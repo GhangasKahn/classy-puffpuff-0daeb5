@@ -1,0 +1,2069 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0A0A" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BEDROCK" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<title>BEDROCK — Capital OS</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg,#0A0A0A);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+  #root{min-height:100vh;min-height:100dvh}
+  .boot{min-height:100vh;display:grid;place-items:center;color:var(--acc,#FF4D14);background:var(--bg,#0A0A0A);font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;position:relative;animation:bootpulse 1.5s ease-in-out infinite}
+  @keyframes bootpulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .boot::after{content:"";position:absolute;left:50%;bottom:44%;transform:translateX(-50%);height:1px;background:var(--acc,#FF4D14);animation:bootscan 1.5s ease-in-out infinite}
+  @keyframes bootscan{0%,100%{width:48px;opacity:.4}50%{width:170px;opacity:1}}
+  @media(prefers-reduced-motion:reduce){.boot,.boot::after{animation:none}.boot::after{width:120px}}
+</style>
+<script>(function(){try{var t=localStorage.getItem("bd_theme")||"dark";document.documentElement.setAttribute("data-theme",t);if(t==="light"){var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute("content","#F2EEE4");}}catch(e){}})();</script>
+</head>
+<body>
+<div id="root">
+  <div class="boot">
+    BOOTING THE DOJO · CAPITAL_OS…
+    <div style="position:absolute; bottom:30%; left:50%; transform:translateX(-50%); font-size:9px; letter-spacing:0; opacity:0.6; white-space:nowrap;">
+      (If stuck &gt;20s: check console or hard-refresh)
+    </div>
+  </div>
+</div>
+<script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useMemo } = React;
+
+// Optional AI proxy. With none set, AI calls fail gracefully and every math feature still works.
+// ---- Multi-provider AI: any OpenAI-compatible endpoint (OpenRouter, Groq, Together, HF, Gemini, xAI, Ollama, local, ...) ----
+const PROVIDERS = {
+  openrouter: { label: "OpenRouter — frontier + open, one key", url: "https://openrouter.ai/api/v1/chat/completions", model: "openai/gpt-4o-mini", note: "hundreds of models: Claude, GPT, Gemini, Grok, Llama, Gemma, DeepSeek, Hermes. works straight from the browser." },
+  groq: { label: "Groq — very fast open models", url: "https://api.groq.com/openai/v1/chat/completions", model: "llama-3.3-70b-versatile", note: "fast Llama / Gemma. may need your proxy for browser CORS." },
+  together: { label: "Together AI — open models", url: "https://api.together.xyz/v1/chat/completions", model: "meta-llama/Llama-3.3-70B-Instruct-Turbo", note: "broad open catalog. may need your proxy." },
+  huggingface: { label: "Hugging Face — open models", url: "https://router.huggingface.co/v1/chat/completions", model: "meta-llama/Llama-3.1-8B-Instruct", note: "HF inference router. may need your proxy." },
+  gemini: { label: "Google Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", model: "gemini-1.5-flash", note: "Google OpenAI-compatible endpoint." },
+  xai: { label: "xAI — Grok", url: "https://api.x.ai/v1/chat/completions", model: "grok-2-latest", note: "Grok via xAI. may need your proxy." },
+  ollama: { label: "Ollama — local, free", url: "http://localhost:11434/v1/chat/completions", model: "llama3.1", note: "runs on your machine, zero cost. open the app locally and set OLLAMA_ORIGINS=* . a hosted https app cannot reach http localhost." },
+  lmstudio: { label: "LM Studio — local, free", url: "http://localhost:1234/v1/chat/completions", model: "local-model", note: "local server; enable its CORS. hosted https cannot reach http localhost." },
+  proxy: { label: "Your proxy — hides key, any provider", url: "https://your-worker.workers.dev", model: "openai/gpt-4o-mini", note: "deploy the included worker; set its upstream + key. use for providers that block browser CORS." },
+  custom: { label: "Custom — any OpenAI-compatible URL", url: "", model: "", note: "paste any /v1/chat/completions endpoint." },
+};
+function readUsage() {
+  let u = {}; try { u = JSON.parse(localStorage.getItem("bd_usage")) || {}; } catch (e) { }
+  const day = new Date().toISOString().slice(0, 10), mon = day.slice(0, 7);
+  if (u.day !== day) { u.day = day; u.daySpent = 0; }
+  if (u.mon !== mon) { u.mon = mon; u.monSpent = 0; }
+  u.daySpent = u.daySpent || 0; u.monSpent = u.monSpent || 0; u.calls = u.calls || 0;
+  return u;
+}
+function logUsage(cost) {
+  const u = readUsage(); u.daySpent += cost; u.monSpent += cost; u.calls += 1;
+  try { localStorage.setItem("bd_usage", JSON.stringify(u)); } catch (e) { }
+}
+async function callLLM(system, messages, maxTokens) {
+  let c = {}; try { c = JSON.parse(localStorage.getItem("bd_ai")) || {}; } catch (e) { }
+  if (!c.url || !c.model) return "// AI is not configured. open Config → AI ENGINE, choose a provider, set a model and your key. every number and tool works without this.";
+  const u = readUsage();
+  if (c.dayCap && u.daySpent >= c.dayCap) return "// daily spend cap reached. it resets tomorrow, or raise it in Config → Spend Governor.";
+  if (c.monCap && u.monSpent >= c.monCap) return "// monthly spend cap reached. raise it in Config if you must.";
+  try {
+    const headers = { "Content-Type": "application/json" };
+    if (c.key) headers["Authorization"] = "Bearer " + c.key;
+    headers["HTTP-Referer"] = "https://bedrock.local"; headers["X-Title"] = "BEDROCK";
+    const res = await fetch(c.url, { method: "POST", headers, body: JSON.stringify({ model: c.model, max_tokens: maxTokens || 1000, messages: [{ role: "system", content: system }].concat(messages || []) }) });
+    const data = await res.json();
+    if (data.error) return "// provider error: " + (data.error.message || JSON.stringify(data.error));
+    const tok = (data.usage && (data.usage.total_tokens || ((data.usage.prompt_tokens || 0) + (data.usage.completion_tokens || 0)))) || 0;
+    logUsage(tok * (c.rate || 0) / 1e6);
+    const m = data.choices && data.choices[0] && data.choices[0].message;
+    const out = m && m.content;
+    if (!out) return "// the provider returned an empty response.";
+    return typeof out === "string" ? out : (Array.isArray(out) ? out.map(x => (x && x.text) || "").join("") : JSON.stringify(out));
+  } catch (e) {
+    return "// could not reach the provider — often a browser CORS block. OpenRouter works directly; others may need the proxy. the math still works regardless.";
+  }
+}
+
+// ---- inline SVG icons (replaces lucide-react; nothing loads from a CDN) ----
+const mkIcon = (kids) => (p) => {
+  const o = p || {}, size = o.size || 16, color = o.color || "currentColor", sw = o.strokeWidth || 2;
+  return React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: color, strokeWidth: sw, strokeLinecap: "round", strokeLinejoin: "round", style: o.style, className: o.className }, kids);
+};
+const LayoutGrid = mkIcon(<g><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></g>);
+const Wallet = mkIcon(<g><path d="M3 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="16" y1="12" x2="19" y2="12"/></g>);
+const Target = mkIcon(<g><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></g>);
+const Activity = mkIcon(<g><polyline points="3 12 7 12 10 19 14 5 17 12 21 12"/></g>);
+const Sparkles = mkIcon(<g><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></g>);
+const Settings2 = mkIcon(<g><line x1="4" y1="8" x2="20" y2="8"/><circle cx="15" cy="8" r="2"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9" cy="16" r="2"/></g>);
+const Plus = mkIcon(<g><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></g>);
+const X = mkIcon(<g><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></g>);
+const Flame = mkIcon(<g><path d="M12 3c1.2 3 4 4.2 4 8a4 4 0 0 1-8 0c0-1.3.6-2.2 1.2-2.8C9 11 12 9.2 12 3z"/></g>);
+const TrendingUp = mkIcon(<g><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></g>);
+const Trash2 = mkIcon(<g><polyline points="3 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></g>);
+const Send = mkIcon(<g><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9"/></g>);
+const Zap = mkIcon(<g><polygon points="13 2 4 14 12 14 11 22 20 10 12 10"/></g>);
+const Award = mkIcon(<g><circle cx="12" cy="9" r="6"/><polyline points="8 14 7 22 12 19 17 22 16 14"/></g>);
+const ChevronRight = mkIcon(<g><polyline points="9 6 15 12 9 18"/></g>);
+const Cpu = mkIcon(<g><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="15" x2="4" y2="15"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="15" x2="22" y2="15"/></g>);
+const Lock = mkIcon(<g><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></g>);
+const Scale = mkIcon(<g><line x1="12" y1="3" x2="12" y2="21"/><line x1="7" y1="21" x2="17" y2="21"/><line x1="4" y1="7" x2="20" y2="7"/><path d="M6 7l-3 6h6z"/><path d="M18 7l-3 6h6z"/></g>);
+const Shield = mkIcon(<g><path d="M12 3l8 3v5c0 5-3.5 8.2-8 9.5-4.5-1.3-8-4.5-8-9.5V6z"/></g>);
+
+// ---- inline SVG charts (replaces recharts) ----
+function CashBars({ data }) {
+  const W = 340, H = 150, base = H - 16, top = 8, d = data || [];
+  const n = d.length || 1, max = Math.max(1, ...d.flatMap(x => [x.inc || 0, x.exp || 0]));
+  const gw = W / n, bw = Math.max(4, gw / 2 - 4), y = v => base - (v / max) * (base - top);
+  return (
+    <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} preserveAspectRatio="none" style={{ display: "block", fontFamily: "monospace" }}>
+      {d.map((x, i) => { const cx = i * gw + gw / 2; return (
+        <g key={i}>
+          <rect x={cx - bw - 1} y={y(x.inc || 0)} width={bw} height={base - y(x.inc || 0)} fill="#46E0A0" />
+          <rect x={cx + 1} y={y(x.exp || 0)} width={bw} height={base - y(x.exp || 0)} fill="#FF4D14" />
+          <text x={cx} y={H - 3} fill="#8C8C8C" fontSize="9" textAnchor="middle">{x.m}</text>
+        </g>); })}
+    </svg>
+  );
+}
+function FanChart({ data }) {
+  const W = 340, H = 210, pt = 12, pb = 16, pl = 4, pr = 4, d = data || [];
+  if (!d.length) return <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} />;
+  const xs = d.map((p, i) => pl + (i / Math.max(1, d.length - 1)) * (W - pl - pr));
+  const all = d.flatMap(p => [p.p5, p.p50, p.p95]), mn = Math.min(...all), mx = Math.max(...all, mn + 1);
+  const y = v => (H - pb) - ((v - mn) / (mx - mn)) * (H - pt - pb);
+  const ln = key => d.map((p, i) => (i ? "L" : "M") + xs[i].toFixed(1) + " " + y(p[key]).toFixed(1)).join(" ");
+  const area = "M" + xs[0].toFixed(1) + " " + y(d[0].p95).toFixed(1) + " " + d.map((p, i) => "L" + xs[i].toFixed(1) + " " + y(p.p95).toFixed(1)).join(" ") + " L" + xs[xs.length - 1].toFixed(1) + " " + (H - pb) + " L" + xs[0].toFixed(1) + " " + (H - pb) + " Z";
+  return (
+    <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} preserveAspectRatio="none" style={{ display: "block" }}>
+      <path d={area} fill="#FF4D14" fillOpacity="0.12" stroke="none" />
+      <path d={ln("p95")} fill="none" stroke="#3A86FF" strokeWidth="1.3" />
+      <path d={ln("p5")} fill="none" stroke="#FFB000" strokeWidth="1.3" strokeDasharray="4 3" />
+      <path d={ln("p50")} fill="none" stroke="#FF4D14" strokeWidth="2.2" />
+    </svg>
+  );
+}
+function Donut({ data, colors }) {
+  const d = data || [], C = 2 * Math.PI * 41, tot = d.reduce((s, x) => s + (x.v || 0), 0) || 1; let acc = 0;
+  return (
+    <svg viewBox="0 0 110 110" width="110" height="110" style={{ flexShrink: 0 }}>
+      <g transform="rotate(-90 55 55)">
+        {d.map((x, i) => { const len = ((x.v || 0) / tot) * C; const seg = <circle key={i} cx="55" cy="55" r="41" fill="none" stroke={colors[i % colors.length]} strokeWidth="22" strokeDasharray={len.toFixed(2) + " " + (C - len).toFixed(2)} strokeDashoffset={(-acc).toFixed(2)} />; acc += len; return seg; })}
+      </g>
+    </svg>
+  );
+}
+
+
+/* ============================ THEME ============================ */
+const CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+:root{
+  --bg:oklch(0.15 0.006 60); --bg2:oklch(0.185 0.008 58); --bg3:oklch(0.225 0.010 55); --line:oklch(0.30 0.012 60); --line2:oklch(0.42 0.015 55);
+  --txt:oklch(0.95 0.008 80); --dim:oklch(0.72 0.012 70); --faint:oklch(0.52 0.012 65);
+  --acc:#FF4D14; --acc2:oklch(0.66 0.20 27); --ok:oklch(0.82 0.16 158); --warn:oklch(0.83 0.15 85); --blue:oklch(0.74 0.13 245);
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'Space Grotesk',system-ui,-apple-system,sans-serif;
+  --disp:'Anton','Space Grotesk',sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:oklch(0.95 0.013 82); --bg2:oklch(0.975 0.010 82); --bg3:oklch(0.992 0.006 82); --line:oklch(0.88 0.014 75); --line2:oklch(0.79 0.016 70);
+  --txt:oklch(0.22 0.020 50); --dim:oklch(0.45 0.018 55); --faint:oklch(0.62 0.015 60);
+  --acc:#FF4D14; --acc2:oklch(0.54 0.20 27); --ok:oklch(0.56 0.15 152); --warn:oklch(0.60 0.15 70); --blue:oklch(0.50 0.17 256);
+}
+:root[data-theme="light"] .bd{background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px)}
+:root[data-theme="light"] .nav{background:rgba(251,248,241,.92)}
+:root[data-theme="light"] .sheet{background:rgba(28,22,15,.45)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+.bd{min-height:100vh;background:var(--bg);color:var(--txt);font-family:var(--sans);
+  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:15px 15px;
+  padding-bottom:84px;position:relative;overflow-x:hidden}
+.bd::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.bd::after{content:"";position:fixed;left:50%;top:-12%;width:130vmax;height:95vmax;transform:translateX(-50%);pointer-events:none;z-index:0;background:radial-gradient(circle, color-mix(in oklch, var(--acc) 15%, transparent) 0%, transparent 55%);opacity:.45;filter:blur(6px)}
+.wrap{max-width:480px;margin:0 auto;position:relative;z-index:1}
+.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.lbl-acc{color:var(--acc)}
+.big{font-family:var(--disp);letter-spacing:.01em;line-height:.86;font-weight:400}
+.creed{border-left:2px solid var(--acc);background:linear-gradient(90deg,rgba(255,77,20,.07),transparent 78%);padding:13px 15px;margin:14px 2px}
+.creed-body{font-family:var(--disp);font-size:15px;line-height:1.34;letter-spacing:.015em;color:var(--txt)}
+.mono-tab{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.card{background:var(--bg2);border:1px solid var(--line);position:relative}
+.tick{position:absolute;width:7px;height:7px;border-color:var(--line2);z-index:2}
+.t-tl{top:-1px;left:-1px;border-top:1.5px solid;border-left:1.5px solid}
+.t-tr{top:-1px;right:-1px;border-top:1.5px solid;border-right:1.5px solid}
+.t-bl{bottom:-1px;left:-1px;border-bottom:1.5px solid;border-left:1.5px solid}
+.t-br{bottom:-1px;right:-1px;border-bottom:1.5px solid;border-right:1.5px solid}
+.stripe{height:6px;background:repeating-linear-gradient(45deg,var(--acc),var(--acc) 7px,#0A0A0A 7px,#0A0A0A 14px)}
+.btn{position:relative;overflow:hidden;z-index:0;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--acc);color:#0A0A0A;border:1px solid var(--acc);padding:14px 16px;cursor:pointer;width:100%;transition:transform .25s cubic-bezier(.25,.46,.45,.94),filter .2s,color .3s}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:color-mix(in oklch,var(--acc) 80%,#fff);transform:translateY(102%);transition:transform .42s cubic-bezier(.65,0,.35,1)}
+.btn:hover::before{transform:translateY(0)}
+.btn:active{transform:translateY(1px);filter:brightness(1.05)}
+.btn-ghost{background:transparent;color:var(--txt);border:1px solid var(--line2)}
+.btn-ghost::before{background:var(--acc)}
+.btn-ghost:hover{color:#0A0A0A;border-color:var(--acc)}
+.btn-ghost:active{background:var(--bg3)}
+.chip{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line2);color:var(--dim)}
+.in{width:100%;background:var(--bg);border:1px solid var(--line2);color:var(--txt);font-family:var(--mono);
+  font-size:14px;padding:11px 12px;outline:none}
+.in:focus{border-color:var(--acc)}
+.sel{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%238C8C8C'%3E%3Cpath d='M0 2l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 12px center}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);z-index:50}
+.navin{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(8,1fr)}
+.navb{background:none;border:none;color:var(--faint);padding:11px 0 13px;cursor:pointer;display:flex;
+  flex-direction:column;align-items:center;gap:4px;transition:.15s;position:relative}
+.navb.on{color:var(--acc)}
+.navb.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:2px;background:var(--acc)}
+.navt{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase}
+.rec{width:7px;height:7px;border-radius:50%;background:var(--acc2);animation:blink 1.4s infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.25}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.fade{animation:up .55s cubic-bezier(.22,1,.36,1) both}
+.sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.6);display:flex;align-items:flex-end}
+.sheetin{background:var(--bg2);border-top:2px solid var(--acc);width:100%;max-width:480px;margin:0 auto;
+  max-height:90vh;overflow-y:auto;animation:slide .25s both}
+@keyframes slide{from{transform:translateY(100%)}to{transform:none}}
+.row{display:flex;align-items:center;justify-content:space-between}
+.divider{height:1px;background:var(--line);margin:0}
+.bubble{padding:10px 12px;font-size:12.5px;line-height:1.5;max-width:85%;border:1px solid var(--line)}
+.bubble.me{background:var(--bg3);align-self:flex-end;border-color:var(--line2)}
+.bubble.ai{background:var(--bg2);align-self:flex-start;border-left:2px solid var(--acc)}
+::-webkit-scrollbar{width:0;height:0}
+@media(prefers-reduced-motion:reduce){.fade{animation:none}.bd::after{display:none}.rec{animation:none}}
+input[type=number]{-moz-appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
+`;
+
+/* ============================ HELPERS ============================ */
+const RANKS = [
+  { min: 0, name: "INITIATE" }, { min: 10000, name: "OPERATOR" },
+  { min: 50000, name: "TACTICIAN" }, { min: 250000, name: "ARCHITECT" },
+  { min: 1000000, name: "SOVEREIGN" }, { min: 5000000, name: "ASCENDANT" },
+];
+const PERSONAS = {
+  STRATEGIST: { tag: "THE STRATEGIST", voice: "a calm, sharp operator-mentor with grounded Morpheus energy — terse, lowercase, occasional // lines, zero hype." },
+  WICK: { tag: "JOHN WICK", voice: "John Wick — economical, lethal precision, almost no wasted words. every dollar is a round and you never waste rounds. quiet, certain, consequence-aware." },
+  ACCOUNTANT: { tag: "THE ACCOUNTANT", voice: "the Accountant — clinical, exacting, unsentimental, faintly menacing in your refusal to flatter. numbers do not lie and neither do you." },
+  BEEKEEPER: { tag: "THE BEEKEEPER", voice: "the Beekeeper — methodical and systemic; you protect the hive and calmly dismantle the inefficiency and predators that threaten it. patient, relentless." },
+  MORPHEUS: { tag: "MORPHEUS", voice: "Morpheus — calm certainties about choice and discipline, the red pill of hard math over comfortable illusion. measured, almost prophetic." },
+  ORACLE: { tag: "THE ORACLE", voice: "the Oracle — warm, knowing, a little cryptic; you ask the question behind the question and nudge him toward what he already knows. dry humor, never sugarcoats." },
+};
+
+// Adaptive lifecycle: the system reads the user's real state and picks the regime + persona. The user does not choose.
+const REGIMES = {
+  SURVIVAL: { persona: "BEEKEEPER", posture: "triage mode — stabilize the floor and kill high-interest debt before anything else." },
+  FOUNDATION: { persona: "ACCOUNTANT", posture: "build the buffer, cut the leaks, then begin deploying. defense before offense." },
+  ACCUMULATE: { persona: "STRATEGIST", posture: "compound aggressively but bounded — size every bet so ruin is impossible." },
+  SCALE: { persona: "WICK", posture: "real capital now — diversify, manage concentration, protect the gains." },
+  PRESERVE: { persona: "ORACLE", posture: "maintenance mode — the game is no longer getting rich, it is staying rich." },
+};
+function regimeOf(D, settings) {
+  const ef = settings && settings.efMonths ? settings.efMonths : 3;
+  const runway = D.runway, liab = D.liab || 0, nw = D.nw || 0, assets = D.assets || 0;
+  let stage;
+  if (liab > assets * 0.5 || (runway != null && runway < 1)) stage = "SURVIVAL";
+  else if ((runway != null && runway < ef) || nw < 25000) stage = "FOUNDATION";
+  else if (nw < 250000) stage = "ACCUMULATE";
+  else if (nw < 1000000) stage = "SCALE";
+  else stage = "PRESERVE";
+  const directive = {
+    SURVIVAL: "The user is in SURVIVAL mode (debt-heavy or below their emergency floor). Focus relentlessly on triage: a small starter buffer, attacking the highest-APR debt, stopping the bleeding. Do not discuss aggressive investing yet — stabilization is the only priority.",
+    FOUNDATION: "The user is in FOUNDATION mode (floor not yet built or small net worth). Priority: finish the emergency fund, clear high-interest debt, then begin steady low-cost deployment. Defense before offense.",
+    ACCUMULATE: "The user is in ACCUMULATE mode (floor set, growing). Priority: bounded-aggressive compounding — disciplined contributions, position sizing for survival, owning productive assets, raising income.",
+    SCALE: "The user is in SCALE mode (substantial capital). Priority: diversification, managing concentration risk, tax-aware structuring with professionals, protecting accumulated gains while still growing.",
+    PRESERVE: "The user is in PRESERVE mode (wealthy). Priority: capital preservation, drawdown control, not chasing returns, not risking what is already built. The goal is staying rich, not getting rich.",
+  }[stage];
+  return { stage, persona: REGIMES[stage].persona, posture: REGIMES[stage].posture, directive };
+}
+const fmt = (n) => (n == null || !isFinite(n)) ? "—" : (n < 0 ? "-$" : "$") + Math.abs(Math.round(n)).toLocaleString();
+const fmtk = (n) => {
+  if (n == null || !isFinite(n)) return "—";
+  const a = Math.abs(n); const s = n < 0 ? "-" : "";
+  if (a >= 1e6) return s + "$" + (a / 1e6).toFixed(a >= 1e7 ? 0 : 1) + "M";
+  if (a >= 1e3) return s + "$" + (a / 1e3).toFixed(a >= 1e5 ? 0 : 1) + "k";
+  return s + "$" + Math.round(a);
+};
+const pctf = (n) => (n == null || !isFinite(n)) ? "—" : (n * 100).toFixed(1) + "%";
+const gauss = () => { let u = 0, v = 0; while (u === 0) u = Math.random(); while (v === 0) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+// Student-t shock: normal / sqrt(chi-square_df / df). Low df => fat tails (modeled crashes).
+const tShock = (df) => { let s = 0; for (let i = 0; i < df; i++) { const z = gauss(); s += z * z; } return gauss() / Math.sqrt(s / df); };
+
+function rankOf(nw) {
+  let i = 0; for (let k = 0; k < RANKS.length; k++) if (nw >= RANKS[k].min) i = k;
+  const cur = RANKS[i], next = RANKS[i + 1];
+  const xp = next ? Math.max(0, Math.min(1, (nw - cur.min) / (next.min - cur.min))) : 1;
+  return { i, name: cur.name, lvl: i + 1, xp, next, toNext: next ? next.min - nw : 0 };
+}
+function goalCalc(g, P0, c, r) {
+  const rm = Math.pow(1 + r, 1 / 12) - 1;
+  const now = new Date(); const ty = now.getFullYear(), tm = now.getMonth() + 1;
+  const n = Math.max(0, (g.year - ty) * 12 + (12 - tm));
+  let projected, reqMo, reached;
+  if (rm === 0) { projected = P0 + c * n; reqMo = Math.max(0, (g.cost - P0) / Math.max(n, 1)); reached = P0 >= g.cost ? ty : ty + (g.cost - P0) / Math.max(c * 12, 1); }
+  else {
+    const grow = Math.pow(1 + rm, n);
+    projected = P0 * grow + c * (grow - 1) / rm;
+    reqMo = grow > 1 ? Math.max(0, (g.cost - P0 * grow) * rm / (grow - 1)) : 0;
+    if (P0 >= g.cost) reached = ty;
+    else { const ratio = (g.cost + c / rm) / (P0 + c / rm); reached = ratio > 0 ? ty + (tm - 1) / 12 + Math.log(ratio) / Math.log(1 + rm) / 12 : null; }
+  }
+  const onPlan = projected >= g.cost;
+  const verdict = onPlan ? "ON PLAN" : reqMo <= c * 1.5 ? "RAISE A BIT" : reqMo <= c * 4 ? "BIG STRETCH" : "JACKPOT ODDS";
+  const fund = Math.max(0, Math.min(1, P0 / g.cost));
+  return { n, projected, reqMo, reached, onPlan, verdict, fund, years: n / 12 };
+}
+function monteCarlo(P0, c, r, vol, months, sims, goal, df) {
+  const sm = vol / Math.sqrt(12); const drift = Math.log(1 + r) / 12 - 0.5 * sm * sm;
+  const tsc = df > 2 ? Math.sqrt((df - 2) / df) : 1;   // rescale t to keep target variance
+  const cols = Array.from({ length: months }, () => []);
+  const terminals = [], maxDDs = [], uw = [];
+  for (let s = 0; s < sims; s++) {
+    let w = P0, peak = P0, mdd = 0, under = 0;
+    for (let m = 0; m < months; m++) {
+      const shock = (df && df > 0) ? tShock(df) * tsc : gauss();   // fat-tailed when df set
+      w = w * Math.exp(drift + sm * shock) + c;
+      if (w > peak) peak = w;
+      const dd = peak > 0 ? (peak - w) / peak : 0;
+      if (dd > mdd) mdd = dd;
+      if (w < peak) under++;
+      cols[m].push(w);
+    }
+    terminals.push(w); maxDDs.push(mdd); uw.push(under / months);
+  }
+  const pc = (arr, p) => { const a = [...arr].sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.floor(p * (a.length - 1)))]; };
+  const step = Math.max(1, Math.round(months / 60));
+  const fan = []; for (let m = 0; m < months; m += step) fan.push({ m: m + 1, yr: ((m + 1) / 12).toFixed(1), p5: pc(cols[m], .05), p50: pc(cols[m], .5), p95: pc(cols[m], .95) });
+  if (fan[fan.length - 1].m !== months) { const m = months - 1; fan.push({ m: months, yr: (months / 12).toFixed(1), p5: pc(cols[m], .05), p50: pc(cols[m], .5), p95: pc(cols[m], .95) }); }
+  const p5 = pc(terminals, .05), p50 = pc(terminals, .5), p95 = pc(terminals, .95);
+  const frac = (arr, th) => arr.filter(x => x >= th).length / arr.length;
+  const asym = (p50 - p5) > 0 ? (p95 - p50) / (p50 - p5) : null;
+  return {
+    fan, p5, p50, p95, mean: terminals.reduce((a, b) => a + b, 0) / sims,
+    prob: goal > 0 ? terminals.filter(t => t >= goal).length / sims : null,
+    dd50: frac(maxDDs, .5), dd70: frac(maxDDs, .7), dd90: frac(maxDDs, .9),
+    medMDD: pc(maxDDs, .5), p95MDD: pc(maxDDs, .95), medUW: pc(uw, .5), asym, df: df || 0
+  };
+}
+
+/* ============================ STORAGE ============================ */
+const store = {
+  async get(k, def) { try { const v = localStorage.getItem(k); return v == null ? def : JSON.parse(v); } catch (e) { return def; } },
+  async set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } },
+};
+// ---------- zero-knowledge backup: AES-256-GCM + PBKDF2 (WebCrypto). nothing leaves the device unless you export it. ----------
+function collectAll() {
+  const o = {};
+  try { Object.keys(localStorage).filter(k => k.indexOf("bd_") === 0).forEach(k => { const v = localStorage.getItem(k); if (v != null) { try { o[k] = JSON.parse(v); } catch (e) { o[k] = v; } } }); } catch (e) { }
+  return o;
+}
+function restoreAll(obj) {
+  Object.keys(obj || {}).forEach(k => { if (k.indexOf("bd_") === 0) { try { localStorage.setItem(k, typeof obj[k] === "string" ? obj[k] : JSON.stringify(obj[k])); } catch (e) { } } });
+}
+function downloadBlob(name, text, mime) {
+  try {
+    const blob = new Blob([text], { type: mime || "application/octet-stream" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click();
+    setTimeout(() => { try { document.body.removeChild(a); URL.revokeObjectURL(url); } catch (e) { } }, 120);
+  } catch (e) { }
+}
+const _b64 = (buf) => btoa(String.fromCharCode.apply(null, new Uint8Array(buf)));
+const _unb64 = (str) => Uint8Array.from(atob(str), c => c.charCodeAt(0));
+async function _deriveKey(pass, salt, iters) {
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: iters, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+}
+async function encryptVault(pass, obj) {
+  const iters = 250000;
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await _deriveKey(pass, salt, iters);
+  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify(obj)));
+  return { app: "BEDROCK", v: 1, alg: "AES-256-GCM", kdf: "PBKDF2-SHA256", iters, salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
+}
+async function decryptVault(pass, blob) {
+  const key = await _deriveKey(pass, _unb64(blob.salt), blob.iters || 250000);
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(blob.iv) }, key, _unb64(blob.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+/* ============================ OPTIONAL CLOUD (BEDROCK-API) ============================ */
+/* Zero-trust: only ever send already-encrypted blobs (your existing encryptVault) or raw sim params.
+   The server cannot read your numbers. This is completely optional. */
+const CLOUD_DEFAULT = { url: "http://localhost:8787", token: "", userId: "", enabled: false };
+
+function getCloud() { try { return JSON.parse(localStorage.getItem("bd_cloud")) || { ...CLOUD_DEFAULT }; } catch (e) { return { ...CLOUD_DEFAULT }; } }
+function setCloud(c) { try { localStorage.setItem("bd_cloud", JSON.stringify(c)); } catch (e) {} }
+
+async function cloudAuth() {
+  const c = getCloud(); if (!c.url) return { ok: false, error: "no backend" };
+  try {
+    const r = await fetch(c.url.replace(/\/$/, "") + "/v1/auth/anonymous", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+    const j = await r.json(); if (!j.token) throw new Error("no token");
+    const nc = { ...c, token: j.token, userId: j.userId, enabled: true }; setCloud(nc); return { ok: true, ...j };
+  } catch (e) { return { ok: false, error: String(e) }; }
+}
+async function cloudListPlans() {
+  const c = getCloud(); if (!c.token) return [];
+  try { const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans", { headers: { Authorization: "Bearer " + c.token } }); if (!r.ok) return []; return (await r.json()).plans || []; } catch (e) { return []; }
+}
+async function cloudPushPlan(name, encryptedState) {
+  const c = getCloud(); if (!c.token) throw new Error("not connected");
+  const body = { name: name || "Main Vault", encryptedState: typeof encryptedState === "string" ? encryptedState : JSON.stringify(encryptedState), meta: { source: "app" } };
+  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + c.token }, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error(await r.text());
+  const j = await r.json();
+  // Track last successful push for UX (simple, local only)
+  const nc = { ...c, lastSync: Date.now() };
+  setCloud(nc);
+  // If the caller is using the React state, it will pick it up on next render via getCloud in other places
+  return j;
+}
+async function cloudGetPlan(id) {
+  const c = getCloud(); if (!c.token) throw new Error("not connected");
+  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans/" + id, { headers: { Authorization: "Bearer " + c.token } });
+  if (!r.ok) throw new Error("not found"); return r.json();
+}
+async function cloudForge(params) {
+  const c = getCloud(); if (!c.token) throw new Error("not connected");
+  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/compute/survival", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + c.token }, body: JSON.stringify({ params }) });
+  if (!r.ok) throw new Error(await r.text()); return r.json();
+}
+
+const DEFAULTS = {
+  settings: { 
+    income: 1600, incomeFrequency: "monthly",
+    contribution: 1000, contributionFrequency: "monthly",
+    capital: 0, ret: 0.10, vol: 0.30, rf: 0.045, efMonths: 6, accent: "#FF4D14" 
+  },
+  accounts: [], txns: [], holdings: [], collection: [],
+  goals: [
+    { id: 1, name: "Tesla Optimus", cost: 25000, year: 2028 },
+    { id: 2, name: "Tesla Cybercab", cost: 30000, year: 2027 },
+    { id: 3, name: "Four Seasons Jet", cost: 175000, year: 2035 },
+    { id: 4, name: "Automated Homestead", cost: 1000000, year: 2040 },
+    { id: 5, name: "Millionaire ($1M)", cost: 1000000, year: 2031 },
+    { id: 6, name: "Deca-millionaire ($10M)", cost: 10000000, year: 2036 },
+  ],
+  game: { streak: 0, last: null, xpLog: 0 },
+};
+
+// Frequency helpers for easy setup (addresses approval feedback: monthly/weekly/bi-weekly etc, auto monthly equiv, accessible for all skill levels)
+const FREQUENCIES = [
+  { key: "weekly", label: "Weekly", perYear: 52 },
+  { key: "biweekly", label: "Bi-weekly (every 2 weeks)", perYear: 26 },
+  { key: "semimonthly", label: "Semi-monthly (2x/month)", perYear: 24 },
+  { key: "monthly", label: "Monthly", perYear: 12 },
+];
+function toMonthly(amount, freqKey) {
+  const f = FREQUENCIES.find(x => x.key === freqKey) || FREQUENCIES[3];
+  return (amount || 0) * (f.perYear / 12);
+}
+function fromMonthly(monthly, freqKey) {
+  const f = FREQUENCIES.find(x => x.key === freqKey) || FREQUENCIES[3];
+  return (monthly || 0) * (12 / f.perYear);
+}
+
+/* ============================ ATOMS ============================ */
+const Ticks = () => (<>
+  <span className="tick t-tl" /><span className="tick t-tr" /><span className="tick t-bl" /><span className="tick t-br" />
+</>);
+function Ring({ v, size = 56, label, color }) {
+  const r = (size - 7) / 2, c = 2 * Math.PI * r, off = c * (1 - Math.max(0, Math.min(1, v)));
+  return (
+    <div style={{ position: "relative", width: size, height: size }}>
+      <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#262626" strokeWidth="3.5" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color || "var(--acc)"} strokeWidth="3.5"
+          strokeDasharray={c} strokeDashoffset={off} strokeLinecap="butt" style={{ transition: "stroke-dashoffset .6s" }} />
+      </svg>
+      <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", fontSize: 11, fontWeight: 700 }} className="mono-tab">{label}</div>
+    </div>
+  );
+}
+function Stat({ k, v, sub, color }) {
+  return (
+    <div className="card" style={{ padding: "12px 13px" }}>
+      <Ticks />
+      <div className="lbl">{k}</div>
+      <div className="mono-tab" style={{ fontSize: 19, fontWeight: 800, marginTop: 6, color: color || "var(--txt)" }}>{v}</div>
+      {sub && <div className="lbl" style={{ marginTop: 3, fontSize: 8.5 }}>{sub}</div>}
+    </div>
+  );
+}
+function Sheet({ title, onClose, children }) {
+  return (
+    <div className="sheet" onClick={onClose}>
+      <div className="sheetin" onClick={e => e.stopPropagation()}>
+        <div className="row" style={{ padding: "14px 16px", borderBottom: "1px solid var(--line)" }}>
+          <div className="big" style={{ fontSize: 22 }}>{title}</div>
+          <button className="btn-ghost" style={{ width: 36, height: 36, padding: 0, display: "grid", placeItems: "center" }} onClick={onClose}><X size={16} /></button>
+        </div>
+        <div style={{ padding: 16 }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+const Field = ({ label, children }) => (
+  <div style={{ marginBottom: 14 }}>
+    <div className="lbl" style={{ marginBottom: 6 }}>{label}</div>{children}
+  </div>
+);
+
+/* ============================ APP ============================ */
+function App() {
+  const [ready, setReady] = useState(false);
+  const [view, setView] = useState("home");
+  const [settings, setSettings] = useState(DEFAULTS.settings);
+  const [accounts, setAccounts] = useState(DEFAULTS.accounts);
+  const [txns, setTxns] = useState(DEFAULTS.txns);
+  const [holdings, setHoldings] = useState(DEFAULTS.holdings);
+  const [collection, setCollection] = useState(DEFAULTS.collection);
+  const [goals, setGoals] = useState(DEFAULTS.goals);
+  const [game, setGame] = useState(DEFAULTS.game);
+  const [cloud, setCloudState] = useState(() => getCloud());
+
+  useEffect(() => {
+    (async () => {
+      setSettings(await store.get("bd_settings", DEFAULTS.settings));
+      setAccounts(await store.get("bd_accounts", DEFAULTS.accounts));
+      setTxns(await store.get("bd_txns", DEFAULTS.txns));
+      setHoldings(await store.get("bd_holdings", DEFAULTS.holdings));
+      setCollection(await store.get("bd_collection", DEFAULTS.collection));
+      setGoals(await store.get("bd_goals", DEFAULTS.goals));
+      const g = await store.get("bd_game", DEFAULTS.game);
+      const today = new Date().toDateString();
+      if (g.last !== today) {
+        const yest = new Date(Date.now() - 864e5).toDateString();
+        g.streak = g.last === yest ? (g.streak || 0) + 1 : 1; g.last = today;
+      }
+      setGame(g); setReady(true);
+    })();
+  }, []);
+  useEffect(() => { if (ready) store.set("bd_settings", settings); }, [settings, ready]);
+  useEffect(() => { if (ready) store.set("bd_accounts", accounts); }, [accounts, ready]);
+  useEffect(() => { if (ready) store.set("bd_txns", txns); }, [txns, ready]);
+  useEffect(() => { if (ready) store.set("bd_holdings", holdings); }, [holdings, ready]);
+  useEffect(() => { if (ready) store.set("bd_collection", collection); }, [collection, ready]);
+  useEffect(() => { if (ready) store.set("bd_goals", goals); }, [goals, ready]);
+  useEffect(() => { if (ready) store.set("bd_game", game); }, [game, ready]);
+  useEffect(() => { document.documentElement.style.setProperty("--acc", settings.accent || "#FF4D14"); }, [settings.accent]);
+
+  /* derived */
+  const D = useMemo(() => {
+    const assets = accounts.filter(a => a.type !== "Liability").reduce((s, a) => s + (+a.bal || 0), 0);
+    const liab = accounts.filter(a => a.type === "Liability").reduce((s, a) => s + Math.abs(+a.bal || 0), 0);
+    const invMv = holdings.reduce((s, h) => s + (+h.units || 0) * (+h.price || 0), 0);
+    const invCost = holdings.reduce((s, h) => s + (+h.units || 0) * (+h.cost || 0), 0);
+    const altMv = collection.reduce((s, a) => s + (+a.qty || 1) * (+a.value || 0), 0);
+    const altCost = collection.reduce((s, a) => s + (+a.qty || 1) * (+a.cost || 0), 0);
+    const nw = assets - liab + invMv + altMv;
+    const now = new Date(); const ym = now.getFullYear() * 12 + now.getMonth();
+    let mi = 0, me = 0; const monthly = {};
+    txns.forEach(t => {
+      const d = new Date(t.date); const k = d.getFullYear() * 12 + d.getMonth();
+      monthly[k] = monthly[k] || { i: 0, e: 0 };
+      if (t.kind === "Income") monthly[k].i += +t.amt || 0;
+      if (t.kind === "Expense") monthly[k].e += +t.amt || 0;
+      if (k === ym) { if (t.kind === "Income") mi += +t.amt || 0; if (t.kind === "Expense") me += +t.amt || 0; }
+    });
+    const flow = []; for (let j = 5; j >= 0; j--) { const k = ym - j; const d = new Date(now.getFullYear(), now.getMonth() - j, 1); flow.push({ m: d.toLocaleString("en", { month: "short" }), inc: monthly[k] ? monthly[k].i : 0, exp: monthly[k] ? monthly[k].e : 0 }); }
+    const tl = [-3, -2, -1].map(j => monthly[ym + j] ? monthly[ym + j].e : 0).filter(x => x > 0);
+    const avgExp = tl.length ? tl.reduce((a, b) => a + b, 0) / tl.length : 0;
+    const runway = avgExp > 0 ? assets / avgExp : null;
+    const savRate = mi > 0 ? (mi - me) / mi : null;
+    const P0 = +settings.capital || 0;
+    // Effective monthly from user-friendly frequency setup (easy for all skill levels)
+    const effIncome = toMonthly(settings.income || 0, settings.incomeFrequency || "monthly");
+    const effContrib = toMonthly(settings.contribution || 0, settings.contributionFrequency || "monthly");
+    return { assets, liab, invMv, invCost, altMv, altCost, nw, mi, me, mNet: mi - me, flow, runway, avgExp, savRate, P0, effIncome, effContrib };
+  }, [accounts, holdings, txns, settings, collection]);
+
+  const rank = rankOf(D.nw);
+
+  const badges = useMemo(() => {
+    const have1k = D.nw >= 1000, ef = D.runway != null && D.runway >= settings.efMonths;
+    const inv = holdings.length > 0, log10 = txns.length >= 10, streak7 = game.streak >= 7;
+    const goalDone = goals.filter(g => goalCalc(g, D.P0, (D.effContrib != null ? D.effContrib : settings.contribution), settings.ret).onPlan).length;
+    return [
+      { id: "seed", name: "SEEDED", got: D.nw > 0 },
+      { id: "1k", name: "FIRST $1K", got: have1k },
+      { id: "ef", name: "FLOOR SET", got: ef },
+      { id: "inv", name: "DEPLOYED", got: inv },
+      { id: "log", name: "DISCIPLINE", got: log10 },
+      { id: "streak", name: "7-DAY", got: streak7 },
+      { id: "goals", name: goalDone + " ON PLAN", got: goalDone > 0 },
+      { id: "6f", name: "SIX FIGURES", got: D.nw >= 100000 },
+      { id: "debt", name: "DEBT FREE", got: D.liab === 0 && D.nw > 0 },
+    ];
+  }, [D, holdings, txns, game, goals, settings]);
+
+  if (!ready) return (
+    <div className="bd" style={{ display: "grid", placeItems: "center" }}>
+      <style>{CSS}</style>
+      <div style={{ textAlign: "center" }}>
+        <div className="big" style={{ fontSize: 40 }}>BEDROCK</div>
+        <div className="lbl" style={{ marginTop: 8 }}>booting capital_os<span className="rec" style={{ display: "inline-block", marginLeft: 8 }} /></div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="bd">
+      <style>{CSS}</style>
+      <div className="wrap">
+        <Header rank={rank} streak={game.streak} />
+        {view === "home" && <Home D={D} rank={rank} goals={goals} settings={settings} badges={badges} flowHas={txns.length > 0} />}
+        {view === "ledger" && <Ledger accounts={accounts} setAccounts={setAccounts} txns={txns} setTxns={setTxns} D={D} collection={collection} setCollection={setCollection} />}
+        {view === "goals" && <Goals goals={goals} setGoals={setGoals} settings={settings} setSettings={setSettings} D={D} />}
+        {view === "quant" && <Quant settings={settings} holdings={holdings} setHoldings={setHoldings} D={D} />}
+        {view === "live" && <LiveMarketView cloud={cloud} />}
+        {view === "fortress" && <FortressView D={D} settings={settings} />}
+        {view === "coach" && <Coach D={D} rank={rank} settings={settings} goals={goals} />}
+        {view === "vet" && <PurchaseAdvisor settings={settings} D={D} />}
+        {view === "set" && <SettingsView settings={settings} setSettings={setSettings} cloud={cloud} />}
+      </div>
+      <Nav view={view} setView={setView} />
+    </div>
+  );
+}
+
+/* ============================ HEADER ============================ */
+function Header({ rank, streak }) {
+  const [clock, setClock] = useState(new Date());
+  useEffect(() => { const t = setInterval(() => setClock(new Date()), 1000); return () => clearInterval(t); }, []);
+  return (
+    <div style={{ padding: "16px 16px 10px" }}>
+      <div className="row">
+        <div>
+          <div className="big" style={{ fontSize: 26, letterSpacing: ".02em" }}>BEDROCK<span style={{ color: "var(--acc)" }}>.</span></div>
+          <div className="lbl" style={{ marginTop: 1 }}>THE DOJO OF CAPITAL · CAPITAL_OS v0.1</div>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div className="row" style={{ gap: 6, justifyContent: "flex-end" }}>
+            <span className="rec" /><span className="lbl lbl-acc">LIVE</span>
+            {cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "1px 5px", borderColor: "var(--ok)", color: "var(--ok)" }}>CLOUD</span>}
+          </div>
+          <div className="lbl mono-tab" style={{ marginTop: 4 }}>{clock.toLocaleTimeString("en", { hour12: false })}</div>
+        </div>
+      </div>
+      <div className="stripe" style={{ marginTop: 12 }} />
+      <div className="row" style={{ marginTop: 8 }}>
+        <div className="lbl">RANK <span style={{ color: "var(--txt)", fontWeight: 700 }}>{String(rank.lvl).padStart(2, "0")} / {rank.name}</span></div>
+        <div className="lbl row" style={{ gap: 5 }}><Flame size={11} color="var(--acc)" /><span className="mono-tab" style={{ color: "var(--txt)", fontWeight: 700 }}>{streak}d</span> STREAK</div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================ HOME ============================ */
+function statusLine(D, rank) {
+  if (D.nw <= 0) return "// zero is a starting line, not a verdict. open LEDGER, log what is real, and begin the work.";
+  if (D.runway != null && D.runway < 3) return "// the floor is thin. a fighter with no guard gets knocked out — build cash before you climb.";
+  if (D.mNet < 0) return "// you bleed more than you earn this month. stop the wound. discipline is the tourniquet.";
+  if (rank.next) return `// the floor holds. ${fmtk(rank.toNext)} stands between you and ${rank.next.name}. close the distance.`;
+  return "// apex tier. the machine runs itself. now you guard what you built.";
+}
+function Home({ D, rank, goals, settings, badges, flowHas }) {
+  const contrib = (D.effContrib != null ? D.effContrib : settings.contribution);
+  const topGoals = goals.slice(0, 3).map(g => ({ g, c: goalCalc(g, D.P0, contrib, settings.ret) }));
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      {/* hero */}
+      <div className="card" style={{ padding: 18, marginTop: 6 }}>
+        <Ticks />
+        <div className="row"><div className="lbl">"NET WORTH" · YOUR TRUE POSITION</div><TrendingUp size={13} color="var(--dim)" /></div>
+        <div className="big mono-tab" style={{ fontSize: 52, marginTop: 8 }}>{fmt(D.nw)}</div>
+        <div className="row" style={{ marginTop: 10 }}>
+          <div className="lbl">CASH <span style={{ color: "var(--txt)" }} className="mono-tab">{fmtk(D.assets)}</span></div>
+          <div className="lbl">INVEST <span style={{ color: "var(--txt)" }} className="mono-tab">{fmtk(D.invMv)}</span></div>
+          <div className="lbl">VAULT <span style={{ color: "var(--txt)" }} className="mono-tab">{fmtk(D.altMv)}</span></div>
+          <div className="lbl">DEBT <span style={{ color: "var(--acc2)" }} className="mono-tab">{fmtk(D.liab)}</span></div>
+        </div>
+      </div>
+      <div style={{ fontSize: 11, color: "var(--dim)", margin: "12px 2px", lineHeight: 1.5 }}>{statusLine(D, rank)}</div>
+
+      {/* Simple onboarding / help for all skill levels (usability phase) */}
+      {D.nw === 0 && (
+        <div className="card" style={{ padding: 12, marginTop: 8, border: "1px dashed var(--acc)" }}>
+          <Ticks />
+          <div className="lbl" style={{ color: "var(--acc)" }}>GET STARTED (no experience needed)</div>
+          <div style={{ fontSize: 11, marginTop: 6, lineHeight: 1.4 }}>
+            1. Go to <b>CONFIG</b> → use a Quick Start template or set your income frequency (weekly/bi-weekly/etc. — auto monthly math).<br/>
+            2. Go to <b>LEDGER</b> → add real accounts (or use Plaid link in CONFIG for auto), log a couple txns, add 1-2 vault items (watches/cards/spirits — more categories now).<br/>
+            3. Come back here — net worth, runway, MC in QUANT, and agents in COACH will light up with your real numbers.<br/>
+            Pro users: Everything is editable in raw localStorage too (bd_* keys). Live data + Plaid = less typing.
+          </div>
+        </div>
+      )}
+
+      <div className="creed">
+        <div className="lbl" style={{ color: "var(--acc)", marginBottom: 8 }}>THE DOCTRINE</div>
+        <div className="creed-body">CONTROL WHAT YOU CONTROL. THE FLOOR IS SACRED. SURVIVE FIRST, COMPOUND SECOND. THE MARKET DOES NOT KNOW YOUR NAME — IT ANSWERS ONLY TO DISCIPLINE. RUIN IS THE ONE MISTAKE YOU CANNOT UNDO. OWN WHAT PRODUCES. CUT WHAT BLEEDS. THE SLOW ROAD, WALKED WITHOUT FAIL, IS THE FAST ROAD.</div>
+      </div>
+
+      {/* rank */}
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div className="row"><div className="lbl">PROGRESSION</div><div className="chip">LV {String(rank.lvl).padStart(2, "0")}</div></div>
+        <div className="big" style={{ fontSize: 28, marginTop: 6 }}>{rank.name}</div>
+        <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10, position: "relative" }}>
+          <div style={{ height: "100%", width: (rank.xp * 100) + "%", background: "var(--acc)", transition: ".6s" }} />
+        </div>
+        <div className="row" style={{ marginTop: 6 }}>
+          <div className="lbl mono-tab">{(rank.xp * 100).toFixed(0)}% TO NEXT</div>
+          <div className="lbl mono-tab">{rank.next ? fmtk(rank.toNext) + " → " + rank.next.name : "MAX TIER"}</div>
+        </div>
+      </div>
+
+      {/* tiles */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+        <Stat k="THIS-MO NET" v={fmt(D.mNet)} color={D.mNet >= 0 ? "var(--ok)" : "var(--acc2)"} sub="income − spend" />
+        <Stat k="SAVINGS RATE" v={pctf(D.savRate)} sub="this month" />
+        <Stat k="EF RUNWAY" v={D.runway != null ? D.runway.toFixed(1) + " mo" : "—"} sub={"target " + settings.efMonths + " mo"} color={D.runway != null && D.runway >= settings.efMonths ? "var(--ok)" : "var(--warn)"} />
+        <Stat k="UNREAL P/L" v={fmt(D.invMv - D.invCost)} sub="portfolio" color={D.invMv - D.invCost >= 0 ? "var(--ok)" : "var(--acc2)"} />
+      </div>
+
+      {/* goals */}
+      <SectionLabel n="03" t="PRIORITY TARGETS" />
+      <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4 }}>
+        {topGoals.map(({ g, c }) => (
+          <div key={g.id} className="card" style={{ padding: 12, minWidth: 138, flex: "0 0 auto" }}>
+            <Ticks />
+            <Ring v={c.fund} label={(c.fund * 100).toFixed(0) + "%"} color={c.onPlan ? "var(--ok)" : "var(--acc)"} />
+            <div style={{ fontSize: 11, fontWeight: 700, marginTop: 8, lineHeight: 1.2 }}>{g.name}</div>
+            <div className="lbl" style={{ marginTop: 4 }}>{fmtk(g.cost)} / {g.year}</div>
+            <div className="chip" style={{ marginTop: 6, display: "inline-block", color: c.onPlan ? "var(--ok)" : "var(--warn)", borderColor: "currentColor" }}>{c.verdict}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* cashflow */}
+      {flowHas && <>
+        <SectionLabel n="04" t="CASH FLOW / 6MO" />
+        <div className="card" style={{ padding: "14px 8px 6px" }}>
+          <Ticks />
+          <CashBars data={D.flow} />
+        </div>
+      </>}
+
+      {/* badges */}
+      <SectionLabel n="05" t="ACHIEVEMENTS" />
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+        {badges.map(b => (
+          <div key={b.id} className="chip" style={{ display: "flex", alignItems: "center", gap: 5, padding: "6px 9px", opacity: b.got ? 1 : .38, borderColor: b.got ? "var(--acc)" : "var(--line2)", color: b.got ? "var(--txt)" : "var(--faint)" }}>
+            {b.got ? <Award size={11} color="var(--acc)" /> : <Lock size={10} />}{b.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+const SectionLabel = ({ n, t }) => (
+  <div className="row" style={{ margin: "20px 2px 10px" }}>
+    <div className="lbl"><span style={{ color: "var(--acc)" }}>{n}</span> / {t}</div>
+    <div style={{ flex: 1, height: 1, background: "var(--line)", marginLeft: 10 }} />
+  </div>
+);
+
+/* ============================ LEDGER ============================ */
+function Ledger({ accounts, setAccounts, txns, setTxns, D, collection, setCollection }) {
+  const [tab, setTab] = useState("acct");
+  const [sheet, setSheet] = useState(null);
+  const [f, setF] = useState({});
+  const open = (t) => { setF(t === "acct" ? { type: "Asset" } : t === "vault" ? { category: "Watch", qty: 1 } : { kind: "Expense", date: new Date().toISOString().slice(0, 10) }); setSheet(t); };
+  const saveAcct = () => { if (!f.name) return; setAccounts([...accounts, { id: Date.now(), name: f.name, type: f.type, bal: +f.bal || 0 }]); setSheet(null); };
+  const saveTxn = () => { if (!f.amt) return; setTxns([{ id: Date.now(), kind: f.kind, amt: +f.amt, cat: f.cat || f.kind, date: f.date, note: f.note || "" }, ...txns]); setSheet(null); };
+  const saveAsset = () => { 
+    if (!f.name) return; 
+    const newItem = { id: Date.now(), name: f.name, category: f.category || "Other", qty: +f.qty || 1, cost: +f.cost || 0, value: +f.value || 0 };
+    if (f.lastComps) newItem.lastComps = f.lastComps;
+    if (f.compSource) newItem.compSource = f.compSource;
+    setCollection([...collection, newItem]); 
+    setSheet(null); 
+  };
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <div className="row" style={{ gap: 8, marginTop: 6 }}>
+        {["acct", "txn", "vault"].map(t => (
+          <button key={t} className={t === tab ? "btn" : "btn btn-ghost"} onClick={() => setTab(t)}>{t === "acct" ? "ACCOUNTS" : t === "txn" ? "LEDGER" : "VAULT"}</button>
+        ))}
+      </div>
+
+      {tab === "acct" && <>
+        <div className="card" style={{ padding: 16, marginTop: 12 }}>
+          <Ticks />
+          <div className="lbl">"NET WORTH" — COMPUTED</div>
+          <div className="big mono-tab" style={{ fontSize: 38, marginTop: 6 }}>{fmt(D.nw)}</div>
+          <div className="lbl" style={{ marginTop: 6 }}>ASSETS {fmtk(D.assets + D.invMv + D.altMv)} · LIAB {fmtk(D.liab)}</div>
+        </div>
+        {accounts.length === 0 && <Empty t="no accounts" s="add your checking, savings, card, brokerage." />}
+        {accounts.map(a => (
+          <div key={a.id} className="card" style={{ padding: "13px 14px", marginTop: 8 }}>
+            <Ticks />
+            <div className="row">
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 13 }}>{a.name}</div>
+                <div className="lbl" style={{ marginTop: 3 }}>{a.type}</div>
+              </div>
+              <div className="row" style={{ gap: 12 }}>
+                <div className="mono-tab" style={{ fontWeight: 800, fontSize: 16, color: a.type === "Liability" ? "var(--acc2)" : "var(--txt)" }}>{fmt(a.bal)}</div>
+                <button className="btn-ghost" style={{ width: 30, height: 30, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setAccounts(accounts.filter(x => x.id !== a.id))}><Trash2 size={13} /></button>
+              </div>
+            </div>
+          </div>
+        ))}
+        <button className="btn" style={{ marginTop: 12 }} onClick={() => open("acct")}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />ADD ACCOUNT</button>
+      </>}
+
+      {tab === "txn" && <>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 12 }}>
+          <Stat k="MO INCOME" v={fmt(D.mi)} color="var(--ok)" />
+          <Stat k="MO SPEND" v={fmt(D.me)} color="var(--acc)" />
+        </div>
+        {txns.length === 0 && <Empty t="no transactions" s="log income & spend to drive your analytics + streak." />}
+        {txns.slice(0, 40).map(t => (
+          <div key={t.id} className="card" style={{ padding: "11px 14px", marginTop: 8 }}>
+            <Ticks />
+            <div className="row">
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 12.5 }}>{t.cat}{t.note ? <span style={{ color: "var(--faint)", fontWeight: 400 }}> · {t.note}</span> : ""}</div>
+                <div className="lbl" style={{ marginTop: 3 }}>{t.kind} · {t.date}</div>
+              </div>
+              <div className="row" style={{ gap: 10 }}>
+                <div className="mono-tab" style={{ fontWeight: 800, fontSize: 14, color: t.kind === "Income" ? "var(--ok)" : t.kind === "Investment" ? "var(--warn)" : "var(--txt)" }}>{t.kind === "Income" ? "+" : "−"}{fmt(t.amt).replace("$", "$")}</div>
+                <button className="btn-ghost" style={{ width: 28, height: 28, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setTxns(txns.filter(x => x.id !== t.id))}><Trash2 size={12} /></button>
+              </div>
+            </div>
+          </div>
+        ))}
+        <button className="btn" style={{ marginTop: 12 }} onClick={() => open("txn")}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />LOG TRANSACTION</button>
+      </>}
+
+      {tab === "vault" && <>
+        <div className="card" style={{ padding: 16, marginTop: 12 }}>
+          <Ticks />
+          <div className="lbl">REAL-WORLD & COLLECTIBLE ASSETS</div>
+          <div className="big mono-tab" style={{ fontSize: 34, marginTop: 6 }}>{fmt(D.altMv)}</div>
+          <div className="lbl" style={{ marginTop: 6 }}>COST {fmtk(D.altCost)} · UNREAL <span style={{ color: (D.altMv - D.altCost) >= 0 ? "var(--ok)" : "var(--acc2)" }}>{fmt(D.altMv - D.altCost)}</span></div>
+        </div>
+        {collection.length === 0 && <Empty t="EMPTY VAULT" s="watches, cards, metals, art, vehicles, property — log anything you own that holds value." />}
+        {collection.map(a => (
+          <div key={a.id} className="card" style={{ padding: "12px 14px", marginTop: 8 }}>
+            <Ticks />
+            <div className="row">
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 13 }}>{a.name}</div>
+                <div className="lbl" style={{ marginTop: 3 }}>{a.category}{a.qty > 1 ? " · x" + a.qty : ""}{a.compSource ? " · " + a.compSource : ""}</div>
+              </div>
+              <div className="row" style={{ gap: 10 }}>
+                <div style={{ textAlign: "right" }}>
+                  <div className="mono-tab" style={{ fontWeight: 800, fontSize: 15 }}>{fmt((+a.qty || 1) * (+a.value || 0))}</div>
+                  <div className="lbl" style={{ color: ((+a.value || 0) - (+a.cost || 0)) >= 0 ? "var(--ok)" : "var(--acc2)" }}>{a.cost ? (((+a.value || 0) / (+a.cost || 1) - 1) * 100).toFixed(0) + "%" : "—"}</div>
+                </div>
+                <button className="btn-ghost" style={{ width: 28, height: 28, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setCollection(collection.filter(x => x.id !== a.id))}><Trash2 size={12} /></button>
+              </div>
+            </div>
+            {a.lastComps && a.lastComps.length > 0 && (
+              <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>
+                Live comps: {a.lastComps.slice(0,2).map((c: any) => `${c.source} ${fmt(c.price)}`).join(" · ")}
+              </div>
+            )}
+          </div>
+        ))}
+        <button className="btn" style={{ marginTop: 12 }} onClick={() => open("vault")}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />ADD ASSET</button>
+        <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>{"// collectibles have no live feed — set value from a recent comp (an eBay sold listing, a dealer quote, an appraisal) and refresh it now and then. it rolls straight into your net worth."}</div>
+      </>}
+
+      {sheet === "acct" && <Sheet title="ADD ACCOUNT" onClose={() => setSheet(null)}>
+        <Field label="Account name"><input className="in" placeholder="e.g. Checking" onChange={e => setF({ ...f, name: e.target.value })} /></Field>
+        <Field label="Type"><select className="in sel" value={f.type} onChange={e => setF({ ...f, type: e.target.value })}><option>Asset</option><option>Liability</option></select></Field>
+        <Field label="Current balance"><input className="in" type="number" inputMode="decimal" placeholder="0" onChange={e => setF({ ...f, bal: e.target.value })} /></Field>
+        <button className="btn" onClick={saveAcct}>SAVE</button>
+      </Sheet>}
+      {sheet === "txn" && <Sheet title="LOG TRANSACTION" onClose={() => setSheet(null)}>
+        <Field label="Type"><select className="in sel" value={f.kind} onChange={e => setF({ ...f, kind: e.target.value })}><option>Income</option><option>Expense</option><option>Investment</option><option>Transfer</option></select></Field>
+        <Field label="Amount"><input className="in" type="number" inputMode="decimal" placeholder="0.00" onChange={e => setF({ ...f, amt: e.target.value })} /></Field>
+        <Field label="Category"><input className="in" placeholder="e.g. Groceries" onChange={e => setF({ ...f, cat: e.target.value })} /></Field>
+        <Field label="Date"><input className="in" type="date" value={f.date} onChange={e => setF({ ...f, date: e.target.value })} /></Field>
+        <Field label="Note (optional)"><input className="in" onChange={e => setF({ ...f, note: e.target.value })} /></Field>
+        <button className="btn" onClick={saveTxn}>SAVE</button>
+      </Sheet>}
+      {sheet === "vault" && <Sheet title="ADD ASSET" onClose={() => setSheet(null)}>
+        <Field label="Name"><input className="in" placeholder="Rolex Submariner / Charizard PSA 10 / 2024 Macallan 18" onChange={e => setF({ ...f, name: e.target.value })} /></Field>
+        <Field label="Category (expandable for any value asset)"><select className="in sel" value={f.category} onChange={e => setF({ ...f, category: e.target.value })}>
+          <option>Watch</option><option>Trading Card</option><option>Collectible</option><option>Art</option>
+          <option>Precious Metal</option><option>Vehicle / Car</option><option>Real Estate</option>
+          <option>Whiskey / Spirits (Japanese etc.)</option><option>Commodity / Futures</option>
+          <option>ETF / Index</option><option>Other</option>
+        </select></Field>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+          <Field label="Qty"><input className="in" type="number" inputMode="decimal" placeholder="1" onChange={e => setF({ ...f, qty: e.target.value })} /></Field>
+          <Field label="Cost $"><input className="in" type="number" inputMode="decimal" placeholder="0" onChange={e => setF({ ...f, cost: e.target.value })} /></Field>
+          <Field label="Value $ (or refresh live later)"><input className="in" type="number" inputMode="decimal" placeholder="0" onChange={e => setF({ ...f, value: e.target.value })} /></Field>
+        </div>
+        <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+          <button className="btn" onClick={saveAsset}>SAVE</button>
+          <button className="btn btn-ghost" onClick={async () => {
+            if (!f.name && !f.category) return;
+            const b = "http://localhost:8787";  // TODO: pass cloud prop down from App/Ledger for user-configured backend
+            try {
+              const q = new URLSearchParams({ category: f.category || "Watch", ref: f.name || "example" });
+              const r = await fetch(`${b.replace(/\/$/, "")}/v1/market/alt/comps?${q}`);
+              const j = await r.json();
+              if (j.suggestedValue) {
+                setF({ ...f, value: Math.round(j.suggestedValue), lastComps: j.comps || [], compSource: j.note || "live" });
+              }
+            } catch (e) {}
+          }}>FETCH SUGGESTED VALUE FROM LIVE</button>
+        </div>
+        <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>Automation: live comps (data layer) auto-suggest value. Will expand to full per-item comp table + refresh in rich Vault UI.</div>
+      </Sheet>}
+    </div>
+  );
+}
+const Empty = ({ t, s }) => (
+  <div className="card" style={{ padding: 20, marginTop: 10, textAlign: "center", borderStyle: "dashed" }}>
+    <div className="lbl" style={{ color: "var(--faint)" }}>{t}</div>
+    <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>{s}</div>
+  </div>
+);
+
+/* ============================ GOALS ============================ */
+function Goals({ goals, setGoals, settings, setSettings, D }) {
+  const [sheet, setSheet] = useState(false);
+  const [f, setF] = useState({});
+  const P0 = D.P0, c = (D.effContrib != null ? D.effContrib : settings.contribution), r = settings.ret;
+  const save = () => { if (!f.name || !f.cost) return; setGoals([...goals, { id: Date.now(), name: f.name, cost: +f.cost, year: +f.year || (new Date().getFullYear() + 5) }]); setSheet(false); };
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      {/* plan inputs */}
+      <div className="card" style={{ padding: 14, marginTop: 6 }}>
+        <Ticks />
+        <div className="lbl">PLAN INPUTS — DRIVES EVERY GOAL</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 10 }}>
+          <MiniIn label="START $" v={settings.capital} onChange={v => setSettings({ ...settings, capital: +v || 0 })} />
+          <MiniIn label="DCA/MO $" v={settings.contribution} onChange={v => setSettings({ ...settings, contribution: +v || 0 })} />
+          <MiniIn label="RETURN %" v={(settings.ret * 100).toFixed(0)} onChange={v => setSettings({ ...settings, ret: (+v || 0) / 100 })} />
+        </div>
+      </div>
+
+      {goals.map(g => {
+        const c2 = goalCalc(g, P0, c, r);
+        return (
+          <div key={g.id} className="card" style={{ padding: 14, marginTop: 8 }}>
+            <Ticks />
+            <div className="row">
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 800, fontSize: 14 }}>{g.name}</div>
+                <div className="lbl" style={{ marginTop: 3 }}>{fmt(g.cost)} TARGET · BY {g.year} · {c2.years.toFixed(1)}Y OUT</div>
+              </div>
+              <Ring v={c2.fund} size={48} label={(c2.fund * 100).toFixed(0) + "%"} color={c2.onPlan ? "var(--ok)" : "var(--acc)"} />
+            </div>
+            <div className="divider" style={{ margin: "12px 0" }} />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 12px" }}>
+              <KV k="PROJECTED BY THEN" v={fmt(c2.projected)} c={c2.onPlan ? "var(--ok)" : "var(--txt)"} />
+              <KV k="NEED $/MO" v={fmt(c2.reqMo)} />
+              <KV k="REACHED ≈" v={c2.reached ? Math.round(c2.reached) : "—"} />
+              <KV k="VS YOUR DCA" v={fmt(c)} />
+            </div>
+            <div className="row" style={{ marginTop: 12 }}>
+              <span className="chip" style={{ color: c2.onPlan ? "var(--ok)" : c2.verdict === "JACKPOT ODDS" ? "var(--acc2)" : "var(--warn)", borderColor: "currentColor", padding: "5px 9px" }}>{c2.verdict}</span>
+              <button className="btn-ghost" style={{ width: 32, height: 32, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setGoals(goals.filter(x => x.id !== g.id))}><Trash2 size={13} /></button>
+            </div>
+          </div>
+        );
+      })}
+      <button className="btn" style={{ marginTop: 12 }} onClick={() => { setF({ year: new Date().getFullYear() + 5 }); setSheet(true); }}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />ADD GOAL</button>
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// "need $/mo" = what hits the target by your year at your return. compare to your DCA. the verdict tells the truth — discipline vs jackpot. not financial advice.</div>
+
+      {sheet && <Sheet title="ADD GOAL" onClose={() => setSheet(false)}>
+        <Field label="Goal name"><input className="in" placeholder="e.g. Land down payment / Rolex / Jet" onChange={e => setF({ ...f, name: e.target.value })} /></Field>
+        <Field label="Target cost $"><input className="in" type="number" inputMode="decimal" onChange={e => setF({ ...f, cost: e.target.value })} /></Field>
+        <Field label="Target year"><input className="in" type="number" inputMode="numeric" value={f.year} onChange={e => setF({ ...f, year: e.target.value })} /></Field>
+        <div style={{ marginTop: 6 }}>
+          <div className="lbl" style={{ fontSize: 9 }}>Quick goal presets (easy start)</div>
+          <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginTop: 4 }}>
+            {["Watch / Luxury", "Car / Vehicle", "Home / Real Estate", "Travel / Jet", "Retirement $1M", "Education / Other"].map(p => (
+              <button key={p} className="chip" style={{ cursor: "pointer", fontSize: 9, padding: "2px 6px" }} onClick={() => setF({ ...f, name: p.split(' / ')[0] })}>{p}</button>
+            ))}
+          </div>
+        </div>
+        <button className="btn" onClick={save}>SAVE</button>
+        <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>Projections use your effective DCA from CONFIG (with freq). Edit later for what-ifs.</div>
+      </Sheet>}
+    </div>
+  );
+}
+const MiniIn = ({ label, v, onChange }) => (
+  <div>
+    <div className="lbl" style={{ fontSize: 8, marginBottom: 4 }}>{label}</div>
+    <input className="in" style={{ padding: "8px 9px", fontSize: 13 }} type="number" inputMode="decimal" defaultValue={v} onBlur={e => onChange(e.target.value)} />
+  </div>
+);
+const KV = ({ k, v, c }) => (<div><div className="lbl" style={{ fontSize: 8.5 }}>{k}</div><div className="mono-tab" style={{ fontWeight: 700, fontSize: 14, marginTop: 3, color: c || "var(--txt)" }}>{v}</div></div>);
+
+/* ============================ BTC CYCLE GAUGE ============================ */
+function BTCGauge() {
+  const last = new Date("2024-04-19"), next = new Date("2028-04-17"), now = new Date();
+  const days = Math.floor((now - last) / 864e5);
+  const cycle = Math.max(0, Math.min(1, (now - last) / (next - last)));
+  const toNext = Math.ceil((next - now) / 864e5);
+  const phase = cycle < .25 ? "POST-HALVING / ACCUMULATION" : cycle < .5 ? "MARKUP / EARLY BULL" : cycle < .7 ? "EUPHORIA RISK ZONE" : cycle < .85 ? "DISTRIBUTION RISK" : "LATE CYCLE / CAUTION";
+  const risk = cycle < .25 ? "LOW" : cycle < .5 ? "RISING" : cycle < .7 ? "ELEVATED" : "HIGH";
+  const rc = risk === "LOW" ? "var(--ok)" : risk === "RISING" ? "var(--warn)" : "var(--acc2)";
+  return (
+    <div className="card" style={{ padding: 14, marginTop: 8 }}>
+      <Ticks />
+      <div className="row"><div className="lbl">BTC CYCLE GAUGE</div><span className="chip" style={{ color: rc, borderColor: "currentColor" }}>{risk} RISK</span></div>
+      <div className="big" style={{ fontSize: 17, marginTop: 8 }}>{phase}</div>
+      <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10 }}><div style={{ height: "100%", width: (cycle * 100) + "%", background: rc, transition: ".6s" }} /></div>
+      <div className="row" style={{ marginTop: 8 }}><div className="lbl mono-tab">{days}D SINCE HALVING</div><div className="lbl mono-tab">{(cycle * 100).toFixed(0)}% THROUGH CYCLE</div></div>
+      <div className="lbl" style={{ marginTop: 6 }}>NEXT HALVING ≈ APR 2028 · {toNext}D OUT · US ELECTION NOV 2028</div>
+      <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// the 4-year rhythm is a pattern, not a promise — returns diminish each cycle. size for the floor, not the moon.</div>
+    </div>
+  );
+}
+
+/* ============================ PURCHASE TRIBUNAL ============================ */
+function PurchaseAdvisor({ settings, D }) {
+  const [item, setItem] = useState({ name: "", cost: "", kind: "Depreciating" });
+  const [out, setOut] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const r = settings.ret, c = (D && D.effContrib != null ? D.effContrib : settings.contribution) || 1;
+  const calc = useMemo(() => {
+    const cost = +item.cost || 0;
+    const fv = (t) => cost * Math.pow(1 + r, t);
+    return { cost, months: cost / c, fv10: fv(10), fv20: fv(20) };
+  }, [item.cost, r, c]);
+  const run = async () => {
+    if (!calc.cost || busy) return;
+    setBusy(true); setOut({ verdict: "…", body: "" });
+    const ctx = `The user wants to buy "${item.name || "this item"}" for $${calc.cost}, classified as a ${item.kind} asset. Their reality: net worth ${fmt(D.nw)}, cash ${fmt(D.assets)}, monthly investable surplus ${fmt(settings.contribution)}, expected market return ${(r * 100).toFixed(0)}%/yr. Opportunity cost: that money invested instead becomes about ${fmt(calc.fv10)} in 10 years and ${fmt(calc.fv20)} in 20. The sticker equals ${calc.months.toFixed(1)} months of their entire investable surplus.`;
+    const system = `You are THE ACCOUNTANT — a cold, exacting purchase-vetting engine inside a finance app. The user brings you something they want to buy; you rule on whether it is financially defensible. Voice: clinical, precise, unsentimental, faintly menacing in your refusal to flatter — like the accountant in the film. Be HARD on the math and the choice, never contemptuous of the person. Weigh opportunity cost honestly; separate appreciating or income-producing assets from depreciating consumption; concede when a purchase is worth it for pure utility even if it is not ROI-positive, but say so plainly; protect their emergency floor absolutely and never bless a buy that eats safety-net cash; never endorse debt or leverage to fund consumption. Begin with a one-line verdict in caps — ACQUIRE, NOT WORTH IT, or WAIT — then 3 to 5 tight sentences tied to the real numbers, then one closing line that this is analysis, not financial advice. Under 130 words. ${ctx}`;
+    try {
+      const text = await callLLM(system, [{ role: "user", content: `Vet this purchase: ${item.name || "item"} at $${calc.cost}.` }], 1000);
+      const head = (text.split("\n")[0] || "").toUpperCase();
+      const verdict = head.includes("ACQUIRE") ? "ACQUIRE" : head.includes("NOT WORTH") ? "NOT WORTH IT" : head.includes("WAIT") ? "WAIT" : "THE RULING";
+      setOut({ verdict, body: text });
+    } catch (e) {
+      setOut({ verdict: "OFFLINE", body: "// no connection — but the math stands. this costs you " + fmt(calc.fv10) + " of future wealth over 10 years and " + calc.months.toFixed(1) + " months of your surplus. rule against that number." });
+    }
+    setBusy(false);
+  };
+  const vc = out ? (out.verdict === "ACQUIRE" ? "var(--ok)" : out.verdict === "NOT WORTH IT" ? "var(--acc2)" : "var(--warn)") : "var(--txt)";
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="⚖" t="PURCHASE TRIBUNAL" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div className="lbl">BRING THE ACCOUNTANT A PURCHASE</div>
+        <div style={{ marginTop: 10 }}><input className="in" placeholder="what do you want? (e.g. Rolex Submariner)" value={item.name} onChange={e => setItem({ ...item, name: e.target.value })} /></div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+          <input className="in" type="number" inputMode="decimal" placeholder="cost $" value={item.cost} onChange={e => setItem({ ...item, cost: e.target.value })} />
+          <select className="in sel" value={item.kind} onChange={e => setItem({ ...item, kind: e.target.value })}><option>Depreciating</option><option>Appreciating</option><option>Income-producing</option><option>Pure utility</option></select>
+        </div>
+        <button className="btn" style={{ marginTop: 12 }} onClick={run}>{busy ? "RULING…" : "⚖ RUN THE NUMBERS"}</button>
+      </div>
+      {calc.cost > 0 && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+        <Stat k="TRUE COST / 10Y" v={fmt(calc.fv10)} color="var(--acc)" sub="if invested instead" />
+        <Stat k="TRUE COST / 20Y" v={fmt(calc.fv20)} color="var(--acc)" sub="opportunity cost" />
+        <Stat k="MONTHS OF SURPLUS" v={calc.months.toFixed(1)} sub="of your DCA" />
+        <Stat k="STICKER" v={fmt(calc.cost)} sub={item.kind.toLowerCase()} />
+      </div>}
+      {out && <div className="card" style={{ padding: 16, marginTop: 8 }}>
+        <Ticks />
+        <div className="row"><div className="lbl">THE RULING</div><Scale size={13} color="var(--acc)" /></div>
+        <div className="big" style={{ fontSize: 26, marginTop: 8, color: vc }}>{out.verdict}</div>
+        <div style={{ fontSize: 12.5, lineHeight: 1.55, marginTop: 10, whiteSpace: "pre-wrap" }}>{busy ? "// computing the cost of wanting…" : out.body}</div>
+      </div>}
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// the tribunal weighs opportunity cost, not your worth. utility can justify a no-ROI buy and it will say so. it will never bless eating your safety floor. analysis, not financial advice.</div>
+    </div>
+  );
+}
+
+/* ============================ FORTRESS: SAFE-TO-SPEND + DEBT ============================ */
+function FortressView({ D, settings }) {
+  const [flow, setFlow] = useState({ income: "", birthDay: 15, floor: "" });
+  const [bills, setBills] = useState([]);
+  const [debts, setDebts] = useState([]);
+  const [ready, setReady] = useState(false);
+  const [bf, setBf] = useState({});
+  const [df, setDf] = useState({});
+  const [extra, setExtra] = useState("");
+  const [method, setMethod] = useState("avalanche");
+
+  useEffect(() => { (async () => {
+    setFlow(await store.get("bd_flow", { income: "", birthDay: 15, floor: "" }));
+    setBills(await store.get("bd_bills", []));
+    setDebts(await store.get("bd_debts", []));
+    setReady(true);
+  })(); }, []);
+  useEffect(() => { if (ready) store.set("bd_flow", flow); }, [flow, ready]);
+  useEffect(() => { if (ready) store.set("bd_bills", bills); }, [bills, ready]);
+  useEffect(() => { if (ready) store.set("bd_debts", debts); }, [debts, ready]);
+
+  const nthWed = (y, m, nth) => {
+    const d = new Date(y, m, 1); let count = 0;
+    while (count < 60) { if (d.getDay() === 3) { count++; if (count === nth) return new Date(d); } d.setDate(d.getDate() + 1); }
+    return new Date(y, m, 15);
+  };
+  const depositInfo = useMemo(() => {
+    const bd = +flow.birthDay || 15;
+    const nth = bd <= 10 ? 2 : bd <= 20 ? 3 : 4;
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    let dep = nthWed(now.getFullYear(), now.getMonth(), nth);
+    if (dep < now) dep = nthWed(now.getFullYear(), now.getMonth() + 1, nth);
+    return { dep, days: Math.ceil((dep - now) / 864e5), nth };
+  }, [flow.birthDay]);
+
+  const billCalc = useMemo(() => {
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const dep = depositInfo.dep; let dueSoon = 0;
+    bills.forEach(b => {
+      const amt = +b.amount || 0; const day = Math.min(+b.dueDay || 1, 28);
+      let due = new Date(now.getFullYear(), now.getMonth(), day);
+      if (due < now) due = new Date(now.getFullYear(), now.getMonth() + 1, day);
+      if (due <= dep) dueSoon += amt;
+    });
+    const monthlyTotal = bills.reduce((s, b) => s + (+b.amount || 0), 0);
+    return { dueSoon, monthlyTotal };
+  }, [bills, depositInfo]);
+
+  const floorBuf = flow.floor !== "" ? +flow.floor : Math.round((D.avgExp || 0) * (settings.efMonths || 3));
+  const cash = D.assets;
+  const safe = cash - billCalc.dueSoon - floorBuf;
+
+  const debtCalc = useMemo(() => {
+    const ds = debts.map(d => ({ name: d.name || "debt", bal: +d.balance || 0, bal0: +d.balance || 0, apr: (+d.apr || 0) / 100, min: +d.minPayment || 0 })).filter(d => d.bal > 0);
+    if (!ds.length) return null;
+    const totalMin = ds.reduce((s, d) => s + d.min, 0);
+    const budget = totalMin + (+extra || 0);
+    const sim = (order) => {
+      if (budget <= 0) return { months: null, interest: 0, legs: [] };
+      let list = order.map(d => ({ ...d, payoff: null })); let months = 0, interest = 0;
+      while (list.some(d => d.bal > 0.01) && months < 600) {
+        months++; let pool = budget;
+        list.forEach(d => { if (d.bal > 0.01) { const it = d.bal * d.apr / 12; d.bal += it; interest += it; } });
+        list.forEach(d => { if (d.bal > 0.01) { const pay = Math.min(d.min, d.bal, pool); d.bal -= pay; pool -= pay; } });
+        for (const d of list) { if (pool <= 0.01) break; if (d.bal > 0.01) { const pay = Math.min(pool, d.bal); d.bal -= pay; pool -= pay; } }
+        list.forEach(d => { if (d.payoff == null && d.bal <= 0.01) d.payoff = months; });
+      }
+      return { months: months >= 600 ? null : months, interest, legs: list.map(d => ({ name: d.name, apr: d.apr, bal0: d.bal0, payoff: d.payoff })) };
+    };
+    const aval = sim([...ds].sort((a, b) => b.apr - a.apr));
+    const snow = sim([...ds].sort((a, b) => a.bal - b.bal));
+    return { totalBal: ds.reduce((s, d) => s + d.bal0, 0), totalMin, budget, aval, snow, plan: aval.legs };
+  }, [debts, extra]);
+
+  const monthDate = (m) => { const d = new Date(); d.setMonth(d.getMonth() + (m || 0)); return d.toLocaleDateString("en", { month: "short", year: "numeric" }); };
+  const downloadPlan = () => {
+    if (!debtCalc || debtCalc.aval.months == null) return;
+    const dc = debtCalc; let r = "";
+    r += "BEDROCK — DEBT KILL ORDER\n";
+    r += "generated " + new Date().toLocaleDateString("en", { year: "numeric", month: "long", day: "numeric" }) + "\n";
+    r += "================================\n\n";
+    r += "TOTAL DEBT: " + fmt(dc.totalBal) + " across " + dc.plan.length + " balances\n";
+    r += "MONTHLY FIREPOWER: " + fmt(dc.budget) + "/mo  (minimums " + fmt(dc.totalMin) + " + extra " + fmt(dc.budget - dc.totalMin) + ")\n";
+    r += "STRATEGY: AVALANCHE — highest APR first. minimizes total interest paid.\n\n";
+    r += "ATTACK SEQUENCE\n----------------\n";
+    dc.plan.forEach((l, i) => { r += (i + 1) + ". " + (l.name || "debt") + "  —  " + (l.apr * 100).toFixed(1) + "% APR  —  start " + fmt(l.bal0) + "  —  cleared month " + (l.payoff || "?") + " (" + monthDate(l.payoff) + ")\n"; });
+    r += "\nDEBT-FREE: month " + dc.aval.months + " (" + monthDate(dc.aval.months) + ")\n";
+    r += "TOTAL INTEREST PAID (avalanche): " + fmt(dc.aval.interest) + "\n";
+    if (dc.snow.interest > dc.aval.interest) r += "INTEREST SAVED vs snowball: " + fmt(dc.snow.interest - dc.aval.interest) + "\n";
+    r += "\nDISCIPLINE\n----------\n";
+    r += "- pay every minimum, every month, without fail.\n";
+    r += "- throw every spare dollar at #1 until it is dead.\n";
+    r += "- when a debt dies, roll its whole payment onto the next in line.\n";
+    r += "- add no new debt. a wound you keep reopening never heals.\n\n";
+    r += "planning model — verify every APR and minimum with your lender.\n";
+    r += "research and education, not personalized financial advice.\n";
+    downloadBlob("bedrock-debt-kill-order-" + new Date().toISOString().slice(0, 10) + ".txt", r, "text/plain");
+  };
+  const ord = ["", "1st", "2nd", "3rd", "4th"][depositInfo.nth] || "";
+
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="⛨" t="SAFE TO SPEND" />
+      <div className="card" style={{ padding: 16 }}>
+        <Ticks />
+        <div className="row"><div className="lbl">DISCRETIONARY — SAFE TO SPEND NOW</div><Shield size={14} color="var(--acc)" /></div>
+        <div className="big" style={{ fontSize: 38, marginTop: 6, color: safe >= 0 ? "var(--ok)" : "var(--acc2)" }}>{fmt(safe)}</div>
+        <div style={{ fontSize: 11.5, color: "var(--dim)", lineHeight: 1.5, marginTop: 6 }}>after {fmt(billCalc.dueSoon)} in bills due before your next deposit and a {fmt(floorBuf)} floor buffer held back. {safe < 0 ? "// below the line — hold, do not spend." : "// everything above this number is yours to move."}</div>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+        <Stat k="NEXT SSDI DEPOSIT" v={depositInfo.dep.toLocaleDateString("en", { month: "short", day: "numeric" })} color="var(--acc)" sub={depositInfo.days + " days out"} />
+        <Stat k="RELIEF INCOMING" v={flow.income ? fmt(+flow.income) : "set it"} sub={"the " + ord + " wednesday"} />
+        <Stat k="BILLS / MONTH" v={fmt(billCalc.monthlyTotal)} sub={bills.length + " tracked"} />
+        <Stat k="CASH ON HAND" v={fmt(cash)} sub="liquid, ex-investments" />
+      </div>
+      <div className="card" style={{ padding: 12, marginTop: 8 }}>
+        <Ticks />
+        <div className="lbl">YOUR CLOCK</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 8 }}>
+          <div>
+            <div className="lbl" style={{ fontSize: 8 }}>INCOME (amount + freq)</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 4 }}>
+              <input className="in" type="number" inputMode="decimal" placeholder="0" value={flow.income} onChange={e => setFlow({ ...flow, income: e.target.value })} />
+              <select className="in sel" value={flow.incomeFrequency || "monthly"} onChange={e => setFlow({ ...flow, incomeFrequency: e.target.value })}>
+                {FREQUENCIES.map(f => <option key={f.key} value={f.key}>{f.label.split(' ')[0]}</option>)}
+              </select>
+            </div>
+          </div>
+          <div><div className="lbl" style={{ fontSize: 8 }}>BIRTH DAY</div><input className="in" type="number" inputMode="numeric" placeholder="1-31" value={flow.birthDay} onChange={e => setFlow({ ...flow, birthDay: e.target.value })} /></div>
+          <div><div className="lbl" style={{ fontSize: 8 }}>FLOOR HOLD</div><input className="in" type="number" inputMode="decimal" placeholder={String(Math.round((D.avgExp || 0) * (settings.efMonths || 3)))} value={flow.floor} onChange={e => setFlow({ ...flow, floor: e.target.value })} /></div>
+        </div>
+        <div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// SSA pays the 2nd, 3rd, or 4th wednesday by birth date 1-10, 11-20, 21-31. holidays shift it earlier. confirm on ssa.gov. (Income freq auto-converts for calcs like main settings.)</div>
+      </div>
+
+      <SectionLabel n="≡" t="BILLS" />
+      {bills.length === 0 && <div className="card" style={{ padding: 14 }}><div style={{ fontSize: 12, color: "var(--dim)" }}>no bills tracked. add your fixed monthly obligations so safe-to-spend knows exactly what to protect.</div></div>}
+      {bills.map(b => (
+        <div key={b.id} className="card" style={{ padding: "10px 12px", marginTop: 6, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div><div style={{ fontWeight: 600, fontSize: 13 }}>{b.name}</div><div className="lbl" style={{ fontSize: 8.5 }}>DUE DAY {b.dueDay}</div></div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}><div className="mono-tab" style={{ fontWeight: 700 }}>{fmt(+b.amount)}</div><button className="btn-ghost" style={{ width: 28, height: 28, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setBills(bills.filter(x => x.id !== b.id))}><Trash2 size={12} /></button></div>
+        </div>
+      ))}
+      <div className="card" style={{ padding: 12, marginTop: 6 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 0.8fr", gap: 6 }}>
+          <input className="in" placeholder="bill name" value={bf.name || ""} onChange={e => setBf({ ...bf, name: e.target.value })} />
+          <input className="in" type="number" inputMode="decimal" placeholder="$/mo" value={bf.amount || ""} onChange={e => setBf({ ...bf, amount: e.target.value })} />
+          <input className="in" type="number" inputMode="numeric" placeholder="day" value={bf.dueDay || ""} onChange={e => setBf({ ...bf, dueDay: e.target.value })} />
+        </div>
+        <button className="btn btn-ghost" style={{ marginTop: 8 }} onClick={() => { if (!bf.name || !bf.amount) return; setBills([...bills, { id: Date.now(), name: bf.name, amount: bf.amount, dueDay: bf.dueDay || 1 }]); setBf({}); }}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />ADD BILL</button>
+      </div>
+
+      <SectionLabel n="⚔" t="DEBT — KILL ORDER" />
+      {debtCalc && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+        <div className="card" style={{ padding: 12 }}><Ticks /><div className="lbl">AVALANCHE</div><div className="big" style={{ fontSize: 22, marginTop: 4 }}>{debtCalc.aval.months == null ? "—" : debtCalc.aval.months + " mo"}</div><div className="lbl" style={{ fontSize: 9, marginTop: 2 }}>{fmt(debtCalc.aval.interest)} INTEREST</div><div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 4 }}>highest APR first</div></div>
+        <div className="card" style={{ padding: 12 }}><Ticks /><div className="lbl">SNOWBALL</div><div className="big" style={{ fontSize: 22, marginTop: 4 }}>{debtCalc.snow.months == null ? "—" : debtCalc.snow.months + " mo"}</div><div className="lbl" style={{ fontSize: 9, marginTop: 2 }}>{fmt(debtCalc.snow.interest)} INTEREST</div><div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 4 }}>smallest balance first</div></div>
+      </div>}
+      {debtCalc && <div className="card" style={{ padding: 12, marginTop: 8 }}>
+        <div className="row"><div className="lbl">EXTRA $/MO AT DEBT</div><div className="mono-tab" style={{ fontWeight: 700 }}>{fmt(debtCalc.budget)}/mo deployed</div></div>
+        <input className="in" type="number" inputMode="decimal" placeholder="0" value={extra} onChange={e => setExtra(e.target.value)} style={{ marginTop: 8 }} />
+        <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 8, lineHeight: 1.5 }}>{debtCalc.aval.months == null ? "// enter each debt minimum payment and any extra to compute the payoff clock." : debtCalc.aval.interest <= debtCalc.snow.interest ? "// the math favors AVALANCHE — it saves " + fmt(debtCalc.snow.interest - debtCalc.aval.interest) + " in interest. snowball wins on momentum if you need early kills." : "// snowball is cheaper here — rare, take it."}</div>
+      </div>}
+      {debtCalc && debtCalc.aval.months != null && debtCalc.plan.length > 0 && <div className="card" style={{ padding: 14, marginTop: 8 }}>
+        <Ticks />
+        <div className="row"><div className="lbl">KILL ORDER — ATTACK SEQUENCE</div><span className="chip lbl-acc" style={{ borderColor: "var(--acc)" }}>AVALANCHE</span></div>
+        {debtCalc.plan.map((l, i) => (
+          <div key={i} className="row" style={{ marginTop: 8, alignItems: "flex-start" }}>
+            <div className="row" style={{ gap: 8 }}><div className="big" style={{ fontSize: 16, color: i === 0 ? "var(--acc)" : "var(--dim)" }}>{i + 1}</div><div><div style={{ fontWeight: 700, fontSize: 12.5 }}>{l.name}</div><div className="lbl" style={{ fontSize: 8.5, marginTop: 2 }}>{(l.apr * 100).toFixed(1)}% APR · {fmt(l.bal0)}</div></div></div>
+            <div style={{ textAlign: "right" }}><div className="mono-tab" style={{ fontWeight: 700, fontSize: 12 }}>{l.payoff ? "mo " + l.payoff : "—"}</div><div className="lbl" style={{ fontSize: 8 }}>{l.payoff ? monthDate(l.payoff) : ""}</div></div>
+          </div>
+        ))}
+        <div style={{ fontSize: 10.5, color: "var(--dim)", marginTop: 12, lineHeight: 1.5 }}>strike #1 first — it bleeds you fastest at {(debtCalc.plan[0].apr * 100).toFixed(1)}%. kill it, then roll its payment onto #2. debt-free by {monthDate(debtCalc.aval.months)}.</div>
+        <button className="btn" style={{ marginTop: 12 }} onClick={downloadPlan}>↓ DOWNLOAD THE PLAN</button>
+      </div>}
+      {debts.length === 0 && <div className="card" style={{ padding: 14 }}><div style={{ fontSize: 12, color: "var(--dim)" }}>no debt logged. if you carry none, you already stand where most never will. if you do — log it, and we set the kill order.</div></div>}
+      {debts.map(d => (
+        <div key={d.id} className="card" style={{ padding: "10px 12px", marginTop: 6, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div><div style={{ fontWeight: 600, fontSize: 13 }}>{d.name}</div><div className="lbl" style={{ fontSize: 8.5 }}>{d.apr}% APR · MIN {fmt(+d.minPayment)}</div></div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}><div className="mono-tab" style={{ fontWeight: 700, color: "var(--acc2)" }}>{fmt(+d.balance)}</div><button className="btn-ghost" style={{ width: 28, height: 28, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setDebts(debts.filter(x => x.id !== d.id))}><Trash2 size={12} /></button></div>
+        </div>
+      ))}
+      <div className="card" style={{ padding: 12, marginTop: 6 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 0.7fr 0.9fr", gap: 6 }}>
+          <input className="in" placeholder="debt" value={df.name || ""} onChange={e => setDf({ ...df, name: e.target.value })} />
+          <input className="in" type="number" inputMode="decimal" placeholder="bal $" value={df.balance || ""} onChange={e => setDf({ ...df, balance: e.target.value })} />
+          <input className="in" type="number" inputMode="decimal" placeholder="APR%" value={df.apr || ""} onChange={e => setDf({ ...df, apr: e.target.value })} />
+          <input className="in" type="number" inputMode="decimal" placeholder="min $" value={df.minPayment || ""} onChange={e => setDf({ ...df, minPayment: e.target.value })} />
+        </div>
+        <button className="btn btn-ghost" style={{ marginTop: 8 }} onClick={() => { if (!df.name || !df.balance) return; setDebts([...debts, { id: Date.now(), name: df.name, balance: df.balance, apr: df.apr || 0, minPayment: df.minPayment || 0 }]); setDf({}); }}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />ADD DEBT</button>
+      </div>
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// the floor is sacred. safe-to-spend never counts bill money or your buffer as spendable. debt math is a planning model — verify rates with your lender. analysis, not financial advice.</div>
+    </div>
+  );
+}
+
+/* ============================ QUANT ============================ */
+function Quant({ settings, holdings, setHoldings, D }) {
+  const [hz, setHz] = useState(10);
+  const [goal, setGoal] = useState(1000000);
+  const [sim, setSim] = useState(null);
+  const [fat, setFat] = useState(true);
+  const ebets = (() => { const mv = holdings.map(h => (+h.units || 0) * (+h.price || 0)); const tot = mv.reduce((a, b) => a + b, 0); if (tot <= 0) return null; return Math.exp(-mv.reduce((sm, m) => { const w = m / tot; return sm + (w > 0 ? w * Math.log(w) : 0); }, 0)); })();
+  const [running, setRunning] = useState(false);
+  const [sheet, setSheet] = useState(false);
+  const [f, setF] = useState({});
+  const [syncing, setSyncing] = useState(false);
+  const [syncNote, setSyncNote] = useState("");
+  const syncPrices = async () => {
+    if (!holdings.length || syncing) return;
+    setSyncing(true); setSyncNote("");
+    let hit = 0, miss = 0;
+    try {
+      const updated = await Promise.all(holdings.map(async (h) => {
+        const t = (h.ticker || "").toUpperCase();
+        if (!t) return h;
+        try {
+          const r = await fetch("https://api.coinbase.com/v2/prices/" + t + "-USD/spot");
+          if (!r.ok) { miss++; return h; }
+          const j = await r.json();
+          const px = j && j.data && +j.data.amount;
+          if (px) { hit++; return { ...h, price: px }; }
+          miss++; return h;
+        } catch (e) { miss++; return h; }
+      }));
+      setHoldings(updated);
+      setSyncNote(hit + " priced live from Coinbase" + (miss ? " · " + miss + " not on the crypto feed (stocks/ETFs — enter price manually, or connect a read-only source)" : ""));
+    } catch (e) { setSyncNote("could not reach the Coinbase price feed — prices unchanged."); }
+    setSyncing(false);
+  };
+  const [imgBusy, setImgBusy] = useState(false);
+  const [imgPrev, setImgPrev] = useState(null);
+  const [imgMsg, setImgMsg] = useState("");
+  const importImg = async (file) => {
+    if (!file) return;
+    setImgBusy(true); setImgPrev(null); setImgMsg("reading image…");
+    try {
+      const dataUrl = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); });
+      setImgMsg("extracting positions with your model…");
+      const out = await callLLM(
+        "You are a precise data-extraction engine. Output only valid JSON and nothing else.",
+        [{ role: "user", content: [
+          { type: "text", text: "Extract every investment position visible in this statement or screenshot. Return ONLY a JSON array. Each element has keys ticker (uppercase symbol string), units (number of units held), cost (average cost per unit, or 0 if not shown), price (current price per unit, or 0 if not shown). If no positions are visible, return an empty array. No prose, no markdown, no code fences." },
+          { type: "image_url", image_url: { url: dataUrl } }
+        ] }],
+        1500
+      );
+      if (out && out.indexOf("//") === 0) { setImgMsg(out); setImgBusy(false); return; }
+      const m = out.match(/\[[\s\S]*\]/);
+      if (!m) { setImgMsg("// could not read positions from that image. try a tighter crop, or set a vision-capable model in Config."); setImgBusy(false); return; }
+      const arr = JSON.parse(m[0]).filter(x => x && x.ticker).map(x => ({ id: Date.now() + Math.floor(Math.random() * 1e6), ticker: String(x.ticker).toUpperCase(), units: +x.units || 0, cost: +x.cost || 0, price: +x.price || 0 }));
+      if (!arr.length) { setImgMsg("// no positions found in that image."); setImgBusy(false); return; }
+      setImgPrev(arr); setImgMsg(arr.length + " positions read — review, then confirm.");
+    } catch (e) { setImgMsg("// import failed. nothing changed."); }
+    setImgBusy(false);
+  };
+  const confirmImg = () => { if (imgPrev) { const n = imgPrev.length; setHoldings([...holdings, ...imgPrev]); setImgPrev(null); setImgMsg(n + " positions added."); } };
+  const run = () => {
+    setRunning(true);
+    setTimeout(() => {
+      const P0 = D.P0 + D.invMv;
+      const contrib = (D.effContrib != null ? D.effContrib : settings.contribution);
+      setSim(monteCarlo(P0, contrib, settings.ret, settings.vol, hz * 12, 400, goal, fat ? 4 : 0));
+      setRunning(false);
+    }, 30);
+  };
+  useEffect(() => { run(); /* eslint-disable-next-line */ }, []);
+  const alloc = holdings.map((h, i) => ({ name: h.ticker || ("H" + i), v: (+h.units || 0) * (+h.price || 0) })).filter(x => x.v > 0);
+  const COL = ["#FF4D14", "#46E0A0", "#FFB000", "#3A86FF", "#FF2D2D", "#8C8C8C"];
+  const saveH = () => { if (!f.ticker) return; setHoldings([...holdings, { id: Date.now(), ticker: f.ticker.toUpperCase(), units: +f.units || 0, cost: +f.cost || 0, price: +f.price || 0 }]); setSheet(false); };
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="∑" t="MONTE CARLO ENGINE" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div className="lbl">GBM SIMULATION · 400 PATHS · CONTRIB {fmt(settings.contribution)}/MO</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 10 }}>
+          <div><div className="lbl" style={{ fontSize: 8, marginBottom: 4 }}>HORIZON (YRS)</div><input className="in" style={{ padding: "8px 9px" }} type="number" value={hz} onChange={e => setHz(Math.max(1, Math.min(40, +e.target.value || 10)))} /></div>
+          <div><div className="lbl" style={{ fontSize: 8, marginBottom: 4 }}>GOAL $</div><input className="in" style={{ padding: "8px 9px" }} type="number" value={goal} onChange={e => setGoal(+e.target.value || 0)} /></div>
+        </div>
+        <div className="lbl" style={{ marginTop: 10 }}>μ {(settings.ret * 100).toFixed(0)}%/yr · σ {(settings.vol * 100).toFixed(0)}%/yr · start {fmtk(D.P0 + D.invMv)}</div>
+        <div className="row" style={{ gap: 8, marginTop: 12 }}>
+          <button className="btn" style={{ flex: 1 }} onClick={run}>{running ? "COMPUTING…" : "▶ RUN (CLIENT)"}</button>
+          {cloud.enabled && <button className="btn btn-ghost" style={{ flex: 1 }} onClick={async () => {
+            try {
+              const P0 = D.P0 + D.invMv;
+              const params = { initialCapital: P0, monthlySurplus: settings.contribution, expectedAnnualReturn: settings.ret, annualVolatility: settings.vol, horizonYears: hz, nPaths: 25000, crashProbPerYear: 0.08, crashMagnitude: -0.40 };
+              const res = await cloudForge(params);
+              // Store extra verification fields for future "verify receipt" UI / standalone check
+              setSim({ ...res.result, _forge: true, _sig: res.signature, _pub: res.publicKey, _alg: res.alg, _signedAt: res.signedAt });
+            } catch (e) { alert("forge failed: " + e.message); }
+          }}>☁ RUN ON FORGE (25k)</button>}
+        </div>
+        {sim && sim._forge && <div className="lbl" style={{ color: "var(--ok)", marginTop: 6 }}>server result shown — compare to a client run</div>}
+      </div>
+
+      {sim && <>
+        <div className="card" style={{ padding: "14px 6px 6px", marginTop: 8 }}>
+          <Ticks />
+          <div className="lbl" style={{ paddingLeft: 8 }}>WEALTH FAN — P5 / P50 / P95</div>
+          <FanChart data={sim.fan} />
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+          <Stat k={"MEDIAN @ " + hz + "Y"} v={fmtk(sim.p50)} color="var(--acc)" />
+          <Stat k="MEAN" v={fmtk(sim.mean)} />
+          <Stat k="P5 (UNLUCKY)" v={fmtk(sim.p5)} color="var(--warn)" />
+          <Stat k="P95 (LUCKY)" v={fmtk(sim.p95)} color="var(--ok)" />
+        </div>
+        <div className="card" style={{ padding: 16, marginTop: 8 }}>
+          <Ticks />
+          <div className="lbl">PROB. OF HITTING {fmtk(goal)}</div>
+          <div className="big mono-tab" style={{ fontSize: 40, marginTop: 6, color: sim.prob >= .5 ? "var(--ok)" : sim.prob >= .2 ? "var(--warn)" : "var(--acc2)" }}>{sim.prob != null ? (sim.prob * 100).toFixed(0) + "%" : "—"}</div>
+          <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10 }}><div style={{ height: "100%", width: (sim.prob * 100) + "%", background: sim.prob >= .5 ? "var(--ok)" : "var(--acc)" }} /></div>
+        </div>
+        <SectionLabel n="☠" t="TAIL RISK & RUIN" />
+        <div className="card" style={{ padding: 16 }}>
+          <Ticks />
+          <div className="row"><div className="lbl">PROBABILITY OF A DRAWDOWN THIS DEEP</div><button className="chip" onClick={() => { const nf = !fat; setFat(nf); setSim(monteCarlo(P0, settings.contribution, settings.ret, settings.vol, hz * 12, 400, goal, nf ? 4 : 0)); }} style={{ cursor: "pointer", borderColor: "var(--acc)", color: "var(--acc)" }}>{fat ? "FAT-TAIL t" : "NORMAL"}</button></div>
+          {[["≥ 50%", sim.dd50, "var(--warn)"], ["≥ 70%", sim.dd70, "var(--acc)"], ["≥ 90% — ruin", sim.dd90, "var(--acc2)"]].map(([lab, v, col]) => (
+            <div key={lab} style={{ marginTop: 10 }}>
+              <div className="row"><div className="lbl" style={{ fontSize: 9.5 }}>{lab}</div><div className="mono-tab" style={{ fontWeight: 700, color: col }}>{(v * 100).toFixed(1)}%</div></div>
+              <div style={{ height: 6, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 4 }}><div style={{ height: "100%", width: (v * 100) + "%", background: col }} /></div>
+            </div>
+          ))}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 12, lineHeight: 1.5 }}>// shocks drawn from a Student-t, df {sim.df || "normal"}, so crashes are modeled rather than wished away. survival is the first objective; everything else is secondary.</div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+          <Stat k="MEDIAN MAX DRAWDOWN" v={(sim.medMDD * 100).toFixed(0) + "%"} color="var(--warn)" sub="typical worst dip" />
+          <Stat k="P95 MAX DRAWDOWN" v={(sim.p95MDD * 100).toFixed(0) + "%"} color="var(--acc2)" sub="unlucky worst dip" />
+          <Stat k="TIME UNDERWATER" v={(sim.medUW * 100).toFixed(0) + "%"} sub="of horizon below peak" />
+          <Stat k="PAYOFF ASYMMETRY" v={sim.asym != null ? sim.asym.toFixed(2) + "x" : "—"} color={sim.asym >= 1 ? "var(--ok)" : "var(--dim)"} sub="upside vs downside" />
+        </div>
+        {ebets != null && <div style={{ marginTop: 8 }}>
+          <Stat k="EFFECTIVE BETS · ENTROPY" v={ebets.toFixed(2)} color="var(--acc)" sub={"of " + holdings.length + " holdings — true diversification, not raw count"} />
+        </div>}
+      </>}
+
+      <SectionLabel n="₿" t="BTC CYCLE" />
+      <BTCGauge />
+      <SectionLabel n="◔" t="PORTFOLIO ALLOCATION" />
+      {alloc.length > 0 ? (
+        <div className="card" style={{ padding: 14, display: "flex", alignItems: "center", gap: 14 }}>
+          <Ticks />
+          <Donut data={alloc} colors={COL} />
+          <div style={{ flex: 1 }}>
+            {alloc.map((a, i) => (
+              <div key={i} className="row" style={{ marginBottom: 6 }}>
+                <div className="lbl row" style={{ gap: 6, color: "var(--txt)" }}><span style={{ width: 8, height: 8, background: COL[i % COL.length] }} />{a.name}</div>
+                <div className="mono-tab" style={{ fontSize: 11, color: "var(--dim)" }}>{fmtk(a.v)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : <Empty t="EMPTY ARSENAL" s="log a position to see allocation and P/L." />}
+      {holdings.map(h => (
+        <div key={h.id} className="card" style={{ padding: "11px 14px", marginTop: 8 }}>
+          <Ticks />
+          <div className="row">
+            <div><div style={{ fontWeight: 800, fontSize: 13 }}>{h.ticker}</div><div className="lbl" style={{ marginTop: 3 }}>{h.units} @ {fmt(h.price)}</div></div>
+            <div className="row" style={{ gap: 10 }}>
+              <div style={{ textAlign: "right" }}><div className="mono-tab" style={{ fontWeight: 800, fontSize: 14 }}>{fmt(h.units * h.price)}</div><div className="lbl" style={{ color: (h.price - h.cost) >= 0 ? "var(--ok)" : "var(--acc2)" }}>{((h.cost ? (h.price / h.cost - 1) : 0) * 100).toFixed(1)}%</div></div>
+              <button className="btn-ghost" style={{ width: 28, height: 28, padding: 0, display: "grid", placeItems: "center" }} onClick={() => setHoldings(holdings.filter(x => x.id !== h.id))}><Trash2 size={12} /></button>
+            </div>
+          </div>
+        </div>
+      ))}
+      {holdings.length > 0 && <button className="btn" style={{ marginTop: 12 }} onClick={syncPrices}>{syncing ? "SYNCING LIVE…" : "⟳ SYNC LIVE PRICES"}</button>}
+      {syncNote && <div style={{ fontSize: 10, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>{"// " + syncNote}</div>}
+      <button className="btn btn-ghost" style={{ marginTop: 8 }} onClick={() => { setF({}); setSheet(true); }}><Plus size={13} style={{ verticalAlign: "-2px", marginRight: 6 }} />ADD HOLDING</button>
+      <label className="btn btn-ghost" style={{ marginTop: 8, cursor: "pointer", display: "grid", placeItems: "center" }}><Sparkles size={12} style={{ verticalAlign: "-2px", marginRight: 6 }} />{imgBusy ? "READING IMAGE…" : "IMPORT FROM IMAGE (AI)"}<input type="file" accept="image/*" onChange={e => importImg(e.target.files && e.target.files[0])} style={{ display: "none" }} /></label>
+      {imgMsg && <div style={{ fontSize: 10, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>{imgMsg}</div>}
+      {imgPrev && <div className="card" style={{ padding: 12, marginTop: 8 }}>
+        <Ticks />
+        <div className="lbl">EXTRACTED — REVIEW BEFORE ADDING</div>
+        {imgPrev.map((h, i) => <div key={i} className="row" style={{ marginTop: 6 }}><div style={{ fontWeight: 700, fontSize: 12 }}>{h.ticker}</div><div className="lbl mono-tab">{h.units} @ {fmt(h.price)} · cost {fmt(h.cost)}</div></div>)}
+        <div className="row" style={{ gap: 8, marginTop: 10 }}><button className="btn" onClick={confirmImg}>CONFIRM IMPORT</button><button className="btn btn-ghost" onClick={() => { setImgPrev(null); setImgMsg(""); }}>DISCARD</button></div>
+      </div>}
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// monte carlo = geometric brownian motion, reseeds each run — a planning model, not a prediction. SYNC pulls live crypto prices from Coinbase public feed: no key, nothing leaves the app. stocks/ETFs need a price entered or a connected read-only source. not financial advice.</div>
+
+      {sheet && <Sheet title="ADD HOLDING" onClose={() => setSheet(false)}>
+        <Field label="Ticker"><input className="in" placeholder="BTC / VTI" onChange={e => setF({ ...f, ticker: e.target.value })} /></Field>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <Field label="Units"><input className="in" type="number" inputMode="decimal" onChange={e => setF({ ...f, units: e.target.value })} /></Field>
+          <Field label="Avg cost $"><input className="in" type="number" inputMode="decimal" onChange={e => setF({ ...f, cost: e.target.value })} /></Field>
+        </div>
+        <Field label="Current price $"><input className="in" type="number" inputMode="decimal" onChange={e => setF({ ...f, price: e.target.value })} /></Field>
+        <button className="btn" onClick={saveH}>SAVE</button>
+      </Sheet>}
+    </div>
+  );
+}
+
+const LESSONS = [
+  { t: "SURVIVE FIRST", b: "Ruin is the one mistake you cannot undo. A 50% loss needs a 100% gain just to break even; a 90% loss needs 900%. Before chasing any return, ask what a bad run does to you. If a string of losses can wipe you out, the size is wrong, no matter how good the odds look." },
+  { t: "THE FLOOR IS SACRED", b: "Hold three to six months of expenses in plain cash, untouchable. It is not idle money, it is the moat that keeps a crisis from forcing you to sell your assets at the worst possible moment. Build it before you invest a single dollar you cannot afford to lose." },
+  { t: "COMPOUNDING IS THE ENGINE", b: "Time does the heavy lifting, not timing. One dollar at 10% a year becomes about 6.7x in twenty years and 17.4x in thirty. The cost of starting late or interrupting the machine is brutal. The slow road, walked without fail, beats the fast road that blows up." },
+  { t: "SIZE FOR SURVIVAL", b: "The real edge is not picking winners, it is sizing bets so a losing streak can never end you. Risk a small, fixed fraction of capital, a fraction of the theoretical Kelly bet, never the whole thing. Position sizing, not prediction, keeps you in the game long enough to win." },
+  { t: "KNOW THE REAL MATH", b: "Long-run stocks return roughly 10% a year before inflation. Turning 25k into a million in five years needs about 110% a year, which no one sustains. Over twenty years it needs about 17%, hard but human. Anyone selling the five-year version is selling the path that also goes to zero." },
+  { t: "DIVERSIFY FOR REAL", b: "Owning ten things that all crash together is not diversification. What matters is how independent your holdings are, not how many you hold. True spread comes from assets that do not move in lockstep, which is exactly what the entropy reading in QUANT estimates." },
+  { t: "KILL DEBT BY THE NUMBERS", b: "High-interest debt is a guaranteed negative return; clearing a 21% card beats almost any investment you could make. Avalanche, highest rate first, saves the most money. Snowball, smallest balance first, builds momentum. Choose one and execute it without drama." },
+  { t: "FEES AND TAXES COMPOUND TOO", b: "A 1% annual fee can quietly eat a quarter of your final wealth across thirty years. Costs compound against you exactly as returns compound for you. Favor low-cost broad ownership and tax-advantaged accounts, and confirm the specifics with a real professional." },
+  { t: "YOU ARE THE BIGGEST RISK", b: "Fear sells the bottom; greed buys the top. The market is a machine for moving money from the impatient to the patient. Rules and automation beat willpower. Decide your plan in calm and obey it in chaos. Discipline is the only durable edge." },
+  { t: "OWN, AND EARN MORE", b: "Lasting wealth comes from owning things that produce, equity, businesses, productive assets, and from raising what you earn and keep, not from frugality alone. Cutting costs has a floor. Building income and ownership does not." },
+];
+const QUOTES = [
+  { q: "You have power over your mind — not outside events.", a: "Marcus Aurelius" },
+  { q: "We suffer more often in imagination than in reality.", a: "Seneca" },
+  { q: "No man is free who is not master of himself.", a: "Epictetus" },
+  { q: "Victorious warriors win first and then go to war.", a: "Sun Tzu" },
+  { q: "In the midst of chaos, there is also opportunity.", a: "Sun Tzu" },
+  { q: "Today is victory over yourself of yesterday.", a: "Miyamoto Musashi" },
+  { q: "A part of all you earn is yours to keep.", a: "The Richest Man in Babylon" },
+  { q: "Rule number one: never lose money.", a: "Warren Buffett" },
+  { q: "Patience and discipline outlast brilliance that cannot wait.", a: "The Dojo" },
+];
+function CodexView() {
+  return (
+    <div style={{ flex: 1, overflowY: "auto", padding: "10px 2px" }}>
+      <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>the discipline beneath the numbers. master yourself first — the market answers only to those who have. read one, apply it, return.</div>
+      <SectionLabel n="◆" t="THE LESSONS" />
+      {LESSONS.map((l, i) => (
+        <div key={i} className="card" style={{ padding: 14, marginTop: 8 }}>
+          <Ticks />
+          <div className="row"><div className="big" style={{ fontSize: 16 }}>{l.t}</div><div className="chip">{String(i + 1).padStart(2, "0")}</div></div>
+          <div style={{ fontSize: 12, color: "var(--dim)", lineHeight: 1.6, marginTop: 8 }}>{l.b}</div>
+        </div>
+      ))}
+      <SectionLabel n="⚔" t="THE CREED · WORDS TO TRAIN BY" />
+      {QUOTES.map((q, i) => (
+        <div key={i} className="card" style={{ padding: 14, marginTop: 8, borderLeft: "2px solid var(--acc)" }}>
+          <div style={{ fontSize: 13.5, fontStyle: "italic", color: "var(--txt)", lineHeight: 1.55 }}>{q.q}</div>
+          <div className="lbl" style={{ marginTop: 8, color: "var(--faint)" }}>— {q.a}</div>
+        </div>
+      ))}
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>education, not financial advice. the principles are timeless; the numbers are yours to earn.</div>
+    </div>
+  );
+}
+
+/* ============================ COACH (AI) ============================ */
+function Coach({ D, rank, settings, goals }) {
+  const [msgs, setMsgs] = useState([{ role: "ai", text: "// the dojo is open. i read your numbers, not your hopes. ask what is true — am i on track, what is my real risk, how fast can i reach the jet. i will not flatter you. i will sharpen you." }]);
+  const reg = regimeOf(D, settings);
+  const persona = reg.persona;
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [mode, setMode] = useState("chat");
+  const endRef = useRef(null);
+  useEffect(() => { endRef.current && endRef.current.scrollIntoView({ behavior: "smooth" }); }, [msgs, busy]);
+  const chips = ["Am I on track?", "How do I reach the jet faster?", "Explain my risk", "Is $1M in 5 years realistic?"];
+
+  // === Hermes-style agent swarm support (Phase 1+) ===
+  // Multiple agents (personas) can analyze the same snapshot in parallel.
+  // They can "call" local tools (monte carlo variants, portfolio suggestions) via structured output the UI can act on.
+  const [swarmResults, setSwarmResults] = useState<any[]>([]);
+  const swarmPersonas = ["STRATEGIST", "WICK", "ACCOUNTANT", "BEEKEEPER"];
+
+  const runSwarm = async () => {
+    setBusy(true);
+    setSwarmResults([]);
+    const snapshot = `Net worth: ${fmt(D.nw)}; Cash: ${fmt(D.assets)}; Investments: ${fmt(D.invMv)}; Monthly DCA: ${fmt(settings.contribution)}; Return/vol: ${(settings.ret*100).toFixed(0)}% / ${(settings.vol*100).toFixed(0)}%`;
+
+    const results: any[] = [];
+    for (const p of swarmPersonas) {
+      const sys = `You are a ${p} agent in a BEDROCK quantitative portfolio engineering swarm. Be concise, structured, use JSON if suggesting numbers. Snapshot: ${snapshot}. Focus on analysis, risk, allocation ideas, or specific actions.`;
+      try {
+        const out = await callLLM(sys, [{ role: "user", content: "Give your view and any actionable portfolio engineering suggestions." }], 700);
+        results.push({ persona: p, text: out });
+      } catch (e) {
+        results.push({ persona: p, text: "// agent failed to respond" });
+      }
+    }
+    setSwarmResults(results);
+    setBusy(false);
+  };
+
+  const send = async (textArg) => {
+    const text = (textArg || input).trim(); if (!text || busy) return;
+    const next = [...msgs, { role: "me", text }]; setMsgs(next); setInput(""); setBusy(true);
+    const ctx = `User snapshot — Net worth: ${fmt(D.nw)}; Cash: ${fmt(D.assets)}; Investments: ${fmt(D.invMv)}; Liabilities: ${fmt(D.liab)}; Monthly contribution (DCA): ${fmt(settings.contribution)}; Starting investable: ${fmt(settings.capital)}; Expected return assumption: ${(settings.ret * 100).toFixed(0)}%/yr; Volatility: ${(settings.vol * 100).toFixed(0)}%/yr; Rank: ${rank.name} (Lv ${rank.lvl}); EF runway: ${D.runway != null ? D.runway.toFixed(1) + " months" : "unknown"}. Goals: ${goals.map(g => g.name + " $" + g.cost + " by " + g.year).join("; ")}.`;
+    const system = `You are ${PERSONAS[persona].tag}, the AI advisor inside a personal-finance app called BEDROCK. ${reg.directive} Voice: ${PERSONAS[persona].voice} Be hard on the math and the choices, never contemptuous of the person. Stay in character, keep it brief, no emojis. You are RIGOROUS and HONEST above all: never promise get-rich-quick, never recommend specific securities or guarantee returns, and gently reality-check fantasies with real math (e.g. $1M in 5y from a small base needs ~90%/yr which no one sustains; long-run stocks ~10%/yr; the path that could spike that high also goes to zero). Champion bounded aggression: maximize growth of money he can afford to risk, protect the floor (emergency fund / bill money) absolutely, and lean on owning productive assets + raising income. Be encouraging about what IS achievable (the Teslas and even the jet are reachable on a disciplined clock). Keep replies under ~130 words, concrete, and tied to his actual numbers. Discourage leverage, margin, and borrowing against volatile assets at his level — it is the fastest path to ruin in the very crashes he wants to survive. On taxes and legal structures give general education only, always defer to a licensed CPA and attorney, and never help conceal assets or evade tax — privacy is legal, evasion is prison. End anything investment-related with a brief reminder this is not financial advice. ${ctx}`;
+    try {
+      const hist = next.filter(m => m.role !== "ai" || m !== next[0]).map(m => ({ role: m.role === "me" ? "user" : "assistant", content: m.text }));
+      const out = await callLLM(system, hist.length ? hist : [{ role: "user", content: text }], 1000);
+      setMsgs([...next, { role: "ai", text: out || "// signal lost. try again." }]);
+    } catch (e) {
+      setMsgs([...next, { role: "ai", text: "// can't reach the network right now. but the math doesn't change: protect the floor, fund what's reachable, raise income. run it back when you're connected." }]);
+    }
+    setBusy(false);
+  };
+
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px", display: "flex", flexDirection: "column", height: "calc(100vh - 220px)" }}>
+      <div className="card" style={{ padding: 12, marginTop: 6 }}>
+        <Ticks />
+        <div className="row"><div className="row" style={{ gap: 8 }}><Cpu size={15} color="var(--acc)" /><div className="big" style={{ fontSize: 18 }}>{PERSONAS[persona].tag}</div></div><span className="chip lbl-acc" style={{ borderColor: "var(--acc)" }}>AI</span></div>
+        <div style={{ marginTop: 10, fontSize: 10.5, color: "var(--dim)", lineHeight: 1.5 }}><span className="lbl" style={{ color: "var(--acc)" }}>AUTO-CALIBRATED · {reg.stage}</span> — {reg.posture}</div>
+      </div>
+      <div className="row" style={{ gap: 8, marginTop: 8 }}>
+        <button className={mode === "chat" ? "btn" : "btn btn-ghost"} onClick={() => setMode("chat")}>STRATEGIST</button>
+        <button className={mode === "codex" ? "btn" : "btn btn-ghost"} onClick={() => setMode("codex")}>CODEX</button>
+        <button className={mode === "swarm" ? "btn" : "btn btn-ghost"} onClick={() => setMode("swarm")}>SWARM</button>
+      </div>
+
+      {mode === "swarm" && (
+        <div style={{ marginTop: 10 }}>
+          <div className="card" style={{ padding: 12 }}>
+            <Ticks />
+            <div className="lbl">HERMES-STYLE AGENT SWARM — QUANT PORTFOLIO ENGINEERING</div>
+            <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6 }}>Multiple specialized agents analyze your current snapshot in parallel and produce structured ideas you can act on (allocations, risk sizing, MC scenarios).</div>
+            <button className="btn" style={{ marginTop: 10 }} onClick={runSwarm} disabled={busy}>{busy ? "RUNNING SWARM..." : "RUN SWARM (4 agents)"}</button>
+          </div>
+
+          {swarmResults.length > 0 && swarmResults.map((r, i) => (
+            <div key={i} className="card" style={{ padding: 12, marginTop: 8 }}>
+              <div className="lbl" style={{ color: "var(--acc)" }}>{r.persona}</div>
+              <div style={{ fontSize: 12.5, marginTop: 6, whiteSpace: "pre-wrap" }}>{r.text}</div>
+            </div>
+          ))}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8 }}>Agents use your live local numbers + the same LLM providers as the single Coach. Add custom agents and tool-calling (run MC, optimize) in later iterations.</div>
+        </div>
+      )}
+
+      {mode === "codex" && <CodexView />}
+      {mode === "chat" && <><div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 10, padding: "14px 2px" }}>
+        {msgs.map((m, i) => <div key={i} className={"bubble " + (m.role === "me" ? "me" : "ai")}>{m.text}</div>)}
+        {busy && <div className="bubble ai"><span className="lbl">thinking</span><span className="rec" style={{ display: "inline-block", marginLeft: 6 }} /></div>}
+        <div ref={endRef} />
+      </div>
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 8 }}>
+        {chips.map(c => <button key={c} className="chip" style={{ cursor: "pointer", padding: "6px 9px" }} onClick={() => send(c)}>{c}</button>)}
+      </div>
+      <div className="row" style={{ gap: 8 }}>
+        <input className="in" placeholder="ask the strategist…" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} />
+        <button className="btn" style={{ width: 52 }} onClick={() => send()}><Send size={15} /></button>
+      </div></>}
+    </div>
+  );
+}
+
+/* ============================ SETTINGS ============================ */
+function NumField({ label, k, mul = 1, s, set }) {
+  return <Field label={label}><input className="in" type="number" inputMode="decimal" defaultValue={mul === 1 ? s[k] : (s[k] * mul)} onBlur={e => set({ ...s, [k]: (+e.target.value || 0) / mul })} /></Field>;
+}
+function SettingsView({ settings, setSettings, cloud }: { settings: any; setSettings: any; cloud?: any }) {
+  const [theme, setThemeState] = useState(() => { try { return localStorage.getItem("bd_theme") || "dark"; } catch (e) { return "dark"; } });
+  const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "light" ? "#F2EEE4" : "#0A0A0A"); };
+  const ACC = ["#FF4D14", "#FF2D2D", "#46E0A0", "#3A86FF", "#FFB000", "#FFFFFF"];
+  const [confirm, setConfirm] = useState(false);
+  const [ai, setAi] = useState(() => { try { return JSON.parse(localStorage.getItem("bd_ai")) || { prov: "openrouter", url: PROVIDERS.openrouter.url, model: PROVIDERS.openrouter.model, key: "", dayCap: 5, monCap: 100, rate: 3 }; } catch (e) { return { prov: "openrouter", url: PROVIDERS.openrouter.url, model: PROVIDERS.openrouter.model, key: "", dayCap: 5, monCap: 100, rate: 3 }; } });
+  const saveAi = (next) => { setAi(next); try { localStorage.setItem("bd_ai", JSON.stringify(next)); } catch (e) { } };
+  const usage = readUsage();
+  const [bkPass, setBkPass] = useState("");
+  const [rsPass, setRsPass] = useState("");
+  const [secMsg, setSecMsg] = useState("");
+  const stamp = () => new Date().toISOString().slice(0, 10);
+  const exportEnc = async () => {
+    if (!bkPass || bkPass.length < 6) { setSecMsg("// set a passphrase of at least 6 characters first."); return; }
+    setSecMsg("encrypting on-device…");
+    try { const blob = await encryptVault(bkPass, collectAll()); downloadBlob("bedrock-vault-" + stamp() + ".bdv", JSON.stringify(blob), "application/json"); setSecMsg("encrypted backup downloaded. store it somewhere safe — only this passphrase opens it, and there is no reset."); }
+    catch (e) { setSecMsg("// encryption failed on this device. nothing was written."); }
+  };
+  const importEnc = async (file) => {
+    if (!file) return;
+    if (!rsPass) { setSecMsg("// enter the backup passphrase first."); return; }
+    setSecMsg("decrypting…");
+    try { const blob = JSON.parse(await file.text()); const data = await decryptVault(rsPass, blob); restoreAll(data); setSecMsg("restored. reloading…"); setTimeout(() => location.reload(), 700); }
+    catch (e) { setSecMsg("// wrong passphrase or corrupt file — nothing changed."); }
+  };
+  const exportPlain = () => { try { const all = collectAll(); delete all.bd_ai; delete all.bd_usage; downloadBlob("bedrock-plain-" + stamp() + ".json", JSON.stringify(all, null, 2), "application/json"); setSecMsg("plain JSON exported — your AI key is NOT included. unencrypted; handle with care."); } catch (e) { } };
+  const importPlain = async (file) => { if (!file) return; setSecMsg("importing…"); try { const data = JSON.parse(await file.text()); restoreAll(data); setSecMsg("imported. reloading…"); setTimeout(() => location.reload(), 700); } catch (e) { setSecMsg("// invalid file — nothing changed."); } };
+  const wipe = async () => { try { Object.keys(localStorage).filter(function (k) { return k.indexOf("bd_") === 0; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) { } location.reload(); };
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="06" t="CONFIG" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        {/* Easy setup for income (per approval feedback: frequency dropdowns, auto monthly equiv, accessible for all users) */}
+        <div style={{ marginBottom: 14 }}>
+          <div className="lbl" style={{ marginBottom: 6 }}>Income (how much & how often)</div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 8 }}>
+            <input className="in" type="number" inputMode="decimal" value={settings.income} onBlur={e => setSettings({ ...settings, income: +e.target.value || 0 })} placeholder="1600" />
+            <select className="in sel" value={settings.incomeFrequency || "monthly"} onChange={e => setSettings({ ...settings, incomeFrequency: e.target.value })}>
+              {FREQUENCIES.map(f => <option key={f.key} value={f.key}>{f.label}</option>)}
+            </select>
+          </div>
+          <div className="lbl" style={{ fontSize: 9, marginTop: 2 }}>≈ ${toMonthly(settings.income, settings.incomeFrequency).toFixed(0)} / month (used for runway, MC, etc.)</div>
+        </div>
+
+        <div style={{ marginBottom: 14 }}>
+          <div className="lbl" style={{ marginBottom: 6 }}>DCA / Contribution (how much & how often)</div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 8 }}>
+            <input className="in" type="number" inputMode="decimal" value={settings.contribution} onBlur={e => setSettings({ ...settings, contribution: +e.target.value || 0 })} placeholder="1000" />
+            <select className="in sel" value={settings.contributionFrequency || "monthly"} onChange={e => setSettings({ ...settings, contributionFrequency: e.target.value })}>
+              {FREQUENCIES.map(f => <option key={f.key} value={f.key}>{f.label}</option>)}
+            </select>
+          </div>
+          <div className="lbl" style={{ fontSize: 9, marginTop: 2 }}>≈ ${toMonthly(settings.contribution, settings.contributionFrequency).toFixed(0)} / month</div>
+        </div>
+
+        <NumField label="Starting investable capital $" k="capital" s={settings} set={setSettings} />
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <NumField label="Expected return %/yr" k="ret" mul={100} s={settings} set={setSettings} />
+          <NumField label="Volatility %/yr" k="vol" mul={100} s={settings} set={setSettings} />
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <NumField label="Risk-free %/yr" k="rf" mul={100} s={settings} set={setSettings} />
+          <NumField label="EF target (months)" k="efMonths" s={settings} set={setSettings} />
+        </div>
+        <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 8 }}>Dropdowns + auto-conversion make setup fast for everyone — from quick manual entry to precise pay-cycle modeling for quants.</div>
+
+        {/* Quick Start Templates / Automation (easy for all levels, per approval feedback) */}
+        <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
+          <div className="lbl" style={{ marginBottom: 6 }}>QUICK START TEMPLATES (one-click common setups)</div>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            <button className="btn btn-ghost" style={{ padding: "6px 8px", fontSize: 10 }} onClick={() => setSettings({ ...settings, income: 5000, incomeFrequency: "biweekly", contribution: 1500, contributionFrequency: "monthly", capital: 10000, efMonths: 6 })}>W2 + Side Hustle (bi-weekly pay)</button>
+            <button className="btn btn-ghost" style={{ padding: "6px 8px", fontSize: 10 }} onClick={() => setSettings({ ...settings, income: 8000, incomeFrequency: "monthly", contribution: 2500, contributionFrequency: "monthly", capital: 50000, efMonths: 12 })}>Tech Professional (monthly, high buffer)</button>
+            <button className="btn btn-ghost" style={{ padding: "6px 8px", fontSize: 10 }} onClick={() => setSettings({ ...settings, income: 0, incomeFrequency: "monthly", contribution: 500, contributionFrequency: "weekly", capital: 5000, efMonths: 3 })}>Minimal / Student / Crypto-only (weekly DCA)</button>
+            <button className="btn btn-ghost" style={{ padding: "6px 8px", fontSize: 10 }} onClick={() => setSettings({ ...settings, income: 12000, incomeFrequency: "semimonthly", contribution: 4000, contributionFrequency: "monthly", capital: 250000, efMonths: 18 })}>High Earner + Vault Collector (advanced)</button>
+          </div>
+          <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>These set sensible starting points. Then add your real accounts/vault via Ledger. Plaid + live market data will auto-fill more later.</div>
+        </div>
+      </div>
+
+      <SectionLabel n="◐" t="APPEARANCE" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div className="lbl" style={{ marginBottom: 10 }}>INTERFACE THEME</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          {["dark", "light"].map(t => (
+            <button key={t} onClick={() => setTheme(t)} className="btn" style={{ background: theme === t ? "var(--acc)" : "transparent", color: theme === t ? "#0A0A0A" : "var(--txt)", border: theme === t ? "none" : "1px solid var(--line2)" }}>{t.toUpperCase()}</button>
+          ))}
+        </div>
+        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>{theme === "light" ? "// cream + orange + blue. same discipline, daylight optics." : "// near-black + orange. the war room at night."}</div>
+      </div>
+
+      <SectionLabel n="◆" t="ACCENT" />
+      <div className="card" style={{ padding: 14, display: "flex", gap: 10 }}>
+        <Ticks />
+        {ACC.map(c => (
+          <button key={c} onClick={() => setSettings({ ...settings, accent: c })} style={{ width: 36, height: 36, background: c, border: settings.accent === c ? "2px solid var(--txt)" : "1px solid var(--line2)", cursor: "pointer" }} />
+        ))}
+      </div>
+
+      <SectionLabel n="◇" t="AI ENGINE — BRING YOUR OWN MODEL" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div className="lbl">PROVIDER</div>
+        <select className="in sel" value={ai.prov} onChange={e => { const k = e.target.value, pre = PROVIDERS[k] || {}; saveAi({ ...ai, prov: k, url: pre.url != null ? pre.url : ai.url, model: pre.model != null ? pre.model : ai.model }); }} style={{ marginTop: 6 }}>
+          {Object.keys(PROVIDERS).map(k => <option key={k} value={k}>{PROVIDERS[k].label}</option>)}
+        </select>
+        <div className="lbl" style={{ marginTop: 10 }}>ENDPOINT</div>
+        <input className="in" placeholder="https://.../v1/chat/completions" value={ai.url} onChange={e => saveAi({ ...ai, url: e.target.value })} style={{ marginTop: 6 }} />
+        <div className="lbl" style={{ marginTop: 10 }}>MODEL ID</div>
+        <input className="in" placeholder="set from your provider model list" value={ai.model} onChange={e => saveAi({ ...ai, model: e.target.value })} style={{ marginTop: 6 }} />
+        <div className="lbl" style={{ marginTop: 10 }}>API KEY · STAYS ON THIS DEVICE</div>
+        <input className="in" type="password" placeholder="paste your key" value={ai.key} onChange={e => saveAi({ ...ai, key: e.target.value })} style={{ marginTop: 6 }} />
+        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// {PROVIDERS[ai.prov] ? PROVIDERS[ai.prov].note : ""}</div>
+      </div>
+
+      <SectionLabel n="↑" t="SPEND GOVERNOR" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <div><div className="lbl" style={{ fontSize: 8 }}>DAILY CAP $</div><input className="in" type="number" inputMode="decimal" value={ai.dayCap} onChange={e => saveAi({ ...ai, dayCap: +e.target.value || 0 })} style={{ marginTop: 4 }} /></div>
+          <div><div className="lbl" style={{ fontSize: 8 }}>MONTHLY CAP $</div><input className="in" type="number" inputMode="decimal" value={ai.monCap} onChange={e => saveAi({ ...ai, monCap: +e.target.value || 0 })} style={{ marginTop: 4 }} /></div>
+        </div>
+        <div style={{ marginTop: 10 }}><div className="lbl" style={{ fontSize: 8 }}>RATE $ / 1M TOKENS — your provider blended price</div><input className="in" type="number" inputMode="decimal" value={ai.rate} onChange={e => saveAi({ ...ai, rate: +e.target.value || 0 })} style={{ marginTop: 4 }} /></div>
+        <div style={{ marginTop: 14 }}>
+          <div className="row"><div className="lbl" style={{ fontSize: 9 }}>SPENT TODAY</div><div className="mono-tab" style={{ fontWeight: 700, color: (ai.dayCap && usage.daySpent >= ai.dayCap) ? "var(--acc2)" : "var(--ok)" }}>{fmt(usage.daySpent)} / {fmt(ai.dayCap)}</div></div>
+          <div style={{ height: 6, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 4 }}><div style={{ height: "100%", width: Math.min(100, ai.dayCap ? usage.daySpent / ai.dayCap * 100 : 0) + "%", background: (ai.dayCap && usage.daySpent >= ai.dayCap) ? "var(--acc2)" : "var(--acc)", transition: ".4s" }} /></div>
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <div className="row"><div className="lbl" style={{ fontSize: 9 }}>SPENT THIS MONTH</div><div className="mono-tab" style={{ fontWeight: 700 }}>{fmt(usage.monSpent)} / {fmt(ai.monCap)}</div></div>
+          <div style={{ height: 6, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 4 }}><div style={{ height: "100%", width: Math.min(100, ai.monCap ? usage.monSpent / ai.monCap * 100 : 0) + "%", background: (ai.monCap && usage.monSpent >= ai.monCap) ? "var(--acc2)" : "var(--acc)", transition: ".4s" }} /></div>
+        </div>
+        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 12, lineHeight: 1.5 }}>// estimated from each call token usage at your rate — a guide, not the exact bill. set a hard limit at your provider too; this cap is a seatbelt, not a vault. {usage.calls} calls logged.</div>
+      </div>
+
+      <SectionLabel n="◈" t="SECURITY / ENCRYPTED BACKUP" />
+
+      {/* ===================== CLOUD SYNC (optional, zero-trust) ===================== */}
+      <SectionLabel n="☁" t="CLOUD SYNC — OPTIONAL" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.55 }}>
+          Your numbers never leave encrypted. We store only ciphertext + a title you choose. Connect for multi-device or remote backup. Disable anytime — your local data is untouched.
+        </div>
+
+        <div style={{ marginTop: 12 }}>
+          <div className="lbl">BACKEND</div>
+          <input className="in" value={cloud.url} onChange={e => { const nc = { ...cloud, url: e.target.value }; setCloudState(nc); setCloud(nc); }} placeholder="http://localhost:8787" />
+        </div>
+
+        <div style={{ marginTop: 10 }}>
+          {!cloud.enabled ? (
+            <button className="btn" onClick={async () => {
+              const res = await cloudAuth();
+              if (res.ok) { const nc = getCloud(); setCloudState(nc); setSecMsg("connected. token stored on this device."); }
+              else setSecMsg("connect failed: " + (res.error || "check url / cors"));
+            }}>CONNECT (ANONYMOUS)</button>
+          ) : (
+            <div className="row" style={{ gap: 8 }}>
+              <div className="chip" style={{ borderColor: "var(--ok)", color: "var(--ok)" }}>CONNECTED</div>
+              <button className="btn btn-ghost" onClick={() => { const nc = { ...cloud, enabled: false, token: "", userId: "" }; setCloudState(nc); setCloud(nc); setSecMsg("disconnected (local data safe)"); }}>DISCONNECT</button>
+            </div>
+          )}
+        </div>
+
+        {cloud.enabled && (
+          <div style={{ marginTop: 14 }}>
+            {/* CLOUD INTEGRATION — Phase 0 polish: lastSync + clear zero-trust language */}
+            <button className="btn" onClick={async () => {
+              try {
+                setSecMsg("encrypting current state…");
+                const full = collectAll();
+                const blob = await encryptVault(bkPass || "temp", full);   // re-uses your existing E2EE
+                await cloudPushPlan("Main State", JSON.stringify(blob));
+                const ls = getCloud().lastSync;
+                setSecMsg("pushed encrypted state to cloud." + (ls ? " (last sync " + new Date(ls).toLocaleTimeString() + ")" : ""));
+              } catch (e) { setSecMsg("push failed: " + e.message); }
+            }}>↑ PUSH ENCRYPTED STATE</button>
+
+            <div style={{ marginTop: 10 }}>
+              <button className="btn btn-ghost" onClick={async () => {
+                const plans = await cloudListPlans();
+                if (!plans.length) { setSecMsg("no remote plans"); return; }
+                const latest = plans[0];
+                try {
+                  const p = await cloudGetPlan(latest.id);
+                  const blob = typeof p.plan.encryptedState === "string" ? JSON.parse(p.plan.encryptedState) : p.plan.encryptedState;
+                  if (!rsPass) { setSecMsg("enter your backup passphrase above to decrypt the pull"); return; }
+                  const data = await decryptVault(rsPass, blob);
+                  restoreAll(data);
+                  setSecMsg("restored from cloud. reloading…"); setTimeout(() => location.reload(), 600);
+                } catch (e) { setSecMsg("pull/decrypt failed: " + e.message); }
+              }}>↓ PULL LATEST & RESTORE</button>
+            </div>
+            <div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 8 }}>uses the same AES-GCM + your backup passphrase. server sees only ciphertext. Full client math always works offline.</div>
+            {cloud.lastSync && <div className="lbl" style={{ marginTop: 6, fontSize: 9 }}>last push: {new Date(cloud.lastSync).toLocaleString()}</div>}
+          </div>
+        )}
+        {secMsg && <div style={{ fontSize: 10.5, color: "var(--dim)", marginTop: 8 }}>{secMsg}</div>}
+      </div>
+
+      {/* Plaid / external account linking (optional, see zero-trust warnings in backend) */}
+      <SectionLabel n="🔗" t="LINK ACCOUNTS (PLAID)" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.5 }}>
+          Connect banks, brokerages, credit cards via Plaid. Data is fetched server-side then returned to *you* to merge into your local encrypted vault. The server does not keep your full financial picture.
+        </div>
+        <button className="btn btn-ghost" style={{ marginTop: 10 }} onClick={async () => {
+          const b = (cloud && cloud.url) || "http://localhost:8787";
+          try {
+            const r = await fetch(`${b.replace(/\/$/, "")}/v1/plaid/create_link_token`, { method: "POST", headers: cloud?.token ? { Authorization: "Bearer " + cloud.token } : {} });
+            const j = await r.json();
+            if (j.linkToken) {
+              // For full experience load Plaid Link JS and call Plaid.create here.
+              // Minimal: show the token and instructions.
+              prompt("Plaid link_token (copy and use in a Plaid Link flow or quickstart):", j.linkToken);
+              alert("After you complete Plaid Link in their widget, POST the public_token to /v1/plaid/exchange_public_token on the backend, then use /sync to pull data.");
+            } else {
+              alert("Plaid not configured on backend or auth required. See bedrock-api/src/lib/plaid.ts");
+            }
+          } catch (e) { alert("Could not reach backend Plaid endpoint"); }
+        }}>GET PLAID LINK TOKEN</button>
+        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8 }}>Full embedded Plaid Link widget + auto-sync into local holdings can be wired in a follow-up. Privacy.com and other providers follow the same pattern.</div>
+      </div>
+
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>back up everything to a file only your passphrase can open — AES-256-GCM, key stretched with PBKDF2 (250k rounds). it encrypts here, on your device; nothing is uploaded. lose the passphrase and the backup is gone for good. that is the cost of true zero-knowledge: there is no reset, no recovery, no back door.</div>
+        <div className="lbl" style={{ marginTop: 12 }}>BACKUP PASSPHRASE</div>
+        <input className="in" type="password" placeholder="a strong passphrase only you know" value={bkPass} onChange={e => setBkPass(e.target.value)} style={{ marginTop: 6 }} />
+        <button className="btn" style={{ marginTop: 10 }} onClick={exportEnc}><Lock size={12} style={{ verticalAlign: "-2px", marginRight: 6 }} />EXPORT ENCRYPTED BACKUP</button>
+        <div className="lbl" style={{ marginTop: 16 }}>RESTORE FROM ENCRYPTED BACKUP</div>
+        <div style={{ fontSize: 10, color: "var(--acc2)", marginTop: 4, lineHeight: 1.5 }}>restoring OVERWRITES everything on this device.</div>
+        <input className="in" type="password" placeholder="passphrase used for that backup" value={rsPass} onChange={e => setRsPass(e.target.value)} style={{ marginTop: 6 }} />
+        <input type="file" accept=".bdv,application/json" onChange={e => importEnc(e.target.files && e.target.files[0])} style={{ marginTop: 8, fontSize: 11, color: "var(--dim)", width: "100%" }} />
+        {secMsg && <div style={{ fontSize: 10.5, color: "var(--dim)", marginTop: 10, lineHeight: 1.5 }}>{secMsg}</div>}
+        <div style={{ height: 1, background: "var(--line)", margin: "16px 0" }} />
+        <div className="lbl">PLAIN EXPORT / IMPORT · UNENCRYPTED, MIGRATION ONLY</div>
+        <div className="row" style={{ gap: 8, marginTop: 8 }}>
+          <button className="btn btn-ghost" onClick={exportPlain}>EXPORT JSON</button>
+          <label className="btn btn-ghost" style={{ cursor: "pointer", display: "grid", placeItems: "center" }}>IMPORT JSON<input type="file" accept="application/json,.json" onChange={e => importPlain(e.target.files && e.target.files[0])} style={{ display: "none" }} /></label>
+        </div>
+      </div>
+
+      <SectionLabel n="!" t="DATA" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>your data lives only on this device. zero trust, zero leak — nothing leaves but the words you hand THE STRATEGIST. this is open code: fork it, sharpen it, make it your own.</div>
+        {!confirm ? <button className="btn btn-ghost" style={{ marginTop: 12, color: "var(--acc2)", borderColor: "var(--acc2)" }} onClick={() => setConfirm(true)}><Trash2 size={12} style={{ verticalAlign: "-2px", marginRight: 6 }} />WIPE ALL DATA</button>
+          : <div style={{ marginTop: 12 }}><div className="lbl" style={{ color: "var(--acc2)", marginBottom: 8 }}>this is permanent. sure?</div><div className="row" style={{ gap: 8 }}><button className="btn" style={{ background: "var(--acc2)" }} onClick={wipe}>YES, WIPE</button><button className="btn btn-ghost" onClick={() => setConfirm(false)}>CANCEL</button></div></div>}
+      </div>
+      <div style={{ textAlign: "center", marginTop: 20 }}>
+        <div className="big" style={{ fontSize: 18, color: "var(--faint)" }}>BEDROCK</div>
+        <div className="lbl" style={{ marginTop: 4 }}>THE DOJO OF CAPITAL · ZERO TRUST · NOT FINANCIAL ADVICE</div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================ LIVE / MARKET (real-time tickers, news, data for analysis + agents) ============================ */
+function LiveMarketView({ cloud }) {
+  const [symbols, setSymbols] = useState("BTC,ETH,SOL,AVAX");
+  const [quotes, setQuotes] = useState([]);
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [note, setNote] = useState("");
+
+  // Alt comps state (data layer continuation — for watches/cards/spirits etc. preview + future vault integration)
+  const [altCat, setAltCat] = useState("Watch");
+  const [altRef, setAltRef] = useState("126610LN");
+  const [altComps, setAltComps] = useState(null);
+
+  const backend = (cloud && cloud.url) || "http://localhost:8787";
+
+  const fetchQuotes = async () => {
+    setLoading(true);
+    const syms = symbols.split(",").map(s => s.trim()).filter(Boolean);
+    const results: any[] = [];
+    for (const s of syms) {
+      try {
+        const r = await fetch(`${backend.replace(/\/$/, "")}/v1/market/quote/${encodeURIComponent(s)}`);
+        if (r.ok) results.push(await r.json());
+      } catch (e) {}
+    }
+    setQuotes(results);
+    setLoading(false);
+  };
+
+  const fetchNews = async () => {
+    try {
+      const r = await fetch(`${backend.replace(/\/$/, "")}/v1/market/news?q=macro+crypto+finance`);
+      if (r.ok) {
+        const j = await r.json();
+        setNews(j.items || []);
+        setNote(j.note || "");
+      }
+    } catch (e) {}
+  };
+
+  const addToHoldings = (q: any) => {
+    // Placeholder: in a full version this would open the Add Holding sheet prefilled
+    // or directly mutate holdings if we had the setter in scope.
+    alert(`Would add ${q.symbol || q.id} @ $${q.price} to local holdings (wire to Quant/Ledger in next iteration).`);
+  };
+
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="📡" t="LIVE MARKET & DATA" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div className="lbl">TICKERS (crypto via CoinGecko proxy + stock placeholder)</div>
+        <input className="in" value={symbols} onChange={e => setSymbols(e.target.value)} style={{ marginTop: 8 }} />
+        <div className="row" style={{ gap: 8, marginTop: 8 }}>
+          <button className="btn" onClick={fetchQuotes} disabled={loading}>{loading ? "FETCHING..." : "REFRESH QUOTES"}</button>
+          <button className="btn btn-ghost" onClick={fetchNews}>LOAD NEWS</button>
+        </div>
+        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 6 }}>Backend: {backend} — real-time data feeds the agents and your local models.</div>
+      </div>
+
+      {quotes.length > 0 && (
+        <div className="card" style={{ padding: 12, marginTop: 10 }}>
+          <Ticks />
+          <div className="lbl">QUOTES</div>
+          {quotes.map((q, i) => (
+            <div key={i} className="row" style={{ marginTop: 8, padding: "6px 0", borderBottom: "1px solid var(--line)" }}>
+              <div>
+                <span style={{ fontWeight: 700 }}>{q.symbol || q.id}</span>
+                {q.price && <span className="mono-tab" style={{ marginLeft: 8 }}>${q.price}</span>}
+              </div>
+              <div className="row" style={{ gap: 10 }}>
+                {q.change24h != null && <span style={{ color: q.change24h >= 0 ? "var(--ok)" : "var(--acc2)" }}>{q.change24h.toFixed(1)}%</span>}
+                <button className="btn-ghost" style={{ padding: "2px 8px", fontSize: 10 }} onClick={() => addToHoldings(q)}>ADD TO LOCAL</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {news.length > 0 && (
+        <div className="card" style={{ padding: 12, marginTop: 10 }}>
+          <Ticks />
+          <div className="lbl">NEWS / INTEL (stub — Ground News, IntoTheCryptoverse style)</div>
+          {news.map((n, i) => (
+            <div key={i} style={{ marginTop: 6, fontSize: 12 }}>
+              <a href={n.url} target="_blank" style={{ color: "var(--txt)" }}>{n.title}</a>
+              <span className="lbl" style={{ marginLeft: 6, fontSize: 10 }}>{n.source}</span>
+            </div>
+          ))}
+          {note && <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 6 }}>{note}</div>}
+        </div>
+      )}
+
+      {/* Alt asset comps (data layer continuation — interactive preview for watches, cards, spirits, cars, metals, etc.) */}
+      <div className="card" style={{ padding: 12, marginTop: 10 }}>
+        <Ticks />
+        <div className="lbl">ALT ASSET COMPS (live sources for vault — watches, cards, whiskey, cars, metals...)</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 6, marginTop: 6 }}>
+          <input className="in" placeholder="Category (Watch / Trading Card / Whiskey / Car / Metal)" value={altCat} onChange={e => setAltCat(e.target.value)} />
+          <input className="in" placeholder="Ref / Name (126610LN or Charizard PSA 10)" value={altRef} onChange={e => setAltRef(e.target.value)} />
+        </div>
+        <button className="btn btn-ghost" style={{ marginTop: 6, padding: "4px 10px", fontSize: 10 }} onClick={async () => {
+          if (!altCat && !altRef) return;
+          const b = (cloud && cloud.url) || "http://localhost:8787";
+          try {
+            const q = new URLSearchParams({ category: altCat || "Watch", ref: altRef || "126610LN" });
+            const r = await fetch(`${b.replace(/\/$/, "")}/v1/market/alt/comps?${q}`);
+            const j = await r.json();
+            setAltComps(j);
+          } catch (e) { setAltComps({ error: "Backend not reachable — start bedrock-api" }); }
+        }}>FETCH COMPS & SUGGESTED VALUE</button>
+        {altComps && (
+          <div style={{ marginTop: 8, fontSize: 11, background: "var(--bg)", padding: 8, borderRadius: 4 }}>
+            {altComps.error ? altComps.error : (
+              <>
+                <div><b>{altComps.ref}</b> — suggested ~{fmt(altComps.suggestedValue || altComps.avgComp)}</div>
+                {(altComps.comps || []).slice(0,3).map((c,i) => (
+                  <div key={i} style={{ marginTop: 2 }}>{c.source}: {fmt(c.price)} ({c.date} {c.grade ? "· " + c.grade : ""})</div>
+                ))}
+                {altComps.note && <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>{altComps.note}</div>}
+              </>
+            )}
+          </div>
+        )}
+        <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>This will drive "refresh live value" and smart suggestions in the rich Vault. Add your own comps manually anytime.</div>
+      </div>
+
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.5 }}>
+        // This data (traditional + alt) will be pulled into your local vault and fed to agent swarms for portfolio engineering.
+        Plaid-linked accounts (banking/brokerage) appear in CONFIG → link flow (see backend /v1/plaid/*). Data is returned to you to encrypt locally.
+      </div>
+    </div>
+  );
+}
+
+/* ============================ NAV ============================ */
+function Nav({ view, setView }) {
+  const items = [
+    { k: "home", i: LayoutGrid, t: "HOME" }, { k: "ledger", i: Wallet, t: "LEDGER" },
+    { k: "goals", i: Target, t: "GOALS" }, { k: "quant", i: Activity, t: "QUANT" },
+    { k: "live", i: TrendingUp, t: "LIVE" },   // real-time tickers, news, data for analysis + agents
+    { k: "coach", i: Sparkles, t: "COACH" }, { k: "vet", i: Scale, t: "VET" }, { k: "fortress", i: Shield, t: "FLOOR" }, { k: "set", i: Settings2, t: "CONFIG" },
+  ];
+  return (
+    <div className="nav"><div className="navin">
+      {items.map(it => { const I = it.i; return (
+        <button key={it.k} className={"navb" + (view === it.k ? " on" : "")} onClick={() => setView(it.k)}>
+          <I size={18} /><span className="navt">{it.t}</span>
+        </button>
+      ); })}
+    </div></div>
+  );
+}
+
+try {
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+} catch (e) {
+  console.error("Failed to mount BEDROCK app:", e);
+  const rootEl = document.getElementById("root");
+  if (rootEl) {
+    rootEl.innerHTML = '<div style="color:#FF4D14; padding: 40px; font-family: monospace; text-align:center;">' +
+      '<div style="font-size:18px;margin-bottom:12px">Error starting the app</div>' +
+      '<div style="font-size:12px;opacity:0.8">Check the browser console (Cmd+Option+I or F12) for details.<br>' +
+      'Common causes: slow/unavailable unpkg CDNs for React or Babel, or a JS syntax issue.<br>' +
+      'Try hard refresh (Cmd+Shift+R). If it persists, the inline script may be too large for client-side Babel in this browser.</div>' +
+      '<div style="margin-top:12px;font-size:11px;opacity:0.6">' + (e && e.message ? e.message : '') + '</div>' +
+      '</div>';
+  }
+}
+
+</script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("./service-worker.js").catch(function(){}); });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# BEDROCK — Netlify configuration
+[build]
+  publish = "."
+  command = ""
+
+# service worker must never be cached stale, and must serve as JS
+[[headers]]
+  for = "/app/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/app/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+# sensible security headers (no strict CSP: the app loads CDN + fonts + inline)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[redirects]]
+  from = "/app"
+  to = "/app/"
+  status = 301

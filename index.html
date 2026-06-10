@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#141210" />
+<meta name="description" content="BEDROCK — a zero-trust financial terminal. The math of survival on your real numbers. Client-side, encrypted, yours." />
+<title>BEDROCK — The Dojo of Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>/* set theme before paint to avoid flash */(function(){try{var t=localStorage.getItem("bd_theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}document.documentElement.classList.add("has-js");})();</script>
+<style>
+/* ============ OKLCH TOKEN SYSTEM — dark + light, independently tuned ============ */
+:root{
+  --bg:oklch(0.15 0.006 60);
+  --s1:oklch(0.185 0.008 58);
+  --s2:oklch(0.225 0.010 55);
+  --line:oklch(0.30 0.012 60);
+  --line2:oklch(0.42 0.015 55);
+  --text:oklch(0.95 0.008 80);
+  --dim:oklch(0.72 0.012 70);
+  --faint:oklch(0.52 0.012 65);
+  --brand:oklch(0.70 0.20 38);
+  --brand-hi:oklch(0.80 0.16 50);
+  --blue:oklch(0.74 0.13 245);
+  --ok:oklch(0.82 0.16 158);
+  --warn:oklch(0.83 0.15 85);
+  --danger:oklch(0.66 0.20 27);
+  --grain:0.05;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --sans:'Space Grotesk',system-ui,sans-serif;
+  --disp:'Anton','Space Grotesk',sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:oklch(0.95 0.013 82);
+  --s1:oklch(0.975 0.010 82);
+  --s2:oklch(0.992 0.006 82);
+  --line:oklch(0.88 0.014 75);
+  --line2:oklch(0.79 0.016 70);
+  --text:oklch(0.22 0.020 50);
+  --dim:oklch(0.45 0.018 55);
+  --faint:oklch(0.62 0.015 60);
+  --brand:oklch(0.62 0.21 37);
+  --brand-hi:oklch(0.55 0.20 34);
+  --blue:oklch(0.50 0.17 256);
+  --ok:oklch(0.56 0.15 152);
+  --warn:oklch(0.60 0.15 70);
+  --danger:oklch(0.54 0.20 27);
+  --grain:0.035;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--sans);
+  font-size:16px;line-height:1.5;overflow-x:hidden;position:relative;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+/* film grain — kills the flat-digital tell */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--grain);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+section{position:relative;z-index:2}
+::selection{background:var(--brand);color:var(--bg)}
+::-webkit-scrollbar{width:0;height:0}
+
+/* ---- type ---- */
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--brand)}
+.kicker.dim{color:var(--faint)}
+.display{font-family:var(--disp);font-weight:400;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+h2.display{font-size:clamp(38px,7vw,86px)}
+p.lead{font-size:clamp(17px,2.1vw,22px);line-height:1.55;color:var(--dim);max-width:60ch;font-weight:300}
+.mono-tab{font-variant-numeric:tabular-nums}
+
+/* ---- floor line: the design hook ---- */
+.floorline{position:relative;height:1px;background:var(--line2);margin:0;transform-origin:left center}
+.floorline::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:repeating-linear-gradient(90deg,var(--brand) 0 1px,transparent 1px 7px);opacity:.5}
+.floorline .tag{position:absolute;left:0;top:-17px;font:700 9px var(--mono);letter-spacing:.24em;color:var(--brand)}
+.floorline .tag.r{left:auto;right:0;color:var(--faint)}
+
+/* ---- buttons: magnetic + sliding fill ---- */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.7em;z-index:0;
+  font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  padding:19px 30px;border:1px solid var(--brand);color:var(--brand);background:transparent;cursor:pointer;
+  transition:color .3s ease, transform .25s cubic-bezier(.25,.46,.45,.94);text-decoration:none;min-height:44px}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--brand);
+  transform:translateY(102%);transition:transform .42s cubic-bezier(.65,0,.35,1)}
+.btn:hover{color:var(--bg)}
+.btn:hover::before{transform:translateY(0)}
+.btn .ar{transition:transform .3s cubic-bezier(.25,.46,.45,.94)}
+.btn:hover .ar{transform:translateX(4px)}
+.btn.solid{background:var(--brand);color:var(--bg);border-color:var(--brand)}
+.btn.solid::before{background:var(--brand-hi)}
+.btn.ghost{border-color:var(--line2);color:var(--text)}
+.btn.ghost::before{background:var(--text)}
+.btn.ghost:hover{color:var(--bg)}
+
+/* ---- nav: floating island that morphs ---- */
+.nav{position:fixed;top:18px;left:0;right:0;z-index:60;display:flex;justify-content:center;pointer-events:none}
+.navin{pointer-events:auto;display:flex;align-items:center;gap:30px;
+  padding:12px 14px 12px 22px;border-radius:100px;border:1px solid transparent;
+  transition:background .4s ease, border-color .4s ease, backdrop-filter .4s ease, box-shadow .4s ease}
+.nav.scrolled .navin{background:color-mix(in oklch, var(--bg) 62%, transparent);
+  border-color:var(--line);backdrop-filter:blur(16px) saturate(1.2);box-shadow:0 8px 40px -16px oklch(0 0 0 / .5)}
+.brand-mark{font:700 15px/1 var(--mono);letter-spacing:.12em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand-mark .dot{width:8px;height:8px;background:var(--brand);border-radius:1px}
+.nav-links{display:flex;gap:26px}
+.nav-links a{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s, transform .2s}
+.nav-links a:hover{color:var(--brand);transform:translateY(-1px)}
+.nav-cta{font:700 11px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--bg);
+  background:var(--brand);padding:11px 18px;border-radius:100px;text-decoration:none;transition:transform .2s;min-height:38px;display:inline-flex;align-items:center}
+.nav-cta:hover{transform:translateY(-1px)}
+.theme-tog{pointer-events:auto;background:none;border:1px solid var(--line2);color:var(--dim);cursor:pointer;
+  width:38px;height:38px;border-radius:100px;font:700 13px var(--mono);transition:color .2s,border-color .2s;display:grid;place-items:center}
+.theme-tog:hover{color:var(--brand);border-color:var(--brand)}
+
+/* ---- hero ---- */
+.hero{min-height:100svh;display:flex;align-items:flex-end;padding-bottom:64px;padding-top:140px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-glow{position:absolute;width:120vmax;height:120vmax;left:50%;top:8%;transform:translateX(-50%);
+  background:radial-gradient(circle, color-mix(in oklch, var(--brand) 22%, transparent) 0%, transparent 55%);opacity:.5;filter:blur(10px)}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:52px 52px;mask-image:radial-gradient(ellipse 80% 70% at 30% 70%, black 0%, transparent 75%);opacity:.4}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
+.hero-inner{position:relative;z-index:3;width:100%}
+.hero h1{font-family:var(--disp);font-weight:400;text-transform:uppercase;line-height:.86;letter-spacing:-.015em;
+  font-size:clamp(58px,15vw,200px);margin:18px 0}
+.hero h1 .o{color:var(--brand)}
+.hero h1 .line{display:block;overflow:hidden}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:28px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{font:500 11px/1.7 var(--mono);letter-spacing:.1em;color:var(--faint);text-align:right;text-transform:uppercase}
+.hero-meta b{color:var(--ok)}
+
+/* ---- generic section rhythm ---- */
+.sec{padding:clamp(80px,12vh,150px) 0}
+.sec-head{display:flex;gap:14px;align-items:baseline;margin-bottom:34px}
+.sec-head .num{font:700 12px var(--mono);color:var(--brand);letter-spacing:.1em}
+
+/* resonate */
+.resonate .display{font-size:clamp(34px,6.2vw,78px);max-width:16ch}
+.resonate .display .o{color:var(--brand)}
+.expose{margin-top:30px;padding-left:22px;border-left:2px solid var(--brand);max-width:54ch}
+.expose p{font-size:clamp(16px,1.9vw,19px);color:var(--dim);font-weight:300}
+
+/* reframe split */
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.split .big{font-family:var(--disp);text-transform:uppercase;line-height:.94;letter-spacing:-.01em;font-size:clamp(40px,6vw,80px)}
+.split .big .o{color:var(--brand)}
+.reframe-card{border:1px solid var(--line);background:var(--s1);padding:30px;position:relative}
+.reframe-card .row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+.reframe-card .row:last-child{border-bottom:none}
+.reframe-card .row span:first-child{color:var(--dim);font-family:var(--mono);font-size:12px;letter-spacing:.05em}
+.reframe-card .row span:last-child{font-weight:600}
+
+/* prove — functional artifacts */
+.artifacts{display:grid;gap:18px}
+.art{border:1px solid var(--line);background:var(--s1);padding:28px;position:relative;overflow:hidden}
+.art .corner{position:absolute;width:9px;height:9px;border-color:var(--line2)}
+.tl{top:-1px;left:-1px;border-top:1.5px solid;border-left:1.5px solid}
+.tr{top:-1px;right:-1px;border-top:1.5px solid;border-right:1.5px solid}
+.bl{bottom:-1px;left:-1px;border-bottom:1.5px solid;border-left:1.5px solid}
+.br{bottom:-1px;right:-1px;border-bottom:1.5px solid;border-right:1.5px solid}
+.art h3{font-family:var(--disp);font-size:clamp(24px,3vw,34px);text-transform:uppercase;letter-spacing:-.01em;margin:10px 0 6px}
+.art .sub{color:var(--dim);font-size:14.5px;font-weight:300;max-width:46ch}
+.art-top{grid-template-columns:1.3fr 1fr;display:grid;gap:18px}
+@media(max-width:860px){.art-top{grid-template-columns:1fr}}
+
+/* monte carlo */
+#mc{width:100%;height:200px;display:block;margin-top:18px}
+.mc-stats{display:flex;gap:26px;margin-top:14px;flex-wrap:wrap}
+.mc-stat .v{font-family:var(--disp);font-size:34px;line-height:1}
+.mc-stat .v.ok{color:var(--ok)}
+.mc-stat .v.warn{color:var(--warn)}
+.mc-stat .k{font:500 9.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+
+/* opportunity cost engine */
+.oc-in{display:flex;align-items:center;gap:10px;margin:18px 0 6px;border:1px solid var(--line2);background:var(--bg);padding:4px 4px 4px 16px}
+.oc-in span{font-family:var(--disp);font-size:28px;color:var(--faint)}
+.oc-in input{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:var(--disp);font-size:34px;width:100%}
+.oc-in input::-webkit-outer-spin-button,.oc-in input::-webkit-inner-spin-button{-webkit-appearance:none}
+.oc-range{width:100%;margin-top:10px;accent-color:var(--brand)}
+.oc-out{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.oc-cell{border:1px solid var(--line);padding:16px;background:var(--bg)}
+.oc-cell .v{font-family:var(--disp);font-size:clamp(26px,3.4vw,40px);line-height:1;color:var(--brand)}
+.oc-cell .k{font:500 9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+.oc-note{font:400 12px/1.6 var(--mono);color:var(--faint);margin-top:14px}
+
+/* zero trust */
+.zt-diagram{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;flex-wrap:wrap}
+.zt-node{flex:1;min-width:120px;border:1px solid var(--line2);padding:18px;text-align:center;background:var(--bg);position:relative}
+.zt-node .lab{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.zt-node .ic{font-family:var(--disp);font-size:30px;color:var(--ok);margin-bottom:6px}
+.zt-node.you{border-color:var(--brand)}.zt-node.you .ic{color:var(--brand)}
+.zt-link{flex:0 0 auto;font:700 11px var(--mono);color:var(--danger);letter-spacing:.1em;text-align:center;line-height:1.3}
+.zt-link .x{font-size:22px;display:block}
+
+/* envision — the ladder */
+.ladder{display:grid;gap:2px;margin-top:30px}
+.rung{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:20px;padding:20px 4px;border-bottom:1px solid var(--line);position:relative}
+.rung .lv{font-family:var(--disp);font-size:30px;color:var(--faint)}
+.rung.live .lv{color:var(--brand)}
+.rung .name{font-weight:600;font-size:clamp(16px,2.2vw,21px)}
+.rung .name small{display:block;font-family:var(--mono);font-size:11px;font-weight:400;color:var(--dim);letter-spacing:.04em;margin-top:3px}
+.rung .tgt{font-family:var(--mono);font-size:13px;color:var(--dim);text-align:right}
+
+/* derisk */
+.derisk{background:var(--s1);border:1px solid var(--line)}
+.derisk .grid{display:grid;grid-template-columns:1fr 1fr;gap:38px;padding:clamp(34px,5vw,60px)}
+.derisk .point{padding:18px 0;border-top:1px solid var(--line)}
+.derisk .point .t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:7px}
+.derisk .point p{font-size:14.5px;color:var(--dim);font-weight:300}
+.disclaimer{font:400 12px/1.7 var(--mono);color:var(--faint);border-top:1px solid var(--line);padding:22px clamp(34px,5vw,60px);max-width:none}
+
+/* command */
+.command{text-align:center;padding:clamp(90px,16vh,180px) 0}
+.command .display{font-size:clamp(56px,13vw,170px)}
+.command .display .o{color:var(--brand)}
+.command p{margin:22px auto 36px;max-width:46ch}
+
+/* footer */
+.foot{border-top:1px solid var(--line);background:var(--s1);padding:60px 0 40px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:34px}
+.foot h4{font:700 10px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+.foot a{display:block;color:var(--dim);text-decoration:none;font-size:14px;padding:5px 0;transition:color .2s}
+.foot a:hover{color:var(--brand)}
+.foot-brand .display{font-size:40px}
+.foot-brand .tag{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em;margin-top:6px}
+.status{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font:500 11px var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.status .pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 2s infinite}
+.foot-legal{margin-top:46px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:400 11px var(--mono);color:var(--faint);letter-spacing:.05em}
+
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in oklch,var(--ok) 70%, transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* telemetry feed */
+.telem{font-family:var(--mono);font-size:12.5px;color:var(--ok);letter-spacing:.02em;min-height:1.5em}
+.telem .cur{display:inline-block;width:8px;height:14px;background:var(--brand);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ============ reveal states (only when JS present) ============ */
+.has-js .reveal{opacity:0;transform:translateY(38px)}
+.has-js .reveal-l{opacity:0;transform:translateX(-32px)}
+.line .in{display:block;transform:translateY(105%)}
+
+/* responsive */
+@media(max-width:880px){
+  .split{grid-template-columns:1fr;gap:34px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .derisk .grid{grid-template-columns:1fr;gap:18px}
+  .oc-out{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .nav-links{display:none}
+  .wrap{padding:0 18px}
+  .hero{padding-bottom:44px}
+  .hero-meta{text-align:left}
+  .rung{grid-template-columns:44px 1fr;gap:12px}
+  .rung .tgt{grid-column:2;text-align:left;margin-top:4px}
+  .foot-grid{grid-template-columns:1fr}
+  .zt-link{flex-basis:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .has-js .reveal,.has-js .reveal-l{opacity:1!important;transform:none!important}
+  .line .in{transform:none!important}
+  .telem .cur,.status .pulse{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="navin">
+    <a href="#top" class="brand-mark"><span class="dot"></span>BEDROCK</a>
+    <div class="nav-links">
+      <a href="#doctrine">Doctrine</a>
+      <a href="#system">System</a>
+      <a href="#floor">The Floor</a>
+    </div>
+    <button class="theme-tog" id="themeTog" aria-label="Toggle light and dark theme">◐</button>
+    <a href="app/" class="nav-cta">Enter</a>
+  </div>
+</nav>
+
+<!-- HERO — DISRUPT -->
+<header class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <canvas id="hero-canvas"></canvas>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="kicker reveal">CAPITAL_OS · v4 · CLIENT-SIDE · NOTHING LEAVES THIS DEVICE</div>
+    <h1>
+      <span class="line"><span class="in">Discipline</span></span>
+      <span class="line"><span class="in o">is the edge.</span></span>
+    </h1>
+    <p class="lead reveal">The market doesn't reward the smartest in the room. It rewards whoever is still standing after the crash. BEDROCK is the terminal built to keep you standing.</p>
+    <div class="hero-row">
+      <div class="hero-cta reveal">
+        <a href="app/" class="btn solid">Enter the Dojo <span class="ar">→</span></a>
+        <a href="#doctrine" class="btn ghost">Read the Doctrine</a>
+      </div>
+      <div class="hero-meta reveal">
+        STATUS <b>OPERATIONAL</b><br>
+        ENCRYPTION · AES-256-GCM<br>
+        ACCOUNTS REQUIRED · 0
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- RESONATE -->
+<section class="sec resonate" id="doctrine">
+  <div class="wrap">
+    <div class="floorline reveal" style="margin-bottom:40px"><span class="tag">FLOOR · 01</span><span class="tag r">RESONANCE</span></div>
+    <h2 class="display reveal">You don't have a money problem.<br>You have a <span class="o">survival</span> problem.</h2>
+    <div class="expose reveal">
+      <p>You've run the fantasy — the one where five disciplined years turn a small number into a life-changing one. You also know how it ends, because the same volatility that 10×'s an account is the volatility that takes it to zero. The fear was never being broke. It's doing everything right and still not making it. You're not undisciplined — you've just never held an instrument that made the cost of every choice impossible to ignore.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section class="sec" id="reframe">
+  <div class="wrap split">
+    <div>
+      <div class="kicker dim reveal">THE REFRAME · 02</div>
+      <h3 class="big reveal" style="margin-top:14px">Sophistication isn't an edge.<br><span class="o">Survival is.</span></h3>
+      <p class="lead reveal" style="margin-top:24px">Elite math doesn't predict markets — nobody's does. What it does is measure ruin before ruin finds you: how far you'd fall, how long you'd bleed, how much you can risk and still wake up solvent. BEDROCK runs that math on your real numbers, every day, and refuses to flatter you.</p>
+    </div>
+    <div class="reframe-card reveal">
+      <div class="telem" id="telem"><span class="cur"></span></div>
+      <div style="height:18px"></div>
+      <div class="row"><span>OBJECTIVE_01</span><span>Never reach zero</span></div>
+      <div class="row"><span>OBJECTIVE_02</span><span>Protect the floor</span></div>
+      <div class="row"><span>OBJECTIVE_03</span><span>Compound the rest</span></div>
+      <div class="row"><span>METHOD</span><span>Bounded · long-only</span></div>
+      <div class="row"><span>LEVERAGE</span><span style="color:var(--danger)">DENIED</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVE — functional artifacts -->
+<section class="sec" id="system">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">03</span><h2 class="display" style="font-size:clamp(30px,5vw,58px)">The instrument</h2></div>
+    <div class="artifacts">
+
+      <div class="art-top">
+        <!-- Monte Carlo survival engine -->
+        <div class="art reveal" id="mcArt">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <div class="kicker">SURVIVAL ENGINE</div>
+          <h3>10,000 futures.</h3>
+          <p class="sub">We don't care which one makes you rich. We care how many of them you live through. Monte-Carlo paths with fat-tailed crashes modeled in, not wished away.</p>
+          <canvas id="mc"></canvas>
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="v ok" id="mcSurv">0%</div><div class="k">paths survived</div></div>
+            <div class="mc-stat"><div class="v warn" id="mcDD">0%</div><div class="k">median max drawdown</div></div>
+            <div class="mc-stat"><div class="v" id="mcPaths">0</div><div class="k">futures simulated</div></div>
+          </div>
+        </div>
+
+        <!-- Zero trust core -->
+        <div class="art reveal" id="ztArt">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <div class="kicker">ZERO-TRUST CORE</div>
+          <h3>Nothing leaves.</h3>
+          <p class="sub">No server. No account. No telemetry. Your numbers are encrypted and live on your device. The math comes to the data — the data never comes to us.</p>
+          <div class="zt-diagram">
+            <div class="zt-node you"><div class="ic">●</div><div class="lab">Your device</div></div>
+            <div class="zt-link"><span class="x">⊘</span>SEVERED</div>
+            <div class="zt-node"><div class="ic" style="color:var(--faint)">▢</div><div class="lab">Our servers</div></div>
+          </div>
+          <p class="oc-note">What we can see about your finances: <b style="color:var(--ok)">nothing</b>. We don't even have your email.</p>
+        </div>
+      </div>
+
+      <!-- Opportunity cost engine (interactive) -->
+      <div class="art reveal" id="ocArt" style="padding:32px">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="kicker">OPPORTUNITY-COST ENGINE</div>
+        <h3 style="margin-bottom:4px">What does it really cost?</h3>
+        <p class="sub">Every dollar spent is a dollar that wasn't compounding. Type any purchase. The terminal tells you what it costs your future self — not in dollars, in years.</p>
+        <div class="oc-in">
+          <span>$</span>
+          <input id="ocInput" type="number" inputmode="numeric" value="2500" aria-label="Purchase amount in dollars" />
+        </div>
+        <input id="ocRange" class="oc-range" type="range" min="50" max="50000" step="50" value="2500" aria-label="Purchase amount slider" />
+        <div class="oc-out">
+          <div class="oc-cell"><div class="v mono-tab" id="ocFv10">$0</div><div class="k">if invested · 10 years</div></div>
+          <div class="oc-cell"><div class="v mono-tab" id="ocFv20">$0</div><div class="k">if invested · 20 years</div></div>
+          <div class="oc-cell"><div class="v mono-tab" id="ocMonths">0</div><div class="k">months of a $1,000 surplus</div></div>
+          <div class="oc-cell"><div class="v mono-tab" id="ocHours">0</div><div class="k">hrs of work · $30/hr after tax</div></div>
+        </div>
+        <p class="oc-note">Assumes ~10%/yr nominal, the long-run equity average — illustrative, not a promise. In the app it runs on your real return and your real surplus.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ENVISION -->
+<section class="sec" id="floor">
+  <div class="wrap">
+    <div class="floorline reveal" style="margin-bottom:42px"><span class="tag">FLOOR · 04</span><span class="tag r">THE HORIZON</span></div>
+    <div class="sec-head reveal"><span class="num"></span><h2 class="display">Hold the floor long enough<br>and the <span style="color:var(--brand)">floor moves.</span></h2></div>
+    <p class="lead reveal" style="margin-bottom:10px">Not a fantasy — a schedule. Roughly 17% a year for twenty years turns $25k into seven figures. No one survives 110% a year for five; the path that could is the same path to zero. Discipline is slower. Discipline is the one that arrives.</p>
+    <div class="ladder">
+      <div class="rung live reveal-l"><div class="lv">01</div><div class="name">The Floor<small>Emergency reserve · bills covered · cannot be breached</small></div><div class="tgt">SURVIVE</div></div>
+      <div class="rung reveal-l"><div class="lv">02</div><div class="name">The Stack<small>Automated DCA · bounded risk · compounding quietly</small></div><div class="tgt">STACK</div></div>
+      <div class="rung reveal-l"><div class="lv">03</div><div class="name">The Holdings<small>Productive assets that pay you · income that rises</small></div><div class="tgt">OWN</div></div>
+      <div class="rung reveal-l"><div class="lv">04</div><div class="name">The Exit<small>The floor is now the lifestyle · work becomes optional</small></div><div class="tgt">FREE</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DE-RISK -->
+<section class="sec" id="derisk">
+  <div class="wrap">
+    <div class="derisk reveal">
+      <div class="grid">
+        <div>
+          <div class="kicker">NO ACCOUNT · NO CLOUD · NO CATCH · 05</div>
+          <h3 class="big" style="font-size:clamp(30px,4.5vw,56px);margin-top:14px">If you're<br>waiting for<br>the catch —</h3>
+          <p class="lead" style="margin-top:20px">there isn't one. The product is the discipline, not your data. We can't sell what we never collect.</p>
+        </div>
+        <div>
+          <div class="point"><div class="t">It's free</div><p>The terminal runs entirely in your browser. No subscription, no paywall on your own numbers.</p></div>
+          <div class="point"><div class="t">It's yours</div><p>Encrypted on your device. Export everything to an encrypted file and walk away anytime — no lock-in, no hostage data.</p></div>
+          <div class="point"><div class="t">It's open</div><p>The math isn't a black box. Every assumption is visible and editable. You audit the instrument, not the other way around.</p></div>
+          <div class="point"><div class="t">It's honest</div><p>It will tell you when a goal doesn't fit the math. A tool that only flatters you is worse than no tool.</p></div>
+        </div>
+      </div>
+      <p class="disclaimer">BEDROCK is research and educational tooling you operate yourself. It is not personalized financial, investment, tax, or legal advice, and it does not execute trades or move money. Markets carry real risk of loss. The only person accountable for your capital is you — which is the entire point of the thing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMAND -->
+<section class="command" id="enter">
+  <div class="wrap">
+    <div class="kicker reveal" style="margin-bottom:6px">THE COMMAND · 06</div>
+    <h2 class="display reveal">Enter<br>the <span class="o">dojo.</span></h2>
+    <p class="lead reveal" style="margin-left:auto;margin-right:auto">Open the terminal. Enter your real numbers. Let the math be honest with you — most things won't be.</p>
+    <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="app/" class="btn solid">Deploy the terminal <span class="ar">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="display">BEDROCK</div>
+        <div class="tag">THE DOJO OF CAPITAL</div>
+        <div class="status"><span class="pulse"></span>System Operational · v4</div>
+      </div>
+      <div>
+        <h4>System</h4>
+        <a href="#system">Survival Engine</a>
+        <a href="#system">Opportunity Cost</a>
+        <a href="#system">Zero-Trust Core</a>
+      </div>
+      <div>
+        <h4>Doctrine</h4>
+        <a href="#doctrine">The Floor</a>
+        <a href="#reframe">The Reframe</a>
+        <a href="#floor">The Horizon</a>
+      </div>
+      <div>
+        <h4>Built for the disciplined</h4>
+        <p style="color:var(--dim);font-size:14px;font-weight:300;line-height:1.6">A war room for your money. Not a bank, not a feed, not a leak. Yours alone.</p>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© <span id="yr"></span> BEDROCK · CAPITAL_OS</span>
+      <span>RESEARCH &amp; EDUCATIONAL TOOLING · NOT FINANCIAL ADVICE</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ---------- theme toggle ---------- */
+  var tog = document.getElementById("themeTog");
+  function applyMeta(t){ var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute("content", t==="light" ? "#F2EEE4" : "#141210"); }
+  applyMeta(document.documentElement.getAttribute("data-theme"));
+  tog.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme")==="light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", cur);
+    try{ localStorage.setItem("bd_theme", cur); }catch(e){}
+    applyMeta(cur);
+    if(window.ScrollTrigger) ScrollTrigger.refresh();
+  });
+
+  /* ---------- nav morph (vanilla, robust) ---------- */
+  var nav = document.getElementById("nav");
+  function onScroll(){ if(window.scrollY > 56) nav.classList.add("scrolled"); else nav.classList.remove("scrolled"); }
+  onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+
+  /* ---------- magnetic buttons ---------- */
+  if(canHover && !reduce){
+    document.querySelectorAll(".btn").forEach(function(b){
+      b.addEventListener("pointermove", function(e){
+        var r=b.getBoundingClientRect();
+        var x=e.clientX-r.left-r.width/2, y=e.clientY-r.top-r.height/2;
+        b.style.transform="translate("+(x*0.22)+"px,"+(y*0.32)+"px)";
+      });
+      b.addEventListener("pointerleave", function(){ b.style.transform="translate(0,0)"; });
+    });
+  }
+
+  /* ---------- telemetry typewriter ---------- */
+  var telem = document.getElementById("telem");
+  var lines = [
+    "> booting capital_os…",
+    "> integrity check … OK",
+    "> loading survival doctrine …",
+    "> the first objective is to not lose.",
+    "> everything else is secondary.",
+    "> the floor is sacred. hold it.",
+    "> sharpen. compound. survive.",
+    "> terminal ready ▸ enter your numbers."
+  ];
+  if(!reduce){
+    var li=0, ci=0, cur='<span class="cur"></span>';
+    function type(){
+      if(li>=lines.length){ li=0; ci=0; telem.innerHTML=cur; setTimeout(type,900); return; }
+      var s=lines[li];
+      ci++; telem.innerHTML = s.slice(0,ci).replace(/</g,"&lt;") + cur;
+      if(ci<s.length){ setTimeout(type, 26+Math.random()*40); }
+      else { li++; ci=0; setTimeout(type, 1100); }
+    }
+    type();
+  } else { telem.textContent = "> terminal ready — enter your numbers."; }
+
+  /* ---------- opportunity cost engine ---------- */
+  var ocIn=document.getElementById("ocInput"), ocRange=document.getElementById("ocRange");
+  var f=function(n){ if(!isFinite(n)) return "$0"; return "$"+Math.round(n).toLocaleString(); };
+  function calcOC(v){
+    v=Math.max(0,+v||0);
+    var fv10=v*Math.pow(1.10,10), fv20=v*Math.pow(1.10,20);
+    document.getElementById("ocFv10").textContent=f(fv10);
+    document.getElementById("ocFv20").textContent=f(fv20);
+    document.getElementById("ocMonths").textContent=(v/1000).toFixed(1);
+    document.getElementById("ocHours").textContent=Math.round(v/30).toLocaleString();
+  }
+  ocIn.addEventListener("input", function(){ ocRange.value=Math.min(50000,Math.max(50,+ocIn.value||0)); calcOC(ocIn.value); });
+  ocRange.addEventListener("input", function(){ ocIn.value=ocRange.value; calcOC(ocRange.value); });
+  calcOC(ocIn.value);
+
+  /* ---------- hero canvas: drifting data lattice ---------- */
+  (function(){
+    var c=document.getElementById("hero-canvas"); if(!c) return;
+    var x=c.getContext("2d"), dpr=Math.min(2,window.devicePixelRatio||1), W,H,pts;
+    function brand(){ return getComputedStyle(document.documentElement).getPropertyValue("--brand").trim()||"#FF4D14"; }
+    function size(){ W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+      pts=[]; var n=Math.min(46, Math.floor(W/26));
+      for(var i=0;i<n;i++) pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}); }
+    size(); window.addEventListener("resize", size, {passive:true});
+    var col=brand(), raf;
+    function frame(){
+      x.clearRect(0,0,W,H); col=brand();
+      for(var i=0;i<pts.length;i++){ var p=pts[i]; p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+        for(var j=i+1;j<pts.length;j++){ var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);
+          if(d<120){ x.globalAlpha=(1-d/120)*.18; x.strokeStyle=col; x.lineWidth=1; x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke(); } }
+        x.globalAlpha=.5; x.fillStyle=col; x.fillRect(p.x-1,p.y-1,2,2);
+      }
+      x.globalAlpha=1; raf=requestAnimationFrame(frame);
+    }
+    if(!reduce) frame(); else { /* static single frame */ frame(); cancelAnimationFrame(raf); }
+  })();
+
+  /* ---------- monte carlo (draws once on view) ---------- */
+  function runMC(){
+    var c=document.getElementById("mc"); if(!c||c.dataset.done) return; c.dataset.done="1";
+    var x=c.getContext("2d"), dpr=Math.min(2,window.devicePixelRatio||1);
+    var W=c.clientWidth, H=200; c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    function gauss(){ var u=0,v=0; while(!u)u=Math.random(); while(!v)v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+    var N=44, steps=90, paths=[], survived=0, ddSum=0, maxV=1;
+    for(var i=0;i<N;i++){ var val=1, peak=1, mdd=0, pts=[1];
+      for(var s=1;s<=steps;s++){ var t=gauss(); var shock=Math.abs(t)>2.2?t*1.8:t; val*=(1+0.0011+0.034*shock); if(val<0.02)val=0.02; pts.push(val); if(val>peak)peak=val; var dd=1-val/peak; if(dd>mdd)mdd=dd; if(val>maxV)maxV=val; }
+      paths.push(pts); if(pts[steps]>=1)survived++; ddSum+=mdd;
+    }
+    var cs=getComputedStyle(document.documentElement);
+    var brand=cs.getPropertyValue("--brand").trim(), faint=cs.getPropertyValue("--faint").trim();
+    var pad=6, plotH=H-pad*2;
+    function Y(v){ return pad+plotH-(v/(maxV*1.05))*plotH; }
+    function X(s){ return (s/steps)*W; }
+    var prog=0, dur= reduce?1:46;
+    function draw(){
+      prog++; var upto=Math.floor((prog/dur)*steps);
+      x.clearRect(0,0,W,H);
+      // baseline (the floor = starting capital)
+      x.strokeStyle=faint; x.globalAlpha=.5; x.setLineDash([3,4]); x.lineWidth=1;
+      x.beginPath(); x.moveTo(0,Y(1)); x.lineTo(W,Y(1)); x.stroke(); x.setLineDash([]);
+      for(var i=0;i<N;i++){ var pts=paths[i]; var ended=pts[steps]>=1;
+        x.globalAlpha= ended?0.16:0.20; x.strokeStyle= ended?faint:cs.getPropertyValue("--danger").trim();
+        x.lineWidth=1; x.beginPath();
+        for(var s=0;s<=upto;s++){ var px=X(s),py=Y(pts[s]); if(s===0)x.moveTo(px,py); else x.lineTo(px,py); }
+        x.stroke();
+      }
+      // median
+      var med=paths[Math.floor(N/2)];
+      x.globalAlpha=1; x.strokeStyle=brand; x.lineWidth=2.2; x.beginPath();
+      for(var s2=0;s2<=upto;s2++){ var mx=X(s2),my=Y(med[s2]); if(s2===0)x.moveTo(mx,my); else x.lineTo(mx,my); }
+      x.stroke();
+      if(prog<dur) requestAnimationFrame(draw);
+    }
+    draw();
+    // count up stats
+    var survPct=Math.round(survived/N*100), ddPct=Math.round(ddSum/N*100);
+    countTo(document.getElementById("mcSurv"), survPct, "%");
+    countTo(document.getElementById("mcDD"), ddPct, "%");
+    countTo(document.getElementById("mcPaths"), 10000, "");
+  }
+  function countTo(el, target, suf){
+    if(reduce){ el.textContent=target.toLocaleString()+suf; return; }
+    var st=null, dur=1100;
+    function step(ts){ if(!st)st=ts; var p=Math.min(1,(ts-st)/dur); var e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*e).toLocaleString()+suf; if(p<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  // trigger MC via IntersectionObserver (works with or without GSAP)
+  var mcArt=document.getElementById("mcArt");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ runMC(); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(mcArt);
+  } else { runMC(); }
+
+  /* ---------- GSAP scroll choreography (guarded) ---------- */
+  if(window.gsap && !reduce){
+    gsap.registerPlugin(ScrollTrigger);
+
+    // hero headline mask reveal
+    gsap.to(".line .in", {y:0, duration:1.1, ease:"power4.out", stagger:0.12, delay:0.15});
+    gsap.to(".hero .reveal", {opacity:1, y:0, duration:1, ease:"power3.out", stagger:0.1, delay:0.35});
+
+    // generic reveals
+    gsap.utils.toArray(".reveal").forEach(function(el){
+      if(el.closest(".hero")) return;
+      gsap.to(el, {opacity:1, y:0, duration:.95, ease:"power3.out",
+        scrollTrigger:{trigger:el, start:"top 86%"}});
+    });
+    gsap.utils.toArray(".reveal-l").forEach(function(el,i){
+      gsap.to(el, {opacity:1, x:0, duration:.8, ease:"power3.out",
+        scrollTrigger:{trigger:el, start:"top 90%"}});
+    });
+    // floor lines draw in
+    gsap.utils.toArray(".floorline").forEach(function(el){
+      gsap.fromTo(el, {scaleX:0}, {scaleX:1, duration:1.1, ease:"power3.inOut",
+        scrollTrigger:{trigger:el, start:"top 92%"}});
+    });
+  } else {
+    // no GSAP or reduced motion -> ensure everything is visible
+    document.documentElement.classList.remove("has-js");
+  }
+
+  // failsafe: if anything above silently failed, reveal content after load
+  window.addEventListener("load", function(){
+    setTimeout(function(){
+      var hidden=document.querySelector(".has-js .reveal");
+      if(hidden && getComputedStyle(hidden).opacity==="0"){
+        document.documentElement.classList.remove("has-js");
+      }
+    }, 2600);
+  });
+})();
+</script>
+</body>
+</html>
