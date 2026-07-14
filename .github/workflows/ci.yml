@@ -43,6 +43,8 @@ jobs:
           test -f docs/ATELIER-generative-web-design-protocol.md
           test -f docs/QUANT-GOD-TIER.md
           test -f docs/HERMES-AGENTS.md
+          test -f docs/VISUAL-SYSTEM.md
+          test -f site/brand/bedrock-system.css
           # Client SDK must expose production surface
           grep -q "pushVault" site/app/bedrock-api.js
           grep -q "REGISTER PASSKEY" site/app/index.html
@@ -51,4 +53,6 @@ jobs:
           grep -q "opportunityCostEngine" site/app/hermes-agents.js
           grep -q "hermes-agents.js" site/app/index.html
           grep -q "QUANT LAB" site/app/index.html
+          grep -q "UNRELIABLE LEDGER" site/index.html
+          grep -q "Archivo Black" site/brand/bedrock-system.css
           grep -q "icon-192.png" site/app/manifest.json

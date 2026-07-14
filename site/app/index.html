@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0A0A0A" />
+<meta name="theme-color" content="#F7F7F5" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -12,23 +12,27 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
-<title>BEDROCK — Capital OS</title>
+<title>BEDROCK — The Unreliable Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg,#0A0A0A);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:var(--bg,#F7F7F5);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
   #root{min-height:100vh;min-height:100dvh}
-  .boot{min-height:100vh;display:grid;place-items:center;color:var(--acc,#FF4D14);background:var(--bg,#0A0A0A);font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;position:relative;animation:bootpulse 1.5s ease-in-out infinite}
+  .boot{min-height:100vh;display:grid;place-items:center;color:var(--acc,#FF4D00);background:var(--bg,#F7F7F5);font-family:'Chakra Petch',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;position:relative;animation:bootpulse 1.5s ease-in-out infinite}
+  .boot::before{content:"";position:absolute;inset:18% 12%;border:2px solid var(--acc,#FF4D00);opacity:.35;pointer-events:none}
   @keyframes bootpulse{0%,100%{opacity:.55}50%{opacity:1}}
-  .boot::after{content:"";position:absolute;left:50%;bottom:44%;transform:translateX(-50%);height:1px;background:var(--acc,#FF4D14);animation:bootscan 1.5s ease-in-out infinite}
+  .boot::after{content:"";position:absolute;left:50%;bottom:42%;transform:translateX(-50%);height:3px;background:var(--acc,#FF4D00);animation:bootscan 1.5s ease-in-out infinite}
   @keyframes bootscan{0%,100%{width:48px;opacity:.4}50%{width:170px;opacity:1}}
   @media(prefers-reduced-motion:reduce){.boot,.boot::after{animation:none}.boot::after{width:120px}}
 </style>
-<script>(function(){try{var t=localStorage.getItem("bd_theme")||"dark";document.documentElement.setAttribute("data-theme",t);if(t==="light"){var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute("content","#F2EEE4");}}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem("bd_theme")||"light";document.documentElement.setAttribute("data-theme",t);var m=document.querySelector("meta[name=theme-color]");if(m)m.setAttribute("content",t==="dark"?"#0A0A0A":"#F7F7F5");}catch(e){}})();</script>
 </head>
 <body>
 <div id="root">
   <div class="boot">
-    BOOTING THE DOJO · CAPITAL_OS…
+    BOOTING UNRELIABLE LEDGER…
     <div style="position:absolute; bottom:30%; left:50%; transform:translateX(-50%); font-size:9px; letter-spacing:0; opacity:0.6; white-space:nowrap;">
       (If stuck &gt;20s: check console or hard-refresh)
     </div>
@@ -127,9 +131,9 @@ function CashBars({ data }) {
     <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} preserveAspectRatio="none" style={{ display: "block", fontFamily: "monospace" }}>
       {d.map((x, i) => { const cx = i * gw + gw / 2; return (
         <g key={i}>
-          <rect x={cx - bw - 1} y={y(x.inc || 0)} width={bw} height={base - y(x.inc || 0)} fill="#46E0A0" />
-          <rect x={cx + 1} y={y(x.exp || 0)} width={bw} height={base - y(x.exp || 0)} fill="#FF4D14" />
-          <text x={cx} y={H - 3} fill="#8C8C8C" fontSize="9" textAnchor="middle">{x.m}</text>
+          <rect x={cx - bw - 1} y={y(x.inc || 0)} width={bw} height={base - y(x.inc || 0)} fill="#1A7A4C" />
+          <rect x={cx + 1} y={y(x.exp || 0)} width={bw} height={base - y(x.exp || 0)} fill="#FF4D00" />
+          <text x={cx} y={H - 3} fill="#8A8A84" fontSize="9" textAnchor="middle">{x.m}</text>
         </g>); })}
     </svg>
   );
@@ -144,10 +148,10 @@ function FanChart({ data }) {
   const area = "M" + xs[0].toFixed(1) + " " + y(d[0].p95).toFixed(1) + " " + d.map((p, i) => "L" + xs[i].toFixed(1) + " " + y(p.p95).toFixed(1)).join(" ") + " L" + xs[xs.length - 1].toFixed(1) + " " + (H - pb) + " L" + xs[0].toFixed(1) + " " + (H - pb) + " Z";
   return (
     <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} preserveAspectRatio="none" style={{ display: "block" }}>
-      <path d={area} fill="#FF4D14" fillOpacity="0.12" stroke="none" />
-      <path d={ln("p95")} fill="none" stroke="#3A86FF" strokeWidth="1.3" />
-      <path d={ln("p5")} fill="none" stroke="#FFB000" strokeWidth="1.3" strokeDasharray="4 3" />
-      <path d={ln("p50")} fill="none" stroke="#FF4D14" strokeWidth="2.2" />
+      <path d={area} fill="#FF4D00" fillOpacity="0.14" stroke="none" />
+      <path d={ln("p95")} fill="none" stroke="#1C4B8C" strokeWidth="1.3" />
+      <path d={ln("p5")} fill="none" stroke="#C9A000" strokeWidth="1.3" strokeDasharray="4 3" />
+      <path d={ln("p50")} fill="none" stroke="#FF4D00" strokeWidth="2.2" />
     </svg>
   );
 }
@@ -165,81 +169,86 @@ function Donut({ data, colors }) {
 
 /* ============================ THEME ============================ */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 :root{
-  --bg:oklch(0.15 0.006 60); --bg2:oklch(0.185 0.008 58); --bg3:oklch(0.225 0.010 55); --line:oklch(0.30 0.012 60); --line2:oklch(0.42 0.015 55);
-  --txt:oklch(0.95 0.008 80); --dim:oklch(0.72 0.012 70); --faint:oklch(0.52 0.012 65);
-  --acc:#FF4D14; --acc2:oklch(0.66 0.20 27); --ok:oklch(0.82 0.16 158); --warn:oklch(0.83 0.15 85); --blue:oklch(0.74 0.13 245);
-  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sans:'Space Grotesk',system-ui,-apple-system,sans-serif;
-  --disp:'Anton','Space Grotesk',sans-serif;
+  --bg:#F7F7F5; --bg2:#EFEFEA; --bg3:#E4E4DE; --line:#0D0D0D; --line2:#B8B8B0;
+  --txt:#0D0D0D; --dim:#4A4A46; --faint:#8A8A84;
+  --acc:#FF4D00; --acc2:#C41E00; --ok:#1A7A4C; --warn:#C9A000; --blue:#1C4B8C; --tape:#E8FF00;
+  --mono:'Space Mono',ui-monospace,Menlo,monospace;
+  --sans:'Archivo','Helvetica Neue',Helvetica,sans-serif;
+  --disp:'Archivo Black','Arial Black',sans-serif;
+  --eng:'Chakra Petch','Arial Narrow',sans-serif;
 }
-:root[data-theme="light"]{
-  --bg:oklch(0.95 0.013 82); --bg2:oklch(0.975 0.010 82); --bg3:oklch(0.992 0.006 82); --line:oklch(0.88 0.014 75); --line2:oklch(0.79 0.016 70);
-  --txt:oklch(0.22 0.020 50); --dim:oklch(0.45 0.018 55); --faint:oklch(0.62 0.015 60);
-  --acc:#FF4D14; --acc2:oklch(0.54 0.20 27); --ok:oklch(0.56 0.15 152); --warn:oklch(0.60 0.15 70); --blue:oklch(0.50 0.17 256);
+:root[data-theme="dark"]{
+  --bg:#0A0A0A; --bg2:#121212; --bg3:#1A1A1A; --line:#F7F7F5; --line2:#3A3A38;
+  --txt:#F7F7F5; --dim:#A8A8A0; --faint:#6A6A64;
+  --acc:#FF4D00; --acc2:#FF6A33; --ok:#3DDC97; --warn:#E8FF00; --blue:#5B8DEF; --tape:#E8FF00;
 }
-:root[data-theme="light"] .bd{background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px)}
-:root[data-theme="light"] .nav{background:rgba(251,248,241,.92)}
-:root[data-theme="light"] .sheet{background:rgba(28,22,15,.45)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
 .bd{min-height:100vh;background:var(--bg);color:var(--txt);font-family:var(--sans);
-  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:15px 15px;
-  padding-bottom:84px;position:relative;overflow-x:hidden}
-.bd::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.bd::after{content:"";position:fixed;left:50%;top:-12%;width:130vmax;height:95vmax;transform:translateX(-50%);pointer-events:none;z-index:0;background:radial-gradient(circle, color-mix(in oklch, var(--acc) 15%, transparent) 0%, transparent 55%);opacity:.45;filter:blur(6px)}
+  background-image:
+    repeating-linear-gradient(-45deg,transparent,transparent 11px,rgba(13,13,13,.04) 11px,rgba(13,13,13,.04) 12px),
+    radial-gradient(rgba(13,13,13,.06) 1px,transparent 1px);
+  background-size:auto, 16px 16px;
+  padding-bottom:88px;position:relative;overflow-x:hidden}
+:root[data-theme="dark"] .bd{
+  background-image:
+    repeating-linear-gradient(-45deg,transparent,transparent 11px,rgba(247,247,245,.04) 11px,rgba(247,247,245,.04) 12px),
+    radial-gradient(rgba(247,247,245,.05) 1px,transparent 1px);
+  background-size:auto, 16px 16px}
+.bd::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+:root[data-theme="dark"] .bd::before{mix-blend-mode:overlay;opacity:.12}
+.bd::after{content:"";position:fixed;right:-20%;top:-10%;width:70vmax;height:70vmax;pointer-events:none;z-index:0;
+  background:linear-gradient(125deg, transparent 40%, color-mix(in srgb, var(--acc) 14%, transparent) 40.5%, color-mix(in srgb, var(--acc) 14%, transparent) 52%, transparent 52.5%);opacity:.9}
 .wrap{max-width:480px;margin:0 auto;position:relative;z-index:1}
-.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.lbl{font-family:var(--eng);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .lbl-acc{color:var(--acc)}
-.big{font-family:var(--disp);letter-spacing:.01em;line-height:.86;font-weight:400}
-.creed{border-left:2px solid var(--acc);background:linear-gradient(90deg,rgba(255,77,20,.07),transparent 78%);padding:13px 15px;margin:14px 2px}
-.creed-body{font-family:var(--disp);font-size:15px;line-height:1.34;letter-spacing:.015em;color:var(--txt)}
+.big{font-family:var(--disp);letter-spacing:-.01em;line-height:.88;font-weight:400;text-transform:uppercase}
+.creed{border:2px solid var(--line);border-left:4px solid var(--acc);background:var(--bg2);padding:13px 15px;margin:14px 2px}
+.creed-body{font-family:var(--disp);font-size:15px;line-height:1.3;letter-spacing:-.01em;color:var(--txt);text-transform:uppercase}
 .mono-tab{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.card{background:var(--bg2);border:1px solid var(--line);position:relative}
-.tick{position:absolute;width:7px;height:7px;border-color:var(--line2);z-index:2}
-.t-tl{top:-1px;left:-1px;border-top:1.5px solid;border-left:1.5px solid}
-.t-tr{top:-1px;right:-1px;border-top:1.5px solid;border-right:1.5px solid}
-.t-bl{bottom:-1px;left:-1px;border-bottom:1.5px solid;border-left:1.5px solid}
-.t-br{bottom:-1px;right:-1px;border-bottom:1.5px solid;border-right:1.5px solid}
-.stripe{height:6px;background:repeating-linear-gradient(45deg,var(--acc),var(--acc) 7px,#0A0A0A 7px,#0A0A0A 14px)}
-.btn{position:relative;overflow:hidden;z-index:0;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  background:var(--acc);color:#0A0A0A;border:1px solid var(--acc);padding:14px 16px;cursor:pointer;width:100%;transition:transform .25s cubic-bezier(.25,.46,.45,.94),filter .2s,color .3s}
-.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:color-mix(in oklch,var(--acc) 80%,#fff);transform:translateY(102%);transition:transform .42s cubic-bezier(.65,0,.35,1)}
-.btn:hover::before{transform:translateY(0)}
-.btn:active{transform:translateY(1px);filter:brightness(1.05)}
-.btn-ghost{background:transparent;color:var(--txt);border:1px solid var(--line2)}
-.btn-ghost::before{background:var(--acc)}
-.btn-ghost:hover{color:#0A0A0A;border-color:var(--acc)}
-.btn-ghost:active{background:var(--bg3)}
-.chip{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line2);color:var(--dim)}
-.in{width:100%;background:var(--bg);border:1px solid var(--line2);color:var(--txt);font-family:var(--mono);
-  font-size:14px;padding:11px 12px;outline:none}
-.in:focus{border-color:var(--acc)}
-.sel{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%238C8C8C'%3E%3Cpath d='M0 2l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 12px center}
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);
-  border-top:1px solid var(--line);z-index:50}
+.card{background:var(--bg2);border:2px solid var(--line);position:relative;border-radius:0}
+.tick{position:absolute;width:10px;height:10px;border-color:var(--acc);z-index:2}
+.t-tl{top:-2px;left:-2px;border-top:3px solid;border-left:3px solid}
+.t-tr{top:-2px;right:-2px;border-top:3px solid;border-right:3px solid}
+.t-bl{bottom:-2px;left:-2px;border-bottom:3px solid;border-left:3px solid}
+.t-br{bottom:-2px;right:-2px;border-bottom:3px solid;border-right:3px solid}
+.stripe{height:10px;background:repeating-linear-gradient(-45deg,var(--tape),var(--tape) 10px,#0D0D0D 10px,#0D0D0D 20px);border:2px solid var(--line);border-left:none;border-right:none}
+.btn{position:relative;overflow:hidden;z-index:0;font-family:var(--eng);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--acc);color:#0D0D0D;border:2px solid var(--line);padding:14px 16px;cursor:pointer;width:100%;border-radius:0;
+  transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background .2s}
+.btn:hover{background:var(--tape);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--line)}
+.btn:active{transform:none;box-shadow:none}
+.btn-ghost{background:transparent;color:var(--txt);border:2px solid var(--line)}
+.btn-ghost:hover{background:var(--line);color:var(--bg);box-shadow:4px 4px 0 var(--acc)}
+.chip{font-family:var(--eng);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border:2px solid var(--line2);color:var(--dim);font-weight:600;border-radius:0;background:var(--bg)}
+.in{width:100%;background:var(--bg);border:2px solid var(--line);color:var(--txt);font-family:var(--mono);
+  font-size:14px;padding:11px 12px;outline:none;border-radius:0}
+.in:focus{border-color:var(--acc);box-shadow:3px 3px 0 var(--acc)}
+.sel{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230D0D0D'%3E%3Cpath d='M0 2l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 12px center}
+.nav{position:fixed;bottom:0;left:0;right:0;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);
+  border-top:2px solid var(--line);z-index:50}
 .navin{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(8,1fr)}
 .navb{background:none;border:none;color:var(--faint);padding:11px 0 13px;cursor:pointer;display:flex;
   flex-direction:column;align-items:center;gap:4px;transition:.15s;position:relative}
 .navb.on{color:var(--acc)}
-.navb.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:2px;background:var(--acc)}
-.navt{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase}
-.rec{width:7px;height:7px;border-radius:50%;background:var(--acc2);animation:blink 1.4s infinite}
+.navb.on::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--acc)}
+.navt{font-family:var(--eng);font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.rec{width:8px;height:8px;background:var(--acc2);animation:blink 1.4s infinite;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.25}}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.fade{animation:up .55s cubic-bezier(.22,1,.36,1) both}
-.sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.6);display:flex;align-items:flex-end}
-.sheetin{background:var(--bg2);border-top:2px solid var(--acc);width:100%;max-width:480px;margin:0 auto;
-  max-height:90vh;overflow-y:auto;animation:slide .25s both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fade{animation:up .5s cubic-bezier(.22,1,.36,1) both}
+.sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.55);display:flex;align-items:flex-end}
+.sheetin{background:var(--bg2);border-top:3px solid var(--acc);width:100%;max-width:480px;margin:0 auto;
+  max-height:90vh;overflow-y:auto;animation:slide .25s both;border-left:2px solid var(--line);border-right:2px solid var(--line)}
 @keyframes slide{from{transform:translateY(100%)}to{transform:none}}
 .row{display:flex;align-items:center;justify-content:space-between}
-.divider{height:1px;background:var(--line);margin:0}
-.bubble{padding:10px 12px;font-size:12.5px;line-height:1.5;max-width:85%;border:1px solid var(--line)}
-.bubble.me{background:var(--bg3);align-self:flex-end;border-color:var(--line2)}
-.bubble.ai{background:var(--bg2);align-self:flex-start;border-left:2px solid var(--acc)}
+.divider{height:2px;background:var(--line);margin:0}
+.bubble{padding:10px 12px;font-size:12.5px;line-height:1.5;max-width:85%;border:2px solid var(--line);border-radius:0}
+.bubble.me{background:var(--bg3);align-self:flex-end}
+.bubble.ai{background:var(--bg2);align-self:flex-start;border-left:4px solid var(--acc)}
 ::-webkit-scrollbar{width:0;height:0}
-@media(prefers-reduced-motion:reduce){.fade{animation:none}.bd::after{display:none}.rec{animation:none}}
+@media(prefers-reduced-motion:reduce){.fade{animation:none}.bd::after{display:none}.rec{animation:none}.btn:hover{transform:none;box-shadow:none}}
 input[type=number]{-moz-appearance:textfield}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
 `;
@@ -400,7 +409,7 @@ const DEFAULTS = {
   settings: { 
     income: 1600, incomeFrequency: "monthly",
     contribution: 1000, contributionFrequency: "monthly",
-    capital: 0, ret: 0.10, vol: 0.30, rf: 0.045, efMonths: 6, accent: "#FF4D14" 
+    capital: 0, ret: 0.10, vol: 0.30, rf: 0.045, efMonths: 6, accent: "#FF4D00" 
   },
   accounts: [], txns: [], holdings: [], collection: [],
   goals: [
@@ -513,7 +522,7 @@ function App() {
   useEffect(() => { if (ready) store.set("bd_collection", collection); }, [collection, ready]);
   useEffect(() => { if (ready) store.set("bd_goals", goals); }, [goals, ready]);
   useEffect(() => { if (ready) store.set("bd_game", game); }, [game, ready]);
-  useEffect(() => { document.documentElement.style.setProperty("--acc", settings.accent || "#FF4D14"); }, [settings.accent]);
+  useEffect(() => { document.documentElement.style.setProperty("--acc", settings.accent || "#FF4D00"); }, [settings.accent]);
 
   /* derived */
   const D = useMemo(() => {
@@ -568,8 +577,8 @@ function App() {
     <div className="bd" style={{ display: "grid", placeItems: "center" }}>
       <style>{CSS}</style>
       <div style={{ textAlign: "center" }}>
-        <div className="big" style={{ fontSize: 40 }}>BEDROCK</div>
-        <div className="lbl" style={{ marginTop: 8 }}>booting capital_os<span className="rec" style={{ display: "inline-block", marginLeft: 8 }} /></div>
+        <div className="big" style={{ fontSize: 44 }}>BED<span style={{ color: "var(--acc)" }}>/</span>ROCK</div>
+        <div className="lbl" style={{ marginTop: 10 }}>booting unreliable ledger<span className="rec" style={{ display: "inline-block", marginLeft: 8 }} /></div>
       </div>
     </div>
   );
@@ -578,7 +587,7 @@ function App() {
     <div className="bd">
       <style>{CSS}</style>
       <div className="wrap">
-        <Header rank={rank} streak={game.streak} />
+        <Header rank={rank} streak={game.streak} cloud={cloud} />
         {view === "home" && <Home D={D} rank={rank} goals={goals} settings={settings} badges={badges} flowHas={txns.length > 0} />}
         {view === "ledger" && <Ledger accounts={accounts} setAccounts={setAccounts} txns={txns} setTxns={setTxns} D={D} collection={collection} setCollection={setCollection} />}
         {view === "goals" && <Goals goals={goals} setGoals={setGoals} settings={settings} setSettings={setSettings} D={D} />}
@@ -596,20 +605,20 @@ function App() {
 }
 
 /* ============================ HEADER ============================ */
-function Header({ rank, streak }) {
+function Header({ rank, streak, cloud }) {
   const [clock, setClock] = useState(new Date());
   useEffect(() => { const t = setInterval(() => setClock(new Date()), 1000); return () => clearInterval(t); }, []);
   return (
     <div style={{ padding: "16px 16px 10px" }}>
       <div className="row">
         <div>
-          <div className="big" style={{ fontSize: 26, letterSpacing: ".02em" }}>BEDROCK<span style={{ color: "var(--acc)" }}>.</span></div>
-          <div className="lbl" style={{ marginTop: 1 }}>THE DOJO OF CAPITAL · CAPITAL_OS v0.1</div>
+          <div className="big" style={{ fontSize: 28 }}>BED<span style={{ color: "var(--acc)" }}>/</span>ROCK</div>
+          <div className="lbl" style={{ marginTop: 3 }}>"THE UNRELIABLE LEDGER" · CAPITAL_OS</div>
         </div>
         <div style={{ textAlign: "right" }}>
           <div className="row" style={{ gap: 6, justifyContent: "flex-end" }}>
             <span className="rec" /><span className="lbl lbl-acc">LIVE</span>
-            {cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "1px 5px", borderColor: "var(--ok)", color: "var(--ok)" }}>ONLINE</span>}
+            {cloud && cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "2px 6px", borderColor: "var(--ok)", color: "var(--ok)" }}>ONLINE</span>}
           </div>
           <div className="lbl mono-tab" style={{ marginTop: 4 }}>{clock.toLocaleTimeString("en", { hour12: false })}</div>
         </div>
@@ -639,7 +648,7 @@ function Home({ D, rank, goals, settings, badges, flowHas }) {
       {/* hero */}
       <div className="card" style={{ padding: 18, marginTop: 6 }}>
         <Ticks />
-        <div className="row"><div className="lbl">"NET WORTH" · YOUR TRUE POSITION</div><TrendingUp size={13} color="var(--dim)" /></div>
+        <div className="row"><div className="lbl">“NET WORTH” · FOR SURVIVAL</div><TrendingUp size={13} color="var(--dim)" /></div>
         <div className="big mono-tab" style={{ fontSize: 52, marginTop: 8 }}>{fmt(D.nw)}</div>
         <div className="row" style={{ marginTop: 10 }}>
           <div className="lbl">CASH <span style={{ color: "var(--txt)" }} className="mono-tab">{fmtk(D.assets)}</span></div>
@@ -665,7 +674,7 @@ function Home({ D, rank, goals, settings, badges, flowHas }) {
       )}
 
       <div className="creed">
-        <div className="lbl" style={{ color: "var(--acc)", marginBottom: 8 }}>THE DOCTRINE</div>
+        <div className="lbl" style={{ color: "var(--acc)", marginBottom: 8 }}>“THE DOCTRINE”</div>
         <div className="creed-body">CONTROL WHAT YOU CONTROL. THE FLOOR IS SACRED. SURVIVE FIRST, COMPOUND SECOND. THE MARKET DOES NOT KNOW YOUR NAME — IT ANSWERS ONLY TO DISCIPLINE. RUIN IS THE ONE MISTAKE YOU CANNOT UNDO. OWN WHAT PRODUCES. CUT WHAT BLEEDS. THE SLOW ROAD, WALKED WITHOUT FAIL, IS THE FAST ROAD.</div>
       </div>
 
@@ -729,7 +738,7 @@ function Home({ D, rank, goals, settings, badges, flowHas }) {
 const SectionLabel = ({ n, t }) => (
   <div className="row" style={{ margin: "20px 2px 10px" }}>
     <div className="lbl"><span style={{ color: "var(--acc)" }}>{n}</span> / {t}</div>
-    <div style={{ flex: 1, height: 1, background: "var(--line)", marginLeft: 10 }} />
+    <div style={{ flex: 1, height: 2, background: "var(--line)", marginLeft: 10 }} />
   </div>
 );
 
@@ -1336,7 +1345,7 @@ function Quant({ settings, holdings, setHoldings, D }) {
   };
   useEffect(() => { run(); /* eslint-disable-next-line */ }, []);
   const alloc = holdings.map((h, i) => ({ name: h.ticker || ("H" + i), v: (+h.units || 0) * (+h.price || 0) })).filter(x => x.v > 0);
-  const COL = ["#FF4D14", "#46E0A0", "#FFB000", "#3A86FF", "#FF2D2D", "#8C8C8C"];
+  const COL = ["#FF4D00", "#1A7A4C", "#C9A000", "#1C4B8C", "#C41E00", "#8A8A84"];
   const saveH = () => { if (!f.ticker) return; setHoldings([...holdings, { id: Date.now(), ticker: f.ticker.toUpperCase(), units: +f.units || 0, cost: +f.cost || 0, price: +f.price || 0 }]); setSheet(false); };
   return (
     <div className="fade" style={{ padding: "4px 16px 20px" }}>
@@ -1609,9 +1618,9 @@ function NumField({ label, k, mul = 1, s, set }) {
   return <Field label={label}><input className="in" type="number" inputMode="decimal" defaultValue={mul === 1 ? s[k] : (s[k] * mul)} onBlur={e => set({ ...s, [k]: (+e.target.value || 0) / mul })} /></Field>;
 }
 function SettingsView({ settings, setSettings, cloud, setCloudState }) {
-  const [theme, setThemeState] = useState(() => { try { return localStorage.getItem("bd_theme") || "dark"; } catch (e) { return "dark"; } });
-  const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "light" ? "#F2EEE4" : "#0A0A0A"); };
-  const ACC = ["#FF4D14", "#FF2D2D", "#46E0A0", "#3A86FF", "#FFB000", "#FFFFFF"];
+  const [theme, setThemeState] = useState(() => { try { return localStorage.getItem("bd_theme") || "light"; } catch (e) { return "light"; } });
+  const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "dark" ? "#0A0A0A" : "#F7F7F5"); };
+  const ACC = ["#FF4D00", "#E8FF00", "#0D0D0D", "#1A7A4C", "#1C4B8C", "#C41E00"];
   const [confirm, setConfirm] = useState(false);
   const [ai, setAi] = useState(() => { try { return JSON.parse(localStorage.getItem("bd_ai")) || { prov: "ollama", url: PROVIDERS.ollama.url, model: PROVIDERS.ollama.model, key: "", dayCap: 5, monCap: 100, rate: 0 }; } catch (e) { return { prov: "ollama", url: PROVIDERS.ollama.url, model: PROVIDERS.ollama.model, key: "", dayCap: 5, monCap: 100, rate: 0 }; } });
   const saveAi = (next) => { setAi(next); try { localStorage.setItem("bd_ai", JSON.stringify(next)); } catch (e) { } };
@@ -2491,7 +2500,7 @@ try {
   console.error("Failed to mount BEDROCK app:", e);
   const rootEl = document.getElementById("root");
   if (rootEl) {
-    rootEl.innerHTML = '<div style="color:#FF4D14; padding: 40px; font-family: monospace; text-align:center;">' +
+    rootEl.innerHTML = '<div style="color:#FF4D00; padding: 40px; font-family: monospace; text-align:center;">' +
       '<div style="font-size:18px;margin-bottom:12px">Error starting the app</div>' +
       '<div style="font-size:12px;opacity:0.8">Check the browser console (Cmd+Option+I or F12) for details.<br>' +
       'Common causes: slow/unavailable unpkg CDNs for React or Babel, or a JS syntax issue.<br>' +
