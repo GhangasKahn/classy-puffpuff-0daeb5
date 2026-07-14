@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BEDROCK">
+  <rect width="512" height="512" fill="#0A0A0A"/>
+  <!-- viewfinder corners -->
+  <g fill="none" stroke="#FF4D14" stroke-width="18" stroke-linecap="square">
+    <path d="M62 62h72M62 62v72"/>
+    <path d="M450 62h-72M450 62v72"/>
+    <path d="M62 450h72M62 450v-72"/>
+    <path d="M450 450h-72M450 450v-72"/>
+  </g>
+  <text x="256" y="256" text-anchor="middle" dominant-baseline="central"
+        font-family="Inter, Arial Black, Helvetica, sans-serif"
+        font-weight="800" font-size="300" fill="#FF4D14">B</text>
+</svg>

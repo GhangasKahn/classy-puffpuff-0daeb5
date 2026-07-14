@@ -9,7 +9,7 @@ const CDN = [
 self.addEventListener("install", function (e) {
   e.waitUntil((async function () {
     const c = await caches.open(CACHE);
-    try { await c.addAll(["./", "./index.html", "./manifest.json", "./bedrock-api.js", "./icon-192.png", "./icon-512.png"]); } catch (err) {}
+    try { await c.addAll(["./", "./index.html", "./manifest.json", "./bedrock-api.js", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./favicon-32.png"]); } catch (err) {}
     for (const u of CDN) { try { await c.add(u); } catch (err) {} }
     self.skipWaiting();
   })());
