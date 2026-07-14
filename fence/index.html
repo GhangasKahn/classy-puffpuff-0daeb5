@@ -331,6 +331,92 @@ body::after{
 }
 .joint-meta dt{font:500 11px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--moss)}
 .joint-meta dd{color:var(--paper-dim)}
+.joint-cad{
+  margin-top:16px;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.22);
+  overflow:hidden;
+}
+.joint-cad img{width:100%;height:auto;display:block}
+.joint-cad .links{
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:12px 14px;
+  border-top:1px solid var(--line);
+  font:500 11px/1 var(--mono);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.joint-cad .links a{color:var(--cedar-hi);text-decoration:none}
+.joint-cad .links a:hover{color:var(--paper)}
+
+/* CAD gallery */
+.cad-hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:28px;
+  align-items:center;
+  margin-bottom:36px;
+}
+@media (max-width:900px){.cad-hero{grid-template-columns:1fr}}
+.cad-hero figure{
+  border:1px solid var(--line);
+  background:#101410;
+  overflow:hidden;
+}
+.cad-hero img{width:100%;height:auto;display:block}
+.cad-hero figcaption{
+  font:500 10px/1.5 var(--mono);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--mist);
+  padding:12px 14px;
+  border-top:1px solid var(--line);
+}
+.cad-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+@media (max-width:900px){.cad-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.cad-grid{grid-template-columns:1fr}}
+.cad-card{
+  border-top:1px solid var(--cedar);
+  padding-top:14px;
+}
+.cad-card a.thumb{
+  display:block;
+  border:1px solid var(--line);
+  background:#101410;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+.cad-card img{width:100%;height:auto;display:block;transition:transform .45s var(--ease)}
+.cad-card a.thumb:hover img{transform:scale(1.03)}
+.cad-card h3{font:500 20px/1.2 var(--disp);margin-bottom:6px}
+.cad-card p{color:var(--paper-dim);font-size:14px;margin-bottom:10px}
+.cad-card .files{
+  display:flex;flex-wrap:wrap;gap:10px;
+  font:500 10px/1 var(--mono);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.cad-card .files a{color:var(--cedar-hi);text-decoration:none}
+.cad-card .files a:hover{color:var(--paper)}
+.mcp-box{
+  margin-top:40px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.mcp-box pre{
+  margin-top:14px;
+  padding:16px 18px;
+  background:rgba(0,0,0,.35);
+  border:1px solid var(--line);
+  overflow-x:auto;
+  font:400 12px/1.55 var(--mono);
+  color:var(--paper-dim);
+  white-space:pre-wrap;
+}
 
 /* build phases */
 .phases{display:grid;gap:0;border-top:1px solid var(--line)}
@@ -435,6 +521,7 @@ body::after{
       <a href="#assess">Assess</a>
       <a href="#system">System</a>
       <a href="#joints">Joints</a>
+      <a href="#cad">CAD</a>
       <a href="#build">Build</a>
       <a href="#stock">Stock</a>
     </nav>
@@ -632,6 +719,14 @@ body::after{
             <div><dt>Lock</dt><dd>Hardwood wedges or komisen peg beside cheek</dd></div>
             <div><dt>Weather</dt><dd>Slope top of rail 5–8°; seal end grain after fit</dd></div>
           </dl>
+          <div class="joint-cad">
+            <img src="cad/renders/nuki_iso.png" alt="OpenSCAD render of nuki through-rail joint" width="1200" height="900" loading="lazy" />
+            <div class="links">
+              <a href="cad/nuki.scad">nuki.scad</a>
+              <a href="cad/exports/nuki.stl">STL</a>
+              <a href="cad/renders/nuki_assembled.png">assembled</a>
+            </div>
+          </div>
         </div>
         <figure class="diagram">
           <svg viewBox="0 0 420 300" aria-hidden="true">
@@ -657,6 +752,13 @@ body::after{
             <div><dt>Lock</dt><dd>Friction first; peg only if tension appears</dd></div>
             <div><dt>Weather</dt><dd>Haunches shed water away from mortise mouth</dd></div>
           </dl>
+          <div class="joint-cad">
+            <img src="cad/renders/watari_ago_iso.png" alt="OpenSCAD render of watari-ago joint" width="1200" height="900" loading="lazy" />
+            <div class="links">
+              <a href="cad/watari_ago.scad">watari_ago.scad</a>
+              <a href="cad/exports/watari_ago.stl">STL</a>
+            </div>
+          </div>
         </div>
         <figure class="diagram">
           <svg viewBox="0 0 420 300" aria-hidden="true">
@@ -680,6 +782,13 @@ body::after{
             <div><dt>Lock</dt><dd>Drawbored komisen (offset peg hole)</dd></div>
             <div><dt>Weather</dt><dd>Through-hozo only where water can exit</dd></div>
           </dl>
+          <div class="joint-cad">
+            <img src="cad/renders/hozo_iso.png" alt="OpenSCAD render of hozo mortise and tenon" width="1200" height="900" loading="lazy" />
+            <div class="links">
+              <a href="cad/hozo.scad">hozo.scad</a>
+              <a href="cad/exports/hozo.stl">STL</a>
+            </div>
+          </div>
         </div>
         <figure class="diagram">
           <svg viewBox="0 0 420 300" aria-hidden="true">
@@ -705,6 +814,13 @@ body::after{
             <div><dt>Lock</dt><dd>Keys / pegs; optional kanawa collar in severe wind</dd></div>
             <div><dt>Weather</dt><dd>Keep splice above splash; drain the footing</dd></div>
           </dl>
+          <div class="joint-cad">
+            <img src="cad/renders/ne_tsugi_iso.png" alt="OpenSCAD render of ne-tsugi foot splice" width="1200" height="900" loading="lazy" />
+            <div class="links">
+              <a href="cad/ne_tsugi.scad">ne_tsugi.scad</a>
+              <a href="cad/exports/ne_tsugi.stl">STL</a>
+            </div>
+          </div>
         </div>
         <figure class="diagram">
           <svg viewBox="0 0 420 300" aria-hidden="true">
@@ -729,6 +845,13 @@ body::after{
             <div><dt>Lock</dt><dd>Geometry; peg if lift is possible</dd></div>
             <div><dt>Weather</dt><dd>Orient so water runs off the lap face</dd></div>
           </dl>
+          <div class="joint-cad">
+            <img src="cad/renders/ari_kake_iso.png" alt="OpenSCAD render of ari-kake dovetail lap" width="1200" height="900" loading="lazy" />
+            <div class="links">
+              <a href="cad/ari_kake.scad">ari_kake.scad</a>
+              <a href="cad/exports/ari_kake.stl">STL</a>
+            </div>
+          </div>
         </div>
         <figure class="diagram">
           <svg viewBox="0 0 420 300" aria-hidden="true">
@@ -752,6 +875,13 @@ body::after{
             <div><dt>Lock</dt><dd>Compression + peg through the hook</dd></div>
             <div><dt>Weather</dt><dd>Site scarfs under a post or flashing</dd></div>
           </dl>
+          <div class="joint-cad">
+            <img src="cad/renders/kama_tsugi_iso.png" alt="OpenSCAD render of kama-tsugi sickle scarf" width="1200" height="900" loading="lazy" />
+            <div class="links">
+              <a href="cad/kama_tsugi.scad">kama_tsugi.scad</a>
+              <a href="cad/exports/kama_tsugi.stl">STL</a>
+            </div>
+          </div>
         </div>
         <figure class="diagram">
           <svg viewBox="0 0 420 300" aria-hidden="true">
@@ -766,10 +896,89 @@ body::after{
     </div>
   </section>
 
+  <section class="sec" id="cad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">04b — OpenSCAD CAD</p>
+        <h2 class="display">Parametric joints you can cut, print, or revise</h2>
+        <p class="lead">Hashira models live as OpenSCAD source under <span class="mono">fence/cad/</span>, rendered and exported through <a href="https://github.com/quellant/openscad-mcp">openscad-mcp</a> (and the local CLI). Tune post size, bay spacing, and explode views with <span class="mono">-D</span> variables.</p>
+      </div>
+
+      <div class="cad-hero reveal">
+        <figure>
+          <img src="cad/renders/bay_iso.png" alt="OpenSCAD render of a full Hashira fence bay" width="1200" height="900" />
+          <figcaption>Bay assembly · triple nuki · rain-screen cladding · post caps</figcaption>
+        </figure>
+        <div>
+          <h3 class="display" style="font-size:clamp(28px,4vw,40px);margin-bottom:12px">One bay, fully parametric</h3>
+          <p class="lead">Defaults match ~4×4 posts on 6 ft centers (mm). Change <span class="mono">post_w</span>, <span class="mono">bay_cc</span>, and rail elevations in <span class="mono">hashira_lib.scad</span> or pass variables through the MCP.</p>
+          <div class="cta-row" style="margin-top:22px">
+            <a class="btn" href="cad/bay.scad">bay.scad</a>
+            <a class="btn ghost" href="cad/exports/bay.stl">Download STL</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cad-grid">
+        <article class="cad-card reveal">
+          <a class="thumb" href="cad/renders/nuki_iso.png"><img src="cad/renders/nuki_iso.png" alt="Nuki CAD" loading="lazy" width="1200" height="900" /></a>
+          <h3>Nuki</h3>
+          <p>Through-rail with optional peg lock.</p>
+          <div class="files"><a href="cad/nuki.scad">.scad</a><a href="cad/exports/nuki.stl">.stl</a></div>
+        </article>
+        <article class="cad-card reveal">
+          <a class="thumb" href="cad/renders/watari_ago_iso.png"><img src="cad/renders/watari_ago_iso.png" alt="Watari-ago CAD" loading="lazy" width="1200" height="900" /></a>
+          <h3>Watari-ago</h3>
+          <p>Shouldered pass-through for twist resistance.</p>
+          <div class="files"><a href="cad/watari_ago.scad">.scad</a><a href="cad/exports/watari_ago.stl">.stl</a></div>
+        </article>
+        <article class="cad-card reveal">
+          <a class="thumb" href="cad/renders/hozo_iso.png"><img src="cad/renders/hozo_iso.png" alt="Hozo CAD" loading="lazy" width="1200" height="900" /></a>
+          <h3>Hozo</h3>
+          <p>Drawbored mortise &amp; tenon for gates and caps.</p>
+          <div class="files"><a href="cad/hozo.scad">.scad</a><a href="cad/exports/hozo.stl">.stl</a></div>
+        </article>
+        <article class="cad-card reveal">
+          <a class="thumb" href="cad/renders/ne_tsugi_iso.png"><img src="cad/renders/ne_tsugi_iso.png" alt="Ne-tsugi CAD" loading="lazy" width="1200" height="900" /></a>
+          <h3>Ne-tsugi</h3>
+          <p>Foot splice — replace the butt, keep the post.</p>
+          <div class="files"><a href="cad/ne_tsugi.scad">.scad</a><a href="cad/exports/ne_tsugi.stl">.stl</a></div>
+        </article>
+        <article class="cad-card reveal">
+          <a class="thumb" href="cad/renders/ari_kake_iso.png"><img src="cad/renders/ari_kake_iso.png" alt="Ari-kake CAD" loading="lazy" width="1200" height="900" /></a>
+          <h3>Ari-kake</h3>
+          <p>Dovetail lap for corners without plates.</p>
+          <div class="files"><a href="cad/ari_kake.scad">.scad</a><a href="cad/exports/ari_kake.stl">.stl</a></div>
+        </article>
+        <article class="cad-card reveal">
+          <a class="thumb" href="cad/renders/kama_tsugi_iso.png"><img src="cad/renders/kama_tsugi_iso.png" alt="Kama-tsugi CAD" loading="lazy" width="1200" height="900" /></a>
+          <h3>Kama-tsugi</h3>
+          <p>Sickle scarf to lengthen rails in place.</p>
+          <div class="files"><a href="cad/kama_tsugi.scad">.scad</a><a href="cad/exports/kama_tsugi.stl">.stl</a></div>
+        </article>
+      </div>
+
+      <div class="mcp-box reveal">
+        <p class="kicker">openscad-mcp · Cursor</p>
+        <h3 class="display" style="font-size:clamp(26px,3.5vw,36px);margin:10px 0 12px">Already wired in this repo</h3>
+        <p class="lead">Project <span class="mono">.mcp.json</span> launches <a href="https://github.com/quellant/openscad-mcp">quellant/openscad-mcp</a> via <span class="mono">uv</span>. Requires OpenSCAD on the machine. Re-render everything with the CLI helper when you change parameters.</p>
+        <pre>uv run --with git+https://github.com/quellant/openscad-mcp.git openscad-mcp
+
+# or regenerate site assets locally
+./scripts/render_hashira_cad.sh
+
+# example: wider posts, tighter bay
+openscad -o fence/cad/exports/bay.stl \
+  -D 'post_w=140' -D 'post_d=140' -D 'bay_cc=1500' \
+  fence/cad/bay.scad</pre>
+      </div>
+    </div>
+  </section>
+
   <section class="sec" id="build">
     <div class="wrap">
       <div class="sec-head reveal">
-        <p class="num">05 — Build sequence</p>
+        <p class="num">06 — Build sequence</p>
         <h2 class="display">Work bay by bay. Never open the whole line at once.</h2>
         <p class="lead">Hand-cut joinery rewards patience. Stabilize two posts, thread one set of rails, clad later.</p>
       </div>
