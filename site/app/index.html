@@ -39,20 +39,21 @@
 <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
 <script src="./bedrock-api.js"></script>
 <script src="./quant-engine.js"></script>
+<script src="./hermes-agents.js"></script>
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useRef, useMemo } = React;
 
 // Optional AI proxy. With none set, AI calls fail gracefully and every math feature still works.
 // ---- Multi-provider AI: any OpenAI-compatible endpoint (OpenRouter, Groq, Together, HF, Gemini, xAI, Ollama, local, ...) ----
 const PROVIDERS = {
+  ollama: { label: "Ollama — local LLM (preferred)", url: "http://localhost:11434/v1/chat/completions", model: "llama3.1", note: "Hermes agents are designed for local LLMs. Run Ollama, set OLLAMA_ORIGINS=*, open the PWA from localhost/http. Hosted https cannot reach http localhost." },
+  lmstudio: { label: "LM Studio — local LLM", url: "http://localhost:1234/v1/chat/completions", model: "local-model", note: "local OpenAI-compatible server; enable CORS. Prefer for Hermes / Nous / Qwen instruct models." },
   openrouter: { label: "OpenRouter — frontier + open, one key", url: "https://openrouter.ai/api/v1/chat/completions", model: "openai/gpt-4o-mini", note: "hundreds of models: Claude, GPT, Gemini, Grok, Llama, Gemma, DeepSeek, Hermes. works straight from the browser." },
   groq: { label: "Groq — very fast open models", url: "https://api.groq.com/openai/v1/chat/completions", model: "llama-3.3-70b-versatile", note: "fast Llama / Gemma. may need your proxy for browser CORS." },
   together: { label: "Together AI — open models", url: "https://api.together.xyz/v1/chat/completions", model: "meta-llama/Llama-3.3-70B-Instruct-Turbo", note: "broad open catalog. may need your proxy." },
   huggingface: { label: "Hugging Face — open models", url: "https://router.huggingface.co/v1/chat/completions", model: "meta-llama/Llama-3.1-8B-Instruct", note: "HF inference router. may need your proxy." },
   gemini: { label: "Google Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", model: "gemini-1.5-flash", note: "Google OpenAI-compatible endpoint." },
   xai: { label: "xAI — Grok", url: "https://api.x.ai/v1/chat/completions", model: "grok-2-latest", note: "Grok via xAI. may need your proxy." },
-  ollama: { label: "Ollama — local, free", url: "http://localhost:11434/v1/chat/completions", model: "llama3.1", note: "runs on your machine, zero cost. open the app locally and set OLLAMA_ORIGINS=* . a hosted https app cannot reach http localhost." },
-  lmstudio: { label: "LM Studio — local, free", url: "http://localhost:1234/v1/chat/completions", model: "local-model", note: "local server; enable its CORS. hosted https cannot reach http localhost." },
   proxy: { label: "Your proxy — hides key, any provider", url: "https://your-worker.workers.dev", model: "openai/gpt-4o-mini", note: "deploy the included worker; set its upstream + key. use for providers that block browser CORS." },
   custom: { label: "Custom — any OpenAI-compatible URL", url: "", model: "", note: "paste any /v1/chat/completions endpoint." },
 };
@@ -249,40 +250,16 @@ const RANKS = [
   { min: 50000, name: "TACTICIAN" }, { min: 250000, name: "ARCHITECT" },
   { min: 1000000, name: "SOVEREIGN" }, { min: 5000000, name: "ASCENDANT" },
 ];
-const PERSONAS = {
-  STRATEGIST: { tag: "THE STRATEGIST", voice: "a calm, sharp operator-mentor with grounded Morpheus energy — terse, lowercase, occasional // lines, zero hype." },
-  WICK: { tag: "JOHN WICK", voice: "John Wick — economical, lethal precision, almost no wasted words. every dollar is a round and you never waste rounds. quiet, certain, consequence-aware." },
-  ACCOUNTANT: { tag: "THE ACCOUNTANT", voice: "the Accountant — clinical, exacting, unsentimental, faintly menacing in your refusal to flatter. numbers do not lie and neither do you." },
-  BEEKEEPER: { tag: "THE BEEKEEPER", voice: "the Beekeeper — methodical and systemic; you protect the hive and calmly dismantle the inefficiency and predators that threaten it. patient, relentless." },
-  MORPHEUS: { tag: "MORPHEUS", voice: "Morpheus — calm certainties about choice and discipline, the red pill of hard math over comfortable illusion. measured, almost prophetic." },
-  ORACLE: { tag: "THE ORACLE", voice: "the Oracle — warm, knowing, a little cryptic; you ask the question behind the question and nudge him toward what he already knows. dry humor, never sugarcoats." },
-};
-
-// Adaptive lifecycle: the system reads the user's real state and picks the regime + persona. The user does not choose.
-const REGIMES = {
-  SURVIVAL: { persona: "BEEKEEPER", posture: "triage mode — stabilize the floor and kill high-interest debt before anything else." },
-  FOUNDATION: { persona: "ACCOUNTANT", posture: "build the buffer, cut the leaks, then begin deploying. defense before offense." },
-  ACCUMULATE: { persona: "STRATEGIST", posture: "compound aggressively but bounded — size every bet so ruin is impossible." },
-  SCALE: { persona: "WICK", posture: "real capital now — diversify, manage concentration, protect the gains." },
-  PRESERVE: { persona: "ORACLE", posture: "maintenance mode — the game is no longer getting rich, it is staying rich." },
-};
+// Hermes stack — personas, regimes, OC engineer (see hermes-agents.js)
+const H = window.BedrockHermes || {};
+const PERSONAS = H.PERSONAS || {};
+const REGIMES = H.REGIMES || {};
+const SWARM_DEFAULT = H.SWARM_DEFAULT || ["ACCOUNTANT", "JACKAL", "BEEKEEPER", "GREENE", "MACGYVER", "DARK_KNIGHT", "ROBOTO"];
 function regimeOf(D, settings) {
-  const ef = settings && settings.efMonths ? settings.efMonths : 3;
-  const runway = D.runway, liab = D.liab || 0, nw = D.nw || 0, assets = D.assets || 0;
-  let stage;
-  if (liab > assets * 0.5 || (runway != null && runway < 1)) stage = "SURVIVAL";
-  else if ((runway != null && runway < ef) || nw < 25000) stage = "FOUNDATION";
-  else if (nw < 250000) stage = "ACCUMULATE";
-  else if (nw < 1000000) stage = "SCALE";
-  else stage = "PRESERVE";
-  const directive = {
-    SURVIVAL: "The user is in SURVIVAL mode (debt-heavy or below their emergency floor). Focus relentlessly on triage: a small starter buffer, attacking the highest-APR debt, stopping the bleeding. Do not discuss aggressive investing yet — stabilization is the only priority.",
-    FOUNDATION: "The user is in FOUNDATION mode (floor not yet built or small net worth). Priority: finish the emergency fund, clear high-interest debt, then begin steady low-cost deployment. Defense before offense.",
-    ACCUMULATE: "The user is in ACCUMULATE mode (floor set, growing). Priority: bounded-aggressive compounding — disciplined contributions, position sizing for survival, owning productive assets, raising income.",
-    SCALE: "The user is in SCALE mode (substantial capital). Priority: diversification, managing concentration risk, tax-aware structuring with professionals, protecting accumulated gains while still growing.",
-    PRESERVE: "The user is in PRESERVE mode (wealthy). Priority: capital preservation, drawdown control, not chasing returns, not risking what is already built. The goal is staying rich, not getting rich.",
-  }[stage];
-  return { stage, persona: REGIMES[stage].persona, posture: REGIMES[stage].posture, directive };
+  return H.regimeOf ? H.regimeOf(D, settings) : { stage: "FOUNDATION", persona: "ACCOUNTANT", posture: "build buffer", directive: "" };
+}
+function personaTag(id) {
+  return (PERSONAS[id] && PERSONAS[id].tag) || id || "HERMES";
 }
 const fmt = (n) => (n == null || !isFinite(n)) ? "—" : (n < 0 ? "-$" : "$") + Math.abs(Math.round(n)).toLocaleString();
 const fmtk = (n) => {
@@ -856,7 +833,7 @@ function Ledger({ accounts, setAccounts, txns, setTxns, D, collection, setCollec
             </div>
             {a.lastComps && a.lastComps.length > 0 && (
               <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>
-                Live comps: {a.lastComps.slice(0,2).map((c: any) => `${c.source} ${fmt(c.price)}`).join(" · ")}
+                Live comps: {a.lastComps.slice(0,2).map((c) => `${c.source} ${fmt(c.price)}`).join(" · ")}
               </div>
             )}
           </div>
@@ -1017,51 +994,70 @@ function BTCGauge() {
   );
 }
 
-/* ============================ PURCHASE TRIBUNAL ============================ */
+/* ============================ PURCHASE TRIBUNAL (Hermes OC Engineer) ============================ */
 function PurchaseAdvisor({ settings, D }) {
   const [item, setItem] = useState({ name: "", cost: "", kind: "Depreciating" });
   const [out, setOut] = useState(null);
   const [busy, setBusy] = useState(false);
-  const r = settings.ret, c = (D && D.effContrib != null ? D.effContrib : settings.contribution) || 1;
-  const calc = useMemo(() => {
-    const cost = +item.cost || 0;
-    const fv = (t) => cost * Math.pow(1 + r, t);
-    return { cost, months: cost / c, fv10: fv(10), fv20: fv(20) };
-  }, [item.cost, r, c]);
+  const surplus = (D && D.effContrib != null ? D.effContrib : settings.contribution) || 0;
+  const floorBuf = (D && D.burn ? D.burn * (settings.efMonths || 3) : 0);
+  const oc = useMemo(() => {
+    if (!H.opportunityCostEngine) return null;
+    return H.opportunityCostEngine({
+      cost: +item.cost || 0,
+      monthlySurplus: surplus,
+      annualReturn: settings.ret != null ? settings.ret : 0.1,
+      floorBuf,
+      cash: D && D.assets != null ? D.assets : 0,
+      kind: item.kind,
+    });
+  }, [item.cost, item.kind, surplus, settings.ret, floorBuf, D && D.assets]);
   const run = async () => {
-    if (!calc.cost || busy) return;
+    if (!oc || !oc.cost || busy) return;
     setBusy(true); setOut({ verdict: "…", body: "" });
-    const ctx = `The user wants to buy "${item.name || "this item"}" for $${calc.cost}, classified as a ${item.kind} asset. Their reality: net worth ${fmt(D.nw)}, cash ${fmt(D.assets)}, monthly investable surplus ${fmt(settings.contribution)}, expected market return ${(r * 100).toFixed(0)}%/yr. Opportunity cost: that money invested instead becomes about ${fmt(calc.fv10)} in 10 years and ${fmt(calc.fv20)} in 20. The sticker equals ${calc.months.toFixed(1)} months of their entire investable surplus.`;
-    const system = `You are THE ACCOUNTANT — a cold, exacting purchase-vetting engine inside a finance app. The user brings you something they want to buy; you rule on whether it is financially defensible. Voice: clinical, precise, unsentimental, faintly menacing in your refusal to flatter — like the accountant in the film. Be HARD on the math and the choice, never contemptuous of the person. Weigh opportunity cost honestly; separate appreciating or income-producing assets from depreciating consumption; concede when a purchase is worth it for pure utility even if it is not ROI-positive, but say so plainly; protect their emergency floor absolutely and never bless a buy that eats safety-net cash; never endorse debt or leverage to fund consumption. Begin with a one-line verdict in caps — ACQUIRE, NOT WORTH IT, or WAIT — then 3 to 5 tight sentences tied to the real numbers, then one closing line that this is analysis, not financial advice. Under 130 words. ${ctx}`;
+    const snap = H.formatSnapshot(H.snapshotFromApp(D, settings, [], {}));
+    const system = H.buildAgentPrompt("ACCOUNTANT", {
+      regimeDirective: regimeOf(D, settings).directive,
+      snapshotText: snap,
+      ocText: H.formatOcForPrompt(oc),
+    });
+    const userMsg = H.tribunalUserMessage(item, oc);
     try {
-      const text = await callLLM(system, [{ role: "user", content: `Vet this purchase: ${item.name || "item"} at $${calc.cost}.` }], 1000);
-      const head = (text.split("\n")[0] || "").toUpperCase();
-      const verdict = head.includes("ACQUIRE") ? "ACQUIRE" : head.includes("NOT WORTH") ? "NOT WORTH IT" : head.includes("WAIT") ? "WAIT" : "THE RULING";
-      setOut({ verdict, body: text });
+      const text = await callLLM(system, [{ role: "user", content: userMsg }], 1200);
+      const offlineish = !text || text.indexOf("// AI is not configured") === 0 || text.indexOf("// could not reach") === 0 || text.indexOf("// provider error") === 0;
+      const body = offlineish ? H.offlineTribunalRuling(oc, item) : text;
+      const head = (body.split("\n")[0] || "").toUpperCase();
+      let verdict = oc.verdict;
+      if (head.includes("FLOOR")) verdict = "FLOOR BREACH";
+      else if (head.includes("ACQUIRE")) verdict = "ACQUIRE";
+      else if (head.includes("NOT WORTH")) verdict = "NOT WORTH IT";
+      else if (head.includes("WAIT")) verdict = "WAIT";
+      setOut({ verdict, body, oc });
     } catch (e) {
-      setOut({ verdict: "OFFLINE", body: "// no connection — but the math stands. this costs you " + fmt(calc.fv10) + " of future wealth over 10 years and " + calc.months.toFixed(1) + " months of your surplus. rule against that number." });
+      setOut({ verdict: oc.verdict, body: H.offlineTribunalRuling(oc, item), oc });
     }
     setBusy(false);
   };
-  const vc = out ? (out.verdict === "ACQUIRE" ? "var(--ok)" : out.verdict === "NOT WORTH IT" ? "var(--acc2)" : "var(--warn)") : "var(--txt)";
+  const vc = out ? (out.verdict === "ACQUIRE" ? "var(--ok)" : out.verdict === "NOT WORTH IT" || out.verdict === "FLOOR BREACH" ? "var(--acc2)" : "var(--warn)") : "var(--txt)";
   return (
     <div className="fade" style={{ padding: "4px 16px 20px" }}>
       <SectionLabel n="⚖" t="PURCHASE TRIBUNAL" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
-        <div className="lbl">BRING THE ACCOUNTANT A PURCHASE</div>
+        <div className="lbl">OPPORTUNITY COST ENGINEER · THE ACCOUNTANT</div>
+        <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>Math runs on-device first. The Accountant (Jung · Adler · Socrates · Greene conditioned) narrates the ruling — local LLM preferred.</div>
         <div style={{ marginTop: 10 }}><input className="in" placeholder="what do you want? (e.g. Rolex Submariner)" value={item.name} onChange={e => setItem({ ...item, name: e.target.value })} /></div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
           <input className="in" type="number" inputMode="decimal" placeholder="cost $" value={item.cost} onChange={e => setItem({ ...item, cost: e.target.value })} />
           <select className="in sel" value={item.kind} onChange={e => setItem({ ...item, kind: e.target.value })}><option>Depreciating</option><option>Appreciating</option><option>Income-producing</option><option>Pure utility</option></select>
         </div>
-        <button className="btn" style={{ marginTop: 12 }} onClick={run}>{busy ? "RULING…" : "⚖ RUN THE NUMBERS"}</button>
+        <button className="btn" style={{ marginTop: 12 }} onClick={run}>{busy ? "RULING…" : "⚖ RUN THE ENGINEER"}</button>
       </div>
-      {calc.cost > 0 && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
-        <Stat k="TRUE COST / 10Y" v={fmt(calc.fv10)} color="var(--acc)" sub="if invested instead" />
-        <Stat k="TRUE COST / 20Y" v={fmt(calc.fv20)} color="var(--acc)" sub="opportunity cost" />
-        <Stat k="MONTHS OF SURPLUS" v={calc.months.toFixed(1)} sub="of your DCA" />
-        <Stat k="STICKER" v={fmt(calc.cost)} sub={item.kind.toLowerCase()} />
+      {oc && oc.cost > 0 && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+        <Stat k="TRUE COST / 10Y" v={fmt(oc.fv[10])} color="var(--acc)" sub="if invested instead" />
+        <Stat k="TRUE COST / 20Y" v={fmt(oc.fv[20])} color="var(--acc)" sub="opportunity cost" />
+        <Stat k="MONTHS OF SURPLUS" v={isFinite(oc.monthsOfSurplus) ? oc.monthsOfSurplus.toFixed(1) : "∞"} sub="of your DCA" />
+        <Stat k="ENGINEER HINT" v={oc.verdict} color={oc.floorBreach ? "var(--acc2)" : "var(--warn)"} sub={"hostility " + oc.hostilityScore} />
       </div>}
       {out && <div className="card" style={{ padding: 16, marginTop: 8 }}>
         <Ticks />
@@ -1069,7 +1065,7 @@ function PurchaseAdvisor({ settings, D }) {
         <div className="big" style={{ fontSize: 26, marginTop: 8, color: vc }}>{out.verdict}</div>
         <div style={{ fontSize: 12.5, lineHeight: 1.55, marginTop: 10, whiteSpace: "pre-wrap" }}>{busy ? "// computing the cost of wanting…" : out.body}</div>
       </div>}
-      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// the tribunal weighs opportunity cost, not your worth. utility can justify a no-ROI buy and it will say so. it will never bless eating your safety floor. analysis, not financial advice.</div>
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// the engineer weighs opportunity cost, not your worth. floor breach is absolute. utility can justify a no-ROI buy and the Accountant will say so. analysis, not financial advice.</div>
     </div>
   );
 }
@@ -1502,54 +1498,52 @@ function CodexView() {
   );
 }
 
-/* ============================ COACH (AI) ============================ */
+/* ============================ COACH (Hermes agents + local LLM) ============================ */
 function Coach({ D, rank, settings, goals }) {
-  const [msgs, setMsgs] = useState([{ role: "ai", text: "// the dojo is open. i read your numbers, not your hopes. ask what is true — am i on track, what is my real risk, how fast can i reach the jet. i will not flatter you. i will sharpen you." }]);
   const reg = regimeOf(D, settings);
-  const persona = reg.persona;
+  const [overridePersona, setOverridePersona] = useState("");
+  const persona = overridePersona || reg.persona;
+  const [msgs, setMsgs] = useState([{ role: "ai", text: "// hermes dojo open. regime-calibrated. ask what is true — track, risk, jet clock. i will not flatter you." }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState("chat");
+  const [swarmResults, setSwarmResults] = useState([]);
   const endRef = useRef(null);
   useEffect(() => { endRef.current && endRef.current.scrollIntoView({ behavior: "smooth" }); }, [msgs, busy]);
-  const chips = ["Am I on track?", "How do I reach the jet faster?", "Explain my risk", "Is $1M in 5 years realistic?"];
+  const chips = ["Am I on track?", "How do I reach the jet faster?", "Explain my risk", "Is $1M in 5 years realistic?", "Hunt my waste"];
+  const roster = ["ACCOUNTANT", "ROBOTO", "JACKAL", "BEEKEEPER", "DARK_KNIGHT", "GREENE", "MACGYVER", "STRATEGIST", "WICK", "ORACLE"];
 
-  // === Hermes-style agent swarm support (Phase 1+) ===
-  // Multiple agents (personas) can analyze the same snapshot in parallel.
-  // They can "call" local tools (monte carlo variants, portfolio suggestions) via structured output the UI can act on.
-  const [swarmResults, setSwarmResults] = useState<any[]>([]);
-  const swarmPersonas = ["STRATEGIST", "WICK", "ACCOUNTANT", "BEEKEEPER"];
+  const snapText = () => H.formatSnapshot(H.snapshotFromApp(D, settings, goals, rank));
 
   const runSwarm = async () => {
     setBusy(true);
     setSwarmResults([]);
-    const snapshot = `Net worth: ${fmt(D.nw)}; Cash: ${fmt(D.assets)}; Investments: ${fmt(D.invMv)}; Monthly DCA: ${fmt(settings.contribution)}; Return/vol: ${(settings.ret*100).toFixed(0)}% / ${(settings.vol*100).toFixed(0)}%`;
-
-    const results: any[] = [];
-    for (const p of swarmPersonas) {
-      const sys = `You are a ${p} agent in a BEDROCK quantitative portfolio engineering swarm. Be concise, structured, use JSON if suggesting numbers. Snapshot: ${snapshot}. Focus on analysis, risk, allocation ideas, or specific actions.`;
+    const results = [];
+    const agents = SWARM_DEFAULT;
+    for (let i = 0; i < agents.length; i++) {
+      const p = agents[i];
+      const sys = H.buildAgentPrompt(p, { regimeDirective: reg.directive, snapshotText: snapText(), extra: "You are one voice in a Hermes swarm. Stay in format. Do not contradict the floor rule." });
       try {
-        const out = await callLLM(sys, [{ role: "user", content: "Give your view and any actionable portfolio engineering suggestions." }], 700);
-        results.push({ persona: p, text: out });
+        const out = await callLLM(sys, [{ role: "user", content: "Give your specialized counsel on this snapshot. One actionable next move." }], 900);
+        results.push({ persona: p, tag: personaTag(p), text: out });
       } catch (e) {
-        results.push({ persona: p, text: "// agent failed to respond" });
+        results.push({ persona: p, tag: personaTag(p), text: "// agent offline — configure Ollama/LM Studio in Config → AI ENGINE." });
       }
+      setSwarmResults(results.slice());
     }
-    setSwarmResults(results);
     setBusy(false);
   };
 
   const send = async (textArg) => {
     const text = (textArg || input).trim(); if (!text || busy) return;
     const next = [...msgs, { role: "me", text }]; setMsgs(next); setInput(""); setBusy(true);
-    const ctx = `User snapshot — Net worth: ${fmt(D.nw)}; Cash: ${fmt(D.assets)}; Investments: ${fmt(D.invMv)}; Liabilities: ${fmt(D.liab)}; Monthly contribution (DCA): ${fmt(settings.contribution)}; Starting investable: ${fmt(settings.capital)}; Expected return assumption: ${(settings.ret * 100).toFixed(0)}%/yr; Volatility: ${(settings.vol * 100).toFixed(0)}%/yr; Rank: ${rank.name} (Lv ${rank.lvl}); EF runway: ${D.runway != null ? D.runway.toFixed(1) + " months" : "unknown"}. Goals: ${goals.map(g => g.name + " $" + g.cost + " by " + g.year).join("; ")}.`;
-    const system = `You are ${PERSONAS[persona].tag}, the AI advisor inside a personal-finance app called BEDROCK. ${reg.directive} Voice: ${PERSONAS[persona].voice} Be hard on the math and the choices, never contemptuous of the person. Stay in character, keep it brief, no emojis. You are RIGOROUS and HONEST above all: never promise get-rich-quick, never recommend specific securities or guarantee returns, and gently reality-check fantasies with real math (e.g. $1M in 5y from a small base needs ~90%/yr which no one sustains; long-run stocks ~10%/yr; the path that could spike that high also goes to zero). Champion bounded aggression: maximize growth of money he can afford to risk, protect the floor (emergency fund / bill money) absolutely, and lean on owning productive assets + raising income. Be encouraging about what IS achievable (the Teslas and even the jet are reachable on a disciplined clock). Keep replies under ~130 words, concrete, and tied to his actual numbers. Discourage leverage, margin, and borrowing against volatile assets at his level — it is the fastest path to ruin in the very crashes he wants to survive. On taxes and legal structures give general education only, always defer to a licensed CPA and attorney, and never help conceal assets or evade tax — privacy is legal, evasion is prison. End anything investment-related with a brief reminder this is not financial advice. ${ctx}`;
+    const system = H.buildAgentPrompt(persona, { regimeDirective: reg.directive, snapshotText: snapText() });
     try {
       const hist = next.filter(m => m.role !== "ai" || m !== next[0]).map(m => ({ role: m.role === "me" ? "user" : "assistant", content: m.text }));
-      const out = await callLLM(system, hist.length ? hist : [{ role: "user", content: text }], 1000);
+      const out = await callLLM(system, hist.length ? hist : [{ role: "user", content: text }], 1200);
       setMsgs([...next, { role: "ai", text: out || "// signal lost. try again." }]);
     } catch (e) {
-      setMsgs([...next, { role: "ai", text: "// can't reach the network right now. but the math doesn't change: protect the floor, fund what's reachable, raise income. run it back when you're connected." }]);
+      setMsgs([...next, { role: "ai", text: "// can't reach the model. protect the floor, fund what's reachable, raise income. prefer Ollama on localhost." }]);
     }
     setBusy(false);
   };
@@ -1558,31 +1552,38 @@ function Coach({ D, rank, settings, goals }) {
     <div className="fade" style={{ padding: "4px 16px 20px", display: "flex", flexDirection: "column", height: "calc(100vh - 220px)" }}>
       <div className="card" style={{ padding: 12, marginTop: 6 }}>
         <Ticks />
-        <div className="row"><div className="row" style={{ gap: 8 }}><Cpu size={15} color="var(--acc)" /><div className="big" style={{ fontSize: 18 }}>{PERSONAS[persona].tag}</div></div><span className="chip lbl-acc" style={{ borderColor: "var(--acc)" }}>AI</span></div>
-        <div style={{ marginTop: 10, fontSize: 10.5, color: "var(--dim)", lineHeight: 1.5 }}><span className="lbl" style={{ color: "var(--acc)" }}>AUTO-CALIBRATED · {reg.stage}</span> — {reg.posture}</div>
+        <div className="row"><div className="row" style={{ gap: 8 }}><Cpu size={15} color="var(--acc)" /><div className="big" style={{ fontSize: 18 }}>{personaTag(persona)}</div></div><span className="chip lbl-acc" style={{ borderColor: "var(--acc)" }}>HERMES</span></div>
+        <div style={{ marginTop: 10, fontSize: 10.5, color: "var(--dim)", lineHeight: 1.5 }}><span className="lbl" style={{ color: "var(--acc)" }}>AUTO · {reg.stage}</span> — {reg.posture}</div>
+        <div style={{ marginTop: 8 }}>
+          <div className="lbl" style={{ fontSize: 8 }}>PERSONA OVERRIDE (optional)</div>
+          <select className="in sel" value={overridePersona} onChange={e => setOverridePersona(e.target.value)} style={{ marginTop: 4 }}>
+            <option value="">regime default ({personaTag(reg.persona)})</option>
+            {roster.map(id => <option key={id} value={id}>{personaTag(id)}</option>)}
+          </select>
+        </div>
       </div>
-      <div className="row" style={{ gap: 8, marginTop: 8 }}>
-        <button className={mode === "chat" ? "btn" : "btn btn-ghost"} onClick={() => setMode("chat")}>STRATEGIST</button>
+      <div className="row" style={{ gap: 8, marginTop: 8, flexWrap: "wrap" }}>
+        <button className={mode === "chat" ? "btn" : "btn btn-ghost"} onClick={() => setMode("chat")}>CHAT</button>
         <button className={mode === "codex" ? "btn" : "btn btn-ghost"} onClick={() => setMode("codex")}>CODEX</button>
         <button className={mode === "swarm" ? "btn" : "btn btn-ghost"} onClick={() => setMode("swarm")}>SWARM</button>
       </div>
 
       {mode === "swarm" && (
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10, overflowY: "auto", flex: 1 }}>
           <div className="card" style={{ padding: 12 }}>
             <Ticks />
-            <div className="lbl">HERMES-STYLE AGENT SWARM — QUANT PORTFOLIO ENGINEERING</div>
-            <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6 }}>Multiple specialized agents analyze your current snapshot in parallel and produce structured ideas you can act on (allocations, risk sizing, MC scenarios).</div>
-            <button className="btn" style={{ marginTop: 10 }} onClick={runSwarm} disabled={busy}>{busy ? "RUNNING SWARM..." : "RUN SWARM (4 agents)"}</button>
+            <div className="lbl">HERMES AGENT SWARM</div>
+            <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>
+              Accountant · Jackal · Beekeeper · Lawgiver · MacGyver · Dark Knight · Mr Roboto — Jung/Adler/Socrates/Greene conditioned. Local LLM first (Ollama / LM Studio).
+            </div>
+            <button className="btn" style={{ marginTop: 10 }} onClick={runSwarm} disabled={busy}>{busy ? "RUNNING SWARM…" : "RUN SWARM (" + SWARM_DEFAULT.length + " agents)"}</button>
           </div>
-
-          {swarmResults.length > 0 && swarmResults.map((r, i) => (
+          {swarmResults.map((r, i) => (
             <div key={i} className="card" style={{ padding: 12, marginTop: 8 }}>
-              <div className="lbl" style={{ color: "var(--acc)" }}>{r.persona}</div>
+              <div className="lbl" style={{ color: "var(--acc)" }}>{r.tag}</div>
               <div style={{ fontSize: 12.5, marginTop: 6, whiteSpace: "pre-wrap" }}>{r.text}</div>
             </div>
           ))}
-          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8 }}>Agents use your live local numbers + the same LLM providers as the single Coach. Add custom agents and tool-calling (run MC, optimize) in later iterations.</div>
         </div>
       )}
 
@@ -1596,7 +1597,7 @@ function Coach({ D, rank, settings, goals }) {
         {chips.map(c => <button key={c} className="chip" style={{ cursor: "pointer", padding: "6px 9px" }} onClick={() => send(c)}>{c}</button>)}
       </div>
       <div className="row" style={{ gap: 8 }}>
-        <input className="in" placeholder="ask the strategist…" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} />
+        <input className="in" placeholder={"ask " + personaTag(persona).toLowerCase() + "…"} value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} />
         <button className="btn" style={{ width: 52 }} onClick={() => send()}><Send size={15} /></button>
       </div></>}
     </div>
@@ -1612,7 +1613,7 @@ function SettingsView({ settings, setSettings, cloud, setCloudState }) {
   const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "light" ? "#F2EEE4" : "#0A0A0A"); };
   const ACC = ["#FF4D14", "#FF2D2D", "#46E0A0", "#3A86FF", "#FFB000", "#FFFFFF"];
   const [confirm, setConfirm] = useState(false);
-  const [ai, setAi] = useState(() => { try { return JSON.parse(localStorage.getItem("bd_ai")) || { prov: "openrouter", url: PROVIDERS.openrouter.url, model: PROVIDERS.openrouter.model, key: "", dayCap: 5, monCap: 100, rate: 3 }; } catch (e) { return { prov: "openrouter", url: PROVIDERS.openrouter.url, model: PROVIDERS.openrouter.model, key: "", dayCap: 5, monCap: 100, rate: 3 }; } });
+  const [ai, setAi] = useState(() => { try { return JSON.parse(localStorage.getItem("bd_ai")) || { prov: "ollama", url: PROVIDERS.ollama.url, model: PROVIDERS.ollama.model, key: "", dayCap: 5, monCap: 100, rate: 0 }; } catch (e) { return { prov: "ollama", url: PROVIDERS.ollama.url, model: PROVIDERS.ollama.model, key: "", dayCap: 5, monCap: 100, rate: 0 }; } });
   const saveAi = (next) => { setAi(next); try { localStorage.setItem("bd_ai", JSON.stringify(next)); } catch (e) { } };
   const usage = readUsage();
   const [bkPass, setBkPass] = useState("");
@@ -1707,9 +1708,10 @@ function SettingsView({ settings, setSettings, cloud, setCloudState }) {
         ))}
       </div>
 
-      <SectionLabel n="◇" t="AI ENGINE — BRING YOUR OWN MODEL" />
+      <SectionLabel n="◇" t="AI ENGINE — LOCAL LLM FIRST" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.5, marginBottom: 8 }}>Hermes agents ship long-form conditioned prompts (Jung · Adler · Socrates · Greene). Prefer Ollama / LM Studio so numbers never leave the machine. Cloud providers optional.</div>
         <div className="lbl">PROVIDER</div>
         <select className="in sel" value={ai.prov} onChange={e => { const k = e.target.value, pre = PROVIDERS[k] || {}; saveAi({ ...ai, prov: k, url: pre.url != null ? pre.url : ai.url, model: pre.model != null ? pre.model : ai.model }); }} style={{ marginTop: 6 }}>
           {Object.keys(PROVIDERS).map(k => <option key={k} value={k}>{PROVIDERS[k].label}</option>)}
@@ -1889,7 +1891,7 @@ function LiveMarketView({ cloud }) {
   const fetchQuotes = async () => {
     setLoading(true);
     const syms = symbols.split(",").map(s => s.trim()).filter(Boolean);
-    const results: any[] = [];
+    const results = [];
     for (const s of syms) {
       try {
         const r = await fetch(`${backend.replace(/\/$/, "")}/v1/market/quote/${encodeURIComponent(s)}`);
@@ -1911,7 +1913,7 @@ function LiveMarketView({ cloud }) {
     } catch (e) {}
   };
 
-  const addToHoldings = (q: any) => {
+  const addToHoldings = (q) => {
     // Placeholder: in a full version this would open the Add Holding sheet prefilled
     // or directly mutate holdings if we had the setter in scope.
     alert(`Would add ${q.symbol || q.id} @ $${q.price} to local holdings (wire to Quant/Ledger in next iteration).`);

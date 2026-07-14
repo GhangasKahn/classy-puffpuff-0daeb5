@@ -24,6 +24,7 @@ optional end-to-end-encrypted sync backend. **The app never moves money.**
 | `docs/BEDROCK-Backend-Architecture.md` | Full backend spec (Phases 0–6) |
 | `docs/ATELIER-generative-web-design-protocol.md` | Landing / marketing design standard |
 | `docs/QUANT-GOD-TIER.md` | Hedge-fund / quant LAB capability map |
+| `docs/HERMES-AGENTS.md` | Opportunity-cost engineer + Hermes personas (local LLM) |
 | `backend/PRIVACY.md` · `ZERO-KNOWLEDGE-DOCTRINE.md` | Privacy constitution |
 
 ## Principles (the short version)
