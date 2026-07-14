@@ -32,6 +32,7 @@ jobs:
           test -f site/index.html
           test -f site/app/index.html
           test -f site/app/bedrock-api.js
+          test -f site/app/quant-engine.js
           test -f site/app/service-worker.js
           test -f site/app/manifest.json
           test -f site/app/icon-192.png
@@ -39,7 +40,10 @@ jobs:
           test -f docs/BEDROCK-Backend-Architecture.md
           test -f docs/BEDROCK-Site-Deploy-and-Activate.md
           test -f docs/ATELIER-generative-web-design-protocol.md
+          test -f docs/QUANT-GOD-TIER.md
           # Client SDK must expose production surface
           grep -q "pushVault" site/app/bedrock-api.js
           grep -q "REGISTER PASSKEY" site/app/index.html
+          grep -q "BedrockQuant" site/app/quant-engine.js
+          grep -q "QUANT LAB" site/app/index.html
           grep -q "icon-192.png" site/app/manifest.json

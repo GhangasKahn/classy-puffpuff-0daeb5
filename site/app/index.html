@@ -38,6 +38,7 @@
 <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
 <script src="./bedrock-api.js"></script>
+<script src="./quant-engine.js"></script>
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useRef, useMemo } = React;
 
@@ -605,6 +606,7 @@ function App() {
         {view === "ledger" && <Ledger accounts={accounts} setAccounts={setAccounts} txns={txns} setTxns={setTxns} D={D} collection={collection} setCollection={setCollection} />}
         {view === "goals" && <Goals goals={goals} setGoals={setGoals} settings={settings} setSettings={setSettings} D={D} />}
         {view === "quant" && <Quant settings={settings} holdings={holdings} setHoldings={setHoldings} D={D} />}
+        {view === "lab" && <QuantLab />}
         {view === "live" && <LiveMarketView cloud={cloud} />}
         {view === "fortress" && <FortressView D={D} settings={settings} />}
         {view === "coach" && <Coach D={D} rank={rank} settings={settings} goals={goals} />}
@@ -2002,12 +2004,357 @@ function LiveMarketView({ cloud }) {
   );
 }
 
+/* ============================ QUANT LAB — GOD TIER ============================ */
+function QuantLab() {
+  const Q = window.BedrockQuant;
+  const [seed, setSeed] = useState(42);
+  const [tab, setTab] = useState("book");
+  const [suite, setSuite] = useState(null);
+  const [lln, setLln] = useState(null);
+  const [chaos, setChaos] = useState(null);
+  const [game, setGame] = useState(null);
+  const [opt, setOpt] = useState(null);
+  const [bond, setBond] = useState(null);
+  const [rl, setRl] = useState(null);
+  const [ml, setMl] = useState(null);
+  const [stoch, setStoch] = useState(null);
+  const [busy, setBusy] = useState("");
+
+  const runBook = () => {
+    if (!Q) return;
+    setBusy("portfolio");
+    setTimeout(() => { setSuite(Q.portfolioSuite(seed)); setBusy(""); }, 20);
+  };
+  const runLln = () => {
+    if (!Q) return;
+    const ex = Q.llnExperiment({ seed: seed, n: 2500, mu: 0.08, sigma: 0.2 });
+    setLln(ex);
+  };
+  const runChaos = () => {
+    if (!Q) return;
+    const r = 3.9;
+    setChaos({
+      logistic: Q.logisticMap({ r: r, n: 120, x0: 0.4 }),
+      lyapunov: Q.lyapunovLogistic(r, 4000, 0.4),
+      lorenz: Q.lorenz({ steps: 800 }),
+    });
+  };
+  const runGame = () => {
+    if (!Q) return;
+    setGame({ hawk: Q.hawkDove(2, 4), alloc: Q.allocationGame() });
+  };
+  const runOpt = () => {
+    if (!Q) return;
+    const bs = Q.blackScholes({ S: 100, K: 100, T: 0.5, r: 0.03, sigma: 0.25, type: "call" });
+    const hedge = Q.deltaHedgeLeg(bs, 1, 100);
+    setOpt({ bs: bs, hedge: hedge });
+  };
+  const runBond = () => {
+    if (!Q) return;
+    setBond(Q.bondMetrics(100, 0.05, 10, 0.045, 2));
+  };
+  const runRl = () => {
+    if (!Q) return;
+    setBusy("rl");
+    setTimeout(() => {
+      const bandit = Q.ucb1(function (arm, rng) {
+        var means = [0.02, 0.05, 0.09, 0.01];
+        return means[arm] + 0.05 * Q.gauss(rng);
+      }, 4, 400, seed);
+      const ql = Q.qLearnCapital({ seed: seed, episodes: 350 });
+      setRl({ bandit: bandit, ql: ql });
+      setBusy("");
+    }, 20);
+  };
+  const runMl = () => {
+    if (!Q) return;
+    setBusy("ml");
+    setTimeout(() => {
+      var rng = Q.makeRng(seed);
+      var X = [], y = [];
+      for (var i = 0; i < 120; i++) {
+        var mom = Q.gauss(rng) * 0.05;
+        var vol = 0.1 + Math.abs(Q.gauss(rng)) * 0.05;
+        X.push([1, mom, vol]);
+        y.push(0.02 + 1.4 * mom - 0.3 * vol + 0.01 * Q.gauss(rng));
+      }
+      var ols = Q.ols(X, y);
+      var yCls = y.map(function (v) { return v > 0.02 ? 1 : 0; });
+      var log = Q.logisticGD(X, yCls, { epochs: 500, lr: 0.2 });
+      var mlp = Q.mlpTrain(X, y, { hidden: 6, epochs: 400, seed: seed });
+      var pred = mlp.predict([1, 0.03, 0.12]);
+      setMl({ ols: ols, logistic: log, mlpPred: pred });
+      setBusy("");
+    }, 20);
+  };
+  const runStoch = () => {
+    if (!Q) return;
+    setStoch({
+      gbm: Q.gbmPath({ seed: seed, S0: 100, mu: 0.08, sigma: 0.2, T: 1, steps: 126 }),
+      jump: Q.mertonJumpPath({ seed: seed + 1, S0: 100, lambda: 1.2, T: 1, steps: 126 }),
+      ou: Q.ouPath({ seed: seed + 2, theta: 1.2, mu: 0.04, sigma: 0.02, T: 3, steps: 200 }),
+      heston: Q.hestonPath({ seed: seed + 3, T: 1, steps: 126 }),
+    });
+  };
+
+  useEffect(() => { runBook(); /* eslint-disable-next-line */ }, []);
+
+  const pct = (x) => (x == null || !isFinite(x)) ? "—" : (x * 100).toFixed(1) + "%";
+  const tabs = [
+    { k: "book", t: "BOOK" }, { k: "stoch", t: "STOCH" }, { k: "entropy", t: "ENTROPY" },
+    { k: "opt", t: "OPTIONS" }, { k: "chaos", t: "CHAOS" }, { k: "game", t: "GAME" },
+    { k: "ml", t: "ML/RL" }, { k: "rotate", t: "ROTATE" },
+  ];
+
+  if (!Q) {
+    return <div className="fade" style={{ padding: 16 }}><div className="lbl">quant-engine.js failed to load</div></div>;
+  }
+
+  const spark = (arr, w, h, color) => {
+    if (!arr || arr.length < 2) return null;
+    var min = Math.min.apply(null, arr), max = Math.max.apply(null, arr);
+    var span = max - min || 1;
+    var pts = arr.map(function (v, i) {
+      var x = (i / (arr.length - 1)) * (w - 4) + 2;
+      var y = h - 2 - ((v - min) / span) * (h - 4);
+      return x + "," + y;
+    }).join(" ");
+    return <svg width={w} height={h} style={{ display: "block" }}><polyline fill="none" stroke={color || "var(--acc)"} strokeWidth="1.4" points={pts} /></svg>;
+  };
+
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="Ω" t="QUANT LAB — GOD TIER" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.55 }}>
+          Hedge-fund primitives on-device: mean-variance · risk parity · fractional Kelly · CVaR · BS greeks · jump-diffusion · Heston · entropy / LLN · chaos · Nash games · capital rotation · OLS / logistic / MLP · UCB1 · Q-learning. Research/education — not advice, moves no money.
+        </div>
+        <div className="row" style={{ marginTop: 10, gap: 8 }}>
+          <div style={{ flex: 1 }}>
+            <div className="lbl" style={{ fontSize: 8 }}>SEED</div>
+            <input className="in" style={{ padding: "8px 9px" }} type="number" value={seed} onChange={e => setSeed(+e.target.value || 1)} />
+          </div>
+          <button className="btn" style={{ flex: 1.2, marginTop: 14 }} onClick={runBook}>{busy === "portfolio" ? "COMPUTING…" : "REBUILD BOOK"}</button>
+        </div>
+        <div className="lbl" style={{ marginTop: 8 }}>engine v{Q.version}</div>
+      </div>
+
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginTop: 10 }}>
+        {tabs.map(t => (
+          <button key={t.k} className="chip" style={{ cursor: "pointer", borderColor: tab === t.k ? "var(--acc)" : "var(--line2)", color: tab === t.k ? "var(--acc)" : "var(--dim)" }} onClick={() => {
+            setTab(t.k);
+            if (t.k === "entropy" && !lln) runLln();
+            if (t.k === "chaos" && !chaos) runChaos();
+            if (t.k === "game" && !game) runGame();
+            if (t.k === "opt" && !opt) { runOpt(); runBond(); }
+            if (t.k === "ml" && !rl) { runMl(); runRl(); }
+            if (t.k === "stoch" && !stoch) runStoch();
+            if (t.k === "rotate" && !suite) runBook();
+          }}>{t.t}</button>
+        ))}
+      </div>
+
+      {tab === "book" && suite && (
+        <>
+          <SectionLabel n="Σ" t="PORTFOLIO ENGINEER" />
+          {Object.keys(suite.books).map(k => {
+            const b = suite.books[k];
+            return (
+              <div key={k} className="card" style={{ padding: 12, marginTop: 8 }}>
+                <Ticks />
+                <div className="lbl">{k.replace(/([A-Z])/g, " $1").toUpperCase()}</div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 8 }}>
+                  <Stat k="μ" v={pct(b.mu)} color="var(--acc)" />
+                  <Stat k="σ" v={pct(b.vol)} />
+                  <Stat k="SHARPE" v={b.sharpe.toFixed(2)} color={b.sharpe > 0.5 ? "var(--ok)" : "var(--warn)"} />
+                  <Stat k="CVaR 5%" v={pct(b.cvar5)} color="var(--acc2)" />
+                  <Stat k="H (ENTROPY)" v={b.entropy.toFixed(2)} />
+                  <Stat k="EFF. BETS" v={b.effectiveBets.toFixed(2)} color="var(--acc)" />
+                </div>
+                <div style={{ marginTop: 8, display: "flex", gap: 4, flexWrap: "wrap" }}>
+                  {suite.universe.names.map((n, i) => (
+                    <span key={n} className="chip" style={{ fontSize: 8 }}>{n} {(b.weights[i] * 100).toFixed(0)}%</span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>// demo 4-asset universe (equity/credit/commodity/hedge) with Cholesky-correlated returns. long-only MV / RP / max-Sharpe / ¼-Kelly.</div>
+        </>
+      )}
+
+      {tab === "stoch" && (
+        <>
+          <SectionLabel n="∂" t="STOCHASTIC CALCULUS" />
+          {!stoch && <button className="btn" onClick={runStoch}>SIMULATE PATHS</button>}
+          {stoch && <>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">GBM</div>{spark(stoch.gbm, 320, 64, "var(--acc)")}<div className="lbl" style={{ marginTop: 4 }}>S_T = {stoch.gbm[stoch.gbm.length - 1].toFixed(2)}</div></div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">MERTON JUMP-DIFFUSION</div>{spark(stoch.jump, 320, 64, "var(--warn)")}<div className="lbl" style={{ marginTop: 4 }}>S_T = {stoch.jump[stoch.jump.length - 1].toFixed(2)}</div></div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">HESTON STOCHASTIC VOL — SPOT</div>{spark(stoch.heston.S, 320, 64, "var(--ok)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">HESTON — VARIANCE</div>{spark(stoch.heston.v, 320, 48, "var(--blue)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">ORNSTEIN–UHLENBECK (MEAN REVERSION)</div>{spark(stoch.ou, 320, 48, "var(--dim)")}</div>
+          </>}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10 }}>// Itô GBM · compensated jumps · CIR-like vol with leverage effect (ρ&lt;0) · OU residual.</div>
+        </>
+      )}
+
+      {tab === "entropy" && (
+        <>
+          <SectionLabel n="H" t="ENTROPY · LAW OF LARGE NUMBERS" />
+          <button className="btn btn-ghost" onClick={runLln}>RUN LLN EXPERIMENT</button>
+          {lln && <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              <Stat k="TRUE μ" v={pct(lln.trueMu)} />
+              <Stat k="X̄ FINAL" v={pct(lln.finalMean)} color="var(--acc)" />
+              <Stat k="|X̄−μ|" v={pct(lln.finalError)} color="var(--warn)" />
+              <Stat k="CHEBYSHEV n (ε=2%)" v={Math.ceil(lln.chebyshevBound(0.02)).toLocaleString()} sub="P≥ε bound" />
+            </div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">RUNNING MEAN CONVERGENCE</div>{spark(lln.runningMean, 320, 70, "var(--acc)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">ABSOLUTE ERROR → 0</div>{spark(lln.absError, 320, 50, "var(--acc2)")}</div>
+          </>}
+          {suite && <div style={{ marginTop: 8 }}><Stat k="MAX-SHARPE EFF. BETS" v={suite.books.maxSharpe.effectiveBets.toFixed(2)} color="var(--acc)" sub={"H = " + suite.books.maxSharpe.entropy.toFixed(3) + " nats"} /></div>}
+        </>
+      )}
+
+      {tab === "opt" && (
+        <>
+          <SectionLabel n="Δ" t="OPTIONS · HEDGE LEG · CONVEXITY" />
+          <button className="btn btn-ghost" onClick={() => { runOpt(); runBond(); }}>PRICE + HEDGE</button>
+          {opt && <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              <Stat k="CALL PRICE" v={opt.bs.price.toFixed(2)} color="var(--acc)" />
+              <Stat k="DELTA" v={opt.bs.delta.toFixed(3)} />
+              <Stat k="GAMMA" v={opt.bs.gamma.toFixed(4)} />
+              <Stat k="VEGA /1%" v={opt.bs.vega.toFixed(3)} />
+              <Stat k="THETA /DAY" v={opt.bs.theta.toFixed(3)} color="var(--warn)" />
+              <Stat k="RHO /1%" v={opt.bs.rho.toFixed(3)} />
+            </div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">DELTA HEDGE LEG (SHORT 1 CALL ×100)</div>
+              <div className="big mono-tab" style={{ fontSize: 28, marginTop: 6 }}>{opt.hedge.shares.toFixed(1)} <span style={{ fontSize: 12, color: "var(--dim)" }}>SHARES</span></div>
+              <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 6 }}>{opt.hedge.note}</div>
+            </div>
+          </>}
+          {bond && <>
+            <SectionLabel n="∂²" t="BOND DURATION / CONVEXITY" />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              <Stat k="PRICE" v={bond.price.toFixed(2)} />
+              <Stat k="MACAULAY" v={bond.macaulay.toFixed(2) + "y"} />
+              <Stat k="MODIFIED" v={bond.modified.toFixed(2)} />
+              <Stat k="CONVEXITY" v={bond.convexity.toFixed(2)} color="var(--acc)" />
+            </div>
+          </>}
+        </>
+      )}
+
+      {tab === "chaos" && (
+        <>
+          <SectionLabel n="λ" t="CHAOS THEORY" />
+          <button className="btn btn-ghost" onClick={runChaos}>INTEGRATE</button>
+          {chaos && <>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">LOGISTIC MAP r=3.9</div>{spark(chaos.logistic, 320, 64, "var(--acc)")}</div>
+            <Stat k="LYAPUNOV EXPONENT" v={chaos.lyapunov.toFixed(3)} color={chaos.lyapunov > 0 ? "var(--acc2)" : "var(--ok)"} sub={chaos.lyapunov > 0 ? "chaotic (λ>0)" : "stable"} />
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">LORENZ — X</div>{spark(chaos.lorenz.x, 320, 56, "var(--warn)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">LORENZ — Z</div>{spark(chaos.lorenz.z, 320, 56, "var(--ok)")}</div>
+          </>}
+        </>
+      )}
+
+      {tab === "game" && (
+        <>
+          <SectionLabel n="Γ" t="GAME THEORY" />
+          <button className="btn btn-ghost" onClick={runGame}>SOLVE NASH</button>
+          {game && <>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">HAWK–DOVE (ESS)</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+                <Stat k="P(HAWK)" v={pct(game.hawk.nash.p[0])} color="var(--acc)" />
+                <Stat k="VALUE" v={game.hawk.nash.value.toFixed(3)} />
+              </div>
+            </div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">ALLOCATION VS MARKET (AGGRESSIVE / DEFENSIVE)</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+                <Stat k="P(AGGRESSIVE)" v={pct(game.alloc.nash.p[0])} color="var(--acc)" />
+                <Stat k="P(BULL) COL" v={pct(game.alloc.nash.q[0])} />
+                <Stat k="GAME VALUE" v={pct(game.alloc.nash.value)} />
+              </div>
+            </div>
+          </>}
+        </>
+      )}
+
+      {tab === "ml" && (
+        <>
+          <SectionLabel n="∇" t="ML · DL · RL" />
+          <div className="row" style={{ gap: 8 }}>
+            <button className="btn" style={{ flex: 1 }} onClick={runMl}>{busy === "ml" ? "…" : "TRAIN ML"}</button>
+            <button className="btn btn-ghost" style={{ flex: 1 }} onClick={runRl}>{busy === "rl" ? "…" : "TRAIN RL"}</button>
+          </div>
+          {ml && <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              <Stat k="OLS R²" v={ml.ols ? ml.ols.r2.toFixed(3) : "—"} color="var(--acc)" />
+              <Stat k="OLS β₁ (MOM)" v={ml.ols ? ml.ols.beta[1].toFixed(3) : "—"} />
+              <Stat k="LOGIT P(edge)" v={ml.logistic ? ml.logistic.predict([1, 0.03, 0.12]).toFixed(3) : "—"} />
+              <Stat k="MLP ŷ" v={ml.mlpPred != null ? ml.mlpPred.toFixed(4) : "—"} color="var(--ok)" />
+            </div>
+          </>}
+          {rl && <>
+            <SectionLabel n="π" t="RL POLICY" />
+            <div className="card" style={{ padding: 12 }}>
+              <Ticks />
+              <div className="lbl">Q-LEARN CAPITAL POSTURE</div>
+              {Object.keys(rl.ql.policy).map(s => (
+                <div key={s} className="row" style={{ marginTop: 6 }}>
+                  <div className="lbl" style={{ color: "var(--txt)" }}>{s}</div>
+                  <div className="chip" style={{ borderColor: "var(--acc)", color: "var(--acc)" }}>{rl.ql.policy[s]}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              {rl.bandit.values.map((v, i) => <Stat key={i} k={"UCB ARM " + i} v={pct(v)} sub={rl.bandit.counts[i] + " pulls"} />)}
+            </div>
+          </>}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10 }}>// OLS · L2-logistic · 1-hidden tanh MLP · UCB1 bandit · tabular Q-learning on Bull/Chop/Bear MDP.</div>
+        </>
+      )}
+
+      {tab === "rotate" && suite && (
+        <>
+          <SectionLabel n="↻" t="CAPITAL ROTATION ENGINEER" />
+          <div className="card" style={{ padding: 14 }}>
+            <Ticks />
+            <div className="lbl">REGIME</div>
+            <div className="big" style={{ fontSize: 32, marginTop: 6, color: "var(--acc)" }}>{suite.rotation.regime}</div>
+            <div className="lbl" style={{ marginTop: 6 }}>sharpe proxy {suite.rotation.sharpeProxy.toFixed(2)}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 12 }}>
+              {Object.keys(suite.rotation.weights).map(k => (
+                <Stat key={k} k={k.toUpperCase()} v={pct(suite.rotation.weights[k])} color={k === "hedge" ? "var(--ok)" : "var(--txt)"} />
+              ))}
+            </div>
+            <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>{suite.rotation.note}</div>
+          </div>
+        </>
+      )}
+
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 16, lineHeight: 1.6 }}>
+        // god-tier mathematics for research and education. models are wrong; some are useful. survival still outranks elegance. not financial advice.
+      </div>
+    </div>
+  );
+}
+
 /* ============================ NAV ============================ */
 function Nav({ view, setView }) {
   const items = [
     { k: "home", i: LayoutGrid, t: "HOME" }, { k: "ledger", i: Wallet, t: "LEDGER" },
     { k: "goals", i: Target, t: "GOALS" }, { k: "quant", i: Activity, t: "QUANT" },
-    { k: "live", i: TrendingUp, t: "LIVE" },   // real-time tickers, news, data for analysis + agents
+    { k: "lab", i: Flame, t: "LAB" },
+    { k: "live", i: TrendingUp, t: "LIVE" },
     { k: "coach", i: Sparkles, t: "COACH" }, { k: "vet", i: Scale, t: "VET" }, { k: "fortress", i: Shield, t: "FLOOR" }, { k: "set", i: Settings2, t: "CONFIG" },
   ];
   return (

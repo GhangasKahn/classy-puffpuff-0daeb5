@@ -23,6 +23,7 @@ optional end-to-end-encrypted sync backend. **The app never moves money.**
 | `docs/PRODUCTION-CHECKLIST.md` | Pre-prod gate |
 | `docs/BEDROCK-Backend-Architecture.md` | Full backend spec (Phases 0–6) |
 | `docs/ATELIER-generative-web-design-protocol.md` | Landing / marketing design standard |
+| `docs/QUANT-GOD-TIER.md` | Hedge-fund / quant LAB capability map |
 | `backend/PRIVACY.md` · `ZERO-KNOWLEDGE-DOCTRINE.md` | Privacy constitution |
 
 ## Principles (the short version)
