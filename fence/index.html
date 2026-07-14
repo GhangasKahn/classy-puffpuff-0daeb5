@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="HASHIRA — reengineer and reinforce an existing fence with Japanese hand-cut joinery for wind, frost, and wet–dry cycling." />
+<title>HASHIRA — Fence Reinforcement by Japanese Joinery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#121612;
+  --ink-soft:#1c221c;
+  --bark:#2a231c;
+  --cedar:#b56a3a;
+  --cedar-hi:#d48a52;
+  --moss:#5d7a4e;
+  --moss-deep:#3e5634;
+  --paper:#e8e2d4;
+  --paper-dim:#cfc6b4;
+  --mist:#9aa394;
+  --line:rgba(232,226,212,.18);
+  --line-strong:rgba(232,226,212,.35);
+  --disp:"Shippori Mincho", "Iowan Old Style", Georgia, serif;
+  --sans:"Sora", "Avenir Next", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+::selection{background:var(--cedar);color:var(--ink)}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+
+/* atmosphere */
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 55% at 70% 10%, rgba(181,106,58,.16), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 10% 80%, rgba(93,122,78,.12), transparent 50%),
+    linear-gradient(180deg, #0e120e 0%, var(--ink) 40%, #161b14 100%);
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+
+.wrap{width:min(1120px, calc(100% - 40px));margin:0 auto;position:relative;z-index:2}
+.kicker{
+  font:500 11px/1 var(--mono);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--cedar-hi);
+}
+.display{
+  font-family:var(--disp);
+  font-weight:500;
+  letter-spacing:-.01em;
+  line-height:1.05;
+  text-wrap:balance;
+}
+.lead{
+  font-size:clamp(16px,1.7vw,19px);
+  color:var(--paper-dim);
+  max-width:52ch;
+  font-weight:300;
+}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* nav */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  padding:18px 0;
+  transition:background .35s var(--ease), border-color .35s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.on{
+  background:rgba(18,22,18,.78);
+  backdrop-filter:blur(12px);
+  border-color:var(--line);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{
+  font:600 15px/1 var(--disp);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.brand i{
+  width:10px;height:22px;background:linear-gradient(180deg,var(--cedar-hi),var(--moss));
+  display:inline-block;
+}
+.nav-links{display:flex;gap:22px;flex-wrap:wrap}
+.nav-links a{
+  font:500 11px/1 var(--mono);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--mist);
+  text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--paper)}
+
+/* hero */
+.hero{
+  min-height:100svh;
+  display:grid;
+  align-items:end;
+  position:relative;
+  padding:120px 0 56px;
+  overflow:hidden;
+}
+.hero-plane{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg, rgba(18,22,18,.15) 0%, rgba(18,22,18,.55) 45%, rgba(18,22,18,.92) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%231a2218'/%3E%3Cstop offset='100%25' stop-color='%230d110d'/%3E%3C/linearGradient%3E%3ClinearGradient id='wood' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236b4024'/%3E%3Cstop offset='50%25' stop-color='%23965a32'/%3E%3Cstop offset='100%25' stop-color='%234a2c18'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23sky)'/%3E%3Cg opacity='.35'%3E%3Cpath d='M0 620 C200 560 340 700 520 640 S860 520 1040 610 1360 700 1600 620 L1600 900 L0 900Z' fill='%23243322'/%3E%3C/g%3E%3Cg fill='url(%23wood)'%3E%3Crect x='180' y='220' width='42' height='560'/%3E%3Crect x='420' y='180' width='42' height='600'/%3E%3Crect x='660' y='240' width='42' height='540'/%3E%3Crect x='900' y='160' width='42' height='620'/%3E%3Crect x='1140' y='210' width='42' height='570'/%3E%3Crect x='1380' y='190' width='42' height='590'/%3E%3Crect x='160' y='360' width='1280' height='28'/%3E%3Crect x='160' y='520' width='1280' height='28'/%3E%3Crect x='160' y='680' width='1280' height='22'/%3E%3C/g%3E%3Cg stroke='%23e8e2d4' stroke-width='1.5' opacity='.25' fill='none'%3E%3Cpath d='M201 360 L201 520 M441 360 L441 520 M681 360 L681 520 M921 360 L921 520 M1161 360 L1161 520 M1401 360 L1401 520'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.04);
+  animation:heroDrift 18s ease-in-out infinite alternate;
+}
+@keyframes heroDrift{
+  from{transform:scale(1.04) translateY(0)}
+  to{transform:scale(1.08) translateY(-12px)}
+}
+.hero-inner{position:relative;z-index:3}
+.hero .brand-hero{
+  font:600 clamp(64px,14vw,168px)/.9 var(--disp);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin:18px 0 20px;
+}
+.hero .brand-hero span{color:var(--cedar-hi)}
+.hero-copy{max-width:38ch;margin-bottom:28px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:.7em;
+  font:600 12px/1 var(--mono);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:18px 26px;
+  border:1px solid var(--cedar);
+  color:var(--paper);
+  background:linear-gradient(180deg, rgba(181,106,58,.25), rgba(181,106,58,.05));
+  transition:transform .25s var(--ease), background .25s, border-color .25s;
+  min-height:48px;
+}
+.btn:hover{transform:translateY(-2px);border-color:var(--cedar-hi);background:rgba(181,106,58,.35)}
+.btn.ghost{
+  background:transparent;
+  border-color:var(--line-strong);
+  color:var(--paper-dim);
+}
+.btn.ghost:hover{color:var(--paper);border-color:var(--paper-dim)}
+
+/* sections */
+.sec{padding:clamp(72px,11vh,130px) 0;position:relative;z-index:2}
+.sec-head{margin-bottom:34px;max-width:60ch}
+.sec-head h2.display{font-size:clamp(34px,5.4vw,64px);margin:12px 0 16px}
+.sec-head .num{
+  font:500 11px/1 var(--mono);
+  letter-spacing:.2em;
+  color:var(--moss);
+}
+
+.rule{
+  height:1px;
+  background:linear-gradient(90deg, var(--cedar), transparent 70%);
+  margin:0 0 40px;
+  transform-origin:left;
+}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease)}
+.reveal.on{opacity:1;transform:none}
+
+/* climate */
+.climate-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px 28px;
+}
+@media (max-width:760px){.climate-grid{grid-template-columns:1fr}}
+.load{
+  padding:22px 0 8px;
+  border-top:1px solid var(--line);
+}
+.load h3{
+  font:500 22px/1.2 var(--disp);
+  margin-bottom:8px;
+}
+.load p{color:var(--paper-dim);max-width:48ch;font-size:15px}
+.load .tag{
+  font:500 10px/1 var(--mono);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--cedar-hi);
+  margin-bottom:10px;
+  display:block;
+}
+
+/* assess */
+.checks{
+  display:grid;
+  gap:0;
+  border-top:1px solid var(--line);
+}
+.check{
+  display:grid;
+  grid-template-columns:72px 1fr;
+  gap:18px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  align-items:start;
+}
+.check .idx{
+  font:500 13px/1 var(--mono);
+  color:var(--moss);
+  letter-spacing:.12em;
+  padding-top:4px;
+}
+.check h3{font:500 20px/1.25 var(--disp);margin-bottom:6px}
+.check p{color:var(--paper-dim);font-size:15px;max-width:62ch}
+
+/* strategy diagram */
+.strategy{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:40px;
+  align-items:center;
+}
+@media (max-width:900px){.strategy{grid-template-columns:1fr}}
+.strategy-copy h3{font:500 28px/1.15 var(--disp);margin:0 0 14px}
+.strategy-copy p{color:var(--paper-dim);margin-bottom:14px;max-width:48ch}
+.strategy-copy ol{
+  list-style:none;
+  display:grid;
+  gap:12px;
+  margin-top:18px;
+}
+.strategy-copy li{
+  display:grid;
+  grid-template-columns:28px 1fr;
+  gap:12px;
+  color:var(--paper-dim);
+  font-size:15px;
+}
+.strategy-copy li b{
+  font:600 12px/1.6 var(--mono);
+  color:var(--cedar-hi);
+}
+
+.diagram{
+  background:
+    linear-gradient(160deg, rgba(42,35,28,.85), rgba(18,22,18,.4)),
+    repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(232,226,212,.04) 24px);
+  border:1px solid var(--line);
+  padding:18px;
+}
+.diagram figcaption{
+  font:500 10px/1.5 var(--mono);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--mist);
+  margin-top:12px;
+}
+
+/* joints */
+.joint-tabs{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:28px;
+}
+.joint-tabs button{
+  font:500 11px/1 var(--mono);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--mist);
+  background:transparent;
+  border:1px solid var(--line);
+  padding:12px 14px;
+  cursor:pointer;
+  transition:color .2s, border-color .2s, background .2s;
+}
+.joint-tabs button[aria-selected="true"],
+.joint-tabs button:hover{
+  color:var(--paper);
+  border-color:var(--cedar);
+  background:rgba(181,106,58,.12);
+}
+.joint-panel{display:none}
+.joint-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media (max-width:860px){.joint-panel.active{grid-template-columns:1fr}}
+.joint-panel h3{
+  font:500 clamp(28px,4vw,42px)/1.1 var(--disp);
+  margin:8px 0 10px;
+}
+.joint-panel .jp{
+  font:500 12px/1 var(--mono);
+  letter-spacing:.2em;
+  color:var(--cedar-hi);
+  text-transform:uppercase;
+}
+.joint-panel p{color:var(--paper-dim);margin-bottom:14px;max-width:48ch}
+.joint-meta{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+.joint-meta div{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:10px;
+  font-size:14px;
+}
+.joint-meta dt{font:500 11px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--moss)}
+.joint-meta dd{color:var(--paper-dim)}
+
+/* build phases */
+.phases{display:grid;gap:0;border-top:1px solid var(--line)}
+.phase{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:24px;
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
+}
+@media (max-width:700px){.phase{grid-template-columns:1fr;gap:10px}}
+.phase .when{
+  font:500 12px/1.5 var(--mono);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cedar-hi);
+}
+.phase h3{font:500 24px/1.2 var(--disp);margin-bottom:8px}
+.phase p{color:var(--paper-dim);max-width:62ch;font-size:15px}
+.phase ul{margin-top:12px;padding-left:18px;color:var(--paper-dim);font-size:14px}
+.phase li{margin:.35em 0}
+
+/* materials */
+.mat-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+.mat-table th,.mat-table td{
+  text-align:left;
+  padding:14px 12px;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+.mat-table th{
+  font:500 11px/1 var(--mono);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--moss);
+}
+.mat-table td{color:var(--paper-dim)}
+.mat-table td:first-child{color:var(--paper);font-family:var(--disp);font-size:18px;font-weight:500}
+
+/* cut list */
+.cuts{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+@media (max-width:860px){.cuts{grid-template-columns:1fr}}
+.cut{
+  border-top:1px solid var(--cedar);
+  padding:18px 0 8px;
+}
+.cut h3{font:500 20px/1.2 var(--disp);margin-bottom:8px}
+.cut p{color:var(--paper-dim);font-size:14px}
+.cut .spec{
+  margin-top:12px;
+  font:500 11px/1.7 var(--mono);
+  letter-spacing:.08em;
+  color:var(--mist);
+  text-transform:uppercase;
+}
+
+/* footer */
+.foot{
+  padding:48px 0 60px;
+  border-top:1px solid var(--line);
+  position:relative;z-index:2;
+}
+.foot .wrap{
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  color:var(--mist);
+  font:400 12px/1.6 var(--mono);
+  letter-spacing:.08em;
+}
+.note{
+  margin-top:40px;
+  padding:20px 0 0;
+  border-top:1px solid var(--line);
+  color:var(--mist);
+  font-size:13px;
+  max-width:70ch;
+}
+
+/* print */
+@media print{
+  .nav,.cta-row{display:none}
+  body{background:#fff;color:#111}
+  .hero{min-height:auto;padding:40px 0}
+  .hero-plane{display:none}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i aria-hidden="true"></i> Hashira</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#loads">Loads</a>
+      <a href="#assess">Assess</a>
+      <a href="#system">System</a>
+      <a href="#joints">Joints</a>
+      <a href="#build">Build</a>
+      <a href="#stock">Stock</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-plane" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="kicker reveal">Japanese joinery · existing fence · weather-ready</p>
+      <h1 class="brand-hero reveal">Hashi<span>ra</span></h1>
+      <p class="lead hero-copy reveal">Reengineer the fence you already have into a post-and-through-rail frame that sheds water, resists racking, and repairs in place — cut by hand, locked by wood.</p>
+      <div class="cta-row reveal">
+        <a class="btn" href="#system">See the system <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#joints">Joint catalog</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="loads">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">01 — Local elements</p>
+        <h2 class="display">Design for the loads that actually fail fences</h2>
+        <p class="lead">Without a site survey, Hashira assumes a temperate residential yard with wind, frost heave, and wet–dry cycling. Tune the matrix to your climate; keep the joint logic.</p>
+      </div>
+      <div class="rule reveal"></div>
+      <div class="climate-grid">
+        <article class="load reveal">
+          <span class="tag">Primary failure</span>
+          <h3>Wind racking</h3>
+          <p>Panel fences act as sails. Nailed butt joints open at the post, rails twist, and the line leans. Through-rails (<em>nuki</em>) and shouldered jaws (<em>watari-ago</em>) turn shear into compression across the post.</p>
+        </article>
+        <article class="load reveal">
+          <span class="tag">Ground movement</span>
+          <h3>Frost heave &amp; soft soil</h3>
+          <p>Posts lift and rot at grade. Keep the structural frame above a drained footing; use <em>ne-tsugi</em> to splice a sound upper post onto a replaced butt without rebuilding the bay.</p>
+        </article>
+        <article class="load reveal">
+          <span class="tag">Moisture</span>
+          <h3>Wet–dry cycling</h3>
+          <p>End grain and trapped water kill wood faster than wind. Cap posts, slope shoulders, leave air gaps behind boards, and prefer joinery that sheds instead of cupping water in metal brackets.</p>
+        </article>
+        <article class="load reveal">
+          <span class="tag">Seasonal move</span>
+          <h3>Shrink / swell</h3>
+          <p>Japanese framing expects wood to move. Pegged through-joints tighten under load; leave intentional play at non-bearing faces so summer humidity does not split the mortise cheeks.</p>
+        </article>
+      </div>
+      <p class="note reveal">If your site is coastal hurricane wind, deep freeze, or arid UV-extreme, keep the same skeleton and upgrade section sizes, footing depth, and species — not the joint vocabulary.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="assess">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">02 — Read the existing fence</p>
+        <h2 class="display">Keep what is sound. Replace only the failed path.</h2>
+        <p class="lead">Hashira is a reengineering method, not a teardown. Walk the line once with this checklist before cutting a single mortise.</p>
+      </div>
+      <div class="checks">
+        <div class="check reveal">
+          <div class="idx">A01</div>
+          <div>
+            <h3>Post soundness at grade</h3>
+            <p>Probe 0–8″ above soil and just below. Soft, hollow, or ant-riddled butts get a <em>ne-tsugi</em> splice or full post reset. Hard heartwood above grade can stay as the new hashira.</p>
+          </div>
+        </div>
+        <div class="check reveal">
+          <div class="idx">A02</div>
+          <div>
+            <h3>Bay geometry</h3>
+            <p>Measure center-to-center post spacing, height, and out-of-plumb. Ideal Hashira bays: 6–8 ft. Over 8 ft, add a mid-post or deepen rail section. Mark a string line for the new top of frame.</p>
+          </div>
+        </div>
+        <div class="check reveal">
+          <div class="idx">A03</div>
+          <div>
+            <h3>Rail / picket role</h3>
+            <p>Decide what remains as cladding only. Existing pickets and boards become non-structural skin. New through-rails carry wind. Never ask old face-nailed 2×4 rails to do both jobs after reinforcement.</p>
+          </div>
+        </div>
+        <div class="check reveal">
+          <div class="idx">A04</div>
+          <div>
+            <h3>Water path</h3>
+            <p>Note where splashback, downspouts, and grade slope attack posts. Raise clearances, add gravel collars, and cut drip shoulders on every exposed tenon cheek.</p>
+          </div>
+        </div>
+        <div class="check reveal">
+          <div class="idx">A05</div>
+          <div>
+            <h3>Gate openings</h3>
+            <p>Treat gates as the stiffest frames. Use doubled posts or a torii-like lintel with <em>hozo</em> tenons so the swinging leaf does not rack the adjacent bays.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="system">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">03 — The Hashira system</p>
+        <h2 class="display">One composition: posts, through-rails, cladding</h2>
+        <p class="lead">Three roles. One load path. Everything else is weather armor.</p>
+      </div>
+      <div class="strategy reveal">
+        <div class="strategy-copy">
+          <h3>Reengineer in place</h3>
+          <p>Convert each bay into a small timber frame. Posts remain the verticals. New rails pass through them. Boards hang as a rain screen — attached to the rails, never asked to brace the line.</p>
+          <ol>
+            <li><b>01</b><span>Reset or splice posts to plumb on drained footings.</span></li>
+            <li><b>02</b><span>Cut through-mortises; thread lower, mid, and top <em>nuki</em>.</span></li>
+            <li><b>03</b><span>Lock with wedges or <em>komisen</em> pegs; cap the post tops.</span></li>
+            <li><b>04</b><span>Refit or renew cladding with airflow and drip edges.</span></li>
+          </ol>
+        </div>
+        <figure class="diagram" aria-label="Fence frame diagram">
+          <svg viewBox="0 0 520 420" role="img" aria-label="Post and through-rail fence elevation">
+            <defs>
+              <linearGradient id="p" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d48a52"/>
+                <stop offset="100%" stop-color="#6b4024"/>
+              </linearGradient>
+              <linearGradient id="r" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#8a9a78"/>
+                <stop offset="100%" stop-color="#5d7a4e"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="520" height="420" fill="#141814"/>
+            <text x="24" y="36" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2">ELEVATION · ONE BAY</text>
+            <!-- grade -->
+            <path d="M20 350 H500" stroke="#5d7a4e" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <text x="24" y="372" fill="#5d7a4e" font-family="IBM Plex Mono, monospace" font-size="10">GRADE</text>
+            <!-- posts -->
+            <rect x="70" y="70" width="36" height="300" fill="url(#p)"/>
+            <rect x="414" y="70" width="36" height="300" fill="url(#p)"/>
+            <!-- caps -->
+            <polygon points="58,70 118,70 104,52 72,52" fill="#e8e2d4" opacity=".85"/>
+            <polygon points="402,70 462,70 448,52 416,52" fill="#e8e2d4" opacity=".85"/>
+            <!-- nuki rails -->
+            <rect x="40" y="120" width="440" height="22" fill="url(#r)"/>
+            <rect x="40" y="210" width="440" height="22" fill="url(#r)"/>
+            <rect x="40" y="300" width="440" height="18" fill="url(#r)"/>
+            <!-- cladding hints -->
+            <g stroke="#e8e2d4" stroke-width="1" opacity=".28">
+              <line x1="140" y1="145" x2="140" y2="298"/>
+              <line x1="175" y1="145" x2="175" y2="298"/>
+              <line x1="210" y1="145" x2="210" y2="298"/>
+              <line x1="245" y1="145" x2="245" y2="298"/>
+              <line x1="280" y1="145" x2="280" y2="298"/>
+              <line x1="315" y1="145" x2="315" y2="298"/>
+              <line x1="350" y1="145" x2="350" y2="298"/>
+              <line x1="385" y1="145" x2="385" y2="298"/>
+            </g>
+            <!-- labels -->
+            <text x="116" y="112" fill="#d48a52" font-family="Shippori Mincho, serif" font-size="14">hashira</text>
+            <text x="230" y="108" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="10">NUKI</text>
+            <text x="210" y="198" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="10">WATARI-AGO OPTION</text>
+            <text x="230" y="288" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="10">ASHI-GATA</text>
+            <text x="150" y="400" fill="#cfc6b4" font-family="Sora, sans-serif" font-size="12">Cladding = rain screen only</text>
+          </svg>
+          <figcaption>Through-rails pass the posts; cladding never braces the frame.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="joints">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">04 — Hand-cut joinery kit</p>
+        <h2 class="display">Six joints. Enough for a whole line.</h2>
+        <p class="lead">Miyadaiku vocabulary, scaled to fence timber. Cut with saw, chisel, and marking gauge — no hidden metal required for the frame.</p>
+      </div>
+      <div class="joint-tabs reveal" role="tablist" aria-label="Joint catalog">
+        <button type="button" role="tab" aria-selected="true" aria-controls="j-nuki" id="tab-nuki">Nuki</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="j-watari" id="tab-watari">Watari-ago</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="j-hozo" id="tab-hozo">Hozo</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="j-ne" id="tab-ne">Ne-tsugi</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="j-ari" id="tab-ari">Ari-kake</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="j-kama" id="tab-kama">Kama-tsugi</button>
+      </div>
+
+      <div class="joint-panel active" id="j-nuki" role="tabpanel" aria-labelledby="tab-nuki">
+        <div>
+          <p class="jp">貫 · Through rail</p>
+          <h3>Nuki</h3>
+          <p>The backbone of Hashira. A full-section rail passes through a mortise in the post. Friction and optional wedges resist racking; the joint can flex slightly under gusts instead of snapping fasteners.</p>
+          <dl class="joint-meta">
+            <div><dt>Use</dt><dd>Lower, mid, and top rails on every bay</dd></div>
+            <div><dt>Cut</dt><dd>Through-mortise square to face; rail as tenon</dd></div>
+            <div><dt>Lock</dt><dd>Hardwood wedges or komisen peg beside cheek</dd></div>
+            <div><dt>Weather</dt><dd>Slope top of rail 5–8°; seal end grain after fit</dd></div>
+          </dl>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" fill="#141814"/>
+            <rect x="170" y="30" width="70" height="240" fill="#8a5a36"/>
+            <rect x="40" y="130" width="340" height="36" fill="#6d845c"/>
+            <rect x="170" y="130" width="70" height="36" fill="#4e6a42"/>
+            <path d="M185 120 L185 176 M225 120 L225 176" stroke="#e8e2d4" stroke-width="1" opacity=".4"/>
+            <text x="24" y="280" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11">POST MORTISE · RAIL PASSES THROUGH</text>
+          </svg>
+          <figcaption>Nuki — shear becomes compression in the post cheeks.</figcaption>
+        </figure>
+      </div>
+
+      <div class="joint-panel" id="j-watari" role="tabpanel" aria-labelledby="tab-watari">
+        <div>
+          <p class="jp">渡り顎 · Passing jaw</p>
+          <h3>Watari-ago</h3>
+          <p>A refined nuki: stepped shoulders / haunches on the rail seat against the post so the bay cannot twist. Use on the mid-rail of wind-exposed runs and beside gates.</p>
+          <dl class="joint-meta">
+            <div><dt>Use</dt><dd>High-wind mid-rails; gate-adjacent bays</dd></div>
+            <div><dt>Cut</dt><dd>Through-mortise + cheek haunches</dd></div>
+            <div><dt>Lock</dt><dd>Friction first; peg only if tension appears</dd></div>
+            <div><dt>Weather</dt><dd>Haunches shed water away from mortise mouth</dd></div>
+          </dl>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" fill="#141814"/>
+            <rect x="175" y="30" width="70" height="240" fill="#8a5a36"/>
+            <path d="M40 140 H175 V120 H245 V140 H380 V176 H245 V196 H175 V176 H40 Z" fill="#6d845c"/>
+            <text x="24" y="280" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11">OFFSET SHOULDERS RESIST TWIST</text>
+          </svg>
+          <figcaption>Watari-ago — anti-racking shoulders for open weather frames.</figcaption>
+        </figure>
+      </div>
+
+      <div class="joint-panel" id="j-hozo" role="tabpanel" aria-labelledby="tab-hozo">
+        <div>
+          <p class="jp">ほぞ継ぎ · Mortise &amp; tenon</p>
+          <h3>Hozo</h3>
+          <p>Classic stopped or through tenon for caps, lintels, and gate frames. Pair with a draw-peg so the shoulder pulls tight as humidity swings.</p>
+          <dl class="joint-meta">
+            <div><dt>Use</dt><dd>Post caps, gate lintels, corner returns</dd></div>
+            <div><dt>Cut</dt><dd>Tenon ~⅓ timber thickness; shoulders square</dd></div>
+            <div><dt>Lock</dt><dd>Drawbored komisen (offset peg hole)</dd></div>
+            <div><dt>Weather</dt><dd>Through-hozo only where water can exit</dd></div>
+          </dl>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" fill="#141814"/>
+            <rect x="70" y="120" width="160" height="50" fill="#6d845c"/>
+            <rect x="230" y="60" width="60" height="180" fill="#8a5a36"/>
+            <rect x="210" y="130" width="40" height="30" fill="#4e6a42"/>
+            <circle cx="250" cy="145" r="6" fill="#e8e2d4"/>
+            <text x="24" y="280" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11">DRAWBORED PEG PULLS SHOULDER HOME</text>
+          </svg>
+          <figcaption>Hozo — precision seating for caps and gate frames.</figcaption>
+        </figure>
+      </div>
+
+      <div class="joint-panel" id="j-ne" role="tabpanel" aria-labelledby="tab-ne">
+        <div>
+          <p class="jp">根継ぎ · Foot splice</p>
+          <h3>Ne-tsugi</h3>
+          <p>Temple repair logic for rotten post butts. Cut away the failed base; splice a new treated or naturally durable stub with interlocking shoulders. Upper hashira and rails stay.</p>
+          <dl class="joint-meta">
+            <div><dt>Use</dt><dd>Posts soft at grade but sound above</dd></div>
+            <div><dt>Cut</dt><dd>Male/female scarf with stub tenons</dd></div>
+            <div><dt>Lock</dt><dd>Keys / pegs; optional kanawa collar in severe wind</dd></div>
+            <div><dt>Weather</dt><dd>Keep splice above splash; drain the footing</dd></div>
+          </dl>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" fill="#141814"/>
+            <path d="M180 30 H250 V140 L215 160 L180 140 Z" fill="#8a5a36"/>
+            <path d="M180 270 H250 V170 L215 150 L180 170 Z" fill="#6d845c"/>
+            <path d="M40 230 H380" stroke="#5d7a4e" stroke-dasharray="4 4"/>
+            <text x="24" y="295" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11">REPLACE THE BUTT · KEEP THE POST</text>
+          </svg>
+          <figcaption>Ne-tsugi — surgical repair instead of full teardown.</figcaption>
+        </figure>
+      </div>
+
+      <div class="joint-panel" id="j-ari" role="tabpanel" aria-labelledby="tab-ari">
+        <div>
+          <p class="jp">蟻掛け · Dovetail lap</p>
+          <h3>Ari-kake</h3>
+          <p>Half-lap dovetail for rail-to-rail meets and corner returns. Tightens under load; useful where a continuous nuki must turn a corner without metal plates.</p>
+          <dl class="joint-meta">
+            <div><dt>Use</dt><dd>Corners, rail splices in-plane</dd></div>
+            <div><dt>Cut</dt><dd>1:6 to 1:8 dovetail slope outdoors</dd></div>
+            <div><dt>Lock</dt><dd>Geometry; peg if lift is possible</dd></div>
+            <div><dt>Weather</dt><dd>Orient so water runs off the lap face</dd></div>
+          </dl>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" fill="#141814"/>
+            <path d="M40 120 H200 L240 150 L200 180 H40 Z" fill="#6d845c"/>
+            <path d="M380 120 H240 L200 150 L240 180 H380 Z" fill="#8a5a36"/>
+            <text x="24" y="280" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11">DOVETAIL LAP · TIGHTENS UNDER SHEAR</text>
+          </svg>
+          <figcaption>Ari-kake — corners without plates.</figcaption>
+        </figure>
+      </div>
+
+      <div class="joint-panel" id="j-kama" role="tabpanel" aria-labelledby="tab-kama">
+        <div>
+          <p class="jp">鎌継ぎ · Sickle scarf</p>
+          <h3>Kama-tsugi</h3>
+          <p>Graceful compression scarf for lengthening rails when a single stick will not span. The sickle hook resists withdrawal; keep scarfs over posts when possible.</p>
+          <dl class="joint-meta">
+            <div><dt>Use</dt><dd>Long runs; repair of broken rails</dd></div>
+            <div><dt>Cut</dt><dd>Matched sickle profiles; dry fit first</dd></div>
+            <div><dt>Lock</dt><dd>Compression + peg through the hook</dd></div>
+            <div><dt>Weather</dt><dd>Site scarfs under a post or flashing</dd></div>
+          </dl>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 420 300" aria-hidden="true">
+            <rect width="420" height="300" fill="#141814"/>
+            <path d="M30 130 H180 C210 130 210 170 240 170 H390 V190 H240 C200 190 200 110 160 110 H30 Z" fill="#6d845c"/>
+            <path d="M390 130 H240 C210 130 210 170 180 170 H30 V190 H180 C220 190 220 110 260 110 H390 Z" fill="#8a5a36" opacity=".85"/>
+            <text x="24" y="280" fill="#9aa394" font-family="IBM Plex Mono, monospace" font-size="11">SICKLE HOOK RESISTS PULL-APART</text>
+          </svg>
+          <figcaption>Kama-tsugi — lengthen rails without butt joints.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="build">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">05 — Build sequence</p>
+        <h2 class="display">Work bay by bay. Never open the whole line at once.</h2>
+        <p class="lead">Hand-cut joinery rewards patience. Stabilize two posts, thread one set of rails, clad later.</p>
+      </div>
+      <div class="phases">
+        <article class="phase reveal">
+          <div class="when">Phase 01</div>
+          <div>
+            <h3>Stabilize &amp; plumb</h3>
+            <p>Brace the run. Excavate failed butts. Set new footings below frost with gravel drainage, or sleeve posts in drained concrete with a bituminous break at grade. Splice with ne-tsugi where the upper post is still true.</p>
+            <ul>
+              <li>Target plumb within 1/8″ over post height</li>
+              <li>Establish one continuous string for rail heights</li>
+              <li>Photograph each post before cutting mortises</li>
+            </ul>
+          </div>
+        </article>
+        <article class="phase reveal">
+          <div class="when">Phase 02</div>
+          <div>
+            <h3>Lay out &amp; cut mortises</h3>
+            <p>Story-stick every bay. Mark through-mortises for lower, mid, and top rails. Bore waste, then chisel to the line. Keep cheeks parallel — a twisted mortise binds the nuki and splits under seasonal swell.</p>
+            <ul>
+              <li>Mortise height = rail thickness + 1/16″ seasonal ease</li>
+              <li>Width ≈ full rail width for classic nuki</li>
+              <li>Watari-ago haunches cut only after dry-fit of the straight pass</li>
+            </ul>
+          </div>
+        </article>
+        <article class="phase reveal">
+          <div class="when">Phase 03</div>
+          <div>
+            <h3>Thread rails &amp; lock</h3>
+            <p>Enter rails from the open end of the run or assemble posts onto a pre-threaded stick if resetting a bay. Drive wedges from the weather side so rain pushes them tighter. Drawbore gate frames.</p>
+            <ul>
+              <li>Three rails minimum on privacy / sail-like panels</li>
+              <li>Two rails acceptable on open board or bamboo-style screens</li>
+              <li>Peg diameter ≈ 3/8″–1/2″ hardwood (oak, black locust)</li>
+            </ul>
+          </div>
+        </article>
+        <article class="phase reveal">
+          <div class="when">Phase 04</div>
+          <div>
+            <h3>Weather the tops</h3>
+            <p>Cap every post with a hozo-tenoned lid or a simple pyramidal cut. Slope exposed rail tops. Oil end grain. Do not trap water with flat metal caps that cup against the post.</p>
+          </div>
+        </article>
+        <article class="phase reveal">
+          <div class="when">Phase 05</div>
+          <div>
+            <h3>Clad as rain screen</h3>
+            <p>Reuse sound boards or cut new verticals (itagaki) / horizontal armor (yoroigaki). Leave 1/4″–3/8″ gaps for airflow. Fasten cladding to rails only — never into post faces in a way that splits mortise cheeks.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="stock">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">06 — Stock &amp; finish</p>
+        <h2 class="display">Choose wood that wants to live outdoors</h2>
+        <p class="lead">Japanese practice favors hinoki and sugi. In North America, match the role — not the kanji — with local durable species.</p>
+      </div>
+      <div class="reveal" style="overflow-x:auto">
+        <table class="mat-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Preferred species</th>
+              <th>Section (start point)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hashira (posts)</td>
+              <td>Western red cedar, black locust, white oak, cypress</td>
+              <td>4×4 min · 6×6 wind / tall</td>
+              <td>Heartwood only at grade; treat or elevate butts</td>
+            </tr>
+            <tr>
+              <td>Nuki (rails)</td>
+              <td>Cedar, cypress, white oak, Douglas fir (clear)</td>
+              <td>2×4 to 3×4</td>
+              <td>Grain straight; avoid large knots at mortise</td>
+            </tr>
+            <tr>
+              <td>Pegs / wedges</td>
+              <td>Oak, black locust, hickory</td>
+              <td>⅜″–½″ pegs</td>
+              <td>Dry stock; slightly harder than frame</td>
+            </tr>
+            <tr>
+              <td>Cladding</td>
+              <td>Cedar boards, sugi-style bark panels, bamboo screen</td>
+              <td>⅝″–1″ boards</td>
+              <td>Optional yakisugi char for UV / insect defense</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cuts" style="margin-top:48px">
+        <article class="cut reveal">
+          <h3>Per bay kit</h3>
+          <p>2 posts (or 1 shared), 3 rails, 4–6 pegs/wedges, 1 post cap pair, cladding set.</p>
+          <p class="spec">Story-stick · mark once · cut the run</p>
+        </article>
+        <article class="cut reveal">
+          <h3>Tool kit</h3>
+          <p>Ryoba or panel saw, marking gauge, mortise chisels, mallet, brace/auger, square, sliding bevel, clamps.</p>
+          <p class="spec">No nail gun required for the frame</p>
+        </article>
+        <article class="cut reveal">
+          <h3>Finish</h3>
+          <p>Penetrating oil or pine tar on end grain; leave faces to silver, or light yakisugi on cladding only.</p>
+          <p class="spec">Re-oil end grain every 18–24 months</p>
+        </article>
+      </div>
+
+      <p class="note reveal">This guide is a carpentry design method for residential fences. Verify footing depth against local frost line and any HOA / permit rules before excavating. Structural spans above ~8 ft or retaining-grade loads need an engineer.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>HASHIRA · fence reinforcement by Japanese joinery</div>
+    <div>Hand-cut · through-rail · weather-first</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('on', window.scrollY > 24); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('on'); });
+  }
+
+  var tabs = document.querySelectorAll('.joint-tabs [role="tab"]');
+  var panels = document.querySelectorAll('.joint-panel');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      panels.forEach(function(p){ p.classList.remove('active'); });
+      tab.setAttribute('aria-selected','true');
+      var panel = document.getElementById(tab.getAttribute('aria-controls'));
+      if(panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>
