@@ -1,7 +1,12 @@
-# BEDROCK — Deploy and Activate
+# BEDROCK — Deploy and Activate (Backend)
 
 Runbook for bringing the Phase 0+1 backend online and pointing the PWA at it.
-Nothing here changes your existing local vault until the client ONLINE panel is wired.
+For Netlify + phone install + first-week data setup, use
+**`BEDROCK-Site-Deploy-and-Activate.md`** first. Full multi-phase design lives in
+**`BEDROCK-Backend-Architecture.md`**.
+
+Nothing here changes your existing local vault until you use Config → ONLINE.
+Always export a `.bdv` before the first sync.
 
 ## Prerequisites
 

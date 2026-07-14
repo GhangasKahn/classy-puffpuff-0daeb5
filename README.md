@@ -11,8 +11,19 @@ optional end-to-end-encrypted sync backend. **The app never moves money.**
 | `site/` | Deployable web root: cinematic landing (`index.html`) + production PWA (`app/`). Drop on Netlify/Cloudflare Pages as-is (`netlify.toml` included). |
 | `backend/` | Cloudflare Worker: WebAuthn passkey auth + zero-knowledge vault sync (D1 + KV). See its `README.md` and `ZERO-KNOWLEDGE-DOCTRINE.md`. Deploy per `docs/BEDROCK-Deploy-and-Activate.md`. |
 | `sim/` | Design-spec simulations. Placeholder for v6 visual-system experiments. |
-| `docs/` | Architecture, deploy runbook, and operating notes. |
+| `docs/` | Architecture, site + backend deploy runbooks, production checklist, ATELIER design protocol. |
 | `legacy/` | Earlier experiments kept for reference only. |
+
+### Docs map
+
+| Doc | Use when |
+|---|---|
+| `docs/BEDROCK-Site-Deploy-and-Activate.md` | Netlify + phone install + first-week setup |
+| `docs/BEDROCK-Deploy-and-Activate.md` | Cloudflare Worker Phase 0+1 go-live |
+| `docs/PRODUCTION-CHECKLIST.md` | Pre-prod gate |
+| `docs/BEDROCK-Backend-Architecture.md` | Full backend spec (Phases 0–6) |
+| `docs/ATELIER-generative-web-design-protocol.md` | Landing / marketing design standard |
+| `backend/PRIVACY.md` · `ZERO-KNOWLEDGE-DOCTRINE.md` | Privacy constitution |
 
 ## Principles (the short version)
 

@@ -34,6 +34,12 @@ jobs:
           test -f site/app/bedrock-api.js
           test -f site/app/service-worker.js
           test -f site/app/manifest.json
+          test -f site/app/icon-192.png
+          test -f site/app/icon-512.png
+          test -f docs/BEDROCK-Backend-Architecture.md
+          test -f docs/BEDROCK-Site-Deploy-and-Activate.md
+          test -f docs/ATELIER-generative-web-design-protocol.md
           # Client SDK must expose production surface
           grep -q "pushVault" site/app/bedrock-api.js
           grep -q "REGISTER PASSKEY" site/app/index.html
+          grep -q "icon-192.png" site/app/manifest.json

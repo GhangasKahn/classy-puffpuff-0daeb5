@@ -18,5 +18,8 @@ in `../backend/` — this front-end runs fully offline without it.
 ## Install on phone
 
 Open `/app/` → Add to Home Screen. Works offline after the first load.
+Icons: `icon-192.png` / `icon-512.png` (referenced by `manifest.json`).
+
+Full phone + first-week setup: `../docs/BEDROCK-Site-Deploy-and-Activate.md`.
 
 Research/educational tooling. **Not financial advice.** The app never moves money.
