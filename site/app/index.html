@@ -995,22 +995,24 @@ const KV = ({ k, v, c }) => (<div><div className="lbl" style={{ fontSize: 8.5 }}
 
 /* ============================ BTC CYCLE GAUGE ============================ */
 function BTCGauge() {
-  const last = new Date("2024-04-19"), next = new Date("2028-04-17"), now = new Date();
-  const days = Math.floor((now - last) / 864e5);
-  const cycle = Math.max(0, Math.min(1, (now - last) / (next - last)));
-  const toNext = Math.ceil((next - now) / 864e5);
-  const phase = cycle < .25 ? "POST-HALVING / ACCUMULATION" : cycle < .5 ? "MARKUP / EARLY BULL" : cycle < .7 ? "EUPHORIA RISK ZONE" : cycle < .85 ? "DISTRIBUTION RISK" : "LATE CYCLE / CAUTION";
-  const risk = cycle < .25 ? "LOW" : cycle < .5 ? "RISING" : cycle < .7 ? "ELEVATED" : "HIGH";
-  const rc = risk === "LOW" ? "var(--ok)" : risk === "RISING" ? "var(--warn)" : "var(--acc2)";
+  const Q = window.BedrockQuant;
+  const cyc = Q && Q.btcFourYearCycle ? Q.btcFourYearCycle() : null;
+  const cycle = cyc ? cyc.progress : 0;
+  const phase = cyc ? cyc.phase : "—";
+  const risk = cyc ? cyc.risk : "—";
+  const days = cyc ? cyc.daysSince : 0;
+  const toNext = cyc ? cyc.daysToNext : 0;
+  const next = cyc ? cyc.nextHalving : "2028-04-17";
+  const rc = risk === "LOW" ? "var(--ok)" : risk === "RISING" ? "var(--warn)" : risk === "ELEVATED" ? "var(--acc)" : "var(--acc2)";
   return (
     <div className="card" style={{ padding: 14, marginTop: 8 }}>
       <Ticks />
-      <div className="row"><div className="lbl">BTC CYCLE GAUGE</div><span className="chip" style={{ color: rc, borderColor: "currentColor" }}>{risk} RISK</span></div>
+      <div className="row"><div className="lbl">BTC 4-YEAR CYCLE</div><span className="chip" style={{ color: rc, borderColor: "currentColor" }}>{risk} RISK</span></div>
       <div className="big" style={{ fontSize: 17, marginTop: 8 }}>{phase}</div>
       <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10 }}><div style={{ height: "100%", width: (cycle * 100) + "%", background: rc, transition: ".6s" }} /></div>
       <div className="row" style={{ marginTop: 8 }}><div className="lbl mono-tab">{days}D SINCE HALVING</div><div className="lbl mono-tab">{(cycle * 100).toFixed(0)}% THROUGH CYCLE</div></div>
-      <div className="lbl" style={{ marginTop: 6 }}>NEXT HALVING ≈ APR 2028 · {toNext}D OUT · US ELECTION NOV 2028</div>
-      <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// the 4-year rhythm is a pattern, not a promise — returns diminish each cycle. size for the floor, not the moon.</div>
+      <div className="lbl" style={{ marginTop: 6 }}>NEXT HALVING ≈ {next} · {toNext}D OUT · pattern ≠ promise</div>
+      <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// 4-year rhythm is a historical pattern — returns diminish each cycle. size for the floor. full rotation desk lives in LAB → CYCLES.</div>
     </div>
   );
 }
@@ -2018,6 +2020,7 @@ function QuantLab() {
   const [rl, setRl] = useState(null);
   const [ml, setMl] = useState(null);
   const [stoch, setStoch] = useState(null);
+  const [cycles, setCycles] = useState(null);
   const [busy, setBusy] = useState("");
 
   const runBook = () => {
@@ -2087,6 +2090,14 @@ function QuantLab() {
       setBusy("");
     }, 20);
   };
+  const runCycles = () => {
+    if (!Q) return;
+    setBusy("cycles");
+    setTimeout(() => {
+      setCycles(Q.syntheticCycleMarket({ seed: seed + 7, days: 252 * 4 }));
+      setBusy("");
+    }, 20);
+  };
   const runStoch = () => {
     if (!Q) return;
     setStoch({
@@ -2101,7 +2112,7 @@ function QuantLab() {
 
   const pct = (x) => (x == null || !isFinite(x)) ? "—" : (x * 100).toFixed(1) + "%";
   const tabs = [
-    { k: "book", t: "BOOK" }, { k: "stoch", t: "STOCH" }, { k: "entropy", t: "ENTROPY" },
+    { k: "book", t: "BOOK" }, { k: "cycles", t: "CYCLES" }, { k: "stoch", t: "STOCH" }, { k: "entropy", t: "ENTROPY" },
     { k: "opt", t: "OPTIONS" }, { k: "chaos", t: "CHAOS" }, { k: "game", t: "GAME" },
     { k: "ml", t: "ML/RL" }, { k: "rotate", t: "ROTATE" },
   ];
@@ -2128,7 +2139,7 @@ function QuantLab() {
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
         <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.55 }}>
-          Hedge-fund primitives on-device: mean-variance · risk parity · fractional Kelly · CVaR · BS greeks · jump-diffusion · Heston · entropy / LLN · chaos · Nash games · capital rotation · OLS / logistic / MLP · UCB1 · Q-learning. Research/education — not advice, moves no money.
+          Hedge-fund primitives on-device: mean-variance · risk parity · Kelly · CVaR · BS greeks · 4y BTC cycle · mid/long periodogram · Engle–Granger cointegration · RS rotation vs BTC∧SPX · Heston · entropy/LLN · chaos · Nash · OLS/MLP · Q-learning. Research/education — not advice.
         </div>
         <div className="row" style={{ marginTop: 10, gap: 8 }}>
           <div style={{ flex: 1 }}>
@@ -2150,6 +2161,7 @@ function QuantLab() {
             if (t.k === "opt" && !opt) { runOpt(); runBond(); }
             if (t.k === "ml" && !rl) { runMl(); runRl(); }
             if (t.k === "stoch" && !stoch) runStoch();
+            if (t.k === "cycles" && !cycles) runCycles();
             if (t.k === "rotate" && !suite) runBook();
           }}>{t.t}</button>
         ))}
@@ -2181,6 +2193,109 @@ function QuantLab() {
             );
           })}
           <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>// demo 4-asset universe (equity/credit/commodity/hedge) with Cholesky-correlated returns. long-only MV / RP / max-Sharpe / ¼-Kelly.</div>
+        </>
+      )}
+
+      {tab === "cycles" && (
+        <>
+          <SectionLabel n="₿" t="4Y CRYPTO · MID/LONG CYCLES · COINTEGRATION" />
+          <button className="btn" onClick={runCycles}>{busy === "cycles" ? "SIMULATING…" : "RUN CYCLE DESK"}</button>
+          {cycles && <>
+            <div className="card" style={{ padding: 14, marginTop: 8 }}>
+              <Ticks />
+              <div className="row"><div className="lbl">BTC HALVING CYCLE</div><span className="chip" style={{ borderColor: "var(--acc)", color: "var(--acc)" }}>{cycles.cycle.risk}</span></div>
+              <div className="big" style={{ fontSize: 20, marginTop: 8 }}>{cycles.cycle.phase}</div>
+              <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10 }}>
+                <div style={{ height: "100%", width: (cycles.cycle.progress * 100) + "%", background: "var(--acc)" }} />
+              </div>
+              <div className="row" style={{ marginTop: 8 }}>
+                <div className="lbl">{cycles.cycle.daysSince}D SINCE {cycles.cycle.lastHalving}</div>
+                <div className="lbl">{cycles.cycle.daysToNext}D → {cycles.cycle.nextHalving}</div>
+              </div>
+            </div>
+
+            <SectionLabel n="∿" t="BTC MID / LONG CYCLE SPECTRUM" />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              <Stat k="TREND (50/200)" v={cycles.btcCycles.trend} color="var(--acc)" />
+              <Stat k="1Y TRAIL" v={cycles.btcCycles.trailing1y != null ? pct(cycles.btcCycles.trailing1y) : "—"} />
+            </div>
+            {(cycles.btcCycles.dominantCycles || []).slice(0, 4).map((d, i) => (
+              <div key={i} className="card" style={{ padding: "10px 12px", marginTop: 6 }}>
+                <div className="row">
+                  <div className="lbl">{d.band}</div>
+                  <div className="mono-tab" style={{ fontSize: 12 }}>{d.periodDays.toFixed(0)}D · {(d.periodYears).toFixed(2)}Y</div>
+                </div>
+              </div>
+            ))}
+
+            <SectionLabel n="⊥" t="RELATIVE STRENGTH VS BTC / SPX" />
+            {Object.keys(cycles.rs).map(k => {
+              const r = cycles.rs[k];
+              return (
+                <div key={k} className="card" style={{ padding: 12, marginTop: 6 }}>
+                  <Ticks />
+                  <div className="row">
+                    <div className="lbl">{k.replace("_", " / ")}</div>
+                    <div className="chip" style={{ borderColor: r.outperforming ? "var(--ok)" : "var(--acc2)", color: r.outperforming ? "var(--ok)" : "var(--acc2)" }}>{r.outperforming ? "LEADING" : "LAGGING"}</div>
+                  </div>
+                  <div className="big mono-tab" style={{ fontSize: 22, marginTop: 6 }}>{r.latest.toFixed(3)}×</div>
+                  {spark(r.path.filter(function (_, i) { return i % 8 === 0; }), 300, 40, r.outperforming ? "var(--ok)" : "var(--acc2)")}
+                </div>
+              );
+            })}
+
+            <SectionLabel n="∫" t="COINTEGRATION (ENGLE–GRANGER)" />
+            {Object.keys(cycles.pairs).map(k => {
+              const p = cycles.pairs[k];
+              return (
+                <div key={k} className="card" style={{ padding: 12, marginTop: 6 }}>
+                  <Ticks />
+                  <div className="row">
+                    <div className="lbl">{k.replace("_", " ~ ")}</div>
+                    <div className="chip" style={{ borderColor: p.cointegrated5 ? "var(--ok)" : p.cointegrated10 ? "var(--warn)" : "var(--line2)", color: p.cointegrated5 ? "var(--ok)" : p.cointegrated10 ? "var(--warn)" : "var(--dim)" }}>
+                      {p.cointegrated5 ? "COINT 5%" : p.cointegrated10 ? "COINT 10%" : "NO COINT"}
+                    </div>
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 8 }}>
+                    <Stat k="β HEDGE" v={p.hedgeRatio.toFixed(3)} />
+                    <Stat k="ADF" v={p.adfStat.toFixed(2)} />
+                    <Stat k="Z-SCORE" v={p.zscore.toFixed(2)} color={Math.abs(p.zscore) > 1.5 ? "var(--acc)" : "var(--txt)"} />
+                  </div>
+                  {p.residualHalfLife != null && <div className="lbl" style={{ marginTop: 6 }}>residual half-life ≈ {p.residualHalfLife.toFixed(0)}D · R² {p.r2.toFixed(3)}</div>}
+                </div>
+              );
+            })}
+
+            <SectionLabel n="↻" t="ROTATE TO ASSETS BEATING BTC ∧ SPX" />
+            <div className="card" style={{ padding: 14, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">LEADERS</div>
+              <div style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap" }}>
+                {(cycles.rotation.leaders.length ? cycles.rotation.leaders : ["(none beating both — using top scores)"]).map(n => (
+                  <span key={n} className="chip" style={{ borderColor: "var(--acc)", color: "var(--acc)" }}>{n}</span>
+                ))}
+              </div>
+              <div className="lbl" style={{ marginTop: 12 }}>CYCLE-AWARE WEIGHTS · ALT BUDGET {pct(cycles.rotation.altBudget)}</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+                {Object.keys(cycles.rotation.weights).map(k => (
+                  <Stat key={k} k={k} v={pct(cycles.rotation.weights[k])} color={k === "CASH" || k === "BTC" ? "var(--warn)" : "var(--ok)"} />
+                ))}
+              </div>
+            </div>
+            {cycles.rotation.ranking.map(r => (
+              <div key={r.name} className="card" style={{ padding: "10px 12px", marginTop: 6 }}>
+                <div className="row">
+                  <div style={{ fontWeight: 700, fontSize: 13 }}>{r.name}</div>
+                  <div className="lbl">score {r.score.toFixed(3)}</div>
+                </div>
+                <div className="row" style={{ marginTop: 4 }}>
+                  <div className="lbl">vs BTC {r.vsBtc.toFixed(3)}× {r.beatBtc ? "▲" : "▼"}</div>
+                  <div className="lbl">vs SPX {r.vsSpx.toFixed(3)}× {r.beatSpx ? "▲" : "▼"}</div>
+                </div>
+              </div>
+            ))}
+            <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>{cycles.rotation.note}</div>
+          </>}
         </>
       )}
 

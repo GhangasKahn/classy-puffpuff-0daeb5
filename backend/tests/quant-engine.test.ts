@@ -93,4 +93,42 @@ describe("BedrockQuant god-tier stack", () => {
     expect(Q.effectiveBets(w)).toBeLessThanOrEqual(3);
     expect(Q.effectiveBets([1, 0, 0])).toBeCloseTo(1, 5);
   });
+
+  it("BTC 4y cycle returns phase and progress in [0,1]", () => {
+    const c = Q.btcFourYearCycle(new Date("2025-06-01"));
+    expect(c.progress).toBeGreaterThan(0);
+    expect(c.progress).toBeLessThan(1);
+    expect(c.phase.length).toBeGreaterThan(5);
+    expect(c.daysSince).toBeGreaterThan(0);
+  });
+
+  it("Engle-Granger detects cointegrated synthetic pair", () => {
+    const rng = Q.makeRng(9);
+    const x = [0], y = [0];
+    for (let i = 1; i < 400; i++) {
+      x.push(x[i - 1] + 0.01 * Q.gauss(rng));
+      y.push(0.5 + 1.2 * x[i] + 0.02 * Q.gauss(rng));
+    }
+    const eg = Q.engleGranger(y, x);
+    expect(eg.hedgeRatio).toBeGreaterThan(1.0);
+    expect(eg.hedgeRatio).toBeLessThan(1.4);
+    expect(eg.cointegrated10 || eg.adfStat < -2.5).toBe(true);
+  });
+
+  it("cycle desk rotates with weights summing ~1", () => {
+    const m = Q.syntheticCycleMarket({ seed: 3, days: 252 * 3 });
+    const w = m.rotation.weights;
+    const sum = Object.values(w).reduce((a, b) => a + b, 0);
+    expect(sum).toBeCloseTo(1, 5);
+    expect(m.rotation.ranking.length).toBeGreaterThan(0);
+    expect(m.btcCycles.dominantCycles.length).toBeGreaterThan(0);
+    expect(m.rs.ETH_BTC.path.length).toBeGreaterThan(10);
+  });
+
+  it("relative strength latest is positive", () => {
+    const a = [100, 110, 120, 130], b = [100, 105, 110, 115];
+    const rs = Q.relativeStrength(a, b);
+    expect(rs.outperforming).toBe(true);
+    expect(rs.latest).toBeGreaterThan(1);
+  });
 });

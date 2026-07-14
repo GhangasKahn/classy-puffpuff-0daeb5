@@ -815,9 +815,245 @@
     return { Q: Q, policy: policy, log: log };
   }
 
+  /* ===================== 4Y CRYPTO · CYCLES · COINTEGRATION · RS ROTATION ===================== */
+
+  var HALVINGS = [
+    { date: "2012-11-28", block: 210000 },
+    { date: "2016-07-09", block: 420000 },
+    { date: "2020-05-11", block: 630000 },
+    { date: "2024-04-19", block: 840000 },
+    { date: "2028-04-17", block: 1050000, estimated: true },
+  ];
+
+  function btcFourYearCycle(asOf) {
+    asOf = asOf ? new Date(asOf) : new Date();
+    var past = HALVINGS.filter(function (h) { return new Date(h.date) <= asOf; });
+    var future = HALVINGS.filter(function (h) { return new Date(h.date) > asOf; });
+    var last = past[past.length - 1] || HALVINGS[0];
+    var next = future[0] || HALVINGS[HALVINGS.length - 1];
+    var t0 = new Date(last.date).getTime();
+    var t1 = new Date(next.date).getTime();
+    var now = asOf.getTime();
+    var cycle = Math.max(0, Math.min(1, (now - t0) / (t1 - t0)));
+    var daysSince = Math.floor((now - t0) / 864e5);
+    var daysToNext = Math.ceil((t1 - now) / 864e5);
+    var phase, risk;
+    if (cycle < 0.2) { phase = "POST-HALVING / ACCUMULATION"; risk = "LOW"; }
+    else if (cycle < 0.45) { phase = "MARKUP / EARLY–MID BULL"; risk = "RISING"; }
+    else if (cycle < 0.65) { phase = "EUPHORIA / SPECULATIVE"; risk = "ELEVATED"; }
+    else if (cycle < 0.82) { phase = "DISTRIBUTION RISK"; risk = "HIGH"; }
+    else { phase = "LATE CYCLE / PRE-HALVING CAUTION"; risk = "CRITICAL"; }
+    return {
+      lastHalving: last.date, nextHalving: next.date, nextEstimated: !!next.estimated,
+      daysSince: daysSince, daysToNext: daysToNext, progress: cycle,
+      phase: phase, risk: risk, cycleIndex: past.length, halvings: HALVINGS,
+    };
+  }
+
+  function logReturns(prices) {
+    var r = [];
+    for (var i = 1; i < prices.length; i++) r.push(Math.log(prices[i] / prices[i - 1]));
+    return r;
+  }
+
+  function relativeStrength(assetPx, benchPx) {
+    var n = Math.min(assetPx.length, benchPx.length);
+    var rs = [], base = assetPx[0] / benchPx[0];
+    for (var i = 0; i < n; i++) rs.push(assetPx[i] / benchPx[i] / base);
+    var roll = [], win = Math.min(63, Math.floor(n / 4));
+    for (var t = win; t < n; t++) {
+      var a0 = assetPx[t - win], b0 = benchPx[t - win];
+      roll.push(assetPx[t] / benchPx[t] / (a0 / b0));
+    }
+    return {
+      path: rs, latest: rs[rs.length - 1], rolling63: roll,
+      outperforming: rs[rs.length - 1] > 1,
+      trailingReturnSpread: Math.log(rs[rs.length - 1]),
+    };
+  }
+
+  function periodogram(series, maxLag) {
+    var n = series.length, m = mean(series);
+    var x = series.map(function (v) { return v - m; });
+    maxLag = Math.min(maxLag || Math.floor(n / 2), Math.floor(n / 2));
+    var peaks = [];
+    for (var k = 2; k < maxLag; k++) {
+      var re = 0, im = 0, w = (2 * Math.PI * k) / n;
+      for (var t = 0; t < n; t++) { re += x[t] * Math.cos(w * t); im -= x[t] * Math.sin(w * t); }
+      peaks.push({ k: k, period: n / k, power: (re * re + im * im) / n });
+    }
+    peaks.sort(function (a, b) { return b.power - a.power; });
+    return { top: peaks.slice(0, 5), all: peaks };
+  }
+
+  function acf(series, lag) {
+    var m = mean(series), n = series.length, num = 0, den = 0;
+    for (var i = 0; i < n; i++) den += (series[i] - m) * (series[i] - m);
+    for (var t = lag; t < n; t++) num += (series[t] - m) * (series[t - lag] - m);
+    return den > 0 ? num / den : 0;
+  }
+
+  function midLongCycleAnalysis(prices, opts) {
+    opts = opts || {};
+    var rets = logReturns(prices);
+    var logP = prices.map(function (p) { return Math.log(p); });
+    var pg = periodogram(logP, opts.maxK || 80);
+    var top = pg.top.map(function (p) {
+      return {
+        periodDays: p.period, periodYears: p.period / 252, power: p.power,
+        band: p.period < 63 ? "SHORT" : p.period < 126 ? "MID (~quarter)" : p.period < 252 ? "MID–LONG (~year)" : p.period < 504 ? "LONG (~2y)" : "MACRO (multi-year)",
+      };
+    });
+    var fast = opts.fast || 50, slow = opts.slow || 200;
+    function sma(arr, w) {
+      var out = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (i + 1 < w) { out.push(null); continue; }
+        var s = 0; for (var j = i - w + 1; j <= i; j++) s += arr[j];
+        out.push(s / w);
+      }
+      return out;
+    }
+    var f = sma(prices, fast), s = sma(prices, slow);
+    var lastF = f[f.length - 1], lastS = s[s.length - 1];
+    var trend = lastF != null && lastS != null ? (lastF > lastS ? "UPTREND" : "DOWNTREND") : "INSUFFICIENT";
+    var y = [], x = [];
+    for (var i = 1; i < rets.length; i++) { y.push(rets[i]); x.push(rets[i - 1]); }
+    var ar1 = 0, den = 0;
+    for (var k = 0; k < y.length; k++) { ar1 += y[k] * x[k]; den += x[k] * x[k]; }
+    ar1 = den > 0 ? ar1 / den : 0;
+    var halfLife = ar1 < 1 && ar1 > 0 ? Math.log(0.5) / Math.log(ar1) : null;
+    return {
+      dominantCycles: top, trend: trend, smaFast: lastF, smaSlow: lastS,
+      acf20: acf(rets, 20), acf63: acf(rets, 63), returnAr1: ar1, halfLifeDays: halfLife,
+      trailing1y: prices.length > 252 ? prices[prices.length - 1] / prices[prices.length - 252] - 1 : null,
+      trailing3y: prices.length > 756 ? prices[prices.length - 1] / prices[prices.length - 756] - 1 : null,
+    };
+  }
+
+  function engleGranger(y, x) {
+    var n = Math.min(y.length, x.length);
+    var Y = y.slice(0, n), X = x.slice(0, n);
+    var Xm = [];
+    for (var i = 0; i < n; i++) Xm.push([1, X[i]]);
+    var fit = ols(Xm, Y);
+    if (!fit) return { cointegrated: false, error: "ols_failed" };
+    var alpha = fit.beta[0], beta = fit.beta[1];
+    var resid = [];
+    for (var t = 0; t < n; t++) resid.push(Y[t] - alpha - beta * X[t]);
+    var dY = [], lag = [];
+    for (var u = 1; u < resid.length; u++) { dY.push(resid[u] - resid[u - 1]); lag.push(resid[u - 1]); }
+    var num = 0, den = 0, sse = 0;
+    for (var j = 0; j < dY.length; j++) { num += dY[j] * lag[j]; den += lag[j] * lag[j]; }
+    var gamma = den > 0 ? num / den : 0;
+    for (var k = 0; k < dY.length; k++) { var e = dY[k] - gamma * lag[k]; sse += e * e; }
+    var se = Math.sqrt(sse / Math.max(1, dY.length - 1) / Math.max(den, 1e-18));
+    var adfStat = se > 0 ? gamma / se : 0;
+    var a = 0, d = 0;
+    for (var i2 = 1; i2 < resid.length; i2++) { a += resid[i2] * resid[i2 - 1]; d += resid[i2 - 1] * resid[i2 - 1]; }
+    var phi = d > 0 ? a / d : 0;
+    var m = mean(resid), s = std(resid);
+    return {
+      alpha: alpha, hedgeRatio: beta, adfStat: adfStat,
+      cointegrated5: adfStat < -3.37, cointegrated10: adfStat < -3.04,
+      r2: fit.r2, residual: resid,
+      residualHalfLife: phi > 0 && phi < 1 ? Math.log(0.5) / Math.log(phi) : null,
+      zscore: s > 0 ? (resid[resid.length - 1] - m) / s : 0,
+    };
+  }
+
+  function beatBtcSpxRotation(book, opts) {
+    opts = opts || {};
+    var names = book.names, prices = book.prices;
+    var btc = prices.BTC || prices.btc, spx = prices.SPX || prices.spx;
+    if (!btc || !spx) throw new Error("need_btc_and_spx");
+    var cycle = btcFourYearCycle(opts.asOf);
+    var rows = [];
+    for (var i = 0; i < names.length; i++) {
+      var nm = names[i];
+      if (nm === "BTC" || nm === "SPX") continue;
+      var px = prices[nm];
+      if (!px) continue;
+      var vsBtc = relativeStrength(px, btc);
+      var vsSpx = relativeStrength(px, spx);
+      var egBtc = engleGranger(px.map(Math.log), btc.map(Math.log));
+      var egSpx = engleGranger(px.map(Math.log), spx.map(Math.log));
+      var score = 0.45 * vsBtc.trailingReturnSpread + 0.45 * vsSpx.trailingReturnSpread;
+      var residualEdge = 0;
+      if (egBtc.cointegrated10 && egBtc.zscore < -1.5) residualEdge += 0.05;
+      if (egSpx.cointegrated10 && egSpx.zscore < -1.5) residualEdge += 0.03;
+      score += residualEdge;
+      rows.push({
+        name: nm, score: score, vsBtc: vsBtc.latest, vsSpx: vsSpx.latest,
+        beatBtc: vsBtc.outperforming, beatSpx: vsSpx.outperforming,
+        beatBoth: vsBtc.outperforming && vsSpx.outperforming,
+        cointBtc: egBtc, cointSpx: egSpx, residualEdge: residualEdge,
+      });
+    }
+    rows.sort(function (a, b) { return b.score - a.score; });
+    var leaders = rows.filter(function (r) { return r.beatBoth; });
+    var pool = leaders.length ? leaders : rows.slice(0, Math.min(3, rows.length));
+    var maxS = pool[0] ? pool[0].score : 0;
+    var exps = pool.map(function (r) { return Math.exp((r.score - maxS) * 8); });
+    var z = exps.reduce(function (a, b) { return a + b; }, 0);
+    var weights = {};
+    var altBudget = cycle.risk === "LOW" || cycle.risk === "RISING" ? 0.55 : cycle.risk === "ELEVATED" ? 0.4 : 0.25;
+    var btcSleeve = cycle.risk === "CRITICAL" || cycle.risk === "HIGH" ? 0.35 : 0.25;
+    var spxSleeve = 0.2;
+    var cashSleeve = Math.max(0.05, 1 - altBudget - btcSleeve - spxSleeve);
+    for (var p = 0; p < pool.length; p++) weights[pool[p].name] = (exps[p] / z) * altBudget;
+    weights.BTC = btcSleeve; weights.SPX = spxSleeve; weights.CASH = cashSleeve;
+    return {
+      cycle: cycle, ranking: rows,
+      leaders: leaders.map(function (r) { return r.name; }),
+      weights: weights, altBudget: altBudget,
+      note: "Rotate into names beating BOTH BTC and SPX on cumulative RS. Cointegration residual z-score can add a mean-reversion edge. Cycle risk caps alt budget. Pattern research — not a promise.",
+    };
+  }
+
+  function syntheticCycleMarket(opts) {
+    opts = opts || {};
+    var rng = makeRng(opts.seed || 77);
+    var days = opts.days || 252 * 4;
+    var cycle = btcFourYearCycle();
+    var btc = [30000], spx = [4000];
+    var alts = { ETH: [2000], SOL: [40], GOLD: [1900], QQQ: [350] };
+    for (var t = 1; t <= days; t++) {
+      var phase = (2 * Math.PI * t) / (252 * 4);
+      var btcDrift = 0.0002 + 0.0006 * Math.sin(phase - 0.3);
+      var btcVol = 0.03 + 0.01 * Math.sin(phase);
+      btc.push(btc[t - 1] * Math.exp(btcDrift - 0.5 * btcVol * btcVol + btcVol * gauss(rng)));
+      var spxDrift = 0.0003 + 0.00015 * Math.sin(phase * 0.5);
+      spx.push(spx[t - 1] * Math.exp(spxDrift - 0.5 * 0.01 * 0.01 + 0.01 * gauss(rng)));
+      var ethAlpha = 0.00015 * Math.cos(phase);
+      alts.ETH.push(alts.ETH[t - 1] * Math.exp(ethAlpha + 1.1 * Math.log(btc[t] / btc[t - 1]) * 0.85 + 0.035 * gauss(rng) - 0.5 * 0.035 * 0.035));
+      var solAlpha = 0.00025 * Math.sin(phase + 0.5);
+      alts.SOL.push(alts.SOL[t - 1] * Math.exp(solAlpha + 1.4 * Math.log(btc[t] / btc[t - 1]) * 0.7 + 0.05 * gauss(rng)));
+      alts.GOLD.push(alts.GOLD[t - 1] * Math.exp(0.0001 + 0.008 * gauss(rng)));
+      alts.QQQ.push(alts.QQQ[t - 1] * Math.exp(0.00005 + 1.15 * Math.log(spx[t] / spx[t - 1]) * 0.9 + 0.012 * gauss(rng)));
+    }
+    var prices = { BTC: btc, SPX: spx, ETH: alts.ETH, SOL: alts.SOL, GOLD: alts.GOLD, QQQ: alts.QQQ };
+    var names = ["ETH", "SOL", "GOLD", "QQQ"];
+    return {
+      prices: prices, names: names, cycle: cycle,
+      btcCycles: midLongCycleAnalysis(btc),
+      rotation: beatBtcSpxRotation({ names: names, prices: prices }),
+      pairs: {
+        ETH_BTC: engleGranger(alts.ETH.map(Math.log), btc.map(Math.log)),
+        QQQ_SPX: engleGranger(alts.QQQ.map(Math.log), spx.map(Math.log)),
+        SOL_BTC: engleGranger(alts.SOL.map(Math.log), btc.map(Math.log)),
+      },
+      rs: {
+        ETH_BTC: relativeStrength(alts.ETH, btc),
+        SOL_BTC: relativeStrength(alts.SOL, btc),
+        ETH_SPX: relativeStrength(alts.ETH, spx),
+        QQQ_SPX: relativeStrength(alts.QQQ, spx),
+      },
+    };
+  }
+
   /* ===================== demo market factory ===================== */
   function demoUniverse(seed) {
-    // 4 assets: Equity, Credit, Commodity, Hedge (long-vol-ish)
     var mu = [0.09, 0.045, 0.06, 0.02];
     var vols = [0.18, 0.06, 0.22, 0.28];
     var corr = [
@@ -826,19 +1062,10 @@
       [0.25, 0.1, 1, -0.05],
       [-0.35, -0.15, -0.05, 1],
     ];
-    var n = 4;
-    var S = matZeros(n, n);
-    for (var i = 0; i < n; i++)
-      for (var j = 0; j < n; j++) S[i][j] = corr[i][j] * vols[i] * vols[j];
-    var rets = simulateReturns(mu, S, 504, seed || 21); // ~2y daily
-    return {
-      names: ["EQUITY", "CREDIT", "COMMODITY", "HEDGE"],
-      mu: mu,
-      vols: vols,
-      S: S,
-      corr: corr,
-      returns: rets,
-    };
+    var n = 4, S = matZeros(n, n);
+    for (var i = 0; i < n; i++) for (var j = 0; j < n; j++) S[i][j] = corr[i][j] * vols[i] * vols[j];
+    var rets = simulateReturns(mu, S, 504, seed || 21);
+    return { names: ["EQUITY", "CREDIT", "COMMODITY", "HEDGE"], mu: mu, vols: vols, S: S, corr: corr, returns: rets };
   }
 
   function portfolioSuite(seed) {
@@ -848,92 +1075,51 @@
     var wRp = riskParity(u.S);
     var wMs = maxSharpe(u.mu, u.S, 0.02, true);
     var wKel = kellyWeights(u.mu, u.S, 0.25);
-    var wKelN = normalizeWeights(wKel.map(function (x) {
-      return Math.max(0, x);
-    }));
+    var wKelN = normalizeWeights(wKel.map(function (x) { return Math.max(0, x); }));
     function metrics(w) {
-      var pr = portReturn(w, u.mu);
-      var pv = portVar(w, u.S);
-      var pathR = [];
+      var pr = portReturn(w, u.mu), pv = portVar(w, u.S), pathR = [];
       for (var t = 0; t < u.returns[0].length; t++) {
-        var r = 0;
-        for (var i = 0; i < w.length; i++) r += w[i] * u.returns[i][t];
+        var r = 0; for (var i = 0; i < w.length; i++) r += w[i] * u.returns[i][t];
         pathR.push(r);
       }
       var es = cvar(pathR, 0.05);
       return {
-        weights: w,
-        mu: pr,
-        vol: Math.sqrt(pv),
-        sharpe: sharpe(w, u.mu, u.S, 0.02),
-        entropy: shannonEntropy(w),
-        effectiveBets: effectiveBets(w),
-        var5: es.var,
-        cvar5: es.cvar,
+        weights: w, mu: pr, vol: Math.sqrt(pv), sharpe: sharpe(w, u.mu, u.S, 0.02),
+        entropy: shannonEntropy(w), effectiveBets: effectiveBets(w), var5: es.var, cvar5: es.cvar,
       };
     }
     return {
       universe: u,
       books: {
-        equityHeavy: metrics(wEq),
-        minVar: metrics(wMv),
-        riskParity: metrics(wRp),
-        maxSharpe: metrics(wMs),
-        fractionalKelly: metrics(wKelN),
+        equityHeavy: metrics(wEq), minVar: metrics(wMv), riskParity: metrics(wRp),
+        maxSharpe: metrics(wMs), fractionalKelly: metrics(wKelN),
       },
       rotation: capitalRotation({
         trailingReturn: mean(u.returns[0].slice(-63)),
         trailingVol: std(u.returns[0].slice(-63)) * Math.sqrt(252),
       }),
+      cycleMarket: syntheticCycleMarket({ seed: (seed || 1) + 99, days: 252 * 4 }),
     };
   }
 
   root.BedrockQuant = {
-    makeRng: makeRng,
-    gauss: gauss,
-    studentT: studentT,
-    mean: mean,
-    std: std,
-    variance: variance,
-    percentile: percentile,
-    covMatrix: covMatrix,
-    corrMatrix: corrMatrix,
-    shannonEntropy: shannonEntropy,
-    renyiEntropy: renyiEntropy,
-    effectiveBets: effectiveBets,
-    klDivergence: klDivergence,
-    llnExperiment: llnExperiment,
-    gbmPath: gbmPath,
-    mertonJumpPath: mertonJumpPath,
-    ouPath: ouPath,
-    hestonPath: hestonPath,
-    normalizeWeights: normalizeWeights,
-    portReturn: portReturn,
-    portVar: portVar,
-    sharpe: sharpe,
-    maxSharpe: maxSharpe,
-    minVariance: minVariance,
-    riskParity: riskParity,
-    kellyWeights: kellyWeights,
-    cvar: cvar,
-    simulateReturns: simulateReturns,
-    blackScholes: blackScholes,
-    deltaHedgeLeg: deltaHedgeLeg,
-    bondMetrics: bondMetrics,
-    logisticMap: logisticMap,
-    lyapunovLogistic: lyapunovLogistic,
-    lorenz: lorenz,
-    mixedNash2x2: mixedNash2x2,
-    hawkDove: hawkDove,
-    allocationGame: allocationGame,
-    capitalRotation: capitalRotation,
-    ols: ols,
-    logisticGD: logisticGD,
-    mlpTrain: mlpTrain,
-    ucb1: ucb1,
-    qLearnCapital: qLearnCapital,
-    demoUniverse: demoUniverse,
-    portfolioSuite: portfolioSuite,
-    version: "1.0.0-godtier",
+    makeRng: makeRng, gauss: gauss, studentT: studentT,
+    mean: mean, std: std, variance: variance, percentile: percentile,
+    covMatrix: covMatrix, corrMatrix: corrMatrix,
+    shannonEntropy: shannonEntropy, renyiEntropy: renyiEntropy,
+    effectiveBets: effectiveBets, klDivergence: klDivergence, llnExperiment: llnExperiment,
+    gbmPath: gbmPath, mertonJumpPath: mertonJumpPath, ouPath: ouPath, hestonPath: hestonPath,
+    normalizeWeights: normalizeWeights, portReturn: portReturn, portVar: portVar, sharpe: sharpe,
+    maxSharpe: maxSharpe, minVariance: minVariance, riskParity: riskParity,
+    kellyWeights: kellyWeights, cvar: cvar, simulateReturns: simulateReturns,
+    blackScholes: blackScholes, deltaHedgeLeg: deltaHedgeLeg, bondMetrics: bondMetrics,
+    logisticMap: logisticMap, lyapunovLogistic: lyapunovLogistic, lorenz: lorenz,
+    mixedNash2x2: mixedNash2x2, hawkDove: hawkDove, allocationGame: allocationGame,
+    capitalRotation: capitalRotation, ols: ols, logisticGD: logisticGD, mlpTrain: mlpTrain,
+    ucb1: ucb1, qLearnCapital: qLearnCapital, demoUniverse: demoUniverse, portfolioSuite: portfolioSuite,
+    btcFourYearCycle: btcFourYearCycle, relativeStrength: relativeStrength, periodogram: periodogram,
+    midLongCycleAnalysis: midLongCycleAnalysis, engleGranger: engleGranger,
+    beatBtcSpxRotation: beatBtcSpxRotation, syntheticCycleMarket: syntheticCycleMarket,
+    logReturns: logReturns, version: "1.1.0-godtier-cycles",
   };
 })(typeof window !== "undefined" ? window : globalThis);

@@ -13,7 +13,11 @@ Research/education mathematics running **on-device** in `site/app/quant-engine.j
 | **Entropy / LLN** | Shannon + Rényi entropy, KL divergence, LLN running-mean experiment + Chebyshev sample-size bound |
 | **Chaos** | Logistic map, Lyapunov exponent, Lorenz attractor |
 | **Game theory** | 2×2 mixed Nash, Hawk–Dove ESS, Aggressive/Defensive vs Bull/Bear |
-| **Capital rotation** | Regime heuristic → Risk-On / Neutral / Risk-Off sleeve weights (hedge = convexity budget) |
+| **Capital rotation** | Regime heuristic sleeves + **beat BTC∧SPX** rotation (RS score, cycle-capped alt budget) |
+| **4y crypto cycle** | Halving calendar, phase/risk, progress since last / to next |
+| **Mid/long cycles** | DFT periodogram bands, 50/200 trend, ACF, AR(1) half-life |
+| **Cointegration** | Engle–Granger hedge β, ADF residual test, z-score, residual half-life |
+| **Relative strength** | Cumulative + rolling RS vs BTC and SPX |
 | **ML / DL** | OLS, L2-logistic GD, 1-hidden-layer tanh MLP |
 | **RL** | UCB1 multi-armed bandit, tabular Q-learning capital posture MDP |
 
@@ -21,7 +25,9 @@ Research/education mathematics running **on-device** in `site/app/quant-engine.j
 
 1. Open the PWA → **LAB**
 2. Set a seed → **Rebuild Book** for portfolio suite
-3. Flip sub-tabs: BOOK · STOCH · ENTROPY · OPTIONS · CHAOS · GAME · ML/RL · ROTATE
+3. Flip sub-tabs: BOOK · **CYCLES** · STOCH · ENTROPY · OPTIONS · CHAOS · GAME · ML/RL · ROTATE
+
+**CYCLES desk:** 4-year BTC halving phase → mid/long periodogram on BTC → RS vs BTC/SPX → Engle–Granger pairs → weights into names beating both benchmarks (alt budget shrinks late-cycle).
 
 ## Tests
 
