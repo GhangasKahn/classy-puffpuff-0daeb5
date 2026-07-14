@@ -1,15 +1,16 @@
 // BEDROCK service worker — network-first for the app shell so new deploys
 // appear immediately; cache-first for heavy CDN assets; offline fallback.
-const CACHE = "bedrock-v3";
+const CACHE = "bedrock-v7";
 const CDN = [
   "https://unpkg.com/react@18.2.0/umd/react.production.min.js",
   "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js",
-  "https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"
+  "https://unpkg.com/@babel/standalone@7.24.7/babel.min.js",
+  "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap"
 ];
 self.addEventListener("install", function (e) {
   e.waitUntil((async function () {
     const c = await caches.open(CACHE);
-    try { await c.addAll(["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"]); } catch (err) {}
+    try { await c.addAll(["./", "./index.html", "./manifest.json", "./bedrock-api.js", "./quant-engine.js", "./hermes-agents.js", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./favicon-32.png"]); } catch (err) {}
     for (const u of CDN) { try { await c.add(u); } catch (err) {} }
     self.skipWaiting();
   })());

@@ -3,30 +3,36 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0A0A0A" />
+<meta name="theme-color" content="#F7F7F5" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="BEDROCK" />
 <link rel="manifest" href="manifest.json" />
-<link rel="apple-touch-icon" href="icon-192.png" />
-<title>BEDROCK — Capital OS</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+<title>BEDROCK — The Unreliable Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg,#0A0A0A);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:var(--bg,#F7F7F5);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
   #root{min-height:100vh;min-height:100dvh}
-  .boot{min-height:100vh;display:grid;place-items:center;color:var(--acc,#FF4D14);background:var(--bg,#0A0A0A);font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;position:relative;animation:bootpulse 1.5s ease-in-out infinite}
+  .boot{min-height:100vh;display:grid;place-items:center;color:var(--acc,#FF4D00);background:var(--bg,#F7F7F5);font-family:'Chakra Petch',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;position:relative;animation:bootpulse 1.5s ease-in-out infinite}
+  .boot::before{content:"";position:absolute;inset:18% 12%;border:2px solid var(--acc,#FF4D00);opacity:.35;pointer-events:none}
   @keyframes bootpulse{0%,100%{opacity:.55}50%{opacity:1}}
-  .boot::after{content:"";position:absolute;left:50%;bottom:44%;transform:translateX(-50%);height:1px;background:var(--acc,#FF4D14);animation:bootscan 1.5s ease-in-out infinite}
+  .boot::after{content:"";position:absolute;left:50%;bottom:42%;transform:translateX(-50%);height:3px;background:var(--acc,#FF4D00);animation:bootscan 1.5s ease-in-out infinite}
   @keyframes bootscan{0%,100%{width:48px;opacity:.4}50%{width:170px;opacity:1}}
   @media(prefers-reduced-motion:reduce){.boot,.boot::after{animation:none}.boot::after{width:120px}}
 </style>
-<script>(function(){try{var t=localStorage.getItem("bd_theme")||"dark";document.documentElement.setAttribute("data-theme",t);if(t==="light"){var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute("content","#F2EEE4");}}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem("bd_theme")||"light";document.documentElement.setAttribute("data-theme",t);var m=document.querySelector("meta[name=theme-color]");if(m)m.setAttribute("content",t==="dark"?"#0A0A0A":"#F7F7F5");}catch(e){}})();</script>
 </head>
 <body>
 <div id="root">
   <div class="boot">
-    BOOTING THE DOJO · CAPITAL_OS…
+    BOOTING UNRELIABLE LEDGER…
     <div style="position:absolute; bottom:30%; left:50%; transform:translateX(-50%); font-size:9px; letter-spacing:0; opacity:0.6; white-space:nowrap;">
       (If stuck &gt;20s: check console or hard-refresh)
     </div>
@@ -35,20 +41,23 @@
 <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<script src="./bedrock-api.js"></script>
+<script src="./quant-engine.js"></script>
+<script src="./hermes-agents.js"></script>
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useRef, useMemo } = React;
 
 // Optional AI proxy. With none set, AI calls fail gracefully and every math feature still works.
 // ---- Multi-provider AI: any OpenAI-compatible endpoint (OpenRouter, Groq, Together, HF, Gemini, xAI, Ollama, local, ...) ----
 const PROVIDERS = {
+  ollama: { label: "Ollama — local LLM (preferred)", url: "http://localhost:11434/v1/chat/completions", model: "llama3.1", note: "Hermes agents are designed for local LLMs. Run Ollama, set OLLAMA_ORIGINS=*, open the PWA from localhost/http. Hosted https cannot reach http localhost." },
+  lmstudio: { label: "LM Studio — local LLM", url: "http://localhost:1234/v1/chat/completions", model: "local-model", note: "local OpenAI-compatible server; enable CORS. Prefer for Hermes / Nous / Qwen instruct models." },
   openrouter: { label: "OpenRouter — frontier + open, one key", url: "https://openrouter.ai/api/v1/chat/completions", model: "openai/gpt-4o-mini", note: "hundreds of models: Claude, GPT, Gemini, Grok, Llama, Gemma, DeepSeek, Hermes. works straight from the browser." },
   groq: { label: "Groq — very fast open models", url: "https://api.groq.com/openai/v1/chat/completions", model: "llama-3.3-70b-versatile", note: "fast Llama / Gemma. may need your proxy for browser CORS." },
   together: { label: "Together AI — open models", url: "https://api.together.xyz/v1/chat/completions", model: "meta-llama/Llama-3.3-70B-Instruct-Turbo", note: "broad open catalog. may need your proxy." },
   huggingface: { label: "Hugging Face — open models", url: "https://router.huggingface.co/v1/chat/completions", model: "meta-llama/Llama-3.1-8B-Instruct", note: "HF inference router. may need your proxy." },
   gemini: { label: "Google Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", model: "gemini-1.5-flash", note: "Google OpenAI-compatible endpoint." },
   xai: { label: "xAI — Grok", url: "https://api.x.ai/v1/chat/completions", model: "grok-2-latest", note: "Grok via xAI. may need your proxy." },
-  ollama: { label: "Ollama — local, free", url: "http://localhost:11434/v1/chat/completions", model: "llama3.1", note: "runs on your machine, zero cost. open the app locally and set OLLAMA_ORIGINS=* . a hosted https app cannot reach http localhost." },
-  lmstudio: { label: "LM Studio — local, free", url: "http://localhost:1234/v1/chat/completions", model: "local-model", note: "local server; enable its CORS. hosted https cannot reach http localhost." },
   proxy: { label: "Your proxy — hides key, any provider", url: "https://your-worker.workers.dev", model: "openai/gpt-4o-mini", note: "deploy the included worker; set its upstream + key. use for providers that block browser CORS." },
   custom: { label: "Custom — any OpenAI-compatible URL", url: "", model: "", note: "paste any /v1/chat/completions endpoint." },
 };
@@ -122,9 +131,9 @@ function CashBars({ data }) {
     <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} preserveAspectRatio="none" style={{ display: "block", fontFamily: "monospace" }}>
       {d.map((x, i) => { const cx = i * gw + gw / 2; return (
         <g key={i}>
-          <rect x={cx - bw - 1} y={y(x.inc || 0)} width={bw} height={base - y(x.inc || 0)} fill="#46E0A0" />
-          <rect x={cx + 1} y={y(x.exp || 0)} width={bw} height={base - y(x.exp || 0)} fill="#FF4D14" />
-          <text x={cx} y={H - 3} fill="#8C8C8C" fontSize="9" textAnchor="middle">{x.m}</text>
+          <rect x={cx - bw - 1} y={y(x.inc || 0)} width={bw} height={base - y(x.inc || 0)} fill="#1A7A4C" />
+          <rect x={cx + 1} y={y(x.exp || 0)} width={bw} height={base - y(x.exp || 0)} fill="#FF4D00" />
+          <text x={cx} y={H - 3} fill="#8A8A84" fontSize="9" textAnchor="middle">{x.m}</text>
         </g>); })}
     </svg>
   );
@@ -139,10 +148,10 @@ function FanChart({ data }) {
   const area = "M" + xs[0].toFixed(1) + " " + y(d[0].p95).toFixed(1) + " " + d.map((p, i) => "L" + xs[i].toFixed(1) + " " + y(p.p95).toFixed(1)).join(" ") + " L" + xs[xs.length - 1].toFixed(1) + " " + (H - pb) + " L" + xs[0].toFixed(1) + " " + (H - pb) + " Z";
   return (
     <svg viewBox={"0 0 " + W + " " + H} width="100%" height={H} preserveAspectRatio="none" style={{ display: "block" }}>
-      <path d={area} fill="#FF4D14" fillOpacity="0.12" stroke="none" />
-      <path d={ln("p95")} fill="none" stroke="#3A86FF" strokeWidth="1.3" />
-      <path d={ln("p5")} fill="none" stroke="#FFB000" strokeWidth="1.3" strokeDasharray="4 3" />
-      <path d={ln("p50")} fill="none" stroke="#FF4D14" strokeWidth="2.2" />
+      <path d={area} fill="#FF4D00" fillOpacity="0.14" stroke="none" />
+      <path d={ln("p95")} fill="none" stroke="#1C4B8C" strokeWidth="1.3" />
+      <path d={ln("p5")} fill="none" stroke="#C9A000" strokeWidth="1.3" strokeDasharray="4 3" />
+      <path d={ln("p50")} fill="none" stroke="#FF4D00" strokeWidth="2.2" />
     </svg>
   );
 }
@@ -160,81 +169,86 @@ function Donut({ data, colors }) {
 
 /* ============================ THEME ============================ */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 :root{
-  --bg:oklch(0.15 0.006 60); --bg2:oklch(0.185 0.008 58); --bg3:oklch(0.225 0.010 55); --line:oklch(0.30 0.012 60); --line2:oklch(0.42 0.015 55);
-  --txt:oklch(0.95 0.008 80); --dim:oklch(0.72 0.012 70); --faint:oklch(0.52 0.012 65);
-  --acc:#FF4D14; --acc2:oklch(0.66 0.20 27); --ok:oklch(0.82 0.16 158); --warn:oklch(0.83 0.15 85); --blue:oklch(0.74 0.13 245);
-  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sans:'Space Grotesk',system-ui,-apple-system,sans-serif;
-  --disp:'Anton','Space Grotesk',sans-serif;
+  --bg:#F7F7F5; --bg2:#EFEFEA; --bg3:#E4E4DE; --line:#0D0D0D; --line2:#B8B8B0;
+  --txt:#0D0D0D; --dim:#4A4A46; --faint:#8A8A84;
+  --acc:#FF4D00; --acc2:#C41E00; --ok:#1A7A4C; --warn:#C9A000; --blue:#1C4B8C; --tape:#E8FF00;
+  --mono:'Space Mono',ui-monospace,Menlo,monospace;
+  --sans:'Archivo','Helvetica Neue',Helvetica,sans-serif;
+  --disp:'Archivo Black','Arial Black',sans-serif;
+  --eng:'Chakra Petch','Arial Narrow',sans-serif;
 }
-:root[data-theme="light"]{
-  --bg:oklch(0.95 0.013 82); --bg2:oklch(0.975 0.010 82); --bg3:oklch(0.992 0.006 82); --line:oklch(0.88 0.014 75); --line2:oklch(0.79 0.016 70);
-  --txt:oklch(0.22 0.020 50); --dim:oklch(0.45 0.018 55); --faint:oklch(0.62 0.015 60);
-  --acc:#FF4D14; --acc2:oklch(0.54 0.20 27); --ok:oklch(0.56 0.15 152); --warn:oklch(0.60 0.15 70); --blue:oklch(0.50 0.17 256);
+:root[data-theme="dark"]{
+  --bg:#0A0A0A; --bg2:#121212; --bg3:#1A1A1A; --line:#F7F7F5; --line2:#3A3A38;
+  --txt:#F7F7F5; --dim:#A8A8A0; --faint:#6A6A64;
+  --acc:#FF4D00; --acc2:#FF6A33; --ok:#3DDC97; --warn:#E8FF00; --blue:#5B8DEF; --tape:#E8FF00;
 }
-:root[data-theme="light"] .bd{background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px)}
-:root[data-theme="light"] .nav{background:rgba(251,248,241,.92)}
-:root[data-theme="light"] .sheet{background:rgba(28,22,15,.45)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
 .bd{min-height:100vh;background:var(--bg);color:var(--txt);font-family:var(--sans);
-  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:15px 15px;
-  padding-bottom:84px;position:relative;overflow-x:hidden}
-.bd::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.bd::after{content:"";position:fixed;left:50%;top:-12%;width:130vmax;height:95vmax;transform:translateX(-50%);pointer-events:none;z-index:0;background:radial-gradient(circle, color-mix(in oklch, var(--acc) 15%, transparent) 0%, transparent 55%);opacity:.45;filter:blur(6px)}
+  background-image:
+    repeating-linear-gradient(-45deg,transparent,transparent 11px,rgba(13,13,13,.04) 11px,rgba(13,13,13,.04) 12px),
+    radial-gradient(rgba(13,13,13,.06) 1px,transparent 1px);
+  background-size:auto, 16px 16px;
+  padding-bottom:88px;position:relative;overflow-x:hidden}
+:root[data-theme="dark"] .bd{
+  background-image:
+    repeating-linear-gradient(-45deg,transparent,transparent 11px,rgba(247,247,245,.04) 11px,rgba(247,247,245,.04) 12px),
+    radial-gradient(rgba(247,247,245,.05) 1px,transparent 1px);
+  background-size:auto, 16px 16px}
+.bd::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+:root[data-theme="dark"] .bd::before{mix-blend-mode:overlay;opacity:.12}
+.bd::after{content:"";position:fixed;right:-20%;top:-10%;width:70vmax;height:70vmax;pointer-events:none;z-index:0;
+  background:linear-gradient(125deg, transparent 40%, color-mix(in srgb, var(--acc) 14%, transparent) 40.5%, color-mix(in srgb, var(--acc) 14%, transparent) 52%, transparent 52.5%);opacity:.9}
 .wrap{max-width:480px;margin:0 auto;position:relative;z-index:1}
-.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.lbl{font-family:var(--eng);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .lbl-acc{color:var(--acc)}
-.big{font-family:var(--disp);letter-spacing:.01em;line-height:.86;font-weight:400}
-.creed{border-left:2px solid var(--acc);background:linear-gradient(90deg,rgba(255,77,20,.07),transparent 78%);padding:13px 15px;margin:14px 2px}
-.creed-body{font-family:var(--disp);font-size:15px;line-height:1.34;letter-spacing:.015em;color:var(--txt)}
+.big{font-family:var(--disp);letter-spacing:-.01em;line-height:.88;font-weight:400;text-transform:uppercase}
+.creed{border:2px solid var(--line);border-left:4px solid var(--acc);background:var(--bg2);padding:13px 15px;margin:14px 2px}
+.creed-body{font-family:var(--disp);font-size:15px;line-height:1.3;letter-spacing:-.01em;color:var(--txt);text-transform:uppercase}
 .mono-tab{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.card{background:var(--bg2);border:1px solid var(--line);position:relative}
-.tick{position:absolute;width:7px;height:7px;border-color:var(--line2);z-index:2}
-.t-tl{top:-1px;left:-1px;border-top:1.5px solid;border-left:1.5px solid}
-.t-tr{top:-1px;right:-1px;border-top:1.5px solid;border-right:1.5px solid}
-.t-bl{bottom:-1px;left:-1px;border-bottom:1.5px solid;border-left:1.5px solid}
-.t-br{bottom:-1px;right:-1px;border-bottom:1.5px solid;border-right:1.5px solid}
-.stripe{height:6px;background:repeating-linear-gradient(45deg,var(--acc),var(--acc) 7px,#0A0A0A 7px,#0A0A0A 14px)}
-.btn{position:relative;overflow:hidden;z-index:0;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  background:var(--acc);color:#0A0A0A;border:1px solid var(--acc);padding:14px 16px;cursor:pointer;width:100%;transition:transform .25s cubic-bezier(.25,.46,.45,.94),filter .2s,color .3s}
-.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:color-mix(in oklch,var(--acc) 80%,#fff);transform:translateY(102%);transition:transform .42s cubic-bezier(.65,0,.35,1)}
-.btn:hover::before{transform:translateY(0)}
-.btn:active{transform:translateY(1px);filter:brightness(1.05)}
-.btn-ghost{background:transparent;color:var(--txt);border:1px solid var(--line2)}
-.btn-ghost::before{background:var(--acc)}
-.btn-ghost:hover{color:#0A0A0A;border-color:var(--acc)}
-.btn-ghost:active{background:var(--bg3)}
-.chip{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line2);color:var(--dim)}
-.in{width:100%;background:var(--bg);border:1px solid var(--line2);color:var(--txt);font-family:var(--mono);
-  font-size:14px;padding:11px 12px;outline:none}
-.in:focus{border-color:var(--acc)}
-.sel{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%238C8C8C'%3E%3Cpath d='M0 2l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 12px center}
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);
-  border-top:1px solid var(--line);z-index:50}
+.card{background:var(--bg2);border:2px solid var(--line);position:relative;border-radius:0}
+.tick{position:absolute;width:10px;height:10px;border-color:var(--acc);z-index:2}
+.t-tl{top:-2px;left:-2px;border-top:3px solid;border-left:3px solid}
+.t-tr{top:-2px;right:-2px;border-top:3px solid;border-right:3px solid}
+.t-bl{bottom:-2px;left:-2px;border-bottom:3px solid;border-left:3px solid}
+.t-br{bottom:-2px;right:-2px;border-bottom:3px solid;border-right:3px solid}
+.stripe{height:10px;background:repeating-linear-gradient(-45deg,var(--tape),var(--tape) 10px,#0D0D0D 10px,#0D0D0D 20px);border:2px solid var(--line);border-left:none;border-right:none}
+.btn{position:relative;overflow:hidden;z-index:0;font-family:var(--eng);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--acc);color:#0D0D0D;border:2px solid var(--line);padding:14px 16px;cursor:pointer;width:100%;border-radius:0;
+  transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background .2s}
+.btn:hover{background:var(--tape);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--line)}
+.btn:active{transform:none;box-shadow:none}
+.btn-ghost{background:transparent;color:var(--txt);border:2px solid var(--line)}
+.btn-ghost:hover{background:var(--line);color:var(--bg);box-shadow:4px 4px 0 var(--acc)}
+.chip{font-family:var(--eng);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border:2px solid var(--line2);color:var(--dim);font-weight:600;border-radius:0;background:var(--bg)}
+.in{width:100%;background:var(--bg);border:2px solid var(--line);color:var(--txt);font-family:var(--mono);
+  font-size:14px;padding:11px 12px;outline:none;border-radius:0}
+.in:focus{border-color:var(--acc);box-shadow:3px 3px 0 var(--acc)}
+.sel{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230D0D0D'%3E%3Cpath d='M0 2l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 12px center}
+.nav{position:fixed;bottom:0;left:0;right:0;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);
+  border-top:2px solid var(--line);z-index:50}
 .navin{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(8,1fr)}
 .navb{background:none;border:none;color:var(--faint);padding:11px 0 13px;cursor:pointer;display:flex;
   flex-direction:column;align-items:center;gap:4px;transition:.15s;position:relative}
 .navb.on{color:var(--acc)}
-.navb.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:2px;background:var(--acc)}
-.navt{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase}
-.rec{width:7px;height:7px;border-radius:50%;background:var(--acc2);animation:blink 1.4s infinite}
+.navb.on::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--acc)}
+.navt{font-family:var(--eng);font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.rec{width:8px;height:8px;background:var(--acc2);animation:blink 1.4s infinite;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.25}}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.fade{animation:up .55s cubic-bezier(.22,1,.36,1) both}
-.sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.6);display:flex;align-items:flex-end}
-.sheetin{background:var(--bg2);border-top:2px solid var(--acc);width:100%;max-width:480px;margin:0 auto;
-  max-height:90vh;overflow-y:auto;animation:slide .25s both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fade{animation:up .5s cubic-bezier(.22,1,.36,1) both}
+.sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.55);display:flex;align-items:flex-end}
+.sheetin{background:var(--bg2);border-top:3px solid var(--acc);width:100%;max-width:480px;margin:0 auto;
+  max-height:90vh;overflow-y:auto;animation:slide .25s both;border-left:2px solid var(--line);border-right:2px solid var(--line)}
 @keyframes slide{from{transform:translateY(100%)}to{transform:none}}
 .row{display:flex;align-items:center;justify-content:space-between}
-.divider{height:1px;background:var(--line);margin:0}
-.bubble{padding:10px 12px;font-size:12.5px;line-height:1.5;max-width:85%;border:1px solid var(--line)}
-.bubble.me{background:var(--bg3);align-self:flex-end;border-color:var(--line2)}
-.bubble.ai{background:var(--bg2);align-self:flex-start;border-left:2px solid var(--acc)}
+.divider{height:2px;background:var(--line);margin:0}
+.bubble{padding:10px 12px;font-size:12.5px;line-height:1.5;max-width:85%;border:2px solid var(--line);border-radius:0}
+.bubble.me{background:var(--bg3);align-self:flex-end}
+.bubble.ai{background:var(--bg2);align-self:flex-start;border-left:4px solid var(--acc)}
 ::-webkit-scrollbar{width:0;height:0}
-@media(prefers-reduced-motion:reduce){.fade{animation:none}.bd::after{display:none}.rec{animation:none}}
+@media(prefers-reduced-motion:reduce){.fade{animation:none}.bd::after{display:none}.rec{animation:none}.btn:hover{transform:none;box-shadow:none}}
 input[type=number]{-moz-appearance:textfield}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
 `;
@@ -245,40 +259,16 @@ const RANKS = [
   { min: 50000, name: "TACTICIAN" }, { min: 250000, name: "ARCHITECT" },
   { min: 1000000, name: "SOVEREIGN" }, { min: 5000000, name: "ASCENDANT" },
 ];
-const PERSONAS = {
-  STRATEGIST: { tag: "THE STRATEGIST", voice: "a calm, sharp operator-mentor with grounded Morpheus energy — terse, lowercase, occasional // lines, zero hype." },
-  WICK: { tag: "JOHN WICK", voice: "John Wick — economical, lethal precision, almost no wasted words. every dollar is a round and you never waste rounds. quiet, certain, consequence-aware." },
-  ACCOUNTANT: { tag: "THE ACCOUNTANT", voice: "the Accountant — clinical, exacting, unsentimental, faintly menacing in your refusal to flatter. numbers do not lie and neither do you." },
-  BEEKEEPER: { tag: "THE BEEKEEPER", voice: "the Beekeeper — methodical and systemic; you protect the hive and calmly dismantle the inefficiency and predators that threaten it. patient, relentless." },
-  MORPHEUS: { tag: "MORPHEUS", voice: "Morpheus — calm certainties about choice and discipline, the red pill of hard math over comfortable illusion. measured, almost prophetic." },
-  ORACLE: { tag: "THE ORACLE", voice: "the Oracle — warm, knowing, a little cryptic; you ask the question behind the question and nudge him toward what he already knows. dry humor, never sugarcoats." },
-};
-
-// Adaptive lifecycle: the system reads the user's real state and picks the regime + persona. The user does not choose.
-const REGIMES = {
-  SURVIVAL: { persona: "BEEKEEPER", posture: "triage mode — stabilize the floor and kill high-interest debt before anything else." },
-  FOUNDATION: { persona: "ACCOUNTANT", posture: "build the buffer, cut the leaks, then begin deploying. defense before offense." },
-  ACCUMULATE: { persona: "STRATEGIST", posture: "compound aggressively but bounded — size every bet so ruin is impossible." },
-  SCALE: { persona: "WICK", posture: "real capital now — diversify, manage concentration, protect the gains." },
-  PRESERVE: { persona: "ORACLE", posture: "maintenance mode — the game is no longer getting rich, it is staying rich." },
-};
+// Hermes stack — personas, regimes, OC engineer (see hermes-agents.js)
+const H = window.BedrockHermes || {};
+const PERSONAS = H.PERSONAS || {};
+const REGIMES = H.REGIMES || {};
+const SWARM_DEFAULT = H.SWARM_DEFAULT || ["ACCOUNTANT", "JACKAL", "BEEKEEPER", "GREENE", "MACGYVER", "DARK_KNIGHT", "ROBOTO"];
 function regimeOf(D, settings) {
-  const ef = settings && settings.efMonths ? settings.efMonths : 3;
-  const runway = D.runway, liab = D.liab || 0, nw = D.nw || 0, assets = D.assets || 0;
-  let stage;
-  if (liab > assets * 0.5 || (runway != null && runway < 1)) stage = "SURVIVAL";
-  else if ((runway != null && runway < ef) || nw < 25000) stage = "FOUNDATION";
-  else if (nw < 250000) stage = "ACCUMULATE";
-  else if (nw < 1000000) stage = "SCALE";
-  else stage = "PRESERVE";
-  const directive = {
-    SURVIVAL: "The user is in SURVIVAL mode (debt-heavy or below their emergency floor). Focus relentlessly on triage: a small starter buffer, attacking the highest-APR debt, stopping the bleeding. Do not discuss aggressive investing yet — stabilization is the only priority.",
-    FOUNDATION: "The user is in FOUNDATION mode (floor not yet built or small net worth). Priority: finish the emergency fund, clear high-interest debt, then begin steady low-cost deployment. Defense before offense.",
-    ACCUMULATE: "The user is in ACCUMULATE mode (floor set, growing). Priority: bounded-aggressive compounding — disciplined contributions, position sizing for survival, owning productive assets, raising income.",
-    SCALE: "The user is in SCALE mode (substantial capital). Priority: diversification, managing concentration risk, tax-aware structuring with professionals, protecting accumulated gains while still growing.",
-    PRESERVE: "The user is in PRESERVE mode (wealthy). Priority: capital preservation, drawdown control, not chasing returns, not risking what is already built. The goal is staying rich, not getting rich.",
-  }[stage];
-  return { stage, persona: REGIMES[stage].persona, posture: REGIMES[stage].posture, directive };
+  return H.regimeOf ? H.regimeOf(D, settings) : { stage: "FOUNDATION", persona: "ACCOUNTANT", posture: "build buffer", directive: "" };
+}
+function personaTag(id) {
+  return (PERSONAS[id] && PERSONAS[id].tag) || id || "HERMES";
 }
 const fmt = (n) => (n == null || !isFinite(n)) ? "—" : (n < 0 ? "-$" : "$") + Math.abs(Math.round(n)).toLocaleString();
 const fmtk = (n) => {
@@ -379,67 +369,47 @@ async function _deriveKey(pass, salt, iters) {
   return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: iters, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
 }
 async function encryptVault(pass, obj) {
-  const iters = 250000;
+  // Prefer production client (600k PBKDF2 + pad buckets); fall back for older sessions
+  if (window.BedrockAPI && window.BedrockAPI.encryptPayload) {
+    return window.BedrockAPI.encryptPayload(pass, obj);
+  }
+  const iters = 600000;
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await _deriveKey(pass, salt, iters);
   const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify(obj)));
-  return { app: "BEDROCK", v: 1, alg: "AES-256-GCM", kdf: "PBKDF2-SHA256", iters, salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
+  return { app: "BEDROCK", v: 2, alg: "AES-256-GCM", kdf: "PBKDF2-SHA256", iters, salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
 }
 async function decryptVault(pass, blob) {
-  const key = await _deriveKey(pass, _unb64(blob.salt), blob.iters || 250000);
+  if (window.BedrockAPI && window.BedrockAPI.decryptPayload) {
+    return window.BedrockAPI.decryptPayload(pass, blob);
+  }
+  const key = await _deriveKey(pass, _unb64(blob.salt), blob.iters || 600000);
   const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(blob.iv) }, key, _unb64(blob.ct));
   return JSON.parse(new TextDecoder().decode(pt));
 }
 
-/* ============================ OPTIONAL CLOUD (BEDROCK-API) ============================ */
-/* Zero-trust: only ever send already-encrypted blobs (your existing encryptVault) or raw sim params.
-   The server cannot read your numbers. This is completely optional. */
-const CLOUD_DEFAULT = { url: "http://localhost:8787", token: "", userId: "", enabled: false };
+/* ============================ ONLINE SYNC (BEDROCK Phase 0+1) ============================ */
+/* Passkey auth + Tier-1 vault sync. Server stores ciphertext only. Completely optional. */
+const CLOUD_DEFAULT = { url: "http://localhost:8787", access_token: "", refresh_token: "", userId: "", device_id: "", enabled: false, lastSync: null, vaultVersion: 0 };
 
-function getCloud() { try { return JSON.parse(localStorage.getItem("bd_cloud")) || { ...CLOUD_DEFAULT }; } catch (e) { return { ...CLOUD_DEFAULT }; } }
-function setCloud(c) { try { localStorage.setItem("bd_cloud", JSON.stringify(c)); } catch (e) {} }
-
-async function cloudAuth() {
-  const c = getCloud(); if (!c.url) return { ok: false, error: "no backend" };
-  try {
-    const r = await fetch(c.url.replace(/\/$/, "") + "/v1/auth/anonymous", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
-    const j = await r.json(); if (!j.token) throw new Error("no token");
-    const nc = { ...c, token: j.token, userId: j.userId, enabled: true }; setCloud(nc); return { ok: true, ...j };
-  } catch (e) { return { ok: false, error: String(e) }; }
+function getCloud() {
+  if (window.BedrockAPI) return Object.assign({}, CLOUD_DEFAULT, window.BedrockAPI.getSession());
+  try { return Object.assign({}, CLOUD_DEFAULT, JSON.parse(localStorage.getItem("bd_cloud") || "{}")); } catch (e) { return { ...CLOUD_DEFAULT }; }
 }
-async function cloudListPlans() {
-  const c = getCloud(); if (!c.token) return [];
-  try { const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans", { headers: { Authorization: "Bearer " + c.token } }); if (!r.ok) return []; return (await r.json()).plans || []; } catch (e) { return []; }
+function setCloud(c) {
+  if (window.BedrockAPI) { window.BedrockAPI.setSession(c); return; }
+  try { localStorage.setItem("bd_cloud", JSON.stringify(c)); } catch (e) {}
 }
-async function cloudPushPlan(name, encryptedState) {
-  const c = getCloud(); if (!c.token) throw new Error("not connected");
-  const body = { name: name || "Main Vault", encryptedState: typeof encryptedState === "string" ? encryptedState : JSON.stringify(encryptedState), meta: { source: "app" } };
-  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + c.token }, body: JSON.stringify(body) });
-  if (!r.ok) throw new Error(await r.text());
-  const j = await r.json();
-  // Track last successful push for UX (simple, local only)
-  const nc = { ...c, lastSync: Date.now() };
-  setCloud(nc);
-  // If the caller is using the React state, it will pick it up on next render via getCloud in other places
-  return j;
-}
-async function cloudGetPlan(id) {
-  const c = getCloud(); if (!c.token) throw new Error("not connected");
-  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans/" + id, { headers: { Authorization: "Bearer " + c.token } });
-  if (!r.ok) throw new Error("not found"); return r.json();
-}
-async function cloudForge(params) {
-  const c = getCloud(); if (!c.token) throw new Error("not connected");
-  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/compute/survival", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + c.token }, body: JSON.stringify({ params }) });
-  if (!r.ok) throw new Error(await r.text()); return r.json();
+async function cloudForge() {
+  throw new Error("server compute removed — Phase 0+1 is vault sync only (sovereign mode)");
 }
 
 const DEFAULTS = {
   settings: { 
     income: 1600, incomeFrequency: "monthly",
     contribution: 1000, contributionFrequency: "monthly",
-    capital: 0, ret: 0.10, vol: 0.30, rf: 0.045, efMonths: 6, accent: "#FF4D14" 
+    capital: 0, ret: 0.10, vol: 0.30, rf: 0.045, efMonths: 6, accent: "#FF4D00" 
   },
   accounts: [], txns: [], holdings: [], collection: [],
   goals: [
@@ -552,7 +522,7 @@ function App() {
   useEffect(() => { if (ready) store.set("bd_collection", collection); }, [collection, ready]);
   useEffect(() => { if (ready) store.set("bd_goals", goals); }, [goals, ready]);
   useEffect(() => { if (ready) store.set("bd_game", game); }, [game, ready]);
-  useEffect(() => { document.documentElement.style.setProperty("--acc", settings.accent || "#FF4D14"); }, [settings.accent]);
+  useEffect(() => { document.documentElement.style.setProperty("--acc", settings.accent || "#FF4D00"); }, [settings.accent]);
 
   /* derived */
   const D = useMemo(() => {
@@ -607,8 +577,8 @@ function App() {
     <div className="bd" style={{ display: "grid", placeItems: "center" }}>
       <style>{CSS}</style>
       <div style={{ textAlign: "center" }}>
-        <div className="big" style={{ fontSize: 40 }}>BEDROCK</div>
-        <div className="lbl" style={{ marginTop: 8 }}>booting capital_os<span className="rec" style={{ display: "inline-block", marginLeft: 8 }} /></div>
+        <div className="big" style={{ fontSize: 44 }}>BED<span style={{ color: "var(--acc)" }}>/</span>ROCK</div>
+        <div className="lbl" style={{ marginTop: 10 }}>booting unreliable ledger<span className="rec" style={{ display: "inline-block", marginLeft: 8 }} /></div>
       </div>
     </div>
   );
@@ -617,16 +587,17 @@ function App() {
     <div className="bd">
       <style>{CSS}</style>
       <div className="wrap">
-        <Header rank={rank} streak={game.streak} />
+        <Header rank={rank} streak={game.streak} cloud={cloud} />
         {view === "home" && <Home D={D} rank={rank} goals={goals} settings={settings} badges={badges} flowHas={txns.length > 0} />}
         {view === "ledger" && <Ledger accounts={accounts} setAccounts={setAccounts} txns={txns} setTxns={setTxns} D={D} collection={collection} setCollection={setCollection} />}
         {view === "goals" && <Goals goals={goals} setGoals={setGoals} settings={settings} setSettings={setSettings} D={D} />}
         {view === "quant" && <Quant settings={settings} holdings={holdings} setHoldings={setHoldings} D={D} />}
+        {view === "lab" && <QuantLab />}
         {view === "live" && <LiveMarketView cloud={cloud} />}
         {view === "fortress" && <FortressView D={D} settings={settings} />}
         {view === "coach" && <Coach D={D} rank={rank} settings={settings} goals={goals} />}
         {view === "vet" && <PurchaseAdvisor settings={settings} D={D} />}
-        {view === "set" && <SettingsView settings={settings} setSettings={setSettings} cloud={cloud} />}
+        {view === "set" && <SettingsView settings={settings} setSettings={setSettings} cloud={cloud} setCloudState={setCloudState} />}
       </div>
       <Nav view={view} setView={setView} />
     </div>
@@ -634,20 +605,20 @@ function App() {
 }
 
 /* ============================ HEADER ============================ */
-function Header({ rank, streak }) {
+function Header({ rank, streak, cloud }) {
   const [clock, setClock] = useState(new Date());
   useEffect(() => { const t = setInterval(() => setClock(new Date()), 1000); return () => clearInterval(t); }, []);
   return (
     <div style={{ padding: "16px 16px 10px" }}>
       <div className="row">
         <div>
-          <div className="big" style={{ fontSize: 26, letterSpacing: ".02em" }}>BEDROCK<span style={{ color: "var(--acc)" }}>.</span></div>
-          <div className="lbl" style={{ marginTop: 1 }}>THE DOJO OF CAPITAL · CAPITAL_OS v0.1</div>
+          <div className="big" style={{ fontSize: 28 }}>BED<span style={{ color: "var(--acc)" }}>/</span>ROCK</div>
+          <div className="lbl" style={{ marginTop: 3 }}>"THE UNRELIABLE LEDGER" · CAPITAL_OS</div>
         </div>
         <div style={{ textAlign: "right" }}>
           <div className="row" style={{ gap: 6, justifyContent: "flex-end" }}>
             <span className="rec" /><span className="lbl lbl-acc">LIVE</span>
-            {cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "1px 5px", borderColor: "var(--ok)", color: "var(--ok)" }}>CLOUD</span>}
+            {cloud && cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "2px 6px", borderColor: "var(--ok)", color: "var(--ok)" }}>ONLINE</span>}
           </div>
           <div className="lbl mono-tab" style={{ marginTop: 4 }}>{clock.toLocaleTimeString("en", { hour12: false })}</div>
         </div>
@@ -677,7 +648,7 @@ function Home({ D, rank, goals, settings, badges, flowHas }) {
       {/* hero */}
       <div className="card" style={{ padding: 18, marginTop: 6 }}>
         <Ticks />
-        <div className="row"><div className="lbl">"NET WORTH" · YOUR TRUE POSITION</div><TrendingUp size={13} color="var(--dim)" /></div>
+        <div className="row"><div className="lbl">“NET WORTH” · FOR SURVIVAL</div><TrendingUp size={13} color="var(--dim)" /></div>
         <div className="big mono-tab" style={{ fontSize: 52, marginTop: 8 }}>{fmt(D.nw)}</div>
         <div className="row" style={{ marginTop: 10 }}>
           <div className="lbl">CASH <span style={{ color: "var(--txt)" }} className="mono-tab">{fmtk(D.assets)}</span></div>
@@ -703,7 +674,7 @@ function Home({ D, rank, goals, settings, badges, flowHas }) {
       )}
 
       <div className="creed">
-        <div className="lbl" style={{ color: "var(--acc)", marginBottom: 8 }}>THE DOCTRINE</div>
+        <div className="lbl" style={{ color: "var(--acc)", marginBottom: 8 }}>“THE DOCTRINE”</div>
         <div className="creed-body">CONTROL WHAT YOU CONTROL. THE FLOOR IS SACRED. SURVIVE FIRST, COMPOUND SECOND. THE MARKET DOES NOT KNOW YOUR NAME — IT ANSWERS ONLY TO DISCIPLINE. RUIN IS THE ONE MISTAKE YOU CANNOT UNDO. OWN WHAT PRODUCES. CUT WHAT BLEEDS. THE SLOW ROAD, WALKED WITHOUT FAIL, IS THE FAST ROAD.</div>
       </div>
 
@@ -767,7 +738,7 @@ function Home({ D, rank, goals, settings, badges, flowHas }) {
 const SectionLabel = ({ n, t }) => (
   <div className="row" style={{ margin: "20px 2px 10px" }}>
     <div className="lbl"><span style={{ color: "var(--acc)" }}>{n}</span> / {t}</div>
-    <div style={{ flex: 1, height: 1, background: "var(--line)", marginLeft: 10 }} />
+    <div style={{ flex: 1, height: 2, background: "var(--line)", marginLeft: 10 }} />
   </div>
 );
 
@@ -871,7 +842,7 @@ function Ledger({ accounts, setAccounts, txns, setTxns, D, collection, setCollec
             </div>
             {a.lastComps && a.lastComps.length > 0 && (
               <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>
-                Live comps: {a.lastComps.slice(0,2).map((c: any) => `${c.source} ${fmt(c.price)}`).join(" · ")}
+                Live comps: {a.lastComps.slice(0,2).map((c) => `${c.source} ${fmt(c.price)}`).join(" · ")}
               </div>
             )}
           </div>
@@ -1010,71 +981,92 @@ const KV = ({ k, v, c }) => (<div><div className="lbl" style={{ fontSize: 8.5 }}
 
 /* ============================ BTC CYCLE GAUGE ============================ */
 function BTCGauge() {
-  const last = new Date("2024-04-19"), next = new Date("2028-04-17"), now = new Date();
-  const days = Math.floor((now - last) / 864e5);
-  const cycle = Math.max(0, Math.min(1, (now - last) / (next - last)));
-  const toNext = Math.ceil((next - now) / 864e5);
-  const phase = cycle < .25 ? "POST-HALVING / ACCUMULATION" : cycle < .5 ? "MARKUP / EARLY BULL" : cycle < .7 ? "EUPHORIA RISK ZONE" : cycle < .85 ? "DISTRIBUTION RISK" : "LATE CYCLE / CAUTION";
-  const risk = cycle < .25 ? "LOW" : cycle < .5 ? "RISING" : cycle < .7 ? "ELEVATED" : "HIGH";
-  const rc = risk === "LOW" ? "var(--ok)" : risk === "RISING" ? "var(--warn)" : "var(--acc2)";
+  const Q = window.BedrockQuant;
+  const cyc = Q && Q.btcFourYearCycle ? Q.btcFourYearCycle() : null;
+  const cycle = cyc ? cyc.progress : 0;
+  const phase = cyc ? cyc.phase : "—";
+  const risk = cyc ? cyc.risk : "—";
+  const days = cyc ? cyc.daysSince : 0;
+  const toNext = cyc ? cyc.daysToNext : 0;
+  const next = cyc ? cyc.nextHalving : "2028-04-17";
+  const rc = risk === "LOW" ? "var(--ok)" : risk === "RISING" ? "var(--warn)" : risk === "ELEVATED" ? "var(--acc)" : "var(--acc2)";
   return (
     <div className="card" style={{ padding: 14, marginTop: 8 }}>
       <Ticks />
-      <div className="row"><div className="lbl">BTC CYCLE GAUGE</div><span className="chip" style={{ color: rc, borderColor: "currentColor" }}>{risk} RISK</span></div>
+      <div className="row"><div className="lbl">BTC 4-YEAR CYCLE</div><span className="chip" style={{ color: rc, borderColor: "currentColor" }}>{risk} RISK</span></div>
       <div className="big" style={{ fontSize: 17, marginTop: 8 }}>{phase}</div>
       <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10 }}><div style={{ height: "100%", width: (cycle * 100) + "%", background: rc, transition: ".6s" }} /></div>
       <div className="row" style={{ marginTop: 8 }}><div className="lbl mono-tab">{days}D SINCE HALVING</div><div className="lbl mono-tab">{(cycle * 100).toFixed(0)}% THROUGH CYCLE</div></div>
-      <div className="lbl" style={{ marginTop: 6 }}>NEXT HALVING ≈ APR 2028 · {toNext}D OUT · US ELECTION NOV 2028</div>
-      <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// the 4-year rhythm is a pattern, not a promise — returns diminish each cycle. size for the floor, not the moon.</div>
+      <div className="lbl" style={{ marginTop: 6 }}>NEXT HALVING ≈ {next} · {toNext}D OUT · pattern ≠ promise</div>
+      <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8, lineHeight: 1.5 }}>// 4-year rhythm is a historical pattern — returns diminish each cycle. size for the floor. full rotation desk lives in LAB → CYCLES.</div>
     </div>
   );
 }
 
-/* ============================ PURCHASE TRIBUNAL ============================ */
+/* ============================ PURCHASE TRIBUNAL (Hermes OC Engineer) ============================ */
 function PurchaseAdvisor({ settings, D }) {
   const [item, setItem] = useState({ name: "", cost: "", kind: "Depreciating" });
   const [out, setOut] = useState(null);
   const [busy, setBusy] = useState(false);
-  const r = settings.ret, c = (D && D.effContrib != null ? D.effContrib : settings.contribution) || 1;
-  const calc = useMemo(() => {
-    const cost = +item.cost || 0;
-    const fv = (t) => cost * Math.pow(1 + r, t);
-    return { cost, months: cost / c, fv10: fv(10), fv20: fv(20) };
-  }, [item.cost, r, c]);
+  const surplus = (D && D.effContrib != null ? D.effContrib : settings.contribution) || 0;
+  const floorBuf = (D && D.burn ? D.burn * (settings.efMonths || 3) : 0);
+  const oc = useMemo(() => {
+    if (!H.opportunityCostEngine) return null;
+    return H.opportunityCostEngine({
+      cost: +item.cost || 0,
+      monthlySurplus: surplus,
+      annualReturn: settings.ret != null ? settings.ret : 0.1,
+      floorBuf,
+      cash: D && D.assets != null ? D.assets : 0,
+      kind: item.kind,
+    });
+  }, [item.cost, item.kind, surplus, settings.ret, floorBuf, D && D.assets]);
   const run = async () => {
-    if (!calc.cost || busy) return;
+    if (!oc || !oc.cost || busy) return;
     setBusy(true); setOut({ verdict: "…", body: "" });
-    const ctx = `The user wants to buy "${item.name || "this item"}" for $${calc.cost}, classified as a ${item.kind} asset. Their reality: net worth ${fmt(D.nw)}, cash ${fmt(D.assets)}, monthly investable surplus ${fmt(settings.contribution)}, expected market return ${(r * 100).toFixed(0)}%/yr. Opportunity cost: that money invested instead becomes about ${fmt(calc.fv10)} in 10 years and ${fmt(calc.fv20)} in 20. The sticker equals ${calc.months.toFixed(1)} months of their entire investable surplus.`;
-    const system = `You are THE ACCOUNTANT — a cold, exacting purchase-vetting engine inside a finance app. The user brings you something they want to buy; you rule on whether it is financially defensible. Voice: clinical, precise, unsentimental, faintly menacing in your refusal to flatter — like the accountant in the film. Be HARD on the math and the choice, never contemptuous of the person. Weigh opportunity cost honestly; separate appreciating or income-producing assets from depreciating consumption; concede when a purchase is worth it for pure utility even if it is not ROI-positive, but say so plainly; protect their emergency floor absolutely and never bless a buy that eats safety-net cash; never endorse debt or leverage to fund consumption. Begin with a one-line verdict in caps — ACQUIRE, NOT WORTH IT, or WAIT — then 3 to 5 tight sentences tied to the real numbers, then one closing line that this is analysis, not financial advice. Under 130 words. ${ctx}`;
+    const snap = H.formatSnapshot(H.snapshotFromApp(D, settings, [], {}));
+    const system = H.buildAgentPrompt("ACCOUNTANT", {
+      regimeDirective: regimeOf(D, settings).directive,
+      snapshotText: snap,
+      ocText: H.formatOcForPrompt(oc),
+    });
+    const userMsg = H.tribunalUserMessage(item, oc);
     try {
-      const text = await callLLM(system, [{ role: "user", content: `Vet this purchase: ${item.name || "item"} at $${calc.cost}.` }], 1000);
-      const head = (text.split("\n")[0] || "").toUpperCase();
-      const verdict = head.includes("ACQUIRE") ? "ACQUIRE" : head.includes("NOT WORTH") ? "NOT WORTH IT" : head.includes("WAIT") ? "WAIT" : "THE RULING";
-      setOut({ verdict, body: text });
+      const text = await callLLM(system, [{ role: "user", content: userMsg }], 1200);
+      const offlineish = !text || text.indexOf("// AI is not configured") === 0 || text.indexOf("// could not reach") === 0 || text.indexOf("// provider error") === 0;
+      const body = offlineish ? H.offlineTribunalRuling(oc, item) : text;
+      const head = (body.split("\n")[0] || "").toUpperCase();
+      let verdict = oc.verdict;
+      if (head.includes("FLOOR")) verdict = "FLOOR BREACH";
+      else if (head.includes("ACQUIRE")) verdict = "ACQUIRE";
+      else if (head.includes("NOT WORTH")) verdict = "NOT WORTH IT";
+      else if (head.includes("WAIT")) verdict = "WAIT";
+      setOut({ verdict, body, oc });
     } catch (e) {
-      setOut({ verdict: "OFFLINE", body: "// no connection — but the math stands. this costs you " + fmt(calc.fv10) + " of future wealth over 10 years and " + calc.months.toFixed(1) + " months of your surplus. rule against that number." });
+      setOut({ verdict: oc.verdict, body: H.offlineTribunalRuling(oc, item), oc });
     }
     setBusy(false);
   };
-  const vc = out ? (out.verdict === "ACQUIRE" ? "var(--ok)" : out.verdict === "NOT WORTH IT" ? "var(--acc2)" : "var(--warn)") : "var(--txt)";
+  const vc = out ? (out.verdict === "ACQUIRE" ? "var(--ok)" : out.verdict === "NOT WORTH IT" || out.verdict === "FLOOR BREACH" ? "var(--acc2)" : "var(--warn)") : "var(--txt)";
   return (
     <div className="fade" style={{ padding: "4px 16px 20px" }}>
       <SectionLabel n="⚖" t="PURCHASE TRIBUNAL" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
-        <div className="lbl">BRING THE ACCOUNTANT A PURCHASE</div>
+        <div className="lbl">OPPORTUNITY COST ENGINEER · THE ACCOUNTANT</div>
+        <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>Math runs on-device first. The Accountant (Jung · Adler · Socrates · Greene conditioned) narrates the ruling — local LLM preferred.</div>
         <div style={{ marginTop: 10 }}><input className="in" placeholder="what do you want? (e.g. Rolex Submariner)" value={item.name} onChange={e => setItem({ ...item, name: e.target.value })} /></div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
           <input className="in" type="number" inputMode="decimal" placeholder="cost $" value={item.cost} onChange={e => setItem({ ...item, cost: e.target.value })} />
           <select className="in sel" value={item.kind} onChange={e => setItem({ ...item, kind: e.target.value })}><option>Depreciating</option><option>Appreciating</option><option>Income-producing</option><option>Pure utility</option></select>
         </div>
-        <button className="btn" style={{ marginTop: 12 }} onClick={run}>{busy ? "RULING…" : "⚖ RUN THE NUMBERS"}</button>
+        <button className="btn" style={{ marginTop: 12 }} onClick={run}>{busy ? "RULING…" : "⚖ RUN THE ENGINEER"}</button>
       </div>
-      {calc.cost > 0 && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
-        <Stat k="TRUE COST / 10Y" v={fmt(calc.fv10)} color="var(--acc)" sub="if invested instead" />
-        <Stat k="TRUE COST / 20Y" v={fmt(calc.fv20)} color="var(--acc)" sub="opportunity cost" />
-        <Stat k="MONTHS OF SURPLUS" v={calc.months.toFixed(1)} sub="of your DCA" />
-        <Stat k="STICKER" v={fmt(calc.cost)} sub={item.kind.toLowerCase()} />
+      {oc && oc.cost > 0 && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+        <Stat k="TRUE COST / 10Y" v={fmt(oc.fv[10])} color="var(--acc)" sub="if invested instead" />
+        <Stat k="TRUE COST / 20Y" v={fmt(oc.fv[20])} color="var(--acc)" sub="opportunity cost" />
+        <Stat k="MONTHS OF SURPLUS" v={isFinite(oc.monthsOfSurplus) ? oc.monthsOfSurplus.toFixed(1) : "∞"} sub="of your DCA" />
+        <Stat k="ENGINEER HINT" v={oc.verdict} color={oc.floorBreach ? "var(--acc2)" : "var(--warn)"} sub={"hostility " + oc.hostilityScore} />
       </div>}
       {out && <div className="card" style={{ padding: 16, marginTop: 8 }}>
         <Ticks />
@@ -1082,7 +1074,7 @@ function PurchaseAdvisor({ settings, D }) {
         <div className="big" style={{ fontSize: 26, marginTop: 8, color: vc }}>{out.verdict}</div>
         <div style={{ fontSize: 12.5, lineHeight: 1.55, marginTop: 10, whiteSpace: "pre-wrap" }}>{busy ? "// computing the cost of wanting…" : out.body}</div>
       </div>}
-      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// the tribunal weighs opportunity cost, not your worth. utility can justify a no-ROI buy and it will say so. it will never bless eating your safety floor. analysis, not financial advice.</div>
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.6 }}>// the engineer weighs opportunity cost, not your worth. floor breach is absolute. utility can justify a no-ROI buy and the Accountant will say so. analysis, not financial advice.</div>
     </div>
   );
 }
@@ -1353,7 +1345,7 @@ function Quant({ settings, holdings, setHoldings, D }) {
   };
   useEffect(() => { run(); /* eslint-disable-next-line */ }, []);
   const alloc = holdings.map((h, i) => ({ name: h.ticker || ("H" + i), v: (+h.units || 0) * (+h.price || 0) })).filter(x => x.v > 0);
-  const COL = ["#FF4D14", "#46E0A0", "#FFB000", "#3A86FF", "#FF2D2D", "#8C8C8C"];
+  const COL = ["#FF4D00", "#1A7A4C", "#C9A000", "#1C4B8C", "#C41E00", "#8A8A84"];
   const saveH = () => { if (!f.ticker) return; setHoldings([...holdings, { id: Date.now(), ticker: f.ticker.toUpperCase(), units: +f.units || 0, cost: +f.cost || 0, price: +f.price || 0 }]); setSheet(false); };
   return (
     <div className="fade" style={{ padding: "4px 16px 20px" }}>
@@ -1368,17 +1360,8 @@ function Quant({ settings, holdings, setHoldings, D }) {
         <div className="lbl" style={{ marginTop: 10 }}>μ {(settings.ret * 100).toFixed(0)}%/yr · σ {(settings.vol * 100).toFixed(0)}%/yr · start {fmtk(D.P0 + D.invMv)}</div>
         <div className="row" style={{ gap: 8, marginTop: 12 }}>
           <button className="btn" style={{ flex: 1 }} onClick={run}>{running ? "COMPUTING…" : "▶ RUN (CLIENT)"}</button>
-          {cloud.enabled && <button className="btn btn-ghost" style={{ flex: 1 }} onClick={async () => {
-            try {
-              const P0 = D.P0 + D.invMv;
-              const params = { initialCapital: P0, monthlySurplus: settings.contribution, expectedAnnualReturn: settings.ret, annualVolatility: settings.vol, horizonYears: hz, nPaths: 25000, crashProbPerYear: 0.08, crashMagnitude: -0.40 };
-              const res = await cloudForge(params);
-              // Store extra verification fields for future "verify receipt" UI / standalone check
-              setSim({ ...res.result, _forge: true, _sig: res.signature, _pub: res.publicKey, _alg: res.alg, _signedAt: res.signedAt });
-            } catch (e) { alert("forge failed: " + e.message); }
-          }}>☁ RUN ON FORGE (25k)</button>}
         </div>
-        {sim && sim._forge && <div className="lbl" style={{ color: "var(--ok)", marginTop: 6 }}>server result shown — compare to a client run</div>}
+        <div className="lbl" style={{ color: "var(--faint)", marginTop: 6 }}>monte carlo runs on-device — server forge retired (sovereign mode)</div>
       </div>
 
       {sim && <>
@@ -1524,54 +1507,52 @@ function CodexView() {
   );
 }
 
-/* ============================ COACH (AI) ============================ */
+/* ============================ COACH (Hermes agents + local LLM) ============================ */
 function Coach({ D, rank, settings, goals }) {
-  const [msgs, setMsgs] = useState([{ role: "ai", text: "// the dojo is open. i read your numbers, not your hopes. ask what is true — am i on track, what is my real risk, how fast can i reach the jet. i will not flatter you. i will sharpen you." }]);
   const reg = regimeOf(D, settings);
-  const persona = reg.persona;
+  const [overridePersona, setOverridePersona] = useState("");
+  const persona = overridePersona || reg.persona;
+  const [msgs, setMsgs] = useState([{ role: "ai", text: "// hermes dojo open. regime-calibrated. ask what is true — track, risk, jet clock. i will not flatter you." }]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState("chat");
+  const [swarmResults, setSwarmResults] = useState([]);
   const endRef = useRef(null);
   useEffect(() => { endRef.current && endRef.current.scrollIntoView({ behavior: "smooth" }); }, [msgs, busy]);
-  const chips = ["Am I on track?", "How do I reach the jet faster?", "Explain my risk", "Is $1M in 5 years realistic?"];
+  const chips = ["Am I on track?", "How do I reach the jet faster?", "Explain my risk", "Is $1M in 5 years realistic?", "Hunt my waste"];
+  const roster = ["ACCOUNTANT", "ROBOTO", "JACKAL", "BEEKEEPER", "DARK_KNIGHT", "GREENE", "MACGYVER", "STRATEGIST", "WICK", "ORACLE"];
 
-  // === Hermes-style agent swarm support (Phase 1+) ===
-  // Multiple agents (personas) can analyze the same snapshot in parallel.
-  // They can "call" local tools (monte carlo variants, portfolio suggestions) via structured output the UI can act on.
-  const [swarmResults, setSwarmResults] = useState<any[]>([]);
-  const swarmPersonas = ["STRATEGIST", "WICK", "ACCOUNTANT", "BEEKEEPER"];
+  const snapText = () => H.formatSnapshot(H.snapshotFromApp(D, settings, goals, rank));
 
   const runSwarm = async () => {
     setBusy(true);
     setSwarmResults([]);
-    const snapshot = `Net worth: ${fmt(D.nw)}; Cash: ${fmt(D.assets)}; Investments: ${fmt(D.invMv)}; Monthly DCA: ${fmt(settings.contribution)}; Return/vol: ${(settings.ret*100).toFixed(0)}% / ${(settings.vol*100).toFixed(0)}%`;
-
-    const results: any[] = [];
-    for (const p of swarmPersonas) {
-      const sys = `You are a ${p} agent in a BEDROCK quantitative portfolio engineering swarm. Be concise, structured, use JSON if suggesting numbers. Snapshot: ${snapshot}. Focus on analysis, risk, allocation ideas, or specific actions.`;
+    const results = [];
+    const agents = SWARM_DEFAULT;
+    for (let i = 0; i < agents.length; i++) {
+      const p = agents[i];
+      const sys = H.buildAgentPrompt(p, { regimeDirective: reg.directive, snapshotText: snapText(), extra: "You are one voice in a Hermes swarm. Stay in format. Do not contradict the floor rule." });
       try {
-        const out = await callLLM(sys, [{ role: "user", content: "Give your view and any actionable portfolio engineering suggestions." }], 700);
-        results.push({ persona: p, text: out });
+        const out = await callLLM(sys, [{ role: "user", content: "Give your specialized counsel on this snapshot. One actionable next move." }], 900);
+        results.push({ persona: p, tag: personaTag(p), text: out });
       } catch (e) {
-        results.push({ persona: p, text: "// agent failed to respond" });
+        results.push({ persona: p, tag: personaTag(p), text: "// agent offline — configure Ollama/LM Studio in Config → AI ENGINE." });
       }
+      setSwarmResults(results.slice());
     }
-    setSwarmResults(results);
     setBusy(false);
   };
 
   const send = async (textArg) => {
     const text = (textArg || input).trim(); if (!text || busy) return;
     const next = [...msgs, { role: "me", text }]; setMsgs(next); setInput(""); setBusy(true);
-    const ctx = `User snapshot — Net worth: ${fmt(D.nw)}; Cash: ${fmt(D.assets)}; Investments: ${fmt(D.invMv)}; Liabilities: ${fmt(D.liab)}; Monthly contribution (DCA): ${fmt(settings.contribution)}; Starting investable: ${fmt(settings.capital)}; Expected return assumption: ${(settings.ret * 100).toFixed(0)}%/yr; Volatility: ${(settings.vol * 100).toFixed(0)}%/yr; Rank: ${rank.name} (Lv ${rank.lvl}); EF runway: ${D.runway != null ? D.runway.toFixed(1) + " months" : "unknown"}. Goals: ${goals.map(g => g.name + " $" + g.cost + " by " + g.year).join("; ")}.`;
-    const system = `You are ${PERSONAS[persona].tag}, the AI advisor inside a personal-finance app called BEDROCK. ${reg.directive} Voice: ${PERSONAS[persona].voice} Be hard on the math and the choices, never contemptuous of the person. Stay in character, keep it brief, no emojis. You are RIGOROUS and HONEST above all: never promise get-rich-quick, never recommend specific securities or guarantee returns, and gently reality-check fantasies with real math (e.g. $1M in 5y from a small base needs ~90%/yr which no one sustains; long-run stocks ~10%/yr; the path that could spike that high also goes to zero). Champion bounded aggression: maximize growth of money he can afford to risk, protect the floor (emergency fund / bill money) absolutely, and lean on owning productive assets + raising income. Be encouraging about what IS achievable (the Teslas and even the jet are reachable on a disciplined clock). Keep replies under ~130 words, concrete, and tied to his actual numbers. Discourage leverage, margin, and borrowing against volatile assets at his level — it is the fastest path to ruin in the very crashes he wants to survive. On taxes and legal structures give general education only, always defer to a licensed CPA and attorney, and never help conceal assets or evade tax — privacy is legal, evasion is prison. End anything investment-related with a brief reminder this is not financial advice. ${ctx}`;
+    const system = H.buildAgentPrompt(persona, { regimeDirective: reg.directive, snapshotText: snapText() });
     try {
       const hist = next.filter(m => m.role !== "ai" || m !== next[0]).map(m => ({ role: m.role === "me" ? "user" : "assistant", content: m.text }));
-      const out = await callLLM(system, hist.length ? hist : [{ role: "user", content: text }], 1000);
+      const out = await callLLM(system, hist.length ? hist : [{ role: "user", content: text }], 1200);
       setMsgs([...next, { role: "ai", text: out || "// signal lost. try again." }]);
     } catch (e) {
-      setMsgs([...next, { role: "ai", text: "// can't reach the network right now. but the math doesn't change: protect the floor, fund what's reachable, raise income. run it back when you're connected." }]);
+      setMsgs([...next, { role: "ai", text: "// can't reach the model. protect the floor, fund what's reachable, raise income. prefer Ollama on localhost." }]);
     }
     setBusy(false);
   };
@@ -1580,31 +1561,38 @@ function Coach({ D, rank, settings, goals }) {
     <div className="fade" style={{ padding: "4px 16px 20px", display: "flex", flexDirection: "column", height: "calc(100vh - 220px)" }}>
       <div className="card" style={{ padding: 12, marginTop: 6 }}>
         <Ticks />
-        <div className="row"><div className="row" style={{ gap: 8 }}><Cpu size={15} color="var(--acc)" /><div className="big" style={{ fontSize: 18 }}>{PERSONAS[persona].tag}</div></div><span className="chip lbl-acc" style={{ borderColor: "var(--acc)" }}>AI</span></div>
-        <div style={{ marginTop: 10, fontSize: 10.5, color: "var(--dim)", lineHeight: 1.5 }}><span className="lbl" style={{ color: "var(--acc)" }}>AUTO-CALIBRATED · {reg.stage}</span> — {reg.posture}</div>
+        <div className="row"><div className="row" style={{ gap: 8 }}><Cpu size={15} color="var(--acc)" /><div className="big" style={{ fontSize: 18 }}>{personaTag(persona)}</div></div><span className="chip lbl-acc" style={{ borderColor: "var(--acc)" }}>HERMES</span></div>
+        <div style={{ marginTop: 10, fontSize: 10.5, color: "var(--dim)", lineHeight: 1.5 }}><span className="lbl" style={{ color: "var(--acc)" }}>AUTO · {reg.stage}</span> — {reg.posture}</div>
+        <div style={{ marginTop: 8 }}>
+          <div className="lbl" style={{ fontSize: 8 }}>PERSONA OVERRIDE (optional)</div>
+          <select className="in sel" value={overridePersona} onChange={e => setOverridePersona(e.target.value)} style={{ marginTop: 4 }}>
+            <option value="">regime default ({personaTag(reg.persona)})</option>
+            {roster.map(id => <option key={id} value={id}>{personaTag(id)}</option>)}
+          </select>
+        </div>
       </div>
-      <div className="row" style={{ gap: 8, marginTop: 8 }}>
-        <button className={mode === "chat" ? "btn" : "btn btn-ghost"} onClick={() => setMode("chat")}>STRATEGIST</button>
+      <div className="row" style={{ gap: 8, marginTop: 8, flexWrap: "wrap" }}>
+        <button className={mode === "chat" ? "btn" : "btn btn-ghost"} onClick={() => setMode("chat")}>CHAT</button>
         <button className={mode === "codex" ? "btn" : "btn btn-ghost"} onClick={() => setMode("codex")}>CODEX</button>
         <button className={mode === "swarm" ? "btn" : "btn btn-ghost"} onClick={() => setMode("swarm")}>SWARM</button>
       </div>
 
       {mode === "swarm" && (
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10, overflowY: "auto", flex: 1 }}>
           <div className="card" style={{ padding: 12 }}>
             <Ticks />
-            <div className="lbl">HERMES-STYLE AGENT SWARM — QUANT PORTFOLIO ENGINEERING</div>
-            <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6 }}>Multiple specialized agents analyze your current snapshot in parallel and produce structured ideas you can act on (allocations, risk sizing, MC scenarios).</div>
-            <button className="btn" style={{ marginTop: 10 }} onClick={runSwarm} disabled={busy}>{busy ? "RUNNING SWARM..." : "RUN SWARM (4 agents)"}</button>
+            <div className="lbl">HERMES AGENT SWARM</div>
+            <div style={{ fontSize: 11, color: "var(--dim)", marginTop: 6, lineHeight: 1.5 }}>
+              Accountant · Jackal · Beekeeper · Lawgiver · MacGyver · Dark Knight · Mr Roboto — Jung/Adler/Socrates/Greene conditioned. Local LLM first (Ollama / LM Studio).
+            </div>
+            <button className="btn" style={{ marginTop: 10 }} onClick={runSwarm} disabled={busy}>{busy ? "RUNNING SWARM…" : "RUN SWARM (" + SWARM_DEFAULT.length + " agents)"}</button>
           </div>
-
-          {swarmResults.length > 0 && swarmResults.map((r, i) => (
+          {swarmResults.map((r, i) => (
             <div key={i} className="card" style={{ padding: 12, marginTop: 8 }}>
-              <div className="lbl" style={{ color: "var(--acc)" }}>{r.persona}</div>
+              <div className="lbl" style={{ color: "var(--acc)" }}>{r.tag}</div>
               <div style={{ fontSize: 12.5, marginTop: 6, whiteSpace: "pre-wrap" }}>{r.text}</div>
             </div>
           ))}
-          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8 }}>Agents use your live local numbers + the same LLM providers as the single Coach. Add custom agents and tool-calling (run MC, optimize) in later iterations.</div>
         </div>
       )}
 
@@ -1618,7 +1606,7 @@ function Coach({ D, rank, settings, goals }) {
         {chips.map(c => <button key={c} className="chip" style={{ cursor: "pointer", padding: "6px 9px" }} onClick={() => send(c)}>{c}</button>)}
       </div>
       <div className="row" style={{ gap: 8 }}>
-        <input className="in" placeholder="ask the strategist…" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} />
+        <input className="in" placeholder={"ask " + personaTag(persona).toLowerCase() + "…"} value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} />
         <button className="btn" style={{ width: 52 }} onClick={() => send()}><Send size={15} /></button>
       </div></>}
     </div>
@@ -1629,12 +1617,12 @@ function Coach({ D, rank, settings, goals }) {
 function NumField({ label, k, mul = 1, s, set }) {
   return <Field label={label}><input className="in" type="number" inputMode="decimal" defaultValue={mul === 1 ? s[k] : (s[k] * mul)} onBlur={e => set({ ...s, [k]: (+e.target.value || 0) / mul })} /></Field>;
 }
-function SettingsView({ settings, setSettings, cloud }: { settings: any; setSettings: any; cloud?: any }) {
-  const [theme, setThemeState] = useState(() => { try { return localStorage.getItem("bd_theme") || "dark"; } catch (e) { return "dark"; } });
-  const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "light" ? "#F2EEE4" : "#0A0A0A"); };
-  const ACC = ["#FF4D14", "#FF2D2D", "#46E0A0", "#3A86FF", "#FFB000", "#FFFFFF"];
+function SettingsView({ settings, setSettings, cloud, setCloudState }) {
+  const [theme, setThemeState] = useState(() => { try { return localStorage.getItem("bd_theme") || "light"; } catch (e) { return "light"; } });
+  const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "dark" ? "#0A0A0A" : "#F7F7F5"); };
+  const ACC = ["#FF4D00", "#E8FF00", "#0D0D0D", "#1A7A4C", "#1C4B8C", "#C41E00"];
   const [confirm, setConfirm] = useState(false);
-  const [ai, setAi] = useState(() => { try { return JSON.parse(localStorage.getItem("bd_ai")) || { prov: "openrouter", url: PROVIDERS.openrouter.url, model: PROVIDERS.openrouter.model, key: "", dayCap: 5, monCap: 100, rate: 3 }; } catch (e) { return { prov: "openrouter", url: PROVIDERS.openrouter.url, model: PROVIDERS.openrouter.model, key: "", dayCap: 5, monCap: 100, rate: 3 }; } });
+  const [ai, setAi] = useState(() => { try { return JSON.parse(localStorage.getItem("bd_ai")) || { prov: "ollama", url: PROVIDERS.ollama.url, model: PROVIDERS.ollama.model, key: "", dayCap: 5, monCap: 100, rate: 0 }; } catch (e) { return { prov: "ollama", url: PROVIDERS.ollama.url, model: PROVIDERS.ollama.model, key: "", dayCap: 5, monCap: 100, rate: 0 }; } });
   const saveAi = (next) => { setAi(next); try { localStorage.setItem("bd_ai", JSON.stringify(next)); } catch (e) { } };
   const usage = readUsage();
   const [bkPass, setBkPass] = useState("");
@@ -1729,9 +1717,10 @@ function SettingsView({ settings, setSettings, cloud }: { settings: any; setSett
         ))}
       </div>
 
-      <SectionLabel n="◇" t="AI ENGINE — BRING YOUR OWN MODEL" />
+      <SectionLabel n="◇" t="AI ENGINE — LOCAL LLM FIRST" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.5, marginBottom: 8 }}>Hermes agents ship long-form conditioned prompts (Jung · Adler · Socrates · Greene). Prefer Ollama / LM Studio so numbers never leave the machine. Cloud providers optional.</div>
         <div className="lbl">PROVIDER</div>
         <select className="in sel" value={ai.prov} onChange={e => { const k = e.target.value, pre = PROVIDERS[k] || {}; saveAi({ ...ai, prov: k, url: pre.url != null ? pre.url : ai.url, model: pre.model != null ? pre.model : ai.model }); }} style={{ marginTop: 6 }}>
           {Object.keys(PROVIDERS).map(k => <option key={k} value={k}>{PROVIDERS[k].label}</option>)}
@@ -1766,98 +1755,102 @@ function SettingsView({ settings, setSettings, cloud }: { settings: any; setSett
 
       <SectionLabel n="◈" t="SECURITY / ENCRYPTED BACKUP" />
 
-      {/* ===================== CLOUD SYNC (optional, zero-trust) ===================== */}
-      <SectionLabel n="☁" t="CLOUD SYNC — OPTIONAL" />
+      {/* ===================== ONLINE — passkey + Tier-1 vault sync ===================== */}
+      <SectionLabel n="☁" t="ONLINE — PASSKEY VAULT SYNC" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
         <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.55 }}>
-          Your numbers never leave encrypted. We store only ciphertext + a title you choose. Connect for multi-device or remote backup. Disable anytime — your local data is untouched.
+          Optional multi-device sync. Passkey authenticates the transport; your passphrase encrypts the vault on-device (PBKDF2 600k + AES-GCM, size-padded). The server stores ciphertext only — zero knowledge, zero recovery.
         </div>
 
         <div style={{ marginTop: 12 }}>
-          <div className="lbl">BACKEND</div>
-          <input className="in" value={cloud.url} onChange={e => { const nc = { ...cloud, url: e.target.value }; setCloudState(nc); setCloud(nc); }} placeholder="http://localhost:8787" />
+          <div className="lbl">BACKEND URL</div>
+          <input className="in" value={cloud.url || ""} onChange={e => { const nc = { ...cloud, url: e.target.value }; setCloudState(nc); setCloud(nc); }} placeholder="https://bedrock-api.example.workers.dev" />
         </div>
 
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
           {!cloud.enabled ? (
-            <button className="btn" onClick={async () => {
-              const res = await cloudAuth();
-              if (res.ok) { const nc = getCloud(); setCloudState(nc); setSecMsg("connected. token stored on this device."); }
-              else setSecMsg("connect failed: " + (res.error || "check url / cors"));
-            }}>CONNECT (ANONYMOUS)</button>
+            <>
+              <button className="btn" onClick={async () => {
+                try {
+                  setSecMsg("checking backend…");
+                  if (!window.BedrockAPI) throw new Error("client SDK missing");
+                  setCloud({ ...getCloud(), url: cloud.url });
+                  await window.BedrockAPI.healthz();
+                  setSecMsg("register passkey…");
+                  const s = await window.BedrockAPI.register();
+                  setCloudState(s); setSecMsg("registered. passkey is your login — passphrase still decrypts the vault.");
+                } catch (e) { setSecMsg("register failed: " + (e.message || e)); }
+              }}>REGISTER PASSKEY</button>
+              <button className="btn btn-ghost" onClick={async () => {
+                try {
+                  if (!window.BedrockAPI) throw new Error("client SDK missing");
+                  setCloud({ ...getCloud(), url: cloud.url });
+                  setSecMsg("asserting passkey…");
+                  const s = await window.BedrockAPI.login();
+                  setCloudState(s); setSecMsg("signed in.");
+                } catch (e) { setSecMsg("login failed: " + (e.message || e)); }
+              }}>LOGIN WITH PASSKEY</button>
+            </>
           ) : (
-            <div className="row" style={{ gap: 8 }}>
-              <div className="chip" style={{ borderColor: "var(--ok)", color: "var(--ok)" }}>CONNECTED</div>
-              <button className="btn btn-ghost" onClick={() => { const nc = { ...cloud, enabled: false, token: "", userId: "" }; setCloudState(nc); setCloud(nc); setSecMsg("disconnected (local data safe)"); }}>DISCONNECT</button>
+            <div className="row" style={{ gap: 8, width: "100%", flexWrap: "wrap" }}>
+              <div className="chip" style={{ borderColor: "var(--ok)", color: "var(--ok)" }}>ONLINE</div>
+              <div className="lbl" style={{ fontSize: 9 }}>uid {String(cloud.userId || "").slice(0, 10)}…</div>
+              <button className="btn btn-ghost" onClick={async () => {
+                try { if (window.BedrockAPI) await window.BedrockAPI.logout(); } catch (e) {}
+                const nc = { ...CLOUD_DEFAULT, url: cloud.url }; setCloudState(nc); setCloud(nc); setSecMsg("signed out (local vault untouched)");
+              }}>SIGN OUT</button>
             </div>
           )}
         </div>
 
         {cloud.enabled && (
           <div style={{ marginTop: 14 }}>
-            {/* CLOUD INTEGRATION — Phase 0 polish: lastSync + clear zero-trust language */}
+            <div style={{ fontSize: 10, color: "var(--faint)", marginBottom: 8 }}>Uses the backup passphrase below (min 8 chars). Export a local .bdv first.</div>
             <button className="btn" onClick={async () => {
               try {
-                setSecMsg("encrypting current state…");
-                const full = collectAll();
-                const blob = await encryptVault(bkPass || "temp", full);   // re-uses your existing E2EE
-                await cloudPushPlan("Main State", JSON.stringify(blob));
-                const ls = getCloud().lastSync;
-                setSecMsg("pushed encrypted state to cloud." + (ls ? " (last sync " + new Date(ls).toLocaleTimeString() + ")" : ""));
-              } catch (e) { setSecMsg("push failed: " + e.message); }
-            }}>↑ PUSH ENCRYPTED STATE</button>
+                if (!bkPass || bkPass.length < 8) { setSecMsg("set a backup passphrase (≥8) before pushing"); return; }
+                setSecMsg("encrypting + padding vault…");
+                const data = await window.BedrockAPI.pushVault(bkPass, collectAll());
+                setCloudState(getCloud());
+                setSecMsg("pushed encrypted vault · version " + data.version);
+              } catch (e) { setSecMsg("push failed: " + (e.message || e)); }
+            }}>↑ PUSH ENCRYPTED VAULT</button>
 
             <div style={{ marginTop: 10 }}>
               <button className="btn btn-ghost" onClick={async () => {
-                const plans = await cloudListPlans();
-                if (!plans.length) { setSecMsg("no remote plans"); return; }
-                const latest = plans[0];
                 try {
-                  const p = await cloudGetPlan(latest.id);
-                  const blob = typeof p.plan.encryptedState === "string" ? JSON.parse(p.plan.encryptedState) : p.plan.encryptedState;
-                  if (!rsPass) { setSecMsg("enter your backup passphrase above to decrypt the pull"); return; }
-                  const data = await decryptVault(rsPass, blob);
-                  restoreAll(data);
-                  setSecMsg("restored from cloud. reloading…"); setTimeout(() => location.reload(), 600);
-                } catch (e) { setSecMsg("pull/decrypt failed: " + e.message); }
+                  if (!rsPass) { setSecMsg("enter restore passphrase to decrypt the pull"); return; }
+                  setSecMsg("pulling ciphertext…");
+                  const pulled = await window.BedrockAPI.pullVault(rsPass);
+                  if (pulled.empty) { setSecMsg("remote vault empty"); return; }
+                  restoreAll(pulled.state);
+                  setCloudState(getCloud());
+                  setSecMsg("restored version " + pulled.version + ". reloading…");
+                  setTimeout(() => location.reload(), 600);
+                } catch (e) { setSecMsg("pull/decrypt failed: " + (e.message || e)); }
               }}>↓ PULL LATEST & RESTORE</button>
             </div>
-            <div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 8 }}>uses the same AES-GCM + your backup passphrase. server sees only ciphertext. Full client math always works offline.</div>
-            {cloud.lastSync && <div className="lbl" style={{ marginTop: 6, fontSize: 9 }}>last push: {new Date(cloud.lastSync).toLocaleString()}</div>}
+            <div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 8 }}>sovereign by default. lose the passphrase and the vault is cryptographically gone — that is the design.</div>
+            {cloud.lastSync && <div className="lbl" style={{ marginTop: 6, fontSize: 9 }}>last sync: {new Date(cloud.lastSync).toLocaleString()} · v{cloud.vaultVersion || "?"}</div>}
           </div>
         )}
         {secMsg && <div style={{ fontSize: 10.5, color: "var(--dim)", marginTop: 8 }}>{secMsg}</div>}
       </div>
 
-      {/* Plaid / external account linking (optional, see zero-trust warnings in backend) */}
+      {/* Plaid deferred — Phase 3+ / recon mode (see ZERO-KNOWLEDGE-DOCTRINE) */}
       <SectionLabel n="🔗" t="LINK ACCOUNTS (PLAID)" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
         <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.5 }}>
-          Connect banks, brokerages, credit cards via Plaid. Data is fetched server-side then returned to *you* to merge into your local encrypted vault. The server does not keep your full financial picture.
+          Plaid is Phase 3+ (recon mode). It is the identified rail — linking a bank means Plaid knows who you are. Sovereign mode (manual entry + this vault sync) is the default. Not wired in this build.
         </div>
-        <button className="btn btn-ghost" style={{ marginTop: 10 }} onClick={async () => {
-          const b = (cloud && cloud.url) || "http://localhost:8787";
-          try {
-            const r = await fetch(`${b.replace(/\/$/, "")}/v1/plaid/create_link_token`, { method: "POST", headers: cloud?.token ? { Authorization: "Bearer " + cloud.token } : {} });
-            const j = await r.json();
-            if (j.linkToken) {
-              // For full experience load Plaid Link JS and call Plaid.create here.
-              // Minimal: show the token and instructions.
-              prompt("Plaid link_token (copy and use in a Plaid Link flow or quickstart):", j.linkToken);
-              alert("After you complete Plaid Link in their widget, POST the public_token to /v1/plaid/exchange_public_token on the backend, then use /sync to pull data.");
-            } else {
-              alert("Plaid not configured on backend or auth required. See bedrock-api/src/lib/plaid.ts");
-            }
-          } catch (e) { alert("Could not reach backend Plaid endpoint"); }
-        }}>GET PLAID LINK TOKEN</button>
-        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8 }}>Full embedded Plaid Link widget + auto-sync into local holdings can be wired in a follow-up. Privacy.com and other providers follow the same pattern.</div>
+        <button className="btn btn-ghost" style={{ marginTop: 10 }} disabled>PLAID — COMING IN PHASE 3</button>
       </div>
 
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
-        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>back up everything to a file only your passphrase can open — AES-256-GCM, key stretched with PBKDF2 (250k rounds). it encrypts here, on your device; nothing is uploaded. lose the passphrase and the backup is gone for good. that is the cost of true zero-knowledge: there is no reset, no recovery, no back door.</div>
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>back up everything to a file only your passphrase can open — AES-256-GCM, key stretched with PBKDF2 (600k rounds, OWASP). it encrypts here, on your device; nothing is uploaded. lose the passphrase and the backup is gone for good. that is the cost of true zero-knowledge: there is no reset, no recovery, no back door.</div>
         <div className="lbl" style={{ marginTop: 12 }}>BACKUP PASSPHRASE</div>
         <input className="in" type="password" placeholder="a strong passphrase only you know" value={bkPass} onChange={e => setBkPass(e.target.value)} style={{ marginTop: 6 }} />
         <button className="btn" style={{ marginTop: 10 }} onClick={exportEnc}><Lock size={12} style={{ verticalAlign: "-2px", marginRight: 6 }} />EXPORT ENCRYPTED BACKUP</button>
@@ -1907,7 +1900,7 @@ function LiveMarketView({ cloud }) {
   const fetchQuotes = async () => {
     setLoading(true);
     const syms = symbols.split(",").map(s => s.trim()).filter(Boolean);
-    const results: any[] = [];
+    const results = [];
     for (const s of syms) {
       try {
         const r = await fetch(`${backend.replace(/\/$/, "")}/v1/market/quote/${encodeURIComponent(s)}`);
@@ -1929,7 +1922,7 @@ function LiveMarketView({ cloud }) {
     } catch (e) {}
   };
 
-  const addToHoldings = (q: any) => {
+  const addToHoldings = (q) => {
     // Placeholder: in a full version this would open the Add Holding sheet prefilled
     // or directly mutate holdings if we had the setter in scope.
     alert(`Would add ${q.symbol || q.id} @ $${q.price} to local holdings (wire to Quant/Ledger in next iteration).`);
@@ -2024,12 +2017,470 @@ function LiveMarketView({ cloud }) {
   );
 }
 
+/* ============================ QUANT LAB — GOD TIER ============================ */
+function QuantLab() {
+  const Q = window.BedrockQuant;
+  const [seed, setSeed] = useState(42);
+  const [tab, setTab] = useState("book");
+  const [suite, setSuite] = useState(null);
+  const [lln, setLln] = useState(null);
+  const [chaos, setChaos] = useState(null);
+  const [game, setGame] = useState(null);
+  const [opt, setOpt] = useState(null);
+  const [bond, setBond] = useState(null);
+  const [rl, setRl] = useState(null);
+  const [ml, setMl] = useState(null);
+  const [stoch, setStoch] = useState(null);
+  const [cycles, setCycles] = useState(null);
+  const [busy, setBusy] = useState("");
+
+  const runBook = () => {
+    if (!Q) return;
+    setBusy("portfolio");
+    setTimeout(() => { setSuite(Q.portfolioSuite(seed)); setBusy(""); }, 20);
+  };
+  const runLln = () => {
+    if (!Q) return;
+    const ex = Q.llnExperiment({ seed: seed, n: 2500, mu: 0.08, sigma: 0.2 });
+    setLln(ex);
+  };
+  const runChaos = () => {
+    if (!Q) return;
+    const r = 3.9;
+    setChaos({
+      logistic: Q.logisticMap({ r: r, n: 120, x0: 0.4 }),
+      lyapunov: Q.lyapunovLogistic(r, 4000, 0.4),
+      lorenz: Q.lorenz({ steps: 800 }),
+    });
+  };
+  const runGame = () => {
+    if (!Q) return;
+    setGame({ hawk: Q.hawkDove(2, 4), alloc: Q.allocationGame() });
+  };
+  const runOpt = () => {
+    if (!Q) return;
+    const bs = Q.blackScholes({ S: 100, K: 100, T: 0.5, r: 0.03, sigma: 0.25, type: "call" });
+    const hedge = Q.deltaHedgeLeg(bs, 1, 100);
+    setOpt({ bs: bs, hedge: hedge });
+  };
+  const runBond = () => {
+    if (!Q) return;
+    setBond(Q.bondMetrics(100, 0.05, 10, 0.045, 2));
+  };
+  const runRl = () => {
+    if (!Q) return;
+    setBusy("rl");
+    setTimeout(() => {
+      const bandit = Q.ucb1(function (arm, rng) {
+        var means = [0.02, 0.05, 0.09, 0.01];
+        return means[arm] + 0.05 * Q.gauss(rng);
+      }, 4, 400, seed);
+      const ql = Q.qLearnCapital({ seed: seed, episodes: 350 });
+      setRl({ bandit: bandit, ql: ql });
+      setBusy("");
+    }, 20);
+  };
+  const runMl = () => {
+    if (!Q) return;
+    setBusy("ml");
+    setTimeout(() => {
+      var rng = Q.makeRng(seed);
+      var X = [], y = [];
+      for (var i = 0; i < 120; i++) {
+        var mom = Q.gauss(rng) * 0.05;
+        var vol = 0.1 + Math.abs(Q.gauss(rng)) * 0.05;
+        X.push([1, mom, vol]);
+        y.push(0.02 + 1.4 * mom - 0.3 * vol + 0.01 * Q.gauss(rng));
+      }
+      var ols = Q.ols(X, y);
+      var yCls = y.map(function (v) { return v > 0.02 ? 1 : 0; });
+      var log = Q.logisticGD(X, yCls, { epochs: 500, lr: 0.2 });
+      var mlp = Q.mlpTrain(X, y, { hidden: 6, epochs: 400, seed: seed });
+      var pred = mlp.predict([1, 0.03, 0.12]);
+      setMl({ ols: ols, logistic: log, mlpPred: pred });
+      setBusy("");
+    }, 20);
+  };
+  const runCycles = () => {
+    if (!Q) return;
+    setBusy("cycles");
+    setTimeout(() => {
+      setCycles(Q.syntheticCycleMarket({ seed: seed + 7, days: 252 * 4 }));
+      setBusy("");
+    }, 20);
+  };
+  const runStoch = () => {
+    if (!Q) return;
+    setStoch({
+      gbm: Q.gbmPath({ seed: seed, S0: 100, mu: 0.08, sigma: 0.2, T: 1, steps: 126 }),
+      jump: Q.mertonJumpPath({ seed: seed + 1, S0: 100, lambda: 1.2, T: 1, steps: 126 }),
+      ou: Q.ouPath({ seed: seed + 2, theta: 1.2, mu: 0.04, sigma: 0.02, T: 3, steps: 200 }),
+      heston: Q.hestonPath({ seed: seed + 3, T: 1, steps: 126 }),
+    });
+  };
+
+  useEffect(() => { runBook(); /* eslint-disable-next-line */ }, []);
+
+  const pct = (x) => (x == null || !isFinite(x)) ? "—" : (x * 100).toFixed(1) + "%";
+  const tabs = [
+    { k: "book", t: "BOOK" }, { k: "cycles", t: "CYCLES" }, { k: "stoch", t: "STOCH" }, { k: "entropy", t: "ENTROPY" },
+    { k: "opt", t: "OPTIONS" }, { k: "chaos", t: "CHAOS" }, { k: "game", t: "GAME" },
+    { k: "ml", t: "ML/RL" }, { k: "rotate", t: "ROTATE" },
+  ];
+
+  if (!Q) {
+    return <div className="fade" style={{ padding: 16 }}><div className="lbl">quant-engine.js failed to load</div></div>;
+  }
+
+  const spark = (arr, w, h, color) => {
+    if (!arr || arr.length < 2) return null;
+    var min = Math.min.apply(null, arr), max = Math.max.apply(null, arr);
+    var span = max - min || 1;
+    var pts = arr.map(function (v, i) {
+      var x = (i / (arr.length - 1)) * (w - 4) + 2;
+      var y = h - 2 - ((v - min) / span) * (h - 4);
+      return x + "," + y;
+    }).join(" ");
+    return <svg width={w} height={h} style={{ display: "block" }}><polyline fill="none" stroke={color || "var(--acc)"} strokeWidth="1.4" points={pts} /></svg>;
+  };
+
+  return (
+    <div className="fade" style={{ padding: "4px 16px 20px" }}>
+      <SectionLabel n="Ω" t="QUANT LAB — GOD TIER" />
+      <div className="card" style={{ padding: 14 }}>
+        <Ticks />
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.55 }}>
+          Hedge-fund primitives on-device: mean-variance · risk parity · Kelly · CVaR · BS greeks · 4y BTC cycle · mid/long periodogram · Engle–Granger cointegration · RS rotation vs BTC∧SPX · Heston · entropy/LLN · chaos · Nash · OLS/MLP · Q-learning. Research/education — not advice.
+        </div>
+        <div className="row" style={{ marginTop: 10, gap: 8 }}>
+          <div style={{ flex: 1 }}>
+            <div className="lbl" style={{ fontSize: 8 }}>SEED</div>
+            <input className="in" style={{ padding: "8px 9px" }} type="number" value={seed} onChange={e => setSeed(+e.target.value || 1)} />
+          </div>
+          <button className="btn" style={{ flex: 1.2, marginTop: 14 }} onClick={runBook}>{busy === "portfolio" ? "COMPUTING…" : "REBUILD BOOK"}</button>
+        </div>
+        <div className="lbl" style={{ marginTop: 8 }}>engine v{Q.version}</div>
+      </div>
+
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginTop: 10 }}>
+        {tabs.map(t => (
+          <button key={t.k} className="chip" style={{ cursor: "pointer", borderColor: tab === t.k ? "var(--acc)" : "var(--line2)", color: tab === t.k ? "var(--acc)" : "var(--dim)" }} onClick={() => {
+            setTab(t.k);
+            if (t.k === "entropy" && !lln) runLln();
+            if (t.k === "chaos" && !chaos) runChaos();
+            if (t.k === "game" && !game) runGame();
+            if (t.k === "opt" && !opt) { runOpt(); runBond(); }
+            if (t.k === "ml" && !rl) { runMl(); runRl(); }
+            if (t.k === "stoch" && !stoch) runStoch();
+            if (t.k === "cycles" && !cycles) runCycles();
+            if (t.k === "rotate" && !suite) runBook();
+          }}>{t.t}</button>
+        ))}
+      </div>
+
+      {tab === "book" && suite && (
+        <>
+          <SectionLabel n="Σ" t="PORTFOLIO ENGINEER" />
+          {Object.keys(suite.books).map(k => {
+            const b = suite.books[k];
+            return (
+              <div key={k} className="card" style={{ padding: 12, marginTop: 8 }}>
+                <Ticks />
+                <div className="lbl">{k.replace(/([A-Z])/g, " $1").toUpperCase()}</div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 8 }}>
+                  <Stat k="μ" v={pct(b.mu)} color="var(--acc)" />
+                  <Stat k="σ" v={pct(b.vol)} />
+                  <Stat k="SHARPE" v={b.sharpe.toFixed(2)} color={b.sharpe > 0.5 ? "var(--ok)" : "var(--warn)"} />
+                  <Stat k="CVaR 5%" v={pct(b.cvar5)} color="var(--acc2)" />
+                  <Stat k="H (ENTROPY)" v={b.entropy.toFixed(2)} />
+                  <Stat k="EFF. BETS" v={b.effectiveBets.toFixed(2)} color="var(--acc)" />
+                </div>
+                <div style={{ marginTop: 8, display: "flex", gap: 4, flexWrap: "wrap" }}>
+                  {suite.universe.names.map((n, i) => (
+                    <span key={n} className="chip" style={{ fontSize: 8 }}>{n} {(b.weights[i] * 100).toFixed(0)}%</span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>// demo 4-asset universe (equity/credit/commodity/hedge) with Cholesky-correlated returns. long-only MV / RP / max-Sharpe / ¼-Kelly.</div>
+        </>
+      )}
+
+      {tab === "cycles" && (
+        <>
+          <SectionLabel n="₿" t="4Y CRYPTO · MID/LONG CYCLES · COINTEGRATION" />
+          <button className="btn" onClick={runCycles}>{busy === "cycles" ? "SIMULATING…" : "RUN CYCLE DESK"}</button>
+          {cycles && <>
+            <div className="card" style={{ padding: 14, marginTop: 8 }}>
+              <Ticks />
+              <div className="row"><div className="lbl">BTC HALVING CYCLE</div><span className="chip" style={{ borderColor: "var(--acc)", color: "var(--acc)" }}>{cycles.cycle.risk}</span></div>
+              <div className="big" style={{ fontSize: 20, marginTop: 8 }}>{cycles.cycle.phase}</div>
+              <div style={{ height: 8, background: "var(--bg)", border: "1px solid var(--line)", marginTop: 10 }}>
+                <div style={{ height: "100%", width: (cycles.cycle.progress * 100) + "%", background: "var(--acc)" }} />
+              </div>
+              <div className="row" style={{ marginTop: 8 }}>
+                <div className="lbl">{cycles.cycle.daysSince}D SINCE {cycles.cycle.lastHalving}</div>
+                <div className="lbl">{cycles.cycle.daysToNext}D → {cycles.cycle.nextHalving}</div>
+              </div>
+            </div>
+
+            <SectionLabel n="∿" t="BTC MID / LONG CYCLE SPECTRUM" />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              <Stat k="TREND (50/200)" v={cycles.btcCycles.trend} color="var(--acc)" />
+              <Stat k="1Y TRAIL" v={cycles.btcCycles.trailing1y != null ? pct(cycles.btcCycles.trailing1y) : "—"} />
+            </div>
+            {(cycles.btcCycles.dominantCycles || []).slice(0, 4).map((d, i) => (
+              <div key={i} className="card" style={{ padding: "10px 12px", marginTop: 6 }}>
+                <div className="row">
+                  <div className="lbl">{d.band}</div>
+                  <div className="mono-tab" style={{ fontSize: 12 }}>{d.periodDays.toFixed(0)}D · {(d.periodYears).toFixed(2)}Y</div>
+                </div>
+              </div>
+            ))}
+
+            <SectionLabel n="⊥" t="RELATIVE STRENGTH VS BTC / SPX" />
+            {Object.keys(cycles.rs).map(k => {
+              const r = cycles.rs[k];
+              return (
+                <div key={k} className="card" style={{ padding: 12, marginTop: 6 }}>
+                  <Ticks />
+                  <div className="row">
+                    <div className="lbl">{k.replace("_", " / ")}</div>
+                    <div className="chip" style={{ borderColor: r.outperforming ? "var(--ok)" : "var(--acc2)", color: r.outperforming ? "var(--ok)" : "var(--acc2)" }}>{r.outperforming ? "LEADING" : "LAGGING"}</div>
+                  </div>
+                  <div className="big mono-tab" style={{ fontSize: 22, marginTop: 6 }}>{r.latest.toFixed(3)}×</div>
+                  {spark(r.path.filter(function (_, i) { return i % 8 === 0; }), 300, 40, r.outperforming ? "var(--ok)" : "var(--acc2)")}
+                </div>
+              );
+            })}
+
+            <SectionLabel n="∫" t="COINTEGRATION (ENGLE–GRANGER)" />
+            {Object.keys(cycles.pairs).map(k => {
+              const p = cycles.pairs[k];
+              return (
+                <div key={k} className="card" style={{ padding: 12, marginTop: 6 }}>
+                  <Ticks />
+                  <div className="row">
+                    <div className="lbl">{k.replace("_", " ~ ")}</div>
+                    <div className="chip" style={{ borderColor: p.cointegrated5 ? "var(--ok)" : p.cointegrated10 ? "var(--warn)" : "var(--line2)", color: p.cointegrated5 ? "var(--ok)" : p.cointegrated10 ? "var(--warn)" : "var(--dim)" }}>
+                      {p.cointegrated5 ? "COINT 5%" : p.cointegrated10 ? "COINT 10%" : "NO COINT"}
+                    </div>
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 8 }}>
+                    <Stat k="β HEDGE" v={p.hedgeRatio.toFixed(3)} />
+                    <Stat k="ADF" v={p.adfStat.toFixed(2)} />
+                    <Stat k="Z-SCORE" v={p.zscore.toFixed(2)} color={Math.abs(p.zscore) > 1.5 ? "var(--acc)" : "var(--txt)"} />
+                  </div>
+                  {p.residualHalfLife != null && <div className="lbl" style={{ marginTop: 6 }}>residual half-life ≈ {p.residualHalfLife.toFixed(0)}D · R² {p.r2.toFixed(3)}</div>}
+                </div>
+              );
+            })}
+
+            <SectionLabel n="↻" t="ROTATE TO ASSETS BEATING BTC ∧ SPX" />
+            <div className="card" style={{ padding: 14, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">LEADERS</div>
+              <div style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap" }}>
+                {(cycles.rotation.leaders.length ? cycles.rotation.leaders : ["(none beating both — using top scores)"]).map(n => (
+                  <span key={n} className="chip" style={{ borderColor: "var(--acc)", color: "var(--acc)" }}>{n}</span>
+                ))}
+              </div>
+              <div className="lbl" style={{ marginTop: 12 }}>CYCLE-AWARE WEIGHTS · ALT BUDGET {pct(cycles.rotation.altBudget)}</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+                {Object.keys(cycles.rotation.weights).map(k => (
+                  <Stat key={k} k={k} v={pct(cycles.rotation.weights[k])} color={k === "CASH" || k === "BTC" ? "var(--warn)" : "var(--ok)"} />
+                ))}
+              </div>
+            </div>
+            {cycles.rotation.ranking.map(r => (
+              <div key={r.name} className="card" style={{ padding: "10px 12px", marginTop: 6 }}>
+                <div className="row">
+                  <div style={{ fontWeight: 700, fontSize: 13 }}>{r.name}</div>
+                  <div className="lbl">score {r.score.toFixed(3)}</div>
+                </div>
+                <div className="row" style={{ marginTop: 4 }}>
+                  <div className="lbl">vs BTC {r.vsBtc.toFixed(3)}× {r.beatBtc ? "▲" : "▼"}</div>
+                  <div className="lbl">vs SPX {r.vsSpx.toFixed(3)}× {r.beatSpx ? "▲" : "▼"}</div>
+                </div>
+              </div>
+            ))}
+            <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>{cycles.rotation.note}</div>
+          </>}
+        </>
+      )}
+
+      {tab === "stoch" && (
+        <>
+          <SectionLabel n="∂" t="STOCHASTIC CALCULUS" />
+          {!stoch && <button className="btn" onClick={runStoch}>SIMULATE PATHS</button>}
+          {stoch && <>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">GBM</div>{spark(stoch.gbm, 320, 64, "var(--acc)")}<div className="lbl" style={{ marginTop: 4 }}>S_T = {stoch.gbm[stoch.gbm.length - 1].toFixed(2)}</div></div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">MERTON JUMP-DIFFUSION</div>{spark(stoch.jump, 320, 64, "var(--warn)")}<div className="lbl" style={{ marginTop: 4 }}>S_T = {stoch.jump[stoch.jump.length - 1].toFixed(2)}</div></div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">HESTON STOCHASTIC VOL — SPOT</div>{spark(stoch.heston.S, 320, 64, "var(--ok)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">HESTON — VARIANCE</div>{spark(stoch.heston.v, 320, 48, "var(--blue)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">ORNSTEIN–UHLENBECK (MEAN REVERSION)</div>{spark(stoch.ou, 320, 48, "var(--dim)")}</div>
+          </>}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10 }}>// Itô GBM · compensated jumps · CIR-like vol with leverage effect (ρ&lt;0) · OU residual.</div>
+        </>
+      )}
+
+      {tab === "entropy" && (
+        <>
+          <SectionLabel n="H" t="ENTROPY · LAW OF LARGE NUMBERS" />
+          <button className="btn btn-ghost" onClick={runLln}>RUN LLN EXPERIMENT</button>
+          {lln && <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              <Stat k="TRUE μ" v={pct(lln.trueMu)} />
+              <Stat k="X̄ FINAL" v={pct(lln.finalMean)} color="var(--acc)" />
+              <Stat k="|X̄−μ|" v={pct(lln.finalError)} color="var(--warn)" />
+              <Stat k="CHEBYSHEV n (ε=2%)" v={Math.ceil(lln.chebyshevBound(0.02)).toLocaleString()} sub="P≥ε bound" />
+            </div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">RUNNING MEAN CONVERGENCE</div>{spark(lln.runningMean, 320, 70, "var(--acc)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">ABSOLUTE ERROR → 0</div>{spark(lln.absError, 320, 50, "var(--acc2)")}</div>
+          </>}
+          {suite && <div style={{ marginTop: 8 }}><Stat k="MAX-SHARPE EFF. BETS" v={suite.books.maxSharpe.effectiveBets.toFixed(2)} color="var(--acc)" sub={"H = " + suite.books.maxSharpe.entropy.toFixed(3) + " nats"} /></div>}
+        </>
+      )}
+
+      {tab === "opt" && (
+        <>
+          <SectionLabel n="Δ" t="OPTIONS · HEDGE LEG · CONVEXITY" />
+          <button className="btn btn-ghost" onClick={() => { runOpt(); runBond(); }}>PRICE + HEDGE</button>
+          {opt && <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              <Stat k="CALL PRICE" v={opt.bs.price.toFixed(2)} color="var(--acc)" />
+              <Stat k="DELTA" v={opt.bs.delta.toFixed(3)} />
+              <Stat k="GAMMA" v={opt.bs.gamma.toFixed(4)} />
+              <Stat k="VEGA /1%" v={opt.bs.vega.toFixed(3)} />
+              <Stat k="THETA /DAY" v={opt.bs.theta.toFixed(3)} color="var(--warn)" />
+              <Stat k="RHO /1%" v={opt.bs.rho.toFixed(3)} />
+            </div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">DELTA HEDGE LEG (SHORT 1 CALL ×100)</div>
+              <div className="big mono-tab" style={{ fontSize: 28, marginTop: 6 }}>{opt.hedge.shares.toFixed(1)} <span style={{ fontSize: 12, color: "var(--dim)" }}>SHARES</span></div>
+              <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 6 }}>{opt.hedge.note}</div>
+            </div>
+          </>}
+          {bond && <>
+            <SectionLabel n="∂²" t="BOND DURATION / CONVEXITY" />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              <Stat k="PRICE" v={bond.price.toFixed(2)} />
+              <Stat k="MACAULAY" v={bond.macaulay.toFixed(2) + "y"} />
+              <Stat k="MODIFIED" v={bond.modified.toFixed(2)} />
+              <Stat k="CONVEXITY" v={bond.convexity.toFixed(2)} color="var(--acc)" />
+            </div>
+          </>}
+        </>
+      )}
+
+      {tab === "chaos" && (
+        <>
+          <SectionLabel n="λ" t="CHAOS THEORY" />
+          <button className="btn btn-ghost" onClick={runChaos}>INTEGRATE</button>
+          {chaos && <>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">LOGISTIC MAP r=3.9</div>{spark(chaos.logistic, 320, 64, "var(--acc)")}</div>
+            <Stat k="LYAPUNOV EXPONENT" v={chaos.lyapunov.toFixed(3)} color={chaos.lyapunov > 0 ? "var(--acc2)" : "var(--ok)"} sub={chaos.lyapunov > 0 ? "chaotic (λ>0)" : "stable"} />
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">LORENZ — X</div>{spark(chaos.lorenz.x, 320, 56, "var(--warn)")}</div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}><Ticks /><div className="lbl">LORENZ — Z</div>{spark(chaos.lorenz.z, 320, 56, "var(--ok)")}</div>
+          </>}
+        </>
+      )}
+
+      {tab === "game" && (
+        <>
+          <SectionLabel n="Γ" t="GAME THEORY" />
+          <button className="btn btn-ghost" onClick={runGame}>SOLVE NASH</button>
+          {game && <>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">HAWK–DOVE (ESS)</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+                <Stat k="P(HAWK)" v={pct(game.hawk.nash.p[0])} color="var(--acc)" />
+                <Stat k="VALUE" v={game.hawk.nash.value.toFixed(3)} />
+              </div>
+            </div>
+            <div className="card" style={{ padding: 12, marginTop: 8 }}>
+              <Ticks />
+              <div className="lbl">ALLOCATION VS MARKET (AGGRESSIVE / DEFENSIVE)</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+                <Stat k="P(AGGRESSIVE)" v={pct(game.alloc.nash.p[0])} color="var(--acc)" />
+                <Stat k="P(BULL) COL" v={pct(game.alloc.nash.q[0])} />
+                <Stat k="GAME VALUE" v={pct(game.alloc.nash.value)} />
+              </div>
+            </div>
+          </>}
+        </>
+      )}
+
+      {tab === "ml" && (
+        <>
+          <SectionLabel n="∇" t="ML · DL · RL" />
+          <div className="row" style={{ gap: 8 }}>
+            <button className="btn" style={{ flex: 1 }} onClick={runMl}>{busy === "ml" ? "…" : "TRAIN ML"}</button>
+            <button className="btn btn-ghost" style={{ flex: 1 }} onClick={runRl}>{busy === "rl" ? "…" : "TRAIN RL"}</button>
+          </div>
+          {ml && <>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              <Stat k="OLS R²" v={ml.ols ? ml.ols.r2.toFixed(3) : "—"} color="var(--acc)" />
+              <Stat k="OLS β₁ (MOM)" v={ml.ols ? ml.ols.beta[1].toFixed(3) : "—"} />
+              <Stat k="LOGIT P(edge)" v={ml.logistic ? ml.logistic.predict([1, 0.03, 0.12]).toFixed(3) : "—"} />
+              <Stat k="MLP ŷ" v={ml.mlpPred != null ? ml.mlpPred.toFixed(4) : "—"} color="var(--ok)" />
+            </div>
+          </>}
+          {rl && <>
+            <SectionLabel n="π" t="RL POLICY" />
+            <div className="card" style={{ padding: 12 }}>
+              <Ticks />
+              <div className="lbl">Q-LEARN CAPITAL POSTURE</div>
+              {Object.keys(rl.ql.policy).map(s => (
+                <div key={s} className="row" style={{ marginTop: 6 }}>
+                  <div className="lbl" style={{ color: "var(--txt)" }}>{s}</div>
+                  <div className="chip" style={{ borderColor: "var(--acc)", color: "var(--acc)" }}>{rl.ql.policy[s]}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+              {rl.bandit.values.map((v, i) => <Stat key={i} k={"UCB ARM " + i} v={pct(v)} sub={rl.bandit.counts[i] + " pulls"} />)}
+            </div>
+          </>}
+          <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10 }}>// OLS · L2-logistic · 1-hidden tanh MLP · UCB1 bandit · tabular Q-learning on Bull/Chop/Bear MDP.</div>
+        </>
+      )}
+
+      {tab === "rotate" && suite && (
+        <>
+          <SectionLabel n="↻" t="CAPITAL ROTATION ENGINEER" />
+          <div className="card" style={{ padding: 14 }}>
+            <Ticks />
+            <div className="lbl">REGIME</div>
+            <div className="big" style={{ fontSize: 32, marginTop: 6, color: "var(--acc)" }}>{suite.rotation.regime}</div>
+            <div className="lbl" style={{ marginTop: 6 }}>sharpe proxy {suite.rotation.sharpeProxy.toFixed(2)}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 12 }}>
+              {Object.keys(suite.rotation.weights).map(k => (
+                <Stat key={k} k={k.toUpperCase()} v={pct(suite.rotation.weights[k])} color={k === "hedge" ? "var(--ok)" : "var(--txt)"} />
+              ))}
+            </div>
+            <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 10, lineHeight: 1.5 }}>{suite.rotation.note}</div>
+          </div>
+        </>
+      )}
+
+      <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 16, lineHeight: 1.6 }}>
+        // god-tier mathematics for research and education. models are wrong; some are useful. survival still outranks elegance. not financial advice.
+      </div>
+    </div>
+  );
+}
+
 /* ============================ NAV ============================ */
 function Nav({ view, setView }) {
   const items = [
     { k: "home", i: LayoutGrid, t: "HOME" }, { k: "ledger", i: Wallet, t: "LEDGER" },
     { k: "goals", i: Target, t: "GOALS" }, { k: "quant", i: Activity, t: "QUANT" },
-    { k: "live", i: TrendingUp, t: "LIVE" },   // real-time tickers, news, data for analysis + agents
+    { k: "lab", i: Flame, t: "LAB" },
+    { k: "live", i: TrendingUp, t: "LIVE" },
     { k: "coach", i: Sparkles, t: "COACH" }, { k: "vet", i: Scale, t: "VET" }, { k: "fortress", i: Shield, t: "FLOOR" }, { k: "set", i: Settings2, t: "CONFIG" },
   ];
   return (
@@ -2049,7 +2500,7 @@ try {
   console.error("Failed to mount BEDROCK app:", e);
   const rootEl = document.getElementById("root");
   if (rootEl) {
-    rootEl.innerHTML = '<div style="color:#FF4D14; padding: 40px; font-family: monospace; text-align:center;">' +
+    rootEl.innerHTML = '<div style="color:#FF4D00; padding: 40px; font-family: monospace; text-align:center;">' +
       '<div style="font-size:18px;margin-bottom:12px">Error starting the app</div>' +
       '<div style="font-size:12px;opacity:0.8">Check the browser console (Cmd+Option+I or F12) for details.<br>' +
       'Common causes: slow/unavailable unpkg CDNs for React or Babel, or a JS syntax issue.<br>' +

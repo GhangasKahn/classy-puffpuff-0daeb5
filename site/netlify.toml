@@ -1,10 +1,9 @@
-# Netlify — monorepo root
-# Publishes the site/ tree (landing + PWA). Backend deploys separately via Wrangler.
-
+# BEDROCK — Netlify configuration
 [build]
-  publish = "site"
+  publish = "."
   command = ""
 
+# service worker must never be cached stale, and must serve as JS
 [[headers]]
   for = "/app/service-worker.js"
   [headers.values]
@@ -16,6 +15,7 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+# sensible security headers (no strict CSP: the app loads CDN + fonts + inline)
 [[headers]]
   for = "/*"
   [headers.values]

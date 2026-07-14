@@ -1,0 +1,2 @@
+SESSION_SECRET=dev-session-secret-replace-me-with-openssl-rand
+KEK_B64=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
