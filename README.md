@@ -1,0 +1,41 @@
+# BEDROCK — The Unreliable Ledger
+
+A zero-trust, zero-knowledge personal finance system. Every balance, forecast, and
+assumption stands trial — guilty until verified. Built as a local-first PWA with an
+optional end-to-end-encrypted sync backend. **The app never moves money.**
+
+## Structure
+
+| Path | What it is |
+|---|---|
+| `site/` | Deployable web root: cinematic landing (`index.html`) + production PWA (`app/`). Drop on Netlify/Cloudflare Pages as-is (`netlify.toml` included). |
+| `backend/` | Cloudflare Worker: WebAuthn passkey auth + zero-knowledge vault sync (D1 + KV). See its `README.md` and `ZERO-KNOWLEDGE-DOCTRINE.md`. Deploy per `docs/BEDROCK-Deploy-and-Activate.md`. |
+| `sim/` | Design-spec simulations. Placeholder for v6 visual-system experiments. |
+| `docs/` | Architecture, deploy runbook, and operating notes. |
+| `legacy/` | Earlier experiments kept for reference only. |
+
+## Principles (the short version)
+
+Solvency before optimization. The floor is sacred. Every purchase stands trial.
+No unsourced claim survives. Backtests are guilty until proven innocent.
+Forecasts are distributions, not promises. The user owns the vault.
+
+## Crypto posture
+
+Client-side PBKDF2 (600k iterations, OWASP minimum) + AES-256-GCM. Passkeys
+authenticate to the service; the passphrase decrypts the vault. **Zero-knowledge
+means zero recovery** — lose the passphrase, lose the vault. That is the design.
+
+Read `backend/PRIVACY.md` and `backend/ZERO-KNOWLEDGE-DOCTRINE.md` before changing
+anything that touches identity, logging, or ciphertext.
+
+## Quick start
+
+**Site (Netlify / Pages):** publish the `site/` directory. Landing at `/`, PWA at `/app/`.
+
+**Backend (Cloudflare Worker):** see `backend/README.md` — create D1 + KV, set secrets,
+migrate, deploy, smoke-check `/healthz`.
+
+## Disclaimer
+
+Research and education only. Nothing here is financial, legal, or tax advice.
