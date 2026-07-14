@@ -36,6 +36,11 @@ anything that touches identity, logging, or ciphertext.
 **Backend (Cloudflare Worker):** see `backend/README.md` — create D1 + KV, set secrets,
 migrate, deploy, smoke-check `/healthz`.
 
+**Production gate:** `docs/PRODUCTION-CHECKLIST.md`.
+
+**Client ONLINE panel (Config → ONLINE):** passkey register/login + encrypted vault
+push/pull against Phase 0+1. Sovereign (offline) remains the default.
+
 ## Disclaimer
 
 Research and education only. Nothing here is financial, legal, or tax advice.

@@ -6,7 +6,7 @@
 
 import { handleAuth } from "./auth";
 import { handleVault } from "./vault";
-import { Env, corsHeaders, err, json } from "./util";
+import { Env, corsHeaders, err, json, nowSec } from "./util";
 
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
@@ -47,6 +47,18 @@ export default {
       // No error bodies with internals; nothing logged (observability.enabled=false)
       return withCors(err(500, "internal"), cors);
     }
+  },
+
+  /** Daily purge of expired security-inbox rows — no activity logs retained. */
+  async scheduled(
+    _controller: ScheduledController,
+    env: Env,
+    _ctx: ExecutionContext
+  ): Promise<void> {
+    if (!env.DB) return;
+    await env.DB.prepare(`DELETE FROM security_inbox WHERE expires_at < ?`)
+      .bind(nowSec())
+      .run();
   },
 } satisfies ExportedHandler<Env>;
 

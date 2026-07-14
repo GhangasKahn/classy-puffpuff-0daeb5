@@ -73,6 +73,10 @@ curl https://bedrock-api.<your-subdomain>.workers.dev/healthz
 
 ## Honest status
 
-Syntax- and type-checked. **The first deploy is the first runtime test.** Nothing here
-can touch your existing PWA data until the client ONLINE panel is wired — safe order:
-deploy → smoke checks → wire client with an encrypted `.bdv` export in hand first.
+Type-checked + unit-tested conflict/CORS/prune logic. Client SDK (`site/app/bedrock-api.js`)
+wires passkey auth and padded vault push/pull. **First Cloudflare deploy is still the first
+full runtime test** for WebAuthn ceremonies. Safe order: deploy → smoke checks → register on a
+throwaway vault with a local `.bdv` export in hand.
+
+See `../docs/PRODUCTION-CHECKLIST.md`.
+

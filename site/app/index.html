@@ -35,6 +35,7 @@
 <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<script src="./bedrock-api.js"></script>
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useRef, useMemo } = React;
 
@@ -379,60 +380,40 @@ async function _deriveKey(pass, salt, iters) {
   return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: iters, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
 }
 async function encryptVault(pass, obj) {
-  const iters = 250000;
+  // Prefer production client (600k PBKDF2 + pad buckets); fall back for older sessions
+  if (window.BedrockAPI && window.BedrockAPI.encryptPayload) {
+    return window.BedrockAPI.encryptPayload(pass, obj);
+  }
+  const iters = 600000;
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await _deriveKey(pass, salt, iters);
   const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(JSON.stringify(obj)));
-  return { app: "BEDROCK", v: 1, alg: "AES-256-GCM", kdf: "PBKDF2-SHA256", iters, salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
+  return { app: "BEDROCK", v: 2, alg: "AES-256-GCM", kdf: "PBKDF2-SHA256", iters, salt: _b64(salt), iv: _b64(iv), ct: _b64(ct) };
 }
 async function decryptVault(pass, blob) {
-  const key = await _deriveKey(pass, _unb64(blob.salt), blob.iters || 250000);
+  if (window.BedrockAPI && window.BedrockAPI.decryptPayload) {
+    return window.BedrockAPI.decryptPayload(pass, blob);
+  }
+  const key = await _deriveKey(pass, _unb64(blob.salt), blob.iters || 600000);
   const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: _unb64(blob.iv) }, key, _unb64(blob.ct));
   return JSON.parse(new TextDecoder().decode(pt));
 }
 
-/* ============================ OPTIONAL CLOUD (BEDROCK-API) ============================ */
-/* Zero-trust: only ever send already-encrypted blobs (your existing encryptVault) or raw sim params.
-   The server cannot read your numbers. This is completely optional. */
-const CLOUD_DEFAULT = { url: "http://localhost:8787", token: "", userId: "", enabled: false };
+/* ============================ ONLINE SYNC (BEDROCK Phase 0+1) ============================ */
+/* Passkey auth + Tier-1 vault sync. Server stores ciphertext only. Completely optional. */
+const CLOUD_DEFAULT = { url: "http://localhost:8787", access_token: "", refresh_token: "", userId: "", device_id: "", enabled: false, lastSync: null, vaultVersion: 0 };
 
-function getCloud() { try { return JSON.parse(localStorage.getItem("bd_cloud")) || { ...CLOUD_DEFAULT }; } catch (e) { return { ...CLOUD_DEFAULT }; } }
-function setCloud(c) { try { localStorage.setItem("bd_cloud", JSON.stringify(c)); } catch (e) {} }
-
-async function cloudAuth() {
-  const c = getCloud(); if (!c.url) return { ok: false, error: "no backend" };
-  try {
-    const r = await fetch(c.url.replace(/\/$/, "") + "/v1/auth/anonymous", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
-    const j = await r.json(); if (!j.token) throw new Error("no token");
-    const nc = { ...c, token: j.token, userId: j.userId, enabled: true }; setCloud(nc); return { ok: true, ...j };
-  } catch (e) { return { ok: false, error: String(e) }; }
+function getCloud() {
+  if (window.BedrockAPI) return Object.assign({}, CLOUD_DEFAULT, window.BedrockAPI.getSession());
+  try { return Object.assign({}, CLOUD_DEFAULT, JSON.parse(localStorage.getItem("bd_cloud") || "{}")); } catch (e) { return { ...CLOUD_DEFAULT }; }
 }
-async function cloudListPlans() {
-  const c = getCloud(); if (!c.token) return [];
-  try { const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans", { headers: { Authorization: "Bearer " + c.token } }); if (!r.ok) return []; return (await r.json()).plans || []; } catch (e) { return []; }
+function setCloud(c) {
+  if (window.BedrockAPI) { window.BedrockAPI.setSession(c); return; }
+  try { localStorage.setItem("bd_cloud", JSON.stringify(c)); } catch (e) {}
 }
-async function cloudPushPlan(name, encryptedState) {
-  const c = getCloud(); if (!c.token) throw new Error("not connected");
-  const body = { name: name || "Main Vault", encryptedState: typeof encryptedState === "string" ? encryptedState : JSON.stringify(encryptedState), meta: { source: "app" } };
-  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + c.token }, body: JSON.stringify(body) });
-  if (!r.ok) throw new Error(await r.text());
-  const j = await r.json();
-  // Track last successful push for UX (simple, local only)
-  const nc = { ...c, lastSync: Date.now() };
-  setCloud(nc);
-  // If the caller is using the React state, it will pick it up on next render via getCloud in other places
-  return j;
-}
-async function cloudGetPlan(id) {
-  const c = getCloud(); if (!c.token) throw new Error("not connected");
-  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/plans/" + id, { headers: { Authorization: "Bearer " + c.token } });
-  if (!r.ok) throw new Error("not found"); return r.json();
-}
-async function cloudForge(params) {
-  const c = getCloud(); if (!c.token) throw new Error("not connected");
-  const r = await fetch(c.url.replace(/\/$/, "") + "/v1/compute/survival", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + c.token }, body: JSON.stringify({ params }) });
-  if (!r.ok) throw new Error(await r.text()); return r.json();
+async function cloudForge() {
+  throw new Error("server compute removed — Phase 0+1 is vault sync only (sovereign mode)");
 }
 
 const DEFAULTS = {
@@ -626,7 +607,7 @@ function App() {
         {view === "fortress" && <FortressView D={D} settings={settings} />}
         {view === "coach" && <Coach D={D} rank={rank} settings={settings} goals={goals} />}
         {view === "vet" && <PurchaseAdvisor settings={settings} D={D} />}
-        {view === "set" && <SettingsView settings={settings} setSettings={setSettings} cloud={cloud} />}
+        {view === "set" && <SettingsView settings={settings} setSettings={setSettings} cloud={cloud} setCloudState={setCloudState} />}
       </div>
       <Nav view={view} setView={setView} />
     </div>
@@ -647,7 +628,7 @@ function Header({ rank, streak }) {
         <div style={{ textAlign: "right" }}>
           <div className="row" style={{ gap: 6, justifyContent: "flex-end" }}>
             <span className="rec" /><span className="lbl lbl-acc">LIVE</span>
-            {cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "1px 5px", borderColor: "var(--ok)", color: "var(--ok)" }}>CLOUD</span>}
+            {cloud.enabled && <span className="chip" style={{ fontSize: 9, padding: "1px 5px", borderColor: "var(--ok)", color: "var(--ok)" }}>ONLINE</span>}
           </div>
           <div className="lbl mono-tab" style={{ marginTop: 4 }}>{clock.toLocaleTimeString("en", { hour12: false })}</div>
         </div>
@@ -1368,17 +1349,8 @@ function Quant({ settings, holdings, setHoldings, D }) {
         <div className="lbl" style={{ marginTop: 10 }}>μ {(settings.ret * 100).toFixed(0)}%/yr · σ {(settings.vol * 100).toFixed(0)}%/yr · start {fmtk(D.P0 + D.invMv)}</div>
         <div className="row" style={{ gap: 8, marginTop: 12 }}>
           <button className="btn" style={{ flex: 1 }} onClick={run}>{running ? "COMPUTING…" : "▶ RUN (CLIENT)"}</button>
-          {cloud.enabled && <button className="btn btn-ghost" style={{ flex: 1 }} onClick={async () => {
-            try {
-              const P0 = D.P0 + D.invMv;
-              const params = { initialCapital: P0, monthlySurplus: settings.contribution, expectedAnnualReturn: settings.ret, annualVolatility: settings.vol, horizonYears: hz, nPaths: 25000, crashProbPerYear: 0.08, crashMagnitude: -0.40 };
-              const res = await cloudForge(params);
-              // Store extra verification fields for future "verify receipt" UI / standalone check
-              setSim({ ...res.result, _forge: true, _sig: res.signature, _pub: res.publicKey, _alg: res.alg, _signedAt: res.signedAt });
-            } catch (e) { alert("forge failed: " + e.message); }
-          }}>☁ RUN ON FORGE (25k)</button>}
         </div>
-        {sim && sim._forge && <div className="lbl" style={{ color: "var(--ok)", marginTop: 6 }}>server result shown — compare to a client run</div>}
+        <div className="lbl" style={{ color: "var(--faint)", marginTop: 6 }}>monte carlo runs on-device — server forge retired (sovereign mode)</div>
       </div>
 
       {sim && <>
@@ -1629,7 +1601,7 @@ function Coach({ D, rank, settings, goals }) {
 function NumField({ label, k, mul = 1, s, set }) {
   return <Field label={label}><input className="in" type="number" inputMode="decimal" defaultValue={mul === 1 ? s[k] : (s[k] * mul)} onBlur={e => set({ ...s, [k]: (+e.target.value || 0) / mul })} /></Field>;
 }
-function SettingsView({ settings, setSettings, cloud }: { settings: any; setSettings: any; cloud?: any }) {
+function SettingsView({ settings, setSettings, cloud, setCloudState }) {
   const [theme, setThemeState] = useState(() => { try { return localStorage.getItem("bd_theme") || "dark"; } catch (e) { return "dark"; } });
   const setTheme = (t) => { setThemeState(t); try { localStorage.setItem("bd_theme", t); } catch (e) {} document.documentElement.setAttribute("data-theme", t); const m = document.querySelector("meta[name=theme-color]"); if (m) m.setAttribute("content", t === "light" ? "#F2EEE4" : "#0A0A0A"); };
   const ACC = ["#FF4D14", "#FF2D2D", "#46E0A0", "#3A86FF", "#FFB000", "#FFFFFF"];
@@ -1766,98 +1738,102 @@ function SettingsView({ settings, setSettings, cloud }: { settings: any; setSett
 
       <SectionLabel n="◈" t="SECURITY / ENCRYPTED BACKUP" />
 
-      {/* ===================== CLOUD SYNC (optional, zero-trust) ===================== */}
-      <SectionLabel n="☁" t="CLOUD SYNC — OPTIONAL" />
+      {/* ===================== ONLINE — passkey + Tier-1 vault sync ===================== */}
+      <SectionLabel n="☁" t="ONLINE — PASSKEY VAULT SYNC" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
         <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.55 }}>
-          Your numbers never leave encrypted. We store only ciphertext + a title you choose. Connect for multi-device or remote backup. Disable anytime — your local data is untouched.
+          Optional multi-device sync. Passkey authenticates the transport; your passphrase encrypts the vault on-device (PBKDF2 600k + AES-GCM, size-padded). The server stores ciphertext only — zero knowledge, zero recovery.
         </div>
 
         <div style={{ marginTop: 12 }}>
-          <div className="lbl">BACKEND</div>
-          <input className="in" value={cloud.url} onChange={e => { const nc = { ...cloud, url: e.target.value }; setCloudState(nc); setCloud(nc); }} placeholder="http://localhost:8787" />
+          <div className="lbl">BACKEND URL</div>
+          <input className="in" value={cloud.url || ""} onChange={e => { const nc = { ...cloud, url: e.target.value }; setCloudState(nc); setCloud(nc); }} placeholder="https://bedrock-api.example.workers.dev" />
         </div>
 
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
           {!cloud.enabled ? (
-            <button className="btn" onClick={async () => {
-              const res = await cloudAuth();
-              if (res.ok) { const nc = getCloud(); setCloudState(nc); setSecMsg("connected. token stored on this device."); }
-              else setSecMsg("connect failed: " + (res.error || "check url / cors"));
-            }}>CONNECT (ANONYMOUS)</button>
+            <>
+              <button className="btn" onClick={async () => {
+                try {
+                  setSecMsg("checking backend…");
+                  if (!window.BedrockAPI) throw new Error("client SDK missing");
+                  setCloud({ ...getCloud(), url: cloud.url });
+                  await window.BedrockAPI.healthz();
+                  setSecMsg("register passkey…");
+                  const s = await window.BedrockAPI.register();
+                  setCloudState(s); setSecMsg("registered. passkey is your login — passphrase still decrypts the vault.");
+                } catch (e) { setSecMsg("register failed: " + (e.message || e)); }
+              }}>REGISTER PASSKEY</button>
+              <button className="btn btn-ghost" onClick={async () => {
+                try {
+                  if (!window.BedrockAPI) throw new Error("client SDK missing");
+                  setCloud({ ...getCloud(), url: cloud.url });
+                  setSecMsg("asserting passkey…");
+                  const s = await window.BedrockAPI.login();
+                  setCloudState(s); setSecMsg("signed in.");
+                } catch (e) { setSecMsg("login failed: " + (e.message || e)); }
+              }}>LOGIN WITH PASSKEY</button>
+            </>
           ) : (
-            <div className="row" style={{ gap: 8 }}>
-              <div className="chip" style={{ borderColor: "var(--ok)", color: "var(--ok)" }}>CONNECTED</div>
-              <button className="btn btn-ghost" onClick={() => { const nc = { ...cloud, enabled: false, token: "", userId: "" }; setCloudState(nc); setCloud(nc); setSecMsg("disconnected (local data safe)"); }}>DISCONNECT</button>
+            <div className="row" style={{ gap: 8, width: "100%", flexWrap: "wrap" }}>
+              <div className="chip" style={{ borderColor: "var(--ok)", color: "var(--ok)" }}>ONLINE</div>
+              <div className="lbl" style={{ fontSize: 9 }}>uid {String(cloud.userId || "").slice(0, 10)}…</div>
+              <button className="btn btn-ghost" onClick={async () => {
+                try { if (window.BedrockAPI) await window.BedrockAPI.logout(); } catch (e) {}
+                const nc = { ...CLOUD_DEFAULT, url: cloud.url }; setCloudState(nc); setCloud(nc); setSecMsg("signed out (local vault untouched)");
+              }}>SIGN OUT</button>
             </div>
           )}
         </div>
 
         {cloud.enabled && (
           <div style={{ marginTop: 14 }}>
-            {/* CLOUD INTEGRATION — Phase 0 polish: lastSync + clear zero-trust language */}
+            <div style={{ fontSize: 10, color: "var(--faint)", marginBottom: 8 }}>Uses the backup passphrase below (min 8 chars). Export a local .bdv first.</div>
             <button className="btn" onClick={async () => {
               try {
-                setSecMsg("encrypting current state…");
-                const full = collectAll();
-                const blob = await encryptVault(bkPass || "temp", full);   // re-uses your existing E2EE
-                await cloudPushPlan("Main State", JSON.stringify(blob));
-                const ls = getCloud().lastSync;
-                setSecMsg("pushed encrypted state to cloud." + (ls ? " (last sync " + new Date(ls).toLocaleTimeString() + ")" : ""));
-              } catch (e) { setSecMsg("push failed: " + e.message); }
-            }}>↑ PUSH ENCRYPTED STATE</button>
+                if (!bkPass || bkPass.length < 8) { setSecMsg("set a backup passphrase (≥8) before pushing"); return; }
+                setSecMsg("encrypting + padding vault…");
+                const data = await window.BedrockAPI.pushVault(bkPass, collectAll());
+                setCloudState(getCloud());
+                setSecMsg("pushed encrypted vault · version " + data.version);
+              } catch (e) { setSecMsg("push failed: " + (e.message || e)); }
+            }}>↑ PUSH ENCRYPTED VAULT</button>
 
             <div style={{ marginTop: 10 }}>
               <button className="btn btn-ghost" onClick={async () => {
-                const plans = await cloudListPlans();
-                if (!plans.length) { setSecMsg("no remote plans"); return; }
-                const latest = plans[0];
                 try {
-                  const p = await cloudGetPlan(latest.id);
-                  const blob = typeof p.plan.encryptedState === "string" ? JSON.parse(p.plan.encryptedState) : p.plan.encryptedState;
-                  if (!rsPass) { setSecMsg("enter your backup passphrase above to decrypt the pull"); return; }
-                  const data = await decryptVault(rsPass, blob);
-                  restoreAll(data);
-                  setSecMsg("restored from cloud. reloading…"); setTimeout(() => location.reload(), 600);
-                } catch (e) { setSecMsg("pull/decrypt failed: " + e.message); }
+                  if (!rsPass) { setSecMsg("enter restore passphrase to decrypt the pull"); return; }
+                  setSecMsg("pulling ciphertext…");
+                  const pulled = await window.BedrockAPI.pullVault(rsPass);
+                  if (pulled.empty) { setSecMsg("remote vault empty"); return; }
+                  restoreAll(pulled.state);
+                  setCloudState(getCloud());
+                  setSecMsg("restored version " + pulled.version + ". reloading…");
+                  setTimeout(() => location.reload(), 600);
+                } catch (e) { setSecMsg("pull/decrypt failed: " + (e.message || e)); }
               }}>↓ PULL LATEST & RESTORE</button>
             </div>
-            <div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 8 }}>uses the same AES-GCM + your backup passphrase. server sees only ciphertext. Full client math always works offline.</div>
-            {cloud.lastSync && <div className="lbl" style={{ marginTop: 6, fontSize: 9 }}>last push: {new Date(cloud.lastSync).toLocaleString()}</div>}
+            <div style={{ fontSize: 9.5, color: "var(--faint)", marginTop: 8 }}>sovereign by default. lose the passphrase and the vault is cryptographically gone — that is the design.</div>
+            {cloud.lastSync && <div className="lbl" style={{ marginTop: 6, fontSize: 9 }}>last sync: {new Date(cloud.lastSync).toLocaleString()} · v{cloud.vaultVersion || "?"}</div>}
           </div>
         )}
         {secMsg && <div style={{ fontSize: 10.5, color: "var(--dim)", marginTop: 8 }}>{secMsg}</div>}
       </div>
 
-      {/* Plaid / external account linking (optional, see zero-trust warnings in backend) */}
+      {/* Plaid deferred — Phase 3+ / recon mode (see ZERO-KNOWLEDGE-DOCTRINE) */}
       <SectionLabel n="🔗" t="LINK ACCOUNTS (PLAID)" />
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
         <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.5 }}>
-          Connect banks, brokerages, credit cards via Plaid. Data is fetched server-side then returned to *you* to merge into your local encrypted vault. The server does not keep your full financial picture.
+          Plaid is Phase 3+ (recon mode). It is the identified rail — linking a bank means Plaid knows who you are. Sovereign mode (manual entry + this vault sync) is the default. Not wired in this build.
         </div>
-        <button className="btn btn-ghost" style={{ marginTop: 10 }} onClick={async () => {
-          const b = (cloud && cloud.url) || "http://localhost:8787";
-          try {
-            const r = await fetch(`${b.replace(/\/$/, "")}/v1/plaid/create_link_token`, { method: "POST", headers: cloud?.token ? { Authorization: "Bearer " + cloud.token } : {} });
-            const j = await r.json();
-            if (j.linkToken) {
-              // For full experience load Plaid Link JS and call Plaid.create here.
-              // Minimal: show the token and instructions.
-              prompt("Plaid link_token (copy and use in a Plaid Link flow or quickstart):", j.linkToken);
-              alert("After you complete Plaid Link in their widget, POST the public_token to /v1/plaid/exchange_public_token on the backend, then use /sync to pull data.");
-            } else {
-              alert("Plaid not configured on backend or auth required. See bedrock-api/src/lib/plaid.ts");
-            }
-          } catch (e) { alert("Could not reach backend Plaid endpoint"); }
-        }}>GET PLAID LINK TOKEN</button>
-        <div style={{ fontSize: 10, color: "var(--faint)", marginTop: 8 }}>Full embedded Plaid Link widget + auto-sync into local holdings can be wired in a follow-up. Privacy.com and other providers follow the same pattern.</div>
+        <button className="btn btn-ghost" style={{ marginTop: 10 }} disabled>PLAID — COMING IN PHASE 3</button>
       </div>
 
       <div className="card" style={{ padding: 14 }}>
         <Ticks />
-        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>back up everything to a file only your passphrase can open — AES-256-GCM, key stretched with PBKDF2 (250k rounds). it encrypts here, on your device; nothing is uploaded. lose the passphrase and the backup is gone for good. that is the cost of true zero-knowledge: there is no reset, no recovery, no back door.</div>
+        <div style={{ fontSize: 11, color: "var(--dim)", lineHeight: 1.6 }}>back up everything to a file only your passphrase can open — AES-256-GCM, key stretched with PBKDF2 (600k rounds, OWASP). it encrypts here, on your device; nothing is uploaded. lose the passphrase and the backup is gone for good. that is the cost of true zero-knowledge: there is no reset, no recovery, no back door.</div>
         <div className="lbl" style={{ marginTop: 12 }}>BACKUP PASSPHRASE</div>
         <input className="in" type="password" placeholder="a strong passphrase only you know" value={bkPass} onChange={e => setBkPass(e.target.value)} style={{ marginTop: 6 }} />
         <button className="btn" style={{ marginTop: 10 }} onClick={exportEnc}><Lock size={12} style={{ verticalAlign: "-2px", marginRight: 6 }} />EXPORT ENCRYPTED BACKUP</button>

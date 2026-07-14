@@ -48,18 +48,18 @@ curl https://bedrock-api.<your-subdomain>.workers.dev/healthz
 
 Deploy `site/` to Netlify or Cloudflare Pages. Publish directory: `site` (or `.` if you deploy from inside `site/`).
 
-The PWA remains fully offline-capable. Sync / passkey login activates when the client
-is pointed at the Worker URL (next phase).
+In **Config → ONLINE**, set the Worker URL, register a passkey on that origin, then push/pull
+with your vault passphrase. Export a local `.bdv` first.
+
+The PWA remains fully offline-capable. Sync is optional.
 
 ## 4. Safety order
 
 1. Deploy backend → smoke checks
 2. Export encrypted `.bdv` from the PWA (always keep a local backup)
-3. Wire the client ONLINE panel
-4. Register a passkey on a throwaway vault first
+3. Register passkey on a throwaway vault first
+4. Push / pull round-trip before trusting multi-device
 
-## Honest status
+## 5. Production gate
 
-Phase 0+1 API is implemented: auth ceremonies, refresh rotation with theft detection,
-device list, sealed security inbox, and versioned vault sync (30-version history).
-Client wiring and Phase 3+ (Plaid / Coinbase recon) are not in this tree yet.
+Complete `docs/PRODUCTION-CHECKLIST.md` before treating a deploy as live.

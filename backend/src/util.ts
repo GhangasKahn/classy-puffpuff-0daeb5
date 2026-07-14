@@ -12,13 +12,8 @@ export interface Env {
 
 export type Json = Record<string, unknown>;
 
-export function dayUTC(d = new Date()): string {
-  return d.toISOString().slice(0, 10);
-}
-
-export function nowSec(): number {
-  return Math.floor(Date.now() / 1000);
-}
+export { dayUTC, nowSec, parseOriginList as parseOriginsList, pickCorsOrigin } from "./logic";
+import { dayUTC, nowSec, parseOriginList, pickCorsOrigin } from "./logic";
 
 /** Copy into a real ArrayBuffer so WebCrypto BufferSource typings are happy. */
 export function toArrayBuffer(u8: Uint8Array): ArrayBuffer {
@@ -78,18 +73,22 @@ export function err(status: number, code: string): Response {
 }
 
 export function parseOrigins(env: Env): string[] {
-  return env.APP_ORIGINS.split(",").map((s) => s.trim()).filter(Boolean);
+  return parseOriginList(env.APP_ORIGINS);
 }
 
 export function corsHeaders(origin: string | null, env: Env): HeadersInit {
   const allowed = parseOrigins(env);
-  const ok = origin && allowed.includes(origin) ? origin : allowed[0] ?? "";
+  const ok = pickCorsOrigin(origin, allowed);
   return {
     "access-control-allow-origin": ok,
-    "access-control-allow-credentials": "true",
     "access-control-allow-headers": "content-type, authorization",
     "access-control-allow-methods": "GET,POST,DELETE,OPTIONS",
-    "vary": "Origin",
+    "access-control-max-age": "600",
+    vary: "Origin",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "no-referrer",
+    "permissions-policy": "interest-cohort=()",
+    "cache-control": "no-store",
   };
 }
 

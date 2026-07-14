@@ -1,11 +1,5 @@
-/**
- * Tier-1 zero-knowledge vault sync.
- * Server stores ciphertext + IV + hash-of-ciphertext only.
- * Conflict-safe: client sends expected_base_version; 409 on mismatch.
- * Keeps last 30 versions per user.
- */
-
 import { requireUser } from "./auth";
+import { isBucketSized, resolveVaultConflict, versionsToPrune } from "./logic";
 import {
   Env,
   b64url,
@@ -26,8 +20,8 @@ async function pruneHistory(env: Env, userId: string): Promise<void> {
     .bind(userId)
     .all<{ version: number }>();
   const versions = (rows.results || []).map((r) => r.version);
-  if (versions.length <= HISTORY_KEEP) return;
-  const drop = versions.slice(HISTORY_KEEP);
+  const drop = versionsToPrune(versions, HISTORY_KEEP);
+  if (!drop.length) return;
   await env.DB.prepare(
     `DELETE FROM vault_versions WHERE user_id = ? AND version IN (${drop.map(() => "?").join(",")})`
   )
@@ -122,21 +116,22 @@ export async function handleVault(req: Request, env: Env, path: string): Promise
       .bind(auth.userId)
       .first<{ version: number }>();
     const current = latest?.version ?? 0;
-    if (current !== body.expected_base_version) {
-      return json(
-        { error: "conflict", current_version: current },
-        409
-      );
+    const decision = resolveVaultConflict(current, body.expected_base_version);
+    if (!decision.ok) {
+      return json({ error: "conflict", current_version: decision.current }, 409);
     }
 
     const ctBytes = fromB64url(body.ciphertext);
     const ivBytes = fromB64url(body.iv);
     if (ctBytes.length < 16 || ivBytes.length < 12) return err(400, "bad_request");
-    // Soft size guard (~2 MiB) — blobs should be padded client-side to buckets
     if (ctBytes.length > 2 * 1024 * 1024) return err(413, "too_large");
+    // Prefer doctrine pad buckets from the client SDK; accept during rollout
+    if (ctBytes.length >= 16 * 1024 && !isBucketSized(ctBytes.length)) {
+      return err(400, "bad_padding");
+    }
 
     const ctHash = await sha256Hex(ctBytes);
-    const next = current + 1;
+    const next = decision.next;
     try {
       await env.DB.prepare(
         `INSERT INTO vault_versions (user_id, version, ciphertext, iv, ct_hash, created_at)
@@ -145,7 +140,6 @@ export async function handleVault(req: Request, env: Env, path: string): Promise
         .bind(auth.userId, next, ctBytes, ivBytes, ctHash, nowSec())
         .run();
     } catch {
-      // concurrent writer
       const again = await env.DB.prepare(
         `SELECT version FROM vault_versions WHERE user_id = ? ORDER BY version DESC LIMIT 1`
       )

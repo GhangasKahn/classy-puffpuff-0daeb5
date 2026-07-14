@@ -6,6 +6,7 @@ backend/node_modules/
 backend/.wrangler/
 backend/dist/
 .dev.vars
+backend/.dev.vars
 .mf/
 
 # Env / secrets — never commit
