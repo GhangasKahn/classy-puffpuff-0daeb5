@@ -3,249 +3,266 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="description" content="Aegis Air — local-first wildfire smoke, wind, air quality and personal exposure-risk prototype." />
-<meta name="theme-color" content="#070b14" />
-<title>Aegis Air — Wildfire Smoke &amp; Personal Exposure Risk</title>
+<meta name="description" content="Aegis Air Field Intel — personal wildfire-smoke recon instrument: open-source satellite capture, on-device ML, transparent exposure scoring. Not a medical device." />
+<meta name="theme-color" content="#04070d" />
+<title>AEGIS AIR // FIELD INTEL — Personal Smoke Recon Instrument</title>
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" type="image/svg+xml" href="icon.svg" />
 <link rel="apple-touch-icon" href="icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@600;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- ======== emergency hard stop ======== -->
-<div id="emergencyOverlay" role="alertdialog" aria-label="Emergency warning">
-  <div class="inner">
-    <h2>⚠ Possible medical emergency</h2>
-    <p>You reported an emergency-level symptom (severe trouble breathing, chest pain or pressure,
-       bluish lips or face, or confusion). <strong>Stop using this app and get help now.</strong></p>
-    <a class="call" href="tel:911">Call 911</a>
-    <p class="small">Aegis Air is not a medical device and cannot assess an emergency.
-       Your entry was saved, but no exposure score is shown while emergency symptoms are reported.</p>
-    <button id="btnDismissEmergency">I understand — dismiss</button>
+<!-- boot sequence -->
+<div id="bootScreen" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-mark">◤ AEGIS AIR</div>
+    <div id="bootLog"></div>
   </div>
 </div>
 
-<!-- ======== app bar ======== -->
-<header class="appbar">
-  <div class="appbar-inner">
-    <div class="brand">
-      <svg class="logo" viewBox="0 0 512 512" aria-hidden="true">
-        <path d="M256 64 L416 122 V262 C416 358 348 418 256 452 C164 418 96 358 96 262 V122 Z"
-              fill="none" stroke="url(#lg)" stroke-width="34" stroke-linejoin="round"/>
-        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/>
-        </linearGradient></defs>
-        <path d="M160 220 h130 a26 26 0 1 0 -26 -26" fill="none" stroke="#a78bfa" stroke-width="30" stroke-linecap="round"/>
-        <path d="M150 285 h170 a26 26 0 1 1 -26 26" fill="none" stroke="#8b9cf9" stroke-width="30" stroke-linecap="round"/>
-        <path d="M180 348 h90" fill="none" stroke="#34d399" stroke-width="30" stroke-linecap="round"/>
-      </svg>
-      <div>
-        <div class="name"><span class="a">Aegis</span> <span class="b">Air</span></div>
-        <div class="sub">wildfire smoke &amp; exposure risk</div>
-      </div>
-    </div>
-    <div class="appbar-actions">
-      <span class="badge">MVP · not a medical device</span>
-      <button id="btnRefresh" class="icon-btn" title="Refresh data" aria-label="Refresh data">
-        <svg viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6M20 9A8 8 0 0 0 5.6 5.6L4 7m0 8 1.6 1.4A8 8 0 0 0 20 15"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
+<!-- emergency hard stop -->
+<div id="emergencyOverlay" role="alertdialog" aria-label="Emergency warning">
+  <div class="inner">
+    <h2>⚠ POSSIBLE MEDICAL EMERGENCY</h2>
+    <p>You reported an emergency-level symptom. <strong>Stop using this instrument and get help now.</strong></p>
+    <a class="call" href="tel:911">CALL 911</a>
+    <p class="small">Aegis is not a medical device and cannot assess an emergency. Your entry was saved.
+       No exposure score is shown while emergency symptoms are reported.</p>
+    <button id="btnDismissEmergency">I UNDERSTAND — DISMISS</button>
   </div>
-  <div class="locbar">
-    <svg viewBox="0 0 24 24" class="pin"><path d="M12 21s-7-5.1-7-11a7 7 0 1 1 14 0c0 5.9-7 11-7 11z M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"
-      fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-    <span id="whereLabel">Kenmore / Buffalo, NY (default)</span>
-    <button id="btnGeo" class="chip">Use my location</button>
-    <button id="btnDefault" class="chip">Reset</button>
-    <a href="../aegis-command/" class="chip" style="text-decoration:none">⌖ Command console</a>
-    <span class="status" id="statusLine" role="status">Loading…</span>
+</div>
+
+<header id="topbar">
+  <div class="brand">
+    <span class="mark">◤</span>
+    <span class="word">AEGIS AIR <b>// FIELD INTEL</b></span>
   </div>
-  <nav class="tabs" role="tablist" aria-label="Sections">
-    <button class="tab active" data-tab="dashboard" role="tab" aria-selected="true">
-      <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4zM4 20h6v-4H4zM14 20h6v-9h-6zM14 8h6V4h-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      <span>Dashboard</span></button>
-    <button class="tab" data-tab="map" role="tab" aria-selected="false">
-      <svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      <span>Map</span></button>
-    <button class="tab" data-tab="outlook" role="tab" aria-selected="false">
-      <svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 6-8 3 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <span>Outlook</span></button>
-    <button class="tab" data-tab="checkin" role="tab" aria-selected="false">
-      <svg viewBox="0 0 24 24"><path d="M20.8 8.6a5 5 0 0 0-8.1-1.6L12 7.7l-.7-.7a5 5 0 1 0-7.1 7.1L12 21.9l7.8-7.8a5 5 0 0 0 1-5.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      <span>Check-in</span></button>
-    <button class="tab" data-tab="history" role="tab" aria-selected="false">
-      <svg viewBox="0 0 24 24"><path d="M12 8v5l3 2M3.5 12a8.5 8.5 0 1 1 2.5 6M3 13l.6-3.4L7 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>History</span></button>
-  </nav>
+  <div class="top-status">
+    <span class="chip live"><i class="dot"></i>LIVE</span>
+    <span class="chip" id="whereChip">BUFFALO/KENMORE (DEFAULT)</span>
+    <span class="chip" id="zChip">Z —</span>
+  </div>
+  <div class="top-actions">
+    <button class="tbtn" id="btnGeo">GEOLOCATE</button>
+    <button class="tbtn" id="btnRefresh">RESYNC</button>
+    <a class="tbtn warn" href="../aegis-command/">COMMAND ↗</a>
+  </div>
 </header>
 
-<main class="container">
+<nav id="modnav" role="tablist" aria-label="Modules">
+  <button class="mod on" data-mod="overview" role="tab" aria-selected="true"><i>◎</i><span>OVERVIEW</span></button>
+  <button class="mod" data-mod="satrecon" role="tab"><i>◈</i><span>SAT RECON</span></button>
+  <button class="mod" data-mod="signals" role="tab"><i>∿</i><span>SIGNALS</span></button>
+  <button class="mod" data-mod="neural" role="tab"><i>⬡</i><span>NEURAL</span></button>
+  <button class="mod" data-mod="log" role="tab"><i>▤</i><span>LOG</span></button>
+</nav>
 
-  <!-- ================= DASHBOARD ================= -->
-  <section class="panel active" id="panel-dashboard" role="tabpanel">
-    <div class="grid">
+<main id="stage">
 
-      <div class="card hero wide">
-        <div class="hero-flex">
-          <div class="ring-wrap" aria-label="Personal exposure-risk score">
-            <svg viewBox="0 0 120 120" class="ring">
-              <circle class="track" cx="60" cy="60" r="52"/>
-              <circle class="prog" id="ringProg" cx="60" cy="60" r="52"/>
-            </svg>
-            <div class="ring-center">
-              <div class="num" id="scoreNum">–</div>
-              <div class="of">/ 100</div>
-            </div>
+  <!-- ==================== OVERVIEW ==================== -->
+  <section class="module on" id="mod-overview">
+    <div class="mgrid">
+      <div class="panel span2" id="scorePanel">
+        <div class="ptitle">PERSONAL EXPOSURE INDEX <span class="ptag">TRANSPARENT · 7 COMPONENTS · NOT MEDICAL</span></div>
+        <div class="score-flex">
+          <div class="gauge-wrap big">
+            <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="g-track"/><circle cx="60" cy="60" r="50" class="g-val" id="scoreArc"/></svg>
+            <div class="gauge-center"><span id="scoreNum">—</span><small>/ 100</small></div>
           </div>
-          <div class="hero-text">
-            <h2>Personal exposure-risk score</h2>
-            <div class="score-cat" id="scoreCat">Calculating…</div>
+          <div class="score-side">
+            <div class="score-cat" id="scoreCat">CALCULATING…</div>
             <p class="score-msg" id="scoreMsg"></p>
-            <details class="components">
-              <summary>How this number is built</summary>
-              <table class="comp" id="compTable">
-                <thead><tr><th>Component</th><th>Basis</th><th class="r">Points</th></tr></thead>
-                <tbody></tbody>
-              </table>
-            </details>
+            <button class="linkbtn" id="btnComp">▸ COMPONENT BREAKDOWN</button>
           </div>
         </div>
+        <div id="compBox" hidden><table class="comp" id="compTable"><tbody></tbody></table></div>
       </div>
 
-      <div class="card">
-        <h2 class="card-title">Current air &amp; weather <span class="pill">CAMS / Open-Meteo model</span></h2>
-        <div class="metric-grid">
-          <div class="metric"><div class="v" id="curAqi">–</div><div class="l">US AQI</div><div id="aqiChip"></div></div>
-          <div class="metric"><div class="v" id="curPm25">–</div><div class="l">PM2.5 µg/m³</div></div>
-          <div class="metric"><div class="v" id="curAod">–</div><div class="l">Aerosol optical depth</div></div>
-          <div class="metric"><div class="v" id="curTemp">–</div><div class="l">Temp °C</div></div>
-          <div class="metric"><div class="v" id="curRh">–</div><div class="l">Humidity %</div></div>
+      <div class="panel" id="briefPanel">
+        <div class="ptitle">INTEL BRIEFING <span class="ptag">AUTO-GENERATED · RULE ENGINE</span></div>
+        <div id="briefing" class="brief">COMPILING…</div>
+      </div>
+
+      <div class="panel">
+        <div class="ptitle">TELEMETRY <span class="ptag">CAMS / OPEN-METEO</span></div>
+        <div class="cells">
+          <div class="cell"><span class="cl">US AQI</span><span class="cv big" id="vAqi">—</span><span id="aqiBadge"></span></div>
+          <div class="cell"><span class="cl">PM2.5</span><span class="cv" id="vPm">—</span></div>
+          <div class="cell"><span class="cl">AOD</span><span class="cv" id="vAod">—</span></div>
+          <div class="cell"><span class="cl">WIND</span><span class="cv" id="vWind">—</span></div>
+          <div class="cell"><span class="cl">TEMP</span><span class="cv" id="vTemp">—</span></div>
+          <div class="cell"><span class="cl">RH</span><span class="cv" id="vRh">—</span></div>
         </div>
       </div>
 
-      <div class="card">
-        <h2 class="card-title">Wind</h2>
-        <div class="wind-flex">
-          <div class="compass" aria-hidden="true">
-            <span class="pt n">N</span><span class="pt s">S</span><span class="pt e">E</span><span class="pt w">W</span>
-            <div class="arrow" id="windArrow"></div>
-          </div>
-          <div>
-            <div class="metric"><div class="v" id="windSpeed">–</div><div class="l">km/h <span id="windMph"></span></div></div>
-            <div class="metric mt"><div class="v sm" id="windDirTxt">–</div><div class="l">blowing from → toward</div></div>
-            <div class="l mt" id="windGust"></div>
-          </div>
+      <div class="panel">
+        <div class="ptitle">ANOMALY SENTINEL <span class="ptag">ON-DEVICE · Z-SCORE VS 7-DAY BASELINE</span></div>
+        <div class="sentinel">
+          <span class="sent-state" id="sentState">—</span>
+          <span class="sent-detail" id="sentDetail">awaiting history…</span>
         </div>
       </div>
 
-      <div class="card">
-        <h2 class="card-title">Wildfire context <span class="pill">NASA EONET · ≤ 2,600 km</span></h2>
-        <div class="metric-grid two">
-          <div class="metric"><div class="v" id="fireCount">–</div><div class="l">open events in range</div></div>
-          <div class="metric"><div class="v sm" id="nearestFire">–</div><div class="l">nearest event</div></div>
+      <div class="panel span2">
+        <div class="ptitle">FIRE RECON <span class="ptag">EONET ≤ 2,600 KM · K-MEANS CLUSTERS</span></div>
+        <div class="cells">
+          <div class="cell"><span class="cl">EVENTS</span><span class="cv big" id="vFires">—</span></div>
+          <div class="cell"><span class="cl">UPWIND ±45°</span><span class="cv big warn" id="vUpwind">—</span></div>
+          <div class="cell wide"><span class="cl">NEAREST</span><span class="cv sm" id="vNearest">—</span></div>
         </div>
-        <div class="note" id="fireUpwind"></div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ================= MAP ================= -->
-  <section class="panel" id="panel-map" role="tabpanel">
-    <div class="card wide flush">
-      <div id="map"></div>
-      <div class="card-pad">
-        <div class="legend">
-          <span><span class="sw fire"></span>EONET wildfire event</span>
-          <span><span class="sw me"></span>Your location</span>
-          <span><span class="sw plume"></span>Downwind plume proxy (opacity ∝ PM2.5)</span>
-        </div>
-        <p class="disclaimer">The plume wedge is a visual proxy computed from local wind direction/speed and current
-          particle burden only. It is <strong>not</strong> NOAA HRRR-Smoke or HYSPLIT transport modeling.</p>
+        <div id="clusterList" class="clusters"></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= OUTLOOK ================= -->
-  <section class="panel" id="panel-outlook" role="tabpanel">
-    <div class="card wide">
-      <h2 class="card-title">72-hour outlook</h2>
-      <div class="seg" role="group" aria-label="Chart metric">
-        <button class="seg-btn active" data-metric="pm2_5">PM2.5</button>
-        <button class="seg-btn" data-metric="us_aqi">US AQI</button>
-        <button class="seg-btn" data-metric="aerosol_optical_depth">Aerosol optical depth</button>
+  <!-- ==================== SAT RECON ==================== -->
+  <section class="module" id="mod-satrecon">
+    <div class="panel flush satwrap">
+      <div class="ptitle pad">ORBITAL IMAGERY <span class="ptag">NASA GIBS · MODIS / VIIRS · NO KEY</span></div>
+      <div class="satbar">
+        <select id="satLayer" aria-label="Satellite layer">
+          <option value="VIIRS_SNPP_CorrectedReflectance_TrueColor">VIIRS SNPP · TRUE COLOR</option>
+          <option value="VIIRS_NOAA20_CorrectedReflectance_TrueColor">VIIRS NOAA-20 · TRUE COLOR</option>
+          <option value="MODIS_Terra_CorrectedReflectance_TrueColor">MODIS TERRA · TRUE COLOR</option>
+          <option value="MODIS_Terra_CorrectedReflectance_Bands721">MODIS 7-2-1 · BURN/SMOKE</option>
+        </select>
+        <button class="sbtn on" id="btnAod">AOD OVERLAY</button>
+        <button class="sbtn on" id="btnFireOv">FIRE MARKERS</button>
+        <button class="sbtn capture" id="btnCapture">⬇ CAPTURE FRAME</button>
       </div>
-      <canvas id="chart" height="280"></canvas>
-      <p class="disclaimer">Modeled CAMS forecast via Open-Meteo. Not regulatory (EPA AirNow) observations.</p>
+      <div id="satmap"></div>
+      <div class="satdeck">
+        <button id="btnSatPlay" title="Animate the last 10 days">▶</button>
+        <input type="range" id="satSlider" min="0" max="9" value="9" aria-label="Imagery date" />
+        <span id="satDate">—</span>
+      </div>
+      <p class="foot">IMAGERY: NASA GIBS / WORLDVIEW — TERRA, SUOMI-NPP &amp; NOAA-20 PASSES (DAILY, ~3H LATENCY). CAPTURE COMPOSES VISIBLE TILES TO PNG WITH METADATA STAMP.</p>
     </div>
   </section>
 
-  <!-- ================= CHECK-IN ================= -->
-  <section class="panel" id="panel-checkin" role="tabpanel">
-    <div class="grid">
-      <div class="card">
-        <h2 class="card-title">Sensitivity profile <span class="pill">conservative by design</span></h2>
+  <!-- ==================== SIGNALS ==================== -->
+  <section class="module" id="mod-signals">
+    <div class="panel">
+      <div class="ptitle">CONTINUOUS SIGNAL — PM2.5 <span class="ptag">7D HISTORY · CAMS T+72H · NEURAL T+24H</span></div>
+      <canvas id="timeline" height="240"></canvas>
+      <div class="legendrow">
+        <span><i class="sw" style="background:#2ee6ff"></i>OBSERVED (MODEL HISTORY)</span>
+        <span><i class="sw" style="background:#8f7bff"></i>CAMS FORECAST</span>
+        <span><i class="sw" style="background:#ffb454"></i>ON-DEVICE NOWCAST</span>
+        <span><i class="sw" style="background:#ff4655"></i>ANOMALY</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">DETECTED EVENTS <span class="ptag">SENTINEL LOG</span></div>
+      <div id="eventList" class="events"></div>
+    </div>
+  </section>
+
+  <!-- ==================== NEURAL ==================== -->
+  <section class="module" id="mod-neural">
+    <div class="mgrid">
+      <div class="panel span2 disclaimer-panel">
+        <div class="ptitle warn">MODEL TRANSPARENCY CONTRACT</div>
+        <p class="foot big">Every model below runs in this browser, on your device. Weights are printed. Nothing is uploaded.
+        These are pattern finders on modeled environmental data and your own logs — <strong>not medical inference, not diagnosis.</strong></p>
+      </div>
+
+      <div class="panel">
+        <div class="ptitle">NOWCAST ENGINE <span class="ptag">RIDGE REGRESSION · RETRAINED ON LOAD</span></div>
+        <div class="cells">
+          <div class="cell"><span class="cl">STATUS</span><span class="cv" id="ncStatus">TRAINING…</span></div>
+          <div class="cell"><span class="cl">HOLDOUT RMSE</span><span class="cv" id="ncRmse">—</span></div>
+          <div class="cell"><span class="cl">T+24H PEAK</span><span class="cv" id="ncPeak">—</span></div>
+        </div>
+        <div class="weights" id="ncWeights">—</div>
+        <p class="foot">FEATURES: LAG-1H · LAG-2H · LAG-24H · 6H TREND · HOUR-OF-DAY (SIN/COS). TRAINED ON THE PAST 7 DAYS OF CAMS PM2.5 AT YOUR POSITION.</p>
+      </div>
+
+      <div class="panel">
+        <div class="ptitle">ANOMALY SENTINEL <span class="ptag">ROBUST Z-SCORE</span></div>
+        <div class="cells">
+          <div class="cell"><span class="cl">CURRENT Z</span><span class="cv big" id="azScore">—</span></div>
+          <div class="cell"><span class="cl">THRESHOLD</span><span class="cv">2.0σ</span></div>
+          <div class="cell"><span class="cl">BASELINE</span><span class="cv" id="azBase">—</span></div>
+        </div>
+        <p class="foot">CURRENT PM2.5 COMPARED AGAINST THE SAME-HOUR DISTRIBUTION OF THE PAST 7 DAYS (MEDIAN/MAD). FLAGS UNUSUAL SMOKE, NOT CAUSE.</p>
+      </div>
+
+      <div class="panel span2">
+        <div class="ptitle">PERSONAL PATTERN LEARNER <span class="ptag">LOGISTIC REGRESSION · YOUR CHECK-INS ONLY</span></div>
+        <div id="pplBody">
+          <div class="cells">
+            <div class="cell"><span class="cl">STATUS</span><span class="cv" id="pplStatus">—</span></div>
+            <div class="cell"><span class="cl">TRAINING SET</span><span class="cv" id="pplN">—</span></div>
+            <div class="cell"><span class="cl">FIT ACCURACY</span><span class="cv" id="pplAcc">—</span></div>
+          </div>
+          <div class="weights" id="pplWeights">—</div>
+          <div class="trainbar"><div id="pplProgress"></div></div>
+          <p class="foot">LEARNS WHICH EXPOSURE FEATURES (PM2.5 AT LOG TIME · HR DEVIATION · OUTDOOR MINUTES) CO-OCCUR WITH YOUR REPORTED RESPIRATORY SYMPTOMS.
+          NEEDS ≥ 8 VARIED CHECK-INS TO TRAIN. EXPERIMENTAL — PATTERNS ARE CORRELATION, NEVER DIAGNOSIS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LOG ==================== -->
+  <section class="module" id="mod-log">
+    <div class="mgrid">
+      <div class="panel">
+        <div class="ptitle">SENSITIVITY PROFILE <span class="ptag">CONSERVATIVE BY DESIGN</span></div>
         <div id="profileChecks"></div>
-        <label class="inline mt">Resting heart-rate baseline (bpm)
-          <input type="number" id="hrBaseline" min="30" max="140" placeholder="e.g. 62" />
-        </label>
-        <button class="primary mt" id="btnSaveProfile">Save profile</button>
+        <label class="inline">RESTING HR BASELINE (BPM)<input type="number" id="hrBaseline" min="30" max="140" placeholder="62" /></label>
+        <button class="primary" id="btnSaveProfile">SAVE PROFILE</button>
       </div>
 
-      <div class="card">
-        <h2 class="card-title">Check-in — symptoms &amp; vitals</h2>
-        <fieldset><legend>Symptoms now</legend><div id="symptomChecks"></div></fieldset>
-        <fieldset class="emergency"><legend>Emergency symptoms</legend><div id="emergencyChecks"></div></fieldset>
+      <div class="panel">
+        <div class="ptitle">FIELD CHECK-IN <span class="ptag">FEEDS THE PATTERN LEARNER</span></div>
+        <fieldset><legend>SYMPTOMS NOW</legend><div id="symptomChecks"></div></fieldset>
+        <fieldset class="emergency"><legend>EMERGENCY SYMPTOMS</legend><div id="emergencyChecks"></div></fieldset>
         <div class="formrow">
-          <label class="inline">Heart rate (bpm)<input type="number" id="ciHr" min="30" max="240" /></label>
-          <label class="inline">SpO₂ % <small>(recorded, never scored)</small><input type="number" id="ciSpo2" min="50" max="100" /></label>
-          <label class="inline">Minutes outdoors today<input type="number" id="ciOutdoor" min="0" max="1440" /></label>
+          <label class="inline">HEART RATE<input type="number" id="ciHr" min="30" max="240" /></label>
+          <label class="inline">SPO₂ % <small>(NEVER SCORED)</small><input type="number" id="ciSpo2" min="50" max="100" /></label>
+          <label class="inline">MIN OUTDOORS<input type="number" id="ciOutdoor" min="0" max="1440" /></label>
         </div>
-        <label class="inline">Notes<textarea id="ciNotes" rows="2" placeholder="optional"></textarea></label>
-        <button class="primary mt" id="btnSaveCheckin">Save check-in</button>
+        <label class="inline">NOTES<textarea id="ciNotes" rows="2"></textarea></label>
+        <button class="primary" id="btnSaveCheckin">LOG ENTRY</button>
+      </div>
+
+      <div class="panel span2">
+        <div class="ptitle">ARCHIVE <span class="ptag">LOCAL ONLY · NOTHING UPLOADED</span></div>
+        <div class="btnrow">
+          <button id="btnExport">⬇ EXPORT JSON</button>
+          <button class="danger" id="btnClear">DELETE ALL LOCAL DATA</button>
+        </div>
+        <div id="historyList"></div>
       </div>
     </div>
   </section>
-
-  <!-- ================= HISTORY ================= -->
-  <section class="panel" id="panel-history" role="tabpanel">
-    <div class="card wide">
-      <h2 class="card-title">History &amp; your data</h2>
-      <div class="btnrow">
-        <button id="btnExport">⬇ Export everything as JSON</button>
-        <button class="danger" id="btnClear">Delete all local data</button>
-      </div>
-      <div id="historyList"></div>
-      <p class="disclaimer">All health data stays in this browser's local storage unless you export it. Nothing is uploaded.</p>
-    </div>
-  </section>
-
-  <footer>
-    <details>
-      <summary><strong>Important limitations</strong></summary>
-      <ul>
-        <li>This is not a medical device and does not diagnose illness.</li>
-        <li>NASA EONET is a curated event catalog, not a complete satellite hotspot feed.</li>
-        <li>The plume shape is a visual proxy from local wind and particle burden — not HRRR-Smoke or HYSPLIT.</li>
-        <li>Open-Meteo/CAMS values are modeled data, not EPA AirNow regulatory observations.</li>
-        <li>SpO₂ is recorded but deliberately not interpreted or scored. Heart rate is used only as a relative deviation from your entered baseline.</li>
-      </ul>
-    </details>
-    <p>Data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo Weather</a> ·
-    <a href="https://open-meteo.com/en/docs/air-quality-api" target="_blank" rel="noopener">Open-Meteo Air Quality (CAMS)</a> ·
-    <a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener">NASA EONET v3</a> ·
-    <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> tiles.</p>
-  </footer>
 </main>
+
+<footer id="statusbar">
+  <div class="src" id="srcRow">
+    <span data-src="wx"><i class="dot"></i>MET</span>
+    <span data-src="aq"><i class="dot"></i>CAMS</span>
+    <span data-src="eonet"><i class="dot"></i>EONET</span>
+    <span data-src="gibs"><i class="dot"></i>GIBS</span>
+    <span data-src="ml"><i class="dot"></i>NEURAL</span>
+  </div>
+  <div class="legal">MODELED DATA · ON-DEVICE ML · NOT A MEDICAL DEVICE</div>
+</footer>
 
 <div id="toast" role="status"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="app.js" defer></script>
+<script src="ml.js" defer></script>
+<script src="sat.js" defer></script>
+<script src="core.js" defer></script>
 </body>
 </html>
