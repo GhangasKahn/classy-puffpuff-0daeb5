@@ -731,7 +731,13 @@ function renderFireList() {
     </div>`;
   }).join("");
   host.querySelectorAll(".fire-row").forEach(row => {
-    const go = () => { const f = S.fires.find(x => x.id === row.dataset.id); if (f) { lockFire(f); S.map.flyTo([f.lat, f.lon], 7, { duration: 1.2 }); } };
+    const go = () => {
+      const f = S.fires.find(x => x.id === row.dataset.id);
+      if (!f) return;
+      lockFire(f);
+      if (S.view === "tactical" && S.map) S.map.flyTo([f.lat, f.lon], 7, { duration: 1.2 });
+      else if (S.globe) S.globe.pointOfView({ lat: f.lat, lng: f.lon, altitude: 0.9 }, 1200);
+    };
     row.addEventListener("click", go);
     row.addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
   });
