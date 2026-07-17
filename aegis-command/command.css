@@ -116,8 +116,31 @@ body::after{
 .alert-row .al-area{color:var(--dim);font-size:9px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .empty-note{color:var(--dim);font-size:10px;padding:8px 4px}
 
-/* ---------- map ---------- */
+/* ---------- view switch ---------- */
+.viewswitch{display:flex;border:1px solid var(--hair2)}
+.vbtn{padding:5px 10px;font-size:10px;letter-spacing:.12em;color:var(--dim);transition:all .15s}
+.vbtn.on{background:var(--cyan);color:var(--void)}
+.vbtn:not(.on):hover{color:var(--ink)}
+
+/* ---------- globe + map ---------- */
+#globe{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,#0a1730 0%,#04070d 60%)}
+#globe canvas{outline:none}
+.globe-tip{
+  background:#060a13ee!important;border:1px solid var(--hair2);color:var(--ink);
+  font:10px "IBM Plex Mono",monospace;padding:6px 8px;max-width:240px;
+}
 #map{position:absolute;inset:0;background:#04070d}
+
+/* ---------- time deck (4D scrub) ---------- */
+#timedeck{
+  position:absolute;left:50%;bottom:40px;transform:translateX(-50%);z-index:820;
+  display:flex;align-items:center;gap:10px;width:min(560px,72%);
+  background:#060a13e6;border:1px solid var(--hair2);padding:7px 12px;
+}
+#btnPlay{color:var(--cyan);font-size:12px;border:1px solid var(--hair2);width:26px;height:22px;line-height:1}
+#btnPlay:hover{background:var(--cyan);color:var(--void)}
+#timeSlider{flex:1;accent-color:#2ee6ff;height:3px;cursor:pointer}
+#timeLabel{color:var(--amber);font-size:9px;letter-spacing:.14em;white-space:nowrap;min-width:92px;text-align:right}
 #windCanvas{position:absolute;inset:0;z-index:400;pointer-events:none}
 .leaflet-container{background:#04070d;font:inherit}
 .leaflet-control-attribution{background:#060a13cc!important;color:var(--dim)!important;font-size:9px!important}
@@ -215,20 +238,36 @@ body::after{
 .wire-card .wc-meta b{color:var(--cyan);font-weight:400}
 
 #castPanel{min-width:0}
-#castStage{flex:1;min-height:0;position:relative;border:1px solid var(--hair);background:#000}
-#castStage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.cast-fallback{
-  position:absolute;left:0;right:0;bottom:0;z-index:2;text-align:center;
-  background:#04070dd9;color:var(--dim);font-size:8.5px;letter-spacing:.12em;padding:3px 6px;
+#castWall{
+  flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;
 }
-.cast-fallback:hover{color:var(--cyan)}
-#castPoster{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:
+.cast-cell{
+  position:relative;border:1px solid var(--hair);background:
     repeating-linear-gradient(0deg,transparent 0 3px,#0a111f 3px 4px),
     radial-gradient(ellipse at center,#0d1830 0%,#04070d 80%);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;
 }
-.cast-hint{color:var(--dim);font-size:10px;letter-spacing:.2em;animation:blink 2s infinite}
+.cast-cell.sel{border-color:var(--cyan);box-shadow:inset 0 0 0 1px var(--cyan)}
+.cast-cell iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cast-cell .cast-src{
+  position:absolute;left:0;top:0;z-index:2;background:#04070dd9;color:var(--cyan);
+  font-size:7.5px;letter-spacing:.12em;padding:2px 5px;pointer-events:none;
+}
+.cast-fallback{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;text-align:center;
+  background:#04070dd9;color:var(--dim);font-size:8px;letter-spacing:.1em;padding:2px 4px;
+}
+.cast-fallback:hover{color:var(--cyan)}
+.cast-hint{color:var(--dim);font-size:8.5px;letter-spacing:.16em;animation:blink 2s infinite;text-align:center;padding:4px}
+#castCustom{display:flex;gap:4px;margin-top:5px;flex:0 0 auto}
+#customFeed{
+  flex:1;background:var(--panel2);border:1px solid var(--hair);color:var(--ink);
+  font:9px "IBM Plex Mono",monospace;padding:5px 7px;letter-spacing:.04em;
+}
+#customFeed::placeholder{color:#3d5170}
+#customFeed:focus{outline:none;border-color:var(--cyan)}
+#btnArm{border:1px solid var(--hair2);color:var(--amber);font-size:9px;letter-spacing:.14em;padding:0 12px}
+#btnArm:hover{background:var(--amber);color:var(--void)}
 #castChannels{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;flex:0 0 auto}
 .cast-btn{
   border:1px solid var(--hair2);padding:4px 8px;font-size:9px;letter-spacing:.1em;color:var(--dim);
@@ -270,7 +309,9 @@ body::after{
   #frame{
     display:flex;flex-direction:column;height:auto;
   }
-  #mapwrap{order:0;height:58vh;position:relative}
+  #mapwrap{order:0;height:62vh;position:relative}
+  #timedeck{bottom:14px;width:88%}
+  #castWall{min-height:230px}
   #left{order:1;border-right:none;border-top:1px solid var(--hair)}
   #right{order:2;border-left:none;border-top:1px solid var(--hair)}
   #bottom{order:3;grid-template-columns:1fr}

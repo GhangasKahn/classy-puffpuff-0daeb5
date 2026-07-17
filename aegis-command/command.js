@@ -22,14 +22,41 @@ const CHANNELS = [
   { id: "UCoMdktPbSTixAyNGwb-UYkQ", name: "SKY NEWS" },
 ];
 
+/* rough country centroids for the GDELT media-density globe layer */
+const COUNTRY_LL = {
+  "United States": [39.8, -98.6], "Canada": [56.1, -106.3], "Australia": [-25.3, 133.8],
+  "United Kingdom": [54.0, -2.5], "India": [21.0, 78.0], "France": [46.6, 2.4],
+  "Germany": [51.1, 10.4], "Spain": [40.2, -3.6], "Portugal": [39.6, -8.0],
+  "Greece": [39.0, 22.0], "Italy": [42.8, 12.8], "Turkey": [39.0, 35.2],
+  "Russia": [61.5, 105.0], "China": [35.0, 103.0], "Japan": [36.2, 138.3],
+  "Brazil": [-14.2, -51.9], "Mexico": [23.6, -102.5], "Chile": [-35.7, -71.5],
+  "Argentina": [-38.4, -63.6], "South Africa": [-30.6, 22.9], "Indonesia": [-2.5, 118.0],
+  "Malaysia": [4.2, 101.9], "Thailand": [15.9, 100.9], "Philippines": [12.9, 121.8],
+  "New Zealand": [-41.8, 172.8], "South Korea": [36.5, 127.9], "Ireland": [53.4, -8.2],
+  "Netherlands": [52.1, 5.3], "Belgium": [50.6, 4.5], "Sweden": [62.2, 17.6],
+  "Norway": [64.5, 11.7], "Finland": [64.9, 26.3], "Poland": [51.9, 19.1],
+  "Ukraine": [48.4, 31.2], "Israel": [31.4, 35.0], "Saudi Arabia": [24.0, 45.0],
+  "United Arab Emirates": [23.9, 54.3], "Egypt": [26.8, 30.8], "Nigeria": [9.1, 8.7],
+  "Kenya": [0.0, 37.9], "Pakistan": [30.4, 69.4], "Bangladesh": [23.7, 90.4],
+  "Vietnam": [15.9, 107.8], "Singapore": [1.35, 103.8], "Colombia": [4.6, -74.1],
+  "Peru": [-9.2, -75.0], "Venezuela": [6.4, -66.6], "Switzerland": [46.8, 8.2],
+  "Austria": [47.5, 14.6], "Czechia": [49.8, 15.5],
+};
+
 /* ---------------- state ---------------- */
 const S = {
   aoi: { ...DEFAULT_AOI },
   map: null,
+  globe: null,
+  view: "orbital",         // "orbital" (4D globe) | "tactical" (flat map)
   layers: { fires: null, rings: null, plume: null, aqi: null, aoi: null, lock: null },
-  show: { wind: true, aqi: true, fires: true, rings: true, plume: true },
+  show: { wind: true, aqi: true, fires: true, rings: true, plume: true, news: true, arcs: true },
   wx: null, air: null,
-  fires: [],
+  fires: [],               // ≤ FIRE_RANGE_KM — threat board + tactical map
+  firesAll: [],            // global catalog — orbital globe
+  mediaDots: [],           // GDELT coverage aggregated by source country
+  timeCut: 0,              // days back (0 = live)
+  playTimer: null,
   windGrid: null,          // {lat0, lon0, dLat, dLon, nLat, nLon, u[], v[]}
   particles: [],
   raf: null,
@@ -37,6 +64,7 @@ const S = {
   bootT: Date.now(),
   aoiMode: false,
   selFire: null,
+  castCell: 0,
   timers: [],
 };
 
@@ -98,8 +126,140 @@ function startClocks() {
   S.timers.push(setInterval(tick, 1000));
 }
 
+/* ---------------- orbital globe (4D) ---------------- */
+function initGlobe() {
+  if (S.globe || typeof Globe === "undefined") return;
+  const el = $("globe");
+  S.globe = Globe()(el)
+    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-night.jpg")
+    .bumpImageUrl("https://unpkg.com/three-globe/example/img/earth-topology.png")
+    .backgroundColor("rgba(0,0,0,0)")
+    .atmosphereColor("#1d4a6e")
+    .atmosphereAltitude(0.18)
+    .width(el.clientWidth).height(el.clientHeight)
+    .pointOfView({ lat: S.aoi.lat, lng: S.aoi.lon, altitude: 1.9 }, 0)
+    .onGlobeClick(({ lat, lng }) => {
+      if (!S.aoiMode) return;
+      setAoi(lat, lng, "MANUAL AOI SET (ORBITAL)");
+      toggleAoiMode(false);
+    });
+
+  // slow idle rotation — the god's-eye drift
+  const ctrl = S.globe.controls();
+  ctrl.autoRotate = !REDUCED;
+  ctrl.autoRotateSpeed = 0.45;
+  ctrl.addEventListener("start", () => { ctrl.autoRotate = false; });
+
+  window.addEventListener("resize", () => {
+    S.globe.width(el.clientWidth).height(el.clientHeight);
+  });
+  renderGlobeLayers();
+}
+
+function fireAgeDays(f) {
+  return f.date ? (Date.now() - Date.parse(f.date)) / 86400e3 : 999;
+}
+
+function renderGlobeLayers() {
+  if (!S.globe) return;
+  const cut = S.timeCut; // days back; 0 = live/full 30d window
+  const visible = S.firesAll.filter(f => cut === 0 || fireAgeDays(f) >= cut);
+
+  // fire points — amber if upwind of AOI, red otherwise; size by recency
+  const pts = S.show.fires ? visible.map(f => ({
+    lat: f.lat, lng: f.lon,
+    size: clamp(0.65 - fireAgeDays(f) / 60, 0.08, 0.65),
+    color: f.upwind ? "#ffb454" : "#ff4655",
+    f,
+  })) : [];
+
+  // media density — GDELT coverage volume by source country
+  const media = S.show.news ? S.mediaDots : [];
+
+  S.globe
+    .pointsData(pts)
+    .pointLat("lat").pointLng("lng")
+    .pointAltitude("size").pointRadius(0.22)
+    .pointColor("color")
+    .pointLabel(d => `<div class="globe-tip"><b>${d.f.title}</b><br/>RNG ${fmt(d.f.dist, 0)} KM · BRG ${fmt(d.f.brg, 0)}°${d.f.upwind ? " · UPWIND ⚠" : ""}<br/>${d.f.date ? new Date(d.f.date).toISOString().slice(0, 10) : ""} · EONET</div>`)
+    .onPointClick(d => { lockFire(d.f); })
+
+    .hexBinPointsData(media)
+    .hexBinPointLat("lat").hexBinPointLng("lng")
+    .hexBinPointWeight("n")
+    .hexBinResolution(3)
+    .hexMargin(0.35)
+    .hexAltitude(d => clamp(d.sumWeight / 260, 0.02, 0.55))
+    .hexTopColor(() => "#2ee6ff")
+    .hexSideColor(() => "rgba(46,230,255,0.35)")
+    .hexLabel(d => `<div class="globe-tip"><b>MEDIA DENSITY</b><br/>${d.points.map(p => p.country).filter((c, i, a) => a.indexOf(c) === i).slice(0, 3).join(" · ")}<br/>${Math.round(d.sumWeight)} geolocated wildfire/smoke reports · 24H · GDELT</div>`)
+
+    // AOI beacon
+    .ringsData([{ lat: S.aoi.lat, lng: S.aoi.lon }])
+    .ringLat("lat").ringLng("lng")
+    .ringColor(() => (t) => `rgba(46,230,255,${1 - t})`)
+    .ringMaxRadius(9).ringPropagationSpeed(2.2).ringRepeatPeriod(1400)
+
+    // threat arcs — AOI → nearest upwind fires
+    .arcsData(S.show.arcs ? S.fires.filter(f => f.upwind).slice(0, 6).map(f => ({
+      startLat: S.aoi.lat, startLng: S.aoi.lon, endLat: f.lat, endLng: f.lon,
+    })) : [])
+    .arcColor(() => ["rgba(46,230,255,.75)", "rgba(255,180,84,.9)"])
+    .arcAltitudeAutoScale(0.38)
+    .arcStroke(0.28)
+    .arcDashLength(0.5).arcDashGap(0.25).arcDashAnimateTime(REDUCED ? 0 : 1600);
+
+  $("timeLabel").textContent = cut === 0
+    ? "T-0D · LIVE"
+    : `T-${cut}D · ${new Date(Date.now() - cut * 86400e3).toISOString().slice(5, 10)} · ${visible.length} EVENTS`;
+}
+
+/* time deck — scrub/replay the fire catalog (the 4th dimension) */
+function initTimeDeck() {
+  const slider = $("timeSlider");
+  slider.addEventListener("input", () => {
+    S.timeCut = 30 - Number(slider.value);
+    renderGlobeLayers();
+  });
+  $("btnPlay").addEventListener("click", () => {
+    if (S.playTimer) { clearInterval(S.playTimer); S.playTimer = null; $("btnPlay").textContent = "▶"; return; }
+    $("btnPlay").textContent = "■";
+    let step = 0;
+    log("TEMPORAL REPLAY — LAST 30 DAYS OF FIRE CATALOG", "warn");
+    S.playTimer = setInterval(() => {
+      step += 1;
+      if (step > 30) { clearInterval(S.playTimer); S.playTimer = null; $("btnPlay").textContent = "▶"; slider.value = 30; S.timeCut = 0; renderGlobeLayers(); return; }
+      slider.value = step; S.timeCut = 30 - step; renderGlobeLayers();
+    }, REDUCED ? 400 : 260);
+  });
+}
+
+/* view switch */
+function setView(v) {
+  S.view = v;
+  $("btnOrbital").classList.toggle("on", v === "orbital");
+  $("btnTactical").classList.toggle("on", v === "tactical");
+  $("globe").hidden = v !== "orbital";
+  $("map").hidden = v !== "tactical";
+  $("windCanvas").style.display = v === "tactical" ? "" : "none";
+  $("timedeck").style.display = v === "orbital" ? "" : "none";
+  document.querySelectorAll(".lbtn.tac").forEach(b => b.style.display = v === "tactical" ? "" : "none");
+  document.querySelectorAll(".lbtn.orb").forEach(b => b.style.display = v === "orbital" ? "" : "none");
+  if (v === "tactical") {
+    const firstInit = !S.map;
+    initMap();
+    if (firstInit && S.aqiCells) drawAqiGrid(S.aqiCells);
+    setTimeout(() => { S.map && S.map.invalidateSize(); seedParticles(); }, 60);
+  } else {
+    initGlobe();
+    renderGlobeLayers();
+  }
+  log(`VIEW — ${v.toUpperCase()}`);
+}
+
 /* ---------------- map ---------------- */
 function initMap() {
+  if (S.map) return;
   S.map = L.map("map", { zoomControl: true, attributionControl: true, worldCopyJump: true })
     .setView([S.aoi.lat, S.aoi.lon], 5);
   L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
@@ -115,18 +275,21 @@ function initMap() {
     toggleAoiMode(false);
   });
   drawAoiMarker();
+  drawRings(); drawFires(); drawPlume();
 }
 
 function drawAoiMarker() {
+  $("aoiChip").textContent = `AOI ${Math.abs(S.aoi.lat).toFixed(4)}${S.aoi.lat >= 0 ? "N" : "S"} ${Math.abs(S.aoi.lon).toFixed(4)}${S.aoi.lon >= 0 ? "E" : "W"}`;
+  if (!S.map) return;
   if (S.layers.aoi) S.map.removeLayer(S.layers.aoi);
   S.layers.aoi = L.marker([S.aoi.lat, S.aoi.lon], {
     icon: L.divIcon({ className: "aoi-marker", html: '<span class="am-x">⌖</span>', iconSize: [20, 20], iconAnchor: [10, 12] }),
     interactive: false,
   }).addTo(S.map);
-  $("aoiChip").textContent = `AOI ${Math.abs(S.aoi.lat).toFixed(4)}${S.aoi.lat >= 0 ? "N" : "S"} ${Math.abs(S.aoi.lon).toFixed(4)}${S.aoi.lon >= 0 ? "E" : "W"}`;
 }
 
 function drawRings() {
+  if (!S.map) return;
   if (S.layers.rings) S.map.removeLayer(S.layers.rings);
   if (!S.show.rings) return;
   const g = L.layerGroup();
@@ -144,6 +307,7 @@ function drawRings() {
 }
 
 function drawPlume() {
+  if (!S.map) return;
   if (S.layers.plume) S.map.removeLayer(S.layers.plume);
   if (!S.show.plume) return;
   const w = S.wx?.current, pm = S.air?.current?.pm2_5;
@@ -163,6 +327,7 @@ function drawPlume() {
 }
 
 function drawFires() {
+  if (!S.map) { renderGlobeLayers(); return; }
   if (S.layers.fires) S.map.removeLayer(S.layers.fires);
   if (!S.show.fires) return;
   const wdir = S.wx?.current?.wind_direction_10m;
@@ -184,6 +349,7 @@ function drawFires() {
 }
 
 function drawAqiGrid(cells) {
+  if (!S.map) { S.aqiCells = cells; return; }
   if (S.layers.aqi) S.map.removeLayer(S.layers.aqi);
   if (!S.show.aqi || !cells) return;
   const g = L.layerGroup();
@@ -206,12 +372,16 @@ function drawAqiGrid(cells) {
 /* target lock — range/bearing line + info card */
 function lockFire(f) {
   S.selFire = f;
-  if (S.layers.lock) S.map.removeLayer(S.layers.lock);
-  const g = L.layerGroup();
-  L.polyline([[S.aoi.lat, S.aoi.lon], [f.lat, f.lon]], {
-    color: f.upwind ? "#ffb454" : "#2ee6ff", weight: 1, dashArray: "4 6", interactive: false,
-  }).addTo(g);
-  S.layers.lock = g.addTo(S.map);
+  if (S.map) {
+    if (S.layers.lock) S.map.removeLayer(S.layers.lock);
+    const g = L.layerGroup();
+    L.polyline([[S.aoi.lat, S.aoi.lon], [f.lat, f.lon]], {
+      color: f.upwind ? "#ffb454" : "#2ee6ff", weight: 1, dashArray: "4 6", interactive: false,
+    }).addTo(g);
+    S.layers.lock = g.addTo(S.map);
+  } else if (S.globe) {
+    S.globe.pointOfView({ lat: (S.aoi.lat + f.lat) / 2, lng: (S.aoi.lon + f.lon) / 2, altitude: 1.1 }, 1000);
+  }
   const el = $("lockinfo");
   el.hidden = false;
   el.innerHTML = `
@@ -252,7 +422,7 @@ function gridVector(lat, lon) {
 }
 
 function seedParticles() {
-  if (!S.windGrid || !S.map) return;
+  if (!S.windGrid || !S.map || S.view !== "tactical") return;
   const b = S.map.getBounds();
   const n = REDUCED ? 0 : Math.min(1300, Math.round((canvas.clientWidth * canvas.clientHeight) / 900));
   S.particles = Array.from({ length: n }, () => spawn(b));
@@ -269,7 +439,7 @@ function spawn(b) {
 
 function stepParticles() {
   S.raf = requestAnimationFrame(stepParticles);
-  if (S.paused || !S.show.wind || !S.windGrid || document.hidden) return;
+  if (S.paused || !S.show.wind || !S.windGrid || !S.map || S.view !== "tactical" || document.hidden) return;
 
   // fade previous frame (trail effect)
   wctx.globalCompositeOperation = "destination-out";
@@ -374,6 +544,7 @@ async function fetchAqiGrid() {
     const res = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lats.join(",")}&longitude=${lons.join(",")}&current=us_aqi`).then(r => r.json());
     const arr = Array.isArray(res) ? res : [res];
     const cells = arr.map((c, i) => ({ lat: +lats[i], lon: +lons[i], aqi: c?.current?.us_aqi ?? null }));
+    S.aqiCells = cells;
     drawAqiGrid(cells);
     log(`AQI SURFACE SAMPLED — ${cells.length} NODES`, "ok");
   } catch {
@@ -384,7 +555,8 @@ async function fetchAqiGrid() {
 async function fetchFires() {
   try {
     const res = await fetch("https://eonet.gsfc.nasa.gov/api/v3/events?category=wildfires&status=open&limit=800").then(r => r.json());
-    const out = [];
+    const all = [];
+    const wdir = S.wx?.current?.wind_direction_10m;
     for (const ev of res.events || []) {
       const g = (ev.geometry || []).slice(-1)[0];
       if (!g) continue;
@@ -393,14 +565,18 @@ async function fetchFires() {
       else if (g.type === "Polygon") [lo, la] = g.coordinates[0][0];
       else continue;
       const dist = haversineKm(S.aoi.lat, S.aoi.lon, la, lo);
-      if (dist > FIRE_RANGE_KM) continue;
-      out.push({ id: ev.id, title: ev.title, date: g.date, lat: la, lon: lo, dist, brg: bearingDeg(S.aoi.lat, S.aoi.lon, la, lo) });
+      const brg = bearingDeg(S.aoi.lat, S.aoi.lon, la, lo);
+      all.push({
+        id: ev.id, title: ev.title, date: g.date, lat: la, lon: lo, dist, brg,
+        upwind: wdir != null && dist <= FIRE_RANGE_KM && angleDiff(wdir, brg) <= 45,
+      });
     }
-    out.sort((a, b) => a.dist - b.dist);
-    S.fires = out;
+    all.sort((a, b) => a.dist - b.dist);
+    S.firesAll = all;
+    S.fires = all.filter(f => f.dist <= FIRE_RANGE_KM);
     srcStatus("eonet", true);
-    drawFires(); renderFireList(); renderAti();
-    log(`EONET SWEEP COMPLETE — ${out.length} OPEN EVENTS ≤ ${FIRE_RANGE_KM} KM`, "ok");
+    drawFires(); renderFireList(); renderAti(); renderGlobeLayers();
+    log(`EONET SWEEP COMPLETE — ${all.length} GLOBAL / ${S.fires.length} ≤ ${FIRE_RANGE_KM} KM`, "ok");
   } catch {
     srcStatus("eonet", false);
     log("EONET SWEEP FAILED", "err");
@@ -433,7 +609,20 @@ async function fetchWire() {
     const arts = (res.articles || []).filter(a => a.title);
     srcStatus("gdelt", true);
     renderWire(arts);
-    log(`GDELT WIRE SYNCED — ${arts.length} ARTICLES / 24H`, "ok");
+    // aggregate coverage volume by source country → media-density globe layer
+    const byCountry = {};
+    for (const a of arts) {
+      const ll = COUNTRY_LL[a.sourcecountry];
+      if (!ll) continue;
+      byCountry[a.sourcecountry] = byCountry[a.sourcecountry] || { lat: ll[0], lon: ll[1], country: a.sourcecountry, n: 0 };
+      byCountry[a.sourcecountry].n += 1;
+    }
+    S.mediaDots = Object.values(byCountry).map(c => ({
+      lat: c.lat + (Math.random() - 0.5) * 3, lng: c.lon + (Math.random() - 0.5) * 3,
+      country: c.country, n: c.n * 12,
+    }));
+    renderGlobeLayers();
+    log(`GDELT WIRE SYNCED — ${arts.length} ARTICLES / ${S.mediaDots.length} MEDIA CLUSTERS`, "ok");
   } catch {
     srcStatus("gdelt", false);
     renderWire(null);
@@ -589,32 +778,79 @@ function renderWire(arts) {
   $("tickerInner").textContent = unique.slice(0, 12).map(a => `▸ ${a.title} [${a.domain}]`).join("   ");
 }
 
-/* ---------------- broadcast monitor ---------------- */
-function initBroadcast() {
-  const host = $("castChannels");
-  host.innerHTML = CHANNELS.map(c => `<button class="cast-btn" data-ch="${c.id}">${c.name}</button>`).join("")
-    + `<a class="cast-btn" href="https://www.youtube.com/results?search_query=wildfire+live" target="_blank" rel="noopener noreferrer">SEARCH LIVE ↗</a>`;
-  host.querySelectorAll("[data-ch]").forEach(btn => btn.addEventListener("click", () => {
-    host.querySelectorAll(".cast-btn").forEach(b => b.classList.remove("on"));
-    btn.classList.add("on");
-    const stage = $("castStage");
-    stage.innerHTML = `<iframe
-      src="https://www.youtube.com/embed/live_stream?channel=${btn.dataset.ch}&autoplay=1&mute=1"
-      title="Live broadcast — ${btn.textContent}"
+/* ---------------- broadcast wall (2×2 multi-feed) ---------------- */
+function armCell(cellIdx, src, label, fallbackUrl) {
+  const cell = document.querySelector(`.cast-cell[data-cell="${cellIdx}"]`);
+  if (!cell) return;
+  cell.innerHTML = `
+    <span class="cast-src">${label}</span>
+    <iframe src="${src}" title="Live feed — ${label}"
       allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen
       referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      <a class="cast-fallback" href="https://www.youtube.com/channel/${btn.dataset.ch}/live"
-         target="_blank" rel="noopener noreferrer">STREAM BLOCKED? OPEN ${btn.textContent} LIVE ON YOUTUBE ↗</a>`;
-    log(`BROADCAST MONITOR — ${btn.textContent} LIVE STREAM OPENED`, "ok");
-  }));
+    <a class="cast-fallback" href="${fallbackUrl}" target="_blank" rel="noopener noreferrer">BLOCKED? OPEN ON YOUTUBE ↗</a>`;
+  log(`BROADCAST WALL — CELL ${cellIdx + 1} ARMED · ${label}`, "ok");
+  // advance selection to the next empty cell for rapid wall build-out
+  const next = [...document.querySelectorAll(".cast-cell")].find(c => !c.querySelector("iframe"));
+  selectCell(next ? Number(next.dataset.cell) : cellIdx);
+}
+function selectCell(i) {
+  S.castCell = i;
+  document.querySelectorAll(".cast-cell").forEach(c => c.classList.toggle("sel", Number(c.dataset.cell) === i));
+}
+
+/* accepts: channel URL, /channel/UC…, @handle, watch?v=, youtu.be/, live URL, or raw UC… id */
+function parseYouTube(input) {
+  const s = input.trim();
+  if (!s) return null;
+  let m;
+  if ((m = s.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/live\/)([\w-]{11})/)))
+    return { src: `https://www.youtube.com/embed/${m[1]}?autoplay=1&mute=1`, label: "VIDEO " + m[1].slice(0, 6).toUpperCase(), fb: `https://www.youtube.com/watch?v=${m[1]}` };
+  if ((m = s.match(/youtube\.com\/channel\/(UC[\w-]{22})/)) || (m = s.match(/^(UC[\w-]{22})$/)))
+    return { src: `https://www.youtube.com/embed/live_stream?channel=${m[1]}&autoplay=1&mute=1`, label: "CH " + m[1].slice(0, 8), fb: `https://www.youtube.com/channel/${m[1]}/live` };
+  if ((m = s.match(/(?:youtube\.com\/)?(@[\w.-]+)/)))
+    // handles can't be embedded directly without the channel id — open the live page
+    return { src: null, label: m[1].toUpperCase(), fb: `https://www.youtube.com/${m[1]}/live` };
+  return null;
+}
+
+function initBroadcast() {
+  document.querySelectorAll(".cast-cell").forEach(c =>
+    c.addEventListener("click", () => selectCell(Number(c.dataset.cell))));
+
+  const host = $("castChannels");
+  host.innerHTML = CHANNELS.map(c => `<button class="cast-btn" data-ch="${c.id}">${c.name}</button>`).join("")
+    + `<a class="cast-btn" href="https://www.youtube.com/results?search_query=wildfire+live&sp=EgJAAQ%253D%253D" target="_blank" rel="noopener noreferrer" title="All live wildfire streams on YouTube right now">SCAN LIVE FIRES ↗</a>`;
+  host.querySelectorAll("[data-ch]").forEach(btn => btn.addEventListener("click", () =>
+    armCell(S.castCell,
+      `https://www.youtube.com/embed/live_stream?channel=${btn.dataset.ch}&autoplay=1&mute=1`,
+      btn.textContent,
+      `https://www.youtube.com/channel/${btn.dataset.ch}/live`)));
+
+  const arm = () => {
+    const parsed = parseYouTube($("customFeed").value);
+    if (!parsed) { log("FEED PARSE FAILED — PASTE A YOUTUBE CHANNEL / VIDEO URL", "err"); return; }
+    if (!parsed.src) {
+      window.open(parsed.fb, "_blank", "noopener");
+      log(`HANDLE DETECTED — OPENED ${parsed.label} LIVE PAGE (YT EMBEDS NEED A CHANNEL ID OR VIDEO URL)`, "warn");
+      return;
+    }
+    armCell(S.castCell, parsed.src, parsed.label, parsed.fb);
+    $("customFeed").value = "";
+  };
+  $("btnArm").addEventListener("click", arm);
+  $("customFeed").addEventListener("keydown", (e) => { if (e.key === "Enter") arm(); });
 }
 
 /* ---------------- AOI + controls ---------------- */
 function setAoi(lat, lon, why) {
   S.aoi = { lat, lon };
   drawAoiMarker(); drawRings();
-  if (S.layers.lock) { S.map.removeLayer(S.layers.lock); S.layers.lock = null; $("lockinfo").hidden = true; }
-  S.map.flyTo([lat, lon], Math.max(S.map.getZoom(), 5), { duration: 1 });
+  if (S.map) {
+    if (S.layers.lock) { S.map.removeLayer(S.layers.lock); S.layers.lock = null; }
+    S.map.flyTo([lat, lon], Math.max(S.map.getZoom(), 5), { duration: 1 });
+  }
+  if (S.globe) S.globe.pointOfView({ lat, lng: lon, altitude: 1.6 }, 1200);
+  $("lockinfo").hidden = true;
   log(`${why} — ${lat.toFixed(4)}, ${lon.toFixed(4)} · RESAMPLING ALL FEEDS`, "warn");
   fetchCore(); fetchWindGrid(); fetchAqiGrid(); fetchFires(); fetchAlerts();
 }
@@ -640,25 +876,29 @@ function initControls() {
     const k = btn.dataset.layer;
     S.show[k] = !S.show[k];
     btn.classList.toggle("on", S.show[k]);
-    if (k === "fires") drawFires();
+    if (k === "fires") { drawFires(); renderGlobeLayers(); }
     if (k === "rings") drawRings();
     if (k === "plume") drawPlume();
     if (k === "aqi") { if (S.show.aqi) fetchAqiGrid(); else drawAqiGrid(null); }
     if (k === "wind") { clearWindCanvas(); if (S.show.wind && REDUCED) drawStaticArrows(); }
+    if (k === "news" || k === "arcs") renderGlobeLayers();
     log(`LAYER ${k.toUpperCase()} ${S.show[k] ? "ENABLED" : "DISABLED"}`);
   }));
+  $("btnOrbital").addEventListener("click", () => setView("orbital"));
+  $("btnTactical").addEventListener("click", () => setView("tactical"));
   window.addEventListener("resize", () => { sizeCanvas(); seedParticles(); });
 }
 
 /* ---------------- boot ---------------- */
 function boot() {
   startClocks();
-  initMap();
   sizeCanvas();
   initControls();
   initBroadcast();
-  drawRings();
-  log("AEGIS COMMAND CONSOLE ONLINE", "ok");
+  initTimeDeck();
+  setView("orbital");           // boot into the god's-eye globe
+  drawAoiMarker();
+  log("AEGIS COMMAND CONSOLE ONLINE — ORBITAL MODE", "ok");
   log("ACQUIRING SIGNALS — MET · CAMS · WINDFIELD · EONET · NWS · GDELT");
 
   fetchCore();

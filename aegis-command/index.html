@@ -30,9 +30,13 @@
     <span class="chip" id="metChip">MET T+00:00</span>
   </div>
   <div class="top-actions">
+    <div class="viewswitch" role="group" aria-label="View mode">
+      <button class="vbtn on" id="btnOrbital">◐ ORBITAL</button>
+      <button class="vbtn" id="btnTactical">▦ TACTICAL</button>
+    </div>
     <a class="tbtn" href="../aegis-air-mvp/" title="Personal exposure instrument">INSTRUMENT ↗</a>
     <button class="tbtn" id="btnGeo" title="Use device location">GEOLOCATE</button>
-    <button class="tbtn warn" id="btnAoi" title="Click map to set area of interest">REPOSITION AOI</button>
+    <button class="tbtn warn" id="btnAoi" title="Click map or globe to set area of interest">REPOSITION AOI</button>
   </div>
 </header>
 
@@ -55,19 +59,28 @@
     <div id="alertList" class="scroll short"></div>
   </aside>
 
-  <!-- ============ CENTER : MAP ============ -->
+  <!-- ============ CENTER : ORBITAL GLOBE + TACTICAL MAP ============ -->
   <main id="mapwrap">
-    <div id="map"></div>
+    <div id="globe"></div>
+    <div id="map" hidden></div>
     <canvas id="windCanvas"></canvas>
     <div id="layerbar">
-      <button class="lbtn on" data-layer="wind">WIND FIELD</button>
-      <button class="lbtn on" data-layer="aqi">AQI GRID</button>
+      <button class="lbtn on tac" data-layer="wind">WIND FIELD</button>
+      <button class="lbtn on tac" data-layer="aqi">AQI GRID</button>
       <button class="lbtn on" data-layer="fires">FIRES</button>
-      <button class="lbtn on" data-layer="rings">RANGE RINGS</button>
-      <button class="lbtn on" data-layer="plume">PLUME PROXY</button>
+      <button class="lbtn on tac" data-layer="rings">RANGE RINGS</button>
+      <button class="lbtn on tac" data-layer="plume">PLUME PROXY</button>
+      <button class="lbtn on orb" data-layer="news">MEDIA DENSITY</button>
+      <button class="lbtn on orb" data-layer="arcs">THREAT ARCS</button>
     </div>
     <div id="lockinfo" hidden></div>
-    <div id="mapnote">WIND FIELD: MODELED 10 M INTERPOLATION (OPEN-METEO) — NOT HRRR-SMOKE · PLUME: VISUAL PROXY</div>
+    <!-- 4D: temporal scrub over the EONET fire catalog -->
+    <div id="timedeck">
+      <button id="btnPlay" title="Replay the last 30 days">▶</button>
+      <input type="range" id="timeSlider" min="0" max="30" step="1" value="30" aria-label="Days of fire history" />
+      <span id="timeLabel">T-0D · LIVE</span>
+    </div>
+    <div id="mapnote">WIND FIELD: MODELED 10 M INTERPOLATION (OPEN-METEO) — NOT HRRR-SMOKE · PLUME: VISUAL PROXY · TIMELINE: EONET CATALOG DATES</div>
   </main>
 
   <!-- ============ RIGHT : ATMOSPHERICS + LOG ============ -->
@@ -129,13 +142,18 @@
       <div id="wire" class="wire scroll-x"></div>
     </div>
     <div class="panel" id="castPanel">
-      <div class="ptitle">BROADCAST MONITOR <span class="ptag">LIVE FIRST-PERSON COVERAGE · CLICK TO STREAM</span></div>
-      <div id="castStage">
-        <div id="castPoster">
-          <span class="cast-hint">◉ SELECT CHANNEL TO OPEN LIVE STREAM</span>
-        </div>
+      <div class="ptitle">BROADCAST WALL <span class="ptag">LIVE FEEDS · SELECT CELL, THEN SOURCE · ANY YT CHANNEL</span></div>
+      <div id="castWall">
+        <div class="cast-cell sel" data-cell="0"><span class="cast-hint">CELL 1 — ARM A FEED</span></div>
+        <div class="cast-cell" data-cell="1"><span class="cast-hint">CELL 2</span></div>
+        <div class="cast-cell" data-cell="2"><span class="cast-hint">CELL 3</span></div>
+        <div class="cast-cell" data-cell="3"><span class="cast-hint">CELL 4</span></div>
       </div>
       <div id="castChannels"></div>
+      <div id="castCustom">
+        <input type="text" id="customFeed" placeholder="PASTE ANY YOUTUBE CHANNEL URL / @HANDLE / VIDEO URL — e.g. A CREATOR'S GOD'S-EYE STREAM" />
+        <button id="btnArm">ARM</button>
+      </div>
     </div>
   </section>
 
@@ -156,6 +174,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/globe.gl@2.34.0/dist/globe.gl.min.js"></script>
 <script src="command.js" defer></script>
 </body>
 </html>
