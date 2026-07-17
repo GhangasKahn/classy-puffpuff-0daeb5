@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0a0f1a"/>
+  <!-- shield -->
+  <path d="M256 64 L416 122 V262 C416 358 348 418 256 452 C164 418 96 358 96 262 V122 Z"
+        fill="none" stroke="#22d3ee" stroke-width="26" stroke-linejoin="round"/>
+  <!-- wind / air lines -->
+  <path d="M160 220 h130 a26 26 0 1 0 -26 -26" fill="none" stroke="#a78bfa" stroke-width="22" stroke-linecap="round"/>
+  <path d="M150 280 h170 a26 26 0 1 1 -26 26" fill="none" stroke="#a78bfa" stroke-width="22" stroke-linecap="round"/>
+  <path d="M180 340 h90" fill="none" stroke="#34d399" stroke-width="22" stroke-linecap="round"/>
+</svg>
