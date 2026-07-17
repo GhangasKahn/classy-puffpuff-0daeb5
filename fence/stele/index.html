@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="STELE — a Buffalo NY fence engineered like old-world architecture: Egyptian battered piers, Roman foundations and arch gate, Mayan stepped caps. Full FreeCAD model + build plans." />
+<title>STELE — Old-World Fence for Buffalo NY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#171512;
+  --stone:#c9bda3;
+  --stone-hi:#e6dcc3;
+  --sand:#a3865a;
+  --terra:#a34e2b;
+  --terra-hi:#c96b41;
+  --moss:#6b7a55;
+  --paper:#efe9da;
+  --paper-dim:#cfc5ae;
+  --mist:#9c937e;
+  --line:rgba(239,233,218,.16);
+  --line-strong:rgba(239,233,218,.34);
+  --disp:"Cormorant Garamond", Georgia, serif;
+  --sans:"Sora", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.55;overflow-x:hidden}
+::selection{background:var(--terra);color:var(--paper)}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 75% 50% at 75% 8%, rgba(163,78,43,.14), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 8% 85%, rgba(107,122,85,.10), transparent 50%),
+    linear-gradient(180deg,#12100d 0%, var(--ink) 45%, #1b1813 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+.wrap{width:min(1140px,calc(100% - 40px));margin:0 auto;position:relative;z-index:2}
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--terra-hi)}
+.display{font-family:var(--disp);font-weight:600;letter-spacing:.01em;line-height:1.02;text-wrap:balance}
+.lead{font-size:clamp(16px,1.7vw,19px);color:var(--paper-dim);max-width:56ch;font-weight:300}
+.mono{font-family:var(--mono)}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;padding:16px 0;transition:background .35s var(--ease),border-color .35s var(--ease);border-bottom:1px solid transparent}
+.nav.on{background:rgba(23,21,18,.82);backdrop-filter:blur(12px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font:600 16px/1 var(--disp);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.brand i{width:12px;height:12px;background:var(--terra);display:inline-block;transform:rotate(45deg)}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+.nav-links a{font:500 11px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--mist);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+
+.hero{min-height:96svh;display:grid;align-items:end;position:relative;padding:130px 0 60px;overflow:hidden}
+.hero-img{position:absolute;inset:0;z-index:1}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 65%;opacity:.55}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,21,18,.25) 0%,rgba(23,21,18,.6) 55%,rgba(23,21,18,.96) 100%)}
+.hero-inner{position:relative;z-index:3}
+.hero h1{font:600 clamp(70px,15vw,190px)/.9 var(--disp);letter-spacing:.06em;text-transform:uppercase;margin:16px 0 18px}
+.hero h1 span{color:var(--terra-hi)}
+.hero-copy{max-width:44ch;margin-bottom:26px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:.7em;font:600 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:18px 26px;border:1px solid var(--terra);color:var(--paper);background:linear-gradient(180deg,rgba(163,78,43,.28),rgba(163,78,43,.06));transition:transform .25s var(--ease),background .25s,border-color .25s;min-height:48px}
+.btn:hover{transform:translateY(-2px);border-color:var(--terra-hi);background:rgba(163,78,43,.4)}
+.btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--paper-dim)}
+.btn.ghost:hover{color:var(--paper);border-color:var(--paper-dim)}
+
+.sec{padding:clamp(72px,11vh,130px) 0;position:relative;z-index:2}
+.sec-head{margin-bottom:36px;max-width:64ch}
+.sec-head h2.display{font-size:clamp(36px,5.6vw,68px);margin:12px 0 16px}
+.sec-head .num{font:500 11px/1 var(--mono);letter-spacing:.2em;color:var(--moss)}
+.rule{height:1px;background:linear-gradient(90deg,var(--terra),transparent 70%);margin:0 0 40px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.on{opacity:1;transform:none}
+
+.trinity{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:860px){.trinity{grid-template-columns:1fr}}
+.civ{border-top:2px solid var(--terra);padding-top:20px}
+.civ .glyph{font:600 40px/1 var(--disp);color:var(--stone-hi)}
+.civ h3{font:600 26px/1.15 var(--disp);margin:10px 0 8px}
+.civ .rule-name{font:500 10px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--terra-hi);display:block;margin-bottom:10px}
+.civ p{color:var(--paper-dim);font-size:15px}
+
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+@media(max-width:760px){.spec-grid{grid-template-columns:1fr}}
+.spec{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.spec dt{font:600 13px/1.5 var(--mono);color:var(--stone-hi);letter-spacing:.06em}
+.spec dd{color:var(--paper-dim);font-size:15px}
+
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:820px){.gallery{grid-template-columns:1fr}}
+.shot{border:1px solid var(--line);background:#14120f;overflow:hidden}
+.shot.wide{grid-column:1/-1}
+.shot img{width:100%;height:auto;display:block}
+.shot figcaption{font:500 10px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mist);padding:12px 16px;border-top:1px solid var(--line)}
+.dl-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+.sheets{display:grid;gap:26px}
+.sheet{border:1px solid var(--line);background:#f6f3ea;overflow:hidden}
+.sheet img{width:100%;height:auto}
+.sheet .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:#14120f;border-top:1px solid var(--line)}
+.sheet .bar b{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--terra-hi);text-transform:uppercase}
+.sheet .bar span{font:400 12px/1.4 var(--mono);color:var(--mist)}
+.sheet .bar a{font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--stone-hi);text-decoration:none}
+.sheet .bar a:hover{color:var(--paper)}
+
+.mat-table{width:100%;border-collapse:collapse;font-size:14px}
+.mat-table th,.mat-table td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.mat-table th{font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--moss)}
+.mat-table td{color:var(--paper-dim)}
+.mat-table td:first-child{color:var(--paper);font-family:var(--disp);font-size:17px;font-weight:600}
+
+.phases{display:grid;gap:0;border-top:1px solid var(--line)}
+.phase{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
+@media(max-width:700px){.phase{grid-template-columns:1fr;gap:10px}}
+.phase .when{font:500 12px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--terra-hi)}
+.phase h3{font:600 23px/1.2 var(--disp);margin-bottom:8px}
+.phase p{color:var(--paper-dim);max-width:64ch;font-size:15px}
+.phase ul{margin-top:10px;padding-left:18px;color:var(--paper-dim);font-size:14px}
+.phase li{margin:.3em 0}
+
+.fc-box{margin-top:8px;border:1px solid var(--line);padding:26px 28px;background:rgba(0,0,0,.25)}
+.fc-box pre{margin-top:14px;padding:16px 18px;background:rgba(0,0,0,.4);border:1px solid var(--line);overflow-x:auto;font:400 12.5px/1.6 var(--mono);color:var(--paper-dim);white-space:pre-wrap}
+.note{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);color:var(--mist);font-size:13px;max-width:72ch}
+
+.foot{padding:46px 0 58px;border-top:1px solid var(--line);position:relative;z-index:2}
+.foot .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--mist);font:400 12px/1.6 var(--mono);letter-spacing:.08em}
+@media print{.nav,.cta-row{display:none}body{background:#fff;color:#111}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i aria-hidden="true"></i> Stele</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#creed">Creed</a>
+      <a href="#climate">Climate</a>
+      <a href="#model">Model</a>
+      <a href="#plans">Plans</a>
+      <a href="#materials">Materials</a>
+      <a href="#build">Build</a>
+      <a href="../report/">Report ↗</a>
+      <a href="../">Hashira ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-img" aria-hidden="true"><img src="renders/stele_iso.png" alt="" /></div>
+    <div class="wrap hero-inner">
+      <p class="kicker reveal">Buffalo NY · FreeCAD model · full build plans</p>
+      <h1 class="reveal">Ste<span>le</span></h1>
+      <p class="lead hero-copy reveal">A custom fence engineered the way the old world built — Egyptian batter, Roman foundations, Mayan caps — sized for lake-effect snow, 48-inch frost, and a century of freeze-thaw.</p>
+      <div class="cta-row reveal">
+        <a class="btn" href="#plans">Build plans <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="cad/exports/stele.FCStd" download>FreeCAD model</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="creed">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">01 — The creed</p>
+        <h2 class="display">Three empires, one lesson: mass, water, geometry</h2>
+        <p class="lead">Old-world structures survive because they obey physics, not fashion. Each civilization contributes one load-bearing idea to this fence.</p>
+      </div>
+      <div class="rule reveal"></div>
+      <div class="trinity">
+        <article class="civ reveal">
+          <div class="glyph">𓉴</div>
+          <h3>Egypt</h3>
+          <span class="rule-name">The batter · talus</span>
+          <p>Every pier face leans inward at 1:26.7 — the pylon taper. The resultant of wind plus self-weight stays inside the middle third of every bed joint, so no joint ever sees tension. Tension is what frost and time exploit; the batter removes it.</p>
+        </article>
+        <article class="civ reveal">
+          <div class="glyph">⌂</div>
+          <h3>Rome</h3>
+          <span class="rule-name">The foundation · the arch</span>
+          <p>Footings bear 48″ down on compacted stone — below Buffalo frost, drained so the base never sits wet. The gate spans as a pure-compression semicircular arch: eleven voussoirs and a keystone that needs no steel to stand.</p>
+        </article>
+        <article class="civ reveal">
+          <div class="glyph">▲</div>
+          <h3>Maya</h3>
+          <span class="rule-name">The platform · the corbel</span>
+          <p>Everything precious rides on a raised plinth, clear of splash and snowpack. Pier tops stack in corbelled tiers with drip kerfs — a stepped pyramid in miniature that sheds ice instead of holding it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="climate">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">02 — Buffalo criteria</p>
+        <h2 class="display">Designed against Erie County weather</h2>
+        <p class="lead">Numbers the geometry answers to. Verify the height limits of your Buffalo Green Code district before digging.</p>
+      </div>
+      <dl class="spec-grid">
+        <div class="spec reveal"><dt>Frost</dt><dd>Footing base 1220 mm (48″) below grade, on 150 mm compacted #57 stone — below Erie County design frost depth.</dd></div>
+        <div class="spec reveal"><dt>Snow</dt><dd>40 psf ground snow + lake-effect drift. Timber held 250 mm above grade on a masonry curb; caps shed on 1:12 washes.</dd></div>
+        <div class="spec reveal"><dt>Wind</dt><dd>115 mph ultimate (ASCE 7). Pier self-weight ≥ 3× panel wind reaction; battered mass resists overturning without straps.</dd></div>
+        <div class="spec reveal"><dt>Freeze-thaw</dt><dd>Air-entrained 4000 psi concrete, drip kerfs on cap tiers, capillary break between stem and plinth, no water-trapping horizontals.</dd></div>
+        <div class="spec reveal"><dt>Heave isolation</dt><dd>Curb wall floats independent of pier footings — if the shallow curb moves, the piers don't care.</dd></div>
+        <div class="spec reveal"><dt>Code</dt><dd>Panel top 1825 mm ≤ 6′-0″ residential limit. Pier caps 1965 mm; arch crown 2640 mm — confirm gate/arbor allowance for your district.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="model">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">03 — FreeCAD model</p>
+        <h2 class="display">One parametric file, the whole fence</h2>
+        <p class="lead">Built headless in FreeCAD 1.1 by <span class="mono">stele_fence.py</span> — 39′-2″ of run: four timber panel bays, an arched gate bay, six battered piers, full foundations. Every dimension is a named parameter.</p>
+      </div>
+      <div class="gallery">
+        <figure class="shot wide reveal"><img src="renders/stele_front.png" alt="Front elevation render of the STELE fence" /><figcaption>Front elevation — 4 panel bays + Roman arch gate · 11 940 mm overall</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/stele_gate.png" alt="Arch gate render" /><figcaption>Gate bay — 48″ clear, voussoir arch, keystone proud 30 mm</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/stele_pier.png" alt="Battered pier render" /><figcaption>Pier — battered shaft, corbelled cap, rail pockets</figcaption></figure>
+        <figure class="shot wide reveal"><img src="renders/stele_below.png" alt="Below grade structure render" /><figcaption>Below grade — 24″ footings at 48″, gravel pads, stems, floating curb</figcaption></figure>
+      </div>
+      <div class="dl-row reveal">
+        <a class="btn ghost" href="cad/exports/stele.FCStd" download>stele.FCStd</a>
+        <a class="btn ghost" href="cad/exports/stele_assembly.step" download>STEP</a>
+        <a class="btn ghost" href="cad/exports/stele_masonry.stl" download>masonry.stl</a>
+        <a class="btn ghost" href="cad/exports/stele_timber.stl" download>timber.stl</a>
+        <a class="btn ghost" href="cad/stele_fence.py" download>stele_fence.py</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="plans">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">04 — Build plans</p>
+        <h2 class="display">Five sheets. Print and dig.</h2>
+        <p class="lead">A3 landscape, dimensioned in mm with inch callouts, generated from the same parameters as the 3D model — drawings and geometry can never disagree.</p>
+      </div>
+      <div class="sheets">
+        <figure class="sheet reveal">
+          <img src="plans/S1_general.svg" alt="Sheet S-1 general arrangement" />
+          <div class="bar"><b>S-1</b><span>General arrangement — elevation, plan, design criteria</span><a href="plans/S1_general.svg" download>Download</a></div>
+        </figure>
+        <figure class="sheet reveal">
+          <img src="plans/S2_panel_bay.svg" alt="Sheet S-2 panel bay" />
+          <div class="bar"><b>S-2</b><span>Panel bay — rails, boards, curb, pocket detail</span><a href="plans/S2_panel_bay.svg" download>Download</a></div>
+        </figure>
+        <figure class="sheet reveal">
+          <img src="plans/S3_foundation.svg" alt="Sheet S-3 foundation section" />
+          <div class="bar"><b>S-3</b><span>Foundation — 48″ frost section, rebar, drainage</span><a href="plans/S3_foundation.svg" download>Download</a></div>
+        </figure>
+        <figure class="sheet reveal">
+          <img src="plans/S4_pier.svg" alt="Sheet S-4 pier details" />
+          <div class="bar"><b>S-4</b><span>Pier — batter geometry, cap tiers, drip kerfs</span><a href="plans/S4_pier.svg" download>Download</a></div>
+        </figure>
+        <figure class="sheet reveal">
+          <img src="plans/S5_arch_gate.svg" alt="Sheet S-5 arch gate" />
+          <div class="bar"><b>S-5</b><span>Roman arch gate — voussoirs, keystone, leaf</span><a href="plans/S5_arch_gate.svg" download>Download</a></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="materials">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">05 — Materials</p>
+        <h2 class="display">Stone where water lives, wood where light lives</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto">
+        <table class="mat-table">
+          <thead><tr><th>Element</th><th>Material</th><th>Size / spec</th><th>Qty (as modeled)</th></tr></thead>
+          <tbody>
+            <tr><td>Footings</td><td>4000 psi air-entrained concrete</td><td>600×600×300 pad + 350 sq stem, (4) #4 vert, #3 ties</td><td>6 piers</td></tr>
+            <tr><td>Gravel pads</td><td>#57 crushed stone, compacted</td><td>700 sq × 150</td><td>6</td></tr>
+            <tr><td>Pier shells</td><td>Cast stone or Onondaga limestone / CMU + veneer</td><td>Battered 480→360 sq × 1600, plinth 560 sq</td><td>6</td></tr>
+            <tr><td>Cap tiers</td><td>Cast stone, drip kerfs</td><td>560 / 470 / pyramid 380→180</td><td>4 sets</td></tr>
+            <tr><td>Arch</td><td>Cast stone voussoirs</td><td>11 + keystone · R610 intrados, 220 deep, 350 thick</td><td>1</td></tr>
+            <tr><td>Curb</td><td>Cast concrete, thickened edge</td><td>200×250 between piers, (2) #4 cont.</td><td>4 bays</td></tr>
+            <tr><td>Rails</td><td>Western red cedar / black locust</td><td>38×89 on edge, pocket-set 60 mm (nuki)</td><td>12</td></tr>
+            <tr><td>Boards</td><td>Cedar, rain-screen</td><td>19×140 vertical, 10 gap, SS ring-shank</td><td>~52</td></tr>
+            <tr><td>Timber caps</td><td>Cedar, 8° wash</td><td>45×120, drip kerf both edges</td><td>4</td></tr>
+            <tr><td>Gate leaf</td><td>Cedar, ledged + braced</td><td>1170×1600×40, SS ball-bearing hinges, M12 epoxy anchors</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="build">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">06 — Build sequence</p>
+        <h2 class="display">Foundations first, arch last</h2>
+      </div>
+      <div class="phases">
+        <article class="phase reveal"><div class="when">Phase 01</div><div>
+          <h3>Layout &amp; excavation</h3>
+          <p>String the run, stake 6 pier centers (8′-0″ typical, 1700 mm at the gate). Dig to 54″: 48″ frost + 6″ gravel. Call 811 before any digging.</p>
+        </div></article>
+        <article class="phase reveal"><div class="when">Phase 02</div><div>
+          <h3>Foundations</h3>
+          <p>Compact gravel pads, pour footings and stems monolithic where possible. Cure 7 days. Damp-proof stem tops and set the capillary-break flashing.</p>
+          <ul><li>Air-entrained mix, 5–7% — non-negotiable in freeze-thaw country</li><li>Slope all surrounding grade away at 5%</li></ul>
+        </div></article>
+        <article class="phase reveal"><div class="when">Phase 03</div><div>
+          <h3>Piers &amp; curb</h3>
+          <p>Lay battered drums or CMU-plus-veneer, checking taper with a story-pole template. Set cap tiers in Type S with kerfs down. Pour curbs floating between piers.</p>
+        </div></article>
+        <article class="phase reveal"><div class="when">Phase 04</div><div>
+          <h3>Timber bays</h3>
+          <p>Slide rails into pockets, wedge-lock; hang boards with gaps; fit sloped caps. All fastening is rail-to-board — masonry stays unpierced above the flashing line.</p>
+        </div></article>
+        <article class="phase reveal"><div class="when">Phase 05</div><div>
+          <h3>The arch</h3>
+          <p>Erect timber centering, lay 11 voussoirs to the keystone, cure 7 days, strike centering, hang the leaf. The moment the keystone seats, the gate becomes the strongest bay on the line.</p>
+        </div></article>
+      </div>
+
+      <div class="fc-box reveal" style="margin-top:48px">
+        <p class="kicker">FreeCAD · parametric</p>
+        <h3 class="display" style="font-size:clamp(26px,3.4vw,36px);margin:10px 0 12px">Rebuild the whole design from one script</h3>
+        <p class="lead">Edit the parameter block in <span class="mono">fence/stele/cad/stele_fence.py</span> (bay spacing, heights, gate width, frost depth…) and re-run. Model, STEP, STLs, and plan sheets all regenerate.</p>
+        <pre># model + exports (FreeCAD headless)
+freecadcmd fence/stele/cad/stele_fence.py
+
+# full pipeline: model + renders + plan sheets
+./scripts/build_stele.sh
+
+# plans only
+python3 scripts/gen_stele_plans.py</pre>
+      </div>
+
+      <p class="note reveal">This is a serious masonry structure: verify Buffalo Green Code height limits for your district, obtain permits, and have the foundation and arch reviewed by a local engineer of record. Utility locate (811) before excavation. The Hashira timber-joinery system on the <a href="../">main page</a> details the rail wedge-locks used in the panel bays.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>STELE · old-world fence for Buffalo NY</div>
+    <div>Egyptian batter · Roman foundations · Mayan caps</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('on',window.scrollY>24)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){io.observe(el)});
+  }else{reveals.forEach(function(el){el.classList.add('on')})}
+})();
+</script>
+</body>
+</html>

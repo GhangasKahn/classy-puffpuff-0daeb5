@@ -4,7 +4,9 @@ A complete, self-contained website:
 
 - `index.html` — the public **landing page** (the marketing front door)
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
-- `netlify.toml` — server headers + redirects for Netlify
+- `fence/` — the **fence design suite**: HASHIRA (Japanese joinery guide), STELE (Buffalo NY masonry + timber design with FreeCAD model and build plans), and the full design & engineering report at `/fence/report/`
+- `scripts/` — CAD pipelines (`build_stele.sh`, `render_hashira_cad.sh`, `gen_stele_plans.py`)
+- `netlify.toml` — server headers + redirects for Netlify (`/stele` and `/report` shortcuts included)
 
 ## What this is — and isn't
 This is the complete **front-end** product: a marketing site plus an installable, offline-capable
