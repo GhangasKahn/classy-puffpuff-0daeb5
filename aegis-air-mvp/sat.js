@@ -11,11 +11,12 @@
 const AegisSat = (() => {
   const GIBS = "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best";
   const DAYS = 10;                 // scrubbable window
-  const LATENCY_H = 30;            // assume imagery complete ~30 h behind now
+  const LATENCY_H = 48;            // imagery reliably complete ~2 days behind now
+  const BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 
   const S = {
     map: null, base: null, aod: null, fireLayer: null,
-    layerId: "VIIRS_SNPP_CorrectedReflectance_TrueColor",
+    layerId: "MODIS_Terra_CorrectedReflectance_TrueColor",
     dates: [], dateIdx: DAYS - 1,
     showAod: true, showFires: true,
     playTimer: null,
@@ -39,7 +40,7 @@ const AegisSat = (() => {
   function makeBase() {
     if (S.base) S.map.removeLayer(S.base);
     S.base = L.tileLayer(tileUrl(S.layerId, curDate(), 9), {
-      maxNativeZoom: 9, maxZoom: 12, crossOrigin: "anonymous",
+      maxNativeZoom: 9, maxZoom: 12, crossOrigin: "anonymous", errorTileUrl: BLANK,
       attribution: 'NASA <a href="https://worldview.earthdata.nasa.gov">GIBS/Worldview</a>',
     }).addTo(S.map);
   }
@@ -47,10 +48,11 @@ const AegisSat = (() => {
     if (S.aod) { S.map.removeLayer(S.aod); S.aod = null; }
     if (!S.showAod) return;
     S.aod = L.tileLayer(tileUrl("MODIS_Combined_Value_Added_AOD", curDate(), 6), {
-      maxNativeZoom: 6, maxZoom: 12, opacity: 0.55, crossOrigin: "anonymous",
+      maxNativeZoom: 6, maxZoom: 12, opacity: 0.38, crossOrigin: "anonymous", errorTileUrl: BLANK,
     }).addTo(S.map);
   }
   function makeFires() {
+    if (!S.map) return;
     if (S.fireLayer) { S.map.removeLayer(S.fireLayer); S.fireLayer = null; }
     if (!S.showFires) return;
     const g = L.layerGroup();
@@ -65,6 +67,22 @@ const AegisSat = (() => {
   function refresh() {
     makeBase(); makeAod(); makeFires();
     document.getElementById("satDate").textContent = curDate() + (S.dateIdx === DAYS - 1 ? " · LATEST" : "");
+    probeAvailability();
+  }
+
+  /* probe one mid-zoom tile near map center; warn if this satellite/date has no imagery yet */
+  let probeSeq = 0;
+  async function probeAvailability() {
+    const seq = ++probeSeq;
+    const c = S.map.getCenter();
+    const n = 2 ** 5;
+    const x = Math.floor((c.lng + 180) / 360 * n);
+    const y = Math.floor((1 - Math.log(Math.tan(c.lat * Math.PI / 180) + 1 / Math.cos(c.lat * Math.PI / 180)) / Math.PI) / 2 * n);
+    try {
+      const r = await fetch(`${GIBS}/${S.layerId}/default/${curDate()}/GoogleMapsCompatible_Level9/5/${y}/${x}.jpg`, { method: "HEAD" });
+      if (seq !== probeSeq) return;
+      if (!r.ok) S.onLog(`SAT NOTICE — ${S.layerId.split("_")[0]} HAS NO PROCESSED IMAGERY FOR ${curDate()} HERE. TRY MODIS TERRA OR AN EARLIER DATE.`, "warn");
+    } catch { /* offline — tiles will fall back to cache */ }
   }
 
   /* ---------- CAPTURE: compose visible tiles → stamped PNG ---------- */

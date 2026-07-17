@@ -79,16 +79,23 @@ const AegisML = (() => {
     }
     const rmse = Math.sqrt(sse / 24);
 
-    // recursive rollout 24 h beyond the end of the series
+    // recursive rollout 24 h beyond the end of the series.
+    // Recursive AR rollouts can drift when the lag-1 weight ≈ 1, so each
+    // step is damped toward the recent mean and capped vs observed history.
     const ext = [...series];
     const t0 = series.length;
     const out = [];
+    const recent = series.slice(-72).filter(v => v > 0);
+    const recentMean = recent.reduce((s, v) => s + v, 0) / Math.max(recent.length, 1);
+    const cap = Math.max(...recent, 10) * 1.5;
     for (let h = 0; h < 24; h++) {
       const t = t0 + h;
       const hod = (new Date(times[times.length - 1]).getHours() + 1 + h) % 24;
       const row = [1, ext[t - 1], ext[t - 2], ext[t - 24], (ext[t - 1] - ext[t - 7]) / 6,
                    Math.sin(hod / 24 * 2 * Math.PI), Math.cos(hod / 24 * 2 * Math.PI)];
-      const p = Math.max(0, predict(row));
+      const damp = 0.06; // pull each step slightly toward the 72 h mean
+      let p = predict(row) * (1 - damp) + recentMean * damp;
+      p = Math.min(Math.max(0, p), cap);
       ext.push(p); out.push(p);
     }
     return { weights: w, featNames: NC_FEATS, rmse, forecast: out };

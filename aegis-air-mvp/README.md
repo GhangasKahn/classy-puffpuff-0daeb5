@@ -1,91 +1,56 @@
-# Aegis Air MVP
+# AEGIS AIR // FIELD INTEL (v2)
 
-A local-first, mobile-friendly prototype for live wildfire context, wind, air quality, a 72-hour PM2.5/AQI outlook, symptom check-ins, and a transparent personal exposure-risk score.
+A local-first, mobile-friendly **personal smoke-recon instrument**: open-source satellite
+imagery capture, on-device machine learning, live wildfire/wind/air telemetry, symptom
+check-ins, and a transparent exposure score. Palantir-style intel console design.
 
-## What works now
+Live: `/aegis-air-mvp/` on the Netlify site · companion god's-eye console at `/aegis-command/`.
 
-- Buffalo/Kenmore default location or browser geolocation
-- Live Open-Meteo weather and CAMS air-quality forecasts
-- NASA EONET curated wildfire events within 2,600 km
-- Wind direction and speed
-- 72-hour PM2.5, AQI, or aerosol-optical-depth chart
-- Conservative personal sensitivity profile
-- Manual symptoms, heart rate, SpO2, and outdoor-time entries
-- Transparent score-component view
-- Local browser storage and JSON export
-- Emergency-symptom hard stop
-- Installable PWA when served over HTTP/HTTPS
+## Modules
+
+- **OVERVIEW** — exposure index (7 transparent components), auto-compiled intel briefing,
+  telemetry cells, anomaly sentinel state, fire recon with k-means cluster badges
+- **SAT RECON** — NASA GIBS orbital imagery (MODIS Terra true color + 7-2-1 burn bands,
+  VIIRS SNPP / NOAA-20), MODIS AOD smoke overlay, EONET fire markers, 10-day date scrub
+  with pass replay, and **CAPTURE FRAME**: composes visible tiles into a stamped PNG download
+- **SIGNALS** — continuous PM2.5 line: 7-day model history + CAMS T+72h + on-device
+  nowcast T+24h, EPA band underlays, anomaly markers, detected-event log
+- **NEURAL** — the on-device ML deck (see below), all weights printed
+- **LOG** — sensitivity profile, field check-ins (symptoms / HR / SpO₂ / outdoor time),
+  archive with JSON export and delete-all
+
+## On-device ML (no cloud, no keys, transparent)
+
+| Model | Type | Trained on |
+|---|---|---|
+| Nowcast engine | Ridge regression (lags, trend, hour-of-day) | Past 7 days of CAMS PM2.5 at your position; holdout RMSE shown |
+| Anomaly sentinel | Robust z-score (median/MAD) | Same-hour 7-day baseline; ≥2σ logs an event |
+| Personal pattern learner | Logistic regression | Your own check-ins (needs ≥8 varied entries); weights + fit accuracy printed |
+| Fire clustering | k-means | EONET events within 2,600 km |
+
+All models run in the browser and print their weights. They find patterns — they are
+**not medical inference** and never diagnose.
+
+## Data sources (all open, no API keys)
+
+- Open-Meteo Weather + Air Quality (CAMS) — modeled data, labeled as such
+- NASA EONET v3 wildfire events
+- NASA GIBS / Worldview satellite imagery (Terra/MODIS, Suomi-NPP & NOAA-20/VIIRS)
+- OpenStreetMap / CARTO basemaps
 
 ## Important limitations
 
-- This is not a medical device and does not diagnose illness.
-- NASA EONET is a curated event catalog, not a complete satellite hotspot feed.
-- The purple/cyan map plume is a visual proxy based on local wind and particle burden. It is not NOAA HRRR-Smoke or HYSPLIT transport modeling.
-- Open-Meteo/CAMS values are modeled environmental data. A later version should ingest EPA AirNow regulatory observations and local indoor sensors.
-- SpO2 is recorded but deliberately not interpreted or scored. Heart rate is used only as a relative deviation from a user-entered baseline.
-- Health data remains in the browser unless the user exports it.
-
-## Project structure
-
-```text
-aegis-air-mvp/
-  index.html         markup: app bar, tabbed sections, forms
-  styles.css         dark glassy theme, mobile bottom tab bar
-  app.js             data fetching, scoring, map, chart, storage
-  manifest.json      PWA manifest
-  service-worker.js  offline app shell + network-first live data
-  icon.svg / icon-192.png / icon-512.png
-```
-
-On the Netlify site the app deploys under `/aegis-air-mvp/`. Its cinematic
-landing page (source in `aegis-landing/`, committed build in `aegis/`) is
-served at `/aegis`.
+- Not a medical device; does not diagnose illness. Emergency symptoms trigger a hard stop.
+- EONET is curated, not a complete hotspot feed; GIBS imagery lags ~1–2 days by satellite.
+- CAMS values are modeled, not EPA AirNow regulatory observations.
+- SpO₂ is recorded but never interpreted or scored. HR is used only vs your own baseline.
+- All health data stays in the browser unless exported.
 
 ## Run it
 
-### Simplest
-
-Open `index.html`. Most modern browsers will load the live APIs directly. If the browser blocks network calls from a local file, use the local server below.
-
-### Mac, Linux, or Termux
-
 ```bash
 cd aegis-air-mvp
-python3 -m http.server 8080
+python3 -m http.server 8080   # then open http://localhost:8080
 ```
 
-Then open:
-
-```text
-http://localhost:8080
-```
-
-For another device on the same Wi-Fi, use the computer's local network address, for example:
-
-```text
-http://192.168.1.20:8080
-```
-
-### Windows
-
-```powershell
-cd aegis-air-mvp
-py -m http.server 8080
-```
-
-## Next engineering milestones
-
-1. Replace curated EONET markers with NASA FIRMS VIIRS hotspots using a user API key.
-2. Add EPA AirNow regulatory-monitor observations and source labels.
-3. Add true HRRR-Smoke raster tiles and forecast animation.
-4. Add NOAA HYSPLIT backward trajectories for modeled source attribution.
-5. Connect a local indoor PM2.5 sensor and calculate infiltration/filtration effectiveness.
-6. Build a native SwiftUI version with HealthKit permissions and on-device encrypted storage.
-7. Validate the personal-risk model with clinician-reviewed thresholds and time-separated data.
-
-## Data sources
-
-- Open-Meteo Weather API
-- Open-Meteo Air Quality API using CAMS forecasts
-- NASA EONET API v3
-- OpenStreetMap map tiles
+Installable as a PWA over HTTP/HTTPS (offline app shell + cached tiles/data).
