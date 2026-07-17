@@ -15,6 +15,19 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+# Aegis Air PWA
+[[headers]]
+  for = "/aegis-air-mvp/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/aegis-air-mvp/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+
 # sensible security headers (no strict CSP: the app loads CDN + fonts + inline)
 [[headers]]
   for = "/*"
@@ -22,9 +35,20 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # geolocation allowed on same origin for the Aegis Air "use my location" feature
+    Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
 
 [[redirects]]
   from = "/app"
   to = "/app/"
+  status = 301
+
+[[redirects]]
+  from = "/aegis"
+  to = "/aegis-air-mvp/"
+  status = 301
+
+[[redirects]]
+  from = "/aegis-air-mvp"
+  to = "/aegis-air-mvp/"
   status = 301

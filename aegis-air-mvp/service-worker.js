@@ -3,12 +3,14 @@
    Live APIs (Open-Meteo, EONET): network-first with cache fallback,
    so stale data can still be shown when offline. */
 
-const SHELL_CACHE = "aegis-shell-v1";
-const DATA_CACHE = "aegis-data-v1";
+const SHELL_CACHE = "aegis-shell-v2";
+const DATA_CACHE = "aegis-data-v2";
 
 const SHELL_ASSETS = [
   "./",
   "./index.html",
+  "./styles.css",
+  "./app.js",
   "./manifest.json",
   "./icon.svg",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",

@@ -25,6 +25,20 @@ A local-first, mobile-friendly prototype for live wildfire context, wind, air qu
 - SpO2 is recorded but deliberately not interpreted or scored. Heart rate is used only as a relative deviation from a user-entered baseline.
 - Health data remains in the browser unless the user exports it.
 
+## Project structure
+
+```text
+aegis-air-mvp/
+  index.html         markup: app bar, tabbed sections, forms
+  styles.css         dark glassy theme, mobile bottom tab bar
+  app.js             data fetching, scoring, map, chart, storage
+  manifest.json      PWA manifest
+  service-worker.js  offline app shell + network-first live data
+  icon.svg / icon-192.png / icon-512.png
+```
+
+On the Netlify site this deploys under `/aegis-air-mvp/` (short link: `/aegis`).
+
 ## Run it
 
 ### Simplest
