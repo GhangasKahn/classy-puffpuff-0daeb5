@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="AEGIS COMMAND — god's-eye OSINT console: live wind field, wildfire threat board, air telemetry, alert wire and broadcast monitor." />
+<meta name="theme-color" content="#04070d" />
+<title>AEGIS // COMMAND — Atmospheric OSINT Console</title>
+<link rel="icon" type="image/svg+xml" href="../aegis-air-mvp/icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="command.css" />
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">
+    <span class="mark">◤</span>
+    <span class="word">AEGIS <b>// COMMAND</b></span>
+    <span class="sub">ATMOSPHERIC OSINT CONSOLE</span>
+  </div>
+  <div class="top-mid">
+    <span class="chip live"><i class="dot"></i>LIVE</span>
+    <span class="chip" id="aoiChip">AOI 42.9656N 78.8703W</span>
+    <span class="chip" id="zChip">Z —</span>
+    <span class="chip" id="lChip">L —</span>
+    <span class="chip" id="metChip">MET T+00:00</span>
+  </div>
+  <div class="top-actions">
+    <a class="tbtn" href="../aegis-air-mvp/" title="Personal exposure instrument">INSTRUMENT ↗</a>
+    <button class="tbtn" id="btnGeo" title="Use device location">GEOLOCATE</button>
+    <button class="tbtn warn" id="btnAoi" title="Click map to set area of interest">REPOSITION AOI</button>
+  </div>
+</header>
+
+<div id="frame">
+
+  <!-- ============ LEFT : SIGNALS + THREAT BOARD ============ -->
+  <aside class="panel" id="left">
+    <div class="ptitle">SIGNALS</div>
+    <div class="sig-grid">
+      <div class="sig"><span class="sv" id="sigFires">—</span><span class="sl">FIRE EVENTS<br/>IN RANGE</span></div>
+      <div class="sig"><span class="sv warn" id="sigUpwind">—</span><span class="sl">UPWIND<br/>±45° SECTOR</span></div>
+      <div class="sig"><span class="sv" id="sigAlerts">—</span><span class="sl">ACTIVE NWS<br/>ALERTS (US)</span></div>
+      <div class="sig"><span class="sv" id="sigWire">—</span><span class="sl">WIRE ITEMS<br/>24H</span></div>
+    </div>
+
+    <div class="ptitle">THREAT BOARD <span class="ptag">EONET · NEAREST FIRST</span></div>
+    <div id="fireList" class="scroll"></div>
+
+    <div class="ptitle">ALERT WIRE <span class="ptag">NWS · FIRE / AIR / SMOKE</span></div>
+    <div id="alertList" class="scroll short"></div>
+  </aside>
+
+  <!-- ============ CENTER : MAP ============ -->
+  <main id="mapwrap">
+    <div id="map"></div>
+    <canvas id="windCanvas"></canvas>
+    <div id="layerbar">
+      <button class="lbtn on" data-layer="wind">WIND FIELD</button>
+      <button class="lbtn on" data-layer="aqi">AQI GRID</button>
+      <button class="lbtn on" data-layer="fires">FIRES</button>
+      <button class="lbtn on" data-layer="rings">RANGE RINGS</button>
+      <button class="lbtn on" data-layer="plume">PLUME PROXY</button>
+    </div>
+    <div id="lockinfo" hidden></div>
+    <div id="mapnote">WIND FIELD: MODELED 10 M INTERPOLATION (OPEN-METEO) — NOT HRRR-SMOKE · PLUME: VISUAL PROXY</div>
+  </main>
+
+  <!-- ============ RIGHT : ATMOSPHERICS + LOG ============ -->
+  <aside class="panel" id="right">
+    <div class="ptitle">ATMOSPHERICS <span class="ptag">CAMS / OPEN-METEO</span></div>
+    <div class="atmo-top">
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 120 120" id="aqiGauge">
+          <circle cx="60" cy="60" r="50" class="g-track"/>
+          <circle cx="60" cy="60" r="50" class="g-val" id="gaugeArc"/>
+        </svg>
+        <div class="gauge-center">
+          <span id="gAqi">—</span>
+          <small>US AQI</small>
+        </div>
+      </div>
+      <div class="atmo-cells">
+        <div class="cell"><span class="cl">PM2.5</span><span class="cv" id="vPm">—</span></div>
+        <div class="cell"><span class="cl">PM10</span><span class="cv" id="vPm10">—</span></div>
+        <div class="cell"><span class="cl">AOD</span><span class="cv" id="vAod">—</span></div>
+        <div class="cell"><span class="cl">TEMP</span><span class="cv" id="vTemp">—</span></div>
+        <div class="cell"><span class="cl">RH</span><span class="cv" id="vRh">—</span></div>
+        <div class="cell"><span class="cl">PRESS</span><span class="cv" id="vPress">—</span></div>
+      </div>
+    </div>
+
+    <div class="wind-row">
+      <svg viewBox="0 0 100 100" id="windDial">
+        <circle cx="50" cy="50" r="44" class="wd-ring"/>
+        <text x="50" y="13" class="wd-pt">N</text><text x="50" y="95" class="wd-pt">S</text>
+        <text x="6" y="53" class="wd-pt">W</text><text x="94" y="53" class="wd-pt">E</text>
+        <g id="windNeedle"><path d="M50 16 L45 55 L50 48 L55 55 Z" class="wd-needle"/></g>
+      </svg>
+      <div class="wind-data">
+        <div><span class="cl">WIND</span><span class="cv big" id="vWind">—</span></div>
+        <div><span class="cl">VECTOR</span><span class="cv" id="vVector">—</span></div>
+        <div><span class="cl">GUSTS</span><span class="cv" id="vGust">—</span></div>
+      </div>
+    </div>
+
+    <div class="ptitle">PM2.5 FORECAST <span class="ptag">T+72H</span></div>
+    <canvas id="spark" height="70"></canvas>
+
+    <div class="ptitle">AREA THREAT INDEX <span class="ptag">ENV ONLY · TRANSPARENT</span></div>
+    <div class="ati-row">
+      <div class="ati-bar"><div id="atiFill"></div></div>
+      <span class="cv big" id="atiVal">—</span>
+    </div>
+    <div class="ati-parts" id="atiParts">air — · trend — · upwind —</div>
+
+    <div class="ptitle">EVENT LOG</div>
+    <div id="eventLog" class="scroll log"></div>
+  </aside>
+
+  <!-- ============ BOTTOM : OSINT WIRE + BROADCAST ============ -->
+  <section id="bottom">
+    <div class="panel" id="wirePanel">
+      <div class="ptitle">OSINT WIRE <span class="ptag">GDELT GLOBAL MONITOR · WILDFIRE / SMOKE / AIR · 24H</span></div>
+      <div id="wire" class="wire scroll-x"></div>
+    </div>
+    <div class="panel" id="castPanel">
+      <div class="ptitle">BROADCAST MONITOR <span class="ptag">LIVE FIRST-PERSON COVERAGE · CLICK TO STREAM</span></div>
+      <div id="castStage">
+        <div id="castPoster">
+          <span class="cast-hint">◉ SELECT CHANNEL TO OPEN LIVE STREAM</span>
+        </div>
+      </div>
+      <div id="castChannels"></div>
+    </div>
+  </section>
+
+</div>
+
+<footer id="statusbar">
+  <div class="src" id="srcRow">
+    <span data-src="wx"><i class="dot"></i>MET</span>
+    <span data-src="aq"><i class="dot"></i>CAMS</span>
+    <span data-src="grid"><i class="dot"></i>WINDFIELD</span>
+    <span data-src="eonet"><i class="dot"></i>EONET</span>
+    <span data-src="nws"><i class="dot"></i>NWS</span>
+    <span data-src="gdelt"><i class="dot"></i>GDELT</span>
+  </div>
+  <div id="ticker"><div id="tickerInner">AEGIS COMMAND — ACQUIRING SIGNALS…</div></div>
+  <div class="legalline">MODELED DATA · NOT A MEDICAL DEVICE · OSINT AGGREGATION — VERIFY BEFORE ACTING</div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="command.js" defer></script>
+</body>
+</html>

@@ -50,3 +50,13 @@
   from = "/aegis-air-mvp"
   to = "/aegis-air-mvp/"
   status = 301
+
+[[redirects]]
+  from = "/command"
+  to = "/aegis-command/"
+  status = 301
+
+[[redirects]]
+  from = "/aegis-command"
+  to = "/aegis-command/"
+  status = 301

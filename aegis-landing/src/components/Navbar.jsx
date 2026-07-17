@@ -42,7 +42,7 @@ export default function Navbar() {
       <div className="flex items-center gap-6">
         <a href="#instrument" className={link}>Instrument</a>
         <a href="#method" className={link}>Method</a>
-        <a href="#proof" className={link}>Proof</a>
+        <a href="/aegis-command/" className={link}>Command</a>
         <a
           href={APP_URL}
           className="btn-magnetic rounded-full bg-ember px-4 py-1.5 text-sm font-bold text-deep"

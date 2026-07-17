@@ -21,6 +21,7 @@ export default function Footer() {
           <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">Instrument</div>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li><a className="lift text-ink/80 hover:text-ink" href={APP_URL}>Open the app</a></li>
+            <li><a className="lift text-ink/80 hover:text-ink" href="/aegis-command/">Command console</a></li>
             <li><a className="lift text-ink/80 hover:text-ink" href="#instrument">The three dials</a></li>
             <li><a className="lift text-ink/80 hover:text-ink" href="#method">The method</a></li>
             <li><a className="lift text-ink/80 hover:text-ink" href="#proof">The record</a></li>
