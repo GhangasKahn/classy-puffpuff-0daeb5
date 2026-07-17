@@ -326,6 +326,8 @@ async function fetchCore() {
     S.wx = wx; S.air = air;
     srcStatus("wx", true); srcStatus("aq", true);
     renderAtmo(); drawPlume(); renderAti();
+    // wind vector may have arrived after the fire sweep — recompute upwind flags
+    if (S.fires.length) { drawFires(); renderFireList(); }
     log("MET + CAMS TELEMETRY REFRESHED", "ok");
   } catch {
     srcStatus("wx", false); srcStatus("aq", false);
@@ -435,7 +437,14 @@ async function fetchWire() {
   } catch {
     srcStatus("gdelt", false);
     renderWire(null);
-    log("GDELT WIRE UNAVAILABLE (RATE LIMIT LIKELY) — RETRY IN 5 MIN", "warn");
+    // GDELT enforces a strict per-IP rate limit; schedule one early retry
+    if (!S.wireRetry) {
+      S.wireRetry = true;
+      setTimeout(() => { S.wireRetry = false; fetchWire(); }, 45e3);
+      log("GDELT WIRE UNAVAILABLE (RATE LIMIT LIKELY) — RETRY IN 45 S", "warn");
+    } else {
+      log("GDELT WIRE STILL UNAVAILABLE — NEXT CYCLE IN 5 MIN", "warn");
+    }
   }
 }
 
@@ -557,8 +566,10 @@ function renderAlerts(feats) {
 function renderWire(arts) {
   const host = $("wire");
   if (arts == null) {
-    host.innerHTML = '<div class="empty-note">GDELT WIRE UNAVAILABLE — AUTO-RETRY SCHEDULED. FEEDS: MET ✓ CAMS ✓ EONET ✓ NWS ✓</div>';
+    host.innerHTML = '<div class="empty-note">GDELT WIRE UNAVAILABLE — RATE-LIMITED OR OFFLINE. AUTO-RETRY SCHEDULED. OTHER FEEDS UNAFFECTED.</div>';
     $("sigWire").textContent = "—";
+    $("tickerInner").textContent =
+      "OSINT WIRE RATE-LIMITED — RETRYING · MET/CAMS TELEMETRY LIVE · EONET FIRE SWEEP LIVE · NWS ALERT WIRE LIVE";
     return;
   }
   $("sigWire").textContent = arts.length;
@@ -591,7 +602,9 @@ function initBroadcast() {
       src="https://www.youtube.com/embed/live_stream?channel=${btn.dataset.ch}&autoplay=1&mute=1"
       title="Live broadcast — ${btn.textContent}"
       allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen
-      referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <a class="cast-fallback" href="https://www.youtube.com/channel/${btn.dataset.ch}/live"
+         target="_blank" rel="noopener noreferrer">STREAM BLOCKED? OPEN ${btn.textContent} LIVE ON YOUTUBE ↗</a>`;
     log(`BROADCAST MONITOR — ${btn.textContent} LIVE STREAM OPENED`, "ok");
   }));
 }
