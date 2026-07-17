@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Design DNA tokens — one edit away */
+  --ground: #0a0f1e;
+  --deep: #070b16;
+  --surface: #101a30;
+  --line: #1d2a47;
+  --ink: #eaf0fa;
+  --muted: #93a4c4;
+  --ember: #ff6b3d;
+  --air: #22d3ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/* anchored sections clear the floating island nav */
+section[id] {
+  scroll-margin-top: 88px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "Archivo", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--deep);
+}
+
+/* Global grain — feTurbulence at 0.05, kills flat digital gradients */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Magnetic buttons — sliding layer under overflow-hidden */
+.btn-magnetic {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.btn-magnetic:hover { transform: scale(1.03); }
+.btn-magnetic:active { transform: scale(0.98); }
+.btn-magnetic .slide {
+  position: absolute;
+  inset: 0;
+  transform: translateY(101%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.btn-magnetic:hover .slide { transform: translateY(0); }
+.btn-magnetic > span:not(.slide) { position: relative; z-index: 1; }
+
+.lift {
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.25s;
+}
+.lift:hover { transform: translateY(-1px); }
+
+/* Focus styled as deliberately as hover */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--air);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Live dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+.pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+
+/* Typewriter cursor */
+@keyframes blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+.tw-cursor { animation: blink 0.9s step-end infinite; }
+
+/* EKG waveform */
+@keyframes ekg {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+.ekg-path {
+  stroke-dasharray: 1000;
+  animation: ekg 3.2s linear infinite;
+}
+
+/* Shuffler cards */
+.shuffle-card {
+  transition:
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.5s ease,
+    filter 0.5s ease;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot, .tw-cursor, .ekg-path { animation: none; }
+  .btn-magnetic:hover { transform: none; }
+  .shuffle-card { transition: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* Tabular readouts */
+.readout { font-variant-numeric: tabular-nums; }

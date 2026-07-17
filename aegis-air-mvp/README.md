@@ -37,7 +37,9 @@ aegis-air-mvp/
   icon.svg / icon-192.png / icon-512.png
 ```
 
-On the Netlify site this deploys under `/aegis-air-mvp/` (short link: `/aegis`).
+On the Netlify site the app deploys under `/aegis-air-mvp/`. Its cinematic
+landing page (source in `aegis-landing/`, committed build in `aegis/`) is
+served at `/aegis`.
 
 ## Run it
 

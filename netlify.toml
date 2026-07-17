@@ -43,10 +43,8 @@
   to = "/app/"
   status = 301
 
-[[redirects]]
-  from = "/aegis"
-  to = "/aegis-air-mvp/"
-  status = 301
+# /aegis now serves the cinematic landing page (committed build in /aegis/),
+# whose CTAs funnel into the instrument app at /aegis-air-mvp/.
 
 [[redirects]]
   from = "/aegis-air-mvp"
