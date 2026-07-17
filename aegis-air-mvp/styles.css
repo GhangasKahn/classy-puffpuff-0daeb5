@@ -43,11 +43,11 @@ button{font:inherit}
 h2{font-weight:650}
 
 /* ---------- app bar ---------- */
+/* NOTE: no backdrop-filter here — it would create a containing block and break
+   the position:fixed bottom tab bar on mobile (which lives inside this header). */
 .appbar{
   position:sticky;top:0;z-index:1000;
-  background:rgba(7,11,20,.82);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  background:rgba(9,14,25,.96);
   border-bottom:1px solid var(--line-soft);
 }
 .appbar-inner{
