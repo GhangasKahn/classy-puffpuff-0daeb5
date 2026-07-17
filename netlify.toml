@@ -28,3 +28,53 @@
   from = "/app"
   to = "/app/"
   status = 301
+
+# ---- fence design suite (HASHIRA / STELE / report) ----
+[[redirects]]
+  from = "/fence"
+  to = "/fence/"
+  status = 301
+
+[[redirects]]
+  from = "/stele"
+  to = "/fence/stele/"
+  status = 301
+
+[[redirects]]
+  from = "/report"
+  to = "/fence/report/"
+  status = 301
+
+# CAD downloads: force download with correct types
+[[headers]]
+  for = "/fence/*/exports/*"
+  [headers.values]
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/*.FCStd"
+  [headers.values]
+    Content-Type = "application/zip"
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/*.step"
+  [headers.values]
+    Content-Type = "application/step"
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/*.stl"
+  [headers.values]
+    Content-Type = "model/stl"
+
+[[headers]]
+  for = "/*.scad"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+# plan sheets render inline as SVG
+[[headers]]
+  for = "/fence/stele/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
