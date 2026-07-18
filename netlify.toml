@@ -15,15 +15,15 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
-# Aegis Air PWA
+# MARTIN build app PWA
 [[headers]]
-  for = "/aegis-air-mvp/service-worker.js"
+  for = "/fence/martin/app/service-worker.js"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
     Content-Type = "application/javascript; charset=utf-8"
 
 [[headers]]
-  for = "/aegis-air-mvp/manifest.json"
+  for = "/fence/martin/app/manifest.json"
   [headers.values]
     Content-Type = "application/manifest+json"
 
@@ -70,6 +70,16 @@
 [[redirects]]
   from = "/martin"
   to = "/fence/martin/"
+  status = 301
+
+[[redirects]]
+  from = "/martin/app"
+  to = "/fence/martin/app/"
+  status = 301
+
+[[redirects]]
+  from = "/build"
+  to = "/fence/martin/app/"
   status = 301
 
 [[redirects]]

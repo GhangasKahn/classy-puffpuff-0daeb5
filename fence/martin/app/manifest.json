@@ -1,0 +1,18 @@
+{
+  "name": "MARTIN Build",
+  "short_name": "MARTIN",
+  "description": "Prairie fence build app — visualization, assembly, materials, blueprints",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#14181c",
+  "theme_color": "#14181c",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

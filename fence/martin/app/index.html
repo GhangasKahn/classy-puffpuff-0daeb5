@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#14181c" />
+<meta name="description" content="MARTIN Build App — interactive breakdown, visualization, assembly checklist, materials, joinery, blueprints for the 143×65 Buffalo Prairie fence." />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="MARTIN" />
+<title>MARTIN Build — Fence Assembly App</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#overview" data-go="overview">
+      <i class="mark" aria-hidden="true"></i>
+      <div>
+        <b>Martin</b>
+        <span>Build app</span>
+      </div>
+    </a>
+    <div class="top-actions">
+      <span class="progress-pill">0% assembled</span>
+      <button type="button" class="btn" id="printBtn">Print</button>
+      <a class="btn primary" href="../">Design</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button type="button" class="tab on" data-tab="overview">Overview</button>
+    <button type="button" class="tab" data-tab="viz">Visualize</button>
+    <button type="button" class="tab" data-tab="assembly">Assembly</button>
+    <button type="button" class="tab" data-tab="materials">Materials</button>
+    <button type="button" class="tab" data-tab="joinery">Joinery</button>
+    <button type="button" class="tab" data-tab="gallery">Gallery</button>
+    <button type="button" class="tab" data-tab="drafts">Drafts</button>
+    <button type="button" class="tab" data-tab="files">Files</button>
+  </nav>
+
+  <main>
+    <!-- OVERVIEW -->
+    <section class="panel on" data-panel="overview" id="overview">
+      <p class="kicker">143″ × 65″ · Buffalo NY · Japanese joinery</p>
+      <h1>Build MARTIN from the ground up</h1>
+      <p class="lead">Interactive breakdown of the Prairie removable fence — explode the model, walk assembly, check off lumber, study joinery, open blueprints, and keep site drafts on-device.</p>
+      <div class="grid3" id="overviewStats"></div>
+      <div class="hr"></div>
+      <div class="grid2">
+        <div class="card">
+          <h3>How to use this app</h3>
+          <ol style="margin:8px 0 0 18px;color:var(--dim);font-size:14px">
+            <li>Open <strong>Visualize</strong> — explode the fence and inspect parts</li>
+            <li>Work <strong>Assembly</strong> checklist phase by phase</li>
+            <li>Shop from <strong>Materials</strong> (≈303 bf)</li>
+            <li>Save drop-off / gray / latch choice in <strong>Drafts</strong></li>
+            <li>Print or download CAD &amp; blueprint <strong>Files</strong></li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Progress</h3>
+          <div style="height:10px;background:var(--ink2);border-radius:999px;overflow:hidden;margin:12px 0">
+            <div id="progressBar" style="height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--sage-hi));transition:width .35s"></div>
+          </div>
+          <p class="hint">Checklist progress is stored in your browser (localStorage). Export JSON anytime from Drafts.</p>
+          <div class="row" style="margin-top:12px">
+            <button type="button" class="btn" data-tab="assembly" onclick="document.querySelector('.tab[data-tab=assembly]').click()">Continue assembly</button>
+            <button type="button" class="btn" id="resetProgress">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <h2>Winter knock-down</h2>
+      <p class="lead">Designed to leave before lake-effect season. Pad can stay; timber and tip-out piers store dry.</p>
+      <ol id="winterList" style="color:var(--dim);font-size:14px"></ol>
+    </section>
+
+    <!-- VIZ -->
+    <section class="panel" data-panel="viz">
+      <p class="kicker">Interactive model</p>
+      <h1>Breakdown &amp; visualization</h1>
+      <p class="lead">Exploded assembly view of the 143″ run. Click parts to inspect. Not a substitute for FreeCAD — open the .FCStd for exact solids.</p>
+      <div class="viz-wrap">
+        <div>
+          <div class="viz-stage" id="vizStage" aria-live="polite"></div>
+          <div class="viz-controls">
+            <label>Explode <input id="explodeRange" type="range" min="0" max="1" step="0.01" value="0" /> <span id="explodeVal" class="mono">0%</span></label>
+            <button type="button" class="btn" onclick="document.getElementById('explodeRange').value=0.55;document.getElementById('explodeRange').dispatchEvent(new Event('input'))">Breakdown</button>
+            <button type="button" class="btn" onclick="document.getElementById('explodeRange').value=0;document.getElementById('explodeRange').dispatchEvent(new Event('input'))">Assembled</button>
+          </div>
+        </div>
+        <div>
+          <div class="card" id="partDetail" style="margin-bottom:10px">
+            <strong>Select a part</strong>
+            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the model or the list to inspect. Drag the explode slider for assembly breakdown.</p>
+          </div>
+          <div class="part-list" id="partList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSEMBLY -->
+    <section class="panel" data-panel="assembly">
+      <p class="kicker">Build sequence</p>
+      <h1>Assembly guide</h1>
+      <p class="lead">Twelve steps from site measure to lock. Check items off as you go — progress stays on this device.</p>
+      <div class="phase-rail">
+        <button type="button" class="chip on" data-phase="all">All</button>
+        <button type="button" class="chip" data-phase="base">01 Base</button>
+        <button type="button" class="chip" data-phase="timber">02 Timber</button>
+        <button type="button" class="chip" data-phase="gate">03 Gate</button>
+        <button type="button" class="chip" data-phase="finish">04 Finish</button>
+      </div>
+      <div id="assemblyList"></div>
+    </section>
+
+    <!-- MATERIALS -->
+    <section class="panel" data-panel="materials">
+      <p class="kicker">Hardware-store stock</p>
+      <h1>Materials &amp; board feet</h1>
+      <p class="lead">Paint-grade dimensional lumber is fine. Prefer straight grain for posts and rails. Check items as you buy.</p>
+      <div class="card" style="overflow:auto">
+        <table>
+          <thead>
+            <tr><th></th><th>Qty</th><th>Nom</th><th>Len</th><th>Use</th><th>BF</th></tr>
+          </thead>
+          <tbody id="lumberBody"></tbody>
+          <tfoot>
+            <tr><td colspan="5"><strong>Timber total</strong></td><td class="mono" id="bfTotal"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card">
+          <h3>Non-timber</h3>
+          <ul id="miscList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        </div>
+        <div class="card">
+          <h3>Tools</h3>
+          <ul id="toolsList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOINERY -->
+    <section class="panel" data-panel="joinery">
+      <p class="kicker">No nails in the timber</p>
+      <h1>Japanese joinery vocabulary</h1>
+      <p class="lead">Every structural connection is wood-on-wood. Wedges and pegs reverse for winter knock-down.</p>
+      <div class="grid2" id="joineryList" style="align-items:stretch"></div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="panel" data-panel="gallery">
+      <p class="kicker">Renders &amp; blueprints</p>
+      <h1>Gallery &amp; drafts on paper</h1>
+      <p class="lead">CAD renders and M-1…M-6 plan sheets. Tap to enlarge. Print from the browser for shop copies.</p>
+      <div class="gallery" id="galleryGrid"></div>
+    </section>
+
+    <!-- DRAFTS -->
+    <section class="panel" data-panel="drafts">
+      <p class="kicker">On-device field notes</p>
+      <h1>Site drafts</h1>
+      <p class="lead">Lock your drop-off, paint gray, and latch choice. Nothing leaves this browser unless you export JSON.</p>
+      <div class="grid2">
+        <div class="card">
+          <div class="field">
+            <label for="draftDrop">Driveway → garden drop (inches)</label>
+            <input id="draftDrop" type="number" min="0" max="24" step="0.25" />
+          </div>
+          <div class="field">
+            <label for="draftGray">Owner gray (hex)</label>
+            <div class="row">
+              <input id="draftGray" type="color" value="#6e7578" style="width:56px;height:40px;padding:2px" />
+              <div id="graySwatch" style="width:56px;height:40px;border-radius:8px;border:1px solid var(--line2);background:#6e7578"></div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="draftLatch">Latch mode</label>
+            <select id="draftLatch">
+              <option value="A">A — into house concrete</option>
+              <option value="B">B — self-contained on P0</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="draftSite">Site / address notes</label>
+            <input id="draftSite" type="text" placeholder="Buffalo parcel, side yard, etc." />
+          </div>
+        </div>
+        <div class="card">
+          <div class="field">
+            <label for="draftNotes">Build notes</label>
+            <textarea id="draftNotes" placeholder="Photo measurements, lumber yard, PE review…"></textarea>
+          </div>
+          <div class="row">
+            <button type="button" class="btn primary" id="saveDrafts">Save</button>
+            <button type="button" class="btn" id="exportDrafts">Export JSON</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILES -->
+    <section class="panel" data-panel="files">
+      <p class="kicker">CAD · plans · report</p>
+      <h1>Downloads</h1>
+      <p class="lead">FreeCAD model, STEP/STL meshes, blueprint SVGs, and the engineering report.</p>
+      <div class="dl-grid" id="downloadGrid"></div>
+      <p class="hint" style="margin-top:16px">Regenerate locally: <span class="mono">./scripts/build_martin.sh</span></p>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Mobile">
+    <button type="button" class="on" data-tab="overview">Home</button>
+    <button type="button" data-tab="viz">Viz</button>
+    <button type="button" data-tab="assembly">Build</button>
+    <button type="button" data-tab="materials">Buy</button>
+    <button type="button" data-tab="gallery">Plans</button>
+  </nav>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button type="button" class="btn" id="lightboxClose">Close</button>
+  <div id="lightboxBody"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js").catch(function () {});
+}
+</script>
+</body>
+</html>
