@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Full design & engineering report: STELE and HASHIRA fence systems for Buffalo NY — climate criteria, CAD models, construction documents, materials, budget, permits, and maintenance." />
-<title>Fence Design &amp; Engineering Report — STELE + HASHIRA · Buffalo NY</title>
+<meta name="description" content="MARTIN Prairie removable fence for Buffalo NY — 143×65 FreeCAD model, blueprints, board feet, Japanese joinery. STELE and HASHIRA archived." />
+<title>Fence Design &amp; Engineering Report — MARTIN · Buffalo NY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -97,6 +97,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
     <b>REPORT</b>
     <a href="#summary">Summary</a>
     <a href="#climate">Climate</a>
+    <a href="#martin">Martin</a>
     <a href="#stele">Stele</a>
     <a href="#hashira">Hashira</a>
     <a href="#engineering">Engineering</a>
@@ -111,14 +112,14 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
 <header class="cover">
   <div class="wrap">
-    <p class="tag">Design &amp; Engineering Report · Rev A</p>
-    <h1>A Fence Built Like the Old World</h1>
-    <p class="sub">STELE masonry-and-timber system with Roman arch gate, and the HASHIRA Japanese-joinery reinforcement method — engineered for Buffalo, New York.</p>
+    <p class="tag">Design &amp; Engineering Report · Rev B</p>
+    <h1>MARTIN — Prairie Fence for a 143″ Opening</h1>
+    <p class="sub">Removable freestanding fence: Darwin Martin / Prairie horizontals + Japanese hand joinery, sized 143″ × 65″ for Buffalo, New York — with leveling pad, locking gate, FreeCAD model, and full build plans.</p>
     <div class="meta">
       <div><b>Location basis</b>Buffalo / Erie County NY</div>
-      <div><b>Design run</b>11 940 mm · 39′-2″ (parametric)</div>
+      <div><b>Design run</b>143″ · 3632 mm × 65″ high</div>
       <div><b>Models</b>FreeCAD 1.1 + OpenSCAD</div>
-      <div><b>Documents</b>5 plan sheets · 2 design guides</div>
+      <div><b>Documents</b>6 MARTIN sheets · STELE + HASHIRA archives</div>
     </div>
   </div>
 </header>
@@ -127,17 +128,20 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
   <section id="summary">
     <div class="wrap">
       <h2><span class="no">1</span>Executive summary</h2>
-      <p class="intro">This report packages a complete, buildable fence design: 3D CAD models, dimensioned construction drawings, materials schedules, sequencing, budget ranges, and the permit path — ready to hand to yourself, a mason, or an inspector.</p>
-      <p><strong>The design problem.</strong> Buffalo weather destroys ordinary fences by three routes: wind racking off the lake, frost heave lifting shallow posts, and freeze-thaw cycling splitting wet wood and concrete. Most fences fail at fasteners and at grade — the two places this design refuses to rely on.</p>
-      <p><strong>The answer.</strong> Two coordinated systems:</p>
+      <p class="intro">This report delivers a buildable, winter-removable fence for a 143″ × 65″ site opening: FreeCAD model, dimensioned blueprints, cut list with board feet, joinery vocabulary, leveling pad for the driveway drop-off, and a locking privacy gate.</p>
+      <p><strong>The design problem.</strong> The existing fence is 143″ long, 65″ high, and ¾″ thick. It must become freestanding and solid in Buffalo wind, frost, and wet–dry cycling; include a locking privacy gate (hooking into house concrete or self-latching); sit level across a driveway→garden drop; and come apart so the timber (and tip-out piers) can be stored for winter. Aesthetic: Prairie School / Darwin Martin horizontals, built entirely with Japanese hand joinery from hardware-store dimensional lumber, painted owner gray — prefer 2×6 / 2×8 over 2×4, no nails or screws in the timber.</p>
+      <p><strong>The answer — MARTIN</strong> (primary for this site):</p>
       <ul>
-        <li><strong>STELE</strong> — the primary build. Six battered masonry piers on 48″ frost foundations carry four timber panel bays and a pure-compression Roman arch gate. Old-world principles do the structural work: Egyptian batter keeps every joint in compression, Roman foundations keep the base dry and below frost, Mayan corbelled caps and plinths shed ice and lift wood clear of snowpack.</li>
-        <li><strong>HASHIRA</strong> — the timber method used inside STELE's bays (and standalone for reinforcing any existing wood fence): through-rails seated in pockets, wedge-locked hand-cut joinery, cladding as a rain screen that carries no load.</li>
+        <li>Four 4×6 posts on tip-out socket piers set in a leveled concrete pad that absorbs the grade drop.</li>
+        <li>Three continuous 2×8 Prairie nuki bands + 2×8 cap; 1×6 (¾″) vertical privacy boards floating in grooves.</li>
+        <li>36″ gate with wooden pintles and sliding oak latch into a house-concrete receiver (or latch post).</li>
+        <li>Knock-down winter sequence: wedges → rails → boards → gate → posts → tip piers.</li>
       </ul>
-      <p><strong>Status.</strong> Geometry is fully modeled and internally consistent — the plan sheets are generated from the same parameter file as the 3D model. Two items remain deliberately open for site verification: your Green Code district's height allowance and an engineer-of-record review of the foundations and arch.</p>
+      <p><strong>Related systems archived in this suite:</strong> STELE (permanent masonry-pier fence for longer runs) and HASHIRA (standalone joinery reinforcement method). Use them if you later extend beyond 143″ or reinforce another fence.</p>
+      <p><strong>Status.</strong> Geometry is fully modeled. Upload site photos (drop-off height, house latch wall, gray swatch) to lock makeup thickness and receiver detail. Not a stamped PE document — confirm Green Code limits and engineer review if the city requires it.</p>
       <figure class="frame">
-        <img src="../stele/renders/stele_front.png" alt="STELE front elevation render" />
-        <figcaption>STELE — front elevation. Four 8′ panel bays, arch gate at 48″ clear, six battered piers.</figcaption>
+        <img src="../martin/renders/martin_front.png" alt="MARTIN front elevation render" />
+        <figcaption>MARTIN — front elevation. 36″ gate + two 46.5″ privacy bays · 143″ overall · owner-gray timber.</figcaption>
       </figure>
     </div>
   </section>
@@ -147,27 +151,83 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <h2><span class="no">2</span>Site &amp; climate criteria</h2>
       <p class="intro">Every dimension in the drawings traces back to one of these numbers.</p>
       <table>
-        <thead><tr><th>Load / hazard</th><th>Design value</th><th>Design response</th></tr></thead>
+        <thead><tr><th>Load / hazard</th><th>Design value</th><th>Design response (MARTIN)</th></tr></thead>
         <tbody>
-          <tr><td>Frost depth</td><td>48″ (1220 mm)</td><td>Footing bearing at 48″ on 6″ compacted #57 stone; Erie County minimum is 42″ — designed past it</td></tr>
-          <tr><td>Ground snow</td><td>40 psf + lake-effect drift</td><td>Timber starts 12.6″ above grade on masonry curb; all masonry tops washed or stepped; no flat water-holding surfaces</td></tr>
-          <tr><td>Wind</td><td>115 mph ultimate (ASCE 7)</td><td>Pier self-weight ≥ 3× panel wind reaction; batter keeps the resultant in the middle third — no uplift hardware needed</td></tr>
-          <tr><td>Freeze-thaw</td><td>Severe (&gt;60 cycles/yr)</td><td>Air-entrained 4000 psi concrete; drip kerfs under cap tiers; capillary break at stem/plinth; rain-screen cladding gaps</td></tr>
-          <tr><td>Soil movement</td><td>Clay-silt, heave-prone</td><td>Curb wall floats independently of pier footings — shallow movement cannot rack the piers</td></tr>
-          <tr><td>Snow removal</td><td>Plow berms at property line</td><td>Masonry curb takes the berm hit; boards and rails stay above the abuse zone</td></tr>
+          <tr><td>Opening</td><td>143″ L × 65″ H</td><td>Exact envelope; posts at 1.75 / 41.25 / 91.25 / 141.25″ centers</td></tr>
+          <tr><td>Grade drop</td><td>Field-verify (default 5″)</td><td>Leveling pad top dead-level; makeup concrete absorbs driveway→garden drop</td></tr>
+          <tr><td>Wind</td><td>115 mph ultimate (ASCE 7)</td><td>4×6 posts, 2×8 through-rails, ~180 lb socket piers + wedge lock; no fastener withdrawal path</td></tr>
+          <tr><td>Frost / heave</td><td>48″ Erie County</td><td>Removable system sits on drained gravel + pad; optional permanent 48″ stems if you abandon tip-out</td></tr>
+          <tr><td>Freeze-thaw</td><td>Severe (&gt;60 cycles/yr)</td><td>Air-entrained 4000 psi; sleeve drain holes; rain-screen board gaps; no trapped water in nuki</td></tr>
+          <tr><td>Winter storage</td><td>Owner requirement</td><td>Full knock-down: timber modules + tip-out piers store dry; pad can remain</td></tr>
+          <tr><td>Snow / plow</td><td>Lake-effect + berms</td><td>Bottom rail CL at 10″ AFF; boards start above splash; pad takes berm abuse</td></tr>
         </tbody>
       </table>
       <div class="callout">
-        <p class="t">Old-world rule of thumb</p>
-        <p>Rome's surviving walls, Egypt's pylons, and the platforms of Tikal share one trait: <em>they manage water before they manage load.</em> Every detail in this design sheds, drains, or elevates — strength follows dryness.</p>
+        <p class="t">Water before load</p>
+        <p>Prairie bands shed; Japanese joints drain; the pad levels and separates timber from soil. Strength follows dryness — the same rule that keeps STELE's masonry alive for a century.</p>
       </div>
+    </div>
+  </section>
+
+  <section id="martin">
+    <div class="wrap">
+      <h2><span class="no">3</span>System A — MARTIN (primary · this site)</h2>
+      <p class="intro">143″ Prairie removable fence. FreeCAD parametric model + six blueprint sheets. Full design page: <a href="../martin/">MARTIN</a>.</p>
+      <div class="grid2">
+        <figure class="frame">
+          <img src="../martin/renders/martin_iso.png" alt="MARTIN isometric" />
+          <figcaption>Isometric — gate left, privacy bays right, pad spanning drop-off</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="../martin/renders/martin_gate.png" alt="Gate detail" />
+          <figcaption>Gate — 36″ clear, diagonal brace, sliding latch bar</figcaption>
+        </figure>
+      </div>
+      <h3>Key dimensions</h3>
+      <table>
+        <thead><tr><th>Element</th><th>Dimension</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Overall length</td><td>143″ · 3632 mm</td><td>Outer face to outer face</td></tr>
+          <tr><td>Overall height</td><td>65″ · 1651 mm</td><td>Pad top to cap top</td></tr>
+          <tr><td>Gate clear</td><td>36″</td><td>Between P0 and P1</td></tr>
+          <tr><td>Privacy bay clear</td><td>46.5″ each</td><td>P1–P2 and P2–P3</td></tr>
+          <tr><td>Posts</td><td>4×6 actual 3.5×5.5</td><td>12″ foot tenon into sleeve</td></tr>
+          <tr><td>Rails R1 / R2 / R3</td><td>2×8 on edge @ 10″ / 28″ / 46″ CL</td><td>Nuki through-posts, wedge-locked</td></tr>
+          <tr><td>Cap</td><td>2×8 flat</td><td>Kama-tsugi scarf at P2</td></tr>
+          <tr><td>Privacy boards</td><td>1×6 × ¾″</td><td>Float in ⅜″ rail grooves; ¼″ gaps</td></tr>
+          <tr><td>Pad</td><td>155″ × 28″ × 6″ + makeup</td><td>Default 5″ drop makeup — field verify</td></tr>
+          <tr><td>Socket piers</td><td>14″ sq × 18″</td><td>Tip-out; sleeved; drained</td></tr>
+        </tbody>
+      </table>
+      <h3>Joinery (no nails / screws in timber)</h3>
+      <table>
+        <thead><tr><th>Joint</th><th>Where</th><th>Lock</th></tr></thead>
+        <tbody>
+          <tr><td>Nuki 貫</td><td>All Prairie rails through posts</td><td>Hardwood kusabi wedges</td></tr>
+          <tr><td>Hozo ほぞ</td><td>Gate stile/rail frame</td><td>Drawbored oak peg</td></tr>
+          <tr><td>Kama-tsugi 鎌継ぎ</td><td>Cap scarf at P2</td><td>Drawbored peg</td></tr>
+          <tr><td>Half-lap</td><td>Gate diagonal brace</td><td>Geometry + friction</td></tr>
+          <tr><td>Floating groove</td><td>1×6 boards in rail dados</td><td>Cap retains; no fasteners</td></tr>
+          <tr><td>Foot tenon</td><td>Post into pier sleeve</td><td>Gravity + optional cross-wedge</td></tr>
+        </tbody>
+      </table>
+      <h3>Gate lock options</h3>
+      <ul>
+        <li><strong>Latch A (preferred):</strong> 1.5″ × 3.5″ × 18″ oak sliding bar into a 4″ hardwood sleeve epoxied (or lag-bolted receiver block) into the house concrete/foundation. Cross-peg + optional keyed padlock hasp.</li>
+        <li><strong>Latch B:</strong> Same bar into a mortise in latch post P0 with gravity catch — fully freestanding.</li>
+        <li><strong>Hinges:</strong> Wooden pintles (lift-off for winter). Optional stainless pintle upgrade is the only recommended metal on the fence.</li>
+      </ul>
+      <figure class="frame">
+        <img src="../martin/renders/martin_below.png" alt="Below grade" />
+        <figcaption>Below — gravel bed, drop-off makeup, leveling pad, four tip-out socket piers</figcaption>
+      </figure>
     </div>
   </section>
 
   <section id="stele">
     <div class="wrap">
-      <h2><span class="no">3</span>System A — STELE (primary build)</h2>
-      <p class="intro">Masonry piers + timber infill + arch gate. 39′-2″ as modeled; the parameter file rescales to any run length.</p>
+      <h2><span class="no">4</span>System B — STELE (archive · longer permanent runs)</h2>
+      <p class="intro">Masonry piers + timber infill + arch gate. 39′-2″ as modeled; use when you want a permanent century-scale fence instead of a removable 143″ run. Design page: <a href="../stele/">STELE</a>.</p>
       <div class="grid2">
         <figure class="frame">
           <img src="../stele/renders/stele_gate.png" alt="Arch gate render" />
@@ -200,7 +260,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
   <section id="hashira">
     <div class="wrap">
-      <h2><span class="no">4</span>System B — HASHIRA (timber joinery)</h2>
+      <h2><span class="no">5</span>System C — HASHIRA (timber joinery vocabulary)</h2>
       <p class="intro">The joinery vocabulary inside STELE's bays — and a standalone method for reinforcing an existing wood fence without tearing it down.</p>
       <p>Rails pass <em>through</em> their supports and lock with wedges or pegs, so wind shear becomes wood-on-wood compression instead of fastener withdrawal. Cladding hangs as a rain screen and is never asked to brace anything. Six hand-cut joints cover every condition:</p>
       <table>
@@ -230,138 +290,144 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
   <section id="engineering">
     <div class="wrap">
-      <h2><span class="no">5</span>Engineering rationale</h2>
-      <h3>Why the batter works (Egypt)</h3>
-      <p>A fence panel in 115 mph wind delivers a horizontal reaction at each pier. A straight-sided pier resists by weight alone; if the overturning moment pushes the resultant force outside the middle third of the base, the windward joint goes into tension — and mortar joints in tension fail by frost wedging within a few winters. Battering the faces at 1:26.7 widens the base and re-centers gravity so the resultant stays inside the kern under full design wind. <em>No bed joint ever sees tension, so there is nothing for ice to pry open.</em></p>
-      <h3>Why the arch needs no steel (Rome)</h3>
-      <p>The semicircular arch converts the gate span into pure compression delivered to the imposts. Cast stone in compression is effectively immortal in this climate — it is tension and shear that freeze-thaw attacks. Stainless dowels at the imposts are for erection alignment only; the geometry carries the load.</p>
-      <h3>Why the foundations are boring on purpose (Rome again)</h3>
-      <p>48″ bearing on drained crushed stone is deeper than code demands. The extra 6″ over Erie County's minimum buys insurance against the freakish frost years, and the gravel pad drains meltwater away from the bearing plane so the soil under the footing never becomes an ice lens.</p>
-      <h3>Why the wood survives (Maya + Japan)</h3>
-      <p>The Mayan move: raise everything organic onto a masonry platform, above splash, snowpack, and plow berms. The Japanese move: joints that flex slightly and drain freely, no trapped water, no load path through a nail. Between them, cedar that would rot in 10 years at grade lasts 40+ in the air.</p>
+      <h2><span class="no">6</span>Engineering rationale</h2>
+      <h3>Why MARTIN stands in wind without nails</h3>
+      <p>Wind on a 65″ × 143″ face delivers shear and overturning into the posts. Through-rails (nuki) turn that shear into wood-on-wood compression inside the posts; wedges keep the rails from walking. Overturning is resisted by the mass of each socket pier plus the 12″ tenon couple. There is no nail withdrawal path to fatigue in freeze-thaw.</p>
+      <h3>Why the pad matters</h3>
+      <p>A fence that is not level racks its joints on day one. The leveling pad creates a single plane across the driveway→garden drop so every post bears evenly. Makeup thickness is a field dimension — default 5″ until site photos confirm.</p>
+      <h3>Why winter removal is structural, not a compromise</h3>
+      <p>Buffalo snowplows and ice berms destroy fences that stay at the curb. Designing the piers as tip-out modules and the timber as wedge-locked knock-down means the fence survives by leaving. The pad can stay as a low curb; everything precious goes indoors.</p>
+      <h3>STELE archive notes (Egypt / Rome / Maya)</h3>
+      <p>For permanent longer runs, STELE's battered piers keep bed joints in compression, 48″ drained footings beat frost, and raised curbs keep wood out of snowpack — see the STELE design page.</p>
       <div class="callout">
-        <p class="t">Failure-mode audit</p>
-        <p>Wind racking → compression joints, mass piers. Frost heave → 48″ bearing, floating curb. Freeze-thaw spalling → air-entrained mix, kerfs, washes. Rot → elevation + rain screen. Fastener corrosion → geometry carries load; the few fasteners are stainless. Snowplow impact → sacrificial masonry curb.</p>
+        <p class="t">Failure-mode audit (MARTIN)</p>
+        <p>Wind racking → nuki compression + pier mass. Grade drop → leveling pad. Rot → elevation + paint + drained sleeves. Fastener corrosion → no fasteners in timber. Plow impact → pad sacrificial, timber stored. Theft / privacy → locking latch into house concrete or P0.</p>
       </div>
     </div>
   </section>
 
   <section id="drawings">
     <div class="wrap">
-      <h2><span class="no">6</span>Construction documents</h2>
-      <p class="intro">Five A3 sheets, dimensioned in mm with inch callouts. Generated from the same parameter file as the 3D model — drawings and geometry cannot disagree. Print at 100% on A3 (or 71% on A4/Letter).</p>
+      <h2><span class="no">7</span>Construction documents</h2>
+      <p class="intro">MARTIN sheets M-1 through M-6 — inches, A3 landscape. Generated from the same parameters as the FreeCAD model.</p>
       <div class="sheetlist">
-        <figure class="frame"><img src="../stele/plans/S1_general.svg" alt="Sheet S-1" /><figcaption>S-1 · General arrangement — elevation, plan, design criteria, sheet index</figcaption></figure>
-        <figure class="frame"><img src="../stele/plans/S2_panel_bay.svg" alt="Sheet S-2" /><figcaption>S-2 · Panel bay — rail heights, board layout, curb, pocket detail 1:5</figcaption></figure>
-        <figure class="frame"><img src="../stele/plans/S3_foundation.svg" alt="Sheet S-3" /><figcaption>S-3 · Foundation section — frost depth, rebar, drainage, capillary break</figcaption></figure>
-        <figure class="frame"><img src="../stele/plans/S4_pier.svg" alt="Sheet S-4" /><figcaption>S-4 · Pier — batter geometry, cap tiers, drip kerf detail 1:4, construction options</figcaption></figure>
-        <figure class="frame"><img src="../stele/plans/S5_arch_gate.svg" alt="Sheet S-5" /><figcaption>S-5 · Roman arch gate — voussoir layout, keystone, centering notes, leaf</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M1_general.svg" alt="Sheet M-1" /><figcaption>M-1 · General arrangement — elevation, plan, design notes</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M2_elevation.svg" alt="Sheet M-2" /><figcaption>M-2 · Bay elevation &amp; rail schedule</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M3_joinery.svg" alt="Sheet M-3" /><figcaption>M-3 · Nuki, foot tenon, kama-tsugi, floating boards</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M4_pad_piers.svg" alt="Sheet M-4" /><figcaption>M-4 · Leveling pad, socket piers, winter sequence</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M5_gate_latch.svg" alt="Sheet M-5" /><figcaption>M-5 · Gate leaf, pintles, house / post latch</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M6_cutlist.svg" alt="Sheet M-6" /><figcaption>M-6 · Cut list &amp; board feet</figcaption></figure>
       </div>
+      <p>STELE archive sheets (S-1…S-5) remain at <a href="../stele/#plans">STELE plans</a>.</p>
     </div>
   </section>
 
   <section id="materials">
     <div class="wrap">
-      <h2><span class="no">7</span>Materials &amp; procurement</h2>
+      <h2><span class="no">8</span>Materials &amp; board feet (MARTIN)</h2>
       <table>
-        <thead><tr><th>Item</th><th>Spec</th><th>Qty (39′ run)</th><th>Sourcing notes — Buffalo area</th></tr></thead>
+        <thead><tr><th>Item</th><th>Spec</th><th>Qty</th><th>Board feet</th></tr></thead>
         <tbody>
-          <tr><td>Concrete</td><td>4000 psi, air-entrained 5–7%</td><td>~2.5 yd³</td><td>Small-batch ready-mix or bag mix; air entrainment is the non-negotiable spec</td></tr>
-          <tr><td>Crushed stone</td><td>#57, compacted</td><td>~1 yd³</td><td>Any aggregate yard</td></tr>
-          <tr><td>Rebar</td><td>#4 + #3 ties</td><td>~180 lf</td><td>Grade 60</td></tr>
-          <tr><td>Pier masonry</td><td>Cast stone units or CMU + veneer</td><td>6 piers</td><td>Cast-stone plants will run battered drums from shop drawings (S-4); or CMU core + Onondaga limestone veneer — the regional stone, quarried since the Erie Canal</td></tr>
-          <tr><td>Arch set</td><td>11 voussoirs + keystone, cast stone</td><td>1 set</td><td>Same plant as pier caps; supply template from S-5</td></tr>
-          <tr><td>Cedar</td><td>Western red, S4S, KD</td><td>12× 2×4, ~52× 1×6, 4× cap stock</td><td>Black locust upgrade for rails if available — regional and nearly rot-proof</td></tr>
-          <tr><td>Fasteners</td><td>316 SS ring-shank, M12 epoxy anchors</td><td>minor</td><td>Only the cladding and hinges use fasteners at all</td></tr>
-          <tr><td>Flashing</td><td>Self-adhered + metal drip</td><td>6 piers</td><td>Capillary break at stem/plinth line</td></tr>
+          <tr><td>Posts</td><td>4×6 × 8′</td><td>4</td><td>64.0</td></tr>
+          <tr><td>Prairie rails</td><td>2×8 × 10′</td><td>6</td><td>80.0</td></tr>
+          <tr><td>Cap / latch stock</td><td>2×8 × 12′</td><td>3</td><td>48.0</td></tr>
+          <tr><td>Gate frame</td><td>2×6 × 8′</td><td>4</td><td>32.0</td></tr>
+          <tr><td>Privacy boards</td><td>1×6 × 8′ (¾″)</td><td>18</td><td>72.0</td></tr>
+          <tr><td>Wedge stock</td><td>2×4 × 8′</td><td>1</td><td>5.3</td></tr>
+          <tr><td>Oak pegs / pintles</td><td>1×4 × 4′</td><td>1</td><td>1.3</td></tr>
+          <tr class="total"><td>Timber total</td><td>paint-grade OK</td><td></td><td>≈ 303 bf</td></tr>
+          <tr><td>Concrete</td><td>4000 psi air-entrained</td><td>~0.35 yd³</td><td>pad + 4 piers</td></tr>
+          <tr><td>#57 stone</td><td>compacted</td><td>~0.4 yd³</td><td>under pad</td></tr>
+          <tr><td>Sleeves</td><td>PVC / galv.</td><td>4</td><td>drained</td></tr>
+          <tr><td>Paint</td><td>primer + owner gray ×2</td><td>—</td><td>mask locking faces</td></tr>
         </tbody>
       </table>
-      <p>Full schedules: <a href="../stele/#materials">STELE materials</a> · <a href="../#stock">HASHIRA stock &amp; finish</a>.</p>
+      <p>Full schedules also on <a href="../martin/#materials">MARTIN materials</a> and sheet M-6.</p>
     </div>
   </section>
 
   <section id="budget">
     <div class="wrap">
-      <h2><span class="no">8</span>Budget planning ranges</h2>
-      <p class="intro">Planning-grade 2026 ranges for the 39′ run as drawn — confirm with local quotes. Masonry labor dominates; the timber bays are genuinely DIY-friendly.</p>
+      <h2><span class="no">9</span>Budget planning ranges (MARTIN · 143″)</h2>
+      <p class="intro">2026 Buffalo-area planning ranges — confirm with local quotes. Timber DIY is realistic; concrete pad is a weekend pour.</p>
       <table>
-        <thead><tr><th>Scope</th><th>DIY materials</th><th>Contracted</th><th>Notes</th></tr></thead>
+        <thead><tr><th>Scope</th><th>DIY materials</th><th>With help / contracted</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Excavation + foundations</td><td>$900 – 1,400</td><td>$3,000 – 5,000</td><td>6 piers, 48″ deep; auger rental vs. crew</td></tr>
-          <tr><td>Piers + curb (cast stone)</td><td>$4,500 – 7,000</td><td>$12,000 – 18,000</td><td>Cast stone units + Type S; veneer route similar</td></tr>
-          <tr><td>Arch set + erection</td><td>$1,200 – 2,000</td><td>$3,500 – 6,000</td><td>Includes centering lumber</td></tr>
-          <tr><td>Timber bays + gate leaf</td><td>$1,400 – 2,200</td><td>$3,000 – 4,500</td><td>Cedar; black locust rails +20%</td></tr>
-          <tr><td>Flashing, anchors, misc</td><td>$300 – 500</td><td>included</td><td></td></tr>
-          <tr class="total"><td>Total</td><td>$8,300 – 13,100</td><td>$21,500 – 33,500</td><td>Hybrid (you do timber, mason does stone) lands mid-range</td></tr>
+          <tr><td>Gravel + leveling pad + piers</td><td>$250 – 450</td><td>$800 – 1,400</td><td>Precast piers raise materials, cut labor</td></tr>
+          <tr><td>Dimensional lumber (~303 bf)</td><td>$450 – 750</td><td>same</td><td>SPF paint-grade; cedar upgrade +40–60%</td></tr>
+          <tr><td>Hardwood / sleeves / misc</td><td>$80 – 150</td><td>same</td><td>Oak, PVC, epoxy for house receiver</td></tr>
+          <tr><td>Primer + gray paint</td><td>$60 – 120</td><td>same</td><td>Match owner photo/swatch</td></tr>
+          <tr><td>Optional stainless pintles + lock</td><td>$40 – 100</td><td>same</td><td>Only metal parts</td></tr>
+          <tr class="total"><td>Total</td><td>$880 – 1,570</td><td>$1,400 – 2,500</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
         </tbody>
       </table>
-      <p>Cost control levers: shorten the run (piers price per unit), swap cast stone for CMU + stucco with cast caps only, or build STELE piers at the gate and corners with HASHIRA all-timber bays between.</p>
     </div>
   </section>
 
   <section id="permits">
     <div class="wrap">
-      <h2><span class="no">9</span>Permits &amp; code path — Buffalo</h2>
+      <h2><span class="no">10</span>Permits &amp; code path — Buffalo</h2>
       <ul class="check">
-        <li>Confirm parcel zoning district and fence rules in the <strong>Buffalo Green Code</strong> (Unified Development Ordinance) — residential fences are commonly limited to 6′ in side/rear yards and less in front yards; the 71.9″ panel top is designed to comply, but pier caps (77.4″) and the arch (8′-8″) may be assessed as gate/arbor features — <strong>ask Permit &amp; Inspection Services before fabricating the arch</strong>.</li>
-        <li>Survey or locate property lines; masonry cannot be moved later. A stake survey is cheap insurance next to $10k of stone.</li>
-        <li>Call <strong>811 (Dig Safely New York)</strong> at least 2 business days before excavation — six 54″ holes qualify.</li>
-        <li>Building permit application with plan sheets S-1 through S-5; expect a request for an <strong>engineer-of-record stamp</strong> on the foundation and arch — budget $500–1,200 for review of these documents.</li>
-        <li>Historic district or corner-lot sight-triangle checks if applicable.</li>
-        <li>Schedule footing inspection <em>before</em> pour (open-hole), and keep the concrete delivery ticket showing the air-entrained mix.</li>
+        <li>Confirm parcel zoning in the <strong>Buffalo Green Code</strong> — residential fences commonly limited to 6′ side/rear; 65″ panel height is designed to comply. Front-yard limits can be lower — verify before building.</li>
+        <li>Removable freestanding fences are often treated more lightly than permanent masonry, but ask Permit &amp; Inspection Services if a permit is required for the pad.</li>
+        <li>Call <strong>811 (Dig Safely New York)</strong> before any excavation for the pad/piers.</li>
+        <li>If latching into house concrete, confirm you are drilling into foundation/wall you own; use epoxy sleeve carefully around waterproofing.</li>
+        <li>Historic district rules if applicable (Darwin Martin neighborhood context — check).</li>
+        <li>This package is <strong>not</strong> a stamped engineering document. Hire a NY PE if the city requests one.</li>
       </ul>
     </div>
   </section>
 
   <section id="maintenance">
     <div class="wrap">
-      <h2><span class="no">10</span>Maintenance calendar</h2>
+      <h2><span class="no">11</span>Maintenance &amp; seasonal calendar</h2>
       <table>
         <thead><tr><th>When</th><th>Task</th><th>Why</th></tr></thead>
         <tbody>
-          <tr><td>Every spring</td><td>Walk the line: probe mortar joints, check kerfs and washes are clearing water, confirm curb hasn't trapped debris</td><td>Catch freeze-thaw damage while it's cosmetic</td></tr>
-          <tr><td>Every 18–24 mo</td><td>Re-oil timber end grain; re-seat any loosened wedges (tap, don't glue)</td><td>End grain is where cedar drinks</td></tr>
-          <tr><td>Every 5 yr</td><td>Repoint any failed mortar joints, Type S; reseal cast stone caps if using sealer</td><td>Joints are the sacrificial element — by design</td></tr>
-          <tr><td>After major storms</td><td>Check gate leaf swing and hinge anchors</td><td>The leaf is the only moving part</td></tr>
-          <tr><td>Never</td><td>Paint the masonry or caulk the rain-screen gaps</td><td>Trapped moisture is the only enemy this design can't fight</td></tr>
+          <tr><td>Late fall</td><td>Full knock-down; store timber indoors/dry; tip piers or leave pad covered</td><td>Avoid plow berms and ice jacking</td></tr>
+          <tr><td>Spring</td><td>Re-set piers, drop posts, re-wedge, hang gate; touch up paint</td><td>Joints seat better dry and warm</td></tr>
+          <tr><td>Every 18–24 mo</td><td>Re-paint end grain; re-seat wedges (tap, don't glue)</td><td>End grain drinks; wedges work by friction</td></tr>
+          <tr><td>After major storms</td><td>Check latch bar and pintles</td><td>Only moving parts</td></tr>
+          <tr><td>Never</td><td>Glue locking faces or caulk board gaps</td><td>Trapped moisture + non-removable joints defeat the design</td></tr>
         </tbody>
       </table>
-      <p>Designed service life: masonry 75–100+ years with repointing; timber infill 30–40 years, replaceable bay-by-bay without touching stone — the rails slide out of their pockets the same way they went in.</p>
     </div>
   </section>
 
   <section id="files">
     <div class="wrap">
-      <h2><span class="no">11</span>File index &amp; reproducibility</h2>
-      <p class="intro">Everything is parametric and regenerable. Edit the parameter block, re-run, and the model, exports, and drawings stay in sync.</p>
+      <h2><span class="no">12</span>File index &amp; reproducibility</h2>
+      <p class="intro">Everything is parametric. Edit the parameter block, re-run, and model + drawings stay in sync.</p>
       <h3>Design pages</h3>
       <p>
-        <a class="dl" href="../stele/">STELE design page</a>
-        <a class="dl" href="../">HASHIRA design guide</a>
+        <a class="dl" href="../martin/">MARTIN design page</a>
+        <a class="dl" href="../stele/">STELE (archive)</a>
+        <a class="dl" href="../">HASHIRA joinery guide</a>
       </p>
-      <h3>CAD models</h3>
+      <h3>MARTIN CAD</h3>
       <p>
-        <a class="dl" href="../stele/cad/exports/stele.FCStd" download>stele.FCStd</a>
-        <a class="dl" href="../stele/cad/exports/stele_assembly.step" download>STEP assembly</a>
-        <a class="dl" href="../stele/cad/stele_fence.py" download>stele_fence.py</a>
-        <a class="dl" href="../cad/bay.scad" download>hashira bay.scad</a>
+        <a class="dl" href="../martin/cad/exports/martin.FCStd" download>martin.FCStd</a>
+        <a class="dl" href="../martin/cad/exports/martin_assembly.step" download>STEP</a>
+        <a class="dl" href="../martin/cad/martin_fence.py" download>martin_fence.py</a>
       </p>
-      <h3>Plan sheets</h3>
+      <h3>MARTIN plan sheets</h3>
       <p>
-        <a class="dl" href="../stele/plans/S1_general.svg" download>S-1</a>
-        <a class="dl" href="../stele/plans/S2_panel_bay.svg" download>S-2</a>
-        <a class="dl" href="../stele/plans/S3_foundation.svg" download>S-3</a>
-        <a class="dl" href="../stele/plans/S4_pier.svg" download>S-4</a>
-        <a class="dl" href="../stele/plans/S5_arch_gate.svg" download>S-5</a>
+        <a class="dl" href="../martin/plans/M1_general.svg" download>M-1</a>
+        <a class="dl" href="../martin/plans/M2_elevation.svg" download>M-2</a>
+        <a class="dl" href="../martin/plans/M3_joinery.svg" download>M-3</a>
+        <a class="dl" href="../martin/plans/M4_pad_piers.svg" download>M-4</a>
+        <a class="dl" href="../martin/plans/M5_gate_latch.svg" download>M-5</a>
+        <a class="dl" href="../martin/plans/M6_cutlist.svg" download>M-6</a>
       </p>
-      <h3>Regenerate everything</h3>
+      <h3>Regenerate</h3>
       <p class="mono" style="background:#fff;border:1px solid var(--line2);padding:16px 18px;max-width:66ch">
-        ./scripts/build_stele.sh&nbsp;&nbsp;# FreeCAD model → exports → renders → plans<br />
-        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# OpenSCAD joint models → renders/STLs
+        ./scripts/build_martin.sh&nbsp;&nbsp;# FreeCAD → renders → plans<br />
+        ./scripts/build_stele.sh&nbsp;&nbsp;# STELE archive pipeline<br />
+        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models
       </p>
       <div class="callout">
         <p class="t">Disclaimer</p>
-        <p>This report is a design package, not a stamped engineering document. Foundation and arch details require review by a licensed engineer in your jurisdiction before construction. Verify all code limits with the City of Buffalo before fabrication.</p>
+        <p>This report is a design package, not a stamped engineering document. Verify Buffalo Green Code limits and obtain any required permits before construction. Upload site photos (drop-off, house wall for latch, gray paint reference) to finalize field dimensions.</p>
       </div>
     </div>
   </section>
@@ -369,7 +435,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
 <footer>
   <div class="wrap">
-    STELE + HASHIRA · Fence Design &amp; Engineering Report · Rev A — generated from parametric CAD sources in this repository.
+    MARTIN + STELE + HASHIRA · Fence Design &amp; Engineering Report · Rev B — generated from parametric CAD sources in this repository.
   </div>
 </footer>
 </body>

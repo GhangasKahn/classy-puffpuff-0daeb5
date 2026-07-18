@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-4  ·  Pad &amp; socket piers</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Scale ~1:20 · Buffalo frost / removable winter system</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev A</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SECTION — LEVELING PAD + TIP-OUT SOCKET PIER</text>
+<rect x='120.0' y='619.0' width='420.0' height='54.0' fill='#6a6864' stroke='#1a1f24' stroke-width='2'/>
+<text x='330.0' y='651.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3f1ec' text-anchor='middle' font-weight='600'>6" COMPACTED #57 GRAVEL</text>
+<rect x='160.0' y='574.0' width='360.0' height='45.0' fill='#9a9890' stroke='#1a1f24' stroke-width='2'/>
+<text x='340.0' y='601.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>DROP-OFF MAKEUP (5") — FIELD VERIFY</text>
+<rect x='140.0' y='520.0' width='400.0' height='54.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<text x='340.0' y='552.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='middle' font-weight='600'>6" LEVELING PAD (TOP LEVEL)</text>
+<rect x='320.0' y='520.0' width='126.0' height='162.0' fill='#b8b6b0' stroke='#1a1f24' stroke-width='2'/>
+<rect x='351.5' y='520.0' width='45.0' height='117.0' fill='none' stroke='#3d5a4c' stroke-width='2' stroke-dasharray='4 3'/>
+<rect x='356.0' y='448.0' width='36.0' height='108.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<rect x='347.0' y='160.0' width='49.5' height='360.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<line x1='446.0' y1='520.0' x2='482.0' y2='520.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='446.0' y1='682.0' x2='482.0' y2='682.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='474.0' y1='520.0' x2='474.0' y2='682.0' stroke='#5a6a4a' stroke-width='1.4'/>
+<polygon points='474.0,520.0 470.0,530.0 478.0,530.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<polygon points='474.0,682.0 470.0,672.0 478.0,672.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<text x='486.0' y='606.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='start' transform='rotate(-90 486.0 606.0)'>18" PIER</text>
+<line x1='300.0' y1='412.0' x2='262.0' y2='412.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='300.0' y1='520.0' x2='262.0' y2='520.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='270.0' y1='412.0' x2='270.0' y2='520.0' stroke='#5a6a4a' stroke-width='1.4'/>
+<polygon points='270.0,412.0 266.0,422.0 274.0,422.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<polygon points='270.0,520.0 266.0,510.0 274.0,510.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<text x='258.0' y='471.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='end' transform='rotate(-90 258.0 471.0)'>12" TENON</text>
+<line x1='320.0' y1='682.0' x2='320.0' y2='726.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='446.0' y1='682.0' x2='446.0' y2='726.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='320.0' y1='718.0' x2='446.0' y2='718.0' stroke='#5a6a4a' stroke-width='1.4'/>
+<polygon points='320.0,718.0 330.0,714.0 330.0,722.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<polygon points='446.0,718.0 436.0,714.0 436.0,722.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<rect x='351.2' y='696.0' width='63.7' height='22.0' fill='#f3f1ec'/>
+<text x='383.0' y='712.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='middle'>14" SQ</text>
+<text x='780.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>PAD PLAN</text>
+<rect x='800.0' y='200.0' width='651.0' height='117.6' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<rect x='803.1' y='229.4' width='58.8' height='58.8' fill='#b8b6b0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='832.5' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P0</text>
+<rect x='969.0' y='229.4' width='58.8' height='58.8' fill='#b8b6b0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='998.5' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P1</text>
+<rect x='1179.0' y='229.4' width='58.8' height='58.8' fill='#b8b6b0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1208.5' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P2</text>
+<rect x='1389.1' y='229.4' width='58.8' height='58.8' fill='#b8b6b0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1418.5' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P3</text>
+<text x='800.0' y='347.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>PAD: 155" × 28" × 6" (+ 5" makeup)</text>
+<text x='780.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WINTER REMOVAL SEQUENCE</text>
+<text x='780.0' y='455.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>1. Open gate · remove oak latch peg / padlock.</text>
+<text x='780.0' y='479.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>2. Knock out rail wedges (kusabi) — save in labeled bag.</text>
+<text x='780.0' y='503.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>3. Slide nuki rails out of posts (two-person).</text>
+<text x='780.0' y='527.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>4. Lift vertical boards out of grooves; bundle flat.</text>
+<text x='780.0' y='551.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>5. Lift gate leaf off wooden pintles.</text>
+<text x='780.0' y='575.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>6. Lift each post straight up out of sleeve.</text>
+<text x='780.0' y='599.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>7. Tip socket piers onto dolly; store dry.</text>
+<text x='780.0' y='623.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>8. Leave leveling pad in place (or cover); mark sleeve holes.</text>
+<text x='40.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>NOTES</text>
+<text x='40.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>• Field-measure driveway→garden drop; adjust makeup thickness. Default shown: 5".</text>
+<text x='40.0' y='952.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>• Sleeve: Schedule 40 PVC or galv. tube sized to 2.5"×4.5" tenon + ¼" clearance; drill ⌀½" drain at bottom.</text>
+<text x='40.0' y='976.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>• Concrete: 4000 psi air-entrained. Piers may be precast for true tip-out removal.</text>
+<text x='40.0' y='1000.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>• For permanent frost piers instead: extend stems to 48" bearing — see STELE report method.</text>
+</svg>

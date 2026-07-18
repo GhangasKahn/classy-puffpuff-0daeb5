@@ -61,10 +61,15 @@
   to = "/aegis-command/"
   status = 301
 
-# ---- fence design suite (HASHIRA / STELE / report) ----
+# ---- fence design suite (MARTIN / HASHIRA / STELE / report) ----
 [[redirects]]
   from = "/fence"
   to = "/fence/"
+  status = 301
+
+[[redirects]]
+  from = "/martin"
+  to = "/fence/martin/"
   status = 301
 
 [[redirects]]
@@ -108,5 +113,10 @@
 # plan sheets render inline as SVG
 [[headers]]
   for = "/fence/stele/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/martin/plans/*"
   [headers.values]
     Content-Type = "image/svg+xml"
