@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-3  ·  Joinery details</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Details @ 1:4 · cut from dimensional lumber</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev A</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DETAIL 1 — NUKI THROUGH-RAIL (2×8 in 4×6)</text>
+<rect x='80.0' y='300.0' width='90.0' height='240.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<rect x='0.0' y='380.0' width='250.0' height='50.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
+<polygon points='150.0,410.0 175.0,420.0 150.0,430.0' fill='#3d5a4c' stroke='#3d5a4c' stroke-width='2'/>
+<text x='125.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='middle'>4×6 POST</text>
+<text x='250.0' y='365.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>2×8 RAIL</text>
+<text x='190.0' y='425.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>WEDGE</text>
+<text x='70.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Mortise: 1.5" × 7.25" through · cheeks ~1" each side of rail</text>
+<text x='70.0' y='132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Wedge: hardwood ⅝" × 1⅛" × 5.5" — tap to lock, reverse to release</text>
+<text x='520.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DETAIL 2 — FOOT TENON INTO SLEEVE</text>
+<rect x='560.0' y='220.0' width='70.0' height='160.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<rect x='570.0' y='380.0' width='50.0' height='130.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<rect x='540.0' y='370.0' width='110.0' height='160.0' fill='none' stroke='#5a6a4a' stroke-width='1.5' stroke-dasharray='5 3'/>
+<rect x='520.0' y='530.0' width='150.0' height='40.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<text x='595.0' y='205.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='middle'>POST</text>
+<text x='595.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>TENON</text>
+<text x='595.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>PIER</text>
+<text x='520.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Shouldered tenon 2.5" × 4.5" × 12" into sleeved pier</text>
+<text x='520.0' y='122.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Drain hole at sleeve bottom · never trap water</text>
+<text x='520.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Cross-wedge optional through pier cheeks for storm lock</text>
+<text x='40.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DETAIL 3 — KAMA-TSUGI CAP SCARF AT P2</text>
+<polygon points='80.0,720.0 200.0,720.0 230.0,700.0 200.0,680.0 80.0,680.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
+<polygon points='230.0,700.0 200.0,680.0 320.0,680.0 350.0,700.0 320.0,720.0 200.0,720.0' fill='#8a9094' stroke='#1a1f24' stroke-width='2'/>
+<line x1='215.0' y1='675.0' x2='215.0' y2='725.0' stroke='#3d5a4c' stroke-width='2'/>
+<text x='215.0' y='745.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle'>OAK PEG (drawbore)</text>
+<text x='40.0' y='590.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Cut sickle scarf in 2×8 cap · dry fit · drawbore ⅛" offset · oak peg ⅜"</text>
+<text x='520.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DETAIL 4 — FLOATING 1×6 IN RAIL GROOVES</text>
+<rect x='560.0' y='650.0' width='200.0' height='40.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
+<rect x='600.0' y='620.0' width='30.0' height='100.0' fill='#cfd3d5' stroke='#1a1f24' stroke-width='1.5'/>
+<rect x='640.0' y='620.0' width='30.0' height='100.0' fill='#cfd3d5' stroke='#1a1f24' stroke-width='1.5'/>
+<rect x='680.0' y='620.0' width='30.0' height='100.0' fill='#cfd3d5' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='520.0' y='590.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>⅜" deep × ⅞" wide dado in rail edges · ¼" board gaps for drainage</text>
+<text x='520.0' y='612.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Boards drop in from top before cap is set — zero fasteners</text>
+<text x='40.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>JOINT VOCABULARY USED</text>
+<text x='40.0' y='848.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Nuki 貫 · Kusabi wedge · Hozo ほぞ (gate) · Kama-tsugi 鎌継ぎ (cap) · Ari-kake optional at corners</text>
+</svg>
