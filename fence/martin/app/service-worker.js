@@ -1,11 +1,12 @@
 /* MARTIN Build App — offline shell */
-const CACHE = "martin-build-v3";
+const CACHE = "martin-build-v4";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./data.js",
+  "./walk.js",
   "./manifest.json",
   "./icon.svg",
 ];
