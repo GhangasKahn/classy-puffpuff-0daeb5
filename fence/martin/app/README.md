@@ -11,9 +11,10 @@ Interactive front end for the 143″ × 65″ Prairie removable fence.
 - 12-step assembly checklist (localStorage progress)
 - Materials / board-feet shopping checklist (~303 bf)
 - Japanese joinery vocabulary
-- Gallery lightbox for renders + M-1…M-6 blueprints
+- Gallery lightbox for renders + M-1…M-7 blueprints
+- Owner tool list + shop tolerances (Festool / Bridge City / Zenwu kit)
 - Site drafts (drop-off, gray swatch, latch mode) + JSON export
-- Downloads: FreeCAD, STEP, STL, plans, report
+- Downloads: FreeCAD, STEP, STL, plans (incl. M-7 shop method), report
 - Installable PWA (manifest + service worker)
 
 ## Local

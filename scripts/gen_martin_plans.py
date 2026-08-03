@@ -165,7 +165,7 @@ class Sheet:
         self.text(160, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "Buffalo NY · Prairie + Japanese joinery", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Removable · No nails in timber · Rev A", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, "Removable · No nails in timber · Rev B", 13, DIM, "end")
 
     def save(self):
         path = os.path.join(OUT, f"{self.code}_{self.title.split()[0].lower()}.svg")
@@ -177,6 +177,7 @@ class Sheet:
             "M-4": "M4_pad_piers.svg",
             "M-5": "M5_gate_latch.svg",
             "M-6": "M6_cutlist.svg",
+            "M-7": "M7_shop.svg",
         }
         path = os.path.join(OUT, names[self.code])
         svg = (
@@ -377,8 +378,9 @@ def sheet_m3():
     s.text(sx + 45, sy + 150, "4×6 POST", 13, DIM, "middle")
     s.text(sx + 170, sy - 55, "2×8 RAIL", 13, DIM)
     s.text(sx + 110, sy + 5, "WEDGE", 12, ACC, bold=True)
-    s.text(sx - 10, 70 + 40, 'Mortise: 1.5" × 7.25" through · cheeks ~1" each side of rail', 13, INK)
-    s.text(sx - 10, 70 + 62, 'Wedge: hardwood ⅝" × 1⅛" × 5.5" — tap to lock, reverse to release', 13, INK)
+    s.text(sx - 10, 70 + 40, 'Mortise: rail thickness (≈1.5") × (7.25" + 1/16" seasonal ease) through', 13, INK)
+    s.text(sx - 10, 70 + 62, 'Cheeks ~1" each side · Zenwu walls + Temple flush trim; sliding fit, no side rattle', 13, INK)
+    s.text(sx - 10, 70 + 84, 'Wedge: hardwood ⅝" × 1⅛" × 5.5" — tap to lock, reverse to release', 13, INK)
 
     # Foot tenon
     s.text(520, 70, "DETAIL 2 — FOOT TENON INTO SLEEVE", 16, ACC, bold=True)
@@ -391,8 +393,9 @@ def sheet_m3():
     s.text(tx + 35, ty + 70, "TENON", 12, ACC, "middle", bold=True)
     s.text(tx + 35, ty + 200, "PIER", 12, DIM, "middle")
     s.text(520, 100, 'Shouldered tenon 2.5" × 4.5" × 12" into sleeved pier', 13, INK)
-    s.text(520, 122, "Drain hole at sleeve bottom · never trap water", 13, INK)
-    s.text(520, 144, "Cross-wedge optional through pier cheeks for storm lock", 13, INK)
+    s.text(520, 122, "Shoulders: TS + Festool LS 36 · cheeks: #5 / Bridge City plane to sleeve", 13, INK)
+    s.text(520, 144, "Sleeve = tenon + ¼\" clear (winter pull) · ⌀½\" drain at bottom", 13, INK)
+    s.text(520, 166, "Cross-wedge optional through pier cheeks for storm lock", 13, INK)
 
     # Scarf
     s.text(40, 560, "DETAIL 3 — KAMA-TSUGI CAP SCARF AT P2", 16, ACC, bold=True)
@@ -401,7 +404,8 @@ def sheet_m3():
            fill="#8a9094", stroke=INK, sw=2)
     s.line(215, 675, 215, 725, 2, ACC)
     s.text(215, 745, "OAK PEG (drawbore)", 12, ACC, "middle")
-    s.text(40, 590, "Cut sickle scarf in 2×8 cap · dry fit · drawbore ⅛\" offset · oak peg ⅜\"", 13, INK)
+    s.text(40, 590, "Sickle scarf · Universal V2 protractor · shoot faces on Preda board", 13, INK)
+    s.text(40, 612, "Dry fit · drawbore ⅛\" offset · oak peg ⅜\" · MFT stop for peg holes", 13, INK)
 
     # Board groove
     s.text(520, 560, "DETAIL 4 — FLOATING 1×6 IN RAIL GROOVES", 16, ACC, bold=True)
@@ -409,11 +413,12 @@ def sheet_m3():
     s.rect(600, 620, 30, 100, fill="#cfd3d5", stroke=INK, sw=1.5)
     s.rect(640, 620, 30, 100, fill="#cfd3d5", stroke=INK, sw=1.5)
     s.rect(680, 620, 30, 100, fill="#cfd3d5", stroke=INK, sw=1.5)
-    s.text(520, 590, '⅜" deep × ⅞" wide dado in rail edges · ¼" board gaps for drainage', 13, INK)
+    s.text(520, 590, '⅜" deep × ⅞" wide plow on table saw (LS 36 fence) · ¼" board gaps', 13, INK)
     s.text(520, 612, "Boards drop in from top before cap is set — zero fasteners", 13, INK)
 
     s.text(40, 820, "JOINT VOCABULARY USED", 14, ACC, bold=True)
     s.text(40, 848, "Nuki 貫 · Kusabi wedge · Hozo ほぞ (gate) · Kama-tsugi 鎌継ぎ (cap) · Ari-kake optional at corners", 13, INK)
+    s.text(40, 876, "Shop method sheet M-7 maps every joint to the owner Festool / Bridge City / Zenwu kit.", 13, DIM)
 
     s.save()
 
@@ -538,7 +543,10 @@ def sheet_m5():
         "  — Same bar into mortise in P0 latch post; gravity catch.",
         "SWING: Into garden (or driveway — confirm site). Clear arc 36\".",
         "JOINERY: Drawbored mortise & tenon at every stile/rail (hozo).",
+        "  — Bridge City tenon + kerf tools · Temple rip/crosscut · Zenwu cleanup.",
+        "  — Drawbore ⅛\" offset; brad-point from MFT dog/stop · ⅜\" oak peg.",
         "  Diagonal brace half-lapped into rails — no fasteners.",
+        "  — Protractor sets brace angle; shoot half-lap faces on Preda board.",
     ]
     for i, t in enumerate(lines):
         s.text(620, 100 + i * 22, t, 13, INK)
@@ -586,7 +594,73 @@ def sheet_m6():
     for i, t in enumerate(misc):
         s.text(40, yy + 85 + i * 24, "•  " + t, 13, INK)
 
-    s.text(40, 980, "CUT ORDER: posts → mortises → rails → dry assemble → boards → cap scarf → gate → paint → set piers/pad → drop in.", 13, DIM)
+    s.text(40, 955, "CUT ORDER (tooling): MFT/track-saw posts → TS tenon shoulders → Zenwu mortises → TS plow grooves", 13, DIM)
+    s.text(40, 980, "→ dry assemble → boards → protractor scarf → gate hozo → paint → set piers/pad → drop in. See M-7.", 13, DIM)
+    s.save()
+
+
+def sheet_m7():
+    s = Sheet("M-7", "Shop method — owner tooling", "Tool-mapped sequence · tolerances for Festool + Bridge City kit")
+    s.titleblock()
+
+    s.text(40, 70, "OWNER KIT (THIS BUILD)", 16, ACC, bold=True)
+    kit_l = [
+        "Festool track saw + MFT (Hongdui dogs / track hinge) — primary breakdown & stop work",
+        "Table saw + Festool TS LS 36 fence + Woodpeckers Fence Guide V2 — rips, shoulders, grooves",
+        "Miter saw / Ryobi — rough crosscuts; Temple rip + crosscut + flush trim — joinery sawing",
+        "Zenwu Y2 chisels + titanium hammer — mortise walls, wedge slots, cleanup",
+        "Stanley #5 + Bridge City bench plane + Adrian Preda LW bench / shooting board — fit faces",
+        "Bridge City: Universal V2 protractor · tenon tool · both kerf tools · Multi-Tool M1",
+        "Incra 12″ rules + Kuratoga metal pencil — layout; cordless + impact + Taylor countersink",
+    ]
+    for i, t in enumerate(kit_l):
+        s.text(40, 98 + i * 22, "•  " + t, 13, INK)
+
+    s.text(40, 270, "TOLERANCES (HOLD THESE)", 16, ACC, bold=True)
+    tol = [
+        ("Layout", "Mark to 1/64″ on joinery faces (Incra + M1). Story-stick mortise CL at 10 / 28 / 46″."),
+        ("Nuki width", "Mortise = measured rail thickness (nom. 1.5″). Sliding fit — plane cheeks if proud; no side rattle."),
+        ("Nuki height", "7.25″ + 1/16″ seasonal ease only. Keep cheeks parallel; square walls with Zenwu."),
+        ("Foot tenon", "2.5″ × 4.5″ × 12″. Shoulder ±1/32″. Sleeve keeps ¼″ clearance for winter pull (do not tighten)."),
+        ("Board plow", "⅜″ deep × ⅞″ wide on TS with LS 36. Test on scrap; ¾″ boards need ~⅛″ total float."),
+        ("Drawbore", "⅛″ offset toward shoulder. Brad-point ⌀⅜″ from MFT stop; light Taylor countersink for clean peg entry."),
+        ("Kusabi", "⅝″ × 1⅛″ × 5.5″. Kerf tools set consistent wedge angle; rip blanks on TS; hand-fit each slot."),
+        ("Plumb", "Posts within ⅛″ over 65″. Cap scarf faces shoot-fit before pegging."),
+    ]
+    yy = 298
+    for label, body in tol:
+        s.text(40, yy, label.upper(), 13, ACC, bold=True)
+        s.text(180, yy, body, 13, INK)
+        yy += 24
+
+    s.text(40, 510, "STATION SEQUENCE", 16, ACC, bold=True)
+    seq = [
+        "1. LAYOUT — M1 + Incra + Kuratoga. Transfer rail CL heights to a story stick; dog posts on MFT.",
+        "2. BREAKDOWN — Festool track saw on MFT: posts to 77″ (65″ + 12″). Miter/Ryobi for rough rail blanks.",
+        "3. FOOT TENONS — TS + LS 36 (+ Fence Guide V2): shoulder to 2.5×4.5. Plane cheeks; dry-fit every sleeve.",
+        "4. NUKI MORTISES — Bore waste (drill), Zenwu + titanium hammer to walls. Temple/flush trim for waste exits.",
+        "5. WEDGE SLOTS — Kerf tools define cheek kerfs; chisel to finished seat. Label each kusabi to its slot.",
+        "6. RAIL GROOVES — Plow ⅜×⅞ on table saw (not router). Keep fence locked; one setup for all R1–R3 edges.",
+        "7. DRY ASSEMBLE — Rails through P1–P3 on sawhorses / MFT. Drop boards; tap wedges snug, not brutal.",
+        "8. CAP SCARF — Protractor sets sickle angle at P2. Saw waste; shoot mating faces on Preda board; drawbore.",
+        "9. GATE — Bridge City tenon tooling for hozo; half-lap brace with protractor; peg from MFT stops.",
+        "10. FINISH — Paint with wedges/tenons masked. Set piers; drop posts; re-wedge; hang gate.",
+    ]
+    for i, t in enumerate(seq):
+        s.text(40, 538 + i * 24, t, 13, INK)
+
+    s.text(40, 800, "QUALITY GATES (DO NOT SKIP)", 16, ACC, bold=True)
+    gates = [
+        "A. Every foot tenon drops into its sleeve by hand and lifts free — no twist bind.",
+        "B. All three nuki slide through a post dry before any wedge is cut to final.",
+        "C. Cap scarf closes to light from shooting board; peg only after paint plan is set.",
+        "D. Gate leaf hangs plumb on wooden pintles and lifts straight up for winter removal.",
+        "E. Never glue locking faces. Never nail the timber frame. Hardware is optional pintles/hasp only.",
+    ]
+    for i, t in enumerate(gates):
+        s.text(40, 828 + i * 24, t, 13, INK)
+
+    s.text(40, 970, "No router required for this build — grooves and shoulders are table-saw work with the LS 36 fence.", 13, DIM)
     s.save()
 
 
@@ -597,4 +671,5 @@ if __name__ == "__main__":
     sheet_m4()
     sheet_m5()
     sheet_m6()
+    sheet_m7()
     print("MARTIN plans done →", OUT)

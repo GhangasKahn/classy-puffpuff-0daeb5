@@ -265,6 +265,12 @@
       .map((m) => `<li><strong>${m.item}</strong> — ${m.qty}</li>`)
       .join("");
     $("#toolsList").innerHTML = D.tools.map((t) => `<li>${t}</li>`).join("");
+    const tolEl = $("#tolerancesList");
+    if (tolEl && D.tolerances) {
+      tolEl.innerHTML = D.tolerances
+        .map((t) => `<li><strong>${t.item}</strong> — ${t.spec}</li>`)
+        .join("");
+    }
   }
 
   /* ---------- Joinery / Gallery / Downloads / Drafts ---------- */
