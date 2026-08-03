@@ -165,7 +165,7 @@ class Sheet:
         self.text(160, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "Buffalo NY · Prairie + Japanese joinery", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Removable · No nails in timber · Rev B", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, "Removable · No nails in timber · Rev C", 13, DIM, "end")
 
     def save(self):
         path = os.path.join(OUT, f"{self.code}_{self.title.split()[0].lower()}.svg")
@@ -178,6 +178,7 @@ class Sheet:
             "M-5": "M5_gate_latch.svg",
             "M-6": "M6_cutlist.svg",
             "M-7": "M7_shop.svg",
+            "M-8": "M8_mill.svg",
         }
         path = os.path.join(OUT, names[self.code])
         svg = (
@@ -276,7 +277,8 @@ def sheet_m1():
     # notes
     notes = [
         "DESIGN: Prairie horizontals (Darwin Martin / FLW) + Japanese nuki / hozo / kama-tsugi.",
-        "JOINERY: No nails or screws in timber. Wedge-locked through-rails. Drawbored gate M&T.",
+        "STOCK: Select DF mill billets (6×6 / 2×12 / 1×12) — owner re-dimensions for VG / low warp.",
+        "JOINERY: 100% Japanese wood joinery. No nails or screws in timber. Drawbored / wedged only.",
         "WINTER: Knock wedges → withdraw nuki rails → lift gate off pintles → lift posts → tip piers.",
         "FINISH: Exterior primer + owner gray. Mask wedge faces, tenons, and sleeve contact.",
         "ENGINEERING NOTE: Planning design — have a NY PE review foundations if required by permit.",
@@ -352,11 +354,11 @@ def sheet_m2():
 
     s.text(980, 360, "JOINERY AT EACH RAIL", 16, ACC, bold=True)
     bullets = [
-        "Nuki (貫): rail passes through post mortise.",
-        "Wedge (kusabi): hardwood wedge from cheek slot.",
-        "Board grooves: ⅜\" deep dado in rail edges — boards float.",
-        "Cap scarf (kama-tsugi) centered on P2, drawbored oak peg.",
-        "All joins cut dry, fit, then paint; never glue locking faces.",
+        "Nuki (貫): rail from 2×12 outer third through post mortise.",
+        "Wedge (kusabi): white oak from cheek slot — reverse to release.",
+        "Board grooves: ⅜\" deep plow — boards float, zero fasteners.",
+        "Cap scarf (kama-tsugi) at P2, drawbored oak peg.",
+        "Japanese joinery only — no nails/screws in timber.",
     ]
     for i, b in enumerate(bullets):
         s.text(980, 395 + i * 26, "•  " + b, 14, INK)
@@ -557,110 +559,215 @@ def sheet_m5():
 
 
 def sheet_m6():
-    s = Sheet("M-6", "Cut list & board feet", "Buy list for one hardware-store run · Buffalo")
+    s = Sheet("M-6", "Mill BOM & finished cuts", "Select DF + white oak · owner re-dimensions · Buffalo")
     s.titleblock()
-    s.text(40, 70, "LUMBER BUY LIST — DIMENSIONAL STOCK (paint-grade OK)", 16, ACC, bold=True)
+    s.text(40, 70, "A — MILL BUY LIST (oversized select stock — reject pith / twist / crook)", 16, ACC, bold=True)
 
     rows = [
-        ("Qty", "Nominal", "Length", "Use", "Board feet"),
-        ("4", "4×6", "8'", "Posts P0–P3 (cut to 65\" + 12\" tenon from same blank)", "64.0"),
-        ("6", "2×8", "10'", "Prairie nuki rails R1–R3 (cut to fit; extras for gate rails/brace scrap)", "80.0"),
-        ("3", "2×8", "12'", "Cap rails + latch bar stock + sill scraps", "48.0"),
-        ("4", "2×6", "8'", "Gate stiles/rails / secondary bands", "32.0"),
-        ("18", "1×6", "8'", "Privacy + gate vertical boards (¾\" — matches existing fence)", "72.0"),
-        ("1", "2×4", "8'", "Wedge stock (rip to kusabi blanks) + stakes", "5.3"),
-        ("1", "1×4 Oak", "4'", "Drawbore pegs, pintle blanks (hardwood)", "1.3"),
+        ("Qty", "Nominal", "Length", "Grade / species", "Primary yield", "BF"),
+        ("4", "6×6", "8'", "DF Select / #1", "Posts → mill 3½×5½×77\"", "96.0"),
+        ("5", "2×12", "12'", "DF Select / #1", "Nuki R1–R3 + cap + gate frame", "120.0"),
+        ("2", "2×12", "10'", "DF Select / #1", "Gate / brace / spare rail cheeks", "40.0"),
+        ("6", "1×12", "10'", "DF Select / VG-ish", "Privacy + gate boards → ¾×5½", "60.0"),
+        ("1", "8/4×6\"", "6'", "White oak", "Kusabi, pegs, pintles, latch bar", "6.0"),
     ]
-    yy = 110
-    cols = [40, 120, 250, 360, 1180]
+    yy = 100
+    cols = [40, 100, 200, 300, 620, 1280]
     for r in rows:
         for i, cell in enumerate(r):
-            s.text(cols[i], yy, cell, 14, DIM if r[0] == "Qty" else INK, bold=(r[0] == "Qty" or i == 0))
-        yy += 30
-        s.line(40, yy - 20, 1400, yy - 20, 0.7, LIGHT)
+            s.text(cols[i], yy, cell, 13, DIM if r[0] == "Qty" else INK, bold=(r[0] == "Qty" or i == 0))
+        yy += 26
+        s.line(40, yy - 18, 1400, yy - 18, 0.6, LIGHT)
 
-    s.text(40, yy + 10, "TOTAL LUMBER ≈ 303 board feet  ·  Buy +15% waste on joinery stock → order ~350 bf equivalent as above counts", 14, ACC, bold=True)
+    s.text(40, yy + 6, "BUY TOTAL ≈ 322 bf  ·  Mill waste ~20–25% expected  ·  Finished timber still paints owner gray", 14, ACC, bold=True)
+    s.text(40, yy + 28, "Why 2×12 / 6×6: outer thirds give straighter grain; pith stays in waste; you control final thickness / faces.", 13, DIM)
 
-    s.text(40, yy + 55, "NON-TIMBER", 16, ACC, bold=True)
+    s.text(40, yy + 58, "B — FINISHED PARTS (after re-dimension · Japanese joinery stock)", 16, ACC, bold=True)
+    finished = [
+        ("4", "Posts P0–P3", '3½×5½×77"', "Foot tenon shouldered to 2½×4½×12\""),
+        ("3", "Nuki rails R1–R3", '1½×7¼×~105"', "Through P1–P3 · plow ⅜×⅞ grooves"),
+        ("2", "Cap (scarf pair)", '1½×7¼×~53" ea', "Kama-tsugi at P2 · + latch stub at P0"),
+        ("2", "Gate stiles", '1½×3½×~62"', "Hozo mortises · wooden pintle gudgeons"),
+        ("5", "Gate rails / brace", '1½×3½–5½×~29"', "Drawbored M&T · half-lap brace"),
+        ("~40", "Privacy/gate boards", '¾×5½× course', "Float in grooves · ¼\" gaps · no fasteners"),
+        ("12+", "Kusabi wedges", '⅝×1⅛×5½"', "White oak · one per nuki cheek seat"),
+        ("8+", "Drawbore pegs", '⌀⅜×~3"', "White oak · gate + cap scarf"),
+        ("2", "Pintles + latch bar", "oak as fit", "Lift-off hinges · sliding bar Latch A/B"),
+    ]
+    yy2 = yy + 88
+    s.text(40, yy2, "Qty", 12, DIM, bold=True)
+    s.text(100, yy2, "Part", 12, DIM, bold=True)
+    s.text(360, yy2, "Finished size", 12, DIM, bold=True)
+    s.text(620, yy2, "Joinery note", 12, DIM, bold=True)
+    yy2 += 22
+    for r in finished:
+        s.text(40, yy2, r[0], 12, INK, bold=True)
+        s.text(100, yy2, r[1], 12, INK)
+        s.text(360, yy2, r[2], 12, INK)
+        s.text(620, yy2, r[3], 12, INK)
+        yy2 += 20
+
+    s.text(40, 900, "NON-TIMBER", 14, ACC, bold=True)
     misc = [
-        "Concrete 4000 psi air-entrained: ~0.35 yd³ (pad + 4 piers) — or 12–14 bags 80 lb + pier precast option",
-        "#57 crushed stone: ~0.4 yd³ under pad",
-        "Sleeve liners: 4 pcs — PVC Sch40 or galv. sized to tenon (or form sleeves and remove)",
-        "Exterior primer + owner gray paint (2 coats); end-grain sealer",
-        "Optional: stainless pintle hinges, keyed padlock hasp (only metal parts)",
-        "Epoxy anchoring adhesive for house receiver sleeve (Latch A)",
-        "Plastic shim pack / construction adhesive — NOT for joinery (pad leveling only)",
+        "Concrete 4000 psi AE ~0.35 yd³ · #57 stone ~0.4 yd³ · 4 drained sleeves (tenon + ¼\" clear)",
+        "Primer + owner gray ×2 · end-grain sealer · epoxy for Latch A house sleeve only",
+        "Optional stainless pintles/hasp — only allowed metal; timber frame stays nail-free",
     ]
     for i, t in enumerate(misc):
-        s.text(40, yy + 85 + i * 24, "•  " + t, 13, INK)
+        s.text(40, 926 + i * 20, "•  " + t, 12, INK)
 
-    s.text(40, 955, "CUT ORDER (tooling): MFT/track-saw posts → TS tenon shoulders → Zenwu mortises → TS plow grooves", 13, DIM)
-    s.text(40, 980, "→ dry assemble → boards → protractor scarf → gate hozo → paint → set piers/pad → drop in. See M-7.", 13, DIM)
+    s.text(40, 1000, "See M-8 for grain selection / sticker schedule / 2×12 yield map. See M-7 for tool stations.", 13, DIM)
     s.save()
 
 
 def sheet_m7():
-    s = Sheet("M-7", "Shop method — owner tooling", "Tool-mapped sequence · tolerances for Festool + Bridge City kit")
+    s = Sheet("M-7", "Shop method — owner tooling", "Mill → Japanese joinery · Festool + Bridge City kit")
     s.titleblock()
 
     s.text(40, 70, "OWNER KIT (THIS BUILD)", 16, ACC, bold=True)
     kit_l = [
-        "Festool track saw + MFT (Hongdui dogs / track hinge) — primary breakdown & stop work",
-        "Table saw + Festool TS LS 36 fence + Woodpeckers Fence Guide V2 — rips, shoulders, grooves",
-        "Miter saw / Ryobi — rough crosscuts; Temple rip + crosscut + flush trim — joinery sawing",
-        "Zenwu Y2 chisels + titanium hammer — mortise walls, wedge slots, cleanup",
-        "Stanley #5 + Bridge City bench plane + Adrian Preda LW bench / shooting board — fit faces",
-        "Bridge City: Universal V2 protractor · tenon tool · both kerf tools · Multi-Tool M1",
-        "Incra 12″ rules + Kuratoga metal pencil — layout; cordless + impact + Taylor countersink",
+        "Festool track saw + MFT (Hongdui dogs / track hinge) — breakdown, stops, story work",
+        "Table saw + Festool TS LS 36 + Woodpeckers Fence Guide V2 — rip / shoulder / plow",
+        "Miter / Ryobi rough crosscut · Temple rip + crosscut + flush trim · Zenwu Y2 + Ti hammer",
+        "Stanley #5 + Bridge City plane + Preda LW bench / shooting board — true faces & fit",
+        "Bridge City Universal V2 protractor · tenon tool · both kerf tools · Multi-Tool M1",
+        "Incra 12″ · Kuratoga · drill/impact · Taylor countersink (peg mouths only — not fasteners)",
     ]
     for i, t in enumerate(kit_l):
-        s.text(40, 98 + i * 22, "•  " + t, 13, INK)
+        s.text(40, 96 + i * 20, "•  " + t, 13, INK)
 
-    s.text(40, 270, "TOLERANCES (HOLD THESE)", 16, ACC, bold=True)
+    s.text(40, 230, "TOLERANCES (HOLD THESE)", 16, ACC, bold=True)
     tol = [
-        ("Layout", "Mark to 1/64″ on joinery faces (Incra + M1). Story-stick mortise CL at 10 / 28 / 46″."),
-        ("Nuki width", "Mortise = measured rail thickness (nom. 1.5″). Sliding fit — plane cheeks if proud; no side rattle."),
-        ("Nuki height", "7.25″ + 1/16″ seasonal ease only. Keep cheeks parallel; square walls with Zenwu."),
-        ("Foot tenon", "2.5″ × 4.5″ × 12″. Shoulder ±1/32″. Sleeve keeps ¼″ clearance for winter pull (do not tighten)."),
-        ("Board plow", "⅜″ deep × ⅞″ wide on TS with LS 36. Test on scrap; ¾″ boards need ~⅛″ total float."),
-        ("Drawbore", "⅛″ offset toward shoulder. Brad-point ⌀⅜″ from MFT stop; light Taylor countersink for clean peg entry."),
-        ("Kusabi", "⅝″ × 1⅛″ × 5.5″. Kerf tools set consistent wedge angle; rip blanks on TS; hand-fit each slot."),
-        ("Plumb", "Posts within ⅛″ over 65″. Cap scarf faces shoot-fit before pegging."),
+        ("Layout", "1/64″ on joinery faces. Story-stick mortise CL at 10 / 28 / 46″."),
+        ("Nuki width", "Mortise = measured rail thickness. Sliding fit — plane cheeks; no side rattle."),
+        ("Nuki height", "7.25″ + 1/16″ seasonal ease only. Parallel Zenwu walls."),
+        ("Foot tenon", "2.5×4.5×12. Shoulders ±1/32″. Sleeve +¼″ clear for winter pull."),
+        ("Board plow", "⅜″ deep × ⅞″ wide on TS (LS 36). ~⅛″ total float on ¾″ boards."),
+        ("Drawbore", "⅛″ offset · ⌀⅜″ oak peg from MFT stop. No metal fasteners in frame."),
+        ("Moisture", "Mill final faces after sticker MC stabilizes (shop-dry). Reject moving sticks."),
+        ("Plumb", "Posts ≤⅛″ over 65″. Cap scarf shoot-fit before peg."),
     ]
-    yy = 298
+    yy = 256
     for label, body in tol:
-        s.text(40, yy, label.upper(), 13, ACC, bold=True)
-        s.text(180, yy, body, 13, INK)
-        yy += 24
+        s.text(40, yy, label.upper(), 12, ACC, bold=True)
+        s.text(170, yy, body, 12, INK)
+        yy += 20
 
-    s.text(40, 510, "STATION SEQUENCE", 16, ACC, bold=True)
+    s.text(40, 430, "STATION SEQUENCE (END-TO-END)", 16, ACC, bold=True)
     seq = [
-        "1. LAYOUT — M1 + Incra + Kuratoga. Transfer rail CL heights to a story stick; dog posts on MFT.",
-        "2. BREAKDOWN — Festool track saw on MFT: posts to 77″ (65″ + 12″). Miter/Ryobi for rough rail blanks.",
-        "3. FOOT TENONS — TS + LS 36 (+ Fence Guide V2): shoulder to 2.5×4.5. Plane cheeks; dry-fit every sleeve.",
-        "4. NUKI MORTISES — Bore waste (drill), Zenwu + titanium hammer to walls. Temple/flush trim for waste exits.",
-        "5. WEDGE SLOTS — Kerf tools define cheek kerfs; chisel to finished seat. Label each kusabi to its slot.",
-        "6. RAIL GROOVES — Plow ⅜×⅞ on table saw (not router). Keep fence locked; one setup for all R1–R3 edges.",
-        "7. DRY ASSEMBLE — Rails through P1–P3 on sawhorses / MFT. Drop boards; tap wedges snug, not brutal.",
-        "8. CAP SCARF — Protractor sets sickle angle at P2. Saw waste; shoot mating faces on Preda board; drawbore.",
-        "9. GATE — Bridge City tenon tooling for hozo; half-lap brace with protractor; peg from MFT stops.",
-        "10. FINISH — Paint with wedges/tenons masked. Set piers; drop posts; re-wedge; hang gate.",
+        "0. SELECT / STICKER — Buy M-6 stock. Mark pith side. Sticker 14+ days (see M-8) while pad cures.",
+        "1. LAYOUT — M1 + Incra + Kuratoga. Story-stick rail CL; dog work on MFT.",
+        "2. RE-DIMENSION — TS + LS 36: 6×6→3½×5½ posts; 2×12→1½×7¼ rails/cap; 1×12→¾×5½ boards (VG edges).",
+        "3. FOOT TENONS — Shoulder 2½×4½×12. Plane cheeks; dry-fit every sleeve.",
+        "4. NUKI MORTISES — Bore waste; Zenwu + Ti hammer; Temple/flush trim exits; kerf-tool kusabi slots.",
+        "5. RAIL GROOVES — Plow ⅜×⅞ one locked TS setup for all R1–R3. No router. No nails.",
+        "6. DRY ASSEMBLE — Rails through P1–P3; drop boards; wedges snug. Cap kama-tsugi (protractor + Preda).",
+        "7. GATE — Bridge City tenon tooling; half-lap brace; drawbore pegs; wooden pintles only.",
+        "8. FINISH / SET — Paint (mask locks). Drop posts; re-wedge; hang gate. Zero nails in timber.",
     ]
     for i, t in enumerate(seq):
-        s.text(40, 538 + i * 24, t, 13, INK)
+        s.text(40, 456 + i * 22, t, 13, INK)
+
+    s.text(40, 670, "JAPANESE JOINERY ONLY — FASTENER BAN", 16, ACC, bold=True)
+    bans = [
+        "Allowed in timber: nuki + kusabi · hozo + drawbore peg · kama-tsugi peg · foot tenon · floating grooves · half-lap brace.",
+        "Forbidden in timber: nails, screws, plates, biscuits, pocket screws, construction adhesive on locking faces.",
+        "Metal allowed only as optional stainless pintles / padlock hasp — never as structural frame fasteners.",
+        "Boards float and drain; wedges reverse for winter knock-down — that is the fastening system.",
+    ]
+    for i, t in enumerate(bans):
+        s.text(40, 698 + i * 22, "•  " + t, 13, INK)
 
     s.text(40, 800, "QUALITY GATES (DO NOT SKIP)", 16, ACC, bold=True)
     gates = [
-        "A. Every foot tenon drops into its sleeve by hand and lifts free — no twist bind.",
-        "B. All three nuki slide through a post dry before any wedge is cut to final.",
-        "C. Cap scarf closes to light from shooting board; peg only after paint plan is set.",
-        "D. Gate leaf hangs plumb on wooden pintles and lifts straight up for winter removal.",
-        "E. Never glue locking faces. Never nail the timber frame. Hardware is optional pintles/hasp only.",
+        "A. Stock rejected if pith in finished section, ring shake, or twist >1/8″ in 8′ after sticker period.",
+        "B. Every foot tenon drops/lifts free in its sleeve — no twist bind.",
+        "C. All three nuki slide a post dry before final wedge fit.",
+        "D. Cap scarf closes to light from shooting board; peg after paint plan is set.",
+        "E. Gate hangs plumb on wooden pintles and lifts straight up for winter.",
     ]
     for i, t in enumerate(gates):
-        s.text(40, 828 + i * 24, t, 13, INK)
+        s.text(40, 828 + i * 22, t, 13, INK)
 
-    s.text(40, 970, "No router required for this build — grooves and shoulders are table-saw work with the LS 36 fence.", 13, DIM)
+    s.text(40, 970, "No router required — grooves/shoulders are table-saw work. Hand tools own the fit.", 13, DIM)
+    s.save()
+
+
+def sheet_m8():
+    s = Sheet("M-8", "Mill stock · grain · warpage", "Select DF strategy · 2×12 yield · sticker · Japanese stock prep")
+    s.titleblock()
+
+    s.text(40, 70, "SPECIES STRATEGY (BUFFALO · PAINTED · LOW WARP)", 16, ACC, bold=True)
+    sp = [
+        "Structure: Douglas fir Select / #1 (or Select Structural) in 6×6 and 2×12 — stiff, straight, common mill sizes.",
+        "Boards: DF 1×12 select — rip VG/rift-leaning edge strips to ¾×5½ (no bandsaw resaw required).",
+        "Hardware wood: white oak 8/4 — kusabi, ⌀⅜ pegs, pintles, latch bar (hard, outdoor-durable).",
+        "Paint seals DF end grain; Japanese joints leave play only where seasonal movement needs it (nuki height).",
+    ]
+    for i, t in enumerate(sp):
+        s.text(40, 98 + i * 22, "•  " + t, 13, INK)
+
+    s.text(40, 200, "GRAIN RULES (LEAST WARPAGE)", 16, ACC, bold=True)
+    grain = [
+        "1. REJECT: pith-centered sticks, ring shake, spiral grain, crook/bow >1/8″ in 8′, wet pockets, huge knots on joinery faces.",
+        "2. 2×12 RAILS: rip the finished 7¼\" width from an OUTER third of the 11¼\" face — leave pith/center as waste or stakes.",
+        "3. RING ORIENTATION: for posts, put more vertical grain on the 5½\" face (garden/drive exposure). Avoid flat-sawn cups on tenons.",
+        "4. BOARDS: choose edge strips with rings closer to 45–90° to the face (rift/VG). Heart side rules: cup toward heart → orient consistently.",
+        "5. BALANCE RIPS: mill matching faces the same day; sticker again overnight before joinery if shop RH swings.",
+        "6. SEAL ENDS: wax or end-sealer on fresh crosscuts during sticker period to slow check.",
+    ]
+    for i, t in enumerate(grain):
+        s.text(40, 228 + i * 22, t, 13, INK)
+
+    # simple 2x12 yield diagram
+    s.text(40, 380, "2×12 YIELD MAP (1½\" × 11¼\" face)", 16, ACC, bold=True)
+    s.rect(40, 400, 520, 90, fill="#d9dcde", stroke=INK, sw=2)
+    s.rect(40, 400, 160, 90, fill="#c5c8c2", stroke=INK, sw=1.5)
+    s.rect(200, 400, 200, 90, fill="#e8eaeb", stroke=ACC, sw=2, dash="5 3")
+    s.rect(400, 400, 160, 90, fill="#6e7578", stroke=INK, sw=1.5)
+    s.text(120, 450, "OUTER", 14, DIM, "middle", bold=True)
+    s.text(120, 470, "RAIL / CAP", 12, ACC, "middle", bold=True)
+    s.text(300, 450, "PITH ZONE", 14, DIM, "middle", bold=True)
+    s.text(300, 470, "WASTE / STAKES", 12, DIM, "middle")
+    s.text(480, 450, "OUTER", 14, PAPER, "middle", bold=True)
+    s.text(480, 470, "GATE / SPARE", 12, PAPER, "middle", bold=True)
+    s.text(580, 430, "Per 12′ 2×12: prefer one clean 7¼\" nuki/cap blank", 13, INK)
+    s.text(580, 454, "from the straighter outer third. Second outer strip →", 13, INK)
+    s.text(580, 478, "gate stile/rail stock or brace. Center scrap ≠ joinery.", 13, INK)
+
+    s.text(40, 520, "STICKER SCHEDULE", 16, ACC, bold=True)
+    stick = [
+        "Stack on flat sleepers · ¾\" stickers every 12–16\" · aligned vertically · weight the top.",
+        "Shop or covered porch airflow; not on concrete without vapor break. Target: stabilize to shop RH.",
+        "Minimum 14 days after delivery before final face milling; longer if stock arrived damp.",
+        "Re-check with winding sticks before joinery. Re-sticker any board that moved >1/16″ in 4′.",
+    ]
+    for i, t in enumerate(stick):
+        s.text(40, 548 + i * 22, "•  " + t, 13, INK)
+
+    s.text(40, 650, "RE-DIMENSION SEQUENCE (YOUR SAWS)", 16, ACC, bold=True)
+    red = [
+        "POSTS: joint/rip 6×6 → 3½×5½ (LS 36 + Fence Guide). Track-saw length 77″ on MFT. Mark tenon end.",
+        "RAILS/CAP: rip 2×12 outer third → 7¼\" wide × 1½\" thick. Plane reference faces. Crosscut ~105″ privacy rails.",
+        "BOARDS: rip 1×12 edge strips → 5½\" wide; plane faces to true ¾\". Cut course lengths after dry-fit rails.",
+        "OAK: rip kusabi blanks; turn/rasp ⌀⅜ pegs; shape pintles + latch bar. Never substitute softwood pegs outdoors.",
+    ]
+    for i, t in enumerate(red):
+        s.text(40, 678 + i * 22, t, 13, INK)
+
+    s.text(40, 780, "JOINERY PREP AFTER MILLING", 16, ACC, bold=True)
+    prep = [
+        "True reference faces with #5 / Bridge City plane before any mortise layout — layout from the good face.",
+        "Keep each post’s grain map: which face is garden, which cheek gets kusabi (consistent around the run).",
+        "Nuki: mill full length, dry-slide through posts, then mark wedge seats from the assembled position.",
+        "All locking faces stay bare wood (no paint/glue). Paint after dry-fit; mask tenons, wedges, peg holes, sleeve zones.",
+    ]
+    for i, t in enumerate(prep):
+        s.text(40, 808 + i * 22, "•  " + t, 13, INK)
+
+    s.text(40, 920, "FINISHED ENVELOPE UNCHANGED: 143″ × 65″ · 36″ gate · 3½×5½ posts · 1½×7¼ Prairie bands · ¾×5½ boards.", 13, DIM)
+    s.text(40, 944, "Only the source stock and grain strategy change — CAD geometry and Japanese joint sizes stay Rev A/B compatible.", 13, DIM)
+    s.text(40, 980, "BOM counts on M-6. Tool stations on M-7. Joinery geometry on M-3 / M-5.", 13, DIM)
     s.save()
 
 
@@ -672,4 +779,5 @@ if __name__ == "__main__":
     sheet_m5()
     sheet_m6()
     sheet_m7()
+    sheet_m8()
     print("MARTIN plans done →", OUT)

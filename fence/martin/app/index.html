@@ -59,7 +59,7 @@
           <ol style="margin:8px 0 0 18px;color:var(--dim);font-size:14px">
             <li>Open <strong>Visualize</strong> — explode the fence and inspect parts</li>
             <li>Work <strong>Assembly</strong> checklist phase by phase</li>
-            <li>Shop from <strong>Materials</strong> (≈303 bf)</li>
+            <li>Shop from <strong>Materials</strong> (≈322 bf mill buy)</li>
             <li>Save drop-off / gray / latch choice in <strong>Drafts</strong></li>
             <li>Print or download CAD &amp; blueprint <strong>Files</strong></li>
           </ol>
@@ -113,19 +113,20 @@
       <p class="lead">Twelve steps from site measure to lock. Check items off as you go — progress stays on this device.</p>
       <div class="phase-rail">
         <button type="button" class="chip on" data-phase="all">All</button>
-        <button type="button" class="chip" data-phase="base">01 Base</button>
-        <button type="button" class="chip" data-phase="timber">02 Timber</button>
-        <button type="button" class="chip" data-phase="gate">03 Gate</button>
-        <button type="button" class="chip" data-phase="finish">04 Finish</button>
+        <button type="button" class="chip" data-phase="mill">01 Mill</button>
+        <button type="button" class="chip" data-phase="base">02 Base</button>
+        <button type="button" class="chip" data-phase="timber">03 Timber</button>
+        <button type="button" class="chip" data-phase="gate">04 Gate</button>
+        <button type="button" class="chip" data-phase="finish">05 Finish</button>
       </div>
       <div id="assemblyList"></div>
     </section>
 
     <!-- MATERIALS -->
     <section class="panel" data-panel="materials">
-      <p class="kicker">Hardware-store stock</p>
+      <p class="kicker">Mill buy · then re-dimension</p>
       <h1>Materials &amp; board feet</h1>
-      <p class="lead">Paint-grade dimensional lumber is fine. Prefer straight grain for posts and rails. Check items as you buy.</p>
+      <p class="lead">Select DF in 6×6 / 2×12 / 1×12 — you mill for vertical grain and low warp. White oak for wedges, pegs, pintles. Japanese joinery only — no nails in the timber.</p>
       <div class="card" style="overflow:auto">
         <table>
           <thead>
@@ -148,9 +149,20 @@
         </div>
       </div>
       <div class="card" style="margin-top:14px">
-        <h3>Hold these tolerances</h3>
-        <p class="hint" style="margin:6px 0 0">Mapped to Festool MFT / Bridge City / Zenwu kit — see sheet M-7.</p>
-        <ul id="tolerancesList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        <h3>Finished parts (after milling)</h3>
+        <ul id="finishedList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card">
+          <h3>Hold these tolerances</h3>
+          <p class="hint" style="margin:6px 0 0">Festool / Bridge City / Zenwu — see M-7.</p>
+          <ul id="tolerancesList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        </div>
+        <div class="card">
+          <h3>Grain / warpage rules</h3>
+          <p class="hint" style="margin:6px 0 0">Full yield map on sheet M-8.</p>
+          <ul id="grainList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        </div>
       </div>
     </section>
 
@@ -166,7 +178,7 @@
     <section class="panel" data-panel="gallery">
       <p class="kicker">Renders &amp; blueprints</p>
       <h1>Gallery &amp; drafts on paper</h1>
-      <p class="lead">CAD renders and M-1…M-7 plan sheets. Tap to enlarge. Print from the browser for shop copies.</p>
+      <p class="lead">CAD renders and M-1…M-8 plan sheets. Tap to enlarge. Print M-6 / M-7 / M-8 for the mill-stock build.</p>
       <div class="gallery" id="galleryGrid"></div>
     </section>
 

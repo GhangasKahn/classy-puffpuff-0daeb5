@@ -75,7 +75,7 @@
       ["Height", m.height + "″"],
       ["Gate", m.gateClear + "″ clear"],
       ["Bay", m.bayClear + "″ each"],
-      ["Board feet", "≈ " + m.boardFeet],
+      ["Mill buy", "≈ " + m.boardFeet + " bf"],
       ["Climate", "Buffalo NY"],
     ]
       .map(
@@ -253,7 +253,7 @@
       .join("");
     $("#lumberBody").innerHTML = rows;
     const total = D.lumber.reduce((a, r) => a + r.bf, 0);
-    $("#bfTotal").textContent = "≈ " + total.toFixed(1) + " bf";
+    $("#bfTotal").textContent = "≈ " + total.toFixed(1) + " bf buy";
     $$("#lumberBody .buy-check").forEach((c) =>
       c.addEventListener("change", () => {
         state.bought[c.dataset.id] = c.checked;
@@ -270,6 +270,19 @@
       tolEl.innerHTML = D.tolerances
         .map((t) => `<li><strong>${t.item}</strong> — ${t.spec}</li>`)
         .join("");
+    }
+    const finEl = $("#finishedList");
+    if (finEl && D.finished) {
+      finEl.innerHTML = D.finished
+        .map(
+          (f) =>
+            `<li><strong>${f.qty} × ${f.part}</strong> — <span class="mono">${f.size}</span> · ${f.note}</li>`
+        )
+        .join("");
+    }
+    const grainEl = $("#grainList");
+    if (grainEl && D.grainRules) {
+      grainEl.innerHTML = D.grainRules.map((g) => `<li>${g}</li>`).join("");
     }
   }
 

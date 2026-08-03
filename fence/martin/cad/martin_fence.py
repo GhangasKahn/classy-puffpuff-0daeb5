@@ -6,7 +6,10 @@ Design brief
   * Overall envelope: 143" long × 65" high (owner site opening)
   * Style: Darwin Martin / Frank Lloyd Wright Prairie horizontals
     + Japanese hand-cut joinery (no nails / screws in the timber)
-  * Lumber: hardware-store dimensional stock (prefer 2×6 / 2×8 / 4×6)
+  * Lumber: select mill stock re-dimensioned by owner
+      - 6×6 DF → 3½×5½ posts; 2×12 DF → 1½×7¼ rails/cap (outer-third VG)
+      - 1×12 DF → ¾×5½ boards; 8/4 white oak → kusabi / pegs / pintles
+  * Joinery: Japanese only (nuki, kusabi, hozo, kama-tsugi) — no nails/screws in timber
   * Finish: exterior paint — owner gray (mask all wedge / hinge faces)
   * Removable for winter: lift-out timber modules + tip-out socket piers
   * Leveling pad corrects driveway → garden drop-off
