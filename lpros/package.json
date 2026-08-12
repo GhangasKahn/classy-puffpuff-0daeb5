@@ -10,7 +10,9 @@
     "econ": "node src/cli.js econ",
     "verify": "node src/cli.js verify",
     "forecast": "node src/cli.js forecast",
-    "pipeline": "node src/cli.js pipeline"
+    "pipeline": "node src/cli.js pipeline",
+    "crawl": "node src/cli.js crawl",
+    "crawl-subtree": "node src/cli.js crawl-subtree"
   },
   "engines": {
     "node": ">=20"

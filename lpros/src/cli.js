@@ -15,6 +15,7 @@ import {
 } from "./core/economics.js";
 import { verifyProduct } from "./core/verify.js";
 import { runResearchPipeline } from "./pipeline.js";
+import { crawlCategory, crawlSubtree } from "./agents/crawl.js";
 
 const [cmd, ...rest] = process.argv.slice(2);
 const args = parseArgs(rest);
@@ -24,11 +25,20 @@ async function main() {
     console.log(`LPROS — Lean Product Research OS
 
 Commands:
-  econ       Net profit after eBay fees
-  forecast   Daily profit + listings-needed (Base/Adverse/Severe)
-  verify     Zero-trust multi-factor gate on a product
-  pipeline   Live eBay research → rank (needs ebay-sold-items/.env)
-  rank       Alias for pipeline
+  econ          Net profit after eBay fees
+  forecast      Daily profit + listings-needed (Base/Adverse/Severe)
+  verify        Zero-trust multi-factor gate on a product
+  pipeline      Live eBay research → rank (needs ebay-sold-items/.env)
+  rank          Alias for pipeline
+  crawl         Paginate ALL active listings in a category (Browse API)
+  crawl-subtree Discover leaf categories under a parent, crawl each
+
+Crawl examples:
+  npm run crawl -- --category-id 43510 --min-price 35 --max-pages 10
+  npm run crawl -- --category-id 63514 --q organizer --max-items 500
+  npm run crawl-subtree -- --root 63514 --max-leaves 5 --max-pages 3
+
+Note: Uses official eBay Browse/Taxonomy APIs only — not HTML scraping.
 `);
     return;
   }
@@ -108,6 +118,40 @@ Commands:
       },
     });
     console.log(JSON.stringify(report, null, 2));
+    return;
+  }
+
+  if (cmd === "crawl") {
+    const summary = await crawlCategory({
+      categoryId: args["category-id"] || args.categoryId || args.cat,
+      q: args.q || args.query,
+      minPrice: num(args["min-price"], 35),
+      maxPrice: num(args["max-price"], 200),
+      maxPages: num(args["max-pages"], 25),
+      maxItems: num(args["max-items"], 2000),
+      pageSize: num(args["page-size"], 200),
+      delayMs: num(args.delay, 400),
+      sort: args.sort || "newlyListed",
+      applyQualityFilter: !args["no-filter"],
+      minPerceivedValue: num(args["min-pv"], 0.25),
+      outPrefix: args.out,
+    });
+    console.log(JSON.stringify(summary, null, 2));
+    return;
+  }
+
+  if (cmd === "crawl-subtree") {
+    const rollup = await crawlSubtree({
+      rootCategoryId: String(args.root || args["root-id"] || args["category-id"] || ""),
+      maxLeaves: num(args["max-leaves"], 10),
+      maxPagesPerLeaf: num(args["max-pages"], 5),
+      maxItemsPerLeaf: num(args["max-items"], 400),
+      minPrice: num(args["min-price"], 35),
+      maxPrice: num(args["max-price"], 200),
+      delayMs: num(args.delay, 400),
+      applyQualityFilter: !args["no-filter"],
+    });
+    console.log(JSON.stringify(rollup, null, 2));
     return;
   }
 

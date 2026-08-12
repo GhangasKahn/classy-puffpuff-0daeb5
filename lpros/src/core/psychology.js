@@ -6,7 +6,7 @@
 
 /** Scammy / low-trust dropship tells — hard kill when score high. */
 const SCAM_PATTERNS = [
-  { id: "qty_spam", re: /\b\d{1,4}\s*[-–\/]\s*\d{2,4}\s*(pcs|pc|pieces|pack|set)?\b/i, w: 1.2 },
+  { id: "qty_spam", re: /\b\d{1,4}\s*[-–\/]\s*\d{2,4}\s*(pcs|pc|pieces|pack|set)\b/i, w: 1.2 },
   { id: "mega_lot", re: /\b(\d{3,}\s*(pcs|pc|pieces)|lot of \d{2,}|bulk lot|wholesale lot)\b/i, w: 1.0 },
   { id: "title_spam", re: /(\*{2,}|\|{2,}|!{2,}|\${2,})/, w: 0.9 },
   { id: "clickbait", re: /\b(hot sale|best deal|must have|as seen on|viral|tiktok|shocking|amazing deal)\b/i, w: 1.0 },

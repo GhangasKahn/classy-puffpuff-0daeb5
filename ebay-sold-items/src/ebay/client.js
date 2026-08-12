@@ -60,7 +60,7 @@ export async function getAppToken({ force = false } = {}) {
 export async function ebayFetch(path, { query, headers } = {}) {
   const token = await getAppToken();
   const qs = query ? `?${new URLSearchParams(query)}` : "";
-  const url = `${config.apiRoot}${path}${qs}`;
+  const url = path.startsWith("http") ? path : `${config.apiRoot}${path}${qs}`;
   const res = await fetch(url, {
     method: "GET",
     headers: {

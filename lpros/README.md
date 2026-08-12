@@ -13,6 +13,27 @@ Built from the Grok design thread (ZBPDP → statistical hardening → low-compu
 | Hard gates + fail-closed verify | Treating PsychFit as a probability |
 | Closed-loop outcome logging | ARC-AGI-3 conditioning (Phase later) |
 
+## Category crawl (official API)
+
+Paginates **all active listings** in a category via Browse API (not HTML scraping).
+
+```bash
+# Single category (eBay category ID) — up to N pages × 200 items
+npm run crawl -- --category-id 43510 --min-price 35 --max-pages 10 --max-items 1500
+
+# Keyword within category
+npm run crawl -- --category-id 63514 --q organizer --max-pages 5
+
+# Raw dump without scam/value filter
+npm run crawl -- --category-id 43510 --no-filter --max-pages 3
+
+# Leaf categories under a parent, crawl each
+npm run crawl-subtree -- --root 63514 --max-leaves 5 --max-pages 3
+```
+
+Outputs: `data/crawls/*.jsonl` + `*.summary.json`  
+Limits: Browse caps deep pagination (~10k offset); sold history still requires Insights entitlement.
+
 ## Selection quality (anti-scam)
 
 Kill scammy dropship tells: qty spam (`6-600Pcs`), mega lots, clickbait, replicas, title `***` spam.
