@@ -1,0 +1,36 @@
+---
+description: Statistics and probability standards — uncertainty, sample size, Bayesian preference for LPROS quantitative work
+alwaysApply: false
+---
+
+# Statistics & Probability Standards
+
+## Prefer Bayesian when beliefs update
+
+- When new outcomes arrive sequentially, update beliefs with **Bayesian updating** (priors → likelihood → posterior). Do not restart from a fresh frequentist point each time unless the process truly reset.
+- State prior source (empirical, elicited, weakly informative) and why it is appropriate.
+- Report posterior summaries with intervals (credible intervals), not only MAP/mean.
+
+## Sample size & power
+
+- Before claiming a signal, check whether the sample can detect an effect of the claimed size.
+- Small-n → widen uncertainty; do not overfit narratives to noise.
+- Multiple comparisons / many tickers / many features → adjust or pre-register the hypothesis; otherwise discount.
+
+## Distributions over point myths
+
+- Default deliverable is a **distribution or scenario set**, not a single “expected” number.
+- Fat tails: for returns, losses, and rare events, prefer heavy-tailed or mixture models over naive Normal when evidence supports it.
+- Dependence matters: correlate shocks when assets/share factors; independence is an assumption you must justify.
+
+## Calibration language
+
+- Use probability language that is auditable: “P(loss > X) ≈ … under model M with assumptions A.”
+- Distinguish **aleatory** uncertainty (inherent randomness) from **epistemic** uncertainty (model/data ignorance).
+- Never equate model confidence with real-world certainty.
+
+## Forbidden shortcuts
+
+- No p-hacking narratives (“significant after we sliced three ways”).
+- No silent winsorizing / outlier deletion without stating the rule and sensitivity.
+- No treating backtest Sharpe as out-of-sample truth.

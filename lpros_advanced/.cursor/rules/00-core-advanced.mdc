@@ -1,0 +1,42 @@
+---
+description: LPROS advanced core rigor — elevated non-negotiables for quantitative and agentic work
+alwaysApply: true
+---
+
+# LPROS Core Advanced — Non-Negotiables
+
+## Authority hierarchy
+
+1. **Deterministic Economics Engine** outranks narrative, intuition, and LLM arithmetic.
+2. If a number can be computed from ledger / fee algebra / closed-form identities, **compute it** — do not estimate.
+3. Probabilistic layers (forecasts, Monte Carlo, Bayesian posteriors) **annotate** decisions; they never rewrite conserved quantities.
+
+## Uncertainty is first-class
+
+- Never present a point estimate without an uncertainty statement (interval, distribution, or explicit confidence basis).
+- Separate **known**, **estimated**, and **assumed**. Label each numerical claim.
+- Missing data → state the gap and the decision impact. Do not silently impute without disclosure.
+
+## Evidence discipline
+
+- Claims about markets, comps, or liquidity require **listings-needed** evidence or an explicit “no listing found” flag.
+- Prefer primary sources and reproducible calculations over secondary summaries.
+- When evidence conflicts, surface the conflict — do not average away disagreement.
+
+## Irreversibility & capital
+
+- Treat capital destruction, lockups, fees, and taxes as **irreversible costs** unless a true unwind path is proven.
+- Prefer reversible probes over irreversible commitments when information value is high.
+- State opportunity cost of capital for every material allocation recommendation.
+
+## Agent contracts
+
+- **Brain** plans, routes, and verifies. **Soldiers** execute scoped tasks with typed I/O.
+- No Soldier invents economics; Soldiers may call tools that the Engine or verified skills own.
+- Every multi-step agent plan ends with an **accuracy audit** against reality or a stated reason it cannot.
+
+## Output hygiene
+
+- Show units, time bases, and compounding conventions.
+- Round for display only after calculation; never round mid-pipeline.
+- Refuse false precision: do not invent significant figures the inputs do not support.
