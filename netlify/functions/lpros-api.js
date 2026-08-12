@@ -1,19 +1,19 @@
 /**
- * Netlify Function — LPROS Command API
+ * Netlify Function — LPROS Command API (CJS entry + dynamic ESM import).
  * Routes: /lpros-command/api/* → this function
  */
-import { pathToFileURL } from "node:url";
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import { routeApi, corsHeaders } from "../../lpros-command/src/http/router.js";
+const { pathToFileURL } = require("node:url");
+const { resolve } = require("node:path");
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const root = resolve(__dirname, "../..");
 
-// Load ebay-sold-items config (reads process.env; .env if present)
-await import(pathToFileURL(resolve(root, "ebay-sold-items/src/config.js")).href);
-
-export async function handler(event) {
+exports.handler = async (event) => {
   try {
+    await import(pathToFileURL(resolve(root, "ebay-sold-items/src/config.js")).href);
+    const { routeApi, corsHeaders } = await import(
+      pathToFileURL(resolve(root, "lpros-command/src/http/router.js")).href
+    );
+
     const method = event.httpMethod || event.requestContext?.http?.method || "GET";
     const rawPath =
       event.path ||
@@ -59,11 +59,14 @@ export async function handler(event) {
     console.error(e);
     return {
       statusCode: e.status || 500,
-      headers: corsHeaders(),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         error: e.message || String(e),
         code: e.code,
       }),
     };
   }
-}
+};

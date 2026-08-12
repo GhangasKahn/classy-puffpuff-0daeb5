@@ -5,9 +5,9 @@
   functions = "netlify/functions"
 
 [functions]
-  node_bundler = "esbuild"
+  node_bundler = "nft"
   directory = "netlify/functions"
-  # Pull LPROS + eBay modules into the function bundle
+  # Pull LPROS + eBay modules into the function bundle (dynamic imports)
   included_files = [
     "lpros-command/src/**",
     "lpros/src/**",
