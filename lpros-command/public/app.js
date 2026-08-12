@@ -11,8 +11,26 @@ async function post(path, body) {
   return j;
 }
 
+function numOrNull(v) {
+  if (v == null || v === "") return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
 function missionPayload() {
   const fd = new FormData($("missionForm"));
+  const evidence = {};
+  const soldCount = numOrNull(fd.get("soldCount"));
+  const avgSoldPrice = numOrNull(fd.get("avgSoldPrice"));
+  const productCost = numOrNull(fd.get("productCost"));
+  const altProductCost = numOrNull(fd.get("altProductCost"));
+  const leadTimeDays = numOrNull(fd.get("leadTimeDays"));
+  if (soldCount != null) evidence.soldCount = soldCount;
+  if (avgSoldPrice != null) evidence.avgSoldPrice = avgSoldPrice;
+  if (productCost != null) evidence.productCost = productCost;
+  if (altProductCost != null) evidence.altProductCost = altProductCost;
+  if (leadTimeDays != null) evidence.leadTimeDays = leadTimeDays;
+
   return {
     q: fd.get("q"),
     categoryId: fd.get("categoryId"),
@@ -23,6 +41,7 @@ function missionPayload() {
     deepCrawl: fd.get("deepCrawl") === "on",
     crawlPages: 2,
     targetDailyProfit: 50,
+    evidence: Object.keys(evidence).length ? evidence : undefined,
   };
 }
 
@@ -32,6 +51,7 @@ function renderBrief(brief) {
   $("briefPanel").hidden = false;
   $("brief").innerHTML = `
     <div class="verdict ${cls}">${escapeHtml(v)}</div>
+    <p class="sub">PASS ${brief.passCount ?? 0} · CONDITIONAL ${brief.conditionalCount ?? "—"}</p>
     <p class="sub">Why this beats ZIK/AutoDS gravity</p>
     <ul class="list">${(brief.whySuperiorToZikAutods || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
     <p class="sub" style="margin-top:1rem">Next actions</p>
@@ -52,10 +72,33 @@ function renderBoard(rows) {
           <span><b>$${Number(r.salePrice || 0).toFixed(2)}</b> price</span>
           <span><b>$${Number(r.net || 0).toFixed(2)}</b> net*</span>
           <span>PV <b>${r.perceivedValue ?? "—"}</b></span>
+          <span>${escapeHtml(r.decision || "")}</span>
           <span>${escapeHtml(r.source || "")}</span>
+          ${(r.flags || []).slice(0, 3).map((f) => `<span>${escapeHtml(f)}</span>`).join("")}
         </div>
       </div>
       <div>${r.url ? `<a class="btn ghost" href="${escapeHtml(r.url)}" target="_blank" rel="noreferrer">Listing</a>` : ""}</div>
+    </article>`
+    )
+    .join("");
+}
+
+function renderDrafts(rows) {
+  if (!rows?.length) {
+    $("draftPanel").hidden = true;
+    return;
+  }
+  $("draftPanel").hidden = false;
+  $("drafts").innerHTML = rows
+    .map(
+      (r) => `
+    <article class="card-row">
+      <div>
+        <h3>${escapeHtml(r.draft?.title || r.title || "").slice(0, 100)}</h3>
+        <div class="meta">
+          ${(r.draft?.bullets || []).slice(0, 2).map((b) => `<span>${escapeHtml(b.slice(0, 80))}</span>`).join("")}
+        </div>
+      </div>
     </article>`
     )
     .join("");
@@ -72,7 +115,7 @@ function escapeHtml(s) {
 $("btnSwarm").onclick = async () => {
   const btn = $("btnSwarm");
   btn.disabled = true;
-  $("agentLog").textContent = "Swarm running… Scout → Intel → Quality → Economics → Brain";
+  $("agentLog").textContent = "Swarm running… Scout ∥ Intel → Quality → Evidence → Copy → Brain";
   try {
     const data = await post("/api/swarm", missionPayload());
     $("agentLog").textContent = (data.agents || [])
@@ -80,6 +123,7 @@ $("btnSwarm").onclick = async () => {
       .join("\n");
     renderBrief(data.brief || {});
     renderBoard(data.lethalBoard || []);
+    renderDrafts(data.listingDrafts || []);
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);
   } finally {
@@ -98,6 +142,51 @@ $("btnIntel").onclick = async () => {
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);
   }
+};
+
+$("evidenceForm").onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = await post("/api/evidence/verify", {
+    title: fd.get("title"),
+    salePrice: Number(fd.get("salePrice")),
+    perceivedValue: 0.55,
+    evidence: {
+      soldCount: Number(fd.get("soldCount")),
+      productCost: Number(fd.get("productCost")),
+      altProductCost: Number(fd.get("altProductCost")),
+      leadTimeDays: Number(fd.get("leadTimeDays")),
+      demandSource: "terapeak",
+    },
+  });
+  $("evidenceOut").textContent = JSON.stringify(
+    {
+      decision: data.decision,
+      cleared: data.cleared,
+      flags: data.remainingFlags,
+      net: data.economics?.net,
+      confidence: data.verification?.verificationConfidence,
+    },
+    null,
+    2
+  );
+};
+
+$("outcomeForm").onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = await post("/api/outcomes", {
+    title: fd.get("title"),
+    net: Number(fd.get("net")),
+    profitable: fd.get("profitable") === "on",
+    returned: fd.get("returned") === "on",
+  });
+  $("outcomeOut").textContent = JSON.stringify(data, null, 2);
+};
+
+$("btnOutcomes").onclick = async () => {
+  const r = await fetch("/api/outcomes?limit=15");
+  $("outcomeOut").textContent = JSON.stringify(await r.json(), null, 2);
 };
 
 $("econForm").onsubmit = async (e) => {

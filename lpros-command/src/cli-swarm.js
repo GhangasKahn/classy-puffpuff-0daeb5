@@ -16,6 +16,13 @@ const args = Object.fromEntries(
   })
 );
 
+const evidencePack = {};
+if (args.sold != null) evidencePack.soldCount = Number(args.sold);
+if (args.cost != null) evidencePack.productCost = Number(args.cost);
+if (args["alt-cost"] != null) evidencePack.altProductCost = Number(args["alt-cost"]);
+if (args.lead != null) evidencePack.leadTimeDays = Number(args.lead);
+if (args["avg-sold"] != null) evidencePack.avgSoldPrice = Number(args["avg-sold"]);
+
 const report = await runResearchSwarm({
   q: args.q || "solid wood desk organizer",
   categoryId: args["category-id"] || "25339",
@@ -26,5 +33,6 @@ const report = await runResearchSwarm({
   deepCrawl: Boolean(args.deep),
   crawlPages: Number(args["crawl-pages"] || 2),
   targetDailyProfit: Number(args.target || 50),
+  evidencePack: Object.keys(evidencePack).length ? evidencePack : null,
 });
 console.log(JSON.stringify(report, null, 2));

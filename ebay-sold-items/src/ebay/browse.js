@@ -32,7 +32,8 @@ export async function searchActiveListings({
   if (minPrice != null || maxPrice != null) {
     const lo = minPrice != null ? Number(minPrice) : 0;
     const hi = maxPrice != null ? Number(maxPrice) : Number.MAX_SAFE_INTEGER;
-    filters.push(`price:[${lo}..${hi}]`);
+    // eBay Browse requires priceCurrency when using price ranges
+    filters.push(`price:[${lo}..${hi}]`, "priceCurrency:USD");
   }
   if (filters.length) query.filter = filters.join(",");
   if (sort) query.sort = sort;

@@ -10,7 +10,9 @@ import {
 import { sellThroughProxy, updateGammaPoisson, WEAK_VELOCITY_PRIOR } from "../src/core/bayesian.js";
 import { psychProxies } from "../src/core/psychology.js";
 import { verifyProduct } from "../src/core/verify.js";
+import { hardenCandidate } from "../src/core/evidence.js";
 import { rankCandidates } from "../src/core/scoring.js";
+import { draftListing } from "../src/agents/listing.js";
 
 describe("economics engine", () => {
   it("computes ~14% effective fees on $40 sale", () => {
@@ -196,6 +198,57 @@ describe("zero-trust verify", () => {
     assert.equal(r.decision, "FAIL");
     assert.equal(r.results.economicViability.pass, false);
     assert.match(r.results.economicViability.note, /outside high-ticket band/);
+  });
+});
+
+describe("evidence harden", () => {
+  it("turns CONDITIONAL into PASS with Terapeak + dual cost", () => {
+    const weak = {
+      title: "Solid oak desk organizer clutter tray upgrade",
+      salePrice: 49,
+      productCost: 49 * 0.4,
+      productCostEstimated: true,
+      leadTimeDays: 7,
+      soldEvidenceMissing: true,
+      evidenceStatus: "partial",
+      demandSources: ["ebay_browse"],
+      activeCount: 40,
+      density: 40,
+      perceivedValue: 0.55,
+      problemSolving: true,
+      remorseRisk: 0.3,
+      scammy: false,
+      hasImages: true,
+      hasItemSpecifics: true,
+      str: 0.02,
+    };
+    const before = hardenCandidate(weak, {});
+    assert.ok(before.decision === "CONDITIONAL" || before.remainingFlags.includes("sold_evidence_missing"));
+
+    const after = hardenCandidate(weak, {
+      soldCount: 24,
+      productCost: 18,
+      altProductCost: 19,
+      leadTimeDays: 6,
+      demandSource: "terapeak",
+    });
+    assert.equal(after.decision, "PASS");
+    assert.equal(after.cleared, true);
+    assert.ok(!after.remainingFlags.includes("sold_evidence_missing"));
+    assert.ok(!after.remainingFlags.includes("single_source_cost"));
+  });
+});
+
+describe("listing draft", () => {
+  it("builds title and bullets from material cues", () => {
+    const d = draftListing({
+      title: "Desk Organizer 5 Tray Letter Sorter Brown",
+      salePrice: 54,
+    });
+    assert.ok(d.title.length > 10);
+    assert.ok(d.bullets.length >= 4);
+    assert.ok(d.itemSpecifics.Type);
+    assert.equal(d.scammy, false);
   });
 });
 

@@ -24,7 +24,10 @@ export async function competitorIntel({
     sort: "price",
   });
 
-  const items = page.items || [];
+  // Defense in depth: Browse price filter is best-effort; enforce band locally
+  const items = (page.items || []).filter(
+    (i) => i.price != null && i.price >= minPrice && i.price <= maxPrice
+  );
   const prices = items.map((i) => i.price).filter((p) => p > 0).sort((a, b) => a - b);
   const sellers = new Map();
   for (const it of items) {

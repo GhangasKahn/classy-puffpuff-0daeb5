@@ -27,6 +27,56 @@ export function logOutcome(row) {
   writeFileSync(logPath, line, { flag: "a" });
 }
 
+/** Most recent outcomes (newest first). */
+export function readRecentOutcomes(limit = 50) {
+  if (!existsSync(logPath)) return [];
+  const lines = readFileSync(logPath, "utf8")
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const rows = [];
+  for (let i = lines.length - 1; i >= 0 && rows.length < limit; i--) {
+    try {
+      rows.push(JSON.parse(lines[i]));
+    } catch {
+      /* skip corrupt */
+    }
+  }
+  return rows;
+}
+
+/**
+ * Record a sale/return outcome and nudge psych weights.
+ */
+export function recordSaleOutcome({
+  title,
+  sku,
+  profitable,
+  returned,
+  net,
+  salePrice,
+  featureSnapshot,
+  note,
+} = {}) {
+  const row = {
+    type: "sale_outcome",
+    title,
+    sku,
+    profitable: Boolean(profitable),
+    returned: Boolean(returned),
+    net: net != null ? Number(net) : null,
+    salePrice: salePrice != null ? Number(salePrice) : null,
+    note: note || null,
+  };
+  logOutcome(row);
+  const weights = nudgeWeightsFromOutcome({
+    profitable: row.profitable,
+    returned: row.returned,
+    featureSnapshot,
+  });
+  return { outcome: row, weights };
+}
+
 export function loadWeights() {
   if (!existsSync(weightsPath)) return { ...DEFAULT_WEIGHTS };
   try {

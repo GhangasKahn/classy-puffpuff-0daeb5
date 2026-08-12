@@ -14,6 +14,13 @@ import {
   expectedDailyProfit,
   stressForecast,
 } from "../../lpros/src/core/economics.js";
+import { hardenCandidate } from "../../lpros/src/core/evidence.js";
+import { draftListing } from "../../lpros/src/agents/listing.js";
+import {
+  readRecentOutcomes,
+  recordSaleOutcome,
+  logOutcome,
+} from "../../lpros/src/agents/outcome.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = resolve(__dirname, "../public");
@@ -69,6 +76,20 @@ function serveStatic(req, res, url) {
   send(res, 200, readFileSync(file, "utf8"), MIME[ext] || "application/octet-stream");
 }
 
+function evidenceFromBody(b) {
+  if (!b || typeof b !== "object") return null;
+  const pack = {};
+  if (b.soldCount != null && b.soldCount !== "") pack.soldCount = Number(b.soldCount);
+  if (b.avgSoldPrice != null && b.avgSoldPrice !== "") pack.avgSoldPrice = Number(b.avgSoldPrice);
+  if (b.sellThrough != null && b.sellThrough !== "") pack.sellThrough = Number(b.sellThrough);
+  if (b.productCost != null && b.productCost !== "") pack.productCost = Number(b.productCost);
+  if (b.altProductCost != null && b.altProductCost !== "") pack.altProductCost = Number(b.altProductCost);
+  if (b.leadTimeDays != null && b.leadTimeDays !== "") pack.leadTimeDays = Number(b.leadTimeDays);
+  if (b.demandSource) pack.demandSource = String(b.demandSource);
+  if (b.note) pack.note = String(b.note);
+  return Object.keys(pack).length ? pack : null;
+}
+
 async function handle(req, res) {
   const url = new URL(req.url || "/", `http://${req.headers.host}`);
   if (req.method === "OPTIONS") {
@@ -87,6 +108,18 @@ async function handle(req, res) {
         service: "lpros-command",
         role: "open ZIK+AutoDS control plane",
         port,
+        endpoints: [
+          "/api/swarm",
+          "/api/intel",
+          "/api/evidence/verify",
+          "/api/listing/draft",
+          "/api/outcomes",
+          "/api/econ",
+          "/api/forecast",
+          "/api/fulfill/decide",
+          "/api/providers",
+          "/api/playbook",
+        ],
       });
     }
 
@@ -97,6 +130,30 @@ async function handle(req, res) {
     if (req.method === "GET" && url.pathname === "/api/playbook") {
       const md = readFileSync(resolve(__dirname, "browser/playbooks.md"), "utf8");
       return send(res, 200, md, "text/markdown; charset=utf-8");
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/outcomes") {
+      const limit = Number(url.searchParams.get("limit") || 40);
+      return send(res, 200, { outcomes: readRecentOutcomes(limit) });
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/outcomes") {
+      const b = await readJson(req);
+      if (b.type === "note" || b.type === "pipeline_run") {
+        logOutcome(b);
+        return send(res, 200, { ok: true });
+      }
+      const result = recordSaleOutcome({
+        title: b.title,
+        sku: b.sku,
+        profitable: b.profitable,
+        returned: b.returned,
+        net: b.net,
+        salePrice: b.salePrice,
+        featureSnapshot: b.featureSnapshot,
+        note: b.note,
+      });
+      return send(res, 200, result);
     }
 
     if (req.method === "POST" && url.pathname === "/api/econ") {
@@ -139,8 +196,44 @@ async function handle(req, res) {
       return send(res, 200, data);
     }
 
+    if (req.method === "POST" && url.pathname === "/api/evidence/verify") {
+      const b = await readJson(req);
+      const pack = evidenceFromBody(b.evidence || b);
+      if (!pack) return send(res, 400, { error: "evidence pack required" });
+      const candidate = b.candidate || {
+        title: b.title || "candidate",
+        salePrice: Number(b.salePrice ?? b.avgSoldPrice ?? 49),
+        productCost: Number(b.productCost ?? pack.productCost ?? 20),
+        productCostEstimated: pack.productCost == null,
+        leadTimeDays: pack.leadTimeDays ?? 7,
+        soldEvidenceMissing: true,
+        evidenceStatus: "partial",
+        demandSources: ["ebay_browse"],
+        activeCount: Number(b.activeCount ?? 40),
+        density: Number(b.density ?? 40),
+        perceivedValue: Number(b.perceivedValue ?? 0.55),
+        remorseRisk: Number(b.remorseRisk ?? 0.3),
+        scammy: false,
+        hasImages: true,
+        hasItemSpecifics: true,
+        str: Number(b.str ?? 0.015),
+      };
+      const result = hardenCandidate(candidate, pack, {
+        minSalePrice: Number(b.minPrice ?? 35),
+        maxSalePrice: Number(b.maxPrice ?? 200),
+      });
+      return send(res, 200, result);
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/listing/draft") {
+      const b = await readJson(req);
+      const draft = draftListing(b.candidate || b, { brand: b.brand, type: b.type });
+      return send(res, 200, draft);
+    }
+
     if (req.method === "POST" && url.pathname === "/api/swarm") {
       const b = await readJson(req);
+      const evidencePack = evidenceFromBody(b.evidence || b.evidencePack);
       const data = await runResearchSwarm({
         q: b.q || "desk organizer wood",
         categoryId: b.categoryId || "25339",
@@ -152,6 +245,8 @@ async function handle(req, res) {
         deepCrawl: Boolean(b.deepCrawl),
         targetDailyProfit: Number(b.targetDailyProfit ?? 50),
         assumedStr: Number(b.assumedStr ?? 0.015),
+        evidencePack,
+        draftListings: b.draftListings !== false,
       });
       return send(res, 200, data);
     }
