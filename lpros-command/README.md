@@ -93,7 +93,10 @@ Browser playbooks (Terapeak assist): `src/browser/playbooks.md` or `/api/playboo
 | `POST /api/orders/ingest` | Import sale + fulfill gate |
 | `POST /api/orders/tracking` | Attach carrier tracking |
 | `POST /api/evidence/verify` | Harden one candidate to PASS/FAIL |
-| `GET /api/auth/status` | App vs user-token capability |
+| `POST /api/orchestrate/campaign` | Marathon 4–5 categories (local :8790) |
+| `GET /api/orchestrate/jobs/:id/packages` | Listing factory packages |
+| `POST /api/orchestrate/jobs/:id/promote` | Promote TEST_NOW packages into SKU registry |
+| `POST /api/orchestrate/jobs/:id/cancel` | Stop after current lane, keep rollup |
 
 ## Live Sell publish (optional)
 

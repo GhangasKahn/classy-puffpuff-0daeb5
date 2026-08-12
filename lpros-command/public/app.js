@@ -543,6 +543,38 @@ function renderOrchTable(products) {
     .join("");
 }
 
+function renderOrchPackages(packages) {
+  const el = $("orchPackages");
+  if (!el) return;
+  if (!packages?.length) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.innerHTML = packages
+    .slice(0, 12)
+    .map(
+      (p) => `
+    <article class="card-row">
+      ${p.beatThis?.image ? `<img class="thumb" src="${escapeHtml(p.beatThis.image)}" alt="" loading="lazy" />` : `<div class="thumb"></div>`}
+      <div>
+        <h3>${escapeHtml((p.title || "").slice(0, 90))}</h3>
+        <div class="meta">
+          <span class="badge-dec ${escapeHtml(p.decision || "")}">${escapeHtml(p.packageId || "")} ${escapeHtml(p.decision || "")}</span>
+          <span>Net <b>$${Number(p.estNet || 0).toFixed(2)}</b></span>
+          <span>Idea <b>${p.ideaScore ?? "—"}</b></span>
+          <span>${escapeHtml(p.clusterSeed || "")}</span>
+          <span>imgs ≥ ${p.imagePlan?.beatWith ?? 8}</span>
+          ${p.beatThis?.url ? `<a href="${escapeHtml(p.beatThis.url)}" target="_blank" rel="noopener">beat listing</a>` : ""}
+        </div>
+        <p class="sub">${escapeHtml((p.bullets || [])[0] || "")}</p>
+      </div>
+    </article>`
+    )
+    .join("");
+}
+
 function finishOrchUi(job, data) {
   const gallery = job?.results?.gallery || data?.gallery || [];
   const products = job?.results?.productsPreview || job?.results?.products || [];
@@ -555,13 +587,16 @@ function finishOrchUi(job, data) {
   renderOrchGallery(gallery);
   renderOrchRecs(recs);
   renderOrchTable(products);
+  renderOrchPackages(job?.results?.packagesPreview || job?.results?.packages || []);
   const n = job?.results?.productCount ?? data?.productCount ?? products.length;
   const imgs = job?.results?.productsWithImages ?? data?.productsWithImages;
   const ideas = job?.results?.ideaCount;
   const variants = job?.results?.variantTotalGenerated;
-  $("orchPhase").textContent = `done · ${n} products${imgs != null ? ` · ${imgs} images` : ""}${variants != null ? ` · ${variants} variants` : ""}${ideas != null ? ` · ${ideas} ideas` : ""}`;
+  const pkgs = job?.results?.packageCount;
+  $("orchPhase").textContent = `done · ${n} products${imgs != null ? ` · ${imgs} images` : ""}${variants != null ? ` · ${variants} variants` : ""}${ideas != null ? ` · ${ideas} ideas` : ""}${pkgs != null ? ` · ${pkgs} packages` : ""}`;
   $("btnOrchCsv").disabled = false;
   $("btnOrchProductsCsv").disabled = false;
+  $("btnOrchPromote").disabled = !(pkgs || job?.results?.packagesPreview?.length);
 }
 
 async function pollOrchJob() {
@@ -573,11 +608,11 @@ async function pollOrchJob() {
     appendOrchLog(ev.events || []);
     orchEventIdx = ev.nextIndex ?? orchEventIdx;
     setOrchProgress(ev.progress);
-    if (ev.status === "completed" || ev.status === "failed") {
+    if (ev.status === "completed" || ev.status === "failed" || ev.status === "cancelled") {
       clearInterval(orchPollTimer);
       orchPollTimer = null;
       const job = await get(`/orchestrate/jobs/${encodeURIComponent(orchJobId)}`);
-      if (ev.status === "completed") finishOrchUi(job);
+      if (ev.status === "completed" || ev.status === "cancelled") finishOrchUi(job);
       $("btnOrchDeploy").disabled = false;
       $("btnOrchMarathon").disabled = false;
       if (ev.status === "failed") {
@@ -595,7 +630,9 @@ async function startOrch(payload, endpoint) {
   $("orchLog").textContent = "";
   $("btnOrchCsv").disabled = true;
   $("btnOrchProductsCsv").disabled = true;
+  $("btnOrchPromote").disabled = true;
   $("orchRecs").hidden = true;
+  $("orchPackages") && ($("orchPackages").hidden = true);
   $("orchTableWrap").hidden = true;
   $("orchGallery").hidden = true;
   $("orchTrends").hidden = true;
@@ -647,6 +684,47 @@ $("btnOrchMarathon").onclick = async () => {
   const payload = { ...orchPayload(), mode: "marathon", marathon: true, sync: false };
   delete payload.categoryId;
   await startOrch(payload, "/api/orchestrate/campaign");
+};
+
+$("btnOrchCancel").onclick = async () => {
+  if (!orchJobId) return;
+  try {
+    const data = await post(`/api/orchestrate/jobs/${encodeURIComponent(orchJobId)}/cancel`, {});
+    appendOrchLog([
+      {
+        at: new Date().toISOString(),
+        level: "warn",
+        message: `Cancel requested (${data.status}) — finishing current lane then rolling up`,
+      },
+    ]);
+  } catch (e) {
+    appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+  }
+};
+
+$("btnOrchPromote").onclick = async () => {
+  if (!orchJobId) return;
+  try {
+    const data = await post(`/api/orchestrate/jobs/${encodeURIComponent(orchJobId)}/promote`, {
+      limit: 8,
+      decision: "TEST_NOW",
+    });
+    appendOrchLog([
+      {
+        at: new Date().toISOString(),
+        level: "info",
+        message: `Promoted ${data.count} packages → SKU registry`,
+      },
+    ]);
+    $("opsOut").textContent = JSON.stringify(
+      (data.skus || []).map((s) => ({ sku: s.sku, title: s.title, status: s.status, net: s.net })),
+      null,
+      2
+    );
+    await loadSkus();
+  } catch (e) {
+    appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+  }
 };
 
 $("btnDeploy").onclick = () => {

@@ -25,6 +25,9 @@ describe("marathon campaign dry-run", () => {
     assert.ok(job.results.workbookCsv.includes("IDEAS"));
     assert.ok(job.results.trends.categoryHeat.length === 5);
     assert.ok(job.checkpoints.length === 5);
+    assert.ok((job.results.packageCount || 0) >= 1);
+    assert.ok((job.results.packages || []).length >= 1);
+    assert.ok(job.results.packagesCsv.includes("packageId"));
   });
 });
 
@@ -46,6 +49,13 @@ describe("marathon API", () => {
     assert.equal(res.body.status, "completed");
     assert.ok(res.body.productCount >= 8);
     assert.ok(res.body.ideaCount >= 20);
+
+    const pkgs = await routeApi({
+      method: "GET",
+      pathname: `/orchestrate/jobs/${res.body.jobId}/packages`,
+    });
+    assert.equal(pkgs.status, 200);
+    assert.ok(pkgs.body.packageCount >= 1);
 
     const sheet = await routeApi({
       method: "GET",

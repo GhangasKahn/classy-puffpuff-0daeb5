@@ -109,9 +109,11 @@
       <div class="cta-row" style="margin-bottom:1rem">
         <button type="button" class="btn primary" id="btnOrchDeploy">Deploy research mission</button>
         <button type="button" class="btn primary" id="btnOrchMarathon">Start marathon campaign</button>
+        <button type="button" class="btn ghost" id="btnOrchCancel">Cancel run</button>
         <button type="button" class="btn ghost" id="btnOrchJobs">Refresh jobs</button>
         <button type="button" class="btn" id="btnOrchCsv" disabled>Download workbook CSV</button>
         <button type="button" class="btn ghost" id="btnOrchProductsCsv" disabled>Products only CSV</button>
+        <button type="button" class="btn" id="btnOrchPromote" disabled>Promote packages to SKUs</button>
       </div>
       <p class="sub">Marathon = 4–5 categories · 100s products · keyword swarms · trend heat · idea factory. Leave local :8790 running — not for Netlify.</p>
       <div class="orch-status" id="orchStatus">
@@ -122,6 +124,7 @@
       <div id="orchTrends" class="orch-trends" hidden></div>
       <div id="orchGallery" class="gallery" hidden></div>
       <div id="orchRecs" class="board" hidden></div>
+      <div id="orchPackages" class="board" hidden></div>
       <div id="orchTableWrap" class="orch-table-wrap" hidden>
         <table class="orch-table" id="orchTable">
           <thead></thead>

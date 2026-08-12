@@ -92,7 +92,7 @@ Critical: Supply, Economics, Compliance. Fail-closed.
 | Phase | Window | Status |
 |-------|--------|--------|
 | 1 Foundation — econ + verify + eBay data | Aug 11–15 | **In progress (this package)** |
-| 2 Research & listing MVP | Aug 16–22 | Next |
+| 2 Research & listing MVP | Aug 16–22 | **In progress** — marathon research + listing factory packages |
 | 3 Fulfillment (DSers/AutoDS wrap) | Aug 23–28 | Later |
 | 4 Integration & hardening | Aug 29–Sep 2 | Later |
 

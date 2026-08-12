@@ -31,50 +31,28 @@ import {
   enrichItemsWithDetails,
 } from "../../../ebay-sold-items/src/ebay/browse.js";
 import { loadEbayEnv } from "../../../lpros/src/agents/_env.js";
+import { persistJob, loadJob, appendJobEvent, jobMem, orchDir } from "./jobstore.js";
+import { assemblePackages } from "./factory.js";
 
-const DATA_DIR = process.env.LPROS_ORCH_DIR || path.join(os.tmpdir(), "lpros-orch");
-
-function ensureDir(d) {
-  if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
-}
-ensureDir(DATA_DIR);
-
-/** @type {Map<string, object>} */
-const jobs = new Map();
+const DATA_DIR = orchDir();
+const jobs = jobMem;
 const bus = new EventEmitter();
 bus.setMaxListeners(50);
 
-function id() {
-  return `job_${Date.now().toString(36)}_${crypto.randomBytes(3).toString("hex")}`;
-}
-
 function persist(job) {
-  try {
-    // Strip huge HTML from persisted events/results already truncated
-    fs.writeFileSync(path.join(DATA_DIR, `${job.id}.json`), JSON.stringify(job, null, 2));
-  } catch {
-    /* ignore */
-  }
+  persistJob(job);
 }
 
 function appendEvent(job, level, message, data = {}) {
-  const ev = { at: new Date().toISOString(), level, message, ...data };
-  job.events.push(ev);
-  if (job.events.length > 2000) job.events.splice(0, job.events.length - 2000);
-  bus.emit("event", { jobId: job.id, event: ev });
-  persist(job);
-  return ev;
+  return appendJobEvent(job, level, message, data);
 }
 
 export function getJob(jobId) {
-  if (jobs.has(jobId)) return jobs.get(jobId);
-  const p = path.join(DATA_DIR, `${jobId}.json`);
-  if (fs.existsSync(p)) {
-    const job = JSON.parse(fs.readFileSync(p, "utf8"));
-    jobs.set(jobId, job);
-    return job;
-  }
-  return null;
+  return loadJob(jobId);
+}
+
+function id() {
+  return `job_${Date.now().toString(36)}_${crypto.randomBytes(3).toString("hex")}`;
 }
 
 export function listJobs(limit = 40) {
@@ -90,6 +68,7 @@ export function listJobs(limit = 40) {
     }
   }
   return [...jobs.values()]
+    .filter((j) => j.type !== "campaign" && !String(j.id).startsWith("camp_"))
     .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
     .slice(0, limit)
     .map((j) => ({
@@ -151,6 +130,7 @@ function slimProduct(p) {
     brand: p.brand,
     categoryPath: p.categoryPath,
     specificsSummary: p.specificsSummary,
+    itemSpecifics: p.itemSpecifics || {},
     descriptionExcerpt: p.descriptionExcerpt,
     contentSignals: p.contentSignals,
     perceivedValue: p.perceivedValue,
@@ -219,6 +199,11 @@ async function runDryMission(job) {
     sheet,
     pipeline: null,
   });
+  try {
+    assemblePackages(job, { maxPackages: 12 });
+  } catch {
+    /* factory optional */
+  }
   job.progress = { phase: "done", pct: 100 };
   job.status = "completed";
   job.updatedAt = new Date().toISOString();
@@ -662,6 +647,11 @@ export async function runMission(job) {
     sheet,
     pipeline,
   });
+  try {
+    assemblePackages(job, { maxPackages: 25 });
+  } catch (e) {
+    appendEvent(job, "warn", `Listing factory soft-fail: ${e.message}`, { phase: "factory" });
+  }
 
   job.progress = { phase: "done", pct: 100 };
   job.status = "completed";

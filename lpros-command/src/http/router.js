@@ -44,7 +44,11 @@ import {
   getCampaignSpreadsheet,
   listCampaignJobs,
   DEFAULT_MARATHON_CATEGORIES,
+  cancelCampaign,
+  resumeCampaign,
 } from "../orchestrate/campaign.js";
+import { assemblePackages, promotePackages } from "../orchestrate/factory.js";
+import { requestCancel } from "../orchestrate/jobstore.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -102,6 +106,8 @@ export async function routeApi(req) {
           "/orchestrate/deploy",
           "/orchestrate/campaign",
           "/orchestrate/jobs",
+          "/orchestrate/jobs/:id/packages",
+          "/orchestrate/jobs/:id/promote",
           "/orchestrate/marathon-defaults",
           "/skus",
           "/export",
@@ -529,6 +535,10 @@ export async function routeApi(req) {
             lanes: job.results.lanes,
             trends: job.results.trends,
             gallery: job.results.gallery,
+            packagesPreview: (job.results.packages || []).slice(0, 12),
+            packageCount: job.results.packageCount,
+            clusters: job.results.clusters,
+            imageStats: job.results.imageStats,
             productsPreview: (job.results.products || []).slice(0, 30),
             variantsPreview: (job.results.variants || []).slice(0, 25),
             ideasPreview: job.results.trends?.ideasPreview || job.results.recommendations?.topIdeas,
@@ -556,6 +566,7 @@ export async function routeApi(req) {
       products: query.get("products") === "1" || query.get("products") === "true",
       trends: query.get("trends") === "1" || query.get("trends") === "true",
       ideas: query.get("ideas") === "1" || query.get("ideas") === "true",
+      packages: query.get("packages") === "1" || query.get("packages") === "true",
     };
     const sheet =
       getCampaignSpreadsheet(jobId, opts) ||
@@ -566,6 +577,73 @@ export async function routeApi(req) {
       return err(409, "spreadsheet not ready", { status: sheet.status, ready: false });
     }
     return ok(sheet.csv, "text/csv; charset=utf-8");
+  }
+
+  if (method === "POST" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/packages$/)) {
+    const jobId = decodeURIComponent(pathname.split("/")[3] || pathname.split("/").slice(-2)[0]);
+    const job = getJob(jobId) || getCampaignJob(jobId);
+    if (!job) return err(404, "job not found");
+    try {
+      const factory = assemblePackages(job, { maxPackages: Number(b.maxPackages || 25) });
+      return ok({
+        jobId,
+        packageCount: factory.packageCount,
+        clusters: factory.clusters,
+        imageStats: factory.imageStats,
+        packages: factory.packages,
+      });
+    } catch (e) {
+      return err(e.status || 500, e.message);
+    }
+  }
+
+  if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/packages$/)) {
+    const jobId = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = getJob(jobId) || getCampaignJob(jobId);
+    if (!job) return err(404, "job not found");
+    if (!job.results?.packages) {
+      try {
+        assemblePackages(job, { maxPackages: 25 });
+      } catch (e) {
+        return err(e.status || 409, e.message);
+      }
+    }
+    return ok({
+      jobId,
+      packageCount: job.results.packageCount,
+      clusters: job.results.clusters,
+      imageStats: job.results.imageStats,
+      packages: job.results.packages,
+    });
+  }
+
+  if (method === "POST" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/promote$/)) {
+    const jobId = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = getJob(jobId) || getCampaignJob(jobId);
+    if (!job) return err(404, "job not found");
+    try {
+      const out = promotePackages(job, {
+        limit: Number(b.limit || 8),
+        decision: b.decision || "TEST_NOW",
+      });
+      return ok(out);
+    } catch (e) {
+      return err(e.status || 500, e.message);
+    }
+  }
+
+  if (method === "POST" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/cancel$/)) {
+    const jobId = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = cancelCampaign(jobId) || requestCancel(jobId);
+    if (!job) return err(404, "job not found");
+    return ok({ jobId, cancelRequested: true, status: job.status });
+  }
+
+  if (method === "POST" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/resume$/)) {
+    const jobId = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = resumeCampaign(jobId, { sync: Boolean(b.sync) });
+    if (!job) return err(404, "job not found");
+    return ok({ jobId, status: job.status, progress: job.progress, note: "Resume async — poll events" });
   }
 
   if (method === "POST" && pathname === "/fulfill/decide") {

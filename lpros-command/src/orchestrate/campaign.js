@@ -12,16 +12,19 @@ import { loadEbayEnv } from "../../../lpros/src/agents/_env.js";
 import { productsToCsv } from "../../../lpros/src/core/listing_content.js";
 import { buildCampaignTrends, trendsToCsv } from "../../../lpros/src/core/trends.js";
 import { researchCategoryLane, researchCategoryLaneDry } from "./lane.js";
+import {
+  jobMem,
+  persistJob,
+  loadJob,
+  appendJobEvent,
+  orchDir,
+  isCancelled,
+  requestCancel,
+} from "./jobstore.js";
+import { assemblePackages } from "./factory.js";
 
-const DATA_DIR = process.env.LPROS_ORCH_DIR || path.join(os.tmpdir(), "lpros-orch");
-
-function ensureDir(d) {
-  if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
-}
-ensureDir(DATA_DIR);
-
-/** @type {Map<string, object>} */
-const jobs = new Map();
+const DATA_DIR = orchDir();
+const jobs = jobMem;
 export const campaignBus = new EventEmitter();
 campaignBus.setMaxListeners(50);
 
@@ -30,31 +33,15 @@ function id() {
 }
 
 function persist(job) {
-  try {
-    fs.writeFileSync(path.join(DATA_DIR, `${job.id}.json`), JSON.stringify(job, null, 2));
-  } catch {
-    /* ignore */
-  }
+  persistJob(job);
 }
 
 function appendEvent(job, level, message, data = {}) {
-  const ev = { at: new Date().toISOString(), level, message, ...data };
-  job.events.push(ev);
-  if (job.events.length > 4000) job.events.splice(0, job.events.length - 4000);
-  campaignBus.emit("event", { jobId: job.id, event: ev });
-  persist(job);
-  return ev;
+  return appendJobEvent(job, level, message, data);
 }
 
 export function getCampaignJob(jobId) {
-  if (jobs.has(jobId)) return jobs.get(jobId);
-  const p = path.join(DATA_DIR, `${jobId}.json`);
-  if (fs.existsSync(p)) {
-    const job = JSON.parse(fs.readFileSync(p, "utf8"));
-    jobs.set(jobId, job);
-    return job;
-  }
-  return null;
+  return loadJob(jobId);
 }
 
 /** Default 5-lane Home/Office organization campaign */
@@ -134,6 +121,7 @@ function slimProduct(p) {
     detailFetched: p.detailFetched,
     rank: p.rank,
     specificsSummary: p.specificsSummary,
+    itemSpecifics: p.itemSpecifics || {},
     descriptionExcerpt: (p.descriptionExcerpt || "").slice(0, 240),
   };
 }
@@ -197,13 +185,28 @@ export async function runCampaign(job) {
   );
   job.progress = { phase: "lanes", pct: 2, lane: 0, laneTotal: cats.length };
 
-  const laneResults = [];
-  const allProducts = [];
-  const allVariants = [];
-  const titleCsvParts = [];
+  const laneResults = [...(job.laneCache || [])];
+  const allProducts = laneResults.flatMap((l) =>
+    (l.products || []).map((p) => ({ ...p, categoryId: l.categoryId, categoryPath: l.label }))
+  );
+  const allVariants = laneResults.flatMap((l) => l.variants || []);
+  const titleCsvParts = laneResults.map((l) => l.spreadsheetCsv).filter(Boolean);
+  let cancelledEarly = false;
 
   for (let i = 0; i < cats.length; i++) {
     const lane = cats[i];
+    if (isCancelled(job)) {
+      appendEvent(job, "warn", "Campaign cancelled by operator — rolling up finished lanes", {
+        phase: "cancel",
+      });
+      cancelledEarly = true;
+      break;
+    }
+    const already = (job.checkpoints || []).some((c) => c.categoryId === lane.categoryId);
+    if (already && cfg.resume) {
+      appendEvent(job, "info", `Resume skip (checkpoint): ${lane.label}`, { phase: "lane" });
+      continue;
+    }
     const pctBase = Math.round((i / cats.length) * 85) + 5;
     job.progress = {
       phase: "lane",
@@ -275,6 +278,17 @@ export async function runCampaign(job) {
       variantCount: allVariants.length,
       lanesDone: laneResults.length,
     };
+    job.laneCache = laneResults.map((l) => ({
+      categoryId: l.categoryId,
+      label: l.label,
+      queries: l.queries,
+      products: l.products,
+      variants: l.variants,
+      snapshot: l.snapshot,
+      momentum: l.momentum,
+      titles: (l.titles || []).slice(0, 200),
+      spreadsheetCsv: l.spreadsheetCsv,
+    }));
     persist(job);
   }
 
@@ -440,13 +454,19 @@ export async function runCampaign(job) {
     },
   };
 
-  job.progress = { phase: "done", pct: 100, lane: cats.length, laneTotal: cats.length };
-  job.status = "completed";
+  try {
+    assemblePackages(job, { maxPackages: cfg.maxPackages || 25 });
+  } catch (e) {
+    appendEvent(job, "warn", `Listing factory soft-fail: ${e.message}`, { phase: "factory" });
+  }
+
+  job.progress = { phase: "done", pct: 100, lane: laneResults.length, laneTotal: cats.length };
+  job.status = cancelledEarly ? "cancelled" : "completed";
   job.updatedAt = new Date().toISOString();
   appendEvent(
     job,
     "info",
-    `Marathon complete — ${laneResults.length} lanes · ${dedupedProducts.length} products · ${dedupedVariants.length} variants · ${trends.ideaCount} ideas`,
+    `${cancelledEarly ? "Cancelled" : "Marathon complete"} — ${laneResults.length} lanes · ${dedupedProducts.length} products · ${dedupedVariants.length} variants · ${trends.ideaCount} ideas · ${job.results.packageCount || 0} listing packages`,
     { phase: "done" }
   );
   persist(job);
@@ -486,6 +506,8 @@ export function deployCampaign(config = {}, { sync = false } = {}) {
       maxQueriesPerCategory: config.maxQueriesPerCategory || 5,
       boardCap: config.boardCap || 150,
       ideasTarget: config.ideasTarget != null ? Number(config.ideasTarget) : 250,
+      maxPackages: config.maxPackages != null ? Number(config.maxPackages) : 25,
+      resume: Boolean(config.resume),
       dryRun: Boolean(config.dryRun),
     },
     progress: { phase: "queued", pct: 0 },
@@ -526,6 +548,38 @@ export function deployCampaign(config = {}, { sync = false } = {}) {
   return job;
 }
 
+export function cancelCampaign(jobId) {
+  return requestCancel(jobId);
+}
+
+export function resumeCampaign(jobId, { sync = false } = {}) {
+  const job = getCampaignJob(jobId);
+  if (!job) return null;
+  if (job.status === "running") {
+    return job;
+  }
+  job.cancelRequested = false;
+  job.status = "queued";
+  job.error = null;
+  job.config = { ...job.config, resume: true };
+  job.updatedAt = new Date().toISOString();
+  appendEvent(job, "info", "Resume requested — skipping checkpointed lanes", { phase: "resume" });
+  const run = async () => {
+    try {
+      await runCampaign(job);
+    } catch (e) {
+      job.status = "failed";
+      job.error = e.message || String(e);
+      job.updatedAt = new Date().toISOString();
+      appendEvent(job, "error", `Resume failed: ${job.error}`, { phase: "error" });
+      persist(job);
+    }
+  };
+  if (sync) return run().then(() => job);
+  setImmediate(() => run());
+  return job;
+}
+
 export function getCampaignEvents(jobId, afterIndex = 0) {
   const job = getCampaignJob(jobId);
   if (!job) return null;
@@ -540,7 +594,7 @@ export function getCampaignEvents(jobId, afterIndex = 0) {
   };
 }
 
-export function getCampaignSpreadsheet(jobId, { workbook = true, products = false, trends = false, ideas = false } = {}) {
+export function getCampaignSpreadsheet(jobId, { workbook = true, products = false, trends = false, ideas = false, packages = false } = {}) {
   const job = getCampaignJob(jobId);
   if (!job) return null;
   if (!job.results) return { jobId, ready: false, status: job.status };
@@ -548,6 +602,7 @@ export function getCampaignSpreadsheet(jobId, { workbook = true, products = fals
   if (products) csv = job.results.productSpreadsheetCsv;
   else if (trends) csv = job.results.trendsCsv;
   else if (ideas) csv = job.results.ideasCsv;
+  else if (packages) csv = job.results.packagesCsv;
   else if (!workbook) csv = job.results.spreadsheetCsv;
   return {
     jobId,
