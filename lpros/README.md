@@ -13,6 +13,12 @@ Built from the Grok design thread (ZBPDP → statistical hardening → low-compu
 | Hard gates + fail-closed verify | Treating PsychFit as a probability |
 | Closed-loop outcome logging | ARC-AGI-3 conditioning (Phase later) |
 
+## Selection quality (anti-scam)
+
+Kill scammy dropship tells: qty spam (`6-600Pcs`), mega lots, clickbait, replicas, title `***` spam.
+
+Prefer: **problem-solving**, **upgrade/better-than-replacement**, **materials** (walnut, stainless…), **unique/modular**, **multi-variation** potential (sizes/colors as a product family — not junk packs).
+
 ## High-ticket band
 
 Default research band is **$35–$200** (floor in the $30–$40 range you specified). Sub-minimum listings are filtered at Browse + killed at verify.

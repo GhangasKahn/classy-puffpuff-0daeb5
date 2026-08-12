@@ -51,7 +51,9 @@ export function scoreCandidate(raw, opts = {}) {
   );
 
   const shrunkNet = uncertaintyShrink(econ.net, demandConfidence, opts.shrinkK ?? 1);
-  const composite = Math.max(0, shrunkNet) * psych.psychFit;
+  // Prefer high perceived value in the composite, not just psychFit × net
+  const valueBoost = 0.55 + 0.45 * (psych.perceivedValue || 0);
+  const composite = Math.max(0, shrunkNet) * psych.psychFit * valueBoost;
 
   const candidate = {
     ...raw,
@@ -63,6 +65,12 @@ export function scoreCandidate(raw, opts = {}) {
     density: dens.density,
     demandConfidence,
     remorseRisk: psych.remorseRisk,
+    perceivedValue: psych.perceivedValue,
+    variationPotential: psych.variationPotential,
+    scammy: psych.scammy,
+    scamHits: psych.scamHits,
+    problemSolving: Boolean(psych.features?.problemSolving),
+    upgradeReplace: Boolean(psych.features?.upgradeReplace),
     soldEvidenceMissing: raw.soldEvidenceMissing ?? sold === 0,
     evidenceStatus: raw.evidenceStatus || (sold > 0 ? "ok" : active > 0 ? "partial" : "listings-needed"),
     demandSources: raw.demandSources || ["ebay_browse"],
@@ -92,7 +100,9 @@ export function scoreCandidate(raw, opts = {}) {
     verification,
     kill:
       verification.decision === "FAIL" ||
-      psych.remorseRisk > (opts.thresholds?.maxRemorse ?? 0.65) ||
+      psych.killRecommendation ||
+      psych.scammy ||
+      psych.remorseRisk > (opts.thresholds?.maxRemorse ?? 0.55) ||
       econ.net <= 0 ||
       salePrice < (opts.thresholds?.minSalePrice ?? 35) ||
       salePrice > (opts.thresholds?.maxSalePrice ?? 200),

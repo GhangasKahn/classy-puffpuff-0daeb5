@@ -84,6 +84,7 @@ export async function runResearchPipeline({
     forecast,
     notes: [
       `High-ticket band: $${band.minSalePrice}–$${band.maxSalePrice} (sub-minimum filtered).`,
+      "Kill scammy dropship tells (qty spam, lots, clickbait, replicas). Prefer problem-solve / upgrade / materials.",
       "PsychFit is provisional proxy scoring — not validated probability.",
       "Marketplace Insights sold data may be unavailable (soldEvidenceMissing).",
       "Retail arbitrage is compliance FAIL — wholesale/manufacturer only.",
@@ -113,9 +114,14 @@ function summarize(s) {
     decision: s.verification?.decision,
     evidenceStatus: s.evidenceStatus,
     psychFit: s.psych?.psychFit,
+    perceivedValue: s.psych?.perceivedValue ?? s.perceivedValue,
+    variationPotential: s.psych?.variationPotential ?? s.variationPotential,
     remorseRisk: s.psych?.remorseRisk ?? s.remorseRisk,
+    scammy: s.psych?.scammy ?? s.scammy,
+    scamHits: s.psych?.scamHits ?? s.scamHits,
     confidence: s.verification?.verificationConfidence,
     url: s.url,
     flags: s.verification?.flags,
+    psychNotes: s.psych?.notes,
   };
 }

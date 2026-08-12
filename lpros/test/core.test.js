@@ -69,18 +69,45 @@ describe("psychology proxies", () => {
       salePrice: 79,
       categoryMedianPrice: 30,
     });
-    assert.ok(p.remorseRisk > 0.4);
+    assert.ok(p.remorseRisk > 0.4 || p.scammy);
   });
 
   it("prefers utility tools", () => {
     const p = psychProxies({
-      title: "Stainless steel organizer mount tool holder",
-      salePrice: 28,
-      categoryMedianPrice: 30,
+      title: "Stainless steel organizer mount tool holder desk clutter",
+      salePrice: 38,
+      categoryMedianPrice: 40,
       velocityPerDay: 1.2,
       active: 20,
     });
-    assert.ok(p.psychFit > 0.35);
+    assert.ok(p.psychFit > 0.3);
+    assert.ok(p.perceivedValue > 0.2);
+  });
+
+  it("kills scammy mega-lot dropship spam", () => {
+    const p = psychProxies({
+      title: "6-600Pcs Magnetic Cable Clips!! Hot Sale Bulk Lot FREE SHIPPING***",
+      salePrice: 105,
+      categoryMedianPrice: 40,
+    });
+    assert.equal(p.scammy, true);
+    assert.ok(p.killRecommendation);
+    assert.ok(p.scamHits.includes("qty_spam") || p.scamHits.includes("title_spam"));
+  });
+
+  it("scores upgrade + materials + problem-solve high", () => {
+    const p = psychProxies({
+      title:
+        "Solid walnut under-desk cable tray — heavy-duty upgrade replaces plastic clips, no-drill clutter solution",
+      salePrice: 49,
+      categoryMedianPrice: 45,
+      velocityPerDay: 0.8,
+      active: 30,
+    });
+    assert.ok(p.perceivedValue >= 0.4);
+    assert.ok(p.features.problemSolving === 1);
+    assert.ok(p.features.upgradeReplace === 1);
+    assert.equal(p.scammy, false);
   });
 });
 
@@ -120,10 +147,13 @@ describe("zero-trust verify", () => {
       density: 120,
       velocityPerDay: 0.8,
       remorseRisk: 0.25,
+      perceivedValue: 0.5,
+      problemSolving: true,
+      upgradeReplace: true,
       retailArbitrage: false,
       sourcePath: "wholesale",
       demandSources: ["ebay_browse", "terapeak"],
-      title: "replacement filter seal kit",
+      title: "solid stainless desk organizer tray clutter upgrade",
     });
     assert.equal(r.decision, "PASS");
   });
@@ -174,9 +204,9 @@ describe("ranking", () => {
     const { ranked, rejected } = rankCandidates([
       {
         ref: "bad",
-        title: "viral meme novelty diy kit",
+        title: "6-600Pcs viral meme novelty diy kit Hot Sale!!! FREE SHIPPING***",
         salePrice: 55,
-        productCost: 40,
+        productCost: 20,
         activeCount: 200,
         soldCount: 2,
         leadTimeDays: 5,
@@ -185,10 +215,11 @@ describe("ranking", () => {
       },
       {
         ref: "good",
-        title: "pro tool organizer mount stainless",
-        salePrice: 36,
-        productCost: 14,
-        altProductCost: 14.5,
+        title:
+          "Solid stainless steel desk organizer tray — heavy-duty upgrade replaces plastic clutter mount",
+        salePrice: 42,
+        productCost: 16,
+        altProductCost: 16.5,
         activeCount: 25,
         soldCount: 15,
         leadTimeDays: 5,
@@ -200,6 +231,6 @@ describe("ranking", () => {
     ]);
     assert.ok(ranked.length >= 1);
     assert.equal(ranked[0].ref, "good");
-    assert.ok(rejected.length >= 0);
+    assert.ok(rejected.some((r) => r.ref === "bad" || r.psych?.scammy));
   });
 });

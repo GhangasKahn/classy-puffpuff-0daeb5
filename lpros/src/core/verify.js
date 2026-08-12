@@ -28,7 +28,8 @@ export function verifyProduct(candidate, thresholds = {}) {
     minSalePrice: thresholds.minSalePrice ?? 35,
     maxSalePrice: thresholds.maxSalePrice ?? 200,
     maxDensity: thresholds.maxDensity ?? 800,
-    maxRemorse: thresholds.maxRemorse ?? 0.65,
+    maxRemorse: thresholds.maxRemorse ?? 0.55,
+    minPerceivedValue: thresholds.minPerceivedValue ?? 0.25,
     minDemandConfidence: thresholds.minDemandConfidence ?? 0.15,
     maxCostVariancePct: thresholds.maxCostVariancePct ?? 0.15,
     minFactorsPass: thresholds.minFactorsPass ?? 6,
@@ -136,27 +137,54 @@ export function verifyProduct(candidate, thresholds = {}) {
   });
   evidence.push(results.economicViability);
 
-  // 5. Compliance
-  const violations = candidate.complianceViolations || [];
+  // 5. Compliance (+ scammy listing / policy red flags)
+  const violations = [...(candidate.complianceViolations || [])];
   const retailArbitrage = Boolean(candidate.retailArbitrage);
-  const compliancePass = violations.length === 0 && !retailArbitrage;
+  const scammy = Boolean(candidate.scammy);
+  if (scammy) violations.push("scammy_listing_signals");
+  if (retailArbitrage) violations.push("retail_arbitrage");
+  const compliancePass = violations.length === 0;
   results.compliance = factor(
     compliancePass,
     compliancePass
-      ? "no critical policy flags"
-      : `violations: ${[...violations, retailArbitrage ? "retail_arbitrage" : null].filter(Boolean).join(", ")}`,
-    { violations, retailArbitrage, sourcePath: candidate.sourcePath || "unspecified" }
+      ? "no critical policy / scam flags"
+      : `violations: ${violations.join(", ")}`,
+    {
+      violations,
+      retailArbitrage,
+      scammy,
+      scamHits: candidate.scamHits || [],
+      sourcePath: candidate.sourcePath || "unspecified",
+    }
   );
   evidence.push(results.compliance);
 
-  // 6. Remorse Risk
+  // 6. Remorse + perceived-value quality gate
   const remorse = Number(candidate.remorseRisk ?? 0.5);
-  const remorsePass = remorse <= t.maxRemorse;
-  results.remorseRisk = factor(
-    remorsePass,
-    remorsePass ? `remorse ${remorse}` : `remorse ${remorse} > ${t.maxRemorse}`,
-    { remorseRisk: remorse }
-  );
+  const perceived = Number(candidate.perceivedValue ?? 0);
+  const variation = Number(candidate.variationPotential ?? 0);
+  const qualityPass =
+    remorse <= t.maxRemorse &&
+    !scammy &&
+    (perceived >= t.minPerceivedValue ||
+      Boolean(candidate.problemSolving) ||
+      Boolean(candidate.upgradeReplace));
+  let qualityNote;
+  if (scammy) qualityNote = `scam/red-flag kill (${(candidate.scamHits || []).join(", ")})`;
+  else if (remorse > t.maxRemorse) qualityNote = `remorse ${remorse} > ${t.maxRemorse}`;
+  else if (!(perceived >= t.minPerceivedValue || candidate.problemSolving || candidate.upgradeReplace)) {
+    qualityNote = `weak perceived value ${perceived} (need problem-solve / upgrade / materials)`;
+  } else {
+    qualityNote = `remorse ${remorse} · perceivedValue ${perceived} · variation ${variation}`;
+  }
+  results.remorseRisk = factor(qualityPass, qualityNote, {
+    remorseRisk: remorse,
+    perceivedValue: perceived,
+    variationPotential: variation,
+    minPerceivedValue: t.minPerceivedValue,
+    problemSolving: Boolean(candidate.problemSolving),
+    upgradeReplace: Boolean(candidate.upgradeReplace),
+  });
   evidence.push(results.remorseRisk);
 
   // 7. Listing Feasibility
@@ -193,6 +221,8 @@ export function verifyProduct(candidate, thresholds = {}) {
   if (results.supplyReality.detail?.singleSource) flags.push("single_source_cost");
   if (candidate.soldEvidenceMissing) flags.push("sold_evidence_missing");
   if (candidate.evidenceStatus === "partial") flags.push("partial_evidence");
+  if (scammy) flags.push("scammy_listing");
+  if (perceived < t.minPerceivedValue) flags.push("low_perceived_value");
 
   let decision = "FAIL";
   if (criticalFail.length === 0 && passCount >= t.minFactorsPass) {

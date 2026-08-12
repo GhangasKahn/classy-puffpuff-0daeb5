@@ -16,6 +16,12 @@ export function runMarginGate(candidate, thresholds) {
     {
       ...candidate,
       remorseRisk: candidate.remorseRisk ?? candidate.psych?.remorseRisk,
+      perceivedValue: candidate.perceivedValue ?? candidate.psych?.perceivedValue,
+      variationPotential: candidate.variationPotential ?? candidate.psych?.variationPotential,
+      scammy: candidate.scammy ?? candidate.psych?.scammy,
+      scamHits: candidate.scamHits ?? candidate.psych?.scamHits,
+      problemSolving: candidate.problemSolving ?? candidate.psych?.features?.problemSolving,
+      upgradeReplace: candidate.upgradeReplace ?? candidate.psych?.features?.upgradeReplace,
       density: candidate.features?.density?.density ?? candidate.density,
       velocityPerDay: candidate.features?.velocity?.mean ?? candidate.velocityPerDay,
       demandConfidence: candidate.demandConfidence ?? candidate.features?.sellThrough?.confidence,
