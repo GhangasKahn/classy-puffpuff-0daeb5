@@ -80,7 +80,7 @@ npm run swarm -- --q "solid wood desk organizer" --category-id 25339 --sold 28 -
 - **Marathon** — 4–5 category long runs + trends + idea factory  
 - **Listing factory** — keyword clusters → conversion packages → promote to SKU registry  
 - **Command desk UI** — tabbed analytics workspace: KPI strip, interactive SVG charts (heat, ladder, histogram, scatter, sellers, lanes), filterable product table + gallery, listing inspector, compare tray, jobs rail  
-- **Agent playground** — job board, sub-agent launcher (Brain + soldiers), allowlisted browser + playbooks, local VM recipes  
+- **Agent playground** — job board, sub-agent launcher (Brain + soldiers), allowlisted browser + playbooks, local VM recipes, live activity, spawn graph, capture → Evidence → Brain, promote PASS to SKU  
 
 Keyboard: `1–6` switch tabs (`6` = playground), `/` focuses market search, `Esc` closes inspector.
 

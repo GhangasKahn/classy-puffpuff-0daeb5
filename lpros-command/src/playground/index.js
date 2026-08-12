@@ -2,9 +2,11 @@ export {
   AGENT_CATALOG,
   PLAYBOOKS,
   VM_RECIPES,
+  PRESETS,
   getAgent,
   getPlaybook,
   getRecipe,
+  getPreset,
 } from "./catalog.js";
 export {
   createJob,
@@ -17,6 +19,11 @@ export {
   retryJob,
   launchAgent,
   catalog,
+  jobTree,
+  activityFeed,
+  commentJob,
+  applySessionEvidence,
+  promoteFromJob,
 } from "./board.js";
 export { slimJob, listKind, load, persist } from "./store.js";
 export {
@@ -28,6 +35,7 @@ export {
   addCapture,
   hostnameAllowed,
   parseItemId,
+  mergedCaptures,
 } from "./browser.js";
 export { vmSnapshot, runRecipe, runVmJob, isServerless } from "./vm.js";
 export { executeJob } from "./runner.js";

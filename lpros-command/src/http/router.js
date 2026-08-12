@@ -52,21 +52,27 @@ import { requestCancel } from "../orchestrate/jobstore.js";
 import {
   AGENT_CATALOG,
   PLAYBOOKS,
+  PRESETS,
   VM_RECIPES,
+  activityFeed,
   addCapture,
   advanceSession,
+  applySessionEvidence,
   boardSummary,
   cancelJob,
+  commentJob,
   createJob,
   createSession,
   fetchAllowed,
   getJob as getPlaygroundJob,
   getSession,
+  jobTree,
   launchAgent,
   listJobs as listPlaygroundJobs,
   listKind,
   listSessions,
   persist,
+  promoteFromJob,
   retryJob,
   runRecipe,
   setJobStatus,
@@ -691,7 +697,7 @@ export async function routeApi(req) {
     });
   }
   if (method === "GET" && pathname === "/playground/catalog") {
-    return ok({ agents: AGENT_CATALOG, playbooks: PLAYBOOKS, recipes: VM_RECIPES });
+    return ok({ agents: AGENT_CATALOG, playbooks: PLAYBOOKS, recipes: VM_RECIPES, presets: PRESETS });
   }
   if (method === "GET" && pathname === "/playground/board") {
     return ok(boardSummary());
@@ -831,6 +837,50 @@ export async function routeApi(req) {
     try {
       const run = await runRecipe(b.recipe || "env", b);
       return ok({ run });
+    } catch (e) {
+      return err(e.status || 500, e.message);
+    }
+  }
+  if (method === "GET" && pathname === "/playground/activity") {
+    return ok({ events: activityFeed(Number(query.get("limit") || 50)) });
+  }
+  if (method === "GET" && pathname.match(/^\/playground\/jobs\/[^/]+\/tree$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const tree = jobTree(id);
+    if (!tree) return err(404, "job not found");
+    return ok(tree);
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/jobs\/[^/]+\/comment$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    try {
+      const job = commentJob(id, b.text || b.comment || b.message);
+      if (!job) return err(404, "job not found");
+      return ok({ job: slimJob(job) });
+    } catch (e) {
+      return err(e.status || 400, e.message);
+    }
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/jobs\/[^/]+\/promote$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    try {
+      const out = promoteFromJob(id);
+      if (!out) return err(404, "job not found");
+      return ok(out);
+    } catch (e) {
+      return err(e.status || 400, e.message, { verdict: e.verdict });
+    }
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/browser\/sessions\/[^/]+\/apply$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    try {
+      const out = await applySessionEvidence(id, {
+        q: b.q,
+        title: b.title,
+        salePrice: b.salePrice,
+        sync: b.sync !== false,
+        relaunchBrain: b.relaunchBrain !== false,
+      });
+      return ok(out);
     } catch (e) {
       return err(e.status || 500, e.message);
     }

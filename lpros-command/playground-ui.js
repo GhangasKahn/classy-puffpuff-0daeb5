@@ -1,5 +1,5 @@
 /**
- * Agent playground UI — job board, launcher, browser, VM.
+ * Agent playground UI — job board, launcher, browser, VM, live watch.
  */
 const $ = (id) => document.getElementById(id);
 
@@ -32,10 +32,11 @@ function esc(s) {
 const COLS = ["queued", "running", "hold", "done", "failed"];
 const pg = {
   jobs: [],
-  catalog: { agents: [], playbooks: [], recipes: [] },
+  catalog: { agents: [], playbooks: [], recipes: [], presets: [] },
   selected: null,
   session: null,
   agent: "brain",
+  poll: null,
 };
 
 function formPayload(form) {
@@ -57,6 +58,16 @@ function formPayload(form) {
     if (o[k] != null && o[k] !== "") o[k] = Number(o[k]);
   });
   return o;
+}
+
+function fillForm(input = {}) {
+  const form = $("pgLaunchForm");
+  if (!form) return;
+  for (const [k, v] of Object.entries(input)) {
+    if (!form[k]) continue;
+    if (form[k].type === "checkbox") form[k].checked = Boolean(v);
+    else form[k].value = Array.isArray(v) ? v.join(",") : v;
+  }
 }
 
 function renderStats(summary) {
@@ -82,15 +93,14 @@ function renderKanban(jobs) {
   const host = $("pgKanban");
   if (!host) return;
   const groups = Object.fromEntries(COLS.map((c) => [c, []]));
-  groups.cancelled = [];
   for (const j of jobs || []) {
     const st = groups[j.status] ? j.status : "failed";
-    (groups[st] || groups.failed).push(j);
+    groups[st].push(j);
   }
   host.innerHTML = COLS.map((col) => {
     const cards = (groups[col] || [])
       .map(
-        (j) => `<button type="button" class="pg-card${pg.selected === j.id ? " on" : ""}" draggable="true" data-id="${esc(j.id)}" data-status="${esc(j.status)}">
+        (j) => `<button type="button" class="pg-card${pg.selected === j.id ? " on" : ""}" draggable="true" data-id="${esc(j.id)}">
         <b>${esc(j.agent || j.kind)} · ${esc(j.priority || "P1")}</b>
         <small>${esc(j.title || j.id)}</small>
         <small>${esc(j.verdict || j.status)} · ${(j.children || []).length} kids</small>
@@ -102,9 +112,7 @@ function renderKanban(jobs) {
 
   host.querySelectorAll(".pg-card").forEach((card) => {
     card.onclick = () => inspectJob(card.dataset.id);
-    card.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", card.dataset.id);
-    });
+    card.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", card.dataset.id));
   });
   host.querySelectorAll(".pg-col").forEach((col) => {
     col.addEventListener("dragover", (e) => {
@@ -119,10 +127,7 @@ function renderKanban(jobs) {
       const status = col.dataset.col;
       if (!id || !["queued", "hold"].includes(status)) return;
       try {
-        await api(`/playground/jobs/${encodeURIComponent(id)}/status`, {
-          method: "POST",
-          body: { status },
-        });
+        await api(`/playground/jobs/${encodeURIComponent(id)}/status`, { method: "POST", body: { status } });
         await refreshBoard();
       } catch (err) {
         $("pgJobOut").textContent = String(err.message || err);
@@ -135,9 +140,7 @@ function renderCatalog(agents) {
   const host = $("pgCatalog");
   const sel = $("pgAgent");
   if (sel) {
-    sel.innerHTML = (agents || [])
-      .map((a) => `<option value="${esc(a.id)}">${esc(a.id)}</option>`)
-      .join("");
+    sel.innerHTML = (agents || []).map((a) => `<option value="${esc(a.id)}">${esc(a.id)}</option>`).join("");
     sel.value = pg.agent;
   }
   if (!host) return;
@@ -154,6 +157,25 @@ function renderCatalog(agents) {
       host.querySelectorAll(".pg-agent").forEach((b) => b.classList.toggle("on", b === btn));
     };
   });
+}
+
+function renderPresets(presets) {
+  const host = $("pgPresets");
+  if (!host) return;
+  host.innerHTML = (presets || [])
+    .map((p) => `<button type="button" class="chip" data-preset="${esc(p.id)}">${esc(p.title)}</button>`)
+    .join("");
+  host.querySelectorAll(".chip").forEach((b) => {
+    b.onclick = () => applyPreset(b.dataset.preset);
+  });
+}
+
+function applyPreset(id) {
+  const p = (pg.catalog.presets || []).find((x) => x.id === id);
+  if (!p) return;
+  pg.agent = p.agent;
+  fillForm({ agent: p.agent, dryRun: p.dryRun, spawn: p.spawn, ...(p.input || {}) });
+  renderCatalog(pg.catalog.agents);
 }
 
 function renderPlaybooks(playbooks) {
@@ -213,10 +235,55 @@ function renderBrowser(session, snapshot) {
   }
 }
 
+function renderGraph(tree) {
+  const svg = $("pgGraph");
+  if (!svg) return;
+  if (!tree?.job) {
+    svg.innerHTML = `<text x="12" y="24" fill="#8a9a8c" font-size="11">Select a job with children</text>`;
+    return;
+  }
+  const kids = tree.children || [];
+  const parent = tree.job;
+  let html = `<rect x="150" y="16" width="120" height="36" fill="#c4f542" rx="2"/>
+    <text x="160" y="38" font-size="11">${esc((parent.agent || parent.kind).slice(0, 14))}</text>`;
+  kids.forEach((c, i) => {
+    const x = 20 + i * 80;
+    html += `<line x1="210" y1="52" x2="${x + 30}" y2="88" stroke="#2a332c"/>
+      <rect class="pg-graph-node" data-id="${esc(c.id)}" x="${x}" y="88" width="70" height="32" fill="#161c18" stroke="#c4f542"/>
+      <text x="${x + 6}" y="108" fill="#e8efe6" font-size="10">${esc((c.agent || "").slice(0, 8))}</text>`;
+  });
+  svg.innerHTML = html;
+  svg.querySelectorAll("[data-id]").forEach((n) => {
+    n.addEventListener("click", () => inspectJob(n.getAttribute("data-id")));
+  });
+}
+
+function renderActivity(events) {
+  const el = $("pgActivity");
+  if (!el) return;
+  el.innerHTML = (events || [])
+    .slice(0, 24)
+    .map(
+      (e) =>
+        `<div><b>${esc(e.agent || "")}</b> ${esc(e.message)} <span>${esc((e.at || "").slice(11, 19))}</span></div>`
+    )
+    .join("") || `<p class="muted">No events yet.</p>`;
+}
+
+function renderLog(events) {
+  const el = $("pgJobLog");
+  if (!el) return;
+  el.textContent = (events || [])
+    .map((e) => `${(e.at || "").slice(11, 19)} [${e.level}] ${e.message}`)
+    .join("\n");
+  el.scrollTop = el.scrollHeight;
+}
+
 async function inspectJob(id) {
   pg.selected = id;
   const job = await api(`/playground/jobs/${encodeURIComponent(id)}`);
   $("pgJobTitle").textContent = `${job.agent || job.kind} · ${job.status} · ${job.title}`;
+  renderLog(job.events);
   $("pgJobOut").textContent = JSON.stringify(
     {
       id: job.id,
@@ -225,26 +292,33 @@ async function inspectJob(id) {
       progress: job.progress,
       error: job.error,
       brief: job.result?.brief,
+      promoted: job.result?.promoted,
       result: job.result,
-      events: (job.events || []).slice(-12),
     },
     null,
     2
   );
+  const verdict = job.result?.brief?.verdict || job.result?.decision;
   const actions = $("pgJobActions");
   actions.innerHTML = `
     <button type="button" class="btn primary" data-act="start">Start</button>
     <button type="button" class="btn" data-act="retry">Retry</button>
     <button type="button" class="btn ghost" data-act="cancel">Cancel</button>
     <button type="button" class="btn ghost" data-act="hold">Hold</button>
+    ${verdict === "PASS_READY" || verdict === "PASS" ? `<button type="button" class="btn primary" data-act="promote">Promote SKU</button>` : ""}
   `;
   actions.querySelectorAll("button").forEach((b) => {
     b.onclick = async () => {
       try {
-        if (b.dataset.act === "start") await api(`/playground/jobs/${id}/start`, { method: "POST", body: { sync: true } });
-        if (b.dataset.act === "retry") await api(`/playground/jobs/${id}/retry`, { method: "POST", body: { sync: true } });
+        const sync = true;
+        if (b.dataset.act === "start") await api(`/playground/jobs/${id}/start`, { method: "POST", body: { sync } });
+        if (b.dataset.act === "retry") await api(`/playground/jobs/${id}/retry`, { method: "POST", body: { sync } });
         if (b.dataset.act === "cancel") await api(`/playground/jobs/${id}/cancel`, { method: "POST", body: {} });
         if (b.dataset.act === "hold") await api(`/playground/jobs/${id}/status`, { method: "POST", body: { status: "hold" } });
+        if (b.dataset.act === "promote") {
+          const out = await api(`/playground/jobs/${id}/promote`, { method: "POST", body: {} });
+          $("pgJobOut").textContent = JSON.stringify(out, null, 2);
+        }
         await refreshBoard();
         await inspectJob(id);
       } catch (e) {
@@ -253,6 +327,25 @@ async function inspectJob(id) {
     };
   });
   document.querySelectorAll(".pg-card").forEach((c) => c.classList.toggle("on", c.dataset.id === id));
+  try {
+    renderGraph(await api(`/playground/jobs/${encodeURIComponent(id)}/tree`));
+  } catch {
+    /* ignore */
+  }
+}
+
+function watchIfNeeded(jobs) {
+  const busy = (jobs || []).some((j) => j.status === "running" || j.status === "queued");
+  if (busy && !pg.poll) {
+    pg.poll = setInterval(() => {
+      refreshBoard().catch(() => {});
+      if (pg.selected) inspectJob(pg.selected).catch(() => {});
+    }, 1400);
+  }
+  if (!busy && pg.poll) {
+    clearInterval(pg.poll);
+    pg.poll = null;
+  }
 }
 
 async function refreshBoard() {
@@ -260,6 +353,13 @@ async function refreshBoard() {
   pg.jobs = data.jobs || [];
   renderStats(data.summary);
   renderKanban(pg.jobs);
+  watchIfNeeded(pg.jobs);
+  try {
+    const act = await api("/playground/activity?limit=30");
+    renderActivity(act.events);
+  } catch {
+    /* ignore */
+  }
 }
 
 async function launch(start) {
@@ -267,9 +367,10 @@ async function launch(start) {
   const p = formPayload(form);
   p.agent = p.agent || pg.agent;
   pg.agent = p.agent;
+  const live = !p.dryRun;
   try {
     if (start) {
-      const body = { ...p, input: p, agent: p.agent, dryRun: p.dryRun, spawn: p.spawn };
+      const body = { ...p, input: p, agent: p.agent, dryRun: p.dryRun, spawn: p.spawn, sync: !live };
       const out = await api("/playground/launch", { method: "POST", body });
       $("pgJobOut").textContent = JSON.stringify(out, null, 2);
       $("pgJobTitle").textContent = `${out.agent} · ${out.status}`;
@@ -282,6 +383,7 @@ async function launch(start) {
       pg.selected = out.job?.id;
     }
     await refreshBoard();
+    if (pg.selected) await inspectJob(pg.selected);
   } catch (e) {
     $("pgJobOut").textContent = String(e.message || e);
   }
@@ -292,8 +394,37 @@ async function runVm(recipe) {
   try {
     const out = await api("/playground/vm/exec", { method: "POST", body: { recipe } });
     $("pgVmOut").textContent = JSON.stringify(out.run, null, 2);
+    const runs = await api("/playground/vm/runs");
+    const host = $("pgVmRuns");
+    if (host) {
+      host.innerHTML = (runs.runs || [])
+        .slice(0, 6)
+        .map((r) => `<article class="card-row"><div><h3>${esc(r.recipe)}</h3><div class="meta"><span>${esc(r.status)}</span><span>${r.ms}ms</span></div></div></article>`)
+        .join("");
+    }
   } catch (e) {
     $("pgVmOut").textContent = String(e.message || e);
+  }
+}
+
+async function refreshSessions() {
+  const host = $("pgSessions");
+  if (!host) return;
+  try {
+    const data = await api("/playground/browser/sessions");
+    host.innerHTML = (data.sessions || [])
+      .slice(0, 8)
+      .map((s) => `<button type="button" class="chip" data-sid="${esc(s.id)}">${esc(s.playbookId)} · ${esc(s.id.slice(-6))}</button>`)
+      .join("");
+    host.querySelectorAll(".chip").forEach((b) => {
+      b.onclick = async () => {
+        const out = await api(`/playground/browser/sessions/${b.dataset.sid}`);
+        pg.session = out.session;
+        renderBrowser(pg.session);
+      };
+    });
+  } catch {
+    /* ignore */
   }
 }
 
@@ -305,6 +436,7 @@ export async function bootPlayground() {
     renderCatalog(cat.agents);
     renderPlaybooks(cat.playbooks);
     renderRecipes(cat.recipes);
+    renderPresets(cat.presets);
   } catch {
     /* desk may boot before API */
   }
@@ -316,6 +448,7 @@ export async function bootPlayground() {
   }
   try {
     await refreshBoard();
+    await refreshSessions();
   } catch {
     /* ignore */
   }
@@ -324,10 +457,7 @@ export async function bootPlayground() {
   $("pgCreateBtn")?.addEventListener("click", () => launch(false));
   $("pgRefresh")?.addEventListener("click", () => refreshBoard());
   $("pgDryBrain")?.addEventListener("click", async () => {
-    $("pgAgent").value = "brain";
-    pg.agent = "brain";
-    $("pgLaunchForm").dryRun.checked = true;
-    $("pgLaunchForm").spawn.value = "scout,intel,economics";
+    applyPreset("dry-brain");
     await launch(true);
   });
   $("pgAgent")?.addEventListener("change", (e) => {
@@ -355,6 +485,7 @@ export async function bootPlayground() {
         },
       });
       await refreshBoard();
+      await refreshSessions();
     } catch (err) {
       $("pgBrowserView").textContent = String(err.message || err);
     }
@@ -384,8 +515,45 @@ export async function bootPlayground() {
       });
       pg.session = out.session;
       renderBrowser(pg.session);
+      fillForm(capture);
     } catch (err) {
       $("pgBrowserView").textContent = String(err.message || err);
+    }
+  });
+  $("pgApplyEvidence")?.addEventListener("click", async () => {
+    if (!pg.session) return;
+    const p = formPayload($("pgLaunchForm"));
+    try {
+      const out = await api(`/playground/browser/sessions/${pg.session.id}/apply`, {
+        method: "POST",
+        body: { q: p.q, title: p.q, salePrice: p.price, relaunchBrain: true },
+      });
+      $("pgJobOut").textContent = JSON.stringify(
+        {
+          capture: out.capture,
+          evidence: out.evidence?.result?.decision,
+          brain: out.brain?.result?.brief?.verdict,
+        },
+        null,
+        2
+      );
+      pg.selected = out.brain?.id || out.evidence?.id;
+      await refreshBoard();
+      if (pg.selected) await inspectJob(pg.selected);
+    } catch (err) {
+      $("pgJobOut").textContent = String(err.message || err);
+    }
+  });
+  $("pgCommentForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!pg.selected) return;
+    const text = new FormData(e.target).get("text");
+    try {
+      await api(`/playground/jobs/${pg.selected}/comment`, { method: "POST", body: { text } });
+      e.target.reset();
+      await inspectJob(pg.selected);
+    } catch (err) {
+      $("pgJobOut").textContent = String(err.message || err);
     }
   });
 }

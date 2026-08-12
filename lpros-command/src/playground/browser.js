@@ -123,6 +123,18 @@ export function advanceSession(id, { capture } = {}) {
   return session;
 }
 
+export function mergedCaptures(session) {
+  const out = {};
+  for (const c of session?.captures || []) {
+    if (c && typeof c === "object") Object.assign(out, c);
+  }
+  for (const s of session?.steps || []) {
+    if (s?.capture && typeof s.capture === "object") Object.assign(out, s.capture);
+  }
+  delete out.at;
+  return out;
+}
+
 export function addCapture(id, capture) {
   const session = load("browser", id);
   if (!session) return null;

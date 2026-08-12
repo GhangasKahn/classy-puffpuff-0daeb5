@@ -367,6 +367,7 @@
         <button type="button" class="btn ghost" id="pgRefresh">Refresh board</button>
         <button type="button" class="btn ghost" id="pgDryBrain">Dry Brain swarm</button>
       </div>
+      <div id="pgPresets" class="cluster-row"></div>
 
       <div class="pg-layout">
         <div class="panel">
@@ -435,7 +436,9 @@
             <label>Landed $ <input name="productCost" type="number" step="0.01" /></label>
             <label>Alt $ <input name="altProductCost" type="number" step="0.01" /></label>
             <button type="submit" class="btn">Capture + next step</button>
+            <button type="button" class="btn primary" id="pgApplyEvidence">Apply capture → Evidence + Brain</button>
           </form>
+          <div id="pgSessions" class="cluster-row"></div>
         </div>
         <div class="panel">
           <h2>VM</h2>
@@ -443,13 +446,32 @@
           <div id="pgVmSnap" class="insp-grid"></div>
           <div id="pgVmRecipes" class="cluster-row"></div>
           <pre id="pgVmOut" class="out tall"></pre>
+          <div id="pgVmRuns" class="board compact-board"></div>
         </div>
       </div>
+
+      <section class="split">
+        <div class="panel">
+          <h2>Spawn graph</h2>
+          <p class="sub">Parent Brain → soldiers</p>
+          <svg id="pgGraph" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel">
+          <h2>Live activity</h2>
+          <p class="sub">Polls while jobs run</p>
+          <div id="pgActivity" class="pg-activity"></div>
+        </div>
+      </section>
 
       <section class="panel" id="pgJobPanel">
         <h2>Job inspector</h2>
         <p class="sub" id="pgJobTitle">Select a board card</p>
         <div class="cta-row" id="pgJobActions"></div>
+        <form id="pgCommentForm" class="grid tight">
+          <label>Note <input name="text" placeholder="Operator note on this job" /></label>
+          <button type="submit" class="btn ghost">Comment</button>
+        </form>
+        <pre id="pgJobLog" class="out orch-log"></pre>
         <pre id="pgJobOut" class="out tall"></pre>
       </section>
     </section>

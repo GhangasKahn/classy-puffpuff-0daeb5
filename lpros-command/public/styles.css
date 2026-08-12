@@ -917,6 +917,21 @@ body.desk .noise { z-index: 0; }
   font-size: 13px;
   margin-bottom: 0.75rem;
 }
+.pg-activity {
+  max-height: 220px;
+  overflow: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  display: grid;
+  gap: 0.3rem;
+}
+.pg-activity div {
+  border-bottom: 1px solid var(--line);
+  padding: 0.25rem 0;
+  color: var(--mute);
+}
+.pg-activity b { color: var(--acc); font-weight: 500; }
+.pg-graph-node { cursor: pointer; }
 @media (max-width: 1100px) {
   .pg-layout, .pg-kanban { grid-template-columns: 1fr; }
 }

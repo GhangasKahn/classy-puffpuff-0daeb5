@@ -9,12 +9,14 @@ import { launchAgent, createJob, listJobs, cancelJob, getJob } from "../src/play
 import { AGENT_CATALOG, PLAYBOOKS, VM_RECIPES } from "../src/playground/catalog.js";
 
 describe("playground catalog", () => {
-  it("lists soldiers, playbooks, and VM recipes", () => {
+  it("lists soldiers, playbooks, and VM recipes", async () => {
     assert.ok(AGENT_CATALOG.some((a) => a.id === "brain"));
     assert.ok(AGENT_CATALOG.some((a) => a.id === "browser"));
     assert.ok(AGENT_CATALOG.some((a) => a.id === "vm"));
     assert.ok(PLAYBOOKS.some((p) => p.id === "terapeak"));
     assert.ok(VM_RECIPES.some((r) => r.id === "health"));
+    const cat = await routeApi({ method: "GET", pathname: "/playground/catalog" });
+    assert.ok((cat.body.presets || []).length >= 3);
   });
 });
 
@@ -161,5 +163,61 @@ describe("playground HTTP", () => {
     assert.equal(adv.status, 200);
     assert.equal(adv.body.session.stepIndex, 1);
     assert.equal(adv.body.session.steps[0].done, true);
+  });
+
+  it("apply capture → evidence + brain, activity, tree, comment, promote", async () => {
+    const created = await routeApi({
+      method: "POST",
+      pathname: "/playground/browser/sessions",
+      body: { playbookId: "terapeak" },
+    });
+    const sid = created.body.session.id;
+    await routeApi({
+      method: "POST",
+      pathname: `/playground/browser/sessions/${sid}/advance`,
+      body: { capture: { soldCount: 28, productCost: 18, altProductCost: 19.5, avgSoldPrice: 49 } },
+    });
+    const applied = await routeApi({
+      method: "POST",
+      pathname: `/playground/browser/sessions/${sid}/apply`,
+      body: { q: "oak desk organizer", salePrice: 49, relaunchBrain: true },
+    });
+    assert.equal(applied.status, 200);
+    assert.equal(applied.body.capture.soldCount, 28);
+    assert.ok(applied.body.evidence?.id);
+    assert.ok(applied.body.brain?.id);
+
+    const evId = applied.body.evidence.id;
+    const tree = await routeApi({ method: "GET", pathname: `/playground/jobs/${evId}/tree` });
+    assert.equal(tree.status, 200);
+    assert.equal(tree.body.job.id, evId);
+
+    const note = await routeApi({
+      method: "POST",
+      pathname: `/playground/jobs/${evId}/comment`,
+      body: { text: "operator captured Terapeak" },
+    });
+    assert.equal(note.status, 200);
+
+    const act = await routeApi({ method: "GET", pathname: "/playground/activity" });
+    assert.equal(act.status, 200);
+    assert.ok(act.body.events.length >= 1);
+
+    if (applied.body.evidence.result?.decision === "PASS") {
+      const promo = await routeApi({
+        method: "POST",
+        pathname: `/playground/jobs/${evId}/promote`,
+        body: {},
+      });
+      assert.equal(promo.status, 200);
+      assert.ok(promo.body.sku?.sku);
+    } else {
+      const blocked = await routeApi({
+        method: "POST",
+        pathname: `/playground/jobs/${applied.body.brain.id}/promote`,
+        body: {},
+      });
+      assert.ok(blocked.status === 409 || blocked.status === 200);
+    }
   });
 });

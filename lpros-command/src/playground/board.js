@@ -4,6 +4,7 @@
 import { AGENT_CATALOG, getAgent, JOB_KINDS, PRIORITIES } from "./catalog.js";
 import { appendEvent, listKind, load, nid, persist, slimJob } from "./store.js";
 import { executeJob } from "./runner.js";
+import { promoteCandidate } from "../ops/skus.js";
 
 function titleFor(kind, agent, input = {}) {
   if (input.title) return String(input.title).slice(0, 120);
@@ -192,4 +193,110 @@ export function catalog() {
     agents: AGENT_CATALOG,
     note: "Soldiers run under Brain contracts. Capital actions HOLD. No eBay HTML scrape.",
   };
+}
+
+export function jobTree(id) {
+  const job = load("job", id);
+  if (!job) return null;
+  return {
+    job: slimJob(job),
+    parent: job.parentId ? slimJob(load("job", job.parentId)) : null,
+    children: (job.children || []).map((cid) => slimJob(load("job", cid))).filter(Boolean),
+    events: (job.events || []).slice(-40),
+    brief: job.result?.brief || null,
+    verdict: job.result?.brief?.verdict || job.result?.decision || null,
+  };
+}
+
+export function activityFeed(limit = 50) {
+  const jobs = listKind("job", 80);
+  const evs = [];
+  for (const j of jobs) {
+    for (const e of j.events || []) {
+      evs.push({
+        jobId: j.id,
+        agent: j.agent,
+        title: j.title,
+        status: j.status,
+        at: e.at,
+        level: e.level,
+        message: e.message,
+        phase: e.phase,
+      });
+    }
+  }
+  evs.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  return evs.slice(0, limit);
+}
+
+export function commentJob(id, text) {
+  const job = load("job", id);
+  if (!job) return null;
+  const msg = String(text || "").trim().slice(0, 500);
+  if (!msg) throw Object.assign(new Error("comment required"), { status: 400 });
+  appendEvent(job, "note", msg, { phase: "note" });
+  return job;
+}
+
+export async function applySessionEvidence(sessionId, { q, title, salePrice, sync = true, relaunchBrain = false } = {}) {
+  const { getSession, mergedCaptures } = await import("./browser.js");
+  const session = getSession(sessionId);
+  if (!session) throw Object.assign(new Error("session not found"), { status: 404 });
+  const cap = mergedCaptures(session);
+  const input = {
+    q: q || title || "desk organizer",
+    title: title || q || "Candidate",
+    salePrice: salePrice ?? cap.avgSoldPrice ?? 49,
+    soldCount: cap.soldCount,
+    productCost: cap.productCost,
+    altProductCost: cap.altProductCost,
+    demandSource: "terapeak",
+    leadTimeDays: cap.leadTimeDays || 7,
+  };
+  const evidence = await launchAgent({ agent: "evidence", input, sync, spawn: [] });
+  let brain = null;
+  if (relaunchBrain) {
+    brain = await launchAgent({
+      agent: "brain",
+      input: { ...input, dryRun: true },
+      dryRun: true,
+      spawn: ["economics"],
+      sync,
+    });
+  }
+  return { capture: cap, evidence, brain };
+}
+
+export function promoteFromJob(id) {
+  const job = load("job", id);
+  if (!job) return null;
+  const verdict = job.result?.brief?.verdict || job.result?.decision;
+  const evidencePass = job.agent === "evidence" && job.result?.decision === "PASS";
+  if (verdict !== "PASS_READY" && !evidencePass) {
+    throw Object.assign(new Error("job is not PASS_READY / PASS — capture sold + dual cost first"), {
+      status: 409,
+      verdict,
+    });
+  }
+  const input = job.input || {};
+  const title = input.title || input.q || job.title;
+  const salePrice = Number(input.salePrice ?? input.price ?? 49);
+  const row = promoteCandidate(
+    { title, salePrice, perceivedValue: 0.55 },
+    {
+      requireHarden: true,
+      categoryId: input.categoryId || "25339",
+      evidence: {
+        soldCount: input.soldCount,
+        productCost: input.productCost ?? input.cost,
+        altProductCost: input.altProductCost,
+        leadTimeDays: input.leadTimeDays || 7,
+        demandSource: "terapeak",
+      },
+    }
+  );
+  appendEvent(job, "info", `Promoted ${row.sku} → ${row.status} (${row.decision})`, { phase: "promote" });
+  job.result = { ...(job.result || {}), promoted: { sku: row.sku, status: row.status, decision: row.decision } };
+  persist("job", job);
+  return { sku: row, job: slimJob(job) };
 }

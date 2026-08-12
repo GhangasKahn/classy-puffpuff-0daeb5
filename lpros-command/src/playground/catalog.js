@@ -235,6 +235,56 @@ export const JOB_KINDS = ["agent", "browser", "vm", "research", "spawn"];
 export const JOB_STATUSES = ["queued", "running", "hold", "done", "failed", "cancelled"];
 export const PRIORITIES = ["P0", "P1", "P2"];
 
+export const PRESETS = [
+  {
+    id: "dry-brain",
+    title: "Dry Brain swarm",
+    agent: "brain",
+    dryRun: true,
+    spawn: ["scout", "intel", "economics"],
+    input: { q: "solid wood desk organizer", categoryId: "25339", minPrice: 35, maxPrice: 150, price: 49, cost: 18 },
+  },
+  {
+    id: "evidence-harden",
+    title: "Harden evidence",
+    agent: "evidence",
+    dryRun: false,
+    spawn: [],
+    input: {
+      title: "Solid wood desk organizer oak",
+      salePrice: 49,
+      soldCount: 28,
+      productCost: 18,
+      altProductCost: 19.5,
+      leadTimeDays: 7,
+    },
+  },
+  {
+    id: "copy-draft",
+    title: "Draft listing copy",
+    agent: "copy",
+    dryRun: false,
+    spawn: [],
+    input: { title: "Walnut desk organizer upgrade", salePrice: 59 },
+  },
+  {
+    id: "vm-health",
+    title: "VM health",
+    agent: "vm",
+    dryRun: false,
+    spawn: [],
+    input: { recipe: "health" },
+  },
+  {
+    id: "browser-terapeak",
+    title: "Terapeak playbook",
+    agent: "browser",
+    dryRun: false,
+    spawn: [],
+    input: { playbookId: "terapeak" },
+  },
+];
+
 export function getAgent(id) {
   return AGENT_CATALOG.find((a) => a.id === id) || null;
 }
@@ -245,4 +295,8 @@ export function getPlaybook(id) {
 
 export function getRecipe(id) {
   return VM_RECIPES.find((r) => r.id === id) || null;
+}
+
+export function getPreset(id) {
+  return PRESETS.find((p) => p.id === id) || null;
 }
