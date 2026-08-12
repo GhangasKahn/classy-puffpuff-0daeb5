@@ -272,6 +272,69 @@ input[type="checkbox"] { width: 1rem; height: 1rem; }
 }
 .list li { margin: 0.25rem 0; }
 
+.orch-status { margin: 0.5rem 0 1rem; }
+.orch-meter {
+  height: 6px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.orch-meter span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), #5ddea8);
+  transition: width 0.35s ease;
+}
+.orch-log {
+  max-height: 220px;
+  font-size: 11px;
+  line-height: 1.45;
+  animation: orchPulse 2.4s ease-in-out infinite;
+}
+@keyframes orchPulse {
+  0%, 100% { border-color: var(--line); }
+  50% { border-color: rgba(196, 245, 66, 0.35); }
+}
+.orch-table-wrap {
+  overflow: auto;
+  max-height: 420px;
+  border: 1px solid var(--line);
+  margin-top: 1rem;
+}
+.orch-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.orch-table th,
+.orch-table td {
+  text-align: left;
+  padding: 0.45rem 0.55rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  max-width: 220px;
+}
+.orch-table th {
+  position: sticky;
+  top: 0;
+  background: var(--bg1);
+  color: var(--acc);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+.orch-table tr:hover td { background: rgba(196, 245, 66, 0.04); }
+.badge-dec {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--line);
+  color: var(--acc);
+}
+.badge-dec.TEST_NOW { border-color: var(--acc); }
+.badge-dec.REWRITE { border-color: var(--warn); color: var(--warn); }
+
 footer {
   position: relative;
   z-index: 1;

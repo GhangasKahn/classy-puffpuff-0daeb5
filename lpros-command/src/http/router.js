@@ -30,6 +30,13 @@ import { pushTracking, pullOrders } from "../ebay/fulfillment.js";
 import { rankMarket } from "../../../lpros/src/core/ranker.js";
 import { applyFilters } from "../../../lpros/src/core/filters.js";
 import { computeMarketMetrics } from "../../../lpros/src/core/market_metrics.js";
+import {
+  deployMission,
+  getJob,
+  listJobs,
+  getJobEvents,
+  getJobSpreadsheet,
+} from "../orchestrate/runner.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -84,6 +91,8 @@ export async function routeApi(req) {
       auth: authStatus(),
         endpoints: [
           "/swarm",
+          "/orchestrate/deploy",
+          "/orchestrate/jobs",
           "/skus",
           "/export",
           "/publish",
@@ -345,6 +354,97 @@ export async function routeApi(req) {
         );
     }
     return ok({ ...data, promoted });
+  }
+
+  // ── Agent orchestration: deploy → research → title swarm → spreadsheet ──
+  if (method === "POST" && pathname === "/orchestrate/deploy") {
+    const onNetlify = Boolean(process.env.NETLIFY);
+    const sync = b.sync === true || (onNetlify && b.sync !== false);
+    const config = {
+      q: b.q || b.query,
+      query: b.query || b.q,
+      categoryId: b.categoryId,
+      category: b.category || b.categoryLabel || "Home",
+      cost: b.cost ?? b.productCost,
+      altCost: b.altCost ?? b.altProductCost,
+      minPrice: b.minPrice,
+      maxPrice: b.maxPrice,
+      suggestedPrice: b.suggestedPrice,
+      variantCount: onNetlify ? Math.min(Number(b.variantCount ?? 120), 150) : b.variantCount ?? 200,
+      liveProbeCount: onNetlify ? Math.min(Number(b.liveProbeCount ?? 3), 5) : b.liveProbeCount ?? 12,
+      sheetRows: b.sheetRows ?? 150,
+      seedQueries: b.seedQueries,
+      crawlPages: onNetlify ? 1 : b.crawlPages ?? 1,
+      crawlLimit: onNetlify ? 40 : b.crawlLimit,
+      dryRun: Boolean(b.dryRun),
+    };
+    const jobOrPromise = deployMission(config, { sync });
+    const job = sync ? await jobOrPromise : jobOrPromise;
+    return ok({
+      jobId: job.id,
+      status: job.status,
+      progress: job.progress,
+      sync,
+      note: sync
+        ? "Ran synchronously (Netlify-friendly). Download CSV via /orchestrate/jobs/:id/spreadsheet"
+        : "Deployed async — poll /orchestrate/jobs/:id/events for live log",
+      error: job.error || undefined,
+      recommendations: job.results?.recommendations,
+      variantCount: job.results?.variants?.length,
+    });
+  }
+
+  if (method === "GET" && pathname === "/orchestrate/jobs") {
+    return ok({ jobs: listJobs(Number(query.get("limit") || 40)) });
+  }
+
+  if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+$/)) {
+    const jobId = decodeURIComponent(pathname.split("/").pop());
+    const job = getJob(jobId);
+    if (!job) return err(404, "job not found");
+    const slim = {
+      id: job.id,
+      status: job.status,
+      createdAt: job.createdAt,
+      updatedAt: job.updatedAt,
+      config: job.config,
+      progress: job.progress,
+      error: job.error,
+      events: job.events?.slice(-80),
+      results: job.results
+        ? {
+            narrowedCategory: job.results.narrowedCategory,
+            patterns: job.results.patterns,
+            pipelineSummary: job.results.pipelineSummary,
+            variantTotalGenerated: job.results.variantTotalGenerated,
+            recommendations: job.results.recommendations,
+            variantsPreview: (job.results.variants || []).slice(0, 25),
+            columns: job.results.columns,
+          }
+        : null,
+    };
+    return ok(slim);
+  }
+
+  if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/events$/)) {
+    const parts = pathname.split("/");
+    const jobId = decodeURIComponent(parts[parts.length - 2]);
+    const after = Number(query.get("after") || 0);
+    const data = getJobEvents(jobId, after);
+    if (!data) return err(404, "job not found");
+    return ok(data);
+  }
+
+  if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/spreadsheet$/)) {
+    const parts = pathname.split("/");
+    const jobId = decodeURIComponent(parts[parts.length - 2]);
+    const sheet = getJobSpreadsheet(jobId);
+    if (!sheet) return err(404, "job not found");
+    if (query.get("format") === "json") return ok(sheet);
+    if (!sheet.ready) {
+      return err(409, "spreadsheet not ready", { status: sheet.status, ready: false });
+    }
+    return ok(sheet.csv, "text/csv; charset=utf-8");
   }
 
   if (method === "POST" && pathname === "/fulfill/decide") {

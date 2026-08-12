@@ -17,6 +17,7 @@
       <h1 class="brand">LPROS<br />COMMAND</h1>
       <p class="lede">ZIK-class intel and AutoDS-class ops — without the SaaS tax or the junk-listing gravity. Cash is truth.</p>
       <div class="cta-row">
+        <button type="button" class="btn primary" id="btnDeploy">Deploy agents</button>
         <button type="button" class="btn primary" id="btnSwarm">Run research swarm</button>
         <button type="button" class="btn ghost" id="btnIntel">Competitor intel</button>
       </div>
@@ -65,6 +66,54 @@
           <input name="promotePass" type="checkbox" />
         </label>
       </form>
+    </section>
+
+    <section class="panel" id="orchPanel">
+      <h2>Agent deploy · logging</h2>
+      <p class="sub">One click: crawl → buyer patterns → category narrow → 100s of title/keyword variants → SEO + cost + image checklist → decision spreadsheet. No manual research loop.</p>
+      <form id="orchForm" class="grid">
+        <label>Query
+          <input name="q" value="solid wood desk organizer" />
+        </label>
+        <label>Category ID
+          <input name="categoryId" value="25339" />
+        </label>
+        <label>Landed cost $
+          <input name="cost" type="number" step="0.01" value="18" />
+        </label>
+        <label>Suggested price $
+          <input name="suggestedPrice" type="number" step="0.01" value="59.99" />
+        </label>
+        <label>Title variants
+          <input name="variantCount" type="number" value="200" />
+        </label>
+        <label>Live probes
+          <input name="liveProbeCount" type="number" value="12" />
+        </label>
+        <label>Min $
+          <input name="minPrice" type="number" value="35" />
+        </label>
+        <label>Max $
+          <input name="maxPrice" type="number" value="150" />
+        </label>
+      </form>
+      <div class="cta-row" style="margin-bottom:1rem">
+        <button type="button" class="btn primary" id="btnOrchDeploy">Deploy mission</button>
+        <button type="button" class="btn ghost" id="btnOrchJobs">Refresh jobs</button>
+        <button type="button" class="btn" id="btnOrchCsv" disabled>Download spreadsheet</button>
+      </div>
+      <div class="orch-status" id="orchStatus">
+        <div class="orch-meter"><span id="orchPct" style="width:0%"></span></div>
+        <p class="sub" id="orchPhase">Idle — deploy to start agents</p>
+      </div>
+      <pre id="orchLog" class="out tall orch-log" aria-live="polite"></pre>
+      <div id="orchRecs" class="board" hidden></div>
+      <div id="orchTableWrap" class="orch-table-wrap" hidden>
+        <table class="orch-table" id="orchTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </section>
 
     <section class="panel" id="briefPanel" hidden>

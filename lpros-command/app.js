@@ -365,6 +365,213 @@ $("btnSwarm").onclick = async () => {
   }
 };
 
+// ── Orchestration deploy / live log / spreadsheet ──
+let orchJobId = null;
+let orchPollTimer = null;
+let orchEventIdx = 0;
+
+function orchPayload() {
+  const fd = new FormData($("orchForm"));
+  return {
+    q: fd.get("q"),
+    categoryId: fd.get("categoryId"),
+    cost: Number(fd.get("cost")),
+    suggestedPrice: Number(fd.get("suggestedPrice")),
+    variantCount: Number(fd.get("variantCount")),
+    liveProbeCount: Number(fd.get("liveProbeCount")),
+    minPrice: Number(fd.get("minPrice")),
+    maxPrice: Number(fd.get("maxPrice")),
+    sync: location.port !== "8790",
+  };
+}
+
+function appendOrchLog(lines) {
+  const el = $("orchLog");
+  const chunk = (lines || [])
+    .map((ev) => `${ev.at?.slice(11, 19) || ""} [${ev.level}] ${ev.message}`)
+    .join("\n");
+  if (!chunk) return;
+  el.textContent = (el.textContent ? el.textContent + "\n" : "") + chunk;
+  el.scrollTop = el.scrollHeight;
+}
+
+function setOrchProgress(progress) {
+  const pct = progress?.pct ?? 0;
+  $("orchPct").style.width = `${pct}%`;
+  $("orchPhase").textContent = progress
+    ? `${progress.phase || "…"} · ${pct}%`
+    : "Idle — deploy to start agents";
+}
+
+function renderOrchRecs(recs) {
+  const el = $("orchRecs");
+  if (!recs) {
+    el.hidden = true;
+    return;
+  }
+  el.hidden = false;
+  const testNow = recs.testNow || [];
+  el.innerHTML = testNow
+    .slice(0, 8)
+    .map(
+      (r) => `
+    <article class="card-row">
+      <div>
+        <h3>${escapeHtml((r.title || "").slice(0, 90))}</h3>
+        <div class="meta">
+          <span class="badge-dec ${escapeHtml(r.decision || "")}">${escapeHtml(r.decision || "")}</span>
+          <span>SEO <b>${r.seoScore ?? "—"}</b></span>
+          <span>Pri <b>${escapeHtml(r.testPriority || "")}</b></span>
+          <span>Net <b>$${Number(r.estNet || 0).toFixed(2)}</b></span>
+          <span>${escapeHtml(r.primaryKeyword || "")}</span>
+        </div>
+      </div>
+    </article>`
+    )
+    .join("");
+}
+
+function renderOrchTable(rows) {
+  const wrap = $("orchTableWrap");
+  const table = $("orchTable");
+  if (!rows?.length) {
+    wrap.hidden = true;
+    return;
+  }
+  wrap.hidden = false;
+  const cols = [
+    "rank",
+    "decision",
+    "testPriority",
+    "seoScore",
+    "title",
+    "suggestedPrice",
+    "landedCost",
+    "estNet",
+    "liveTotal",
+    "outrankNotes",
+  ];
+  table.querySelector("thead").innerHTML = `<tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>`;
+  table.querySelector("tbody").innerHTML = rows
+    .slice(0, 40)
+    .map(
+      (r) => `<tr>${cols
+        .map((c) => {
+          let v = r[c];
+          if (c === "title") v = String(v || "").slice(0, 70);
+          if (c === "decision") {
+            return `<td><span class="badge-dec ${escapeHtml(String(v || ""))}">${escapeHtml(String(v || ""))}</span></td>`;
+          }
+          return `<td>${escapeHtml(v == null ? "" : String(v))}</td>`;
+        })
+        .join("")}</tr>`
+    )
+    .join("");
+}
+
+async function pollOrchJob() {
+  if (!orchJobId) return;
+  try {
+    const ev = await get(
+      `/orchestrate/jobs/${encodeURIComponent(orchJobId)}/events?after=${orchEventIdx}`
+    );
+    appendOrchLog(ev.events || []);
+    orchEventIdx = ev.nextIndex ?? orchEventIdx;
+    setOrchProgress(ev.progress);
+    if (ev.status === "completed" || ev.status === "failed") {
+      clearInterval(orchPollTimer);
+      orchPollTimer = null;
+      const job = await get(`/orchestrate/jobs/${encodeURIComponent(orchJobId)}`);
+      renderOrchRecs(job.results?.recommendations);
+      renderOrchTable(job.results?.variantsPreview || []);
+      $("btnOrchCsv").disabled = ev.status !== "completed";
+      $("btnOrchDeploy").disabled = false;
+      if (ev.status === "failed") {
+        $("orchPhase").textContent = `Failed — ${job.error || "see log"}`;
+      }
+    }
+  } catch (e) {
+    appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+  }
+}
+
+$("btnOrchDeploy").onclick = async () => {
+  $("btnOrchDeploy").disabled = true;
+  $("orchLog").textContent = "";
+  $("btnOrchCsv").disabled = true;
+  $("orchRecs").hidden = true;
+  $("orchTableWrap").hidden = true;
+  orchEventIdx = 0;
+  if (orchPollTimer) clearInterval(orchPollTimer);
+  try {
+    const payload = orchPayload();
+    const data = await post("/api/orchestrate/deploy", payload);
+    orchJobId = data.jobId;
+    appendOrchLog([
+      {
+        at: new Date().toISOString(),
+        level: "info",
+        message: `Deployed ${data.jobId} (${data.sync ? "sync" : "async"})`,
+      },
+    ]);
+    setOrchProgress(data.progress || { phase: "queued", pct: 0 });
+    if (data.sync && data.status === "completed") {
+      const job = await get(`/orchestrate/jobs/${encodeURIComponent(orchJobId)}`);
+      appendOrchLog(job.events || []);
+      setOrchProgress(job.progress);
+      renderOrchRecs(job.results?.recommendations || data.recommendations);
+      renderOrchTable(job.results?.variantsPreview || []);
+      $("btnOrchCsv").disabled = false;
+      $("btnOrchDeploy").disabled = false;
+    } else if (data.status === "failed") {
+      appendOrchLog([{ at: new Date().toISOString(), level: "error", message: data.error || "failed" }]);
+      $("btnOrchDeploy").disabled = false;
+    } else {
+      orchPollTimer = setInterval(pollOrchJob, 900);
+      pollOrchJob();
+    }
+  } catch (e) {
+    appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+    $("btnOrchDeploy").disabled = false;
+  }
+};
+
+$("btnDeploy").onclick = () => {
+  $("orchPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  $("btnOrchDeploy").click();
+};
+
+$("btnOrchJobs").onclick = async () => {
+  const data = await get("/orchestrate/jobs?limit=12");
+  $("orchLog").textContent = (data.jobs || [])
+    .map(
+      (j) =>
+        `${j.id} · ${j.status} · ${j.query || ""} · variants=${j.variantCount || 0} · ${j.progress?.phase || ""}`
+    )
+    .join("\n");
+};
+
+$("btnOrchCsv").onclick = async () => {
+  if (!orchJobId) return;
+  try {
+    const r = await fetch(
+      `${API_BASE}/orchestrate/jobs/${encodeURIComponent(orchJobId)}/spreadsheet`
+    );
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.error || r.statusText);
+    }
+    const blob = await r.blob();
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `lpros-decision-${orchJobId}.csv`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  } catch (e) {
+    appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+  }
+};
+
 $("btnIntel").onclick = async () => {
   $("agentLog").textContent = "Pulling competitor intel…";
   try {
