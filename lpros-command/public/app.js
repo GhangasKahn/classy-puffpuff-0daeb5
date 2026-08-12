@@ -26,6 +26,712 @@ async function get(path) {
   return j;
 }
 
+const desk = {
+  products: [],
+  packages: [],
+  trends: null,
+  intel: null,
+  lanes: [],
+  ideas: [],
+  variants: [],
+  jobs: [],
+  compare: [],
+  lastInspect: null,
+  view: "split",
+  filter: { q: "", cat: "", hasImg: false, sort: "price", min: null, max: null },
+};
+
+function showTab(name) {
+  document.querySelectorAll(".tab").forEach((el) => el.classList.toggle("on", el.id === `tab-${name}`));
+  document.querySelectorAll(".rail-btn").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
+}
+
+function setKpis({ products, images, variants, ideas, packages, heat, skus } = {}) {
+  const set = (id, v) => {
+    const el = $(id);
+    if (el) el.textContent = v == null || v === "" ? "—" : String(v);
+  };
+  if (products != null) set("kpiProducts", products);
+  if (images != null) set("kpiImages", images);
+  if (variants != null) set("kpiVariants", variants);
+  if (ideas != null) set("kpiIdeas", ideas);
+  if (packages != null) set("kpiPackages", packages);
+  if (heat != null) set("kpiHeat", heat);
+  if (skus != null) set("kpiSkus", skus);
+}
+
+function tipShow(ev, html) {
+  const el = $("tip");
+  if (!el) return;
+  el.hidden = false;
+  el.innerHTML = html;
+  el.style.left = `${Math.min(window.innerWidth - 280, ev.clientX + 12)}px`;
+  el.style.top = `${Math.min(window.innerHeight - 80, ev.clientY + 12)}px`;
+}
+function tipHide() {
+  const el = $("tip");
+  if (el) el.hidden = true;
+}
+
+function openInspector(item) {
+  const box = $("inspector");
+  const body = $("inspBody");
+  if (!box || !body || !item) return;
+  box.hidden = false;
+  desk.lastInspect = item;
+  const imgs = (item.images || []).filter(Boolean);
+  if (item.image && !imgs.includes(item.image)) imgs.unshift(item.image);
+  const hero = imgs[0] || "";
+  body.innerHTML = `
+    ${hero ? `<img class="insp-hero" id="inspHero" src="${escapeHtml(hero)}" alt="" />` : ""}
+    ${imgs.length > 1 ? `<div class="insp-thumbs">${imgs.slice(0, 10).map((u, i) => `<img class="${i === 0 ? "on" : ""}" data-src="${escapeHtml(u)}" src="${escapeHtml(u)}" alt="" />`).join("")}</div>` : ""}
+    <h2 style="font-size:1.05rem;margin:0 0 0.5rem">${escapeHtml((item.title || "").slice(0, 120))}</h2>
+    <div class="insp-grid">
+      <div class="stat"><span>Price</span><b>$${Number(item.price || item.salePrice || 0).toFixed(2)}</b></div>
+      <div class="stat"><span>Images</span><b>${item.imageCount ?? imgs.length}</b></div>
+      <div class="stat"><span>PV</span><b>${item.perceivedValue ?? "—"}</b></div>
+      <div class="stat"><span>Rank</span><b>${item.rank ?? "—"}</b></div>
+      <div class="stat"><span>Score</span><b>${item.rankScore != null ? Number(item.rankScore).toFixed(1) : "—"}</b></div>
+      <div class="stat"><span>STR≈</span><b>${item.sellThrough != null ? `${(Number(item.sellThrough) * 100).toFixed(1)}%` : "—"}</b></div>
+    </div>
+    <div class="meta">
+      <span>${escapeHtml(item.seller || "")}</span>
+      <span>${escapeHtml(item.categoryPath || item.categoryId || "")}</span>
+      ${item.detailFetched ? `<span>getItem</span>` : ""}
+    </div>
+    <p class="sub">${escapeHtml(item.descriptionExcerpt || item.specificsSummary || "No description excerpt")}</p>
+    ${item.contentSignals?.length ? `<p class="sub">${item.contentSignals.map((s) => `<span class="chip">${escapeHtml(s)}</span>`).join(" ")}</p>` : ""}
+    <div class="cta-row">
+      ${item.url ? `<a class="btn primary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open listing</a>` : ""}
+    </div>
+    ${item.itemSpecifics && Object.keys(item.itemSpecifics).length ? `<pre class="out">${escapeHtml(JSON.stringify(item.itemSpecifics, null, 2))}</pre>` : ""}
+  `;
+  body.querySelectorAll(".insp-thumbs img").forEach((img) => {
+    img.onclick = () => {
+      body.querySelectorAll(".insp-thumbs img").forEach((x) => x.classList.remove("on"));
+      img.classList.add("on");
+      const heroEl = $("inspHero");
+      if (heroEl) heroEl.src = img.dataset.src;
+    };
+  });
+}
+
+function closeInspector() {
+  const box = $("inspector");
+  if (box) box.hidden = true;
+}
+
+function svgEl(tag, attrs, text) {
+  const n = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const [k, v] of Object.entries(attrs || {})) n.setAttribute(k, String(v));
+  if (text != null) n.textContent = text;
+  return n;
+}
+
+function drawHBars(svg, rows, { labelKey = "label", valueKey = "value", color = "#c4f542", onClick } = {}) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const data = (rows || []).slice(0, 8);
+  const w = Number(svg.viewBox.baseVal.width) || 420;
+  const h = Number(svg.viewBox.baseVal.height) || 180;
+  if (!data.length) {
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8a9a8c", "font-size": 11 }, "No data yet — run intel or marathon"));
+    return;
+  }
+  const max = Math.max(...data.map((d) => Number(d[valueKey]) || 0), 0.01);
+  data.forEach((d, i) => {
+    const y = 18 + i * ((h - 24) / data.length);
+    const bw = ((Number(d[valueKey]) || 0) / max) * (w - 150);
+    const g = svgEl("g", { class: "hit" });
+    g.appendChild(svgEl("rect", { x: 120, y, width: Math.max(bw, 2), height: 14, fill: color, opacity: 0.85 }));
+    g.appendChild(svgEl("text", { x: 8, y: y + 11, fill: "#8a9a8c", "font-size": 10 }, String(d[labelKey] || "").slice(0, 16)));
+    g.appendChild(svgEl("text", { x: 124 + bw, y: y + 11, fill: "#c4f542", "font-size": 10 }, String(d[valueKey])));
+    g.addEventListener("mousemove", (ev) => tipShow(ev, `<b>${escapeHtml(d[labelKey])}</b><br/>${valueKey} ${escapeHtml(d[valueKey])}`));
+    g.addEventListener("mouseleave", tipHide);
+    if (onClick) g.addEventListener("click", () => onClick(d));
+    svg.appendChild(g);
+  });
+}
+
+function drawScatterXY(svg, rows, { xKey = "x", yKey = "y", onClick } = {}) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const data = (rows || []).slice(0, 60);
+  const w = 420;
+  const h = 180;
+  if (!data.length) {
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8a9a8c", "font-size": 11 }, "No points"));
+    return;
+  }
+  const xs = data.map((d) => Number(d[xKey]) || 0);
+  const ys = data.map((d) => Number(d[yKey]) || 0);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs, minX + 1);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys, minY + 1);
+  data.forEach((d) => {
+    const x = 28 + ((Number(d[xKey]) - minX) / (maxX - minX)) * (w - 50);
+    const y = h - 22 - ((Number(d[yKey]) - minY) / (maxY - minY)) * (h - 40);
+    const c = svgEl("circle", { cx: x, cy: y, r: 5, fill: "#c4f542", opacity: 0.8, class: "hit" });
+    c.addEventListener("mousemove", (ev) =>
+      tipShow(ev, `${escapeHtml((d.title || "").slice(0, 60))}<br/>$${Number(d[xKey] || 0).toFixed(0)} · ${yKey} ${d[yKey]}`)
+    );
+    c.addEventListener("mouseleave", tipHide);
+    if (onClick) c.addEventListener("click", () => onClick(d));
+    svg.appendChild(c);
+  });
+  svg.appendChild(svgEl("text", { x: 8, y: 14, fill: "#8a9a8c", "font-size": 10 }, `${xKey} →  ·  ${yKey} ↑`));
+}
+
+function drawLadder(svg, ladder) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const pts = [
+    ["p10", ladder?.p10],
+    ["p25", ladder?.p25],
+    ["p50", ladder?.p50],
+    ["p75", ladder?.p75],
+    ["p90", ladder?.p90],
+  ].filter(([, v]) => v != null);
+  if (!pts.length) {
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8a9a8c", "font-size": 11 }, "No price ladder"));
+    return;
+  }
+  const vals = pts.map((p) => Number(p[1]));
+  const min = Math.min(...vals);
+  const max = Math.max(...vals, min + 1);
+  pts.forEach((p, i) => {
+    const x = 40 + i * 75;
+    const h = ((Number(p[1]) - min) / (max - min)) * 120 + 16;
+    const y = 150 - h;
+    svg.appendChild(svgEl("rect", { x, y, width: 36, height: h, fill: i === 2 ? "#c4f542" : "#5ddea8", opacity: 0.8 }));
+    svg.appendChild(svgEl("text", { x, y: 168, fill: "#8a9a8c", "font-size": 10 }, p[0]));
+    svg.appendChild(svgEl("text", { x, y: y - 6, fill: "#e8efe6", "font-size": 10 }, `$${Number(p[1]).toFixed(0)}`));
+  });
+}
+
+function percentile(sorted, p) {
+  if (!sorted.length) return null;
+  const i = (sorted.length - 1) * p;
+  const lo = Math.floor(i);
+  const hi = Math.ceil(i);
+  if (lo === hi) return sorted[lo];
+  return sorted[lo] * (hi - i) + sorted[hi] * (i - lo);
+}
+
+function deriveMarketStats(rows) {
+  const list = rows || [];
+  const prices = list.map((r) => Number(r.price || r.salePrice) || 0).filter((n) => n > 0).sort((a, b) => a - b);
+  const imgs = list.map((r) => Number(r.imageCount) || (r.image ? 1 : 0));
+  const sellers = new Map();
+  for (const r of list) {
+    const s = r.seller || "unknown";
+    sellers.set(s, (sellers.get(s) || 0) + 1);
+  }
+  const sellerRows = [...sellers.entries()]
+    .map(([seller, listings]) => ({ seller, listings, share: list.length ? listings / list.length : 0 }))
+    .sort((a, b) => b.listings - a.listings);
+  const hhi = sellerRows.reduce((acc, s) => acc + s.share * s.share, 0);
+  const withImg = list.filter((r) => r.image || (r.images || []).length).length;
+  const cats = new Map();
+  for (const r of list) {
+    const c = r.categoryPath || r.categoryId || "uncat";
+    cats.set(c, (cats.get(c) || 0) + 1);
+  }
+  return {
+    n: list.length,
+    withImg,
+    imgPct: list.length ? Math.round((withImg / list.length) * 100) : 0,
+    median: percentile(prices, 0.5),
+    p10: percentile(prices, 0.1),
+    p25: percentile(prices, 0.25),
+    p75: percentile(prices, 0.75),
+    p90: percentile(prices, 0.9),
+    min: prices[0] || null,
+    max: prices[prices.length - 1] || null,
+    uniqueSellers: sellers.size,
+    hhi: Math.round(hhi * 10000) / 10000,
+    sellerRows,
+    prices,
+    imgs,
+    catRows: [...cats.entries()].map(([label, value]) => ({ label, value })).sort((a, b) => b.value - a.value),
+  };
+}
+
+function buckets(values, count = 8) {
+  const nums = (values || []).filter((n) => Number.isFinite(n));
+  if (!nums.length) return [];
+  const min = Math.min(...nums);
+  const max = Math.max(...nums, min + 1);
+  const step = (max - min) / count || 1;
+  const bins = Array.from({ length: count }, (_, i) => ({
+    i,
+    min: min + i * step,
+    max: i === count - 1 ? max : min + (i + 1) * step,
+    value: 0,
+  }));
+  for (const n of nums) {
+    let idx = Math.floor((n - min) / step);
+    if (idx >= count) idx = count - 1;
+    if (idx < 0) idx = 0;
+    bins[idx].value += 1;
+  }
+  return bins;
+}
+
+function drawHistogram(svg, bins, { label = "$", onClick } = {}) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const w = Number(svg.viewBox.baseVal.width) || 420;
+  const h = Number(svg.viewBox.baseVal.height) || 180;
+  if (!bins?.length) {
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8a9a8c", "font-size": 11 }, "No distribution"));
+    return;
+  }
+  const max = Math.max(...bins.map((b) => b.value), 1);
+  const bw = (w - 36) / bins.length;
+  bins.forEach((b, i) => {
+    const bh = (b.value / max) * (h - 40);
+    const x = 24 + i * bw;
+    const y = h - 22 - bh;
+    const g = svgEl("g", { class: "hit" });
+    g.appendChild(svgEl("rect", { x, y, width: Math.max(bw - 4, 2), height: Math.max(bh, 1), fill: "#c4f542", opacity: 0.8 }));
+    g.appendChild(svgEl("text", { x, y: h - 8, fill: "#8a9a8c", "font-size": 9 }, `${label}${Math.round(b.min)}`));
+    g.addEventListener("mousemove", (ev) =>
+      tipShow(ev, `${label}${Math.round(b.min)}–${Math.round(b.max)}<br/><b>${b.value}</b> listings`)
+    );
+    g.addEventListener("mouseleave", tipHide);
+    if (onClick) g.addEventListener("click", () => onClick(b));
+    svg.appendChild(g);
+  });
+}
+
+function drawDonut(svg, parts) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const data = (parts || []).filter((p) => p.value > 0);
+  const total = data.reduce((s, p) => s + p.value, 0);
+  if (!total) {
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8a9a8c", "font-size": 11 }, "No mix yet"));
+    return;
+  }
+  const cx = 70;
+  const cy = 70;
+  const r = 48;
+  let a0 = -Math.PI / 2;
+  const colors = ["#c4f542", "#5ddea8", "#ff6b3d", "#8a9a8c", "#e6c35c"];
+  data.forEach((p, i) => {
+    const slice = (p.value / total) * Math.PI * 2;
+    const a1 = a0 + slice;
+    const x1 = cx + r * Math.cos(a0);
+    const y1 = cy + r * Math.sin(a0);
+    const x2 = cx + r * Math.cos(a1);
+    const y2 = cy + r * Math.sin(a1);
+    const large = slice > Math.PI ? 1 : 0;
+    const path = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
+    const g = svgEl("g", { class: "hit" });
+    g.appendChild(svgEl("path", { d: path, fill: colors[i % colors.length], opacity: 0.9 }));
+    g.addEventListener("mousemove", (ev) => tipShow(ev, `<b>${escapeHtml(p.label)}</b><br/>${p.value}`));
+    g.addEventListener("mouseleave", tipHide);
+    svg.appendChild(g);
+    svg.appendChild(svgEl("text", { x: 140, y: 28 + i * 16, fill: colors[i % colors.length], "font-size": 11 }, `${p.label} ${p.value}`));
+    a0 = a1;
+  });
+}
+
+function drawSparkline(svg, values) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const nums = (values || []).filter((n) => Number.isFinite(n));
+  if (nums.length < 2) return;
+  const w = 180;
+  const h = 36;
+  const min = Math.min(...nums);
+  const max = Math.max(...nums, min + 1);
+  const pts = nums
+    .map((n, i) => {
+      const x = (i / (nums.length - 1)) * (w - 4) + 2;
+      const y = h - 4 - ((n - min) / (max - min)) * (h - 8);
+      return `${x},${y}`;
+    })
+    .join(" ");
+  svg.appendChild(svgEl("polyline", { points: pts, fill: "none", stroke: "#c4f542", "stroke-width": 1.5 }));
+}
+
+function renderStatStrip(el, stats) {
+  if (!el) return;
+  if (!stats?.n) {
+    el.innerHTML = `<div class="stat"><span>Sample</span><b>0</b><em>run intel or marathon</em></div>`;
+    return;
+  }
+  const money = (n) => (n == null ? "—" : `$${Number(n).toFixed(0)}`);
+  el.innerHTML = [
+    ["Listings", stats.n, `${stats.withImg} with photos`],
+    ["Median $", money(stats.median), `${money(stats.p10)}–${money(stats.p90)}`],
+    ["Image cover", `${stats.imgPct}%`, `${stats.withImg}/${stats.n}`],
+    ["Sellers", stats.uniqueSellers, `HHI ${stats.hhi}`],
+    ["P25 / P75", `${money(stats.p25)} / ${money(stats.p75)}`, "ladder"],
+  ]
+    .map(([k, v, sub]) => `<div class="stat"><span>${k}</span><b>${v}</b><em>${sub}</em></div>`)
+    .join("");
+}
+
+function setPriceFilter(min, max) {
+  desk.filter.min = min;
+  desk.filter.max = max;
+  if ($("marketMin")) $("marketMin").value = min != null ? Math.round(min) : "";
+  if ($("marketMax")) $("marketMax").value = max != null ? Math.round(max) : "";
+  applyMarketFilters();
+}
+
+function pinCompare(item) {
+  if (!item) return;
+  const key = item.itemId || item.url || item.title;
+  if (desk.compare.some((c) => (c.itemId || c.url || c.title) === key)) return;
+  desk.compare = [...desk.compare.slice(-1), item].slice(-2);
+  renderCompare();
+}
+
+function renderCompare() {
+  const tray = $("compareTray");
+  const body = $("compareBody");
+  if (!tray || !body) return;
+  if (desk.compare.length < 1) {
+    tray.hidden = true;
+    return;
+  }
+  tray.hidden = false;
+  body.innerHTML = desk.compare
+    .map(
+      (p) => `<div class="compare-col">
+        ${p.image ? `<img src="${escapeHtml(p.image)}" alt="" />` : ""}
+        <h3>${escapeHtml((p.title || "").slice(0, 80))}</h3>
+        <div class="meta">
+          <span><b>$${Number(p.price || p.salePrice || 0).toFixed(2)}</b></span>
+          <span>${p.imageCount ?? 0} imgs</span>
+          <span>PV ${p.perceivedValue ?? "—"}</span>
+          <span>${escapeHtml(p.seller || "")}</span>
+        </div>
+      </div>`
+    )
+    .join("");
+}
+
+function renderJobsRail(jobs) {
+  desk.jobs = jobs || [];
+  const rail = $("jobsRail");
+  const list = $("jobsList");
+  const html = (desk.jobs || [])
+    .slice(0, 12)
+    .map((j) => {
+      const n = j.productCount || j.results?.productCount || 0;
+      return `<button type="button" class="job-chip" data-job="${escapeHtml(j.id)}">
+        <b>${escapeHtml(j.status || "")}</b> ${escapeHtml(j.type || "job")}
+        <small>${escapeHtml(j.id)} · ${n} products · ${escapeHtml(j.query || j.q || "")}</small>
+      </button>`;
+    })
+    .join("");
+  if (rail) rail.innerHTML = html || `<p class="muted">No jobs yet</p>`;
+  if (list) list.innerHTML = html || "";
+  const bind = (host) => {
+    host?.querySelectorAll(".job-chip").forEach((btn) => {
+      btn.onclick = async () => {
+        try {
+          const job = await get(`/orchestrate/jobs/${encodeURIComponent(btn.dataset.job)}`);
+          orchJobId = job.id;
+          finishOrchUi(job);
+          showTab("market");
+        } catch (e) {
+          appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+        }
+      };
+    });
+  };
+  bind(rail);
+  bind(list);
+}
+
+async function refreshJobsRail() {
+  try {
+    const data = await get("/orchestrate/jobs?limit=12");
+    renderJobsRail(data.jobs || []);
+    return data.jobs || [];
+  } catch {
+    return [];
+  }
+}
+
+function renderIdeas(ideas) {
+  const el = $("ideasBoard");
+  if (!el) return;
+  const rows = ideas || [];
+  el.innerHTML = rows
+    .slice(0, 24)
+    .map(
+      (i) =>
+        `<button type="button" class="chip" data-q="${escapeHtml(i.title || i.term || "")}">${escapeHtml((i.title || i.term || "").slice(0, 48))} ${i.family ? `· ${escapeHtml(i.family)}` : ""}</button>`
+    )
+    .join("") || `<p class="muted">No ideas yet — run a marathon.</p>`;
+  el.querySelectorAll(".chip").forEach((b) => {
+    b.onclick = () => {
+      const q = (b.dataset.q || "").split(" ").slice(0, 3).join(" ");
+      desk.filter.q = q;
+      if ($("marketSearch")) $("marketSearch").value = q;
+      applyMarketFilters();
+      showTab("market");
+    };
+  });
+}
+
+function renderVariants(rows) {
+  const el = $("variantsBoard");
+  if (!el) return;
+  const list = rows || [];
+  if (!list.length) {
+    el.innerHTML = `<p class="muted">No title variants yet.</p>`;
+    return;
+  }
+  el.innerHTML = list
+    .slice(0, 16)
+    .map((v) => {
+      const title = v.title || v.variant || v.candidate || "";
+      const seo = v.seoScore ?? v.seo_score ?? "—";
+      const dec = v.decision || "";
+      return `<article class="card-row"><div><h3>${escapeHtml(String(title).slice(0, 90))}</h3>
+        <div class="meta"><span class="badge-dec ${escapeHtml(dec)}">${escapeHtml(dec || "variant")}</span><span>SEO <b>${escapeHtml(String(seo))}</b></span></div></div></article>`;
+    })
+    .join("");
+}
+
+function filteredProducts() {
+  const f = desk.filter;
+  let rows = [...(desk.products || [])];
+  const q = f.q.trim().toLowerCase();
+  if (q) {
+    rows = rows.filter((r) =>
+      `${r.title || ""} ${r.seller || ""} ${r.categoryPath || ""}`.toLowerCase().includes(q)
+    );
+  }
+  if (f.cat) rows = rows.filter((r) => String(r.categoryPath || r.categoryId) === f.cat);
+  if (f.hasImg) rows = rows.filter((r) => r.image || (r.images || []).length);
+  if (f.min != null && f.min !== "") rows = rows.filter((r) => Number(r.price || r.salePrice || 0) >= Number(f.min));
+  if (f.max != null && f.max !== "") rows = rows.filter((r) => Number(r.price || r.salePrice || 0) <= Number(f.max));
+  const key = f.sort || "price";
+  rows.sort((a, b) => (Number(b[key]) || 0) - (Number(a[key]) || 0));
+  return rows;
+}
+
+function applyMarketFilters() {
+  const rows = filteredProducts();
+  const count = $("marketCount");
+  if (count) count.textContent = `${rows.length} / ${desk.products.length} rows`;
+  renderOrchTable(rows);
+  renderMarketGallery(rows);
+  renderStatStrip($("statStrip"), deriveMarketStats(rows));
+  drawScatterXY($("chartScatter"), rows, {
+    xKey: "price",
+    yKey: "imageCount",
+    onClick: openInspector,
+  });
+}
+
+function renderMarketGallery(rows) {
+  const host = $("gallery");
+  if (!host) return;
+  const list = (rows || []).filter((r) => r.image || r.url).slice(0, 36);
+  host.innerHTML = list
+    .map(
+      (g, i) => `
+    <button type="button" class="gal-card" data-idx="${i}">
+      ${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" />` : `<div class="gal-ph"></div>`}
+      <div class="gal-meta">
+        <span>$${Number(g.price || g.salePrice || 0).toFixed(2)}</span>
+        <span>${g.imageCount != null ? `${g.imageCount} imgs` : ""}</span>
+        <span>${escapeHtml((g.title || "").slice(0, 42))}</span>
+      </div>
+    </button>`
+    )
+    .join("");
+  host.querySelectorAll(".gal-card").forEach((btn) => {
+    btn.onclick = () => openInspector(list[Number(btn.dataset.idx)]);
+  });
+}
+
+function renderDeskCharts() {
+  const stats = deriveMarketStats(desk.products);
+  const heatSrc = (desk.trends?.categoryHeat || []).map((c) => ({
+    label: c.label || c.categoryId,
+    value: c.heatScore,
+    id: c.categoryId,
+  }));
+  const heat = heatSrc.length ? heatSrc : stats.catRows;
+  drawHBars($("chartHeat"), heat, {
+    onClick: (d) => {
+      const match =
+        (desk.products || []).find((p) => (p.categoryPath || p.categoryId) === d.label) ||
+        (desk.products || []).find((p) => String(p.categoryId) === String(d.id));
+      const cat = match ? match.categoryPath || match.categoryId : d.label;
+      const sel = $("marketCat");
+      if (sel) sel.value = cat || "";
+      desk.filter.cat = cat || "";
+      applyMarketFilters();
+    },
+  });
+  const rising = (desk.trends?.risingKeywords || []).map((k) => ({
+    label: k.term,
+    value: Number(k.lift || k.freshCount || 0).toFixed(2),
+  }));
+  drawHBars($("chartKw"), rising, {
+    color: "#5ddea8",
+    onClick: (d) => {
+      desk.filter.q = d.label || "";
+      if ($("marketSearch")) $("marketSearch").value = desk.filter.q;
+      applyMarketFilters();
+    },
+  });
+  const ladder =
+    desk.trends?.hottestCategory?.priceLadder ||
+    desk.trends?.categoryHeat?.[0]?.priceLadder ||
+    desk.intel?.market?.priceLadder ||
+    desk.intel?.priceLadder ||
+    (stats.median
+      ? { p10: stats.p10, p25: stats.p25, p50: stats.median, p75: stats.p75, p90: stats.p90 }
+      : null);
+  drawLadder($("chartLadder"), ladder);
+  drawHistogram($("chartHist"), buckets(stats.prices, 8), {
+    label: "$",
+    onClick: (b) => setPriceFilter(b.min, b.max),
+  });
+  const imgBins = [0, 1, 2, 4, 6, 8, 12].map((lo, i, arr) => {
+    const hi = arr[i + 1] ?? 99;
+    const label = hi === 99 ? `${lo}+` : lo === hi - 1 ? String(lo) : `${lo}–${hi - 1}`;
+    return {
+      label,
+      value: stats.imgs.filter((n) => n >= lo && n < hi).length,
+      lo,
+    };
+  });
+  drawHBars($("chartImgs"), imgBins, {
+    labelKey: "label",
+    valueKey: "value",
+    color: "#5ddea8",
+    onClick: (d) => {
+      desk.filter.hasImg = (d.lo || 0) > 0;
+      if ($("marketHasImg")) $("marketHasImg").checked = desk.filter.hasImg;
+      applyMarketFilters();
+    },
+  });
+  const sellers = (desk.intel?.market?.topSellers || desk.intel?.topSellers || stats.sellerRows).slice(0, 8).map((s) => ({
+    label: s.seller,
+    value: s.listings,
+  }));
+  drawHBars($("chartSellers"), sellers, {
+    onClick: (d) => {
+      desk.filter.q = d.label || "";
+      if ($("marketSearch")) $("marketSearch").value = desk.filter.q;
+      applyMarketFilters();
+    },
+  });
+  const lanes = (desk.lanes || []).map((l) => ({
+    label: l.label || l.categoryId,
+    value: l.productCount || l.heatScore || 0,
+  }));
+  drawHBars($("chartLanes"), lanes.length ? lanes : stats.catRows, {
+    onClick: (d) => {
+      desk.filter.cat = d.label || "";
+      if ($("marketCat")) $("marketCat").value = desk.filter.cat;
+      applyMarketFilters();
+    },
+  });
+  const decisions = {};
+  for (const p of desk.packages || []) {
+    const k = p.decision || "OPEN";
+    decisions[k] = (decisions[k] || 0) + 1;
+  }
+  drawDonut(
+    $("chartDecisions"),
+    Object.entries(decisions).map(([label, value]) => ({ label, value }))
+  );
+  drawSparkline($("kpiSpark"), stats.prices.slice(0, 40));
+  drawScatterXY($("chartScatter"), desk.products, {
+    xKey: "price",
+    yKey: "imageCount",
+    onClick: openInspector,
+  });
+}
+
+function hydrateMarketFromJob(job) {
+  const r = job?.results || {};
+  desk.products = r.productsPreview || r.products || [];
+  desk.packages = r.packagesPreview || r.packages || [];
+  desk.trends = r.trends || null;
+  desk.intel = r.intel || null;
+  desk.lanes = r.lanes || [];
+  desk.ideas = r.ideasPreview || r.trends?.ideasPreview || r.recommendations?.topIdeas || [];
+  desk.variants = r.variantsPreview || r.variants || [];
+  const cats = [...new Set(desk.products.map((p) => p.categoryPath || p.categoryId).filter(Boolean))];
+  const sel = $("marketCat");
+  if (sel) {
+    const cur = sel.value;
+    sel.innerHTML = `<option value="">All categories</option>${cats.map((c) => `<option value="${escapeHtml(String(c))}">${escapeHtml(String(c))}</option>`).join("")}`;
+    sel.value = cur;
+  }
+  const clusters = r.clusters?.clusters || [];
+  const cv = $("clusterViz");
+  if (cv) {
+    cv.innerHTML = clusters
+      .slice(0, 16)
+      .map((c) => `<button type="button" class="chip" data-seed="${escapeHtml(c.seed)}">${escapeHtml(c.seed)} · ${c.size}</button>`)
+      .join("");
+    cv.querySelectorAll(".chip").forEach((b) => {
+      b.onclick = () => {
+        desk.filter.q = b.dataset.seed || "";
+        const inp = $("marketSearch");
+        if (inp) inp.value = desk.filter.q;
+        applyMarketFilters();
+        showTab("market");
+      };
+    });
+  }
+  setKpis({
+    products: r.productCount ?? desk.products.length,
+    images: r.productsWithImages,
+    variants: r.variantTotalGenerated,
+    ideas: r.ideaCount ?? desk.ideas.length,
+    packages: r.packageCount ?? desk.packages.length,
+    heat: r.trends?.hottestCategory?.heatScore ?? heatMax(r.trends),
+  });
+  renderDeskCharts();
+  applyMarketFilters();
+  renderIdeas(desk.ideas);
+  renderVariants(desk.variants);
+  const pkgStats = $("pkgStats");
+  if (pkgStats) {
+    const nets = desk.packages.map((p) => Number(p.estNet) || 0);
+    renderStatStrip(pkgStats, {
+      n: desk.packages.length,
+      withImg: desk.packages.filter((p) => p.beatThis?.image).length,
+      imgPct: desk.packages.length
+        ? Math.round((desk.packages.filter((p) => p.beatThis?.image).length / desk.packages.length) * 100)
+        : 0,
+      median: percentile(nets.sort((a, b) => a - b), 0.5),
+      p10: percentile(nets, 0.1),
+      p25: percentile(nets, 0.25),
+      p75: percentile(nets, 0.75),
+      p90: percentile(nets, 0.9),
+      uniqueSellers: new Set(desk.packages.map((p) => p.clusterSeed).filter(Boolean)).size,
+      hhi: desk.packages.length,
+    });
+  }
+  const rs = $("railStatus");
+  if (rs) rs.textContent = job?.status || "ready";
+}
+
+function heatMax(trends) {
+  const hs = (trends?.categoryHeat || []).map((c) => Number(c.heatScore) || 0);
+  return hs.length ? Math.max(...hs) : null;
+}
+
 
 function numOrNull(v) {
   if (v == null || v === "") return null;
@@ -131,10 +837,17 @@ function renderBoard(rows) {
 
 function renderViz(viz, board, meta) {
   if (!viz && !(board || []).length) {
-    $("vizPanel").hidden = true;
     return;
   }
   $("vizPanel").hidden = false;
+  showTab("market");
+
+  if (board?.length && !desk.products.length) {
+    desk.products = board.map((r) => ({
+      ...r,
+      price: r.salePrice ?? r.price,
+    }));
+  }
 
   const gallery = viz?.gallery || (board || []).slice(0, 12).map((r) => ({
     rank: r.rank,
@@ -145,22 +858,16 @@ function renderViz(viz, board, meta) {
     score: r.rankScore,
   }));
 
-  $("gallery").innerHTML = gallery
-    .map(
-      (g) => `
-    <figure>
-      ${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" />` : `<div style="aspect-ratio:1;background:#1a1f1c"></div>`}
-      <figcaption>
-        ${g.rank != null ? `#${g.rank} · ` : ""}<b>$${Number(g.price || 0).toFixed(0)}</b><br/>
-        ${escapeHtml((g.title || "").slice(0, 48))}
-      </figcaption>
-    </figure>`
-    )
-    .join("");
+  renderMarketGallery(gallery.length ? gallery : desk.products);
 
   drawBars($("chartStr"), viz?.strBars || [], "str", "conf");
   drawTwinBars($("chartPop"), viz?.popularityBars || [], "popularity", "ctrProxy");
-  drawScatter($("chartScatter"), viz?.priceVsRank || []);
+  if (viz?.priceVsRank?.length) {
+    drawScatterXY($("chartScatter"), viz.priceVsRank.map((d) => ({ ...d, imageCount: d.score, price: d.price })), {
+      xKey: "price",
+      yKey: "imageCount",
+    });
+  }
 
   const histRow = (board || []).find((b) => b.purchaseHistory?.available);
   if (histRow?.purchaseHistory?.events?.length) {
@@ -193,11 +900,11 @@ function renderViz(viz, board, meta) {
 
 function drawBars(svg, rows, key, confKey) {
   if (!svg) return;
-  const w = 320;
+  const w = 420;
   const h = 140;
   const data = (rows || []).slice(0, 12);
   if (!data.length) {
-    svg.innerHTML = "";
+    svg.innerHTML = `<text x="12" y="24" fill="#8a9a8c" font-size="11">No STR series — run swarm/intel</text>`;
     return;
   }
   const max = Math.max(...data.map((d) => Number(d[key]) || 0), 0.01);
@@ -220,10 +927,10 @@ function drawTwinBars(svg, rows, aKey, bKey) {
   if (!svg) return;
   const data = (rows || []).slice(0, 10);
   if (!data.length) {
-    svg.innerHTML = "";
+    svg.innerHTML = `<text x="12" y="24" fill="#8a9a8c" font-size="11">No popularity series — run swarm/intel</text>`;
     return;
   }
-  const w = 320;
+  const w = 420;
   const h = 140;
   const bw = (w - 40) / data.length;
   const maxA = Math.max(...data.map((d) => Number(d[aKey]) || 0), 0.01);
@@ -264,17 +971,16 @@ function drawScatter(svg, rows) {
 
 function renderSkus(skus) {
   $("skuBoard").innerHTML = (skus || [])
-    .slice(0, 20)
+    .slice(0, 24)
     .map(
       (s) => `
-    <article class="card-row">
+    <article class="sku-card">
       <div>
+        <div class="pack-rank">${escapeHtml(s.status || "")} · ${escapeHtml(s.decision || "")}</div>
         <h3>${escapeHtml(s.sku)}</h3>
         <div class="meta">
           <span>${escapeHtml((s.title || "").slice(0, 70))}</span>
           <span><b>$${Number(s.salePrice || 0).toFixed(2)}</b></span>
-          <span>${escapeHtml(s.status)}</span>
-          <span>${escapeHtml(s.decision || "")}</span>
         </div>
       </div>
       <div>
@@ -282,7 +988,7 @@ function renderSkus(skus) {
       </div>
     </article>`
     )
-    .join("");
+    .join("") || `<p class="muted">No SKUs in registry yet.</p>`;
   $("skuBoard").querySelectorAll(".btn-dry").forEach((btn) => {
     btn.onclick = async () => {
       const data = await post("/api/publish/dry-run", { sku: btn.dataset.sku });
@@ -300,6 +1006,7 @@ async function loadSkus() {
   const r = await fetch(`${API_BASE}/skus`);
   const data = await r.json();
   renderSkus(data.skus || []);
+  setKpis({ skus: data.count ?? (data.skus || []).length });
   return data;
 }
 
@@ -354,6 +1061,7 @@ $("btnSwarm").onclick = async () => {
       ],
     });
     renderDrafts(data.listingDrafts || []);
+    showTab("market");
     if (data.promoted?.length) {
       $("opsOut").textContent = `Auto-promoted ${data.promoted.length} PASS SKUs`;
       await loadSkus();
@@ -448,26 +1156,14 @@ function renderOrchTrends(trends) {
 
 function renderOrchGallery(gallery) {
   const el = $("orchGallery");
+  if (!el) return;
   if (!gallery?.length) {
     el.hidden = true;
     el.innerHTML = "";
     return;
   }
-  el.hidden = false;
-  el.innerHTML = gallery
-    .slice(0, 24)
-    .map(
-      (g) => `
-    <a class="gal-card" href="${escapeHtml(g.url || "#")}" target="_blank" rel="noopener">
-      ${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" />` : `<div class="gal-ph"></div>`}
-      <div class="gal-meta">
-        <span>$${Number(g.price || 0).toFixed(2)}</span>
-        <span>${g.imageCount != null ? `${g.imageCount} imgs` : ""} ${escapeHtml(g.categoryPath || "")}</span>
-        <span>${escapeHtml((g.title || "").slice(0, 48))}</span>
-      </div>
-    </a>`
-    )
-    .join("");
+  el.hidden = true; // primary gallery is #gallery on Market tab
+  renderMarketGallery(gallery);
 }
 
 function renderOrchRecs(recs) {
@@ -519,17 +1215,19 @@ function renderOrchRecs(recs) {
 function renderOrchTable(products) {
   const wrap = $("orchTableWrap");
   const table = $("orchTable");
+  if (!wrap || !table) return;
   if (!products?.length) {
-    wrap.hidden = true;
+    wrap.hidden = false;
+    table.querySelector("tbody").innerHTML = `<tr><td colspan="8">No rows — run a mission or apply a looser filter</td></tr>`;
     return;
   }
   wrap.hidden = false;
-  const cols = ["rank", "price", "imageCount", "title", "categoryPath", "seller", "url"];
-  table.querySelector("thead").innerHTML = `<tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>`;
+  const cols = ["rank", "price", "imageCount", "perceivedValue", "seller", "categoryPath", "title", "url"];
+  table.querySelector("thead").innerHTML = `<tr>${cols.map((c) => `<th data-sort="${c}">${c}</th>`).join("")}</tr>`;
   table.querySelector("tbody").innerHTML = products
-    .slice(0, 50)
+    .slice(0, 80)
     .map(
-      (r) => `<tr>${cols
+      (r, i) => `<tr data-idx="${i}">${cols
         .map((c) => {
           let v = r[c];
           if (c === "title") v = String(v || "").slice(0, 70);
@@ -541,6 +1239,20 @@ function renderOrchTable(products) {
         .join("")}</tr>`
     )
     .join("");
+  table.querySelectorAll("tbody tr").forEach((tr) => {
+    tr.onclick = (e) => {
+      if (e.target.closest("a")) return;
+      openInspector(products[Number(tr.dataset.idx)]);
+    };
+  });
+  table.querySelectorAll("th[data-sort]").forEach((th) => {
+    th.onclick = () => {
+      desk.filter.sort = th.dataset.sort;
+      const sel = $("marketSort");
+      if (sel) sel.value = desk.filter.sort;
+      applyMarketFilters();
+    };
+  });
 }
 
 function renderOrchPackages(packages) {
@@ -553,29 +1265,29 @@ function renderOrchPackages(packages) {
   }
   el.hidden = false;
   el.innerHTML = packages
-    .slice(0, 12)
-    .map(
-      (p) => `
-    <article class="card-row">
-      ${p.beatThis?.image ? `<img class="thumb" src="${escapeHtml(p.beatThis.image)}" alt="" loading="lazy" />` : `<div class="thumb"></div>`}
-      <div>
-        <h3>${escapeHtml((p.title || "").slice(0, 90))}</h3>
-        <div class="meta">
-          <span class="badge-dec ${escapeHtml(p.decision || "")}">${escapeHtml(p.packageId || "")} ${escapeHtml(p.decision || "")}</span>
-          <span>Net <b>$${Number(p.estNet || 0).toFixed(2)}</b></span>
-          <span>Idea <b>${p.ideaScore ?? "—"}</b></span>
-          <span>${escapeHtml(p.clusterSeed || "")}</span>
-          <span>imgs ≥ ${p.imagePlan?.beatWith ?? 8}</span>
-          ${p.beatThis?.url ? `<a href="${escapeHtml(p.beatThis.url)}" target="_blank" rel="noopener">beat listing</a>` : ""}
-        </div>
-        <p class="sub">${escapeHtml((p.bullets || [])[0] || "")}</p>
+    .slice(0, 18)
+    .map((p, i) => {
+      const score = Math.min(100, Math.max(4, Number(p.ideaScore || p.estNet || 0)));
+      return `
+    <article class="pack-card" data-idx="${i}">
+      ${p.beatThis?.image ? `<img class="thumb" src="${escapeHtml(p.beatThis.image)}" alt="" />` : ""}
+      <div class="pack-rank">#${i + 1} · ${escapeHtml(p.packageId || "")} · ${escapeHtml(p.decision || "")}</div>
+      <h3>${escapeHtml((p.title || "").slice(0, 90))}</h3>
+      <div class="scorebar" title="idea/net"><span style="width:${score}%"></span></div>
+      <div class="meta">
+        <span>Net <b>$${Number(p.estNet || 0).toFixed(2)}</b></span>
+        <span>Price <b>$${Number(p.salePrice || p.price || 0).toFixed(2)}</b></span>
+        <span>Idea <b>${p.ideaScore ?? "—"}</b></span>
+        <span>${escapeHtml(p.clusterSeed || "")}</span>
+        <span>imgs ≥ ${p.imagePlan?.beatWith ?? 8}</span>
       </div>
-    </article>`
-    )
+      <p class="sub">${escapeHtml((p.bullets || [])[0] || "")}</p>
+    </article>`;
+    })
     .join("");
 }
 
-function finishOrchUi(job, data) {
+function finishOrchUi(job, data, opts = {}) {
   const gallery = job?.results?.gallery || data?.gallery || [];
   const products = job?.results?.productsPreview || job?.results?.products || [];
   const recs = job?.results?.recommendations || data?.recommendations;
@@ -586,7 +1298,7 @@ function finishOrchUi(job, data) {
   renderOrchTrends(trends);
   renderOrchGallery(gallery);
   renderOrchRecs(recs);
-  renderOrchTable(products);
+  hydrateMarketFromJob(job || { results: { ...data, products, gallery, trends, recommendations: recs } });
   renderOrchPackages(job?.results?.packagesPreview || job?.results?.packages || []);
   const n = job?.results?.productCount ?? data?.productCount ?? products.length;
   const imgs = job?.results?.productsWithImages ?? data?.productsWithImages;
@@ -597,6 +1309,8 @@ function finishOrchUi(job, data) {
   $("btnOrchCsv").disabled = false;
   $("btnOrchProductsCsv").disabled = false;
   $("btnOrchPromote").disabled = !(pkgs || job?.results?.packagesPreview?.length);
+  refreshJobsRail().catch(() => {});
+  if (!opts.stay) showTab("market");
 }
 
 async function pollOrchJob() {
@@ -722,24 +1436,26 @@ $("btnOrchPromote").onclick = async () => {
       2
     );
     await loadSkus();
+    showTab("registry");
   } catch (e) {
     appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
   }
 };
 
 $("btnDeploy").onclick = () => {
-  $("orchPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  showTab("launch");
   $("btnOrchMarathon").click();
 };
 
 $("btnOrchJobs").onclick = async () => {
-  const data = await get("/orchestrate/jobs?limit=12");
-  $("orchLog").textContent = (data.jobs || [])
+  const jobs = await refreshJobsRail();
+  $("orchLog").textContent = (jobs || [])
     .map(
       (j) =>
         `${j.id} · ${j.type || "mission"} · ${j.status} · ${j.query || ""} · products=${j.productCount || 0} · variants=${j.variantCount || 0} · ideas=${j.ideaCount || 0} · ${j.progress?.phase || ""}`
     )
     .join("\n");
+  showTab("launch");
 };
 
 async function downloadOrchCsv(qs) {
@@ -788,6 +1504,8 @@ $("btnIntel").onclick = async () => {
       stats: data.market?.rankStats,
     });
     $("boardPanel").hidden = false;
+    showTab("market");
+    if (data.market?.priceLadder) drawLadder($("chartLadder"), data.market.priceLadder);
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);
   }
@@ -846,6 +1564,17 @@ $("econForm").onsubmit = async (e) => {
     cost: Number(fd.get("cost")),
   });
   $("econOut").textContent = JSON.stringify(data, null, 2);
+  const net = Number(data.net ?? data.economics?.net ?? 0);
+  const price = Number(fd.get("price")) || 1;
+  const pct = Math.max(0, Math.min(100, (net / price) * 100));
+  let g = $("econGauge");
+  if (!g) {
+    g = document.createElement("div");
+    g.id = "econGauge";
+    g.className = "stat";
+    $("econOut").after(g);
+  }
+  g.innerHTML = `<span>Fee-true net</span><b>$${Number.isFinite(net) ? net.toFixed(2) : "—"}</b><div class="gauge"><span style="width:${pct}%"></span></div>`;
 };
 
 $("forecastForm").onsubmit = async (e) => {
@@ -938,4 +1667,102 @@ $("btnOrders").onclick = async () => {
 const playbook = document.getElementById("playbookLink");
 if (playbook) playbook.href = `${API_BASE}/playbook`;
 
+document.querySelectorAll(".rail-btn, .kpi").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.tab) showTab(btn.dataset.tab);
+  });
+});
+$("inspClose")?.addEventListener("click", closeInspector);
+$("marketSearch")?.addEventListener("input", (e) => {
+  desk.filter.q = e.target.value;
+  applyMarketFilters();
+});
+$("marketCat")?.addEventListener("change", (e) => {
+  desk.filter.cat = e.target.value;
+  applyMarketFilters();
+});
+$("marketSort")?.addEventListener("change", (e) => {
+  desk.filter.sort = e.target.value;
+  applyMarketFilters();
+});
+$("marketHasImg")?.addEventListener("change", (e) => {
+  desk.filter.hasImg = e.target.checked;
+  applyMarketFilters();
+});
+
+$("orchPackages")?.addEventListener("click", (e) => {
+  const card = e.target.closest(".pack-card, .card-row");
+  if (!card) return;
+  const idx = Number(card.dataset.idx);
+  const pkg = Number.isFinite(idx) ? desk.packages[idx] : null;
+  const title = card.querySelector("h3")?.textContent;
+  const found =
+    pkg ||
+    (desk.packages || []).find((p) => p.title && title && p.title.startsWith(title.slice(0, 40)));
+  if (found) {
+    openInspector({
+      title: found.title,
+      price: found.salePrice || found.price,
+      url: found.beatThis?.url,
+      image: found.beatThis?.image,
+      images: found.beatThis?.image ? [found.beatThis.image] : [],
+      descriptionExcerpt: (found.bullets || []).join(" · "),
+      categoryPath: found.categoryPath,
+      itemSpecifics: found.itemSpecifics,
+      perceivedValue: found.ideaScore,
+      rankScore: found.estNet,
+      imageCount: found.imagePlan?.beatWith,
+    });
+  }
+});
+
+$("marketMin")?.addEventListener("input", (e) => {
+  desk.filter.min = e.target.value === "" ? null : Number(e.target.value);
+  applyMarketFilters();
+});
+$("marketMax")?.addEventListener("input", (e) => {
+  desk.filter.max = e.target.value === "" ? null : Number(e.target.value);
+  applyMarketFilters();
+});
+$("viewSeg")?.querySelectorAll("button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    desk.view = btn.dataset.view || "split";
+    $("viewSeg").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b === btn));
+    const body = $("marketBody");
+    if (body) body.className = `market-body view-${desk.view}`;
+  });
+});
+$("inspCompare")?.addEventListener("click", () => pinCompare(desk.lastInspect));
+$("compareClear")?.addEventListener("click", () => {
+  desk.compare = [];
+  renderCompare();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeInspector();
+  if (e.target && ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
+  const tabs = ["launch", "market", "packages", "registry", "ops"];
+  if (e.key >= "1" && e.key <= "5") showTab(tabs[Number(e.key) - 1]);
+  if (e.key === "/") {
+    e.preventDefault();
+    showTab("market");
+    $("marketSearch")?.focus();
+  }
+});
+
+async function bootDesk() {
+  renderDeskCharts();
+  const jobs = await refreshJobsRail();
+  const done = (jobs || []).find((j) => j.status === "completed");
+  if (done?.id) {
+    try {
+      const job = await get(`/orchestrate/jobs/${encodeURIComponent(done.id)}`);
+      orchJobId = job.id;
+      finishOrchUi(job, null, { stay: true });
+    } catch {
+      /* empty desk until a run */
+    }
+  }
+}
+
 loadSkus().catch(() => {});
+bootDesk();

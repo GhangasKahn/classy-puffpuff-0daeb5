@@ -78,9 +78,11 @@ export function listJobs(limit = 40) {
       updatedAt: j.updatedAt,
       query: j.config?.query,
       categoryId: j.config?.categoryId,
+      type: j.type || "mission",
       progress: j.progress,
       productCount: j.results?.products?.length || 0,
       variantCount: j.results?.variants?.length || 0,
+      ideaCount: j.results?.ideaCount || 0,
       error: j.error || null,
     }));
 }

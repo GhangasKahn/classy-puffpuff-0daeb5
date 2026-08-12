@@ -77,6 +77,11 @@ npm run swarm -- --q "solid wood desk organizer" --category-id 25339 --sold 28 -
 - **Orders** — ingest + HOLD/AUTO + tracking push dry-run  
 - **Brain** — GO / CAUTION / NO-GO brief  
 - **Conditioning** — sale/return outcomes nudge psych weights  
+- **Marathon** — 4–5 category long runs + trends + idea factory  
+- **Listing factory** — keyword clusters → conversion packages → promote to SKU registry  
+- **Command desk UI** — tabbed analytics workspace: KPI strip, interactive SVG charts (heat, ladder, histogram, scatter, sellers, lanes), filterable product table + gallery, listing inspector, compare tray, jobs rail  
+
+Keyboard: `1–5` switch tabs, `/` focuses market search, `Esc` closes inspector.
 
 Browser playbooks (Terapeak assist): `src/browser/playbooks.md` or `/api/playbook`.
 
