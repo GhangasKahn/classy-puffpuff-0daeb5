@@ -42,6 +42,7 @@ function missionPayload() {
     crawlPages: 2,
     targetDailyProfit: 50,
     evidence: Object.keys(evidence).length ? evidence : undefined,
+    promotePass: fd.get("promotePass") === "on",
   };
 }
 
@@ -64,7 +65,7 @@ function renderBoard(rows) {
   $("board").innerHTML = (rows || [])
     .slice(0, 12)
     .map(
-      (r) => `
+      (r, i) => `
     <article class="card-row">
       <div>
         <h3>${escapeHtml((r.title || "").slice(0, 100))}</h3>
@@ -77,10 +78,76 @@ function renderBoard(rows) {
           ${(r.flags || []).slice(0, 3).map((f) => `<span>${escapeHtml(f)}</span>`).join("")}
         </div>
       </div>
-      <div>${r.url ? `<a class="btn ghost" href="${escapeHtml(r.url)}" target="_blank" rel="noreferrer">Listing</a>` : ""}</div>
+      <div>
+        <button type="button" class="btn ghost btn-promote" data-idx="${i}">Promote</button>
+        ${r.url ? `<a class="btn ghost" href="${escapeHtml(r.url)}" target="_blank" rel="noreferrer">Listing</a>` : ""}
+      </div>
     </article>`
     )
     .join("");
+
+  window.__boardRows = rows || [];
+  $("board").querySelectorAll(".btn-promote").forEach((btn) => {
+    btn.onclick = async () => {
+      const row = window.__boardRows[Number(btn.dataset.idx)];
+      if (!row) return;
+      const p = missionPayload();
+      try {
+        const saved = await post("/api/skus/promote", {
+          candidate: row,
+          evidence: p.evidence,
+          categoryId: p.categoryId,
+          costRatio: p.costRatio,
+          productCost: p.evidence?.productCost,
+        });
+        $("opsOut").textContent = `Promoted ${saved.sku} → ${saved.status} (${saved.decision})`;
+        await loadSkus();
+      } catch (e) {
+        $("opsOut").textContent = String(e.message || e);
+      }
+    };
+  });
+}
+
+function renderSkus(skus) {
+  $("skuBoard").innerHTML = (skus || [])
+    .slice(0, 20)
+    .map(
+      (s) => `
+    <article class="card-row">
+      <div>
+        <h3>${escapeHtml(s.sku)}</h3>
+        <div class="meta">
+          <span>${escapeHtml((s.title || "").slice(0, 70))}</span>
+          <span><b>$${Number(s.salePrice || 0).toFixed(2)}</b></span>
+          <span>${escapeHtml(s.status)}</span>
+          <span>${escapeHtml(s.decision || "")}</span>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn ghost btn-dry" data-sku="${escapeHtml(s.sku)}">Dry-run</button>
+      </div>
+    </article>`
+    )
+    .join("");
+  $("skuBoard").querySelectorAll(".btn-dry").forEach((btn) => {
+    btn.onclick = async () => {
+      const data = await post("/api/publish/dry-run", { sku: btn.dataset.sku });
+      $("publishOut").textContent = JSON.stringify(
+        { mode: data.mode, ready: data.package?.ready, blockers: data.package?.blockers, canGoLive: data.canGoLive },
+        null,
+        2
+      );
+      $("publishForm").sku.value = btn.dataset.sku;
+    };
+  });
+}
+
+async function loadSkus() {
+  const r = await fetch("/api/skus");
+  const data = await r.json();
+  renderSkus(data.skus || []);
+  return data;
 }
 
 function renderDrafts(rows) {
@@ -124,6 +191,10 @@ $("btnSwarm").onclick = async () => {
     renderBrief(data.brief || {});
     renderBoard(data.lethalBoard || []);
     renderDrafts(data.listingDrafts || []);
+    if (data.promoted?.length) {
+      $("opsOut").textContent = `Auto-promoted ${data.promoted.length} PASS SKUs`;
+      await loadSkus();
+    }
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);
   } finally {
@@ -230,3 +301,62 @@ $("btnFulfillDemo").onclick = async () => {
   });
   $("fulfillOut").textContent = JSON.stringify(data, null, 2);
 };
+
+$("btnSkus").onclick = async () => {
+  const data = await loadSkus();
+  $("opsOut").textContent = `${data.count} SKUs · updated ${data.updatedAt || "—"}`;
+};
+
+$("btnExport").onclick = async () => {
+  const data = await post("/api/export", { status: "ready", format: "both" });
+  $("opsOut").textContent = JSON.stringify(
+    { count: data.count, files: data.files, sample: data.sample?.map((p) => p.sku) },
+    null,
+    2
+  );
+};
+
+$("btnAuth").onclick = async () => {
+  const r = await fetch("/api/auth/status");
+  $("opsOut").textContent = JSON.stringify(await r.json(), null, 2);
+};
+
+$("publishForm").onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = await post("/api/publish", { sku: fd.get("sku"), live: false });
+  $("publishOut").textContent = JSON.stringify(
+    {
+      mode: data.mode,
+      ready: data.package?.ready,
+      blockers: data.package?.blockers,
+      canGoLive: data.canGoLive,
+      next: data.next,
+    },
+    null,
+    2
+  );
+};
+
+$("orderForm").onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = await post("/api/orders/ingest", {
+    orderId: fd.get("orderId"),
+    sku: fd.get("sku"),
+    buyerTotal: Number(fd.get("buyerTotal")),
+    supplierConfirmed: fd.get("supplierConfirmed") === "on",
+  });
+  $("orderOut").textContent = JSON.stringify(
+    { orderId: data.order?.orderId, status: data.order?.status, gate: data.gate },
+    null,
+    2
+  );
+};
+
+$("btnOrders").onclick = async () => {
+  const r = await fetch("/api/orders");
+  $("orderOut").textContent = JSON.stringify(await r.json(), null, 2);
+};
+
+loadSkus().catch(() => {});

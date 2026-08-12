@@ -61,6 +61,9 @@
         <label>Lead days
           <input name="leadTimeDays" type="number" value="7" />
         </label>
+        <label class="check">Auto-promote PASS
+          <input name="promotePass" type="checkbox" />
+        </label>
       </form>
     </section>
 
@@ -71,7 +74,7 @@
 
     <section class="panel" id="boardPanel" hidden>
       <h2>Lethal board</h2>
-      <p class="sub">Problem-solving · upgrade · materials · not qty-spam</p>
+      <p class="sub">Problem-solving · upgrade · materials · not qty-spam · promote into registry</p>
       <div id="board" class="board"></div>
     </section>
 
@@ -79,6 +82,42 @@
       <h2>Listing drafts</h2>
       <p class="sub">Deterministic copy shells — edit before publish</p>
       <div id="drafts" class="board"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Ops · SKU registry</h2>
+      <p class="sub">Real-world workbook — export CSV for Seller Hub today; Inventory API when user token set</p>
+      <div class="cta-row" style="margin-bottom:1rem">
+        <button type="button" class="btn" id="btnSkus">Load registry</button>
+        <button type="button" class="btn primary" id="btnExport">Export ready CSV/JSON</button>
+        <button type="button" class="btn ghost" id="btnAuth">Auth status</button>
+      </div>
+      <div id="skuBoard" class="board"></div>
+      <pre id="opsOut" class="out"></pre>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2>Publish dry-run</h2>
+        <form id="publishForm" class="grid tight">
+          <label>SKU <input name="sku" placeholder="LPROS-…" /></label>
+          <button type="submit" class="btn">Dry-run Inventory payload</button>
+        </form>
+        <pre id="publishOut" class="out"></pre>
+      </div>
+      <div class="panel">
+        <h2>Order ingest</h2>
+        <p class="sub">Paste a sale → HOLD/AUTO gate uses registry cost</p>
+        <form id="orderForm" class="grid tight">
+          <label>Order ID <input name="orderId" value="MANUAL-1" /></label>
+          <label>SKU <input name="sku" placeholder="from registry" /></label>
+          <label>Buyer total $ <input name="buyerTotal" type="number" value="49" /></label>
+          <label class="check">Supplier confirmed <input name="supplierConfirmed" type="checkbox" /></label>
+          <button type="submit" class="btn">Ingest + gate</button>
+        </form>
+        <button type="button" class="btn ghost" id="btnOrders" style="margin-top:0.75rem">List orders</button>
+        <pre id="orderOut" class="out"></pre>
+      </div>
     </section>
 
     <section class="split">

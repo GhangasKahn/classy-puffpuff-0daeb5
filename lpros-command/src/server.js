@@ -1,5 +1,5 @@
 /**
- * LPROS Command — HTTP desk for research swarm, intel, economics, fulfillment gates.
+ * LPROS Command — research swarm + real-world ops desk (registry, export, publish, orders).
  */
 import { createServer } from "node:http";
 import { readFileSync, existsSync } from "node:fs";
@@ -21,13 +21,18 @@ import {
   recordSaleOutcome,
   logOutcome,
 } from "../../lpros/src/agents/outcome.js";
+import { listSkus, promoteCandidate, getSku, setSkuStatus, removeSku } from "./ops/skus.js";
+import { exportPackages, exportSku, buildListingPackage } from "./ops/packages.js";
+import { listOrders, ingestOrder, attachTracking, getOrder } from "./ops/orders.js";
+import { authStatus } from "./ebay/userToken.js";
+import { dryRunPublish, publishSku } from "./ebay/inventory.js";
+import { dryRunTrackingPush, pushTracking, pullOrders } from "./ebay/fulfillment.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = resolve(__dirname, "../public");
 const port = Number(process.env.LPROS_COMMAND_PORT || 8790);
 const host = process.env.HOST || "127.0.0.1";
 
-// Load eBay env once
 await import(pathToFileURL(resolve(__dirname, "../../ebay-sold-items/src/config.js")).href);
 
 const MIME = {
@@ -36,6 +41,7 @@ const MIME = {
   ".js": "application/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".md": "text/markdown; charset=utf-8",
+  ".csv": "text/csv; charset=utf-8",
   ".svg": "image/svg+xml",
 };
 
@@ -45,7 +51,7 @@ function send(res, status, body, type = "application/json; charset=utf-8") {
     "Content-Type": type,
     "Cache-Control": "no-store",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE",
     "Access-Control-Allow-Headers": "Content-Type",
   });
   res.end(payload);
@@ -95,7 +101,7 @@ async function handle(req, res) {
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+      "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE",
       "Access-Control-Allow-Headers": "Content-Type",
     });
     return res.end();
@@ -108,19 +114,25 @@ async function handle(req, res) {
         service: "lpros-command",
         role: "open ZIK+AutoDS control plane",
         port,
+        auth: authStatus(),
         endpoints: [
           "/api/swarm",
-          "/api/intel",
+          "/api/skus",
+          "/api/skus/promote",
+          "/api/export",
+          "/api/publish",
+          "/api/orders",
+          "/api/orders/ingest",
           "/api/evidence/verify",
           "/api/listing/draft",
           "/api/outcomes",
-          "/api/econ",
-          "/api/forecast",
-          "/api/fulfill/decide",
-          "/api/providers",
-          "/api/playbook",
+          "/api/auth/status",
         ],
       });
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/auth/status") {
+      return send(res, 200, authStatus());
     }
 
     if (req.method === "GET" && url.pathname === "/api/providers") {
@@ -133,8 +145,7 @@ async function handle(req, res) {
     }
 
     if (req.method === "GET" && url.pathname === "/api/outcomes") {
-      const limit = Number(url.searchParams.get("limit") || 40);
-      return send(res, 200, { outcomes: readRecentOutcomes(limit) });
+      return send(res, 200, { outcomes: readRecentOutcomes(Number(url.searchParams.get("limit") || 40)) });
     }
 
     if (req.method === "POST" && url.pathname === "/api/outcomes") {
@@ -143,17 +154,120 @@ async function handle(req, res) {
         logOutcome(b);
         return send(res, 200, { ok: true });
       }
-      const result = recordSaleOutcome({
-        title: b.title,
+      return send(
+        res,
+        200,
+        recordSaleOutcome({
+          title: b.title,
+          sku: b.sku,
+          profitable: b.profitable,
+          returned: b.returned,
+          net: b.net,
+          salePrice: b.salePrice,
+          featureSnapshot: b.featureSnapshot,
+          note: b.note,
+        })
+      );
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/skus") {
+      return send(res, 200, listSkus({ status: url.searchParams.get("status") || undefined }));
+    }
+
+    if (req.method === "GET" && url.pathname.startsWith("/api/skus/") && url.pathname !== "/api/skus/promote") {
+      const sku = decodeURIComponent(url.pathname.slice("/api/skus/".length));
+      const row = getSku(sku);
+      if (!row) return send(res, 404, { error: "not found" });
+      return send(res, 200, { sku: row, package: buildListingPackage(row) });
+    }
+
+    if (req.method === "DELETE" && url.pathname.startsWith("/api/skus/")) {
+      const sku = decodeURIComponent(url.pathname.slice("/api/skus/".length));
+      return send(res, 200, removeSku(sku));
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/skus/promote") {
+      const b = await readJson(req);
+      const evidence = evidenceFromBody(b.evidence || b);
+      const row = promoteCandidate(b.candidate || b, {
+        evidence,
+        categoryId: b.categoryId,
+        quantity: b.quantity,
+        costRatio: b.costRatio,
+        productCost: b.productCost ?? evidence?.productCost,
+        requireHarden: Boolean(evidence),
         sku: b.sku,
-        profitable: b.profitable,
-        returned: b.returned,
-        net: b.net,
-        salePrice: b.salePrice,
-        featureSnapshot: b.featureSnapshot,
-        note: b.note,
+        notes: b.notes,
       });
+      return send(res, 200, row);
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/skus/status") {
+      const b = await readJson(req);
+      return send(res, 200, setSkuStatus(b.sku, b.status, b.patch || {}));
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/export") {
+      const b = await readJson(req);
+      const result = exportPackages({
+        status: b.status || "ready",
+        format: b.format || "both",
+      });
+      return send(res, 200, {
+        stamp: result.stamp,
+        status: result.status,
+        count: result.count,
+        files: result.files,
+        sample: result.packages.slice(0, 3),
+      });
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/export/csv") {
+      const status = url.searchParams.get("status") || "ready";
+      const result = exportPackages({ status, format: "csv" });
+      const csvFile = result.files.find((f) => f.type === "csv");
+      const csv = readFileSync(csvFile.path, "utf8");
+      return send(res, 200, csv, "text/csv; charset=utf-8");
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/publish") {
+      const b = await readJson(req);
+      const result = await publishSku(b.sku, { live: Boolean(b.live) });
       return send(res, 200, result);
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/publish/dry-run") {
+      const b = await readJson(req);
+      return send(res, 200, dryRunPublish(b.sku));
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/orders") {
+      return send(res, 200, listOrders({ status: url.searchParams.get("status") || undefined }));
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/orders/ingest") {
+      const b = await readJson(req);
+      return send(res, 200, ingestOrder(b.order || b, b.policy || {}));
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/orders/tracking") {
+      const b = await readJson(req);
+      const row = attachTracking(b.orderId, {
+        trackingNumber: b.trackingNumber,
+        carrier: b.carrier,
+        shippedAt: b.shippedAt,
+      });
+      return send(res, 200, row);
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/orders/push-tracking") {
+      const b = await readJson(req);
+      return send(res, 200, await pushTracking(b.orderId, { live: Boolean(b.live) }));
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/orders/pull") {
+      const b = await readJson(req);
+      return send(res, 200, await pullOrders({ limit: b.limit || 20, live: Boolean(b.live) }));
     }
 
     if (req.method === "POST" && url.pathname === "/api/econ") {
@@ -185,15 +299,18 @@ async function handle(req, res) {
 
     if (req.method === "POST" && url.pathname === "/api/intel") {
       const b = await readJson(req);
-      const data = await competitorIntel({
-        q: b.q,
-        categoryId: b.categoryId,
-        minPrice: Number(b.minPrice ?? 35),
-        maxPrice: Number(b.maxPrice ?? 200),
-        limit: Number(b.limit ?? 100),
-        productCostRatio: Number(b.costRatio ?? 0.4),
-      });
-      return send(res, 200, data);
+      return send(
+        res,
+        200,
+        await competitorIntel({
+          q: b.q,
+          categoryId: b.categoryId,
+          minPrice: Number(b.minPrice ?? 35),
+          maxPrice: Number(b.maxPrice ?? 200),
+          limit: Number(b.limit ?? 100),
+          productCostRatio: Number(b.costRatio ?? 0.4),
+        })
+      );
     }
 
     if (req.method === "POST" && url.pathname === "/api/evidence/verify") {
@@ -218,17 +335,19 @@ async function handle(req, res) {
         hasItemSpecifics: true,
         str: Number(b.str ?? 0.015),
       };
-      const result = hardenCandidate(candidate, pack, {
-        minSalePrice: Number(b.minPrice ?? 35),
-        maxSalePrice: Number(b.maxPrice ?? 200),
-      });
-      return send(res, 200, result);
+      return send(
+        res,
+        200,
+        hardenCandidate(candidate, pack, {
+          minSalePrice: Number(b.minPrice ?? 35),
+          maxSalePrice: Number(b.maxPrice ?? 200),
+        })
+      );
     }
 
     if (req.method === "POST" && url.pathname === "/api/listing/draft") {
       const b = await readJson(req);
-      const draft = draftListing(b.candidate || b, { brand: b.brand, type: b.type });
-      return send(res, 200, draft);
+      return send(res, 200, draftListing(b.candidate || b, { brand: b.brand, type: b.type }));
     }
 
     if (req.method === "POST" && url.pathname === "/api/swarm") {
@@ -248,7 +367,24 @@ async function handle(req, res) {
         evidencePack,
         draftListings: b.draftListings !== false,
       });
-      return send(res, 200, data);
+
+      let promoted = [];
+      if (b.promotePass || b.autoPromote) {
+        promoted = (data.lethalBoard || [])
+          .filter((r) => r.decision === "PASS")
+          .slice(0, Number(b.promoteLimit || 5))
+          .map((r) =>
+            promoteCandidate(r, {
+              evidence: evidencePack,
+              categoryId: b.categoryId || "25339",
+              costRatio: Number(b.costRatio ?? 0.4),
+              productCost: evidencePack?.productCost,
+              requireHarden: false,
+            })
+          );
+      }
+
+      return send(res, 200, { ...data, promoted });
     }
 
     if (req.method === "POST" && url.pathname === "/api/fulfill/decide") {
@@ -260,7 +396,12 @@ async function handle(req, res) {
     return send(res, 404, { error: "not found" });
   } catch (e) {
     console.error(e);
-    return send(res, e.status || 500, { error: e.message || String(e) });
+    return send(res, e.status || 500, {
+      error: e.message || String(e),
+      code: e.code,
+      blockers: e.blockers,
+      payload: e.payload,
+    });
   }
 }
 

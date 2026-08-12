@@ -16,7 +16,16 @@ Use Cursor Browser / Open WebUI agent when official sold data is gated.
 2. Record landed cost + handling days.
 3. Enter as `productCost` + `altProductCost` (second quote) before PASS.
 
+## Ops after PASS (real-world)
+
+1. Promote PASS rows into LPROS Command registry (`Promote` on board or `npm run ops -- promote …`).
+2. Export CSV (`npm run ops -- export` or desk **Export ready CSV/JSON**).
+3. Create listings in Seller Hub from CSV / paste — or set `EBAY_USER_REFRESH_TOKEN` + business policies for live Inventory API.
+4. When an order arrives, **Order ingest** with registry SKU → HOLD until supplier confirmed + tracking.
+5. Attach tracking → dry-run push payload; live push when user token present.
+
 ## Anti-patterns
 
 - Do not bulk-scrape eBay HTML search pages (ToS / ban risk). Use Browse crawl.
 - Do not let browser agents place supplier orders without HOLD_REVIEW gate.
+- Do not `{ live:true }` publish without photos + PASS evidence + policies.

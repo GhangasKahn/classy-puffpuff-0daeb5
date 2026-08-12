@@ -8,6 +8,7 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "swarm": "node src/cli-swarm.js",
+    "ops": "node src/cli-ops.js",
     "test": "node --test test/*.test.js"
   },
   "engines": {
