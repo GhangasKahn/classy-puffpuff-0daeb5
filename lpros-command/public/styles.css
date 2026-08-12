@@ -235,6 +235,32 @@ input[type="checkbox"] { width: 1rem; height: 1rem; }
   gap: 0.15rem;
 }
 .gal-meta span:first-child { color: var(--acc); }
+.orch-trends {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,0.2);
+}
+.heat-board { display: grid; gap: 0.45rem; margin: 0.75rem 0 1rem; }
+.heat-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1.2fr) 48px 2fr;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mute);
+}
+.heat-row b { color: var(--acc); }
+.split-lite {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 720px) {
+  .split-lite { grid-template-columns: 1fr; }
+  .heat-row { grid-template-columns: 1fr 40px; }
+  .heat-row span:last-child { grid-column: 1 / -1; }
+}
 .viz-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

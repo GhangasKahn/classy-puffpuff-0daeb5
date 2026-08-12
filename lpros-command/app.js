@@ -372,6 +372,7 @@ let orchEventIdx = 0;
 
 function orchPayload() {
   const fd = new FormData($("orchForm"));
+  const marathon = fd.get("marathon") === "on";
   return {
     q: fd.get("q"),
     categoryId: fd.get("categoryId"),
@@ -379,11 +380,14 @@ function orchPayload() {
     suggestedPrice: Number(fd.get("suggestedPrice")),
     variantCount: Number(fd.get("variantCount")),
     detailCount: Number(fd.get("detailCount") || 12),
+    ideasTarget: Number(fd.get("ideasTarget") || 250),
     liveProbeCount: Number(fd.get("liveProbeCount")),
     minPrice: Number(fd.get("minPrice")),
     maxPrice: Number(fd.get("maxPrice")),
-    crawlPages: 2,
-    sync: location.port !== "8790",
+    crawlPages: marathon ? 4 : 2,
+    mode: marathon ? "marathon" : undefined,
+    marathon,
+    sync: location.port !== "8790" && !marathon,
   };
 }
 
@@ -400,9 +404,46 @@ function appendOrchLog(lines) {
 function setOrchProgress(progress) {
   const pct = progress?.pct ?? 0;
   $("orchPct").style.width = `${pct}%`;
+  const lane =
+    progress?.lane && progress?.laneTotal
+      ? ` · lane ${progress.lane}/${progress.laneTotal}${progress.label ? ` ${progress.label}` : ""}`
+      : "";
   $("orchPhase").textContent = progress
-    ? `${progress.phase || "…"} · ${pct}%`
+    ? `${progress.phase || "…"} · ${pct}%${lane}`
     : "Idle — deploy for live product research";
+}
+
+function renderOrchTrends(trends) {
+  const el = $("orchTrends");
+  if (!trends?.categoryHeat?.length && !trends?.risingKeywords?.length) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  const heat = (trends.categoryHeat || [])
+    .slice(0, 5)
+    .map(
+      (c) =>
+        `<div class="heat-row"><span>${escapeHtml(c.label || c.categoryId)}</span><b>${c.heatScore}</b><span>${escapeHtml(c.read || "")}</span></div>`
+    )
+    .join("");
+  const rising = (trends.risingKeywords || [])
+    .slice(0, 10)
+    .map((r) => `<li><b>${escapeHtml(r.term)}</b> lift ${r.lift} · ${escapeHtml(r.label || "")}</li>`)
+    .join("");
+  const ideas = (trends.ideasPreview || [])
+    .slice(0, 8)
+    .map((i) => `<li>${escapeHtml(i.title)} <span class="meta">(${escapeHtml(i.family || "")})</span></li>`)
+    .join("");
+  el.innerHTML = `
+    <h3 class="viz-title">Trend heat · rising keywords · ideas</h3>
+    <p class="sub">${escapeHtml(trends.caveat || "")}</p>
+    <div class="heat-board">${heat}</div>
+    <div class="split-lite">
+      <ul class="list">${rising}</ul>
+      <ul class="list">${ideas}</ul>
+    </div>`;
 }
 
 function renderOrchGallery(gallery) {
@@ -414,14 +455,14 @@ function renderOrchGallery(gallery) {
   }
   el.hidden = false;
   el.innerHTML = gallery
-    .slice(0, 16)
+    .slice(0, 24)
     .map(
       (g) => `
     <a class="gal-card" href="${escapeHtml(g.url || "#")}" target="_blank" rel="noopener">
       ${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" />` : `<div class="gal-ph"></div>`}
       <div class="gal-meta">
         <span>$${Number(g.price || 0).toFixed(2)}</span>
-        <span>${g.imageCount != null ? `${g.imageCount} imgs` : ""}</span>
+        <span>${g.imageCount != null ? `${g.imageCount} imgs` : ""} ${escapeHtml(g.categoryPath || "")}</span>
         <span>${escapeHtml((g.title || "").slice(0, 48))}</span>
       </div>
     </a>`
@@ -440,7 +481,7 @@ function renderOrchRecs(recs) {
   const testNow = recs.testNow || [];
   el.innerHTML =
     beat
-      .slice(0, 6)
+      .slice(0, 8)
       .map(
         (r) => `
     <article class="card-row">
@@ -450,8 +491,8 @@ function renderOrchRecs(recs) {
         <div class="meta">
           <span class="badge-dec">BEAT THIS</span>
           <span><b>$${Number(r.price || 0).toFixed(2)}</b></span>
+          <span>${escapeHtml(r.categoryPath || "")}</span>
           <span>${r.imageCount ?? 0} images</span>
-          <span>${escapeHtml((r.weaknesses || [])[0] || "")}</span>
         </div>
       </div>
     </article>`
@@ -467,7 +508,7 @@ function renderOrchRecs(recs) {
         <div class="meta">
           <span class="badge-dec ${escapeHtml(r.decision || "")}">${escapeHtml(r.decision || "")}</span>
           <span>SEO <b>${r.seoScore ?? "—"}</b></span>
-          <span>Net <b>$${Number(r.estNet || 0).toFixed(2)}</b></span>
+          <span>${escapeHtml(r.categoryPath || "")}</span>
         </div>
       </div>
     </article>`
@@ -483,24 +524,15 @@ function renderOrchTable(products) {
     return;
   }
   wrap.hidden = false;
-  const cols = [
-    "rank",
-    "price",
-    "imageCount",
-    "title",
-    "seller",
-    "contentSignals",
-    "url",
-  ];
+  const cols = ["rank", "price", "imageCount", "title", "categoryPath", "seller", "url"];
   table.querySelector("thead").innerHTML = `<tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>`;
   table.querySelector("tbody").innerHTML = products
-    .slice(0, 40)
+    .slice(0, 50)
     .map(
       (r) => `<tr>${cols
         .map((c) => {
           let v = r[c];
           if (c === "title") v = String(v || "").slice(0, 70);
-          if (c === "contentSignals") v = Array.isArray(v) ? v.join(", ") : v;
           if (c === "url" && v) {
             return `<td><a href="${escapeHtml(String(v))}" target="_blank" rel="noopener">listing</a></td>`;
           }
@@ -515,14 +547,19 @@ function finishOrchUi(job, data) {
   const gallery = job?.results?.gallery || data?.gallery || [];
   const products = job?.results?.productsPreview || job?.results?.products || [];
   const recs = job?.results?.recommendations || data?.recommendations;
+  const trends = job?.results?.trends || null;
+  if (trends) {
+    trends.ideasPreview = trends.ideasPreview || job?.results?.ideasPreview || recs?.topIdeas;
+  }
+  renderOrchTrends(trends);
   renderOrchGallery(gallery);
   renderOrchRecs(recs);
   renderOrchTable(products);
   const n = job?.results?.productCount ?? data?.productCount ?? products.length;
   const imgs = job?.results?.productsWithImages ?? data?.productsWithImages;
-  if (n != null) {
-    $("orchPhase").textContent = `done · ${n} products researched${imgs != null ? ` · ${imgs} with images` : ""}`;
-  }
+  const ideas = job?.results?.ideaCount;
+  const variants = job?.results?.variantTotalGenerated;
+  $("orchPhase").textContent = `done · ${n} products${imgs != null ? ` · ${imgs} images` : ""}${variants != null ? ` · ${variants} variants` : ""}${ideas != null ? ` · ${ideas} ideas` : ""}`;
   $("btnOrchCsv").disabled = false;
   $("btnOrchProductsCsv").disabled = false;
 }
@@ -542,6 +579,7 @@ async function pollOrchJob() {
       const job = await get(`/orchestrate/jobs/${encodeURIComponent(orchJobId)}`);
       if (ev.status === "completed") finishOrchUi(job);
       $("btnOrchDeploy").disabled = false;
+      $("btnOrchMarathon").disabled = false;
       if (ev.status === "failed") {
         $("orchPhase").textContent = `Failed — ${job.error || "see log"}`;
       }
@@ -551,25 +589,26 @@ async function pollOrchJob() {
   }
 }
 
-$("btnOrchDeploy").onclick = async () => {
+async function startOrch(payload, endpoint) {
   $("btnOrchDeploy").disabled = true;
+  $("btnOrchMarathon").disabled = true;
   $("orchLog").textContent = "";
   $("btnOrchCsv").disabled = true;
   $("btnOrchProductsCsv").disabled = true;
   $("orchRecs").hidden = true;
   $("orchTableWrap").hidden = true;
   $("orchGallery").hidden = true;
+  $("orchTrends").hidden = true;
   orchEventIdx = 0;
   if (orchPollTimer) clearInterval(orchPollTimer);
   try {
-    const payload = orchPayload();
-    const data = await post("/api/orchestrate/deploy", payload);
+    const data = await post(endpoint, payload);
     orchJobId = data.jobId;
     appendOrchLog([
       {
         at: new Date().toISOString(),
         level: "info",
-        message: `Deployed ${data.jobId} (${data.sync ? "sync" : "async"})`,
+        message: `Deployed ${data.jobId} (${data.type || "mission"} · ${data.sync ? "sync" : "async"})`,
       },
     ]);
     setOrchProgress(data.progress || { phase: "queued", pct: 0 });
@@ -579,22 +618,40 @@ $("btnOrchDeploy").onclick = async () => {
       setOrchProgress(job.progress);
       finishOrchUi(job, data);
       $("btnOrchDeploy").disabled = false;
+      $("btnOrchMarathon").disabled = false;
     } else if (data.status === "failed") {
       appendOrchLog([{ at: new Date().toISOString(), level: "error", message: data.error || "failed" }]);
       $("btnOrchDeploy").disabled = false;
+      $("btnOrchMarathon").disabled = false;
     } else {
-      orchPollTimer = setInterval(pollOrchJob, 900);
+      orchPollTimer = setInterval(pollOrchJob, 1200);
       pollOrchJob();
     }
   } catch (e) {
     appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
     $("btnOrchDeploy").disabled = false;
+    $("btnOrchMarathon").disabled = false;
   }
+}
+
+$("btnOrchDeploy").onclick = async () => {
+  const payload = orchPayload();
+  if (payload.marathon) {
+    await startOrch({ ...payload, sync: false }, "/api/orchestrate/campaign");
+  } else {
+    await startOrch(payload, "/api/orchestrate/deploy");
+  }
+};
+
+$("btnOrchMarathon").onclick = async () => {
+  const payload = { ...orchPayload(), mode: "marathon", marathon: true, sync: false };
+  delete payload.categoryId;
+  await startOrch(payload, "/api/orchestrate/campaign");
 };
 
 $("btnDeploy").onclick = () => {
   $("orchPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  $("btnOrchDeploy").click();
+  $("btnOrchMarathon").click();
 };
 
 $("btnOrchJobs").onclick = async () => {
@@ -602,7 +659,7 @@ $("btnOrchJobs").onclick = async () => {
   $("orchLog").textContent = (data.jobs || [])
     .map(
       (j) =>
-        `${j.id} · ${j.status} · ${j.query || ""} · products=${j.productCount || 0} · variants=${j.variantCount || 0} · ${j.progress?.phase || ""}`
+        `${j.id} · ${j.type || "mission"} · ${j.status} · ${j.query || ""} · products=${j.productCount || 0} · variants=${j.variantCount || 0} · ideas=${j.ideaCount || 0} · ${j.progress?.phase || ""}`
     )
     .join("\n");
 };

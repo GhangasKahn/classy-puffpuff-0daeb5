@@ -37,6 +37,14 @@ import {
   getJobEvents,
   getJobSpreadsheet,
 } from "../orchestrate/runner.js";
+import {
+  deployCampaign,
+  getCampaignJob,
+  getCampaignEvents,
+  getCampaignSpreadsheet,
+  listCampaignJobs,
+  DEFAULT_MARATHON_CATEGORIES,
+} from "../orchestrate/campaign.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -92,7 +100,9 @@ export async function routeApi(req) {
         endpoints: [
           "/swarm",
           "/orchestrate/deploy",
+          "/orchestrate/campaign",
           "/orchestrate/jobs",
+          "/orchestrate/marathon-defaults",
           "/skus",
           "/export",
           "/publish",
@@ -359,6 +369,36 @@ export async function routeApi(req) {
   // ── Agent orchestration: deploy → research → title swarm → spreadsheet ──
   if (method === "POST" && pathname === "/orchestrate/deploy") {
     const onNetlify = Boolean(process.env.NETLIFY);
+    const wantsMarathon =
+      b.mode === "marathon" ||
+      b.marathon === true ||
+      (Array.isArray(b.categories) && b.categories.length > 1);
+    if (wantsMarathon) {
+      if (onNetlify && !b.dryRun) {
+        return err(400, "Marathon campaigns need local :8790 (Netlify timeout). Use dryRun:true for a short preview or run locally.");
+      }
+      const sync = b.sync === true;
+      const jobOrPromise = deployCampaign(
+        {
+          ...b,
+          mode: "marathon",
+          q: b.q || b.query,
+          categories: b.categories,
+        },
+        { sync }
+      );
+      const job = sync ? await jobOrPromise : jobOrPromise;
+      return ok({
+        jobId: job.id,
+        type: "campaign",
+        status: job.status,
+        progress: job.progress,
+        sync,
+        categoryCount: job.config?.categories?.length,
+        note: "Marathon async — poll /orchestrate/jobs/:id/events (long run)",
+        error: job.error || undefined,
+      });
+    }
     const sync = b.sync === true || (onNetlify && b.sync !== false);
     const config = {
       q: b.q || b.query,
@@ -399,39 +439,99 @@ export async function routeApi(req) {
     });
   }
 
+  if (method === "POST" && pathname === "/orchestrate/campaign") {
+    const onNetlify = Boolean(process.env.NETLIFY);
+    if (onNetlify && !b.dryRun) {
+      return err(
+        400,
+        "Marathon campaigns require local Command (:8790) or CLI — Netlify functions time out. Pass dryRun:true for a preview."
+      );
+    }
+    const sync = Boolean(b.sync);
+    const jobOrPromise = deployCampaign(
+      {
+        mode: "marathon",
+        q: b.q || b.query,
+        categories: b.categories,
+        cost: b.cost,
+        minPrice: b.minPrice,
+        maxPrice: b.maxPrice,
+        suggestedPrice: b.suggestedPrice,
+        variantCount: b.variantCount ?? 250,
+        detailCount: b.detailCount ?? 30,
+        crawlPages: b.crawlPages ?? 4,
+        crawlLimit: b.crawlLimit ?? 600,
+        intelLimit: b.intelLimit ?? 120,
+        liveProbeCount: b.liveProbeCount ?? 10,
+        ideasTarget: b.ideasTarget ?? 250,
+        dryRun: Boolean(b.dryRun),
+      },
+      { sync }
+    );
+    const job = sync ? await jobOrPromise : jobOrPromise;
+    return ok({
+      jobId: job.id,
+      type: "campaign",
+      status: job.status,
+      progress: job.progress,
+      sync,
+      categories: job.config?.categories?.map((c) => ({ id: c.categoryId, label: c.label })),
+      note: "Long marathon — leave local server running; download ?workbook=1 when done",
+      error: job.error || undefined,
+      productCount: job.results?.productCount,
+      ideaCount: job.results?.ideaCount,
+      variantCount: job.results?.variantTotalGenerated,
+    });
+  }
+
+  if (method === "GET" && pathname === "/orchestrate/marathon-defaults") {
+    return ok({ categories: DEFAULT_MARATHON_CATEGORIES });
+  }
+
   if (method === "GET" && pathname === "/orchestrate/jobs") {
-    return ok({ jobs: listJobs(Number(query.get("limit") || 40)) });
+    const merged = [...listCampaignJobs(40), ...listJobs(40)]
+      .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
+      .slice(0, Number(query.get("limit") || 40));
+    return ok({ jobs: merged });
   }
 
   if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+$/)) {
     const jobId = decodeURIComponent(pathname.split("/").pop());
-    const job = getJob(jobId);
+    const job = getJob(jobId) || getCampaignJob(jobId);
     if (!job) return err(404, "job not found");
     const slim = {
       id: job.id,
+      type: job.type || (String(job.id).startsWith("camp_") ? "campaign" : "mission"),
       status: job.status,
       createdAt: job.createdAt,
       updatedAt: job.updatedAt,
       config: job.config,
       progress: job.progress,
       error: job.error,
-      events: job.events?.slice(-80),
+      checkpoints: job.checkpoints?.slice(-10),
+      events: job.events?.slice(-100),
       results: job.results
         ? {
+            mode: job.results.mode,
             researched: job.results.researched,
+            categoryCount: job.results.categoryCount,
             productCount: job.results.productCount,
             productsWithImages: job.results.productsWithImages,
             productsWithUrls: job.results.productsWithUrls,
             productsWithDetail: job.results.productsWithDetail,
+            variantTotalGenerated: job.results.variantTotalGenerated,
+            ideaCount: job.results.ideaCount,
             narrowedCategory: job.results.narrowedCategory,
             patterns: job.results.patterns,
             pipelineSummary: job.results.pipelineSummary,
-            variantTotalGenerated: job.results.variantTotalGenerated,
             recommendations: job.results.recommendations,
             intel: job.results.intel,
+            lanes: job.results.lanes,
+            trends: job.results.trends,
             gallery: job.results.gallery,
-            productsPreview: (job.results.products || []).slice(0, 20),
+            productsPreview: (job.results.products || []).slice(0, 30),
             variantsPreview: (job.results.variants || []).slice(0, 25),
+            ideasPreview: job.results.trends?.ideasPreview || job.results.recommendations?.topIdeas,
             columns: job.results.columns,
           }
         : null,
@@ -443,7 +543,7 @@ export async function routeApi(req) {
     const parts = pathname.split("/");
     const jobId = decodeURIComponent(parts[parts.length - 2]);
     const after = Number(query.get("after") || 0);
-    const data = getJobEvents(jobId, after);
+    const data = getJobEvents(jobId, after) || getCampaignEvents(jobId, after);
     if (!data) return err(404, "job not found");
     return ok(data);
   }
@@ -451,10 +551,15 @@ export async function routeApi(req) {
   if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/spreadsheet$/)) {
     const parts = pathname.split("/");
     const jobId = decodeURIComponent(parts[parts.length - 2]);
-    const sheet = getJobSpreadsheet(jobId, {
+    const opts = {
       workbook: query.get("workbook") === "1" || query.get("workbook") === "true",
       products: query.get("products") === "1" || query.get("products") === "true",
-    });
+      trends: query.get("trends") === "1" || query.get("trends") === "true",
+      ideas: query.get("ideas") === "1" || query.get("ideas") === "true",
+    };
+    const sheet =
+      getCampaignSpreadsheet(jobId, opts) ||
+      getJobSpreadsheet(jobId, { workbook: opts.workbook, products: opts.products });
     if (!sheet) return err(404, "job not found");
     if (query.get("format") === "json") return ok(sheet);
     if (!sheet.ready) {

@@ -75,8 +75,11 @@
         <label>Query
           <input name="q" value="solid wood desk organizer" />
         </label>
-        <label>Category ID
+        <label>Category ID (single)
           <input name="categoryId" value="25339" />
+        </label>
+        <label class="check">Marathon (5 categories)
+          <input name="marathon" type="checkbox" />
         </label>
         <label>Landed cost $
           <input name="cost" type="number" step="0.01" value="18" />
@@ -84,14 +87,17 @@
         <label>Suggested price $
           <input name="suggestedPrice" type="number" step="0.01" value="59.99" />
         </label>
-        <label>Title variants
-          <input name="variantCount" type="number" value="200" />
+        <label>Title variants / lane
+          <input name="variantCount" type="number" value="250" />
         </label>
-        <label>Item details
-          <input name="detailCount" type="number" value="12" />
+        <label>Item details / lane
+          <input name="detailCount" type="number" value="30" />
         </label>
-        <label>Live probes
-          <input name="liveProbeCount" type="number" value="12" />
+        <label>Ideas target
+          <input name="ideasTarget" type="number" value="250" />
+        </label>
+        <label>Live probes / lane
+          <input name="liveProbeCount" type="number" value="10" />
         </label>
         <label>Min $
           <input name="minPrice" type="number" value="35" />
@@ -102,15 +108,18 @@
       </form>
       <div class="cta-row" style="margin-bottom:1rem">
         <button type="button" class="btn primary" id="btnOrchDeploy">Deploy research mission</button>
+        <button type="button" class="btn primary" id="btnOrchMarathon">Start marathon campaign</button>
         <button type="button" class="btn ghost" id="btnOrchJobs">Refresh jobs</button>
         <button type="button" class="btn" id="btnOrchCsv" disabled>Download workbook CSV</button>
         <button type="button" class="btn ghost" id="btnOrchProductsCsv" disabled>Products only CSV</button>
       </div>
+      <p class="sub">Marathon = 4–5 categories · 100s products · keyword swarms · trend heat · idea factory. Leave local :8790 running — not for Netlify.</p>
       <div class="orch-status" id="orchStatus">
         <div class="orch-meter"><span id="orchPct" style="width:0%"></span></div>
         <p class="sub" id="orchPhase">Idle — deploy for live product research</p>
       </div>
       <pre id="orchLog" class="out tall orch-log" aria-live="polite"></pre>
+      <div id="orchTrends" class="orch-trends" hidden></div>
       <div id="orchGallery" class="gallery" hidden></div>
       <div id="orchRecs" class="board" hidden></div>
       <div id="orchTableWrap" class="orch-table-wrap" hidden>
