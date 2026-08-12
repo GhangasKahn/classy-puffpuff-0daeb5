@@ -21,6 +21,7 @@
       <button type="button" class="rail-btn" data-tab="packages">Packages</button>
       <button type="button" class="rail-btn" data-tab="registry">Registry</button>
       <button type="button" class="rail-btn" data-tab="ops">Ops</button>
+      <button type="button" class="rail-btn" data-tab="playground">Playground</button>
     </nav>
     <p class="rail-jobs-head">Recent jobs</p>
     <div class="rail-jobs" id="jobsRail"><p class="muted">No jobs yet</p></div>
@@ -42,7 +43,7 @@
       <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Ideas</span><b id="kpiIdeas">—</b></button>
       <button type="button" class="kpi" data-tab="packages"><span class="kpi-l">Packages</span><b id="kpiPackages">—</b></button>
       <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Heat max</span><b id="kpiHeat">—</b></button>
-      <button type="button" class="kpi" data-tab="registry"><span class="kpi-l">SKUs</span><b id="kpiSkus">—</b></button>
+      <button type="button" class="kpi" data-tab="playground"><span class="kpi-l">Play jobs</span><b id="kpiPlay">—</b></button>
     </div>
     <div class="runbox">
       <svg id="kpiSpark" class="spark" viewBox="0 0 180 36" role="img" aria-label="Price sparkline"></svg>
@@ -354,6 +355,102 @@
         <button type="button" class="btn ghost" id="btnProviders">Provider matrix</button>
         <button type="button" class="btn" id="btnFulfillDemo">Demo HOLD decision</button>
         <pre id="fulfillOut" class="out"></pre>
+      </section>
+    </section>
+
+    <!-- PLAYGROUND -->
+    <section class="tab" id="tab-playground">
+      <div class="statstrip" id="pgStats"></div>
+      <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="pgLaunchBtn">Launch agent</button>
+        <button type="button" class="btn" id="pgCreateBtn">Queue job</button>
+        <button type="button" class="btn ghost" id="pgRefresh">Refresh board</button>
+        <button type="button" class="btn ghost" id="pgDryBrain">Dry Brain swarm</button>
+      </div>
+
+      <div class="pg-layout">
+        <div class="panel">
+          <h2>Job board</h2>
+          <p class="sub">Drag queued cards to Hold / Cancel · click a card to inspect</p>
+          <div class="pg-kanban" id="pgKanban"></div>
+        </div>
+        <div class="panel">
+          <h2>Sub-agent launcher</h2>
+          <p class="sub">MEUFT soldiers under Brain contracts · capital actions HOLD</p>
+          <div id="pgCatalog" class="pg-catalog"></div>
+          <form id="pgLaunchForm" class="grid tight">
+            <label>Agent
+              <select name="agent" id="pgAgent">
+                <option value="brain">brain</option>
+              </select>
+            </label>
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Price $ <input name="price" type="number" step="0.01" value="49" /></label>
+            <label>Cost $ <input name="cost" type="number" step="0.01" value="18" /></label>
+            <label>Sold 90d <input name="soldCount" type="number" placeholder="Terapeak" /></label>
+            <label>Alt cost $ <input name="altProductCost" type="number" step="0.01" /></label>
+            <label>Priority
+              <select name="priority">
+                <option>P0</option>
+                <option selected>P1</option>
+                <option>P2</option>
+              </select>
+            </label>
+            <label class="check">Dry-run <input name="dryRun" type="checkbox" checked /></label>
+            <label>Spawn <input name="spawn" placeholder="scout,intel,economics" /></label>
+            <label>Orch job <input name="orchJobId" placeholder="factory only" /></label>
+            <label>Item / URL <input name="url" placeholder="https://example.com or /itm/id" /></label>
+            <label>VM recipe <input name="recipe" placeholder="health / env / dry-mission" /></label>
+            <label>Playbook
+              <select name="playbookId" id="pgPlaybook">
+                <option value="terapeak">terapeak</option>
+              </select>
+            </label>
+          </form>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="panel">
+          <h2>Browser</h2>
+          <p class="sub">Allowlisted fetch · eBay /itm/ uses official getItem · no search HTML scrape</p>
+          <form id="pgBrowserForm" class="grid tight">
+            <label>URL <input name="url" placeholder="https://example.com or eBay /itm/…" /></label>
+            <label>Playbook
+              <select name="playbookId" id="pgBrowserPlaybook">
+                <option value="terapeak">terapeak</option>
+              </select>
+            </label>
+            <button type="submit" class="btn primary">Open session</button>
+            <button type="button" class="btn" id="pgBrowserFetch">Fetch URL</button>
+          </form>
+          <div id="pgBrowserSteps" class="pg-steps"></div>
+          <div id="pgBrowserView" class="pg-browser-view"></div>
+          <form id="pgCaptureForm" class="grid tight">
+            <label>Sold 90d <input name="soldCount" type="number" /></label>
+            <label>Avg sold $ <input name="avgSoldPrice" type="number" step="0.01" /></label>
+            <label>Landed $ <input name="productCost" type="number" step="0.01" /></label>
+            <label>Alt $ <input name="altProductCost" type="number" step="0.01" /></label>
+            <button type="submit" class="btn">Capture + next step</button>
+          </form>
+        </div>
+        <div class="panel">
+          <h2>VM</h2>
+          <p class="sub">This worker · allowlisted recipes · spawn tests local-only</p>
+          <div id="pgVmSnap" class="insp-grid"></div>
+          <div id="pgVmRecipes" class="cluster-row"></div>
+          <pre id="pgVmOut" class="out tall"></pre>
+        </div>
+      </div>
+
+      <section class="panel" id="pgJobPanel">
+        <h2>Job inspector</h2>
+        <p class="sub" id="pgJobTitle">Select a board card</p>
+        <div class="cta-row" id="pgJobActions"></div>
+        <pre id="pgJobOut" class="out tall"></pre>
       </section>
     </section>
   </main>

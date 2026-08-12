@@ -481,7 +481,7 @@ body.desk .noise { z-index: 0; }
 .lede-sm { margin: 0.15rem 0 0; color: var(--mute); font-size: 12px; }
 .kpis {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 0.4rem;
 }
 .kpi {
@@ -837,4 +837,86 @@ body.desk .noise { z-index: 0; }
   .job-chip { min-width: 180px; }
   .compare-tray { left: 0; }
   .compare-body { grid-template-columns: 1fr; }
+}
+
+/* ── Playground ── */
+.pg-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1rem;
+}
+.pg-kanban {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.45rem;
+  min-height: 280px;
+}
+.pg-col {
+  background: var(--bg0);
+  border: 1px solid var(--line);
+  padding: 0.45rem;
+  min-height: 260px;
+}
+.pg-col h3 {
+  margin: 0 0 0.45rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.pg-col.drop { border-color: var(--acc); }
+.pg-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #121812;
+  border: 1px solid var(--line);
+  color: inherit;
+  padding: 0.45rem 0.5rem;
+  margin-bottom: 0.35rem;
+  cursor: grab;
+  font-family: var(--sans);
+}
+.pg-card:hover, .pg-card.on { border-color: var(--acc); }
+.pg-card b { display: block; font-size: 12px; color: var(--acc); }
+.pg-card small { display: block; color: var(--mute); font-family: var(--mono); font-size: 10px; margin-top: 0.2rem; }
+.pg-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+.pg-agent {
+  text-align: left;
+  background: var(--bg0);
+  border: 1px solid var(--line);
+  color: inherit;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.pg-agent.on, .pg-agent:hover { border-color: var(--acc); }
+.pg-agent span { display: block; color: var(--mute); font-size: 10px; margin-top: 0.2rem; }
+.pg-steps { display: grid; gap: 0.35rem; margin: 0.75rem 0; }
+.pg-step {
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.5rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mute);
+}
+.pg-step.done { border-color: var(--ok); color: var(--ok); }
+.pg-step.now { border-color: var(--acc); color: var(--acc); }
+.pg-browser-view {
+  border: 1px solid var(--line);
+  background: var(--bg0);
+  padding: 0.75rem;
+  min-height: 120px;
+  font-size: 13px;
+  margin-bottom: 0.75rem;
+}
+@media (max-width: 1100px) {
+  .pg-layout, .pg-kanban { grid-template-columns: 1fr; }
 }

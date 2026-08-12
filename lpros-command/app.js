@@ -1,3 +1,5 @@
+import { bootPlayground } from "./playground-ui.js";
+
 const $ = (id) => document.getElementById(id);
 
 /** Local :8790 uses /api; Netlify uses /lpros-command/api */
@@ -1740,8 +1742,8 @@ $("compareClear")?.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeInspector();
   if (e.target && ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
-  const tabs = ["launch", "market", "packages", "registry", "ops"];
-  if (e.key >= "1" && e.key <= "5") showTab(tabs[Number(e.key) - 1]);
+  const tabs = ["launch", "market", "packages", "registry", "ops", "playground"];
+  if (e.key >= "1" && e.key <= "6") showTab(tabs[Number(e.key) - 1]);
   if (e.key === "/") {
     e.preventDefault();
     showTab("market");
@@ -1766,3 +1768,4 @@ async function bootDesk() {
 
 loadSkus().catch(() => {});
 bootDesk();
+bootPlayground();

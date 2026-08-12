@@ -80,8 +80,9 @@ npm run swarm -- --q "solid wood desk organizer" --category-id 25339 --sold 28 -
 - **Marathon** — 4–5 category long runs + trends + idea factory  
 - **Listing factory** — keyword clusters → conversion packages → promote to SKU registry  
 - **Command desk UI** — tabbed analytics workspace: KPI strip, interactive SVG charts (heat, ladder, histogram, scatter, sellers, lanes), filterable product table + gallery, listing inspector, compare tray, jobs rail  
+- **Agent playground** — job board, sub-agent launcher (Brain + soldiers), allowlisted browser + playbooks, local VM recipes  
 
-Keyboard: `1–5` switch tabs, `/` focuses market search, `Esc` closes inspector.
+Keyboard: `1–6` switch tabs (`6` = playground), `/` focuses market search, `Esc` closes inspector.
 
 Browser playbooks (Terapeak assist): `src/browser/playbooks.md` or `/api/playbook`.
 
@@ -102,6 +103,11 @@ Browser playbooks (Terapeak assist): `src/browser/playbooks.md` or `/api/playboo
 | `GET /api/orchestrate/jobs/:id/packages` | Listing factory packages |
 | `POST /api/orchestrate/jobs/:id/promote` | Promote TEST_NOW packages into SKU registry |
 | `POST /api/orchestrate/jobs/:id/cancel` | Stop after current lane, keep rollup |
+| `GET /api/playground` | Playground health + board + VM snapshot |
+| `POST /api/playground/launch` | Launch Brain/soldier (`dryRun`, optional `spawn`) |
+| `GET /api/playground/jobs` | Job board |
+| `POST /api/playground/browser/fetch` | Allowlisted fetch / official getItem |
+| `POST /api/playground/vm/exec` | Allowlisted VM recipe |
 
 ## Live Sell publish (optional)
 

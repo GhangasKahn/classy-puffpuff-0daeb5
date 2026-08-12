@@ -49,6 +49,31 @@ import {
 } from "../orchestrate/campaign.js";
 import { assemblePackages, promotePackages } from "../orchestrate/factory.js";
 import { requestCancel } from "../orchestrate/jobstore.js";
+import {
+  AGENT_CATALOG,
+  PLAYBOOKS,
+  VM_RECIPES,
+  addCapture,
+  advanceSession,
+  boardSummary,
+  cancelJob,
+  createJob,
+  createSession,
+  fetchAllowed,
+  getJob as getPlaygroundJob,
+  getSession,
+  launchAgent,
+  listJobs as listPlaygroundJobs,
+  listKind,
+  listSessions,
+  persist,
+  retryJob,
+  runRecipe,
+  setJobStatus,
+  slimJob,
+  startJob,
+  vmSnapshot,
+} from "../playground/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -109,6 +134,11 @@ export async function routeApi(req) {
           "/orchestrate/jobs/:id/packages",
           "/orchestrate/jobs/:id/promote",
           "/orchestrate/marathon-defaults",
+          "/playground",
+          "/playground/jobs",
+          "/playground/launch",
+          "/playground/browser/fetch",
+          "/playground/vm",
           "/skus",
           "/export",
           "/publish",
@@ -648,6 +678,162 @@ export async function routeApi(req) {
 
   if (method === "POST" && pathname === "/fulfill/decide") {
     return ok(fulfillDecision(b.order || b, b.policy || {}));
+  }
+
+  // ── Agent playground: job board, sub-agent launcher, browser, VM ──
+  if (method === "GET" && pathname === "/playground") {
+    return ok({
+      ok: true,
+      service: "lpros-playground",
+      catalog: { agents: AGENT_CATALOG.length, playbooks: PLAYBOOKS.length, recipes: VM_RECIPES.length },
+      board: boardSummary(),
+      vm: vmSnapshot(),
+    });
+  }
+  if (method === "GET" && pathname === "/playground/catalog") {
+    return ok({ agents: AGENT_CATALOG, playbooks: PLAYBOOKS, recipes: VM_RECIPES });
+  }
+  if (method === "GET" && pathname === "/playground/board") {
+    return ok(boardSummary());
+  }
+  if (method === "GET" && pathname === "/playground/jobs") {
+    const jobs = listPlaygroundJobs({
+      status: query.get("status") || undefined,
+      agent: query.get("agent") || undefined,
+      kind: query.get("kind") || undefined,
+      limit: Number(query.get("limit") || 80),
+    });
+    return ok({ jobs: jobs.map(slimJob), summary: boardSummary() });
+  }
+  if (method === "POST" && pathname === "/playground/jobs") {
+    const job = createJob({
+      kind: b.kind || (b.agent === "browser" ? "browser" : b.agent === "vm" ? "vm" : "agent"),
+      agent: b.agent || null,
+      title: b.title,
+      priority: b.priority || "P1",
+      parentId: b.parentId || null,
+      input: b.input || b,
+    });
+    if (b.start) {
+      const ran = await startJob(job.id, { sync: b.sync !== false });
+      return ok({ job: slimJob(ran), result: ran.result, status: ran.status });
+    }
+    return ok({ job: slimJob(job) });
+  }
+  if (method === "POST" && pathname === "/playground/launch") {
+    const job = await launchAgent({
+      agent: b.agent,
+      input: b.input || b,
+      spawn: b.spawn,
+      priority: b.priority || "P1",
+      title: b.title,
+      sync: b.sync !== false,
+      dryRun: Boolean(b.dryRun),
+    });
+    return ok({
+      jobId: job.id,
+      status: job.status,
+      agent: job.agent,
+      children: job.children,
+      result: job.result,
+      error: job.error,
+      brief: job.result?.brief || null,
+    });
+  }
+  if (method === "GET" && pathname.match(/^\/playground\/jobs\/[^/]+$/)) {
+    const job = getPlaygroundJob(decodeURIComponent(pathname.split("/").pop()));
+    if (!job) return err(404, "job not found");
+    return ok(job);
+  }
+  if (method === "GET" && pathname.match(/^\/playground\/jobs\/[^/]+\/events$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = getPlaygroundJob(id);
+    if (!job) return err(404, "job not found");
+    const after = Number(query.get("after") || 0);
+    const events = (job.events || []).slice(after);
+    return ok({ events, nextIndex: (job.events || []).length, status: job.status, progress: job.progress });
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/jobs\/[^/]+\/start$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = await startJob(id, { sync: b.sync !== false });
+    if (!job) return err(404, "job not found");
+    return ok({ job: slimJob(job), result: job.result, status: job.status });
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/jobs\/[^/]+\/cancel$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = cancelJob(id);
+    if (!job) return err(404, "job not found");
+    return ok({ job: slimJob(job) });
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/jobs\/[^/]+\/retry$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const job = await retryJob(id, { sync: b.sync !== false });
+    if (!job) return err(404, "job not found");
+    return ok({ job: slimJob(job), result: job.result, status: job.status });
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/jobs\/[^/]+\/status$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    try {
+      const job = setJobStatus(id, b.status);
+      if (!job) return err(404, "job not found");
+      return ok({ job: slimJob(job) });
+    } catch (e) {
+      return err(e.status || 400, e.message);
+    }
+  }
+  if (method === "GET" && pathname === "/playground/browser/sessions") {
+    return ok({ sessions: listSessions(40) });
+  }
+  if (method === "POST" && pathname === "/playground/browser/sessions") {
+    return ok({ session: createSession(b) });
+  }
+  if (method === "GET" && pathname.match(/^\/playground\/browser\/sessions\/[^/]+$/)) {
+    const session = getSession(decodeURIComponent(pathname.split("/").pop()));
+    if (!session) return err(404, "session not found");
+    return ok({ session });
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/browser\/sessions\/[^/]+\/advance$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const session = advanceSession(id, { capture: b.capture });
+    if (!session) return err(404, "session not found");
+    return ok({ session });
+  }
+  if (method === "POST" && pathname.match(/^\/playground\/browser\/sessions\/[^/]+\/capture$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const session = addCapture(id, b);
+    if (!session) return err(404, "session not found");
+    return ok({ session });
+  }
+  if (method === "POST" && pathname === "/playground/browser/fetch") {
+    try {
+      const snapshot = await fetchAllowed(b.url || b.itemId);
+      if (b.sessionId) {
+        const session = getSession(b.sessionId);
+        if (session) {
+          session.snapshots.push({ at: new Date().toISOString(), ...snapshot });
+          session.url = snapshot.url || session.url;
+          session.updatedAt = new Date().toISOString();
+          persist("browser", session);
+        }
+      }
+      return ok({ snapshot });
+    } catch (e) {
+      return err(e.status || 500, e.message);
+    }
+  }
+  if (method === "GET" && pathname === "/playground/vm") {
+    return ok(vmSnapshot());
+  }
+  if (method === "GET" && pathname === "/playground/vm/runs") {
+    return ok({ runs: listKind("vm", 40) });
+  }
+  if (method === "POST" && pathname === "/playground/vm/exec") {
+    try {
+      const run = await runRecipe(b.recipe || "env", b);
+      return ok({ run });
+    } catch (e) {
+      return err(e.status || 500, e.message);
+    }
   }
 
   return err(404, `not found: ${method} ${pathname}`);
