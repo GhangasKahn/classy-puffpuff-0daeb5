@@ -69,8 +69,8 @@
     </section>
 
     <section class="panel" id="orchPanel">
-      <h2>Agent deploy · logging</h2>
-      <p class="sub">One click: crawl → buyer patterns → category narrow → 100s of title/keyword variants → SEO + cost + image checklist → decision spreadsheet. No manual research loop.</p>
+      <h2>Agent deploy · hardened research</h2>
+      <p class="sub">Live Browse intel → real products (images + listing URLs) → getItem page content (description/specifics) → pattern mine → title swarm → decision workbook. Official APIs only — not eBay HTML scrape.</p>
       <form id="orchForm" class="grid">
         <label>Query
           <input name="q" value="solid wood desk organizer" />
@@ -87,6 +87,9 @@
         <label>Title variants
           <input name="variantCount" type="number" value="200" />
         </label>
+        <label>Item details
+          <input name="detailCount" type="number" value="12" />
+        </label>
         <label>Live probes
           <input name="liveProbeCount" type="number" value="12" />
         </label>
@@ -98,15 +101,17 @@
         </label>
       </form>
       <div class="cta-row" style="margin-bottom:1rem">
-        <button type="button" class="btn primary" id="btnOrchDeploy">Deploy mission</button>
+        <button type="button" class="btn primary" id="btnOrchDeploy">Deploy research mission</button>
         <button type="button" class="btn ghost" id="btnOrchJobs">Refresh jobs</button>
-        <button type="button" class="btn" id="btnOrchCsv" disabled>Download spreadsheet</button>
+        <button type="button" class="btn" id="btnOrchCsv" disabled>Download workbook CSV</button>
+        <button type="button" class="btn ghost" id="btnOrchProductsCsv" disabled>Products only CSV</button>
       </div>
       <div class="orch-status" id="orchStatus">
         <div class="orch-meter"><span id="orchPct" style="width:0%"></span></div>
-        <p class="sub" id="orchPhase">Idle — deploy to start agents</p>
+        <p class="sub" id="orchPhase">Idle — deploy for live product research</p>
       </div>
       <pre id="orchLog" class="out tall orch-log" aria-live="polite"></pre>
+      <div id="orchGallery" class="gallery" hidden></div>
       <div id="orchRecs" class="board" hidden></div>
       <div id="orchTableWrap" class="orch-table-wrap" hidden>
         <table class="orch-table" id="orchTable">

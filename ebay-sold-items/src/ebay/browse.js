@@ -177,3 +177,128 @@ function normalizeBrowseItem(it) {
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
+
+/**
+ * Full listing detail — official Browse getItem (description, gallery, specifics).
+ * This is the ToS-safe substitute for HTML page scraping.
+ * GET /buy/browse/v1/item/{item_id}
+ */
+export async function getBrowseItem(itemId, { fieldgroups } = {}) {
+  if (!itemId) throw new Error("itemId required");
+  const id = encodeURIComponent(String(itemId));
+  const query = {};
+  // PRODUCT for enriched product fields when available
+  if (fieldgroups) query.fieldgroups = String(fieldgroups);
+  else query.fieldgroups = "PRODUCT";
+
+  const { ok, status, json } = await ebayFetch(`/buy/browse/v1/item/${id}`, { query });
+  if (!ok) {
+    const err = new Error(
+      `Browse getItem failed (${status}): ${json.errors?.[0]?.message || JSON.stringify(json)}`
+    );
+    err.status = status;
+    err.payload = json;
+    throw err;
+  }
+  return normalizeBrowseItemDetail(json);
+}
+
+/**
+ * Batch fetch details for ranked candidates (rate-limit friendly sequential).
+ */
+export async function enrichItemsWithDetails(items = [], { max = 12, delayMs = 200 } = {}) {
+  const out = [];
+  const slice = (items || []).filter((it) => it?.id).slice(0, max);
+  for (const it of slice) {
+    try {
+      const detail = await getBrowseItem(it.id);
+      out.push({
+        ...it,
+        ...detail,
+        // preserve search rank fields
+        rank: it.rank,
+        rankScore: it.rankScore,
+        perceivedValue: it.perceivedValue ?? detail.perceivedValue,
+        image: detail.image || it.image,
+        images: detail.images?.length ? detail.images : it.images,
+        url: detail.url || it.url,
+        detailFetched: true,
+      });
+    } catch (e) {
+      out.push({
+        ...it,
+        detailFetched: false,
+        detailError: e.message,
+      });
+    }
+    if (delayMs > 0) await sleep(delayMs);
+  }
+  return out;
+}
+
+function normalizeBrowseItemDetail(it) {
+  const base = normalizeBrowseItem(it);
+  const descHtml = it.description || it.shortDescription || "";
+  const specifics = {};
+  for (const g of it.localizedAspects || []) {
+    if (g?.name && g?.value != null) specifics[g.name] = g.value;
+  }
+  // Also common product aspects
+  for (const g of it.product?.aspects || []) {
+    const name = g?.name || g?.localizedName;
+    const vals = g?.values || g?.value;
+    if (name && vals != null) specifics[name] = Array.isArray(vals) ? vals.join(", ") : vals;
+  }
+  const quantity =
+    it.estimatedAvailabilities?.[0]?.estimatedAvailableQuantity ??
+    it.estimatedAvailabilities?.[0]?.availabilityThreshold ??
+    null;
+
+  return {
+    ...base,
+    descriptionHtml: descHtml,
+    descriptionText: stripHtml(descHtml).slice(0, 4000),
+    shortDescription: it.shortDescription || null,
+    itemSpecifics: specifics,
+    brand: it.brand || specifics.Brand || it.product?.brand || null,
+    mpn: it.mpn || specifics.MPN || null,
+    gtin: it.gtin || null,
+    epid: it.epid || it.product?.epid || null,
+    categoryPath: (it.categoryPath || "").replace(/\|/g, " > ") || null,
+    categoryIdLeaf: it.categoryId || base.leafCategoryIds?.[0] || null,
+    imageCount: base.images?.length || 0,
+    sellerFeedbackScore:
+      it.seller?.feedbackScore != null ? Number(it.seller.feedbackScore) : null,
+    quantityAvailable: quantity != null ? Number(quantity) : null,
+    shippingOptions: (it.shippingOptions || []).slice(0, 3).map((s) => ({
+      type: s.shippingCarrierCode || s.type,
+      cost: s.shippingCost?.value != null ? Number(s.shippingCost.value) : null,
+      currency: s.shippingCost?.currency,
+    })),
+    returnTerms: it.returnTerms
+      ? {
+          returnsAccepted: it.returnTerms.returnsAccepted,
+          refundMethod: it.returnTerms.refundMethod,
+          returnPeriod: it.returnTerms.returnPeriod,
+        }
+      : null,
+    localizedTitle: it.title,
+    rawItemId: it.itemId,
+  };
+}
+
+function stripHtml(html) {
+  return String(html || "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export { stripHtml };

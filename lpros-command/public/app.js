@@ -378,9 +378,11 @@ function orchPayload() {
     cost: Number(fd.get("cost")),
     suggestedPrice: Number(fd.get("suggestedPrice")),
     variantCount: Number(fd.get("variantCount")),
+    detailCount: Number(fd.get("detailCount") || 12),
     liveProbeCount: Number(fd.get("liveProbeCount")),
     minPrice: Number(fd.get("minPrice")),
     maxPrice: Number(fd.get("maxPrice")),
+    crawlPages: 2,
     sync: location.port !== "8790",
   };
 }
@@ -400,7 +402,31 @@ function setOrchProgress(progress) {
   $("orchPct").style.width = `${pct}%`;
   $("orchPhase").textContent = progress
     ? `${progress.phase || "…"} · ${pct}%`
-    : "Idle — deploy to start agents";
+    : "Idle — deploy for live product research";
+}
+
+function renderOrchGallery(gallery) {
+  const el = $("orchGallery");
+  if (!gallery?.length) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.innerHTML = gallery
+    .slice(0, 16)
+    .map(
+      (g) => `
+    <a class="gal-card" href="${escapeHtml(g.url || "#")}" target="_blank" rel="noopener">
+      ${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" />` : `<div class="gal-ph"></div>`}
+      <div class="gal-meta">
+        <span>$${Number(g.price || 0).toFixed(2)}</span>
+        <span>${g.imageCount != null ? `${g.imageCount} imgs` : ""}</span>
+        <span>${escapeHtml((g.title || "").slice(0, 48))}</span>
+      </div>
+    </a>`
+    )
+    .join("");
 }
 
 function renderOrchRecs(recs) {
@@ -410,63 +436,95 @@ function renderOrchRecs(recs) {
     return;
   }
   el.hidden = false;
+  const beat = recs.productsToBeat || [];
   const testNow = recs.testNow || [];
-  el.innerHTML = testNow
-    .slice(0, 8)
-    .map(
-      (r) => `
+  el.innerHTML =
+    beat
+      .slice(0, 6)
+      .map(
+        (r) => `
+    <article class="card-row">
+      ${r.image ? `<img class="thumb" src="${escapeHtml(r.image)}" alt="" loading="lazy" />` : `<div class="thumb"></div>`}
+      <div>
+        <h3><a href="${escapeHtml(r.url || "#")}" target="_blank" rel="noopener">${escapeHtml((r.title || "").slice(0, 90))}</a></h3>
+        <div class="meta">
+          <span class="badge-dec">BEAT THIS</span>
+          <span><b>$${Number(r.price || 0).toFixed(2)}</b></span>
+          <span>${r.imageCount ?? 0} images</span>
+          <span>${escapeHtml((r.weaknesses || [])[0] || "")}</span>
+        </div>
+      </div>
+    </article>`
+      )
+      .join("") +
+    testNow
+      .slice(0, 4)
+      .map(
+        (r) => `
     <article class="card-row">
       <div>
         <h3>${escapeHtml((r.title || "").slice(0, 90))}</h3>
         <div class="meta">
           <span class="badge-dec ${escapeHtml(r.decision || "")}">${escapeHtml(r.decision || "")}</span>
           <span>SEO <b>${r.seoScore ?? "—"}</b></span>
-          <span>Pri <b>${escapeHtml(r.testPriority || "")}</b></span>
           <span>Net <b>$${Number(r.estNet || 0).toFixed(2)}</b></span>
-          <span>${escapeHtml(r.primaryKeyword || "")}</span>
         </div>
       </div>
     </article>`
-    )
-    .join("");
+      )
+      .join("");
 }
 
-function renderOrchTable(rows) {
+function renderOrchTable(products) {
   const wrap = $("orchTableWrap");
   const table = $("orchTable");
-  if (!rows?.length) {
+  if (!products?.length) {
     wrap.hidden = true;
     return;
   }
   wrap.hidden = false;
   const cols = [
     "rank",
-    "decision",
-    "testPriority",
-    "seoScore",
+    "price",
+    "imageCount",
     "title",
-    "suggestedPrice",
-    "landedCost",
-    "estNet",
-    "liveTotal",
-    "outrankNotes",
+    "seller",
+    "contentSignals",
+    "url",
   ];
   table.querySelector("thead").innerHTML = `<tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>`;
-  table.querySelector("tbody").innerHTML = rows
+  table.querySelector("tbody").innerHTML = products
     .slice(0, 40)
     .map(
       (r) => `<tr>${cols
         .map((c) => {
           let v = r[c];
           if (c === "title") v = String(v || "").slice(0, 70);
-          if (c === "decision") {
-            return `<td><span class="badge-dec ${escapeHtml(String(v || ""))}">${escapeHtml(String(v || ""))}</span></td>`;
+          if (c === "contentSignals") v = Array.isArray(v) ? v.join(", ") : v;
+          if (c === "url" && v) {
+            return `<td><a href="${escapeHtml(String(v))}" target="_blank" rel="noopener">listing</a></td>`;
           }
           return `<td>${escapeHtml(v == null ? "" : String(v))}</td>`;
         })
         .join("")}</tr>`
     )
     .join("");
+}
+
+function finishOrchUi(job, data) {
+  const gallery = job?.results?.gallery || data?.gallery || [];
+  const products = job?.results?.productsPreview || job?.results?.products || [];
+  const recs = job?.results?.recommendations || data?.recommendations;
+  renderOrchGallery(gallery);
+  renderOrchRecs(recs);
+  renderOrchTable(products);
+  const n = job?.results?.productCount ?? data?.productCount ?? products.length;
+  const imgs = job?.results?.productsWithImages ?? data?.productsWithImages;
+  if (n != null) {
+    $("orchPhase").textContent = `done · ${n} products researched${imgs != null ? ` · ${imgs} with images` : ""}`;
+  }
+  $("btnOrchCsv").disabled = false;
+  $("btnOrchProductsCsv").disabled = false;
 }
 
 async function pollOrchJob() {
@@ -482,9 +540,7 @@ async function pollOrchJob() {
       clearInterval(orchPollTimer);
       orchPollTimer = null;
       const job = await get(`/orchestrate/jobs/${encodeURIComponent(orchJobId)}`);
-      renderOrchRecs(job.results?.recommendations);
-      renderOrchTable(job.results?.variantsPreview || []);
-      $("btnOrchCsv").disabled = ev.status !== "completed";
+      if (ev.status === "completed") finishOrchUi(job);
       $("btnOrchDeploy").disabled = false;
       if (ev.status === "failed") {
         $("orchPhase").textContent = `Failed — ${job.error || "see log"}`;
@@ -499,8 +555,10 @@ $("btnOrchDeploy").onclick = async () => {
   $("btnOrchDeploy").disabled = true;
   $("orchLog").textContent = "";
   $("btnOrchCsv").disabled = true;
+  $("btnOrchProductsCsv").disabled = true;
   $("orchRecs").hidden = true;
   $("orchTableWrap").hidden = true;
+  $("orchGallery").hidden = true;
   orchEventIdx = 0;
   if (orchPollTimer) clearInterval(orchPollTimer);
   try {
@@ -519,9 +577,7 @@ $("btnOrchDeploy").onclick = async () => {
       const job = await get(`/orchestrate/jobs/${encodeURIComponent(orchJobId)}`);
       appendOrchLog(job.events || []);
       setOrchProgress(job.progress);
-      renderOrchRecs(job.results?.recommendations || data.recommendations);
-      renderOrchTable(job.results?.variantsPreview || []);
-      $("btnOrchCsv").disabled = false;
+      finishOrchUi(job, data);
       $("btnOrchDeploy").disabled = false;
     } else if (data.status === "failed") {
       appendOrchLog([{ at: new Date().toISOString(), level: "error", message: data.error || "failed" }]);
@@ -546,27 +602,39 @@ $("btnOrchJobs").onclick = async () => {
   $("orchLog").textContent = (data.jobs || [])
     .map(
       (j) =>
-        `${j.id} · ${j.status} · ${j.query || ""} · variants=${j.variantCount || 0} · ${j.progress?.phase || ""}`
+        `${j.id} · ${j.status} · ${j.query || ""} · products=${j.productCount || 0} · variants=${j.variantCount || 0} · ${j.progress?.phase || ""}`
     )
     .join("\n");
 };
 
-$("btnOrchCsv").onclick = async () => {
+async function downloadOrchCsv(qs) {
   if (!orchJobId) return;
+  const r = await fetch(
+    `${API_BASE}/orchestrate/jobs/${encodeURIComponent(orchJobId)}/spreadsheet${qs}`
+  );
+  if (!r.ok) {
+    const j = await r.json().catch(() => ({}));
+    throw new Error(j.error || r.statusText);
+  }
+  const blob = await r.blob();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `lpros-${qs.includes("products") ? "products" : "workbook"}-${orchJobId}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+$("btnOrchCsv").onclick = async () => {
   try {
-    const r = await fetch(
-      `${API_BASE}/orchestrate/jobs/${encodeURIComponent(orchJobId)}/spreadsheet`
-    );
-    if (!r.ok) {
-      const j = await r.json().catch(() => ({}));
-      throw new Error(j.error || r.statusText);
-    }
-    const blob = await r.blob();
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `lpros-decision-${orchJobId}.csv`;
-    a.click();
-    URL.revokeObjectURL(a.href);
+    await downloadOrchCsv("?workbook=1");
+  } catch (e) {
+    appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
+  }
+};
+
+$("btnOrchProductsCsv").onclick = async () => {
+  try {
+    await downloadOrchCsv("?products=1");
   } catch (e) {
     appendOrchLog([{ at: new Date().toISOString(), level: "error", message: String(e.message || e) }]);
   }

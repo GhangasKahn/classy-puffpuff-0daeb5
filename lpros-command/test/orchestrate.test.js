@@ -26,13 +26,16 @@ describe("orchestrate dry-run", () => {
       { sync: true }
     );
     assert.equal(job.status, "completed");
+    assert.ok(job.results.products.length >= 1);
     assert.ok(job.results.variants.length >= 10);
     assert.ok(job.results.spreadsheetCsv.includes("seo_score"));
+    assert.ok(job.results.productSpreadsheetCsv.includes("PRODUCT") || job.results.productSpreadsheetCsv.includes("itemId") || job.results.productSpreadsheetCsv.includes("url"));
+    assert.ok(job.results.workbookCsv.includes("PRODUCT_RESEARCH"));
     assert.ok(job.events.some((e) => /complete/i.test(e.message)));
 
-    const sheet = getJobSpreadsheet(job.id);
+    const sheet = getJobSpreadsheet(job.id, { workbook: true });
     assert.equal(sheet.ready, true);
-    assert.ok(sheet.csv.split("\n").length > 5);
+    assert.ok(sheet.csv.includes("TITLE_KEYWORD_TESTS"));
 
     const ev = getJobEvents(job.id, 0);
     assert.ok(ev.events.length > 3);
@@ -62,15 +65,15 @@ describe("orchestrate API", () => {
       pathname: `/orchestrate/jobs/${jobId}`,
     });
     assert.equal(job.status, 200);
-    assert.ok(job.body.results.variantsPreview.length > 0);
+    assert.ok((job.body.results.productsPreview || []).length > 0);
 
     const csv = await routeApi({
       method: "GET",
       pathname: `/orchestrate/jobs/${jobId}/spreadsheet`,
-      query: new URLSearchParams(),
+      query: new URLSearchParams({ workbook: "1" }),
     });
     assert.equal(csv.status, 200);
     assert.match(csv.type, /csv/);
-    assert.ok(String(csv.body).includes("decision"));
+    assert.ok(String(csv.body).includes("PRODUCT_RESEARCH"));
   });
 });

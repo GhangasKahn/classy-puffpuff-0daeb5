@@ -376,6 +376,7 @@ export async function routeApi(req) {
       seedQueries: b.seedQueries,
       crawlPages: onNetlify ? 1 : b.crawlPages ?? 1,
       crawlLimit: onNetlify ? 40 : b.crawlLimit,
+      detailCount: onNetlify ? Math.min(Number(b.detailCount ?? 5), 6) : b.detailCount ?? 12,
       dryRun: Boolean(b.dryRun),
     };
     const jobOrPromise = deployMission(config, { sync });
@@ -386,10 +387,14 @@ export async function routeApi(req) {
       progress: job.progress,
       sync,
       note: sync
-        ? "Ran synchronously (Netlify-friendly). Download CSV via /orchestrate/jobs/:id/spreadsheet"
+        ? "Ran synchronously. Download workbook CSV via /orchestrate/jobs/:id/spreadsheet?workbook=1"
         : "Deployed async — poll /orchestrate/jobs/:id/events for live log",
       error: job.error || undefined,
+      researched: job.results?.researched,
+      productCount: job.results?.productCount,
+      productsWithImages: job.results?.productsWithImages,
       recommendations: job.results?.recommendations,
+      gallery: job.results?.gallery?.slice(0, 8),
       variantCount: job.results?.variants?.length,
     });
   }
@@ -413,11 +418,19 @@ export async function routeApi(req) {
       events: job.events?.slice(-80),
       results: job.results
         ? {
+            researched: job.results.researched,
+            productCount: job.results.productCount,
+            productsWithImages: job.results.productsWithImages,
+            productsWithUrls: job.results.productsWithUrls,
+            productsWithDetail: job.results.productsWithDetail,
             narrowedCategory: job.results.narrowedCategory,
             patterns: job.results.patterns,
             pipelineSummary: job.results.pipelineSummary,
             variantTotalGenerated: job.results.variantTotalGenerated,
             recommendations: job.results.recommendations,
+            intel: job.results.intel,
+            gallery: job.results.gallery,
+            productsPreview: (job.results.products || []).slice(0, 20),
             variantsPreview: (job.results.variants || []).slice(0, 25),
             columns: job.results.columns,
           }
@@ -438,7 +451,10 @@ export async function routeApi(req) {
   if (method === "GET" && pathname.match(/^\/orchestrate\/jobs\/[^/]+\/spreadsheet$/)) {
     const parts = pathname.split("/");
     const jobId = decodeURIComponent(parts[parts.length - 2]);
-    const sheet = getJobSpreadsheet(jobId);
+    const sheet = getJobSpreadsheet(jobId, {
+      workbook: query.get("workbook") === "1" || query.get("workbook") === "true",
+      products: query.get("products") === "1" || query.get("products") === "true",
+    });
     if (!sheet) return err(404, "job not found");
     if (query.get("format") === "json") return ok(sheet);
     if (!sheet.ready) {
