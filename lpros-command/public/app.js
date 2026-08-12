@@ -1,7 +1,15 @@
 const $ = (id) => document.getElementById(id);
 
+/** Local :8790 uses /api; Netlify uses /lpros-command/api */
+const API_BASE = (() => {
+  const { port, pathname } = location;
+  if (port === "8790") return "/api";
+  if (pathname.includes("/lpros-command")) return "/lpros-command/api";
+  return "/lpros-command/api";
+})();
+
 async function post(path, body) {
-  const r = await fetch(path, {
+  const r = await fetch(`${API_BASE}${path.replace(/^\/api/, "")}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -10,6 +18,14 @@ async function post(path, body) {
   if (!r.ok) throw new Error(j.error || r.statusText);
   return j;
 }
+
+async function get(path) {
+  const r = await fetch(`${API_BASE}${path.replace(/^\/api/, "")}`);
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.error || r.statusText);
+  return j;
+}
+
 
 function numOrNull(v) {
   if (v == null || v === "") return null;
@@ -144,7 +160,7 @@ function renderSkus(skus) {
 }
 
 async function loadSkus() {
-  const r = await fetch("/api/skus");
+  const r = await fetch(`${API_BASE}/skus`);
   const data = await r.json();
   renderSkus(data.skus || []);
   return data;
@@ -256,8 +272,8 @@ $("outcomeForm").onsubmit = async (e) => {
 };
 
 $("btnOutcomes").onclick = async () => {
-  const r = await fetch("/api/outcomes?limit=15");
-  $("outcomeOut").textContent = JSON.stringify(await r.json(), null, 2);
+  const data = await get("/outcomes?limit=15");
+  $("outcomeOut").textContent = JSON.stringify(data, null, 2);
 };
 
 $("econForm").onsubmit = async (e) => {
@@ -283,8 +299,7 @@ $("forecastForm").onsubmit = async (e) => {
 };
 
 $("btnProviders").onclick = async () => {
-  const r = await fetch("/api/providers");
-  $("fulfillOut").textContent = JSON.stringify(await r.json(), null, 2);
+  $("fulfillOut").textContent = JSON.stringify(await get("/providers"), null, 2);
 };
 
 $("btnFulfillDemo").onclick = async () => {
@@ -317,8 +332,7 @@ $("btnExport").onclick = async () => {
 };
 
 $("btnAuth").onclick = async () => {
-  const r = await fetch("/api/auth/status");
-  $("opsOut").textContent = JSON.stringify(await r.json(), null, 2);
+  $("opsOut").textContent = JSON.stringify(await get("/auth/status"), null, 2);
 };
 
 $("publishForm").onsubmit = async (e) => {
@@ -355,8 +369,11 @@ $("orderForm").onsubmit = async (e) => {
 };
 
 $("btnOrders").onclick = async () => {
-  const r = await fetch("/api/orders");
-  $("orderOut").textContent = JSON.stringify(await r.json(), null, 2);
+  $("orderOut").textContent = JSON.stringify(await get("/orders"), null, 2);
 };
+
+// Fix playbook link for Netlify vs local
+const playbook = document.getElementById("playbookLink");
+if (playbook) playbook.href = `${API_BASE}/playbook`;
 
 loadSkus().catch(() => {});

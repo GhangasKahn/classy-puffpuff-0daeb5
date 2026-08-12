@@ -11,7 +11,11 @@ import {
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../data");
+const root = process.env.LPROS_DATA_DIR
+  ? resolve(process.env.LPROS_DATA_DIR)
+  : process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME
+    ? resolve("/tmp/lpros-command-data")
+    : resolve(dirname(fileURLToPath(import.meta.url)), "../../data");
 
 export function dataPath(...parts) {
   return resolve(root, ...parts);

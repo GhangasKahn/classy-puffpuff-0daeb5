@@ -31,6 +31,20 @@ npm run ops -- auth
 
 Without a user refresh token you still run a real business from the desk: research → evidence → registry → CSV into Seller Hub → order ingest → HOLD until tracking exists.
 
+## Netlify deploy
+
+Live path after deploy: **`/lpros-command/`** (also `/lpros`).
+
+API: `/lpros-command/api/*` → Netlify Function `lpros-api` (26s timeout).
+
+1. Push this repo to the linked Netlify site (or `npx netlify deploy --prod`).
+2. In Netlify → Site settings → Environment variables, set at least:
+   - `EBAY_ENV=production`
+   - `EBAY_PRD_APP_ID` / `EBAY_PRD_CERT_ID` (and Dev ID)
+3. Redeploy. Open `https://<site>.netlify.app/lpros-command/`
+
+Notes: SKU/order JSON on Netlify is **ephemeral** (`/tmp`). For durable registry use local `npm start` or add a DB later. See `netlify-env.example`.
+
 ## Start desk
 
 ```bash

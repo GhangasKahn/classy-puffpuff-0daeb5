@@ -6,7 +6,11 @@ import { writeFileSync, readFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const dataDir = resolve(dirname(fileURLToPath(import.meta.url)), "../../data");
+const dataDir = process.env.LPROS_DATA_DIR
+  ? resolve(process.env.LPROS_DATA_DIR)
+  : process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME
+    ? resolve("/tmp/lpros-outcomes")
+    : resolve(dirname(fileURLToPath(import.meta.url)), "../../data");
 const logPath = resolve(dataDir, "outcomes.jsonl");
 const weightsPath = resolve(dataDir, "psych_weights.json");
 

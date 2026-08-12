@@ -1,0 +1,22 @@
+# Netlify / production env for LPROS Command
+# Set these in Netlify UI → Site settings → Environment variables
+# (Do NOT commit real Cert IDs.)
+
+EBAY_ENV=production
+EBAY_MARKETPLACE_ID=EBAY_US
+
+# Production keyset
+EBAY_PRD_APP_ID=
+EBAY_PRD_CERT_ID=
+EBAY_PRD_DEV_ID=
+
+# Optional aliases
+# EBAY_APP_ID=
+# EBAY_CERT_ID=
+
+# Optional Sell APIs (live publish)
+# EBAY_USER_REFRESH_TOKEN=
+# EBAY_FULFILLMENT_POLICY_ID=
+# EBAY_PAYMENT_POLICY_ID=
+# EBAY_RETURN_POLICY_ID=
+# EBAY_MERCHANT_LOCATION_KEY=
