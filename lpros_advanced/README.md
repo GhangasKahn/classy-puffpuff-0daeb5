@@ -43,6 +43,7 @@ lpros_advanced/
 | Accuracy | accuracy-audit skill | Continuous calibration against reality |
 | Constraint thinking | physics-informed skill | Capital conservation & irreversibility mindset |
 | eBay evidence | ebay-listings skill | Sold/active comps via `ebay-sold-items` bridge |
+| LPROS runtime | lpros-runtime skill | Economics engine, zero-trust gates, research pipeline |
 
 ## How to Install
 

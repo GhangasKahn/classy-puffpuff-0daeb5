@@ -2008,7 +2008,7 @@ function LiveMarketView({ cloud }) {
                   {altComps.evidenceStatus && (
                     <span className="lbl" style={{ marginLeft: 8, color: altComps.evidenceStatus === "ok" ? "var(--ok)" : altComps.evidenceStatus === "partial" ? "var(--acc)" : "var(--acc2)" }}>
                       {String(altComps.evidenceStatus).toUpperCase()}
-                      {altComps.listingsNeeded ? " · LISTINGS-NEEDED" : ""}
+                      {altComps.listingsNeeded ? " · LISTINGS-NEEDED" : altComps.soldEvidenceMissing ? " · SOLD EVIDENCE MISSING" : ""}
                     </span>
                   )}
                 </div>

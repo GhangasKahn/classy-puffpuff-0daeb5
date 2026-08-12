@@ -1,0 +1,22 @@
+{
+  "minMargin": 0.12,
+  "maxDensity": 800,
+  "maxRemorse": 0.65,
+  "minDemandConfidence": 0.15,
+  "priceBand": [25, 80],
+  "defaultCostRatio": 0.45,
+  "returnsBufferRate": 0.04,
+  "assumedStr": 0.015,
+  "fvfRate": 0.136,
+  "compliance": {
+    "allowRetailArbitrage": false,
+    "maxLeadDays": 12
+  },
+  "paidData": {
+    "zik": {
+      "enabled": false,
+      "role": "cross_check_only",
+      "note": "Never sole demand authority under zero-trust rules"
+    }
+  }
+}
