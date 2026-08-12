@@ -6,6 +6,7 @@ import { searchActiveListings } from "../../../ebay-sold-items/src/ebay/browse.j
 import { sellThroughProxy, competitionDensity } from "../../../lpros/src/core/bayesian.js";
 import { psychProxies } from "../../../lpros/src/core/psychology.js";
 import { netProfitPerSale } from "../../../lpros/src/core/economics.js";
+import { rankMarket } from "../../../lpros/src/core/ranker.js";
 
 export async function competitorIntel({
   q,
@@ -67,7 +68,7 @@ export async function competitorIntel({
     p90: percentile(prices, 0.9),
   };
 
-  const scored = items.slice(0, 40).map((it) => {
+  const scored = items.slice(0, 80).map((it) => {
     const psych = psychProxies({ title: it.title, salePrice: it.price, categoryMedianPrice: ladder.p50 });
     const cost = (it.price || 0) * productCostRatio;
     const econ = netProfitPerSale({
@@ -79,20 +80,56 @@ export async function competitorIntel({
       id: it.id,
       title: it.title,
       price: it.price,
+      salePrice: it.price,
       seller: it.seller,
       url: it.url,
       condition: it.condition,
+      image: it.image,
+      images: it.images || [],
+      thumbnail: it.thumbnail,
+      watchCount: it.watchCount,
       perceivedValue: psych.perceivedValue,
       scammy: psych.scammy,
       psychFit: psych.psychFit,
       netAtCostRatio: econ.net,
       marginPct: econ.marginPct,
+      productCost: cost,
+      activeCount: page.total || items.length,
+      soldCount: 0,
+      soldEvidenceMissing: true,
+      categoryMedianPrice: ladder.p50,
     };
   });
 
-  const lethal = scored
-    .filter((s) => !s.scammy && s.perceivedValue >= 0.25 && s.netAtCostRatio > 0 && s.price >= minPrice)
-    .sort((a, b) => b.perceivedValue * b.netAtCostRatio - a.perceivedValue * a.netAtCostRatio);
+  const marketRank = rankMarket(scored, {
+    minPrice,
+    maxPrice,
+    costRatio: productCostRatio,
+  });
+
+  const lethal = marketRank.ranked.slice(0, 20).map((r) => ({
+    id: r.id,
+    title: r.title,
+    price: r.salePrice ?? r.price,
+    seller: r.seller,
+    url: r.url,
+    condition: r.condition,
+    image: r.image,
+    images: r.images,
+    watchCount: r.watchCount,
+    perceivedValue: r.psych?.perceivedValue ?? r.perceivedValue,
+    scammy: r.psych?.scammy,
+    psychFit: r.psych?.psychFit,
+    netAtCostRatio: r.economics?.net,
+    marginPct: r.economics?.marginPct,
+    rank: r.rank,
+    rankScore: r.rankScore,
+    sellThrough: r.metrics?.sellThrough?.rate,
+    ctrProxy: r.metrics?.ctr?.rate,
+    popularity: r.metrics?.popularity,
+    purchaseHistory: r.metrics?.purchaseHistory,
+    components: r.components,
+  }));
 
   return {
     query: q || null,
@@ -106,8 +143,35 @@ export async function competitorIntel({
       sellThroughProxy: { ...st, caveat: "Synthetic until Marketplace Insights entitled" },
       sellerConcentrationHHI: Math.round(hhi * 10000) / 10000,
       topSellers: sellerRows.slice(0, 12),
+      algorithm: marketRank.algorithm,
+      weights: marketRank.weights,
+      rankStats: marketRank.stats,
     },
-    lethalCandidates: lethal.slice(0, 20),
+    lethalCandidates: lethal,
+    viz: marketRank.ranked.slice(0, 20).length
+      ? {
+          gallery: lethal.slice(0, 12).map((r) => ({
+            rank: r.rank,
+            title: (r.title || "").slice(0, 70),
+            image: r.image,
+            price: r.price,
+            url: r.url,
+            score: r.rankScore,
+          })),
+          strBars: lethal.map((r) => ({ rank: r.rank, str: r.sellThrough || 0, conf: 0.2 })),
+          popularityBars: lethal.map((r) => ({
+            rank: r.rank,
+            popularity: r.popularity || 0,
+            ctrProxy: r.ctrProxy || 0,
+          })),
+          priceVsRank: lethal.map((r) => ({
+            rank: r.rank,
+            price: r.price,
+            score: r.rankScore,
+            title: (r.title || "").slice(0, 40),
+          })),
+        }
+      : null,
     rejectedScamSample: scored.filter((s) => s.scammy).slice(0, 8),
     vsZik: {
       parity: ["active competition snapshot", "price distribution", "seller share"],
@@ -115,9 +179,14 @@ export async function competitorIntel({
         "true fee/net economics (cash-is-truth)",
         "scam/red-flag kill filters",
         "perceived-value / upgrade / problem-solve scoring",
+        "LPROS_Rank multi-factor (STR/CTR-proxy/popularity/cash)",
         "zero-trust multi-factor gates",
       ],
-      gap: ["official sold/STR history requires Insights or Terapeak browser assist"],
+      gap: [
+        "official sold/STR history requires Insights or Terapeak browser assist",
+        "official CTR not in Browse API — engagement proxy only",
+        "watchCount often restricted without App Check",
+      ],
     },
   };
 }

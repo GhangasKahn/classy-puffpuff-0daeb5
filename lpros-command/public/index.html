@@ -78,6 +78,32 @@
       <div id="board" class="board"></div>
     </section>
 
+    <section class="panel" id="vizPanel" hidden>
+      <h2>Market visualization</h2>
+      <p class="sub">Images · LPROS rank · STR · CTR proxy · popularity — CTR/purchase history honest about API gaps</p>
+      <div id="gallery" class="gallery"></div>
+      <div class="viz-grid">
+        <div>
+          <h3 class="viz-title">Sell-through (proxy)</h3>
+          <svg id="chartStr" class="chart" viewBox="0 0 320 140" role="img" aria-label="STR chart"></svg>
+        </div>
+        <div>
+          <h3 class="viz-title">Popularity vs CTR proxy</h3>
+          <svg id="chartPop" class="chart" viewBox="0 0 320 140" role="img" aria-label="Popularity chart"></svg>
+        </div>
+        <div>
+          <h3 class="viz-title">Price vs rank score</h3>
+          <svg id="chartScatter" class="chart" viewBox="0 0 320 140" role="img" aria-label="Price rank scatter"></svg>
+        </div>
+      </div>
+      <div id="historyPanel" class="history" hidden>
+        <h3 class="viz-title">Purchase history</h3>
+        <p class="sub" id="historyCaveat"></p>
+        <div id="historyList" class="board"></div>
+      </div>
+      <pre id="rankMeta" class="out"></pre>
+    </section>
+
     <section class="panel" id="draftPanel" hidden>
       <h2>Listing drafts</h2>
       <p class="sub">Deterministic copy shells — edit before publish</p>

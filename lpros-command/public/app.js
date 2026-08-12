@@ -83,15 +83,19 @@ function renderBoard(rows) {
     .map(
       (r, i) => `
     <article class="card-row">
+      ${r.image ? `<img class="thumb" src="${escapeHtml(r.image)}" alt="" loading="lazy" />` : `<div class="thumb"></div>`}
       <div>
         <h3>${escapeHtml((r.title || "").slice(0, 100))}</h3>
         <div class="meta">
+          ${r.rank != null ? `<span>Rank <b>#${r.rank}</b></span>` : ""}
           <span><b>$${Number(r.salePrice || 0).toFixed(2)}</b> price</span>
           <span><b>$${Number(r.net || 0).toFixed(2)}</b> net*</span>
           <span>PV <b>${r.perceivedValue ?? "—"}</b></span>
+          ${r.sellThrough != null ? `<span>STR <b>${(Number(r.sellThrough) * 100).toFixed(1)}%</b></span>` : ""}
+          ${r.ctrProxy != null ? `<span>CTR≈ <b>${(Number(r.ctrProxy) * 100).toFixed(2)}%</b></span>` : ""}
+          ${r.popularity != null ? `<span>Pop <b>${Number(r.popularity).toFixed(2)}</b></span>` : ""}
           <span>${escapeHtml(r.decision || "")}</span>
           <span>${escapeHtml(r.source || "")}</span>
-          ${(r.flags || []).slice(0, 3).map((f) => `<span>${escapeHtml(f)}</span>`).join("")}
         </div>
       </div>
       <div>
@@ -123,6 +127,139 @@ function renderBoard(rows) {
       }
     };
   });
+}
+
+function renderViz(viz, board, meta) {
+  if (!viz && !(board || []).length) {
+    $("vizPanel").hidden = true;
+    return;
+  }
+  $("vizPanel").hidden = false;
+
+  const gallery = viz?.gallery || (board || []).slice(0, 12).map((r) => ({
+    rank: r.rank,
+    title: r.title,
+    image: r.image,
+    price: r.salePrice || r.price,
+    url: r.url,
+    score: r.rankScore,
+  }));
+
+  $("gallery").innerHTML = gallery
+    .map(
+      (g) => `
+    <figure>
+      ${g.image ? `<img src="${escapeHtml(g.image)}" alt="" loading="lazy" />` : `<div style="aspect-ratio:1;background:#1a1f1c"></div>`}
+      <figcaption>
+        ${g.rank != null ? `#${g.rank} · ` : ""}<b>$${Number(g.price || 0).toFixed(0)}</b><br/>
+        ${escapeHtml((g.title || "").slice(0, 48))}
+      </figcaption>
+    </figure>`
+    )
+    .join("");
+
+  drawBars($("chartStr"), viz?.strBars || [], "str", "conf");
+  drawTwinBars($("chartPop"), viz?.popularityBars || [], "popularity", "ctrProxy");
+  drawScatter($("chartScatter"), viz?.priceVsRank || []);
+
+  const histRow = (board || []).find((b) => b.purchaseHistory?.available);
+  if (histRow?.purchaseHistory?.events?.length) {
+    $("historyPanel").hidden = false;
+    $("historyCaveat").textContent = histRow.purchaseHistory.caveat || "Sold / purchase events";
+    $("historyList").innerHTML = histRow.purchaseHistory.events
+      .slice(0, 12)
+      .map(
+        (e) => `<article class="card-row"><div><h3>${escapeHtml((e.title || "").slice(0, 80))}</h3>
+        <div class="meta"><span>${escapeHtml(e.date || "")}</span><span><b>$${Number(e.price || 0).toFixed(2)}</b></span><span>${escapeHtml(e.kind || "")}</span></div></div>
+        ${e.url ? `<a class="btn ghost" href="${escapeHtml(e.url)}" target="_blank" rel="noreferrer">Open</a>` : ""}</article>`
+      )
+      .join("");
+  } else {
+    $("historyPanel").hidden = false;
+    $("historyCaveat").textContent =
+      "No purchase history on this keyset yet — Marketplace Insights gated. Paste Terapeak sold count into Mission evidence to harden STR.";
+    $("historyList").innerHTML = "";
+  }
+
+  $("rankMeta").textContent = JSON.stringify(
+    meta || {
+      note: "CTR is engagement proxy — not official eBay CTR",
+      gallery: gallery.length,
+    },
+    null,
+    2
+  );
+}
+
+function drawBars(svg, rows, key, confKey) {
+  if (!svg) return;
+  const w = 320;
+  const h = 140;
+  const data = (rows || []).slice(0, 12);
+  if (!data.length) {
+    svg.innerHTML = "";
+    return;
+  }
+  const max = Math.max(...data.map((d) => Number(d[key]) || 0), 0.01);
+  const bw = (w - 40) / data.length;
+  const bars = data
+    .map((d, i) => {
+      const v = Number(d[key]) || 0;
+      const bh = (v / max) * 100;
+      const x = 24 + i * bw;
+      const y = 120 - bh;
+      const opacity = 0.35 + 0.65 * (Number(d[confKey]) || 0.4);
+      return `<rect x="${x}" y="${y}" width="${Math.max(bw - 4, 2)}" height="${bh}" fill="#c4f542" opacity="${opacity}" />`;
+    })
+    .join("");
+  svg.innerHTML = `<rect width="${w}" height="${h}" fill="transparent"/>${bars}
+    <text x="8" y="14" fill="#8a9a8c" font-size="10" font-family="IBM Plex Mono, monospace">0–max STR</text>`;
+}
+
+function drawTwinBars(svg, rows, aKey, bKey) {
+  if (!svg) return;
+  const data = (rows || []).slice(0, 10);
+  if (!data.length) {
+    svg.innerHTML = "";
+    return;
+  }
+  const w = 320;
+  const h = 140;
+  const bw = (w - 40) / data.length;
+  const maxA = Math.max(...data.map((d) => Number(d[aKey]) || 0), 0.01);
+  const maxB = Math.max(...data.map((d) => Number(d[bKey]) || 0), 0.001);
+  const bars = data
+    .map((d, i) => {
+      const x = 24 + i * bw;
+      const ah = ((Number(d[aKey]) || 0) / maxA) * 100;
+      const bh = ((Number(d[bKey]) || 0) / maxB) * 100;
+      return `<rect x="${x}" y="${120 - ah}" width="${Math.max(bw / 2 - 2, 2)}" height="${ah}" fill="#c4f542"/>
+        <rect x="${x + bw / 2}" y="${120 - bh}" width="${Math.max(bw / 2 - 2, 2)}" height="${bh}" fill="#5ddea8"/>`;
+    })
+    .join("");
+  svg.innerHTML = `${bars}<text x="8" y="14" fill="#8a9a8c" font-size="10" font-family="IBM Plex Mono, monospace">pop (acid) · CTR proxy (teal)</text>`;
+}
+
+function drawScatter(svg, rows) {
+  if (!svg) return;
+  const data = (rows || []).slice(0, 20);
+  if (!data.length) {
+    svg.innerHTML = "";
+    return;
+  }
+  const prices = data.map((d) => Number(d.price) || 0);
+  const scores = data.map((d) => Number(d.score) || 0);
+  const minP = Math.min(...prices);
+  const maxP = Math.max(...prices, minP + 1);
+  const maxS = Math.max(...scores, 0.01);
+  const dots = data
+    .map((d) => {
+      const x = 30 + ((Number(d.price) - minP) / (maxP - minP)) * 260;
+      const y = 120 - ((Number(d.score) || 0) / maxS) * 100;
+      return `<circle cx="${x}" cy="${y}" r="4" fill="#c4f542" opacity="0.85"/>`;
+    })
+    .join("");
+  svg.innerHTML = `${dots}<text x="8" y="14" fill="#8a9a8c" font-size="10" font-family="IBM Plex Mono, monospace">price → · score ↑</text>`;
 }
 
 function renderSkus(skus) {
@@ -205,7 +342,17 @@ $("btnSwarm").onclick = async () => {
       .map((a) => `${a.ts.slice(11, 19)}  [${a.agent}]  ${a.msg}`)
       .join("\n");
     renderBrief(data.brief || {});
-    renderBoard(data.lethalBoard || []);
+    const board = data.marketBoard?.length ? data.marketBoard : data.lethalBoard || [];
+    renderBoard(board);
+    renderViz(data.viz, board, {
+      algorithm: data.scout?.market?.algorithm || data.intel?.market?.algorithm,
+      weights: data.scout?.market?.weights || data.intel?.market?.weights,
+      stats: data.scout?.market?.stats || data.intel?.market?.rankStats,
+      caveats: [
+        "CTR is engagement PROXY — not official eBay CTR",
+        "Purchase history empty until Insights/Terapeak",
+      ],
+    });
     renderDrafts(data.listingDrafts || []);
     if (data.promoted?.length) {
       $("opsOut").textContent = `Auto-promoted ${data.promoted.length} PASS SKUs`;
@@ -225,6 +372,11 @@ $("btnIntel").onclick = async () => {
     const data = await post("/api/intel", p);
     $("agentLog").textContent = JSON.stringify(data.market, null, 2);
     renderBoard(data.lethalCandidates || []);
+    renderViz(data.viz, data.lethalCandidates || [], {
+      algorithm: data.market?.algorithm,
+      weights: data.market?.weights,
+      stats: data.market?.rankStats,
+    });
     $("boardPanel").hidden = false;
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);

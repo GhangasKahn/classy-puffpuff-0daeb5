@@ -120,6 +120,7 @@ export async function buildCandidatesFromQuery({
       .slice(0, 8);
     for (const it of top) {
       const salePrice = it.price || median;
+      const soldComps = (snap.comps.comps || []).filter((c) => c.kind === "sold");
       out.push({
         ref: q,
         category,
@@ -132,15 +133,22 @@ export async function buildCandidatesFromQuery({
         sourcePath,
         retailArbitrage: false,
         activeCount: snap.comps.activeCount ?? snap.browse?.total ?? top.length,
-        soldCount: snap.comps.soldCount ?? 0,
+        soldCount: snap.comps.soldCount ?? soldComps.length ?? 0,
         soldEvidenceMissing: snap.comps.soldEvidenceMissing ?? true,
         evidenceStatus: snap.comps.evidenceStatus,
         demandSources: ["ebay_browse", snap.comps.soldCount ? "ebay_insights" : null].filter(Boolean),
         categoryMedianPrice: median,
         url: it.url,
-        hasImages: Boolean(it.image || true),
+        image: it.image || null,
+        images: it.images || (it.image ? [it.image] : []),
+        thumbnail: it.thumbnail || it.image || null,
+        watchCount: it.watchCount ?? null,
+        seller: it.seller || null,
+        soldComps,
+        purchaseHistory: soldComps,
+        hasImages: Boolean(it.image || (it.images && it.images.length)),
         hasItemSpecifics: true,
-        windowDays: 14,
+        windowDays: 90,
         minSalePrice: minPrice,
         maxSalePrice: maxPrice,
       });

@@ -146,6 +146,10 @@ export async function* iterateCategoryListings({
 
 function normalizeBrowseItem(it) {
   const price = it.price?.value != null ? Number(it.price.value) : null;
+  const primary = it.image?.imageUrl || null;
+  const thumbs = (it.thumbnailImages || []).map((t) => t.imageUrl).filter(Boolean);
+  const additional = (it.additionalImages || []).map((t) => t.imageUrl).filter(Boolean);
+  const images = [...new Set([primary, ...thumbs, ...additional].filter(Boolean))];
   return {
     id: it.itemId,
     legacyItemId: it.legacyItemId,
@@ -154,13 +158,17 @@ function normalizeBrowseItem(it) {
     currency: it.price?.currency || "USD",
     condition: it.condition,
     url: it.itemWebUrl,
-    image: it.image?.imageUrl || it.thumbnailImages?.[0]?.imageUrl,
+    image: images[0] || null,
+    images,
+    thumbnail: thumbs[0] || images[0] || null,
+    watchCount: it.watchCount != null ? Number(it.watchCount) : null,
     seller: it.seller?.username,
+    sellerFeedback: it.seller?.feedbackPercentage != null ? Number(it.seller.feedbackPercentage) : null,
     buyingOptions: it.buyingOptions,
     itemLocation: it.itemLocation?.country,
     categories: it.categories,
     leafCategoryIds: it.leafCategoryIds,
-    listingDate: null,
+    listingDate: it.itemCreationDate || it.listingDate || null,
     soldDate: null,
     kind: "active",
   };

@@ -209,8 +209,11 @@ export async function runResearchSwarm({
       priceBand: scout.priceBand,
       top: scout.top?.slice(0, 8),
       forecast: scout.forecast,
+      market: scout.market || null,
     },
     intel,
+    marketBoard: scout.market?.board || intel.lethalCandidates || [],
+    viz: scout.market?.viz || intel.viz || null,
     crawl: crawl
       ? { kept: crawl.kept, rawCount: crawl.rawCount, apiTotal: crawl.apiTotal, jsonlPath: crawl.jsonlPath }
       : null,
@@ -250,6 +253,14 @@ function mergeLethal(scoutTop, intelLethal, crawlTop) {
       perceivedValue: row.perceivedValue,
       psychFit: row.psychFit,
       url: row.url,
+      image: row.image || null,
+      images: row.images || [],
+      rank: row.rank,
+      rankScore: row.rankScore,
+      sellThrough: row.sellThrough,
+      ctrProxy: row.ctrProxy,
+      popularity: row.popularity,
+      purchaseHistory: row.purchaseHistory || null,
       decision: row.decision || "CANDIDATE",
       flags: row.flags || [],
     });

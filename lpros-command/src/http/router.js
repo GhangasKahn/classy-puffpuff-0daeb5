@@ -27,6 +27,9 @@ import { listOrders, ingestOrder, attachTracking } from "../ops/orders.js";
 import { authStatus } from "../ebay/userToken.js";
 import { dryRunPublish, publishSku } from "../ebay/inventory.js";
 import { pushTracking, pullOrders } from "../ebay/fulfillment.js";
+import { rankMarket } from "../../../lpros/src/core/ranker.js";
+import { applyFilters } from "../../../lpros/src/core/filters.js";
+import { computeMarketMetrics } from "../../../lpros/src/core/market_metrics.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -79,15 +82,18 @@ export async function routeApi(req) {
       role: "open ZIK+AutoDS control plane",
       runtime: process.env.NETLIFY ? "netlify" : "node",
       auth: authStatus(),
-      endpoints: [
-        "/swarm",
-        "/skus",
-        "/export",
-        "/publish",
-        "/orders",
-        "/evidence/verify",
-        "/auth/status",
-      ],
+        endpoints: [
+          "/swarm",
+          "/skus",
+          "/export",
+          "/publish",
+          "/orders",
+          "/rank",
+          "/metrics",
+          "/filter",
+          "/evidence/verify",
+          "/auth/status",
+        ],
     });
   }
 
@@ -250,6 +256,27 @@ export async function routeApi(req) {
         productCostRatio: Number(b.costRatio ?? 0.4),
       })
     );
+  }
+
+  if (method === "POST" && pathname === "/rank") {
+    const candidates = Array.isArray(b.candidates) ? b.candidates : [];
+    if (!candidates.length) return err(400, "candidates[] required");
+    const ranked = rankMarket(candidates, {
+      minPrice: Number(b.minPrice ?? 35),
+      maxPrice: Number(b.maxPrice ?? 200),
+      costRatio: Number(b.costRatio ?? 0.4),
+      weights: b.weights,
+    });
+    return ok(ranked);
+  }
+
+  if (method === "POST" && pathname === "/metrics") {
+    return ok(computeMarketMetrics(b));
+  }
+
+  if (method === "POST" && pathname === "/filter") {
+    const candidates = Array.isArray(b.candidates) ? b.candidates : [];
+    return ok(applyFilters(candidates, b.policy || b));
   }
 
   if (method === "POST" && pathname === "/evidence/verify") {
