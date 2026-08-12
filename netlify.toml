@@ -19,15 +19,13 @@
   timeout = 26
 
 # ---- LPROS Command desk ----
+# Static files live at /lpros-command/{index.html,app.js,styles.css}
+# (duplicated from public/ for Netlify; local server still uses public/)
+
 [[redirects]]
   from = "/lpros"
   to = "/lpros-command/"
-  status = 301
-
-[[redirects]]
-  from = "/lpros-command"
-  to = "/lpros-command/"
-  status = 301
+  status = 302
 
 # API → serverless (must be before static splat)
 [[redirects]]
@@ -38,23 +36,6 @@
 [[redirects]]
   from = "/lpros-command/api"
   to = "/.netlify/functions/lpros-api/health"
-  status = 200
-
-[[redirects]]
-  from = "/lpros-command/"
-  to = "/lpros-command/public/index.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/lpros-command/index.html"
-  to = "/lpros-command/public/index.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/lpros-command/*"
-  to = "/lpros-command/public/:splat"
   status = 200
 
 # service worker must never be cached stale, and must serve as JS

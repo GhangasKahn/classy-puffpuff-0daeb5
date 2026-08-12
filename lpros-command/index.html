@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LPROS COMMAND</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Open research + fulfillment control plane</p>
+      <h1 class="brand">LPROS<br />COMMAND</h1>
+      <p class="lede">ZIK-class intel and AutoDS-class ops — without the SaaS tax or the junk-listing gravity. Cash is truth.</p>
+      <div class="cta-row">
+        <button type="button" class="btn primary" id="btnSwarm">Run research swarm</button>
+        <button type="button" class="btn ghost" id="btnIntel">Competitor intel</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" id="mission">
+      <h2>Mission</h2>
+      <p class="sub">High-ticket, high perceived value only. Scammy lots die here.</p>
+      <form id="missionForm" class="grid">
+        <label>Query
+          <input name="q" value="solid wood desk organizer" />
+        </label>
+        <label>Category ID
+          <input name="categoryId" value="25339" />
+        </label>
+        <label>Min $
+          <input name="minPrice" type="number" value="35" />
+        </label>
+        <label>Max $
+          <input name="maxPrice" type="number" value="150" />
+        </label>
+        <label>Cost ratio
+          <input name="costRatio" type="number" step="0.05" value="0.4" />
+        </label>
+        <label class="check">Deep crawl
+          <input name="deepCrawl" type="checkbox" />
+        </label>
+        <label>Sold count (90d)
+          <input name="soldCount" type="number" placeholder="Terapeak" />
+        </label>
+        <label>Avg sold $
+          <input name="avgSoldPrice" type="number" step="0.01" placeholder="optional" />
+        </label>
+        <label>Product cost $
+          <input name="productCost" type="number" step="0.01" placeholder="supplier 1" />
+        </label>
+        <label>Alt cost $
+          <input name="altProductCost" type="number" step="0.01" placeholder="supplier 2" />
+        </label>
+        <label>Lead days
+          <input name="leadTimeDays" type="number" value="7" />
+        </label>
+        <label class="check">Auto-promote PASS
+          <input name="promotePass" type="checkbox" />
+        </label>
+      </form>
+    </section>
+
+    <section class="panel" id="briefPanel" hidden>
+      <h2>Brain brief</h2>
+      <div id="brief"></div>
+    </section>
+
+    <section class="panel" id="boardPanel" hidden>
+      <h2>Lethal board</h2>
+      <p class="sub">Problem-solving · upgrade · materials · not qty-spam · promote into registry</p>
+      <div id="board" class="board"></div>
+    </section>
+
+    <section class="panel" id="draftPanel" hidden>
+      <h2>Listing drafts</h2>
+      <p class="sub">Deterministic copy shells — edit before publish</p>
+      <div id="drafts" class="board"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Ops · SKU registry</h2>
+      <p class="sub">Real-world workbook — export CSV for Seller Hub today; Inventory API when user token set</p>
+      <div class="cta-row" style="margin-bottom:1rem">
+        <button type="button" class="btn" id="btnSkus">Load registry</button>
+        <button type="button" class="btn primary" id="btnExport">Export ready CSV/JSON</button>
+        <button type="button" class="btn ghost" id="btnAuth">Auth status</button>
+      </div>
+      <div id="skuBoard" class="board"></div>
+      <pre id="opsOut" class="out"></pre>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2>Publish dry-run</h2>
+        <form id="publishForm" class="grid tight">
+          <label>SKU <input name="sku" placeholder="LPROS-…" /></label>
+          <button type="submit" class="btn">Dry-run Inventory payload</button>
+        </form>
+        <pre id="publishOut" class="out"></pre>
+      </div>
+      <div class="panel">
+        <h2>Order ingest</h2>
+        <p class="sub">Paste a sale → HOLD/AUTO gate uses registry cost</p>
+        <form id="orderForm" class="grid tight">
+          <label>Order ID <input name="orderId" value="MANUAL-1" /></label>
+          <label>SKU <input name="sku" placeholder="from registry" /></label>
+          <label>Buyer total $ <input name="buyerTotal" type="number" value="49" /></label>
+          <label class="check">Supplier confirmed <input name="supplierConfirmed" type="checkbox" /></label>
+          <button type="submit" class="btn">Ingest + gate</button>
+        </form>
+        <button type="button" class="btn ghost" id="btnOrders" style="margin-top:0.75rem">List orders</button>
+        <pre id="orderOut" class="out"></pre>
+      </div>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2>Evidence harden</h2>
+        <p class="sub">Clear CONDITIONAL → PASS with Terapeak + dual quotes</p>
+        <form id="evidenceForm" class="grid tight">
+          <label>Title <input name="title" value="Solid wood desk organizer oak" /></label>
+          <label>Sale $ <input name="salePrice" type="number" value="49" /></label>
+          <label>Sold 90d <input name="soldCount" type="number" value="28" /></label>
+          <label>Cost $ <input name="productCost" type="number" value="18" /></label>
+          <label>Alt cost $ <input name="altProductCost" type="number" value="19.5" /></label>
+          <label>Lead days <input name="leadTimeDays" type="number" value="7" /></label>
+          <button type="submit" class="btn">Verify evidence</button>
+        </form>
+        <pre id="evidenceOut" class="out"></pre>
+      </div>
+      <div class="panel">
+        <h2>Conditioning</h2>
+        <p class="sub">Log sale/return → nudge psych weights</p>
+        <form id="outcomeForm" class="grid tight">
+          <label>Title <input name="title" value="Oak desk organizer test SKU" /></label>
+          <label>Net $ <input name="net" type="number" step="0.01" value="12" /></label>
+          <label class="check">Profitable <input name="profitable" type="checkbox" checked /></label>
+          <label class="check">Returned <input name="returned" type="checkbox" /></label>
+          <button type="submit" class="btn">Log outcome</button>
+        </form>
+        <button type="button" class="btn ghost" id="btnOutcomes" style="margin-top:0.75rem">Recent outcomes</button>
+        <pre id="outcomeOut" class="out"></pre>
+      </div>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2>Economics</h2>
+        <form id="econForm" class="grid tight">
+          <label>Price <input name="price" type="number" value="49" /></label>
+          <label>Cost <input name="cost" type="number" value="18" /></label>
+          <button type="submit" class="btn">Calc net</button>
+        </form>
+        <pre id="econOut" class="out"></pre>
+      </div>
+      <div class="panel">
+        <h2>Forecast</h2>
+        <form id="forecastForm" class="grid tight">
+          <label>Listings <input name="listings" type="number" value="300" /></label>
+          <label>STR/day <input name="str" type="number" step="0.001" value="0.015" /></label>
+          <label>Avg net <input name="net" type="number" step="0.01" value="12" /></label>
+          <label>Target $/day <input name="target" type="number" value="50" /></label>
+          <button type="submit" class="btn">Project</button>
+        </form>
+        <pre id="forecastOut" class="out"></pre>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Fulfillment gate</h2>
+      <p class="sub">AutoDS is an optional executor under this HOLD/AUTO control plane — never the brain.</p>
+      <button type="button" class="btn ghost" id="btnProviders">Provider matrix</button>
+      <button type="button" class="btn" id="btnFulfillDemo">Demo HOLD decision</button>
+      <pre id="fulfillOut" class="out"></pre>
+    </section>
+
+    <section class="panel">
+      <h2>Agent log</h2>
+      <pre id="agentLog" class="out tall"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <span>API-only eBay Browse · zero-trust · open stack</span>
+    <a id="playbookLink" href="api/playbook">Browser playbooks</a>
+  </footer>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
