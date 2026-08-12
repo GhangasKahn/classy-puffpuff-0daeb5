@@ -1,0 +1,16 @@
+{
+  "name": "lpros-command",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Open-source ZIK Analytics + AutoDS alternative — LPROS Command desk with Hermes research swarm",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "swarm": "node src/cli-swarm.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
