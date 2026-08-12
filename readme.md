@@ -7,6 +7,8 @@ A complete, self-contained website:
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, plan generators)
 - `fence/martin/app/` — interactive **MARTIN Build** PWA (visualize, assembly checklist, materials, joinery, gallery, drafts, downloads) at `/martin/app` or `/build`
+- `ebay-sold-items/` — eBay Developer Program bridge (OAuth + Browse + Insights) serving `/v1/market/alt/comps` for Vault/LIVE comps
+- `lpros_advanced/` — advanced Cursor rules & skills (forecasting, Bayesian, listings-needed, etc.)
 - `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`)
 
 

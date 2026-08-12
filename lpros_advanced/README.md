@@ -21,7 +21,8 @@ lpros_advanced/
 │       ├── computational-math/SKILL.md
 │       ├── agentic-orchestration/SKILL.md
 │       ├── accuracy-audit/SKILL.md
-│       └── physics-informed/SKILL.md
+│       ├── physics-informed/SKILL.md
+│       └── ebay-listings/SKILL.md
 └── README.md
 ```
 
@@ -41,6 +42,7 @@ lpros_advanced/
 | Agentic design | agentic-orchestration skill | Brain/Soldier routing and contracts |
 | Accuracy | accuracy-audit skill | Continuous calibration against reality |
 | Constraint thinking | physics-informed skill | Capital conservation & irreversibility mindset |
+| eBay evidence | ebay-listings skill | Sold/active comps via `ebay-sold-items` bridge |
 
 ## How to Install
 
