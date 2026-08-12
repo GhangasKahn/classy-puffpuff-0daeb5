@@ -25,6 +25,8 @@ export const CRITICAL = new Set(["supplyReality", "economicViability", "complian
 export function verifyProduct(candidate, thresholds = {}) {
   const t = {
     minMargin: thresholds.minMargin ?? 0.12,
+    minSalePrice: thresholds.minSalePrice ?? 35,
+    maxSalePrice: thresholds.maxSalePrice ?? 200,
     maxDensity: thresholds.maxDensity ?? 800,
     maxRemorse: thresholds.maxRemorse ?? 0.65,
     minDemandConfidence: thresholds.minDemandConfidence ?? 0.15,
@@ -105,7 +107,9 @@ export function verifyProduct(candidate, thresholds = {}) {
   );
   evidence.push(results.competitionDensity);
 
-  // 4. Economic Viability
+  // 4. Economic Viability (+ high-ticket price band)
+  const sale = Number(candidate.salePrice) || 0;
+  const inBand = sale >= t.minSalePrice && sale <= t.maxSalePrice;
   const econ = netProfitPerSale({
     salePrice: candidate.salePrice,
     shippingCharged: candidate.shippingCharged || 0,
@@ -115,14 +119,21 @@ export function verifyProduct(candidate, thresholds = {}) {
     hasStore: candidate.hasStore,
     toolAmortPerSale: candidate.toolAmortPerSale || 0,
   });
-  const econPass = econ.net > 0 && econ.margin >= t.minMargin;
-  results.economicViability = factor(
-    econPass,
-    econPass
-      ? `net $${econ.net} margin ${econ.marginPct}%`
-      : `net $${econ.net} margin ${econ.marginPct}% below floor ${t.minMargin * 100}%`,
-    econ
-  );
+  const econPass = inBand && econ.net > 0 && econ.margin >= t.minMargin;
+  let econNote;
+  if (!inBand) {
+    econNote = `sale $${sale} outside high-ticket band $${t.minSalePrice}–$${t.maxSalePrice}`;
+  } else if (!(econ.net > 0 && econ.margin >= t.minMargin)) {
+    econNote = `net $${econ.net} margin ${econ.marginPct}% below floor ${t.minMargin * 100}%`;
+  } else {
+    econNote = `net $${econ.net} margin ${econ.marginPct}% · band ok`;
+  }
+  results.economicViability = factor(econPass, econNote, {
+    ...econ,
+    minSalePrice: t.minSalePrice,
+    maxSalePrice: t.maxSalePrice,
+    inBand,
+  });
   evidence.push(results.economicViability);
 
   // 5. Compliance

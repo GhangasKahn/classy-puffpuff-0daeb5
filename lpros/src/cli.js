@@ -99,8 +99,12 @@ Commands:
       sourcePath: args.source || "wholesale_unspecified",
       targetDailyProfit: num(args.target, 50),
       assumedStr: num(args.str, 0.015),
+      minPrice: num(args["min-price"], 35),
+      maxPrice: num(args["max-price"], 200),
       thresholds: {
         minMargin: num(args["min-margin"], 0.12),
+        minSalePrice: num(args["min-price"], 35),
+        maxSalePrice: num(args["max-price"], 200),
       },
     });
     console.log(JSON.stringify(report, null, 2));

@@ -10,6 +10,8 @@ export async function searchActiveListings({
   categoryIds,
   filter,
   sort,
+  minPrice,
+  maxPrice,
 } = {}) {
   if (!q && !categoryIds) {
     throw new Error("Browse search requires q and/or category_ids");
@@ -19,7 +21,14 @@ export async function searchActiveListings({
   };
   if (q) query.q = q;
   if (categoryIds) query.category_ids = String(categoryIds);
-  if (filter) query.filter = filter;
+  const filters = [];
+  if (filter) filters.push(filter);
+  if (minPrice != null || maxPrice != null) {
+    const lo = minPrice != null ? Number(minPrice) : 0;
+    const hi = maxPrice != null ? Number(maxPrice) : Number.MAX_SAFE_INTEGER;
+    filters.push(`price:[${lo}..${hi}]`);
+  }
+  if (filters.length) query.filter = filters.join(",");
   if (sort) query.sort = sort;
 
   const { ok, status, json } = await ebayFetch("/buy/browse/v1/item_summary/search", {

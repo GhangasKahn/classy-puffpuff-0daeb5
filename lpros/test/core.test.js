@@ -146,6 +146,27 @@ describe("zero-trust verify", () => {
     });
     assert.equal(r.results.demandSignal.pass, false);
   });
+
+  it("FAIL sale below high-ticket floor $35", () => {
+    const r = verifyProduct({
+      salePrice: 18,
+      productCost: 7,
+      leadTimeDays: 5,
+      activeCount: 40,
+      soldCount: 12,
+      soldEvidenceMissing: false,
+      evidenceStatus: "ok",
+      demandConfidence: 0.5,
+      density: 120,
+      velocityPerDay: 0.8,
+      remorseRisk: 0.25,
+      demandSources: ["ebay_browse", "terapeak"],
+      title: "cheap clip",
+    });
+    assert.equal(r.decision, "FAIL");
+    assert.equal(r.results.economicViability.pass, false);
+    assert.match(r.results.economicViability.note, /outside high-ticket band/);
+  });
 });
 
 describe("ranking", () => {

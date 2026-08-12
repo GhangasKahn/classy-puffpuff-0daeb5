@@ -93,7 +93,9 @@ export function scoreCandidate(raw, opts = {}) {
     kill:
       verification.decision === "FAIL" ||
       psych.remorseRisk > (opts.thresholds?.maxRemorse ?? 0.65) ||
-      econ.net <= 0,
+      econ.net <= 0 ||
+      salePrice < (opts.thresholds?.minSalePrice ?? 35) ||
+      salePrice > (opts.thresholds?.maxSalePrice ?? 200),
   };
 }
 

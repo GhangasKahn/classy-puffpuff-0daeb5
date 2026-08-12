@@ -20,8 +20,16 @@ export async function runResearchPipeline({
   thresholds,
   targetDailyProfit = 50,
   assumedStr = 0.015,
+  minPrice = 35,
+  maxPrice = 200,
 } = {}) {
   await loadEbayEnv();
+
+  const band = {
+    minSalePrice: thresholds?.minSalePrice ?? minPrice,
+    maxSalePrice: thresholds?.maxSalePrice ?? maxPrice,
+  };
+  const gateThresholds = { ...thresholds, ...band };
 
   const raw = await buildCandidatesFromQuery({
     category,
@@ -29,12 +37,14 @@ export async function runResearchPipeline({
     productCostRatio,
     leadTimeDays,
     sourcePath,
+    minPrice: band.minSalePrice,
+    maxPrice: band.maxSalePrice,
   });
 
   const enriched = raw.map((c) => {
     const f = extractFeatures(c);
     const p = scorePsychology(f);
-    return runMarginGate(p, thresholds);
+    return runMarginGate(p, gateThresholds);
   });
 
   // Re-score via composite ranker (includes verify again — consistent)
@@ -46,7 +56,7 @@ export async function runResearchPipeline({
       demandConfidence: e.features?.sellThrough?.confidence,
       remorseRisk: e.psych?.remorseRisk,
     })),
-    { thresholds, defaultCostRatio: productCostRatio }
+    { thresholds: gateThresholds, defaultCostRatio: productCostRatio }
   );
 
   const top = ranked.ranked[0];
@@ -62,6 +72,7 @@ export async function runResearchPipeline({
     generatedAt: new Date().toISOString(),
     category,
     queries,
+    priceBand: { min: band.minSalePrice, max: band.maxSalePrice },
     counts: {
       candidates: raw.length,
       ranked: ranked.ranked.length,
@@ -72,6 +83,7 @@ export async function runResearchPipeline({
     rejectedSample: ranked.rejected.slice(0, 5).map(summarize),
     forecast,
     notes: [
+      `High-ticket band: $${band.minSalePrice}–$${band.maxSalePrice} (sub-minimum filtered).`,
       "PsychFit is provisional proxy scoring — not validated probability.",
       "Marketplace Insights sold data may be unavailable (soldEvidenceMissing).",
       "Retail arbitrage is compliance FAIL — wholesale/manufacturer only.",
@@ -82,6 +94,7 @@ export async function runResearchPipeline({
     type: "pipeline_run",
     category,
     queries,
+    priceBand: report.priceBand,
     ranked: report.counts.ranked,
     rejected: report.counts.rejected,
   });

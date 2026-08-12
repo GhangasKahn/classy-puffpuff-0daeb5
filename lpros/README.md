@@ -13,7 +13,15 @@ Built from the Grok design thread (ZBPDP → statistical hardening → low-compu
 | Hard gates + fail-closed verify | Treating PsychFit as a probability |
 | Closed-loop outcome logging | ARC-AGI-3 conditioning (Phase later) |
 
-## Quick start
+## High-ticket band
+
+Default research band is **$35–$200** (floor in the $30–$40 range you specified). Sub-minimum listings are filtered at Browse + killed at verify.
+
+```bash
+npm run pipeline -- --category Tool --q "desk organizer wood" --min-price 35 --max-price 150
+npm run pipeline -- --min-price 40   # stricter floor
+```
+
 
 ```bash
 # 1) eBay keys (gitignored)

@@ -1,9 +1,11 @@
 {
   "minMargin": 0.12,
+  "minSalePrice": 35,
+  "maxSalePrice": 200,
+  "priceBand": [35, 200],
   "maxDensity": 800,
   "maxRemorse": 0.65,
   "minDemandConfidence": 0.15,
-  "priceBand": [25, 80],
   "defaultCostRatio": 0.45,
   "returnsBufferRate": 0.04,
   "assumedStr": 0.015,
