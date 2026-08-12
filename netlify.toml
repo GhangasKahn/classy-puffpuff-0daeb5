@@ -44,6 +44,13 @@
   from = "/lpros-command/"
   to = "/lpros-command/public/index.html"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/lpros-command/index.html"
+  to = "/lpros-command/public/index.html"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/lpros-command/*"
