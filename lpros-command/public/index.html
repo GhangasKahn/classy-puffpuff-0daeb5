@@ -126,7 +126,7 @@
       </section>
     </section>
 
-    <!-- WATCH VM -->
+    <!-- WATCH VM — left: live ingest stream · right dock: research VM -->
     <section class="tab on" id="tab-watch">
       <div class="cta-row sticky-cta">
         <button type="button" class="btn primary" id="watchStartBtn">Start live watch</button>
@@ -135,8 +135,8 @@
         <span class="sub tight" id="watchPhaseLabel">Idle — VM not running</span>
       </div>
       <div class="panel watch-ops">
-        <h2>Operator</h2>
-        <p class="sub">This column is you. The <b>research VM is pinned on the right</b> — you watch Browse + getItem land live listings, photos, and URLs. Not a CSV upload.</p>
+        <h2>Live ingest</h2>
+        <p class="sub">Left: listings appear as eBay Browse returns them (photo + price + /itm/ URL). Right: the research VM — Page, Term, Net, and raw API Proof. This is not an uploaded CSV.</p>
         <form id="watchForm" class="grid tight">
           <label>Query <input name="q" value="solid wood desk organizer" /></label>
           <label>Category <input name="categoryId" value="25339" /></label>
@@ -151,9 +151,10 @@
           <span>dryRun —</span>
         </div>
         <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
-        <h3 class="viz-title">API + agent log</h3>
-        <pre id="watchLog" class="out tall orch-log watch-term" aria-live="polite"></pre>
-        <div id="watchCalls" class="watch-calls"></div>
+        <p class="sub tight" id="watchStreamMeta">0 live listings</p>
+        <div id="watchStream" class="watch-stream" aria-live="polite"></div>
+        <pre id="watchLog" class="out orch-log watch-term" hidden></pre>
+        <div id="watchCalls" class="watch-calls" hidden></div>
       </div>
     </section>
 
@@ -530,11 +531,12 @@
         <button type="button" class="on" data-vmview="page">Page</button>
         <button type="button" data-vmview="term">Term</button>
         <button type="button" data-vmview="net">Net</button>
+        <button type="button" data-vmview="proof">Proof</button>
       </div>
       <div class="vm-screen">
         <div class="vm-view on" id="vmPage">
           <div class="vm-hero idle" id="watchHero">
-            <p class="muted">Pinned research VM. Click Run research — live eBay Browse listings appear here with photos and /itm/ URLs. This is not uploaded CSV data.</p>
+            <p class="muted">Research VM. Run research — this pane reconstructs the live getItem listing (eBay blocks iframes). Left column fills with Browse hits. Proof tab shows the raw API JSON.</p>
           </div>
           <div class="vm-listing" id="vmListing" hidden></div>
           <div class="vm-gallery" id="watchGallery"></div>
@@ -544,6 +546,10 @@
         </div>
         <div class="vm-view" id="vmNet" hidden>
           <div id="vmNetLog" class="watch-calls"></div>
+        </div>
+        <div class="vm-view" id="vmProof" hidden>
+          <p class="sub">Raw eBay Browse / getItem payloads. If this JSON has itemId, itemWebUrl, and image URLs, it is live API — not a spreadsheet upload.</p>
+          <pre id="vmProofJson" class="out tall orch-log">Waiting for first API response…</pre>
         </div>
       </div>
       <div class="vm-status" id="vmStatus">Waiting for a session</div>

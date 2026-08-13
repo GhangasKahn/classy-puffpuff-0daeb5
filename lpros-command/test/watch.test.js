@@ -5,6 +5,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
   cancelWatch,
+  clipProof,
   createWatchSession,
   getWatch,
   slimWatch,
@@ -32,6 +33,12 @@ const liveItems = [
 ];
 
 describe("research watch VM", () => {
+  it("clipProof keeps listing URLs for the Proof tab", () => {
+    const s = clipProof({ url: "https://www.ebay.com/itm/111", title: "oak" });
+    assert.match(s, /ebay\.com\/itm\/111/);
+    assert.match(clipProof({ n: "x".repeat(4000) }, 80), /truncated/);
+  });
+
   it("refuses dry-run — watch is live-only", () => {
     assert.throws(() => createWatchSession({ dryRun: true, q: "desk" }), /live-only/i);
   });
@@ -95,6 +102,9 @@ describe("research watch VM", () => {
     const slim = slimWatch(cur);
     assert.equal(slim.productCount, cur.products.length);
     assert.ok(slim.productsWithImages >= 1);
+    assert.match(cur.proof.browseSnippet, /ebay\.com\/itm/);
+    assert.match(cur.proof.itemSnippet, /Solid oak/i);
+    assert.equal(cur.proof.notUploadedCsv, true);
   });
 
   it("cancel stops the session", () => {

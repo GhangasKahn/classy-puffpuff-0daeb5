@@ -16,6 +16,16 @@ function now() {
   return new Date().toISOString();
 }
 
+/** Truncated JSON the desk can show as proof this is live Browse, not a CSV. */
+export function clipProof(obj, max = 2200) {
+  try {
+    const s = JSON.stringify(obj, null, 2);
+    return s.length > max ? `${s.slice(0, max)}\n…truncated` : s;
+  } catch {
+    return String(obj);
+  }
+}
+
 function log(session, level, message, extra = {}) {
   const ev = { at: now(), level, message, phase: session.phase, ...extra };
   session.events = session.events || [];
@@ -98,6 +108,9 @@ export function createWatchSession(input = {}) {
       pid: snap.pid,
       node: snap.node,
       serverless: snap.serverless,
+      notUploadedCsv: true,
+      browseSnippet: null,
+      itemSnippet: null,
     },
     raw: [],
     products: [],
@@ -183,11 +196,27 @@ async function stepSearch(session, searchFn) {
       categoryIds: attempt?.categoryIds || null,
       total: page.total,
     };
+    session.proof.browseSnippet = clipProof({
+      host: "api.ebay.com",
+      path: session.proof.api,
+      status: 200,
+      ms: call.ms,
+      source: page.source || "ebay_browse",
+      total: page.total,
+      returned: items.length,
+      items: items.slice(0, 2).map((i) => ({
+        itemId: i.itemId || i.id,
+        title: i.title,
+        price: i.price,
+        url: i.url,
+        image: i.image,
+      })),
+    });
     log(
       session,
       items.length ? "info" : "error",
       items.length
-        ? `Browse returned ${items.length} live listings (API total ${page.total ?? items.length}) · source=${page.source || "ebay_browse"}`
+        ? `Browse returned ${items.length} live listings (API total ${page.total ?? items.length}) · source=${page.source || "ebay_browse"} · first ${items[0]?.url || ""}`
         : error
           ? `Browse empty. Last error: ${error.message}`
           : emptyLiveHint()
@@ -266,6 +295,20 @@ async function stepDetail(session, getItemFn) {
     );
     session.products[idx] = merged;
     session.current = merged;
+    session.proof.itemSnippet = clipProof({
+      host: "api.ebay.com",
+      path: `/buy/browse/v1/item/${id}`,
+      status: 200,
+      ms: call.ms,
+      itemId: id,
+      title: merged.title,
+      price: merged.price,
+      url: merged.url,
+      image: merged.image,
+      imageCount: merged.imageCount,
+      descriptionExcerpt: merged.descriptionExcerpt,
+      itemSpecifics: merged.itemSpecifics,
+    });
     log(session, "info", `Detail OK · ${(merged.descriptionExcerpt || "").slice(0, 80) || merged.specificsSummary || "no excerpt"}`, {
       url: merged.url,
       image: Boolean(merged.image),

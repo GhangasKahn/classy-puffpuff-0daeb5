@@ -410,7 +410,7 @@ footer a { color: var(--acc); }
 /* ── Desk shell ── */
 body.desk {
   display: grid;
-  grid-template-columns: 148px minmax(0, 1fr) minmax(340px, 42vw);
+  grid-template-columns: 148px minmax(280px, 1fr) minmax(420px, 1fr);
   grid-template-rows: auto auto 1fr;
   min-height: 100vh;
 }
@@ -1011,6 +1011,42 @@ body.desk .noise { z-index: 0; }
 }
 .watch-calls div { border-bottom: 1px solid var(--line); padding: 0.2rem 0; }
 .watch-calls b { color: var(--acc); font-weight: 500; }
+.watch-stream {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+.watch-stream article {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  background: var(--bg0);
+  padding: 0.5rem;
+  min-width: 0;
+}
+.watch-stream article.on { border-color: var(--acc); }
+.watch-stream img,
+.watch-stream .ph {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  background: #1a1f1c;
+  border: 1px solid var(--line);
+}
+.watch-stream h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+.watch-stream p { margin: 0 0 0.2rem; font-size: 0.75rem; }
+.watch-stream a {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--acc);
+  word-break: break-all;
+}
 .vm-dock {
   grid-column: 3;
   grid-row: 1 / -1;

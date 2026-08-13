@@ -65,11 +65,53 @@ function renderProof(s) {
     ["source", p.source || "—", p.source === "ebay_browse"],
     ["env", p.env || "—", p.appConfigured],
     ["dryRun", p.dryRun ? "YES (fake)" : "no — live API", !p.dryRun],
+    ["csv", p.notUploadedCsv === false ? "uploaded" : "not a CSV upload", p.notUploadedCsv !== false],
     ["host", p.hostname || "—", true],
     ["pid", p.pid || "—", true],
   ];
   el.innerHTML = chips
     .map(([k, v, ok]) => `<span class="${ok ? "live" : "warn"}">${esc(k)} ${esc(v)}</span>`)
+    .join("");
+}
+
+function renderProofJson(s) {
+  const el = $("vmProofJson");
+  if (!el) return;
+  const p = s?.proof || {};
+  const parts = [];
+  if (p.browseSnippet) parts.push(`// Browse ${p.api || "item_summary/search"}\n${p.browseSnippet}`);
+  if (p.itemSnippet) parts.push(`// getItem ${p.detailApi || "item/{id}"}\n${p.itemSnippet}`);
+  el.textContent = parts.join("\n\n") || "Waiting for first API response…";
+}
+
+function renderStream(s) {
+  const el = $("watchStream");
+  const meta = $("watchStreamMeta");
+  const rows = s?.products || [];
+  if (meta) {
+    meta.textContent = s
+      ? `${rows.length} live listings · ${s.productsWithImages || 0} images · ${s.productsWithUrls || 0} /itm/ URLs · ${s.proof?.source || "ebay_browse"}`
+      : "0 live listings";
+  }
+  if (!el) return;
+  if (!rows.length) {
+    el.innerHTML = `<p class="muted">Waiting for Browse… cards appear here as the VM ingests live listings (photo, price, eBay URL).</p>`;
+    return;
+  }
+  const cur = s?.current?.itemId || s?.current?.id;
+  el.innerHTML = rows
+    .map((p) => {
+      const id = p.itemId || p.id || p.title;
+      const on = cur && (p.itemId === cur || p.id === cur) ? " on" : "";
+      return `<article class="${on}" data-id="${esc(id)}">
+        ${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" />` : `<div class="ph"></div>`}
+        <div>
+          <h3>${esc((p.title || "").slice(0, 90))}</h3>
+          <p><b>$${Number(p.price || 0).toFixed(2)}</b> · ${esc(p.seller || "")}</p>
+          ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.url.replace(/^https:\/\/www\./, ""))}</a>` : `<span class="muted">no url</span>`}
+        </div>
+      </article>`;
+    })
     .join("");
 }
 
@@ -213,11 +255,13 @@ export function renderWatch(s) {
   const orch = $("orchPhase");
   if (orch && s) orch.textContent = `watch ${s.phase} · ${s.progress?.pct || 0}%`;
   renderProof(s);
+  renderProofJson(s);
   renderLog(s);
   renderCalls(s);
   renderHero(s?.current);
   renderListing(s?.current);
   renderGallery(s);
+  renderStream(s);
   const addr = $("vmAddr");
   if (addr) {
     const last = (s?.apiCalls || []).at(-1);
@@ -255,8 +299,13 @@ async function loopTicks() {
       }
     }
   } catch (e) {
-    const log = $("watchLog");
-    if (log) log.textContent += `\nERROR ${e.message || e}`;
+    const msg = `\nERROR ${e.message || e}`;
+    ["watchLog", "vmTermLog"].forEach((id) => {
+      const log = $(id);
+      if (log) log.textContent += msg;
+    });
+    const meta = $("watchStreamMeta");
+    if (meta) meta.textContent = String(e.message || e);
     const badge = $("vmBadge");
     if (badge) {
       badge.textContent = "FAILED";
@@ -310,7 +359,7 @@ export async function bootWatch() {
     btn.addEventListener("click", () => {
       const view = btn.dataset.vmview;
       $("vmViewTabs").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b === btn));
-      ["page", "term", "net"].forEach((name) => {
+      ["page", "term", "net", "proof"].forEach((name) => {
         const el = $(`vm${name[0].toUpperCase()}${name.slice(1)}`);
         if (el) el.hidden = name !== view;
       });
