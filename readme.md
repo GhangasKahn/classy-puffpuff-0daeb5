@@ -18,6 +18,14 @@ database, no account, nothing collected. Features that require a server (bank/br
 Plaid, live balance sync, multi-device sync, hardware 2FA) are a separate, future **backend phase**.
 Hosting this on Netlify does not add them.
 
+## Live site
+
+**https://darling-kleicha-ba04ad.netlify.app**
+
+WALTER DS-16 plans (this branch): `/walter` · `/walter/app` · `/walter/pocket` · `/walter/pack`
+
+Production currently follows Git `main`. Deploy branch `cursor/walter-drum-sander-plans-5bdd` (or merge it) so `/walter` is on the live site.
+
 ## Deploy — drag & drop (about 60 seconds)
 1. Go to https://app.netlify.com/drop
 2. Drag this entire `bedrock-deploy` folder (or its contents) onto the page.
