@@ -95,11 +95,9 @@ h3{font:600 18px/1.25 var(--disp);margin:0 0 8px}
 @media(max-width:800px){.viz-wrap{grid-template-columns:1fr}}
 .viz-stage{
   background:linear-gradient(160deg,#1a2228,#12161a);
-  border:1px solid var(--line);border-radius:12px;min-height:320px;padding:12px;
-  background-image:
-    radial-gradient(ellipse 60% 40% at 70% 20%, rgba(143,173,120,.12), transparent 50%),
-    linear-gradient(160deg,#1a2228,#12161a);
+  border:1px solid var(--line);border-radius:12px;min-height:420px;height:min(56vh,560px);padding:0;overflow:hidden;position:relative;
 }
+.viz-stage canvas{display:block;width:100%;height:100%}
 .viz-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
 .viz-controls label{font:500 12px/1 var(--mono);color:var(--dim);display:flex;align-items:center;gap:8px}
 .mono{font-family:var(--mono)}

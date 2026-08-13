@@ -1,10 +1,11 @@
-const CACHE = "walter-ds16-v2";
+const CACHE = "walter-ds16-v3";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./data.js",
+  "./model3d.js",
   "./manifest.json",
   "./icon.svg",
 ];

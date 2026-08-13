@@ -118,6 +118,16 @@
   to = "/shop/drum-sander/app/"
   status = 301
 
+[[redirects]]
+  from = "/walter/model"
+  to = "/shop/drum-sander/model/"
+  status = 301
+
+[[redirects]]
+  from = "/drum/model"
+  to = "/shop/drum-sander/model/"
+  status = 301
+
 [[headers]]
   for = "/shop/drum-sander/app/service-worker.js"
   [headers.values]
@@ -131,6 +141,11 @@
 
 [[headers]]
   for = "/shop/drum-sander/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/shop/drum-sander/renders/*"
   [headers.values]
     Content-Type = "image/svg+xml"
 

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="WALTER DS-16 interactive 3D model — Rev B drum thickness sander." />
+<title>WALTER DS-16 — 3D model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#14181c;--paper:#f3f1ec;--dim:#a8afb3;--sage-hi:#8fad78;
+  --line:rgba(243,241,236,.14);--mono:"IBM Plex Mono",monospace;
+  --disp:"Newsreader",Georgia,serif;--sans:"Libre Franklin",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ink);color:var(--paper);font-family:var(--sans);overflow:hidden}
+#stage{position:absolute;inset:0}
+.hud{
+  position:absolute;z-index:2;left:16px;right:16px;top:16px;
+  display:flex;justify-content:space-between;gap:12px;pointer-events:none;
+}
+.hud > *{pointer-events:auto}
+.brand{text-decoration:none;color:var(--paper)}
+.brand b{font:600 14px/1 var(--disp);letter-spacing:.2em;text-transform:uppercase}
+.brand span{display:block;margin-top:6px;font:500 10px/1 var(--mono);letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.panel{
+  background:rgba(20,24,28,.82);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;backdrop-filter:blur(12px);max-width:280px;
+}
+.panel h2{font:600 18px/1.2 var(--disp);margin:0 0 6px}
+.panel p{color:var(--dim);font-size:13px}
+.ctrl{
+  position:absolute;z-index:2;left:16px;bottom:16px;right:16px;
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+}
+.btn,.chip{
+  border:1px solid var(--line);background:rgba(20,24,28,.8);color:var(--paper);
+  border-radius:8px;padding:8px 12px;font:600 11px/1 var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;cursor:pointer;text-decoration:none;
+}
+.btn:hover,.chip:hover{border-color:var(--sage-hi)}
+label.ex{display:flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+input[type=range]{width:160px}
+.hint{position:absolute;bottom:18px;right:18px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);z-index:2}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="hud">
+  <a class="brand" href="../"><b>Walter DS-16</b><span>Interactive solid model · Rev B</span></a>
+  <div class="panel" id="info">
+    <h2>Orbit the machine</h2>
+    <p>Drag to orbit. Scroll to zoom. Click a part. Explode to see the dual Acme lift, ways, drum, and hold-downs.</p>
+  </div>
+</div>
+<div class="ctrl">
+  <label class="ex">Explode <input id="ex" type="range" min="0" max="1" step="0.01" value="0" /></label>
+  <button class="chip" id="assembled" type="button">Assembled</button>
+  <button class="chip" id="exploded" type="button">Exploded</button>
+  <button class="chip" id="iso" type="button">Iso</button>
+  <button class="chip" id="front" type="button">Front</button>
+  <button class="chip" id="side" type="button">Drive side</button>
+  <a class="btn" href="../app/">Build app</a>
+  <a class="btn" href="../plans/D9_model.svg" target="_blank" rel="noopener">D-9 sheet</a>
+</div>
+<p class="hint">Three.js · dimensions from walter_ds16.py</p>
+<script type="module">
+import { createWalterModel } from "../app/model3d.js";
+const viewer = createWalterModel(document.getElementById("stage"), {
+  autoRotate: true,
+  onSelect(id, part) {
+    const info = document.getElementById("info");
+    info.innerHTML = `<h2>${part.label}</h2><p>${part.detail}</p>`;
+  }
+});
+const ex = document.getElementById("ex");
+ex.addEventListener("input", () => viewer.setExplode(+ex.value));
+document.getElementById("assembled").onclick = () => { ex.value = 0; viewer.setExplode(0); };
+document.getElementById("exploded").onclick = () => { ex.value = 1; viewer.setExplode(1); };
+function cam(x,y,z) {
+  viewer.controls.autoRotate = false;
+  viewer.controls.object.position.set(x,y,z);
+  viewer.controls.target.set(0,14,0);
+  viewer.controls.update();
+}
+document.getElementById("iso").onclick = () => cam(38,28,42);
+document.getElementById("front").onclick = () => cam(0,16,48);
+document.getElementById("side").onclick = () => cam(52,16,0);
+</script>
+</body>
+</html>

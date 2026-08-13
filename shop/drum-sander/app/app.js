@@ -81,31 +81,8 @@
     safety.innerHTML = D.safety.map((m) => `<li>${m}</li>`).join("");
   }
 
-  /* Viz */
-  function renderViz(explode) {
-    const stage = $("#vizStage");
-    if (!stage) return;
-    const e = explode || 0;
-    const gap = e * 28;
-    const parts = D.parts;
-    let y = 20;
-    const blocks = parts
-      .map((p, i) => {
-        const yy = y + i * gap;
-        const h = 36;
-        return `<g class="viz-part" data-id="${p.id}" style="cursor:pointer">
-          <rect x="40" y="${yy}" width="280" height="${h}" rx="4" fill="${p.color}" stroke="#1a1f24" stroke-width="1.5"/>
-          <text x="54" y="${yy + 23}" fill="#1a1f24" font-size="13" font-family="IBM Plex Mono, monospace">${p.label}</text>
-        </g>`;
-      })
-      .join("");
-    stage.innerHTML = `<svg viewBox="0 0 360 ${80 + parts.length * 36 + e * 28 * parts.length}" width="100%" height="100%">${blocks}</svg>`;
-    $$(".viz-part", stage).forEach((g) =>
-      g.addEventListener("click", () => selectPart(g.dataset.id))
-    );
-  }
-
-  function selectPart(id) {
+  /* Viz — 3D viewer is created by model3d.js; keep list + highlight in sync */
+  function selectPart(id, from3d) {
     selectedPart = id;
     const p = D.parts.find((x) => x.id === id);
     const detail = $("#partDetail");
@@ -115,7 +92,9 @@
     $$(".part-item").forEach((el) =>
       el.classList.toggle("on", el.dataset.id === id)
     );
+    if (!from3d && window.__ds16 && id) window.__ds16.highlight(id);
   }
+  window.selectWalterPart = (id) => selectPart(id, true);
 
   const partList = $("#partList");
   if (partList) {
@@ -133,10 +112,9 @@
   const explode = $("#explodeRange");
   if (explode) {
     explode.addEventListener("input", () => {
-      $("#explodeVal").textContent = Math.round(explode.value * 100) + "%";
-      renderViz(+explode.value);
+      const n = $("#explodeVal");
+      if (n) n.textContent = Math.round(explode.value * 100) + "%";
     });
-    renderViz(0);
   }
 
   /* Assembly */

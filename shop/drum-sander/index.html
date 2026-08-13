@@ -66,17 +66,12 @@ body::before{
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .machine{
   position:relative;aspect-ratio:4/3;border-radius:4px;overflow:hidden;
-  background:
-    linear-gradient(160deg, rgba(20,24,28,.2), rgba(20,24,28,.55)),
-    radial-gradient(circle at 55% 42%, rgba(184,169,144,.9) 0 18%, transparent 19%),
-    linear-gradient(180deg,#2a3238,#1a1f24);
+  background:#12161a;
   border:1px solid var(--line);
   animation:rise .9s var(--ease) both;
 }
-.machine svg{width:100%;height:100%}
+.machine canvas{width:100%;height:100%;display:block}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.drum-spin{transform-origin:320px 210px;animation:spin 8s linear infinite}
 .section{padding:72px 0;border-top:1px solid var(--line);position:relative;z-index:2}
 .section h2{font-size:clamp(32px,5vw,56px);margin:10px 0 14px}
 .grid3{display:grid;gap:18px;grid-template-columns:repeat(3,1fr);margin-top:28px}
@@ -113,6 +108,7 @@ body::before{
     <a href="#spec">Spec</a>
     <a href="#geometry">Geometry</a>
     <a href="#modern">Modern</a>
+    <a href="#model">3D</a>
     <a href="#plans">Plans</a>
     <a href="app/">Build app</a>
     <a href="/fence/">Fence suite</a>
@@ -127,34 +123,11 @@ body::before{
       <p class="lead">A shop-built drum thickness sander engineered from Ron Walters’ dedicated-motor rebuild — then taken past “good enough.” Rev B is dual-end geometry, ways, hold-downs, and a paper-on indicator spec of ±0.003″.</p>
       <div class="cta-row">
         <a class="btn solid" href="app/">Open build app</a>
-        <a class="btn" href="plans/D1_general.svg" target="_blank" rel="noopener">D-1 blueprint</a>
+        <a class="btn" href="model/">3D model</a>
+        <a class="btn" href="plans/D9_model.svg" target="_blank" rel="noopener">D-9 solids</a>
       </div>
     </div>
-    <div class="machine" aria-hidden="true">
-      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#3a444c"/>
-            <stop offset="1" stop-color="#1a1f24"/>
-          </linearGradient>
-        </defs>
-        <rect x="40" y="40" width="560" height="400" rx="4" fill="url(#g)" stroke="#6e7578" stroke-width="1"/>
-        <!-- sides -->
-        <rect x="90" y="100" width="28" height="280" fill="#c4a574"/>
-        <rect x="522" y="100" width="28" height="280" fill="#c4a574"/>
-        <!-- table -->
-        <rect x="130" y="260" width="380" height="28" fill="#d9dcde"/>
-        <!-- drum -->
-        <g class="drum-spin">
-          <ellipse cx="320" cy="210" rx="170" ry="48" fill="#b8a990" stroke="#1a1f24" stroke-width="2"/>
-          <ellipse cx="320" cy="210" rx="170" ry="48" fill="none" stroke="#8a7355" stroke-width="1" stroke-dasharray="8 10"/>
-          <circle cx="320" cy="210" r="10" fill="#8a9098"/>
-        </g>
-        <!-- hood hint -->
-        <path d="M150 210 Q320 110 490 210" fill="none" stroke="#8fad78" stroke-width="3" opacity=".7"/>
-        <text x="320" y="420" text-anchor="middle" fill="#9aa3a6" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="4">⌀5″ · 15.5″ · ±0.003″ A/B</text>
-      </svg>
-    </div>
+    <div class="machine" id="hero3d" role="img" aria-label="Interactive 3D model of the WALTER DS-16 drum sander"></div>
   </div>
 </section>
 
@@ -234,10 +207,27 @@ body::before{
   </div>
 </section>
 
+<section class="wrap section" id="model">
+  <p class="kicker">Solids</p>
+  <h2 class="display">3D model</h2>
+  <p class="lead">The machine is modeled as solids from the same numbers as the cut list — Baltic birch box, UHMW ways, torsion-box table, ⌀5″ drum, dual Acme, hold-downs, hood. Orbit it live, or print the isometric sheet.</p>
+  <div class="plans">
+    <a class="plan" href="renders/iso_assembled.svg" target="_blank" rel="noopener"><img src="renders/iso_assembled.svg" alt="Isometric assembled"/><span>Iso assembled</span></a>
+    <a class="plan" href="renders/iso_exploded.svg" target="_blank" rel="noopener"><img src="renders/iso_exploded.svg" alt="Isometric exploded"/><span>Iso exploded</span></a>
+    <a class="plan" href="renders/ortho_front.svg" target="_blank" rel="noopener"><img src="renders/ortho_front.svg" alt="Front solid"/><span>Front</span></a>
+    <a class="plan" href="renders/ortho_side.svg" target="_blank" rel="noopener"><img src="renders/ortho_side.svg" alt="Drive side solid"/><span>Drive side</span></a>
+  </div>
+  <div class="cta-row">
+    <a class="btn solid" href="model/">Open interactive model</a>
+    <a class="btn" href="cad/walter_ds16.scad">OpenSCAD</a>
+    <a class="btn" href="plans/D9_model.svg" target="_blank" rel="noopener">D-9 sheet</a>
+  </div>
+</section>
+
 <section class="wrap section" id="plans">
   <p class="kicker">Blueprints</p>
-  <h2 class="display">D-1 through D-8</h2>
-  <p class="lead">Printable A3-landscape SVG from the parametric source. D-7 is the geometry/calibration sheet. D-8 is hold-downs, truing sled, oscillator, and output modes.</p>
+  <h2 class="display">D-1 through D-9</h2>
+  <p class="lead">Printable A3-landscape SVG from the parametric source. D-9 is the solid-model isometric sheet. Open the interactive viewer for orbit / explode.</p>
   <div class="plans">
     <a class="plan" href="plans/D1_general.svg" target="_blank" rel="noopener"><img src="plans/D1_general.svg" alt="D-1"/><span>D-1 General</span></a>
     <a class="plan" href="plans/D2_frame.svg" target="_blank" rel="noopener"><img src="plans/D2_frame.svg" alt="D-2"/><span>D-2 Frame</span></a>
@@ -247,11 +237,13 @@ body::before{
     <a class="plan" href="plans/D6_cutlist.svg" target="_blank" rel="noopener"><img src="plans/D6_cutlist.svg" alt="D-6"/><span>D-6 Cut list</span></a>
     <a class="plan" href="plans/D7_geometry.svg" target="_blank" rel="noopener"><img src="plans/D7_geometry.svg" alt="D-7"/><span>D-7 Geometry</span></a>
     <a class="plan" href="plans/D8_holddowns.svg" target="_blank" rel="noopener"><img src="plans/D8_holddowns.svg" alt="D-8"/><span>D-8 Hold-downs</span></a>
+    <a class="plan" href="plans/D9_model.svg" target="_blank" rel="noopener"><img src="plans/D9_model.svg" alt="D-9"/><span>D-9 3D views</span></a>
   </div>
   <div class="cta-row">
     <a class="btn solid" href="app/">Launch build app</a>
+    <a class="btn" href="model/">3D model</a>
     <a class="btn" href="cad/walter_ds16.py">Parametric source</a>
-    <a class="btn" href="cad/walter_ds16.scad">OpenSCAD model</a>
+    <a class="btn" href="cad/walter_ds16.scad">OpenSCAD</a>
   </div>
 </section>
 
@@ -259,5 +251,10 @@ body::before{
   <p>Lineage: <a href="https://woodgears.ca/reader/walters/drum_sander.html" target="_blank" rel="noopener">Ron Walters on woodgears.ca</a> · <a href="https://youtu.be/W-5Sj6kBVic" target="_blank" rel="noopener">YouTube build video</a> · ShopNotes No. 86 · Heslop / Hawley notes.</p>
   <p style="margin-top:8px">Planning design for shop construction — follow electrical code for motor wiring; use guards and dust extraction. Not a commercial machine certification.</p>
 </footer>
+<script type="module">
+import { createWalterModel } from "./app/model3d.js";
+const el = document.getElementById("hero3d");
+if (el) createWalterModel(el, { autoRotate: true });
+</script>
 </body>
 </html>

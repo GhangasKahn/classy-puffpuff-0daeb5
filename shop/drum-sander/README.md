@@ -9,7 +9,10 @@ Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron 
 
 - Design overview: `/shop/drum-sander/` · shortcuts `/walter` · `/drum` · `/shop`
 - Build app: `/shop/drum-sander/app/` · `/walter/app` · `/drum/app`
-- Plans: `D1` … `D8` in `/shop/drum-sander/plans/`
+- Plans: `D1` … `D9` in `/shop/drum-sander/plans/`
+- Interactive 3D: `/shop/drum-sander/model/` · `/walter/model`
+- OpenSCAD: `cad/walter_ds16.scad`
+- Isometric renders: `renders/iso_assembled.svg` etc.
 
 ## Spec (Rev B)
 

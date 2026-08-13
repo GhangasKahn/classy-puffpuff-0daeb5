@@ -74,20 +74,23 @@
     </section>
 
     <section class="panel" data-panel="viz">
-      <p class="kicker">Part breakdown</p>
-      <h1>Exploded stack</h1>
-      <p class="lead">Click parts to inspect. Open the SVG sheets or OpenSCAD model for true geometry.</p>
+      <p class="kicker">Interactive solid model</p>
+      <h1>3D assembly</h1>
+      <p class="lead">Orbit, explode, and click parts. Same solids as the OpenSCAD model and D-9 sheet. Full-screen viewer: <a href="../model/">/model</a>.</p>
       <div class="viz-wrap">
         <div>
           <div class="viz-stage" id="vizStage" aria-live="polite"></div>
           <div class="viz-controls">
             <label>Explode <input id="explodeRange" type="range" min="0" max="1" step="0.01" value="0" /> <span id="explodeVal" class="mono">0%</span></label>
+            <button type="button" class="btn" id="vizAssembled">Assembled</button>
+            <button type="button" class="btn" id="vizExploded">Exploded</button>
+            <a class="btn" href="../model/">Full model</a>
           </div>
         </div>
         <div>
           <div class="card" id="partDetail" style="margin-bottom:10px">
             <strong>Select a part</strong>
-            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the stack or the list.</p>
+            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the model or the list.</p>
           </div>
           <div class="part-list" id="partList"></div>
         </div>
@@ -165,6 +168,38 @@
 </div>
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script type="module">
+import { createWalterModel } from "./model3d.js";
+const stage = document.getElementById("vizStage");
+if (stage) {
+  const viewer = createWalterModel(stage, {
+    autoRotate: false,
+    onSelect(id, part) {
+      if (window.selectWalterPart) window.selectWalterPart(id);
+      const detail = document.getElementById("partDetail");
+      if (detail && part) {
+        detail.innerHTML = `<strong>${part.label}</strong><p style="margin:6px 0 0;color:var(--dim);font-size:14px">${part.detail}</p>`;
+      }
+    }
+  });
+  window.__ds16 = viewer;
+  const ex = document.getElementById("explodeRange");
+  const val = document.getElementById("explodeVal");
+  if (ex) {
+    ex.addEventListener("input", () => {
+      viewer.setExplode(+ex.value);
+      if (val) val.textContent = Math.round(ex.value * 100) + "%";
+    });
+  }
+  const a = document.getElementById("vizAssembled");
+  const b = document.getElementById("vizExploded");
+  if (a) a.onclick = () => { if (ex) ex.value = 0; viewer.setExplode(0); if (val) val.textContent = "0%"; };
+  if (b) b.onclick = () => { if (ex) ex.value = 1; viewer.setExplode(1); if (val) val.textContent = "100%"; };
+  document.querySelectorAll(".tab").forEach((t) => {
+    t.addEventListener("click", () => setTimeout(() => viewer.resize(), 50));
+  });
+}
+</script>
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").catch(function () {});
