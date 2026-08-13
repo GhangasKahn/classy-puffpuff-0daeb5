@@ -171,9 +171,10 @@
     Content-Type = "application/javascript; charset=utf-8"
 
 [[headers]]
-  for = "/shop/drum-sander/view/manifest.json"
+  for = "/shop/drum-sander/vendor/*"
   [headers.values]
-    Content-Type = "application/manifest+json"
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
   for = "/shop/drum-sander/plans/*"

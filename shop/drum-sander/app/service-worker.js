@@ -1,4 +1,4 @@
-const CACHE = "walter-ds16-v4";
+const CACHE = "walter-ds16-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const ASSETS = [
   "./manifest.json",
   "./icon.svg",
   "./apple-touch-icon.png",
+  "../vendor/three.module.js",
+  "../vendor/OrbitControls.js",
   "../pocket/index.html",
   "../plans/D1_general.svg",
   "../plans/D2_frame.svg",
@@ -25,7 +27,11 @@ const ASSETS = [
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+  e.waitUntil(
+    caches.open(CACHE).then((c) =>
+      Promise.all(ASSETS.map((url) => c.add(url).catch(() => undefined)))
+    )
+  );
   self.skipWaiting();
 });
 

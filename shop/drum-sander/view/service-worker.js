@@ -1,4 +1,4 @@
-const CACHE = "walter-view-v1";
+const CACHE = "walter-view-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const ASSETS = [
   "../app/model3d.js",
   "../app/apple-touch-icon.png",
   "../app/icon.svg",
+  "../vendor/three.module.js",
+  "../vendor/OrbitControls.js",
   "../pocket/index.html",
   "../plans/D1_general.svg",
   "../plans/D2_frame.svg",
@@ -24,12 +26,14 @@ const ASSETS = [
   "../renders/iso_exploded.svg",
   "../renders/ortho_front.svg",
   "../renders/ortho_side.svg",
-  "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-  "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js",
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+  e.waitUntil(
+    caches.open(CACHE).then((c) =>
+      Promise.all(ASSETS.map((url) => c.add(url).catch(() => undefined)))
+    )
+  );
   self.skipWaiting();
 });
 
@@ -43,5 +47,19 @@ self.addEventListener("activate", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
+  const url = new URL(e.request.url);
+  const live = /(?:service-worker|view|model3d|index)\.(?:js|html)$/.test(url.pathname);
+  if (live) {
+    e.respondWith(
+      fetch(e.request)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(e.request, copy));
+          return res;
+        })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
   e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
 });

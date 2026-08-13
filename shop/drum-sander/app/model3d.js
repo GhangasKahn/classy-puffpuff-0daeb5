@@ -1,8 +1,8 @@
 /* WALTER DS-16 — interactive Three.js solid model (inches, Y-up)
  * Shared by the Build app viz tab, the design hero, and /model/
  */
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
-import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "../vendor/three.module.js";
+import { OrbitControls } from "../vendor/OrbitControls.js";
 
 const P = {
   sideT: 0.75,
@@ -257,11 +257,22 @@ export function createWalterModel(container, options = {}) {
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 400);
   camera.position.set(38, 28, 42);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const mobile = typeof window !== "undefined" && (window.innerWidth < 900 || matchMedia("(pointer: coarse)").matches);
+  const renderer = new THREE.WebGLRenderer({
+    antialias: !mobile,
+    alpha: false,
+    powerPreference: "default",
+    failIfMajorPerformanceCaveat: false,
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2));
+  renderer.setClearColor(scene.background, 1);
+  renderer.shadowMap.enabled = !mobile;
+  if (!mobile) renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.domElement.style.width = "100%";
+  renderer.domElement.style.height = "100%";
+  renderer.domElement.style.display = "block";
+  renderer.domElement.style.touchAction = "none";
   container.appendChild(renderer.domElement);
 
   const hemi = new THREE.HemisphereLight(0xf3f1ec, 0x3a3228, 0.85);
@@ -297,7 +308,8 @@ export function createWalterModel(container, options = {}) {
   controls.enableDamping = true;
   controls.dampingFactor = 0.06;
   controls.target.set(0, 14, 0);
-  controls.maxPolarAngle = Math.PI * 0.48;
+  controls.minPolarAngle = 0.12;
+  controls.maxPolarAngle = Math.PI * 0.72;
   controls.minDistance = 18;
   controls.maxDistance = 90;
   controls.autoRotate = autoRotate;
@@ -335,11 +347,11 @@ export function createWalterModel(container, options = {}) {
   }
 
   function resize() {
-    const w = container.clientWidth || 640;
-    const h = container.clientHeight || 480;
+    const w = Math.max(container.clientWidth || 0, container.offsetWidth || 0, 280);
+    const h = Math.max(container.clientHeight || 0, container.offsetHeight || 0, 240);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(w, h, false);
+    renderer.setSize(w, h, true);
   }
 
   const ro = new ResizeObserver(resize);

@@ -1,5 +1,3 @@
-import { createWalterModel } from "../app/model3d.js";
-
 const D = window.WALTER_DATA;
 const PACK = "../pack/WALTER-DS16-RevB.zip";
 const PACK_NAME = "WALTER-DS16-RevB.zip";
@@ -38,31 +36,63 @@ function showScreen(id) {
 
 $$(".nav button").forEach((b) => b.addEventListener("click", () => showScreen(b.dataset.go)));
 
-/* 3D */
 const stage = $("#stage");
 const detail = $("#partDetail");
 const openSheet = $("#openSheet");
 let currentSheet = null;
+let viewer = null;
 
-const viewer = createWalterModel(stage, {
-  autoRotate: true,
-  onSelect(id, part) {
-    const row = D.parts.find((p) => p.id === id) || { label: part.label, detail: part.detail, sheet: null };
-    currentSheet = row.sheet ? "../plans/" + row.sheet : null;
-    detail.innerHTML = `<strong>${row.label}</strong><p>${row.detail}</p>`;
-    openSheet.hidden = !currentSheet;
-    openSheet.textContent = currentSheet ? "Open " + row.sheet.replace(".svg", "").replace("_", " ") : "";
-    $$(".chip").forEach((c) => c.classList.toggle("on", c.dataset.id === id));
-  },
-});
-window.__ds16 = viewer;
+function selectPart(id, part) {
+  const row = (D.parts || []).find((p) => p.id === id) || {
+    label: part?.label || id,
+    detail: part?.detail || "",
+    sheet: null,
+  };
+  currentSheet = row.sheet ? "../plans/" + row.sheet : null;
+  detail.innerHTML = `<strong>${row.label}</strong><p>${row.detail}</p>`;
+  openSheet.hidden = !currentSheet;
+  openSheet.textContent = currentSheet ? "Open " + row.sheet.replace(".svg", "").replace("_", " ") : "";
+  $$(".chip").forEach((c) => c.classList.toggle("on", c.dataset.id === id));
+}
+
+function showFallback(message) {
+  const wait = $("#stageWait");
+  if (wait) wait.remove();
+  const wrap = document.createElement("div");
+  wrap.className = "stage-fallback";
+  wrap.innerHTML = `<img src="../renders/iso_assembled.svg" alt="WALTER DS-16 assembled">`;
+  stage.appendChild(wrap);
+  detail.innerHTML = `<strong>Still viewable as a drawing</strong><p>${message} Swipe Plans for every sheet.</p>`;
+}
+
+async function bootModel() {
+  try {
+    const mod = await import("../app/model3d.js");
+    const wait = $("#stageWait");
+    if (wait) wait.remove();
+    viewer = mod.createWalterModel(stage, {
+      autoRotate: true,
+      onSelect: selectPart,
+    });
+    window.__ds16 = viewer;
+    const paint = () => viewer && viewer.resize();
+    requestAnimationFrame(paint);
+    setTimeout(paint, 80);
+    setTimeout(paint, 320);
+    window.addEventListener("orientationchange", () => setTimeout(paint, 200));
+  } catch (err) {
+    console.error("WALTER 3D failed", err);
+    showFallback("The live 3D view could not start on this phone.");
+  }
+}
 
 const chips = $("#chips");
-chips.innerHTML = D.parts
+chips.innerHTML = (D.parts || [])
   .map((p) => `<button type="button" class="chip" data-id="${p.id}"><i style="background:${p.color}"></i>${p.label}</button>`)
   .join("");
 $$(".chip", chips).forEach((b) =>
   b.addEventListener("click", () => {
+    if (!viewer) return;
     viewer.highlight(b.dataset.id);
     viewer.controls.autoRotate = false;
   })
@@ -70,15 +100,17 @@ $$(".chip", chips).forEach((b) =>
 
 const explode = $("#explode");
 explode.addEventListener("input", () => {
+  if (!viewer) return;
   viewer.setExplode(+explode.value);
   viewer.controls.autoRotate = false;
 });
 $("#assembled").onclick = () => {
   explode.value = 0;
-  viewer.setExplode(0);
+  if (viewer) viewer.setExplode(0);
 };
 $("#exploded").onclick = () => {
   explode.value = 1;
+  if (!viewer) return;
   viewer.setExplode(1);
   viewer.controls.autoRotate = false;
 };
@@ -87,6 +119,8 @@ openSheet.addEventListener("click", () => {
   const g = D.gallery.find((x) => currentSheet.endsWith(x.src.split("/").pop()));
   openLightbox(currentSheet, g ? g.title : "Plan");
 });
+
+bootModel();
 
 /* Plans */
 function card(g) {
@@ -161,6 +195,7 @@ $$(".step").forEach((s) =>
   s.addEventListener("click", () => {
     const id = phasePart[s.dataset.phase];
     showScreen("model");
+    if (!viewer) return;
     if (id) viewer.highlight(id);
     viewer.controls.autoRotate = false;
   })
