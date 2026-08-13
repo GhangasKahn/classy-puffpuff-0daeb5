@@ -1,4 +1,5 @@
 import { ebayFetch } from "./client.js";
+import { sellerHandle } from "./identity.js";
 
 /**
  * Browse API — active listings only.
@@ -162,7 +163,7 @@ function normalizeBrowseItem(it) {
     images,
     thumbnail: thumbs[0] || images[0] || null,
     watchCount: it.watchCount != null ? Number(it.watchCount) : null,
-    seller: it.seller?.username,
+    seller: sellerHandle(it.seller),
     sellerFeedback: it.seller?.feedbackPercentage != null ? Number(it.seller.feedbackPercentage) : null,
     buyingOptions: it.buyingOptions,
     itemLocation: it.itemLocation?.country,

@@ -1,4 +1,5 @@
 import { ebayFetch } from "./client.js";
+import { sellerHandle } from "./identity.js";
 
 /**
  * Marketplace Insights API (limited release) — sold items, last ~90 days.
@@ -70,7 +71,7 @@ function normalizeSale(it) {
     condition: it.condition,
     url: it.itemWebUrl || it.itemHref,
     image: it.image?.imageUrl,
-    seller: it.seller?.username,
+    seller: sellerHandle(it.seller),
     soldDate: it.lastSoldDate || it.soldDate || null,
     buyingOptions: it.buyingOptions,
     kind: "sold",
