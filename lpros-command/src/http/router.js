@@ -81,6 +81,7 @@ import {
   launchAgent,
   listJobs as listPlaygroundJobs,
   listKind,
+  listPacks,
   listSessions,
   persist,
   promoteFromJob,
@@ -811,7 +812,10 @@ export async function routeApi(req) {
     });
   }
   if (method === "GET" && pathname === "/playground/catalog") {
-    return ok({ agents: AGENT_CATALOG, playbooks: PLAYBOOKS, recipes: VM_RECIPES, presets: PRESETS });
+    return ok({ agents: AGENT_CATALOG, playbooks: PLAYBOOKS, recipes: VM_RECIPES, presets: PRESETS, packs: listPacks() });
+  }
+  if (method === "GET" && pathname === "/playground/packs") {
+    return ok({ packs: listPacks() });
   }
   if (method === "GET" && pathname === "/playground/board") {
     return ok(boardSummary());

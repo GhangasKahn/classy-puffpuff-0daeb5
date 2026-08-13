@@ -1,3 +1,3 @@
-# Spawn with create-elite-agent
+# Live pack
 
-Reserved listing-copy specialist. Desk wiring today: deterministic `lpros/src/agents/listing.js` (Ollama/Hermes hook not yet). Never publish. Never copy competitor photos.
+Full OpenClaw workspace is in this folder. Desk JS: playground `copy`. See `../ROSTER.md`.

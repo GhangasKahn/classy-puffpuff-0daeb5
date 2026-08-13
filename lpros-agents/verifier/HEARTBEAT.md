@@ -10,4 +10,11 @@ On routine heartbeat:
 
 When idle: do not invent a queue. Wait for Scout packages.
 
+## Idle law
+- Do not initiate unsolicited scrapes or invent a gate queue.
+- Do not promote CONDITIONAL to PASS on a pulse.
+- If evidence logs are missing, the PASS did not happen.
+
+Self-check: Did I soft-pass? Did I cook a FAIL because the operator was impatient?
+
 End of HEARTBEAT.md

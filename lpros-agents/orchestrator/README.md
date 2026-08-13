@@ -1,3 +1,3 @@
-# Spawn with create-elite-agent
+# Live pack
 
-Reserved for Brain routing and sparse escalation (frontier-tier). Until spawned, use `brain/SYSTEM_PROMPT.md` + `brain/CONDITIONING.md` and close action advice with a MEUFT BRIEF (`MEUFT.md`).
+Full OpenClaw workspace is in this folder. Desk JS: playground `brain`. See `../ROSTER.md`.

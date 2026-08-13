@@ -1,3 +1,3 @@
-# Spawn with create-elite-agent
+# Live pack
 
-Reserved meta-agent: applies authoritative + Pavlovian feedback to other soldiers from outcome logs. Does not rank products or move capital.
+Full OpenClaw workspace is in this folder. Playground id `conditioner` (pack-only until a residual runner exists). See `../ROSTER.md`.

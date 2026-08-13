@@ -1,6 +1,6 @@
 ---
 name: create-elite-agent
-description: Spawn a new LPROS elite Hermes soldier with the full OpenClaw-style workspace (SOUL, IDENTITY, AGENTS, TOOLS, HEARTBEAT, MEMORY). Use when adding economist, orchestrator, fulfiller, copywriter, conditioner, or any new specialist under lpros-agents/.
+description: Spawn a new LPROS elite Hermes soldier with the full OpenClaw-style workspace (SOUL, IDENTITY, AGENTS, TOOLS, HEARTBEAT, MEMORY). Use when adding a specialist under lpros-agents/ or when a playground catalog agent has JS but no prompt pack. Live roster already includes orchestrator, scout, intel, verifier, economist, fulfiller, copywriter, conditioner, redteam, pressure, compliance, taxonomy, memento, inversion, factory.
 ---
 
 # Create Elite Agent
@@ -17,7 +17,7 @@ Root `lpros-agents/AGENTS.md` is binding. The new soldier’s `AGENTS.md` is **p
 
 ## Atomic sequence (do not skip)
 
-1. **Name the slot** — lowercase folder: `economist` | `orchestrator` | `fulfiller` | `copywriter` | `conditioner` | new kebab-case id.
+1. **Name the slot** — lowercase kebab-case id not already in `ROSTER.md`.
 2. **Read** root `AGENTS.md`, `USER.md`, `MEUFT.md`, and a complete live pack (`scout/` or `verifier/`) as the quality bar.
 3. **Write six files** in `lpros-agents/<id>/`:
 
@@ -31,7 +31,7 @@ Root `lpros-agents/AGENTS.md` is binding. The new soldier’s `AGENTS.md` is **p
 | `MEMORY.md` | What may be remembered, what must never be stored as fact, growth/prune rules | One-off spikes as “demand” |
 
 4. **Wire** — one line in IDENTITY: desk JS (`lpros-command/src/playground/runner.js` case) and/or `lpros/src/agents/*`. If JS is missing, say so; do not fake a live runner.
-5. **Update** root `lpros-agents/README.md` live-pack table.
+5. **Update** root `lpros-agents/README.md` live-pack table, `ROSTER.md`, `INSPIRATION.md`, `src/loadPack.js` `ELITE_PACKS`, and playground `catalog.js` (`hermesPack` / `packOnly`).
 6. **Do not** put API keys in any markdown. Do not gitignore SOUL/IDENTITY (those are the agent). `USER.md` may be gitignored if it grows private.
 
 ## Quality bar (reject the draft if)

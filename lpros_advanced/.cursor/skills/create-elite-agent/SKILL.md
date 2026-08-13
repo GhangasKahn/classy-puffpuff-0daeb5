@@ -1,6 +1,6 @@
 ---
 name: create-elite-agent
-description: Spawn a new LPROS elite Hermes soldier with the full OpenClaw-style workspace (SOUL, IDENTITY, AGENTS, TOOLS, HEARTBEAT, MEMORY). Use when adding economist, orchestrator, fulfiller, copywriter, conditioner, or any new specialist under lpros-agents/.
+description: Spawn a new LPROS elite Hermes soldier. Canonical skill: lpros-agents/.cursor/skills/create-elite-agent/SKILL.md. Live roster already complete for orchestrator, scout, intel, verifier, economist, fulfiller, copywriter, conditioner, redteam, pressure, compliance, taxonomy, memento, inversion, factory.
 ---
 
 # Create Elite Agent

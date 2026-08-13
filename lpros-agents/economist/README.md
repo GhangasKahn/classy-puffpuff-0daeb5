@@ -1,9 +1,5 @@
-# Spawn with create-elite-agent
+# Live pack
 
-This folder is reserved. Do not improvise a competing constitution.
+Full OpenClaw workspace is in this folder (`SOUL.md` · `IDENTITY.md` · `AGENTS.md` · `TOOLS.md` · `HEARTBEAT.md` · `MEMORY.md`).
 
-Use the Cursor skill `create-elite-agent` and emit the full set:
-
-`SOUL.md` · `IDENTITY.md` · `AGENTS.md` · `TOOLS.md` · `HEARTBEAT.md` · `MEMORY.md`
-
-Mandate (from swarm README): pure interface to the Economics Engine + stress interpretation. No LLM inside fee math. Numbers come from `lpros/src/core/economics.js`.
+See `../ROSTER.md`. Do not add a competing constitution.

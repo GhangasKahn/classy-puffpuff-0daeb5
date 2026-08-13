@@ -1,3 +1,3 @@
-# Spawn with create-elite-agent
+# Live pack
 
-Reserved for order → supplier → tracking discipline. Fail-closed HOLD until supplier confirmed. Desk wiring today: playground soldier `fulfill`.
+Full OpenClaw workspace is in this folder. Desk JS: playground `fulfill`. See `../ROSTER.md`.

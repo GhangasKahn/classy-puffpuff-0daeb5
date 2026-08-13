@@ -12,6 +12,7 @@ import { draftListing } from "../../../lpros/src/agents/listing.js";
 import { fulfillDecision } from "../fulfill/adapter.js";
 import { getAgent } from "./catalog.js";
 import { appendEvent, load, persist } from "./store.js";
+import { CATALOG_TO_PACK, loadPack } from "../../../lpros-agents/src/loadPack.js";
 import { runBrowserJob } from "./browser.js";
 import { runVmJob } from "./vm.js";
 import { deskFromResearch, deskFromPlaygroundJobs, emptyLiveHint, noLiveProductsError } from "../http/marketRows.js";
@@ -307,9 +308,41 @@ async function runBrain(job, input = {}) {
   };
 }
 
+const PACK_ONLY = new Set([
+  "conditioner",
+  "redteam",
+  "pressure",
+  "compliance",
+  "memento",
+  "inversion",
+]);
+
+function runPersonaPack(catalogId, input = {}) {
+  const spec = getAgent(catalogId);
+  const packId = spec?.hermesPack || CATALOG_TO_PACK[catalogId] || catalogId;
+  const pack = loadPack(packId);
+  return {
+    packOnly: true,
+    packId: pack.id,
+    mold: pack.mold,
+    voice: pack.voice,
+    soulExcerpt: pack.soulExcerpt,
+    identityExcerpt: pack.identityExcerpt,
+    proceduresExcerpt: pack.proceduresExcerpt,
+    lengths: pack.lengths,
+    input,
+    note: pack.note,
+    millionairePath:
+      "Long-horizon fee-true expectancy after fail-closed gates — not a promise. Capital after proven loops (USER.md).",
+  };
+}
+
 async function dispatch(job) {
   const input = job.input || {};
   const agent = job.agent || (job.kind === "browser" ? "browser" : job.kind === "vm" ? "vm" : null);
+  if (PACK_ONLY.has(agent) || getAgent(agent)?.packOnly) {
+    return runPersonaPack(agent, input);
+  }
   switch (agent) {
     case "brain":
       return runBrain(job, input);
