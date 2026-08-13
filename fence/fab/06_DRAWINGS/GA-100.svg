@@ -1,0 +1,48 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 900' width='1400' height='900' font-size='16'>
+<rect width='1400' height='900' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='1352.0' height='852.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='790.0' width='1352.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='822.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='848.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>GENERAL ASSEMBLY — FRONT ELEVATION  1:40</text>
+<text x='1200.0' y='830.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>GA-100</text>
+<text x='1200.0' y='852.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<line x1='80.0' y1='620.0' x2='378.5' y2='620.0' stroke='#26241f' stroke-width='2'/>
+<text x='80.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#8a6f4d' text-anchor='start'>GRADE</text>
+<rect x='73.0' y='616.2' width='14.0' height='3.8' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<polygon points='74.0,616.2 86.0,616.2 84.5,576.2 75.5,576.2' fill='none' stroke='#26241f' stroke-width='1.4'/>
+<text x='80.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>P1</text>
+<text x='80.0' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#8a6f4d' text-anchor='middle'>END_L</text>
+<rect x='134.0' y='616.2' width='14.0' height='3.8' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<polygon points='135.0,616.2 147.0,616.2 145.5,576.2 136.5,576.2' fill='none' stroke='#26241f' stroke-width='1.4'/>
+<text x='141.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>P2</text>
+<text x='141.0' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#8a6f4d' text-anchor='middle'>MID</text>
+<rect x='195.0' y='616.2' width='14.0' height='3.8' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<polygon points='196.0,616.2 208.0,616.2 206.5,576.2 197.5,576.2' fill='none' stroke='#26241f' stroke-width='1.4'/>
+<text x='202.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>P3</text>
+<text x='202.0' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#8a6f4d' text-anchor='middle'>MID</text>
+<rect x='256.0' y='616.2' width='14.0' height='3.8' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<polygon points='257.0,616.2 269.0,616.2 267.5,576.2 258.5,576.2' fill='none' stroke='#26241f' stroke-width='1.4'/>
+<text x='263.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>P4</text>
+<text x='263.0' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#8a6f4d' text-anchor='middle'>GATE_L</text>
+<rect x='298.5' y='616.2' width='14.0' height='3.8' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<polygon points='299.5,616.2 311.5,616.2 310.0,576.2 301.0,576.2' fill='none' stroke='#26241f' stroke-width='1.4'/>
+<text x='305.5' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>P5</text>
+<text x='305.5' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#8a6f4d' text-anchor='middle'>GATE_R</text>
+<rect x='359.5' y='616.2' width='14.0' height='3.8' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<polygon points='360.5,616.2 372.5,616.2 371.0,576.2 362.0,576.2' fill='none' stroke='#26241f' stroke-width='1.4'/>
+<text x='366.5' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>P6</text>
+<text x='366.5' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#8a6f4d' text-anchor='middle'>END_R</text>
+<rect x='86.0' y='613.8' width='49.0' height='6.2' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='86.0' y='575.5' width='49.0' height='36.5' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='147.0' y='613.8' width='49.0' height='6.2' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='147.0' y='575.5' width='49.0' height='36.5' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='208.0' y='613.8' width='49.0' height='6.2' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='208.0' y='575.5' width='49.0' height='36.5' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='311.5' y='613.8' width='49.0' height='6.2' fill='none' stroke='#26241f' stroke-width='1'/>
+<rect x='311.5' y='575.5' width='49.0' height='36.5' fill='none' stroke='#26241f' stroke-width='1'/>
+<path d='M 263.5 574.8 A 20.8 20.8 0 0 1 305.0 574.8' fill='none' stroke='#26241f' stroke-width='1.6'/>
+<path d='M 269.0 574.8 A 15.2 15.2 0 0 1 299.5 574.8' fill='none' stroke='#26241f' stroke-width='1.6'/>
+<text x='229.2' y='700.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='middle'>OVERALL 11940 [470.08"]   BAY CC 2440   GATE CLEAR 1220   PANEL TOP 1825   PIER TOP 1965   CROWN 2640</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>DATUM: GRADE = Z0 · RUN = +X · STREET FACE = −Y</text>
+
+</svg>

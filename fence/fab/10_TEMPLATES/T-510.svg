@@ -1,0 +1,28 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 1100' width='700' height='1100' font-size='16'>
+<rect width='700' height='1100' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='652.0' height='1052.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='990.0' width='652.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='1022.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='1048.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>BATTER STORY STICK  1:2</text>
+<text x='500.0' y='1030.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>T-510</text>
+<text x='500.0' y='1052.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<line x1='80.0' y1='980.0' x2='600.0' y2='980.0' stroke='#26241f' stroke-width='2'/>
+<text x='80.0' y='996.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>PLINTH BED</text>
+<polygon points='100.0,980.0 340.0,980.0 310.0,180.0 130.0,180.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<line x1='220.0' y1='980.0' x2='220.0' y2='180.0' stroke='#8a6f4d' stroke-width='1' stroke-dasharray='4 4'/>
+<text x='352.0' y='970.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#26241f' text-anchor='start'>BASE 480 [18.9"]</text>
+<text x='322.0' y='194.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#26241f' text-anchor='start'>TOP 360 [14.17"]</text>
+<text x='80.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#26241f' text-anchor='start'>H 1600</text>
+<text x='80.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#a34e2b' text-anchor='start' font-weight='600'>BATTER 60 / 1600  =  1:26.7 PER FACE</text>
+<text x='80.0' y='108.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>Egyptian talus. Resultant stays in middle third under design wind.</text>
+<line x1='140.0' y1='880.0' x2='300.0' y2='880.0' stroke='#a34e2b' stroke-width='1.2' stroke-dasharray='6 4'/>
+<text x='310.0' y='884.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>POCKET CL 350</text>
+<line x1='140.0' y1='555.0' x2='300.0' y2='555.0' stroke='#a34e2b' stroke-width='1.2' stroke-dasharray='6 4'/>
+<text x='310.0' y='559.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>POCKET CL 1000</text>
+<line x1='140.0' y1='230.0' x2='300.0' y2='230.0' stroke='#a34e2b' stroke-width='1.2' stroke-dasharray='6 4'/>
+<text x='310.0' y='234.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>POCKET CL 1650</text>
+<rect x='80.0' y='150.0' width='100.0' height='100.0' fill='none' stroke='#a34e2b' stroke-width='2'/>
+<text x='80.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>CHECK BOX = 100.000 mm  (verify print scale)</text>
+<text x='130.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#a34e2b' text-anchor='middle'>100</text>
+
+</svg>

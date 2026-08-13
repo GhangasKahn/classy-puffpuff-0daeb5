@@ -1,0 +1,25 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1100 700' width='1100' height='700' font-size='16'>
+<rect width='1100' height='700' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='1052.0' height='652.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='590.0' width='1052.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='622.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='648.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>NUKI POCKET  ·  SECTION AT RAIL  4:1</text>
+<text x='900.0' y='630.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>J-201</text>
+<text x='900.0' y='652.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<rect x='120.0' y='160.0' width='320.0' height='480.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<rect x='200.0' y='240.0' width='240.0' height='380.0' fill='none' stroke='#a34e2b' stroke-width='2'/>
+<rect x='40.0' y='252.0' width='520.0' height='356.0' fill='#c4a574' stroke='#26241f' stroke-width='1.5'/>
+<polygon points='448.0,250.0 592.0,250.0 592.0,610.0 448.0,602.0' fill='#a34e2b' opacity='.5' stroke='#a34e2b'/>
+<text x='120.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>MASONRY FACE (bay side)</text>
+<text x='460.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>W-001  weather-side</text>
+<text x='500.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>POCKET  44 × 95 × 60 deep</text>
+<text x='500.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start'>RAIL    38 × 89  (ease 6 total)</text>
+<text x='500.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#a34e2b' text-anchor='start'>FLOOR SLOPE 5° OUT — DRAIN</text>
+<text x='500.0' y='264.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>DATUM: plinth bed + face CL. Measure rail_z along Reference Edge (vertical CL).</text>
+<text x='500.0' y='292.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>rail_z CL = [350, 1000, 1650]  (3 pockets / face as scheduled)</text>
+<text x='500.0' y='330.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#26241f' text-anchor='start'>FIT CLASS: CLEARANCE + WEDGE.  Do not glue.  Do not caulk.</text>
+<rect x='500.0' y='380.0' width='100.0' height='100.0' fill='none' stroke='#a34e2b' stroke-width='2'/>
+<text x='500.0' y='372.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>CHECK BOX = 100.000 mm  (verify print scale)</text>
+<text x='550.0' y='438.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#a34e2b' text-anchor='middle'>100</text>
+
+</svg>

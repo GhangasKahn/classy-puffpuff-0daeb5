@@ -106,6 +106,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
     <a href="#permits">Permits</a>
     <a href="#maintenance">Care</a>
     <a href="#files">Files</a>
+    <a href="../fab/">Shop</a>
   </div>
 </nav>
 
@@ -338,6 +339,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <p>
         <a class="dl" href="../stele/">STELE design page</a>
         <a class="dl" href="../">HASHIRA design guide</a>
+        <a class="dl" href="../fab/">Shop fabrication model (Rev B)</a>
       </p>
       <h3>CAD models</h3>
       <p>
@@ -357,7 +359,8 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <h3>Regenerate everything</h3>
       <p class="mono" style="background:#fff;border:1px solid var(--line2);padding:16px 18px;max-width:66ch">
         ./scripts/build_stele.sh&nbsp;&nbsp;# FreeCAD model → exports → renders → plans<br />
-        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# OpenSCAD joint models → renders/STLs
+        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# OpenSCAD joint models → renders/STLs<br />
+        python3 scripts/fab_system.py&nbsp;&nbsp;# BOM, cut lists, shop drawings, JSON/CSV
       </p>
       <div class="callout">
         <p class="t">Disclaimer</p>

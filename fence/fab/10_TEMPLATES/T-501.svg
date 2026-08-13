@@ -1,0 +1,35 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 700' width='900' height='700' font-size='16'>
+<rect width='900' height='700' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='852.0' height='652.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='590.0' width='852.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='622.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='648.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>VOUSSOIR FULL-SIZE TEMPLATE  (print 1:1, tile if needed)</text>
+<text x='700.0' y='630.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>T-501</text>
+<text x='700.0' y='652.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<rect x='60.0' y='80.0' width='100.0' height='100.0' fill='none' stroke='#a34e2b' stroke-width='2'/>
+<text x='60.0' y='72.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>CHECK BOX = 100.000 mm  (verify print scale)</text>
+<text x='110.0' y='138.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#a34e2b' text-anchor='middle'>100</text>
+<path d='M 159.5 520.0 A 290.5 290.5 0 0 1 740.5 520.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<path d='M 236.5 520.0 A 213.5 213.5 0 0 1 663.5 520.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<line x1='236.5' y1='520.0' x2='159.5' y2='520.0' stroke='#26241f' stroke-width='1.2'/>
+<line x1='245.1' y1='459.9' x2='171.3' y2='438.2' stroke='#26241f' stroke-width='1.2'/>
+<line x1='270.4' y1='404.6' x2='205.6' y2='362.9' stroke='#26241f' stroke-width='1.2'/>
+<line x1='310.2' y1='358.6' x2='259.8' y2='300.5' stroke='#26241f' stroke-width='1.2'/>
+<line x1='361.3' y1='325.8' x2='329.3' y2='255.8' stroke='#26241f' stroke-width='1.2'/>
+<line x1='419.6' y1='308.7' x2='408.7' y2='232.5' stroke='#26241f' stroke-width='1.2'/>
+<line x1='480.4' y1='308.7' x2='491.3' y2='232.5' stroke='#26241f' stroke-width='1.2'/>
+<line x1='538.7' y1='325.8' x2='570.7' y2='255.8' stroke='#26241f' stroke-width='1.2'/>
+<line x1='589.8' y1='358.6' x2='640.2' y2='300.5' stroke='#26241f' stroke-width='1.2'/>
+<line x1='629.6' y1='404.6' x2='694.4' y2='362.9' stroke='#26241f' stroke-width='1.2'/>
+<line x1='654.9' y1='459.9' x2='728.7' y2='438.2' stroke='#26241f' stroke-width='1.2'/>
+<line x1='663.5' y1='520.0' x2='740.5' y2='520.0' stroke='#26241f' stroke-width='1.2'/>
+<line x1='139.5' y1='520.0' x2='760.5' y2='520.0' stroke='#8a6f4d' stroke-width='1' stroke-dasharray='8 6'/>
+<text x='450.0' y='544.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='middle'>SPRINGLINE</text>
+<text x='60.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#26241f' text-anchor='start'>R_IN  610 mm  [24.02"]</text>
+<text x='60.0' y='244.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#26241f' text-anchor='start'>R_OUT 830 mm  [32.68"]</text>
+<text x='60.0' y='268.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#26241f' text-anchor='start'>THICK 350 mm   DEPTH 220 mm</text>
+<text x='60.0' y='292.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#26241f' text-anchor='start'>11 divisions  ·  2 springers MIRRORED  ·  8 typical IDENTICAL  ·  1 key</text>
+<text x='60.0' y='328.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>GRAIN n/a (cast stone).  DATUM: impost bed.  ORIENTATION: intrados down on centering.</text>
+<text x='60.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#a34e2b' text-anchor='start'>TRUE 1:1 DXF: scale this drawing × (1/0.35) in CAD, or loft from r_in/r_out in FreeCAD.</text>
+
+</svg>

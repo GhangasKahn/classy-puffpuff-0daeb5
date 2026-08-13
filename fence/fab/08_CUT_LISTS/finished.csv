@@ -1,0 +1,22 @@
+PART_ID,DESCRIPTION,QTY,T,W,L,T_IN,W_IN,L_IN,MATERIAL,HANDED,NOTES
+F-001,Pier footing pad,6,300,600,600,"11.81""","23.62""","23.62""",Concrete 4000 psi AE 5–7%,IDENTICAL,Bearing at −frost_depth on F-003. Pour monolithic with F-002 where possible.
+F-002,Pier stem,6,920,350,350,"36.22""","13.78""","13.78""",Concrete 4000 psi AE 5–7%,IDENTICAL,Capillary-break flashing at stem/plinth. CONSTRAINT: FIXED to F-001.
+M-001,Pier plinth,6,150,560,560,"5.91""","22.05""","22.05""",Cast stone or limestone,IDENTICAL,Sits on flashing over F-002.
+M-002-L,Battered shaft — pockets LEFT,2,1600,480,360,"62.99""","18.9""","14.17""",Cast stone (3 drums),LEFT-HAND,Batter 60/1600 = 1:26.7 per face (Egyptian talus). GATE_L + END_R.
+M-002-R,Battered shaft — pockets RIGHT,2,1600,480,360,"62.99""","18.9""","14.17""",Cast stone (3 drums),RIGHT-HAND,END_L + GATE_R. Mirror of M-002-L.
+M-002-B,Battered shaft — pockets BOTH,2,1600,480,360,"62.99""","18.9""","14.17""",Cast stone (3 drums),IDENTICAL,MID piers. Same batter as M-002-L/R.
+M-003,Mayan cap stack (3 units),4,215,560,180,"8.46""","22.05""","7.09""",Cast stone,IDENTICAL,"Drip kerf 8×8, 20 from edge, all 4 sides of tiers 1+2. 1:12 wash min."
+M-004,Impost block,2,60,520,520,"2.36""","20.47""","20.47""",Cast stone,IDENTICAL,Arch bears here in pure compression. SS dowels for erection only.
+M-005,Arch springer voussoir,2,220,350,206,"8.66""","13.78""","8.11""",Cast stone,MIRRORED,Flat soffit on impost. L/R mirrored.
+M-006,Arch typical voussoir,8,220,350,206,"8.66""","13.78""","8.11""",Cast stone,IDENTICAL,Concentric ring — all typical voussoirs IDENTICAL.
+M-007,Keystone,1,300,280,410,"11.81""","11.02""","16.14""",Cast stone,IDENTICAL,Do not strike centering until 7-day cure after key is set.
+C-001,Splash curb,4,250,200,1960,"9.84""","7.87""","77.17""",Cast concrete or solid CMU,IDENTICAL,CONSTRAINT: FLOATING — heave isolation from piers.
+R-001,Nuki through-rail,12,38,89,2080,"1.5""","3.5""","81.89""",Western red cedar,IDENTICAL,All 12 IDENTICAL. Purchase 2×4×8' S4S. Datum End = left pocket engagement.
+B-001,Rain-screen board,52,19,140,1460,"0.75""","5.51""","57.48""",Western red cedar,IDENTICAL,CONSTRAINT: FLOATING (nailed to rails; rails float in pockets). 10 mm gaps.
+TC-001,Bay timber cap,4,45,120,2080,"1.77""","4.72""","81.89""",Western red cedar,IDENTICAL,Washes water off rain-screen. Do not caulk kerfs.
+W-001,Nuki locking wedge,24,8,25,90,"0.31""","0.98""","3.54""",White oak or black locust,IDENTICAL,Harder than cedar frame. Replaceable. Do not glue.
+GS-001,Gate stile,2,40,70,1600,"1.57""","2.76""","62.99""",Western red cedar or locust,IDENTICAL,"Hinge stile = street-left as viewed from outside, inward swing."
+GL-001,Gate ledge,3,45,45,1030,"1.77""","1.77""","40.55""",Western red cedar,IDENTICAL,
+GB-001,Gate diagonal brace,1,45,45,1762,"1.77""","1.77""","69.37""",Western red cedar,IDENTICAL,Brace must rise from hinge (bottom) to latch (top). Reverse = sag.
+GF-001,Gate face board,12,16,90,1600,"0.63""","3.54""","62.99""",Western red cedar,IDENTICAL,
+L-001,Hashira post (study / repair),2,89,89,1800,"3.5""","3.5""","70.87""",Western red cedar / black locust / white oak,IDENTICAL,HASHIRA system for existing-fence reinforcement — not used in STELE (masonry piers replace posts).
