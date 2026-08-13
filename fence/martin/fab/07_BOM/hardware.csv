@@ -1,7 +1,8 @@
-HARDWARE_ID,DESCRIPTION,STANDARD,SIZE,QTY,MATERIAL,MAKE_OR_BUY
-H-001,"Sleeve liner, PVC Sch40 or galvanized, ID to 2.75″×4.75″ tenon pocket, drain ⌀½″",ASTM D1785 / ASTM A53,custom / formed,4,PVC or zinc-coated steel,BUY
-H-002,"House foundation latch receiver, 4.00″ deep hardwood/pipe sleeve",site,fits G-010 1.50″×3.50″ bar,1,oak + epoxy,BUY/MAKE
-H-003,"Optional stainless lift-off pintle hinge set, 2 leaves",manufacturer,to suit 1.50″ gate + 3.50″ post,1,stainless steel,BUY
-H-004,Optional keyed padlock hasp for latch bar,manufacturer,to suit G-010,1,stainless or galvanized,BUY
-H-005,"Exterior primer + owner gray enamel, 2 finish coats",exterior grade,kit,1,coating,BUY
-H-006,ICC-rated epoxy anchoring adhesive for Latch A sleeve,ICC-ES,cartridge,1,epoxy,BUY
+HARDWARE_ID,DESCRIPTION,SIZE,QTY,MAKE_OR_BUY,NOTES
+H-010,Sleeve liner PVC Sch40 or galvanized tube,ID = 2.5×4.5 tenon + ¼″ clear,4,BUY,⌀½″ drain at bottom
+H-020,Optional stainless pintle hinge set,lift-off pair,1,BUY,Only allowed metal hinge; wood pintles are default
+H-021,Optional keyed padlock hasp,to suit H-003 bar,1,BUY,Locking only — not structural
+H-022,Epoxy anchoring adhesive (Latch A),house sleeve only,1,BUY,Never on timber locking faces
+C-CON,Concrete 4000 psi air-entrained,~0.35 yd³,1,BUY,Pad + 4 piers
+C-STN,#57 crushed stone,~0.4 yd³,1,BUY,Under pad
+F-001,Exterior primer + owner gray ×2 + end sealer,1 kit,1,BUY,Mask wedges/tenons/pegs/sleeves

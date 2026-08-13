@@ -209,6 +209,53 @@ tr.bought td{opacity:.55;text-decoration:line-through}
 }
 .chip.on{background:rgba(90,106,74,.25);border-color:var(--sage);color:var(--paper)}
 
+/* 5-phase walk */
+.phase-map{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 18px;
+}
+@media(max-width:900px){.phase-map{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.phase-map{grid-template-columns:1fr}}
+.phase-card{
+  text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);
+  padding:14px 12px;cursor:pointer;display:flex;flex-direction:column;gap:6px;
+  transition:border-color .2s,transform .2s,background .2s;min-height:118px;
+}
+.phase-card:hover{border-color:var(--sage-hi);transform:translateY(-2px)}
+.phase-card.on{border-color:var(--sage-hi);background:rgba(90,106,74,.18);box-shadow:0 0 0 1px rgba(143,173,120,.25)}
+.phase-card.done{border-color:var(--ok)}
+.phase-card .mono{color:var(--sage-hi);font-size:11px;letter-spacing:.16em}
+.phase-card strong{font:600 16px/1.15 var(--disp)}
+.phase-card small{color:var(--faint);font-size:12px;line-height:1.35}
+.phase-card .bar{display:block;height:4px;background:var(--ink2);border-radius:999px;overflow:hidden;margin-top:auto}
+.phase-card .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--sage),var(--sage-hi))}
+.phase-card em{font:600 10px/1 var(--mono);color:var(--faint);letter-spacing:.08em;font-style:normal}
+
+.walk-stage-wrap{margin-top:6px}
+.walk-nav{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;
+}
+.walk-phase-label{text-align:center}
+.walk-phase-label .mono{display:block;color:var(--sage-hi);letter-spacing:.18em;font-size:11px;margin-bottom:4px}
+.walk-phase-label strong{font:600 22px/1.1 var(--disp)}
+.walk-stage{
+  background:radial-gradient(ellipse at 50% 0%, #2a333a, var(--ink2));
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-height:280px;
+}
+.walk-svg{width:100%;height:auto;display:block}
+.walk-hero{color:var(--dim);font-size:15px;max-width:70ch;margin:14px 0 16px}
+.walk-sheets{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.sheet-chip{
+  border:1px solid var(--line2);border-radius:999px;padding:8px 12px;text-decoration:none;
+  color:var(--paper);font:600 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(90,106,74,.12);
+}
+.sheet-chip:hover{border-color:var(--sage-hi);color:var(--sage-hi)}
+.anim-slide{animation:slideIn .9s var(--ease) both}
+@keyframes slideIn{from{transform:translateX(-24px);opacity:.35}to{transform:none;opacity:1}}
+.anim-swing{animation:pulseSoft 2.8s ease-in-out infinite alternate}
+@keyframes pulseSoft{from{opacity:.92}to{opacity:1}}
+button:disabled{opacity:.35;cursor:not-allowed}
+
 .fence-part{transition:opacity .35s var(--ease), transform .45s var(--ease);cursor:pointer}
 .fence-part.dim{opacity:.22}
 .fence-part.hot{filter:url(#glow)}

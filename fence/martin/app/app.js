@@ -1,6 +1,18 @@
-/* MARTIN Build App — interactive shell */
+/* MARTIN Build App — visual 5-phase walk + explode + checklist */
 (function () {
   const D = window.MARTIN_DATA;
+  let SSOT = null;
+
+  function loadSSOT() {
+    return fetch("martin.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        SSOT = j;
+        return j;
+      })
+      .catch(() => null);
+  }
+  const W = window.MARTIN_WALK;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const store = {
@@ -20,12 +32,13 @@
   };
 
   const state = {
-    tab: store.get("tab", "overview"),
+    tab: store.get("tab", "walk"),
     explode: store.get("explode", 0),
     selected: store.get("selected", null),
     done: store.get("done", {}),
     bought: store.get("bought", {}),
     phase: store.get("phase", "all"),
+    walkIdx: store.get("walkIdx", 0),
     drafts: store.get("drafts", {
       dropOff: D.meta.dropDefault,
       grayHex: "#6e7578",
@@ -51,6 +64,13 @@
       b.classList.toggle("on", b.dataset.tab === id)
     );
     if (id === "viz") drawViz();
+    if (id === "walk") renderWalk();
+    if (id === "registry") renderRegistry();
+    if (id === "qa") renderQA();
+    if (id === "fab") {
+      if (window.MARTIN_FAB) renderFab(window.MARTIN_FAB);
+      else loadFab();
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -62,12 +82,113 @@
 
   function refreshProgress() {
     const pct = progressPct();
-    $$(".progress-pill").forEach((el) => (el.textContent = pct + "% assembled"));
+    $$(".progress-pill").forEach((el) => (el.textContent = pct + "% complete"));
     const bar = $("#progressBar");
     if (bar) bar.style.width = pct + "%";
   }
 
-  /* ---------- Overview ---------- */
+  function phaseProgress(phaseId) {
+    const steps = D.assembly.filter((s) => s.phase === phaseId);
+    if (!steps.length) return 0;
+    const done = steps.filter((s) => state.done[s.id]).length;
+    return Math.round((100 * done) / steps.length);
+  }
+
+  /* ---------- Walk (primary visual) ---------- */
+  function currentPhase() {
+    return W.phases[Math.max(0, Math.min(state.walkIdx, W.phases.length - 1))];
+  }
+
+  function renderPhaseMap() {
+    $("#phaseMap").innerHTML = W.phases
+      .map((p, i) => {
+        const pct = phaseProgress(p.id);
+        const on = i === state.walkIdx ? " on" : "";
+        const done = pct === 100 ? " done" : "";
+        return `<button type="button" class="phase-card${on}${done}" data-walk="${i}">
+          <span class="mono">${p.num}</span>
+          <strong>${p.title}</strong>
+          <small>${p.subtitle}</small>
+          <i class="bar"><i style="width:${pct}%"></i></i>
+          <em>${pct}%</em>
+        </button>`;
+      })
+      .join("");
+    $$("#phaseMap .phase-card").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.walkIdx = parseInt(b.dataset.walk, 10);
+        store.set("walkIdx", state.walkIdx);
+        renderWalk();
+      })
+    );
+  }
+
+  function renderWalk() {
+    const p = currentPhase();
+    $("#walkNum").textContent = p.num;
+    $("#walkTitle").textContent = p.title;
+    $("#walkHero").textContent = p.hero;
+    W.drawScene(p.viz, $("#walkStage"), { grayHex: state.drafts.grayHex });
+    $("#walkHighlights").innerHTML = p.highlights
+      .map(
+        (h) =>
+          `<div class="card stat"><span>${h.title}</span><b style="font-size:15px;line-height:1.35;font-family:var(--sans);font-weight:500">${h.body}</b></div>`
+      )
+      .join("");
+    $("#walkSheets").innerHTML = p.sheets
+      .map(
+        (s) =>
+          `<a class="sheet-chip" href="../plans/${s}" data-gallery="../plans/${s}" data-title="${s}">${s.replace(".svg", "")}</a>`
+      )
+      .join("");
+    $$("#walkSheets .sheet-chip").forEach((a) =>
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLightbox(a.dataset.gallery, a.dataset.title);
+      })
+    );
+
+    const steps = D.assembly.filter((s) => s.phase === p.id);
+    $("#walkSteps").innerHTML = steps
+      .map((s) => {
+        const done = !!state.done[s.id];
+        return `<div class="step${done ? " done" : ""}">
+          <div class="num">${done ? "✓" : s.id.replace(/\D/g, "") || "·"}</div>
+          <div><h3>${s.title}</h3><p>${s.body}</p></div>
+          <button type="button" class="check" data-id="${s.id}" aria-label="Mark done"></button>
+        </div>`;
+      })
+      .join("");
+    $$("#walkSteps .check").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.done[b.dataset.id] = !state.done[b.dataset.id];
+        store.set("done", state.done);
+        renderWalk();
+        renderAssembly();
+        refreshProgress();
+      })
+    );
+
+    renderPhaseMap();
+    $("#walkPrev").disabled = state.walkIdx === 0;
+    $("#walkNext").disabled = state.walkIdx >= W.phases.length - 1;
+  }
+
+  function markPhaseDone() {
+    const p = currentPhase();
+    D.assembly
+      .filter((s) => s.phase === p.id)
+      .forEach((s) => {
+        state.done[s.id] = true;
+      });
+    store.set("done", state.done);
+    renderWalk();
+    renderAssembly();
+    refreshProgress();
+    toast(p.title + " marked done");
+  }
+
+  /* ---------- Overview stats ---------- */
   function renderOverview() {
     const m = D.meta;
     $("#overviewStats").innerHTML = [
@@ -75,13 +196,10 @@
       ["Height", m.height + "″"],
       ["Gate", m.gateClear + "″ clear"],
       ["Bay", m.bayClear + "″ each"],
-      ["Board feet", "≈ " + m.boardFeet + " buy"],
-      ["Climate", "Buffalo NY"],
+      ["Mill buy", "≈ " + m.boardFeet + " bf"],
+      ["Rev", m.rev + " · " + (m.species || "DF + oak")],
     ]
-      .map(
-        ([k, v]) =>
-          `<div class="card stat"><span>${k}</span><b>${v}</b></div>`
-      )
+      .map(([k, v]) => `<div class="card stat"><span>${k}</span><b>${v}</b></div>`)
       .join("");
   }
 
@@ -92,21 +210,22 @@
     const L = D.meta.length;
     const H = D.meta.height;
     const gate = D.meta.gateClear;
-    const explode = state.explode; // 0..1
+    const explode = state.explode;
     const lift = explode * 28;
     const spread = explode * 18;
     const selected = state.selected;
+    const gray = state.drafts.grayHex || "#6e7578";
 
-    const S = 6.2; // px per inch
+    const S = 6.2;
     const padX = 40;
     const padY = 36;
-    const W = padX * 2 + L * S + explode * 80;
+    const Wsvg = padX * 2 + L * S + explode * 80;
     const VH = padY * 2 + (H + 24) * S + lift * 2;
 
     const yOf = (z) => padY + (H - z) * S + lift;
     const xOf = (x) => padX + x * S + spread;
-
-    const dim = (id) => (selected && selected !== id ? " dim" : selected === id ? " hot" : "");
+    const dim = (id) =>
+      selected && selected !== id ? " dim" : selected === id ? " hot" : "";
 
     const posts = D.posts
       .map((p, i) => {
@@ -126,7 +245,7 @@
         const x0 = xOf(41.25 - 1.75 - 0.5);
         const w = (141.25 + 1.75 + 0.5 - (41.25 - 1.75 - 0.5)) * S;
         const y = yOf(r.cl + 3.625);
-        return `<rect class="fence-part${dim("rails")}" data-part="rails" x="${x0}" y="${y - i * lift * 0.08}" width="${w}" height="${7.25 * S}" fill="#6e7578" stroke="#1a1f24" stroke-width="1"/>`;
+        return `<rect class="fence-part${dim("rails")}" data-part="rails" x="${x0}" y="${y - i * lift * 0.08}" width="${w}" height="${7.25 * S}" fill="${gray}" stroke="#1a1f24" stroke-width="1"/>`;
       })
       .join("");
 
@@ -136,7 +255,6 @@
       return `<rect class="fence-part${dim("cap")}" data-part="cap" x="${x0}" y="${yOf(H) - lift * 0.4}" width="${w}" height="${1.5 * S}" fill="#8a9094" stroke="#1a1f24"/>`;
     })();
 
-    // boards hint
     let boards = "";
     for (const bay of [
       [41.25 + 1.75, 91.25 - 1.75],
@@ -158,9 +276,7 @@
     </g>`;
 
     const latch = `<rect class="fence-part${dim("latch")}" data-part="latch" x="${xOf(3.5 + 0.5) - 18 * S * (0.35 + explode * 0.4)}" y="${yOf(28 + 1.75)}" width="${18 * S * (0.35 + explode * 0.25)}" height="${3.5 * S}" fill="#aeb6ba" stroke="#1a1f24"/>`;
-
     const pad = `<rect class="fence-part${dim("pad")}" data-part="pad" x="${xOf(-6)}" y="${yOf(0)}" width="${(L + 12) * S}" height="${6 * S}" fill="#9a9890" stroke="#1a1f24"/>`;
-
     const piers = D.posts
       .map((p, i) => {
         const x = xOf(p.x - 7);
@@ -168,10 +284,8 @@
       })
       .join("");
 
-    stage.innerHTML = `<svg viewBox="0 0 ${W} ${VH}" role="img" aria-label="MARTIN fence visualization">
-      <defs>
-        <filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#8fad78"/></filter>
-      </defs>
+    stage.innerHTML = `<svg viewBox="0 0 ${Wsvg} ${VH}" role="img" aria-label="MARTIN fence visualization">
+      <defs><filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#8fad78"/></filter></defs>
       ${pad}${piers}${posts}${boards}${rails}${cap}${gateLeaf}${latch}
       <text x="${padX}" y="${VH - 10}" fill="#6e7578" font-size="11" font-family="IBM Plex Mono,monospace">143″ overall · explode ${Math.round(explode * 100)}%</text>
     </svg>`;
@@ -193,7 +307,7 @@
     if (part && state.selected) {
       $("#partDetail").innerHTML = `<strong>${part.label}</strong><p>${part.detail}</p>`;
     } else {
-      $("#partDetail").innerHTML = `<strong>Select a part</strong><p>Click the model or the list to inspect. Drag the explode slider for assembly breakdown.</p>`;
+      $("#partDetail").innerHTML = `<strong>Select a part</strong><p>Click the model or the list to inspect.</p>`;
     }
   }
 
@@ -220,7 +334,7 @@
         const done = !!state.done[s.id];
         return `<div class="step${done ? " done" : ""}" data-id="${s.id}">
           <div class="num">${String(i + 1).padStart(2, "0")}</div>
-          <div><h3>${s.title}</h3><p>${s.body}</p></div>
+          <div><h3>${s.title}</h3><p><span class="mono" style="color:var(--sage-hi)">${s.phase}</span> · ${s.body}</p></div>
           <button type="button" class="check" aria-label="Mark done" data-id="${s.id}"></button>
         </div>`;
       })
@@ -230,6 +344,7 @@
         state.done[b.dataset.id] = !state.done[b.dataset.id];
         store.set("done", state.done);
         renderAssembly();
+        renderWalk();
         refreshProgress();
         toast(state.done[b.dataset.id] ? "Step complete" : "Step reopened");
       })
@@ -253,7 +368,7 @@
       .join("");
     $("#lumberBody").innerHTML = rows;
     const total = D.lumber.reduce((a, r) => a + r.bf, 0);
-    $("#bfTotal").textContent = "≈ " + total.toFixed(1) + " bf";
+    $("#bfTotal").textContent = "≈ " + total.toFixed(1) + " bf buy";
     $$("#lumberBody .buy-check").forEach((c) =>
       c.addEventListener("change", () => {
         state.bought[c.dataset.id] = c.checked;
@@ -265,13 +380,120 @@
       .map((m) => `<li><strong>${m.item}</strong> — ${m.qty}</li>`)
       .join("");
     $("#toolsList").innerHTML = D.tools.map((t) => `<li>${t}</li>`).join("");
+    const tolEl = $("#tolerancesList");
+    if (tolEl && D.tolerances) {
+      tolEl.innerHTML = D.tolerances
+        .map((t) => `<li><strong>${t.item}</strong> — ${t.spec}</li>`)
+        .join("");
+    }
+    const finEl = $("#finishedList");
+    if (finEl && D.finished) {
+      finEl.innerHTML = D.finished
+        .map(
+          (f) =>
+            `<li><strong>${f.qty} × ${f.part}</strong> — <span class="mono">${f.size}</span> · ${f.note}</li>`
+        )
+        .join("");
+    }
+    const grainEl = $("#grainList");
+    if (grainEl && D.grainRules) {
+      grainEl.innerHTML = D.grainRules.map((g) => `<li>${g}</li>`).join("");
+    }
   }
 
-  /* ---------- Joinery / Gallery / Downloads / Drafts ---------- */
-  function renderJoinery() {
-    $("#joineryList").innerHTML = D.joinery
+  function fmtSize(p) {
+    const t = p.FINISHED_THICKNESS;
+    const w = p.FINISHED_WIDTH;
+    const l = p.FINISHED_LENGTH;
+    if (!t && !w && !l) return "—";
+    return `${t} × ${w} × ${l}`;
+  }
+
+  function renderRegistry() {
+    if (!SSOT) {
+      $("#registryBody").innerHTML = `<tr><td colspan="6">Loading martin.json…</td></tr>`;
+      return;
+    }
+    const ly = SSOT.layout || {};
+    const mat = SSOT.material || {};
+    $("#ssotStats").innerHTML = [
+      ["Rev", SSOT.project.REVISION],
+      ["Parts", String(SSOT.parts.length)],
+      ["Joints", String(SSOT.joints.length)],
+      ["Post L", ly.post_finished_length + "″"],
+      ["Nuki L", ly.nuki_length + "″"],
+      ["Buy bf", String(mat.procurement_board_feet)],
+    ]
+      .map(([k, v]) => `<div class="card stat"><span>${k}</span><b>${v}</b></div>`)
+      .join("");
+    $("#registryBody").innerHTML = SSOT.parts
       .map(
-        (j) => `<article class="join">
+        (p) => `<tr>
+          <td class="mono">${p.PART_ID}</td>
+          <td>${p.PART_NAME}</td>
+          <td>${p.QUANTITY}</td>
+          <td class="mono">${fmtSize(p)}</td>
+          <td>${p.JOINERY || ""}</td>
+          <td>${p.MAKE_OR_BUY}</td>
+        </tr>`
+      )
+      .join("");
+    $("#paramBody").innerHTML = Object.entries(SSOT.parameters)
+      .map(([k, meta]) => {
+        const val = Array.isArray(meta.value) ? meta.value.join(" / ") : meta.value;
+        return `<tr><td class="mono">${k}</td><td>${val}</td><td>${meta.class}</td><td>${meta.note}</td></tr>`;
+      })
+      .join("");
+  }
+
+  function renderQA() {
+    if (!SSOT) return;
+    $("#gateList").innerHTML = Object.entries(SSOT.gates || {})
+      .map(
+        ([k, v]) =>
+          `<div class="card"><span class="mono">${k}</span><p style="margin:6px 0 0;color:var(--dim)">${v}</p></div>`
+      )
+      .join("");
+    $("#qcList").innerHTML = (SSOT.inspection || [])
+      .map(
+        (q) => `<div class="step">
+          <div class="num">${q.QC.replace("QC-", "")}</div>
+          <div><h3>${q.CHECK}</h3><p>${q.CRITERIA} · ${q.GATE} · ${q.CLASS}</p></div>
+        </div>`
+      )
+      .join("");
+    $("#decisionList").innerHTML = (SSOT.decisions || [])
+      .map(
+        (d) => `<article class="join" style="grid-template-columns:80px 1fr;margin-bottom:10px">
+          <div class="glyph">${d.ID}</div>
+          <div><h3>${d.DECISION}</h3><p style="margin:0;color:var(--dim);font-size:14px">${d.REASON}<br><span class="mono">${d.AFFECTED}</span></p></div>
+        </article>`
+      )
+      .join("");
+    $("#unresolvedList").innerHTML = (SSOT.unresolved || [])
+      .map((u) => `<li><strong>${u.ID}</strong> ${u.ITEM} (${u.CLASS}) — ${u.ACTION}</li>`)
+      .join("");
+  }
+
+  function renderJoinery() {
+    const extra = SSOT
+      ? SSOT.joints
+          .map(
+            (j) => `<article class="join">
+          <div class="glyph">${j.JOINT_ID.replace("J-", "")}</div>
+          <div>
+            <h3>${j.JOINT_TYPE}</h3>
+            <p class="hint" style="margin:0 0 6px">${j.PART_A} ↔ ${j.PART_B} · <span class="mono">${j.FIT_CLASS}</span></p>
+            <p style="margin:0;color:var(--dim);font-size:14px">${j.LOCATION || ""} · ${j.TOOLING || ""}</p>
+          </div>
+        </article>`
+          )
+          .join("")
+      : "";
+    $("#joineryList").innerHTML =
+      D.joinery
+        .map(
+          (j) => `<article class="join">
           <div class="glyph">${j.jp}</div>
           <div>
             <h3>${j.name}</h3>
@@ -279,8 +501,8 @@
             <p style="margin:0;color:var(--dim);font-size:14px">${j.tip}</p>
           </div>
         </article>`
-      )
-      .join("");
+        )
+        .join("") + extra;
   }
 
   function renderGallery() {
@@ -313,7 +535,7 @@
     $("#downloadGrid").innerHTML = D.downloads
       .map(
         (d) =>
-          `<a class="dl" href="${d.href}" ${d.href.match(/\.(FCStd|step|stl|py|svg)$/) ? "download" : ""}>
+          `<a class="dl" href="${d.href}" ${d.href.match(/\.(FCStd|step|stl|py|svg|json|csv)$/) ? "download" : ""}>
             <b>${d.label}</b><span>${d.note}</span>
           </a>`
       )
@@ -340,6 +562,8 @@
     };
     store.set("drafts", state.drafts);
     $("#graySwatch").style.background = state.drafts.grayHex;
+    if (state.tab === "walk") renderWalk();
+    if (state.tab === "viz") drawViz();
     toast("Drafts saved locally");
   }
 
@@ -350,6 +574,7 @@
       drafts: state.drafts,
       assemblyDone: state.done,
       lumberBought: state.bought,
+      walkPhase: currentPhase().id,
       progressPct: progressPct(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
@@ -363,11 +588,13 @@
   }
 
   function renderWinter() {
-    $("#winterList").innerHTML = D.winter.map((w, i) => `<li><span class="mono">${i + 1}.</span> ${w}</li>`).join("");
+    $("#winterList").innerHTML = D.winter
+      .map((w, i) => `<li><span class="mono">${i + 1}.</span> ${w}</li>`)
+      .join("");
   }
 
   function renderFab(fab) {
-    if (!fab) return;
+    if (!fab || !$("#fabStats")) return;
     const nest = fab.nest || {};
     $("#fabStats").innerHTML = [
       ["Parts", fab.parts.length],
@@ -435,8 +662,12 @@
       });
   }
 
-  /* ---------- Wire UI ---------- */
   function init() {
+    loadSSOT().then(() => {
+      renderRegistry();
+      renderQA();
+      renderJoinery();
+    });
     renderOverview();
     renderPartList();
     renderAssembly();
@@ -449,10 +680,14 @@
     loadFab();
     refreshProgress();
     drawViz();
-    setTab(state.tab);
+    renderWalk();
+    setTab(state.tab === "overview" ? "walk" : state.tab);
 
     $$(".tab, .mobile-nav button").forEach((b) =>
       b.addEventListener("click", () => setTab(b.dataset.tab))
+    );
+    $$("[data-tab-jump]").forEach((b) =>
+      b.addEventListener("click", () => setTab(b.dataset.tabJump))
     );
 
     $("#explodeRange").addEventListener("input", (e) => {
@@ -463,6 +698,14 @@
     });
     $("#explodeRange").value = state.explode;
     $("#explodeVal").textContent = Math.round(state.explode * 100) + "%";
+    $("#btnBreakdown").addEventListener("click", () => {
+      $("#explodeRange").value = 0.55;
+      $("#explodeRange").dispatchEvent(new Event("input"));
+    });
+    $("#btnAssembled").addEventListener("click", () => {
+      $("#explodeRange").value = 0;
+      $("#explodeRange").dispatchEvent(new Event("input"));
+    });
 
     $$(".phase-rail .chip").forEach((c) =>
       c.addEventListener("click", () => {
@@ -472,6 +715,18 @@
       })
     );
 
+    $("#walkPrev").addEventListener("click", () => {
+      state.walkIdx = Math.max(0, state.walkIdx - 1);
+      store.set("walkIdx", state.walkIdx);
+      renderWalk();
+    });
+    $("#walkNext").addEventListener("click", () => {
+      state.walkIdx = Math.min(W.phases.length - 1, state.walkIdx + 1);
+      store.set("walkIdx", state.walkIdx);
+      renderWalk();
+    });
+    $("#walkMarkPhase").addEventListener("click", markPhaseDone);
+
     $("#saveDrafts").addEventListener("click", saveDrafts);
     $("#exportDrafts").addEventListener("click", exportDrafts);
     $("#resetProgress").addEventListener("click", () => {
@@ -479,6 +734,7 @@
         state.done = {};
         store.set("done", state.done);
         renderAssembly();
+        renderWalk();
         refreshProgress();
         toast("Progress reset");
       }

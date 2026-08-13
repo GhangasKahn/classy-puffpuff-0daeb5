@@ -4,11 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#14181c" />
-<meta name="description" content="MARTIN Build App — interactive breakdown, visualization, assembly checklist, materials, joinery, blueprints for the 143×65 Buffalo Prairie fence." />
+<meta name="description" content="MARTIN Build — visual 5-phase mill-stock fence app: mill, pad, timber, gate, finish. Japanese joinery, BOM, blueprints." />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="MARTIN" />
-<title>MARTIN Build — Fence Assembly App</title>
+<title>MARTIN Build — Visual Fence Walk</title>
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icon.svg" />
@@ -20,11 +20,11 @@
 <body>
 <div class="app">
   <header class="topbar">
-    <a class="brand" href="#overview" data-go="overview">
+    <a class="brand" href="#walk" data-go="walk">
       <i class="mark" aria-hidden="true"></i>
       <div>
         <b>Martin</b>
-        <span>Build app</span>
+        <span>Build walk</span>
       </div>
     </a>
     <div class="top-actions">
@@ -35,35 +35,62 @@
   </header>
 
   <nav class="tabs" aria-label="Sections">
-    <button type="button" class="tab on" data-tab="overview">Overview</button>
-    <button type="button" class="tab" data-tab="viz">Visualize</button>
-    <button type="button" class="tab" data-tab="assembly">Assembly</button>
-    <button type="button" class="tab" data-tab="materials">Materials</button>
+    <button type="button" class="tab on" data-tab="walk">Walk</button>
+    <button type="button" class="tab" data-tab="viz">Explode</button>
+    <button type="button" class="tab" data-tab="assembly">Checklist</button>
+    <button type="button" class="tab" data-tab="registry">Parts</button>
+    <button type="button" class="tab" data-tab="materials">BOM</button>
     <button type="button" class="tab" data-tab="joinery">Joinery</button>
+    <button type="button" class="tab" data-tab="qa">QA</button>
     <button type="button" class="tab" data-tab="fab">Fabrication</button>
-    <button type="button" class="tab" data-tab="gallery">Gallery</button>
+    <button type="button" class="tab" data-tab="gallery">Plans</button>
     <button type="button" class="tab" data-tab="drafts">Drafts</button>
     <button type="button" class="tab" data-tab="files">Files</button>
   </nav>
 
   <main>
-    <!-- OVERVIEW -->
-    <section class="panel on" data-panel="overview" id="overview">
-      <p class="kicker">143″ × 65″ · Buffalo NY · Japanese joinery</p>
-      <h1>Build MARTIN from the ground up</h1>
-      <p class="lead">Interactive breakdown of the Prairie removable fence — explode the model, walk assembly, check off lumber, study joinery, open blueprints, and keep site drafts on-device.</p>
-      <div class="grid3" id="overviewStats"></div>
+    <!-- WALK — primary visual 5-phase journey -->
+    <section class="panel on" data-panel="walk" id="walk">
+      <p class="kicker">Rev D · parametric SSOT · Japanese joinery · 5 phases</p>
+      <h1>See the whole build</h1>
+      <p class="lead">Walk every phase visually — mill for grain, pour the pad, cut nuki, build the gate, paint and set. Check steps off as you go.</p>
+
+      <div class="phase-map" id="phaseMap"></div>
+
+      <div class="walk-stage-wrap">
+        <div class="walk-nav">
+          <button type="button" class="btn" id="walkPrev">← Prev</button>
+          <div class="walk-phase-label">
+            <span class="mono" id="walkNum">01</span>
+            <strong id="walkTitle">Mill &amp; sticker</strong>
+          </div>
+          <button type="button" class="btn" id="walkNext">Next →</button>
+        </div>
+        <div class="walk-stage" id="walkStage" aria-live="polite"></div>
+        <p class="walk-hero" id="walkHero"></p>
+        <div class="grid3" id="walkHighlights"></div>
+        <div class="walk-sheets" id="walkSheets"></div>
+        <div class="hr"></div>
+        <h2>Steps in this phase</h2>
+        <div id="walkSteps"></div>
+        <div class="row" style="margin-top:16px">
+          <button type="button" class="btn primary" id="walkMarkPhase">Mark phase steps done</button>
+          <button type="button" class="btn" data-tab-jump="viz">Open explode view</button>
+          <button type="button" class="btn" data-tab-jump="gallery">Open plan sheets</button>
+        </div>
+      </div>
+
       <div class="hr"></div>
       <div class="grid2">
         <div class="card">
           <h3>How to use this app</h3>
           <ol style="margin:8px 0 0 18px;color:var(--dim);font-size:14px">
-            <li>Open <strong>Visualize</strong> — explode the fence and inspect parts</li>
-            <li>Work <strong>Assembly</strong> checklist phase by phase</li>
-            <li>Shop from <strong>Materials</strong> (196 bf net / 225 bf buy)</li>
-            <li>Open <strong>Fabrication</strong> for Part IDs, joints, nest, and shop drawings</li>
-            <li>Save drop-off / gray / latch choice in <strong>Drafts</strong></li>
-            <li>Print or download CAD &amp; blueprint <strong>Files</strong></li>
+            <li>Walk the five phases — mill, pad, timber, gate, finish</li>
+            <li>Open <strong>Explode</strong> and inspect parts</li>
+            <li>Work the <strong>Checklist</strong> phase by phase</li>
+            <li>Shop from <strong>BOM</strong> (mill-stock ≈322 bf buy)</li>
+            <li>Use <strong>QA</strong> for mill SSOT gates; <strong>Fabrication</strong> for the parallel kernel package</li>
+            <li>Save drop-off / gray / latch in <strong>Drafts</strong></li>
           </ol>
         </div>
         <div class="card">
@@ -71,37 +98,37 @@
           <div style="height:10px;background:var(--ink2);border-radius:999px;overflow:hidden;margin:12px 0">
             <div id="progressBar" style="height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--sage-hi));transition:width .35s"></div>
           </div>
-          <p class="hint">Checklist progress is stored in your browser (localStorage). Export JSON anytime from Drafts.</p>
+          <p class="hint">Checklist progress stays in this browser. Export JSON from Drafts anytime.</p>
           <div class="row" style="margin-top:12px">
-            <button type="button" class="btn" data-tab="assembly" onclick="document.querySelector('.tab[data-tab=assembly]').click()">Continue assembly</button>
             <button type="button" class="btn" id="resetProgress">Reset</button>
           </div>
         </div>
+        <div class="card">
+          <h3>Winter knock-down</h3>
+          <ol id="winterList" style="color:var(--dim);font-size:14px;margin:8px 0 0"></ol>
+        </div>
       </div>
-      <div class="hr"></div>
-      <h2>Winter knock-down</h2>
-      <p class="lead">Designed to leave before lake-effect season. Pad can stay; timber and tip-out piers store dry.</p>
-      <ol id="winterList" style="color:var(--dim);font-size:14px"></ol>
+      <div class="grid3" id="overviewStats" style="margin-top:14px"></div>
     </section>
 
     <!-- VIZ -->
     <section class="panel" data-panel="viz">
       <p class="kicker">Interactive model</p>
-      <h1>Breakdown &amp; visualization</h1>
-      <p class="lead">Exploded assembly view of the 143″ run. Click parts to inspect. Not a substitute for FreeCAD — open the .FCStd for exact solids.</p>
+      <h1>Exploded assembly</h1>
+      <p class="lead">Pull the fence apart. Click parts to inspect. Syncs with the Walk phases.</p>
       <div class="viz-wrap">
         <div>
           <div class="viz-stage" id="vizStage" aria-live="polite"></div>
           <div class="viz-controls">
             <label>Explode <input id="explodeRange" type="range" min="0" max="1" step="0.01" value="0" /> <span id="explodeVal" class="mono">0%</span></label>
-            <button type="button" class="btn" onclick="document.getElementById('explodeRange').value=0.55;document.getElementById('explodeRange').dispatchEvent(new Event('input'))">Breakdown</button>
-            <button type="button" class="btn" onclick="document.getElementById('explodeRange').value=0;document.getElementById('explodeRange').dispatchEvent(new Event('input'))">Assembled</button>
+            <button type="button" class="btn" id="btnBreakdown">Breakdown</button>
+            <button type="button" class="btn" id="btnAssembled">Assembled</button>
           </div>
         </div>
         <div>
           <div class="card" id="partDetail" style="margin-bottom:10px">
             <strong>Select a part</strong>
-            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the model or the list to inspect. Drag the explode slider for assembly breakdown.</p>
+            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the model or the list to inspect.</p>
           </div>
           <div class="part-list" id="partList"></div>
         </div>
@@ -110,24 +137,50 @@
 
     <!-- ASSEMBLY -->
     <section class="panel" data-panel="assembly">
-      <p class="kicker">Build sequence</p>
-      <h1>Assembly guide</h1>
-      <p class="lead">Twelve steps from site measure to lock. Check items off as you go — progress stays on this device.</p>
+      <p class="kicker">Full checklist</p>
+      <h1>Every step, end to end</h1>
+      <p class="lead">Mill → base → timber → gate → finish. Same steps as Walk, listed for shop use.</p>
       <div class="phase-rail">
         <button type="button" class="chip on" data-phase="all">All</button>
-        <button type="button" class="chip" data-phase="base">01 Base</button>
-        <button type="button" class="chip" data-phase="timber">02 Timber</button>
-        <button type="button" class="chip" data-phase="gate">03 Gate</button>
-        <button type="button" class="chip" data-phase="finish">04 Finish</button>
+        <button type="button" class="chip" data-phase="mill">01 Mill</button>
+        <button type="button" class="chip" data-phase="base">02 Base</button>
+        <button type="button" class="chip" data-phase="timber">03 Timber</button>
+        <button type="button" class="chip" data-phase="gate">04 Gate</button>
+        <button type="button" class="chip" data-phase="finish">05 Finish</button>
       </div>
       <div id="assemblyList"></div>
     </section>
 
+    <!-- REGISTRY -->
+    <section class="panel" data-panel="registry">
+      <p class="kicker">Single source of truth</p>
+      <h1>Part register</h1>
+      <p class="lead">Every fabricated and purchased component. Dimensions derived from fab/martin.json — change overall length and regenerate.</p>
+      <div class="grid3" id="ssotStats"></div>
+      <div class="card" style="overflow:auto;margin-top:14px">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Qty</th><th>Finished T×W×L</th><th>Joinery</th><th>M/B</th></tr>
+          </thead>
+          <tbody id="registryBody"></tbody>
+        </table>
+      </div>
+      <div class="hr"></div>
+      <h2>Parameters</h2>
+      <p class="hint">V = verified · D = derived · A = assumed · M = to be measured</p>
+      <div class="card" style="overflow:auto">
+        <table>
+          <thead><tr><th>Name</th><th>Value</th><th>Class</th><th>Note</th></tr></thead>
+          <tbody id="paramBody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- MATERIALS -->
     <section class="panel" data-panel="materials">
-      <p class="kicker">Hardware-store stock</p>
-      <h1>Materials &amp; board feet</h1>
-      <p class="lead">Paint-grade dimensional lumber is fine. Prefer straight grain for posts and rails. Check items as you buy.</p>
+      <p class="kicker">Mill buy · then re-dimension</p>
+      <h1>BOM &amp; board feet</h1>
+      <p class="lead">Select DF in 6×6 / 2×12 / 1×12 — mill for vertical grain and low warp. White oak for wedges, pegs, pintles. Japanese joinery only.</p>
       <div class="card" style="overflow:auto">
         <table>
           <thead>
@@ -135,7 +188,7 @@
           </thead>
           <tbody id="lumberBody"></tbody>
           <tfoot>
-            <tr><td colspan="5"><strong>Timber total</strong></td><td class="mono" id="bfTotal"></td></tr>
+            <tr><td colspan="5"><strong>Mill buy total</strong></td><td class="mono" id="bfTotal"></td></tr>
           </tfoot>
         </table>
       </div>
@@ -145,8 +198,24 @@
           <ul id="miscList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
         </div>
         <div class="card">
-          <h3>Tools</h3>
+          <h3>Owner tools (this shop)</h3>
           <ul id="toolsList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Finished parts (after milling)</h3>
+        <ul id="finishedList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card">
+          <h3>Hold these tolerances</h3>
+          <p class="hint" style="margin:6px 0 0">Festool / Bridge City / Zenwu — see M-7.</p>
+          <ul id="tolerancesList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
+        </div>
+        <div class="card">
+          <h3>Grain / warpage rules</h3>
+          <p class="hint" style="margin:6px 0 0">Full yield map on sheet M-8.</p>
+          <ul id="grainList" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul>
         </div>
       </div>
     </section>
@@ -159,11 +228,28 @@
       <div class="grid2" id="joineryList" style="align-items:stretch"></div>
     </section>
 
-    <!-- FABRICATION -->
+    <!-- QA -->
+    <section class="panel" data-panel="qa">
+      <p class="kicker">Gates M0–M8</p>
+      <h1>Inspection &amp; decisions</h1>
+      <p class="lead">QA checkpoints, fit classes, and engineering decisions (including D-001 post length). Sign off in the shop — not just on screen.</p>
+      <div class="grid2" id="gateList"></div>
+      <div class="hr"></div>
+      <h2>QC list</h2>
+      <div id="qcList"></div>
+      <div class="hr"></div>
+      <h2>Decisions</h2>
+      <div id="decisionList"></div>
+      <div class="hr"></div>
+      <h2>Unresolved</h2>
+      <ul id="unresolvedList" style="color:var(--dim)"></ul>
+    </section>
+
+    <!-- FABRICATION (kernel package from main — parallel to mill SSOT, not a substitute BOM) -->
     <section class="panel" data-panel="fab">
-      <p class="kicker">Rev C · single source of truth</p>
+      <p class="kicker">Kernel package · hardware-store nest</p>
       <h1>Fabrication model</h1>
-      <p class="lead">Part register, joints, nested cut list, QA, and shop drawings generated from <span class="mono">martin_kernel.py</span>. Change a parameter, re-export, everything updates.</p>
+      <p class="lead">Part register, joints, nested cut list, QA, and shop drawings generated from <span class="mono">martin_kernel.py</span>. This is the parallel SPF nest from <code>main</code> — mill-stock shop numbers live on Walk / BOM / QA.</p>
       <div class="row" style="margin-bottom:14px">
         <a class="btn primary" href="../fab/">Open package</a>
         <a class="btn" href="../fab/00_SOURCE/martin_project.json" download>JSON</a>
@@ -201,8 +287,8 @@
     <!-- GALLERY -->
     <section class="panel" data-panel="gallery">
       <p class="kicker">Renders &amp; blueprints</p>
-      <h1>Gallery &amp; drafts on paper</h1>
-      <p class="lead">CAD renders and M-1…M-6 plan sheets. Tap to enlarge. Print from the browser for shop copies.</p>
+      <h1>Gallery &amp; plan sheets</h1>
+      <p class="lead">CAD renders and M-1…M-8. Print M-6 / M-7 / M-8 for the mill-stock build.</p>
       <div class="gallery" id="galleryGrid"></div>
     </section>
 
@@ -260,11 +346,11 @@
   </main>
 
   <nav class="mobile-nav" aria-label="Mobile">
-    <button type="button" class="on" data-tab="overview">Home</button>
-    <button type="button" data-tab="viz">Viz</button>
-    <button type="button" data-tab="assembly">Build</button>
-    <button type="button" data-tab="materials">Buy</button>
-    <button type="button" data-tab="gallery">Plans</button>
+    <button type="button" class="on" data-tab="walk">Walk</button>
+    <button type="button" data-tab="viz">Explode</button>
+    <button type="button" data-tab="registry">Parts</button>
+    <button type="button" data-tab="materials">BOM</button>
+    <button type="button" data-tab="qa">QA</button>
   </nav>
 </div>
 
@@ -275,6 +361,7 @@
 </div>
 
 <script src="data.js"></script>
+<script src="walk.js"></script>
 <script src="app.js"></script>
 <script>
 if ("serviceWorker" in navigator) {

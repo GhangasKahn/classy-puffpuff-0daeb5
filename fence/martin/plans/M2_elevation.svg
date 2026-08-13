@@ -7,7 +7,7 @@
 <text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-2  ·  Elevation &amp; rail schedule</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Scale ~1:12 · rail centerlines AFF</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev A</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev D</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>PRIVACY BAY ELEVATION — typical</text>
 <rect x='120.0' y='118.0' width='42.0' height='762.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
 <rect x='720.0' y='118.0' width='42.0' height='762.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
@@ -108,9 +108,9 @@
 <text x='1420.0' y='278.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Nuki posts + 12" foot tenon</text>
 <line x1='980.0' y1='288.0' x2='1580.0' y2='288.0' stroke='#c5c8c2' stroke-width='0.6'/>
 <text x='980.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>JOINERY AT EACH RAIL</text>
-<text x='980.0' y='395.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Nuki (貫): rail passes through post mortise.</text>
-<text x='980.0' y='421.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Wedge (kusabi): hardwood wedge from cheek slot.</text>
-<text x='980.0' y='447.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Board grooves: ⅜" deep dado in rail edges — boards float.</text>
-<text x='980.0' y='473.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Cap scarf (kama-tsugi) centered on P2, drawbored oak peg.</text>
-<text x='980.0' y='499.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  All joins cut dry, fit, then paint; never glue locking faces.</text>
+<text x='980.0' y='395.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Nuki (貫): rail from 2×12 outer third through post mortise.</text>
+<text x='980.0' y='421.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Wedge (kusabi): white oak from cheek slot — reverse to release.</text>
+<text x='980.0' y='447.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Board grooves: ⅜" deep plow — boards float, zero fasteners.</text>
+<text x='980.0' y='473.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Cap scarf (kama-tsugi) at P2, drawbored oak peg.</text>
+<text x='980.0' y='499.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Japanese joinery only — no nails/screws in timber.</text>
 </svg>

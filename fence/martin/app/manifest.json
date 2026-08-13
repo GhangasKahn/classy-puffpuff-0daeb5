@@ -1,7 +1,7 @@
 {
   "name": "MARTIN Build",
   "short_name": "MARTIN",
-  "description": "Prairie fence build app — visualization, assembly, materials, blueprints",
+  "description": "Prairie fence visual walk — 5 phases, mill BOM, Japanese joinery, blueprints",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

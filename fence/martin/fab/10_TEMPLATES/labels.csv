@@ -1,0 +1,23 @@
+PART_ID,NAME,QTY,FACE,EDGE,END,MATES,REV
+L-001,P0 Latch post,1,garden face,run-left arris,tenon shoulder (pad top),foot tenon + nuki mortise,D
+L-002,P1 Hinge post,1,garden face,run-left arris,tenon shoulder (pad top),foot tenon + nuki mortise + kusabi,D
+L-003,P2 Mid post,1,garden face,run-left arris,tenon shoulder (pad top),foot tenon + nuki mortise + kusabi,D
+L-004,P3 End post,1,garden face,run-left arris,tenon shoulder (pad top),foot tenon + nuki mortise + kusabi,D
+R-001,Nuki Prairie band R1,1,top edge,garden face,P1 overhang,nuki through L-002/003/004 + kusabi,D
+R-002,Nuki Prairie band R2,1,top edge,garden face,P1 overhang,nuki through L-002/003/004 + kusabi,D
+R-003,Nuki Prairie band R3,1,top edge,garden face,P1 overhang,nuki through L-002/003/004 + kusabi,D
+R-004,Cap scarf leaf A (P1–P2),1,top,garden,P2 scarf,kama-tsugi J-KAMA-01,D
+R-005,Cap scarf leaf B (P2–P3),1,top,garden,P2 scarf,kama-tsugi J-KAMA-01,D
+R-006,Cap stub over P0,1,top,garden,house,bears on L-001; does not bridge gate,D
+P-C1,Privacy board C1_below_R1,16,garden,left,bottom,FLOATING in R-001–R-003 grooves — no fasteners,D
+P-C2,Privacy board C2_R1_R2,16,garden,left,bottom,FLOATING in R-001–R-003 grooves — no fasteners,D
+P-C3,Privacy board C3_R2_R3,16,garden,left,bottom,FLOATING in R-001–R-003 grooves — no fasteners,D
+P-C4,Privacy board C4_above_R3,16,garden,left,bottom,FLOATING in R-001–R-003 grooves — no fasteners,D
+G-001,Gate stile (pair),2,garden,outer,bottom,hozo drawbore to G-010 rails,D
+G-010,Gate rails (Prairie-aligned + top/bottom),5,garden,top,tenon shoulder,hozo into G-001,D
+G-020,Gate diagonal brace,1,garden,long,lower hinge,half-lap into G-010 — no fasteners,D
+G-030,Gate infill boards,4,garden,left,bottom,FLOATING — no fasteners,D
+K-001,Kusabi wedge,12,drive face,long,thin,friction lock — NEVER glue,D
+H-001,Drawbore peg,12,n/a,n/a,entry chamfer,drawbore ⅛″ offset,D
+H-002,Wooden pintle + gudgeon set,2,bearing,plumb,tip,wood hinge — lift straight up,D
+H-003,Sliding latch bar,1,top,long,house,sliding — Latch A house sleeve or Latch B P0 mortise,D

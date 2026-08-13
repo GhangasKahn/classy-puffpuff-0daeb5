@@ -12,6 +12,9 @@ if [[ -x /home/ubuntu/tools/squashfs-root/usr/bin/freecadcmd ]]; then
   FREECADCMD=/home/ubuntu/tools/squashfs-root/usr/bin/freecadcmd
 fi
 
+echo "==> Fabrication SSOT (JSON/CSV/part registry)"
+python3 "$ROOT/fence/martin/fab/martin_ssot.py"
+
 echo "==> FreeCAD build (model + FCStd/STEP/STL exports)"
 (cd "$CAD" && "$FREECADCMD" martin_fence.py 2>&1 | grep -E "MARTIN|Run length|Height|Gate|Post|Bay|Drop" || true)
 
@@ -28,10 +31,11 @@ else
   echo "openscad not found — skipping preview renders"
 fi
 
-echo "==> Fabrication package (kernel → BOM / drawings / JSON)"
-python3 "$ROOT/scripts/export_martin_fab.py"
-
-echo "==> Plan sheets (SVG, from kernel)"
+echo "==> Plan sheets (SVG) from mill SSOT"
 python3 "$ROOT/scripts/gen_martin_plans.py"
+
+# origin/main also added scripts/export_martin_fab.py (martin_kernel.py, hardware-store SPF).
+# It writes the same fence/martin/fab/*.csv paths as martin_ssot.py. Do not run both
+# in one pass until the two MARTIN kernels are unified — last writer would clobber BOM.
 
 echo "Done."

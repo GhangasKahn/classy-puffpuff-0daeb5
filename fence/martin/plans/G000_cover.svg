@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>G-000  ·  Cover · drawing index</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Rev D parametric fabrication model · inches</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev D</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN — DIGITAL MANUFACTURING DEFINITION</text>
+<text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Parameter → geometry → metadata → drawings → BOM → cut list → build / QA</text>
+<text x='40.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GATES M0–M8: PASS (see fab/martin.json). CAD solids still grouped; Part IDs live in SSOT.</text>
+<text x='40.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DRAWING INDEX</text>
+<text x='40.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>G-000</text>
+<text x='220.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>This cover</text>
+<text x='40.0' y='232.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GA-100 / M-1</text>
+<text x='220.0' y='232.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>General arrangement</text>
+<text x='40.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GA-110 / M-2</text>
+<text x='220.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Elevation &amp; rail schedule</text>
+<text x='40.0' y='276.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-400 / M-3</text>
+<text x='220.0' y='276.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Joinery details</text>
+<text x='40.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GA-140 / M-4</text>
+<text x='220.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Pad &amp; socket piers</text>
+<text x='40.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-350 / M-5</text>
+<text x='220.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Gate &amp; latch</text>
+<text x='40.0' y='342.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>S-401 / M-6</text>
+<text x='220.0' y='342.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Mill BOM &amp; finished parts</text>
+<text x='40.0' y='364.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>S-410 / M-7</text>
+<text x='220.0' y='364.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Shop method · stops · owner tools</text>
+<text x='40.0' y='386.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>S-420 / M-8</text>
+<text x='220.0' y='386.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Grain · warpage · 2×12 yield</text>
+<text x='40.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>S-402</text>
+<text x='220.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Rough + finished cut list (this package)</text>
+<text x='40.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-301</text>
+<text x='220.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Post L-001…L-004 — datums &amp; tenon</text>
+<text x='40.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>QA-700</text>
+<text x='220.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Inspection plan</text>
+<text x='40.0' y='474.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>EX-200</text>
+<text x='220.0' y='474.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Exploded / Walk app at /build</text>
+<text x='40.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>CONTROLLING EQUATIONS</text>
+<text x='40.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P0 = post_x / 2</text>
+<text x='40.0' y='568.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P1 = post_x + gate_clear + post_x / 2</text>
+<text x='40.0' y='588.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>bay_clear = (overall_length - 3*post_x - gate_clear) / 2</text>
+<text x='40.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P2 = P1 + post_x/2 + bay_clear + post_x/2</text>
+<text x='40.0' y='628.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P3 = overall_length - post_x / 2</text>
+<text x='40.0' y='648.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>post_finished_length = overall_height - cap_t + post_tenon_h</text>
+<text x='40.0' y='668.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>nuki_length = (P3 - P1) + post_x + 2*nuki_reveal</text>
+<text x='40.0' y='688.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>mortise_height = rail_h + nuki_height_ease</text>
+<text x='40.0' y='708.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>mortise_cheek = (post_y - rail_t) / 2</text>
+<text x='40.0' y='728.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>leaf_width = gate_clear - 2*gate_gap</text>
+<text x='40.0' y='760.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>D-001: post finished length = overall_height − cap_t + post_tenon_h = 75.5" (not height+tenon).</text>
+<text x='40.0' y='784.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>drop_off is class M — field-verify before pour. Fastener ban in timber.</text>
+<text x='40.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Machine-readable: fence/martin/fab/martin.json + CSV schedules.</text>
+<text x='40.0' y='860.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Completeness: a craftsperson can fabricate from Part IDs, datums, and schedules without inferring critical sizes.</text>
+</svg>

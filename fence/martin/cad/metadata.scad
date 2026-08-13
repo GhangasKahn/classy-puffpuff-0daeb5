@@ -1,0 +1,26 @@
+// AUTO-GENERATED part echo for external parsers
+include <parameters.scad>;
+echo("PART", "L-001", "P0 Latch post", 1, "Douglas fir", 3.5, 5.5, 75.5);
+echo("PART", "L-002", "P1 Hinge post", 1, "Douglas fir", 3.5, 5.5, 75.5);
+echo("PART", "L-003", "P2 Mid post", 1, "Douglas fir", 3.5, 5.5, 75.5);
+echo("PART", "L-004", "P3 End post", 1, "Douglas fir", 3.5, 5.5, 75.5);
+echo("PART", "R-001", "Nuki Prairie band R1", 1, "Douglas fir", 1.5, 7.25, 104.5);
+echo("PART", "R-002", "Nuki Prairie band R2", 1, "Douglas fir", 1.5, 7.25, 104.5);
+echo("PART", "R-003", "Nuki Prairie band R3", 1, "Douglas fir", 1.5, 7.25, 104.5);
+echo("PART", "R-004", "Cap scarf leaf A (P1–P2)", 1, "Douglas fir", 1.5, 7.25, 52.5);
+echo("PART", "R-005", "Cap scarf leaf B (P2–P3)", 1, "Douglas fir", 1.5, 7.25, 52.5);
+echo("PART", "R-006", "Cap stub over P0", 1, "Douglas fir", 1.5, 7.25, 4.5);
+echo("PART", "P-C1", "Privacy board C1_below_R1", 16, "Douglas fir", 0.75, 5.5, 4.75);
+echo("PART", "P-C2", "Privacy board C2_R1_R2", 16, "Douglas fir", 0.75, 5.5, 10.5);
+echo("PART", "P-C3", "Privacy board C3_R2_R3", 16, "Douglas fir", 0.75, 5.5, 10.5);
+echo("PART", "P-C4", "Privacy board C4_above_R3", 16, "Douglas fir", 0.75, 5.5, 13.625);
+echo("PART", "G-001", "Gate stile (pair)", 2, "Douglas fir", 1.5, 3.5, 63.0);
+echo("PART", "G-010", "Gate rails (Prairie-aligned + top/bottom)", 5, "Douglas fir", 1.5, 5.5, 28.0);
+echo("PART", "G-020", "Gate diagonal brace", 1, "Douglas fir", 1.5, 3.5, 59.942);
+echo("PART", "G-030", "Gate infill boards", 4, "Douglas fir", 0.75, 5.5, 55.0);
+echo("PART", "K-001", "Kusabi wedge", 12, "White oak", 0.625, 1.125, 5.5);
+echo("PART", "H-001", "Drawbore peg", 12, "White oak", 0.375, 0.375, 3.0);
+echo("PART", "H-002", "Wooden pintle + gudgeon set", 2, "White oak / hard maple", 1.0, 1.0, 6.0);
+echo("PART", "H-003", "Sliding latch bar", 1, "White oak", 1.5, 3.5, 18.0);
+echo("PART", "C-001", "Leveling pad", 1, "4000 psi AE concrete", 6.0, 28.0, 155.0);
+echo("PART", "C-002", "Socket pier", 4, "4000 psi AE concrete", 14.0, 14.0, 18.0);
