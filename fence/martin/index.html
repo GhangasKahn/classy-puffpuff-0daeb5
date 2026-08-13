@@ -135,6 +135,7 @@ body::before{
     <a class="brand" href="#top"><i aria-hidden="true"></i> Martin</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="app/">Build app</a>
+      <a href="fab/">Fab</a>
       <a href="#brief">Brief</a>
       <a href="#system">System</a>
       <a href="#model">Model</a>
@@ -156,6 +157,7 @@ body::before{
       <p class="lead hero-copy reveal">A freestanding Prairie fence — Darwin Martin horizontals, hand-cut joinery, no nails in the timber — engineered to lift out for winter and sit level across the driveway-to-garden drop.</p>
       <div class="cta-row reveal">
         <a class="btn" href="app/">Launch build app <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="fab/">Fabrication package</a>
         <a class="btn ghost" href="#plans">Blueprints</a>
         <a class="btn ghost" href="cad/exports/martin.FCStd" download>FreeCAD model</a>
       </div>
@@ -255,19 +257,19 @@ body::before{
       <div class="sec-head reveal">
         <p class="num">05 — Materials</p>
         <h2 class="display">Hardware-store lumber, overbuilt on purpose</h2>
-        <p class="lead">Paint-grade dimensional stock is fine — it all gets the gray. Prefer straight-grain boards for posts and rails. ~303 bf listed; buy the counts below (~15% joinery waste built in via extras).</p>
+        <p class="lead">Paint-grade dimensional stock is fine — it all gets the gray. Nested from the kernel: <strong>196 bf net / 225 bf buy</strong> (15% waste factor). Prefer straight-grain for posts and rails.</p>
       </div>
       <table class="mat-table reveal">
         <thead><tr><th>Item</th><th>Spec</th><th>Qty</th><th>Board feet</th></tr></thead>
         <tbody>
           <tr><td>Posts</td><td>4×6 × 8′</td><td>4</td><td>64.0</td></tr>
-          <tr><td>Prairie rails</td><td>2×8 × 10′</td><td>6</td><td>80.0</td></tr>
-          <tr><td>Cap / latch stock</td><td>2×8 × 12′</td><td>3</td><td>48.0</td></tr>
+          <tr><td>Prairie rails</td><td>2×8 × 10′</td><td>3</td><td>40.0</td></tr>
+          <tr><td>Cap / stub</td><td>2×8 × 12′</td><td>1</td><td>16.0</td></tr>
           <tr><td>Gate frame</td><td>2×6 × 8′</td><td>4</td><td>32.0</td></tr>
-          <tr><td>Privacy boards</td><td>1×6 × 8′ (¾″)</td><td>18</td><td>72.0</td></tr>
+          <tr><td>Privacy + gate boards</td><td>1×6 × 8′ (¾″)</td><td>9</td><td>36.0</td></tr>
           <tr><td>Wedge / stake stock</td><td>2×4 × 8′</td><td>1</td><td>5.3</td></tr>
-          <tr><td>Hardwood pegs / pintles</td><td>1×4 oak × 4′</td><td>1</td><td>1.3</td></tr>
-          <tr class="total"><td>Timber total</td><td></td><td></td><td>≈ 303 bf</td></tr>
+          <tr><td>Hardwood pegs / pintles</td><td>1×4 oak × 4′</td><td>2</td><td>2.7</td></tr>
+          <tr class="total"><td>Timber net / buy</td><td>kernel nest · 15% waste</td><td></td><td>196 / 225 bf</td></tr>
           <tr><td>Concrete</td><td>4000 psi air-entrained</td><td>~0.35 yd³</td><td>pad + 4 piers</td></tr>
           <tr><td>Gravel</td><td>#57 crushed stone</td><td>~0.4 yd³</td><td>under pad</td></tr>
           <tr><td>Sleeves</td><td>PVC Sch40 or galv.</td><td>4</td><td>tenon + ¼″ clear</td></tr>
@@ -286,7 +288,7 @@ body::before{
       </div>
       <div class="phases">
         <div class="phase reveal"><div class="when">Phase 1</div><div><h3>Site &amp; pad</h3><p>Measure the 143″ opening and the drop-off. Compact #57 gravel. Form and pour the leveling pad (top dead level) with four pier pockets / set precast socket piers. Sleeve drain holes at the bottom. Cure before loading.</p></div></div>
-        <div class="phase reveal"><div class="when">Phase 2</div><div><h3>Posts &amp; mortises</h3><p>Cut four 4×6 blanks to 77″ (65″ above + 12″ tenon). Shoulder the foot tenons. Cut through-mortises for R1–R3. Cut wedge slots. Dry-fit tenons into sleeves.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 2</div><div><h3>Posts &amp; mortises</h3><p>Cut four 4×6 blanks to 75.50″ (63.50″ body + 12″ tenon; body = height − cap). Shoulder the foot tenons. Cut through-mortises for R1–R3. Cut wedge slots. Dry-fit tenons into sleeves.</p></div></div>
         <div class="phase reveal"><div class="when">Phase 3</div><div><h3>Rails &amp; boards</h3><p>Mill 2×8 nuki rails; plow ⅜″ board grooves. Cut 1×6 boards to course heights. Assemble privacy run on sawhorses — rails through posts, boards dropped in, wedges tapped. Cap with kama-tsugi over P2, drawbored.</p></div></div>
         <div class="phase reveal"><div class="when">Phase 4</div><div><h3>Gate &amp; latch</h3><p>Build leaf with drawbored hozo joints and half-lap brace. Fit wooden pintles on P1. Install sliding oak latch — into house concrete receiver (Latch A) or P0 mortise (Latch B). Confirm swing arc.</p></div></div>
         <div class="phase reveal"><div class="when">Phase 5</div><div><h3>Paint &amp; set</h3><p>Disassemble for paint or paint in place with wedges pulled. Primer + two coats owner gray. Mask all locking faces. Drop posts into sleeves, re-insert rails and wedges, hang gate, lock.</p>
@@ -302,6 +304,7 @@ body::before{
         <pre>./scripts/build_martin.sh
 # or stepwise:
 freecadcmd fence/martin/cad/martin_fence.py
+python3 scripts/export_martin_fab.py
 python3 scripts/gen_martin_plans.py</pre>
       </div>
       <p class="note">Planning design for DIY construction — not a stamped PE document. Confirm Buffalo Green Code fence height / front-yard rules and call 811 before digging. Upload site photos (drop-off, house latch wall, gray swatch) and we will lock final makeup thickness and latch receiver detail.</p>
@@ -312,7 +315,7 @@ python3 scripts/gen_martin_plans.py</pre>
 <footer class="foot">
   <div class="wrap">
     <span>MARTIN · Prairie removable fence · Buffalo NY</span>
-    <span>FreeCAD 1.1 · Rev A</span>
+    <span>FreeCAD 1.1 · Rev C · kernel SSOT</span>
   </div>
 </footer>
 <script>

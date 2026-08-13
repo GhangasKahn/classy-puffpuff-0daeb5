@@ -1,0 +1,15 @@
+QC,CHECK,CLASS,TOL
+QC-01,Confirm overall opening 143.000″ ± 0.25″ on site,VERIFIED/TBM,T1
+QC-02,Measure driveway→garden drop; set P.drop_off; do not pour on estimate,TBM,T1
+QC-03,Stock moisture — avoid wet framing; paint-grade OK,T0,—
+QC-04,"Four posts finished length 75.500"" within ±1/32""",T2,±0.031
+QC-05,Paired nuki rails R-001..003 identical length and groove,T2,±0.031
+QC-06,Mortise CL AFF 10.000 / 28.000 / 46.000 from pad-shoulder datum,T2,±0.062
+QC-07,Foot tenon 2.500×4.500 enters sleeve with drain clear,T2,+0.03/−0
+QC-08,Dry-assemble privacy: diagonals / plumb / no racking,T1,plumb 1/8″ in 65″
+QC-09,Gate leaf swings; lift-off pintles; latch bar travels 4″ into receiver,T2,—
+QC-10,No glue on kusabi or nuki locking faces,T0,binary
+QC-11,"Paint masked on tenons, wedges, sleeve OD, pintle barrels",T0,—
+QC-12,Winter knock-down rehearsal before first storm season,T0,—
+QC-13,Pad top level; four sleeve centers match post CLs,T1,±0.125
+QC-14,Gate vs cap clearance ≥ 0.50″ (Rev C),T2,min 0.38

@@ -83,6 +83,11 @@
   status = 301
 
 [[redirects]]
+  from = "/fab"
+  to = "/fence/martin/fab/"
+  status = 301
+
+[[redirects]]
   from = "/stele"
   to = "/fence/stele/"
   status = 301
@@ -128,5 +133,15 @@
 
 [[headers]]
   for = "/fence/martin/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/martin/fab/06_DRAWINGS/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/martin/fab/10_TEMPLATES/*"
   [headers.values]
     Content-Type = "image/svg+xml"

@@ -1,0 +1,36 @@
+PART_ID,PART_NAME,QUANTITY,ROUGH_THICKNESS,ROUGH_WIDTH,ROUGH_LENGTH,MATERIAL,PURCHASE,NOTES
+L-001,P0 latch post,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,latch post
+L-002,P1 hinge post,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,hinge post
+L-003,P2 mid post / cap scarf,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,mid post / cap scarf
+L-004,P3 end post,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,end post
+R-001,R1 bottom Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
+R-002,R2 mid Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
+R-003,R3 upper Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
+C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,106.0,solid lumber,2×8 × 12′,Cut as two halves after scarf layout; still one Part ID for the finished cap
+C-002,Latch-post cap stub,1,1.5,7.25,5.0,solid lumber,from C-001 offcut / 2×8,Does not bridge gate
+B-001,Privacy board course C1 (below R1),16,0.75,5.5,5.25,solid lumber,1×6 × 8′,
+B-002,Privacy board courses C2+C3 (between rails),32,0.75,5.5,11.0,solid lumber,1×6 × 8′,
+B-003,Privacy board course C4 (above R3),16,0.75,5.5,14.125,solid lumber,1×6 × 8′,
+G-001,Gate hinge stile,1,1.5,3.5,63.0,solid lumber,2×6 × 8′,
+G-002,Gate latch stile,1,1.5,3.5,63.0,solid lumber,2×6 × 8′,
+G-003,Gate rail aligned to R1,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,finished length includes tenons; shoulder-to-shoulder = gate_inner
+G-004,Gate rail aligned to R2 (latch),1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
+G-005,Gate rail aligned to R3,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
+G-006,Gate bottom rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
+G-007,Gate top rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
+G-008,Gate diagonal brace,1,1.5,3.5,60.059,solid lumber,2×4 / 2×6 offcut,
+G-009,Gate infill board,4,0.75,5.5,54.5,solid lumber,1×6 × 8′,
+G-010,Sliding latch bar,1,1.5,3.5,19.0,white oak (preferred) or hard maple,1×4 oak × 4′ / 2×4,
+W-001,Kusabi locking wedge,9,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,Make 3 extras (qty buy 12 blanks). Label bag for winter.
+W-002,Drawbore / latch oak peg,14,0.375,0.375,2.5,white oak,1×4 oak × 4′,10 gate M&T + 1 cap scarf + 1 latch cross-peg + 2 spare
+W-003,Wooden pintle (or stainless upgrade),2,1.0,1.0,4.0,white oak / hard maple (BUY: stainless pintle set),oak offcut or H-003,Gate lifts straight up for winter. Metal optional — only purchased metal on fence if used.
+F-001,Leveling pad,1,6.0,28.0,155.0,4000 psi air-entrained concrete 5–7%,bag mix or small ready-mix,Top dead level. Makeup F-002 absorbs drop_off (TBM).
+F-002,Drop-off makeup,1,5.0,12.6,155.0,4000 psi air-entrained concrete,poured with F-001,ESTIMATED 5″ — TBM before pour
+F-003,Socket pier,4,14.0,14.0,18.0,4000 psi air-entrained (precast preferred for tip-out),form or precast,
+F-004,Gravel drainage bed,1,6.0,36.0,163.0,#57 crushed stone,~0.4 yd³,
+H-001,Sleeve liner,4,0.25,3.25,13.5,PVC Schedule 40 or galvanized tube,sized to sleeve ID + wall,ID ≈ 2.75″ × 4.75″ (tenon + sleeve_clear)
+H-002,House latch receiver sleeve (Latch A),1,2.0,4.0,4.0,hardwood sleeve + epoxy into foundation,oak block or pipe sleeve,TBM at house wall. Latch B omits this — mortise L-001 instead.
+H-003,Optional stainless pintle set,1,0,0,0,stainless steel,"lift-off pintle hinges, 2-pack",Replaces W-003 if preferred. Only metal on fence.
+H-004,Keyed padlock hasp (optional),1,0,0,0,stainless / galvanized,,On latch bar — not structural
+H-005,Exterior primer + owner gray enamel,1,0,0,0,exterior acrylic / alkyd,,"Mask wedges, tenons, sleeve contact, pintle faces"
+H-006,Epoxy anchoring adhesive (Latch A),1,0,0,0,ICC-rated epoxy,,Foundation receiver only

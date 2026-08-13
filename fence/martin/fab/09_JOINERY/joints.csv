@@ -1,0 +1,29 @@
+JOINT_ID,JOINT_TYPE,PART_A,PART_B,LOCATION,FIT_CLASS,GLUE,ASSEMBLY_DIRECTION
+J-001,nuki 貫 + kusabi,L-002,R-001,"L-002 × R-001 @ z_cl=10.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-002,nuki 貫 + kusabi,L-003,R-001,"L-003 × R-001 @ z_cl=10.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-003,nuki 貫 + kusabi,L-004,R-001,"L-004 × R-001 @ z_cl=10.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-004,nuki 貫 + kusabi,L-002,R-002,"L-002 × R-002 @ z_cl=28.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-005,nuki 貫 + kusabi,L-003,R-002,"L-003 × R-002 @ z_cl=28.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-006,nuki 貫 + kusabi,L-004,R-002,"L-004 × R-002 @ z_cl=28.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-007,nuki 貫 + kusabi,L-002,R-003,"L-002 × R-003 @ z_cl=46.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-008,nuki 貫 + kusabi,L-003,R-003,"L-003 × R-003 @ z_cl=46.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-009,nuki 貫 + kusabi,L-004,R-003,"L-004 × R-003 @ z_cl=46.0""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (rails withdraw toward P3 for winter)
+J-010,foot tenon into sleeved pier,L-001,F-003 / H-001,"P0 cx=1.75""",CLEARANCE in sleeve; GRAVITY + optional cross-wedge,NO — winter removable,−Z drop-in
+J-011,foot tenon into sleeved pier,L-002,F-003 / H-001,"P1 cx=41.25""",CLEARANCE in sleeve; GRAVITY + optional cross-wedge,NO — winter removable,−Z drop-in
+J-012,foot tenon into sleeved pier,L-003,F-003 / H-001,"P2 cx=91.25""",CLEARANCE in sleeve; GRAVITY + optional cross-wedge,NO — winter removable,−Z drop-in
+J-013,foot tenon into sleeved pier,L-004,F-003 / H-001,"P3 cx=141.25""",CLEARANCE in sleeve; GRAVITY + optional cross-wedge,NO — winter removable,−Z drop-in
+J-014,kama-tsugi 鎌継ぎ,C-001-L,C-001-R,centered on L-003,DRAWBORED,NO (or hide glue if not disassembling cap),+X nuki / −Z tenon
+J-015,hozo ほぞ drawbored M&T,G-001,G-003,G-001 × G-003,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-016,hozo ほぞ drawbored M&T,G-002,G-003,G-002 × G-003,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-017,hozo ほぞ drawbored M&T,G-001,G-004,G-001 × G-004,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-018,hozo ほぞ drawbored M&T,G-002,G-004,G-002 × G-004,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-019,hozo ほぞ drawbored M&T,G-001,G-005,G-001 × G-005,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-020,hozo ほぞ drawbored M&T,G-002,G-005,G-002 × G-005,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-021,hozo ほぞ drawbored M&T,G-001,G-006,G-001 × G-006,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-022,hozo ほぞ drawbored M&T,G-002,G-006,G-002 × G-006,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-023,hozo ほぞ drawbored M&T,G-001,G-007,G-001 × G-007,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-024,hozo ほぞ drawbored M&T,G-002,G-007,G-002 × G-007,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-025,half-lap brace,G-008,G-003 / G-007,compression diagonal,GLUE + geometry,NO — winter removable,in plane of leaf
+J-026,floating groove,R-001..R-003 / C-001,B-001..B-003,rail edges,CLEARANCE,NO,+X nuki / −Z tenon
+J-027,pintle / gudgeon,L-002,G-001,"two pintles, lift-off +Z",LOCATIONAL,NO — winter removable,+Z to remove
+J-028,sliding latch,G-010,H-002 or L-001,"z_cl=28.0"" (R2)",SLIDING,NO — winter removable,+X nuki / −Z tenon

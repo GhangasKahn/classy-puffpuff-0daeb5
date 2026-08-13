@@ -6,7 +6,9 @@ A complete, self-contained website:
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, plan generators)
-- `fence/martin/app/` — interactive **MARTIN Build** PWA (visualize, assembly checklist, materials, joinery, gallery, drafts, downloads) at `/martin/app` or `/build`
+- `fence/martin/martin_kernel.py` — **single source of truth** (Rev C). `scripts/export_martin_fab.py` writes BOM, cut lists, shop drawings, JSON, OpenSCAD, QA.
+- `fence/martin/fab/` — fabrication package at `/fab`
+- `fence/martin/app/` — interactive **MARTIN Build** PWA at `/martin/app` or `/build`
 - `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`)
 
 

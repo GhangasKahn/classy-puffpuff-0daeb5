@@ -28,7 +28,10 @@ else
   echo "openscad not found — skipping preview renders"
 fi
 
-echo "==> Plan sheets (SVG)"
+echo "==> Fabrication package (kernel → BOM / drawings / JSON)"
+python3 "$ROOT/scripts/export_martin_fab.py"
+
+echo "==> Plan sheets (SVG, from kernel)"
 python3 "$ROOT/scripts/gen_martin_plans.py"
 
 echo "Done."

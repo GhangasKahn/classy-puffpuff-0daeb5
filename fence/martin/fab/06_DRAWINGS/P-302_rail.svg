@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
+<line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-302  ·  Nuki rail R-001..003</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>FINISHED 104.500" × 1.500 × 7.250  ·  qty 3  ·  S-021</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<rect x='80.0' y='200.0' width='1200.0' height='90.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
+<line x1='80.0' y1='290.0' x2='80.0' y2='324.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='1280.0' y1='290.0' x2='1280.0' y2='324.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='80.0' y1='318.0' x2='1280.0' y2='318.0' stroke='#5a6a4a' stroke-width='1.3'/>
+<text x='680.0' y='313.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='middle'>104.500" nuki_len  DERIVED</text>
+<text x='80.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Groove both long edges: 0.375″ deep × 0.875″ wide. FACE A against fence. Boards FLOAT — no glue.</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Stations: through L-002, L-003, L-004. Withdraw toward P3 for winter.</text>
+<text x='80.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Fit class SLIDING in mortise (nuki_fit 0.030″) then INTERFERENCE via W-001 kusabi.</text>
+</svg>

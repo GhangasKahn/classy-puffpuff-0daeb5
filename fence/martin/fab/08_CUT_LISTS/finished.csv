@@ -1,0 +1,36 @@
+PART_ID,PART_NAME,QUANTITY,FINISHED_THICKNESS,FINISHED_WIDTH,FINISHED_LENGTH,JOINERY,TOLERANCE_CLASS
+L-001,P0 latch post,1,3.5,5.5,75.5,foot tenon + 3 nuki mortises; latch-bar mortise (Latch B); no kusabi (gate side),T2
+L-002,P1 hinge post,1,3.5,5.5,75.5,foot tenon + 3 nuki mortises; 3 kusabi slots; 2 pintle mortises,T2
+L-003,P2 mid post / cap scarf,1,3.5,5.5,75.5,foot tenon + 3 nuki mortises; 3 kusabi slots; cap scarf bearing,T2
+L-004,P3 end post,1,3.5,5.5,75.5,foot tenon + 3 nuki mortises; 3 kusabi slots,T2
+R-001,R1 bottom Prairie nuki,1,1.5,7.25,104.5,nuki through L-002/003/004; board grooves both edges; kusabi slots,T2
+R-002,R2 mid Prairie nuki,1,1.5,7.25,104.5,nuki through L-002/003/004; board grooves both edges; kusabi slots,T2
+R-003,R3 upper Prairie nuki,1,1.5,7.25,104.5,nuki through L-002/003/004; board grooves both edges; kusabi slots,T2
+C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,105.0,"kama-tsugi scarf at L-003 centerline, drawbored",T2
+C-002,Latch-post cap stub,1,1.5,7.25,4.5,hozo to L-001 top,T1
+B-001,Privacy board course C1 (below R1),16,0.75,5.5,4.75,floats in R-001 bottom groove; no fasteners,T1
+B-002,Privacy board courses C2+C3 (between rails),32,0.75,5.5,10.5,floats in rail grooves,T1
+B-003,Privacy board course C4 (above R3),16,0.75,5.5,13.625,floats; retained by C-001,T1
+G-001,Gate hinge stile,1,1.5,3.5,62.0,hozo mortises for G-003..G-007; pintle gudgeons,T2
+G-002,Gate latch stile,1,1.5,3.5,62.0,hozo mortises; latch-bar mortise,T2
+G-003,Gate rail aligned to R1,1,1.5,5.5,30.5,"haunched hozo both ends, drawbored",T2
+G-004,Gate rail aligned to R2 (latch),1,1.5,5.5,30.5,"haunched hozo, drawbored; latch path",T2
+G-005,Gate rail aligned to R3,1,1.5,5.5,30.5,"haunched hozo, drawbored",T2
+G-006,Gate bottom rail,1,1.5,3.5,30.5,"hozo, drawbored",T2
+G-007,Gate top rail,1,1.5,3.5,30.5,"hozo, drawbored",T2
+G-008,Gate diagonal brace,1,1.5,3.5,59.059,"half-lap into G-003 and G-007 (compression brace, hinge-bottom to latch-top)",T1
+G-009,Gate infill board,4,0.75,5.5,54.0,groove / stop in gate rails — FLOATING,T1
+G-010,Sliding latch bar,1,1.5,3.5,18.0,slides in G-002 / house sleeve; cross-peg hole,T2
+W-001,Kusabi locking wedge,9,0.625,1.125,5.5,driven in cheek slot; NEVER glue,T2
+W-002,Drawbore / latch oak peg,14,0.375,0.375,2.25,drawbore 1/8″ offset,T2
+W-003,Wooden pintle (or stainless upgrade),2,0.75,0.75,3.5,gudgeon in G-001; pintle in L-002,T1
+F-001,Leveling pad,1,6.0,28.0,155.0,pier pockets or set precast F-003,T1
+F-002,Drop-off makeup,1,5.0,12.6,155.0,,T1
+F-003,Socket pier,4,14.0,14.0,18.0,sleeve pocket for L-00x tenon,T1
+F-004,Gravel drainage bed,1,6.0,36.0,163.0,,T1
+H-001,Sleeve liner,4,0.25,3.25,13.5,drain ⌀½″ at bottom — never trap water,T1
+H-002,House latch receiver sleeve (Latch A),1,2.0,4.0,4.0,,T1
+H-003,Optional stainless pintle set,1,0,0,0,,T1
+H-004,Keyed padlock hasp (optional),1,0,0,0,,T1
+H-005,Exterior primer + owner gray enamel,1,0,0,0,,T1
+H-006,Epoxy anchoring adhesive (Latch A),1,0,0,0,,T1

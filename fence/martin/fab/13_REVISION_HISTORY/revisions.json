@@ -1,0 +1,17 @@
+[
+  {
+    "REV": "A",
+    "DATE": "2026-07-18",
+    "NOTE": "Initial geometry + marketing plans M-1\u2026M-6; material-group CAD solids"
+  },
+  {
+    "REV": "B",
+    "DATE": "2026-07-18",
+    "NOTE": "Build app + Netlify; same geometry. Gate/cap overlap latent."
+  },
+  {
+    "REV": "C",
+    "DATE": "2026-08-13",
+    "NOTE": "Fabrication kernel: semantic parts, joints, BOM, cut lists, nesting, QA; gate_h derived to clear cap; post blank 75.50\u2033 (was documented 77\u2033)."
+  }
+]

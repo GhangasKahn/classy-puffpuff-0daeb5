@@ -40,6 +40,7 @@
     <button type="button" class="tab" data-tab="assembly">Assembly</button>
     <button type="button" class="tab" data-tab="materials">Materials</button>
     <button type="button" class="tab" data-tab="joinery">Joinery</button>
+    <button type="button" class="tab" data-tab="fab">Fabrication</button>
     <button type="button" class="tab" data-tab="gallery">Gallery</button>
     <button type="button" class="tab" data-tab="drafts">Drafts</button>
     <button type="button" class="tab" data-tab="files">Files</button>
@@ -59,7 +60,8 @@
           <ol style="margin:8px 0 0 18px;color:var(--dim);font-size:14px">
             <li>Open <strong>Visualize</strong> — explode the fence and inspect parts</li>
             <li>Work <strong>Assembly</strong> checklist phase by phase</li>
-            <li>Shop from <strong>Materials</strong> (≈303 bf)</li>
+            <li>Shop from <strong>Materials</strong> (196 bf net / 225 bf buy)</li>
+            <li>Open <strong>Fabrication</strong> for Part IDs, joints, nest, and shop drawings</li>
             <li>Save drop-off / gray / latch choice in <strong>Drafts</strong></li>
             <li>Print or download CAD &amp; blueprint <strong>Files</strong></li>
           </ol>
@@ -155,6 +157,45 @@
       <h1>Japanese joinery vocabulary</h1>
       <p class="lead">Every structural connection is wood-on-wood. Wedges and pegs reverse for winter knock-down.</p>
       <div class="grid2" id="joineryList" style="align-items:stretch"></div>
+    </section>
+
+    <!-- FABRICATION -->
+    <section class="panel" data-panel="fab">
+      <p class="kicker">Rev C · single source of truth</p>
+      <h1>Fabrication model</h1>
+      <p class="lead">Part register, joints, nested cut list, QA, and shop drawings generated from <span class="mono">martin_kernel.py</span>. Change a parameter, re-export, everything updates.</p>
+      <div class="row" style="margin-bottom:14px">
+        <a class="btn primary" href="../fab/">Open package</a>
+        <a class="btn" href="../fab/00_SOURCE/martin_project.json" download>JSON</a>
+        <a class="btn" href="../fab/07_BOM/bom.csv" download>BOM CSV</a>
+        <a class="btn" href="../fab/08_CUT_LISTS/nest.csv" download>Nest CSV</a>
+      </div>
+      <div class="grid3" id="fabStats"></div>
+      <div class="hr"></div>
+      <h2>Part register</h2>
+      <div class="card" style="overflow:auto;max-height:420px">
+        <table>
+          <thead><tr><th>ID</th><th>Name</th><th>Qty</th><th>Finished T×W×L</th><th>Joinery</th></tr></thead>
+          <tbody id="fabParts"></tbody>
+        </table>
+      </div>
+      <div class="hr"></div>
+      <h2>Joints</h2>
+      <div class="card" style="overflow:auto;max-height:280px">
+        <table>
+          <thead><tr><th>ID</th><th>Type</th><th>A</th><th>B</th><th>Fit</th></tr></thead>
+          <tbody id="fabJoints"></tbody>
+        </table>
+      </div>
+      <div class="hr"></div>
+      <h2>QA / unresolved</h2>
+      <div class="grid2">
+        <div class="card"><h3>Geometry gates</h3><ul id="fabQa" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul></div>
+        <div class="card"><h3>TBM / assumed</h3><ul id="fabOpen" style="margin:8px 0 0 18px;color:var(--dim);font-size:14px"></ul></div>
+      </div>
+      <div class="hr"></div>
+      <h2>Shop drawings</h2>
+      <div class="gallery" id="fabDrawings"></div>
     </section>
 
     <!-- GALLERY -->

@@ -1,62 +1,62 @@
 #!/usr/bin/env python3
-"""Generate MARTIN build-plan SVG sheets (A3 landscape, printable).
+"""Generate MARTIN marketing plan SVG sheets (A3 landscape, printable).
 
-Dimensions mirror fence/martin/cad/martin_fence.py.
+Dimensions come from martin_kernel.build_project() — do not hard-code.
 Run:  python3 scripts/gen_martin_plans.py
 """
 
 from __future__ import annotations
 
 import os
+import sys
 
-OUT = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "..", "fence", "martin", "plans"
-)
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "fence", "martin"))
+from martin_kernel import build_project, v as kv  # noqa: E402
+
+OUT = os.path.join(ROOT, "fence", "martin", "plans")
 os.makedirs(OUT, exist_ok=True)
 
 IN = 25.4
+PROJ = build_project()
+LY = PROJ["layout"]
+NEST = PROJ["nest"]
 
-# ---- parameters (must mirror martin_fence.py) --------------------------------
+# Derived from martin_kernel — do not hard-code controlling dims here.
 P = dict(
-    length=143.0,
-    height=65.0,
-    post_x=3.5,
-    post_y=5.5,
-    post_tenon_x=2.5,
-    post_tenon_y=4.5,
-    post_tenon_h=12.0,
-    gate_clear=36.0,
-    gate_gap=0.5,
-    rail_t=1.5,
-    rail_h=7.25,
-    rail_z_cl=(10.0, 28.0, 46.0),
-    cap_t=1.5,
-    cap_w=7.25,
-    board_t=0.75,
-    board_w=5.5,
-    board_gap=0.25,
-    pad_overhang=6.0,
-    pad_width=28.0,
-    pad_thick=6.0,
-    drop_off=5.0,
-    pier_xy=14.0,
-    pier_h=18.0,
-    gravel_h=6.0,
-    latch_bar=18.0,
+    length=kv("overall_length"),
+    height=kv("overall_height"),
+    post_x=kv("post_x"),
+    post_y=kv("post_y"),
+    post_tenon_x=kv("post_tenon_x"),
+    post_tenon_y=kv("post_tenon_y"),
+    post_tenon_h=kv("post_tenon_h"),
+    gate_clear=kv("gate_clear"),
+    gate_gap=kv("gate_gap"),
+    rail_t=kv("rail_t"),
+    rail_h=kv("rail_h"),
+    rail_z_cl=LY["rail_cls"],
+    cap_t=kv("cap_t"),
+    cap_w=kv("cap_w"),
+    board_t=kv("board_t"),
+    board_w=kv("board_w"),
+    board_gap=kv("board_gap"),
+    pad_overhang=kv("pad_overhang"),
+    pad_width=kv("pad_width"),
+    pad_thick=kv("pad_thick"),
+    drop_off=kv("drop_off"),
+    pier_xy=kv("pier_xy"),
+    pier_h=kv("pier_h"),
+    gravel_h=kv("gravel_h"),
+    latch_bar=kv("latch_bar_l"),
 )
 
 fx = P["post_x"]
 L = P["length"]
 gate = P["gate_clear"]
-P0 = fx / 2.0
-P1 = fx + gate + fx / 2.0
-p1_right = P1 + fx / 2.0
-p3_left = L - fx
-clear_span = p3_left - p1_right
-bay_clear = (clear_span - fx) / 2.0
-P2 = p1_right + bay_clear + fx / 2.0
-P3 = L - fx / 2.0
-POSTS = (P0, P1, P2, P3)
+POSTS = tuple(p["cx"] for p in LY["posts"])
+P0, P1, P2, P3 = POSTS
+bay_clear = LY["bay_clear"]
 H = P["height"]
 
 # ---- sheet primitives --------------------------------------------------------
@@ -511,8 +511,8 @@ def sheet_m5():
     def y(v):
         return oy - v * S5
 
-    gw = gate - 1.0
-    gh = H - 2.0
+    gw = LY["gate_leaf_w"]
+    gh = LY["gate_h"]
     s.rect(x(0), y(gh), gw * S5, gh * S5, fill="#e8eaeb", stroke=INK, sw=2)
     # stiles
     s.rect(x(0), y(gh), 3.5 * S5, gh * S5, fill="#d9dcde", stroke=INK)
@@ -553,16 +553,22 @@ def sheet_m6():
     s.titleblock()
     s.text(40, 70, "LUMBER BUY LIST — DIMENSIONAL STOCK (paint-grade OK)", 16, ACC, bold=True)
 
-    rows = [
-        ("Qty", "Nominal", "Length", "Use", "Board feet"),
-        ("4", "4×6", "8'", "Posts P0–P3 (cut to 65\" + 12\" tenon from same blank)", "64.0"),
-        ("6", "2×8", "10'", "Prairie nuki rails R1–R3 (cut to fit; extras for gate rails/brace scrap)", "80.0"),
-        ("3", "2×8", "12'", "Cap rails + latch bar stock + sill scraps", "48.0"),
-        ("4", "2×6", "8'", "Gate stiles/rails / secondary bands", "32.0"),
-        ("18", "1×6", "8'", "Privacy + gate vertical boards (¾\" — matches existing fence)", "72.0"),
-        ("1", "2×4", "8'", "Wedge stock (rip to kusabi blanks) + stakes", "5.3"),
-        ("1", "1×4 Oak", "4'", "Drawbore pegs, pintle blanks (hardwood)", "1.3"),
-    ]
+    fam_meta = {
+        "4x6x8": ("4×6", "8'", "Posts L-001…004 — stop S-014 75.50″"),
+        "2x8x10": ("2×8", "10'", "Nuki rails R-001…003 (104.50″)"),
+        "2x8x12": ("2×8", "12'", "Cap C-001 + stub C-002 nested"),
+        "2x6x8": ("2×6", "8'", "Gate G-001…008 nested"),
+        "1x6x8": ("1×6", "8'", "Privacy + gate boards nested"),
+        "2x4x8": ("2×4", "8'", "Kusabi W-001 blanks"),
+        "oak_1x4x4": ("1×4 oak", "4'", "Pegs / latch / pintles"),
+    }
+    bf_by = {}
+    for b in NEST["boards"]:
+        bf_by[b["PURCHASE"]] = bf_by.get(b["PURCHASE"], 0) + b["BF"]
+    rows = [("Qty", "Nominal", "Length", "Use", "Board feet")]
+    for fam in ("4x6x8", "2x8x10", "2x8x12", "2x6x8", "1x6x8", "2x4x8", "oak_1x4x4"):
+        nom, length, use = fam_meta[fam]
+        rows.append((str(NEST["buy_counts"].get(fam, 0)), nom, length, use, f"{bf_by.get(fam, 0):.1f}"))
     yy = 110
     cols = [40, 120, 250, 360, 1180]
     for r in rows:
@@ -571,7 +577,14 @@ def sheet_m6():
         yy += 30
         s.line(40, yy - 20, 1400, yy - 20, 0.7, LIGHT)
 
-    s.text(40, yy + 10, "TOTAL LUMBER ≈ 303 board feet  ·  Buy +15% waste on joinery stock → order ~350 bf equivalent as above counts", 14, ACC, bold=True)
+    s.text(
+        40,
+        yy + 10,
+        f"NET {NEST['net_bf']:.0f} bf  ·  waste {NEST['waste_factor']:.0%}  ·  PROCUREMENT {NEST['procurement_bf']:.0f} bf  ·  counts from kernel nest (not a hand list)",
+        14,
+        ACC,
+        bold=True,
+    )
 
     s.text(40, yy + 55, "NON-TIMBER", 16, ACC, bold=True)
     misc = [

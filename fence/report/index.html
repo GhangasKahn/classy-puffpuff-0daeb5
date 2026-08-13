@@ -112,14 +112,14 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
 <header class="cover">
   <div class="wrap">
-    <p class="tag">Design &amp; Engineering Report · Rev B</p>
+    <p class="tag">Design &amp; Engineering Report · Rev C</p>
     <h1>MARTIN — Prairie Fence for a 143″ Opening</h1>
     <p class="sub">Removable freestanding fence: Darwin Martin / Prairie horizontals + Japanese hand joinery, sized 143″ × 65″ for Buffalo, New York — with leveling pad, locking gate, FreeCAD model, and full build plans.</p>
     <div class="meta">
       <div><b>Location basis</b>Buffalo / Erie County NY</div>
       <div><b>Design run</b>143″ · 3632 mm × 65″ high</div>
       <div><b>Models</b>FreeCAD 1.1 + OpenSCAD</div>
-      <div><b>Documents</b>6 MARTIN sheets · STELE + HASHIRA archives</div>
+      <div><b>Documents</b>Fab package + 6 MARTIN sheets · STELE + HASHIRA archives</div>
     </div>
   </div>
 </header>
@@ -138,7 +138,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <li>Knock-down winter sequence: wedges → rails → boards → gate → posts → tip piers.</li>
       </ul>
       <p><strong>Related systems archived in this suite:</strong> STELE (permanent masonry-pier fence for longer runs) and HASHIRA (standalone joinery reinforcement method). Use them if you later extend beyond 143″ or reinforce another fence.</p>
-      <p><strong>Status.</strong> Geometry is fully modeled. Upload site photos (drop-off height, house latch wall, gray swatch) to lock makeup thickness and receiver detail. Not a stamped PE document — confirm Green Code limits and engineer review if the city requires it.</p>
+      <p><strong>Status — Rev C.</strong> Parametric fabrication kernel is the single source of truth: semantic Part IDs, joint register, nested BOM (196 bf net / 225 bf buy), shop drawings, and QA. Upload site photos (drop-off height, house latch wall, gray swatch) to lock makeup thickness and receiver detail. Not a stamped PE document — confirm Green Code limits and engineer review if the city requires it.</p>
       <figure class="frame">
         <img src="../martin/renders/martin_front.png" alt="MARTIN front elevation render" />
         <figcaption>MARTIN — front elevation. 36″ gate + two 46.5″ privacy bays · 143″ overall · owner-gray timber.</figcaption>
@@ -309,7 +309,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
   <section id="drawings">
     <div class="wrap">
       <h2><span class="no">7</span>Construction documents</h2>
-      <p class="intro">MARTIN sheets M-1 through M-6 — inches, A3 landscape. Generated from the same parameters as the FreeCAD model.</p>
+      <p class="intro">MARTIN sheets M-1 through M-6 (marketing A3) plus the fabrication package at <a href="../martin/fab/">/fab</a> (G/GA/EX/P/J/T/S/QA). All generated from <code>martin_kernel.py</code>.</p>
       <div class="sheetlist">
         <figure class="frame"><img src="../martin/plans/M1_general.svg" alt="Sheet M-1" /><figcaption>M-1 · General arrangement — elevation, plan, design notes</figcaption></figure>
         <figure class="frame"><img src="../martin/plans/M2_elevation.svg" alt="Sheet M-2" /><figcaption>M-2 · Bay elevation &amp; rail schedule</figcaption></figure>
@@ -329,13 +329,13 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <thead><tr><th>Item</th><th>Spec</th><th>Qty</th><th>Board feet</th></tr></thead>
         <tbody>
           <tr><td>Posts</td><td>4×6 × 8′</td><td>4</td><td>64.0</td></tr>
-          <tr><td>Prairie rails</td><td>2×8 × 10′</td><td>6</td><td>80.0</td></tr>
-          <tr><td>Cap / latch stock</td><td>2×8 × 12′</td><td>3</td><td>48.0</td></tr>
+          <tr><td>Prairie rails</td><td>2×8 × 10′</td><td>3</td><td>40.0</td></tr>
+          <tr><td>Cap / stub</td><td>2×8 × 12′</td><td>1</td><td>16.0</td></tr>
           <tr><td>Gate frame</td><td>2×6 × 8′</td><td>4</td><td>32.0</td></tr>
-          <tr><td>Privacy boards</td><td>1×6 × 8′ (¾″)</td><td>18</td><td>72.0</td></tr>
+          <tr><td>Privacy + gate boards</td><td>1×6 × 8′ (¾″)</td><td>9</td><td>36.0</td></tr>
           <tr><td>Wedge stock</td><td>2×4 × 8′</td><td>1</td><td>5.3</td></tr>
-          <tr><td>Oak pegs / pintles</td><td>1×4 × 4′</td><td>1</td><td>1.3</td></tr>
-          <tr class="total"><td>Timber total</td><td>paint-grade OK</td><td></td><td>≈ 303 bf</td></tr>
+          <tr><td>Oak pegs / pintles</td><td>1×4 × 4′</td><td>2</td><td>2.7</td></tr>
+          <tr class="total"><td>Timber net / buy</td><td>kernel nest · 15% waste</td><td></td><td>196 / 225 bf</td></tr>
           <tr><td>Concrete</td><td>4000 psi air-entrained</td><td>~0.35 yd³</td><td>pad + 4 piers</td></tr>
           <tr><td>#57 stone</td><td>compacted</td><td>~0.4 yd³</td><td>under pad</td></tr>
           <tr><td>Sleeves</td><td>PVC / galv.</td><td>4</td><td>drained</td></tr>
@@ -354,11 +354,11 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <thead><tr><th>Scope</th><th>DIY materials</th><th>With help / contracted</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td>Gravel + leveling pad + piers</td><td>$250 – 450</td><td>$800 – 1,400</td><td>Precast piers raise materials, cut labor</td></tr>
-          <tr><td>Dimensional lumber (~303 bf)</td><td>$450 – 750</td><td>same</td><td>SPF paint-grade; cedar upgrade +40–60%</td></tr>
+          <tr><td>Dimensional lumber (225 bf buy)</td><td>$330 – 560</td><td>same</td><td>SPF paint-grade; cedar upgrade +40–60%</td></tr>
           <tr><td>Hardwood / sleeves / misc</td><td>$80 – 150</td><td>same</td><td>Oak, PVC, epoxy for house receiver</td></tr>
           <tr><td>Primer + gray paint</td><td>$60 – 120</td><td>same</td><td>Match owner photo/swatch</td></tr>
           <tr><td>Optional stainless pintles + lock</td><td>$40 – 100</td><td>same</td><td>Only metal parts</td></tr>
-          <tr class="total"><td>Total</td><td>$880 – 1,570</td><td>$1,400 – 2,500</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
+          <tr class="total"><td>Total</td><td>$760 – 1,380</td><td>$1,280 – 2,300</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
         </tbody>
       </table>
     </div>
@@ -401,6 +401,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <h3>Design pages</h3>
       <p>
         <a class="dl" href="../martin/">MARTIN design page</a>
+        <a class="dl" href="../martin/fab/">MARTIN fabrication package</a>
         <a class="dl" href="../martin/app/">MARTIN Build app</a>
         <a class="dl" href="../stele/">STELE (archive)</a>
         <a class="dl" href="../">HASHIRA joinery guide</a>
@@ -410,6 +411,8 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <a class="dl" href="../martin/cad/exports/martin.FCStd" download>martin.FCStd</a>
         <a class="dl" href="../martin/cad/exports/martin_assembly.step" download>STEP</a>
         <a class="dl" href="../martin/cad/martin_fence.py" download>martin_fence.py</a>
+        <a class="dl" href="../martin/martin_kernel.py" download>martin_kernel.py</a>
+        <a class="dl" href="../martin/fab/00_SOURCE/martin_project.json" download>martin_project.json</a>
       </p>
       <h3>MARTIN plan sheets</h3>
       <p>
@@ -422,7 +425,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       </p>
       <h3>Regenerate</h3>
       <p class="mono" style="background:#fff;border:1px solid var(--line2);padding:16px 18px;max-width:66ch">
-        ./scripts/build_martin.sh&nbsp;&nbsp;# FreeCAD → renders → plans<br />
+        ./scripts/build_martin.sh&nbsp;&nbsp;# kernel → FreeCAD → fab package → plans<br />
         ./scripts/build_stele.sh&nbsp;&nbsp;# STELE archive pipeline<br />
         ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models
       </p>
@@ -436,7 +439,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
 <footer>
   <div class="wrap">
-    MARTIN + STELE + HASHIRA · Fence Design &amp; Engineering Report · Rev B — generated from parametric CAD sources in this repository.
+    MARTIN + STELE + HASHIRA · Fence Design &amp; Engineering Report · Rev C — generated from martin_kernel.py.
   </div>
 </footer>
 </body>

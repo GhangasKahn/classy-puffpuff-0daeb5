@@ -1,0 +1,50 @@
+[
+  {
+    "ID": "D-001",
+    "Decision": "4\u00d76 posts not 4\u00d74 / 2\u00d74",
+    "Reason": "nuki cheeks and overturning couple; owner asked to overbuild",
+    "Parts": "L-001..004"
+  },
+  {
+    "ID": "D-002",
+    "Decision": "2\u00d78 Prairie bands on edge, not 2\u00d74",
+    "Reason": "Prairie read + nuki bearing area",
+    "Parts": "R-001..003"
+  },
+  {
+    "ID": "D-003",
+    "Decision": "No nails/screws in timber",
+    "Reason": "owner + winter knock-down + fastener corrosion in Buffalo",
+    "Parts": "all MAKE lumber"
+  },
+  {
+    "ID": "D-004",
+    "Decision": "Tip-out 18\u2033 piers rather than 48\u2033 frost stems",
+    "Reason": "removability; pad stays. Permanent frost option is STELE method.",
+    "Parts": "F-003"
+  },
+  {
+    "ID": "D-005",
+    "Decision": "Rev C gate_h derived to clear cap by 0.50\u2033",
+    "Reason": "Rev B model overlapped cap by 0.50\u2033 (z0=1.0, h=63.0 \u2192 top 64.0 vs cap 63.5)",
+    "Parts": "G-001..009"
+  },
+  {
+    "ID": "D-006",
+    "Decision": "Tenon 2.50\u00d74.50 (\u2153-ish of 3.50\u00d75.50 with 0.50\u2033 shoulders)",
+    "Reason": "cheek thickness \u2265 0.50\u2033; socket couple 12\u2033",
+    "Parts": "L-001..004"
+  },
+  {
+    "ID": "D-007",
+    "Decision": "Privacy boards FLOATING in grooves",
+    "Reason": "seasonal movement; rain-screen; zero fasteners; winter pull-out",
+    "Parts": "B-001..003"
+  },
+  {
+    "ID": "D-008",
+    "Decision": "Latch A preferred (house concrete) with Latch B parametric fallback",
+    "Reason": "privacy lock without relying on a strike that can be lifted with the gate",
+    "Parts": "G-010, H-002, L-001"
+  }
+]
