@@ -1,0 +1,24 @@
+{
+  "name": "WALTER DS-16 Viewer",
+  "short_name": "WALTER",
+  "description": "Visual parts and build plans for the WALTER DS-16 drum thickness sander",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#14181c",
+  "theme_color": "#14181c",
+  "icons": [
+    {
+      "src": "../app/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../app/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

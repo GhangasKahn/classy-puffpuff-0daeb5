@@ -10,6 +10,7 @@ Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron 
 - Design overview: `/shop/drum-sander/` · shortcuts `/walter` · `/drum` · `/shop`
 - Build app: `/shop/drum-sander/app/` · `/walter/app` · `/drum/app`
 - Pocket field card: `/shop/drum-sander/pocket/` · `/walter/pocket`
+- **Viewer app (phone):** `/shop/drum-sander/view/` · `/walter/view` — 3D parts + swipeable plans, Add to Home Screen
 - **Shop pack (ZIP):** `/shop/drum-sander/pack/WALTER-DS16-RevB.zip` · `/walter/pack`
 - Plans: `D1` … `D10` in `/shop/drum-sander/plans/`
 - Interactive 3D: `/shop/drum-sander/model/` · `/walter/model`

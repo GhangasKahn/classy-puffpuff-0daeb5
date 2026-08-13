@@ -247,6 +247,9 @@ def pack_zip() -> Path:
     add(PACK / "lumberyard.csv", "lumberyard.csv")
     add(PACK / "spec.json", "spec.json")
     add(POCKET / "index.html", "pocket.html")
+    add(SHOP / "view" / "index.html", "view/index.html")
+    add(SHOP / "view" / "view.css", "view/view.css")
+    add(SHOP / "view" / "view.js", "view/view.js")
     add(SHOP / "cad" / "walter_ds16.py", "cad/walter_ds16.py")
     add(SHOP / "cad" / "walter_ds16.scad", "cad/walter_ds16.scad")
     for p in sorted((SHOP / "plans").glob("*.svg")):

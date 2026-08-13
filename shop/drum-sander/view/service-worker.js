@@ -1,0 +1,47 @@
+const CACHE = "walter-view-v1";
+const ASSETS = [
+  "./",
+  "./index.html",
+  "./view.css",
+  "./view.js",
+  "./manifest.json",
+  "../app/data.js",
+  "../app/model3d.js",
+  "../app/apple-touch-icon.png",
+  "../app/icon.svg",
+  "../pocket/index.html",
+  "../plans/D1_general.svg",
+  "../plans/D2_frame.svg",
+  "../plans/D3_drum.svg",
+  "../plans/D4_drive.svg",
+  "../plans/D5_hood.svg",
+  "../plans/D6_cutlist.svg",
+  "../plans/D7_geometry.svg",
+  "../plans/D8_holddowns.svg",
+  "../plans/D9_model.svg",
+  "../plans/D10_lumberyard.svg",
+  "../renders/iso_assembled.svg",
+  "../renders/iso_exploded.svg",
+  "../renders/ortho_front.svg",
+  "../renders/ortho_side.svg",
+  "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js",
+];
+
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
+    )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (e) => {
+  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
+});
