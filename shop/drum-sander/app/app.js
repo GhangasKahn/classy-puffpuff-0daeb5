@@ -211,8 +211,20 @@
     cuts.innerHTML = D.cutList
       .map(
         (r) =>
-          `<tr><td>${r.qty}</td><td>${r.size}</td><td>${r.stock}</td><td>${r.use}</td></tr>`
+          `<tr><td>${r.qty}</td><td>${r.size}${r.sizeMm ? `<div class="hint">${r.sizeMm}</div>` : ""}</td><td>${r.stock}</td><td>${r.use}</td></tr>`
       )
+      .join("");
+  }
+  const lumber = $("#lumberList");
+  if (lumber) {
+    lumber.innerHTML = (D.lumberyard || [])
+      .map((r) => `<tr><td>${r.where}</td><td>${r.item}</td><td>${r.qty}</td><td>${r.use}</td></tr>`)
+      .join("");
+  }
+  const fast = $("#fastenerList");
+  if (fast) {
+    fast.innerHTML = (D.fasteners || [])
+      .map((r) => `<tr><td>${r.qty}</td><td>${r.item}</td><td>${r.use}</td></tr>`)
       .join("");
   }
   const hw = $("#hardwareList");
@@ -226,26 +238,92 @@
     tools.innerHTML = D.tools.map((t) => `<li>${t}</li>`).join("");
   }
 
-  /* Gallery */
+  /* Gallery + phone save */
+  const PACK_ZIP = "../pack/WALTER-DS16-RevB.zip";
+  const PACK_NAME = "WALTER-DS16-RevB.zip";
+
+  async function saveToPhone(url, filename, mime) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("fetch");
+      const blob = await res.blob();
+      const type = mime || blob.type || "application/octet-stream";
+      const file = new File([blob], filename, { type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: filename, text: "WALTER DS-16" });
+        return "shared";
+      }
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2500);
+      return "downloaded";
+    } catch (err) {
+      if (err && err.name === "AbortError") return "cancel";
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.rel = "noopener";
+      a.click();
+      return "open";
+    }
+  }
+
+  function bindShare(el) {
+    if (!el) return;
+    el.addEventListener("click", () => saveToPhone(PACK_ZIP, PACK_NAME, "application/zip"));
+  }
+  bindShare($("#sharePackBtn"));
+  bindShare($("#sharePackBtn2"));
+
   const gal = $("#gallery");
   if (gal) {
     gal.innerHTML = D.gallery
-      .map(
-        (g) =>
-          `<a class="gal-card" href="${g.src}" target="_blank" rel="noopener"><img src="${g.src}" alt="${g.title}"/><span>${g.title}</span></a>`
-      )
+      .map((g) => {
+        const name = (g.src.split("/").pop() || "sheet.svg");
+        return `<div class="gal-card">
+          <a href="${g.src}" target="_blank" rel="noopener"><img src="${g.src}" alt="${g.title}"/><span>${g.title}</span></a>
+          <div class="gal-actions">
+            <a class="btn" href="${g.src}" download="${name}">Download</a>
+            <button type="button" class="btn" data-share-src="${g.src}" data-share-name="${name}">Save to Files</button>
+          </div>
+        </div>`;
+      })
       .join("");
+    $$("[data-share-src]", gal).forEach((b) =>
+      b.addEventListener("click", () =>
+        saveToPhone(b.dataset.shareSrc, b.dataset.shareName, "image/svg+xml")
+      )
+    );
   }
 
   /* Files */
   const files = $("#filesList");
   if (files) {
     files.innerHTML = D.downloads
-      .map(
-        (d) =>
-          `<a class="file-row" href="${d.href}"><strong>${d.label}</strong><span>${d.note}</span></a>`
-      )
+      .map((d) => {
+        const dl = d.download ? ` download="${d.download}"` : "";
+        const share = d.share
+          ? `<button type="button" class="btn" data-share-file="${d.href}" data-share-name="${d.download || ""}">Share</button>`
+          : "";
+        return `<div class="file-row ${d.primary ? "primary" : ""}">
+          <a href="${d.href}"${dl}><strong>${d.label}</strong><span>${d.note}</span></a>
+          ${share}
+        </div>`;
+      })
       .join("");
+    $$("[data-share-file]", files).forEach((b) =>
+      b.addEventListener("click", () =>
+        saveToPhone(
+          b.dataset.shareFile,
+          b.dataset.shareName || "WALTER-DS16-RevB.zip",
+          "application/zip"
+        )
+      )
+    );
   }
   const srcs = $("#sourcesList");
   if (srcs) {

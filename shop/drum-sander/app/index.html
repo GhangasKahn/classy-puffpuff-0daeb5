@@ -11,7 +11,7 @@
 <title>WALTER DS-16 Build — Drum Sander Plans</title>
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
@@ -30,7 +30,8 @@
     <div class="top-actions">
       <span class="progress-pill">0% built</span>
       <button type="button" class="btn" id="printBtn">Print</button>
-      <a class="btn primary" href="../">Design</a>
+      <button type="button" class="btn" id="sharePackBtn">Save pack</button>
+      <a class="btn primary" href="../pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">ZIP</a>
     </div>
   </header>
 
@@ -132,14 +133,27 @@
     <section class="panel" data-panel="materials">
       <p class="kicker">Shopping</p>
       <h1>Materials &amp; hardware</h1>
-      <p class="lead">Cut list sized for 15.5″ capacity. Confirm Baltic birch is true ¾″ (imperial) vs 18 mm metric before cutting dados/slots.</p>
-      <h3>Cut list</h3>
+      <p class="lead">Cut list sized for 15.5″ capacity. Confirm Baltic birch is true ¾″ vs 18 mm before you cut — keep 16.5″ (419 mm) clear between inner faces either way.</p>
+      <p class="hint" style="margin-bottom:16px"><a href="../pocket/">Pocket field card</a> · <a href="../pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Download shop pack</a> · D-10 nesting sheet.</p>
+      <h3>Lumberyard card</h3>
+      <table class="bom">
+        <thead><tr><th>Aisle</th><th>Buy</th><th>Qty</th><th>For</th></tr></thead>
+        <tbody id="lumberList"></tbody>
+      </table>
+      <div class="hr"></div>
+      <h3>Cut list (inch / mm)</h3>
       <table class="bom">
         <thead><tr><th>Qty</th><th>Size</th><th>Stock</th><th>Use</th></tr></thead>
         <tbody id="cutList"></tbody>
       </table>
       <div class="hr"></div>
-      <h3>Hardware</h3>
+      <h3>Fasteners (hardware aisle)</h3>
+      <table class="bom">
+        <thead><tr><th>Qty</th><th>Item</th><th>Use</th></tr></thead>
+        <tbody id="fastenerList"></tbody>
+      </table>
+      <div class="hr"></div>
+      <h3>Specialty hardware</h3>
       <table class="bom">
         <thead><tr><th>Qty</th><th>Item</th></tr></thead>
         <tbody id="hardwareList"></tbody>
@@ -150,15 +164,29 @@
     </section>
 
     <section class="panel" data-panel="gallery">
-      <p class="kicker">Blueprints D-1…D-8</p>
+      <p class="kicker">Blueprints D-1…D-10</p>
       <h1>Plan sheets</h1>
-      <p class="lead">Printable A3-landscape SVG. Open any sheet full-size for print or tablet shop use.</p>
+      <p class="lead">Printable A3-landscape SVG. On iPhone, use <strong>Save</strong> on a sheet (Share → Save to Files) or grab the whole ZIP from Files.</p>
       <div class="gal-grid" id="gallery"></div>
     </section>
 
     <section class="panel" data-panel="files">
       <p class="kicker">Downloads &amp; lineage</p>
-      <h1>Files &amp; sources</h1>
+      <h1>Save to your phone</h1>
+      <p class="lead">Safari often opens SVG instead of saving it. The ZIP is the reliable path: Share → Save to Files on iPhone, or Download on Android.</p>
+      <div class="pack-hero">
+        <div>
+          <p class="kicker">Shop pack</p>
+          <h3>WALTER-DS16-RevB.zip</h3>
+          <p class="hint">D-1…D-10, isometric renders, BOM (inch/mm), fasteners, lumberyard, CAD, pocket card.</p>
+        </div>
+        <div class="row">
+          <a class="btn primary" href="../pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Download ZIP</a>
+          <button type="button" class="btn" id="sharePackBtn2">Share to Files</button>
+          <a class="btn" href="../pocket/">Pocket card</a>
+        </div>
+      </div>
+      <p class="hint" id="saveHint">iPhone: Share to Files. Add the Build app to Home Screen while on Wi-Fi — plans cache for the shop.</p>
       <div id="filesList"></div>
       <div class="hr"></div>
       <h3>Primary sources</h3>

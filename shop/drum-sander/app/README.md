@@ -1,35 +1,21 @@
-# WALTER DS-16
+# WALTER DS-16 Build app
 
-Modern dedicated **drum thickness sander** build plans — ShopNotes No. 86 lineage via Ron Walters. Rev B: dual-end geometry, ways, hold-downs, ±0.003″ A/B spec.
+PWA for the shop: assembly checklist, calibration, materials, plan sheets, and phone downloads.
 
-## Live paths
+## Phone save
 
-- Design overview: `/shop/drum-sander/`
-- Build app: `/shop/drum-sander/app/` · shortcuts `/walter` · `/drum`
-- Plans: `/shop/drum-sander/plans/D1_general.svg` … `D6_cutlist.svg`
+Safari often opens SVG instead of downloading. Use:
 
-## Spec (Rev A)
+- **ZIP** in the top bar, or Files → Download ZIP / Share to Files
+- Pocket card at `/walter/pocket` — Add to Home Screen or Print → PDF
+- After one visit on Wi-Fi, the service worker caches D-1…D-10 for offline
 
-| Item | Value |
-|------|-------|
-| Capacity | 15.5″ wide · 1/16″–3″ thick |
-| Drum | ⌀5″ × 15.75″ @ ~1035 RPM |
-| Motor | ½ HP 1725 RPM · 3″/5″ pulleys |
-| Frame | ¾″ Baltic birch · flange bearings |
-| Feed | Solid laminated table + push sticks |
-| Dust | Kerf-bent hood · 4″ port |
+## Regenerate
 
-## Regenerate plans
+From the repo root:
 
 ```bash
 python3 scripts/gen_drum_sander_plans.py
+python3 scripts/gen_drum_sander_iso.py
+python3 scripts/pack_drum_sander.py
 ```
-
-Parametric source: `cad/walter_ds16.py` · OpenSCAD preview: `cad/walter_ds16.scad`
-
-## Sources
-
-- https://woodgears.ca/reader/walters/drum_sander.html
-- https://youtu.be/W-5Sj6kBVic
-- https://woodgears.ca/sander/drum.html
-- https://woodgears.ca/sander/plans/

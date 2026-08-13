@@ -745,6 +745,73 @@ def sheet_d8():
     s.save("D8_holddowns.svg")
 
 
+def sheet_d10():
+    s = Sheet("D-10", "Lumberyard & fasteners", "Store trip · nesting · inch / mm · phone pack")
+    s.titleblock()
+    from walter_ds16 import fastener_schedule, lumberyard, nest_sheets
+
+    s.text(40, 70, "NEST THE 5′×5′ SHEETS BEFORE YOU BUY — keep 16.5″ (419 mm) inner span", 16, ACC, bold=True)
+    s.text(
+        40,
+        94,
+        "Euro 18 mm Baltic birch is the usual ¾″ substitute. Recut sides to actual thickness; do not assume 0.750″.",
+        13,
+        DIM,
+    )
+
+    px = 5.4  # px per inch
+    origins = [(40, 120), (400, 120), (760, 120)]
+    for sheet, (ox, oy) in zip(nest_sheets(), origins):
+        sw, sh = sheet["sheet_w"] * px, sheet["sheet_h"] * px
+        s.rect(ox, oy, sw, sh, fill=LIGHT, stroke=INK, sw=1.5)
+        s.text(ox, oy - 8, sheet["name"][:42], 11, ACC, bold=True)
+        for p in sheet["parts"]:
+            x, y = ox + p["x"] * px, oy + p["y"] * px
+            w, h = p["w"] * px, p["h"] * px
+            fill = WOOD if "Side" in p["label"] or "Skin" in p["label"] else (MDF if "Disc" in p["label"] else PAPER)
+            s.rect(x, y, w, h, fill=fill, stroke=INK, sw=0.8)
+            if p["w"] >= 8 and "Disc" not in p["label"]:
+                s.text(x + w / 2, y + h / 2 + 4, p["label"], 9, INK, "middle")
+        s.text(ox, oy + sh + 16, sheet["note"][:52], 10, DIM)
+
+    s.text(40, 500, "LUMBERYARD CARD  (inch / mm)", 16, ACC, bold=True)
+    yy = 528
+    s.text(40, yy, "WHERE", 11, DIM, bold=True)
+    s.text(160, yy, "BUY", 11, DIM, bold=True)
+    s.text(720, yy, "QTY", 11, DIM, bold=True)
+    s.text(900, yy, "FOR", 11, DIM, bold=True)
+    yy += 20
+    for row in lumberyard():
+        s.text(40, yy, row["where"][:14], 11, ACC, bold=True)
+        s.text(160, yy, row["item"][:58], 11, INK)
+        s.text(720, yy, row["qty"][:22], 11, INK)
+        s.text(900, yy, row["use"][:48], 11, DIM)
+        yy += 18
+
+    s.text(40, 720, "HARDWARE AISLE + SPECIALTY  (the list the plywood BOM was missing)", 16, ACC, bold=True)
+    yy = 748
+    col_x = (40, 860)
+    rows = fastener_schedule()
+    mid = (len(rows) + 1) // 2
+    for col, chunk in enumerate((rows[:mid], rows[mid:])):
+        x = col_x[col]
+        y = yy
+        for row in chunk:
+            s.text(x, y, row["qty"][:12], 11, ACC, bold=True)
+            s.text(x + 110, y, row["item"][:48], 11, INK)
+            s.text(x + 520, y, row["use"][:28], 11, DIM)
+            y += 17
+
+    s.text(
+        40,
+        1050,
+        "Phone: /walter/pack → ZIP (Share → Save to Files) · /walter/pocket → field card · Add Build app to Home Screen for offline.",
+        12,
+        DIM,
+    )
+    s.save("D10_lumberyard.svg")
+
+
 def main():
     sheet_d1()
     sheet_d2()
@@ -754,6 +821,7 @@ def main():
     sheet_d6()
     sheet_d7()
     sheet_d8()
+    sheet_d10()
     print("done →", OUT)
 
 

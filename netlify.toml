@@ -128,6 +128,26 @@
   to = "/shop/drum-sander/model/"
   status = 301
 
+[[redirects]]
+  from = "/walter/pack"
+  to = "/shop/drum-sander/pack/WALTER-DS16-RevB.zip"
+  status = 301
+
+[[redirects]]
+  from = "/drum/pack"
+  to = "/shop/drum-sander/pack/WALTER-DS16-RevB.zip"
+  status = 301
+
+[[redirects]]
+  from = "/walter/pocket"
+  to = "/shop/drum-sander/pocket/"
+  status = 301
+
+[[redirects]]
+  from = "/drum/pocket"
+  to = "/shop/drum-sander/pocket/"
+  status = 301
+
 [[headers]]
   for = "/shop/drum-sander/app/service-worker.js"
   [headers.values]
@@ -148,6 +168,36 @@
   for = "/shop/drum-sander/renders/*"
   [headers.values]
     Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/shop/drum-sander/pack/*.zip"
+  [headers.values]
+    Content-Type = "application/zip"
+    Content-Disposition = "attachment; filename=\"WALTER-DS16-RevB.zip\""
+
+[[headers]]
+  for = "/shop/drum-sander/pack/*.csv"
+  [headers.values]
+    Content-Type = "text/csv; charset=utf-8"
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/shop/drum-sander/pack/*.json"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/shop/drum-sander/cad/*.py"
+  [headers.values]
+    Content-Type = "text/x-python; charset=utf-8"
+    Content-Disposition = "attachment"
+
+[[headers]]
+  for = "/shop/drum-sander/cad/*.scad"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Content-Disposition = "attachment"
 
 # CAD downloads: force download with correct types
 [[headers]]

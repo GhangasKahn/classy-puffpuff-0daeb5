@@ -1,0 +1,880 @@
+{
+  "name": "WALTER DS-16",
+  "revision": "B",
+  "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry",
+  "capacity": "15.5\" wide \u00b7 0.0625\"\u20133.0\" thick",
+  "drum_rpm": 1035.0,
+  "surface_fpm": 1355.0,
+  "parallel_tol": 0.003,
+  "spec": {
+    "revision": "B",
+    "capacity_width": 15.5,
+    "min_stock_thickness": 0.0625,
+    "max_stock_thickness": 3.0,
+    "min_stock_length": 12.0,
+    "parallel_tol": 0.003,
+    "table_flat_tol": 0.004,
+    "drum_tir": 0.002,
+    "paper_on_delta": 0.002,
+    "pass_rough": 0.008,
+    "pass_medium": 0.004,
+    "pass_finish": 0.001,
+    "drum_od": 5.0,
+    "drum_length": 15.75,
+    "disc_thick": 0.75,
+    "disc_count_core": 19,
+    "disc_count_ends": 2,
+    "spacer_every_n": 4,
+    "spacer_mm": 1.0,
+    "velcro_width": 4.0,
+    "sandpaper_width": 3.0,
+    "shaft_od": 0.75,
+    "shaft_length": 22.5,
+    "shaft_spec": "Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
+    "key_wire_od": 0.125,
+    "bearing_drive": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FIXED",
+    "bearing_idler": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FLOATING (axial)",
+    "bearing_count": 2,
+    "motor_hp": 0.5,
+    "motor_rpm": 1725.0,
+    "pulley_motor_od": 3.0,
+    "pulley_drum_od": 5.0,
+    "belt": "4L / A-section V-belt (size to center distance)",
+    "drum_rpm": 1035.0,
+    "side_thick": 0.75,
+    "side_height": 30.0,
+    "side_depth": 22.0,
+    "clear_between_sides": 16.5,
+    "base_thick": 0.75,
+    "stretchers": 3,
+    "table_thick": 1.5,
+    "table_width": 16.0,
+    "table_depth": 22.0,
+    "table_core": "Torsion box: \u00be\u2033 skins + \u00bd\u2033 grid, full glue",
+    "table_top": "\u00bd\u2033 phenolic or \u215c\u2033 MIC-6 / cast tooling plate",
+    "elev_screw": "Two \u00bd\u2033-10 Acme \u00d7 12\u2033, bronze nuts, #25 chain couple",
+    "elev_travel": 3.25,
+    "way_stock": "\u00be\u2033 \u00d7 \u00be\u2033 UHMW strips, inner faces of sides",
+    "taper_uncouple": "Left sprocket clutch + parallel-home stop",
+    "roller_od": 1.25,
+    "roller_len": 15.75,
+    "roller_setbelow": 0.03,
+    "roller_spring": "Light compression; too much = snipe",
+    "osc_stroke": 0.125,
+    "osc_cpm": 80.0,
+    "hood_ply": 0.25,
+    "dust_port_od": 4.0,
+    "hood_method": "Kerf-bent \u00bc\u2033 pine/birch ply, sawdust-glue filled",
+    "modernizations": [
+      "Dual \u00bd-10 Acme table screws, chain-coupled \u2014 coarse lift stays coplanar",
+      "Left screw uncouples for taper; dog stop returns to parallel home",
+      "UHMW ways on inner sides \u2014 table cannot rack while feeding",
+      "Stack-drill side panels as a pair; floating idler bearing (axial growth)",
+      "Torsion-box table + phenolic / tooling-plate wear face",
+      "Spring hold-down rollers infeed + outfeed \u2014 kills snipe and chatter",
+      "Full-width truing sled; re-clock after paper wrap to \u00b10.003\u2033",
+      "Dial-indicator pad on drive side; 0.001\u2033 pass schedule",
+      "Optional \u215b\u2033 slow oscillation (gear motor) to erase spiral tracks",
+      "Pack-bore disc jig + static balance of end discs"
+    ]
+  },
+  "quality": [
+    {
+      "check": "Table flatness",
+      "tool": "Straightedge + feelers on wear face",
+      "spec": "\u2264 0.004\u2033 on both diagonals"
+    },
+    {
+      "check": "Drum TIR (paper off)",
+      "tool": "Dial indicator on drum OD, mid-span",
+      "spec": "\u2264 0.002\u2033 TIR"
+    },
+    {
+      "check": "Drum \u2225 table (paper on)",
+      "tool": "Indicator at A (drive) and B (idler)",
+      "spec": "|A\u2212B| \u2264 0.003\u2033 over 15.5\u2033"
+    },
+    {
+      "check": "Way coplanar",
+      "tool": "Winding sticks / indicator on both UHMW",
+      "spec": "No twist; table slides without bind"
+    },
+    {
+      "check": "Pulley coplanar",
+      "tool": "Straightedge across both pulley faces",
+      "spec": "Faces flush; belt tracks center"
+    },
+    {
+      "check": "Hold-down set",
+      "tool": "Feeler under roller vs drum (paper on)",
+      "spec": "Rollers 0.030\u2033 below drum OD"
+    },
+    {
+      "check": "Thickness scatter",
+      "tool": "Caliper 4 corners of test panel",
+      "spec": "\u2264 0.003\u2033 after finish pass"
+    }
+  ],
+  "passes": [
+    {
+      "grit": "80",
+      "depth": "0.008\u2033",
+      "use": "Flatten / mill marks / glue"
+    },
+    {
+      "grit": "120",
+      "depth": "0.004\u2033",
+      "use": "Thickness to +0.008\u2033 of final"
+    },
+    {
+      "grit": "180",
+      "depth": "0.001\u2033",
+      "use": "Finish pass; optional 90\u00b0 cross"
+    },
+    {
+      "grit": "220",
+      "depth": "0.001\u2033",
+      "use": "Veneer / figured maple \u2014 hold-downs on"
+    }
+  ],
+  "cut_list": [
+    {
+      "qty": 2,
+      "size": "22.0\" \u00d7 30.0\" \u00d7 \u00be\"",
+      "size_mm": "559 \u00d7 762 \u00d7 19 mm",
+      "stock": "Baltic birch",
+      "use": "Side panels \u2014 stack-drill as a pair"
+    },
+    {
+      "qty": 1,
+      "size": "18.0\" \u00d7 22.0\" \u00d7 \u00be\"",
+      "size_mm": "457 \u00d7 559 \u00d7 19 mm",
+      "stock": "Baltic birch",
+      "use": "Base deck"
+    },
+    {
+      "qty": 3,
+      "size": "16.5\" \u00d7 4\" \u00d7 \u00be\"",
+      "size_mm": "419 \u00d7 102 \u00d7 19 mm",
+      "stock": "Baltic birch",
+      "use": "Front / mid / rear stretchers"
+    },
+    {
+      "qty": 2,
+      "size": "16.0\" \u00d7 22.0\" \u00d7 \u00be\"",
+      "size_mm": "406 \u00d7 559 \u00d7 19 mm",
+      "stock": "Baltic birch skins",
+      "use": "Table torsion-box skins"
+    },
+    {
+      "qty": 1,
+      "size": "\u00bd\" grid offcuts",
+      "size_mm": "12 mm grid",
+      "stock": "BB / MDF",
+      "use": "Torsion-box ribs @ 4\u2033 o.c."
+    },
+    {
+      "qty": 1,
+      "size": "16.0\" \u00d7 22.0\" \u00d7 \u00bd\"",
+      "size_mm": "406 \u00d7 559 \u00d7 12 mm",
+      "stock": "Phenolic or MIC-6",
+      "use": "Replaceable wear face"
+    },
+    {
+      "qty": 2,
+      "size": "\u00be\" \u00d7 \u00be\" \u00d7 22.0\"",
+      "size_mm": "19 \u00d7 19 \u00d7 559 mm",
+      "stock": "UHMW",
+      "use": "Table ways (inner faces)"
+    },
+    {
+      "qty": 21,
+      "size": "\u23005.125\" \u00d7 \u00be\" (true to \u23005.0\")",
+      "size_mm": "\u2300130 \u2192 true \u2300127 \u00d7 19 mm",
+      "stock": "MDF core + BB ends (or all BB)",
+      "use": "Drum discs \u2014 pack-bore"
+    },
+    {
+      "qty": 1,
+      "size": "22.5\" \u00d7 \u2300\u00be\"",
+      "size_mm": "572 \u00d7 \u230019 mm",
+      "stock": "Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
+      "use": "Drum shaft"
+    },
+    {
+      "qty": 1,
+      "size": "~18\" \u00d7 12\" \u00d7 \u00bc\"",
+      "size_mm": "~457 \u00d7 305 \u00d7 6 mm",
+      "stock": "Pine or birch ply",
+      "use": "Kerf-bent dust hood blank"
+    },
+    {
+      "qty": 1,
+      "size": "12\" \u00d7 8\" \u00d7 \u00be\"",
+      "size_mm": "305 \u00d7 203 \u00d7 19 mm",
+      "stock": "Baltic birch",
+      "use": "Motor pivot cradle"
+    },
+    {
+      "qty": 1,
+      "size": "16.0\" \u00d7 8\" \u00d7 \u00be\"",
+      "size_mm": "406 \u00d7 203 \u00d7 19 mm",
+      "stock": "MDF / BB",
+      "use": "Full-width truing sled"
+    },
+    {
+      "qty": 2,
+      "size": "yoke 18\" \u00d7 3\" \u00d7 \u00be\"",
+      "size_mm": "457 \u00d7 76 \u00d7 19 mm",
+      "stock": "Hardwood / alum angle",
+      "use": "Hold-down roller yokes"
+    },
+    {
+      "qty": 1,
+      "size": "12\" \u00d7 12\" \u00d7 \u00be\"",
+      "size_mm": "305 \u00d7 305 \u00d7 19 mm",
+      "stock": "MDF",
+      "use": "Disc pack-bore jig"
+    }
+  ],
+  "hardware": [
+    {
+      "item": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FIXED",
+      "qty": "1"
+    },
+    {
+      "item": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FLOATING (axial)",
+      "qty": "1"
+    },
+    {
+      "item": "3.0\" motor + 5.0\" drum 4L pulleys",
+      "qty": "1 set"
+    },
+    {
+      "item": "4L / A-section V-belt (size to center distance)",
+      "qty": "1"
+    },
+    {
+      "item": "0.5 HP 1725 RPM TEFC motor, 115 V",
+      "qty": "1"
+    },
+    {
+      "item": "\u00bd\u2033-10 Acme rod 12\u2033 + bronze nut + flange",
+      "qty": "2"
+    },
+    {
+      "item": "#25 sprockets (\u00bd\u2033 bore) + chain + master link",
+      "qty": "2 + loop"
+    },
+    {
+      "item": "Left sprocket clutch / set-screw dog for parallel-home",
+      "qty": "1"
+    },
+    {
+      "item": "Rubber rollers \u23001.25\" \u00d7 ~15.75\" + \u215c\u2033 axles",
+      "qty": "2"
+    },
+    {
+      "item": "Compression springs + shoulder bolts for yokes",
+      "qty": "4"
+    },
+    {
+      "item": "Star knobs \u215c-16 + washers (way locks / yokes)",
+      "qty": "6"
+    },
+    {
+      "item": "Hook Velcro 4\" PSA + 3\" loop sandpaper (80/120/180/220)",
+      "qty": "as needed"
+    },
+    {
+      "item": "\u215b\" piano wire for shaft keys",
+      "qty": "12 in"
+    },
+    {
+      "item": "4\" dust adapter + blast gate",
+      "qty": "1"
+    },
+    {
+      "item": "Switch box + 15 ft cord",
+      "qty": "1"
+    },
+    {
+      "item": "Dial indicator 0.001\u2033 + mag base (or \u215c-16 pad)",
+      "qty": "1"
+    },
+    {
+      "item": "Optional: 60\u201390 RPM gearmotor + scotch yoke (oscillator)",
+      "qty": "1 kit"
+    }
+  ],
+  "fasteners": [
+    {
+      "aisle": "Screws",
+      "item": "#8 \u00d7 1\u00bc\u2033 coarse cabinet screws",
+      "qty": "~100 (1 lb)",
+      "use": "Box, skins, hood, jigs"
+    },
+    {
+      "aisle": "Screws",
+      "item": "#8 \u00d7 2\u2033 coarse screws",
+      "qty": "~50",
+      "use": "Through-side into stretchers"
+    },
+    {
+      "aisle": "Fasteners",
+      "item": "\u00bc-20 T-nuts + 1\u00bc\u2033 hex bolts + washers",
+      "qty": "8",
+      "use": "Motor-cradle pivot / locks"
+    },
+    {
+      "aisle": "Fasteners",
+      "item": "5/16-18 \u00d7 1\u2033 hex + nylock + washer",
+      "qty": "8",
+      "use": "4-bolt flange bearings (confirm hole)"
+    },
+    {
+      "aisle": "Knobs",
+      "item": "\u215c-16 star knobs + 1\u00bd\u2033 studs + washers",
+      "qty": "6",
+      "use": "Way locks and roller yokes"
+    },
+    {
+      "aisle": "Fasteners",
+      "item": "Shoulder bolts 5/16 \u00d7 1\u00bd\u2033",
+      "qty": "4",
+      "use": "Spring yoke pivots"
+    },
+    {
+      "aisle": "Springs",
+      "item": "Light compression springs ~\u00be\u2033 OD",
+      "qty": "4",
+      "use": "Hold-downs \u2014 too stiff = snipe"
+    },
+    {
+      "aisle": "Rod",
+      "item": "\u215c\u2033 drill rod or bolts, 17\u2033",
+      "qty": "2",
+      "use": "Roller axles"
+    },
+    {
+      "aisle": "Wire",
+      "item": "\u215b\u2033 piano wire",
+      "qty": "12\u2033",
+      "use": "Drum-disc keys"
+    },
+    {
+      "aisle": "Wax",
+      "item": "Paste wax",
+      "qty": "1 tin",
+      "use": "UHMW ways \u2014 dry lube, no oil"
+    },
+    {
+      "aisle": "Dust",
+      "item": "4\u2033 dust adapter + blast gate",
+      "qty": "1",
+      "use": "Hood port"
+    },
+    {
+      "aisle": "Electrical",
+      "item": "Switch box + 14/3 SJ cord + plug",
+      "qty": "1 kit",
+      "use": "Motor \u2014 follow local code"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "4-bolt flange bearing \u00be\u2033 bore, sealed",
+      "qty": "2",
+      "use": "Drive FIXED \u00b7 idler FLOATING"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "\u00be\u2033 TG&P / precision-ground shaft \u00d7 24\u2033",
+      "qty": "1",
+      "use": "Drum shaft (cut to 22.5\u2033)"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "\u00bd-10 Acme rod 12\u2033 + bronze nut + flange",
+      "qty": "2",
+      "use": "Dual table lift"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "#25 chain + \u00bd\u2033-bore sprockets + master + left clutch/dog",
+      "qty": "1 kit",
+      "use": "Couple screws; taper uncouple"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "3\u2033 + 5\u2033 4L pulleys + A-section belt",
+      "qty": "1 set",
+      "use": "Coplanar 3:5 reduction"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "\u00bd HP 1725 RPM TEFC 115 V",
+      "qty": "1",
+      "use": "Drum drive"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "Dial indicator 0.001\u2033 + mag base",
+      "qty": "1",
+      "use": "TIR and A/B clock"
+    },
+    {
+      "aisle": "Specialty",
+      "item": "Rubber rollers \u23001.25\u2033 \u00d7 ~15.75\u2033",
+      "qty": "2",
+      "use": "Infeed / outfeed hold-downs"
+    },
+    {
+      "aisle": "Optional",
+      "item": "60\u201390 RPM gearmotor + scotch yoke",
+      "qty": "1 kit",
+      "use": "\u215b\u2033 slow oscillator, not drum RPM"
+    }
+  ],
+  "lumberyard": [
+    {
+      "where": "Plywood",
+      "item": "\u00be\u2033 Baltic birch (18 mm Euro BB is the usual substitute)",
+      "qty": "2 sheets 5\u2032\u00d75\u2032",
+      "alt": "One 4\u2032\u00d78\u2032 + one 5\u2032\u00d75\u2032 if that\u2019s what is stocked",
+      "use": "Sides, base, stretchers, table skins, cradle, yokes"
+    },
+    {
+      "where": "MDF",
+      "item": "\u00be\u2033 MDF",
+      "qty": "24\u2033 \u00d7 48\u2033",
+      "alt": "Half a 4\u2032\u00d78\u2032 sheet",
+      "use": "21 drum discs + pack-bore jig + torsion ribs if no \u00bd\u2033 offcuts"
+    },
+    {
+      "where": "Plywood",
+      "item": "\u00bc\u2033 birch or pine ply",
+      "qty": "24\u2033 \u00d7 24\u2033",
+      "alt": "Door-skin offcut is enough",
+      "use": "Kerf-bent dust hood blank ~18\u2033 \u00d7 12\u2033"
+    },
+    {
+      "where": "Plastics / order",
+      "item": "\u00bd\u2033 phenolic or \u215c\u2033 MIC-6 / cast tooling plate",
+      "qty": "16\u2033 \u00d7 22\u2033",
+      "alt": "UHMW sheet if phenolic is a wait",
+      "use": "Replaceable table wear face \u2014 this is the metrology surface"
+    },
+    {
+      "where": "Plastics",
+      "item": "UHMW bar \u00be\u2033 \u00d7 \u00be\u2033",
+      "qty": "48\u2033",
+      "alt": "Two 24\u2033 sticks",
+      "use": "Table ways, inner faces of sides"
+    },
+    {
+      "where": "Hardwood / metal",
+      "item": "Hardwood \u00be\u2033 or 1\u00bd\u2033 aluminum angle",
+      "qty": "36\u2033",
+      "alt": "BB offcuts from sheet 2",
+      "use": "Hold-down roller yokes"
+    },
+    {
+      "where": "Abrasives",
+      "item": "Hook Velcro 4\u2033 PSA + 3\u2033 loop paper 80/120/180/220",
+      "qty": "1 roll + 4 grits",
+      "alt": "PSA paper if you skip Velcro (harder to change)",
+      "use": "Spiral wrap after truing"
+    },
+    {
+      "where": "Glue",
+      "item": "Titebond III + thin CA",
+      "qty": "1 qt + 1 oz",
+      "alt": "Any Type I PVA for the box",
+      "use": "Torsion box, drum lamination, Velcro edges"
+    }
+  ],
+  "nesting": [
+    {
+      "name": "Sheet 1 \u2014 5\u2032\u00d75\u2032 \u00d7 \u00be\u2033 BB (frame)",
+      "sheet_w": 60.0,
+      "sheet_h": 60.0,
+      "parts": [
+        {
+          "label": "Side A",
+          "x": 0.25,
+          "y": 0.25,
+          "w": 22.0,
+          "h": 30.0
+        },
+        {
+          "label": "Side B",
+          "x": 22.5,
+          "y": 0.25,
+          "w": 22.0,
+          "h": 30.0
+        },
+        {
+          "label": "Base",
+          "x": 0.25,
+          "y": 30.5,
+          "w": 18.0,
+          "h": 22.0
+        },
+        {
+          "label": "Str 1",
+          "x": 18.5,
+          "y": 30.5,
+          "w": 16.5,
+          "h": 4.0
+        },
+        {
+          "label": "Str 2",
+          "x": 18.5,
+          "y": 34.75,
+          "w": 16.5,
+          "h": 4.0
+        },
+        {
+          "label": "Str 3",
+          "x": 18.5,
+          "y": 39.0,
+          "w": 16.5,
+          "h": 4.0
+        },
+        {
+          "label": "Cradle",
+          "x": 18.5,
+          "y": 43.25,
+          "w": 12.0,
+          "h": 8.0
+        }
+      ],
+      "note": "Right ~15\u2033 strip is spare / grain-matched patches. Stack-drill the two sides as a pair after cut."
+    },
+    {
+      "name": "Sheet 2 \u2014 5\u2032\u00d75\u2032 \u00d7 \u00be\u2033 BB (table & jigs)",
+      "sheet_w": 60.0,
+      "sheet_h": 60.0,
+      "parts": [
+        {
+          "label": "Skin A",
+          "x": 0.25,
+          "y": 0.25,
+          "w": 16.0,
+          "h": 22.0
+        },
+        {
+          "label": "Skin B",
+          "x": 16.5,
+          "y": 0.25,
+          "w": 16.0,
+          "h": 22.0
+        },
+        {
+          "label": "Sled",
+          "x": 0.25,
+          "y": 22.5,
+          "w": 16.0,
+          "h": 8.0
+        },
+        {
+          "label": "Yoke 1",
+          "x": 16.5,
+          "y": 22.5,
+          "w": 18.0,
+          "h": 3.0
+        },
+        {
+          "label": "Yoke 2",
+          "x": 16.5,
+          "y": 25.75,
+          "w": 18.0,
+          "h": 3.0
+        },
+        {
+          "label": "Bore jig",
+          "x": 0.25,
+          "y": 31.0,
+          "w": 12.0,
+          "h": 12.0
+        }
+      ],
+      "note": "Torsion ribs are \u00bd\u2033 stock (offcuts or MDF). Leftover \u00be\u2033 is insurance, not required."
+    },
+    {
+      "name": "Sheet 3 \u2014 24\u2033\u00d748\u2033 \u00d7 \u00be\u2033 MDF (discs)",
+      "sheet_w": 24.0,
+      "sheet_h": 48.0,
+      "parts": [
+        {
+          "label": "Disc 1",
+          "x": 0.2,
+          "y": 0.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 2",
+          "x": 6.2,
+          "y": 0.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 3",
+          "x": 12.2,
+          "y": 0.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 4",
+          "x": 18.2,
+          "y": 0.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 5",
+          "x": 0.2,
+          "y": 6.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 6",
+          "x": 6.2,
+          "y": 6.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 7",
+          "x": 12.2,
+          "y": 6.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 8",
+          "x": 18.2,
+          "y": 6.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 9",
+          "x": 0.2,
+          "y": 12.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 10",
+          "x": 6.2,
+          "y": 12.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 11",
+          "x": 12.2,
+          "y": 12.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 12",
+          "x": 18.2,
+          "y": 12.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 13",
+          "x": 0.2,
+          "y": 18.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 14",
+          "x": 6.2,
+          "y": 18.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 15",
+          "x": 12.2,
+          "y": 18.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 16",
+          "x": 18.2,
+          "y": 18.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 17",
+          "x": 0.2,
+          "y": 24.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 18",
+          "x": 6.2,
+          "y": 24.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 19",
+          "x": 12.2,
+          "y": 24.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 20",
+          "x": 18.2,
+          "y": 24.2,
+          "w": 5.5,
+          "h": 5.5
+        },
+        {
+          "label": "Disc 21",
+          "x": 0.2,
+          "y": 30.2,
+          "w": 5.5,
+          "h": 5.5
+        }
+      ],
+      "note": "Bandsaw oversize \u23005\u215b\u2033, then pack-bore. Two end discs preferably BB from sheet-2 leftover."
+    }
+  ],
+  "assembly": [
+    {
+      "id": "a1",
+      "phase": "frame",
+      "title": "Template & stack-drill sides",
+      "body": "Clamp both side panels face-to-face. Drill bearing CLs, way screw holes, and indicator pad as one stack so left and right are identical."
+    },
+    {
+      "id": "a2",
+      "phase": "frame",
+      "title": "Assemble box + UHMW ways",
+      "body": "Glue + screw stretchers. Square diagonals. Bond UHMW ways to inner faces; they are the table\u2019s only vertical reference."
+    },
+    {
+      "id": "a3",
+      "phase": "drum",
+      "title": "Pack-bore discs & laminate drum",
+      "body": "Bandsaw oversize. Stack all discs in the bore jig; drill/ream \u2300\u00be\u2033 as a pack. Key with piano wire. 1 mm relief every 4 MDF discs. Static-balance end discs."
+    },
+    {
+      "id": "a4",
+      "phase": "drum",
+      "title": "Fixed drive bearing, floating idler",
+      "body": "Lock the drive flange. Idler flange sits on an axial-float pad (slots or liner) so the shaft cannot banana from over-constraint or heat."
+    },
+    {
+      "id": "a5",
+      "phase": "drive",
+      "title": "Motor cradle, coplanar pulleys, lock",
+      "body": "Straightedge across pulley faces. Gravity tension, then lock the cradle so the belt cannot pump."
+    },
+    {
+      "id": "a6",
+      "phase": "table",
+      "title": "Torsion-box table + wear face",
+      "body": "Skins + 4\u2033 rib grid, continuous glue. Flatten the top, then bond phenolic or tooling plate. Check diagonals to 0.004\u2033."
+    },
+    {
+      "id": "a7",
+      "phase": "table",
+      "title": "Dual Acme lift + chain couple",
+      "body": "Bronze nuts in table. Chain both \u00bd-10 screws. Fit left clutch and parallel-home dog. Table must rise without twist in the ways."
+    },
+    {
+      "id": "a8",
+      "phase": "table",
+      "title": "Hold-down roller yokes",
+      "body": "Infeed and outfeed rollers on spring yokes. Set 0.030\u2033 below drum OD (paper on). Too much spring = snipe."
+    },
+    {
+      "id": "a9",
+      "phase": "hood",
+      "title": "Kerf-bend dust hood",
+      "body": "Kerf \u00bc\u2033 ply, wet, glue to form, fill kerfs. 4\u2033 port. Hood must clear oscillator stroke if fitted."
+    },
+    {
+      "id": "a10",
+      "phase": "wrap",
+      "title": "True drum on full-width sled",
+      "body": "Abrasive face-up on the truing sled that rides the ways. Light passes until TIR \u2264 0.002\u2033. Then Velcro + spiral paper."
+    },
+    {
+      "id": "a11",
+      "phase": "tune",
+      "title": "Indicator clock A/B \u2014 parallel home",
+      "body": "Paper on. Indicator at drive (A) and idler (B). Uncouple left screw until |A\u2212B| \u2264 0.003\u2033. Lock home dog. Record the reading."
+    },
+    {
+      "id": "a12",
+      "phase": "tune",
+      "title": "Test panel + pass schedule",
+      "body": "80 / 120 / 180. Caliper four corners. If scatter > 0.003\u2033, re-clock. Finish at 0.001\u2033. Optional oscillator last."
+    }
+  ],
+  "calibration": [
+    {
+      "id": "c1",
+      "title": "Disconnect power",
+      "body": "Unplug. Hood off. Paper off for TIR; paper on for A/B parallel."
+    },
+    {
+      "id": "c2",
+      "title": "Seat the table in the ways",
+      "body": "Raise/lower through full travel. No bind, no rock. Winding sticks on wear face \u2014 no twist."
+    },
+    {
+      "id": "c3",
+      "title": "Drum TIR",
+      "body": "Indicator on mid-span OD. Rotate by hand. If > 0.002\u2033, re-true on the sled before wrapping paper."
+    },
+    {
+      "id": "c4",
+      "title": "Wrap & re-clock",
+      "body": "Velcro then spiral paper. Paper is not uniform \u2014 A/B will change. This is the measurement that matters."
+    },
+    {
+      "id": "c5",
+      "title": "A/B parallel",
+      "body": "Same indicator height, drive end then idler. Uncouple left Acme; 1/40 turn \u2248 0.0025\u2033. Recouple. Set home dog."
+    },
+    {
+      "id": "c6",
+      "title": "Hold-down height",
+      "body": "Feelers under each roller vs drum. 0.030\u2033 below. Leading snipe \u2192 ease outfeed spring; trailing snipe \u2192 ease infeed."
+    },
+    {
+      "id": "c7",
+      "title": "Witness board",
+      "body": "6\u2033 \u00d7 16\u2033 maple, 80 grit, one pass. Ridge at overlap = idler high/low. Caliper corners. Log in the Build app."
+    },
+    {
+      "id": "c8",
+      "title": "Taper mode (optional)",
+      "body": "Uncouple left, drop idler a few thousandths, sand, then return to home dog \u2014 do not re-invent parallel each time."
+    }
+  ],
+  "notes": [
+    "Keep 16.5\u2033 (419 mm) clear between inner faces even if ply is 18 mm Euro BB instead of \u00be\u2033.",
+    "iPhone: share the ZIP \u2192 Save to Files. Pocket card: Share \u2192 Add to Home Screen or Print \u2192 PDF."
+  ]
+}

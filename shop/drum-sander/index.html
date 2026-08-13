@@ -55,6 +55,7 @@ body::before{
   display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:8px;
   border:1px solid var(--line-strong);font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
   transition:background .25s var(--ease),border-color .25s,transform .2s;
+  background:transparent;color:inherit;cursor:pointer;
 }
 .btn:hover{border-color:var(--sage-hi);background:rgba(90,106,74,.22)}
 .btn.solid{background:linear-gradient(180deg,rgba(90,106,74,.55),rgba(90,106,74,.2));border-color:var(--sage)}
@@ -111,6 +112,8 @@ body::before{
     <a href="#model">3D</a>
     <a href="#plans">Plans</a>
     <a href="app/">Build app</a>
+    <a href="pocket/">Pocket</a>
+    <a href="pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Save pack</a>
     <a href="/fence/">Fence suite</a>
   </nav>
 </header>
@@ -122,10 +125,13 @@ body::before{
       <h1 class="display">DS-16</h1>
       <p class="lead">A shop-built drum thickness sander engineered from Ron Walters’ dedicated-motor rebuild — then taken past “good enough.” Rev B is dual-end geometry, ways, hold-downs, and a paper-on indicator spec of ±0.003″.</p>
       <div class="cta-row">
-        <a class="btn solid" href="app/">Open build app</a>
+        <a class="btn solid" href="pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Save shop pack</a>
+        <button class="btn" type="button" id="sharePackBtn">Share to Files</button>
+        <a class="btn" href="pocket/">Pocket card</a>
+        <a class="btn" href="app/">Build app</a>
         <a class="btn" href="model/">3D model</a>
-        <a class="btn" href="plans/D9_model.svg" target="_blank" rel="noopener">D-9 solids</a>
       </div>
+      <p style="margin-top:14px;color:var(--gray-hi);font-size:13px">iPhone: Share to Files. Android: Save shop pack. Pocket card → Add to Home Screen or Print → PDF.</p>
     </div>
     <div class="machine" id="hero3d" role="img" aria-label="Interactive 3D model of the WALTER DS-16 drum sander"></div>
   </div>
@@ -226,8 +232,8 @@ body::before{
 
 <section class="wrap section" id="plans">
   <p class="kicker">Blueprints</p>
-  <h2 class="display">D-1 through D-9</h2>
-  <p class="lead">Printable A3-landscape SVG from the parametric source. D-9 is the solid-model isometric sheet. Open the interactive viewer for orbit / explode.</p>
+  <h2 class="display">D-1 through D-10</h2>
+  <p class="lead">Printable A3-landscape SVG from the parametric source. D-9 is the solid-model isometric sheet. D-10 is the lumberyard nesting + fastener card. Download the ZIP for the phone.</p>
   <div class="plans">
     <a class="plan" href="plans/D1_general.svg" target="_blank" rel="noopener"><img src="plans/D1_general.svg" alt="D-1"/><span>D-1 General</span></a>
     <a class="plan" href="plans/D2_frame.svg" target="_blank" rel="noopener"><img src="plans/D2_frame.svg" alt="D-2"/><span>D-2 Frame</span></a>
@@ -238,12 +244,15 @@ body::before{
     <a class="plan" href="plans/D7_geometry.svg" target="_blank" rel="noopener"><img src="plans/D7_geometry.svg" alt="D-7"/><span>D-7 Geometry</span></a>
     <a class="plan" href="plans/D8_holddowns.svg" target="_blank" rel="noopener"><img src="plans/D8_holddowns.svg" alt="D-8"/><span>D-8 Hold-downs</span></a>
     <a class="plan" href="plans/D9_model.svg" target="_blank" rel="noopener"><img src="plans/D9_model.svg" alt="D-9"/><span>D-9 3D views</span></a>
+    <a class="plan" href="plans/D10_lumberyard.svg" target="_blank" rel="noopener"><img src="plans/D10_lumberyard.svg" alt="D-10"/><span>D-10 Lumberyard</span></a>
   </div>
   <div class="cta-row">
-    <a class="btn solid" href="app/">Launch build app</a>
+    <a class="btn solid" href="pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Download all (ZIP)</a>
+    <a class="btn" href="pocket/">Pocket card</a>
+    <a class="btn" href="app/">Launch build app</a>
     <a class="btn" href="model/">3D model</a>
-    <a class="btn" href="cad/walter_ds16.py">Parametric source</a>
-    <a class="btn" href="cad/walter_ds16.scad">OpenSCAD</a>
+    <a class="btn" href="cad/walter_ds16.py" download="walter_ds16.py">Parametric source</a>
+    <a class="btn" href="cad/walter_ds16.scad" download="walter_ds16.scad">OpenSCAD</a>
   </div>
 </section>
 
@@ -255,6 +264,31 @@ body::before{
 import { createWalterModel } from "./app/model3d.js";
 const el = document.getElementById("hero3d");
 if (el) createWalterModel(el, { autoRotate: true });
+</script>
+<script>
+(function () {
+  const zip = new URL("pack/WALTER-DS16-RevB.zip", location.href).href;
+  const btn = document.getElementById("sharePackBtn");
+  if (!btn) return;
+  btn.addEventListener("click", async function () {
+    try {
+      const res = await fetch(zip);
+      const blob = await res.blob();
+      const file = new File([blob], "WALTER-DS16-RevB.zip", { type: "application/zip" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "WALTER DS-16 shop pack" });
+        return;
+      }
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "WALTER-DS16-RevB.zip";
+      a.click();
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+      location.href = zip;
+    }
+  });
+})();
 </script>
 </body>
 </html>

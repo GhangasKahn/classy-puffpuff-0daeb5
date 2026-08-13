@@ -1,4 +1,4 @@
-const CACHE = "walter-ds16-v3";
+const CACHE = "walter-ds16-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -8,6 +8,20 @@ const ASSETS = [
   "./model3d.js",
   "./manifest.json",
   "./icon.svg",
+  "./apple-touch-icon.png",
+  "../pocket/index.html",
+  "../plans/D1_general.svg",
+  "../plans/D2_frame.svg",
+  "../plans/D3_drum.svg",
+  "../plans/D4_drive.svg",
+  "../plans/D5_hood.svg",
+  "../plans/D6_cutlist.svg",
+  "../plans/D7_geometry.svg",
+  "../plans/D8_holddowns.svg",
+  "../plans/D9_model.svg",
+  "../plans/D10_lumberyard.svg",
+  "../renders/iso_assembled.svg",
+  "../renders/iso_exploded.svg",
 ];
 
 self.addEventListener("install", (e) => {

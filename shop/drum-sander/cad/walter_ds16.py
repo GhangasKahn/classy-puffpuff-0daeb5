@@ -115,6 +115,13 @@ class Spec:
 
 SPEC = Spec()
 
+IN_TO_MM = 25.4
+
+
+def in_mm(inches: float, nd: int = 1) -> str:
+    """Format an inch value with millimetre equivalent."""
+    return f'{inches:g}" / {inches * IN_TO_MM:.{nd}f} mm'
+
 
 def surface_fpm(drum_od: float, rpm: float) -> float:
     return (3.14159265 * drum_od / 12.0) * rpm
@@ -147,20 +154,154 @@ def cut_list() -> list[dict[str, Any]]:
     s = SPEC
     span = s.clear_between_sides
     return [
-        {"qty": 2, "size": f'{s.side_depth}" × {s.side_height}" × ¾"', "stock": "Baltic birch", "use": "Side panels — stack-drill as a pair"},
-        {"qty": 1, "size": f'{span + 2 * s.side_thick}" × {s.side_depth}" × ¾"', "stock": "Baltic birch", "use": "Base deck"},
-        {"qty": 3, "size": f'{span}" × 4" × ¾"', "stock": "Baltic birch", "use": "Front / mid / rear stretchers"},
-        {"qty": 2, "size": f'{s.table_width}" × {s.table_depth}" × ¾"', "stock": "Baltic birch skins", "use": "Table torsion-box skins"},
-        {"qty": 1, "size": '½" grid offcuts', "stock": "BB / MDF", "use": "Torsion-box ribs @ 4″ o.c."},
-        {"qty": 1, "size": f'{s.table_width}" × {s.table_depth}" × ½"', "stock": "Phenolic or MIC-6", "use": "Replaceable wear face"},
-        {"qty": 2, "size": f'¾" × ¾" × {s.side_depth}"', "stock": "UHMW", "use": "Table ways (inner faces)"},
-        {"qty": s.disc_count_core + s.disc_count_ends, "size": f'⌀{s.drum_od + 0.125}" × ¾" (true to ⌀{s.drum_od}")', "stock": "MDF core + BB ends (or all BB)", "use": "Drum discs — pack-bore"},
-        {"qty": 1, "size": f'{s.shaft_length}" × ⌀¾"', "stock": s.shaft_spec, "use": "Drum shaft"},
-        {"qty": 1, "size": '~18" × 12" × ¼"', "stock": "Pine or birch ply", "use": "Kerf-bent dust hood blank"},
-        {"qty": 1, "size": '12" × 8" × ¾"', "stock": "Baltic birch", "use": "Motor pivot cradle"},
-        {"qty": 1, "size": f'{s.table_width}" × 8" × ¾"', "stock": "MDF / BB", "use": "Full-width truing sled"},
-        {"qty": 2, "size": f'yoke 18" × 3" × ¾"', "stock": "Hardwood / alum angle", "use": "Hold-down roller yokes"},
-        {"qty": 1, "size": '12" × 12" × ¾"', "stock": "MDF", "use": "Disc pack-bore jig"},
+        {"qty": 2, "size": f'{s.side_depth}" × {s.side_height}" × ¾"', "size_mm": "559 × 762 × 19 mm", "stock": "Baltic birch", "use": "Side panels — stack-drill as a pair"},
+        {"qty": 1, "size": f'{span + 2 * s.side_thick}" × {s.side_depth}" × ¾"', "size_mm": "457 × 559 × 19 mm", "stock": "Baltic birch", "use": "Base deck"},
+        {"qty": 3, "size": f'{span}" × 4" × ¾"', "size_mm": "419 × 102 × 19 mm", "stock": "Baltic birch", "use": "Front / mid / rear stretchers"},
+        {"qty": 2, "size": f'{s.table_width}" × {s.table_depth}" × ¾"', "size_mm": "406 × 559 × 19 mm", "stock": "Baltic birch skins", "use": "Table torsion-box skins"},
+        {"qty": 1, "size": '½" grid offcuts', "size_mm": "12 mm grid", "stock": "BB / MDF", "use": "Torsion-box ribs @ 4″ o.c."},
+        {"qty": 1, "size": f'{s.table_width}" × {s.table_depth}" × ½"', "size_mm": "406 × 559 × 12 mm", "stock": "Phenolic or MIC-6", "use": "Replaceable wear face"},
+        {"qty": 2, "size": f'¾" × ¾" × {s.side_depth}"', "size_mm": "19 × 19 × 559 mm", "stock": "UHMW", "use": "Table ways (inner faces)"},
+        {"qty": s.disc_count_core + s.disc_count_ends, "size": f'⌀{s.drum_od + 0.125}" × ¾" (true to ⌀{s.drum_od}")', "size_mm": "⌀130 → true ⌀127 × 19 mm", "stock": "MDF core + BB ends (or all BB)", "use": "Drum discs — pack-bore"},
+        {"qty": 1, "size": f'{s.shaft_length}" × ⌀¾"', "size_mm": "572 × ⌀19 mm", "stock": s.shaft_spec, "use": "Drum shaft"},
+        {"qty": 1, "size": '~18" × 12" × ¼"', "size_mm": "~457 × 305 × 6 mm", "stock": "Pine or birch ply", "use": "Kerf-bent dust hood blank"},
+        {"qty": 1, "size": '12" × 8" × ¾"', "size_mm": "305 × 203 × 19 mm", "stock": "Baltic birch", "use": "Motor pivot cradle"},
+        {"qty": 1, "size": f'{s.table_width}" × 8" × ¾"', "size_mm": "406 × 203 × 19 mm", "stock": "MDF / BB", "use": "Full-width truing sled"},
+        {"qty": 2, "size": 'yoke 18" × 3" × ¾"', "size_mm": "457 × 76 × 19 mm", "stock": "Hardwood / alum angle", "use": "Hold-down roller yokes"},
+        {"qty": 1, "size": '12" × 12" × ¾"', "size_mm": "305 × 305 × 19 mm", "stock": "MDF", "use": "Disc pack-bore jig"},
+    ]
+
+
+def lumberyard() -> list[dict[str, str]]:
+    """Store-trip sheet goods. Keep 16.5″ clear between inner faces regardless of ply thickness."""
+    return [
+        {
+            "where": "Plywood",
+            "item": "¾″ Baltic birch (18 mm Euro BB is the usual substitute)",
+            "qty": "2 sheets 5′×5′",
+            "alt": "One 4′×8′ + one 5′×5′ if that’s what is stocked",
+            "use": "Sides, base, stretchers, table skins, cradle, yokes",
+        },
+        {
+            "where": "MDF",
+            "item": "¾″ MDF",
+            "qty": "24″ × 48″",
+            "alt": "Half a 4′×8′ sheet",
+            "use": "21 drum discs + pack-bore jig + torsion ribs if no ½″ offcuts",
+        },
+        {
+            "where": "Plywood",
+            "item": "¼″ birch or pine ply",
+            "qty": "24″ × 24″",
+            "alt": "Door-skin offcut is enough",
+            "use": "Kerf-bent dust hood blank ~18″ × 12″",
+        },
+        {
+            "where": "Plastics / order",
+            "item": "½″ phenolic or ⅜″ MIC-6 / cast tooling plate",
+            "qty": "16″ × 22″",
+            "alt": "UHMW sheet if phenolic is a wait",
+            "use": "Replaceable table wear face — this is the metrology surface",
+        },
+        {
+            "where": "Plastics",
+            "item": "UHMW bar ¾″ × ¾″",
+            "qty": "48″",
+            "alt": "Two 24″ sticks",
+            "use": "Table ways, inner faces of sides",
+        },
+        {
+            "where": "Hardwood / metal",
+            "item": "Hardwood ¾″ or 1½″ aluminum angle",
+            "qty": "36″",
+            "alt": "BB offcuts from sheet 2",
+            "use": "Hold-down roller yokes",
+        },
+        {
+            "where": "Abrasives",
+            "item": "Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220",
+            "qty": "1 roll + 4 grits",
+            "alt": "PSA paper if you skip Velcro (harder to change)",
+            "use": "Spiral wrap after truing",
+        },
+        {
+            "where": "Glue",
+            "item": "Titebond III + thin CA",
+            "qty": "1 qt + 1 oz",
+            "alt": "Any Type I PVA for the box",
+            "use": "Torsion box, drum lamination, Velcro edges",
+        },
+    ]
+
+
+def fastener_schedule() -> list[dict[str, str]]:
+    """Hardware-aisle list that was missing from the specialty BOM."""
+    return [
+        {"aisle": "Screws", "item": "#8 × 1¼″ coarse cabinet screws", "qty": "~100 (1 lb)", "use": "Box, skins, hood, jigs"},
+        {"aisle": "Screws", "item": "#8 × 2″ coarse screws", "qty": "~50", "use": "Through-side into stretchers"},
+        {"aisle": "Fasteners", "item": "¼-20 T-nuts + 1¼″ hex bolts + washers", "qty": "8", "use": "Motor-cradle pivot / locks"},
+        {"aisle": "Fasteners", "item": "5/16-18 × 1″ hex + nylock + washer", "qty": "8", "use": "4-bolt flange bearings (confirm hole)"},
+        {"aisle": "Knobs", "item": "⅜-16 star knobs + 1½″ studs + washers", "qty": "6", "use": "Way locks and roller yokes"},
+        {"aisle": "Fasteners", "item": "Shoulder bolts 5/16 × 1½″", "qty": "4", "use": "Spring yoke pivots"},
+        {"aisle": "Springs", "item": "Light compression springs ~¾″ OD", "qty": "4", "use": "Hold-downs — too stiff = snipe"},
+        {"aisle": "Rod", "item": "⅜″ drill rod or bolts, 17″", "qty": "2", "use": "Roller axles"},
+        {"aisle": "Wire", "item": "⅛″ piano wire", "qty": "12″", "use": "Drum-disc keys"},
+        {"aisle": "Wax", "item": "Paste wax", "qty": "1 tin", "use": "UHMW ways — dry lube, no oil"},
+        {"aisle": "Dust", "item": "4″ dust adapter + blast gate", "qty": "1", "use": "Hood port"},
+        {"aisle": "Electrical", "item": "Switch box + 14/3 SJ cord + plug", "qty": "1 kit", "use": "Motor — follow local code"},
+        {"aisle": "Specialty", "item": "4-bolt flange bearing ¾″ bore, sealed", "qty": "2", "use": "Drive FIXED · idler FLOATING"},
+        {"aisle": "Specialty", "item": "¾″ TG&P / precision-ground shaft × 24″", "qty": "1", "use": "Drum shaft (cut to 22.5″)"},
+        {"aisle": "Specialty", "item": "½-10 Acme rod 12″ + bronze nut + flange", "qty": "2", "use": "Dual table lift"},
+        {"aisle": "Specialty", "item": "#25 chain + ½″-bore sprockets + master + left clutch/dog", "qty": "1 kit", "use": "Couple screws; taper uncouple"},
+        {"aisle": "Specialty", "item": "3″ + 5″ 4L pulleys + A-section belt", "qty": "1 set", "use": "Coplanar 3:5 reduction"},
+        {"aisle": "Specialty", "item": "½ HP 1725 RPM TEFC 115 V", "qty": "1", "use": "Drum drive"},
+        {"aisle": "Specialty", "item": "Dial indicator 0.001″ + mag base", "qty": "1", "use": "TIR and A/B clock"},
+        {"aisle": "Specialty", "item": "Rubber rollers ⌀1.25″ × ~15.75″", "qty": "2", "use": "Infeed / outfeed hold-downs"},
+        {"aisle": "Optional", "item": "60–90 RPM gearmotor + scotch yoke", "qty": "1 kit", "use": "⅛″ slow oscillator, not drum RPM"},
+    ]
+
+
+def nest_sheets() -> list[dict[str, Any]]:
+    """Recommended 5′×5′ nesting. Kerf ~⅛″ already in the gaps. Keep inner span 16.5″."""
+    return [
+        {
+            "name": "Sheet 1 — 5′×5′ × ¾″ BB (frame)",
+            "sheet_w": 60.0,
+            "sheet_h": 60.0,
+            "parts": [
+                {"label": "Side A", "x": 0.25, "y": 0.25, "w": 22.0, "h": 30.0},
+                {"label": "Side B", "x": 22.50, "y": 0.25, "w": 22.0, "h": 30.0},
+                {"label": "Base", "x": 0.25, "y": 30.50, "w": 18.0, "h": 22.0},
+                {"label": "Str 1", "x": 18.50, "y": 30.50, "w": 16.5, "h": 4.0},
+                {"label": "Str 2", "x": 18.50, "y": 34.75, "w": 16.5, "h": 4.0},
+                {"label": "Str 3", "x": 18.50, "y": 39.00, "w": 16.5, "h": 4.0},
+                {"label": "Cradle", "x": 18.50, "y": 43.25, "w": 12.0, "h": 8.0},
+            ],
+            "note": "Right ~15″ strip is spare / grain-matched patches. Stack-drill the two sides as a pair after cut.",
+        },
+        {
+            "name": "Sheet 2 — 5′×5′ × ¾″ BB (table & jigs)",
+            "sheet_w": 60.0,
+            "sheet_h": 60.0,
+            "parts": [
+                {"label": "Skin A", "x": 0.25, "y": 0.25, "w": 16.0, "h": 22.0},
+                {"label": "Skin B", "x": 16.50, "y": 0.25, "w": 16.0, "h": 22.0},
+                {"label": "Sled", "x": 0.25, "y": 22.50, "w": 16.0, "h": 8.0},
+                {"label": "Yoke 1", "x": 16.50, "y": 22.50, "w": 18.0, "h": 3.0},
+                {"label": "Yoke 2", "x": 16.50, "y": 25.75, "w": 18.0, "h": 3.0},
+                {"label": "Bore jig", "x": 0.25, "y": 31.00, "w": 12.0, "h": 12.0},
+            ],
+            "note": "Torsion ribs are ½″ stock (offcuts or MDF). Leftover ¾″ is insurance, not required.",
+        },
+        {
+            "name": "Sheet 3 — 24″×48″ × ¾″ MDF (discs)",
+            "sheet_w": 24.0,
+            "sheet_h": 48.0,
+            "parts": [
+                {"label": f"Disc {i + 1}", "x": (i % 4) * 6.0 + 0.2, "y": (i // 4) * 6.0 + 0.2, "w": 5.5, "h": 5.5}
+                for i in range(21)
+            ],
+            "note": "Bandsaw oversize ⌀5⅛″, then pack-bore. Two end discs preferably BB from sheet-2 leftover.",
+        },
     ]
 
 
@@ -244,8 +385,15 @@ def summary() -> dict[str, Any]:
         "passes": pass_schedule(),
         "cut_list": cut_list(),
         "hardware": hardware_bom(),
+        "fasteners": fastener_schedule(),
+        "lumberyard": lumberyard(),
+        "nesting": nest_sheets(),
         "assembly": assembly_phases(),
         "calibration": calibration_steps(),
+        "notes": [
+            "Keep 16.5″ (419 mm) clear between inner faces even if ply is 18 mm Euro BB instead of ¾″.",
+            "iPhone: share the ZIP → Save to Files. Pocket card: Share → Add to Home Screen or Print → PDF.",
+        ],
     }
 
 

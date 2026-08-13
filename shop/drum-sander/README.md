@@ -9,10 +9,14 @@ Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron 
 
 - Design overview: `/shop/drum-sander/` · shortcuts `/walter` · `/drum` · `/shop`
 - Build app: `/shop/drum-sander/app/` · `/walter/app` · `/drum/app`
-- Plans: `D1` … `D9` in `/shop/drum-sander/plans/`
+- Pocket field card: `/shop/drum-sander/pocket/` · `/walter/pocket`
+- **Shop pack (ZIP):** `/shop/drum-sander/pack/WALTER-DS16-RevB.zip` · `/walter/pack`
+- Plans: `D1` … `D10` in `/shop/drum-sander/plans/`
 - Interactive 3D: `/shop/drum-sander/model/` · `/walter/model`
 - OpenSCAD: `cad/walter_ds16.scad`
 - Isometric renders: `renders/iso_assembled.svg` etc.
+
+On iPhone, Safari often opens SVG instead of saving. Use **Share to Files** on the ZIP, or open the pocket card and Add to Home Screen / Print → PDF.
 
 ## Spec (Rev B)
 
@@ -25,11 +29,14 @@ Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron 
 | Table | Torsion box in UHMW ways + phenolic/MIC-6 |
 | Hold-downs | Infeed/outfeed rollers 0.030″ below drum |
 | Oscillator | Optional ⅛″ @ ~80 cpm (not drum RPM) |
+| Ply note | Keep 16.5″ (419 mm) inner span; 18 mm Euro BB is fine |
 
 ## Regenerate plans
 
 ```bash
 python3 scripts/gen_drum_sander_plans.py
+python3 scripts/gen_drum_sander_iso.py
+python3 scripts/pack_drum_sander.py
 ```
 
 Parametric source: `cad/walter_ds16.py` · OpenSCAD: `cad/walter_ds16.scad`

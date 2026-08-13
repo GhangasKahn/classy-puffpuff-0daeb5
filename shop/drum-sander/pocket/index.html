@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#14181c"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="WALTER"/>
+<title>WALTER DS-16 pocket card</title>
+<link rel="apple-touch-icon" href="../app/apple-touch-icon.png"/>
+<style>
+:root{--ink:#14181c;--ink2:#1c2228;--paper:#f3f1ec;--dim:#a8afb3;--sage:#8fad78;--wood:#c4a574;--line:rgba(243,241,236,.14)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.45 system-ui,sans-serif;padding:16px 16px 80px}
+h1{font:600 40px/1 Georgia,serif;margin:8px 0}
+h2{font:600 22px/1.2 Georgia,serif;margin:28px 0 10px}
+.k{letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font:600 11px/1 ui-monospace,monospace}
+.lead{color:var(--dim);max-width:40ch}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+a.btn,button.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 16px;border-radius:10px;
+  border:1px solid var(--line);background:#222a30;color:var(--paper);text-decoration:none;font:600 13px/1 ui-monospace,monospace;
+  letter-spacing:.06em;text-transform:uppercase;min-height:48px;cursor:pointer}
+a.btn.primary{background:#3d5a4c;border-color:#5a6a4a}
+.grid{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.card{background:var(--ink2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card strong{display:block;font:600 22px/1.1 Georgia,serif;margin:6px 0}
+.ab{font:600 48px/1 Georgia,serif;color:var(--wood)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font:600 10px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+small{color:var(--dim)}
+ol,ul{padding-left:1.2em;color:var(--dim)}
+li{margin:8px 0}
+.hint{color:var(--dim);font-size:14px}
+@media print{body{background:#fff;color:#111} a.btn{display:none} .card{border-color:#ccc}}
+</style>
+</head>
+<body>
+<p class="k">WALTER · DS-16 · Rev B</p>
+<h1>Pocket card</h1>
+<p class="lead">Shop-floor numbers for the phone. Save the ZIP to Files, then keep this page on the Home Screen.</p>
+<div class="row">
+  <a class="btn primary" href="../pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Download shop pack</a>
+  <button class="btn" type="button" id="sharePack">Share to Files</button>
+  <a class="btn" href="../app/">Build app</a>
+  <a class="btn" href="../">Design</a>
+</div>
+<p class="hint">iPhone: Share to Files. Android: Download pack. Then Share this page → Add to Home Screen, or Print → Save PDF.</p>
+
+<div class="grid">
+  <div class="card"><span class="k">Capacity</span><strong>15.5″</strong><p>1/16″–3″ thick · 394 mm</p></div>
+  <div class="card"><span class="k">Drum</span><strong>⌀5″</strong><p>1035 RPM · ~1355 sfpm</p></div>
+  <div class="card"><span class="k">A/B spec</span><div class="ab">±0.003″</div><p>paper on · 0.08 mm</p></div>
+  <div class="card"><span class="k">TIR</span><strong>≤ 0.002″</strong><p>paper off, then wrap, then re-clock</p></div>
+</div>
+
+<h2>Pass schedule</h2>
+<div class="grid"><div class='card'><b>80 grit</b><strong>0.008″</strong><p>Flatten / mill marks / glue</p></div><div class='card'><b>120 grit</b><strong>0.004″</strong><p>Thickness to +0.008″ of final</p></div><div class='card'><b>180 grit</b><strong>0.001″</strong><p>Finish pass; optional 90° cross</p></div><div class='card'><b>220 grit</b><strong>0.001″</strong><p>Veneer / figured maple — hold-downs on</p></div></div>
+
+<h2>Clock A/B (paper on)</h2>
+<ol><li><b>Disconnect power</b> — Unplug. Hood off. Paper off for TIR; paper on for A/B parallel.</li><li><b>Seat the table in the ways</b> — Raise/lower through full travel. No bind, no rock. Winding sticks on wear face — no twist.</li><li><b>Drum TIR</b> — Indicator on mid-span OD. Rotate by hand. If &gt; 0.002″, re-true on the sled before wrapping paper.</li><li><b>Wrap &amp; re-clock</b> — Velcro then spiral paper. Paper is not uniform — A/B will change. This is the measurement that matters.</li><li><b>A/B parallel</b> — Same indicator height, drive end then idler. Uncouple left Acme; 1/40 turn ≈ 0.0025″. Recouple. Set home dog.</li><li><b>Hold-down height</b> — Feelers under each roller vs drum. 0.030″ below. Leading snipe → ease outfeed spring; trailing snipe → ease infeed.</li><li><b>Witness board</b> — 6″ × 16″ maple, 80 grit, one pass. Ridge at overlap = idler high/low. Caliper corners. Log in the Build app.</li><li><b>Taper mode (optional)</b> — Uncouple left, drop idler a few thousandths, sand, then return to home dog — do not re-invent parallel each time.</li></ol>
+<table><tr><td>Table flatness</td><td>≤ 0.004″ on both diagonals</td></tr><tr><td>Drum TIR (paper off)</td><td>≤ 0.002″ TIR</td></tr><tr><td>Drum ∥ table (paper on)</td><td>|A−B| ≤ 0.003″ over 15.5″</td></tr><tr><td>Way coplanar</td><td>No twist; table slides without bind</td></tr><tr><td>Pulley coplanar</td><td>Faces flush; belt tracks center</td></tr><tr><td>Hold-down set</td><td>Rollers 0.030″ below drum OD</td></tr><tr><td>Thickness scatter</td><td>≤ 0.003″ after finish pass</td></tr></table>
+
+<h2>Lumberyard</h2>
+<p class="hint">Keep 16.5″ (419 mm) clear between inner faces even if the birch is 18 mm.</p>
+<table><thead><tr><th>Aisle</th><th>Buy</th><th>Qty</th><th>For</th></tr></thead><tbody><tr><td>Plywood</td><td>¾″ Baltic birch (18 mm Euro BB is the usual substitute)</td><td>2 sheets 5′×5′</td><td>Sides, base, stretchers, table skins, cradle, yokes</td></tr><tr><td>MDF</td><td>¾″ MDF</td><td>24″ × 48″</td><td>21 drum discs + pack-bore jig + torsion ribs if no ½″ offcuts</td></tr><tr><td>Plywood</td><td>¼″ birch or pine ply</td><td>24″ × 24″</td><td>Kerf-bent dust hood blank ~18″ × 12″</td></tr><tr><td>Plastics / order</td><td>½″ phenolic or ⅜″ MIC-6 / cast tooling plate</td><td>16″ × 22″</td><td>Replaceable table wear face — this is the metrology surface</td></tr><tr><td>Plastics</td><td>UHMW bar ¾″ × ¾″</td><td>48″</td><td>Table ways, inner faces of sides</td></tr><tr><td>Hardwood / metal</td><td>Hardwood ¾″ or 1½″ aluminum angle</td><td>36″</td><td>Hold-down roller yokes</td></tr><tr><td>Abrasives</td><td>Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220</td><td>1 roll + 4 grits</td><td>Spiral wrap after truing</td></tr><tr><td>Glue</td><td>Titebond III + thin CA</td><td>1 qt + 1 oz</td><td>Torsion box, drum lamination, Velcro edges</td></tr></tbody></table>
+
+<h2>Fasteners</h2>
+<table><thead><tr><th>Qty</th><th>Item</th><th>Use</th></tr></thead><tbody><tr><td>~100 (1 lb)</td><td>#8 × 1¼″ coarse cabinet screws</td><td>Box, skins, hood, jigs</td></tr><tr><td>~50</td><td>#8 × 2″ coarse screws</td><td>Through-side into stretchers</td></tr><tr><td>8</td><td>¼-20 T-nuts + 1¼″ hex bolts + washers</td><td>Motor-cradle pivot / locks</td></tr><tr><td>8</td><td>5/16-18 × 1″ hex + nylock + washer</td><td>4-bolt flange bearings (confirm hole)</td></tr><tr><td>6</td><td>⅜-16 star knobs + 1½″ studs + washers</td><td>Way locks and roller yokes</td></tr><tr><td>4</td><td>Shoulder bolts 5/16 × 1½″</td><td>Spring yoke pivots</td></tr><tr><td>4</td><td>Light compression springs ~¾″ OD</td><td>Hold-downs — too stiff = snipe</td></tr><tr><td>2</td><td>⅜″ drill rod or bolts, 17″</td><td>Roller axles</td></tr><tr><td>12″</td><td>⅛″ piano wire</td><td>Drum-disc keys</td></tr><tr><td>1 tin</td><td>Paste wax</td><td>UHMW ways — dry lube, no oil</td></tr><tr><td>1</td><td>4″ dust adapter + blast gate</td><td>Hood port</td></tr><tr><td>1 kit</td><td>Switch box + 14/3 SJ cord + plug</td><td>Motor — follow local code</td></tr><tr><td>2</td><td>4-bolt flange bearing ¾″ bore, sealed</td><td>Drive FIXED · idler FLOATING</td></tr><tr><td>1</td><td>¾″ TG&amp;P / precision-ground shaft × 24″</td><td>Drum shaft (cut to 22.5″)</td></tr><tr><td>2</td><td>½-10 Acme rod 12″ + bronze nut + flange</td><td>Dual table lift</td></tr><tr><td>1 kit</td><td>#25 chain + ½″-bore sprockets + master + left clutch/dog</td><td>Couple screws; taper uncouple</td></tr><tr><td>1 set</td><td>3″ + 5″ 4L pulleys + A-section belt</td><td>Coplanar 3:5 reduction</td></tr><tr><td>1</td><td>½ HP 1725 RPM TEFC 115 V</td><td>Drum drive</td></tr><tr><td>1</td><td>Dial indicator 0.001″ + mag base</td><td>TIR and A/B clock</td></tr><tr><td>2</td><td>Rubber rollers ⌀1.25″ × ~15.75″</td><td>Infeed / outfeed hold-downs</td></tr><tr><td>1 kit</td><td>60–90 RPM gearmotor + scotch yoke</td><td>⅛″ slow oscillator, not drum RPM</td></tr></tbody></table>
+
+<h2>Cut list (inch / mm)</h2>
+<table><thead><tr><th>Qty</th><th>Size</th><th>Stock</th><th>Use</th></tr></thead><tbody><tr><td>2</td><td>22.0&quot; × 30.0&quot; × ¾&quot;<br><small>559 × 762 × 19 mm</small></td><td>Baltic birch</td><td>Side panels — stack-drill as a pair</td></tr><tr><td>1</td><td>18.0&quot; × 22.0&quot; × ¾&quot;<br><small>457 × 559 × 19 mm</small></td><td>Baltic birch</td><td>Base deck</td></tr><tr><td>3</td><td>16.5&quot; × 4&quot; × ¾&quot;<br><small>419 × 102 × 19 mm</small></td><td>Baltic birch</td><td>Front / mid / rear stretchers</td></tr><tr><td>2</td><td>16.0&quot; × 22.0&quot; × ¾&quot;<br><small>406 × 559 × 19 mm</small></td><td>Baltic birch skins</td><td>Table torsion-box skins</td></tr><tr><td>1</td><td>½&quot; grid offcuts<br><small>12 mm grid</small></td><td>BB / MDF</td><td>Torsion-box ribs @ 4″ o.c.</td></tr><tr><td>1</td><td>16.0&quot; × 22.0&quot; × ½&quot;<br><small>406 × 559 × 12 mm</small></td><td>Phenolic or MIC-6</td><td>Replaceable wear face</td></tr><tr><td>2</td><td>¾&quot; × ¾&quot; × 22.0&quot;<br><small>19 × 19 × 559 mm</small></td><td>UHMW</td><td>Table ways (inner faces)</td></tr><tr><td>21</td><td>⌀5.125&quot; × ¾&quot; (true to ⌀5.0&quot;)<br><small>⌀130 → true ⌀127 × 19 mm</small></td><td>MDF core + BB ends (or all BB)</td><td>Drum discs — pack-bore</td></tr><tr><td>1</td><td>22.5&quot; × ⌀¾&quot;<br><small>572 × ⌀19 mm</small></td><td>Precision-ground CRS or TG&amp;P, ¾″, 0.0005″ TIR</td><td>Drum shaft</td></tr><tr><td>1</td><td>~18&quot; × 12&quot; × ¼&quot;<br><small>~457 × 305 × 6 mm</small></td><td>Pine or birch ply</td><td>Kerf-bent dust hood blank</td></tr><tr><td>1</td><td>12&quot; × 8&quot; × ¾&quot;<br><small>305 × 203 × 19 mm</small></td><td>Baltic birch</td><td>Motor pivot cradle</td></tr><tr><td>1</td><td>16.0&quot; × 8&quot; × ¾&quot;<br><small>406 × 203 × 19 mm</small></td><td>MDF / BB</td><td>Full-width truing sled</td></tr><tr><td>2</td><td>yoke 18&quot; × 3&quot; × ¾&quot;<br><small>457 × 76 × 19 mm</small></td><td>Hardwood / alum angle</td><td>Hold-down roller yokes</td></tr><tr><td>1</td><td>12&quot; × 12&quot; × ¾&quot;<br><small>305 × 305 × 19 mm</small></td><td>MDF</td><td>Disc pack-bore jig</td></tr></tbody></table>
+
+<h2>Specialty hardware</h2>
+<table><thead><tr><th>Qty</th><th>Item</th></tr></thead><tbody><tr><td>1</td><td>4-bolt flange, ¾″ bore, sealed — FIXED</td></tr><tr><td>1</td><td>4-bolt flange, ¾″ bore, sealed — FLOATING (axial)</td></tr><tr><td>1 set</td><td>3.0&quot; motor + 5.0&quot; drum 4L pulleys</td></tr><tr><td>1</td><td>4L / A-section V-belt (size to center distance)</td></tr><tr><td>1</td><td>0.5 HP 1725 RPM TEFC motor, 115 V</td></tr><tr><td>2</td><td>½″-10 Acme rod 12″ + bronze nut + flange</td></tr><tr><td>2 + loop</td><td>#25 sprockets (½″ bore) + chain + master link</td></tr><tr><td>1</td><td>Left sprocket clutch / set-screw dog for parallel-home</td></tr><tr><td>2</td><td>Rubber rollers ⌀1.25&quot; × ~15.75&quot; + ⅜″ axles</td></tr><tr><td>4</td><td>Compression springs + shoulder bolts for yokes</td></tr><tr><td>6</td><td>Star knobs ⅜-16 + washers (way locks / yokes)</td></tr><tr><td>as needed</td><td>Hook Velcro 4&quot; PSA + 3&quot; loop sandpaper (80/120/180/220)</td></tr><tr><td>12 in</td><td>⅛&quot; piano wire for shaft keys</td></tr><tr><td>1</td><td>4&quot; dust adapter + blast gate</td></tr><tr><td>1</td><td>Switch box + 15 ft cord</td></tr><tr><td>1</td><td>Dial indicator 0.001″ + mag base (or ⅜-16 pad)</td></tr><tr><td>1 kit</td><td>Optional: 60–90 RPM gearmotor + scotch yoke (oscillator)</td></tr></tbody></table>
+
+<h2>Assembly</h2>
+<ol><li><b>A1 Template &amp; stack-drill sides</b> — Clamp both side panels face-to-face. Drill bearing CLs, way screw holes, and indicator pad as one stack so left and right are identical.</li><li><b>A2 Assemble box + UHMW ways</b> — Glue + screw stretchers. Square diagonals. Bond UHMW ways to inner faces; they are the table’s only vertical reference.</li><li><b>A3 Pack-bore discs &amp; laminate drum</b> — Bandsaw oversize. Stack all discs in the bore jig; drill/ream ⌀¾″ as a pack. Key with piano wire. 1 mm relief every 4 MDF discs. Static-balance end discs.</li><li><b>A4 Fixed drive bearing, floating idler</b> — Lock the drive flange. Idler flange sits on an axial-float pad (slots or liner) so the shaft cannot banana from over-constraint or heat.</li><li><b>A5 Motor cradle, coplanar pulleys, lock</b> — Straightedge across pulley faces. Gravity tension, then lock the cradle so the belt cannot pump.</li><li><b>A6 Torsion-box table + wear face</b> — Skins + 4″ rib grid, continuous glue. Flatten the top, then bond phenolic or tooling plate. Check diagonals to 0.004″.</li><li><b>A7 Dual Acme lift + chain couple</b> — Bronze nuts in table. Chain both ½-10 screws. Fit left clutch and parallel-home dog. Table must rise without twist in the ways.</li><li><b>A8 Hold-down roller yokes</b> — Infeed and outfeed rollers on spring yokes. Set 0.030″ below drum OD (paper on). Too much spring = snipe.</li><li><b>A9 Kerf-bend dust hood</b> — Kerf ¼″ ply, wet, glue to form, fill kerfs. 4″ port. Hood must clear oscillator stroke if fitted.</li><li><b>A10 True drum on full-width sled</b> — Abrasive face-up on the truing sled that rides the ways. Light passes until TIR ≤ 0.002″. Then Velcro + spiral paper.</li><li><b>A11 Indicator clock A/B — parallel home</b> — Paper on. Indicator at drive (A) and idler (B). Uncouple left screw until |A−B| ≤ 0.003″. Lock home dog. Record the reading.</li><li><b>A12 Test panel + pass schedule</b> — 80 / 120 / 180. Caliper four corners. If scatter &gt; 0.003″, re-clock. Finish at 0.001″. Optional oscillator last.</li></ol>
+
+<p class="hint">Lineage: ShopNotes 86 → Ron Walters → Rev B geometry. woodgears.ca/reader/walters/drum_sander.html</p>
+<script>
+(function(){
+  const zip = new URL("../pack/WALTER-DS16-RevB.zip", location.href).href;
+  const btn = document.getElementById("sharePack");
+  if (!btn) return;
+  btn.onclick = async function(){
+    try {
+      const res = await fetch(zip);
+      const blob = await res.blob();
+      const file = new File([blob], "WALTER-DS16-RevB.zip", { type: "application/zip" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "WALTER DS-16 shop pack" });
+        return;
+      }
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "WALTER-DS16-RevB.zip";
+      a.click();
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+      location.href = zip;
+    }
+  };
+})();
+</script>
+</body>
+</html>

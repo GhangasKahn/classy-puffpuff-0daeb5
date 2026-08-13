@@ -135,17 +135,27 @@ table.bom th{font:600 10px/1 var(--mono);letter-spacing:.14em;text-transform:upp
   display:block;border:1px solid var(--line);border-radius:12px;overflow:hidden;
   background:var(--panel);text-decoration:none;color:var(--paper);
 }
+.gal-card a{display:block;text-decoration:none;color:var(--paper)}
 .gal-card img{width:100%;aspect-ratio:16/11;object-fit:cover;background:#f3f1ec}
 .gal-card span{display:block;padding:10px 12px;font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.gal-actions{display:flex;gap:8px;padding:0 10px 12px}
 
 .file-row{
-  display:flex;justify-content:space-between;gap:12px;padding:12px 0;
-  border-bottom:1px solid var(--line);text-decoration:none;color:var(--paper);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;
+  border-bottom:1px solid var(--line);color:var(--paper);
 }
+.file-row a{display:flex;justify-content:space-between;gap:12px;flex:1;text-decoration:none;color:var(--paper)}
 .file-row span{color:var(--dim);font-size:13px}
+.file-row.primary a strong{color:var(--sage-hi)}
+.pack-hero{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-end;
+  padding:16px 18px;margin:0 0 20px;border:1px solid var(--line);border-radius:12px;
+  background:linear-gradient(180deg,rgba(90,106,74,.22),rgba(90,106,74,.06));
+}
+.pack-hero h3{margin:6px 0 8px}
 
 @media print{
-  .topbar,.tabs,.viz-controls{display:none!important}
+  .topbar,.tabs,.viz-controls,.gal-actions,.pack-hero{display:none!important}
   body{background:#fff;color:#111}
   .panel{display:block!important;break-inside:avoid}
 }
