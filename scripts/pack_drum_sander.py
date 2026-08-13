@@ -29,12 +29,18 @@ from walter_ds16 import (  # noqa: E402
     calibration_steps,
     cut_list,
     fastener_schedule,
+    hardware,
     hardware_bom,
+    inspection,
+    joints,
     lumberyard,
+    operations,
+    parts,
     pass_schedule,
     quality_targets,
     summary,
     surface_fpm,
+    write_exports,
 )
 
 PACK = SHOP / "pack"
@@ -92,7 +98,7 @@ def pocket_html() -> str:
     s = SPEC
     sfpm = round(surface_fpm(s.drum_od, s.drum_rpm))
     cuts = "".join(
-        f"<tr><td>{escape(str(r['qty']))}</td><td>{escape(r['size'])}<br><small>{escape(r.get('size_mm',''))}</small></td>"
+        f"<tr><td>{escape(str(r['part_id']))}</td><td>{escape(str(r['qty']))}</td><td>{escape(r['size'])}<br><small>{escape(r.get('size_mm',''))}</small></td>"
         f"<td>{escape(r['stock'])}</td><td>{escape(r['use'])}</td></tr>"
         for r in cut_list()
     )
@@ -193,7 +199,7 @@ li{{margin:8px 0}}
 <table><thead><tr><th>Qty</th><th>Item</th><th>Use</th></tr></thead><tbody>{fast}</tbody></table>
 
 <h2>Cut list (inch / mm)</h2>
-<table><thead><tr><th>Qty</th><th>Size</th><th>Stock</th><th>Use</th></tr></thead><tbody>{cuts}</tbody></table>
+<table><thead><tr><th>ID</th><th>Qty</th><th>Size</th><th>Stock</th><th>Part</th></tr></thead><tbody>{cuts}</tbody></table>
 
 <h2>Specialty hardware</h2>
 <table><thead><tr><th>Qty</th><th>Item</th></tr></thead><tbody>{hw}</tbody></table>
@@ -243,15 +249,22 @@ def pack_zip() -> Path:
 
     add(PACK / "README.txt", "README.txt")
     add(PACK / "BOM.csv", "BOM.csv")
+    add(PACK / "parts.csv", "parts.csv")
+    add(PACK / "joints.csv", "joints.csv")
+    add(PACK / "operations.csv", "operations.csv")
+    add(PACK / "qa.csv", "qa.csv")
     add(PACK / "fasteners.csv", "fasteners.csv")
     add(PACK / "lumberyard.csv", "lumberyard.csv")
     add(PACK / "spec.json", "spec.json")
+    add(PACK / "fabrication.json", "fabrication.json")
     add(POCKET / "index.html", "pocket.html")
     add(SHOP / "view" / "index.html", "view/index.html")
     add(SHOP / "view" / "view.css", "view/view.css")
     add(SHOP / "view" / "view.js", "view/view.js")
     add(SHOP / "cad" / "walter_ds16.py", "cad/walter_ds16.py")
     add(SHOP / "cad" / "walter_ds16.scad", "cad/walter_ds16.scad")
+    add(SHOP / "cad" / "parameters.scad", "cad/parameters.scad")
+    add(SHOP / "cad" / "fabrication.json", "cad/fabrication.json")
     for p in sorted((SHOP / "plans").glob("*.svg")):
         add(p, f"plans/{p.name}")
     for p in sorted((SHOP / "renders").glob("*.svg")):
@@ -266,20 +279,93 @@ def pack_zip() -> Path:
 def main() -> None:
     PACK.mkdir(parents=True, exist_ok=True)
     POCKET.mkdir(parents=True, exist_ok=True)
+    write_exports(str(SHOP))
 
+    write_csv(
+        PACK / "parts.csv",
+        [
+            {
+                "part_id": p["part_id"],
+                "part_name": p["part_name"],
+                "qty": str(p["qty"]),
+                "make_or_buy": p["make_or_buy"],
+                "material": p["material"],
+                "finished_size": p["finished_size"],
+                "finished_size_mm": p["finished_size_mm"],
+                "rough_size": p["rough_size"],
+                "handed": p["handed"],
+                "joinery": p["joinery"],
+                "sheet": p["sheet"],
+                "notes": p["notes"],
+            }
+            for p in parts()
+        ],
+        ["part_id", "part_name", "qty", "make_or_buy", "material", "finished_size", "finished_size_mm", "rough_size", "handed", "joinery", "sheet", "notes"],
+    )
     write_csv(
         PACK / "BOM.csv",
         [
             {
-                "qty": str(r["qty"]),
-                "size_in": r["size"],
-                "size_mm": r.get("size_mm", ""),
-                "stock": r["stock"],
-                "use": r["use"],
+                "item": p["part_id"],
+                "description": p["part_name"],
+                "qty": str(p["qty"]),
+                "make_or_buy": p["make_or_buy"],
+                "material": p["material"],
+                "finished_size": p["finished_size"],
+                "purchase_size": p["purchase_size"],
+                "rev": p["revision"],
             }
-            for r in cut_list()
+            for p in parts()
+        ]
+        + [
+            {
+                "item": h["hardware_id"],
+                "description": h["description"],
+                "qty": str(h.get("qty", 1)),
+                "make_or_buy": h["make_or_buy"],
+                "material": "purchased",
+                "finished_size": h.get("size", ""),
+                "purchase_size": h.get("purchase", ""),
+                "rev": SPEC.fabrication_rev,
+            }
+            for h in hardware()
         ],
-        ["qty", "size_in", "size_mm", "stock", "use"],
+        ["item", "description", "qty", "make_or_buy", "material", "finished_size", "purchase_size", "rev"],
+    )
+    write_csv(
+        PACK / "joints.csv",
+        [
+            {
+                "joint_id": j["joint_id"],
+                "joint_type": j["joint_type"],
+                "part_a": j["part_a"],
+                "part_b": j["part_b"],
+                "fit_class": j.get("fit_class", ""),
+                "notes": j.get("notes", ""),
+            }
+            for j in joints()
+        ],
+        ["joint_id", "joint_type", "part_a", "part_b", "fit_class", "notes"],
+    )
+    write_csv(
+        PACK / "operations.csv",
+        [
+            {
+                "op": o["op"],
+                "title": o["title"],
+                "tool": o.get("tool", ""),
+                "setting": o.get("setting", ""),
+                "parts": ", ".join(o.get("parts", [])),
+                "rule": o.get("rule", ""),
+            }
+            for o in operations()
+        ],
+        ["op", "title", "tool", "setting", "parts", "rule"],
+    )
+    write_csv(
+        PACK / "qa.csv",
+        inspection(),
+        ["qc", "check", "spec", "class", "gate"],
     )
     write_csv(
         PACK / "fasteners.csv",
@@ -291,11 +377,13 @@ def main() -> None:
         lumberyard(),
         ["where", "item", "qty", "alt", "use"],
     )
-    (PACK / "spec.json").write_text(json.dumps(summary(), indent=2) + "\n", encoding="utf-8")
+    fab = json.dumps(summary(), indent=2) + "\n"
+    (PACK / "spec.json").write_text(fab, encoding="utf-8")
+    (PACK / "fabrication.json").write_text(fab, encoding="utf-8")
     (PACK / "README.txt").write_text(
         "\n".join(
             [
-                "WALTER DS-16  ·  Rev B  ·  shop pack",
+                "WALTER DS-16  ·  Rev B geometry  ·  fabrication B.1",
                 "",
                 "Phone: Share this ZIP → Save to Files (iPhone) or it lands in Downloads (Android).",
                 "Pocket field card: open pocket.html, then Add to Home Screen or Print → PDF.",
@@ -303,9 +391,11 @@ def main() -> None:
                 f"Capacity {SPEC.capacity_width:g}\" · drum ⌀{SPEC.drum_od:g}\" @ {SPEC.drum_rpm:g} RPM",
                 f"|A−B| ≤ {SPEC.parallel_tol:.3f}\" paper-on · TIR ≤ {SPEC.drum_tir:.3f}\" paper-off",
                 "Keep 16.5\" (419 mm) clear between inner faces (18 mm BB is fine).",
+                "Way rebate so the 16\" table fits; stretchers housed 1/4\" (P-003 = 17\").",
                 "",
-                "plans/ D-1…D-10   renders/ isometric solids   cad/ parametric + OpenSCAD",
-                "BOM.csv fasteners.csv lumberyard.csv spec.json",
+                "plans/ D-1…D-12   renders/ isometric solids   cad/ Python SSOT + OpenSCAD",
+                "BOM.csv parts.csv joints.csv operations.csv qa.csv fasteners.csv lumberyard.csv",
+                "fabrication.json = machine-readable source dump",
                 "",
                 "Sources: woodgears.ca/reader/walters/drum_sander.html  ·  youtu.be/W-5Sj6kBVic",
                 "ShopNotes No. 86  ·  Heslop / Hawley  ·  Jet/Grizzly roller practice",

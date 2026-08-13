@@ -1,48 +1,43 @@
 // WALTER DS-16 Rev B — OpenSCAD solid model (inches)
-// Authoritative numbers: walter_ds16.py
+// Authoritative numbers: walter_ds16.py → parameters.scad
 //   X = across drum (drive +X)   Y = feed depth (infeed −Y)   Z = up
 // Set explode > 0 for an exploded preview. F5 preview / F6 render.
 
+include <parameters.scad>;
+
 $fn = 48;
-
-side_t = 0.75;
-side_h = 30;
-side_d = 22;
-clear  = 16.5;
-W = clear + 2 * side_t;
-drum_od = 5.0;
-drum_len = 15.75;
-shaft_od = 0.75;
-shaft_len = 22.5;
-table_w = 16;
-table_d = 22;
-table_t = 1.5;
-table_z = 14;
-drum_z = 18.5;
-drum_y = 11;
-roller_od = 1.25;
-roller_len = 15.75;
-
 explode = 0; // 0 assembled · try 5 for exploded
 
 module side_panel() {
   difference() {
     color("#c4a574") cube([side_t, side_d, side_h]);
-    translate([-0.1, 1.5, 10.2]) cube([side_t + 0.2, side_d - 3, 1.1]);
+    // way rebate (inner face is +X on left panel)
+    translate([side_t - way_rebate, 1, way_z])
+      cube([way_rebate + 0.05, side_d - 2, way_stock]);
+    // stretcher housings
+    for (z = [6, 12, 20])
+      translate([side_t - stretcher_housing, 2, z])
+        cube([stretcher_housing + 0.05, 4, 0.75]);
     translate([-0.1, drum_y, drum_z]) rotate([0, 90, 0])
       cylinder(h=side_t + 0.2, d=shaft_od + 0.08);
   }
 }
 
 module stretcher(z) {
-  color("#8a7355") translate([side_t, 2, z]) cube([clear, 4, 0.75]);
+  color("#8a7355")
+    translate([side_t - stretcher_housing, 2, z])
+      cube([stretcher_len, 4, 0.75]);
 }
 
 module way_left() {
-  color("#d9dcde") translate([side_t, 1, 10]) cube([0.75, side_d - 2, 0.75]);
+  color("#d9dcde")
+    translate([side_t - way_rebate, 1, way_z])
+      cube([way_stock, side_d - 2, way_stock]);
 }
 module way_right() {
-  color("#d9dcde") translate([side_t + clear - 0.75, 1, 10]) cube([0.75, side_d - 2, 0.75]);
+  color("#d9dcde")
+    translate([side_t + clear - way_project, 1, way_z])
+      cube([way_stock, side_d - 2, way_stock]);
 }
 
 module table() {
@@ -52,8 +47,8 @@ module table() {
   }
 }
 
-module acme(x) {
-  color("#8a9098") translate([x, 4.75, 2]) cylinder(h=16, d=0.5);
+module acme(x, y) {
+  color("#8a9098") translate([x, y, 2]) cylinder(h=16, d=0.5);
 }
 
 module drum_stack() {
@@ -106,7 +101,7 @@ module hood() {
         rotate_extrude(angle=180)
           translate([4.6, 0, 0]) square([0.9, clear - 1.2]);
     translate([clear - 1.4, 0, 4.4]) rotate([0, 90, 0])
-      color("#7a8f68") cylinder(h=1.4, d=4.0);
+      color("#7a8f68") cylinder(h=1.4, d=dust_port_od);
   }
 }
 
@@ -114,7 +109,7 @@ color("#a89070") cube([W, side_d, 0.75]);
 
 translate([-explode, 0, 0]) { side_panel(); way_left(); }
 translate([explode, 0, 0]) {
-  translate([side_t + clear, 0, 0]) side_panel();
+  translate([W, 0, 0]) mirror([1, 0, 0]) side_panel();
   way_right();
 }
 
@@ -124,8 +119,8 @@ stretcher(20);
 
 translate([0, 0, -explode * 0.7]) {
   table();
-  acme(side_t + 2.4);
-  acme(side_t + clear - 2.4);
+  acme(acme_x0, acme_y0);
+  acme(acme_x1, acme_y1);
 }
 
 translate([0, 0, explode * 0.9]) {

@@ -7,17 +7,17 @@
 <text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-1  ·  General arrangement</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Scale ~1:8 · inches · overall machine</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry · fab B.1 (part IDs · housed stretchers)</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SIDE ELEVATION — drive side</text>
 <text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>15.5" capacity · ⌀5.0" drum @ ~1035 RPM · 0.5 HP 1725 RPM · solid sliding table (no conveyor)</text>
 <rect x='80.0' y='380.0' width='396.0' height='540.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.8'/>
 <rect x='98.0' y='641.0' width='396.0' height='27.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
 <text x='296.0' y='659.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>TABLE</text>
-<circle cx='278.0' cy='595.1' r='45.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
-<circle cx='278.0' cy='595.1' r='4.0' fill='#8a9098' stroke='#1a1f24' stroke-width='1'/>
-<text x='278.0' y='538.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>DRUM ⌀5"</text>
-<ellipse cx='278.0' cy='595.1' rx='66.6' ry='72.0' fill='none' stroke='#3d5a4c' stroke-width='1.5'/>
-<text x='350.0' y='523.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start'>HOOD</text>
+<circle cx='278.0' cy='587.0' r='45.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
+<circle cx='278.0' cy='587.0' r='4.0' fill='#8a9098' stroke='#1a1f24' stroke-width='1'/>
+<text x='278.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>DRUM ⌀5"</text>
+<ellipse cx='278.0' cy='587.0' rx='66.6' ry='72.0' fill='none' stroke='#3d5a4c' stroke-width='1.5'/>
+<text x='350.0' y='515.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start'>HOOD</text>
 <rect x='134.0' y='776.0' width='144.0' height='108.0' fill='#6e7578' stroke='#1a1f24' stroke-width='1.5'/>
 <text x='206.0' y='835.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3f1ec' text-anchor='middle' font-weight='600'>MOTOR ½ HP</text>
 <circle cx='206.0' cy='776.0' r='27.0' fill='none' stroke='#8a9098' stroke-width='2'/>

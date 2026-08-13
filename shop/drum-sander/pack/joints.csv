@@ -1,0 +1,12 @@
+joint_id,joint_type,part_a,part_b,fit_class,notes
+J-001,housed dado + screw,P-001L / P-001R,P-003,GLUE,"Racking stiffness. Ways, not stretchers, locate the table."
+J-002,rebate + bond,P-001L / P-001R,P-007,GLUE,Without the rebate a ¾″ way would steal 1.5″ and the 16″ table would not fit.
+J-003,glue torsion box,P-004,P-005,GLUE,Continuous glue. Flatten before J-004.
+J-004,bonded wear face,P-004,P-006,GLUE,Replaceable metrology surface.
+J-005,pack-bore + keyed stack,P-008 / P-009,P-010,LOCATIONAL / GLUE,Bore as a pack. 1 mm relief every 4 MDF discs. Balance ends.
+J-006,"flange bearing, fixed",P-001L,H-001 / P-010,LOCATIONAL,Drive-side axial lock. Datum for drum axis.
+J-007,"flange bearing, floating axial",P-001R,H-002 / P-010,SLIDING (axial only),0.25″ slots. Over-constraint bananas the shaft.
+J-008,pivoting T-nut cradle,P-012,H-016 / P-001L,SNUG then LOCKED,"Gravity tension, then lock so the belt cannot pump."
+J-009,spring yoke pivot,P-014,H-009 / H-011 / H-012,"CLEARANCE pivot, SPRING down","Set rollers 0.030″ below drum OD, paper on."
+J-010,screw base to sides,P-002,P-001L / P-001R,GLUE + SCREW,
+J-011,bronze nut to table,P-016,P-004 / H-007,LOCATIONAL,Both nuts; chain-coupled rotation.

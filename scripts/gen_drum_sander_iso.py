@@ -13,6 +13,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "shop", "drum-sander", "cad"))
+from walter_ds16 import GEOM as G  # noqa: E402
 from walter_ds16 import SPEC as S  # noqa: E402
 
 REND = os.path.join(ROOT, "shop", "drum-sander", "renders")
@@ -105,7 +106,7 @@ def cyl_x(part, color, cx, cy, cz, length, r, segs=16) -> Mesh:
 def machine(explode: float = 0.0) -> list[Mesh]:
     """Build solid list. explode 0–1 separates major groups."""
     e = explode
-    side_t = S.side_thick
+    side_t = G.side_thick
     clear = S.clear_between_sides
     W = clear + 2 * side_t
     D = S.side_depth
@@ -128,17 +129,18 @@ def machine(explode: float = 0.0) -> list[Mesh]:
     meshes.append(box("sides", "#c4a574", -hx - ex_side, 0.75, -hz, side_t, H - 0.75, D))
     meshes.append(box("sides", "#c4a574", hx - side_t + ex_side, 0.75, -hz, side_t, H - 0.75, D))
 
-    # Stretchers (3)
-    for y in (6.0, 12.0, 20.0):
-        meshes.append(box("stretch", "#8a7355", -hx + side_t, y, -2.0, clear, 0.75, 4.0))
+    # Stretchers (3) — housed length, drawn spanning inner faces
+    for y in S.stretcher_z:
+        meshes.append(box("stretch", "#8a7355", -hx + side_t - S.stretcher_housing, y, -2.0, G.stretcher_length, 0.75, S.stretcher_height))
 
-    # Ways
-    meshes.append(box("ways", "#d9dcde", -hx + side_t, 10.0, -hz + 1, 0.75, 0.75, D - 2))
-    meshes.append(box("ways", "#d9dcde", hx - side_t - 0.75, 10.0, -hz + 1, 0.75, 0.75, D - 2))
+    # Ways — projecting only (rebate is in the side)
+    wp = G.way_project
+    meshes.append(box("ways", "#d9dcde", -hx + side_t, S.way_z, -hz + 1, wp, S.way_stock, D - 2))
+    meshes.append(box("ways", "#d9dcde", hx - side_t - wp, S.way_z, -hz + 1, wp, S.way_stock, D - 2))
 
     # Table + wear
-    tw, td, tt = S.table_width, S.table_depth, S.table_thick
-    ty = 14.0 + ey_table
+    tw, td, tt = G.table_width, G.table_depth, G.table_thick
+    ty = G.table_z_display + ey_table
     meshes.append(box("table", "#c4b8a4", -tw / 2, ty, -td / 2, tw, tt - 0.25, td))
     meshes.append(box("table", "#d9dcde", -tw / 2, ty + tt - 0.25, -td / 2, tw, 0.25, td))
 
@@ -147,8 +149,8 @@ def machine(explode: float = 0.0) -> list[Mesh]:
         meshes.append(box("elev", "#8a9098", x - 0.25, 2.0, -6.25, 0.5, 14.0 + ey_table * 0.3, 0.5))
 
     # Drum / shaft / bearings
-    dy = 18.5 + ey_drum
-    meshes.append(cyl_x("drum", "#b8a990", 0, dy, 0, S.drum_length, S.drum_od / 2, 20))
+    dy = G.bearing_cl_z + ey_drum
+    meshes.append(cyl_x("drum", "#b8a990", 0, dy, 0, G.drum_length, S.drum_od / 2, 20))
     meshes.append(cyl_x("shaft", "#8a9098", 0, dy, 0, S.shaft_length, S.shaft_od / 2, 12))
     for x, part in ((-8.1, "shaft"), (8.1, "shaft")):
         meshes.append(box(part, "#6e7578", x - 0.35, dy - 1.4, -1.4, 0.7, 2.8, 2.8))
@@ -163,8 +165,8 @@ def machine(explode: float = 0.0) -> list[Mesh]:
 
     # Hold-down rollers
     ry = 16.15 + ey_table
-    meshes.append(cyl_x("rollers", "#5a6068", 0, ry, -3.6 - ez_roll, S.roller_len, S.roller_od / 2, 12))
-    meshes.append(cyl_x("rollers", "#5a6068", 0, ry, 3.6 + ez_roll, S.roller_len, S.roller_od / 2, 12))
+    meshes.append(cyl_x("rollers", "#5a6068", 0, ry, -3.6 - ez_roll, G.roller_len, S.roller_od / 2, 12))
+    meshes.append(cyl_x("rollers", "#5a6068", 0, ry, 3.6 + ez_roll, G.roller_len, S.roller_od / 2, 12))
     meshes.append(box("rollers", "#8a7355", -8.2, ry + 0.4, -4.4 - ez_roll, 16.4, 0.4, 0.8))
     meshes.append(box("rollers", "#8a7355", -8.2, ry + 0.4, 3.6 + ez_roll, 16.4, 0.4, 0.8))
 

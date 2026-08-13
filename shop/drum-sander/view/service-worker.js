@@ -1,4 +1,4 @@
-const CACHE = "walter-view-v2";
+const CACHE = "walter-view-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -7,6 +7,7 @@ const ASSETS = [
   "./manifest.json",
   "../app/data.js",
   "../app/model3d.js",
+  "../app/geometry.js",
   "../app/apple-touch-icon.png",
   "../app/icon.svg",
   "../vendor/three.module.js",
@@ -22,6 +23,8 @@ const ASSETS = [
   "../plans/D8_holddowns.svg",
   "../plans/D9_model.svg",
   "../plans/D10_lumberyard.svg",
+  "../plans/D11_register.svg",
+  "../plans/D12_joinery.svg",
   "../renders/iso_assembled.svg",
   "../renders/iso_exploded.svg",
   "../renders/ortho_front.svg",

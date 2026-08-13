@@ -1,0 +1,31 @@
+// AUTO-GENERATED from walter_ds16.py — do not edit
+// WALTER DS-16 Rev B fab B.1 · inches
+side_t = 0.75;
+side_h = 30.0;
+side_d = 22.0;
+clear  = 16.5;
+W = 18.0;
+drum_od = 5.0;
+drum_len = 15.75;
+shaft_od = 0.75;
+shaft_len = 22.5;
+table_w = 16.0;
+table_d = 22.0;
+table_t = 1.5;
+table_z = 14.0;
+drum_z = 18.5;
+drum_y = 11.0;
+roller_od = 1.25;
+roller_len = 15.75;
+way_project = 0.23;
+way_stock = 0.75;
+way_rebate = 0.52;
+way_z = 10.0;
+stretcher_h = 4.0;
+stretcher_len = 17.0;
+stretcher_housing = 0.25;
+acme_y0 = 4.0;
+acme_y1 = 18.0;
+acme_x0 = 3.15;
+acme_x1 = 14.85;
+dust_port_od = 4.0;

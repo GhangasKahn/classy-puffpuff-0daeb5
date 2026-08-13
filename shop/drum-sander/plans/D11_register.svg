@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-11  ·  Part register</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Fabrication B.1 · persistent IDs · datums</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry · fab B.1 (part IDs · housed stretchers)</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>MAKE / BUY-CUT REGISTER  —  Python SSOT  cad/walter_ds16.py</text>
+<text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Inner span 16.5″ · table 16″ · way project 0.230″ / rebate 0.520″ · stretcher 17″ housed</text>
+<text x='40.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>ID</text>
+<text x='120.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>Q</text>
+<text x='155.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>NAME</text>
+<text x='520.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>FINISHED T×W×L</text>
+<text x='820.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>HAND</text>
+<text x='980.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>JOINERY / DATUM</text>
+<text x='40.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-001L</text>
+<text x='120.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Side panel, drive (left)</text>
+<text x='520.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>30" × 22" × 0.75"</text>
+<text x='820.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>LEFT-HAND</text>
+<text x='980.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-001 housed stretchers; J-002 way rebate;</text>
+<text x='40.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-001R</text>
+<text x='120.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Side panel, idler (right)</text>
+<text x='520.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>30" × 22" × 0.75"</text>
+<text x='820.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>RIGHT-HAND / M</text>
+<text x='980.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-001; J-002; idler flange on axial-float </text>
+<text x='40.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-002</text>
+<text x='120.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Base deck</text>
+<text x='520.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>18" × 22" × 0.75"</text>
+<text x='820.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-010 screws up into sides</text>
+<text x='40.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-003</text>
+<text x='120.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>3</text>
+<text x='155.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Stretcher</text>
+<text x='520.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>17" × 4" × 0.75"</text>
+<text x='820.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-001 ¼″ housing in sides + #8 × 2″ throug</text>
+<text x='40.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-004</text>
+<text x='120.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='155.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Table torsion-box skin</text>
+<text x='520.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>16" × 22" × 0.75"</text>
+<text x='820.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-003 continuous glue to P-005</text>
+<text x='40.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-005</text>
+<text x='120.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>8</text>
+<text x='155.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Torsion-box ribs</text>
+<text x='520.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>15.5" × 1.25" × 0.5"</text>
+<text x='820.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-003</text>
+<text x='40.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-006</text>
+<text x='120.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Table wear face</text>
+<text x='520.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>16" × 22" × 0.5"</text>
+<text x='820.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-004 bond, replaceable</text>
+<text x='40.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-007</text>
+<text x='120.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='155.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>UHMW way</text>
+<text x='520.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>22" × 0.75" × 0.75"</text>
+<text x='820.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-002 rebate + glue; optional #8 flush scr</text>
+<text x='40.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-008</text>
+<text x='120.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>19</text>
+<text x='155.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum disc, core</text>
+<text x='520.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>5.125" × 5.125" × 0.75"</text>
+<text x='820.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-005 pack-bore + piano-wire keys; 1 mm re</text>
+<text x='40.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-009</text>
+<text x='120.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='155.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum disc, end</text>
+<text x='520.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>5.125" × 5.125" × 0.75"</text>
+<text x='820.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-005</text>
+<text x='40.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-010</text>
+<text x='120.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum shaft</text>
+<text x='520.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>22.5" × 0.75" × 0.75"</text>
+<text x='820.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-005 discs; J-006 fixed drive flange; J-0</text>
+<text x='40.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-011</text>
+<text x='120.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Dust hood blank</text>
+<text x='520.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>18" × 12" × 0.25"</text>
+<text x='820.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>Friction on sides; paraffin at paint rubs</text>
+<text x='40.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-012</text>
+<text x='120.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Motor pivot cradle</text>
+<text x='520.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>12" × 8" × 0.75"</text>
+<text x='820.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-008 ¼-20 T-nuts</text>
+<text x='40.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-013</text>
+<text x='120.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Full-width truing sled</text>
+<text x='520.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>16" × 8" × 0.75"</text>
+<text x='820.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>none — fixture</text>
+<text x='40.0' y='366.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-014</text>
+<text x='120.0' y='366.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='155.0' y='366.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Hold-down roller yoke</text>
+<text x='520.0' y='366.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>18" × 3" × 0.75"</text>
+<text x='820.0' y='366.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='366.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-009 shoulder bolts + springs</text>
+<text x='40.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-015</text>
+<text x='120.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='155.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Disc pack-bore jig</text>
+<text x='520.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>12" × 12" × 0.75"</text>
+<text x='820.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>none</text>
+<text x='40.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-016</text>
+<text x='120.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='155.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Acme bronze nut block</text>
+<text x='520.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2.5" × 2" × 1.5"</text>
+<text x='820.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>IDENTICAL</text>
+<text x='980.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>J-011 nut to table</text>
+<text x='40.0' y='424.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUMS</text>
+<text x='40.0' y='446.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-A</text>
+<text x='160.0' y='446.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>P-001L/R  ·  Bottom edge  —  Z = 0 floor / base top after install</text>
+<text x='40.0' y='464.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-B</text>
+<text x='160.0' y='464.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>P-001L/R  ·  Infeed edge  —  Y = 0; bearing_cl_y measured from here</text>
+<text x='40.0' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-C</text>
+<text x='160.0' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>P-001L/R  ·  Inner face  —  X local; dados and way rebate</text>
+<text x='40.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-D</text>
+<text x='160.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>P-006  ·  Wear-face top  —  Table plane; A/B indicator reference</text>
+<text x='40.0' y='518.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-E</text>
+<text x='160.0' y='518.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>P-010  ·  Drum axis  —  Fixed by H-001; TIR and parallel</text>
+<text x='40.0' y='544.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHEET YIELD</text>
+<text x='40.0' y='564.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Sheet 1 — 5′×5′ × ¾″ BB (frame)   yield 56.0%   waste 44.0%   7 parts</text>
+<text x='40.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Sheet 2 — 5′×5′ × ¾″ BB (table &amp; jigs)   yield 30.1%   waste 69.9%   6 parts</text>
+<text x='40.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Sheet 3 — 24″×48″ × ¾″ MDF (discs)   yield 55.1%   waste 44.9%   21 parts</text>
+<text x='40.0' y='1050.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>If overall length/span changes, stretcher length, table width, and way rebate recompute. Do not edit these numbers on the sheet.</text>
+</svg>

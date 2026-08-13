@@ -1,22 +1,23 @@
 aisle,qty,item,use
-Screws,~100 (1 lb),#8 × 1¼″ coarse cabinet screws,"Box, skins, hood, jigs"
-Screws,~50,#8 × 2″ coarse screws,Through-side into stretchers
-Fasteners,8,¼-20 T-nuts + 1¼″ hex bolts + washers,Motor-cradle pivot / locks
-Fasteners,8,5/16-18 × 1″ hex + nylock + washer,4-bolt flange bearings (confirm hole)
-Knobs,6,⅜-16 star knobs + 1½″ studs + washers,Way locks and roller yokes
-Fasteners,4,Shoulder bolts 5/16 × 1½″,Spring yoke pivots
-Springs,4,Light compression springs ~¾″ OD,Hold-downs — too stiff = snipe
-Rod,2,"⅜″ drill rod or bolts, 17″",Roller axles
-Wire,12″,⅛″ piano wire,Drum-disc keys
-Wax,1 tin,Paste wax,"UHMW ways — dry lube, no oil"
-Dust,1,4″ dust adapter + blast gate,Hood port
-Electrical,1 kit,Switch box + 14/3 SJ cord + plug,Motor — follow local code
-Specialty,2,"4-bolt flange bearing ¾″ bore, sealed",Drive FIXED · idler FLOATING
-Specialty,1,¾″ TG&P / precision-ground shaft × 24″,Drum shaft (cut to 22.5″)
-Specialty,2,½-10 Acme rod 12″ + bronze nut + flange,Dual table lift
-Specialty,1 kit,#25 chain + ½″-bore sprockets + master + left clutch/dog,Couple screws; taper uncouple
-Specialty,1 set,3″ + 5″ 4L pulleys + A-section belt,Coplanar 3:5 reduction
-Specialty,1,½ HP 1725 RPM TEFC 115 V,Drum drive
-Specialty,1,Dial indicator 0.001″ + mag base,TIR and A/B clock
-Specialty,2,Rubber rollers ⌀1.25″ × ~15.75″,Infeed / outfeed hold-downs
-Optional,1 kit,60–90 RPM gearmotor + scotch yoke,"⅛″ slow oscillator, not drum RPM"
+Screws,100,#8 × 1¼″ coarse cabinet screws,H-014
+Screws,50,#8 × 2″ coarse screws (sides into stretchers),H-015
+Fasteners,8,¼-20 T-nuts + 1¼″ hex bolts + washers,H-016
+Fasteners,8,5/16-18 × 1″ hex + nylock + washer (flange bearings),Confirm flange hole.
+Knobs,6,Star knobs ⅜-16 + 1½″ studs + washers,Way locks and yokes.
+Fasteners,4,Shoulder bolts 5/16 × 1½″,H-012
+Springs,4,Light compression springs ~¾″ OD,Too stiff = snipe.
+Rod,2,⅜″ drill rod / bolts × 17″ (roller axles),H-010
+Wire,1,⅛″ piano wire,Disc keys.
+Wax,1,Paste wax (UHMW dry lube — no oil),H-024
+Dust,1,4″ dust adapter + blast gate,H-019
+Electrical,1,Switch box + 14/3 SJ cord + plug,Code.
+Specialty,1,"4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)",Lock to P-001L. No axial float.
+Specialty,2,"4-bolt flange bearing ¾″ bore, sealed",H-001 FIXED · H-002 FLOATING
+Specialty,1,¾″ TG&P / precision-ground shaft × 24″,P-010 drum shaft (cut to 22.5″)
+Specialty,2,½-10 Acme rod 12″ + bronze nut + flange,H-007 dual table lift
+Specialty,1 kit,#25 chain + ½″-bore sprockets + master + left clutch/dog,H-008 couple screws; taper uncouple
+Specialty,1 set,3″ + 5″ 4L pulleys + A-section belt,H-003/H-004/H-005 coplanar 3:5
+Specialty,1,½ HP 1725 RPM TEFC 115 V,H-006 drum drive
+Specialty,1,Dial indicator 0.001″ + mag base,H-021 TIR and A/B clock
+Specialty,2,Rubber rollers ⌀1.25″ × ~15.75″,H-009 hold-downs
+Optional,1 kit,60–90 RPM gearmotor + scotch yoke,H-025 ⅛″ slow oscillator

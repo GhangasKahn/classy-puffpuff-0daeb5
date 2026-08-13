@@ -211,7 +211,7 @@
     cuts.innerHTML = D.cutList
       .map(
         (r) =>
-          `<tr><td>${r.qty}</td><td>${r.size}${r.sizeMm ? `<div class="hint">${r.sizeMm}</div>` : ""}</td><td>${r.stock}</td><td>${r.use}</td></tr>`
+          `<tr><td>${r.partId ? `<b>${r.partId}</b> ` : ""}${r.qty}</td><td>${r.size}${r.sizeMm ? `<div class="hint">${r.sizeMm}</div>` : ""}</td><td>${r.stock}</td><td>${r.use}</td></tr>`
       )
       .join("");
   }

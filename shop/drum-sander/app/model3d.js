@@ -3,28 +3,7 @@
  */
 import * as THREE from "../vendor/three.module.js";
 import { OrbitControls } from "../vendor/OrbitControls.js";
-
-const P = {
-  sideT: 0.75,
-  sideH: 30,
-  sideD: 22,
-  clear: 16.5,
-  drumOd: 5,
-  drumLen: 15.75,
-  shaftOd: 0.75,
-  shaftLen: 22.5,
-  tableW: 16,
-  tableD: 22,
-  tableT: 1.5,
-  tableY: 14,
-  drumY: 18.5,
-  rollerOd: 1.25,
-  rollerLen: 15.75,
-};
-
-P.W = P.clear + 2 * P.sideT;
-P.hx = P.W / 2;
-P.hz = P.sideD / 2;
+import { P } from "./geometry.js";
 
 const COLORS = {
   sides: 0xc4a574,
@@ -48,7 +27,7 @@ const COLORS = {
 const PARTS = {
   sides: { label: "Side panels (2)", detail: "¾″ Baltic birch · stack-drilled as a pair" },
   base: { label: "Base deck", detail: "¾″ BB spanning overall width" },
-  stretch: { label: "Stretchers (3)", detail: "16.5″ × 4″ × ¾″ between sides" },
+  stretch: { label: "Stretchers (3)", detail: "P-003 housed in ¼″ dados — not the table datum" },
   ways: { label: "UHMW ways", detail: "Inner-face vertical reference · no rack" },
   table: { label: "Torsion-box table", detail: "Skins + ribs + phenolic/MIC-6 wear face" },
   elev: { label: "Dual Acme lift", detail: "½-10 screws · chain couple · home dog" },
@@ -123,17 +102,17 @@ function buildMachine() {
   R.position.set(P.hx - P.sideT / 2, 0.75 + (P.sideH - 0.75) / 2, 0);
   grp("sides").add(tag(R, "sides"));
 
-  for (const y of [6.375, 12.375, 20.375]) {
-    const s = box(P.clear, 0.75, 4, COLORS.stretch);
+  for (const y of P.stretcherZ.map((z) => z + 0.375)) {
+    const s = box(P.stretcherLen, 0.75, P.stretcherH, COLORS.stretch);
     s.position.set(0, y, -6);
     grp("stretch").add(tag(s, "stretch"));
   }
 
-  const wayL = box(0.75, 0.75, P.sideD - 2, COLORS.ways, { roughness: 0.3 });
-  wayL.position.set(-P.hx + P.sideT + 0.375, 10.375, 0);
+  const wayL = box(P.wayProject, P.wayStock, P.sideD - 2, COLORS.ways, { roughness: 0.3 });
+  wayL.position.set(-P.hx + P.sideT + P.wayProject / 2, P.wayZ + P.wayStock / 2, 0);
   grp("ways").add(tag(wayL, "ways"));
-  const wayR = box(0.75, 0.75, P.sideD - 2, COLORS.ways, { roughness: 0.3 });
-  wayR.position.set(P.hx - P.sideT - 0.375, 10.375, 0);
+  const wayR = box(P.wayProject, P.wayStock, P.sideD - 2, COLORS.ways, { roughness: 0.3 });
+  wayR.position.set(P.hx - P.sideT - P.wayProject / 2, P.wayZ + P.wayStock / 2, 0);
   grp("ways").add(tag(wayR, "ways"));
 
   const core = box(P.tableW, P.tableT - 0.25, P.tableD, COLORS.table);

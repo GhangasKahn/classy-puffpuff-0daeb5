@@ -1,0 +1,12 @@
+op,title,tool,setting,parts,rule
+S-001,Stop: side height,Track saw / table saw + stop,"30""","P-001L, P-001R",DO NOT MOVE STOP
+S-002,Stop: side depth,Same,"22""","P-001L, P-001R",DO NOT MOVE STOP
+S-003,Stop: stretcher length (housed),Miter gauge + stop,"17""",P-003 ×3,DO NOT MOVE STOP until all three are cut
+S-004,Stop: stretcher width,Rip fence,"4""",P-003 ×3,
+S-005,Stop: table skins,Fence + stop,"16"" × 22""",P-004 ×2,
+S-006,Dado: stretcher housing,Dado / router,"depth 0.25"" · width 0.75""","P-001L, P-001R",
+S-007,Rebate: way,Router + edge guide,"depth 0.520"" · width 0.75""","P-001L, P-001R",
+S-008,Stack-drill bearing CL,"Drill press, sides clamped face-to-face","Y 11"" from infeed · Z 18.5"" from bottom",P-001L+R,One stack. Then split for inner-face dados.
+S-009,Pack-bore discs,P-015 jig + drill/ream,"⌀0.75""","P-008, P-009",
+S-010,True drum,P-013 sled on ways,"TIR ≤ 0.002""",A-DRUM,
+S-011,A/B clock,H-021 indicator,"|A−B| ≤ 0.003"" paper on","A-TABLE, A-DRUM",

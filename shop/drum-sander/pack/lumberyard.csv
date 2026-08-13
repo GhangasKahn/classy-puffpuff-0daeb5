@@ -1,9 +1,9 @@
 where,item,qty,alt,use
-Plywood,¾″ Baltic birch (18 mm Euro BB is the usual substitute),2 sheets 5′×5′,One 4′×8′ + one 5′×5′ if that’s what is stocked,"Sides, base, stretchers, table skins, cradle, yokes"
-MDF,¾″ MDF,24″ × 48″,Half a 4′×8′ sheet,21 drum discs + pack-bore jig + torsion ribs if no ½″ offcuts
-Plywood,¼″ birch or pine ply,24″ × 24″,Door-skin offcut is enough,Kerf-bent dust hood blank ~18″ × 12″
-Plastics / order,½″ phenolic or ⅜″ MIC-6 / cast tooling plate,16″ × 22″,UHMW sheet if phenolic is a wait,Replaceable table wear face — this is the metrology surface
-Plastics,UHMW bar ¾″ × ¾″,48″,Two 24″ sticks,"Table ways, inner faces of sides"
-Hardwood / metal,Hardwood ¾″ or 1½″ aluminum angle,36″,BB offcuts from sheet 2,Hold-down roller yokes
-Abrasives,Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220,1 roll + 4 grits,PSA paper if you skip Velcro (harder to change),Spiral wrap after truing
-Glue,Titebond III + thin CA,1 qt + 1 oz,Any Type I PVA for the box,"Torsion box, drum lamination, Velcro edges"
+Plywood,¾″ Baltic birch (18 mm Euro BB is the usual substitute),2 sheets 5′×5′,One 4′×8′ + one 5′×5′ if that’s what is stocked,"P-001L/R, P-002, P-003, P-004, P-012, P-014"
+MDF,¾″ MDF,24″ × 48″,Half a 4′×8′ sheet,P-008 ×19 + P-015 + P-005 if no ½″ offcuts
+Plywood,¼″ birch or pine ply,24″ × 24″,Door-skin offcut is enough,P-011 hood blank
+Plastics / order,½″ phenolic or ⅜″ MIC-6 / cast tooling plate,16″ × 22″,UHMW sheet if phenolic is a wait,P-006 wear face — metrology surface
+Plastics,UHMW bar ¾″ × ¾″,48″,Two 24″ sticks,"P-007 ways, let into J-002 rebate"
+Hardwood / metal,Hardwood ¾″ or 1½″ aluminum angle,36″,BB offcuts from sheet 2,P-014 yokes
+Abrasives,Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220,1 roll + 4 grits,PSA paper if you skip Velcro (harder to change),H-022 spiral wrap after truing
+Glue,Titebond III + thin CA,1 qt + 1 oz,Any Type I PVA for the box,"H-023 torsion box, drum, Velcro edges"

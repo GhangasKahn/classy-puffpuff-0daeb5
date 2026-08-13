@@ -45,9 +45,9 @@
 <polygon points='147.3,223.3 552.7,223.3 552.7,214.0 147.3,214.0' fill='#6c7671' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='124.7,394.0 143.3,394.0 143.3,319.3 124.7,319.3' fill='#4d5254' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='556.7,394.0 575.3,394.0 575.3,319.3 556.7,319.3' fill='#4d5254' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='130.0,690.0 570.0,690.0 570.0,670.0 130.0,670.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='130.0,530.0 570.0,530.0 570.0,510.0 130.0,510.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='130.0,316.7 570.0,316.7 570.0,296.7 130.0,296.7' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='123.3,690.0 576.7,690.0 576.7,670.0 123.3,670.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='123.3,530.0 576.7,530.0 576.7,510.0 123.3,510.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='123.3,316.7 576.7,316.7 576.7,296.7 123.3,296.7' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='590.0,582.4 590.0,600.2 611.3,600.2 611.3,582.4' fill='#3f4349' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='147.3,233.3 552.7,233.3 552.7,224.0 147.3,224.0' fill='#6c7671' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='590.0,566.4 590.0,582.4 611.3,582.4 611.3,566.4' fill='#43484e' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
@@ -68,8 +68,8 @@
 <polygon points='162.0,796.7 175.3,796.7 175.3,423.3 162.0,423.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='524.7,796.7 538.0,796.7 538.0,423.3 524.7,423.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='435.3,676.7 595.3,676.7 595.3,516.7 435.3,516.7' fill='#34383e' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='130.0,583.3 150.0,583.3 150.0,563.3 130.0,563.3' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='550.0,583.3 570.0,583.3 570.0,563.3 550.0,563.3' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='130.0,583.3 136.1,583.3 136.1,563.3 130.0,563.3' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='563.9,583.3 570.0,583.3 570.0,563.3 563.9,563.3' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='110.0,850.0 590.0,850.0 590.0,830.0 110.0,830.0' fill='#76654f' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='110.0,830.0 130.0,830.0 130.0,50.0 110.0,50.0' fill='#8a7452' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='570.0,830.0 590.0,830.0 590.0,50.0 570.0,50.0' fill='#8a7452' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>

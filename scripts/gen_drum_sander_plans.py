@@ -12,6 +12,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "shop", "drum-sander", "cad"))
+from walter_ds16 import GEOM as G  # noqa: E402
 from walter_ds16 import SPEC as S  # noqa: E402
 
 OUT = os.path.join(ROOT, "shop", "drum-sander", "plans")
@@ -149,7 +150,7 @@ class Sheet:
         self.text(
             W - 40,
             Hpx - 34,
-            "ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)",
+            "ShopNotes 86 → Walters → Rev B geometry · fab B.1 (part IDs · housed stretchers)",
             13,
             DIM,
             "end",
@@ -195,19 +196,19 @@ def sheet_d1():
     # Base / sides
     s.rect(X(0), Y(S.side_height), S.side_depth * sc, S.side_height * sc, fill=WOOD, stroke=INK, sw=1.8)
     # Table
-    table_z = 14.0
+    table_z = G.table_z_display
     s.rect(
         X(1),
-        Y(table_z + S.table_thick),
-        S.table_depth * sc,
-        S.table_thick * sc,
+        Y(table_z + G.table_thick),
+        G.table_depth * sc,
+        G.table_thick * sc,
         fill=LIGHT,
         stroke=INK,
         sw=1.5,
     )
-    s.text(X(S.table_depth / 2 + 1), Y(table_z + S.table_thick / 2) + 5, "TABLE", 12, DIM, "middle")
+    s.text(X(G.table_depth / 2 + 1), Y(table_z + G.table_thick / 2) + 5, "TABLE", 12, DIM, "middle")
     # Drum
-    drum_cx, drum_cz = 11.0, table_z + S.table_thick + S.drum_od / 2 + 0.05
+    drum_cx, drum_cz = G.bearing_cl_y, G.bearing_cl_z
     s.circle(X(drum_cx), Y(drum_cz), (S.drum_od / 2) * sc, fill=MDF, stroke=INK, sw=2)
     s.circle(X(drum_cx), Y(drum_cz), 4, fill=STEEL, stroke=INK, sw=1)
     s.text(X(drum_cx), Y(drum_cz) - S.drum_od / 2 * sc - 12, "DRUM ⌀5\"", 13, ACC, "middle", bold=True)
@@ -239,19 +240,19 @@ def sheet_d1():
     fs = 14.0
     span = S.clear_between_sides
     # sides
-    s.rect(fx, fy - S.side_height * fs * 0.55, S.side_thick * fs, S.side_height * fs * 0.55, fill=WOOD, stroke=INK)
+    s.rect(fx, fy - S.side_height * fs * 0.55, G.side_thick * fs, S.side_height * fs * 0.55, fill=WOOD, stroke=INK)
     s.rect(
-        fx + (span + S.side_thick) * fs,
+        fx + (span + G.side_thick) * fs,
         fy - S.side_height * fs * 0.55,
-        S.side_thick * fs,
+        G.side_thick * fs,
         S.side_height * fs * 0.55,
         fill=WOOD,
         stroke=INK,
     )
     # drum as rectangle (end view is circle already; here cylinder face)
-    drum_w = S.drum_length * fs
+    drum_w = G.drum_length * fs
     s.rect(
-        fx + S.side_thick * fs + (span * fs - drum_w) / 2,
+        fx + G.side_thick * fs + (span * fs - drum_w) / 2,
         fy - 280,
         drum_w,
         S.drum_od * fs,
@@ -260,16 +261,16 @@ def sheet_d1():
         sw=1.5,
     )
     s.rect(
-        fx + S.side_thick * fs,
+        fx + G.side_thick * fs,
         fy - 200,
         span * fs,
-        S.table_thick * fs,
+        G.table_thick * fs,
         fill=LIGHT,
         stroke=INK,
     )
     s.dim_h(
-        fx + S.side_thick * fs,
-        fx + S.side_thick * fs + span * fs,
+        fx + G.side_thick * fs,
+        fx + G.side_thick * fs + span * fs,
         fy - 40,
         f'{span}" CLEAR / {S.capacity_width}" WORK',
         offset=20,
@@ -306,17 +307,17 @@ def sheet_d2():
 
     s.rect(X(0), Y(S.side_height), S.side_depth * sc, S.side_height * sc, fill=WOOD, stroke=INK, sw=2)
     # bearing center
-    bx, bz = 11.0, 18.5
+    bx, bz = G.bearing_cl_y, G.bearing_cl_z
     s.circle(X(bx), Y(bz), 1.1 * sc, fill="none", stroke=ACC, sw=2)
     s.circle(X(bx), Y(bz), 0.375 * sc, fill=STEEL, stroke=INK)
     s.text(X(bx) + 30, Y(bz), "FLANGE BEARING CL", 12, ACC)
     # UHMW way
-    s.rect(X(1.5), Y(22), 18 * sc, 0.75 * sc, fill=LIGHT, stroke=ACC, sw=1.5)
-    s.text(X(10.5), Y(22.4), "UHMW WAY (inner face)", 11, ACC, "middle", bold=True)
-    s.circle(X(4), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
-    s.circle(X(18), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
-    s.text(X(4), Y(10.6), "L ACME", 10, STEEL, "middle")
-    s.text(X(18), Y(10.6), "R ACME", 10, STEEL, "middle")
+    s.rect(X(1.5), Y(S.way_z + S.way_stock), (S.side_depth - 3) * sc, S.way_stock * sc, fill=LIGHT, stroke=ACC, sw=1.5)
+    s.text(X(10.5), Y(S.way_z + S.way_stock + 0.4), f"P-007 WAY  rebate {G.way_rebate:.3f}\"  project {G.way_project:.3f}\"", 11, ACC, "middle", bold=True)
+    s.circle(X(G.acme_y_infeed), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
+    s.circle(X(G.acme_y_outfeed), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
+    s.text(X(G.acme_y_infeed), Y(10.6), "L ACME", 10, STEEL, "middle")
+    s.text(X(G.acme_y_outfeed), Y(10.6), "R ACME", 10, STEEL, "middle")
     # motor pivot
     s.circle(X(4), Y(6), 0.4 * sc, fill="none", stroke=GRAY, sw=1.5)
     s.text(X(4), Y(4.5), "MOTOR PIVOT", 11, DIM, "middle")
@@ -336,7 +337,7 @@ def sheet_d2():
     s.text(1060, 211, '½" RIBS @ 4" O.C. — FULL GLUE', 11, INK, "middle")
     s.rect(920, 220, 280, 36, fill=WOOD, stroke=INK, sw=1.5)
     s.text(1060, 243, '¾" SKIN B', 12, INK, "middle")
-    s.text(920, 280, f'{S.table_width}" W × {S.table_depth}" D · flatness ≤ {S.table_flat_tol:.3f}" diag.', 13, DIM)
+    s.text(920, 280, f'{G.table_width}" W × {G.table_depth}" D · flatness ≤ {S.table_flat_tol:.3f}" diag.', 13, DIM)
 
     s.text(900, 330, "DUAL-END LIFT (Rev B)", 16, ACC, bold=True)
     rows = [
@@ -344,8 +345,8 @@ def sheet_d2():
         ("Couple", "#25 chain · both screws turn together"),
         ("Taper", "Uncouple LEFT sprocket · then recouple"),
         ("Home", "Dog stop = last known parallel"),
-        ("Ways", "UHMW inner faces — no rack while feeding"),
-        ("Travel", f'{S.elev_travel}" · 1/40 turn ≈ 0.0025″'),
+        ("Ways", f"J-002 rebate {G.way_rebate:.3f}″ · project {G.way_project:.3f}″"),
+        ("Travel", f'{S.elev_travel}" · 1/{S.acme_tpi:g} turn ≈ {G.acme_per_turn:.4f}″'),
     ]
     yy = 368
     for a, b in rows:
@@ -357,7 +358,7 @@ def sheet_d2():
     s.text(
         40,
         890,
-        f'Front / mid / rear: {S.clear_between_sides}" × 4" × ¾" Baltic birch. Glue + screws. Ways — not stretchers — locate the table.',
+        f'Front / mid / rear: P-003  {G.stretcher_length:g}" × {S.stretcher_height:g}" × {G.side_thick:g}"  housed {S.stretcher_housing:g}" each end (J-001). Ways — not stretchers — locate the table.',
         14,
         INK,
     )
@@ -379,7 +380,7 @@ def sheet_d3():
     s.text(
         40,
         94,
-        f'{S.disc_count_core} core discs + {S.disc_count_ends} BB ends · ⌀{S.drum_od}" × {S.drum_length}" · '
+        f'{S.disc_count_core} core discs + {S.disc_count_ends} BB ends · ⌀{S.drum_od}" × {G.drum_length}" · '
         f'precision ⌀{S.shaft_od}" shaft {S.shaft_length}" long',
         14,
         DIM,
@@ -578,17 +579,19 @@ def sheet_d6():
     from walter_ds16 import cut_list, hardware_bom, assembly_phases
 
     yy = 108
-    s.text(40, yy, "QTY", 11, DIM, bold=True)
-    s.text(90, yy, "SIZE", 11, DIM, bold=True)
-    s.text(430, yy, "STOCK", 11, DIM, bold=True)
-    s.text(640, yy, "USE", 11, DIM, bold=True)
-    yy += 22
+    s.text(40, yy, "ID", 11, DIM, bold=True)
+    s.text(110, yy, "QTY", 11, DIM, bold=True)
+    s.text(160, yy, "FINISHED", 11, DIM, bold=True)
+    s.text(520, yy, "STOCK", 11, DIM, bold=True)
+    s.text(720, yy, "PART", 11, DIM, bold=True)
+    yy += 20
     for row in cut_list():
-        s.text(40, yy, str(row["qty"]), 12, INK)
-        s.text(90, yy, row["size"][:42], 12, INK)
-        s.text(430, yy, row["stock"][:22], 12, INK)
-        s.text(640, yy, row["use"][:36], 12, INK)
-        yy += 22
+        s.text(40, yy, row["part_id"], 11, ACC, bold=True)
+        s.text(110, yy, str(row["qty"]), 11, INK)
+        s.text(160, yy, row["size"][:38], 11, INK)
+        s.text(520, yy, row["stock"][:18], 11, INK)
+        s.text(720, yy, row["use"][:42], 11, INK)
+        yy += 18
 
     s.text(40, yy + 12, "HARDWARE (hold-down / oscillator detail on D-8)", 16, ACC, bold=True)
     yy += 38
@@ -697,7 +700,7 @@ def sheet_d8():
     s.text(280, 430, f"Set rollers {S.roller_setbelow:.3f}\" BELOW drum OD (paper on)", 13, DIM, "middle")
 
     rules = [
-        f"Rollers: ⌀{S.roller_od}\" rubber × ~{S.roller_len}\" on ⅜″ axles, spring yokes.",
+        f"Rollers: ⌀{S.roller_od}\" rubber × ~{G.roller_len}\" on ⅜″ axles, spring yokes.",
         "Light springs. Excess pressure = snipe (same as Jet/Grizzly tension rollers).",
         "Leading-end snipe → ease OUTFEED spring. Trailing-end snipe → ease INFEED.",
         "Stock shorter than 12″ rides a sled that the rollers can still pinch.",
@@ -812,6 +815,101 @@ def sheet_d10():
     s.save("D10_lumberyard.svg")
 
 
+def sheet_d11():
+    s = Sheet("D-11", "Part register", "Fabrication B.1 · persistent IDs · datums")
+    s.titleblock()
+    from walter_ds16 import parts, datums, nest_yield, GEOM as Gg
+
+    s.text(40, 70, "MAKE / BUY-CUT REGISTER  —  Python SSOT  cad/walter_ds16.py", 16, ACC, bold=True)
+    s.text(
+        40,
+        94,
+        f"Inner span {S.clear_between_sides:g}″ · table {Gg.table_width:g}″ · way project {Gg.way_project:.3f}″ / rebate {Gg.way_rebate:.3f}″ · stretcher {Gg.stretcher_length:g}″ housed",
+        13,
+        DIM,
+    )
+    yy = 124
+    s.text(40, yy, "ID", 11, DIM, bold=True)
+    s.text(120, yy, "Q", 11, DIM, bold=True)
+    s.text(155, yy, "NAME", 11, DIM, bold=True)
+    s.text(520, yy, "FINISHED T×W×L", 11, DIM, bold=True)
+    s.text(820, yy, "HAND", 11, DIM, bold=True)
+    s.text(980, yy, "JOINERY / DATUM", 11, DIM, bold=True)
+    yy += 18
+    for p in parts():
+        s.text(40, yy, p["part_id"], 11, ACC, bold=True)
+        s.text(120, yy, str(p["qty"]), 11, INK)
+        s.text(155, yy, p["part_name"][:38], 11, INK)
+        s.text(520, yy, (p["finished_size"] or p["purchase_size"] or "—")[:32], 11, INK)
+        s.text(820, yy, p["handed"][:14], 11, DIM)
+        s.text(980, yy, (p["joinery"] or p["reference_face"] or "")[:42], 11, DIM)
+        yy += 16
+
+    s.text(40, yy + 10, "DATUMS", 14, ACC, bold=True)
+    yy += 32
+    for d in datums():
+        s.text(40, yy, d["id"], 12, ACC, bold=True)
+        s.text(160, yy, f'{d["on"]}  ·  {d["what"]}  —  {d["use"]}', 12, INK)
+        yy += 18
+
+    s.text(40, yy + 8, "SHEET YIELD", 14, ACC, bold=True)
+    yy += 28
+    for n in nest_yield():
+        s.text(40, yy, f'{n["sheet"][:42]}   yield {n["yield_pct"]}%   waste {n["waste_pct"]}%   {n["part_count"]} parts', 12, INK)
+        yy += 18
+
+    s.text(40, 1050, "If overall length/span changes, stretcher length, table width, and way rebate recompute. Do not edit these numbers on the sheet.", 12, DIM)
+    s.save("D11_register.svg")
+
+
+def sheet_d12():
+    s = Sheet("D-12", "Joinery, routing, QA", "J-IDs · stop setups · inspection gates")
+    s.titleblock()
+    from walter_ds16 import joints, operations, inspection, decisions, fmea
+
+    s.text(40, 70, "JOINT REGISTER", 16, ACC, bold=True)
+    yy = 98
+    for j in joints():
+        s.text(40, yy, j["joint_id"], 12, ACC, bold=True)
+        s.text(110, yy, f'{j["joint_type"][:22]}  {j["part_a"]} → {j["part_b"]}', 12, INK)
+        note = (j.get("notes") or j.get("fit_class") or "")[:70]
+        s.text(980, yy, note, 11, DIM)
+        yy += 17
+
+    s.text(40, yy + 8, "STOP SETUPS  —  do not move the stop until the listed parts are done", 16, ACC, bold=True)
+    yy += 32
+    for op in operations():
+        s.text(40, yy, op["op"], 12, ACC, bold=True)
+        s.text(110, yy, f'{op["title"][:28]}  {op.get("setting","")[:36]}  {", ".join(op.get("parts", []))[:28]}', 12, INK)
+        yy += 17
+
+    s.text(40, yy + 8, "QA GATES", 16, ACC, bold=True)
+    yy += 30
+    col = 0
+    y0 = yy
+    for i, q in enumerate(inspection()):
+        x = 40 + (i % 2) * 800
+        y = y0 + (i // 2) * 22
+        s.text(x, y, q["qc"], 12, ACC, bold=True)
+        s.text(x + 70, y, f'{q["check"]}: {q["spec"][:56]}', 12, INK)
+        yy = y
+
+    s.text(40, 900, "DECISIONS B.1", 16, ACC, bold=True)
+    yy = 928
+    for d in decisions()[-3:]:
+        s.text(40, yy, d["id"], 12, ACC, bold=True)
+        s.text(110, yy, f'{d["decision"]}  —  {d["reason"][:70]}', 12, INK)
+        yy += 18
+
+    s.text(40, 1000, "FMEA (shop, not certified structural analysis)", 14, ACC, bold=True)
+    yy = 1024
+    for f in fmea()[:4]:
+        s.text(40, yy, f'{f["mode"]}: {f["mitigation"]}', 12, INK)
+        yy += 16
+
+    s.save("D12_joinery.svg")
+
+
 def main():
     sheet_d1()
     sheet_d2()
@@ -822,6 +920,8 @@ def main():
     sheet_d7()
     sheet_d8()
     sheet_d10()
+    sheet_d11()
+    sheet_d12()
     print("done →", OUT)
 
 

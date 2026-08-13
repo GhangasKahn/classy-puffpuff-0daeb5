@@ -1,4 +1,4 @@
-const CACHE = "walter-ds16-v5";
+const CACHE = "walter-ds16-v6";
 const ASSETS = [
   "./",
   "./index.html",
@@ -6,6 +6,7 @@ const ASSETS = [
   "./app.js",
   "./data.js",
   "./model3d.js",
+  "./geometry.js",
   "./manifest.json",
   "./icon.svg",
   "./apple-touch-icon.png",
@@ -22,6 +23,8 @@ const ASSETS = [
   "../plans/D8_holddowns.svg",
   "../plans/D9_model.svg",
   "../plans/D10_lumberyard.svg",
+  "../plans/D11_register.svg",
+  "../plans/D12_joinery.svg",
   "../renders/iso_assembled.svg",
   "../renders/iso_exploded.svg",
 ];
