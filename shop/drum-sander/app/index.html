@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#12151a" />
+<meta name="description" content="DS-18 shop drum sander — 3D model, assembly, cut list, shopping list, and plan sheets. 18″ drum, 6″ OD, 1.5 HP." />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="DS-18" />
+<title>DS-18 — Shop Drum Sander Build App</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<noscript><style>.panel{display:block!important}</style></noscript>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#overview" data-go="overview">
+      <i class="mark" aria-hidden="true"></i>
+      <div>
+        <b>DS-18</b>
+        <span>Drum sander</span>
+      </div>
+    </a>
+    <div class="top-actions">
+      <span class="progress-pill">0% assembled</span>
+      <button type="button" class="btn" id="printBtn">Print</button>
+      <a class="btn primary" href="../">Design</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button type="button" class="tab on" data-tab="overview">Overview</button>
+    <button type="button" class="tab" data-tab="viz">Visualize</button>
+    <button type="button" class="tab" data-tab="assembly">Assembly</button>
+    <button type="button" class="tab" data-tab="cutlist">Cut list</button>
+    <button type="button" class="tab" data-tab="shop">Shopping</button>
+    <button type="button" class="tab" data-tab="plans">Plans</button>
+    <button type="button" class="tab" data-tab="files">Files</button>
+  </nav>
+
+  <main>
+    <!-- OVERVIEW — visible without JS (class="panel on") -->
+    <section class="panel on" data-panel="overview" id="overview">
+      <p class="kicker">18″ drum · 6″ OD · 1.5 HP · shop-built</p>
+      <h1>Build the DS-18 drum sander</h1>
+      <p class="lead">A plywood-cabinet open drum sander you can cut, assemble, and tune in a one-car shop. Orbit the 3D model, explode the machine, walk a twelve-step build, check off the cut list and hardware, and print DS-1…DS-6 plan sheets.</p>
+      <div class="grid3">
+        <div class="card stat"><span>Drum</span><b>18″ × 6″ OD</b></div>
+        <div class="card stat"><span>Cabinet</span><b>36 × 22 × 28″</b></div>
+        <div class="card stat"><span>Overall height</span><b>42″</b></div>
+        <div class="card stat"><span>Motor</span><b>1.5 HP · 1725</b></div>
+        <div class="card stat"><span>Drum speed</span><b>~860 RPM</b></div>
+        <div class="card stat"><span>Dust port</span><b>4″</b></div>
+      </div>
+      <div class="hr"></div>
+      <div class="grid2">
+        <div class="card">
+          <h3>How to use this app</h3>
+          <ol style="margin:8px 0 0 18px;color:var(--dim);font-size:14px">
+            <li>Open <strong>Visualize</strong> — orbit, explode, pick parts, spin the drum</li>
+            <li>Work the <strong>Assembly</strong> checklist, carcass → drum → table → finish</li>
+            <li>Cut from the nested <strong>Cut list</strong> (two 4×8 sheets)</li>
+            <li>Buy from <strong>Shopping</strong> (~$680 hardware + sheet goods)</li>
+            <li>Print <strong>Plans</strong> DS-1…DS-6 or download the OpenSCAD model</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Progress</h3>
+          <div style="height:10px;background:var(--ink2);border-radius:999px;overflow:hidden;margin:12px 0">
+            <div id="progressBar" style="height:100%;width:0;background:linear-gradient(90deg,var(--copper),var(--copper-hi));transition:width .35s"></div>
+          </div>
+          <p class="hint">Checklist progress stays in this browser (localStorage). Export JSON from the Files tab.</p>
+          <div class="row" style="margin-top:12px">
+            <button type="button" class="btn" data-go="assembly">Continue assembly</button>
+            <button type="button" class="btn" id="resetProgress">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <h2>Machine in one paragraph</h2>
+      <p class="lead">A 36×22×28″ Baltic-birch cabinet holds a 1.5 HP 56-frame motor. Two 3/4″ towers carry 1″ pillow blocks. A 6″ × 18″ drum on a 24″ shaft is driven ~1:2 by an A-section V-belt (~860 RPM). The 20×22″ table rides four 1/2-13 jacks through 2.5″ of travel. A sheet-metal hood dumps into a 4″ collector port. Wrap 18″ PSA paper; max take is 1/32″ hardwood per pass.</p>
+      <div class="card">
+        <h3>Safety</h3>
+        <ul class="warn-list">
+          <li>Never reach under a spinning drum. Stop, wait, then adjust jacks.</li>
+          <li>Dust collection on before any cut. Fine sanding dust is combustible.</li>
+          <li>Wrap PSA with the drum unplugged. Overlap ~1/4″, no wrinkles.</li>
+          <li>Magnetic switch so a power blip does not restart the drum.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- VIZ -->
+    <section class="panel" data-panel="viz" id="viz">
+      <p class="kicker">Three.js parametric model</p>
+      <h1>Breakdown &amp; visualization</h1>
+      <p class="lead">Orbit with drag, pinch to zoom. Click a part to inspect. Explode the assembly. The drum spins at preview speed — not shop RPM. If the CDN is blocked, an isometric SVG still picks and explodes.</p>
+      <div class="viz-wrap">
+        <div>
+          <div class="viz-stage" id="vizStage" aria-live="polite">
+            <div class="viz-msg">Open this tab to load the 3D model. Overview, cut list, and shopping work without it.</div>
+          </div>
+          <div class="viz-controls">
+            <label>Explode <input id="explodeRange" type="range" min="0" max="1" step="0.01" value="0" /> <span id="explodeVal" class="mono">0%</span></label>
+            <label>Table <input id="tableRange" type="range" min="0" max="1" step="0.01" value="0.35" /> <span id="tableVal" class="mono">0.88″</span></label>
+            <button type="button" class="btn" id="breakdownBtn">Breakdown</button>
+            <button type="button" class="btn" id="assembledBtn">Assembled</button>
+            <button type="button" class="btn primary" id="spinToggle">Spin drum</button>
+            <button type="button" class="btn" id="camReset">Reset camera</button>
+          </div>
+        </div>
+        <div>
+          <div class="card" id="partDetail" style="margin-bottom:10px">
+            <strong>Select a part</strong>
+            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the model or the list. Drag explode for an assembly breakdown.</p>
+          </div>
+          <div class="part-list" id="partList">
+            <button type="button" class="part" disabled><strong>Cabinet, drum, motor, table…</strong><small>List fills when scripts load</small></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSEMBLY -->
+    <section class="panel" data-panel="assembly" id="assembly">
+      <p class="kicker">Twelve shop steps</p>
+      <h1>Assembly guide</h1>
+      <p class="lead">Carcass, drum, table, finish. Check items off as you go — progress stays on this device.</p>
+      <div class="phase-rail">
+        <button type="button" class="chip on" data-phase="all">All</button>
+        <button type="button" class="chip" data-phase="carcass">01 Carcass</button>
+        <button type="button" class="chip" data-phase="drum">02 Drum</button>
+        <button type="button" class="chip" data-phase="table">03 Table</button>
+        <button type="button" class="chip" data-phase="finish">04 Finish</button>
+      </div>
+      <div id="assemblyList">
+        <article class="step"><div class="num">01</div><div><h3>Nest and cut plywood</h3><p>Lay out DS-2 on two 4×8 × 3/4″ Baltic birch sheets. Cut sides, front, back, bottom, motor shelf, table, aprons, and tower cheeks.</p></div></article>
+        <article class="step"><div class="num">02</div><div><h3>Assemble the cabinet</h3><p>Glue and screw the 36×22×28 carcass. Bottom sits in a 3/8″ dado. Square diagonals before the glue sets.</p></div></article>
+        <article class="step"><div class="num">03</div><div><h3>Motor shelf and wiring chase</h3><p>Install the 14″-deep shelf 8″ off the bottom on the left. Bore a 1.5″ belt slot in the left wall.</p></div></article>
+        <article class="step"><div class="num">04</div><div><h3>Stand the bearing towers</h3><p>Bolt 6×14 cheeks to the cabinet top, 19″ apart inside. They must be coplanar.</p></div></article>
+        <article class="step"><div class="num">05</div><div><h3>Align pillow blocks</h3><p>Set both 1″ pillow blocks. Use a dummy rod. Shim until the shaft spins with no bind.</p></div></article>
+        <article class="step"><div class="num">06</div><div><h3>Build the drum on the shaft</h3><p>Hubs in the 6″ tube, 24″ shaft through, lock collars outboard. Wrap PSA later.</p></div></article>
+        <article class="step"><div class="num">07</div><div><h3>Hang the drum</h3><p>Drop the shaft into the pillow blocks. End play ≤ 0.010″. TIR within 0.015″.</p></div></article>
+        <article class="step"><div class="num">08</div><div><h3>Drive and belt</h3><p>1.5 HP on the shelf, 2″ and 4″ pulleys, A-36 belt. ~1/2″ mid-span deflection.</p></div></article>
+        <article class="step"><div class="num">09</div><div><h3>Table and four jacks</h3><p>20×22 table, T-nuts at corners, 1/2-13 jacks with handwheels. 2.5″ travel.</p></div></article>
+        <article class="step"><div class="num">10</div><div><h3>Fence and stops</h3><p>3×20 fence 90° to the drum. UHMW wear strip on the infeed lip.</p></div></article>
+        <article class="step"><div class="num">11</div><div><h3>Dust hood and 4″ port</h3><p>Wrap the hood with ~3/8″ drum clearance. Port exits the back. Collector on.</p></div></article>
+        <article class="step"><div class="num">12</div><div><h3>Wire, wrap, true, test</h3><p>Magnetic switch + E-stop. 80-grit PSA. First pass: scrap pine, 1/64″ take.</p></div></article>
+      </div>
+    </section>
+
+    <!-- CUT LIST -->
+    <section class="panel" data-panel="cutlist" id="cutlist">
+      <p class="kicker">Two 4×8 sheets · inches</p>
+      <h1>Cut list</h1>
+      <p class="lead">All plywood is 3/4″ Baltic birch unless noted. Nesting is on DS-2. Check pieces as you cut them.</p>
+      <div class="row" style="margin-bottom:12px">
+        <button type="button" class="btn" id="resetCut">Reset cuts</button>
+        <span class="hint" id="cutTotal">12 line items</span>
+      </div>
+      <div class="card" style="overflow:auto">
+        <table>
+          <thead>
+            <tr><th></th><th>Qty</th><th>Material</th><th>Size</th><th>Part</th><th>Sheet</th></tr>
+          </thead>
+          <tbody id="cutBody">
+            <tr><td></td><td class="mono">2</td><td>3/4″ birch</td><td class="mono">22 × 28</td><td>Cabinet sides</td><td class="mono">A</td></tr>
+            <tr><td></td><td class="mono">1</td><td>3/4″ birch</td><td class="mono">34½ × 28</td><td>Cabinet front</td><td class="mono">A</td></tr>
+            <tr><td></td><td class="mono">1</td><td>3/4″ birch</td><td class="mono">34½ × 28</td><td>Cabinet back</td><td class="mono">B</td></tr>
+            <tr><td></td><td class="mono">1</td><td>3/4″ birch</td><td class="mono">34½ × 20½</td><td>Cabinet bottom</td><td class="mono">B</td></tr>
+            <tr><td></td><td class="mono">1</td><td>3/4″ birch</td><td class="mono">34½ × 14</td><td>Motor shelf</td><td class="mono">B</td></tr>
+            <tr><td></td><td class="mono">2</td><td>3/4″ birch</td><td class="mono">6 × 14</td><td>Bearing towers</td><td class="mono">A</td></tr>
+            <tr><td></td><td class="mono">1</td><td>3/4″ birch</td><td class="mono">20 × 22</td><td>Table top</td><td class="mono">B</td></tr>
+            <tr><td></td><td class="mono">2</td><td>3/4″ birch</td><td class="mono">3½ × 22</td><td>Table aprons (sides)</td><td class="mono">A</td></tr>
+            <tr><td></td><td class="mono">2</td><td>3/4″ birch</td><td class="mono">3½ × 18½</td><td>Table aprons (ends)</td><td class="mono">A</td></tr>
+            <tr><td></td><td class="mono">2</td><td>3/4″ birch</td><td class="mono">12 × 8</td><td>Hood cheeks</td><td class="mono">A</td></tr>
+            <tr><td></td><td class="mono">1</td><td>26 ga steel</td><td class="mono">20 × 12</td><td>Hood wrap</td><td class="mono">—</td></tr>
+            <tr><td></td><td class="mono">1</td><td>hardwood</td><td class="mono">¾ × 3 × 20</td><td>Fence</td><td class="mono">offcut</td></tr>
+            <tr><td></td><td class="mono">1</td><td>UHMW</td><td class="mono">⅛ × ¾ × 20</td><td>Infeed wear strip</td><td class="mono">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SHOPPING -->
+    <section class="panel" data-panel="shop" id="shop">
+      <p class="kicker">Hardware-store + motor shop</p>
+      <h1>Shopping list</h1>
+      <p class="lead">Prices are 2026 ballpark USD, not quotes. Check items as you buy. Reset anytime.</p>
+      <div class="row" style="margin-bottom:12px">
+        <button type="button" class="btn" id="resetShop">Reset bought</button>
+        <span class="hint">Est. total <strong class="mono" id="shopTotal">$766</strong> · bought <strong class="mono" id="shopBought">$0</strong></span>
+      </div>
+      <div class="card" style="overflow:auto">
+        <table>
+          <thead>
+            <tr><th></th><th>Qty</th><th>Item</th><th>Use</th><th>Est</th></tr>
+          </thead>
+          <tbody id="shopBody">
+            <tr><td></td><td class="mono">2</td><td>4×8 × 3/4″ Baltic birch</td><td>Carcass, table, towers</td><td class="mono">$160</td></tr>
+            <tr><td></td><td class="mono">1</td><td>1.5 HP 1725 RPM TEFC motor, 56 frame</td><td>Drum drive</td><td class="mono">$180</td></tr>
+            <tr><td></td><td class="mono">1 pr</td><td>1″ bore pillow-block bearings</td><td>Drum journals</td><td class="mono">$45</td></tr>
+            <tr><td></td><td class="mono">1</td><td>1″ × 24″ precision shaft</td><td>Drum axle</td><td class="mono">$35</td></tr>
+            <tr><td></td><td class="mono">1</td><td>6″ OD × 18″ tube + hubs</td><td>Sanding drum</td><td class="mono">$55</td></tr>
+            <tr><td></td><td class="mono">1</td><td>2″ A-section pulley, 1/2″ bore</td><td>Motor</td><td class="mono">$14</td></tr>
+            <tr><td></td><td class="mono">1</td><td>4″ A-section pulley, 1″ bore</td><td>Drum</td><td class="mono">$18</td></tr>
+            <tr><td></td><td class="mono">1</td><td>A-36 V-belt</td><td>Reduction drive</td><td class="mono">$12</td></tr>
+            <tr><td></td><td class="mono">4</td><td>1/2-13 × 8″ jack screw + handwheel</td><td>Table height</td><td class="mono">$48</td></tr>
+            <tr><td></td><td class="mono">4</td><td>1/2-13 T-nuts</td><td>Table corners</td><td class="mono">$8</td></tr>
+            <tr><td></td><td class="mono">1</td><td>4″ dust port flange</td><td>Collector hookup</td><td class="mono">$12</td></tr>
+            <tr><td></td><td class="mono">1</td><td>Magnetic motor starter + E-stop</td><td>Power</td><td class="mono">$55</td></tr>
+            <tr><td></td><td class="mono">1</td><td>18″ PSA sandpaper roll (80/120/180)</td><td>Abrasive</td><td class="mono">$40</td></tr>
+            <tr><td></td><td class="mono">4</td><td>3″ locking casters</td><td>Mobility</td><td class="mono">$32</td></tr>
+            <tr><td></td><td class="mono">1 box</td><td>#8 × 1-1/4″ screws</td><td>Carcass</td><td class="mono">$12</td></tr>
+            <tr><td></td><td class="mono">1 kit</td><td>1/4-20 bolts, lock collars, set screws</td><td>Drum / pulleys</td><td class="mono">$18</td></tr>
+            <tr><td></td><td class="mono">1</td><td>Wood glue + wipe-on poly</td><td>Cabinet</td><td class="mono">$22</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card">
+          <h3>Tools</h3>
+          <ul class="warn-list">
+            <li>Table saw or track saw</li>
+            <li>Drill press (bearing towers)</li>
+            <li>Dial indicator or truing stick</li>
+            <li>Dust collector ≥ 350 CFM</li>
+            <li>Multimeter (motor wiring)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Not in the cart</h3>
+          <p class="lead" style="margin:0">Dust collector, 220 V circuit if you step the motor up, and a PE review if this lives in a school shop. This is a hobby machine, not a listed commercial sander.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS -->
+    <section class="panel" data-panel="plans" id="plans">
+      <p class="kicker">DS-1 … DS-6 · inches</p>
+      <h1>Plan sheets</h1>
+      <p class="lead">Tap a sheet to enlarge. Print from the browser for shop copies. Dimensions govern over the 3D preview.</p>
+      <div class="gallery" id="plansGrid">
+        <a class="shot" href="plans/DS1_general.svg"><img src="plans/DS1_general.svg" alt="DS-1"/><figcaption>DS-1 · General arrangement</figcaption></a>
+        <a class="shot" href="plans/DS2_plywood.svg"><img src="plans/DS2_plywood.svg" alt="DS-2"/><figcaption>DS-2 · Plywood nesting</figcaption></a>
+        <a class="shot" href="plans/DS3_drum.svg"><img src="plans/DS3_drum.svg" alt="DS-3"/><figcaption>DS-3 · Drum, shaft, bearings</figcaption></a>
+        <a class="shot" href="plans/DS4_table.svg"><img src="plans/DS4_table.svg" alt="DS-4"/><figcaption>DS-4 · Table &amp; jacks</figcaption></a>
+        <a class="shot" href="plans/DS5_drive.svg"><img src="plans/DS5_drive.svg" alt="DS-5"/><figcaption>DS-5 · Drive &amp; dust</figcaption></a>
+        <a class="shot" href="plans/DS6_cutlist.svg"><img src="plans/DS6_cutlist.svg" alt="DS-6"/><figcaption>DS-6 · Cut list &amp; hardware</figcaption></a>
+      </div>
+    </section>
+
+    <!-- FILES -->
+    <section class="panel" data-panel="files" id="files">
+      <p class="kicker">CAD · plans · progress</p>
+      <h1>Downloads</h1>
+      <p class="lead">OpenSCAD parametric model, SVG plan sheets, and a JSON dump of your checklist.</p>
+      <div class="dl-grid" id="downloadGrid">
+        <a class="dl" href="../cad/drum_sander.scad" download><b>drum_sander.scad</b><span>OpenSCAD parametric</span></a>
+        <a class="dl" href="plans/DS1_general.svg" download><b>DS-1 SVG</b><span>General arrangement</span></a>
+        <a class="dl" href="plans/DS6_cutlist.svg" download><b>DS-6 SVG</b><span>Cut list</span></a>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button type="button" class="btn primary" id="exportBtn">Export progress JSON</button>
+      </div>
+      <p class="hint">Local preview: <span class="mono">python3 -m http.server 8080</span> then open <span class="mono">/shop/drum-sander/app/#overview</span></p>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Mobile">
+    <button type="button" class="on" data-tab="overview">Home</button>
+    <button type="button" data-tab="viz">3D</button>
+    <button type="button" data-tab="assembly">Build</button>
+    <button type="button" data-tab="cutlist">Cuts</button>
+    <button type="button" data-tab="shop">Buy</button>
+  </nav>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button type="button" class="btn" id="lightboxClose">Close</button>
+  <div id="lightboxBody"></div>
+</div>
+
+<script src="data.js"></script>
+<script type="module" src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js").catch(function () {});
+}
+</script>
+</body>
+</html>

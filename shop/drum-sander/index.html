@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="DS-18 shop-built 18″ drum sander — 3D model, cut list, shopping list, plan sheets." />
+<title>DS-18 — Shop Drum Sander</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#12151a;--paper:#f4efe6;--dim:#b8b0a4;--copper:#e09a58;--ply:#c4a574;
+  --disp:"Newsreader",Georgia,serif;--sans:"Libre Franklin",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.55}
+.wrap{width:min(900px,calc(100% - 40px));margin:0 auto;padding:48px 0 80px}
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--copper)}
+h1{font:600 clamp(36px,6vw,64px)/1.05 var(--disp);margin:12px 0 16px}
+.lead{color:var(--dim);font-size:18px;max-width:54ch;margin-bottom:28px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+a.btn{display:inline-flex;padding:12px 18px;border:1px solid rgba(224,154,88,.5);border-radius:8px;color:var(--paper);text-decoration:none;font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+a.btn.primary{background:linear-gradient(180deg,rgba(196,122,58,.5),rgba(196,122,58,.18))}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px 0}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{border:1px solid rgba(244,239,230,.12);border-radius:10px;padding:16px;background:#1a1f27}
+.card b{display:block;font:600 22px/1.1 var(--disp);margin-top:4px}
+.card span{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7a7368}
+p.note{color:var(--dim);font-size:14px;max-width:60ch}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Shop project · DS-18</p>
+  <h1>Open-drum sander, built in plywood</h1>
+  <p class="lead">Eighteen-inch drum, six-inch diameter, 1.5 horsepower, height-adjust table, 4″ dust port. Orbit the model, explode the machine, cut two sheets of birch, and buy the hardware from one list.</p>
+  <div class="row">
+    <a class="btn primary" href="app/#overview">Open the build app</a>
+    <a class="btn" href="app/#viz">3D model</a>
+    <a class="btn" href="cad/drum_sander.scad">OpenSCAD</a>
+  </div>
+  <div class="grid">
+    <div class="card"><span>Drum</span><b>18″ × 6″ OD</b></div>
+    <div class="card"><span>Cabinet</span><b>36 × 22 × 28″</b></div>
+    <div class="card"><span>Motor</span><b>1.5 HP · ~860 RPM</b></div>
+  </div>
+  <p class="note">Hobby machine, not UL listed. Magnetic switch, dust collection, and a 1/32″ max hardwood take are part of the design — not optional.</p>
+</div>
+</body>
+</html>

@@ -82,6 +82,27 @@
   to = "/fence/martin/app/"
   status = 301
 
+# ---- shop / DS-18 drum sander ----
+[[redirects]]
+  from = "/shop"
+  to = "/shop/"
+  status = 301
+
+[[redirects]]
+  from = "/drum-sander"
+  to = "/shop/drum-sander/"
+  status = 301
+
+[[redirects]]
+  from = "/shop/drum-sander"
+  to = "/shop/drum-sander/"
+  status = 301
+
+[[redirects]]
+  from = "/shop/drum-sander/app"
+  to = "/shop/drum-sander/app/"
+  status = 301
+
 [[redirects]]
   from = "/stele"
   to = "/fence/stele/"
@@ -130,3 +151,19 @@
   for = "/fence/martin/plans/*"
   [headers.values]
     Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/shop/drum-sander/app/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/shop/drum-sander/app/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/shop/drum-sander/app/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
