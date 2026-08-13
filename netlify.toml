@@ -38,6 +38,20 @@
     # geolocation allowed on same origin for the Aegis Air "use my location" feature
     Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
 
+# This branch launches WALTER. The git root is still the old BEDROCK finance
+# PWA, so a Drop of the repo would otherwise open "The Dojo of Capital".
+# force=true is required because index.html exists at /. BEDROCK stays at /app/.
+[[redirects]]
+  from = "/"
+  to = "/shop/drum-sander/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/dojo"
+  to = "/app/"
+  status = 301
+
 [[redirects]]
   from = "/app"
   to = "/app/"

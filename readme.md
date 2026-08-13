@@ -20,11 +20,20 @@ Hosting this on Netlify does not add them.
 
 ## Live site
 
-**https://darling-kleicha-ba04ad.netlify.app**
+**https://darling-kleicha-ba04ad.netlify.app** is the old BEDROCK finance homepage (Dojo of Capital). That is not WALTER.
 
-WALTER DS-16 plans (this branch): `/walter` · `/walter/app` · `/walter/pocket` · `/walter/pack`
+On this branch, a Netlify deploy of the repo **opens the drum sander** (`/` → `/shop/drum-sander/`). Direct paths:
 
-Production currently follows Git `main`. Deploy branch `cursor/walter-drum-sander-plans-5bdd` (or merge it) so `/walter` is on the live site.
+- Viewer (phone): `/walter/view`
+- Plans + 3D: `/walter`
+- Shop pack ZIP: `/walter/pack`
+- Pocket card: `/walter/pocket`
+
+BEDROCK, if you still want it: `/app/` or `/dojo`.
+
+Production currently follows Git `main`, which does **not** include WALTER. Deploy branch `cursor/walter-drum-sander-plans-5bdd` (or merge it).
+
+To Drop **only** the sander (homepage is WALTER, no finance app): drag the `shop/drum-sander` folder onto https://app.netlify.com/drop
 
 ## Deploy — drag & drop (about 60 seconds)
 1. Go to https://app.netlify.com/drop

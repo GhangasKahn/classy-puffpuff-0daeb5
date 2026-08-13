@@ -1,0 +1,75 @@
+# WALTER DS-16 — use this file when the publish directory is this folder
+# (Netlify Drop of shop/drum-sander only). The monorepo root netlify.toml
+# is what runs when the whole repo is published.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/app/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/view/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/view/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/renders/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/pack/*.zip"
+  [headers.values]
+    Content-Type = "application/zip"
+    Content-Disposition = "attachment; filename=\"WALTER-DS16-RevB.zip\""
+
+[[headers]]
+  for = "/vendor/*"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[redirects]]
+  from = "/walter"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/view"
+  to = "/view/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/app"
+  to = "/app/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/pack"
+  to = "/pack/WALTER-DS16-RevB.zip"
+  status = 301
+
+[[redirects]]
+  from = "/walter/pocket"
+  to = "/pocket/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/model"
+  to = "/model/"
+  status = 301

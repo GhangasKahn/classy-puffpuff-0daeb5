@@ -1,0 +1,3 @@
+# WALTER first. force (!) so existing index.html (BEDROCK) is not served at /.
+/    /shop/drum-sander/   302!
+/dojo    /app/   301

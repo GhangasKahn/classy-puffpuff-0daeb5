@@ -19,7 +19,7 @@ Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron 
 - Fabrication dump: `cad/fabrication.json` · `pack/parts.csv` · `pack/joints.csv`
 - Isometric renders: `renders/iso_assembled.svg` etc.
 
-On iPhone, Safari often opens SVG instead of saving. Use **Share to Files** on the ZIP, or open the pocket card and Add to Home Screen / Print → PDF.
+On this branch a Netlify deploy of the **repo** opens WALTER at `/` (not the old BEDROCK finance homepage). Bookmark `/walter/view` for the phone viewer.
 
 ## Spec (Rev B)
 
