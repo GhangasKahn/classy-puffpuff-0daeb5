@@ -1,10 +1,8 @@
-// WALTER DS-16 — OpenSCAD preview model (inches)
-// Open in OpenSCAD for a quick 3D sanity check of proportions.
+// WALTER DS-16 Rev B — OpenSCAD preview (inches)
 // Authoritative dimensions: walter_ds16.py
 
 $fn = 48;
 
-capacity = 15.5;
 drum_od = 5.0;
 drum_len = 15.75;
 shaft_od = 0.75;
@@ -14,11 +12,16 @@ side_d = 22;
 clear = 16.5;
 table_t = 1.5;
 table_w = 16;
-table_d = 20;
+table_d = 22;
 
 module side_panel() {
-  color("#c4a574")
-  cube([side_t, side_d, side_h]);
+  color("#c4a574") cube([side_t, side_d, side_h]);
+}
+
+module way() {
+  color("#d9dcde")
+  translate([side_t, 1, 10])
+    cube([0.75, side_d - 2, 0.75]);
 }
 
 module stretcher(z) {
@@ -33,18 +36,31 @@ module drum() {
       color("#b8a990")
         cylinder(h=drum_len, d=drum_od, center=true);
       color("#8a9098")
-        cylinder(h=22, d=shaft_od, center=true);
+        cylinder(h=22.5, d=shaft_od, center=true);
     }
 }
 
 module table() {
-  color("#d9dcde")
-  translate([side_t + (clear - table_w)/2, 1, 14])
+  color("#cfd3d5")
+  translate([side_t + (clear - table_w)/2, 0.5, 14])
     cube([table_w, table_d, table_t]);
 }
 
+module acme(x) {
+  color("#8a9098")
+  translate([x, 4, 2])
+    cylinder(h=16, d=0.5);
+}
+
+module roller(y) {
+  translate([side_t + clear/2, y, 16.7])
+    rotate([0, 90, 0])
+      color("#5a6068")
+        cylinder(h=drum_len, d=1.25, center=true);
+}
+
 module motor() {
-  color("#5a6068")
+  color("#4a5058")
   translate([side_t + 2, 3, 2])
     cube([6, 8, 6]);
 }
@@ -57,14 +73,19 @@ module hood() {
         sphere(r=5);
 }
 
-// Assembly
 side_panel();
 translate([side_t + clear, 0, 0]) side_panel();
-color("#a89070") translate([0, 0, 0]) cube([clear + 2*side_t, side_d, 0.75]);
+way();
+translate([clear - 0.75, 0, 0]) way();
+color("#a89070") cube([clear + 2*side_t, side_d, 0.75]);
 stretcher(6);
 stretcher(12);
 stretcher(20);
 drum();
 table();
+acme(side_t + 2);
+acme(side_t + clear - 2);
+roller(7.5);
+roller(14.5);
 motor();
 hood();

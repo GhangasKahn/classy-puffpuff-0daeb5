@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-8  ·  Hold-downs &amp; output</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Rollers · truing sled · optional oscillator</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SPRING HOLD-DOWN ROLLERS — the snipe / chatter fix</text>
+<circle cx='280.0' cy='260.0' r='70.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
+<text x='280.0' y='265.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle' font-weight='600'>DRUM</text>
+<circle cx='140.0' cy='330.0' r='28.0' fill='#6e7578' stroke='#1a1f24' stroke-width='1.5'/>
+<circle cx='420.0' cy='330.0' r='28.0' fill='#6e7578' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='140.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>INFEED</text>
+<text x='420.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>OUTFEED</text>
+<rect x='80.0' y='358.0' width='400.0' height='16.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<text x='280.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='middle'>Set rollers 0.030" BELOW drum OD (paper on)</text>
+<text x='560.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Rollers: ⌀1.25" rubber × ~15.75" on ⅜″ axles, spring yokes.</text>
+<text x='560.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Light springs. Excess pressure = snipe (same as Jet/Grizzly tension rollers).</text>
+<text x='560.0' y='184.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Leading-end snipe → ease OUTFEED spring. Trailing-end snipe → ease INFEED.</text>
+<text x='560.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Stock shorter than 12″ rides a sled that the rollers can still pinch.</text>
+<text x='560.0' y='248.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Hold-downs keep the board on the table plane — that is coplanarity in use, not just at setup.</text>
+<text x='40.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>FULL-WIDTH TRUING SLED</text>
+<rect x='40.0' y='500.0' width='480.0' height='80.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
+<text x='280.0' y='545.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='middle' font-weight='600'>ABRASIVE FACE-UP  ·  RIDES THE WAYS</text>
+<text x='40.0' y='610.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>True paper-off to 0.002″ TIR. The sled is as wide as the drum so you cannot dish the middle.</text>
+<text x='560.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>OPTIONAL SLOW OSCILLATOR</text>
+<text x='560.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Stroke 0.125" at ~80 cycles/min — NOT drum RPM.</text>
+<text x='560.0' y='538.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  60–90 RPM gearmotor + scotch yoke on the floating idler housing.</text>
+<text x='560.0' y='566.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Drum RPM axial cam is vibration, not oscillation. Keep them separate.</text>
+<text x='560.0' y='594.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Erases the helical tracks of a 3″ spiral wrap (the commercial trick).</text>
+<text x='560.0' y='622.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Belt must tolerate ⅛″ walk — slightly wide pulley or crown.</text>
+<text x='560.0' y='650.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Hood clearance = stroke + ¼″. Switch osc off for veneer if you want.</text>
+<text x='40.0' y='680.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>OUTPUT MODES</text>
+<text x='40.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>THICKNESS</text>
+<text x='180.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Home dog in. Hold-downs on. 80→120→180. Caliper 4 corners. Stop at 0.001″ passes.</text>
+<text x='40.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>TAPER</text>
+<text x='180.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Uncouple left. Drop B a few thousandths. Door edges, guitar sides. Return to home dog.</text>
+<text x='40.0' y='772.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>VENEER</text>
+<text x='180.0' y='772.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>220 grit, 0.001″, hold-downs, extractor on, optional osc off. Backer sled.</text>
+<text x='40.0' y='800.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>WIDE / FLIP</text>
+<text x='180.0' y='800.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>If a panel is wider than 15.5″, leave B ~0.002″ low, flip, overlap — Jet ridge trick.</text>
+<text x='40.0' y='828.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>CROSS</text>
+<text x='180.0' y='828.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Last finish pass: rotate the panel 90° to break remaining tracks.</text>
+<text x='40.0' y='880.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WHY REV A WAS NOT ENOUGH</text>
+<text x='40.0' y='912.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>One screw + one shimmed bearing can be parallel once. Paper wrap, humidity, and a racking table undo it.</text>
+<text x='40.0' y='940.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>No hold-downs: the board lifts into the drum — snipe and thickness scatter even with a perfect A/B.</text>
+<text x='40.0' y='968.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Spiral wrap without oscillation: helical grooves. Dual lift + ways + rollers + clocking is the actual quality stack.</text>
+</svg>

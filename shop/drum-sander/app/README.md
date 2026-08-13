@@ -1,6 +1,6 @@
 # WALTER DS-16
 
-Modern dedicated **drum thickness sander** build plans — ShopNotes No. 86 lineage via Ron Walters, redesigned as Rev A with a solid sliding table (no conveyor).
+Modern dedicated **drum thickness sander** build plans — ShopNotes No. 86 lineage via Ron Walters. Rev B: dual-end geometry, ways, hold-downs, ±0.003″ A/B spec.
 
 ## Live paths
 

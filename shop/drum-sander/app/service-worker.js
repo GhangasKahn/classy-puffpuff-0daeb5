@@ -1,4 +1,4 @@
-const CACHE = "walter-ds16-v1";
+const CACHE = "walter-ds16-v2";
 const ASSETS = [
   "./",
   "./index.html",

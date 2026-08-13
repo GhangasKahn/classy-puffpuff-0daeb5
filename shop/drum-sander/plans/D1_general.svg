@@ -7,12 +7,12 @@
 <text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-1  ·  General arrangement</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Scale ~1:8 · inches · overall machine</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev A solid-table redesign</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SIDE ELEVATION — drive side</text>
 <text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>15.5" capacity · ⌀5.0" drum @ ~1035 RPM · 0.5 HP 1725 RPM · solid sliding table (no conveyor)</text>
 <rect x='80.0' y='380.0' width='396.0' height='540.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.8'/>
-<rect x='98.0' y='641.0' width='360.0' height='27.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
-<text x='278.0' y='659.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>TABLE</text>
+<rect x='98.0' y='641.0' width='396.0' height='27.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='296.0' y='659.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>TABLE</text>
 <circle cx='278.0' cy='595.1' r='45.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
 <circle cx='278.0' cy='595.1' r='4.0' fill='#8a9098' stroke='#1a1f24' stroke-width='1'/>
 <text x='278.0' y='538.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>DRUM ⌀5"</text>
@@ -48,11 +48,11 @@
 <polygon points='1061.5,500.0 1051.5,496.0 1051.5,504.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
 <rect x='830.6' y='478.0' width='230.7' height='22.0' fill='#f3f1ec'/>
 <text x='946.0' y='494.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='middle'>16.5" CLEAR / 15.5" WORK</text>
-<text x='780.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LINEAGE: ShopNotes 86 table-saw unit → Walters dedicated motor → this Rev A.</text>
-<text x='780.0' y='586.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>FEED: Solid laminated table + push sticks. Conveyor deleted (tracking failures).</text>
-<text x='780.0' y='612.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>DRIVE: 3″ motor / 5″ drum pulleys → ~1035 RPM · ~1350 sfpm surface.</text>
-<text x='780.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>DRUM: 19×¾″ core + 2×¾″ BB ends on precision ¾″ shaft · Velcro hook wrap.</text>
-<text x='780.0' y='664.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>ADJUST: Idler flange bearing on jack/shim pad for parallelism or light taper.</text>
-<text x='780.0' y='690.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>SAFETY: Hood is a guard. Never open while spinning. Light passes only.</text>
-<text x='780.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>DUST: 4″ port to collector. MDF dust is heavy — run extraction every session.</text>
+<text x='780.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LINEAGE: ShopNotes 86 → Walters → Rev A solid table → Rev B geometry.</text>
+<text x='780.0' y='586.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>FEED: Table in UHMW ways + spring hold-downs. Conveyor still deleted.</text>
+<text x='780.0' y='612.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LIFT: Dual ½-10 Acme, chain-coupled. Left uncouples for taper; home dog.</text>
+<text x='780.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>DRIVE: 3″ / 5″ pulleys → ~1035 RPM · ~1350 sfpm. Pulley faces coplanar.</text>
+<text x='780.0' y='664.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>DRUM: Pack-bored discs · floating idler bearing · true, then wrap, then re-clock.</text>
+<text x='780.0' y='690.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QUALITY: |A−B| ≤ 0.003″ paper-on · TIR ≤ 0.002″ · 0.001″ finish passes.</text>
+<text x='780.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>SAFETY: Hood is a guard. Hold-downs on. Never open while spinning.</text>
 </svg>

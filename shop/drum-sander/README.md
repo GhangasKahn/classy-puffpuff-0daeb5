@@ -1,23 +1,27 @@
 # WALTER DS-16
 
-Modern dedicated **drum thickness sander** build plans — ShopNotes No. 86 lineage via Ron Walters, redesigned as Rev A with a solid sliding table (no conveyor).
+Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron Walters.
+
+- **Rev A:** solid sliding table (no conveyor)
+- **Rev B:** dual-end geometry, UHMW ways, hold-downs, paper-on A/B spec ±0.003″
 
 ## Live paths
 
 - Design overview: `/shop/drum-sander/` · shortcuts `/walter` · `/drum` · `/shop`
 - Build app: `/shop/drum-sander/app/` · `/walter/app` · `/drum/app`
-- Plans: `/shop/drum-sander/plans/D1_general.svg` … `D6_cutlist.svg`
+- Plans: `D1` … `D8` in `/shop/drum-sander/plans/`
 
-## Spec (Rev A)
+## Spec (Rev B)
 
 | Item | Value |
 |------|-------|
 | Capacity | 15.5″ wide · 1/16″–3″ thick |
+| Quality | \|A−B\| ≤ 0.003″ paper-on · TIR ≤ 0.002″ |
 | Drum | ⌀5″ × 15.75″ @ ~1035 RPM |
-| Motor | ½ HP 1725 RPM · 3″/5″ pulleys |
-| Frame | ¾″ Baltic birch · flange bearings |
-| Feed | Solid laminated table + push sticks |
-| Dust | Kerf-bent hood · 4″ port |
+| Lift | Dual ½-10 Acme, chain-coupled, left clutch + home dog |
+| Table | Torsion box in UHMW ways + phenolic/MIC-6 |
+| Hold-downs | Infeed/outfeed rollers 0.030″ below drum |
+| Oscillator | Optional ⅛″ @ ~80 cpm (not drum RPM) |
 
 ## Regenerate plans
 
@@ -25,7 +29,7 @@ Modern dedicated **drum thickness sander** build plans — ShopNotes No. 86 line
 python3 scripts/gen_drum_sander_plans.py
 ```
 
-Parametric source: `cad/walter_ds16.py` · OpenSCAD preview: `cad/walter_ds16.scad`
+Parametric source: `cad/walter_ds16.py` · OpenSCAD: `cad/walter_ds16.scad`
 
 ## Sources
 

@@ -38,6 +38,7 @@
     <button type="button" class="tab on" data-tab="overview">Overview</button>
     <button type="button" class="tab" data-tab="viz">Explode</button>
     <button type="button" class="tab" data-tab="assembly">Assembly</button>
+    <button type="button" class="tab" data-tab="cal">Calibrate</button>
     <button type="button" class="tab" data-tab="materials">Materials</button>
     <button type="button" class="tab" data-tab="gallery">Plans</button>
     <button type="button" class="tab" data-tab="files">Files</button>
@@ -45,9 +46,9 @@
 
   <main>
     <section class="panel on" data-panel="overview" id="overview">
-      <p class="kicker">15.5″ · ⌀5″ drum · dedicated ½ HP · Rev A</p>
+      <p class="kicker">15.5″ · ⌀5″ drum · ±0.003″ A/B · Rev B</p>
       <h1>Build WALTER DS-16</h1>
-      <p class="lead">Modern engineering plans for a shop-built drum thickness sander — evolved from ShopNotes No. 86 and Ron Walters’ dedicated-motor rebuild, with the conveyor deleted and the hard-won fixes baked in.</p>
+      <p class="lead">Rev B is the geometry revision: dual-end lift, ways, hold-downs, and a paper-on indicator protocol. Parallel once is not enough — the machine has to stay coplanar while it cuts.</p>
       <div class="grid3" id="overviewStats"></div>
       <div class="hr"></div>
       <div class="grid2">
@@ -110,6 +111,21 @@
       <div id="assemblyList"></div>
     </section>
 
+    <section class="panel" data-panel="cal">
+      <p class="kicker">±0.003″ over 15.5″ · paper on</p>
+      <h1>Calibration</h1>
+      <p class="lead">Quality is three planes: table flatness, drum axis, feed vector. Clock A/B after the paper is on — wrap thickness is not uniform.</p>
+      <h3>Targets</h3>
+      <table class="bom" style="margin-bottom:24px">
+        <thead><tr><th>Check</th><th>Spec</th><th>Tool</th></tr></thead>
+        <tbody id="qualityList"></tbody>
+      </table>
+      <h3>Pass schedule</h3>
+      <div class="grid3" id="passList" style="margin:12px 0 28px"></div>
+      <h3>Protocol</h3>
+      <div id="calList"></div>
+    </section>
+
     <section class="panel" data-panel="materials">
       <p class="kicker">Shopping</p>
       <h1>Materials &amp; hardware</h1>
@@ -131,7 +147,7 @@
     </section>
 
     <section class="panel" data-panel="gallery">
-      <p class="kicker">Blueprints D-1…D-6</p>
+      <p class="kicker">Blueprints D-1…D-8</p>
       <h1>Plan sheets</h1>
       <p class="lead">Printable A3-landscape SVG. Open any sheet full-size for print or tablet shop use.</p>
       <div class="gal-grid" id="gallery"></div>

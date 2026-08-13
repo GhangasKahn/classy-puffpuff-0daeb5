@@ -60,8 +60,8 @@
     const items = [
       { k: "Capacity", v: D.meta.capacity + "″" },
       { k: "Drum", v: "⌀" + D.meta.drumOd + "″ @ " + D.meta.drumRpm + " RPM" },
-      { k: "Motor", v: D.meta.motorHp + " HP" },
-      { k: "Surface", v: "~" + D.meta.surfaceFpm + " sfpm" },
+      { k: "A/B spec", v: "±" + D.meta.parallelTol + "″" },
+      { k: "Rev", v: D.meta.revision },
     ];
     stats.innerHTML = items
       .map(
@@ -175,6 +175,57 @@
     })
   );
   renderAssembly();
+
+  /* Calibration */
+  const CALKEY = "walter_ds16_cal_v1";
+  function loadCal() {
+    try {
+      return JSON.parse(localStorage.getItem(CALKEY) || "{}");
+    } catch {
+      return {};
+    }
+  }
+  function saveCal(p) {
+    localStorage.setItem(CALKEY, JSON.stringify(p));
+  }
+  let cal = loadCal();
+
+  const qbox = $("#qualityList");
+  if (qbox) {
+    qbox.innerHTML = (D.quality || [])
+      .map((r) => `<tr><td>${r.check}</td><td>${r.spec}</td><td>${r.tool}</td></tr>`)
+      .join("");
+  }
+  const pbox = $("#passList");
+  if (pbox) {
+    pbox.innerHTML = (D.passes || [])
+      .map(
+        (p) =>
+          `<div class="stat"><span class="k">${p.grit} grit</span><strong>${p.depth}</strong><p class="hint" style="margin:8px 0 0">${p.use}</p></div>`
+      )
+      .join("");
+  }
+  function renderCal() {
+    const box = $("#calList");
+    if (!box) return;
+    box.innerHTML = (D.calibration || [])
+      .map((a) => {
+        const on = !!cal[a.id];
+        return `<label class="check-row ${on ? "done" : ""}">
+          <input type="checkbox" data-cid="${a.id}" ${on ? "checked" : ""}/>
+          <div><strong>${a.title}</strong><p>${a.body}</p></div>
+        </label>`;
+      })
+      .join("");
+    $$("input[data-cid]", box).forEach((inp) =>
+      inp.addEventListener("change", () => {
+        cal[inp.dataset.cid] = inp.checked;
+        saveCal(cal);
+        renderCal();
+      })
+    );
+  }
+  renderCal();
 
   /* Materials */
   const cuts = $("#cutList");

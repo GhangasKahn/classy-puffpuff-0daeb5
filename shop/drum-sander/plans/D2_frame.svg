@@ -7,14 +7,18 @@
 <text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-2  ·  Frame &amp; table</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Scale ~1:6 · Baltic birch structure</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev A solid-table redesign</text>
-<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SIDE PANEL — layout (make 2, mirrored)</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SIDE PANEL — layout (stack-drill as a pair, then split)</text>
 <rect x='60.0' y='120.0' width='484.0' height='660.0' fill='#c4a574' stroke='#1a1f24' stroke-width='2'/>
 <circle cx='302.0' cy='373.0' r='24.2' fill='none' stroke='#3d5a4c' stroke-width='2'/>
 <circle cx='302.0' cy='373.0' r='8.2' fill='#8a9098' stroke='#1a1f24' stroke-width='2'/>
 <text x='332.0' y='373.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start'>FLANGE BEARING CL</text>
-<rect x='93.0' y='428.0' width='374.0' height='8.8' fill='none' stroke='#5a6a4a' stroke-width='1.5' stroke-dasharray='6 4'/>
-<text x='280.0' y='417.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='middle'>TABLE LOCK SLOT</text>
+<rect x='93.0' y='296.0' width='396.0' height='16.5' fill='#c5c8c2' stroke='#3d5a4c' stroke-width='1.5'/>
+<text x='291.0' y='287.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='middle' font-weight='600'>UHMW WAY (inner face)</text>
+<circle cx='148.0' cy='516.0' r='5.5' fill='none' stroke='#8a9098' stroke-width='1.5'/>
+<circle cx='456.0' cy='516.0' r='5.5' fill='none' stroke='#8a9098' stroke-width='1.5'/>
+<text x='148.0' y='546.8' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#8a9098' text-anchor='middle'>L ACME</text>
+<text x='456.0' y='546.8' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#8a9098' text-anchor='middle'>R ACME</text>
 <circle cx='148.0' cy='648.0' r='8.8' fill='none' stroke='#6e7578' stroke-width='1.5'/>
 <text x='148.0' y='681.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='middle'>MOTOR PIVOT</text>
 <line x1='60.0' y1='780.0' x2='60.0' y2='828.0' stroke='#5a6a4a' stroke-width='1'/>
@@ -43,27 +47,30 @@
 <polygon points='580.0,780.0 576.0,790.0 584.0,790.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
 <polygon points='580.0,373.0 576.0,363.0 584.0,363.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
 <text x='592.0' y='581.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='start' transform='rotate(-90 592.0 581.5)'>18.5"</text>
-<text x='900.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>TABLE SANDWICH</text>
-<rect x='920.0' y='120.0' width='280.0' height='40.0' fill='#8a9098' stroke='#1a1f24' stroke-width='1.5'/>
-<text x='1060.0' y='145.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3f1ec' text-anchor='middle' font-weight='600'>WEAR: PHENOLIC / FORMICA</text>
-<rect x='920.0' y='160.0' width='280.0' height='50.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.5'/>
-<text x='1060.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>¾" PLY LAYER A</text>
-<rect x='920.0' y='210.0' width='280.0' height='50.0' fill='#b8a990' stroke='#1a1f24' stroke-width='1.5'/>
-<text x='1060.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>¾" PLY LAYER B — FULL GLUE</text>
-<text x='920.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Finished: 16.0" W × 20.0" D × 1.5"</text>
-<text x='920.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Do not screw-only — torsional stiffness needs continuous glue.</text>
-<text x='900.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>ELEVATION MECHANISM</text>
-<text x='920.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Screw</text>
-<text x='1040.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>¾″-6 Acme or wood-threaded oak dowel</text>
-<text x='920.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Travel</text>
-<text x='1040.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>3.25" typical</text>
-<text x='920.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Locks</text>
-<text x='1040.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>2× star knobs + elongated washers</text>
-<text x='920.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Nut</text>
-<text x='1040.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Tapped oak 2×4 or Acme nut in stretcher</text>
-<text x='920.0' y='532.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Tip</text>
-<text x='1040.0' y='532.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Unload screw with knobs before fine adjust</text>
-<text x='40.0' y='860.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>STRETCHERS — 3× between sides</text>
-<text x='40.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Front / mid / rear: 16.5" long × 4" × ¾" Baltic birch. Glue + screws. Mid stretcher carries elev nut.</text>
-<text x='40.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Idler-side bearing pad: oak block with jack screws or shim stack — Walters' recommended fix for out-of-parallel after paper wrap.</text>
+<text x='900.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>TABLE — TORSION BOX + WEAR FACE</text>
+<rect x='920.0' y='120.0' width='280.0' height='36.0' fill='#8a9098' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1060.0' y='143.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3f1ec' text-anchor='middle' font-weight='600'>WEAR: PHENOLIC / MIC-6</text>
+<rect x='920.0' y='156.0' width='280.0' height='36.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1060.0' y='179.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>¾" SKIN A</text>
+<rect x='920.0' y='192.0' width='280.0' height='28.0' fill='#b8a990' stroke='#1a1f24' stroke-width='1.2' stroke-dasharray='4 3'/>
+<text x='1060.0' y='211.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='middle'>½" RIBS @ 4" O.C. — FULL GLUE</text>
+<rect x='920.0' y='220.0' width='280.0' height='36.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1060.0' y='243.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>¾" SKIN B</text>
+<text x='920.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>16.0" W × 22.0" D · flatness ≤ 0.004" diag.</text>
+<text x='900.0' y='330.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DUAL-END LIFT (Rev B)</text>
+<text x='920.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Screws</text>
+<text x='1040.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Two ½″-10 Acme × 12″ + bronze nuts</text>
+<text x='920.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Couple</text>
+<text x='1040.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>#25 chain · both screws turn together</text>
+<text x='920.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Taper</text>
+<text x='1040.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Uncouple LEFT sprocket · then recouple</text>
+<text x='920.0' y='446.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Home</text>
+<text x='1040.0' y='446.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Dog stop = last known parallel</text>
+<text x='920.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Ways</text>
+<text x='1040.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>UHMW inner faces — no rack while feeding</text>
+<text x='920.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Travel</text>
+<text x='1040.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>3.25" · 1/40 turn ≈ 0.0025″</text>
+<text x='40.0' y='860.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>STRETCHERS — 3× between sides  ·  STACK-DRILL SIDES AS A PAIR</text>
+<text x='40.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Front / mid / rear: 16.5" × 4" × ¾" Baltic birch. Glue + screws. Ways — not stretchers — locate the table.</text>
+<text x='40.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Idler flange is FLOATING (axial slots). Drive flange is FIXED. Over-constraining both bearings bananas the shaft.</text>
 </svg>

@@ -149,7 +149,7 @@ class Sheet:
         self.text(
             W - 40,
             Hpx - 34,
-            "ShopNotes 86 → Walters → Rev A solid-table redesign",
+            "ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)",
             13,
             DIM,
             "end",
@@ -276,13 +276,13 @@ def sheet_d1():
     )
 
     notes = [
-        "LINEAGE: ShopNotes 86 table-saw unit → Walters dedicated motor → this Rev A.",
-        "FEED: Solid laminated table + push sticks. Conveyor deleted (tracking failures).",
-        "DRIVE: 3″ motor / 5″ drum pulleys → ~1035 RPM · ~1350 sfpm surface.",
-        "DRUM: 19×¾″ core + 2×¾″ BB ends on precision ¾″ shaft · Velcro hook wrap.",
-        "ADJUST: Idler flange bearing on jack/shim pad for parallelism or light taper.",
-        "SAFETY: Hood is a guard. Never open while spinning. Light passes only.",
-        "DUST: 4″ port to collector. MDF dust is heavy — run extraction every session.",
+        "LINEAGE: ShopNotes 86 → Walters → Rev A solid table → Rev B geometry.",
+        "FEED: Table in UHMW ways + spring hold-downs. Conveyor still deleted.",
+        "LIFT: Dual ½-10 Acme, chain-coupled. Left uncouples for taper; home dog.",
+        "DRIVE: 3″ / 5″ pulleys → ~1035 RPM · ~1350 sfpm. Pulley faces coplanar.",
+        "DRUM: Pack-bored discs · floating idler bearing · true, then wrap, then re-clock.",
+        "QUALITY: |A−B| ≤ 0.003″ paper-on · TIR ≤ 0.002″ · 0.001″ finish passes.",
+        "SAFETY: Hood is a guard. Hold-downs on. Never open while spinning.",
     ]
     for i, n in enumerate(notes):
         s.text(780, 560 + i * 26, n, 13, INK)
@@ -293,7 +293,7 @@ def sheet_d1():
 def sheet_d2():
     s = Sheet("D-2", "Frame & table", "Scale ~1:6 · Baltic birch structure")
     s.titleblock()
-    s.text(40, 70, "SIDE PANEL — layout (make 2, mirrored)", 16, ACC, bold=True)
+    s.text(40, 70, "SIDE PANEL — layout (stack-drill as a pair, then split)", 16, ACC, bold=True)
 
     sc = 22.0
     ox, oy = 60, 780
@@ -310,9 +310,13 @@ def sheet_d2():
     s.circle(X(bx), Y(bz), 1.1 * sc, fill="none", stroke=ACC, sw=2)
     s.circle(X(bx), Y(bz), 0.375 * sc, fill=STEEL, stroke=INK)
     s.text(X(bx) + 30, Y(bz), "FLANGE BEARING CL", 12, ACC)
-    # table slot
-    s.rect(X(1.5), Y(16), 17 * sc, 0.4 * sc, fill="none", stroke=DIM, sw=1.5, dash="6 4")
-    s.text(X(10), Y(16.5), "TABLE LOCK SLOT", 11, DIM, "middle")
+    # UHMW way
+    s.rect(X(1.5), Y(22), 18 * sc, 0.75 * sc, fill=LIGHT, stroke=ACC, sw=1.5)
+    s.text(X(10.5), Y(22.4), "UHMW WAY (inner face)", 11, ACC, "middle", bold=True)
+    s.circle(X(4), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
+    s.circle(X(18), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
+    s.text(X(4), Y(10.6), "L ACME", 10, STEEL, "middle")
+    s.text(X(18), Y(10.6), "R ACME", 10, STEEL, "middle")
     # motor pivot
     s.circle(X(4), Y(6), 0.4 * sc, fill="none", stroke=GRAY, sw=1.5)
     s.text(X(4), Y(4.5), "MOTOR PIVOT", 11, DIM, "middle")
@@ -323,44 +327,44 @@ def sheet_d2():
     s.dim_v(Y(0), Y(bz), X(S.side_depth), f'{bz:g}"', offset=36)
 
     # Table detail
-    s.text(900, 70, "TABLE SANDWICH", 16, ACC, bold=True)
-    s.rect(920, 120, 280, 40, fill=STEEL, stroke=INK, sw=1.5)
-    s.text(1060, 145, "WEAR: PHENOLIC / FORMICA", 12, PAPER, "middle", bold=True)
-    s.rect(920, 160, 280, 50, fill=WOOD, stroke=INK, sw=1.5)
-    s.text(1060, 190, '¾" PLY LAYER A', 12, INK, "middle")
-    s.rect(920, 210, 280, 50, fill=MDF, stroke=INK, sw=1.5)
-    s.text(1060, 240, '¾" PLY LAYER B — FULL GLUE', 12, INK, "middle")
-    s.text(920, 290, f'Finished: {S.table_width}" W × {S.table_depth}" D × {S.table_thick}"', 13, DIM)
-    s.text(920, 318, "Do not screw-only — torsional stiffness needs continuous glue.", 13, INK)
+    s.text(900, 70, "TABLE — TORSION BOX + WEAR FACE", 16, ACC, bold=True)
+    s.rect(920, 120, 280, 36, fill=STEEL, stroke=INK, sw=1.5)
+    s.text(1060, 143, "WEAR: PHENOLIC / MIC-6", 12, PAPER, "middle", bold=True)
+    s.rect(920, 156, 280, 36, fill=WOOD, stroke=INK, sw=1.5)
+    s.text(1060, 179, '¾" SKIN A', 12, INK, "middle")
+    s.rect(920, 192, 280, 28, fill=MDF, stroke=INK, sw=1.2, dash="4 3")
+    s.text(1060, 211, '½" RIBS @ 4" O.C. — FULL GLUE', 11, INK, "middle")
+    s.rect(920, 220, 280, 36, fill=WOOD, stroke=INK, sw=1.5)
+    s.text(1060, 243, '¾" SKIN B', 12, INK, "middle")
+    s.text(920, 280, f'{S.table_width}" W × {S.table_depth}" D · flatness ≤ {S.table_flat_tol:.3f}" diag.', 13, DIM)
 
-    s.text(900, 380, "ELEVATION MECHANISM", 16, ACC, bold=True)
+    s.text(900, 330, "DUAL-END LIFT (Rev B)", 16, ACC, bold=True)
     rows = [
-        ("Screw", S.elev_screw),
-        ("Travel", f'{S.elev_travel}" typical'),
-        ("Locks", f"{S.lock_knobs}× star knobs + elongated washers"),
-        ("Nut", "Tapped oak 2×4 or Acme nut in stretcher"),
-        ("Tip", "Unload screw with knobs before fine adjust"),
+        ("Screws", "Two ½″-10 Acme × 12″ + bronze nuts"),
+        ("Couple", "#25 chain · both screws turn together"),
+        ("Taper", "Uncouple LEFT sprocket · then recouple"),
+        ("Home", "Dog stop = last known parallel"),
+        ("Ways", "UHMW inner faces — no rack while feeding"),
+        ("Travel", f'{S.elev_travel}" · 1/40 turn ≈ 0.0025″'),
     ]
-    yy = 420
+    yy = 368
     for a, b in rows:
         s.text(920, yy, a, 13, DIM, bold=True)
         s.text(1040, yy, b, 13, INK)
-        yy += 28
+        yy += 26
 
-    s.text(40, 860, "STRETCHERS — 3× between sides", 16, ACC, bold=True)
+    s.text(40, 860, "STRETCHERS — 3× between sides  ·  STACK-DRILL SIDES AS A PAIR", 16, ACC, bold=True)
     s.text(
         40,
         890,
-        f'Front / mid / rear: {S.clear_between_sides}" long × 4" × ¾" Baltic birch. '
-        "Glue + screws. Mid stretcher carries elev nut.",
+        f'Front / mid / rear: {S.clear_between_sides}" × 4" × ¾" Baltic birch. Glue + screws. Ways — not stretchers — locate the table.',
         14,
         INK,
     )
     s.text(
         40,
         920,
-        "Idler-side bearing pad: oak block with jack screws or shim stack — "
-        "Walters' recommended fix for out-of-parallel after paper wrap.",
+        "Idler flange is FLOATING (axial slots). Drive flange is FIXED. Over-constraining both bearings bananas the shaft.",
         14,
         INK,
     )
@@ -403,10 +407,10 @@ def sheet_d3():
     s.text(1580 - 60, 480, '5" PULLEY', 12, DIM, "middle")
 
     # Bearing boxes
-    for bx, lab in ((160, "DRIVE FLANGE"), (1380, "IDLER FLANGE*")):
+    for bx, lab in ((160, "DRIVE FIXED"), (1380, "IDLER FLOAT")):
         s.rect(bx, 330, 50, 140, fill=STEEL, stroke=INK, sw=1.5)
         s.text(bx + 25, 500, lab, 11, ACC, "middle", bold=True)
-    s.text(1200, 540, "* adjustable height pad", 12, ACC)
+    s.text(1180, 540, "axial slots — do not lock both", 12, ACC)
 
     s.text(40, 620, "KEYING & GLUE", 16, ACC, bold=True)
     bullets = [
@@ -414,8 +418,9 @@ def sheet_d3():
         "Laminate with polyurethane or waterproof PVA; clamp axially while curing.",
         "MDF option: 1 mm cardboard/plastic relief every 4 discs — prevents glue-swell cracks (Walters/Wandel).",
         "Birch option: all Baltic birch discs — heavier, more stable (Heslop preference after MDF roller issues).",
-        "True the OD in place: abrasive face-up on a sled, light passes until concentric to the table plane.",
-        f"Wrap {S.velcro_width}\" hook Velcro; spiral {S.sandpaper_width}\" loop paper. Centrifugal force seats the hooks.",
+        "Pack-bore all discs in a jig (not one-at-a-time) so the bore is coaxial. Static-balance end discs.",
+        "True OD on the full-width sled that rides the ways (TIR ≤ 0.002″). THEN wrap paper. THEN re-clock A/B.",
+        f"Wrap {S.velcro_width}\" hook Velcro; spiral {S.sandpaper_width}\" loop paper. Paper thickness is not uniform — expect A/B to move.",
     ]
     for i, b in enumerate(bullets):
         s.text(40, 660 + i * 28, "•  " + b, 14, INK)
@@ -468,41 +473,43 @@ def sheet_d4():
     for i, n in enumerate(notes):
         s.text(700, 140 + i * 32, "•  " + n, 14, INK)
 
-    s.text(40, 520, "TABLE ELEVATION", 16, ACC, bold=True)
-    s.rect(80, 560, 400, 30, fill=LIGHT, stroke=INK)
-    s.text(280, 580, "TABLE", 12, DIM, "middle")
-    s.line(280, 590, 280, 780, 4, STEEL)
-    s.rect(250, 720, 60, 40, fill=WOOD, stroke=INK)
-    s.text(280, 745, "NUT", 11, INK, "middle", bold=True)
-    s.text(320, 700, "ACME / WOOD THREAD", 12, DIM)
-    s.rect(120, 620, 40, 80, fill=STEEL, stroke=INK)
-    s.rect(400, 620, 40, 80, fill=STEEL, stroke=INK)
-    s.text(140, 640, "LOCK", 10, PAPER, "middle")
-    s.text(420, 640, "LOCK", 10, PAPER, "middle")
+    s.text(40, 520, "DUAL ACME LIFT — chain couple", 16, ACC, bold=True)
+    s.rect(80, 560, 480, 28, fill=LIGHT, stroke=INK)
+    s.text(320, 580, "TABLE IN UHMW WAYS", 12, DIM, "middle")
+    s.line(160, 588, 160, 780, 4, STEEL)
+    s.line(480, 588, 480, 780, 4, STEEL)
+    s.rect(130, 720, 60, 36, fill=WOOD, stroke=INK)
+    s.rect(450, 720, 60, 36, fill=WOOD, stroke=INK)
+    s.text(160, 742, "L", 12, INK, "middle", bold=True)
+    s.text(480, 742, "R", 12, INK, "middle", bold=True)
+    s.line(190, 738, 450, 738, 2, ACC)
+    s.text(320, 728, "#25 CHAIN", 11, ACC, "middle")
+    s.circle(160, 700, 14, fill="none", stroke=ACC, sw=2)
+    s.text(160, 670, "CLUTCH", 10, ACC, "middle")
 
     elev = [
-        "Loosen both star knobs.",
-        "Turn elevating screw — light contact only.",
-        "Retighten knobs to unload the screw threads.",
-        "Elongated Formica/phenolic washers protect paint (Walters tip).",
-        "Never take a heavy cut — drum sanders remove thousandths per pass.",
+        "Both screws turn together → table stays coplanar while rising.",
+        "Uncouple LEFT only to correct |A−B| or to sand a taper.",
+        "Set the home dog at the last known parallel — return without re-indicating.",
+        "1/40 turn of ½-10 Acme ≈ 0.0025″ at that end.",
+        "Ways take feed load. Screws take elevation. Do not mix those jobs.",
+        "Light contact only. Finish passes 0.001″. This is not a planer.",
     ]
     for i, e in enumerate(elev):
-        s.text(700, 560 + i * 32, f"{i + 1}.  {e}", 14, INK)
+        s.text(700, 540 + i * 30, f"{i + 1}.  {e}", 14, INK)
 
-    s.text(40, 860, "IDLER BEARING MICRO-ADJUST", 16, ACC, bold=True)
+    s.text(40, 860, "PULLEY COPLANAR + FLOATING IDLER", 16, ACC, bold=True)
     s.text(
         40,
         895,
-        "Jack screws or shim stock under the left (idler) flange bearing correct "
-        "paper-thickness error and allow intentional light taper sanding.",
+        "Straightedge across both pulley faces before locking the motor cradle. Axial-float the idler flange so the shaft is not a three-force beam.",
         14,
         INK,
     )
     s.text(
         40,
         925,
-        "Reference oak locator blocks under both bearings so the drum returns to the same seat after removal.",
+        "Oak locator blocks under both bearings so the drum returns to the same seat after removal — then re-check TIR, not just seat marks.",
         14,
         INK,
     )
@@ -570,51 +577,172 @@ def sheet_d6():
 
     from walter_ds16 import cut_list, hardware_bom, assembly_phases
 
-    yy = 110
-    s.text(40, yy, "QTY", 12, DIM, bold=True)
-    s.text(100, yy, "SIZE", 12, DIM, bold=True)
-    s.text(520, yy, "STOCK", 12, DIM, bold=True)
-    s.text(780, yy, "USE", 12, DIM, bold=True)
-    yy += 28
+    yy = 108
+    s.text(40, yy, "QTY", 11, DIM, bold=True)
+    s.text(90, yy, "SIZE", 11, DIM, bold=True)
+    s.text(430, yy, "STOCK", 11, DIM, bold=True)
+    s.text(640, yy, "USE", 11, DIM, bold=True)
+    yy += 22
     for row in cut_list():
-        s.text(40, yy, str(row["qty"]), 13, INK)
-        s.text(100, yy, row["size"], 13, INK)
-        s.text(520, yy, row["stock"], 13, INK)
-        s.text(780, yy, row["use"], 13, INK)
-        yy += 26
-
-    s.text(40, yy + 20, "HARDWARE BOM", 16, ACC, bold=True)
-    yy += 50
-    for row in hardware_bom():
-        s.text(40, yy, row["qty"], 13, ACC, bold=True)
-        s.text(100, yy, row["item"], 13, INK)
-        yy += 24
-        if yy > 900:
-            break
-
-    # Assembly column
-    s.text(1100, 70, "BUILD SEQUENCE", 16, ACC, bold=True)
-    yy = 110
-    for step in assembly_phases():
-        s.text(1100, yy, step["id"].upper() + "  " + step["title"], 12, INK, bold=True)
+        s.text(40, yy, str(row["qty"]), 12, INK)
+        s.text(90, yy, row["size"][:42], 12, INK)
+        s.text(430, yy, row["stock"][:22], 12, INK)
+        s.text(640, yy, row["use"][:36], 12, INK)
         yy += 22
-        # wrap body lightly
-        body = step["body"]
-        if len(body) > 48:
-            body = body[:48] + "…"
-        s.text(1100, yy, body, 11, DIM)
-        yy += 28
+
+    s.text(40, yy + 12, "HARDWARE (hold-down / oscillator detail on D-8)", 16, ACC, bold=True)
+    yy += 38
+    for row in hardware_bom()[:10]:
+        s.text(40, yy, row["qty"][:8], 12, ACC, bold=True)
+        s.text(110, yy, row["item"][:78], 12, INK)
+        yy += 20
+
+    s.text(1100, 70, "BUILD SEQUENCE", 16, ACC, bold=True)
+    yy = 108
+    for step in assembly_phases():
+        s.text(1100, yy, step["id"].upper() + "  " + step["title"][:34], 12, INK, bold=True)
+        yy += 26
 
     s.text(
         40,
         1050,
         "Sources: woodgears.ca/reader/walters/drum_sander.html · YouTube W-5Sj6kBVic · "
-        "ShopNotes 86 · Heslop/Hawley notes on woodgears.ca",
+        "ShopNotes 86 · Jet/Grizzly parallel & tension-roller practice",
         12,
         DIM,
     )
 
     s.save("D6_cutlist.svg")
+
+
+def sheet_d7():
+    s = Sheet("D-7", "Geometry & calibration", "Parallelism · coplanarity · indicator protocol")
+    s.titleblock()
+    s.text(40, 70, "THREE PLANES THAT MAKE THE CUT QUALITY", 16, ACC, bold=True)
+
+    # Table plane box
+    s.rect(60, 110, 420, 200, fill=LIGHT, stroke=INK, sw=1.5)
+    s.text(270, 145, "1  TABLE PLANE", 14, ACC, "middle", bold=True)
+    s.text(80, 180, "Torsion box + wear face", 13, INK)
+    s.text(80, 204, f"Flatness ≤ {S.table_flat_tol:.3f}\" on both diagonals", 13, INK)
+    s.text(80, 228, "UHMW ways: no twist, no rack", 13, INK)
+    s.text(80, 252, "Wear face is the metrology surface", 13, INK)
+
+    s.rect(510, 110, 420, 200, fill=MDF, stroke=INK, sw=1.5)
+    s.text(720, 145, "2  DRUM AXIS", 14, ACC, "middle", bold=True)
+    s.text(530, 180, f"TIR ≤ {S.drum_tir:.3f}\" paper off", 13, INK)
+    s.text(530, 204, "Pack-bore + floating idler", 13, INK)
+    s.text(530, 228, "True on ways-riding sled", 13, INK)
+    s.text(530, 252, "Re-clock AFTER paper wrap", 13, INK)
+
+    s.rect(960, 110, 420, 200, fill=WOOD, stroke=INK, sw=1.5)
+    s.text(1170, 145, "3  FEED VECTOR", 14, ACC, "middle", bold=True)
+    s.text(980, 180, "Hold-downs keep stock on plane 1", 13, INK)
+    s.text(980, 204, "Ways take thrust; screws take lift", 13, INK)
+    s.text(980, 228, "Steady feed = even chip load", 13, INK)
+    s.text(980, 252, "Oscillator erases spiral tracks", 13, INK)
+
+    # A/B diagram
+    s.text(40, 350, "A / B INDICATOR CLOCK  —  paper ON  —  same indicator, both ends", 16, ACC, bold=True)
+    s.rect(80, 380, 520, 80, fill=MDF, stroke=INK)
+    s.text(340, 425, "DRUM  (paper on)", 14, INK, "middle", bold=True)
+    s.rect(80, 490, 520, 36, fill=LIGHT, stroke=INK)
+    s.text(340, 514, "TABLE WEAR FACE", 12, DIM, "middle")
+    s.line(120, 380, 120, 560, 1.5, ACC, dash="4 3")
+    s.line(560, 380, 560, 560, 1.5, ACC, dash="4 3")
+    s.text(120, 580, "A  DRIVE", 13, ACC, "middle", bold=True)
+    s.text(560, 580, "B  IDLER", 13, ACC, "middle", bold=True)
+    s.text(340, 580, f"|A − B|  ≤  {S.parallel_tol:.3f}\"", 14, INK, "middle", bold=True)
+
+    from walter_ds16 import quality_targets, pass_schedule, calibration_steps
+
+    s.text(700, 350, "QUALITY TARGETS", 16, ACC, bold=True)
+    yy = 384
+    for row in quality_targets():
+        s.text(700, yy, row["check"], 12, INK, bold=True)
+        s.text(980, yy, row["spec"], 12, DIM)
+        yy += 24
+
+    s.text(40, 640, "CALIBRATION SEQUENCE (unplugged)", 16, ACC, bold=True)
+    yy = 672
+    for step in calibration_steps():
+        s.text(40, yy, step["id"].upper(), 12, ACC, bold=True)
+        s.text(90, yy, step["title"] + " — " + step["body"][:88], 12, INK)
+        yy += 24
+
+    s.text(40, 900, "PASS SCHEDULE", 16, ACC, bold=True)
+    xx = 40
+    for p in pass_schedule():
+        s.rect(xx, 920, 280, 70, fill=LIGHT, stroke=INK, sw=1)
+        s.text(xx + 14, 948, f"{p['grit']} grit  ·  {p['depth']}", 13, ACC, bold=True)
+        s.text(xx + 14, 972, p["use"], 12, INK)
+        xx += 300
+
+    s.save("D7_geometry.svg")
+
+
+def sheet_d8():
+    s = Sheet("D-8", "Hold-downs & output", "Rollers · truing sled · optional oscillator")
+    s.titleblock()
+    s.text(40, 70, "SPRING HOLD-DOWN ROLLERS — the snipe / chatter fix", 16, ACC, bold=True)
+
+    # drum + rollers schematic
+    s.circle(280, 260, 70, fill=MDF, stroke=INK, sw=2)
+    s.text(280, 265, "DRUM", 12, INK, "middle", bold=True)
+    s.circle(140, 330, 28, fill=GRAY, stroke=INK, sw=1.5)
+    s.circle(420, 330, 28, fill=GRAY, stroke=INK, sw=1.5)
+    s.text(140, 390, "INFEED", 12, ACC, "middle", bold=True)
+    s.text(420, 390, "OUTFEED", 12, ACC, "middle", bold=True)
+    s.rect(80, 358, 400, 16, fill=LIGHT, stroke=INK)
+    s.text(280, 430, f"Set rollers {S.roller_setbelow:.3f}\" BELOW drum OD (paper on)", 13, DIM, "middle")
+
+    rules = [
+        f"Rollers: ⌀{S.roller_od}\" rubber × ~{S.roller_len}\" on ⅜″ axles, spring yokes.",
+        "Light springs. Excess pressure = snipe (same as Jet/Grizzly tension rollers).",
+        "Leading-end snipe → ease OUTFEED spring. Trailing-end snipe → ease INFEED.",
+        "Stock shorter than 12″ rides a sled that the rollers can still pinch.",
+        "Hold-downs keep the board on the table plane — that is coplanarity in use, not just at setup.",
+    ]
+    for i, r in enumerate(rules):
+        s.text(560, 120 + i * 32, "•  " + r, 14, INK)
+
+    s.text(40, 470, "FULL-WIDTH TRUING SLED", 16, ACC, bold=True)
+    s.rect(40, 500, 480, 80, fill=MDF, stroke=INK)
+    s.text(280, 545, "ABRASIVE FACE-UP  ·  RIDES THE WAYS", 13, INK, "middle", bold=True)
+    s.text(40, 610, "True paper-off to 0.002″ TIR. The sled is as wide as the drum so you cannot dish the middle.", 13, INK)
+
+    s.text(560, 470, "OPTIONAL SLOW OSCILLATOR", 16, ACC, bold=True)
+    osc = [
+        f"Stroke {S.osc_stroke:g}\" at ~{S.osc_cpm:g} cycles/min — NOT drum RPM.",
+        "60–90 RPM gearmotor + scotch yoke on the floating idler housing.",
+        "Drum RPM axial cam is vibration, not oscillation. Keep them separate.",
+        "Erases the helical tracks of a 3″ spiral wrap (the commercial trick).",
+        "Belt must tolerate ⅛″ walk — slightly wide pulley or crown.",
+        "Hood clearance = stroke + ¼″. Switch osc off for veneer if you want.",
+    ]
+    for i, o in enumerate(osc):
+        s.text(560, 510 + i * 28, "•  " + o, 14, INK)
+
+    s.text(40, 680, "OUTPUT MODES", 16, ACC, bold=True)
+    modes = [
+        ("THICKNESS", "Home dog in. Hold-downs on. 80→120→180. Caliper 4 corners. Stop at 0.001″ passes."),
+        ("TAPER", "Uncouple left. Drop B a few thousandths. Door edges, guitar sides. Return to home dog."),
+        ("VENEER", "220 grit, 0.001″, hold-downs, extractor on, optional osc off. Backer sled."),
+        ("WIDE / FLIP", "If a panel is wider than 15.5″, leave B ~0.002″ low, flip, overlap — Jet ridge trick."),
+        ("CROSS", "Last finish pass: rotate the panel 90° to break remaining tracks."),
+    ]
+    yy = 716
+    for name, body in modes:
+        s.text(40, yy, name, 13, ACC, bold=True)
+        s.text(180, yy, body, 13, INK)
+        yy += 28
+
+    s.text(40, 880, "WHY REV A WAS NOT ENOUGH", 16, ACC, bold=True)
+    s.text(40, 912, "One screw + one shimmed bearing can be parallel once. Paper wrap, humidity, and a racking table undo it.", 13, INK)
+    s.text(40, 940, "No hold-downs: the board lifts into the drum — snipe and thickness scatter even with a perfect A/B.", 13, INK)
+    s.text(40, 968, "Spiral wrap without oscillation: helical grooves. Dual lift + ways + rollers + clocking is the actual quality stack.", 13, INK)
+
+    s.save("D8_holddowns.svg")
 
 
 def main():
@@ -624,6 +752,8 @@ def main():
     sheet_d4()
     sheet_d5()
     sheet_d6()
+    sheet_d7()
+    sheet_d8()
     print("done →", OUT)
 
 

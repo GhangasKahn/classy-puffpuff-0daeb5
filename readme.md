@@ -5,7 +5,7 @@ A complete, self-contained website:
 - `index.html` — the public **landing page** (the marketing front door)
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
-- `shop/drum-sander/` — **WALTER DS-16** modern drum thickness sander plans (Walters / ShopNotes lineage): design page, D-1…D-6 blueprints, Build app at `/walter` · `/drum`
+- `shop/drum-sander/` — **WALTER DS-16** drum thickness sander (Walters / ShopNotes lineage), Rev B geometry: `/walter` · `/drum`
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, plan generators)
 - `fence/martin/app/` — interactive **MARTIN Build** PWA (visualize, assembly checklist, materials, joinery, gallery, drafts, downloads) at `/martin/app` or `/build`
 - `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`)

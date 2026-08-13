@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-7  ·  Geometry &amp; calibration</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Parallelism · coplanarity · indicator protocol</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry (∥ · coplanar · hold-downs)</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>THREE PLANES THAT MAKE THE CUT QUALITY</text>
+<rect x='60.0' y='110.0' width='420.0' height='200.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='270.0' y='145.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='middle' font-weight='600'>1  TABLE PLANE</text>
+<text x='80.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Torsion box + wear face</text>
+<text x='80.0' y='204.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Flatness ≤ 0.004" on both diagonals</text>
+<text x='80.0' y='228.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>UHMW ways: no twist, no rack</text>
+<text x='80.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Wear face is the metrology surface</text>
+<rect x='510.0' y='110.0' width='420.0' height='200.0' fill='#b8a990' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='720.0' y='145.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='middle' font-weight='600'>2  DRUM AXIS</text>
+<text x='530.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>TIR ≤ 0.002" paper off</text>
+<text x='530.0' y='204.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Pack-bore + floating idler</text>
+<text x='530.0' y='228.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>True on ways-riding sled</text>
+<text x='530.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Re-clock AFTER paper wrap</text>
+<rect x='960.0' y='110.0' width='420.0' height='200.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1170.0' y='145.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='middle' font-weight='600'>3  FEED VECTOR</text>
+<text x='980.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Hold-downs keep stock on plane 1</text>
+<text x='980.0' y='204.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Ways take thrust; screws take lift</text>
+<text x='980.0' y='228.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Steady feed = even chip load</text>
+<text x='980.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Oscillator erases spiral tracks</text>
+<text x='40.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>A / B INDICATOR CLOCK  —  paper ON  —  same indicator, both ends</text>
+<rect x='80.0' y='380.0' width='520.0' height='80.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
+<text x='340.0' y='425.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='middle' font-weight='600'>DRUM  (paper on)</text>
+<rect x='80.0' y='490.0' width='520.0' height='36.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<text x='340.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>TABLE WEAR FACE</text>
+<line x1='120.0' y1='380.0' x2='120.0' y2='560.0' stroke='#3d5a4c' stroke-width='1.5' stroke-dasharray='4 3'/>
+<line x1='560.0' y1='380.0' x2='560.0' y2='560.0' stroke='#3d5a4c' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='120.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>A  DRIVE</text>
+<text x='560.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>B  IDLER</text>
+<text x='340.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='middle' font-weight='600'>|A − B|  ≤  0.003"</text>
+<text x='700.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>QUALITY TARGETS</text>
+<text x='700.0' y='384.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Table flatness</text>
+<text x='980.0' y='384.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.004″ on both diagonals</text>
+<text x='700.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Drum TIR (paper off)</text>
+<text x='980.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.002″ TIR</text>
+<text x='700.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Drum ∥ table (paper on)</text>
+<text x='980.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>|A−B| ≤ 0.003″ over 15.5″</text>
+<text x='700.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Way coplanar</text>
+<text x='980.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>No twist; table slides without bind</text>
+<text x='700.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Pulley coplanar</text>
+<text x='980.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Faces flush; belt tracks center</text>
+<text x='700.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Hold-down set</text>
+<text x='980.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Rollers 0.030″ below drum OD</text>
+<text x='700.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Thickness scatter</text>
+<text x='980.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.003″ after finish pass</text>
+<text x='40.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>CALIBRATION SEQUENCE (unplugged)</text>
+<text x='40.0' y='672.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C1</text>
+<text x='90.0' y='672.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Disconnect power — Unplug. Hood off. Paper off for TIR; paper on for A/B parallel.</text>
+<text x='40.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C2</text>
+<text x='90.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Seat the table in the ways — Raise/lower through full travel. No bind, no rock. Winding sticks on wear face — no twis</text>
+<text x='40.0' y='720.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C3</text>
+<text x='90.0' y='720.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Drum TIR — Indicator on mid-span OD. Rotate by hand. If &gt; 0.002″, re-true on the sled before wrappi</text>
+<text x='40.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C4</text>
+<text x='90.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Wrap &amp; re-clock — Velcro then spiral paper. Paper is not uniform — A/B will change. This is the measuremen</text>
+<text x='40.0' y='768.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C5</text>
+<text x='90.0' y='768.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>A/B parallel — Same indicator height, drive end then idler. Uncouple left Acme; 1/40 turn ≈ 0.0025″. Re</text>
+<text x='40.0' y='792.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C6</text>
+<text x='90.0' y='792.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Hold-down height — Feelers under each roller vs drum. 0.030″ below. Leading snipe → ease outfeed spring; tr</text>
+<text x='40.0' y='816.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C7</text>
+<text x='90.0' y='816.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Witness board — 6″ × 16″ maple, 80 grit, one pass. Ridge at overlap = idler high/low. Caliper corners. L</text>
+<text x='40.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C8</text>
+<text x='90.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Taper mode (optional) — Uncouple left, drop idler a few thousandths, sand, then return to home dog — do not re-i</text>
+<text x='40.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>PASS SCHEDULE</text>
+<rect x='40.0' y='920.0' width='280.0' height='70.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1'/>
+<text x='54.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>80 grit  ·  0.008″</text>
+<text x='54.0' y='972.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Flatten / mill marks / glue</text>
+<rect x='340.0' y='920.0' width='280.0' height='70.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1'/>
+<text x='354.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>120 grit  ·  0.004″</text>
+<text x='354.0' y='972.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Thickness to +0.008″ of final</text>
+<rect x='640.0' y='920.0' width='280.0' height='70.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1'/>
+<text x='654.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>180 grit  ·  0.001″</text>
+<text x='654.0' y='972.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Finish pass; optional 90° cross</text>
+<rect x='940.0' y='920.0' width='280.0' height='70.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1'/>
+<text x='954.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>220 grit  ·  0.001″</text>
+<text x='954.0' y='972.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Veneer / figured maple — hold-downs on</text>
+</svg>
