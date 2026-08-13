@@ -49,6 +49,7 @@ export function slimWatch(session) {
     events: (session.events || []).slice(-80),
     apiCalls: session.apiCalls || [],
     cursor: session.cursor,
+    address: session.current?.url || session.apiCalls?.at(-1)?.path || "about:idle",
   };
 }
 
@@ -148,12 +149,14 @@ async function stepSearch(session, searchFn) {
   const call = {
     at: now(),
     method: "GET",
+    host: "api.ebay.com",
     path: session.proof.api,
     query: { q: cfg.q, category_ids: cfg.categoryId, filter: `price:[${cfg.minPrice}..${cfg.maxPrice}]` },
   };
   session.apiCalls.push(call);
   log(session, "info", `Browse search "${cfg.q}" · $${cfg.minPrice}–$${cfg.maxPrice} · cat ${cfg.categoryId}`);
   persist("watch", session);
+  const t0 = Date.now();
   try {
     const { page, attempt, error } = await searchBrowseWithFallback(
       {
@@ -166,6 +169,7 @@ async function stepSearch(session, searchFn) {
       searchFn
     );
     call.status = 200;
+    call.ms = Date.now() - t0;
     call.sort = attempt?.sort || null;
     call.categoryIds = attempt?.categoryIds || null;
     call.total = page.total;
@@ -195,6 +199,7 @@ async function stepSearch(session, searchFn) {
     return session;
   } catch (e) {
     call.status = e.status || 500;
+    call.ms = Date.now() - t0;
     call.error = e.message;
     return fail(session, `Browse failed: ${e.message}`);
   }
@@ -243,15 +248,18 @@ async function stepDetail(session, getItemFn) {
   const call = {
     at: now(),
     method: "GET",
+    host: "api.ebay.com",
     path: `/buy/browse/v1/item/${id}`,
     itemId: id,
   };
   session.apiCalls.push(call);
   log(session, "info", `getItem ${id} — official listing page (images, specifics, description)`);
   persist("watch", session);
+  const t0 = Date.now();
   try {
     const detail = await fetch(id);
     call.status = 200;
+    call.ms = Date.now() - t0;
     const merged = normalizeProduct(
       { ...item, ...detail, image: detail.image || item.image, url: detail.url || item.url, detailFetched: true },
       { source: "ebay_browse" }
@@ -265,6 +273,7 @@ async function stepDetail(session, getItemFn) {
     });
   } catch (e) {
     call.status = e.status || 500;
+    call.ms = Date.now() - t0;
     call.error = e.message;
     item.detailFetched = false;
     item.detailError = e.message;

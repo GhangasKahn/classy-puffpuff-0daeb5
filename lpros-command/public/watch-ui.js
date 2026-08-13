@@ -74,27 +74,60 @@ function renderProof(s) {
 }
 
 function renderLog(s) {
-  const el = $("watchLog");
-  if (!el) return;
-  el.textContent = (s?.events || [])
+  const text = (s?.events || [])
     .map((e) => `${(e.at || "").slice(11, 19)} [${e.phase || ""}] ${e.message}`)
     .join("\n");
-  el.scrollTop = el.scrollHeight;
+  ["watchLog", "vmTermLog"].forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    el.textContent = text;
+    el.scrollTop = el.scrollHeight;
+  });
 }
 
 function renderCalls(s) {
-  const el = $("watchCalls");
-  if (!el) return;
-  el.innerHTML = (s?.apiCalls || [])
-    .slice(-8)
+  const html = (s?.apiCalls || [])
+    .slice()
     .reverse()
-    .map(
-      (c) =>
-        `<div><b>${esc(c.method)}</b> ${esc(c.path)} <span>${c.status ?? "…"}</span>${
-          c.sample != null ? ` · ${c.sample} items` : ""
-        }</div>`
-    )
+    .map((c) => {
+      const ms = c.ms != null ? `${c.ms}ms` : "…";
+      return `<div><b>${esc(c.status ?? "…")}</b> ${esc(c.method)} ${esc(c.host || "api.ebay.com")}${esc(c.path)} <span>${ms}</span>${
+        c.sample != null ? ` · ${c.sample} items` : ""
+      }</div>`;
+    })
     .join("");
+  ["watchCalls", "vmNetLog"].forEach((id) => {
+    const el = $(id);
+    if (el) el.innerHTML = html || `<div class="muted">No API calls yet</div>`;
+  });
+}
+
+function renderListing(item) {
+  const box = $("vmListing");
+  if (!box) return;
+  if (!item) {
+    box.hidden = true;
+    box.innerHTML = "";
+    return;
+  }
+  box.hidden = false;
+  const specs = item.itemSpecifics || {};
+  const specRows = Object.entries(specs)
+    .slice(0, 8)
+    .map(([k, v]) => `<div><b>${esc(k)}</b> ${esc(v)}</div>`)
+    .join("");
+  const thumbs = (item.images || []).slice(0, 6)
+    .map((u) => `<img src="${esc(u)}" alt="" />`)
+    .join("");
+  box.innerHTML = `
+    <div class="meta"><span>LIVE getItem</span><span>${esc(item.itemId || item.id || "")}</span></div>
+    ${thumbs ? `<div class="vm-gallery">${thumbs}</div>` : ""}
+    <h3>${esc((item.title || "").slice(0, 140))}</h3>
+    <p><b>$${Number(item.price || 0).toFixed(2)}</b> · ${esc(item.condition || "")} · ${esc(item.seller || "")}</p>
+    <p class="sub">${esc((item.descriptionExcerpt || "Waiting on description from getItem…").slice(0, 420))}</p>
+    ${specRows ? `<div class="spec">${specRows}</div>` : ""}
+    ${item.url ? `<p><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.url)}</a></p>` : ""}
+  `;
 }
 
 function renderHero(item) {
@@ -183,7 +216,15 @@ export function renderWatch(s) {
   renderLog(s);
   renderCalls(s);
   renderHero(s?.current);
+  renderListing(s?.current);
   renderGallery(s);
+  const addr = $("vmAddr");
+  if (addr) {
+    const last = (s?.apiCalls || []).at(-1);
+    addr.textContent =
+      s?.current?.url ||
+      (last ? `https://${last.host || "api.ebay.com"}${last.path}` : "about:idle");
+  }
 }
 
 async function loopTicks() {
@@ -230,6 +271,7 @@ export async function startResearchWatch(payload) {
   const p = payload || formPayload();
   fillWatchForm(p);
   window.showTab?.("watch");
+  document.body.classList.add("vm-live");
   if ($("watchLog")) $("watchLog").textContent = "Booting research VM…";
   if ($("vmBadge")) {
     $("vmBadge").textContent = "BOOT";
@@ -242,27 +284,58 @@ export async function startResearchWatch(payload) {
 }
 
 export async function bootWatch() {
-  if (!$("tab-watch")) return;
+  if (!$("vmDock") && !$("tab-watch")) return;
   $("watchStartBtn")?.addEventListener("click", () => {
     startResearchWatch(formPayload()).catch((e) => {
       if ($("watchLog")) $("watchLog").textContent = String(e.message || e);
     });
   });
-  $("watchCancelBtn")?.addEventListener("click", async () => {
+  $("dockStartBtn")?.addEventListener("click", () => {
+    startResearchWatch(formPayload()).catch((e) => {
+      if ($("vmTermLog")) $("vmTermLog").textContent = String(e.message || e);
+    });
+  });
+  const cancel = async () => {
     if (!watch.session?.id) return;
     try {
       renderWatch(await api(`/research/watch/${watch.session.id}/cancel`, { method: "POST", body: {} }));
     } catch (e) {
       if ($("watchLog")) $("watchLog").textContent = String(e.message || e);
     }
-  });
+  };
+  $("watchCancelBtn")?.addEventListener("click", cancel);
+  $("dockCancelBtn")?.addEventListener("click", cancel);
   $("watchToMarket")?.addEventListener("click", () => window.showTab?.("market"));
+  $("vmViewTabs")?.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const view = btn.dataset.vmview;
+      $("vmViewTabs").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b === btn));
+      ["page", "term", "net"].forEach((name) => {
+        const el = $(`vm${name[0].toUpperCase()}${name.slice(1)}`);
+        if (el) el.hidden = name !== view;
+      });
+    });
+  });
+  window.showTab?.("watch");
   try {
     const data = await api("/research/watch");
     const last = (data.sessions || [])[0];
+    if (last && last.status === "running") {
+      renderWatch(last);
+      loopTicks();
+      return;
+    }
     if (last) renderWatch(last);
   } catch {
     /* empty */
+  }
+  try {
+    const h = await api("/health");
+    if (h.ebay?.appConfigured && !watch.looping) {
+      startResearchWatch(formPayload()).catch(() => {});
+    }
+  } catch {
+    /* ignore */
   }
 }
 

@@ -16,8 +16,8 @@
   <aside class="rail">
     <p class="rail-mark">LPROS</p>
     <nav class="rail-nav" aria-label="Desk">
-      <button type="button" class="rail-btn on" data-tab="launch">Launch</button>
-      <button type="button" class="rail-btn" data-tab="watch">Watch</button>
+      <button type="button" class="rail-btn" data-tab="launch">Launch</button>
+      <button type="button" class="rail-btn on" data-tab="watch">Watch</button>
       <button type="button" class="rail-btn" data-tab="market">Market</button>
       <button type="button" class="rail-btn" data-tab="packages">Packages</button>
       <button type="button" class="rail-btn" data-tab="registry">Registry</button>
@@ -58,7 +58,7 @@
 
   <main class="workspace">
     <!-- LAUNCH -->
-    <section class="tab on" id="tab-launch">
+    <section class="tab" id="tab-launch">
       <div class="cta-row sticky-cta">
         <button type="button" class="btn primary" id="btnLiveResearch">Live product research</button>
         <button type="button" class="btn primary" id="btnDeploy">Deploy marathon</button>
@@ -127,51 +127,33 @@
     </section>
 
     <!-- WATCH VM -->
-    <section class="tab" id="tab-watch">
+    <section class="tab on" id="tab-watch">
       <div class="cta-row sticky-cta">
         <button type="button" class="btn primary" id="watchStartBtn">Start live watch</button>
         <button type="button" class="btn ghost" id="watchCancelBtn">Cancel</button>
         <button type="button" class="btn ghost" id="watchToMarket">Open Market</button>
         <span class="sub tight" id="watchPhaseLabel">Idle — VM not running</span>
       </div>
-      <div class="watch-split">
-        <div class="panel watch-ops">
-          <h2>Operator</h2>
-          <p class="sub">Left: you. Right: the research VM hitting official eBay Browse in real time.</p>
-          <form id="watchForm" class="grid tight">
-            <label>Query <input name="q" value="solid wood desk organizer" /></label>
-            <label>Category <input name="categoryId" value="25339" /></label>
-            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
-            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
-            <label>Limit <input name="limit" type="number" value="40" /></label>
-            <label>getItem n <input name="detailCount" type="number" value="8" /></label>
-          </form>
-          <div class="watch-proof" id="watchProof">
-            <span>source —</span>
-            <span>env —</span>
-            <span>dryRun —</span>
-          </div>
-          <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
-          <h3 class="viz-title">API + agent log</h3>
-          <pre id="watchLog" class="out tall orch-log watch-term" aria-live="polite"></pre>
-          <div id="watchCalls" class="watch-calls"></div>
+      <div class="panel watch-ops">
+        <h2>Operator</h2>
+        <p class="sub">This column is you. The <b>research VM is pinned on the right</b> — you watch Browse + getItem land live listings, photos, and URLs. Not a CSV upload.</p>
+        <form id="watchForm" class="grid tight">
+          <label>Query <input name="q" value="solid wood desk organizer" /></label>
+          <label>Category <input name="categoryId" value="25339" /></label>
+          <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+          <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+          <label>Limit <input name="limit" type="number" value="40" /></label>
+          <label>getItem n <input name="detailCount" type="number" value="8" /></label>
+        </form>
+        <div class="watch-proof" id="watchProof">
+          <span>source —</span>
+          <span>env —</span>
+          <span>dryRun —</span>
         </div>
-        <div class="panel watch-vm-wrap">
-          <div class="vm-frame" id="vmFrame">
-            <div class="vm-titlebar">
-              <span class="vm-dots" aria-hidden="true"></span>
-              <span id="vmTitle">research-vm · idle</span>
-              <span class="vm-badge" id="vmBadge">STANDBY</span>
-            </div>
-            <div class="vm-screen">
-              <div class="vm-hero" id="watchHero">
-                <p class="muted">Start live watch to see Browse search and getItem land listing photos and URLs here. This is not a CSV upload.</p>
-              </div>
-              <div class="vm-gallery" id="watchGallery"></div>
-            </div>
-            <div class="vm-status" id="vmStatus">Waiting for a session</div>
-          </div>
-        </div>
+        <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
+        <h3 class="viz-title">API + agent log</h3>
+        <pre id="watchLog" class="out tall orch-log watch-term" aria-live="polite"></pre>
+        <div id="watchCalls" class="watch-calls"></div>
       </div>
     </section>
 
@@ -531,6 +513,42 @@
       </section>
     </section>
   </main>
+
+  <aside class="vm-dock" id="vmDock" aria-label="Research VM">
+    <div class="vm-frame" id="vmFrame">
+      <div class="vm-titlebar">
+        <span class="vm-dots" aria-hidden="true"></span>
+        <span id="vmTitle">research-vm · idle</span>
+        <span class="vm-badge" id="vmBadge">STANDBY</span>
+      </div>
+      <div class="vm-toolbar">
+        <button type="button" class="btn primary" id="dockStartBtn">Run research</button>
+        <button type="button" class="btn ghost" id="dockCancelBtn">Stop</button>
+      </div>
+      <div class="vm-addr" id="vmAddr" title="What the agent is fetching">about:idle</div>
+      <div class="vm-tabs" id="vmViewTabs">
+        <button type="button" class="on" data-vmview="page">Page</button>
+        <button type="button" data-vmview="term">Term</button>
+        <button type="button" data-vmview="net">Net</button>
+      </div>
+      <div class="vm-screen">
+        <div class="vm-view on" id="vmPage">
+          <div class="vm-hero idle" id="watchHero">
+            <p class="muted">Pinned research VM. Click Run research — live eBay Browse listings appear here with photos and /itm/ URLs. This is not uploaded CSV data.</p>
+          </div>
+          <div class="vm-listing" id="vmListing" hidden></div>
+          <div class="vm-gallery" id="watchGallery"></div>
+        </div>
+        <div class="vm-view" id="vmTerm" hidden>
+          <pre id="vmTermLog" class="out tall orch-log watch-term" aria-live="polite"></pre>
+        </div>
+        <div class="vm-view" id="vmNet" hidden>
+          <div id="vmNetLog" class="watch-calls"></div>
+        </div>
+      </div>
+      <div class="vm-status" id="vmStatus">Waiting for a session</div>
+    </div>
+  </aside>
 
   <aside class="inspector" id="inspector" hidden>
     <div class="insp-bar">

@@ -59,6 +59,8 @@ describe("research watch VM", () => {
     let cur = getWatch(session.id);
     assert.equal(cur.phase, "ingest");
     assert.equal(cur.raw.length, 2);
+    assert.equal(cur.apiCalls[0].host, "api.ebay.com");
+    assert.equal(typeof cur.apiCalls[0].ms, "number");
 
     await tickWatch(session.id, { n: 1 });
     cur = getWatch(session.id);
