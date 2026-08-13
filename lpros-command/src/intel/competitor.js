@@ -53,6 +53,7 @@ function toDeskItem(it) {
     images: it.images || [],
     thumbnail: it.thumbnail,
     watchCount: it.watchCount,
+    listingDate: it.listingDate || null,
     category: it.categories?.[0]?.categoryName || it.category || "",
   };
 }

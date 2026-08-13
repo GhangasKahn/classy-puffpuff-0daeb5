@@ -147,6 +147,7 @@ export async function buildCandidatesFromQuery({
         images: it.images || (it.image ? [it.image] : []),
         thumbnail: it.thumbnail || it.image || null,
         watchCount: it.watchCount ?? null,
+        listingDate: it.listingDate || null,
         seller: it.seller || null,
         soldComps,
         purchaseHistory: soldComps,

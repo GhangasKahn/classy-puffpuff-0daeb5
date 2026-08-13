@@ -1,3 +1,8 @@
+/**
+ * Fluid desk snap — maps any viewport onto a named layout.
+ * CSS reads data-layout / data-rail / data-vm plus --desk-* custom properties.
+ */
+
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { applyDeskLayout, snapLayout, snapName } from "../public/layout.js";
@@ -20,6 +25,12 @@ describe("desk layout snap", () => {
     assert.equal(snapName(5120), "ultra");
   });
 
+  it("keeps a horizontal research nav on every snap", () => {
+    for (const w of [390, 780, 1024, 1440, 2560]) {
+      assert.equal(snapLayout(w, 900).rail, "top");
+    }
+  });
+
   it("phones stack the VM unless landscape is short", () => {
     const portrait = snapLayout(390, 844);
     assert.equal(portrait.name, "phone");
@@ -34,10 +45,10 @@ describe("desk layout snap", () => {
     assert.equal(land.short, true);
   });
 
-  it("tablets compact the rail in landscape and stack VM in portrait", () => {
+  it("tablets stack VM in portrait and keep it beside the board in landscape", () => {
     const land = snapLayout(1024, 768);
     assert.equal(land.name, "tablet");
-    assert.equal(land.rail, "compact");
+    assert.equal(land.rail, "top");
     assert.equal(land.vm, "side");
 
     const port = snapLayout(900, 1200);
@@ -46,17 +57,17 @@ describe("desk layout snap", () => {
     assert.equal(port.vm, "bottom");
   });
 
-  it("desk and ultra keep a side rail + side VM with fluid vars", () => {
+  it("desk and ultra keep a side VM with fluid vars", () => {
     const desk = snapLayout(1600, 900);
     assert.equal(desk.name, "desk");
-    assert.equal(desk.rail, "side");
+    assert.equal(desk.rail, "top");
     assert.equal(desk.vm, "side");
-    assert.match(desk.vars["--rail-w"], /px$/);
+    assert.match(desk.vars["--rail-w"], /%/);
     assert.ok(Number(desk.vars["--vm-fr"]) > 0);
 
     const ultra = snapLayout(3840, 2160);
     assert.equal(ultra.name, "ultra");
-    assert.equal(ultra.rail, "side");
+    assert.equal(ultra.rail, "top");
     assert.equal(ultra.vm, "side");
   });
 
@@ -64,7 +75,7 @@ describe("desk layout snap", () => {
     const el = { dataset: {}, style: { props: {}, setProperty(k, v) { this.props[k] = v; } } };
     applyDeskLayout(el, snapLayout(1440, 900));
     assert.equal(el.dataset.layout, "desk");
-    assert.equal(el.dataset.rail, "side");
+    assert.equal(el.dataset.rail, "top");
     assert.equal(el.dataset.vm, "side");
     assert.equal(el.dataset.orient, "landscape");
     assert.ok(el.style.props["--desk-w"]);

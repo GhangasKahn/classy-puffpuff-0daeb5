@@ -47,7 +47,15 @@ const desk = {
 
 function showTab(name) {
   document.querySelectorAll(".tab").forEach((el) => el.classList.toggle("on", el.id === `tab-${name}`));
-  document.querySelectorAll(".rail-btn").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
+  const pipeline = new Set(["ops", "packages", "registry", "launch"]);
+  document.querySelectorAll(".rail .rail-nav .rail-btn").forEach((b) => {
+    const tab = b.dataset.tab;
+    b.classList.toggle("on", pipeline.has(name) ? tab === "ops" : tab === name);
+  });
+  document.querySelectorAll(".pipeline-subnav .rail-btn").forEach((b) => {
+    b.classList.toggle("on", b.dataset.tab === name);
+  });
+  document.body.dataset.suite = name === "watch" ? "watch" : "research";
 }
 window.showTab = showTab;
 
@@ -360,7 +368,82 @@ function drawSparkline(svg, values) {
       return `${x},${y}`;
     })
     .join(" ");
-  svg.appendChild(svgEl("polyline", { points: pts, fill: "none", stroke: "#c4f542", "stroke-width": 1.5 }));
+  svg.appendChild(svgEl("polyline", { points: pts, fill: "none", stroke: "#7ee0a3", "stroke-width": 1.5 }));
+}
+
+function listingAgeHours(row) {
+  const raw = row?.listingDate || row?.itemCreationDate;
+  if (!raw) return null;
+  const t = new Date(raw).getTime();
+  if (!Number.isFinite(t)) return null;
+  return Math.max(0, (Date.now() - t) / 3600000);
+}
+
+function drawAgeChart(svg, rows) {
+  if (!svg) return;
+  const bins = [
+    { label: "<6h", lo: 0, hi: 6, value: 0 },
+    { label: "6–24h", lo: 6, hi: 24, value: 0 },
+    { label: "1–3d", lo: 24, hi: 72, value: 0 },
+    { label: "3–7d", lo: 72, hi: 168, value: 0 },
+    { label: "7–14d", lo: 168, hi: 336, value: 0 },
+    { label: "14–30d", lo: 336, hi: 720, value: 0 },
+    { label: "30d+", lo: 720, hi: Infinity, value: 0 },
+  ];
+  let dated = 0;
+  for (const r of rows || []) {
+    const h = listingAgeHours(r);
+    if (h == null) continue;
+    dated += 1;
+    const bin = bins.find((b) => h >= b.lo && h < b.hi) || bins.at(-1);
+    bin.value += 1;
+  }
+  if (!dated) {
+    svg.innerHTML = "";
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8b9bb0", "font-size": 11 }, "No listingDate yet — fetch live"));
+    return;
+  }
+  drawHBars(svg, bins, {
+    color: "#6cb6ff",
+    onClick: () => showTab("market"),
+  });
+}
+
+function drawFreshness(svg, rows) {
+  if (!svg) return;
+  svg.innerHTML = "";
+  const days = [];
+  const now = new Date();
+  for (let i = 13; i >= 0; i -= 1) {
+    const d = new Date(now);
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - i);
+    days.push({ key: d.toISOString().slice(0, 10), label: `${d.getMonth() + 1}/${d.getDate()}`, value: 0 });
+  }
+  const index = new Map(days.map((d) => [d.key, d]));
+  let dated = 0;
+  for (const r of rows || []) {
+    const raw = r.listingDate || r.itemCreationDate;
+    if (!raw) continue;
+    const key = new Date(raw).toISOString().slice(0, 10);
+    if (index.has(key)) {
+      index.get(key).value += 1;
+      dated += 1;
+    }
+  }
+  if (!dated) {
+    svg.appendChild(svgEl("text", { x: 12, y: 24, fill: "#8b9bb0", "font-size": 11 }, "No creation dates in this sample"));
+    return;
+  }
+  const max = Math.max(...days.map((d) => d.value), 1);
+  days.forEach((d, i) => {
+    const x = 18 + i * 28;
+    const h = (d.value / max) * 130;
+    const y = 150 - h;
+    svg.appendChild(svgEl("rect", { x, y, width: 18, height: h, fill: "#7ee0a3", opacity: 0.85 }));
+    svg.appendChild(svgEl("text", { x, y: 168, fill: "#8b9bb0", "font-size": 8 }, d.label));
+    if (d.value) svg.appendChild(svgEl("text", { x, y: y - 4, fill: "#e7eef6", "font-size": 9 }, String(d.value)));
+  });
 }
 
 function renderStatStrip(el, stats) {
@@ -522,7 +605,11 @@ function filteredProducts() {
   if (f.min != null && f.min !== "") rows = rows.filter((r) => Number(r.price || r.salePrice || 0) >= Number(f.min));
   if (f.max != null && f.max !== "") rows = rows.filter((r) => Number(r.price || r.salePrice || 0) <= Number(f.max));
   const key = f.sort || "price";
-  rows.sort((a, b) => (Number(b[key]) || 0) - (Number(a[key]) || 0));
+  rows.sort((a, b) => {
+    const av = Number(a[key]) || 0;
+    const bv = Number(b[key]) || 0;
+    return key === "listingAgeHours" ? av - bv : bv - av;
+  });
   return rows;
 }
 
@@ -667,6 +754,8 @@ function renderDeskCharts() {
     yKey: "imageCount",
     onClick: openInspector,
   });
+  drawAgeChart($("chartAge"), desk.products);
+  drawFreshness($("chartFresh"), desk.products);
 }
 
 function setDeskBanner(msg, kind = "err") {
@@ -693,6 +782,8 @@ function clientProduct(item = {}) {
     image: images[0] || item.image || "",
     images,
     imageCount: item.imageCount ?? images.length,
+    listingDate: item.listingDate || item.itemCreationDate || "",
+    listingAgeHours: listingAgeHours(item),
     descriptionExcerpt: item.descriptionExcerpt || item.description || item.specificsSummary || "",
   };
 }
@@ -746,13 +837,14 @@ function hydrateMarketFromResearch(payload, meta = {}) {
         : "No products yet. Click Live product research (not Dry-run).");
   const imgs = desk.products.filter((p) => p.image).length;
   const urls = desk.products.filter((p) => p.url).length;
+  const stats = deriveMarketStats(desk.products);
   setKpis({
     products: desk.products.length,
     images: r.productsWithImages ?? imgs,
     variants: r.variantTotalGenerated ?? desk.variants.length,
     ideas: r.ideaCount ?? desk.ideas.length,
     packages: r.packageCount ?? desk.packages.length,
-    heat: r.trends?.hottestCategory?.heatScore ?? heatMax(r.trends),
+    heat: stats.median != null ? Math.round(stats.median) : r.trends?.hottestCategory?.heatScore ?? heatMax(r.trends),
   });
   renderDeskCharts();
   applyMarketFilters();
@@ -866,8 +958,34 @@ function numOrNull(v) {
   return Number.isFinite(n) ? n : null;
 }
 
+function suiteFields() {
+  const form = $("suiteQuery");
+  if (!form) return {};
+  const fd = new FormData(form);
+  return {
+    q: fd.get("q"),
+    categoryId: fd.get("categoryId"),
+    minPrice: Number(fd.get("minPrice")),
+    maxPrice: Number(fd.get("maxPrice")),
+    costRatio: Number(fd.get("costRatio")),
+  };
+}
+
+function syncSuiteToForms() {
+  const s = suiteFields();
+  for (const id of ["missionForm", "watchForm", "orchForm", "pgLaunchForm"]) {
+    const form = $(id);
+    if (!form) continue;
+    for (const [k, v] of Object.entries(s)) {
+      if (form[k] && v != null && v !== "" && !Number.isNaN(v)) form[k].value = v;
+    }
+  }
+}
+
 function missionPayload() {
+  syncSuiteToForms();
   const fd = new FormData($("missionForm"));
+  const suite = suiteFields();
   const evidence = {};
   const soldCount = numOrNull(fd.get("soldCount"));
   const avgSoldPrice = numOrNull(fd.get("avgSoldPrice"));
@@ -881,12 +999,12 @@ function missionPayload() {
   if (leadTimeDays != null) evidence.leadTimeDays = leadTimeDays;
 
   return {
-    q: fd.get("q"),
-    categoryId: fd.get("categoryId"),
+    q: suite.q || fd.get("q"),
+    categoryId: suite.categoryId || fd.get("categoryId"),
     categoryLabel: "Home",
-    minPrice: Number(fd.get("minPrice")),
-    maxPrice: Number(fd.get("maxPrice")),
-    costRatio: Number(fd.get("costRatio")),
+    minPrice: Number(suite.minPrice ?? fd.get("minPrice")),
+    maxPrice: Number(suite.maxPrice ?? fd.get("maxPrice")),
+    costRatio: Number(suite.costRatio ?? fd.get("costRatio")),
     deepCrawl: fd.get("deepCrawl") === "on",
     crawlPages: 2,
     targetDailyProfit: 50,
@@ -1654,8 +1772,17 @@ $("btnIntel").onclick = async () => {
 };
 
 $("btnLiveResearch")?.addEventListener("click", () => {
+  syncSuiteToForms();
+  showTab("market");
   runLiveResearch(missionPayload()).catch(() => {});
 });
+$("suiteQuery")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  syncSuiteToForms();
+  showTab("market");
+  runLiveResearch(missionPayload()).catch(() => {});
+});
+$("suiteQuery")?.addEventListener("input", () => syncSuiteToForms());
 
 $("evidenceForm").onsubmit = async (e) => {
   e.preventDefault();
@@ -1886,12 +2013,12 @@ $("compareClear")?.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeInspector();
   if (e.target && ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
-  const tabs = ["launch", "watch", "market", "packages", "registry", "ops", "playground"];
-  if (e.key >= "1" && e.key <= "7") showTab(tabs[Number(e.key) - 1]);
+  const tabs = ["market", "watch", "analysis", "playground", "ops"];
+  if (e.key >= "1" && e.key <= "5") showTab(tabs[Number(e.key) - 1]);
   if (e.key === "/") {
     e.preventDefault();
-    showTab("market");
-    $("marketSearch")?.focus();
+    const q = $("suiteQuery")?.elements?.namedItem("q") || $("marketSearch");
+    q?.focus?.();
   }
 });
 

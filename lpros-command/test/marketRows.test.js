@@ -99,6 +99,13 @@ describe("marketRows", () => {
     assert.equal(row.url, "https://www.ebay.com/itm/44");
     assert.ok(row.image);
     assert.ok(row.imageCount >= 2);
+    const dated = normalizeProduct({
+      title: "Oak",
+      price: 49,
+      url: "https://www.ebay.com/itm/1",
+      listingDate: "2026-08-12T12:00:00.000Z",
+    });
+    assert.equal(dated.listingDate, "2026-08-12T12:00:00.000Z");
   });
 });
 

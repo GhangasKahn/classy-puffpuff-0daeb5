@@ -33,21 +33,15 @@ export function snapLayout(width = 1280, height = 800) {
   const landscape = w >= h;
   const short = h > 0 && h < 560;
 
-  let rail = "side";
-  if (name === "phone" || name === "phablet") rail = "top";
-  else if (name === "tablet") rail = landscape ? "compact" : "top";
-  else if (name === "laptop") rail = "compact";
-
+  let rail = "top";
   let vm = "side";
   if (name === "phone" || name === "phablet") vm = landscape && short ? "side" : "bottom";
   else if (name === "tablet" && !landscape) vm = "bottom";
 
-  const railW =
-    rail === "compact" ? 76 : name === "ultra" ? 168 : name === "wide" ? 156 : 148;
   const vmFr =
-    name === "ultra" ? 0.4 : name === "wide" ? 0.44 : name === "desk" ? 0.48 : 0.5;
+    name === "ultra" ? 0.36 : name === "wide" ? 0.4 : name === "desk" ? 0.42 : 0.48;
   const pad = clamp(Math.round(w * 0.012), 10, 22);
-  const kpiCols = name === "phone" ? 2 : name === "phablet" || name === "tablet" ? 4 : 8;
+  const kpiCols = name === "phone" ? 3 : name === "phablet" || name === "tablet" ? 3 : 6;
 
   return {
     name,
@@ -60,7 +54,7 @@ export function snapLayout(width = 1280, height = 800) {
     vars: {
       "--desk-w": `${Math.round(w)}px`,
       "--desk-h": `${Math.round(h)}px`,
-      "--rail-w": rail === "top" ? "100%" : `${railW}px`,
+      "--rail-w": "100%",
       "--vm-fr": String(vmFr),
       "--pad": `${pad}px`,
       "--kpi-cols": String(kpiCols),

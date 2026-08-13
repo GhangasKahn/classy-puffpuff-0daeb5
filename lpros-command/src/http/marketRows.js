@@ -60,6 +60,7 @@ export function normalizeProduct(item = {}, meta = {}) {
     dryRun: Boolean(item.dryRun || item.source === "dry-fixture" || meta.dryRun),
     detailFetched: Boolean(item.detailFetched),
     watchCount: item.watchCount ?? null,
+    listingDate: item.listingDate || item.itemCreationDate || null,
   };
 }
 

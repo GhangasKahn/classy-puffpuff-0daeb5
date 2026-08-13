@@ -123,6 +123,7 @@ export async function runResearchPipeline({
         images: c.images || [],
         thumbnail: c.thumbnail || c.image || null,
         watchCount: c.watchCount ?? null,
+        listingDate: c.listingDate || null,
         seller: c.seller || null,
         source: "ebay_browse",
       })),

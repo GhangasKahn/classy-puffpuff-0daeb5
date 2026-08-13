@@ -3,179 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>LPROS COMMAND · Desk</title>
+  <title>LPROS · Product research</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="desk">
+<body class="desk" data-suite="research">
   <div class="noise" aria-hidden="true"></div>
   <div id="tip" class="tip" hidden></div>
 
-  <aside class="rail">
-    <p class="rail-mark">LPROS</p>
-    <nav class="rail-nav" aria-label="Desk">
-      <button type="button" class="rail-btn" data-tab="launch">Launch</button>
-      <button type="button" class="rail-btn on" data-tab="watch">Watch</button>
-      <button type="button" class="rail-btn" data-tab="market">Market</button>
-      <button type="button" class="rail-btn" data-tab="packages">Packages</button>
-      <button type="button" class="rail-btn" data-tab="registry">Registry</button>
-      <button type="button" class="rail-btn" data-tab="ops">Ops</button>
-      <button type="button" class="rail-btn" data-tab="playground">Playground</button>
-    </nav>
-    <p class="rail-jobs-head">Recent jobs</p>
+  <header class="topbar">
+    <div class="brand-row">
+      <p class="rail-mark">LPROS</p>
+      <h1 class="brand-sm">Product research</h1>
+      <p class="lede-sm">Live eBay Browse · fee-true net · not a CSV upload</p>
+    </div>
+    <form id="suiteQuery" class="command-bar" autocomplete="off">
+      <label class="cmd-q">Query
+        <input name="q" value="solid wood desk organizer" placeholder="What are buyers searching?" />
+      </label>
+      <label>Category
+        <input name="categoryId" value="25339" inputmode="numeric" />
+      </label>
+      <label>Min $
+        <input name="minPrice" type="number" value="35" />
+      </label>
+      <label>Max $
+        <input name="maxPrice" type="number" value="150" />
+      </label>
+      <label>Cost ratio
+        <input name="costRatio" type="number" step="0.05" value="0.4" />
+      </label>
+      <div class="command-actions">
+        <button type="submit" class="btn primary" id="btnLiveResearch">Fetch live</button>
+        <button type="button" class="btn primary" id="watchStartBtn">Watch live</button>
+        <button type="button" class="btn" id="btnIntel">Intel</button>
+        <button type="button" class="btn ghost" id="watchCancelBtn">Stop</button>
+      </div>
+    </form>
+    <div class="kpis" id="kpis">
+      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Listings</span><b id="kpiProducts">—</b></button>
+      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">With photos</span><b id="kpiImages">—</b></button>
+      <button type="button" class="kpi" data-tab="analysis"><span class="kpi-l">P50 $</span><b id="kpiHeat">—</b></button>
+      <button type="button" class="kpi" data-tab="packages"><span class="kpi-l">Packages</span><b id="kpiPackages">—</b></button>
+      <button type="button" class="kpi" data-tab="watch"><span class="kpi-l">Watch</span><b id="kpiWatch">idle</b></button>
+      <button type="button" class="kpi" data-tab="playground"><span class="kpi-l">Hive jobs</span><b id="kpiPlay">—</b></button>
+      <span class="kpi ghost-kpi" hidden><span class="kpi-l">Variants</span><b id="kpiVariants">—</b></span>
+      <span class="kpi ghost-kpi" hidden><span class="kpi-l">Ideas</span><b id="kpiIdeas">—</b></span>
+    </div>
+    <div class="runbox">
+      <svg id="kpiSpark" class="spark" viewBox="0 0 180 36" role="img" aria-label="Price sparkline"></svg>
+      <div class="orch-meter"><span id="orchPct" style="width:0%"></span></div>
+      <p class="sub tight" id="orchPhase">Idle — fetch live listings to fill the board</p>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Research suite">
+    <div class="rail-nav">
+      <button type="button" class="rail-btn on" data-tab="market" data-group="research">Research</button>
+      <button type="button" class="rail-btn" data-tab="watch" data-group="watch">Watch</button>
+      <button type="button" class="rail-btn" data-tab="analysis" data-group="research">Analysis</button>
+      <button type="button" class="rail-btn" data-tab="playground" data-group="hive">Hive</button>
+      <button type="button" class="rail-btn" data-tab="ops" data-group="ops">Pipeline</button>
+    </div>
+    <div class="rail-jobs-head">Recent runs</div>
     <div class="rail-jobs" id="jobsRail"><p class="muted">No jobs yet</p></div>
     <div class="rail-foot">
       <span id="railStatus">idle</span>
       <a id="playbookLink" href="api/playbook">Playbooks</a>
     </div>
-  </aside>
-
-  <header class="topbar">
-    <div class="brand-row">
-      <h1 class="brand-sm">Command desk</h1>
-      <p class="lede-sm">Cash is truth · Browse intel · listing factory</p>
-    </div>
-    <div class="kpis" id="kpis">
-      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Products</span><b id="kpiProducts">—</b></button>
-      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Images</span><b id="kpiImages">—</b></button>
-      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Variants</span><b id="kpiVariants">—</b></button>
-      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Ideas</span><b id="kpiIdeas">—</b></button>
-      <button type="button" class="kpi" data-tab="packages"><span class="kpi-l">Packages</span><b id="kpiPackages">—</b></button>
-      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Heat max</span><b id="kpiHeat">—</b></button>
-      <button type="button" class="kpi" data-tab="watch"><span class="kpi-l">Watch VM</span><b id="kpiWatch">idle</b></button>
-      <button type="button" class="kpi" data-tab="playground"><span class="kpi-l">Play jobs</span><b id="kpiPlay">—</b></button>
-    </div>
-    <div class="runbox">
-      <svg id="kpiSpark" class="spark" viewBox="0 0 180 36" role="img" aria-label="Price sparkline"></svg>
-      <div class="orch-meter"><span id="orchPct" style="width:0%"></span></div>
-      <p class="sub tight" id="orchPhase">Idle</p>
-    </div>
-  </header>
+  </nav>
 
   <div id="deskBanner" class="desk-banner" hidden role="status"></div>
 
   <main class="workspace">
-    <!-- LAUNCH -->
-    <section class="tab" id="tab-launch">
-      <div class="cta-row sticky-cta">
-        <button type="button" class="btn primary" id="btnLiveResearch">Live product research</button>
-        <button type="button" class="btn primary" id="btnDeploy">Deploy marathon</button>
-        <button type="button" class="btn primary" id="btnOrchMarathon">Start marathon</button>
-        <button type="button" class="btn primary" id="btnOrchDeploy">Research mission</button>
-        <button type="button" class="btn primary" id="btnSwarm">Research swarm</button>
-        <button type="button" class="btn ghost" id="btnIntel">Competitor intel</button>
-        <button type="button" class="btn ghost" id="btnOrchCancel">Cancel</button>
-        <button type="button" class="btn ghost" id="btnOrchJobs">Jobs</button>
-        <button type="button" class="btn" id="btnOrchCsv" disabled>Workbook CSV</button>
-        <button type="button" class="btn ghost" id="btnOrchProductsCsv" disabled>Products CSV</button>
-        <button type="button" class="btn" id="btnOrchPromote" disabled>Promote packages</button>
-      </div>
-
-      <div class="split3">
-        <div class="panel" id="mission">
-          <h2>Mission</h2>
-          <p class="sub">High-ticket band · scam lots die here</p>
-          <form id="missionForm" class="grid">
-            <label>Query <input name="q" value="solid wood desk organizer" /></label>
-            <label>Category ID <input name="categoryId" value="25339" /></label>
-            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
-            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
-            <label>Cost ratio <input name="costRatio" type="number" step="0.05" value="0.4" /></label>
-            <label class="check">Deep crawl <input name="deepCrawl" type="checkbox" /></label>
-            <label>Sold 90d <input name="soldCount" type="number" placeholder="Terapeak" /></label>
-            <label>Avg sold $ <input name="avgSoldPrice" type="number" step="0.01" /></label>
-            <label>Cost $ <input name="productCost" type="number" step="0.01" /></label>
-            <label>Alt cost $ <input name="altProductCost" type="number" step="0.01" /></label>
-            <label>Lead days <input name="leadTimeDays" type="number" value="7" /></label>
-            <label class="check">Auto-promote PASS <input name="promotePass" type="checkbox" /></label>
-          </form>
+    <section class="tab on" id="tab-market">
+      <div class="workbench-head">
+        <div>
+          <h2>Live market board</h2>
+          <p class="sub">Official Browse listings with photos and /itm/ URLs. Click a row to inspect. STR/CTR are proxies until Terapeak.</p>
         </div>
-
-        <div class="panel" id="orchPanel">
-          <h2>Marathon / mission</h2>
-          <p class="sub">4–5 categories · getItem page content · title swarm · trends</p>
-          <form id="orchForm" class="grid">
-            <label>Query <input name="q" value="solid wood desk organizer" /></label>
-            <label>Category ID <input name="categoryId" value="25339" /></label>
-            <label class="check">Marathon (5 cats) <input name="marathon" type="checkbox" checked /></label>
-            <label>Landed cost $ <input name="cost" type="number" step="0.01" value="18" /></label>
-            <label>Price $ <input name="suggestedPrice" type="number" step="0.01" value="59.99" /></label>
-            <label>Variants / lane <input name="variantCount" type="number" value="250" /></label>
-            <label>Details / lane <input name="detailCount" type="number" value="30" /></label>
-            <label>Ideas <input name="ideasTarget" type="number" value="250" /></label>
-            <label>Probes / lane <input name="liveProbeCount" type="number" value="10" /></label>
-            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
-            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
-          </form>
-        </div>
-
-        <div class="panel">
-          <h2>Live log</h2>
-          <p class="sub" id="orchStatus">Official Browse APIs only — not HTML scrape</p>
-          <pre id="orchLog" class="out tall orch-log" aria-live="polite"></pre>
-          <pre id="agentLog" class="out tall"></pre>
-          <div id="jobsList" class="jobs-list"></div>
-        </div>
+        <div class="statstrip" id="statStrip"></div>
       </div>
-
-      <section class="panel" id="briefPanel" hidden>
-        <h2>Brain brief</h2>
-        <div id="brief"></div>
-      </section>
-    </section>
-
-    <!-- WATCH VM — left: live ingest stream · right dock: research VM -->
-    <section class="tab on" id="tab-watch">
-      <div class="cta-row sticky-cta">
-        <button type="button" class="btn primary" id="watchStartBtn">Start live watch</button>
-        <button type="button" class="btn ghost" id="watchCancelBtn">Cancel</button>
-        <button type="button" class="btn ghost" id="watchToMarket">Open Market</button>
-        <span class="sub tight" id="watchPhaseLabel">Idle — VM not running</span>
-      </div>
-      <div class="panel watch-ops">
-        <h2>Live ingest</h2>
-        <p class="sub">Left: listings appear as eBay Browse returns them (photo + price + /itm/ URL). Right: the research VM — Page, Term, Net, and raw API Proof. This is not an uploaded CSV.</p>
-        <form id="watchForm" class="grid tight">
-          <label>Query <input name="q" value="solid wood desk organizer" /></label>
-          <label>Category <input name="categoryId" value="25339" /></label>
-          <label>Min $ <input name="minPrice" type="number" value="35" /></label>
-          <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
-          <label>Limit <input name="limit" type="number" value="40" /></label>
-          <label>getItem n <input name="detailCount" type="number" value="8" /></label>
-        </form>
-        <div class="watch-proof" id="watchProof">
-          <span>source —</span>
-          <span>env —</span>
-          <span>dryRun —</span>
-        </div>
-        <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
-        <p class="sub tight" id="watchStreamMeta">0 live listings</p>
-        <div id="watchStream" class="watch-stream" aria-live="polite"></div>
-        <pre id="watchLog" class="out orch-log watch-term" hidden></pre>
-        <div id="watchCalls" class="watch-calls" hidden></div>
-      </div>
-    </section>
-
-    <!-- MARKET -->
-    <section class="tab" id="tab-market">
-      <div class="statstrip" id="statStrip"></div>
       <div class="filterbar">
-        <input id="marketSearch" placeholder="Filter title / seller / category…" />
-        <select id="marketCat">
-          <option value="">All categories</option>
-        </select>
+        <input id="marketSearch" placeholder="Filter title, seller, category…" />
+        <select id="marketCat"><option value="">All categories</option></select>
         <select id="marketSort">
           <option value="price">Sort: price</option>
           <option value="imageCount">Sort: images</option>
           <option value="rank">Sort: rank</option>
-          <option value="perceivedValue">Sort: PV</option>
+          <option value="perceivedValue">Sort: perceived value</option>
           <option value="rankScore">Sort: score</option>
+          <option value="listingAgeHours">Sort: newest</option>
         </select>
         <input id="marketMin" type="number" placeholder="Min $" step="1" />
         <input id="marketMax" type="number" placeholder="Max $" step="1" />
-        <label class="check tight-check">Has image <input id="marketHasImg" type="checkbox" /></label>
+        <label class="check tight-check">Has photo <input id="marketHasImg" type="checkbox" /></label>
         <div class="seg" id="viewSeg">
           <button type="button" class="on" data-view="split">Split</button>
           <button type="button" data-view="gallery">Gallery</button>
@@ -183,77 +107,20 @@
         </div>
         <span class="sub tight" id="marketCount">0 rows</span>
       </div>
-
-      <div class="viz-grid four">
-        <div class="panel chart-card">
-          <h3 class="viz-title">Category heat · click to filter</h3>
-          <svg id="chartHeat" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Price ladder</h3>
-          <svg id="chartLadder" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Price vs images · click inspect</h3>
-          <svg id="chartScatter" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Rising keywords · click filter</h3>
-          <svg id="chartKw" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-      </div>
-
-      <div class="viz-grid four">
-        <div class="panel chart-card">
-          <h3 class="viz-title">Price histogram · click band</h3>
-          <svg id="chartHist" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Image-count mix</h3>
-          <svg id="chartImgs" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Seller concentration · click</h3>
-          <svg id="chartSellers" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Lane / category volume</h3>
-          <svg id="chartLanes" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
-        </div>
-      </div>
-
-      <div class="viz-grid">
-        <div class="panel chart-card">
-          <h3 class="viz-title">Sell-through proxy</h3>
-          <svg id="chartStr" class="chart" viewBox="0 0 420 140" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Popularity vs CTR proxy</h3>
-          <svg id="chartPop" class="chart" viewBox="0 0 420 140" role="img"></svg>
-        </div>
-        <div class="panel chart-card">
-          <h3 class="viz-title">Decision mix</h3>
-          <svg id="chartDecisions" class="chart" viewBox="0 0 420 140" role="img"></svg>
-        </div>
-        <div class="panel" id="orchTrends" hidden></div>
-      </div>
-
-      <div id="marketBody" class="market-body view-split">
+      <div id="marketBody" class="market-body view-split research-board">
         <section class="panel" id="vizPanel">
-          <h2>Product gallery</h2>
-          <p class="sub">Click a card to inspect · CTR/STR are Browse proxies until Insights/Terapeak</p>
+          <h2>Photos</h2>
+          <p class="sub">Click a card to inspect the listing</p>
           <div id="gallery" class="gallery dense"></div>
           <div id="orchGallery" class="gallery dense" hidden></div>
         </section>
-
         <section class="panel" id="boardPanel" hidden>
           <h2>Lethal board</h2>
           <div id="board" class="board"></div>
         </section>
-
-        <section class="panel">
-          <h2>Researched products</h2>
-          <p class="sub">Click a row to inspect listing content · click a header to sort</p>
+        <section class="panel table-panel">
+          <h2>Listings</h2>
+          <p class="sub">Sortable · click a row for content, photos, and economics</p>
           <div id="orchRecs" class="board" hidden></div>
           <div id="orchTableWrap" class="orch-table-wrap">
             <table class="orch-table" id="orchTable">
@@ -269,11 +136,10 @@
           <pre id="rankMeta" class="out"></pre>
         </section>
       </div>
-
       <section class="split">
         <div class="panel">
           <h2>Idea factory</h2>
-          <p class="sub">Click a chip to filter the market table</p>
+          <p class="sub">Click a chip to filter the board</p>
           <div id="ideasBoard" class="cluster-row"></div>
         </div>
         <div class="panel">
@@ -284,8 +150,184 @@
       </section>
     </section>
 
-    <!-- PACKAGES -->
+    <section class="tab" id="tab-watch">
+      <div class="watch-stage">
+        <div class="panel watch-ops">
+          <div class="watch-ops-head">
+            <div>
+              <h2>Live ingest</h2>
+              <p class="sub tight" id="watchPhaseLabel">Idle — start Watch to stream Browse hits as they arrive</p>
+            </div>
+            <button type="button" class="btn ghost" id="watchToMarket">Send to board</button>
+          </div>
+          <form id="watchForm" class="grid tight">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Limit <input name="limit" type="number" value="40" /></label>
+            <label>getItem n <input name="detailCount" type="number" value="8" /></label>
+          </form>
+          <div class="watch-proof" id="watchProof">
+            <span>source —</span>
+            <span>env —</span>
+          </div>
+          <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
+          <p class="sub tight" id="watchStreamMeta">0 live listings</p>
+          <div id="watchStream" class="watch-stream" aria-live="polite"></div>
+          <pre id="watchLog" class="out orch-log watch-term" hidden></pre>
+          <div id="watchCalls" class="watch-calls" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab" id="tab-analysis">
+      <div class="workbench-head">
+        <div>
+          <h2>Market analysis</h2>
+          <p class="sub">Price distribution, listing freshness, seller concentration, and proxy demand. Not invented sold counts.</p>
+        </div>
+      </div>
+      <div class="viz-grid analysis-hero">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Listing freshness (age)</h3>
+          <p class="sub">Hours/days since itemCreationDate from Browse</p>
+          <svg id="chartAge" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">New listings over time</h3>
+          <p class="sub">Count of live listings by creation day</p>
+          <svg id="chartFresh" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Price histogram · click a band</h3>
+          <svg id="chartHist" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Price ladder</h3>
+          <svg id="chartLadder" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+      </div>
+      <div class="viz-grid four">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Category heat · click to filter</h3>
+          <svg id="chartHeat" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Price vs images · click inspect</h3>
+          <svg id="chartScatter" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Rising keywords · click filter</h3>
+          <svg id="chartKw" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Image-count mix</h3>
+          <svg id="chartImgs" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+      </div>
+      <div class="viz-grid four">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Seller concentration · click</h3>
+          <svg id="chartSellers" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Lane / category volume</h3>
+          <svg id="chartLanes" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Sell-through proxy</h3>
+          <svg id="chartStr" class="chart" viewBox="0 0 420 140" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Popularity vs CTR proxy</h3>
+          <svg id="chartPop" class="chart" viewBox="0 0 420 140" role="img"></svg>
+        </div>
+      </div>
+      <div class="viz-grid">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Decision mix</h3>
+          <svg id="chartDecisions" class="chart" viewBox="0 0 420 140" role="img"></svg>
+        </div>
+        <div class="panel" id="orchTrends" hidden></div>
+      </div>
+    </section>
+
+    <section class="tab" id="tab-launch">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn on" data-tab="launch">Missions</button>
+      </div>
+      <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="btnDeploy">Deploy marathon</button>
+        <button type="button" class="btn primary" id="btnOrchMarathon">Start marathon</button>
+        <button type="button" class="btn" id="btnOrchDeploy">Research mission</button>
+        <button type="button" class="btn" id="btnSwarm">Research swarm</button>
+        <button type="button" class="btn ghost" id="btnOrchCancel">Cancel</button>
+        <button type="button" class="btn ghost" id="btnOrchJobs">Jobs</button>
+        <button type="button" class="btn" id="btnOrchCsv" disabled>Workbook CSV</button>
+        <button type="button" class="btn ghost" id="btnOrchProductsCsv" disabled>Products CSV</button>
+        <button type="button" class="btn" id="btnOrchPromote" disabled>Promote packages</button>
+      </div>
+      <div class="split3">
+        <div class="panel" id="mission">
+          <h2>Evidence pack</h2>
+          <p class="sub">Terapeak sold + dual quotes. Never invent n.</p>
+          <form id="missionForm" class="grid">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category ID <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Cost ratio <input name="costRatio" type="number" step="0.05" value="0.4" /></label>
+            <label class="check">Deep crawl <input name="deepCrawl" type="checkbox" /></label>
+            <label>Sold 90d <input name="soldCount" type="number" placeholder="Terapeak" /></label>
+            <label>Avg sold $ <input name="avgSoldPrice" type="number" step="0.01" /></label>
+            <label>Cost $ <input name="productCost" type="number" step="0.01" /></label>
+            <label>Alt cost $ <input name="altProductCost" type="number" step="0.01" /></label>
+            <label>Lead days <input name="leadTimeDays" type="number" value="7" /></label>
+            <label class="check">Auto-promote PASS <input name="promotePass" type="checkbox" /></label>
+          </form>
+        </div>
+        <div class="panel" id="orchPanel">
+          <h2>Marathon</h2>
+          <p class="sub">Local :8790 · getItem pages · title swarm</p>
+          <form id="orchForm" class="grid">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category ID <input name="categoryId" value="25339" /></label>
+            <label class="check">Marathon (5 cats) <input name="marathon" type="checkbox" checked /></label>
+            <label>Landed cost $ <input name="cost" type="number" step="0.01" value="18" /></label>
+            <label>Price $ <input name="suggestedPrice" type="number" step="0.01" value="59.99" /></label>
+            <label>Variants / lane <input name="variantCount" type="number" value="250" /></label>
+            <label>Details / lane <input name="detailCount" type="number" value="30" /></label>
+            <label>Ideas <input name="ideasTarget" type="number" value="250" /></label>
+            <label>Probes / lane <input name="liveProbeCount" type="number" value="10" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+          </form>
+        </div>
+        <div class="panel">
+          <h2>Run log</h2>
+          <p class="sub" id="orchStatus">Official Browse APIs only — not HTML scrape</p>
+          <pre id="orchLog" class="out tall orch-log" aria-live="polite"></pre>
+          <pre id="agentLog" class="out tall"></pre>
+          <div id="jobsList" class="jobs-list"></div>
+        </div>
+      </div>
+      <section class="panel" id="briefPanel" hidden>
+        <h2>Brain brief</h2>
+        <div id="brief"></div>
+      </section>
+    </section>
+
     <section class="tab" id="tab-packages">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn on" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn" data-tab="launch">Missions</button>
+      </div>
       <div class="statstrip" id="pkgStats"></div>
       <section class="panel">
         <h2>Listing packages</h2>
@@ -299,8 +341,13 @@
       </section>
     </section>
 
-    <!-- REGISTRY -->
     <section class="tab" id="tab-registry">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn on" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn" data-tab="launch">Missions</button>
+      </div>
       <section class="panel">
         <h2>SKU registry</h2>
         <p class="sub">Export CSV for Seller Hub · Inventory API when user token set</p>
@@ -314,8 +361,13 @@
       </section>
     </section>
 
-    <!-- OPS -->
     <section class="tab" id="tab-ops">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn on" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn" data-tab="launch">Missions</button>
+      </div>
       <section class="split">
         <div class="panel">
           <h2>Publish dry-run</h2>
@@ -395,11 +447,10 @@
       </section>
     </section>
 
-    <!-- PLAYGROUND -->
     <section class="tab" id="tab-playground">
       <div class="statstrip" id="pgStats"></div>
       <div class="cta-row sticky-cta">
-        <button type="button" class="btn primary" id="pgLiveResearch">Live product research</button>
+        <button type="button" class="btn primary" id="pgLiveResearch">Fetch live</button>
         <button type="button" class="btn primary" id="pgLaunchBtn">Launch agent</button>
         <button type="button" class="btn" id="pgCreateBtn">Queue job</button>
         <button type="button" class="btn ghost" id="pgRefresh">Refresh board</button>
@@ -407,7 +458,6 @@
       </div>
       <div id="pgPresets" class="cluster-row"></div>
       <div id="pgWorkloads" class="cluster-row"></div>
-
       <div class="pg-layout">
         <div class="panel">
           <h2>Job board</h2>
@@ -452,7 +502,6 @@
           </form>
         </div>
       </div>
-
       <div class="split">
         <div class="panel">
           <h2>Browser</h2>
@@ -488,7 +537,6 @@
           <div id="pgVmRuns" class="board compact-board"></div>
         </div>
       </div>
-
       <section class="split">
         <div class="panel">
           <h2>Spawn graph</h2>
@@ -501,13 +549,11 @@
           <div id="pgActivity" class="pg-activity"></div>
         </div>
       </section>
-
       <section class="panel" id="pgHivePanel">
         <h2>Hive workload</h2>
         <p class="sub">TASK CONTRACTs · named workers · Oracle lessons · HOLD default · not Browse</p>
         <pre id="pgHiveOut" class="out tall"></pre>
       </section>
-
       <section class="panel" id="pgJobPanel">
         <h2>Job inspector</h2>
         <p class="sub" id="pgJobTitle">Select a board card</p>
@@ -543,7 +589,7 @@
       <div class="vm-screen">
         <div class="vm-view on" id="vmPage">
           <div class="vm-hero idle" id="watchHero">
-            <p class="muted">Research VM. Run research — this pane reconstructs the live getItem listing (eBay blocks iframes). Left column fills with Browse hits. Proof tab shows the raw API JSON.</p>
+            <p class="muted">Listing reconstruction from official getItem (eBay blocks iframes). Proof tab shows the raw Browse JSON.</p>
           </div>
           <div class="vm-listing" id="vmListing" hidden></div>
           <div class="vm-gallery" id="watchGallery"></div>
@@ -555,7 +601,7 @@
           <div id="vmNetLog" class="watch-calls"></div>
         </div>
         <div class="vm-view" id="vmProof" hidden>
-          <p class="sub">Raw eBay Browse / getItem payloads. If this JSON has itemId, itemWebUrl, and image URLs, it is live API — not a spreadsheet upload.</p>
+          <p class="sub">Raw eBay Browse / getItem payloads. itemId + itemWebUrl + image URLs = live API, not a spreadsheet.</p>
           <pre id="vmProofJson" class="out tall orch-log">Waiting for first API response…</pre>
         </div>
       </div>

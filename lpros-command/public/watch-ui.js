@@ -35,13 +35,15 @@ const watch = {
 };
 
 function formPayload() {
-  const form = $("watchForm");
-  if (!form) return {};
-  const fd = new FormData(form);
   const o = {};
-  for (const [k, v] of fd.entries()) {
-    if (v === "" || v == null) continue;
-    o[k] = v;
+  for (const id of ["suiteQuery", "watchForm"]) {
+    const form = $(id);
+    if (!form) continue;
+    const fd = new FormData(form);
+    for (const [k, v] of fd.entries()) {
+      if (v === "" || v == null) continue;
+      o[k] = v;
+    }
   }
   ["minPrice", "maxPrice", "limit", "detailCount"].forEach((k) => {
     if (o[k] != null) o[k] = Number(o[k]);
@@ -365,11 +367,11 @@ export async function bootWatch() {
       });
     });
   });
-  window.showTab?.("watch");
   try {
     const data = await api("/research/watch");
     const last = (data.sessions || [])[0];
     if (last && last.status === "running") {
+      window.showTab?.("watch");
       renderWatch(last);
       loopTicks();
       return;
@@ -377,14 +379,6 @@ export async function bootWatch() {
     if (last) renderWatch(last);
   } catch {
     /* empty */
-  }
-  try {
-    const h = await api("/health");
-    if (h.ebay?.appConfigured && !watch.looping) {
-      startResearchWatch(formPayload()).catch(() => {});
-    }
-  } catch {
-    /* ignore */
   }
 }
 
