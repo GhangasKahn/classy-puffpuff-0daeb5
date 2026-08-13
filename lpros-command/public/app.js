@@ -1,5 +1,6 @@
 import { bootPlayground } from "./playground-ui.js";
 import { bootWatch, startResearchWatch } from "./watch-ui.js";
+import { bindDeskLayout } from "./layout.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -1921,6 +1922,7 @@ async function bootDesk() {
 }
 
 loadSkus().catch(() => {});
+bindDeskLayout(document.body);
 bootDesk();
 bootPlayground();
 bootWatch();
