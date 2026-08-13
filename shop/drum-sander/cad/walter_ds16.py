@@ -9,6 +9,7 @@ Lineage:
   → Fab B.1: part IDs, housed stretchers, way rebate (table actually fits),
              joinery/ops/QA registries. Machine geometry (capacity, drum,
              16.5″ inner span) is unchanged.
+  → Fab B.2: Wandel-style individual part / assembly / hardware sheets.
 
 Units: inches internally. Convert only at export.
 Evidence: VERIFIED (spec), DERIVED (equation), ASSUMED (layout), ESTIMATED.
@@ -33,14 +34,14 @@ PROJECT = {
     "project_id": "WALTER-DS16",
     "project_name": "WALTER DS-16 dedicated drum thickness sander",
     "revision": "B",
-    "fabrication_rev": "B.1",
+    "fabrication_rev": "B.2",
     "units": "inch",
     "unit_policy": "Internal inches. Millimetres are interface-only.",
     "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on A/B",
     "material_system": "Baltic birch + MDF drum + UHMW ways + phenolic wear",
     "tolerance_class": "T2 joinery, T4 drum/table metrology",
     "author": "WALTER fabrication model",
-    "model_version": "B.1",
+    "model_version": "B.2",
     "cad_platform": "Python SSOT + OpenSCAD solids + SVG shop drawings",
     "lineage": "ShopNotes 86 → Ron Walters → Rev A solid table → Rev B geometry",
 }
@@ -51,7 +52,7 @@ class Spec:
     """Controlling inputs. Dependent sizes live in Geom, not here."""
 
     revision: str = "B"
-    fabrication_rev: str = "B.1"
+    fabrication_rev: str = "B.2"
 
     # Capacity — VERIFIED design intent
     capacity_width: float = 15.5
@@ -154,7 +155,20 @@ class Spec:
     motor_pivot_y: float = 4.0
     motor_pivot_z: float = 6.0
     way_z: float = 10.0  # bottom of UHMW from floor
+    way_end_inset: float = 1.0  # rebate stops short of infeed/outfeed edges
     display_gap_under_drum: float = 0.50  # viz opening, not min capacity
+
+    # Hole / cut patterns on P-001 (ASSUMED until flange BCD is USER_CONFIRM)
+    flange_bolt_square: float = 2.05  # 4-bolt square CTC, typical ¾″ 4-bolt flange
+    flange_bolt_clr: float = 0.344  # 11/32″ for 5/16-18
+    ply_shaft_clear_dia: float = 1.125  # shaft must not rub the plywood
+    motor_pivot_dia: float = 0.266  # F / 17/64 for ¼-20
+    indicator_pad_y: float = 8.0  # drive side only, from infeed
+    indicator_pad_z: float = 16.0
+    indicator_pad_dia: float = 0.201  # #7 tap-drill for ¼-20
+    stretcher_dado_y0: float = 2.0  # inner-face housing, from infeed (matches OpenSCAD)
+    stretcher_screw_inset: float = 0.75  # from dado Y ends, through from outside
+    idler_float_pad: float = 0.25  # UHMW pad under H-002; axial, not YZ slots
 
     # Jigs
     cradle_w: float = 12.0
@@ -167,7 +181,7 @@ class Spec:
         "Left screw uncouples for taper; dog stop returns to parallel home",
         "UHMW ways let into side rebates — table cannot rack, and still fits",
         "Housed stretchers (¼″ dados) + through-screws for racking stiffness",
-        "Stack-drill side panels as a pair; floating idler bearing (axial growth)",
+        "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
         "Torsion-box table + phenolic / tooling-plate wear face",
         "Spring hold-down rollers infeed + outfeed — kills snipe and chatter",
         "Full-width truing sled; re-clock after paper wrap to ±0.003″",
@@ -303,6 +317,103 @@ def build_geom(s: Spec = SPEC) -> Geom:
 
 
 GEOM = build_geom(SPEC)
+
+
+def fmt_in(v: float, nd: int = 2) -> str:
+    """Shop dimension: drop trailing zeros, keep a readable decimal."""
+    if abs(v - round(v)) < 1e-9:
+        return f"{int(round(v))}.00" if nd else f"{int(round(v))}"
+    s = f"{v:.{nd}f}".rstrip("0").rstrip(".")
+    if "." not in s:
+        s += ".00"
+    return s
+
+
+def side_features(s: Spec = SPEC, g: Geom = GEOM, hand: str = "L") -> dict[str, Any]:
+    """Named holes and cuts on P-001 inner face. Y from infeed, Z from bottom.
+
+    Flange bolt square is ASSUMED — confirm against the purchased 4-bolt flange
+    (USER_CONFIRM) before drilling. Stack-drill L+R as a pair first; inner-face
+    dados and the way rebate are mirrored after the pair is split.
+    """
+    half = s.flange_bolt_square / 2.0
+    by, bz = g.bearing_cl_y, g.bearing_cl_z
+    bolts = [
+        {"y": by + dy, "z": bz + dz, "dia": s.flange_bolt_clr, "id": f"FB{i+1}"}
+        for i, (dy, dz) in enumerate(((-half, -half), (half, -half), (-half, half), (half, half)))
+    ]
+    dados = [
+        {
+            "id": f"J-001.{i+1}",
+            "y0": s.stretcher_dado_y0,
+            "y1": s.stretcher_dado_y0 + s.stretcher_height,
+            "z0": z,
+            "z1": z + s.ply_actual,
+            "depth": s.stretcher_housing,
+        }
+        for i, z in enumerate(s.stretcher_z)
+    ]
+    way = {
+        "id": "J-002",
+        "y0": s.way_end_inset,
+        "y1": s.side_depth - s.way_end_inset,
+        "z0": s.way_z,
+        "z1": s.way_z + s.way_stock,
+        "depth": g.way_rebate,
+        "project": g.way_project,
+    }
+    screws = []
+    for i, d in enumerate(dados):
+        for j, y in enumerate((d["y0"] + s.stretcher_screw_inset, d["y1"] - s.stretcher_screw_inset)):
+            screws.append({
+                "id": f"SS{i+1}{chr(97+j)}",
+                "y": y,
+                "z": (d["z0"] + d["z1"]) / 2.0,
+                "dia": 0.125,  # pilot; expand from outside after clamp-up
+            })
+    feats = {
+        "hand": hand,
+        "datums": "Y0 = infeed edge · Z0 = bottom edge · inner face toward drum",
+        "bearing_cl": {"y": by, "z": bz, "shaft_clear_dia": s.ply_shaft_clear_dia},
+        "flange_bolts": bolts,
+        "flange_bolt_square": s.flange_bolt_square,
+        "dados": dados,
+        "way": way,
+        "stretcher_screws": screws,
+        "motor_pivot": None,
+        "indicator_pad": None,
+        "idler_pad": None,
+        "evidence": {
+            "outline": "VERIFIED",
+            "bearing_cl": "VERIFIED layout",
+            "flange_bcd": "ASSUMED — USER_CONFIRM vs purchased flange",
+            "dados": "DERIVED from stretcher_z / stretcher_dado_y0",
+            "way": "DERIVED J-002",
+        },
+    }
+    if hand == "L":
+        feats["motor_pivot"] = {
+            "y": s.motor_pivot_y,
+            "z": s.motor_pivot_z,
+            "dia": s.motor_pivot_dia,
+            "note": "¼-20 pivot for P-012. Drill after stack so L and R stay a pair; tap this hole on the drive side only.",
+        }
+        feats["indicator_pad"] = {
+            "y": s.indicator_pad_y,
+            "z": s.indicator_pad_z,
+            "dia": s.indicator_pad_dia,
+            "note": "¼-20 pad for H-021 mag-base / stem. Drive side is the A-clock datum.",
+        }
+    else:
+        feats["idler_pad"] = {
+            "note": (
+                f"H-002 floats on a {s.idler_float_pad:g}″ UHMW pad (J-007). "
+                "Do not elongate the flange holes in the YZ plane — that lets the drum axis wander. "
+                "Bolts snug, not torqued; shaft must be able to grow axially."
+            ),
+            "pad_thick": s.idler_float_pad,
+        }
+    return feats
 
 
 def in_mm(inches: float, nd: int = 1) -> str:
@@ -442,7 +553,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             ref_edge="Bottom (sits on base)", ref_end="Infeed edge = Datum Y0",
             process="Cut, pair-stack drill, then dado inner face",
             joinery="J-001 housed stretchers; J-002 way rebate; through holes for bearings",
-            handed="LEFT-HAND", viz="sides", sheet="D2_frame.svg",
+            handed="LEFT-HAND", viz="sides", sheet="P001L_side_drive.svg",
             notes="Stack-drill with P-001R as a pair, then split for inner-face work.",
             evidence="VERIFIED overall; dados B.1",
         ),
@@ -456,7 +567,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             ref_edge="Bottom", ref_end="Infeed edge = Datum Y0",
             process="Cut, pair-stack drill, then dado inner face (mirror of L)",
             joinery="J-001; J-002; idler flange on axial-float slots J-007",
-            handed="RIGHT-HAND / MIRROR", viz="sides", sheet="D2_frame.svg",
+            handed="RIGHT-HAND / MIRROR", viz="sides", sheet="P001R_side_idler.svg",
             notes="Identical hole pattern to L after stack-drill. Ways and dados on inner face only.",
             evidence="VERIFIED overall; dados B.1",
         ),
@@ -468,7 +579,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             grain="face grain across drum", ref_face="Top", ref_edge="Infeed",
             ref_end="Drive edge", process="Cut to overall footprint; screw to sides",
             joinery="J-010 screws up into sides", handed="IDENTICAL", viz="base",
-            sheet="D2_frame.svg", notes="Width follows ply_actual so 18 mm BB still keeps 16.5″ clear.",
+            sheet="P002_base.svg", notes="Width follows ply_actual so 18 mm BB still keeps 16.5″ clear.",
         ),
         _part(
             "P-003", "Stretcher", 3,
@@ -479,7 +590,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             ref_edge="Front long edge", ref_end="Drive end",
             process="Rip 4″, crosscut to housed length, one stop for all three",
             joinery="J-001 ¼″ housing in sides + #8 × 2″ through-screws",
-            handed="IDENTICAL", viz="base", sheet="D2_frame.svg",
+            handed="IDENTICAL", viz="base", sheet="P003_stretcher.svg",
             notes="Do not use stretchers as the table datum — ways are the datum.",
             purchase='¾" BB off sheet 1',
         ),
@@ -491,7 +602,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             grain="length across drum", ref_face="Show face outboard",
             process="Cut pair; glue to rib grid; flatten before wear face",
             joinery="J-003 continuous glue to P-005", handed="IDENTICAL",
-            viz="table", sheet="D7_geometry.svg",
+            viz="table", sheet="P004_table_skin.svg",
         ),
         _part(
             "P-005", "Torsion-box ribs", 8,
@@ -500,7 +611,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             t=s.table_rib, w=g.table_thick - 0.25, l=g.table_width - 0.5,
             rough_t=s.table_rib, rough_w=2.0, rough_l=g.table_width,
             process="Rip ½″, grid @ 4″ o.c., full glue",
-            joinery="J-003", handed="IDENTICAL", viz="table", sheet="D7_geometry.svg",
+            joinery="J-003", handed="IDENTICAL", viz="table", sheet="P005_table_ribs.svg",
             notes="Qty is typical for 4″ o.c. in 22″ depth; cut from offcuts.",
             evidence="ESTIMATED qty from spacing",
         ),
@@ -512,7 +623,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             purchase='½" phenolic or ⅜" MIC-6, 16" × 22"',
             ref_face="Top = metrology surface", process="Bond to flattened box; check diagonals",
             joinery="J-004 bond, replaceable", handed="IDENTICAL", viz="table",
-            sheet="D7_geometry.svg", notes="This is the inspection plane. Keep a spare.",
+            sheet="P006_wear_face.svg", notes="This is the inspection plane. Keep a spare.",
             evidence="VERIFIED size; thickness is BUY option ½″ or ⅜″",
         ),
         _part(
@@ -522,7 +633,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             purchase='¾" × ¾" UHMW bar, 48" buys both + spare',
             process="Cut to side depth; let into J-002 rebate; bond + wax",
             joinery="J-002 rebate + glue; optional #8 flush screws from outer face",
-            handed="IDENTICAL", viz="ways", sheet="D2_frame.svg",
+            handed="IDENTICAL", viz="ways", sheet="P007_uhmw_way.svg",
             notes=f"Projects {g.way_project:.3f}″ past inner face. Rebate {g.way_rebate:.3f}″.",
             evidence="DERIVED project/rebate so 16″ table fits in 16.5″ span",
         ),
@@ -533,7 +644,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             purchase='¾" MDF, bandsaw ⌀5⅛″',
             process="Bandsaw oversize, pack-bore ⌀¾″, true on sled to ⌀5″",
             joinery="J-005 pack-bore + piano-wire keys; 1 mm relief every 4",
-            handed="IDENTICAL", viz="drum", sheet="D3_drum.svg",
+            handed="IDENTICAL", viz="drum", sheet="P008_disc_core.svg",
         ),
         _part(
             "P-009", "Drum disc, end", s.disc_count_ends,
@@ -541,7 +652,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             material="Baltic birch plywood", species="Birch",
             t=s.disc_thick, w=g.drum_oversize_od, l=g.drum_oversize_od,
             process="Same pack as P-008; static-balance these two",
-            joinery="J-005", handed="IDENTICAL", viz="drum", sheet="D3_drum.svg",
+            joinery="J-005", handed="IDENTICAL", viz="drum", sheet="P009_disc_end.svg",
             notes="BB ends resist crushing at the flanges.",
         ),
         _part(
@@ -552,7 +663,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             purchase='¾" TG&P × 24", cut to 22.5"',
             process="Cut to length; ⅛″ key slots; TIR ≤ 0.0005″ incoming",
             joinery="J-005 discs; J-006 fixed drive flange; J-007 floating idler",
-            handed="IDENTICAL", viz="shaft", sheet="D3_drum.svg",
+            handed="IDENTICAL", viz="shaft", sheet="P010_shaft.svg",
             notes=s.shaft_spec, evidence="VERIFIED",
         ),
         _part(
@@ -561,7 +672,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             material="Birch or pine plywood", t=s.hood_ply, w=s.hood_blank_h, l=s.hood_blank_w,
             process="Kerf-bend, glue to form, fill kerfs, 4″ port",
             joinery="Friction on sides; paraffin at paint rubs",
-            handed="IDENTICAL", viz="hood", sheet="D5_hood.svg",
+            handed="IDENTICAL", viz="hood", sheet="P011_hood.svg",
             notes=s.hood_method, evidence="ESTIMATED blank; trim to drum arc",
         ),
         _part(
@@ -569,7 +680,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             category="jig", assembly="A-DRIVE", make="MAKE",
             material="Baltic birch plywood", t=t, w=s.cradle_h, l=s.cradle_w,
             process="Cut, T-nuts for pivot/lock", joinery="J-008 ¼-20 T-nuts",
-            handed="IDENTICAL", viz="motor", sheet="D4_drive.svg",
+            handed="IDENTICAL", viz="motor", sheet="P012_motor_cradle.svg",
         ),
         _part(
             "P-013", "Full-width truing sled", 1,
@@ -577,7 +688,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             material="MDF or Baltic birch", t=t, w=s.sled_depth, l=g.table_width,
             process="Abrasive face-up; rides the ways",
             joinery="none — fixture", handed="IDENTICAL", viz="table",
-            sheet="D8_holddowns.svg", notes="As wide as the drum so you cannot dish the middle.",
+            sheet="P013_truing_sled.svg", notes="As wide as the drum so you cannot dish the middle.",
         ),
         _part(
             "P-014", "Hold-down roller yoke", 2,
@@ -586,7 +697,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             t=s.yoke_thick, w=s.yoke_width, l=s.yoke_length,
             process="Cut pair; shoulder-bolt pivots; spring pockets",
             joinery="J-009 shoulder bolts + springs",
-            handed="IDENTICAL", viz="rollers", sheet="D8_holddowns.svg",
+            handed="IDENTICAL", viz="rollers", sheet="P014_roller_yoke.svg",
             notes=f"Board feet net {board_feet(s.yoke_thick, s.yoke_width, s.yoke_length, 2):.2f}; buy with {s.waste_factor_lumber:.0%} waste.",
         ),
         _part(
@@ -594,7 +705,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             category="jig", assembly="A-JIG", make="MAKE",
             material="MDF", t=t, w=s.bore_jig, l=s.bore_jig,
             process="Fence + clamp wall; drill/ream ⌀¾″ through the pack",
-            joinery="none", handed="IDENTICAL", viz="drum", sheet="D3_drum.svg",
+            joinery="none", handed="IDENTICAL", viz="drum", sheet="P015_pack_bore.svg",
         ),
         _part(
             "P-016", "Acme bronze nut block", 2,
@@ -603,7 +714,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             t=1.5, w=2.0, l=2.5,
             process="Bore for bronze nut; bolt to table underside",
             joinery="J-011 nut to table", handed="IDENTICAL", viz="elev",
-            sheet="D7_geometry.svg", evidence="ASSUMED block size; nut is BUY",
+            sheet="P016_nut_block.svg", evidence="ASSUMED block size; nut is BUY",
         ),
     ]
 
@@ -611,7 +722,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
 def hardware(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
     return [
         {"hardware_id": "H-001", "description": '4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)', "standard": "2-bolt/4-bolt flange", "size": '¾" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "notes": "Lock to P-001L. No axial float."},
-        {"hardware_id": "H-002", "description": '4-bolt flange bearing, ¾″ bore, sealed, FLOATING (idler)', "standard": "4-bolt flange", "size": '¾" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "notes": f"Axial slots {s.idler_float_slot:g}″ so the shaft cannot banana."},
+        {"hardware_id": "H-002", "description": '4-bolt flange bearing, ¾″ bore, sealed, FLOATING (idler)', "standard": "4-bolt flange", "size": '¾" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "notes": f"Axial float on a {s.idler_float_pad:g}″ UHMW pad (J-007). Do not elongate flange holes in the plywood face."},
         {"hardware_id": "H-003", "description": f'{s.pulley_motor_od:g}″ motor 4L pulley', "size": f'{s.pulley_motor_od:g}"', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRIVE"},
         {"hardware_id": "H-004", "description": f'{s.pulley_drum_od:g}″ drum 4L pulley', "size": f'{s.pulley_drum_od:g}"', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRIVE"},
         {"hardware_id": "H-005", "description": s.belt, "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRIVE", "notes": "Size to measured center distance after cradle lock."},
@@ -646,7 +757,7 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "part_a": "P-001L / P-001R",
             "part_b": "P-003",
             "qty": 6,
-            "location": f"Inner faces at Z = {s.stretcher_z} in, from Datum Y per stretcher layout",
+            "location": f"Inner faces; Y {s.stretcher_dado_y0:g}–{s.stretcher_dado_y0 + s.stretcher_height:g}″ from infeed; Z bottoms {s.stretcher_z}",
             "dado_width": s.ply_actual,
             "dado_depth": s.stretcher_housing,
             "fit_class": "GLUE",
@@ -714,7 +825,10 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "part_b": "H-002 / P-010",
             "fit_class": "SLIDING (axial only)",
             "constraint": "FLOATING",
-            "notes": f"{s.idler_float_slot:g}″ slots. Over-constraint bananas the shaft.",
+            "notes": (
+                f"{s.idler_float_pad:g}″ UHMW pad under the flange. Bolts snug, not torqued. "
+                "Do not slot the plywood in Y or Z — that lets the drum axis wander. Over-constraint bananas the shaft."
+            ),
         },
         {
             "joint_id": "J-008",
@@ -806,6 +920,8 @@ def decisions() -> list[dict[str, str]]:
         {"id": "D-020", "decision": "UHMW let into a rebate; project only ~0.23″", "reason": "¾″ proud ways steal 1.5″ and a 16″ table cannot enter a 16.5″ span", "rev": "B.1", "affected": "P-001L/R, P-007, table_width equation"},
         {"id": "D-021", "decision": "¼″ housed stretchers, not butt joints", "reason": "Racking stiffness without using stretchers as the table datum", "rev": "B.1", "affected": "P-003 length, J-001, S-003"},
         {"id": "D-022", "decision": "Persistent part IDs P/H/J/A; Python is SSOT", "reason": "Drawings, BOM, viewer, and OpenSCAD were duplicating 16.5 / 14 / 18.5", "rev": "B.1"},
+        {"id": "D-023", "decision": "Wandel-style individual part, assembly, and hardware sheets", "reason": "Overview D-sheets are not enough to fabricate P-001 from; each make part needs its own isometric + hole chart + callouts", "rev": "B.2", "affected": "plans/P*.svg, A*.svg, H01, IDX"},
+        {"id": "D-024", "decision": "Idler float is an axial pad, not YZ slots in the side panel", "reason": "Face-plane slots let the drum axis wander; shaft growth is through the bearing", "rev": "B.2", "affected": "J-007, H-002, P-001R"},
     ]
 
 
@@ -814,6 +930,7 @@ def revisions() -> list[dict[str, str]]:
         {"rev": "A", "note": "Solid sliding table, no conveyor, adjustable idler, precision shaft"},
         {"rev": "B", "note": "Dual-end lift, UHMW ways, hold-downs, floating bearing, paper-on A/B ±0.003″"},
         {"rev": "B.1", "note": "Fabrication model: part/joint IDs, housed stretchers, way rebate so table fits, derived geometry, JSON/CSV SSOT"},
+        {"rev": "B.2", "note": "Individual Wandel-style part/assembly/hardware sheets; named hole patterns; idler axial pad (not YZ slots)"},
     ]
 
 
@@ -1072,7 +1189,7 @@ def summary() -> dict[str, Any]:
         "lumberyard": lumberyard(),
         "fasteners": fastener_schedule(),
         "nesting": nest_sheets(),
-        "nest_yield": nest_yield(),
+        "drawings": shop_drawings(),
         "assembly": assembly_phases(),
         "calibration": calibration_steps(),
         "name": PROJECT["project_name"],
@@ -1121,6 +1238,14 @@ def parameters_scad(s: Spec = SPEC, g: Geom = GEOM) -> str:
         f"stretcher_h = {s.stretcher_height};",
         f"stretcher_len = {g.stretcher_length};",
         f"stretcher_housing = {s.stretcher_housing};",
+        f"stretcher_dado_y0 = {s.stretcher_dado_y0};",
+        f"flange_bolt_square = {s.flange_bolt_square};",
+        f"flange_bolt_clr = {s.flange_bolt_clr};",
+        f"ply_shaft_clear_dia = {s.ply_shaft_clear_dia};",
+        f"motor_pivot_y = {s.motor_pivot_y};",
+        f"motor_pivot_z = {s.motor_pivot_z};",
+        f"way_end_inset = {s.way_end_inset};",
+        f"idler_float_pad = {s.idler_float_pad};",
         f"acme_y0 = {g.acme_y_infeed};",
         f"acme_y1 = {g.acme_y_outfeed};",
         f"acme_x0 = {g.acme_x_left};",
@@ -1167,6 +1292,53 @@ def geometry_js(s: Spec = SPEC, g: Geom = GEOM) -> str:
     )
 
 
+def shop_drawings() -> list[dict[str, str]]:
+    """Every printable sheet. kind drives the phone viewer rails."""
+    rows: list[dict[str, str]] = [
+        {"code": "IDX", "file": "IDX_drawings.svg", "title": "Drawing index", "kind": "plan", "group": "index"},
+        {"code": "D-1", "file": "D1_general.svg", "title": "D-1 General", "kind": "plan", "group": "overview"},
+        {"code": "D-2", "file": "D2_frame.svg", "title": "D-2 Frame", "kind": "plan", "group": "overview"},
+        {"code": "D-3", "file": "D3_drum.svg", "title": "D-3 Drum", "kind": "plan", "group": "overview"},
+        {"code": "D-4", "file": "D4_drive.svg", "title": "D-4 Drive", "kind": "plan", "group": "overview"},
+        {"code": "D-5", "file": "D5_hood.svg", "title": "D-5 Hood", "kind": "plan", "group": "overview"},
+        {"code": "D-6", "file": "D6_cutlist.svg", "title": "D-6 Cut list", "kind": "plan", "group": "overview"},
+        {"code": "D-7", "file": "D7_geometry.svg", "title": "D-7 Geometry", "kind": "plan", "group": "overview"},
+        {"code": "D-8", "file": "D8_holddowns.svg", "title": "D-8 Hold-downs", "kind": "plan", "group": "overview"},
+        {"code": "D-9", "file": "D9_model.svg", "title": "D-9 3D views", "kind": "plan", "group": "overview"},
+        {"code": "D-10", "file": "D10_lumberyard.svg", "title": "D-10 Lumberyard", "kind": "plan", "group": "overview"},
+        {"code": "D-11", "file": "D11_register.svg", "title": "D-11 Part register", "kind": "plan", "group": "overview"},
+        {"code": "D-12", "file": "D12_joinery.svg", "title": "D-12 Joinery & QA", "kind": "plan", "group": "overview"},
+        {"code": "P-001L", "file": "P001L_side_drive.svg", "title": "P-001L Side, drive", "kind": "part", "group": "part"},
+        {"code": "P-001R", "file": "P001R_side_idler.svg", "title": "P-001R Side, idler", "kind": "part", "group": "part"},
+        {"code": "P-002", "file": "P002_base.svg", "title": "P-002 Base deck", "kind": "part", "group": "part"},
+        {"code": "P-003", "file": "P003_stretcher.svg", "title": "P-003 Stretcher", "kind": "part", "group": "part"},
+        {"code": "P-004", "file": "P004_table_skin.svg", "title": "P-004 Table skin", "kind": "part", "group": "part"},
+        {"code": "P-005", "file": "P005_table_ribs.svg", "title": "P-005 Table ribs", "kind": "part", "group": "part"},
+        {"code": "P-006", "file": "P006_wear_face.svg", "title": "P-006 Wear face", "kind": "part", "group": "part"},
+        {"code": "P-007", "file": "P007_uhmw_way.svg", "title": "P-007 UHMW way", "kind": "part", "group": "part"},
+        {"code": "P-008", "file": "P008_disc_core.svg", "title": "P-008 Disc, core", "kind": "part", "group": "part"},
+        {"code": "P-009", "file": "P009_disc_end.svg", "title": "P-009 Disc, end", "kind": "part", "group": "part"},
+        {"code": "P-010", "file": "P010_shaft.svg", "title": "P-010 Shaft", "kind": "part", "group": "part"},
+        {"code": "P-011", "file": "P011_hood.svg", "title": "P-011 Dust hood", "kind": "part", "group": "part"},
+        {"code": "P-012", "file": "P012_motor_cradle.svg", "title": "P-012 Motor cradle", "kind": "part", "group": "part"},
+        {"code": "P-013", "file": "P013_truing_sled.svg", "title": "P-013 Truing sled", "kind": "part", "group": "part"},
+        {"code": "P-014", "file": "P014_roller_yoke.svg", "title": "P-014 Roller yoke", "kind": "part", "group": "part"},
+        {"code": "P-015", "file": "P015_pack_bore.svg", "title": "P-015 Pack-bore jig", "kind": "part", "group": "part"},
+        {"code": "P-016", "file": "P016_nut_block.svg", "title": "P-016 Nut block", "kind": "part", "group": "part"},
+        {"code": "A-01", "file": "A01_frame.svg", "title": "A-01 Frame assembly", "kind": "assembly", "group": "assembly"},
+        {"code": "A-02", "file": "A02_drum.svg", "title": "A-02 Drum assembly", "kind": "assembly", "group": "assembly"},
+        {"code": "A-03", "file": "A03_table.svg", "title": "A-03 Table assembly", "kind": "assembly", "group": "assembly"},
+        {"code": "A-04", "file": "A04_drive.svg", "title": "A-04 Drive assembly", "kind": "assembly", "group": "assembly"},
+        {"code": "A-05", "file": "A05_holddowns.svg", "title": "A-05 Hold-downs", "kind": "assembly", "group": "assembly"},
+        {"code": "H-01", "file": "H01_hardware.svg", "title": "H-01 Hardware", "kind": "hardware", "group": "hardware"},
+        {"src_kind": "render", "code": "ISO-A", "file": "iso_assembled.svg", "title": "Iso assembled", "kind": "render", "group": "render", "dir": "renders"},
+        {"src_kind": "render", "code": "ISO-E", "file": "iso_exploded.svg", "title": "Iso exploded", "kind": "render", "group": "render", "dir": "renders"},
+        {"src_kind": "render", "code": "ORTHO-F", "file": "ortho_front.svg", "title": "Front solid", "kind": "render", "group": "render", "dir": "renders"},
+        {"src_kind": "render", "code": "ORTHO-S", "file": "ortho_side.svg", "title": "Drive side", "kind": "render", "group": "render", "dir": "renders"},
+    ]
+    return rows
+
+
 def viewer_data() -> dict[str, Any]:
     s, g = SPEC, GEOM
     return {
@@ -1186,16 +1358,16 @@ def viewer_data() -> dict[str, Any]:
         },
         "modernizations": list(s.modernizations),
         "parts": [
-            {"id": "sides", "fabIds": ["P-001L", "P-001R"], "group": "frame", "label": "Side panels P-001L/R", "detail": f"{s.ply_actual:g}″ BB · stack-drill then inner-face dado/rebate", "color": "#c4a574", "sheet": "D2_frame.svg"},
-            {"id": "ways", "fabIds": ["P-007"], "group": "frame", "label": "UHMW ways P-007", "detail": f"Rebate {g.way_rebate:.3f}″ · project {g.way_project:.3f}″ · J-002", "color": "#d9dcde", "sheet": "D2_frame.svg"},
-            {"id": "base", "fabIds": ["P-002", "P-003"], "group": "frame", "label": "Base + stretchers", "detail": f"P-003 housed {g.stretcher_length:g}″ · J-001", "color": "#a89070", "sheet": "D2_frame.svg"},
-            {"id": "drum", "fabIds": ["P-008", "P-009"], "group": "drum", "label": "Sanding drum", "detail": f"⌀{s.drum_od:g}″ × {g.drum_length:g}″ · pack-bored · P-008/P-009", "color": "#b8a990", "sheet": "D3_drum.svg"},
-            {"id": "shaft", "fabIds": ["P-010", "H-001", "H-002"], "group": "drum", "label": "Shaft + bearings", "detail": "P-010 · J-006 fixed · J-007 float", "color": "#8a9098", "sheet": "D3_drum.svg"},
-            {"id": "table", "fabIds": ["P-004", "P-005", "P-006"], "group": "table", "label": "Torsion-box table", "detail": "P-004/P-005/P-006 · J-003/J-004", "color": "#cfd3d5", "sheet": "D7_geometry.svg"},
-            {"id": "elev", "fabIds": ["P-016", "H-007", "H-008"], "group": "table", "label": "Dual Acme lift", "detail": "H-007/H-008 · left clutch · home dog", "color": "#6e7578", "sheet": "D7_geometry.svg"},
-            {"id": "rollers", "fabIds": ["P-014", "H-009"], "group": "table", "label": "Hold-down rollers", "detail": f"P-014 · {s.roller_setbelow:.3f}″ below drum", "color": "#5a6068", "sheet": "D8_holddowns.svg"},
-            {"id": "motor", "fabIds": ["P-012", "H-006"], "group": "drive", "label": "Motor + pulleys", "detail": f"{s.motor_hp:g} HP · coplanar {s.pulley_motor_od:g}″/{s.pulley_drum_od:g}″", "color": "#4a5058", "sheet": "D4_drive.svg"},
-            {"id": "hood", "fabIds": ["P-011"], "group": "hood", "label": "Dust hood", "detail": "P-011 kerf-bent · 4″ port", "color": "#9aa8a0", "sheet": "D5_hood.svg"},
+            {"id": "sides", "fabIds": ["P-001L", "P-001R"], "group": "frame", "label": "Side panels P-001L/R", "detail": f"{s.ply_actual:g}″ BB · stack-drill then inner-face dado/rebate", "color": "#c4a574", "sheet": "P001L_side_drive.svg"},
+            {"id": "ways", "fabIds": ["P-007"], "group": "frame", "label": "UHMW ways P-007", "detail": f"Rebate {g.way_rebate:.3f}″ · project {g.way_project:.3f}″ · J-002", "color": "#d9dcde", "sheet": "P007_uhmw_way.svg"},
+            {"id": "base", "fabIds": ["P-002", "P-003"], "group": "frame", "label": "Base + stretchers", "detail": f"P-003 housed {g.stretcher_length:g}″ · J-001", "color": "#a89070", "sheet": "A01_frame.svg"},
+            {"id": "drum", "fabIds": ["P-008", "P-009"], "group": "drum", "label": "Sanding drum", "detail": f"⌀{s.drum_od:g}″ × {g.drum_length:g}″ · pack-bored · P-008/P-009", "color": "#b8a990", "sheet": "A02_drum.svg"},
+            {"id": "shaft", "fabIds": ["P-010", "H-001", "H-002"], "group": "drum", "label": "Shaft + bearings", "detail": "P-010 · J-006 fixed · J-007 float", "color": "#8a9098", "sheet": "P010_shaft.svg"},
+            {"id": "table", "fabIds": ["P-004", "P-005", "P-006"], "group": "table", "label": "Torsion-box table", "detail": "P-004/P-005/P-006 · J-003/J-004", "color": "#cfd3d5", "sheet": "A03_table.svg"},
+            {"id": "elev", "fabIds": ["P-016", "H-007", "H-008"], "group": "table", "label": "Dual Acme lift", "detail": "H-007/H-008 · left clutch · home dog", "color": "#6e7578", "sheet": "P016_nut_block.svg"},
+            {"id": "rollers", "fabIds": ["P-014", "H-009"], "group": "table", "label": "Hold-down rollers", "detail": f"P-014 · {s.roller_setbelow:.3f}″ below drum", "color": "#5a6068", "sheet": "A05_holddowns.svg"},
+            {"id": "motor", "fabIds": ["P-012", "H-006"], "group": "drive", "label": "Motor + pulleys", "detail": f"{s.motor_hp:g} HP · coplanar {s.pulley_motor_od:g}″/{s.pulley_drum_od:g}″", "color": "#4a5058", "sheet": "A04_drive.svg"},
+            {"id": "hood", "fabIds": ["P-011"], "group": "hood", "label": "Dust hood", "detail": "P-011 kerf-bent · 4″ port", "color": "#9aa8a0", "sheet": "P011_hood.svg"},
         ],
         "cutList": [
             {"qty": r["qty"], "size": r["size"], "sizeMm": r["size_mm"], "stock": r["stock"], "use": r["part_id"] + " " + r["use"][:42], "partId": r["part_id"]}
@@ -1223,22 +1395,14 @@ def viewer_data() -> dict[str, Any]:
             "Eye, hearing, respirator when truing MDF.",
         ],
         "gallery": [
-            {"src": "../plans/D1_general.svg", "title": "D-1 General", "kind": "plan"},
-            {"src": "../plans/D2_frame.svg", "title": "D-2 Frame", "kind": "plan"},
-            {"src": "../plans/D3_drum.svg", "title": "D-3 Drum", "kind": "plan"},
-            {"src": "../plans/D4_drive.svg", "title": "D-4 Drive", "kind": "plan"},
-            {"src": "../plans/D5_hood.svg", "title": "D-5 Hood", "kind": "plan"},
-            {"src": "../plans/D6_cutlist.svg", "title": "D-6 Cut list", "kind": "plan"},
-            {"src": "../plans/D7_geometry.svg", "title": "D-7 Geometry", "kind": "plan"},
-            {"src": "../plans/D8_holddowns.svg", "title": "D-8 Hold-downs", "kind": "plan"},
-            {"src": "../plans/D9_model.svg", "title": "D-9 3D views", "kind": "plan"},
-            {"src": "../plans/D10_lumberyard.svg", "title": "D-10 Lumberyard", "kind": "plan"},
-            {"src": "../plans/D11_register.svg", "title": "D-11 Part register", "kind": "plan"},
-            {"src": "../plans/D12_joinery.svg", "title": "D-12 Joinery & QA", "kind": "plan"},
-            {"src": "../renders/iso_assembled.svg", "title": "Iso assembled", "kind": "render"},
-            {"src": "../renders/iso_exploded.svg", "title": "Iso exploded", "kind": "render"},
-            {"src": "../renders/ortho_front.svg", "title": "Front solid", "kind": "render"},
-            {"src": "../renders/ortho_side.svg", "title": "Drive side", "kind": "render"},
+            {
+                "src": f"../{d.get('dir', 'plans')}/{d['file']}",
+                "title": d["title"],
+                "kind": d["kind"],
+                "group": d["group"],
+                "code": d["code"],
+            }
+            for d in shop_drawings()
         ],
         "lumberyard": [{"where": r["where"], "item": r["item"], "qty": r["qty"], "use": r["use"]} for r in lumberyard()],
         "fasteners": [{"qty": r["qty"], "item": r["item"], "use": r["use"]} for r in fastener_schedule()[:8]],
@@ -1254,6 +1418,9 @@ def viewer_data() -> dict[str, Any]:
             {"href": "../cad/walter_ds16.py", "label": "walter_ds16.py", "note": "Parametric engineering source", "download": "walter_ds16.py"},
             {"href": "../cad/walter_ds16.scad", "label": "walter_ds16.scad", "note": "OpenSCAD solid model", "download": "walter_ds16.scad"},
             {"href": "../model/", "label": "3D viewer", "note": "Orbit / explode"},
+            {"href": "../plans/IDX_drawings.svg", "label": "IDX SVG", "note": "Drawing index", "download": "IDX_drawings.svg"},
+            {"href": "../plans/P001L_side_drive.svg", "label": "P-001L SVG", "note": "Drive side panel", "download": "P001L_side_drive.svg"},
+            {"href": "../plans/H01_hardware.svg", "label": "H-01 SVG", "note": "Illustrated hardware", "download": "H01_hardware.svg"},
             {"href": "../plans/D11_register.svg", "label": "D-11 SVG", "note": "Part register", "download": "D11_register.svg"},
             {"href": "../plans/D12_joinery.svg", "label": "D-12 SVG", "note": "Joinery & QA", "download": "D12_joinery.svg"},
             {"href": "../", "label": "Design page", "note": "Overview"},

@@ -4,6 +4,7 @@
 Run after plan generators:
   python3 scripts/gen_drum_sander_plans.py
   python3 scripts/gen_drum_sander_iso.py
+  python3 scripts/gen_walter_part_sheets.py
   python3 scripts/pack_drum_sander.py
 """
 
@@ -383,7 +384,7 @@ def main() -> None:
     (PACK / "README.txt").write_text(
         "\n".join(
             [
-                "WALTER DS-16  ·  Rev B geometry  ·  fabrication B.1",
+                "WALTER DS-16  ·  Rev B geometry  ·  fabrication B.2",
                 "",
                 "Phone: Share this ZIP → Save to Files (iPhone) or it lands in Downloads (Android).",
                 "Pocket field card: open pocket.html, then Add to Home Screen or Print → PDF.",
@@ -393,9 +394,13 @@ def main() -> None:
                 "Keep 16.5\" (419 mm) clear between inner faces (18 mm BB is fine).",
                 "Way rebate so the 16\" table fits; stretchers housed 1/4\" (P-003 = 17\").",
                 "",
-                "plans/ D-1…D-12   renders/ isometric solids   cad/ Python SSOT + OpenSCAD",
+                "plans/ IDX + P-001L…P-016 individual sheets + A-01…A-05 + H-01 hardware",
+                "plans/ D-1…D-12 overviews   renders/ isometric solids",
+                "cad/ Python SSOT + OpenSCAD",
                 "BOM.csv parts.csv joints.csv operations.csv qa.csv fasteners.csv lumberyard.csv",
                 "fabrication.json = machine-readable source dump",
+                "",
+                "Cut from the P-sheets. Confirm flange bolt circle against the bearing you bought.",
                 "",
                 "Sources: woodgears.ca/reader/walters/drum_sander.html  ·  youtu.be/W-5Sj6kBVic",
                 "ShopNotes No. 86  ·  Heslop / Hawley  ·  Jet/Grizzly roller practice",

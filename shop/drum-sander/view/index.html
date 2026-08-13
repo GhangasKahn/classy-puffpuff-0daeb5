@@ -58,9 +58,13 @@
 
     <section class="screen" data-screen="plans">
       <div class="plans">
-        <p class="kicker">Blueprints</p>
-        <h1 style="font:600 32px/1 var(--disp);margin:0 0 8px">Plan sheets</h1>
-        <p class="hint">Swipe the reel, tap a sheet to zoom. Save pack puts every file in Files / Downloads.</p>
+        <p class="kicker">Part sheets — cut these</p>
+        <h1 style="font:600 32px/1 var(--disp);margin:0 0 8px">Build plans</h1>
+        <p class="hint">Swipe each reel, tap a sheet to zoom. Save pack puts every file in Files / Downloads.</p>
+        <div class="plan-rail" id="partRail"></div>
+        <p class="kicker" style="margin-top:18px">Assembly &amp; hardware</p>
+        <div class="plan-rail" id="assemblyRail"></div>
+        <p class="kicker" style="margin-top:18px">Overview D-1…D-12</p>
         <div class="plan-rail" id="planRail"></div>
         <p class="kicker" style="margin-top:18px">Solids</p>
         <div class="grid" id="renderGrid"></div>

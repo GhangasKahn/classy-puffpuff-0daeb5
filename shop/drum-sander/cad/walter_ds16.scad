@@ -12,12 +12,12 @@ module side_panel() {
   difference() {
     color("#c4a574") cube([side_t, side_d, side_h]);
     // way rebate (inner face is +X on left panel)
-    translate([side_t - way_rebate, 1, way_z])
-      cube([way_rebate + 0.05, side_d - 2, way_stock]);
-    // stretcher housings
+    translate([side_t - way_rebate, way_end_inset, way_z])
+      cube([way_rebate + 0.05, side_d - 2 * way_end_inset, way_stock]);
+    // stretcher housings (Y from infeed, Z = rail bottom, ¾″ tall)
     for (z = [6, 12, 20])
-      translate([side_t - stretcher_housing, 2, z])
-        cube([stretcher_housing + 0.05, 4, 0.75]);
+      translate([side_t - stretcher_housing, stretcher_dado_y0, z])
+        cube([stretcher_housing + 0.05, stretcher_h, side_t]);
     translate([-0.1, drum_y, drum_z]) rotate([0, 90, 0])
       cylinder(h=side_t + 0.2, d=shaft_od + 0.08);
   }
@@ -25,19 +25,19 @@ module side_panel() {
 
 module stretcher(z) {
   color("#8a7355")
-    translate([side_t - stretcher_housing, 2, z])
-      cube([stretcher_len, 4, 0.75]);
+    translate([side_t - stretcher_housing, stretcher_dado_y0, z])
+      cube([stretcher_len, stretcher_h, side_t]);
 }
 
 module way_left() {
   color("#d9dcde")
-    translate([side_t - way_rebate, 1, way_z])
-      cube([way_stock, side_d - 2, way_stock]);
+    translate([side_t - way_rebate, way_end_inset, way_z])
+      cube([way_stock, side_d - 2 * way_end_inset, way_stock]);
 }
 module way_right() {
   color("#d9dcde")
-    translate([side_t + clear - way_project, 1, way_z])
-      cube([way_stock, side_d - 2, way_stock]);
+    translate([side_t + clear - way_project, way_end_inset, way_z])
+      cube([way_stock, side_d - 2 * way_end_inset, way_stock]);
 }
 
 module table() {

@@ -5,7 +5,7 @@ J-003,glue torsion box,P-004,P-005,GLUE,Continuous glue. Flatten before J-004.
 J-004,bonded wear face,P-004,P-006,GLUE,Replaceable metrology surface.
 J-005,pack-bore + keyed stack,P-008 / P-009,P-010,LOCATIONAL / GLUE,Bore as a pack. 1 mm relief every 4 MDF discs. Balance ends.
 J-006,"flange bearing, fixed",P-001L,H-001 / P-010,LOCATIONAL,Drive-side axial lock. Datum for drum axis.
-J-007,"flange bearing, floating axial",P-001R,H-002 / P-010,SLIDING (axial only),0.25″ slots. Over-constraint bananas the shaft.
+J-007,"flange bearing, floating axial",P-001R,H-002 / P-010,SLIDING (axial only),"0.25″ UHMW pad under the flange. Bolts snug, not torqued. Do not slot the plywood in Y or Z — that lets the drum axis wander. Over-constraint bananas the shaft."
 J-008,pivoting T-nut cradle,P-012,H-016 / P-001L,SNUG then LOCKED,"Gravity tension, then lock so the belt cannot pump."
 J-009,spring yoke pivot,P-014,H-009 / H-011 / H-012,"CLEARANCE pivot, SPRING down","Set rollers 0.030″ below drum OD, paper on."
 J-010,screw base to sides,P-002,P-001L / P-001R,GLUE + SCREW,

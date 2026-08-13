@@ -5,9 +5,9 @@
 <line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
 <text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER</text>
 <text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-11  ·  Part register</text>
-<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Fabrication B.1 · persistent IDs · datums</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Fabrication B.2 · persistent IDs · see IDX + P-sheets</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry · fab B.1 (part IDs · housed stretchers)</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry · fab B.2 (individual part sheets)</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>MAKE / BUY-CUT REGISTER  —  Python SSOT  cad/walter_ds16.py</text>
 <text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Inner span 16.5″ · table 16″ · way project 0.230″ / rebate 0.520″ · stretcher 17″ housed</text>
 <text x='40.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start' font-weight='600'>ID</text>
@@ -133,5 +133,5 @@
 <text x='40.0' y='564.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Sheet 1 — 5′×5′ × ¾″ BB (frame)   yield 56.0%   waste 44.0%   7 parts</text>
 <text x='40.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Sheet 2 — 5′×5′ × ¾″ BB (table &amp; jigs)   yield 30.1%   waste 69.9%   6 parts</text>
 <text x='40.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Sheet 3 — 24″×48″ × ¾″ MDF (discs)   yield 55.1%   waste 44.9%   21 parts</text>
-<text x='40.0' y='1050.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>If overall length/span changes, stretcher length, table width, and way rebate recompute. Do not edit these numbers on the sheet.</text>
+<text x='40.0' y='1050.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Cut from the P-sheets (IDX). D-1…D-12 are overviews. If span changes, stretcher length, table width, and way rebate recompute — do not edit numbers on the sheet.</text>
 </svg>

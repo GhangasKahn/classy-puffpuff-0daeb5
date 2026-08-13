@@ -129,7 +129,13 @@ function card(g) {
   </button>`;
 }
 const plans = D.gallery.filter((g) => g.kind === "plan");
+const partSheets = D.gallery.filter((g) => g.kind === "part");
+const assemblySheets = D.gallery.filter((g) => g.kind === "assembly" || g.kind === "hardware");
 const renders = D.gallery.filter((g) => g.kind === "render");
+const partRail = $("#partRail");
+if (partRail) partRail.innerHTML = partSheets.map(card).join("");
+const assemblyRail = $("#assemblyRail");
+if (assemblyRail) assemblyRail.innerHTML = assemblySheets.map(card).join("");
 $("#planRail").innerHTML = plans.map(card).join("");
 $("#renderGrid").innerHTML = renders.map(card).join("");
 

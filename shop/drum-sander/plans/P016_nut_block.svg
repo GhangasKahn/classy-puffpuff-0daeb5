@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-016</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Acme bronze nut block</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>J-011 nut to table</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 2  ·  IDENTICAL</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Hardwood or aluminum + bronze nut  ·  2.5" × 2" × 1.5"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 2  ·  Bore for bronze nut; bolt to table underside</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.2 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · ASSUMED block size; nut is BUY</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>ACME NUT BLOCK — make two, bolt to table underside</text>
+<rect x='80.0' y='160.0' width='120.0' height='96.0' fill='#e6d09a' stroke='#1a1a1a' stroke-width='2.0'/>
+<line x1='80.0' y1='256.0' x2='80.0' y2='290.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='200.0' y1='256.0' x2='200.0' y2='290.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='284.0' x2='200.0' y2='284.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,284.0 88.0,280.8 88.0,287.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='200.0,284.0 192.0,280.8 192.0,287.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='122.4' y='267.0' width='35.1' height='18.0' fill='#ffffff'/>
+<text x='140.0' y='279.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>2.5"</text>
+<line x1='80.0' y1='160.0' x2='42.0' y2='160.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='256.0' x2='42.0' y2='256.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='48.0' y1='160.0' x2='48.0' y2='256.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='48.0,160.0 44.8,168.0 51.2,168.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='48.0,256.0 44.8,248.0 51.2,248.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='38.0' y='212.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 212.0)'>2.00"</text>
+<text x='216.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 1.5"</text>
+<circle cx='140.0' cy='208.0' r='16.8' fill='#c4783a' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='140.0' y1='208.0' x2='212.0' y2='142.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='140.0' cy='208.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='218.0' y='140.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Bronze nut ½-10  (BUY)</text>
+<rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1259.5,388.0 1418.8,296.0 1418.8,185.6 1259.5,277.6' fill='#a2936c'/>
+<polygon points='1132.0,314.4 1259.5,388.0 1259.5,277.6 1132.0,204.0' fill='#c0ae81'/>
+<polygon points='1331.6,300.3 1340.6,300.1 1232.2,237.5 1223.3,237.7' fill='#8a5429'/>
+<polygon points='1340.6,300.1 1350.5,294.3 1242.1,231.8 1232.2,237.5' fill='#8a5429'/>
+<polygon points='1350.5,294.3 1359.4,284.2 1251.1,221.6 1242.1,231.8' fill='#8a5429'/>
+<polygon points='1359.4,284.2 1365.6,271.7 1257.3,209.1 1251.1,221.6' fill='#8a5429'/>
+<polygon points='1365.6,271.7 1367.8,259.2 1259.5,196.6 1257.3,209.1' fill='#9a5e2d'/>
+<polygon points='1367.8,259.2 1365.6,249.3 1257.3,186.7 1259.5,196.6' fill='#ad6a33'/>
+<polygon points='1365.6,249.3 1359.4,243.9 1251.1,181.3 1257.3,186.7' fill='#ba7237'/>
+<polygon points='1259.5,277.6 1418.8,185.6 1291.3,112.0 1132.0,204.0' fill='#a2936c'/>
+<polygon points='1259.5,196.6 1257.3,186.7 1251.1,181.3 1242.1,181.5 1232.2,187.3 1223.3,197.4 1217.1,209.9 1214.9,222.4 1217.1,232.3 1223.3,237.7 1232.2,237.5 1242.1,231.8 1251.1,221.6 1257.3,209.1' fill='#8a5429'/>
+</g>
+<text x='1130.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric</text>
+<rect x='1120.0' y='420.0' width='500.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1136.0' y='444.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PART DATA</text>
+<text x='1136.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Stock</text>
+<text x='1260.0' y='470.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3" × 2.125" × 1.5"</text>
+<text x='1136.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Joinery</text>
+<text x='1260.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-011 nut to table</text>
+<text x='1136.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref face</text>
+<text x='1260.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref edge</text>
+<text x='1260.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Grain</text>
+<text x='1260.0' y='558.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
+<text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ASSUMED block size; nut is BUY</text>
+<text x='80.0' y='1000.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Block size is ASSUMED; the bronze nut is BUY. Both nuts;</text>
+<text x='80.0' y='1036.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  chain-coupled rotation (H-008).</text>
+<text x='80.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Left screw uncouples for taper. Dog stop is the last known</text>
+<text x='80.0' y='1072.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  parallel home.</text>
+<text x='80.0' y='1092.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ½-10 Acme · 0.1" per turn. Travel 3.25".</text>
+</svg>

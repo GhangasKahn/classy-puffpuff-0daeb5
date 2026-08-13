@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-001L</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Side panel, drive (left)</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Stack-drill with P-001R as a pair, then split for inner-face work.</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 1  ·  stack-drill with mate</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Baltic birch plywood  ·  30" × 22" × 0.75"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Inner face · ~18 px/inch · print A3 · Datum Y0 = infeed · Datum Z0 = bottom</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.2 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · ASSUMED — USER_CONFIRM vs purchased flange</text>
+<rect x='90.0' y='360.0' width='396.0' height='540.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='2.0'/>
+<text x='288.0' y='346.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>INNER FACE — looking from inside the machine</text>
+<rect x='108.0' y='706.5' width='360.0' height='13.5' fill='#d5d9de' stroke='#3d5a4c' stroke-width='1.4'/>
+<text x='288.0' y='698.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='middle' font-weight='600'>J-002 way rebate  0.52" deep</text>
+<rect x='126.0' y='778.5' width='72.0' height='13.5' fill='#e6d09a' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='206.0' y='789.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>J-001.1</text>
+<rect x='126.0' y='670.5' width='72.0' height='13.5' fill='#e6d09a' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='206.0' y='681.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>J-001.2</text>
+<rect x='126.0' y='526.5' width='72.0' height='13.5' fill='#e6d09a' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='206.0' y='537.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>J-001.3</text>
+<circle cx='288.0' cy='567.0' r='10.1' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.4'/>
+<circle cx='288.0' cy='567.0' r='2.4' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='269.5' cy='585.5' r='3.1' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.3'/>
+<text x='279.5' y='577.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#3d4a38' text-anchor='start'>FB1</text>
+<circle cx='306.5' cy='585.5' r='3.1' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.3'/>
+<text x='316.5' y='577.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#3d4a38' text-anchor='start'>FB2</text>
+<circle cx='269.5' cy='548.5' r='3.1' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.3'/>
+<text x='279.5' y='540.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#3d4a38' text-anchor='start'>FB3</text>
+<circle cx='306.5' cy='548.5' r='3.1' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.3'/>
+<text x='316.5' y='540.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='9' fill='#3d4a38' text-anchor='start'>FB4</text>
+<circle cx='139.5' cy='785.2' r='1.6' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='184.5' cy='785.2' r='1.6' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='139.5' cy='677.2' r='1.6' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='184.5' cy='677.2' r='1.6' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='139.5' cy='533.2' r='1.6' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='184.5' cy='533.2' r='1.6' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='162.0' cy='792.0' r='5.4' fill='none' stroke='#3d5a4c' stroke-width='1.4'/>
+<circle cx='162.0' cy='792.0' r='2.4' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<line x1='162.0' y1='792.0' x2='80.0' y2='832.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='162.0' cy='792.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='74.0' y='830.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='end'>Motor pivot ¼-20  (drive only)</text>
+<circle cx='234.0' cy='612.0' r='1.8' fill='#ffffff' stroke='#3d5a4c' stroke-width='1.4'/>
+<line x1='234.0' y1='612.0' x2='506.0' y2='582.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='234.0' cy='612.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='512.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>A-clock pad ¼-20  (drive only)</text>
+<line x1='90.0' y1='900.0' x2='90.0' y2='942.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='486.0' y1='900.0' x2='486.0' y2='942.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='90.0' y1='936.0' x2='486.0' y2='936.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='90.0,936.0 98.0,932.8 98.0,939.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='486.0,936.0 478.0,932.8 478.0,939.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='263.2' y='919.0' width='49.7' height='18.0' fill='#ffffff'/>
+<text x='288.0' y='931.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>22.00"</text>
+<line x1='90.0' y1='900.0' x2='44.0' y2='900.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='90.0' y1='360.0' x2='44.0' y2='360.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='50.0' y1='900.0' x2='50.0' y2='360.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='50.0,900.0 46.8,908.0 53.2,908.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='50.0,360.0 46.8,352.0 53.2,352.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='40.0' y='634.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 40.0 634.0)'>30.00"</text>
+<line x1='90.0' y1='360.0' x2='90.0' y2='326.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='288.0' y1='360.0' x2='288.0' y2='326.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='90.0' y1='332.0' x2='288.0' y2='332.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='90.0,332.0 98.0,328.8 98.0,335.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='288.0,332.0 280.0,328.8 280.0,335.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='164.2' y='332.0' width='49.7' height='18.0' fill='#ffffff'/>
+<text x='189.0' y='344.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>11.00"</text>
+<line x1='486.0' y1='900.0' x2='524.0' y2='900.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='486.0' y1='567.0' x2='524.0' y2='567.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='518.0' y1='900.0' x2='518.0' y2='567.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='518.0,900.0 514.8,908.0 521.2,908.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='518.0,567.0 514.8,559.0 521.2,559.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='528.0' y='737.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start' transform='rotate(-90 528.0 737.5)'>18.5"</text>
+<line x1='108.0' y1='720.0' x2='108.0' y2='748.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='468.0' y1='720.0' x2='468.0' y2='748.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='108.0' y1='742.0' x2='468.0' y2='742.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='108.0,742.0 116.0,738.8 116.0,745.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='468.0,742.0 460.0,738.8 460.0,745.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='263.2' y='725.0' width='49.7' height='18.0' fill='#ffffff'/>
+<text x='288.0' y='737.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>20.00"</text>
+<line x1='108.0' y1='720.0' x2='80.0' y2='720.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='108.0' y1='706.5' x2='80.0' y2='706.5' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='86.0' y1='720.0' x2='86.0' y2='706.5' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='86.0,720.0 82.8,728.0 89.2,728.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='86.0,706.5 82.8,698.5 89.2,698.5' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='76.0' y='717.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 76.0 717.2)'>0.75"</text>
+<line x1='90.0' y1='792.0' x2='90.0' y2='816.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='126.0' y1='792.0' x2='126.0' y2='816.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='90.0' y1='810.0' x2='126.0' y2='810.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='90.0,810.0 98.0,806.8 98.0,813.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='126.0,810.0 118.0,806.8 118.0,813.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='86.8' y='793.0' width='42.4' height='18.0' fill='#ffffff'/>
+<text x='108.0' y='805.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>2.00"</text>
+<line x1='126.0' y1='778.5' x2='126.0' y2='756.5' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='198.0' y1='778.5' x2='198.0' y2='756.5' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='126.0' y1='762.5' x2='198.0' y2='762.5' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='126.0,762.5 134.0,759.3 134.0,765.7' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='198.0,762.5 190.0,759.3 190.0,765.7' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='140.8' y='762.5' width='42.4' height='18.0' fill='#ffffff'/>
+<text x='162.0' y='774.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>4.00"</text>
+<text x='108.0' y='878.4' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>DATUM Y0 infeed</text>
+<text x='95.4' y='856.8' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' transform='rotate(-90 95.4 856.8)'>DATUM Z0 bottom</text>
+<rect x='1080.0' y='100.0' width='540.0' height='340.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1237.5,428.0 1242.5,425.1 1242.5,196.0 1237.5,198.9' fill='#436545'/>
+<polygon points='1232.4,346.9 1235.9,344.9 1235.9,339.2 1232.4,341.2' fill='#96999d'/>
+<polygon points='1227.6,372.6 1229.2,371.7 1229.2,365.9 1227.6,366.9' fill='#a2936c'/>
+<polygon points='1227.6,326.8 1229.2,325.8 1229.2,320.1 1227.6,321.1' fill='#a2936c'/>
+<polygon points='1201.1,357.4 1227.6,372.6 1227.6,366.9 1201.1,351.6' fill='#c0ae81'/>
+<polygon points='1227.6,366.9 1229.2,365.9 1202.8,350.7 1201.1,351.6' fill='#a2936c'/>
+<polygon points='1227.6,265.7 1229.2,264.7 1229.2,259.0 1227.6,260.0' fill='#a2936c'/>
+<polygon points='1201.1,311.5 1227.6,326.8 1227.6,321.1 1201.1,305.8' fill='#c0ae81'/>
+<polygon points='1227.6,321.1 1229.2,320.1 1202.8,304.8 1201.1,305.8' fill='#a2936c'/>
+<polygon points='1201.1,250.4 1227.6,265.7 1227.6,260.0 1201.1,244.7' fill='#c0ae81'/>
+<polygon points='1227.6,260.0 1229.2,259.0 1202.8,243.7 1201.1,244.7' fill='#a2936c'/>
+<polygon points='1100.1,270.6 1232.4,346.9 1232.4,341.2 1100.1,264.8' fill='#b2b6ba'/>
+<polygon points='1232.4,341.2 1235.9,339.2 1103.6,262.8 1100.1,264.8' fill='#96999d'/>
+<polygon points='1092.0,344.0 1237.5,428.0 1237.5,198.9 1092.0,114.9' fill='#4f7752'/>
+<polygon points='1165.0,250.3 1166.3,249.8 1173.9,245.4 1172.7,245.9' fill='#8b8d90'/>
+<polygon points='1163.4,249.8 1165.0,250.3 1172.7,245.9 1171.0,245.4' fill='#8b8d90'/>
+<polygon points='1161.8,248.4 1163.4,249.8 1171.0,245.4 1169.4,244.0' fill='#8b8d90'/>
+<polygon points='1171.0,236.8 1169.4,236.3 1168.1,236.7 1167.4,238.0 1167.4,239.9 1168.1,242.1 1169.4,244.0 1171.0,245.4 1172.7,245.9 1173.9,245.4 1174.7,244.1 1174.7,242.2 1173.9,240.1 1172.7,238.1' fill='#a5a7ab'/>
+<polygon points='1160.5,246.5 1161.8,248.4 1169.4,244.0 1168.1,242.1' fill='#8b8d90'/>
+<polygon points='1159.8,244.3 1160.5,246.5 1168.1,242.1 1167.4,239.9' fill='#8b8d90'/>
+<polygon points='1160.5,241.1 1159.8,242.4 1167.4,238.0 1168.1,236.7' fill='#949699'/>
+<polygon points='1159.8,242.4 1159.8,244.3 1167.4,239.9 1167.4,238.0' fill='#8b8d90'/>
+<polygon points='1237.5,198.9 1242.5,196.0 1097.0,112.0 1092.0,114.9' fill='#436545'/>
+</g>
+<text x='1090.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric — inner face toward camera</text>
+<rect x='1080.0' y='460.0' width='540.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1096.0' y='484.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>HOLE CHART  (inner-face Y / Z)</text>
+<text x='1096.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>ID</text>
+<text x='1180.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Y</text>
+<text x='1280.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Z</text>
+<text x='1380.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>DRILL</text>
+<text x='1096.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start' font-weight='600'>SHAFT</text>
+<text x='1180.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>11.00</text>
+<text x='1280.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>18.5</text>
+<text x='1380.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>⌀1.12" clear</text>
+<text x='1096.0' y='552.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start' font-weight='600'>FB1–4</text>
+<text x='1180.0' y='552.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>CL ± 1.02</text>
+<text x='1280.0' y='552.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>square</text>
+<text x='1380.0' y='552.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>⌀0.34"  (5/16)</text>
+<text x='1096.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start' font-weight='600'>PIVOT</text>
+<text x='1180.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>4.00</text>
+<text x='1280.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>6.00</text>
+<text x='1380.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>⌀0.27" tap ¼-20</text>
+<text x='1096.0' y='596.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start' font-weight='600'>PAD</text>
+<text x='1180.0' y='596.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>8.00</text>
+<text x='1280.0' y='596.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>16.00</text>
+<text x='1380.0' y='596.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>⌀0.2" tap ¼-20</text>
+<text x='1096.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start' font-weight='600'>SS*</text>
+<text x='1180.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>dado Y</text>
+<text x='1280.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>dado Z mid</text>
+<text x='1380.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1a1a' text-anchor='start'>#8 pilot — drill after clamp</text>
+<text x='1096.0' y='720.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Flange square CTC is ASSUMED. Transfer the purchased flange.</text>
+<text x='1080.0' y='760.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>FABRICATION SEQUENCE</text>
+<text x='1080.0' y='780.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Stack-drill P-001L and P-001R face-to-face (S-008) for bearing</text>
+<text x='1080.0' y='796.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  CL, flange bolts, and stretcher pilots. Then split.</text>
+<text x='1080.0' y='816.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Dados J-001 and way rebate J-002 are INNER FACE only and</text>
+<text x='1080.0' y='832.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  mirrored. Do not dado the pair while stacked.</text>
+<text x='1080.0' y='852.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Way rebate 0.52" deep × 0.75" wide so P-007 projects 0.23".</text>
+<text x='1080.0' y='868.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Without the rebate a 16" table will not enter the 16.5" span.</text>
+<text x='1080.0' y='888.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Clamp each stretcher in its housing, then drill #8 pilots</text>
+<text x='1080.0' y='904.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  through the side into P-003 (S-006). Countersink from the</text>
+<text x='1080.0' y='920.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  outside.</text>
+<text x='1080.0' y='940.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Drive flange H-001 is FIXED (J-006). This side is the</text>
+<text x='1080.0' y='956.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  drum-axis datum. Torque the flange bolts.</text>
+<text x='1080.0' y='976.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ¼-20 pivot for P-012. Drill after stack so L and R stay a</text>
+<text x='1080.0' y='992.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  pair; tap this hole on the drive side only.</text>
+<text x='1080.0' y='1012.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ¼-20 pad for H-021 mag-base / stem. Drive side is the A-clock</text>
+<text x='1080.0' y='1028.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  datum.</text>
+</svg>

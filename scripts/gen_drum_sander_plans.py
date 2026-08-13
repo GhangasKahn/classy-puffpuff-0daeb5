@@ -150,7 +150,7 @@ class Sheet:
         self.text(
             W - 40,
             Hpx - 34,
-            "ShopNotes 86 → Walters → Rev B geometry · fab B.1 (part IDs · housed stretchers)",
+            "ShopNotes 86 → Walters → Rev B geometry · fab B.2 (individual part sheets)",
             13,
             DIM,
             "end",
@@ -816,7 +816,7 @@ def sheet_d10():
 
 
 def sheet_d11():
-    s = Sheet("D-11", "Part register", "Fabrication B.1 · persistent IDs · datums")
+    s = Sheet("D-11", "Part register", "Fabrication B.2 · persistent IDs · see IDX + P-sheets")
     s.titleblock()
     from walter_ds16 import parts, datums, nest_yield, GEOM as Gg
 
@@ -858,7 +858,7 @@ def sheet_d11():
         s.text(40, yy, f'{n["sheet"][:42]}   yield {n["yield_pct"]}%   waste {n["waste_pct"]}%   {n["part_count"]} parts', 12, INK)
         yy += 18
 
-    s.text(40, 1050, "If overall length/span changes, stretcher length, table width, and way rebate recompute. Do not edit these numbers on the sheet.", 12, DIM)
+    s.text(40, 1050, "Cut from the P-sheets (IDX). D-1…D-12 are overviews. If span changes, stretcher length, table width, and way rebate recompute — do not edit numbers on the sheet.", 12, DIM)
     s.save("D11_register.svg")
 
 

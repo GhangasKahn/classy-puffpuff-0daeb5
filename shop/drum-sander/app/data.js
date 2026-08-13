@@ -3,9 +3,9 @@ window.WALTER_DATA = {
   "meta": {
     "name": "WALTER",
     "code": "DS-16",
-    "subtitle": "Dedicated drum thickness sander \u00b7 15.5\u2033 \u00b7 geometry Rev B \u00b7 fab B.1",
+    "subtitle": "Dedicated drum thickness sander \u00b7 15.5\u2033 \u00b7 geometry Rev B \u00b7 fab B.2",
     "revision": "B",
-    "fabricationRev": "B.1",
+    "fabricationRev": "B.2",
     "capacity": 15.5,
     "drumOd": 5.0,
     "drumRpm": 1035.0,
@@ -19,7 +19,7 @@ window.WALTER_DATA = {
     "Left screw uncouples for taper; dog stop returns to parallel home",
     "UHMW ways let into side rebates \u2014 table cannot rack, and still fits",
     "Housed stretchers (\u00bc\u2033 dados) + through-screws for racking stiffness",
-    "Stack-drill side panels as a pair; floating idler bearing (axial growth)",
+    "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
     "Torsion-box table + phenolic / tooling-plate wear face",
     "Spring hold-down rollers infeed + outfeed \u2014 kills snipe and chatter",
     "Full-width truing sled; re-clock after paper wrap to \u00b10.003\u2033",
@@ -38,7 +38,7 @@ window.WALTER_DATA = {
       "label": "Side panels P-001L/R",
       "detail": "0.75\u2033 BB \u00b7 stack-drill then inner-face dado/rebate",
       "color": "#c4a574",
-      "sheet": "D2_frame.svg"
+      "sheet": "P001L_side_drive.svg"
     },
     {
       "id": "ways",
@@ -49,7 +49,7 @@ window.WALTER_DATA = {
       "label": "UHMW ways P-007",
       "detail": "Rebate 0.520\u2033 \u00b7 project 0.230\u2033 \u00b7 J-002",
       "color": "#d9dcde",
-      "sheet": "D2_frame.svg"
+      "sheet": "P007_uhmw_way.svg"
     },
     {
       "id": "base",
@@ -61,7 +61,7 @@ window.WALTER_DATA = {
       "label": "Base + stretchers",
       "detail": "P-003 housed 17\u2033 \u00b7 J-001",
       "color": "#a89070",
-      "sheet": "D2_frame.svg"
+      "sheet": "A01_frame.svg"
     },
     {
       "id": "drum",
@@ -73,7 +73,7 @@ window.WALTER_DATA = {
       "label": "Sanding drum",
       "detail": "\u23005\u2033 \u00d7 15.75\u2033 \u00b7 pack-bored \u00b7 P-008/P-009",
       "color": "#b8a990",
-      "sheet": "D3_drum.svg"
+      "sheet": "A02_drum.svg"
     },
     {
       "id": "shaft",
@@ -86,7 +86,7 @@ window.WALTER_DATA = {
       "label": "Shaft + bearings",
       "detail": "P-010 \u00b7 J-006 fixed \u00b7 J-007 float",
       "color": "#8a9098",
-      "sheet": "D3_drum.svg"
+      "sheet": "P010_shaft.svg"
     },
     {
       "id": "table",
@@ -99,7 +99,7 @@ window.WALTER_DATA = {
       "label": "Torsion-box table",
       "detail": "P-004/P-005/P-006 \u00b7 J-003/J-004",
       "color": "#cfd3d5",
-      "sheet": "D7_geometry.svg"
+      "sheet": "A03_table.svg"
     },
     {
       "id": "elev",
@@ -112,7 +112,7 @@ window.WALTER_DATA = {
       "label": "Dual Acme lift",
       "detail": "H-007/H-008 \u00b7 left clutch \u00b7 home dog",
       "color": "#6e7578",
-      "sheet": "D7_geometry.svg"
+      "sheet": "P016_nut_block.svg"
     },
     {
       "id": "rollers",
@@ -124,7 +124,7 @@ window.WALTER_DATA = {
       "label": "Hold-down rollers",
       "detail": "P-014 \u00b7 0.030\u2033 below drum",
       "color": "#5a6068",
-      "sheet": "D8_holddowns.svg"
+      "sheet": "A05_holddowns.svg"
     },
     {
       "id": "motor",
@@ -136,7 +136,7 @@ window.WALTER_DATA = {
       "label": "Motor + pulleys",
       "detail": "0.5 HP \u00b7 coplanar 3\u2033/5\u2033",
       "color": "#4a5058",
-      "sheet": "D4_drive.svg"
+      "sheet": "A04_drive.svg"
     },
     {
       "id": "hood",
@@ -147,7 +147,7 @@ window.WALTER_DATA = {
       "label": "Dust hood",
       "detail": "P-011 kerf-bent \u00b7 4\u2033 port",
       "color": "#9aa8a0",
-      "sheet": "D5_hood.svg"
+      "sheet": "P011_hood.svg"
     }
   ],
   "cutList": [
@@ -559,84 +559,284 @@ window.WALTER_DATA = {
   ],
   "gallery": [
     {
+      "src": "../plans/IDX_drawings.svg",
+      "title": "Drawing index",
+      "kind": "plan",
+      "group": "index",
+      "code": "IDX"
+    },
+    {
       "src": "../plans/D1_general.svg",
       "title": "D-1 General",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-1"
     },
     {
       "src": "../plans/D2_frame.svg",
       "title": "D-2 Frame",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-2"
     },
     {
       "src": "../plans/D3_drum.svg",
       "title": "D-3 Drum",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-3"
     },
     {
       "src": "../plans/D4_drive.svg",
       "title": "D-4 Drive",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-4"
     },
     {
       "src": "../plans/D5_hood.svg",
       "title": "D-5 Hood",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-5"
     },
     {
       "src": "../plans/D6_cutlist.svg",
       "title": "D-6 Cut list",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-6"
     },
     {
       "src": "../plans/D7_geometry.svg",
       "title": "D-7 Geometry",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-7"
     },
     {
       "src": "../plans/D8_holddowns.svg",
       "title": "D-8 Hold-downs",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-8"
     },
     {
       "src": "../plans/D9_model.svg",
       "title": "D-9 3D views",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-9"
     },
     {
       "src": "../plans/D10_lumberyard.svg",
       "title": "D-10 Lumberyard",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-10"
     },
     {
       "src": "../plans/D11_register.svg",
       "title": "D-11 Part register",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-11"
     },
     {
       "src": "../plans/D12_joinery.svg",
       "title": "D-12 Joinery & QA",
-      "kind": "plan"
+      "kind": "plan",
+      "group": "overview",
+      "code": "D-12"
+    },
+    {
+      "src": "../plans/P001L_side_drive.svg",
+      "title": "P-001L Side, drive",
+      "kind": "part",
+      "group": "part",
+      "code": "P-001L"
+    },
+    {
+      "src": "../plans/P001R_side_idler.svg",
+      "title": "P-001R Side, idler",
+      "kind": "part",
+      "group": "part",
+      "code": "P-001R"
+    },
+    {
+      "src": "../plans/P002_base.svg",
+      "title": "P-002 Base deck",
+      "kind": "part",
+      "group": "part",
+      "code": "P-002"
+    },
+    {
+      "src": "../plans/P003_stretcher.svg",
+      "title": "P-003 Stretcher",
+      "kind": "part",
+      "group": "part",
+      "code": "P-003"
+    },
+    {
+      "src": "../plans/P004_table_skin.svg",
+      "title": "P-004 Table skin",
+      "kind": "part",
+      "group": "part",
+      "code": "P-004"
+    },
+    {
+      "src": "../plans/P005_table_ribs.svg",
+      "title": "P-005 Table ribs",
+      "kind": "part",
+      "group": "part",
+      "code": "P-005"
+    },
+    {
+      "src": "../plans/P006_wear_face.svg",
+      "title": "P-006 Wear face",
+      "kind": "part",
+      "group": "part",
+      "code": "P-006"
+    },
+    {
+      "src": "../plans/P007_uhmw_way.svg",
+      "title": "P-007 UHMW way",
+      "kind": "part",
+      "group": "part",
+      "code": "P-007"
+    },
+    {
+      "src": "../plans/P008_disc_core.svg",
+      "title": "P-008 Disc, core",
+      "kind": "part",
+      "group": "part",
+      "code": "P-008"
+    },
+    {
+      "src": "../plans/P009_disc_end.svg",
+      "title": "P-009 Disc, end",
+      "kind": "part",
+      "group": "part",
+      "code": "P-009"
+    },
+    {
+      "src": "../plans/P010_shaft.svg",
+      "title": "P-010 Shaft",
+      "kind": "part",
+      "group": "part",
+      "code": "P-010"
+    },
+    {
+      "src": "../plans/P011_hood.svg",
+      "title": "P-011 Dust hood",
+      "kind": "part",
+      "group": "part",
+      "code": "P-011"
+    },
+    {
+      "src": "../plans/P012_motor_cradle.svg",
+      "title": "P-012 Motor cradle",
+      "kind": "part",
+      "group": "part",
+      "code": "P-012"
+    },
+    {
+      "src": "../plans/P013_truing_sled.svg",
+      "title": "P-013 Truing sled",
+      "kind": "part",
+      "group": "part",
+      "code": "P-013"
+    },
+    {
+      "src": "../plans/P014_roller_yoke.svg",
+      "title": "P-014 Roller yoke",
+      "kind": "part",
+      "group": "part",
+      "code": "P-014"
+    },
+    {
+      "src": "../plans/P015_pack_bore.svg",
+      "title": "P-015 Pack-bore jig",
+      "kind": "part",
+      "group": "part",
+      "code": "P-015"
+    },
+    {
+      "src": "../plans/P016_nut_block.svg",
+      "title": "P-016 Nut block",
+      "kind": "part",
+      "group": "part",
+      "code": "P-016"
+    },
+    {
+      "src": "../plans/A01_frame.svg",
+      "title": "A-01 Frame assembly",
+      "kind": "assembly",
+      "group": "assembly",
+      "code": "A-01"
+    },
+    {
+      "src": "../plans/A02_drum.svg",
+      "title": "A-02 Drum assembly",
+      "kind": "assembly",
+      "group": "assembly",
+      "code": "A-02"
+    },
+    {
+      "src": "../plans/A03_table.svg",
+      "title": "A-03 Table assembly",
+      "kind": "assembly",
+      "group": "assembly",
+      "code": "A-03"
+    },
+    {
+      "src": "../plans/A04_drive.svg",
+      "title": "A-04 Drive assembly",
+      "kind": "assembly",
+      "group": "assembly",
+      "code": "A-04"
+    },
+    {
+      "src": "../plans/A05_holddowns.svg",
+      "title": "A-05 Hold-downs",
+      "kind": "assembly",
+      "group": "assembly",
+      "code": "A-05"
+    },
+    {
+      "src": "../plans/H01_hardware.svg",
+      "title": "H-01 Hardware",
+      "kind": "hardware",
+      "group": "hardware",
+      "code": "H-01"
     },
     {
       "src": "../renders/iso_assembled.svg",
       "title": "Iso assembled",
-      "kind": "render"
+      "kind": "render",
+      "group": "render",
+      "code": "ISO-A"
     },
     {
       "src": "../renders/iso_exploded.svg",
       "title": "Iso exploded",
-      "kind": "render"
+      "kind": "render",
+      "group": "render",
+      "code": "ISO-E"
     },
     {
       "src": "../renders/ortho_front.svg",
       "title": "Front solid",
-      "kind": "render"
+      "kind": "render",
+      "group": "render",
+      "code": "ORTHO-F"
     },
     {
       "src": "../renders/ortho_side.svg",
       "title": "Drive side",
-      "kind": "render"
+      "kind": "render",
+      "group": "render",
+      "code": "ORTHO-S"
     }
   ],
   "lumberyard": [
@@ -797,6 +997,24 @@ window.WALTER_DATA = {
       "href": "../model/",
       "label": "3D viewer",
       "note": "Orbit / explode"
+    },
+    {
+      "href": "../plans/IDX_drawings.svg",
+      "label": "IDX SVG",
+      "note": "Drawing index",
+      "download": "IDX_drawings.svg"
+    },
+    {
+      "href": "../plans/P001L_side_drive.svg",
+      "label": "P-001L SVG",
+      "note": "Drive side panel",
+      "download": "P001L_side_drive.svg"
+    },
+    {
+      "href": "../plans/H01_hardware.svg",
+      "label": "H-01 SVG",
+      "note": "Illustrated hardware",
+      "download": "H01_hardware.svg"
     },
     {
       "href": "../plans/D11_register.svg",

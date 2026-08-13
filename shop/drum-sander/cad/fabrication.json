@@ -3,20 +3,20 @@
     "project_id": "WALTER-DS16",
     "project_name": "WALTER DS-16 dedicated drum thickness sander",
     "revision": "B",
-    "fabrication_rev": "B.1",
+    "fabrication_rev": "B.2",
     "units": "inch",
     "unit_policy": "Internal inches. Millimetres are interface-only.",
     "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on A/B",
     "material_system": "Baltic birch + MDF drum + UHMW ways + phenolic wear",
     "tolerance_class": "T2 joinery, T4 drum/table metrology",
     "author": "WALTER fabrication model",
-    "model_version": "B.1",
+    "model_version": "B.2",
     "cad_platform": "Python SSOT + OpenSCAD solids + SVG shop drawings",
     "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry"
   },
   "parameters": {
     "revision": "B",
-    "fabrication_rev": "B.1",
+    "fabrication_rev": "B.2",
     "capacity_width": 15.5,
     "min_stock_thickness": 0.0625,
     "max_stock_thickness": 3.0,
@@ -94,7 +94,18 @@
     "motor_pivot_y": 4.0,
     "motor_pivot_z": 6.0,
     "way_z": 10.0,
+    "way_end_inset": 1.0,
     "display_gap_under_drum": 0.5,
+    "flange_bolt_square": 2.05,
+    "flange_bolt_clr": 0.344,
+    "ply_shaft_clear_dia": 1.125,
+    "motor_pivot_dia": 0.266,
+    "indicator_pad_y": 8.0,
+    "indicator_pad_z": 16.0,
+    "indicator_pad_dia": 0.201,
+    "stretcher_dado_y0": 2.0,
+    "stretcher_screw_inset": 0.75,
+    "idler_float_pad": 0.25,
     "cradle_w": 12.0,
     "cradle_h": 8.0,
     "sled_depth": 8.0,
@@ -104,7 +115,7 @@
       "Left screw uncouples for taper; dog stop returns to parallel home",
       "UHMW ways let into side rebates \u2014 table cannot rack, and still fits",
       "Housed stretchers (\u00bc\u2033 dados) + through-screws for racking stiffness",
-      "Stack-drill side panels as a pair; floating idler bearing (axial growth)",
+      "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
       "Torsion-box table + phenolic / tooling-plate wear face",
       "Spring hold-down rollers infeed + outfeed \u2014 kills snipe and chatter",
       "Full-width truing sled; re-clock after paper wrap to \u00b10.003\u2033",
@@ -234,10 +245,10 @@
       "joinery": "J-001 housed stretchers; J-002 way rebate; through holes for bearings",
       "handed": "LEFT-HAND",
       "viz_id": "sides",
-      "sheet": "D2_frame.svg",
+      "sheet": "P001L_side_drive.svg",
       "notes": "Stack-drill with P-001R as a pair, then split for inner-face work.",
       "evidence": "VERIFIED overall; dados B.1",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-001R",
@@ -266,10 +277,10 @@
       "joinery": "J-001; J-002; idler flange on axial-float slots J-007",
       "handed": "RIGHT-HAND / MIRROR",
       "viz_id": "sides",
-      "sheet": "D2_frame.svg",
+      "sheet": "P001R_side_idler.svg",
       "notes": "Identical hole pattern to L after stack-drill. Ways and dados on inner face only.",
       "evidence": "VERIFIED overall; dados B.1",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-002",
@@ -298,10 +309,10 @@
       "joinery": "J-010 screws up into sides",
       "handed": "IDENTICAL",
       "viz_id": "base",
-      "sheet": "D2_frame.svg",
+      "sheet": "P002_base.svg",
       "notes": "Width follows ply_actual so 18 mm BB still keeps 16.5\u2033 clear.",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-003",
@@ -330,10 +341,10 @@
       "joinery": "J-001 \u00bc\u2033 housing in sides + #8 \u00d7 2\u2033 through-screws",
       "handed": "IDENTICAL",
       "viz_id": "base",
-      "sheet": "D2_frame.svg",
+      "sheet": "P003_stretcher.svg",
       "notes": "Do not use stretchers as the table datum \u2014 ways are the datum.",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-004",
@@ -362,10 +373,10 @@
       "joinery": "J-003 continuous glue to P-005",
       "handed": "IDENTICAL",
       "viz_id": "table",
-      "sheet": "D7_geometry.svg",
+      "sheet": "P004_table_skin.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-005",
@@ -394,10 +405,10 @@
       "joinery": "J-003",
       "handed": "IDENTICAL",
       "viz_id": "table",
-      "sheet": "D7_geometry.svg",
+      "sheet": "P005_table_ribs.svg",
       "notes": "Qty is typical for 4\u2033 o.c. in 22\u2033 depth; cut from offcuts.",
       "evidence": "ESTIMATED qty from spacing",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-006",
@@ -426,10 +437,10 @@
       "joinery": "J-004 bond, replaceable",
       "handed": "IDENTICAL",
       "viz_id": "table",
-      "sheet": "D7_geometry.svg",
+      "sheet": "P006_wear_face.svg",
       "notes": "This is the inspection plane. Keep a spare.",
       "evidence": "VERIFIED size; thickness is BUY option \u00bd\u2033 or \u215c\u2033",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-007",
@@ -458,10 +469,10 @@
       "joinery": "J-002 rebate + glue; optional #8 flush screws from outer face",
       "handed": "IDENTICAL",
       "viz_id": "ways",
-      "sheet": "D2_frame.svg",
+      "sheet": "P007_uhmw_way.svg",
       "notes": "Projects 0.230\u2033 past inner face. Rebate 0.520\u2033.",
       "evidence": "DERIVED project/rebate so 16\u2033 table fits in 16.5\u2033 span",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-008",
@@ -490,10 +501,10 @@
       "joinery": "J-005 pack-bore + piano-wire keys; 1 mm relief every 4",
       "handed": "IDENTICAL",
       "viz_id": "drum",
-      "sheet": "D3_drum.svg",
+      "sheet": "P008_disc_core.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-009",
@@ -522,10 +533,10 @@
       "joinery": "J-005",
       "handed": "IDENTICAL",
       "viz_id": "drum",
-      "sheet": "D3_drum.svg",
+      "sheet": "P009_disc_end.svg",
       "notes": "BB ends resist crushing at the flanges.",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-010",
@@ -554,10 +565,10 @@
       "joinery": "J-005 discs; J-006 fixed drive flange; J-007 floating idler",
       "handed": "IDENTICAL",
       "viz_id": "shaft",
-      "sheet": "D3_drum.svg",
+      "sheet": "P010_shaft.svg",
       "notes": "Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
       "evidence": "VERIFIED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-011",
@@ -586,10 +597,10 @@
       "joinery": "Friction on sides; paraffin at paint rubs",
       "handed": "IDENTICAL",
       "viz_id": "hood",
-      "sheet": "D5_hood.svg",
+      "sheet": "P011_hood.svg",
       "notes": "Kerf-bent \u00bc\u2033 pine/birch ply, sawdust-glue filled",
       "evidence": "ESTIMATED blank; trim to drum arc",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-012",
@@ -618,10 +629,10 @@
       "joinery": "J-008 \u00bc-20 T-nuts",
       "handed": "IDENTICAL",
       "viz_id": "motor",
-      "sheet": "D4_drive.svg",
+      "sheet": "P012_motor_cradle.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-013",
@@ -650,10 +661,10 @@
       "joinery": "none \u2014 fixture",
       "handed": "IDENTICAL",
       "viz_id": "table",
-      "sheet": "D8_holddowns.svg",
+      "sheet": "P013_truing_sled.svg",
       "notes": "As wide as the drum so you cannot dish the middle.",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-014",
@@ -682,10 +693,10 @@
       "joinery": "J-009 shoulder bolts + springs",
       "handed": "IDENTICAL",
       "viz_id": "rollers",
-      "sheet": "D8_holddowns.svg",
+      "sheet": "P014_roller_yoke.svg",
       "notes": "Board feet net 0.56; buy with 30% waste.",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-015",
@@ -714,10 +725,10 @@
       "joinery": "none",
       "handed": "IDENTICAL",
       "viz_id": "drum",
-      "sheet": "D3_drum.svg",
+      "sheet": "P015_pack_bore.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.1"
+      "revision": "B.2"
     },
     {
       "part_id": "P-016",
@@ -746,10 +757,10 @@
       "joinery": "J-011 nut to table",
       "handed": "IDENTICAL",
       "viz_id": "elev",
-      "sheet": "D7_geometry.svg",
+      "sheet": "P016_nut_block.svg",
       "notes": "",
       "evidence": "ASSUMED block size; nut is BUY",
-      "revision": "B.1"
+      "revision": "B.2"
     }
   ],
   "joints": [
@@ -759,7 +770,7 @@
       "part_a": "P-001L / P-001R",
       "part_b": "P-003",
       "qty": 6,
-      "location": "Inner faces at Z = (6.0, 12.0, 20.0) in, from Datum Y per stretcher layout",
+      "location": "Inner faces; Y 2\u20136\u2033 from infeed; Z bottoms (6.0, 12.0, 20.0)",
       "dado_width": 0.75,
       "dado_depth": 0.25,
       "fit_class": "GLUE",
@@ -827,7 +838,7 @@
       "part_b": "H-002 / P-010",
       "fit_class": "SLIDING (axial only)",
       "constraint": "FLOATING",
-      "notes": "0.25\u2033 slots. Over-constraint bananas the shaft."
+      "notes": "0.25\u2033 UHMW pad under the flange. Bolts snug, not torqued. Do not slot the plywood in Y or Z \u2014 that lets the drum axis wander. Over-constraint bananas the shaft."
     },
     {
       "joint_id": "J-008",
@@ -880,7 +891,7 @@
       "qty": 1,
       "make_or_buy": "BUY",
       "assembly": "A-DRUM",
-      "notes": "Axial slots 0.25\u2033 so the shaft cannot banana."
+      "notes": "Axial float on a 0.25\u2033 UHMW pad (J-007). Do not elongate flange holes in the plywood face."
     },
     {
       "hardware_id": "H-003",
@@ -1393,6 +1404,20 @@
       "decision": "Persistent part IDs P/H/J/A; Python is SSOT",
       "reason": "Drawings, BOM, viewer, and OpenSCAD were duplicating 16.5 / 14 / 18.5",
       "rev": "B.1"
+    },
+    {
+      "id": "D-023",
+      "decision": "Wandel-style individual part, assembly, and hardware sheets",
+      "reason": "Overview D-sheets are not enough to fabricate P-001 from; each make part needs its own isometric + hole chart + callouts",
+      "rev": "B.2",
+      "affected": "plans/P*.svg, A*.svg, H01, IDX"
+    },
+    {
+      "id": "D-024",
+      "decision": "Idler float is an axial pad, not YZ slots in the side panel",
+      "reason": "Face-plane slots let the drum axis wander; shaft growth is through the bearing",
+      "rev": "B.2",
+      "affected": "J-007, H-002, P-001R"
     }
   ],
   "revisions": [
@@ -1407,6 +1432,10 @@
     {
       "rev": "B.1",
       "note": "Fabrication model: part/joint IDs, housed stretchers, way rebate so table fits, derived geometry, JSON/CSV SSOT"
+    },
+    {
+      "rev": "B.2",
+      "note": "Individual Wandel-style part/assembly/hardware sheets; named hole patterns; idler axial pad (not YZ slots)"
     }
   ],
   "fmea": [
@@ -2181,30 +2210,294 @@
       "note": "Bandsaw oversize \u23005\u215b\u2033, pack-bore. Two end discs preferably BB (P-009) from sheet-2 leftover."
     }
   ],
-  "nest_yield": [
+  "drawings": [
     {
-      "sheet": "Sheet 1 \u2014 5\u2032\u00d75\u2032 \u00d7 \u00be\u2033 BB (frame)",
-      "area_in2": 3600.0,
-      "used_in2": 2016.0,
-      "yield_pct": 56.0,
-      "waste_pct": 44.0,
-      "part_count": 7
+      "code": "IDX",
+      "file": "IDX_drawings.svg",
+      "title": "Drawing index",
+      "kind": "plan",
+      "group": "index"
     },
     {
-      "sheet": "Sheet 2 \u2014 5\u2032\u00d75\u2032 \u00d7 \u00be\u2033 BB (table & jigs)",
-      "area_in2": 3600.0,
-      "used_in2": 1084.0,
-      "yield_pct": 30.1,
-      "waste_pct": 69.9,
-      "part_count": 6
+      "code": "D-1",
+      "file": "D1_general.svg",
+      "title": "D-1 General",
+      "kind": "plan",
+      "group": "overview"
     },
     {
-      "sheet": "Sheet 3 \u2014 24\u2033\u00d748\u2033 \u00d7 \u00be\u2033 MDF (discs)",
-      "area_in2": 1152.0,
-      "used_in2": 635.2,
-      "yield_pct": 55.1,
-      "waste_pct": 44.9,
-      "part_count": 21
+      "code": "D-2",
+      "file": "D2_frame.svg",
+      "title": "D-2 Frame",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-3",
+      "file": "D3_drum.svg",
+      "title": "D-3 Drum",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-4",
+      "file": "D4_drive.svg",
+      "title": "D-4 Drive",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-5",
+      "file": "D5_hood.svg",
+      "title": "D-5 Hood",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-6",
+      "file": "D6_cutlist.svg",
+      "title": "D-6 Cut list",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-7",
+      "file": "D7_geometry.svg",
+      "title": "D-7 Geometry",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-8",
+      "file": "D8_holddowns.svg",
+      "title": "D-8 Hold-downs",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-9",
+      "file": "D9_model.svg",
+      "title": "D-9 3D views",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-10",
+      "file": "D10_lumberyard.svg",
+      "title": "D-10 Lumberyard",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-11",
+      "file": "D11_register.svg",
+      "title": "D-11 Part register",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "D-12",
+      "file": "D12_joinery.svg",
+      "title": "D-12 Joinery & QA",
+      "kind": "plan",
+      "group": "overview"
+    },
+    {
+      "code": "P-001L",
+      "file": "P001L_side_drive.svg",
+      "title": "P-001L Side, drive",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-001R",
+      "file": "P001R_side_idler.svg",
+      "title": "P-001R Side, idler",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-002",
+      "file": "P002_base.svg",
+      "title": "P-002 Base deck",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-003",
+      "file": "P003_stretcher.svg",
+      "title": "P-003 Stretcher",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-004",
+      "file": "P004_table_skin.svg",
+      "title": "P-004 Table skin",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-005",
+      "file": "P005_table_ribs.svg",
+      "title": "P-005 Table ribs",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-006",
+      "file": "P006_wear_face.svg",
+      "title": "P-006 Wear face",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-007",
+      "file": "P007_uhmw_way.svg",
+      "title": "P-007 UHMW way",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-008",
+      "file": "P008_disc_core.svg",
+      "title": "P-008 Disc, core",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-009",
+      "file": "P009_disc_end.svg",
+      "title": "P-009 Disc, end",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-010",
+      "file": "P010_shaft.svg",
+      "title": "P-010 Shaft",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-011",
+      "file": "P011_hood.svg",
+      "title": "P-011 Dust hood",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-012",
+      "file": "P012_motor_cradle.svg",
+      "title": "P-012 Motor cradle",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-013",
+      "file": "P013_truing_sled.svg",
+      "title": "P-013 Truing sled",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-014",
+      "file": "P014_roller_yoke.svg",
+      "title": "P-014 Roller yoke",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-015",
+      "file": "P015_pack_bore.svg",
+      "title": "P-015 Pack-bore jig",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-016",
+      "file": "P016_nut_block.svg",
+      "title": "P-016 Nut block",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "A-01",
+      "file": "A01_frame.svg",
+      "title": "A-01 Frame assembly",
+      "kind": "assembly",
+      "group": "assembly"
+    },
+    {
+      "code": "A-02",
+      "file": "A02_drum.svg",
+      "title": "A-02 Drum assembly",
+      "kind": "assembly",
+      "group": "assembly"
+    },
+    {
+      "code": "A-03",
+      "file": "A03_table.svg",
+      "title": "A-03 Table assembly",
+      "kind": "assembly",
+      "group": "assembly"
+    },
+    {
+      "code": "A-04",
+      "file": "A04_drive.svg",
+      "title": "A-04 Drive assembly",
+      "kind": "assembly",
+      "group": "assembly"
+    },
+    {
+      "code": "A-05",
+      "file": "A05_holddowns.svg",
+      "title": "A-05 Hold-downs",
+      "kind": "assembly",
+      "group": "assembly"
+    },
+    {
+      "code": "H-01",
+      "file": "H01_hardware.svg",
+      "title": "H-01 Hardware",
+      "kind": "hardware",
+      "group": "hardware"
+    },
+    {
+      "src_kind": "render",
+      "code": "ISO-A",
+      "file": "iso_assembled.svg",
+      "title": "Iso assembled",
+      "kind": "render",
+      "group": "render",
+      "dir": "renders"
+    },
+    {
+      "src_kind": "render",
+      "code": "ISO-E",
+      "file": "iso_exploded.svg",
+      "title": "Iso exploded",
+      "kind": "render",
+      "group": "render",
+      "dir": "renders"
+    },
+    {
+      "src_kind": "render",
+      "code": "ORTHO-F",
+      "file": "ortho_front.svg",
+      "title": "Front solid",
+      "kind": "render",
+      "group": "render",
+      "dir": "renders"
+    },
+    {
+      "src_kind": "render",
+      "code": "ORTHO-S",
+      "file": "ortho_side.svg",
+      "title": "Drive side",
+      "kind": "render",
+      "group": "render",
+      "dir": "renders"
     }
   ],
   "assembly": [
@@ -2325,7 +2618,7 @@
   ],
   "name": "WALTER DS-16 dedicated drum thickness sander",
   "revision": "B",
-  "fabrication_rev": "B.1",
+  "fabrication_rev": "B.2",
   "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry",
   "capacity": "15.5\" wide \u00b7 0.0625\"\u20133.0\" thick",
   "drum_rpm": 1035.0,
@@ -2333,7 +2626,7 @@
   "parallel_tol": 0.003,
   "spec": {
     "revision": "B",
-    "fabrication_rev": "B.1",
+    "fabrication_rev": "B.2",
     "capacity_width": 15.5,
     "min_stock_thickness": 0.0625,
     "max_stock_thickness": 3.0,
@@ -2411,7 +2704,18 @@
     "motor_pivot_y": 4.0,
     "motor_pivot_z": 6.0,
     "way_z": 10.0,
+    "way_end_inset": 1.0,
     "display_gap_under_drum": 0.5,
+    "flange_bolt_square": 2.05,
+    "flange_bolt_clr": 0.344,
+    "ply_shaft_clear_dia": 1.125,
+    "motor_pivot_dia": 0.266,
+    "indicator_pad_y": 8.0,
+    "indicator_pad_z": 16.0,
+    "indicator_pad_dia": 0.201,
+    "stretcher_dado_y0": 2.0,
+    "stretcher_screw_inset": 0.75,
+    "idler_float_pad": 0.25,
     "cradle_w": 12.0,
     "cradle_h": 8.0,
     "sled_depth": 8.0,
@@ -2421,7 +2725,7 @@
       "Left screw uncouples for taper; dog stop returns to parallel home",
       "UHMW ways let into side rebates \u2014 table cannot rack, and still fits",
       "Housed stretchers (\u00bc\u2033 dados) + through-screws for racking stiffness",
-      "Stack-drill side panels as a pair; floating idler bearing (axial growth)",
+      "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
       "Torsion-box table + phenolic / tooling-plate wear face",
       "Spring hold-down rollers infeed + outfeed \u2014 kills snipe and chatter",
       "Full-width truing sled; re-clock after paper wrap to \u00b10.003\u2033",

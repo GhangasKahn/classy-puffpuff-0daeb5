@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-010</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Drum shaft</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>BUY-CUT 1</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Precision-ground CRS or TG&amp;P, ¾″, 0.0005″ TIR</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Precision-ground shaft  ·  incoming TIR ≤ 0.0005″</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.2 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · VERIFIED</text>
+<rect x='80.0' y='280.0' width='378.0' height='36.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.8' rx='4'/>
+<rect x='80.0' y='280.0' width='980.0' height='36.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.8' rx='6'/>
+<line x1='80.0' y1='316.0' x2='80.0' y2='350.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='1060.0' y1='316.0' x2='1060.0' y2='350.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='344.0' x2='1060.0' y2='344.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,344.0 88.0,340.8 88.0,347.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='1060.0,344.0 1052.0,340.8 1052.0,347.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='425.0' y='327.0' width='289.9' height='18.0' fill='#ffffff'/>
+<text x='570.0' y='339.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>22.5" finished  (buy 24", cut to 22.5")</text>
+<line x1='80.0' y1='280.0' x2='38.0' y2='280.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='316.0' x2='38.0' y2='316.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='44.0' y1='280.0' x2='44.0' y2='316.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='44.0,280.0 40.8,288.0 47.2,288.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='44.0,316.0 40.8,308.0 47.2,308.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='34.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 34.0 302.0)'>⌀0.75"</text>
+<line x1='160.0' y1='280.0' x2='160.0' y2='232.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='160.0' cy='280.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='166.0' y='230.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Drive end — H-001 FIXED (J-006)</text>
+<line x1='980.0' y1='316.0' x2='1020.0' y2='370.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='980.0' cy='316.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='1026.0' y='368.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Idler end — H-002 FLOATING pad (J-007)</text>
+<rect x='80.0' y='480.0' width='700.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='101.0,748.0 102.9,748.0 515.9,509.6 514.0,509.6' fill='#8b8d90'/>
+<polygon points='98.9,747.2 101.0,748.0 514.0,509.6 511.9,508.7' fill='#8b8d90'/>
+<polygon points='96.8,745.5 98.9,747.2 511.9,508.7 509.7,507.1' fill='#8b8d90'/>
+<polygon points='94.8,743.3 96.8,745.5 509.7,507.1 507.8,504.9' fill='#8b8d90'/>
+<polygon points='93.3,740.7 94.8,743.3 507.8,504.9 506.3,502.2' fill='#8b8d90'/>
+<polygon points='92.3,737.9 93.3,740.7 506.3,502.2 505.3,499.5' fill='#8b8d90'/>
+<polygon points='94.8,730.4 93.3,731.3 506.3,492.9 507.8,492.0' fill='#a3a6a9'/>
+<polygon points='92.0,735.2 92.3,737.9 505.3,499.5 505.0,496.8' fill='#8b8d90'/>
+<polygon points='93.3,731.3 92.3,733.0 505.3,494.6 506.3,492.9' fill='#95979a'/>
+<polygon points='92.3,733.0 92.0,735.2 505.0,496.8 505.3,494.6' fill='#8b8d90'/>
+<polygon points='511.9,492.8 509.7,492.0 507.8,492.0 506.3,492.9 505.3,494.6 505.0,496.8 505.3,499.5 506.3,502.2 507.8,504.9 509.7,507.1 511.9,508.7 514.0,509.6 515.9,509.6 517.4,508.7 518.4,507.0 518.7,504.8 518.4,502.1 517.4,499.3 515.9,496.7 514.0,494.5' fill='#a5a7ab'/>
+</g>
+<text x='90.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric shaft</text>
+<text x='820.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='820.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Do not lock both flanges. Drive is the datum; idler must let</text>
+<text x='820.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the shaft grow.</text>
+<text x='820.0' y='556.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Key slots: ⅛″ piano wire, snug in the discs, not a press that</text>
+<text x='820.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  bananas the pack.</text>
+<text x='820.0' y='592.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• After truing: TIR ≤ 0.002″ mid-span paper-off (QC-06), then</text>
+<text x='820.0' y='608.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  wrap, then re-clock |A−B|.</text>
+</svg>

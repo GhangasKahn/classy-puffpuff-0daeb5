@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-011</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Dust hood blank</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Kerf-bent ¼″ pine/birch ply, sawdust-glue filled</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 1  ·  IDENTICAL</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Birch or pine plywood  ·  18" × 12" × 0.25"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 1  ·  Kerf-bend, glue to form, fill kerfs, 4″ port</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.2 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · ESTIMATED blank; trim to drum arc</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>HOOD BLANK — kerf-bend around the drum, then trim</text>
+<rect x='80.0' y='160.0' width='864.0' height='576.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='2.0'/>
+<line x1='80.0' y1='736.0' x2='80.0' y2='770.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='944.0' y1='736.0' x2='944.0' y2='770.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='764.0' x2='944.0' y2='764.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,764.0 88.0,760.8 88.0,767.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='944.0,764.0 936.0,760.8 936.0,767.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='487.2' y='747.0' width='49.7' height='18.0' fill='#ffffff'/>
+<text x='512.0' y='759.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>18.00"</text>
+<line x1='80.0' y1='160.0' x2='42.0' y2='160.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='736.0' x2='42.0' y2='736.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='48.0' y1='160.0' x2='48.0' y2='736.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='48.0,160.0 44.8,168.0 51.2,168.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='48.0,736.0 44.8,728.0 51.2,728.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='38.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 452.0)'>12.00"</text>
+<text x='960.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 0.25"</text>
+<circle cx='904.0' cy='448.0' r='33.6' fill='none' stroke='#3d5a4c' stroke-width='1.6'/>
+<line x1='904.0' y1='448.0' x2='954.0' y2='144.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='904.0' cy='448.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='960.0' y='142.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>4" dust port (trim to drum arc)</text>
+<line x1='100.0' y1='168.0' x2='100.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='212.0' y1='168.0' x2='212.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='324.0' y1='168.0' x2='324.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='436.0' y1='168.0' x2='436.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='548.0' y1='168.0' x2='548.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='660.0' y1='168.0' x2='660.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='772.0' y1='168.0' x2='772.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<line x1='884.0' y1='168.0' x2='884.0' y2='728.0' stroke='#3d4a38' stroke-width='0.7' stroke-dasharray='3 4'/>
+<text x='104.0' y='182.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>KERFS  ·  sawdust-glue fill</text>
+<rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1320.1,388.0 1602.2,225.1 1602.2,220.6 1320.1,383.5' fill='#436545'/>
+<polygon points='1132.0,279.4 1320.1,388.0 1320.1,383.5 1132.0,274.9' fill='#4f7752'/>
+<polygon points='1320.1,383.5 1602.2,220.6 1414.1,112.0 1132.0,274.9' fill='#436545'/>
+</g>
+<text x='1130.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric</text>
+<rect x='1120.0' y='420.0' width='500.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1136.0' y='444.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PART DATA</text>
+<text x='1136.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Stock</text>
+<text x='1260.0' y='470.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18.5" × 12.125" × 0.25"</text>
+<text x='1136.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Joinery</text>
+<text x='1260.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Friction on sides; paraffin at paint rubs</text>
+<text x='1136.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref face</text>
+<text x='1260.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref edge</text>
+<text x='1260.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Grain</text>
+<text x='1260.0' y='558.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
+<text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ESTIMATED blank; trim to drum arc</text>
+<text x='80.0' y='1000.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Kerf-bent ¼″ pine/birch ply, sawdust-glue filled</text>
+<text x='80.0' y='1040.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Hood ON is the primary guard. Paraffin the paint-rubs against</text>
+<text x='80.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the sides.</text>
+<text x='80.0' y='1076.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Blank size is ESTIMATED — trim to the drum arc after the first</text>
+<text x='80.0' y='1092.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  dry-fit.</text>
+</svg>
