@@ -1,0 +1,41 @@
+{
+  "minMargin": 0.12,
+  "minSalePrice": 35,
+  "maxSalePrice": 200,
+  "priceBand": [35, 200],
+  "minPerceivedValue": 0.25,
+  "maxRemorse": 0.55,
+  "maxDensity": 800,
+  "minDemandConfidence": 0.15,
+  "defaultCostRatio": 0.45,
+  "returnsBufferRate": 0.04,
+  "assumedStr": 0.015,
+  "fvfRate": 0.136,
+  "selection": {
+    "prefer": [
+      "problem_solving",
+      "upgrade_over_replacement",
+      "high_perceived_value_materials",
+      "unique_modular",
+      "multi_variation_potential"
+    ],
+    "kill": [
+      "qty_spam_lots",
+      "clickbait",
+      "replica",
+      "title_punctuation_spam",
+      "generic_novelty_gadgets"
+    ]
+  },
+  "compliance": {
+    "allowRetailArbitrage": false,
+    "maxLeadDays": 12
+  },
+  "paidData": {
+    "zik": {
+      "enabled": false,
+      "role": "cross_check_only",
+      "note": "Never sole demand authority under zero-trust rules"
+    }
+  }
+}

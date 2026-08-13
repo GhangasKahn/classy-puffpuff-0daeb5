@@ -1,0 +1,43 @@
+---
+description: Forecasting standards — base/adverse/severe scenarios and listings-needed discipline for LPROS
+alwaysApply: false
+---
+
+# Forecasting Standards
+
+## Mandatory scenario triad
+
+Every material forecast ships **three** named scenarios:
+
+| Scenario | Role |
+|----------|------|
+| **Base** | Central path under stated assumptions |
+| **Adverse** | Plausible downside that still occurs in normal regimes |
+| **Severe** | Tail / stress path; rare but decision-relevant |
+
+- Quantify each path (levels, returns, cash, runway, or KPI — domain-appropriate).
+- State triggers that move you from Base → Adverse → Severe.
+- Do not collapse the triad into one “expected” number in the headline.
+
+## Listings-needed discipline
+
+- Price, liquidity, and exit assumptions for tangible / alt assets require **current listings, comps, or order-book evidence**.
+- If listings are missing: mark the forecast **listings-needed** and widen uncertainty or refuse a tight range.
+- Stale listings (> domain threshold) count as weak evidence — say so.
+
+## Horizon & path
+
+- State forecast horizon and resolution (day / week / month / quarter).
+- Separate level forecasts from path/volatility forecasts when both matter.
+- Roll-forward: when reality arrives, run Bayesian / accuracy-audit updates — do not quietly overwrite history.
+
+## Model honesty
+
+- Name the model class (naive, seasonal, structural, MC, expert blend).
+- Disclose training window, leakage risks, and known blind spots.
+- Planning models ≠ predictions: label Monte Carlo and scenario engines as **planning distributions** unless validated for prediction.
+
+## Decision coupling
+
+- Tie each scenario to an action rule (size, hedge, wait, exit).
+- Forecasts without decision consequences are incomplete for LPROS work.

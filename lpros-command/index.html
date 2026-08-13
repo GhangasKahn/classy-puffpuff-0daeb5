@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>LPROS · Product research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="desk" data-suite="research">
+  <div class="noise" aria-hidden="true"></div>
+  <div id="tip" class="tip" hidden></div>
+
+  <header class="topbar">
+    <div class="brand-row">
+      <p class="rail-mark">LPROS</p>
+      <h1 class="brand-sm">Product research</h1>
+      <p class="lede-sm">Live eBay Browse · fee-true net · not a CSV upload</p>
+    </div>
+    <form id="suiteQuery" class="command-bar" autocomplete="off">
+      <label class="cmd-q">Query
+        <input name="q" value="solid wood desk organizer" placeholder="What are buyers searching?" />
+      </label>
+      <label>Category
+        <input name="categoryId" value="25339" inputmode="numeric" />
+      </label>
+      <label>Min $
+        <input name="minPrice" type="number" value="35" />
+      </label>
+      <label>Max $
+        <input name="maxPrice" type="number" value="150" />
+      </label>
+      <label>Cost ratio
+        <input name="costRatio" type="number" step="0.05" value="0.4" />
+      </label>
+      <div class="command-actions">
+        <button type="submit" class="btn primary" id="btnLiveResearch">Fetch live</button>
+        <button type="button" class="btn primary" id="watchStartBtn">Watch live</button>
+        <button type="button" class="btn" id="btnIntel">Intel</button>
+        <button type="button" class="btn ghost" id="watchCancelBtn">Stop</button>
+      </div>
+    </form>
+    <div class="kpis" id="kpis">
+      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Listings</span><b id="kpiProducts">—</b></button>
+      <button type="button" class="kpi" data-tab="market"><span class="kpi-l">With photos</span><b id="kpiImages">—</b></button>
+      <button type="button" class="kpi" data-tab="analysis"><span class="kpi-l">P50 $</span><b id="kpiHeat">—</b></button>
+      <button type="button" class="kpi" data-tab="packages"><span class="kpi-l">Packages</span><b id="kpiPackages">—</b></button>
+      <button type="button" class="kpi" data-tab="watch"><span class="kpi-l">Watch</span><b id="kpiWatch">idle</b></button>
+      <button type="button" class="kpi" data-tab="playground"><span class="kpi-l">Hive jobs</span><b id="kpiPlay">—</b></button>
+      <span class="kpi ghost-kpi" hidden><span class="kpi-l">Variants</span><b id="kpiVariants">—</b></span>
+      <span class="kpi ghost-kpi" hidden><span class="kpi-l">Ideas</span><b id="kpiIdeas">—</b></span>
+    </div>
+    <div class="runbox">
+      <svg id="kpiSpark" class="spark" viewBox="0 0 180 36" role="img" aria-label="Price sparkline"></svg>
+      <div class="orch-meter"><span id="orchPct" style="width:0%"></span></div>
+      <p class="sub tight" id="orchPhase">Idle — fetch live listings to fill the board</p>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Research suite">
+    <div class="rail-nav">
+      <button type="button" class="rail-btn on" data-tab="market" data-group="research">Research</button>
+      <button type="button" class="rail-btn" data-tab="watch" data-group="watch">Watch</button>
+      <button type="button" class="rail-btn" data-tab="analysis" data-group="research">Analysis</button>
+      <button type="button" class="rail-btn" data-tab="playground" data-group="hive">Hive</button>
+      <button type="button" class="rail-btn" data-tab="ops" data-group="ops">Pipeline</button>
+    </div>
+    <div class="rail-jobs-head">Recent runs</div>
+    <div class="rail-jobs" id="jobsRail"><p class="muted">No jobs yet</p></div>
+    <div class="rail-foot">
+      <span id="railStatus">idle</span>
+      <a id="playbookLink" href="api/playbook">Playbooks</a>
+    </div>
+  </nav>
+
+  <div id="deskBanner" class="desk-banner" hidden role="status"></div>
+
+  <main class="workspace">
+    <section class="tab on" id="tab-market">
+      <div class="workbench-head">
+        <div>
+          <h2>Live market board</h2>
+          <p class="sub">Official Browse listings with photos and /itm/ URLs. Click a row to inspect. STR/CTR are proxies until Terapeak.</p>
+        </div>
+        <div class="statstrip" id="statStrip"></div>
+      </div>
+      <div class="filterbar">
+        <input id="marketSearch" placeholder="Filter title, seller, category…" />
+        <select id="marketCat"><option value="">All categories</option></select>
+        <select id="marketSort">
+          <option value="price">Sort: price</option>
+          <option value="imageCount">Sort: images</option>
+          <option value="rank">Sort: rank</option>
+          <option value="perceivedValue">Sort: perceived value</option>
+          <option value="rankScore">Sort: score</option>
+          <option value="listingAgeHours">Sort: newest</option>
+        </select>
+        <input id="marketMin" type="number" placeholder="Min $" step="1" />
+        <input id="marketMax" type="number" placeholder="Max $" step="1" />
+        <label class="check tight-check">Has photo <input id="marketHasImg" type="checkbox" /></label>
+        <div class="seg" id="viewSeg">
+          <button type="button" class="on" data-view="split">Split</button>
+          <button type="button" data-view="gallery">Gallery</button>
+          <button type="button" data-view="table">Table</button>
+        </div>
+        <span class="sub tight" id="marketCount">0 rows</span>
+      </div>
+      <div id="marketBody" class="market-body view-split research-board">
+        <section class="panel" id="vizPanel">
+          <h2>Photos</h2>
+          <p class="sub">Click a card to inspect the listing</p>
+          <div id="gallery" class="gallery dense"></div>
+          <div id="orchGallery" class="gallery dense" hidden></div>
+        </section>
+        <section class="panel" id="boardPanel" hidden>
+          <h2>Lethal board</h2>
+          <div id="board" class="board"></div>
+        </section>
+        <section class="panel table-panel">
+          <h2>Listings</h2>
+          <p class="sub">Sortable · click a row for content, photos, and economics</p>
+          <div id="orchRecs" class="board" hidden></div>
+          <div id="orchTableWrap" class="orch-table-wrap">
+            <table class="orch-table" id="orchTable">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="historyPanel" class="history" hidden>
+            <h3 class="viz-title">Purchase history</h3>
+            <p class="sub" id="historyCaveat"></p>
+            <div id="historyList" class="board"></div>
+          </div>
+          <pre id="rankMeta" class="out"></pre>
+        </section>
+      </div>
+      <section class="split">
+        <div class="panel">
+          <h2>Idea factory</h2>
+          <p class="sub">Click a chip to filter the board</p>
+          <div id="ideasBoard" class="cluster-row"></div>
+        </div>
+        <div class="panel">
+          <h2>Title variants</h2>
+          <p class="sub">SEO swarm preview</p>
+          <div id="variantsBoard" class="board compact-board"></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="tab" id="tab-watch">
+      <div class="watch-stage">
+        <div class="panel watch-ops">
+          <div class="watch-ops-head">
+            <div>
+              <h2>Live ingest</h2>
+              <p class="sub tight" id="watchPhaseLabel">Idle — start Watch to stream Browse hits as they arrive</p>
+            </div>
+            <button type="button" class="btn ghost" id="watchToMarket">Send to board</button>
+          </div>
+          <form id="watchForm" class="grid tight">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Limit <input name="limit" type="number" value="40" /></label>
+            <label>getItem n <input name="detailCount" type="number" value="8" /></label>
+          </form>
+          <div class="watch-proof" id="watchProof">
+            <span>source —</span>
+            <span>env —</span>
+          </div>
+          <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
+          <p class="sub tight" id="watchStreamMeta">0 live listings</p>
+          <div id="watchStream" class="watch-stream" aria-live="polite"></div>
+          <pre id="watchLog" class="out orch-log watch-term" hidden></pre>
+          <div id="watchCalls" class="watch-calls" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab" id="tab-analysis">
+      <div class="workbench-head">
+        <div>
+          <h2>Market analysis</h2>
+          <p class="sub">Price distribution, listing freshness, seller concentration, and proxy demand. Not invented sold counts.</p>
+        </div>
+      </div>
+      <div class="viz-grid analysis-hero">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Listing freshness (age)</h3>
+          <p class="sub">Hours/days since itemCreationDate from Browse</p>
+          <svg id="chartAge" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">New listings over time</h3>
+          <p class="sub">Count of live listings by creation day</p>
+          <svg id="chartFresh" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Price histogram · click a band</h3>
+          <svg id="chartHist" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Price ladder</h3>
+          <svg id="chartLadder" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+      </div>
+      <div class="viz-grid four">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Category heat · click to filter</h3>
+          <svg id="chartHeat" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Price vs images · click inspect</h3>
+          <svg id="chartScatter" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Rising keywords · click filter</h3>
+          <svg id="chartKw" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Image-count mix</h3>
+          <svg id="chartImgs" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+      </div>
+      <div class="viz-grid four">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Seller concentration · click</h3>
+          <svg id="chartSellers" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Lane / category volume</h3>
+          <svg id="chartLanes" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Sell-through proxy</h3>
+          <svg id="chartStr" class="chart" viewBox="0 0 420 140" role="img"></svg>
+        </div>
+        <div class="panel chart-card">
+          <h3 class="viz-title">Popularity vs CTR proxy</h3>
+          <svg id="chartPop" class="chart" viewBox="0 0 420 140" role="img"></svg>
+        </div>
+      </div>
+      <div class="viz-grid">
+        <div class="panel chart-card">
+          <h3 class="viz-title">Decision mix</h3>
+          <svg id="chartDecisions" class="chart" viewBox="0 0 420 140" role="img"></svg>
+        </div>
+        <div class="panel" id="orchTrends" hidden></div>
+      </div>
+    </section>
+
+    <section class="tab" id="tab-launch">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn on" data-tab="launch">Missions</button>
+      </div>
+      <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="btnDeploy">Deploy marathon</button>
+        <button type="button" class="btn primary" id="btnOrchMarathon">Start marathon</button>
+        <button type="button" class="btn" id="btnOrchDeploy">Research mission</button>
+        <button type="button" class="btn" id="btnSwarm">Research swarm</button>
+        <button type="button" class="btn ghost" id="btnOrchCancel">Cancel</button>
+        <button type="button" class="btn ghost" id="btnOrchJobs">Jobs</button>
+        <button type="button" class="btn" id="btnOrchCsv" disabled>Workbook CSV</button>
+        <button type="button" class="btn ghost" id="btnOrchProductsCsv" disabled>Products CSV</button>
+        <button type="button" class="btn" id="btnOrchPromote" disabled>Promote packages</button>
+      </div>
+      <div class="split3">
+        <div class="panel" id="mission">
+          <h2>Evidence pack</h2>
+          <p class="sub">Terapeak sold + dual quotes. Never invent n.</p>
+          <form id="missionForm" class="grid">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category ID <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Cost ratio <input name="costRatio" type="number" step="0.05" value="0.4" /></label>
+            <label class="check">Deep crawl <input name="deepCrawl" type="checkbox" /></label>
+            <label>Sold 90d <input name="soldCount" type="number" placeholder="Terapeak" /></label>
+            <label>Avg sold $ <input name="avgSoldPrice" type="number" step="0.01" /></label>
+            <label>Cost $ <input name="productCost" type="number" step="0.01" /></label>
+            <label>Alt cost $ <input name="altProductCost" type="number" step="0.01" /></label>
+            <label>Lead days <input name="leadTimeDays" type="number" value="7" /></label>
+            <label class="check">Auto-promote PASS <input name="promotePass" type="checkbox" /></label>
+          </form>
+        </div>
+        <div class="panel" id="orchPanel">
+          <h2>Marathon</h2>
+          <p class="sub">Local :8790 · getItem pages · title swarm</p>
+          <form id="orchForm" class="grid">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category ID <input name="categoryId" value="25339" /></label>
+            <label class="check">Marathon (5 cats) <input name="marathon" type="checkbox" checked /></label>
+            <label>Landed cost $ <input name="cost" type="number" step="0.01" value="18" /></label>
+            <label>Price $ <input name="suggestedPrice" type="number" step="0.01" value="59.99" /></label>
+            <label>Variants / lane <input name="variantCount" type="number" value="250" /></label>
+            <label>Details / lane <input name="detailCount" type="number" value="30" /></label>
+            <label>Ideas <input name="ideasTarget" type="number" value="250" /></label>
+            <label>Probes / lane <input name="liveProbeCount" type="number" value="10" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+          </form>
+        </div>
+        <div class="panel">
+          <h2>Run log</h2>
+          <p class="sub" id="orchStatus">Official Browse APIs only — not HTML scrape</p>
+          <pre id="orchLog" class="out tall orch-log" aria-live="polite"></pre>
+          <pre id="agentLog" class="out tall"></pre>
+          <div id="jobsList" class="jobs-list"></div>
+        </div>
+      </div>
+      <section class="panel" id="briefPanel" hidden>
+        <h2>Brain brief</h2>
+        <div id="brief"></div>
+      </section>
+    </section>
+
+    <section class="tab" id="tab-packages">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn on" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn" data-tab="launch">Missions</button>
+      </div>
+      <div class="statstrip" id="pkgStats"></div>
+      <section class="panel">
+        <h2>Listing packages</h2>
+        <p class="sub">Keyword clusters · conversion copy · beat-this comps · original photos only</p>
+        <div id="clusterViz" class="cluster-row"></div>
+        <div id="orchPackages" class="board pack-grid"></div>
+        <section class="panel nested" id="draftPanel" hidden>
+          <h2>Swarm drafts</h2>
+          <div id="drafts" class="board"></div>
+        </section>
+      </section>
+    </section>
+
+    <section class="tab" id="tab-registry">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn on" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn" data-tab="launch">Missions</button>
+      </div>
+      <section class="panel">
+        <h2>SKU registry</h2>
+        <p class="sub">Export CSV for Seller Hub · Inventory API when user token set</p>
+        <div class="cta-row" style="margin-bottom:1rem">
+          <button type="button" class="btn" id="btnSkus">Load registry</button>
+          <button type="button" class="btn primary" id="btnExport">Export ready CSV/JSON</button>
+          <button type="button" class="btn ghost" id="btnAuth">Auth status</button>
+        </div>
+        <div id="skuBoard" class="board"></div>
+        <pre id="opsOut" class="out"></pre>
+      </section>
+    </section>
+
+    <section class="tab" id="tab-ops">
+      <div class="pipeline-subnav">
+        <button type="button" class="rail-btn on" data-tab="ops">Gates</button>
+        <button type="button" class="rail-btn" data-tab="packages">Packages</button>
+        <button type="button" class="rail-btn" data-tab="registry">Registry</button>
+        <button type="button" class="rail-btn" data-tab="launch">Missions</button>
+      </div>
+      <section class="split">
+        <div class="panel">
+          <h2>Publish dry-run</h2>
+          <form id="publishForm" class="grid tight">
+            <label>SKU <input name="sku" placeholder="LPROS-…" /></label>
+            <button type="submit" class="btn">Dry-run Inventory payload</button>
+          </form>
+          <pre id="publishOut" class="out"></pre>
+        </div>
+        <div class="panel">
+          <h2>Order ingest</h2>
+          <form id="orderForm" class="grid tight">
+            <label>Order ID <input name="orderId" value="MANUAL-1" /></label>
+            <label>SKU <input name="sku" placeholder="from registry" /></label>
+            <label>Buyer total $ <input name="buyerTotal" type="number" value="49" /></label>
+            <label class="check">Supplier confirmed <input name="supplierConfirmed" type="checkbox" /></label>
+            <button type="submit" class="btn">Ingest + gate</button>
+          </form>
+          <button type="button" class="btn ghost" id="btnOrders" style="margin-top:0.75rem">List orders</button>
+          <pre id="orderOut" class="out"></pre>
+        </div>
+      </section>
+      <section class="split">
+        <div class="panel">
+          <h2>Evidence harden</h2>
+          <form id="evidenceForm" class="grid tight">
+            <label>Title <input name="title" value="Solid wood desk organizer oak" /></label>
+            <label>Sale $ <input name="salePrice" type="number" value="49" /></label>
+            <label>Sold 90d <input name="soldCount" type="number" value="28" /></label>
+            <label>Cost $ <input name="productCost" type="number" value="18" /></label>
+            <label>Alt cost $ <input name="altProductCost" type="number" value="19.5" /></label>
+            <label>Lead days <input name="leadTimeDays" type="number" value="7" /></label>
+            <button type="submit" class="btn">Verify evidence</button>
+          </form>
+          <pre id="evidenceOut" class="out"></pre>
+        </div>
+        <div class="panel">
+          <h2>Conditioning</h2>
+          <form id="outcomeForm" class="grid tight">
+            <label>Title <input name="title" value="Oak desk organizer test SKU" /></label>
+            <label>Net $ <input name="net" type="number" step="0.01" value="12" /></label>
+            <label class="check">Profitable <input name="profitable" type="checkbox" checked /></label>
+            <label class="check">Returned <input name="returned" type="checkbox" /></label>
+            <button type="submit" class="btn">Log outcome</button>
+          </form>
+          <button type="button" class="btn ghost" id="btnOutcomes" style="margin-top:0.75rem">Recent outcomes</button>
+          <pre id="outcomeOut" class="out"></pre>
+        </div>
+      </section>
+      <section class="split">
+        <div class="panel">
+          <h2>Economics</h2>
+          <form id="econForm" class="grid tight">
+            <label>Price <input name="price" type="number" value="49" /></label>
+            <label>Cost <input name="cost" type="number" value="18" /></label>
+            <button type="submit" class="btn">Calc net</button>
+          </form>
+          <pre id="econOut" class="out"></pre>
+        </div>
+        <div class="panel">
+          <h2>Forecast</h2>
+          <form id="forecastForm" class="grid tight">
+            <label>Listings <input name="listings" type="number" value="300" /></label>
+            <label>STR/day <input name="str" type="number" step="0.001" value="0.015" /></label>
+            <label>Avg net <input name="net" type="number" step="0.01" value="12" /></label>
+            <label>Target $/day <input name="target" type="number" value="50" /></label>
+            <button type="submit" class="btn">Project</button>
+          </form>
+          <pre id="forecastOut" class="out"></pre>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Fulfillment gate</h2>
+        <button type="button" class="btn ghost" id="btnProviders">Provider matrix</button>
+        <button type="button" class="btn" id="btnFulfillDemo">Demo HOLD decision</button>
+        <pre id="fulfillOut" class="out"></pre>
+      </section>
+    </section>
+
+    <section class="tab" id="tab-playground">
+      <div class="statstrip" id="pgStats"></div>
+      <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="pgLiveResearch">Fetch live</button>
+        <button type="button" class="btn primary" id="pgLaunchBtn">Launch agent</button>
+        <button type="button" class="btn" id="pgCreateBtn">Queue job</button>
+        <button type="button" class="btn ghost" id="pgRefresh">Refresh board</button>
+        <button type="button" class="btn ghost" id="pgDryBrain">Dry Brain swarm</button>
+      </div>
+      <div id="pgPresets" class="cluster-row"></div>
+      <div id="pgWorkloads" class="cluster-row"></div>
+      <div class="pg-layout">
+        <div class="panel">
+          <h2>Job board</h2>
+          <p class="sub">Drag queued cards to Hold / Cancel · click a card to inspect</p>
+          <div class="pg-kanban" id="pgKanban"></div>
+        </div>
+        <div class="panel">
+          <h2>Sub-agent launcher</h2>
+          <p class="sub">MEUFT soldiers under Brain contracts · capital actions HOLD</p>
+          <div id="pgCatalog" class="pg-catalog"></div>
+          <form id="pgLaunchForm" class="grid tight">
+            <label>Agent
+              <select name="agent" id="pgAgent">
+                <option value="brain">brain</option>
+              </select>
+            </label>
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Price $ <input name="price" type="number" step="0.01" value="49" /></label>
+            <label>Cost $ <input name="cost" type="number" step="0.01" value="18" /></label>
+            <label>Sold 90d <input name="soldCount" type="number" placeholder="Terapeak" /></label>
+            <label>Alt cost $ <input name="altProductCost" type="number" step="0.01" /></label>
+            <label>Priority
+              <select name="priority">
+                <option>P0</option>
+                <option selected>P1</option>
+                <option>P2</option>
+              </select>
+            </label>
+            <label class="check">Dry-run <input name="dryRun" type="checkbox" /></label>
+            <label>Spawn <input name="spawn" placeholder="scout,intel,economics" /></label>
+            <label>Orch job <input name="orchJobId" placeholder="factory only" /></label>
+            <label>Item / URL <input name="url" placeholder="https://example.com or /itm/id" /></label>
+            <label>VM recipe <input name="recipe" placeholder="health / env / dry-mission" /></label>
+            <label>Playbook
+              <select name="playbookId" id="pgPlaybook">
+                <option value="terapeak">terapeak</option>
+              </select>
+            </label>
+          </form>
+        </div>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h2>Browser</h2>
+          <p class="sub">Allowlisted fetch · eBay /itm/ uses official getItem · no search HTML scrape</p>
+          <form id="pgBrowserForm" class="grid tight">
+            <label>URL <input name="url" placeholder="https://example.com or eBay /itm/…" /></label>
+            <label>Playbook
+              <select name="playbookId" id="pgBrowserPlaybook">
+                <option value="terapeak">terapeak</option>
+              </select>
+            </label>
+            <button type="submit" class="btn primary">Open session</button>
+            <button type="button" class="btn" id="pgBrowserFetch">Fetch URL</button>
+          </form>
+          <div id="pgBrowserSteps" class="pg-steps"></div>
+          <div id="pgBrowserView" class="pg-browser-view"></div>
+          <form id="pgCaptureForm" class="grid tight">
+            <label>Sold 90d <input name="soldCount" type="number" /></label>
+            <label>Avg sold $ <input name="avgSoldPrice" type="number" step="0.01" /></label>
+            <label>Landed $ <input name="productCost" type="number" step="0.01" /></label>
+            <label>Alt $ <input name="altProductCost" type="number" step="0.01" /></label>
+            <button type="submit" class="btn">Capture + next step</button>
+            <button type="button" class="btn primary" id="pgApplyEvidence">Apply capture → Evidence + Brain</button>
+          </form>
+          <div id="pgSessions" class="cluster-row"></div>
+        </div>
+        <div class="panel">
+          <h2>VM</h2>
+          <p class="sub">This worker · allowlisted recipes · spawn tests local-only</p>
+          <div id="pgVmSnap" class="insp-grid"></div>
+          <div id="pgVmRecipes" class="cluster-row"></div>
+          <pre id="pgVmOut" class="out tall"></pre>
+          <div id="pgVmRuns" class="board compact-board"></div>
+        </div>
+      </div>
+      <section class="split">
+        <div class="panel">
+          <h2>Spawn graph</h2>
+          <p class="sub">Parent Brain → soldiers</p>
+          <svg id="pgGraph" class="chart tallchart" viewBox="0 0 420 180" role="img"></svg>
+        </div>
+        <div class="panel">
+          <h2>Live activity</h2>
+          <p class="sub">Polls while jobs run</p>
+          <div id="pgActivity" class="pg-activity"></div>
+        </div>
+      </section>
+      <section class="panel" id="pgHivePanel">
+        <h2>Hive workload</h2>
+        <p class="sub">TASK CONTRACTs · named workers · Oracle lessons · HOLD default · not Browse</p>
+        <pre id="pgHiveOut" class="out tall"></pre>
+      </section>
+      <section class="panel" id="pgJobPanel">
+        <h2>Job inspector</h2>
+        <p class="sub" id="pgJobTitle">Select a board card</p>
+        <div class="cta-row" id="pgJobActions"></div>
+        <form id="pgCommentForm" class="grid tight">
+          <label>Note <input name="text" placeholder="Operator note on this job" /></label>
+          <button type="submit" class="btn ghost">Comment</button>
+        </form>
+        <pre id="pgJobLog" class="out orch-log"></pre>
+        <pre id="pgJobOut" class="out tall"></pre>
+      </section>
+    </section>
+  </main>
+
+  <aside class="vm-dock" id="vmDock" aria-label="Research VM">
+    <div class="vm-frame" id="vmFrame">
+      <div class="vm-titlebar">
+        <span class="vm-dots" aria-hidden="true"></span>
+        <span id="vmTitle">research-vm · idle</span>
+        <span class="vm-badge" id="vmBadge">STANDBY</span>
+      </div>
+      <div class="vm-toolbar">
+        <button type="button" class="btn primary" id="dockStartBtn">Run research</button>
+        <button type="button" class="btn ghost" id="dockCancelBtn">Stop</button>
+      </div>
+      <div class="vm-addr" id="vmAddr" title="What the agent is fetching">about:idle</div>
+      <div class="vm-tabs" id="vmViewTabs">
+        <button type="button" class="on" data-vmview="page">Page</button>
+        <button type="button" data-vmview="term">Term</button>
+        <button type="button" data-vmview="net">Net</button>
+        <button type="button" data-vmview="proof">Proof</button>
+      </div>
+      <div class="vm-screen">
+        <div class="vm-view on" id="vmPage">
+          <div class="vm-hero idle" id="watchHero">
+            <p class="muted">Listing reconstruction from official getItem (eBay blocks iframes). Proof tab shows the raw Browse JSON.</p>
+          </div>
+          <div class="vm-listing" id="vmListing" hidden></div>
+          <div class="vm-gallery" id="watchGallery"></div>
+        </div>
+        <div class="vm-view" id="vmTerm" hidden>
+          <pre id="vmTermLog" class="out tall orch-log watch-term" aria-live="polite"></pre>
+        </div>
+        <div class="vm-view" id="vmNet" hidden>
+          <div id="vmNetLog" class="watch-calls"></div>
+        </div>
+        <div class="vm-view" id="vmProof" hidden>
+          <p class="sub">Raw eBay Browse / getItem payloads. itemId + itemWebUrl + image URLs = live API, not a spreadsheet.</p>
+          <pre id="vmProofJson" class="out tall orch-log">Waiting for first API response…</pre>
+        </div>
+      </div>
+      <div class="vm-status" id="vmStatus">Waiting for a session</div>
+    </div>
+  </aside>
+
+  <aside class="inspector" id="inspector" hidden>
+    <div class="insp-bar">
+      <button type="button" class="insp-close" id="inspClose">Close</button>
+      <button type="button" class="insp-close" id="inspCompare">Compare</button>
+    </div>
+    <div id="inspBody"></div>
+  </aside>
+  <div class="compare-tray" id="compareTray" hidden>
+    <div id="compareBody" class="compare-body"></div>
+    <button type="button" class="insp-close" id="compareClear">Clear compare</button>
+  </div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

@@ -2,6 +2,43 @@
 [build]
   publish = "."
   command = ""
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "nft"
+  directory = "netlify/functions"
+  # Pull LPROS + eBay modules into the function bundle (dynamic imports)
+  included_files = [
+    "lpros-command/src/**",
+    "lpros/src/**",
+    "ebay-sold-items/src/**",
+    "lpros-agents/src/**",
+    "lpros-agents/**/*.md",
+  ]
+
+[functions."lpros-api"]
+  # Research swarm hits eBay Browse — needs headroom
+  timeout = 26
+
+# ---- LPROS Command desk ----
+# Static files live at /lpros-command/{index.html,app.js,styles.css}
+# (duplicated from public/ for Netlify; local server still uses public/)
+
+[[redirects]]
+  from = "/lpros"
+  to = "/lpros-command/"
+  status = 302
+
+# API → serverless (must be before static splat)
+[[redirects]]
+  from = "/lpros-command/api/*"
+  to = "/.netlify/functions/lpros-api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/lpros-command/api"
+  to = "/.netlify/functions/lpros-api/health"
+  status = 200
 
 # service worker must never be cached stale, and must serve as JS
 [[headers]]

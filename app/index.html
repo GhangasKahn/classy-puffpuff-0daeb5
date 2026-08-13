@@ -1998,22 +1998,38 @@ function LiveMarketView({ cloud }) {
             const r = await fetch(`${b.replace(/\/$/, "")}/v1/market/alt/comps?${q}`);
             const j = await r.json();
             setAltComps(j);
-          } catch (e) { setAltComps({ error: "Backend not reachable — start bedrock-api" }); }
+          } catch (e) { setAltComps({ error: "Backend not reachable — start ebay-sold-items (cd ebay-sold-items && npm start) or bedrock-api" }); }
         }}>FETCH COMPS & SUGGESTED VALUE</button>
         {altComps && (
           <div style={{ marginTop: 8, fontSize: 11, background: "var(--bg)", padding: 8, borderRadius: 4 }}>
             {altComps.error ? altComps.error : (
               <>
-                <div><b>{altComps.ref}</b> — suggested ~{fmt(altComps.suggestedValue || altComps.avgComp)}</div>
-                {(altComps.comps || []).slice(0,3).map((c,i) => (
-                  <div key={i} style={{ marginTop: 2 }}>{c.source}: {fmt(c.price)} ({c.date} {c.grade ? "· " + c.grade : ""})</div>
+                <div><b>{altComps.ref}</b> — suggested ~{fmt(altComps.suggestedValue || altComps.avgComp)}
+                  {altComps.evidenceStatus && (
+                    <span className="lbl" style={{ marginLeft: 8, color: altComps.evidenceStatus === "ok" ? "var(--ok)" : altComps.evidenceStatus === "partial" ? "var(--acc)" : "var(--acc2)" }}>
+                      {String(altComps.evidenceStatus).toUpperCase()}
+                      {altComps.listingsNeeded ? " · LISTINGS-NEEDED" : altComps.soldEvidenceMissing ? " · SOLD EVIDENCE MISSING" : ""}
+                    </span>
+                  )}
+                </div>
+                {(altComps.soldCount != null || altComps.activeCount != null) && (
+                  <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 2 }}>
+                    sold {altComps.soldCount ?? 0} · active {altComps.activeCount ?? 0}
+                    {altComps.provider ? ` · ${altComps.provider}` : ""}
+                  </div>
+                )}
+                {(altComps.comps || []).slice(0, 5).map((c,i) => (
+                  <div key={i} style={{ marginTop: 2 }}>
+                    {c.source}: {fmt(c.price)} ({c.date}{c.grade ? " · " + c.grade : ""})
+                    {c.url && <> · <a href={c.url} target="_blank" rel="noreferrer" style={{ color: "var(--acc)" }}>listing</a></>}
+                  </div>
                 ))}
                 {altComps.note && <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>{altComps.note}</div>}
               </>
             )}
           </div>
         )}
-        <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>This will drive "refresh live value" and smart suggestions in the rich Vault. Add your own comps manually anytime.</div>
+        <div style={{ fontSize: 9, color: "var(--faint)", marginTop: 4 }}>eBay bridge: `ebay-sold-items` on :8787 (Browse actives + Insights sold when entitled). Asking prices ≠ sold comps.</div>
       </div>
 
       <div style={{ fontSize: 10.5, color: "var(--faint)", marginTop: 14, lineHeight: 1.5 }}>
