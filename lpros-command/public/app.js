@@ -1,4 +1,5 @@
 import { bootPlayground } from "./playground-ui.js";
+import { bootWatch, startResearchWatch } from "./watch-ui.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -769,41 +770,16 @@ function hydrateMarketFromResearch(payload, meta = {}) {
 
 async function runLiveResearch(p) {
   const payload = p || missionPayload();
-  setDeskBanner("Pulling live eBay Browse listings (images + URLs)…", "info");
+  setDeskBanner("Booting research VM — live eBay Browse, not a CSV dump…", "info");
   const phase = $("orchPhase");
-  if (phase) phase.textContent = "live research…";
-  const log = $("agentLog") || $("pgJobOut");
-  if (log) log.textContent = "Live product research…";
+  if (phase) phase.textContent = "watch boot…";
+  showTab("watch");
   try {
-    const data = await post("/api/research/live", payload);
-    hydrateMarketFromResearch(data, { status: "live" });
-    renderViz(data.viz, data.lethalCandidates || data.products, {
-      algorithm: data.market?.algorithm,
-      weights: data.market?.weights,
-      stats: data.market?.rankStats,
-    });
-    if (data.market?.priceLadder) drawLadder($("chartLadder"), data.market.priceLadder);
-    showTab("market");
-    if (log) {
-      log.textContent = JSON.stringify(
-        {
-          productCount: data.productCount,
-          productsWithImages: data.productsWithImages,
-          productsWithUrls: data.productsWithUrls,
-          detailsFetched: data.detailsFetched,
-          market: data.market,
-        },
-        null,
-        2
-      );
-    }
-    return data;
+    return await startResearchWatch(payload);
   } catch (e) {
     const msg = String(e.message || e);
     setDeskBanner(msg, "err");
     hydrateMarketFromResearch({ products: [], emptyReason: msg });
-    showTab("market");
-    if (log) log.textContent = msg;
     throw e;
   }
 }
@@ -1909,8 +1885,8 @@ $("compareClear")?.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeInspector();
   if (e.target && ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
-  const tabs = ["launch", "market", "packages", "registry", "ops", "playground"];
-  if (e.key >= "1" && e.key <= "6") showTab(tabs[Number(e.key) - 1]);
+  const tabs = ["launch", "watch", "market", "packages", "registry", "ops", "playground"];
+  if (e.key >= "1" && e.key <= "7") showTab(tabs[Number(e.key) - 1]);
   if (e.key === "/") {
     e.preventDefault();
     showTab("market");
@@ -1947,3 +1923,4 @@ async function bootDesk() {
 loadSkus().catch(() => {});
 bootDesk();
 bootPlayground();
+bootWatch();

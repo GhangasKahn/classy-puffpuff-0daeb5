@@ -28,6 +28,14 @@ import { authStatus } from "../ebay/userToken.js";
 import { config as ebayConfig } from "../../../ebay-sold-items/src/config.js";
 import { deskFromPlaygroundJobs, deskFromResearch, emptyLiveHint } from "./marketRows.js";
 import { enrichItemsWithDetails } from "../../../ebay-sold-items/src/ebay/browse.js";
+import {
+  cancelWatch,
+  createWatchSession,
+  getWatch,
+  listWatches,
+  slimWatch,
+  tickWatch,
+} from "../research/watch.js";
 import { dryRunPublish, publishSku } from "../ebay/inventory.js";
 import { pushTracking, pullOrders } from "../ebay/fulfillment.js";
 import { rankMarket } from "../../../lpros/src/core/ranker.js";
@@ -145,6 +153,7 @@ export async function routeApi(req) {
       },
         endpoints: [
           "/research/live",
+          "/research/watch",
           "/swarm",
           "/orchestrate/deploy",
           "/orchestrate/campaign",
@@ -369,6 +378,55 @@ export async function routeApi(req) {
       lethalCandidates: intel.lethalCandidates,
       detailsFetched: detailed.filter((d) => d.detailFetched).length,
     });
+  }
+
+  if (method === "GET" && pathname === "/research/watch") {
+    return ok({ sessions: listWatches(20) });
+  }
+  if (method === "POST" && pathname === "/research/watch") {
+    try {
+      const session = createWatchSession(b);
+      await tickWatch(session.id, { n: 1 });
+      return ok(slimWatch(getWatch(session.id)));
+    } catch (e) {
+      return err(e.status || 500, e.message, { code: e.code });
+    }
+  }
+  if (method === "GET" && pathname.match(/^\/research\/watch\/[^/]+$/)) {
+    const id = decodeURIComponent(pathname.split("/").pop());
+    const session = getWatch(id);
+    if (!session) return err(404, "watch session not found");
+    return ok(slimWatch(session));
+  }
+  if (method === "GET" && pathname.match(/^\/research\/watch\/[^/]+\/events$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const session = getWatch(id);
+    if (!session) return err(404, "watch session not found");
+    const after = Number(query.get("after") || 0);
+    const events = (session.events || []).slice(after);
+    return ok({
+      events,
+      nextIndex: (session.events || []).length,
+      status: session.status,
+      phase: session.phase,
+      progress: session.progress,
+      productCount: (session.products || []).length,
+    });
+  }
+  if (method === "POST" && pathname.match(/^\/research\/watch\/[^/]+\/tick$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    try {
+      const session = await tickWatch(id, { n: Number(b.n ?? 1) });
+      return ok(slimWatch(session));
+    } catch (e) {
+      return err(e.status || 500, e.message, { code: e.code });
+    }
+  }
+  if (method === "POST" && pathname.match(/^\/research\/watch\/[^/]+\/cancel$/)) {
+    const id = decodeURIComponent(pathname.split("/").slice(-2)[0]);
+    const session = cancelWatch(id);
+    if (!session) return err(404, "watch session not found");
+    return ok(slimWatch(session));
   }
 
   if (method === "POST" && pathname === "/rank") {

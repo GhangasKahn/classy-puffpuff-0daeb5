@@ -483,7 +483,6 @@ export async function bootPlayground() {
     if (typeof window.runLiveResearch === "function") {
       try {
         await window.runLiveResearch(p);
-        window.showTab?.("market");
       } catch (e) {
         $("pgJobOut").textContent = String(e.message || e);
       }

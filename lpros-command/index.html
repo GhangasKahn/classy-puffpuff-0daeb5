@@ -17,6 +17,7 @@
     <p class="rail-mark">LPROS</p>
     <nav class="rail-nav" aria-label="Desk">
       <button type="button" class="rail-btn on" data-tab="launch">Launch</button>
+      <button type="button" class="rail-btn" data-tab="watch">Watch</button>
       <button type="button" class="rail-btn" data-tab="market">Market</button>
       <button type="button" class="rail-btn" data-tab="packages">Packages</button>
       <button type="button" class="rail-btn" data-tab="registry">Registry</button>
@@ -43,6 +44,7 @@
       <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Ideas</span><b id="kpiIdeas">—</b></button>
       <button type="button" class="kpi" data-tab="packages"><span class="kpi-l">Packages</span><b id="kpiPackages">—</b></button>
       <button type="button" class="kpi" data-tab="market"><span class="kpi-l">Heat max</span><b id="kpiHeat">—</b></button>
+      <button type="button" class="kpi" data-tab="watch"><span class="kpi-l">Watch VM</span><b id="kpiWatch">idle</b></button>
       <button type="button" class="kpi" data-tab="playground"><span class="kpi-l">Play jobs</span><b id="kpiPlay">—</b></button>
     </div>
     <div class="runbox">
@@ -122,6 +124,55 @@
         <h2>Brain brief</h2>
         <div id="brief"></div>
       </section>
+    </section>
+
+    <!-- WATCH VM -->
+    <section class="tab" id="tab-watch">
+      <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="watchStartBtn">Start live watch</button>
+        <button type="button" class="btn ghost" id="watchCancelBtn">Cancel</button>
+        <button type="button" class="btn ghost" id="watchToMarket">Open Market</button>
+        <span class="sub tight" id="watchPhaseLabel">Idle — VM not running</span>
+      </div>
+      <div class="watch-split">
+        <div class="panel watch-ops">
+          <h2>Operator</h2>
+          <p class="sub">Left: you. Right: the research VM hitting official eBay Browse in real time.</p>
+          <form id="watchForm" class="grid tight">
+            <label>Query <input name="q" value="solid wood desk organizer" /></label>
+            <label>Category <input name="categoryId" value="25339" /></label>
+            <label>Min $ <input name="minPrice" type="number" value="35" /></label>
+            <label>Max $ <input name="maxPrice" type="number" value="150" /></label>
+            <label>Limit <input name="limit" type="number" value="40" /></label>
+            <label>getItem n <input name="detailCount" type="number" value="8" /></label>
+          </form>
+          <div class="watch-proof" id="watchProof">
+            <span>source —</span>
+            <span>env —</span>
+            <span>dryRun —</span>
+          </div>
+          <div class="orch-meter"><span id="watchPct" style="width:0%"></span></div>
+          <h3 class="viz-title">API + agent log</h3>
+          <pre id="watchLog" class="out tall orch-log watch-term" aria-live="polite"></pre>
+          <div id="watchCalls" class="watch-calls"></div>
+        </div>
+        <div class="panel watch-vm-wrap">
+          <div class="vm-frame" id="vmFrame">
+            <div class="vm-titlebar">
+              <span class="vm-dots" aria-hidden="true"></span>
+              <span id="vmTitle">research-vm · idle</span>
+              <span class="vm-badge" id="vmBadge">STANDBY</span>
+            </div>
+            <div class="vm-screen">
+              <div class="vm-hero" id="watchHero">
+                <p class="muted">Start live watch to see Browse search and getItem land listing photos and URLs here. This is not a CSV upload.</p>
+              </div>
+              <div class="vm-gallery" id="watchGallery"></div>
+            </div>
+            <div class="vm-status" id="vmStatus">Waiting for a session</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- MARKET -->
