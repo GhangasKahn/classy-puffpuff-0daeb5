@@ -52,10 +52,13 @@
     </div>
   </header>
 
+  <div id="deskBanner" class="desk-banner" hidden role="status"></div>
+
   <main class="workspace">
     <!-- LAUNCH -->
     <section class="tab on" id="tab-launch">
       <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="btnLiveResearch">Live product research</button>
         <button type="button" class="btn primary" id="btnDeploy">Deploy marathon</button>
         <button type="button" class="btn primary" id="btnOrchMarathon">Start marathon</button>
         <button type="button" class="btn primary" id="btnOrchDeploy">Research mission</button>
@@ -362,6 +365,7 @@
     <section class="tab" id="tab-playground">
       <div class="statstrip" id="pgStats"></div>
       <div class="cta-row sticky-cta">
+        <button type="button" class="btn primary" id="pgLiveResearch">Live product research</button>
         <button type="button" class="btn primary" id="pgLaunchBtn">Launch agent</button>
         <button type="button" class="btn" id="pgCreateBtn">Queue job</button>
         <button type="button" class="btn ghost" id="pgRefresh">Refresh board</button>
@@ -400,7 +404,7 @@
                 <option>P2</option>
               </select>
             </label>
-            <label class="check">Dry-run <input name="dryRun" type="checkbox" checked /></label>
+            <label class="check">Dry-run <input name="dryRun" type="checkbox" /></label>
             <label>Spawn <input name="spawn" placeholder="scout,intel,economics" /></label>
             <label>Orch job <input name="orchJobId" placeholder="factory only" /></label>
             <label>Item / URL <input name="url" placeholder="https://example.com or /itm/id" /></label>

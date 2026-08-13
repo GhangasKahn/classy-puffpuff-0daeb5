@@ -7,6 +7,55 @@ import { sellThroughProxy, competitionDensity } from "../../../lpros/src/core/ba
 import { psychProxies } from "../../../lpros/src/core/psychology.js";
 import { netProfitPerSale } from "../../../lpros/src/core/economics.js";
 import { rankMarket } from "../../../lpros/src/core/ranker.js";
+import { emptyLiveHint } from "../http/marketRows.js";
+
+/**
+ * Browse search with fallbacks. Ranker/sort/category must never hide a live market.
+ * Inject `searchFn` in tests.
+ */
+export async function searchBrowseWithFallback(
+  { q, categoryId, minPrice, maxPrice, limit = 100 } = {},
+  searchFn = searchActiveListings
+) {
+  const pageSize = Math.min(limit, 200);
+  const attempts = [
+    { q, categoryIds: categoryId || undefined, minPrice, maxPrice, limit: pageSize, sort: "newlyListed" },
+    { q, categoryIds: categoryId || undefined, minPrice, maxPrice, limit: pageSize },
+    { q, minPrice, maxPrice, limit: pageSize, sort: "newlyListed" },
+    { q, minPrice, maxPrice, limit: pageSize },
+  ];
+  let lastErr = null;
+  let lastEmpty = { items: [], total: 0 };
+  for (const opts of attempts) {
+    try {
+      const page = await searchFn(opts);
+      if ((page?.items || []).length) return { page, attempt: opts, error: null };
+      lastEmpty = page || lastEmpty;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  if (lastErr && !(lastEmpty.items || []).length) throw lastErr;
+  return { page: lastEmpty, attempt: attempts[0], error: lastErr };
+}
+
+function toDeskItem(it) {
+  return {
+    id: it.id,
+    itemId: it.id || it.itemId,
+    title: it.title,
+    price: it.price,
+    salePrice: it.price,
+    seller: it.seller,
+    url: it.url,
+    condition: it.condition,
+    image: it.image,
+    images: it.images || [],
+    thumbnail: it.thumbnail,
+    watchCount: it.watchCount,
+    category: it.categories?.[0]?.categoryName || it.category || "",
+  };
+}
 
 export async function competitorIntel({
   q,
@@ -15,20 +64,17 @@ export async function competitorIntel({
   maxPrice = 200,
   limit = 100,
   productCostRatio = 0.4,
+  searchFn,
 } = {}) {
-  const page = await searchActiveListings({
-    q,
-    categoryIds: categoryId,
-    minPrice,
-    maxPrice,
-    limit: Math.min(limit, 200),
-    sort: "price",
-  });
+  const { page, attempt, error } = await searchBrowseWithFallback(
+    { q, categoryId, minPrice, maxPrice, limit },
+    searchFn
+  );
 
   // Defense in depth: Browse price filter is best-effort; enforce band locally
-  const items = (page.items || []).filter(
-    (i) => i.price != null && i.price >= minPrice && i.price <= maxPrice
-  );
+  const items = (page.items || [])
+    .filter((i) => i.price != null && i.price >= minPrice && i.price <= maxPrice)
+    .map(toDeskItem);
   const prices = items.map((i) => i.price).filter((p) => p > 0).sort((a, b) => a - b);
   const sellers = new Map();
   for (const it of items) {
@@ -109,6 +155,7 @@ export async function competitorIntel({
 
   const lethal = marketRank.ranked.slice(0, 20).map((r) => ({
     id: r.id,
+    itemId: r.id,
     title: r.title,
     price: r.salePrice ?? r.price,
     seller: r.seller,
@@ -147,10 +194,10 @@ export async function competitorIntel({
       weights: marketRank.weights,
       rankStats: marketRank.stats,
     },
-    lethalCandidates: lethal,
-    viz: marketRank.ranked.slice(0, 20).length
+    lethalCandidates: lethal.length ? lethal : items.slice(0, 20),
+    viz: (lethal.length ? lethal : items).length
       ? {
-          gallery: lethal.slice(0, 12).map((r) => ({
+          gallery: (lethal.length ? lethal : items).slice(0, 12).map((r) => ({
             rank: r.rank,
             title: (r.title || "").slice(0, 70),
             image: r.image,
@@ -172,6 +219,18 @@ export async function competitorIntel({
           })),
         }
       : null,
+    items,
+    products: items,
+    productCount: items.length,
+    productsWithImages: items.filter((i) => i.image).length,
+    productsWithUrls: items.filter((i) => i.url).length,
+    emptyReason: items.length
+      ? null
+      : emptyLiveHint({ dryRun: false }) + (error ? ` Last error: ${error.message}` : ""),
+    browseAttempt: {
+      sort: attempt?.sort || null,
+      categoryIds: attempt?.categoryIds || null,
+    },
     rejectedScamSample: scored.filter((s) => s.scammy).slice(0, 8),
     vsZik: {
       parity: ["active competition snapshot", "price distribution", "seller share"],

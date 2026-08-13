@@ -47,6 +47,7 @@ function showTab(name) {
   document.querySelectorAll(".tab").forEach((el) => el.classList.toggle("on", el.id === `tab-${name}`));
   document.querySelectorAll(".rail-btn").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
 }
+window.showTab = showTab;
 
 function setKpis({ products, images, variants, ideas, packages, heat, skus } = {}) {
   const set = (id, v) => {
@@ -541,6 +542,10 @@ function renderMarketGallery(rows) {
   const host = $("gallery");
   if (!host) return;
   const list = (rows || []).filter((r) => r.image || r.url).slice(0, 36);
+  if (!list.length) {
+    host.innerHTML = `<div class="empty-market">${escapeHtml(desk.emptyReason || "No products, images, or listing URLs yet. Click Live product research (not Dry-run).")}</div>`;
+    return;
+  }
   host.innerHTML = list
     .map(
       (g, i) => `
@@ -662,15 +667,158 @@ function renderDeskCharts() {
   });
 }
 
+function setDeskBanner(msg, kind = "err") {
+  const el = $("deskBanner");
+  if (!el) return;
+  if (!msg) {
+    el.hidden = true;
+    el.textContent = "";
+    return;
+  }
+  el.hidden = false;
+  el.className = `desk-banner ${kind}`;
+  el.textContent = msg;
+}
+
+function clientProduct(item = {}) {
+  const images = [...new Set([item.image, item.thumbnail, ...(item.images || [])].filter(Boolean))];
+  return {
+    ...item,
+    title: item.title || "",
+    price: Number(item.price ?? item.salePrice) || 0,
+    salePrice: Number(item.salePrice ?? item.price) || 0,
+    url: item.url || "",
+    image: images[0] || item.image || "",
+    images,
+    imageCount: item.imageCount ?? images.length,
+    descriptionExcerpt: item.descriptionExcerpt || item.description || item.specificsSummary || "",
+  };
+}
+
+function collectClientProducts(payload = {}) {
+  const r = payload.results || payload;
+  const bags = [
+    r.productsPreview,
+    r.products,
+    r.items,
+    r.lethalCandidates,
+    r.lethalBoard,
+    r.marketBoard,
+    r.top,
+    r.gallery,
+    r.viz?.gallery,
+    payload.market?.products,
+  ];
+  const out = [];
+  const seen = new Set();
+  for (const bag of bags) {
+    if (!Array.isArray(bag)) continue;
+    for (const it of bag) {
+      const row = clientProduct(it);
+      if (!row.title) continue;
+      const key = row.url || row.itemId || row.id || row.title.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(row);
+    }
+  }
+  return out;
+}
+
+function hydrateMarketFromResearch(payload, meta = {}) {
+  const r = payload?.results || payload || {};
+  const products = collectClientProducts(payload);
+  const dryRun = Boolean(r.dryRun || meta.dryRun || payload?.dryRun || products.some((p) => p.source === "dry-fixture"));
+  desk.products = dryRun ? [] : products;
+  desk.intel = r.intel || r.market ? r : desk.intel;
+  if (r.intel) desk.intel = r.intel;
+  if (r.market && !r.intel) desk.intel = { market: r.market, ...r };
+  desk.emptyReason =
+    r.emptyReason ||
+    payload?.emptyReason ||
+    meta.emptyReason ||
+    (dryRun
+      ? "Dry-run fixtures are not live listings. Click Live product research."
+      : products.length
+        ? null
+        : "No products yet. Click Live product research (not Dry-run).");
+  const imgs = desk.products.filter((p) => p.image).length;
+  const urls = desk.products.filter((p) => p.url).length;
+  setKpis({
+    products: desk.products.length,
+    images: r.productsWithImages ?? imgs,
+    variants: r.variantTotalGenerated ?? desk.variants.length,
+    ideas: r.ideaCount ?? desk.ideas.length,
+    packages: r.packageCount ?? desk.packages.length,
+    heat: r.trends?.hottestCategory?.heatScore ?? heatMax(r.trends),
+  });
+  renderDeskCharts();
+  applyMarketFilters();
+  renderBoard(desk.products.length ? desk.products : products);
+  if (desk.products.length) {
+    setDeskBanner(
+      `${desk.products.length} products · ${imgs} images · ${urls} listing URLs${r.detailsFetched ? ` · ${r.detailsFetched} getItem pages` : ""}`,
+      "ok"
+    );
+  } else {
+    setDeskBanner(desk.emptyReason, dryRun ? "info" : "err");
+  }
+  const rs = $("railStatus");
+  if (rs) rs.textContent = meta.status || (desk.products.length ? "live" : "empty");
+}
+
+async function runLiveResearch(p) {
+  const payload = p || missionPayload();
+  setDeskBanner("Pulling live eBay Browse listings (images + URLs)…", "info");
+  const phase = $("orchPhase");
+  if (phase) phase.textContent = "live research…";
+  const log = $("agentLog") || $("pgJobOut");
+  if (log) log.textContent = "Live product research…";
+  try {
+    const data = await post("/api/research/live", payload);
+    hydrateMarketFromResearch(data, { status: "live" });
+    renderViz(data.viz, data.lethalCandidates || data.products, {
+      algorithm: data.market?.algorithm,
+      weights: data.market?.weights,
+      stats: data.market?.rankStats,
+    });
+    if (data.market?.priceLadder) drawLadder($("chartLadder"), data.market.priceLadder);
+    showTab("market");
+    if (log) {
+      log.textContent = JSON.stringify(
+        {
+          productCount: data.productCount,
+          productsWithImages: data.productsWithImages,
+          productsWithUrls: data.productsWithUrls,
+          detailsFetched: data.detailsFetched,
+          market: data.market,
+        },
+        null,
+        2
+      );
+    }
+    return data;
+  } catch (e) {
+    const msg = String(e.message || e);
+    setDeskBanner(msg, "err");
+    hydrateMarketFromResearch({ products: [], emptyReason: msg });
+    showTab("market");
+    if (log) log.textContent = msg;
+    throw e;
+  }
+}
+window.hydrateMarketFromResearch = hydrateMarketFromResearch;
+window.runLiveResearch = runLiveResearch;
+
 function hydrateMarketFromJob(job) {
   const r = job?.results || {};
-  desk.products = r.productsPreview || r.products || [];
   desk.packages = r.packagesPreview || r.packages || [];
   desk.trends = r.trends || null;
-  desk.intel = r.intel || null;
   desk.lanes = r.lanes || [];
   desk.ideas = r.ideasPreview || r.trends?.ideasPreview || r.recommendations?.topIdeas || [];
   desk.variants = r.variantsPreview || r.variants || [];
+  hydrateMarketFromResearch(job?.results || job || {}, { status: job?.status });
+  desk.intel = r.intel || desk.intel;
   const cats = [...new Set(desk.products.map((p) => p.categoryPath || p.categoryId).filter(Boolean))];
   const sel = $("marketCat");
   if (sel) {
@@ -786,6 +934,12 @@ function renderBrief(brief) {
 
 function renderBoard(rows) {
   $("boardPanel").hidden = false;
+  const list = rows || [];
+  if (!list.length) {
+    $("board").innerHTML = `<p class="empty-market">${escapeHtml(desk.emptyReason || "Lethal board empty until Live product research returns listings.")}</p>`;
+    window.__boardRows = [];
+    return;
+  }
   $("board").innerHTML = (rows || [])
     .slice(0, 12)
     .map(
@@ -1051,7 +1205,12 @@ $("btnSwarm").onclick = async () => {
       .map((a) => `${a.ts.slice(11, 19)}  [${a.agent}]  ${a.msg}`)
       .join("\n");
     renderBrief(data.brief || {});
-    const board = data.marketBoard?.length ? data.marketBoard : data.lethalBoard || [];
+    const board = data.products?.length
+      ? data.products
+      : data.marketBoard?.length
+        ? data.marketBoard
+        : data.lethalBoard || [];
+    hydrateMarketFromResearch(data);
     renderBoard(board);
     renderViz(data.viz, board, {
       algorithm: data.scout?.market?.algorithm || data.intel?.market?.algorithm,
@@ -1070,6 +1229,7 @@ $("btnSwarm").onclick = async () => {
     }
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);
+    setDeskBanner(String(e.message || e), "err");
   } finally {
     btn.disabled = false;
   }
@@ -1499,8 +1659,9 @@ $("btnIntel").onclick = async () => {
     const p = missionPayload();
     const data = await post("/api/intel", p);
     $("agentLog").textContent = JSON.stringify(data.market, null, 2);
-    renderBoard(data.lethalCandidates || []);
-    renderViz(data.viz, data.lethalCandidates || [], {
+    hydrateMarketFromResearch(data);
+    renderBoard(data.products || data.lethalCandidates || []);
+    renderViz(data.viz, data.products || data.lethalCandidates || [], {
       algorithm: data.market?.algorithm,
       weights: data.market?.weights,
       stats: data.market?.rankStats,
@@ -1508,10 +1669,16 @@ $("btnIntel").onclick = async () => {
     $("boardPanel").hidden = false;
     showTab("market");
     if (data.market?.priceLadder) drawLadder($("chartLadder"), data.market.priceLadder);
+    if (!data.productCount) setDeskBanner(data.emptyReason || "Intel returned 0 products", "err");
   } catch (e) {
     $("agentLog").textContent = String(e.message || e);
+    setDeskBanner(String(e.message || e), "err");
   }
 };
+
+$("btnLiveResearch")?.addEventListener("click", () => {
+  runLiveResearch(missionPayload()).catch(() => {});
+});
 
 $("evidenceForm").onsubmit = async (e) => {
   e.preventDefault();
@@ -1753,6 +1920,17 @@ document.addEventListener("keydown", (e) => {
 
 async function bootDesk() {
   renderDeskCharts();
+  try {
+    const h = await get("/health");
+    if (h.ebay && !h.ebay.appConfigured) {
+      setDeskBanner(h.ebay.hint || "eBay credentials missing — live research will return 0 products.", "err");
+    }
+  } catch (e) {
+    setDeskBanner(
+      "Command API unreachable. For live listings run local :8790 (`cd lpros-command && npm start`) or set Netlify EBAY_PRD_* env vars.",
+      "err"
+    );
+  }
   const jobs = await refreshJobsRail();
   const done = (jobs || []).find((j) => j.status === "completed");
   if (done?.id) {

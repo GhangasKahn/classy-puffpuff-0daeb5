@@ -208,10 +208,10 @@ export async function getBrowseItem(itemId, { fieldgroups } = {}) {
  */
 export async function enrichItemsWithDetails(items = [], { max = 12, delayMs = 200 } = {}) {
   const out = [];
-  const slice = (items || []).filter((it) => it?.id).slice(0, max);
+  const slice = (items || []).filter((it) => it?.id || it?.itemId).slice(0, max);
   for (const it of slice) {
     try {
-      const detail = await getBrowseItem(it.id);
+      const detail = await getBrowseItem(it.id || it.itemId);
       out.push({
         ...it,
         ...detail,

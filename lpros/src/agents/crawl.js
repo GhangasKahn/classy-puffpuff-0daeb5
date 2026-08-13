@@ -203,6 +203,8 @@ function brief(r) {
     perceivedValue: r.perceivedValue,
     psychFit: r.psychFit,
     url: r.url,
+    image: r.image || null,
+    images: r.images || (r.image ? [r.image] : []),
     scammy: r.scammy,
   };
 }

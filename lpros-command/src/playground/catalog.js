@@ -237,6 +237,14 @@ export const PRIORITIES = ["P0", "P1", "P2"];
 
 export const PRESETS = [
   {
+    id: "live-intel",
+    title: "Live product research",
+    agent: "intel",
+    dryRun: false,
+    spawn: [],
+    input: { q: "solid wood desk organizer", categoryId: "25339", minPrice: 35, maxPrice: 150, limit: 80 },
+  },
+  {
     id: "dry-brain",
     title: "Dry Brain swarm",
     agent: "brain",

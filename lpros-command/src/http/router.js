@@ -25,6 +25,9 @@ import { listSkus, promoteCandidate, getSku, setSkuStatus, removeSku } from "../
 import { exportPackages, buildListingPackage } from "../ops/packages.js";
 import { listOrders, ingestOrder, attachTracking } from "../ops/orders.js";
 import { authStatus } from "../ebay/userToken.js";
+import { config as ebayConfig } from "../../../ebay-sold-items/src/config.js";
+import { deskFromPlaygroundJobs, deskFromResearch, emptyLiveHint } from "./marketRows.js";
+import { enrichItemsWithDetails } from "../../../ebay-sold-items/src/ebay/browse.js";
 import { dryRunPublish, publishSku } from "../ebay/inventory.js";
 import { pushTracking, pullOrders } from "../ebay/fulfillment.js";
 import { rankMarket } from "../../../lpros/src/core/ranker.js";
@@ -126,13 +129,22 @@ export async function routeApi(req) {
   }
 
   if (method === "GET" && (pathname === "/" || pathname === "/health")) {
+    const appConfigured = Boolean(ebayConfig.appId && ebayConfig.certId);
     return ok({
       ok: true,
       service: "lpros-command",
       role: "open ZIK+AutoDS control plane",
       runtime: process.env.NETLIFY ? "netlify" : "node",
       auth: authStatus(),
+      ebay: {
+        appConfigured,
+        env: ebayConfig.env,
+        hint: appConfigured
+          ? null
+          : emptyLiveHint({ configured: false }),
+      },
         endpoints: [
+          "/research/live",
           "/swarm",
           "/orchestrate/deploy",
           "/orchestrate/campaign",
@@ -307,16 +319,56 @@ export async function routeApi(req) {
   }
 
   if (method === "POST" && pathname === "/intel") {
-    return ok(
-      await competitorIntel({
-        q: b.q,
-        categoryId: b.categoryId,
-        minPrice: Number(b.minPrice ?? 35),
-        maxPrice: Number(b.maxPrice ?? 200),
-        limit: Number(b.limit ?? 100),
-        productCostRatio: Number(b.costRatio ?? 0.4),
-      })
+    const intel = await competitorIntel({
+      q: b.q,
+      categoryId: b.categoryId,
+      minPrice: Number(b.minPrice ?? 35),
+      maxPrice: Number(b.maxPrice ?? 200),
+      limit: Number(b.limit ?? 100),
+      productCostRatio: Number(b.costRatio ?? 0.4),
+    });
+    const desk = deskFromResearch(intel, { query: b.q, categoryId: b.categoryId });
+    return ok({ ...intel, ...desk, products: desk.products });
+  }
+
+  if (method === "POST" && pathname === "/research/live") {
+    const appConfigured = Boolean(ebayConfig.appId && ebayConfig.certId);
+    if (!appConfigured) {
+      return err(503, emptyLiveHint({ configured: false }), { code: "EBAY_CONFIG" });
+    }
+    const onNetlify = Boolean(process.env.NETLIFY);
+    const limit = onNetlify ? Math.min(Number(b.limit ?? 40), 40) : Number(b.limit ?? 80);
+    const detailCount = onNetlify ? Math.min(Number(b.detailCount ?? 8), 8) : Number(b.detailCount ?? 12);
+    const intel = await competitorIntel({
+      q: b.q || "solid wood desk organizer",
+      categoryId: b.categoryId,
+      minPrice: Number(b.minPrice ?? 35),
+      maxPrice: Number(b.maxPrice ?? 200),
+      limit,
+      productCostRatio: Number(b.costRatio ?? 0.4),
+    });
+    const seed = (intel.lethalCandidates?.length ? intel.lethalCandidates : intel.items || []).slice(
+      0,
+      detailCount
     );
+    let detailed = seed;
+    if (b.details !== false && seed.length) {
+      detailed = await enrichItemsWithDetails(seed, { max: detailCount, delayMs: onNetlify ? 120 : 180 });
+    }
+    const desk = deskFromResearch(
+      { ...intel, items: detailed, products: detailed, lethalCandidates: intel.lethalCandidates },
+      { query: b.q, categoryId: b.categoryId, configured: true }
+    );
+    if (!desk.productCount) {
+      return err(422, desk.emptyReason || emptyLiveHint(), { code: "NO_LIVE_PRODUCTS", market: intel.market });
+    }
+    return ok({
+      ...intel,
+      ...desk,
+      products: desk.products,
+      lethalCandidates: intel.lethalCandidates,
+      detailsFetched: detailed.filter((d) => d.detailFetched).length,
+    });
   }
 
   if (method === "POST" && pathname === "/rank") {
@@ -405,7 +457,11 @@ export async function routeApi(req) {
           })
         );
     }
-    return ok({ ...data, promoted });
+    const desk = deskFromResearch(data, { query: b.q, categoryId: b.categoryId });
+    if (!desk.productCount) {
+      return err(422, desk.emptyReason || emptyLiveHint(), { code: "NO_LIVE_PRODUCTS", brief: data.brief });
+    }
+    return ok({ ...data, ...desk, products: desk.products, promoted });
   }
 
   // ── Agent orchestration: deploy → research → title swarm → spreadsheet ──
@@ -736,6 +792,8 @@ export async function routeApi(req) {
       sync: b.sync !== false,
       dryRun: Boolean(b.dryRun),
     });
+    const kids = (job.children || []).map((id) => getPlaygroundJob(id)).filter(Boolean);
+    const market = deskFromPlaygroundJobs([job, ...kids], { query: job.input?.q });
     return ok({
       jobId: job.id,
       status: job.status,
@@ -744,6 +802,11 @@ export async function routeApi(req) {
       result: job.result,
       error: job.error,
       brief: job.result?.brief || null,
+      market,
+      products: market.products,
+      productCount: market.productCount,
+      emptyReason: market.emptyReason,
+      dryRun: market.dryRun,
     });
   }
   if (method === "GET" && pathname.match(/^\/playground\/jobs\/[^/]+$/)) {

@@ -14,6 +14,7 @@ import { getAgent } from "./catalog.js";
 import { appendEvent, load, persist } from "./store.js";
 import { runBrowserJob } from "./browser.js";
 import { runVmJob } from "./vm.js";
+import { deskFromResearch, deskFromPlaygroundJobs, emptyLiveHint, noLiveProductsError } from "../http/marketRows.js";
 
 function num(v, d = null) {
   if (v == null || v === "") return d;
@@ -118,10 +119,22 @@ async function runScout(input = {}) {
     targetDailyProfit: num(input.target, 50),
     assumedStr: num(input.str, 0.015),
   });
+  const desk = deskFromResearch({
+    top: out.top,
+    marketBoard: out.market?.board,
+    viz: out.market?.viz,
+  });
+  if (!desk.productCount) {
+    throw noLiveProductsError(`Scout: 0 live products. ${emptyLiveHint()}`);
+  }
   return {
     top: (out.top || []).slice(0, 12),
+    products: desk.products,
+    productCount: desk.productCount,
+    productsWithImages: desk.productsWithImages,
+    productsWithUrls: desk.productsWithUrls,
     market: out.market || null,
-    viz: out.viz || null,
+    viz: out.viz || out.market?.viz || null,
     algorithm: out.algorithm || out.market?.algorithm,
   };
 }
@@ -140,7 +153,7 @@ async function runIntel(input = {}) {
     };
   }
   const { competitorIntel } = await import("../intel/competitor.js");
-  return competitorIntel({
+  const intel = await competitorIntel({
     q: input.q || "desk organizer",
     categoryId: input.categoryId || "25339",
     minPrice: num(input.minPrice, 35),
@@ -148,6 +161,11 @@ async function runIntel(input = {}) {
     limit: num(input.limit, 80),
     productCostRatio: num(input.costRatio, 0.4),
   });
+  const desk = deskFromResearch(intel);
+  if (!desk.productCount) {
+    throw noLiveProductsError(`Intel: 0 live products. ${intel.emptyReason || emptyLiveHint()}`);
+  }
+  return { ...intel, products: desk.products, productCount: desk.productCount };
 }
 
 async function runCrawler(input = {}) {
@@ -167,7 +185,9 @@ async function runCrawler(input = {}) {
     outPrefix: `pg-crawl-${input.categoryId || "25339"}`,
   });
   return {
-    itemCount: crawl?.items?.length || crawl?.count,
+    itemCount: crawl?.kept ?? crawl?.items?.length ?? 0,
+    items: (crawl?.topByPerceivedValue || []).slice(0, 40),
+    products: (crawl?.topByPerceivedValue || []).slice(0, 40),
     topByPerceivedValue: (crawl?.topByPerceivedValue || []).slice(0, 8),
   };
 }
@@ -265,7 +285,26 @@ async function runBrain(job, input = {}) {
   }
   const econ = await runEconomics(input);
   const brief = meuftBrief({ input, childResults, econ: econ.net });
-  return { brief, economics: econ };
+  const desk = deskFromPlaygroundJobs(childResults, { query: input.q, dryRun: Boolean(input.dryRun) });
+  if (!input.dryRun && !desk.productCount) {
+    brief.verdict = "NO-GO";
+    brief.emptyReason = desk.emptyReason;
+    brief.next = [
+      "Run Live product research (not Dry-run)",
+      "Confirm EBAY_PRD_APP_ID / EBAY_PRD_CERT_ID and EBAY_ENV=production",
+      "Use local Command :8790 if Netlify env vars are unset",
+    ];
+  }
+  return {
+    brief,
+    economics: econ,
+    products: desk.products,
+    productCount: desk.productCount,
+    productsWithImages: desk.productsWithImages,
+    productsWithUrls: desk.productsWithUrls,
+    dryRun: desk.dryRun,
+    emptyReason: desk.emptyReason,
+  };
 }
 
 async function dispatch(job) {

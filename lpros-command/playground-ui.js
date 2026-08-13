@@ -293,11 +293,25 @@ async function inspectJob(id) {
       error: job.error,
       brief: job.result?.brief,
       promoted: job.result?.promoted,
+      productCount: job.result?.productCount,
+      emptyReason: job.result?.emptyReason,
       result: job.result,
     },
     null,
     2
   );
+  if (
+    job.status === "done" &&
+    !job.input?.dryRun &&
+    !job.result?.dryRun &&
+    (job.result?.productCount ||
+      job.result?.products?.length ||
+      job.result?.items?.length ||
+      job.result?.lethalCandidates?.length) &&
+    typeof window.hydrateMarketFromResearch === "function"
+  ) {
+    window.hydrateMarketFromResearch(job.result || {}, { status: job.status });
+  }
   const verdict = job.result?.brief?.verdict || job.result?.decision;
   const actions = $("pgJobActions");
   actions.innerHTML = `
@@ -370,11 +384,17 @@ async function launch(start) {
   const live = !p.dryRun;
   try {
     if (start) {
-      const body = { ...p, input: p, agent: p.agent, dryRun: p.dryRun, spawn: p.spawn, sync: !live };
+      const body = { ...p, input: p, agent: p.agent, dryRun: p.dryRun, spawn: p.spawn, sync: true };
       const out = await api("/playground/launch", { method: "POST", body });
       $("pgJobOut").textContent = JSON.stringify(out, null, 2);
       $("pgJobTitle").textContent = `${out.agent} · ${out.status}`;
       pg.selected = out.jobId;
+      if (live && typeof window.hydrateMarketFromResearch === "function") {
+        window.hydrateMarketFromResearch(out.market || out.result || out, { dryRun: out.dryRun });
+        if (out.productCount) window.showTab?.("market");
+      } else if (out.dryRun && typeof window.hydrateMarketFromResearch === "function") {
+        window.hydrateMarketFromResearch({ products: [], dryRun: true, emptyReason: out.emptyReason });
+      }
     } else {
       const out = await api("/playground/jobs", {
         method: "POST",
@@ -456,6 +476,22 @@ export async function bootPlayground() {
   $("pgLaunchBtn")?.addEventListener("click", () => launch(true));
   $("pgCreateBtn")?.addEventListener("click", () => launch(false));
   $("pgRefresh")?.addEventListener("click", () => refreshBoard());
+  $("pgLiveResearch")?.addEventListener("click", async () => {
+    const form = $("pgLaunchForm");
+    if (form?.dryRun) form.dryRun.checked = false;
+    const p = formPayload(form);
+    if (typeof window.runLiveResearch === "function") {
+      try {
+        await window.runLiveResearch(p);
+        window.showTab?.("market");
+      } catch (e) {
+        $("pgJobOut").textContent = String(e.message || e);
+      }
+    } else {
+      applyPreset("live-intel");
+      await launch(true);
+    }
+  });
   $("pgDryBrain")?.addEventListener("click", async () => {
     applyPreset("dry-brain");
     await launch(true);

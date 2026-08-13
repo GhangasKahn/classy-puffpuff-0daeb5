@@ -423,8 +423,8 @@ export async function runMission(job) {
     throw new Error(`Hardened core requires live intel — ${e.message}`);
   }
 
-  if (!(intel?.lethalCandidates?.length || intel?.market?.sampleSize)) {
-    throw new Error("Zero products from Browse intel — check query/category/credentials");
+  if (!(intel?.lethalCandidates?.length || intel?.items?.length || intel?.market?.sampleSize)) {
+    throw new Error(intel?.emptyReason || "Zero products from Browse intel — check query/category/credentials");
   }
 
   // ── Phase 2: Category crawl (more real titles + density) ──
@@ -475,7 +475,9 @@ export async function runMission(job) {
   }
 
   // ── Phase 4: Fetch REAL listing page content via getItem ──
-  const boardSeed = (intel.lethalCandidates || []).slice(0, cfg.detailCount || 15);
+  const boardSeed = (
+    intel.lethalCandidates?.length ? intel.lethalCandidates : intel.items || intel.products || []
+  ).slice(0, cfg.detailCount || 15);
   appendEvent(
     job,
     "info",

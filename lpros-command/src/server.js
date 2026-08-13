@@ -4,15 +4,14 @@
 import { createServer } from "node:http";
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname, extname, join } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import { routeApi, corsHeaders } from "./http/router.js";
+import { config as ebayConfig } from "../../ebay-sold-items/src/config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = resolve(__dirname, "../public");
 const port = Number(process.env.LPROS_COMMAND_PORT || 8790);
 const host = process.env.HOST || "127.0.0.1";
-
-await import(pathToFileURL(resolve(__dirname, "../../ebay-sold-items/src/config.js")).href);
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -88,4 +87,11 @@ const server = createServer((req, res) => {
 });
 server.listen(port, host, () => {
   console.log(`[lpros-command] http://${host}:${port}`);
+  if (!ebayConfig.appId || !ebayConfig.certId) {
+    console.error(
+      "[lpros-command] eBay App/Cert ID missing — Live product research will return 0 products. Set EBAY_PRD_APP_ID + EBAY_PRD_CERT_ID and EBAY_ENV=production."
+    );
+  } else {
+    console.log(`[lpros-command] eBay ${ebayConfig.env} app configured`);
+  }
 });
