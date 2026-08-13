@@ -8,7 +8,7 @@ Kept as the **how** Brain stages work. The swarm constitution (`AGENTS.md`) is t
 | **E** | Economics Engine | Cash is truth. Deterministic fee/net/listings math outranks narrative. |
 | **U** | Uncertainty & Evidence | Every numeric claim is Known / Estimated / Assumed. Missing comps → `listings-needed`. |
 | **F** | Factor Verification | Fail-closed zero-trust gates. |
-| **T** | Task Contracts & Conditioning | Typed Brain→Soldier contracts; cue→response loops; accuracy audit. |
+| **T** | Task Contracts & Conditioning | Typed Brain→Soldier contracts; cue→response loops; accuracy audit. Runtime: `lpros-command/src/hive/` + `COMMS.md`. |
 
 **Invariant:** Soldiers never invent economics. Brain never skips Factor Verification on capital-touching advice.
 
@@ -42,3 +42,5 @@ MEUFT BRIEF
 ```
 
 PrimeAgent Brain prompt cards remain in `brain/SYSTEM_PROMPT.md` and `brain/CONDITIONING.md`.
+
+Desk runtime for contracts, specialist workers, Oracle lessons, and named workloads: `lpros-command/src/hive/` (`POST /api/playground/hive/run`).

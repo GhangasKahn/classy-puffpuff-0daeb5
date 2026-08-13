@@ -58,9 +58,10 @@ ARTICLE G-IV — COMMUNICATION
 
 Agents speak in **contracts**, not vibes.
 
-- Brain → Soldier: TASK CONTRACT (`MEUFT.md`).
+- Brain → Soldier: TASK CONTRACT (`MEUFT.md`, `COMMS.md`).
 - Soldier → Brain: IDENTITY output JSON + uncertainty labels.
 - Specialist → Soldier: kill-sheet / lesson / veto — never a competing constitution.
+- Runtime: `lpros-command/src/hive/` posts contracts and replies; workloads name `workersRan`.
 - Heartbeat: comments-only; no unsolicited scrapes, crawls, or capital.
 - Operator: tables, schemas, HOLD language. No pep. No destiny speeches.
 

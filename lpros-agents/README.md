@@ -12,6 +12,7 @@ Restart order is **ruler down**: Orchestrator (Fischer × Dark Knight × Morpheu
 lpros-agents/
 ├── AGENTS.md                          # Swarm constitution (binding law)
 ├── GROWTH.md                          # Day-zero → day-N; 4D; residual loop
+├── COMMS.md                           # TASK CONTRACT envelope + hive runtime
 ├── MEUFT.md                           # How Brain stages work (briefs + contracts)
 ├── USER.md                            # Operator card (Kyle; capital bar)
 ├── ROSTER.md                          # Inspiration → folder map
@@ -71,7 +72,7 @@ Every folder above (except `brain/` which is the PrimeAgent graph) has:
 
 Pack-only soldiers launch from the Command playground and return the persona (excerpts + contracts). They do **not** pretend a markdown file ran Browse. Wire JS next; do not fake it.
 
-Loader: `lpros-agents/src/loadPack.js`. API: `GET /playground/packs`.
+Loader: `lpros-agents/src/loadPack.js`. API: `GET /playground/packs`. Hive: `POST /playground/hive/run`.
 
 ## Core doctrine
 

@@ -91,6 +91,10 @@ import {
   slimJob,
   startJob,
   vmSnapshot,
+  WORKLOADS,
+  runWorkload,
+  listComms,
+  runConditioner,
 } from "../playground/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -165,6 +169,8 @@ export async function routeApi(req) {
           "/playground",
           "/playground/jobs",
           "/playground/launch",
+          "/playground/hive",
+          "/playground/hive/run",
           "/playground/browser/fetch",
           "/playground/vm",
           "/skus",
@@ -812,10 +818,36 @@ export async function routeApi(req) {
     });
   }
   if (method === "GET" && pathname === "/playground/catalog") {
-    return ok({ agents: AGENT_CATALOG, playbooks: PLAYBOOKS, recipes: VM_RECIPES, presets: PRESETS, packs: listPacks() });
+    return ok({
+      agents: AGENT_CATALOG,
+      playbooks: PLAYBOOKS,
+      recipes: VM_RECIPES,
+      presets: PRESETS,
+      packs: listPacks(),
+      workloads: WORKLOADS,
+    });
   }
   if (method === "GET" && pathname === "/playground/packs") {
     return ok({ packs: listPacks() });
+  }
+  if (method === "GET" && pathname === "/playground/hive") {
+    return ok({
+      ok: true,
+      workloads: WORKLOADS,
+      comms: listComms(40),
+      note: "TASK CONTRACTs + specialist workers. Pack-only is not Browse. HOLD default.",
+    });
+  }
+  if (method === "GET" && pathname === "/playground/hive/comms") {
+    return ok({ comms: listComms(Number(query.get("limit") || 80)) });
+  }
+  if (method === "POST" && pathname === "/playground/hive/run") {
+    const id = b.workload || b.id || "specialist-gauntlet";
+    const out = await runWorkload(id, b.input || b);
+    return ok(out);
+  }
+  if (method === "POST" && pathname === "/playground/hive/condition") {
+    return ok(runConditioner(b.input || b));
   }
   if (method === "GET" && pathname === "/playground/board") {
     return ok(boardSummary());

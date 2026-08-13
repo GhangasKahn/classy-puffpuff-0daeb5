@@ -81,6 +81,7 @@ npm run swarm -- --q "solid wood desk organizer" --category-id 25339 --sold 28 -
 - **Listing factory** — keyword clusters → conversion packages → promote to SKU registry  
 - **Command desk UI** — tabbed analytics workspace: KPI strip, interactive SVG charts (heat, ladder, histogram, scatter, sellers, lanes), filterable product table + gallery, listing inspector, compare tray, jobs rail  
 - **Agent playground** — job board, sub-agent launcher (Brain + soldiers), allowlisted browser + playbooks, local VM recipes, live activity, spawn graph, capture → Evidence → Brain, promote PASS to SKU  
+- **Hive** — TASK CONTRACTs, specialist workers (Joker/Bane/Robot/Memento/Tenet/Wick/Oracle), named workloads, Oracle conditioning from cited residuals  
 
 Keyboard: `1–6` switch tabs (`6` = playground), `/` focuses market search, `Esc` closes inspector.
 
@@ -105,6 +106,10 @@ Browser playbooks (Terapeak assist): `src/browser/playbooks.md` or `/api/playboo
 | `POST /api/orchestrate/jobs/:id/cancel` | Stop after current lane, keep rollup |
 | `GET /api/playground` | Playground health + board + VM snapshot |
 | `POST /api/playground/launch` | Launch Brain/soldier (`dryRun`, optional `spawn`) |
+| `GET /api/playground/hive` | Workloads + recent comms |
+| `POST /api/playground/hive/run` | Run a named hive workload (`research-gate`, `specialist-gauntlet`, `condition-loop`, `fulfill-hold`, `full-hive`) |
+| `POST /api/playground/hive/condition` | Oracle conditioner (cite residuals or DEFER) |
+| `GET /api/playground/hive/comms` | TASK CONTRACT / reply log |
 | `GET /api/playground/jobs` | Job board |
 | `POST /api/playground/browser/fetch` | Allowlisted fetch / official getItem |
 | `POST /api/playground/vm/exec` | Allowlisted VM recipe |

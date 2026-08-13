@@ -170,6 +170,53 @@ function renderPresets(presets) {
   });
 }
 
+function renderWorkloads(workloads) {
+  const host = $("pgWorkloads");
+  if (!host) return;
+  host.innerHTML = (workloads || [])
+    .map((w) => `<button type="button" class="chip" data-workload="${esc(w.id)}">${esc(w.title)}</button>`)
+    .join("");
+  host.querySelectorAll("[data-workload]").forEach((b) => {
+    b.onclick = () => runHive(b.dataset.workload);
+  });
+}
+
+async function runHive(id) {
+  const p = formPayload($("pgLaunchForm"));
+  const outEl = $("pgHiveOut");
+  if (outEl) outEl.textContent = "Running hive…";
+  try {
+    const out = await api("/playground/hive/run", {
+      method: "POST",
+      body: {
+        workload: id,
+        dryRun: true,
+        q: p.q,
+        price: p.price,
+        cost: p.cost,
+        soldCount: p.soldCount,
+        altProductCost: p.altProductCost,
+        thesis: p.thesis || `Evaluate "${p.q || "candidate"}"`,
+      },
+    });
+    if (outEl) {
+      outEl.textContent = JSON.stringify(
+        {
+          workload: out.workload,
+          brief: out.hiveBrief,
+          workers: (out.workers || []).map((w) => ({ agent: w.agent, verdict: w.result?.verdict || w.status })),
+          contracts: out.contracts,
+        },
+        null,
+        2
+      );
+    }
+    refreshBoard?.();
+  } catch (err) {
+    if (outEl) outEl.textContent = String(err.message || err);
+  }
+}
+
 function applyPreset(id) {
   const p = (pg.catalog.presets || []).find((x) => x.id === id);
   if (!p) return;
@@ -457,6 +504,7 @@ export async function bootPlayground() {
     renderPlaybooks(cat.playbooks);
     renderRecipes(cat.recipes);
     renderPresets(cat.presets);
+    renderWorkloads(cat.workloads);
   } catch {
     /* desk may boot before API */
   }

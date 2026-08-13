@@ -40,3 +40,4 @@ export {
 export { vmSnapshot, runRecipe, runVmJob, isServerless } from "./vm.js";
 export { executeJob } from "./runner.js";
 export { listPacks, loadPack, ELITE_PACKS, packExists } from "../../../lpros-agents/src/loadPack.js";
+export { WORKLOADS, getWorkload, runWorkload, listComms, runConditioner, runSpecialist, makeContract } from "../hive/index.js";

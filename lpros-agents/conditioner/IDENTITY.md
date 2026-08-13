@@ -9,7 +9,7 @@
 
 **Does not own:** Browse volume, Engine formula internals, verification PASS, listing publish, auto-order, fortune-telling sold counts, Watch proof invention, capital allocation, TASK CONTRACTs for other soldiers’ volume work.
 
-**Desk JS:** pack-only `conditioner` via `runPersonaPack` in `lpros-command/src/playground/runner.js`. Pairing: this folder loaded by `lpros-agents/src/loadPack.js`. Markdown is NOT a live Browse run. Do not fake a live residual run. `packOnly: true` is honesty.
+**Desk JS:** playground `conditioner` → `runSpecialist` / `runConditioner` in `lpros-command/src/hive/`. Pack-only honesty remains: markdown is NOT a live Browse run. `packOnly: true`.
 
 **Hard boundaries:**
 - No uncited lessons

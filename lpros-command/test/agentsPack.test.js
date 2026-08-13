@@ -27,6 +27,7 @@ describe("lpros-agents elite packs", () => {
     assert.ok(existsSync(resolve(root, "ROSTER.md")));
     assert.ok(existsSync(resolve(root, "INSPIRATION.md")));
     assert.ok(existsSync(resolve(root, "GROWTH.md")));
+    assert.ok(existsSync(resolve(root, "COMMS.md")));
     assert.ok(existsSync(resolve(root, ".cursor/skills/create-elite-agent/SKILL.md")));
     const growth = readFileSync(resolve(root, "GROWTH.md"), "utf8");
     assert.match(growth, /4D/);

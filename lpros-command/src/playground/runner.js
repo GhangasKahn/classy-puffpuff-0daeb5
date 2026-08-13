@@ -12,10 +12,10 @@ import { draftListing } from "../../../lpros/src/agents/listing.js";
 import { fulfillDecision } from "../fulfill/adapter.js";
 import { getAgent } from "./catalog.js";
 import { appendEvent, load, persist } from "./store.js";
-import { CATALOG_TO_PACK, loadPack } from "../../../lpros-agents/src/loadPack.js";
 import { runBrowserJob } from "./browser.js";
 import { runVmJob } from "./vm.js";
 import { deskFromResearch, deskFromPlaygroundJobs, emptyLiveHint, noLiveProductsError } from "../http/marketRows.js";
+import { runSpecialist } from "../hive/specialists.js";
 
 function num(v, d = null) {
   if (v == null || v === "") return d;
@@ -49,12 +49,16 @@ function meuftBrief({ input = {}, childResults = [], econ = null }) {
   } else {
     estimated.push("price ladder from soldiers not present");
   }
+  const workersRan = childResults.filter((c) => c.status === "done").map((c) => c.agent).filter(Boolean);
+  const workersFailed = childResults.filter((c) => c.status === "failed").map((c) => c.agent).filter(Boolean);
   return {
     mission: `Evaluate "${q}" for dropshipping lethality (high PV, fee-true net, no scam lots)`,
     economics: econ,
     uncertainty: { known, estimated, assumed },
     factors: { verdict, flags },
     verdict,
+    workersRan,
+    workersSimulated: input.dryRun ? workersRan : [],
     soldiers: childResults.map((c) => ({
       id: c.id,
       agent: c.agent,
@@ -319,23 +323,7 @@ const PACK_ONLY = new Set([
 ]);
 
 function runPersonaPack(catalogId, input = {}) {
-  const spec = getAgent(catalogId);
-  const packId = spec?.hermesPack || CATALOG_TO_PACK[catalogId] || catalogId;
-  const pack = loadPack(packId);
-  return {
-    packOnly: true,
-    packId: pack.id,
-    mold: pack.mold,
-    voice: pack.voice,
-    soulExcerpt: pack.soulExcerpt,
-    identityExcerpt: pack.identityExcerpt,
-    proceduresExcerpt: pack.proceduresExcerpt,
-    lengths: pack.lengths,
-    input,
-    note: pack.note,
-    millionairePath:
-      "Long-horizon fee-true expectancy after fail-closed gates — not a promise. Capital after proven loops (USER.md).",
-  };
+  return runSpecialist(catalogId, input);
 }
 
 async function dispatch(job) {
