@@ -107,6 +107,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
     <a href="#permits">Permits</a>
     <a href="#maintenance">Care</a>
     <a href="#files">Files</a>
+    <a href="../fab/">Shop</a>
   </div>
 </nav>
 
@@ -402,7 +403,8 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <p>
         <a class="dl" href="../martin/">MARTIN design page</a>
         <a class="dl" href="../martin/app/">MARTIN Build app</a>
-        <a class="dl" href="../stele/">STELE (archive)</a>
+        <a class="dl" href="../stele/">STELE</a>
+        <a class="dl" href="../fab/">Shop fabrication model (Rev B)</a>
         <a class="dl" href="../">HASHIRA joinery guide</a>
       </p>
       <h3>MARTIN CAD</h3>
@@ -422,9 +424,10 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       </p>
       <h3>Regenerate</h3>
       <p class="mono" style="background:#fff;border:1px solid var(--line2);padding:16px 18px;max-width:66ch">
-        ./scripts/build_martin.sh&nbsp;&nbsp;# FreeCAD → renders → plans<br />
-        ./scripts/build_stele.sh&nbsp;&nbsp;# STELE archive pipeline<br />
-        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models
+        ./scripts/build_martin.sh&nbsp;&nbsp;# MARTIN FreeCAD → renders → plans<br />
+        ./scripts/build_stele.sh&nbsp;&nbsp;# STELE pipeline<br />
+        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models<br />
+        python3 scripts/fab_system.py&nbsp;&nbsp;# STELE BOM, cut lists, shop drawings, JSON/CSV
       </p>
       <div class="callout">
         <p class="t">Disclaimer</p>

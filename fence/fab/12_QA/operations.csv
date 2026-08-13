@@ -1,0 +1,21 @@
+PART_ID,OP,NAME,TOOL,REFERENCE,TOLERANCE,FAILURE
+R-001,OP0010,Rough crosscut 8' stock,Miter saw,factory end,T1 ±2 mm,End check/split — recut
+R-001,OP0020,Joint face A,Jointer / #7 plane,FACE A down later,T2 0.3 mm hollow max,Twist — discard
+R-001,OP0030,Joint edge B,Jointer,FACE A against fence,T2,Not square to A
+R-001,OP0040,Plane to 38 thickness,Planer,FACE A down,T1 ±0.4 mm,Snipe — extra length
+R-001,OP0050,Rip to 89 width,Table saw,EDGE B on fence,T1 ±0.4 mm,Blade drift
+R-001,OP0060,Final crosscut to rail_length — STOP S-014 DO NOT MOVE,Miter + stop,"DATUM END against stop, EDGE B down",T2 ±0.5 mm,Stop creep
+R-001,OP0070,Arris 1 mm both long edges,Block plane,FACE A up,T0,Tearout
+R-001,OP0080,End-grain oil,Brush,both ends,n/a,Skip — premature check
+R-001,OP0090,Inspect length vs mate rails,Tape + story stick,DATUM END,T2 all 12 within 1 mm,Mismatch — recut from extra
+B-001,OP0010,Rip 1x6 to 140,Table saw,factory edge,T1 ±0.5,Burn — feed rate
+B-001,OP0020,Final crosscut STOP S-015,Miter + stop,DATUM END (bottom),T1 ±1 mm,Stop creep
+B-001,OP0030,Ease arrises,Block plane / 120 grit,show face,T0,Over-round gaps look uneven
+GS-001,OP0010,Mill to 40×70×leaf_h,Jointer/planer/saw,"FACE A, EDGE B, DATUM END 0 = hinge bottom",T2,Wind
+GS-001,OP0020,Layout ledge mortises from Datum End 0,Square + gauge,EDGE B,T2 ±0.3 mm,Paired stiles must match
+GS-001,OP0030,Chop mortises,Chisel / mortiser,FACE A reference,T2,Blowout — backer
+GS-001,OP0040,Drawbore 1.5 mm toward shoulder,Drill press,FACE A,T3,Over-offset splits tenon
+M-002-B,OP0010,Verify drum templates vs T-510 batter stick,Story pole,plinth bed,T3,Batter error compounds
+M-002-B,OP0020,Core 3 pockets per face from rail_z story stick,Core drill / shop drawing P-302,Datum: plinth bed + face centerline,T2 ±1 mm CL,CL mismatch = rail bind
+M-002-B,OP0030,Slope pocket floors 5° out,Chisel / grinder,pocket floor,T1,Back-slope traps water
+M-002-B,OP0040,"Set drums on Type S, #4 epoxy dowels",Mason,plumb + batter stick,T1 3 mm in 1600,Lean into bay

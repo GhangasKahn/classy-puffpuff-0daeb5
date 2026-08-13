@@ -32,4 +32,7 @@ fi
 echo "==> Plan sheets (SVG)"
 python3 "$ROOT/scripts/gen_stele_plans.py"
 
+echo "==> Fabrication system (BOM, cut lists, shop drawings, JSON)"
+python3 "$ROOT/scripts/fab_system.py"
+
 echo "Done."

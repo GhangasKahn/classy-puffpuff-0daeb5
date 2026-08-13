@@ -4,11 +4,10 @@ A complete, self-contained website:
 
 - `index.html` — the public **landing page** (the marketing front door)
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
-- `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
-- `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, plan generators)
-- `fence/martin/app/` — interactive **MARTIN Build** PWA (visualize, assembly checklist, materials, joinery, gallery, drafts, downloads) at `/martin/app` or `/build`
-- `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`)
-
+- `fence/` — the **fence design suite**: MARTIN (Prairie + Japanese joinery), HASHIRA (joinery guide), STELE (masonry + timber), `/fence/report/` (engineering report), `/fence/fab/` (parametric fabrication model: BOM, cut lists, shop drawings, JSON/CSV)
+- `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, `fab_system.py`, plan generators)
+- `fence/martin/app/` — interactive **MARTIN Build** PWA at `/martin/app` or `/build`
+- `netlify.toml` — headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`, `/fab`)
 
 ## What this is — and isn't
 This is the complete **front-end** product: a marketing site plus an installable, offline-capable

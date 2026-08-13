@@ -92,6 +92,11 @@
   to = "/fence/report/"
   status = 301
 
+[[redirects]]
+  from = "/fab"
+  to = "/fence/fab/"
+  status = 301
+
 # CAD downloads: force download with correct types
 [[headers]]
   for = "/fence/*/exports/*"
@@ -128,5 +133,20 @@
 
 [[headers]]
   for = "/fence/martin/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/fab/*.csv"
+  [headers.values]
+    Content-Type = "text/csv; charset=utf-8"
+
+[[headers]]
+  for = "/fence/fab/*.json"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+
+[[headers]]
+  for = "/fence/fab/**/*.svg"
   [headers.values]
     Content-Type = "image/svg+xml"
