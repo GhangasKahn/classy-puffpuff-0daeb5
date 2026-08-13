@@ -3,7 +3,7 @@
  * Dry-run safe. Capital climate is HOLD. No HTML scrape.
  */
 import { getAgent } from "../playground/catalog.js";
-import { makeContract, postContract, listComms } from "./comms.js";
+import { makeContract, postContract, postReply, listComms } from "./comms.js";
 import { runSpecialist } from "./specialists.js";
 
 export const WORKLOADS = [
@@ -64,6 +64,86 @@ const SPECIALIST_IDS = new Set([
 
 function mergeInput(base, extra) {
   return { ...base, ...extra };
+}
+
+function firstProduct(result = {}) {
+  const bags = [result.products, result.items, result.lethalCandidates, result.top, result.liveItems];
+  for (const bag of bags) {
+    if (Array.isArray(bag) && bag.length) return bag[0];
+  }
+  return null;
+}
+
+/** Fold a soldier's output into the next stage's payload so Brain actually sees Scout/Intel. */
+export function absorbWorker(payload, row) {
+  const r = row?.result || {};
+  const bags = [r.products, r.items, r.lethalCandidates, r.liveItems, r.top].filter((b) => Array.isArray(b));
+  const incoming = bags.flat().filter((p) => p && (p.title || p.url));
+  if (incoming.length) {
+    payload.products = [...(payload.products || []), ...incoming];
+    payload.items = payload.products;
+    const first = incoming.find((p) => p.title && (p.url || p.image)) || incoming[0];
+    if (first) {
+      payload.title = payload.title || first.title;
+      payload.salePrice = payload.salePrice ?? first.salePrice ?? first.price;
+      payload.price = payload.price ?? payload.salePrice;
+      payload.image = payload.image || first.image;
+      payload.url = payload.url || first.url;
+    }
+  }
+  if (r.market) payload.market = r.market;
+  if (r.productCount != null) payload.productCount = (payload.productCount || 0) + Number(r.productCount || 0);
+  payload.hiveSoldiers = [
+    ...(payload.hiveSoldiers || []),
+    {
+      id: row.jobId || null,
+      jobId: row.jobId || null,
+      agent: row.agent,
+      status: row.status,
+      result: slimSoldierResult(r),
+      error: row.error || null,
+    },
+  ];
+  return payload;
+}
+
+function slimSoldierResult(r = {}) {
+  const products = (r.products || r.items || r.liveItems || r.lethalCandidates || r.top || []).slice(0, 40);
+  return {
+    verdict: r.verdict || r.brief?.verdict || null,
+    brief: r.brief || null,
+    productCount: r.productCount ?? products.length,
+    productsWithImages: r.productsWithImages ?? products.filter((p) => p?.image).length,
+    productsWithUrls: r.productsWithUrls ?? products.filter((p) => p?.url).length,
+    products,
+    items: products,
+    market: r.market || null,
+    fourD: r.fourD || null,
+    packId: r.packId || null,
+    workerNote: r.workerNote || r.note || null,
+    hiveSoldiersSeen: r.hiveSoldiersSeen || null,
+    openMarkers: r.openMarkers || null,
+    crimeShaped: Boolean(r.crimeShaped),
+    policyHits: r.policyHits || null,
+    vanityHits: r.vanityHits || null,
+  };
+}
+
+function slimReply(row) {
+  const r = row?.result || {};
+  const first = firstProduct(r);
+  return {
+    agent: row.agent,
+    status: row.status,
+    verdict: r.verdict || r.brief?.verdict || null,
+    productCount: r.productCount || (r.products || r.items || []).length || 0,
+    productsWithImages: r.productsWithImages ?? null,
+    productsWithUrls: r.productsWithUrls ?? null,
+    title: first?.title || null,
+    url: first?.url || null,
+    hasImage: Boolean(first?.image),
+    error: row.error || null,
+  };
 }
 
 async function runAgent(agent, input, { launchAgent, contract }) {
@@ -147,17 +227,29 @@ export async function runWorkload(id, input = {}) {
       contracts.push(contract);
       postContract(contract);
       const row = await runAgent(role, mergeInput(payload, extra), { launchAgent, contract });
-      workers.push(row);
-      if (row.result?.verdict === "VETO" || row.result?.crimeShaped) {
-        veto = { agent: role, verdict: row.result.verdict };
-      }
       return row;
     };
+    const finish = (row) => {
+      workers.push(row);
+      absorbWorker(payload, row);
+      if (!SPECIALIST_IDS.has(row.agent)) {
+        postReply({
+          from: row.agent,
+          to: "brain",
+          contractId: row.contractId,
+          payload: slimReply(row),
+        });
+      }
+      if (row.result?.verdict === "VETO" || row.result?.crimeShaped) {
+        veto = { agent: row.agent, verdict: row.result.verdict };
+      }
+    };
     if (stage.parallel) {
-      await Promise.all(live.map(runOne));
+      const rows = await Promise.all(live.map(runOne));
+      for (const row of rows) finish(row);
     } else {
       for (const role of live) {
-        await runOne(role);
+        finish(await runOne(role));
         if (veto) break;
       }
     }
@@ -178,6 +270,9 @@ export async function runWorkload(id, input = {}) {
     workersSimulated: payload.dryRun ? workersRan.filter((a) => ["scout", "intel"].includes(a)) : [],
     holds,
     veto,
+    productCount: (payload.products || []).length,
+    productsWithImages: (payload.products || []).filter((p) => p.image).length,
+    productsWithUrls: (payload.products || []).filter((p) => p.url).length,
     next: veto
       ? ["Stop. Compliance veto. Do not list."]
       : holds.length

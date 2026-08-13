@@ -16,6 +16,7 @@ import {
   WORKLOADS,
   getWorkload,
   runWorkload,
+  absorbWorker,
 } from "../src/hive/index.js";
 
 describe("hive comms", () => {
@@ -166,6 +167,36 @@ describe("hive workloads", () => {
     const brief = hive.workers.find((w) => w.agent === "brain")?.result?.brief;
     assert.ok(brief?.verdict);
     assert.ok(!JSON.stringify(hive).includes("soldCount\":40"));
+    const replies = hive.comms.filter((m) => m.type === "reply");
+    assert.ok(replies.some((m) => m.from === "scout"));
+    assert.ok(replies.some((m) => m.from === "intel"));
+    const brain = hive.workers.find((w) => w.agent === "brain");
+    assert.ok((brain.result.hiveSoldiersSeen || []).includes("scout"));
+    assert.ok((brain.result.hiveSoldiersSeen || []).includes("intel"));
+  });
+
+  it("absorbWorker threads listing images and URLs into the next payload", () => {
+    const payload = { dryRun: true };
+    absorbWorker(payload, {
+      agent: "intel",
+      status: "done",
+      jobId: "job_intel",
+      result: {
+        products: [
+          {
+            title: "Oak desk organizer",
+            price: 49,
+            url: "https://www.ebay.com/itm/1",
+            image: "https://i.ebayimg.com/a.jpg",
+          },
+        ],
+        productCount: 1,
+      },
+    });
+    assert.equal(payload.products.length, 1);
+    assert.equal(payload.hiveSoldiers[0].agent, "intel");
+    assert.match(payload.url, /ebay\.com\/itm/);
+    assert.ok(payload.image);
   });
 });
 

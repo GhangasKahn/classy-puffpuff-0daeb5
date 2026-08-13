@@ -23,6 +23,7 @@ export async function runResearchPipeline({
   assumedStr = 0.015,
   minPrice = 35,
   maxPrice = 200,
+  categoryId,
 } = {}) {
   await loadEbayEnv();
 
@@ -40,6 +41,7 @@ export async function runResearchPipeline({
     sourcePath,
     minPrice: band.minSalePrice,
     maxPrice: band.maxSalePrice,
+    categoryIds: categoryId,
   });
 
   const enriched = raw.map((c) => {
@@ -107,6 +109,23 @@ export async function runResearchPipeline({
     },
     top: ranked.ranked.slice(0, 10).map(summarize),
     rejectedSample: ranked.rejected.slice(0, 5).map(summarize),
+    // Ranker rejection must never hide live Browse listings from the desk.
+    liveItems: raw
+      .filter((c) => c.url && !c.synthetic)
+      .map((c) => ({
+        id: c.id || c.itemId || null,
+        itemId: c.itemId || c.id || null,
+        title: c.title,
+        price: c.salePrice,
+        salePrice: c.salePrice,
+        url: c.url,
+        image: c.image,
+        images: c.images || [],
+        thumbnail: c.thumbnail || c.image || null,
+        watchCount: c.watchCount ?? null,
+        seller: c.seller || null,
+        source: "ebay_browse",
+      })),
     market: {
       algorithm: market.algorithm,
       weights: market.weights,

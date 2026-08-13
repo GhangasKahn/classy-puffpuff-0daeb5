@@ -17,6 +17,7 @@ export async function searchActiveListings({
   sort,
   minPrice,
   maxPrice,
+  fieldgroups = "EXTENDED",
 } = {}) {
   if (!q && !categoryIds) {
     throw new Error("Browse search requires q and/or category_ids");
@@ -28,6 +29,8 @@ export async function searchActiveListings({
   };
   if (q) query.q = q;
   if (categoryIds) query.category_ids = String(categoryIds);
+  // EXTENDED pulls additionalImages so the desk is not stuck with image-less summaries.
+  if (fieldgroups) query.fieldgroups = String(fieldgroups);
   const filters = [];
   if (filter) filters.push(filter);
   if (minPrice != null || maxPrice != null) {
@@ -39,9 +42,18 @@ export async function searchActiveListings({
   if (filters.length) query.filter = filters.join(",");
   if (sort) query.sort = sort;
 
-  const { ok, status, json } = await ebayFetch("/buy/browse/v1/item_summary/search", {
+  let { ok, status, json } = await ebayFetch("/buy/browse/v1/item_summary/search", {
     query,
   });
+
+  // Some app tokens reject EXTENDED; never fail closed on images — retry MATCHING_ITEMS.
+  if (!ok && query.fieldgroups && query.fieldgroups !== "MATCHING_ITEMS") {
+    const retryQuery = { ...query, fieldgroups: "MATCHING_ITEMS" };
+    const retry = await ebayFetch("/buy/browse/v1/item_summary/search", { query: retryQuery });
+    ok = retry.ok;
+    status = retry.status;
+    json = retry.json;
+  }
 
   if (!ok) {
     const err = new Error(

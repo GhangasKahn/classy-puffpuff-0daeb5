@@ -117,6 +117,7 @@ async function runScout(input = {}) {
   const { runResearchPipeline } = await import("../../../lpros/src/pipeline.js");
   const out = await runResearchPipeline({
     category: input.categoryLabel || "Home",
+    categoryId: input.categoryId || "25339",
     queries: [input.q || "desk organizer"],
     productCostRatio: num(input.costRatio, 0.4),
     minPrice: num(input.minPrice, 35),
@@ -128,12 +129,15 @@ async function runScout(input = {}) {
     top: out.top,
     marketBoard: out.market?.board,
     viz: out.market?.viz,
+    items: out.liveItems,
+    products: out.liveItems,
   });
   if (!desk.productCount) {
     throw noLiveProductsError(`Scout: 0 live products. ${emptyLiveHint()}`);
   }
   return {
     top: (out.top || []).slice(0, 12),
+    liveItems: out.liveItems || [],
     products: desk.products,
     productCount: desk.productCount,
     productsWithImages: desk.productsWithImages,
@@ -288,9 +292,23 @@ async function runBrain(job, input = {}) {
     const child = load("job", cid);
     if (child) childResults.push(child);
   }
+  // Hive workloads launch soldiers as siblings (spawn:[]). Thread their output here.
+  for (const soldier of input.hiveSoldiers || []) {
+    if (!soldier) continue;
+    const seen = childResults.some(
+      (c) => (c.id && soldier.id && c.id === soldier.id) || (c.jobId && soldier.jobId && c.jobId === soldier.jobId)
+    );
+    if (!seen) childResults.push(soldier);
+  }
   const econ = await runEconomics(input);
   const brief = meuftBrief({ input, childResults, econ: econ.net });
-  const desk = deskFromPlaygroundJobs(childResults, { query: input.q, dryRun: Boolean(input.dryRun) });
+  let desk = deskFromPlaygroundJobs(childResults, { query: input.q, dryRun: Boolean(input.dryRun) });
+  if (!desk.productCount && (input.products || input.items || []).length) {
+    desk = deskFromResearch(
+      { products: input.products, items: input.items || input.products },
+      { query: input.q, dryRun: Boolean(input.dryRun) }
+    );
+  }
   if (!input.dryRun && !desk.productCount) {
     brief.verdict = "NO-GO";
     brief.emptyReason = desk.emptyReason;
@@ -309,6 +327,7 @@ async function runBrain(job, input = {}) {
     productsWithUrls: desk.productsWithUrls,
     dryRun: desk.dryRun,
     emptyReason: desk.emptyReason,
+    hiveSoldiersSeen: childResults.map((c) => c.agent).filter(Boolean),
   };
 }
 

@@ -11,7 +11,9 @@
   included_files = [
     "lpros-command/src/**",
     "lpros/src/**",
-    "ebay-sold-items/src/**"
+    "ebay-sold-items/src/**",
+    "lpros-agents/src/**",
+    "lpros-agents/**/*.md",
   ]
 
 [functions."lpros-api"]

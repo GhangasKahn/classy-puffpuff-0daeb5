@@ -15,7 +15,9 @@ import {
   loadPack,
   listPacks,
   packExists,
+  packDir,
 } from "../../lpros-agents/src/loadPack.js";
+import { packDir as barrelPackDir, CATALOG_TO_PACK } from "../src/playground/index.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../lpros-agents");
 
@@ -32,6 +34,13 @@ describe("lpros-agents elite packs", () => {
     const growth = readFileSync(resolve(root, "GROWTH.md"), "utf8");
     assert.match(growth, /4D/);
     assert.match(growth, /outperform/i);
+  });
+
+  it("exports packDir from the playground barrel so Netlify NFT does not drop it", () => {
+    assert.equal(typeof packDir, "function");
+    assert.equal(barrelPackDir("scout"), packDir("scout"));
+    assert.equal(CATALOG_TO_PACK.brain, "orchestrator");
+    assert.match(packDir("orchestrator"), /lpros-agents/);
   });
 
   it("roster lists every elite pack as complete", () => {

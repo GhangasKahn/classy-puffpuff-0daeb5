@@ -17,7 +17,7 @@ export async function fetchDemandSnapshot({
   category,
   ref,
   categoryIds,
-  limit = 12,
+  limit = 40,
   minPrice = 35,
   maxPrice = 200,
 } = {}) {
@@ -98,6 +98,7 @@ export async function buildCandidatesFromQuery({
   sourcePath = "wholesale_unspecified",
   minPrice = 35,
   maxPrice = 200,
+  categoryIds,
 } = {}) {
   const qlist = queries.length ? queries : [category];
   const out = [];
@@ -105,6 +106,7 @@ export async function buildCandidatesFromQuery({
     const snap = await fetchDemandSnapshot({
       category,
       ref: q,
+      categoryIds,
       minPrice,
       maxPrice,
     });
@@ -117,13 +119,15 @@ export async function buildCandidatesFromQuery({
         const p = it.price || median;
         return p != null && p >= minPrice && p <= maxPrice;
       })
-      .slice(0, 8);
+      .slice(0, 40);
     for (const it of top) {
       const salePrice = it.price || median;
       const soldComps = (snap.comps.comps || []).filter((c) => c.kind === "sold");
       out.push({
         ref: q,
         category,
+        id: it.id || it.itemId || null,
+        itemId: it.id || it.itemId || null,
         title: it.title || q,
         salePrice,
         suggestedValue: snap.comps.suggestedValue,
@@ -153,6 +157,7 @@ export async function buildCandidatesFromQuery({
         maxSalePrice: maxPrice,
       });
     }
+    // Title-only median stubs have no listing URL/image — never treat them as desk products.
     if (!top.length && median && median >= minPrice && median <= maxPrice) {
       out.push({
         ref: q,
@@ -171,6 +176,10 @@ export async function buildCandidatesFromQuery({
         categoryMedianPrice: median,
         minSalePrice: minPrice,
         maxSalePrice: maxPrice,
+        synthetic: true,
+        url: null,
+        image: null,
+        images: [],
       });
     }
   }
