@@ -24,4 +24,4 @@ description: MEUFT Brain single-agent conditioning — Mission, Economics Engine
 2. Known / Estimated / Assumed on every number.
 3. FAIL-closed factors; no fake PASS without sold + dual cost.
 4. End action advice with MEUFT BRIEF + accuracy audit.
-5. Soldiers deferred until Brain cue mastery.
+5. Soldiers: Scout + Verifier packs are live markdown; spawn others with `create-elite-agent`.

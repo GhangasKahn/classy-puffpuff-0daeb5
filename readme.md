@@ -10,7 +10,7 @@ A complete, self-contained website:
 - `ebay-sold-items/` — eBay Developer Program bridge (OAuth + Browse + Insights) serving `/v1/market/alt/comps` for Vault/LIVE comps
 - `lpros/` — Lean Product Research OS (economics engine, zero-trust gates, Hermes-style research pipeline, category crawl)
 - `lpros-command/` — operator desk + Hermes research swarm (open ZIK/AutoDS alternative)
-- `lpros-agents/` — MEUFT-conditioned PrimeAgent pack (Phase-1: single **Brain** agent)
+- `lpros-agents/` — Elite Hermes packs (OpenClaw-style SOUL/IDENTITY/AGENTS/TOOLS/HEARTBEAT/MEMORY). Live: Scout + Verifier. Brain PrimeAgent graph still in `brain/`.
 - `lpros_advanced/` — advanced Cursor rules & skills (forecasting, Bayesian, listings-needed, etc.)
 - `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`)
 

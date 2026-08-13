@@ -22,7 +22,8 @@ lpros_advanced/
 │       ├── agentic-orchestration/SKILL.md
 │       ├── accuracy-audit/SKILL.md
 │       ├── physics-informed/SKILL.md
-│       └── ebay-listings/SKILL.md
+│       ├── ebay-listings/SKILL.md
+│       └── create-elite-agent/SKILL.md
 └── README.md
 ```
 
@@ -43,6 +44,7 @@ lpros_advanced/
 | Accuracy | accuracy-audit skill | Continuous calibration against reality |
 | Constraint thinking | physics-informed skill | Capital conservation & irreversibility mindset |
 | eBay evidence | ebay-listings skill | Sold/active comps via `ebay-sold-items` bridge |
+| Elite spawn | create-elite-agent skill | OpenClaw-style Hermes soldier workspace |
 | LPROS runtime | lpros-runtime skill | Economics engine, zero-trust gates, research pipeline |
 
 ## How to Install
