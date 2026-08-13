@@ -736,6 +736,7 @@ h1{{font-size:42px;margin:8px 0 12px}}
 <a href="12_QA/QA-701_inspection.svg">QA-701</a>
 <a href="10_TEMPLATES/T-501_kusabi.svg">T-501 1:1</a>
 <a href="../app/">Build app</a>
+<a href="../../fab/">STELE fab</a>
 </div>
 <h2>Drawings</h2>
 <table><thead><tr><th>DWG</th><th>Title</th></tr></thead><tbody>{cards}</tbody></table>

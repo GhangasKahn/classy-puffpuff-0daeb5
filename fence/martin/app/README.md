@@ -2,7 +2,7 @@
 
 Interactive front end for the 143″ × 65″ Prairie removable fence.
 
-**Live (after Netlify deploy):** `/fence/martin/app/` · shortcuts `/martin/app` · `/build` · fabrication `/fab`
+**Live (after Netlify deploy):** `/fence/martin/app/` · shortcuts `/martin/app` · `/build` · fabrication `/fence/martin/fab/` (`/martin/fab`)
 
 ## Features
 

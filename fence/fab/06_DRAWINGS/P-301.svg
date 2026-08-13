@@ -1,0 +1,24 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 520' width='1200' height='520' font-size='16'>
+<rect width='1200' height='520' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='1152.0' height='472.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='410.0' width='1152.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>R-001  NUKI THROUGH-RAIL  QTY 12  1:2.2</text>
+<text x='1000.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>P-301</text>
+<text x='1000.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<rect x='80.0' y='180.0' width='936.0' height='40.1' fill='none' stroke='#26241f' stroke-width='2'/>
+<rect x='80.0' y='180.0' width='27.0' height='40.1' fill='#e8d5c4' stroke='#a34e2b' stroke-width='1'/>
+<rect x='989.0' y='180.0' width='27.0' height='40.1' fill='#e8d5c4' stroke='#a34e2b' stroke-width='1'/>
+<text x='93.5' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>POCKET</text>
+<text x='1002.5' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#a34e2b' text-anchor='middle'>POCKET</text>
+<line x1='80.0' y1='244.1' x2='1016.0' y2='244.1' stroke='#8a6f4d' stroke-width='1.2'/>
+<text x='548.0' y='238.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='middle'>FINISHED L 2080 [81.89"]</text>
+<text x='1028.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>89 [3.5"]</text>
+<text x='80.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>MATERIAL  western red cedar  ·  GRAIN →  ·  FACE A (show) toward street  ·  EDGE B down in pocket</text>
+<text x='80.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#a34e2b' text-anchor='start'>DATUM END 0 = left (toward PIER smaller X).  Tolerance T2 ±0.5 mm.  STOP S-014 = 2080 mm.  DO NOT MOVE STOP.</text>
+<text x='80.0' y='404.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>Fit: CLEARANCE in pocket (pocket_ease 6 mm total). Lock: W-001 wedges, weather side. CONSTRAINT: FLOATING. No glue.</text>
+<rect x='980.0' y='200.0' width='100.0' height='100.0' fill='none' stroke='#a34e2b' stroke-width='2'/>
+<text x='980.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='start'>CHECK BOX = 100.000 mm  (verify print scale)</text>
+<text x='1030.0' y='258.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#a34e2b' text-anchor='middle'>100</text>
+
+</svg>

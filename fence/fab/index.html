@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STELE Fabrication Model — Rev B</title>
+<style>
+:root{--ink:#26241f;--dim:#6d6553;--terra:#a34e2b;--paper:#f6f3ea;--line:#d9d2bf;--mono:"IBM Plex Mono",ui-monospace,monospace;--serif:"Source Serif 4",Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.5 var(--serif)}
+.wrap{width:min(1100px,calc(100% - 32px));margin:0 auto}
+nav{position:sticky;top:0;background:rgba(246,243,234,.95);border-bottom:1px solid var(--line);padding:8px 0;z-index:20}
+nav .wrap{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+nav b{font:600 11px var(--mono);letter-spacing:.16em;color:var(--terra)}
+nav a{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+header{padding:48px 0 28px;border-bottom:3px solid var(--ink)}
+h1{font:700 42px/1.1 var(--serif)}
+.sub{color:var(--dim);max-width:60ch;margin-top:8px}
+.meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;font:500 12px/1.6 var(--mono);color:var(--dim)}
+.meta b{display:block;color:var(--ink)}
+section{padding:36px 0;border-bottom:1px solid var(--line)}
+h2{font:700 26px var(--serif);margin-bottom:10px}
+h2 span{color:var(--terra);font:600 13px var(--mono);margin-right:8px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#5c6b48}
+.audit td:last-child{font-family:var(--mono);font-weight:600}
+.GOOD{color:#2d6a3e}.WEAK{color:#a34e2b}.CRITICAL{color:#8b1e1e}
+.callout{border-left:4px solid var(--terra);background:#efeadb;padding:12px 16px;margin:16px 0;max-width:75ch}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+figure{border:1px solid var(--line);background:#fff;margin:16px 0}
+figure img{width:100%;display:block}
+figcaption{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:8px 12px;border-top:1px solid var(--line)}
+a.dl{display:inline-block;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:8px 12px;margin:3px;background:#fff}
+pre{background:#fff;border:1px solid var(--line);padding:12px;overflow:auto;font:12px var(--mono)}
+footer{padding:40px 0;font:12px var(--mono);color:var(--dim)}
+@media print{nav{display:none}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<b>FAB REV B</b>
+<a href="#audit">Audit</a><a href="#params">Params</a><a href="#parts">Parts</a>
+<a href="#joints">Joints</a><a href="#bom">BOM</a><a href="#cuts">Cuts</a>
+<a href="#drawings">Drawings</a><a href="#build">Build</a><a href="#qa">QA</a>
+<a href="#files">Files</a>
+<a href="../report/">Report</a><a href="../stele/">Stele</a><a href="../martin/fab/">MARTIN fab</a>
+</div></nav>
+<header><div class="wrap">
+<p style="font:600 12px var(--mono);letter-spacing:.28em;color:var(--terra)">PARAMETRIC FABRICATION MODEL</p>
+<h1>STELE — digital manufacturing definition</h1>
+<p class="sub">Not a picture of a fence. A linked system: parameter → geometry → metadata → drawings → BOM → cut list → build documentation. Change <span style="font-family:var(--mono)">bay_cc</span> by 300 mm and rails, boards, curbs, nests, and this portal regenerate together.</p>
+<div class="meta">
+<div><b>Project</b>STELE-BUF-001</div>
+<div><b>Revision</b>B · 2026-08-13</div>
+<div><b>Units</b>mm internal · inches at interfaces</div>
+<div><b>Run</b>11940 mm · 470.08"</div>
+</div>
+</div></header>
+<main class="wrap">
+
+<section id="audit">
+<h2><span>M0–M8</span>Existing-model audit (MODE B)</h2>
+<p>Source audited: <code>fence/stele/cad/stele_fence.py</code> + HASHIRA OpenSCAD studies + plan SVGs generated from a <em>second</em> copy of the same numbers.</p>
+<table class="audit">
+<tr><th>Criterion</th><th>Before (Rev A)</th><th>After (Rev B)</th></tr>
+<tr><td>Architecture</td><td class="WEAK">WEAK — four material blobs (Masonry/Timber/Concrete/Gravel), no Part IDs</td><td class="GOOD">GOOD — semantic registry, persistent IDs</td></tr>
+<tr><td>Parameterization</td><td class="WEAK">WEAK — P dict in CAD, duplicated in gen_stele_plans.py</td><td class="GOOD">GOOD — this file is the only numeric source for schedules</td></tr>
+<tr><td>Part separation</td><td class="CRITICAL">CRITICAL — cannot extract a rail from the compound</td><td class="GOOD">GOOD — R-001 qty 12, etc.</td></tr>
+<tr><td>Metadata</td><td class="CRITICAL">CRITICAL — none</td><td class="GOOD">GOOD — Fabrication properties on every part</td></tr>
+<tr><td>Assembly hierarchy</td><td class="WEAK">WEAK — implicit loop order</td><td class="GOOD">GOOD — A-FND / A-PIER / A-BAY / A-GATE / A-LEAF</td></tr>
+<tr><td>Joinery as data</td><td class="CRITICAL">CRITICAL — pockets only as booleans</td><td class="GOOD">GOOD — J-N* instances + J-ARCH + J-HOZO-LEAF</td></tr>
+<tr><td>BOM / cut-list ready</td><td class="CRITICAL">CRITICAL</td><td class="GOOD">GOOD — CSV + JSON generated here</td></tr>
+<tr><td>Drawing readiness</td><td class="WEAK">ACCEPTABLE architectural sheets; no part drawings</td><td class="GOOD">GOOD — GA/P/J/T/LBL added; S-1..S-5 remain design intent</td></tr>
+<tr><td>Magic numbers</td><td class="WEAK">WEAK — 150, 90+6, 40, 1.25 leaf clip</td><td class="GOOD">GOOD — named; remaining CAD literals queued as D-007</td></tr>
+</table>
+<div class="callout"><strong>Refactor before documentation.</strong> Schedules in this package are generated from the registry, not typed from renders. FreeCAD still exports visual compounds (Rev A geometry script) — Part-as-Body split inside FreeCAD is the next CAD increment (D-007), not a blocker for shop data.</div>
+</section>
+
+<section id="params">
+<h2><span>A–B</span>Parameters &amp; equations</h2>
+<p>If overall length changes, change <code>n_panel_bays_*</code> or <code>bay_cc</code> only. Rail length, board count, curb length, nests, and BOM quantities follow.</p>
+<table><thead><tr><th>KEY</th><th>MM</th><th>IN</th><th>STATUS</th></tr></thead><tbody><tr><td>frost_depth</td><td>1220</td><td>48.03"</td><td>VERIFIED</td></tr><tr><td>ground_snow_psf</td><td>40</td><td>1.57"</td><td>VERIFIED</td></tr><tr><td>wind_ult_mph</td><td>115</td><td>4.53"</td><td>VERIFIED</td></tr><tr><td>footing_w</td><td>600</td><td>23.62"</td><td>DESIGN</td></tr><tr><td>footing_h</td><td>300</td><td>11.81"</td><td>DESIGN</td></tr><tr><td>gravel_w</td><td>700</td><td>27.56"</td><td>DESIGN</td></tr><tr><td>gravel_h</td><td>150</td><td>5.91"</td><td>DESIGN</td></tr><tr><td>stem_w</td><td>350</td><td>13.78"</td><td>DESIGN</td></tr><tr><td>plinth_w</td><td>560</td><td>22.05"</td><td>DESIGN</td></tr><tr><td>plinth_h</td><td>150</td><td>5.91"</td><td>DESIGN</td></tr><tr><td>shaft_base</td><td>480</td><td>18.9"</td><td>DESIGN</td></tr><tr><td>shaft_top</td><td>360</td><td>14.17"</td><td>DESIGN</td></tr><tr><td>shaft_h</td><td>1600</td><td>62.99"</td><td>DESIGN</td></tr><tr><td>cap1_w</td><td>560</td><td>22.05"</td><td>DESIGN</td></tr><tr><td>cap1_h</td><td>50</td><td>1.97"</td><td>DESIGN</td></tr><tr><td>cap2_w</td><td>470</td><td>18.5"</td><td>DESIGN</td></tr><tr><td>cap2_h</td><td>55</td><td>2.17"</td><td>DESIGN</td></tr><tr><td>pyr_base</td><td>380</td><td>14.96"</td><td>DESIGN</td></tr><tr><td>pyr_top</td><td>180</td><td>7.09"</td><td>DESIGN</td></tr><tr><td>pyr_h</td><td>110</td><td>4.33"</td><td>DESIGN</td></tr><tr><td>bay_cc</td><td>2440</td><td>96.06"</td><td>DESIGN</td></tr><tr><td>n_panel_bays_left</td><td>2</td><td>0.08"</td><td>DESIGN</td></tr><tr><td>n_panel_bays_right</td><td>1</td><td>0.04"</td><td>DESIGN</td></tr><tr><td>rail_t</td><td>38</td><td>1.5"</td><td>DERIVED</td></tr><tr><td>rail_w</td><td>89</td><td>3.5"</td><td>DERIVED</td></tr><tr><td>pocket_depth</td><td>60</td><td>2.36"</td><td>DESIGN</td></tr><tr><td>rail_z</td><td>[350, 1000, 1650]</td><td>—</td><td>DESIGN</td></tr><tr><td>board_t</td><td>19</td><td>0.75"</td><td>DERIVED</td></tr><tr><td>board_w</td><td>140</td><td>5.51"</td><td>DERIVED</td></tr><tr><td>board_gap</td><td>10</td><td>0.39"</td><td>DESIGN</td></tr><tr><td>board_z0</td><td>320</td><td>12.6"</td><td>DESIGN</td></tr><tr><td>board_z1</td><td>1780</td><td>70.08"</td><td>DESIGN</td></tr><tr><td>tcap_h</td><td>45</td><td>1.77"</td><td>DESIGN</td></tr><tr><td>tcap_w</td><td>120</td><td>4.72"</td><td>DESIGN</td></tr><tr><td>curb_w</td><td>200</td><td>7.87"</td><td>DESIGN</td></tr><tr><td>curb_h</td><td>250</td><td>9.84"</td><td>DESIGN</td></tr><tr><td>gate_clear</td><td>1220</td><td>48.03"</td><td>DESIGN</td></tr><tr><td>arch_depth</td><td>220</td><td>8.66"</td><td>DESIGN</td></tr><tr><td>arch_thick</td><td>350</td><td>13.78"</td><td>DESIGN</td></tr><tr><td>impost_w</td><td>520</td><td>20.47"</td><td>DESIGN</td></tr><tr><td>impost_h</td><td>60</td><td>2.36"</td><td>DESIGN</td></tr><tr><td>key_b</td><td>180</td><td>7.09"</td><td>DESIGN</td></tr><tr><td>key_t</td><td>280</td><td>11.02"</td><td>DESIGN</td></tr><tr><td>key_h</td><td>300</td><td>11.81"</td><td>DESIGN</td></tr><tr><td>key_proud</td><td>30</td><td>1.18"</td><td>DESIGN</td></tr><tr><td>n_voussoirs</td><td>11</td><td>0.43"</td><td>DESIGN</td></tr><tr><td>leaf_gap</td><td>25</td><td>0.98"</td><td>DESIGN</td></tr><tr><td>stile</td><td>70</td><td>2.76"</td><td>DESIGN</td></tr><tr><td>ledge</td><td>45</td><td>1.77"</td><td>DESIGN</td></tr><tr><td>leaf_h</td><td>1600</td><td>62.99"</td><td>DESIGN</td></tr><tr><td>leaf_t</td><td>40</td><td>1.57"</td><td>DESIGN</td></tr><tr><td>leaf_z0</td><td>150</td><td>5.91"</td><td>DESIGN</td></tr><tr><td>gate_board_w</td><td>90</td><td>3.54"</td><td>DESIGN</td></tr><tr><td>gate_board_t</td><td>16</td><td>0.63"</td><td>DESIGN</td></tr><tr><td>gate_board_gap</td><td>6</td><td>0.24"</td><td>DESIGN</td></tr><tr><td>saw_kerf</td><td>3.2</td><td>0.13"</td><td>ASSUMED</td></tr><tr><td>pocket_ease</td><td>6</td><td>0.24"</td><td>DESIGN</td></tr><tr><td>seasonal_ease</td><td>1.2</td><td>0.05"</td><td>DESIGN</td></tr><tr><td>waste_factor_cedar</td><td>1.25</td><td>0.05"</td><td>ASSUMED</td></tr><tr><td>waste_factor_masonry</td><td>1.08</td><td>0.04"</td><td>ASSUMED</td></tr><tr><td>peg_d</td><td>10</td><td>0.39"</td><td>DESIGN</td></tr><tr><td>wedge_t</td><td>8</td><td>0.31"</td><td>DESIGN</td></tr><tr><td>wedge_w</td><td>25</td><td>0.98"</td><td>DESIGN</td></tr><tr><td>wedge_l</td><td>90</td><td>3.54"</td><td>DESIGN</td></tr></tbody></table>
+<h3 style="margin-top:24px;font:600 20px var(--serif)">Design equations</h3>
+<table><thead><tr><th>NAME</th><th>EQUATION</th><th>VALUE</th></tr></thead><tbody><tr><td>bay_clear</td><td>bay_cc − shaft_base</td><td>1960</td></tr><tr><td>rail_length</td><td>bay_clear + 2 × pocket_depth</td><td>2080</td></tr><tr><td>board_height</td><td>board_z1 − board_z0</td><td>1460</td></tr><tr><td>n_boards_bay</td><td>floor((bay_clear − gap) / (board_w + gap))</td><td>13</td></tr><tr><td>n_panel_bays</td><td>n_left + 1 connecting + n_right</td><td>4</td></tr><tr><td>gate_span_cc</td><td>gate_clear + shaft_base</td><td>1700</td></tr><tr><td>spring</td><td>plinth_h + shaft_h + impost_h</td><td>1810</td></tr><tr><td>crown</td><td>spring + gate_clear/2 + arch_depth</td><td>2640.0</td></tr><tr><td>pier_top</td><td>plinth + shaft + cap1 + cap2 + pyr</td><td>1965</td></tr><tr><td>panel_top</td><td>board_z1 + tcap_h</td><td>1825</td></tr><tr><td>run_length</td><td>last_pier_x + shaft_base</td><td>11940</td></tr><tr><td>batter_ratio</td><td>shaft_h / ((shaft_base − shaft_top)/2)</td><td>26.67</td></tr><tr><td>leaf_width</td><td>gate_clear − 2 × leaf_gap</td><td>1170</td></tr><tr><td>cedar_bf_buy</td><td>net × waste_factor_cedar</td><td>433.3</td></tr></tbody></table>
+</section>
+
+<section id="parts">
+<h2><span>C</span>Part register</h2>
+<p>Identical parts share one ID with qty &gt; 1. Handed shafts are separate IDs. HASHIRA post L-001 is OPTIONAL (STELE uses masonry piers).</p>
+<table><thead><tr><th>PART_ID</th><th>NAME</th><th>QTY</th><th>MAKE</th><th>MAT</th><th>FINISHED T×W×L</th><th>HANDED</th><th>JOINERY</th><th>CONSTRAINT</th></tr></thead><tbody><tr><td>F-001</td><td>Pier footing pad</td><td>6</td><td>MAKE</td><td>Concrete 4000 psi AE 5–7%</td><td>300×600×600</td><td>IDENTICAL</td><td></td><td>FIXED</td></tr><tr><td>F-002</td><td>Pier stem</td><td>6</td><td>MAKE</td><td>Concrete 4000 psi AE 5–7%</td><td>920×350×350</td><td>IDENTICAL</td><td></td><td>FIXED</td></tr><tr><td>F-003</td><td>Gravel drainage pad</td><td>6</td><td>BUY</td><td>#57 crushed stone</td><td>150×700×700</td><td>IDENTICAL</td><td></td><td>FIXED</td></tr><tr><td>M-001</td><td>Pier plinth</td><td>6</td><td>MAKE</td><td>Cast stone or limestone</td><td>150×560×560</td><td>IDENTICAL</td><td></td><td>FIXED</td></tr><tr><td>M-002-L</td><td>Battered shaft — pockets LEFT</td><td>2</td><td>MAKE</td><td>Cast stone (3 drums)</td><td>1600×480×360</td><td>LEFT-HAND</td><td>3× nuki pockets LEFT @ rail_z</td><td>FIXED</td></tr><tr><td>M-002-R</td><td>Battered shaft — pockets RIGHT</td><td>2</td><td>MAKE</td><td>Cast stone (3 drums)</td><td>1600×480×360</td><td>RIGHT-HAND</td><td>3× nuki pockets RIGHT @ rail_z</td><td>FIXED</td></tr><tr><td>M-002-B</td><td>Battered shaft — pockets BOTH</td><td>2</td><td>MAKE</td><td>Cast stone (3 drums)</td><td>1600×480×360</td><td>IDENTICAL</td><td>6× nuki pockets (3L+3R)</td><td>FIXED</td></tr><tr><td>M-003</td><td>Mayan cap stack (3 units)</td><td>4</td><td>MAKE</td><td>Cast stone</td><td>215×560×180</td><td>IDENTICAL</td><td></td><td>FIXED</td></tr><tr><td>M-004</td><td>Impost block</td><td>2</td><td>MAKE</td><td>Cast stone</td><td>60×520×520</td><td>IDENTICAL</td><td></td><td>FIXED</td></tr><tr><td>M-005</td><td>Arch springer voussoir</td><td>2</td><td>MAKE</td><td>Cast stone</td><td>220×350×206</td><td>MIRRORED</td><td>J-ARCH</td><td>FIXED</td></tr><tr><td>M-006</td><td>Arch typical voussoir</td><td>8</td><td>MAKE</td><td>Cast stone</td><td>220×350×206</td><td>IDENTICAL</td><td>J-ARCH</td><td>FIXED</td></tr><tr><td>M-007</td><td>Keystone</td><td>1</td><td>MAKE</td><td>Cast stone</td><td>300×280×410</td><td>IDENTICAL</td><td>J-ARCH</td><td>FIXED</td></tr><tr><td>C-001</td><td>Splash curb</td><td>4</td><td>MAKE</td><td>Cast concrete or solid CMU</td><td>250×200×1960</td><td>IDENTICAL</td><td></td><td>FLOATING</td></tr><tr><td>R-001</td><td>Nuki through-rail</td><td>12</td><td>MAKE</td><td>Western red cedar</td><td>38×89×2080</td><td>IDENTICAL</td><td>Nuki 貫 through M-002 pockets; W-001 wedges both ends</td><td>FLOATING</td></tr><tr><td>B-001</td><td>Rain-screen board</td><td>52</td><td>MAKE</td><td>Western red cedar</td><td>19×140×1460</td><td>IDENTICAL</td><td>Fastened to R-001 only — never into masonry</td><td>FLOATING</td></tr><tr><td>TC-001</td><td>Bay timber cap</td><td>4</td><td>MAKE</td><td>Western red cedar</td><td>45×120×2080</td><td>IDENTICAL</td><td></td><td>FLOATING</td></tr><tr><td>W-001</td><td>Nuki locking wedge</td><td>24</td><td>MAKE</td><td>White oak or black locust</td><td>8×25×90</td><td>IDENTICAL</td><td>J-NUKI</td><td>CLEARANCED</td></tr><tr><td>GS-001</td><td>Gate stile</td><td>2</td><td>MAKE</td><td>Western red cedar or locust</td><td>40×70×1600</td><td>IDENTICAL</td><td>Hozo ほぞ into ledges, drawbore optional</td><td>FIXED</td></tr><tr><td>GL-001</td><td>Gate ledge</td><td>3</td><td>MAKE</td><td>Western red cedar</td><td>45×45×1030</td><td>IDENTICAL</td><td>Hozo into GS-001</td><td>FIXED</td></tr><tr><td>GB-001</td><td>Gate diagonal brace</td><td>1</td><td>MAKE</td><td>Western red cedar</td><td>45×45×1762</td><td>IDENTICAL</td><td>Housed into ledges — compression strut</td><td>FIXED</td></tr><tr><td>GF-001</td><td>Gate face board</td><td>12</td><td>MAKE</td><td>Western red cedar</td><td>16×90×1600</td><td>IDENTICAL</td><td></td><td>FLOATING</td></tr><tr><td>L-001</td><td>Hashira post (study / repair)</td><td>2</td><td>MAKE</td><td>Western red cedar / black locust / white oak</td><td>89×89×1800</td><td>IDENTICAL</td><td>Through-mortises for nuki</td><td>FIXED</td></tr></tbody></table>
+</section>
+
+<section id="joints">
+<h2><span>E</span>Joinery register</h2>
+<table><thead><tr><th>JOINT_ID</th><th>JOINT_TYPE</th><th>PART_A</th><th>PART_B</th><th>FIT_CLASS</th><th>CONSTRAINT</th><th>LOCATION</th></tr></thead><tbody><tr><td>J-N011</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 1 rail 1 CL z=350</td></tr><tr><td>J-N012</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 1 rail 2 CL z=1000</td></tr><tr><td>J-N013</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 1 rail 3 CL z=1650</td></tr><tr><td>J-N021</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 2 rail 1 CL z=350</td></tr><tr><td>J-N022</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 2 rail 2 CL z=1000</td></tr><tr><td>J-N023</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 2 rail 3 CL z=1650</td></tr><tr><td>J-N031</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 3 rail 1 CL z=350</td></tr><tr><td>J-N032</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 3 rail 2 CL z=1000</td></tr><tr><td>J-N033</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 3 rail 3 CL z=1650</td></tr><tr><td>J-N041</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 4 rail 1 CL z=350</td></tr><tr><td>J-N042</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 4 rail 2 CL z=1000</td></tr><tr><td>J-N043</td><td>NUKI 貫 through-pocket</td><td>R-001</td><td>M-002-*</td><td>CLEARANCE + WEDGE (W-001)</td><td>FLOATING</td><td>Bay 4 rail 3 CL z=1650</td></tr><tr><td>J-ARCH</td><td>Radial voussoir bed (Roman)</td><td>M-005/M-006/M-007</td><td>M-004 imposts</td><td>GLUE (Type S 10 mm joints) COMPRESSION</td><td>FIXED</td><td>Gate CL x=8170 spring z=1810</td></tr><tr><td>J-HOZO-LEAF</td><td>Hozo ほぞ mortise & tenon</td><td>GL-001</td><td>GS-001</td><td>DRAWBORED / SNUG</td><td>FIXED</td><td>Gate leaf — 3 ledges × 2 stiles = 6 tenons</td></tr><tr><td>J-WATARI</td><td>Watari-ago 渡り顎 (optional upgrade)</td><td>R-001 (mid-rail)</td><td>M-002-*</td><td>FRICTION + HAUNCH</td><td>FLOATING</td><td>Wind-exposed mid-rails / gate-adjacent bays — OPTIONAL</td></tr></tbody></table>
+<p>Nuki instances: 12 (3 rails × 4 bays). Optional watari-ago is an upgrade path, not mixed in one rail.</p>
+</section>
+
+<section id="bom">
+<h2><span>F / 46</span>Master BOM</h2>
+<table><thead><tr><th>ITEM</th><th>PART_ID</th><th>DESCRIPTION</th><th>QTY</th><th>MAKE/BUY</th><th>MATERIAL</th><th>FINISHED</th><th>HANDED</th><th>REV</th></tr></thead><tbody><tr><td>1</td><td>F-001</td><td>Pier footing pad</td><td>6</td><td>MAKE</td><td>Concrete 4000 psi AE 5–7%</td><td>300 × 600 × 600</td><td>IDENTICAL</td><td>B</td></tr><tr><td>2</td><td>F-002</td><td>Pier stem</td><td>6</td><td>MAKE</td><td>Concrete 4000 psi AE 5–7%</td><td>920 × 350 × 350</td><td>IDENTICAL</td><td>B</td></tr><tr><td>3</td><td>F-003</td><td>Gravel drainage pad</td><td>6</td><td>BUY</td><td>#57 crushed stone</td><td>150 × 700 × 700</td><td>IDENTICAL</td><td>B</td></tr><tr><td>4</td><td>M-001</td><td>Pier plinth</td><td>6</td><td>MAKE</td><td>Cast stone or limestone</td><td>150 × 560 × 560</td><td>IDENTICAL</td><td>B</td></tr><tr><td>5</td><td>M-002-L</td><td>Battered shaft — pockets LEFT</td><td>2</td><td>MAKE</td><td>Cast stone (3 drums)</td><td>1600 × 480 × 360</td><td>LEFT-HAND</td><td>B</td></tr><tr><td>6</td><td>M-002-R</td><td>Battered shaft — pockets RIGHT</td><td>2</td><td>MAKE</td><td>Cast stone (3 drums)</td><td>1600 × 480 × 360</td><td>RIGHT-HAND</td><td>B</td></tr><tr><td>7</td><td>M-002-B</td><td>Battered shaft — pockets BOTH</td><td>2</td><td>MAKE</td><td>Cast stone (3 drums)</td><td>1600 × 480 × 360</td><td>IDENTICAL</td><td>B</td></tr><tr><td>8</td><td>M-003</td><td>Mayan cap stack (3 units)</td><td>4</td><td>MAKE</td><td>Cast stone</td><td>215 × 560 × 180</td><td>IDENTICAL</td><td>B</td></tr><tr><td>9</td><td>M-004</td><td>Impost block</td><td>2</td><td>MAKE</td><td>Cast stone</td><td>60 × 520 × 520</td><td>IDENTICAL</td><td>B</td></tr><tr><td>10</td><td>M-005</td><td>Arch springer voussoir</td><td>2</td><td>MAKE</td><td>Cast stone</td><td>220 × 350 × 206</td><td>MIRRORED</td><td>B</td></tr><tr><td>11</td><td>M-006</td><td>Arch typical voussoir</td><td>8</td><td>MAKE</td><td>Cast stone</td><td>220 × 350 × 206</td><td>IDENTICAL</td><td>B</td></tr><tr><td>12</td><td>M-007</td><td>Keystone</td><td>1</td><td>MAKE</td><td>Cast stone</td><td>300 × 280 × 410</td><td>IDENTICAL</td><td>B</td></tr><tr><td>13</td><td>C-001</td><td>Splash curb</td><td>4</td><td>MAKE</td><td>Cast concrete or solid CMU</td><td>250 × 200 × 1960</td><td>IDENTICAL</td><td>B</td></tr><tr><td>14</td><td>R-001</td><td>Nuki through-rail</td><td>12</td><td>MAKE</td><td>Western red cedar</td><td>38 × 89 × 2080</td><td>IDENTICAL</td><td>B</td></tr><tr><td>15</td><td>B-001</td><td>Rain-screen board</td><td>52</td><td>MAKE</td><td>Western red cedar</td><td>19 × 140 × 1460</td><td>IDENTICAL</td><td>B</td></tr><tr><td>16</td><td>TC-001</td><td>Bay timber cap</td><td>4</td><td>MAKE</td><td>Western red cedar</td><td>45 × 120 × 2080</td><td>IDENTICAL</td><td>B</td></tr><tr><td>17</td><td>W-001</td><td>Nuki locking wedge</td><td>24</td><td>MAKE</td><td>White oak or black locust</td><td>8 × 25 × 90</td><td>IDENTICAL</td><td>B</td></tr><tr><td>18</td><td>GS-001</td><td>Gate stile</td><td>2</td><td>MAKE</td><td>Western red cedar or locust</td><td>40 × 70 × 1600</td><td>IDENTICAL</td><td>B</td></tr><tr><td>19</td><td>GL-001</td><td>Gate ledge</td><td>3</td><td>MAKE</td><td>Western red cedar</td><td>45 × 45 × 1030</td><td>IDENTICAL</td><td>B</td></tr><tr><td>20</td><td>GB-001</td><td>Gate diagonal brace</td><td>1</td><td>MAKE</td><td>Western red cedar</td><td>45 × 45 × 1762</td><td>IDENTICAL</td><td>B</td></tr><tr><td>21</td><td>GF-001</td><td>Gate face board</td><td>12</td><td>MAKE</td><td>Western red cedar</td><td>16 × 90 × 1600</td><td>IDENTICAL</td><td>B</td></tr><tr><td>22</td><td>L-001</td><td>Hashira post (study / repair)</td><td>2</td><td>MAKE</td><td>Western red cedar / black locust / white oak</td><td>89 × 89 × 1800</td><td>IDENTICAL</td><td>B</td></tr><tr><td>23</td><td>H-001</td><td>Ring-shank nail, stainless 316</td><td>312</td><td>BUY</td><td>Stainless 316</td><td>8d (2.5 mm shank) × 63 mm</td><td>n/a</td><td>B</td></tr><tr><td>24</td><td>H-002</td><td>Ball-bearing butt hinge, stainless, heavy</td><td>3</td><td>BUY</td><td>Stainless 304/316</td><td>114 × 114 mm (4.5×4.5) × n/a</td><td>n/a</td><td>B</td></tr><tr><td>25</td><td>H-003</td><td>M12 epoxy anchor rod into masonry</td><td>6</td><td>BUY</td><td>Stainless 316</td><td>M12 × 160 mm embed min 100</td><td>n/a</td><td>B</td></tr><tr><td>26</td><td>H-004</td><td>Gate latch + keeper, stainless, lockable</td><td>1</td><td>BUY</td><td>Stainless 316</td><td>residential heavy × n/a</td><td>n/a</td><td>B</td></tr><tr><td>27</td><td>H-005</td><td>Type S masonry mortar</td><td>12</td><td>BUY</td><td>Portland + lime + sand</td><td>n/a × n/a</td><td>n/a</td><td>B</td></tr><tr><td>28</td><td>H-006</td><td>#4 / #3 rebar Grade 60</td><td>1</td><td>BUY</td><td>Carbon steel</td><td>#4 vert / #3 ties / #4 ftg × see F-001/F-002</td><td>n/a</td><td>B</td></tr><tr><td>29</td><td>H-007</td><td>Self-adhered flashing + metal drip</td><td>1</td><td>BUY</td><td>Asphalt/butyl + SS drip</td><td>150 mm roll × ~8 m</td><td>n/a</td><td>B</td></tr><tr><td>30</td><td>H-008</td><td>Penetrating oil / pine tar (end grain)</td><td>1</td><td>BUY</td><td>Tung or pine tar</td><td>n/a × n/a</td><td>n/a</td><td>B</td></tr></tbody></table>
+<h3 style="margin:24px 0 8px;font:600 20px var(--serif)">Hardware schedule</h3>
+<table><thead><tr><th>HARDWARE_ID</th><th>DESCRIPTION</th><th>STANDARD</th><th>SIZE</th><th>LENGTH</th><th>MATERIAL</th><th>QTY</th><th>MPN</th></tr></thead><tbody><tr><td>H-001</td><td>Ring-shank nail, stainless 316</td><td>ASTM A276 316</td><td>8d (2.5 mm shank)</td><td>63 mm</td><td>Stainless 316</td><td>312</td><td>SS8D-RS</td></tr><tr><td>H-002</td><td>Ball-bearing butt hinge, stainless, heavy</td><td>ANSI A156.1 Grade 1</td><td>114 × 114 mm (4.5×4.5)</td><td>n/a</td><td>Stainless 304/316</td><td>3</td><td>BB1279-4.5-32D-SS</td></tr><tr><td>H-003</td><td>M12 epoxy anchor rod into masonry</td><td>ASTM F593 / ICC ESR epoxy</td><td>M12</td><td>160 mm embed min 100</td><td>Stainless 316</td><td>6</td><td>HAS-E-316 / SET-XP</td></tr><tr><td>H-004</td><td>Gate latch + keeper, stainless, lockable</td><td>n/a</td><td>residential heavy</td><td>n/a</td><td>Stainless 316</td><td>1</td><td>TO BE SELECTED</td></tr><tr><td>H-005</td><td>Type S masonry mortar</td><td>ASTM C270 Type S</td><td>n/a</td><td>n/a</td><td>Portland + lime + sand</td><td>12</td><td>Type S</td></tr><tr><td>H-006</td><td>#4 / #3 rebar Grade 60</td><td>ASTM A615 Gr60</td><td>#4 vert / #3 ties / #4 ftg</td><td>see F-001/F-002</td><td>Carbon steel</td><td>1</td><td>n/a</td></tr><tr><td>H-007</td><td>Self-adhered flashing + metal drip</td><td>AAMA 711</td><td>150 mm roll</td><td>~8 m</td><td>Asphalt/butyl + SS drip</td><td>1</td><td>Vycor plus SS drip</td></tr><tr><td>H-008</td><td>Penetrating oil / pine tar (end grain)</td><td>n/a</td><td>n/a</td><td>n/a</td><td>Tung or pine tar</td><td>1</td><td>n/a</td></tr></tbody></table>
+<p>Cedar procurement: net 346.7 BF × waste factor 1.25 = <strong>433.3 BF buy</strong>. Waste factor is explicit (knots, matching, milling). Unit costs are not invented — fill UNIT_COST in JSON when quotes exist.</p>
+</section>
+
+<section id="cuts">
+<h2><span>G–I</span>Cut lists &amp; nesting</h2>
+<h3>Rough cut list</h3>
+<table><thead><tr><th>PART_ID</th><th>DESCRIPTION</th><th>QTY</th><th>T</th><th>W</th><th>L</th><th>T_IN</th><th>W_IN</th><th>L_IN</th><th>MATERIAL</th><th>NOTES</th></tr></thead><tbody><tr><td>F-001</td><td>Pier footing pad</td><td>6</td><td>300</td><td>600</td><td>600</td><td>11.81"</td><td>23.62"</td><td>23.62"</td><td>Concrete 4000 psi AE 5–7%</td><td>Bearing at −frost_depth on F-003. Pour monolithic with F-002 where possible.</td></tr><tr><td>F-002</td><td>Pier stem</td><td>6</td><td>920</td><td>350</td><td>350</td><td>36.22"</td><td>13.78"</td><td>13.78"</td><td>Concrete 4000 psi AE 5–7%</td><td>Capillary-break flashing at stem/plinth. CONSTRAINT: FIXED to F-001.</td></tr><tr><td>M-001</td><td>Pier plinth</td><td>6</td><td>156</td><td>566</td><td>566</td><td>6.14"</td><td>22.28"</td><td>22.28"</td><td>Cast stone or limestone</td><td>Sits on flashing over F-002.</td></tr><tr><td>M-002-L</td><td>Battered shaft — pockets LEFT</td><td>2</td><td>1600</td><td>480</td><td>480</td><td>62.99"</td><td>18.9"</td><td>18.9"</td><td>Cast stone (3 drums)</td><td>Batter 60/1600 = 1:26.7 per face (Egyptian talus). GATE_L + END_R.</td></tr><tr><td>M-002-R</td><td>Battered shaft — pockets RIGHT</td><td>2</td><td>1600</td><td>480</td><td>480</td><td>62.99"</td><td>18.9"</td><td>18.9"</td><td>Cast stone (3 drums)</td><td>END_L + GATE_R. Mirror of M-002-L.</td></tr><tr><td>M-002-B</td><td>Battered shaft — pockets BOTH</td><td>2</td><td>1600</td><td>480</td><td>480</td><td>62.99"</td><td>18.9"</td><td>18.9"</td><td>Cast stone (3 drums)</td><td>MID piers. Same batter as M-002-L/R.</td></tr><tr><td>M-003</td><td>Mayan cap stack (3 units)</td><td>4</td><td>223</td><td>560</td><td>560</td><td>8.78"</td><td>22.05"</td><td>22.05"</td><td>Cast stone</td><td>Drip kerf 8×8, 20 from edge, all 4 sides of tiers 1+2. 1:12 wash min.</td></tr><tr><td>M-004</td><td>Impost block</td><td>2</td><td>64</td><td>520</td><td>520</td><td>2.52"</td><td>20.47"</td><td>20.47"</td><td>Cast stone</td><td>Arch bears here in pure compression. SS dowels for erection only.</td></tr><tr><td>M-005</td><td>Arch springer voussoir</td><td>2</td><td>240</td><td>370</td><td>277</td><td>9.45"</td><td>14.57"</td><td>10.91"</td><td>Cast stone</td><td>Flat soffit on impost. L/R mirrored.</td></tr><tr><td>M-006</td><td>Arch typical voussoir</td><td>8</td><td>240</td><td>370</td><td>277</td><td>9.45"</td><td>14.57"</td><td>10.91"</td><td>Cast stone</td><td>Concentric ring — all typical voussoirs IDENTICAL.</td></tr><tr><td>M-007</td><td>Keystone</td><td>1</td><td>310</td><td>300</td><td>420</td><td>12.2"</td><td>11.81"</td><td>16.54"</td><td>Cast stone</td><td>Do not strike centering until 7-day cure after key is set.</td></tr><tr><td>C-001</td><td>Splash curb</td><td>4</td><td>300</td><td>200</td><td>1980</td><td>11.81"</td><td>7.87"</td><td>77.95"</td><td>Cast concrete or solid CMU</td><td>CONSTRAINT: FLOATING — heave isolation from piers.</td></tr><tr><td>R-001</td><td>Nuki through-rail</td><td>12</td><td>42</td><td>95</td><td>2105</td><td>1.65"</td><td>3.74"</td><td>82.87"</td><td>Western red cedar</td><td>All 12 IDENTICAL. Purchase 2×4×8' S4S. Datum End = left pocket engagement.</td></tr><tr><td>B-001</td><td>Rain-screen board</td><td>52</td><td>22</td><td>146</td><td>1480</td><td>0.87"</td><td>5.75"</td><td>58.27"</td><td>Western red cedar</td><td>CONSTRAINT: FLOATING (nailed to rails; rails float in pockets). 10 mm gaps.</td></tr><tr><td>TC-001</td><td>Bay timber cap</td><td>4</td><td>50</td><td>130</td><td>2105</td><td>1.97"</td><td>5.12"</td><td>82.87"</td><td>Western red cedar</td><td>Washes water off rain-screen. Do not caulk kerfs.</td></tr><tr><td>W-001</td><td>Nuki locking wedge</td><td>24</td><td>12</td><td>30</td><td>100</td><td>0.47"</td><td>1.18"</td><td>3.94"</td><td>White oak or black locust</td><td>Harder than cedar frame. Replaceable. Do not glue.</td></tr><tr><td>GS-001</td><td>Gate stile</td><td>2</td><td>45</td><td>76</td><td>1620</td><td>1.77"</td><td>2.99"</td><td>63.78"</td><td>Western red cedar or locust</td><td>Hinge stile = street-left as viewed from outside, inward swing.</td></tr><tr><td>GL-001</td><td>Gate ledge</td><td>3</td><td>50</td><td>50</td><td>1050</td><td>1.97"</td><td>1.97"</td><td>41.34"</td><td>Western red cedar</td><td></td></tr><tr><td>GB-001</td><td>Gate diagonal brace</td><td>1</td><td>50</td><td>50</td><td>1802</td><td>1.97"</td><td>1.97"</td><td>70.94"</td><td>Western red cedar</td><td>Brace must rise from hinge (bottom) to latch (top). Reverse = sag.</td></tr><tr><td>GF-001</td><td>Gate face board</td><td>12</td><td>19</td><td>96</td><td>1620</td><td>0.75"</td><td>3.78"</td><td>63.78"</td><td>Western red cedar</td><td></td></tr><tr><td>L-001</td><td>Hashira post (study / repair)</td><td>2</td><td>95</td><td>95</td><td>1850</td><td>3.74"</td><td>3.74"</td><td>72.83"</td><td>Western red cedar / black locust / white oak</td><td>HASHIRA system for existing-fence reinforcement — not used in STELE (masonry piers replace posts).</td></tr></tbody></table>
+<h3>Finished dimension list</h3>
+<table><thead><tr><th>PART_ID</th><th>DESCRIPTION</th><th>QTY</th><th>T</th><th>W</th><th>L</th><th>T_IN</th><th>W_IN</th><th>L_IN</th><th>MATERIAL</th><th>HANDED</th></tr></thead><tbody><tr><td>F-001</td><td>Pier footing pad</td><td>6</td><td>300</td><td>600</td><td>600</td><td>11.81"</td><td>23.62"</td><td>23.62"</td><td>Concrete 4000 psi AE 5–7%</td><td>IDENTICAL</td></tr><tr><td>F-002</td><td>Pier stem</td><td>6</td><td>920</td><td>350</td><td>350</td><td>36.22"</td><td>13.78"</td><td>13.78"</td><td>Concrete 4000 psi AE 5–7%</td><td>IDENTICAL</td></tr><tr><td>M-001</td><td>Pier plinth</td><td>6</td><td>150</td><td>560</td><td>560</td><td>5.91"</td><td>22.05"</td><td>22.05"</td><td>Cast stone or limestone</td><td>IDENTICAL</td></tr><tr><td>M-002-L</td><td>Battered shaft — pockets LEFT</td><td>2</td><td>1600</td><td>480</td><td>360</td><td>62.99"</td><td>18.9"</td><td>14.17"</td><td>Cast stone (3 drums)</td><td>LEFT-HAND</td></tr><tr><td>M-002-R</td><td>Battered shaft — pockets RIGHT</td><td>2</td><td>1600</td><td>480</td><td>360</td><td>62.99"</td><td>18.9"</td><td>14.17"</td><td>Cast stone (3 drums)</td><td>RIGHT-HAND</td></tr><tr><td>M-002-B</td><td>Battered shaft — pockets BOTH</td><td>2</td><td>1600</td><td>480</td><td>360</td><td>62.99"</td><td>18.9"</td><td>14.17"</td><td>Cast stone (3 drums)</td><td>IDENTICAL</td></tr><tr><td>M-003</td><td>Mayan cap stack (3 units)</td><td>4</td><td>215</td><td>560</td><td>180</td><td>8.46"</td><td>22.05"</td><td>7.09"</td><td>Cast stone</td><td>IDENTICAL</td></tr><tr><td>M-004</td><td>Impost block</td><td>2</td><td>60</td><td>520</td><td>520</td><td>2.36"</td><td>20.47"</td><td>20.47"</td><td>Cast stone</td><td>IDENTICAL</td></tr><tr><td>M-005</td><td>Arch springer voussoir</td><td>2</td><td>220</td><td>350</td><td>206</td><td>8.66"</td><td>13.78"</td><td>8.11"</td><td>Cast stone</td><td>MIRRORED</td></tr><tr><td>M-006</td><td>Arch typical voussoir</td><td>8</td><td>220</td><td>350</td><td>206</td><td>8.66"</td><td>13.78"</td><td>8.11"</td><td>Cast stone</td><td>IDENTICAL</td></tr><tr><td>M-007</td><td>Keystone</td><td>1</td><td>300</td><td>280</td><td>410</td><td>11.81"</td><td>11.02"</td><td>16.14"</td><td>Cast stone</td><td>IDENTICAL</td></tr><tr><td>C-001</td><td>Splash curb</td><td>4</td><td>250</td><td>200</td><td>1960</td><td>9.84"</td><td>7.87"</td><td>77.17"</td><td>Cast concrete or solid CMU</td><td>IDENTICAL</td></tr><tr><td>R-001</td><td>Nuki through-rail</td><td>12</td><td>38</td><td>89</td><td>2080</td><td>1.5"</td><td>3.5"</td><td>81.89"</td><td>Western red cedar</td><td>IDENTICAL</td></tr><tr><td>B-001</td><td>Rain-screen board</td><td>52</td><td>19</td><td>140</td><td>1460</td><td>0.75"</td><td>5.51"</td><td>57.48"</td><td>Western red cedar</td><td>IDENTICAL</td></tr><tr><td>TC-001</td><td>Bay timber cap</td><td>4</td><td>45</td><td>120</td><td>2080</td><td>1.77"</td><td>4.72"</td><td>81.89"</td><td>Western red cedar</td><td>IDENTICAL</td></tr><tr><td>W-001</td><td>Nuki locking wedge</td><td>24</td><td>8</td><td>25</td><td>90</td><td>0.31"</td><td>0.98"</td><td>3.54"</td><td>White oak or black locust</td><td>IDENTICAL</td></tr><tr><td>GS-001</td><td>Gate stile</td><td>2</td><td>40</td><td>70</td><td>1600</td><td>1.57"</td><td>2.76"</td><td>62.99"</td><td>Western red cedar or locust</td><td>IDENTICAL</td></tr><tr><td>GL-001</td><td>Gate ledge</td><td>3</td><td>45</td><td>45</td><td>1030</td><td>1.77"</td><td>1.77"</td><td>40.55"</td><td>Western red cedar</td><td>IDENTICAL</td></tr><tr><td>GB-001</td><td>Gate diagonal brace</td><td>1</td><td>45</td><td>45</td><td>1762</td><td>1.77"</td><td>1.77"</td><td>69.37"</td><td>Western red cedar</td><td>IDENTICAL</td></tr><tr><td>GF-001</td><td>Gate face board</td><td>12</td><td>16</td><td>90</td><td>1600</td><td>0.63"</td><td>3.54"</td><td>62.99"</td><td>Western red cedar</td><td>IDENTICAL</td></tr><tr><td>L-001</td><td>Hashira post (study / repair)</td><td>2</td><td>89</td><td>89</td><td>1800</td><td>3.5"</td><td>3.5"</td><td>70.87"</td><td>Western red cedar / black locust / white oak</td><td>IDENTICAL</td></tr></tbody></table>
+<h3>Dimensional nesting</h3>
+<table><thead><tr><th>PART_ID</th><th>STOCK_LENGTH</th><th>PER_STOCK</th><th>N_STOCK</th><th>YIELD_PCT</th><th>WASTE_MM</th></tr></thead><tbody><tr><td>R-001</td><td>2438</td><td>1</td><td>12</td><td>85.3</td><td>4296.0</td></tr><tr><td>B-001</td><td>2438</td><td>1</td><td>52</td><td>59.9</td><td>50856.0</td></tr><tr><td>TC-001</td><td>2438</td><td>1</td><td>4</td><td>85.3</td><td>1432.0</td></tr><tr><td>GS-001</td><td>2438</td><td>1</td><td>2</td><td>65.6</td><td>1676.0</td></tr><tr><td>GF-001</td><td>2438</td><td>1</td><td>12</td><td>65.6</td><td>10056.0</td></tr><tr><td>W-001</td><td>915</td><td>9</td><td>3</td><td>81.1</td><td>518.0</td></tr></tbody></table>
+<p>R-001: one rail per 8′ 2×4 (finished 2080 mm). B-001: one board per 8′ 1×6 at 1460 mm — remainder is usable for wedges/offcuts, not a second board. Stop setups: <strong>S-014 = 2080 mm</strong> (all 12 rails), <strong>S-015 = 1460 mm</strong> (all 52 boards). Do not move the stop.</p>
+</section>
+
+<section id="drawings">
+<h2><span>L</span>Drawing index</h2>
+<ul>
+<li>GA-100 General assembly elevation — this package</li>
+<li>EX-200 Exploded bay insertion logic</li>
+<li>P-301 R-001 rail part drawing</li>
+<li>J-201 Nuki pocket section</li>
+<li>T-501 Voussoir template (with 100 mm check box)</li>
+<li>T-510 Batter story stick + pocket CLs</li>
+<li>LBL-001 Part labels</li>
+<li>S-1…S-5 Architectural intent (existing <a href="../stele/plans/S1_general.svg">/fence/stele/plans</a>)</li>
+</ul>
+<div class="grid">
+<figure><img src="06_DRAWINGS/GA-100.svg" alt="GA-100"/><figcaption>GA-100</figcaption></figure>
+<figure><img src="06_DRAWINGS/EX-200.svg" alt="EX-200"/><figcaption>EX-200</figcaption></figure>
+<figure><img src="06_DRAWINGS/P-301.svg" alt="P-301"/><figcaption>P-301 R-001</figcaption></figure>
+<figure><img src="06_DRAWINGS/J-201.svg" alt="J-201"/><figcaption>J-201 pocket</figcaption></figure>
+<figure><img src="10_TEMPLATES/T-510.svg" alt="T-510"/><figcaption>T-510 batter stick</figcaption></figure>
+<figure><img src="10_TEMPLATES/T-501.svg" alt="T-501"/><figcaption>T-501 voussoir</figcaption></figure>
+</div>
+<figure><img src="10_TEMPLATES/LBL-001.svg" alt="labels"/><figcaption>LBL-001</figcaption></figure>
+</section>
+
+<section id="build">
+<h2><span>K</span>Assembly sequence (dependency order)</h2>
+<table><thead><tr><th>STEP</th><th>OPERATION</th><th>HOLD</th></tr></thead><tbody><tr><td>01</td><td>STOCK / 811 / SURVEY</td><td>QC-01</td></tr><tr><td>02</td><td>Excavate 6 pits to frost_depth + gravel_h</td><td>QC-02</td></tr><tr><td>03</td><td>F-003 compact; F-001+F-002 pour AE 4000</td><td>QC-03</td></tr><tr><td>04</td><td>Cure 7 d; flashing H-007; M-001 plinths</td><td>QC-11</td></tr><tr><td>05</td><td>M-002 drums to batter stick; core pockets from story stick</td><td>QC-05 QC-07</td></tr><tr><td>06</td><td>M-003 caps (non-gate); C-001 curbs FLOATING</td><td>QC-12</td></tr><tr><td>07</td><td>Mill R-001 lot on stop S-014; W-001</td><td>QC-06</td></tr><tr><td>08</td><td>Dry-fit all rails J-N*; wedge weather-side</td><td>QC-08</td></tr><tr><td>09</td><td>B-001 cladding; TC-001 caps</td><td>QC-13</td></tr><tr><td>10</td><td>M-004 imposts; timber centering; M-005/006/007; 7-day hold</td><td>QC-10</td></tr><tr><td>11</td><td>Strike centering; A-LEAF dry diagonals; hang H-002/H-003</td><td>QC-09</td></tr><tr><td>12</td><td>Final QA walk, oil end grain H-008</td><td>QC-06..13</td></tr></tbody></table>
+<pre>{
+  "A-000 MASTER_ASSEMBLY STELE": {
+    "A-FND Foundations": [
+      "F-003 \u00d76",
+      "F-001 \u00d76",
+      "F-002 \u00d76",
+      "H-006",
+      "H-007"
+    ],
+    "A-PIER Piers (\u00d76)": {
+      "END_L / GATE_R": [
+        "M-001",
+        "M-002-R",
+        "M-003 (END_L only)"
+      ],
+      "MID \u00d72": [
+        "M-001",
+        "M-002-B",
+        "M-003"
+      ],
+      "GATE_L / END_R": [
+        "M-001",
+        "M-002-L",
+        "M-003 (END_R only)"
+      ]
+    },
+    "A-BAY Panel bays \u00d74": [
+      "C-001",
+      "R-001 \u00d73",
+      "W-001 \u00d76",
+      "B-001 \u00d7 n_boards_bay",
+      "TC-001",
+      "H-001"
+    ],
+    "A-GATE Arch": [
+      "M-004 \u00d72",
+      "M-005 \u00d72",
+      "M-006 \u00d78",
+      "M-007",
+      "H-005",
+      "centering (temp)"
+    ],
+    "A-LEAF Gate leaf": [
+      "GS-001 \u00d72",
+      "GL-001 \u00d73",
+      "GB-001",
+      "GF-001 \u00d7 n",
+      "H-002",
+      "H-003",
+      "H-004"
+    ]
+  }
+}</pre>
+<h3 style="margin:20px 0 8px;font:600 20px var(--serif)">Routing excerpt — R-001</h3>
+<table><thead><tr><th>OP</th><th>NAME</th><th>TOOL</th><th>REFERENCE</th><th>TOLERANCE</th><th>FAILURE</th></tr></thead><tbody><tr><td>OP0010</td><td>Rough crosscut 8' stock</td><td>Miter saw</td><td>factory end</td><td>T1 ±2 mm</td><td>End check/split — recut</td></tr><tr><td>OP0020</td><td>Joint face A</td><td>Jointer / #7 plane</td><td>FACE A down later</td><td>T2 0.3 mm hollow max</td><td>Twist — discard</td></tr><tr><td>OP0030</td><td>Joint edge B</td><td>Jointer</td><td>FACE A against fence</td><td>T2</td><td>Not square to A</td></tr><tr><td>OP0040</td><td>Plane to 38 thickness</td><td>Planer</td><td>FACE A down</td><td>T1 ±0.4 mm</td><td>Snipe — extra length</td></tr><tr><td>OP0050</td><td>Rip to 89 width</td><td>Table saw</td><td>EDGE B on fence</td><td>T1 ±0.4 mm</td><td>Blade drift</td></tr><tr><td>OP0060</td><td>Final crosscut to rail_length — STOP S-014 DO NOT MOVE</td><td>Miter + stop</td><td>DATUM END against stop, EDGE B down</td><td>T2 ±0.5 mm</td><td>Stop creep</td></tr><tr><td>OP0070</td><td>Arris 1 mm both long edges</td><td>Block plane</td><td>FACE A up</td><td>T0</td><td>Tearout</td></tr><tr><td>OP0080</td><td>End-grain oil</td><td>Brush</td><td>both ends</td><td>n/a</td><td>Skip — premature check</td></tr><tr><td>OP0090</td><td>Inspect length vs mate rails</td><td>Tape + story stick</td><td>DATUM END</td><td>T2 all 12 within 1 mm</td><td>Mismatch — recut from extra</td></tr></tbody></table>
+</section>
+
+<section id="qa">
+<h2><span>M</span>QA / FMEA / decisions</h2>
+<table><thead><tr><th>QC</th><th>GATE</th><th>CHECK</th><th>SPEC</th><th>CLASS</th></tr></thead><tbody><tr><td>QC-01</td><td>M0</td><td>Verify parcel survey + 811 locates before excavation</td><td>Open-hole</td><td>T0</td></tr><tr><td>QC-02</td><td>M4</td><td>Footing bearing elevation</td><td>−1220 mm from finish grade, ±15 mm</td><td>T1</td></tr><tr><td>QC-03</td><td>M4</td><td>Air-entrainment on delivery ticket</td><td>5–7% AE, 4000 psi</td><td>T0</td></tr><tr><td>QC-04</td><td>M5</td><td>Pier centerline spacing</td><td>2440 mm ±3 mm typical; gate 1700 mm ±3</td><td>T2</td></tr><tr><td>QC-05</td><td>M5</td><td>Pier plumb and batter</td><td>1:26.7 per face; plumb within 3 mm / 1600</td><td>T2</td></tr><tr><td>QC-06</td><td>M4</td><td>All R-001 finished lengths</td><td>2080 mm, all 12 within 1 mm of each other</td><td>T2</td></tr><tr><td>QC-07</td><td>M3</td><td>Pocket CL vs rail_z story stick</td><td>[350, 1000, 1650] ±1 mm</td><td>T2</td></tr><tr><td>QC-08</td><td>M5</td><td>Dry-fit rails through both pockets before cladding</td><td>Slides by hand; wedge snugs; no bind in summer moisture</td><td>T2</td></tr><tr><td>QC-09</td><td>M5</td><td>Gate diagonals (leaf)</td><td>Diagonals within 2 mm before boards go on</td><td>T2</td></tr><tr><td>QC-10</td><td>M5</td><td>Arch centering not struck before 7-day cure</td><td>Hold point — sign-off</td><td>T0</td></tr><tr><td>QC-11</td><td>M7</td><td>Capillary flashing continuous at all 6 stems</td><td>Visual + photo</td><td>T0</td></tr><tr><td>QC-12</td><td>M7</td><td>Curb isolated from pier footings</td><td>Construction joint / foam; no rebar continuity</td><td>T1</td></tr><tr><td>QC-13</td><td>M7</td><td>Rain-screen gaps remain open (not caulked)</td><td>10 mm ±2</td><td>T1</td></tr><tr><td>QC-14</td><td>M7</td><td>Printer scale on templates T-501..T-510</td><td>100.000 mm check box measures 100.0 ±0.5</td><td>T3</td></tr></tbody></table>
+<h3 style="margin:20px 0 8px;font:600 20px var(--serif)">Failure modes</h3>
+<table><thead><tr><th>MODE</th><th>CAUSE</th><th>EFFECT</th><th>SEV</th><th>LIK</th><th>MITIGATION</th></tr></thead><tbody><tr><td>Frost heave lifts pier</td><td>Footing above frost / wet bearing</td><td>Rack, cracked mortar</td><td>9</td><td>2</td><td>48″ bearing + F-003 drain + AE concrete + QC-02/03</td></tr><tr><td>Wind overturning</td><td>Sail-like panels, skinny posts</td><td>Lean / collapse</td><td>10</td><td>2</td><td>Mass rule ≥3× reaction; batter keeps resultant in middle third</td></tr><tr><td>Rail bind / split cheeks</td><td>No seasonal ease / glued nuki</td><td>Cracked pier or broken rail</td><td>6</td><td>4</td><td>CLEARANCE fit + wedges; D-002</td></tr><tr><td>Curb heave racks line</td><td>Curb tied into pier ftgs</td><td>Cracked plinths</td><td>7</td><td>3</td><td>FLOATING curb D-004 / QC-12</td></tr><tr><td>Arch spreading</td><td>Struck centering early / weak impost</td><td>Joint opening at crown</td><td>8</td><td>2</td><td>7-day hold QC-10; imposts sized; Type S</td></tr><tr><td>Cedar rot at grade</td><td>Wood in snow/splash</td><td>10-year failure</td><td>5</td><td>2</td><td>Curb 250 + board_z0 320; no wood below 250</td></tr><tr><td>Plow strike</td><td>Berm against boards</td><td>Broken cladding</td><td>4</td><td>6</td><td>Sacrificial masonry curb; boards replaceable bay-by-bay</td></tr></tbody></table>
+<h3 style="margin:20px 0 8px;font:600 20px var(--serif)">Decision log</h3>
+<table><thead><tr><th>ID</th><th>DECISION</th><th>REASON</th><th>AFFECTED</th></tr></thead><tbody><tr><td>D-001</td><td>Masonry piers replace timber posts in STELE</td><td>Buffalo frost + plow berms destroy grade-set posts; mass + batter resists 115 mph without straps.</td><td>All M-*, F-*; L-001 optional HASHIRA-only</td></tr><tr><td>D-002</td><td>Nuki pockets FLOATING, not glued</td><td>Seasonal movement of 2080 mm cedar; glue would split mortise cheeks. Wedges are the lock and the repair path.</td><td>R-001, W-001, J-N*</td></tr><tr><td>D-003</td><td>Tenon thickness = ⅓ of 40 mm stile ≈ 13 mm</td><td>Mortise cheek thickness remains adequate in GS-001.</td><td>GS-001, GL-001, J-HOZO-LEAF</td></tr><tr><td>D-004</td><td>Curb FLOATING independent of pier footings</td><td>Shallow curb will heave; continuity would rack piers.</td><td>C-001, F-001</td></tr><tr><td>D-005</td><td>Arch in pure compression, no structural steel</td><td>Freeze-thaw attacks tension; Roman geometry removes it. SS dowels are erection-only.</td><td>M-004..M-007, J-ARCH</td></tr><tr><td>D-006</td><td>Panel top 1825 mm under 6′-0″ residential limit</td><td>Green Code. Pier caps 1965 and arch 2640 assessed separately — TO BE CONFIRMED with Permit & Inspection.</td><td>overall height parameters</td></tr></tbody></table>
+<div class="callout">This is a fabrication definition, not a stamped engineering document. Foundations and arch still require an engineer of record in Erie County before pour.</div>
+</section>
+
+<section id="files">
+<h2><span>N–O</span>Export manifest &amp; unresolved</h2>
+<p>
+<a class="dl" href="data/fabrication.json">fabrication.json</a>
+<a class="dl" href="00_SOURCE/parameters.json">parameters.json</a>
+<a class="dl" href="07_BOM/master_bom.csv">master_bom.csv</a>
+<a class="dl" href="07_BOM/hardware.csv">hardware.csv</a>
+<a class="dl" href="08_CUT_LISTS/rough.csv">rough.csv</a>
+<a class="dl" href="08_CUT_LISTS/finished.csv">finished.csv</a>
+<a class="dl" href="08_CUT_LISTS/nesting.csv">nesting.csv</a>
+<a class="dl" href="09_JOINERY/joints.csv">joints.csv</a>
+<a class="dl" href="12_QA/inspection.csv">inspection.csv</a>
+<a class="dl" href="06_DRAWINGS/GA-100.svg">GA-100</a>
+<a class="dl" href="06_DRAWINGS/P-301.svg">P-301</a>
+<a class="dl" href="10_TEMPLATES/T-510.svg">T-510</a>
+</p>
+<p><strong>Unresolved / TO BE MEASURED / TO BE CONFIRMED</strong></p>
+<ul>
+<li>Green Code district height for pier caps (1965) and arch crown (2640) — D-006.</li>
+<li>H-004 latch MPN — user selection.</li>
+<li>Saw kerf ASSUMED 3.2 mm — measure your blade; parameter <code>saw_kerf</code>.</li>
+<li>Unit costs — fill when quotes in hand; do not invent.</li>
+<li>D-007: split FreeCAD compounds into named Bodies with Fabrication properties (CAD increment).</li>
+<li>Site-specific overall run: set <code>n_panel_bays_left/right</code> or <code>bay_cc</code> and re-run <code>python3 scripts/fab_system.py</code>.</li>
+</ul>
+<p>Regenerate: <code>python3 scripts/fab_system.py</code></p>
+</section>
+</main>
+<footer><div class="wrap">STELE fabrication model Rev B · parameter → geometry → metadata → shop documents · STELE-BUF-001</div></footer>
+</body></html>

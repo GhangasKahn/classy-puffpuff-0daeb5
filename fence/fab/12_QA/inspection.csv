@@ -1,0 +1,15 @@
+QC,GATE,CHECK,SPEC,CLASS
+QC-01,M0,Verify parcel survey + 811 locates before excavation,Open-hole,T0
+QC-02,M4,Footing bearing elevation,"−1220 mm from finish grade, ±15 mm",T1
+QC-03,M4,Air-entrainment on delivery ticket,"5–7% AE, 4000 psi",T0
+QC-04,M5,Pier centerline spacing,2440 mm ±3 mm typical; gate 1700 mm ±3,T2
+QC-05,M5,Pier plumb and batter,1:26.7 per face; plumb within 3 mm / 1600,T2
+QC-06,M4,All R-001 finished lengths,"2080 mm, all 12 within 1 mm of each other",T2
+QC-07,M3,Pocket CL vs rail_z story stick,"[350, 1000, 1650] ±1 mm",T2
+QC-08,M5,Dry-fit rails through both pockets before cladding,Slides by hand; wedge snugs; no bind in summer moisture,T2
+QC-09,M5,Gate diagonals (leaf),Diagonals within 2 mm before boards go on,T2
+QC-10,M5,Arch centering not struck before 7-day cure,Hold point — sign-off,T0
+QC-11,M7,Capillary flashing continuous at all 6 stems,Visual + photo,T0
+QC-12,M7,Curb isolated from pier footings,Construction joint / foam; no rebar continuity,T1
+QC-13,M7,Rain-screen gaps remain open (not caulked),10 mm ±2,T1
+QC-14,M7,Printer scale on templates T-501..T-510,100.000 mm check box measures 100.0 ±0.5,T3

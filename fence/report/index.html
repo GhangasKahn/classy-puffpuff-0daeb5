@@ -107,6 +107,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
     <a href="#permits">Permits</a>
     <a href="#maintenance">Care</a>
     <a href="#files">Files</a>
+    <a href="../fab/">Shop</a>
   </div>
 </nav>
 
@@ -309,7 +310,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
   <section id="drawings">
     <div class="wrap">
       <h2><span class="no">7</span>Construction documents</h2>
-      <p class="intro">MARTIN sheets M-1 through M-6 (marketing A3) plus the fabrication package at <a href="../martin/fab/">/fab</a> (G/GA/EX/P/J/T/S/QA). All generated from <code>martin_kernel.py</code>.</p>
+      <p class="intro">MARTIN sheets M-1 through M-6 (marketing A3) plus the fabrication package at <a href="../martin/fab/">/fence/martin/fab/</a> (G/GA/EX/P/J/T/S/QA). All generated from <code>martin_kernel.py</code>.</p>
       <div class="sheetlist">
         <figure class="frame"><img src="../martin/plans/M1_general.svg" alt="Sheet M-1" /><figcaption>M-1 · General arrangement — elevation, plan, design notes</figcaption></figure>
         <figure class="frame"><img src="../martin/plans/M2_elevation.svg" alt="Sheet M-2" /><figcaption>M-2 · Bay elevation &amp; rail schedule</figcaption></figure>
@@ -403,7 +404,8 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <a class="dl" href="../martin/">MARTIN design page</a>
         <a class="dl" href="../martin/fab/">MARTIN fabrication package</a>
         <a class="dl" href="../martin/app/">MARTIN Build app</a>
-        <a class="dl" href="../stele/">STELE (archive)</a>
+        <a class="dl" href="../stele/">STELE</a>
+        <a class="dl" href="../fab/">Shop fabrication model (Rev B)</a>
         <a class="dl" href="../">HASHIRA joinery guide</a>
       </p>
       <h3>MARTIN CAD</h3>
@@ -425,9 +427,11 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       </p>
       <h3>Regenerate</h3>
       <p class="mono" style="background:#fff;border:1px solid var(--line2);padding:16px 18px;max-width:66ch">
-        ./scripts/build_martin.sh&nbsp;&nbsp;# kernel → FreeCAD → fab package → plans<br />
+        ./scripts/build_martin.sh&nbsp;&nbsp;# kernel → FreeCAD → MARTIN fab package → plans<br />
         ./scripts/build_stele.sh&nbsp;&nbsp;# STELE archive pipeline<br />
-        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models
+        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models<br />
+        python3 scripts/export_martin_fab.py&nbsp;&nbsp;# MARTIN BOM, drawings, JSON/CSV<br />
+        python3 scripts/fab_system.py&nbsp;&nbsp;# STELE BOM, cut lists, shop drawings, JSON/CSV
       </p>
       <div class="callout">
         <p class="t">Disclaimer</p>
