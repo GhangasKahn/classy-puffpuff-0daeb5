@@ -34,6 +34,10 @@ export const ELITE_PACKS = [
   "memento",
   "inversion",
   "factory",
+  "wick",
+  "browser",
+  "vm",
+  "swarm",
 ];
 
 /** Playground catalog id → pack folder (when they differ). */
@@ -59,6 +63,10 @@ export const CATALOG_TO_PACK = {
   verifier: "verifier",
   copywriter: "copywriter",
   fulfiller: "fulfiller",
+  wick: "wick",
+  browser: "browser",
+  vm: "vm",
+  swarm: "swarm",
 };
 
 export function packDir(id) {

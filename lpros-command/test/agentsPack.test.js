@@ -26,7 +26,11 @@ describe("lpros-agents elite packs", () => {
     assert.ok(existsSync(resolve(root, "USER.md")));
     assert.ok(existsSync(resolve(root, "ROSTER.md")));
     assert.ok(existsSync(resolve(root, "INSPIRATION.md")));
+    assert.ok(existsSync(resolve(root, "GROWTH.md")));
     assert.ok(existsSync(resolve(root, ".cursor/skills/create-elite-agent/SKILL.md")));
+    const growth = readFileSync(resolve(root, "GROWTH.md"), "utf8");
+    assert.match(growth, /4D/);
+    assert.match(growth, /outperform/i);
   });
 
   it("roster lists every elite pack as complete", () => {
@@ -45,6 +49,10 @@ describe("lpros-agents elite packs", () => {
         assert.ok(existsSync(p), `${agent}/${f}`);
         const text = readFileSync(p, "utf8");
         assert.ok(text.length > 400, `${agent}/${f} too short (${text.length})`);
+        if (f === "SOUL.md") {
+          assert.ok(text.length > 6000, `${agent}/SOUL.md not exhaustive (${text.length})`);
+          assert.match(text, /^# Mold:/m);
+        }
       }
     });
 
@@ -71,11 +79,16 @@ describe("lpros-agents elite packs", () => {
 
 describe("playground persona packs", () => {
   it("catalog includes specialists and hermesPack wiring", async () => {
-    for (const id of ["conditioner", "redteam", "pressure", "compliance", "memento", "inversion"]) {
+    for (const id of ["conditioner", "redteam", "pressure", "compliance", "memento", "inversion", "wick"]) {
       assert.ok(AGENT_CATALOG.some((a) => a.id === id), id);
     }
     assert.equal(AGENT_CATALOG.find((a) => a.id === "brain")?.hermesPack, "orchestrator");
     assert.equal(AGENT_CATALOG.find((a) => a.id === "crawler")?.hermesPack, "taxonomy");
+    assert.equal(AGENT_CATALOG.find((a) => a.id === "browser")?.hermesPack, "browser");
+    assert.equal(AGENT_CATALOG.find((a) => a.id === "vm")?.hermesPack, "vm");
+    assert.equal(AGENT_CATALOG.find((a) => a.id === "swarm")?.hermesPack, "swarm");
+    assert.equal(AGENT_CATALOG.find((a) => a.id === "wick")?.packOnly, true);
+    assert.equal(AGENT_CATALOG.find((a) => a.id === "fulfill")?.hermesPack, "fulfiller");
     const cat = await routeApi({ method: "GET", pathname: "/playground/catalog" });
     assert.ok((cat.body.packs || []).every((p) => p.complete));
     const packs = await routeApi({ method: "GET", pathname: "/playground/packs" });
@@ -105,5 +118,23 @@ describe("playground persona packs", () => {
     assert.equal(job.status, "done");
     assert.equal(job.result.packId, "redteam");
     assert.match(job.result.soulExcerpt, /Joker|lawful|crime|thesis/i);
+  });
+
+  it("launches Wick consequence pack without violence", async () => {
+    const job = await launchAgent({
+      agent: "wick",
+      dryRun: true,
+      sync: true,
+      input: { openMarkers: ["supplier_unconfirmed"] },
+    });
+    assert.equal(job.status, "done");
+    assert.equal(job.result.packOnly, true);
+    assert.equal(job.result.packId, "wick");
+    assert.match(job.result.soulExcerpt, /Wick|HOLD|consequence/i);
+  });
+
+  it("Shinobi fulfiller and Oracle conditioner souls stay on-mold", () => {
+    assert.match(loadPack("fulfiller").soulExcerpt, /Shinobi/i);
+    assert.match(loadPack("conditioner").soulExcerpt, /Oracle/i);
   });
 });

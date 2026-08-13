@@ -315,6 +315,7 @@ const PACK_ONLY = new Set([
   "compliance",
   "memento",
   "inversion",
+  "wick",
 ]);
 
 function runPersonaPack(catalogId, input = {}) {
