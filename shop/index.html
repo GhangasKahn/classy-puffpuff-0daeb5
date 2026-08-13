@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Shop projects — DS-18 drum sander build app with 3D, cut lists, and plans." />
+<title>Shop — Build projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#12151a;--paper:#f4efe6;--dim:#b8b0a4;--copper:#e09a58;
+  --disp:"Newsreader",Georgia,serif;--sans:"Libre Franklin",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.55}
+.wrap{width:min(900px,calc(100% - 40px));margin:0 auto;padding:48px 0 80px}
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--copper)}
+h1{font:600 clamp(36px,6vw,56px)/1.05 var(--disp);margin:12px 0 16px}
+.lead{color:var(--dim);font-size:18px;max-width:54ch;margin-bottom:28px}
+a.card{display:block;border:1px solid rgba(244,239,230,.12);border-radius:12px;padding:22px;background:#1a1f27;color:inherit;text-decoration:none}
+a.card:hover{border-color:var(--copper)}
+a.card b{font:600 22px/1.2 var(--disp);display:block;margin:6px 0}
+a.card span{color:var(--dim);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Shop floor</p>
+  <h1>Machines you can build</h1>
+  <p class="lead">Interactive build apps: 3D visualization, assembly, nested cut lists, shopping checklists, and printable plan sheets.</p>
+  <a class="card" href="drum-sander/app/#overview">
+    <p class="kicker">DS-18</p>
+    <b>Shop drum sander</b>
+    <span>18″ drum · 6″ OD · 1.5 HP · plywood cabinet · explode, cut list, shopping list, DS-1…DS-6 plans.</span>
+  </a>
+</div>
+</body>
+</html>

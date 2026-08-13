@@ -1,0 +1,18 @@
+{
+  "name": "DS-18 Drum Sander",
+  "short_name": "DS-18",
+  "description": "Shop drum sander build app — 3D, assembly, cut list, shopping, plans",
+  "start_url": "./#overview",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12151a",
+  "theme_color": "#12151a",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1188" viewBox="0 0 1680 1188">
+<rect width="1680" height="1188" fill="#f4efe6" stroke="#1a1f24" stroke-width="3"/>
+<rect x="24" y="24" width="1632" height="1140" fill="none" stroke="#1a1f24" stroke-width="1.2"/>
+<line x1="24" y1="1098" x2="1656" y2="1098" stroke="#1a1f24" stroke-width="1.5"/>
+<text x="40" y="70" font-family="IBM Plex Mono, Menlo, monospace" font-size="16" fill="#c47a3a" font-weight="600">DS-18 SHOP DRUM SANDER</text>
+<text x="40" y="96" font-family="Georgia, serif" font-size="28" fill="#1a1f24" font-weight="600">Plywood nesting</text>
+<text x="40" y="122" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#5a4a3a">Two 4×8 sheets  ·  3/4″ Baltic birch  ·  scale 1:24 approx</text>
+<text x="40" y="1130" font-family="Georgia, serif" font-size="28" fill="#c47a3a" font-weight="600">DS-18</text>
+<text x="160" y="1126" font-family="IBM Plex Mono, Menlo, monospace" font-size="18" fill="#1a1f24" font-weight="600">DS-2  ·  Plywood nesting</text>
+<text x="40" y="1154" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a">Dimensions in inches · Rev A · hobby machine, not UL listed</text>
+<text x="1640" y="1130" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#5a4a3a" text-anchor="end">18″ drum · 6″ OD · 1.5 HP</text>
+<text x="1640" y="1154" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a" text-anchor="end">Cabinet 36 × 22 × 28 · overall 42″ high</text>
+
+<text x="40" y="160" font-family="IBM Plex Mono, Menlo, monospace" font-size="15" fill="#c47a3a" font-weight="600">SHEET A — 4×8 × 3/4″ Baltic birch</text>
+<rect x="80" y="180" width="336.0" height="168.0" fill="#efe6d6" stroke="#1a1f24" stroke-width="2"/>
+<rect x="84" y="184" width="77.0" height="98.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="122.5" y="237.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">SIDE 22×28</text>
+
+<rect x="165.0" y="184" width="77.0" height="98.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="203.5" y="237.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">SIDE 22×28</text>
+
+<rect x="246.0" y="184" width="120.75" height="98.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="306.375" y="237.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">FRONT 34.5×28</text>
+
+<rect x="84" y="288.0" width="21.0" height="49.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="94.5" y="316.5" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">TOWER</text>
+
+<rect x="111.0" y="288.0" width="21.0" height="49.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="121.5" y="316.5" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">TOWER</text>
+
+<rect x="138.0" y="288.0" width="42.0" height="28.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="159.0" y="306.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">HOOD</text>
+
+<rect x="184.0" y="288.0" width="42.0" height="28.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="205.0" y="306.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">HOOD</text>
+
+<rect x="230.0" y="288.0" width="77.0" height="12.25" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="268.5" y="298.125" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">APR 22</text>
+
+<rect x="230.0" y="304.25" width="77.0" height="12.25" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="268.5" y="314.375" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">APR 22</text>
+
+<rect x="230.0" y="320.5" width="64.75" height="12.25" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="262.375" y="330.625" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">APR 18.5</text>
+
+<rect x="311.0" y="288.0" width="64.75" height="12.25" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="343.375" y="298.125" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">APR 18.5</text>
+
+<text x="80" y="376.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a">Kerf ~1/8″ between parts. Grain with the long edge. Remainder is scrap / fence stock.</text>
+
+<text x="40" y="600" font-family="IBM Plex Mono, Menlo, monospace" font-size="15" fill="#c47a3a" font-weight="600">SHEET B — 4×8 × 3/4″ Baltic birch</text>
+<rect x="80" y="620" width="336.0" height="168.0" fill="#efe6d6" stroke="#1a1f24" stroke-width="2"/>
+<rect x="84" y="624" width="120.75" height="98.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="144.375" y="677.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">BACK 34.5×28</text>
+
+<rect x="212.75" y="624" width="70.0" height="77.0" fill="#e0b888" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="247.75" y="666.5" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">TABLE 20×22</text>
+
+<rect x="290.75" y="624" width="120.75" height="71.75" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="351.125" y="663.875" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">BOTTOM 34.5×20.5</text>
+
+<rect x="84" y="730.0" width="120.75" height="49.0" fill="#d2b48c" stroke="#1a1f24" stroke-width="1.2"/>
+<text x="144.375" y="758.5" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#1a1f24" text-anchor="middle">SHELF 34.5×14</text>
+
+<text x="212.75" y="758.0" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a">Offcut: fence 3/4×3×20 hardwood from solid stock, not this sheet.</text>
+
+</svg>

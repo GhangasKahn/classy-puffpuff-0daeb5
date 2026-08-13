@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1188" viewBox="0 0 1680 1188">
+<rect width="1680" height="1188" fill="#f4efe6" stroke="#1a1f24" stroke-width="3"/>
+<rect x="24" y="24" width="1632" height="1140" fill="none" stroke="#1a1f24" stroke-width="1.2"/>
+<line x1="24" y1="1098" x2="1656" y2="1098" stroke="#1a1f24" stroke-width="1.5"/>
+<text x="40" y="70" font-family="IBM Plex Mono, Menlo, monospace" font-size="16" fill="#c47a3a" font-weight="600">DS-18 SHOP DRUM SANDER</text>
+<text x="40" y="96" font-family="Georgia, serif" font-size="28" fill="#1a1f24" font-weight="600">Drive &amp; dust</text>
+<text x="40" y="122" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#5a4a3a">Pulleys, belt, hood, wiring</text>
+<text x="40" y="1130" font-family="Georgia, serif" font-size="28" fill="#c47a3a" font-weight="600">DS-18</text>
+<text x="160" y="1126" font-family="IBM Plex Mono, Menlo, monospace" font-size="18" fill="#1a1f24" font-weight="600">DS-5  ·  Drive &amp; dust</text>
+<text x="40" y="1154" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a">Dimensions in inches · Rev A · hobby machine, not UL listed</text>
+<text x="1640" y="1130" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#5a4a3a" text-anchor="end">18″ drum · 6″ OD · 1.5 HP</text>
+<text x="1640" y="1154" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a" text-anchor="end">Cabinet 36 × 22 × 28 · overall 42″ high</text>
+
+<text x="40" y="160" font-family="IBM Plex Mono, Menlo, monospace" font-size="15" fill="#c47a3a" font-weight="600">DRIVE — left side (belt plane)</text>
+<rect x="160" y="520" width="280" height="200" fill="#2a2e33" rx="20" stroke="#1a1f24" stroke-width="1.8"/>
+<text x="300" y="630" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#f4efe6" text-anchor="middle">1.5 HP · 1725 RPM</text>
+<circle cx="520" cy="620" r="32" fill="#8a9098" stroke="#1a1f24" stroke-width="2"/>
+<text x="520" y="680" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#5a4a3a" text-anchor="middle">2″ MOTOR</text>
+<circle cx="520" cy="320" r="64" fill="#8a9098" stroke="#1a1f24" stroke-width="2"/>
+<text x="520" y="240" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" fill="#5a4a3a" text-anchor="middle">4″ DRUM</text>
+<path d="M488 320 C400 320, 400 620, 488 620" fill="none" stroke="#1a1a1a" stroke-width="10"/>
+<path d="M552 320 C640 320, 640 620, 552 620" fill="none" stroke="#1a1a1a" stroke-width="10"/>
+<text x="700" y="470" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">A-36 V-belt</text>
+<text x="700" y="494" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">~1:2 reduction → ~860 RPM drum</text>
+<text x="700" y="518" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">1/2″ deflection at mid-span</text>
+<text x="700" y="542" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">1.5″ slot in left cabinet wall</text>
+<text x="980" y="160" font-family="IBM Plex Mono, Menlo, monospace" font-size="15" fill="#c47a3a" font-weight="600">DUST HOOD</text>
+<path d="M1040 420 C1040 260, 1480 260, 1480 420" fill="none" stroke="#4a5560" stroke-width="14"/>
+<circle cx="1260" cy="248" r="28" fill="none" stroke="#4a5560" stroke-width="6"/>
+<text x="1260" y="200" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" fill="#5a4a3a" text-anchor="middle">4″ PORT AFT</text>
+<text x="1040" y="480" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">~3/8″ clearance over 6″ drum</text>
+<text x="1040" y="504" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">26 ga wrap + 3/4″ plywood cheeks</text>
+<text x="1040" y="528" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">Collector ≥ 350 CFM before test</text>
+<text x="40" y="820" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#c47a3a" font-weight="600">WIRING</text>
+<text x="40" y="848" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">Magnetic starter on left cabinet. E-stop in reach of the operator. Cord through 7/8″ strain relief.</text>
+<text x="40" y="872" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#1a1f24">Match motor nameplate (115/230). A power blip must not restart the drum.</text>
+
+</svg>
