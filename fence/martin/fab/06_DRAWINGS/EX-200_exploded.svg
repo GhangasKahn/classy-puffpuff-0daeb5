@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
+<line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>EX-200  ·  Exploded assembly</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Insertion directions — not decorative</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WINTER / ASSEMBLY LOGIC  (reverse for knock-down)</text>
+<text x='40.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>1  F-004 gravel  →  F-001 pad (LEVEL)  →  F-003 piers  →  H-001 sleeves (drain down)</text>
+<text x='40.0' y='146.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>2  L-001..004 drop −Z into sleeves (shoulder on pad = DATUM)</text>
+<text x='40.0' y='182.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>3  R-001..003 slide +X through nuki mortises (P1→P3)</text>
+<text x='40.0' y='218.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>4  B-001..003 drop −Z into rail grooves</text>
+<text x='40.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>5  C-001 cap +Z onto posts; kama-tsugi peg at L-003</text>
+<text x='40.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>6  W-001 kusabi driven in cheeks (lock); NEVER glue</text>
+<text x='40.0' y='326.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>7  A-030 gate +Z onto L-002 pintles; G-010 slides to H-002 or L-001</text>
+<text x='40.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>BALLOONS</text>
+<text x='40.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>L-001   P0 latch post                                     qty 1</text>
+<text x='40.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>L-002   P1 hinge post                                     qty 1</text>
+<text x='40.0' y='466.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>L-003   P2 mid post / cap scarf                           qty 1</text>
+<text x='40.0' y='484.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>L-004   P3 end post                                       qty 1</text>
+<text x='40.0' y='502.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-001   R1 bottom Prairie nuki                            qty 1</text>
+<text x='40.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-002   R2 mid Prairie nuki                               qty 1</text>
+<text x='40.0' y='538.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-003   R3 upper Prairie nuki                             qty 1</text>
+<text x='40.0' y='556.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>C-001   Privacy cap (kama-tsugi pair)                     qty 1</text>
+<text x='40.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>C-002   Latch-post cap stub                               qty 1</text>
+<text x='40.0' y='592.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>B-001   Privacy board course C1 (below R1)                qty 16</text>
+<text x='40.0' y='610.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>B-002   Privacy board courses C2+C3 (between rails)       qty 32</text>
+<text x='40.0' y='628.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>B-003   Privacy board course C4 (above R3)                qty 16</text>
+<text x='40.0' y='646.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-001   Gate hinge stile                                  qty 1</text>
+<text x='40.0' y='664.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-002   Gate latch stile                                  qty 1</text>
+<text x='40.0' y='682.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-003   Gate rail aligned to R1                           qty 1</text>
+<text x='40.0' y='700.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-004   Gate rail aligned to R2 (latch)                   qty 1</text>
+<text x='40.0' y='718.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-005   Gate rail aligned to R3                           qty 1</text>
+<text x='40.0' y='736.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-006   Gate bottom rail                                  qty 1</text>
+</svg>

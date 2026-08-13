@@ -67,6 +67,10 @@
     if (id === "walk") renderWalk();
     if (id === "registry") renderRegistry();
     if (id === "qa") renderQA();
+    if (id === "fab") {
+      if (window.MARTIN_FAB) renderFab(window.MARTIN_FAB);
+      else loadFab();
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -589,6 +593,75 @@
       .join("");
   }
 
+  function renderFab(fab) {
+    if (!fab || !$("#fabStats")) return;
+    const nest = fab.nest || {};
+    $("#fabStats").innerHTML = [
+      ["Parts", fab.parts.length],
+      ["Joints", fab.joints.length],
+      ["Net bf", nest.net_bf],
+      ["Buy bf", nest.procurement_bf],
+      ["Concrete", (fab.concrete && fab.concrete.concrete_yd3) + " yd³"],
+      ["Rev", fab.project.REVISION],
+    ]
+      .map(([k, v]) => `<div class="card stat"><span>${k}</span><b>${v}</b></div>`)
+      .join("");
+    $("#fabParts").innerHTML = fab.parts
+      .filter((p) => p.MAKE_OR_BUY === "MAKE")
+      .map(
+        (p) =>
+          `<tr><td class="mono">${p.PART_ID}</td><td>${p.PART_NAME}</td><td>${p.QUANTITY}</td><td class="mono">${p.FINISHED_THICKNESS}×${p.FINISHED_WIDTH}×${p.FINISHED_LENGTH}</td><td>${(p.JOINERY || "").slice(0, 72)}</td></tr>`
+      )
+      .join("");
+    $("#fabJoints").innerHTML = fab.joints
+      .map(
+        (j) =>
+          `<tr><td class="mono">${j.JOINT_ID}</td><td>${j.JOINT_TYPE}</td><td>${j.PART_A}</td><td>${j.PART_B}</td><td>${j.FIT_CLASS || ""}</td></tr>`
+      )
+      .join("");
+    $("#fabQa").innerHTML = (fab.qa_geometry || [])
+      .map((g) => `<li><strong>${g.level}</strong> — ${g.item}: ${g.detail || ""}</li>`)
+      .join("");
+    $("#fabOpen").innerHTML = (fab.unresolved || [])
+      .map((u) => `<li><strong>${u.ID}</strong> ${u.ITEM} [${u.CLASS}]</li>`)
+      .join("");
+    const dwg = (fab.drawing_index || []).filter((d) => String(d.FILE).endsWith(".svg"));
+    $("#fabDrawings").innerHTML = dwg
+      .map((d) => {
+        const href = d.FILE.startsWith("T-")
+          ? `../fab/10_TEMPLATES/${d.FILE}`
+          : d.FILE.startsWith("QA")
+          ? `../fab/12_QA/${d.FILE}`
+          : d.FILE.startsWith("L-")
+          ? `../fab/11_BUILD_MANUAL/${d.FILE}`
+          : `../fab/06_DRAWINGS/${d.FILE}`;
+        return `<a class="shot" href="${href}" data-gallery="${href}" data-title="${d.DWG}">
+          <img src="${href}" alt="${d.TITLE}" loading="lazy"/>
+          <figcaption>${d.DWG} · ${d.TITLE}</figcaption>
+        </a>`;
+      })
+      .join("");
+    $$("#fabDrawings .shot").forEach((a) =>
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLightbox(a.dataset.gallery, a.dataset.title);
+      })
+    );
+  }
+
+  function loadFab() {
+    fetch("fab.json")
+      .then((r) => r.json())
+      .then((fab) => {
+        window.MARTIN_FAB = fab;
+        renderFab(fab);
+      })
+      .catch(() => {
+        const el = $("#fabStats");
+        if (el) el.innerHTML = "<p class='hint'>fab.json not loaded — open the fabrication package folder.</p>";
+      });
+  }
+
   function init() {
     loadSSOT().then(() => {
       renderRegistry();
@@ -604,6 +677,7 @@
     renderDownloads();
     renderDrafts();
     renderWinter();
+    loadFab();
     refreshProgress();
     drawViz();
     renderWalk();

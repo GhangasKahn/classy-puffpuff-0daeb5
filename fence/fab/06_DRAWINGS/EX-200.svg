@@ -1,0 +1,28 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800' width='1200' height='800' font-size='16'>
+<rect width='1200' height='800' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='1152.0' height='752.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='690.0' width='1152.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='722.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='748.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>EXPLODED BAY  —  insertion logic (not decorative)</text>
+<text x='1000.0' y='730.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>EX-200</text>
+<text x='1000.0' y='752.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<text x='60.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#a34e2b' text-anchor='start'>INSERTION ORDER  C-001  →  R-001 (3)  →  W-001  →  B-001  →  TC-001</text>
+<rect x='80.0' y='400.0' width='40.0' height='280.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<rect x='720.0' y='400.0' width='40.0' height='280.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='100.0' y='700.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='middle'>M-002</text>
+<text x='740.0' y='700.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='middle'>M-002</text>
+<rect x='160.0' y='620.0' width='520.0' height='18.0' fill='none' stroke='#a34e2b' stroke-width='1.5'/>
+<text x='420.0' y='612.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='middle'>R-001  rail 1  →  slide +X through pockets</text>
+<rect x='160.0' y='520.0' width='520.0' height='18.0' fill='none' stroke='#a34e2b' stroke-width='1.5'/>
+<text x='420.0' y='512.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='middle'>R-001  rail 2  →  slide +X through pockets</text>
+<rect x='160.0' y='430.0' width='520.0' height='18.0' fill='none' stroke='#a34e2b' stroke-width='1.5'/>
+<text x='420.0' y='422.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='middle'>R-001  rail 3  →  slide +X through pockets</text>
+<rect x='200.0' y='660.0' width='440.0' height='24.0' fill='none' stroke='#26241f' stroke-width='1.2'/>
+<text x='420.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='middle'>C-001 CURB  (FLOATING)</text>
+<rect x='220.0' y='250.0' width='400.0' height='140.0' fill='none' stroke='#c8c2b2' stroke-width='1'/>
+<text x='420.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='middle'>B-001 boards  (after rails locked)  FACE A −Y</text>
+<rect x='180.0' y='200.0' width='480.0' height='16.0' fill='none' stroke='#26241f' stroke-width='1.5'/>
+<text x='420.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='middle'>TC-001 cap  last</text>
+<text x='60.0' y='740.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#a34e2b' text-anchor='start'>Do not fasten B-001 to masonry. Do not assemble boards before QC-08 rail dry-fit.</text>
+
+</svg>

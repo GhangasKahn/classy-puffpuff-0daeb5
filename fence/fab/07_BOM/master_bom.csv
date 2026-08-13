@@ -1,0 +1,23 @@
+ITEM,PART_ID,DESCRIPTION,QTY,MAKE_OR_BUY,MATERIAL,SPECIES,FINISHED_T,FINISHED_W,FINISHED_L,ROUGH_T,ROUGH_W,ROUGH_L,HANDED,REV,NOTES
+1,F-001,Pier footing pad,6,MAKE,Concrete 4000 psi AE 5–7%,,300,600,600,300,600,600,IDENTICAL,B,Bearing at −frost_depth on F-003. Pour monolithic with F-002 where possible.
+2,F-002,Pier stem,6,MAKE,Concrete 4000 psi AE 5–7%,,920,350,350,920,350,350,IDENTICAL,B,Capillary-break flashing at stem/plinth. CONSTRAINT: FIXED to F-001.
+3,F-003,Gravel drainage pad,6,BUY,#57 crushed stone,,150,700,700,150,700,700,IDENTICAL,B,Roman rule: never let the base sit wet.
+4,M-001,Pier plinth,6,MAKE,Cast stone or limestone,,150,560,560,156,566,566,IDENTICAL,B,Sits on flashing over F-002.
+5,M-002-L,Battered shaft — pockets LEFT,2,MAKE,Cast stone (3 drums),,1600,480,360,1600,480,480,LEFT-HAND,B,Batter 60/1600 = 1:26.7 per face (Egyptian talus). GATE_L + END_R.
+6,M-002-R,Battered shaft — pockets RIGHT,2,MAKE,Cast stone (3 drums),,1600,480,360,1600,480,480,RIGHT-HAND,B,END_L + GATE_R. Mirror of M-002-L.
+7,M-002-B,Battered shaft — pockets BOTH,2,MAKE,Cast stone (3 drums),,1600,480,360,1600,480,480,IDENTICAL,B,MID piers. Same batter as M-002-L/R.
+8,M-003,Mayan cap stack (3 units),4,MAKE,Cast stone,,215,560,180,223,560,560,IDENTICAL,B,"Drip kerf 8×8, 20 from edge, all 4 sides of tiers 1+2. 1:12 wash min."
+9,M-004,Impost block,2,MAKE,Cast stone,,60,520,520,64,520,520,IDENTICAL,B,Arch bears here in pure compression. SS dowels for erection only.
+10,M-005,Arch springer voussoir,2,MAKE,Cast stone,,220,350,206,240,370,277,MIRRORED,B,Flat soffit on impost. L/R mirrored.
+11,M-006,Arch typical voussoir,8,MAKE,Cast stone,,220,350,206,240,370,277,IDENTICAL,B,Concentric ring — all typical voussoirs IDENTICAL.
+12,M-007,Keystone,1,MAKE,Cast stone,,300,280,410,310,300,420,IDENTICAL,B,Do not strike centering until 7-day cure after key is set.
+13,C-001,Splash curb,4,MAKE,Cast concrete or solid CMU,,250,200,1960,300,200,1980,IDENTICAL,B,CONSTRAINT: FLOATING — heave isolation from piers.
+14,R-001,Nuki through-rail,12,MAKE,Western red cedar,Thuja plicata,38,89,2080,42,95,2105,IDENTICAL,B,All 12 IDENTICAL. Purchase 2×4×8' S4S. Datum End = left pocket engagement.
+15,B-001,Rain-screen board,52,MAKE,Western red cedar,Thuja plicata,19,140,1460,22,146,1480,IDENTICAL,B,CONSTRAINT: FLOATING (nailed to rails; rails float in pockets). 10 mm gaps.
+16,TC-001,Bay timber cap,4,MAKE,Western red cedar,Thuja plicata,45,120,2080,50,130,2105,IDENTICAL,B,Washes water off rain-screen. Do not caulk kerfs.
+17,W-001,Nuki locking wedge,24,MAKE,White oak or black locust,Quercus alba / Robinia,8,25,90,12,30,100,IDENTICAL,B,Harder than cedar frame. Replaceable. Do not glue.
+18,GS-001,Gate stile,2,MAKE,Western red cedar or locust,Thuja plicata,40,70,1600,45,76,1620,IDENTICAL,B,"Hinge stile = street-left as viewed from outside, inward swing."
+19,GL-001,Gate ledge,3,MAKE,Western red cedar,,45,45,1030,50,50,1050,IDENTICAL,B,
+20,GB-001,Gate diagonal brace,1,MAKE,Western red cedar,,45,45,1762,50,50,1802,IDENTICAL,B,Brace must rise from hinge (bottom) to latch (top). Reverse = sag.
+21,GF-001,Gate face board,12,MAKE,Western red cedar,,16,90,1600,19,96,1620,IDENTICAL,B,
+22,L-001,Hashira post (study / repair),2,MAKE,Western red cedar / black locust / white oak,site,89,89,1800,95,95,1850,IDENTICAL,B,HASHIRA system for existing-fence reinforcement — not used in STELE (masonry piers replace posts).

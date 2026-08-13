@@ -1,0 +1,94 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1100 1400' width='1100' height='1400' font-size='16'>
+<rect width='1100' height='1400' fill='#f6f3ea'/>
+<rect x='24.0' y='24.0' width='1052.0' height='1352.0' fill='none' stroke='#26241f' stroke-width='2.5'/>
+<rect x='24.0' y='1290.0' width='1052.0' height='86.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='40.0' y='1322.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a6f4d' text-anchor='start'>STELE  FABRICATION  ·  BUFFALO NY  ·  REV B</text>
+<text x='40.0' y='1348.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#26241f' text-anchor='start' font-weight='600'>PART LABELS  —  print, cut, attach to FACE A</text>
+<text x='900.0' y='1330.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>LBL-001</text>
+<text x='900.0' y='1352.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>UNITS mm [in]  ·  DO NOT SCALE</text>
+<rect x='50.0' y='80.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='64.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>R-001</text>
+<text x='64.0' y='138.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>NUKI RAIL</text>
+<text x='64.0' y='162.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>38×89×2080</text>
+<text x='64.0' y='186.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>GRAIN →  FACE A STREET  EDGE B DOWN</text>
+<text x='64.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES M-002  W-001  ·  REV B</text>
+<text x='536.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='570.0' y='80.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='584.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>B-001</text>
+<text x='584.0' y='138.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>RAIN-SCREEN BOARD</text>
+<text x='584.0' y='162.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>19×140×1460</text>
+<text x='584.0' y='186.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>TOP ↑  FACE A STREET</text>
+<text x='584.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES R-001 only  ·  REV B</text>
+<text x='1056.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='50.0' y='262.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='64.0' y='294.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>TC-001</text>
+<text x='64.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>BAY CAP</text>
+<text x='64.0' y='344.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>45×120×2080</text>
+<text x='64.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>WASH TO STREET  KERF DOWN</text>
+<text x='64.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES R-001  ·  REV B</text>
+<text x='536.0' y='294.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='570.0' y='262.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='584.0' y='294.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>W-001</text>
+<text x='584.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>NUKI WEDGE</text>
+<text x='584.0' y='344.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>8×25×90</text>
+<text x='584.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>TAPER 1:12  WEATHER SIDE</text>
+<text x='584.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES R-001 / pocket  ·  REV B</text>
+<text x='1056.0' y='294.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='50.0' y='444.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='64.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>GS-001</text>
+<text x='64.0' y='502.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>GATE STILE</text>
+<text x='64.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>40×70×1600</text>
+<text x='64.0' y='550.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>DATUM END 0 = BOTTOM</text>
+<text x='64.0' y='572.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES GL-001  H-002  ·  REV B</text>
+<text x='536.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='570.0' y='444.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='584.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>GL-001</text>
+<text x='584.0' y='502.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>GATE LEDGE</text>
+<text x='584.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>45×45×1030</text>
+<text x='584.0' y='550.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>TENON BOTH ENDS</text>
+<text x='584.0' y='572.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES GS-001  ·  REV B</text>
+<text x='1056.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='50.0' y='626.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='64.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>GB-001</text>
+<text x='64.0' y='684.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>GATE BRACE</text>
+<text x='64.0' y='708.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>RISES FROM HINGE</text>
+<text x='64.0' y='732.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>TEMPLATE T-503</text>
+<text x='64.0' y='754.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MATES ledges  ·  REV B</text>
+<text x='536.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='570.0' y='626.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='584.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>M-002-L</text>
+<text x='584.0' y='684.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>SHAFT LH</text>
+<text x='584.0' y='708.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>POCKETS LEFT</text>
+<text x='584.0' y='732.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>BATTER STICK T-510</text>
+<text x='584.0' y='754.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>GATE_L / END_R  ·  REV B</text>
+<text x='1056.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='50.0' y='808.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='64.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>M-002-R</text>
+<text x='64.0' y='866.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>SHAFT RH</text>
+<text x='64.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>POCKETS RIGHT</text>
+<text x='64.0' y='914.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>BATTER STICK T-510</text>
+<text x='64.0' y='936.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>END_L / GATE_R  ·  REV B</text>
+<text x='536.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='570.0' y='808.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='584.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>M-002-B</text>
+<text x='584.0' y='866.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>SHAFT BOTH</text>
+<text x='584.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>POCKETS L+R</text>
+<text x='584.0' y='914.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>BATTER STICK T-510</text>
+<text x='584.0' y='936.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>MID  ·  REV B</text>
+<text x='1056.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='50.0' y='990.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='64.0' y='1022.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>C-001</text>
+<text x='64.0' y='1048.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>CURB</text>
+<text x='64.0' y='1072.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>200×250×1960</text>
+<text x='64.0' y='1096.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>FLOATING — NO REBAR TO PIERS</text>
+<text x='64.0' y='1118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>Bay splash  ·  REV B</text>
+<text x='536.0' y='1022.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+<rect x='570.0' y='990.0' width='500.0' height='170.0' fill='none' stroke='#26241f' stroke-width='2'/>
+<text x='584.0' y='1022.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#a34e2b' text-anchor='start' font-weight='600'>M-007</text>
+<text x='584.0' y='1048.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#26241f' text-anchor='start' font-weight='600'>KEYSTONE</text>
+<text x='584.0' y='1072.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a6f4d' text-anchor='start'>proud 30</text>
+<text x='584.0' y='1096.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#26241f' text-anchor='start'>CROWN  ORIENT TAPER UP</text>
+<text x='584.0' y='1118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a6f4d' text-anchor='start'>J-ARCH  ·  REV B</text>
+<text x='1056.0' y='1022.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a34e2b' text-anchor='end'>TOP ↑</text>
+
+</svg>

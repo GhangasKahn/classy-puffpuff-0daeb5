@@ -83,6 +83,11 @@
   status = 301
 
 [[redirects]]
+  from = "/martin/fab"
+  to = "/fence/martin/fab/"
+  status = 301
+
+[[redirects]]
   from = "/stele"
   to = "/fence/stele/"
   status = 301
@@ -90,6 +95,11 @@
 [[redirects]]
   from = "/report"
   to = "/fence/report/"
+  status = 301
+
+[[redirects]]
+  from = "/fab"
+  to = "/fence/fab/"
   status = 301
 
 # CAD downloads: force download with correct types
@@ -128,5 +138,30 @@
 
 [[headers]]
   for = "/fence/martin/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/martin/fab/06_DRAWINGS/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/martin/fab/10_TEMPLATES/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/fence/fab/*.csv"
+  [headers.values]
+    Content-Type = "text/csv; charset=utf-8"
+
+[[headers]]
+  for = "/fence/fab/*.json"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+
+[[headers]]
+  for = "/fence/fab/**/*.svg"
   [headers.values]
     Content-Type = "image/svg+xml"

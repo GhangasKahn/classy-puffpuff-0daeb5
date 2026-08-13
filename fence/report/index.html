@@ -107,19 +107,20 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
     <a href="#permits">Permits</a>
     <a href="#maintenance">Care</a>
     <a href="#files">Files</a>
+    <a href="../fab/">Shop</a>
   </div>
 </nav>
 
 <header class="cover">
   <div class="wrap">
-    <p class="tag">Design &amp; Engineering Report · Rev B</p>
+    <p class="tag">Design &amp; Engineering Report · Rev C</p>
     <h1>MARTIN — Prairie Fence for a 143″ Opening</h1>
     <p class="sub">Removable freestanding fence: Darwin Martin / Prairie horizontals + Japanese hand joinery, sized 143″ × 65″ for Buffalo, New York — with leveling pad, locking gate, FreeCAD model, and full build plans.</p>
     <div class="meta">
       <div><b>Location basis</b>Buffalo / Erie County NY</div>
       <div><b>Design run</b>143″ · 3632 mm × 65″ high</div>
       <div><b>Models</b>FreeCAD 1.1 + OpenSCAD</div>
-      <div><b>Documents</b>6 MARTIN sheets · STELE + HASHIRA archives</div>
+      <div><b>Documents</b>Fab package + 6 MARTIN sheets · STELE + HASHIRA archives</div>
     </div>
   </div>
 </header>
@@ -138,7 +139,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <li>Knock-down winter sequence: wedges → rails → boards → gate → posts → tip piers.</li>
       </ul>
       <p><strong>Related systems archived in this suite:</strong> STELE (permanent masonry-pier fence for longer runs) and HASHIRA (standalone joinery reinforcement method). Use them if you later extend beyond 143″ or reinforce another fence.</p>
-      <p><strong>Status.</strong> Geometry is fully modeled. Upload site photos (drop-off height, house latch wall, gray swatch) to lock makeup thickness and receiver detail. Not a stamped PE document — confirm Green Code limits and engineer review if the city requires it.</p>
+      <p><strong>Status — Rev C.</strong> Parametric fabrication kernel is the single source of truth: semantic Part IDs, joint register, nested BOM (196 bf net / 225 bf buy), shop drawings, and QA. Upload site photos (drop-off height, house latch wall, gray swatch) to lock makeup thickness and receiver detail. Not a stamped PE document — confirm Green Code limits and engineer review if the city requires it.</p>
       <figure class="frame">
         <img src="../martin/renders/martin_front.png" alt="MARTIN front elevation render" />
         <figcaption>MARTIN — front elevation. 36″ gate + two 46.5″ privacy bays · 143″ overall · owner-gray timber.</figcaption>
@@ -309,7 +310,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
   <section id="drawings">
     <div class="wrap">
       <h2><span class="no">7</span>Construction documents</h2>
-      <p class="intro">MARTIN sheets M-1 through M-8 — inches, A3 landscape. Generated from the same parameters as the FreeCAD model. Rev C is the mill-stock package (select DF + oak) with grain/warpage controls on M-8 and owner tooling on M-7.</p>
+      <p class="intro">MARTIN sheets M-1 through M-8 — inches, A3 landscape. Rev D mill-stock package (select DF + oak) with grain/warpage on M-8 and owner tooling on M-7. Additional shop drawings live in the <a href="../martin/fab/">fabrication package</a> (G/GA/EX/P/J/T/S/QA). Mill-stock and kernel nest BOMs are not interchangeable — see the dual-SSOT note on the Build app README.</p>
       <div class="sheetlist">
         <figure class="frame"><img src="../martin/plans/M1_general.svg" alt="Sheet M-1" /><figcaption>M-1 · General arrangement — elevation, plan, design notes</figcaption></figure>
         <figure class="frame"><img src="../martin/plans/M2_elevation.svg" alt="Sheet M-2" /><figcaption>M-2 · Bay elevation &amp; rail schedule</figcaption></figure>
@@ -358,7 +359,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
           <tr><td>Hardwood / sleeves / misc</td><td>$80 – 150</td><td>same</td><td>Oak, PVC, epoxy for house receiver</td></tr>
           <tr><td>Primer + gray paint</td><td>$60 – 120</td><td>same</td><td>Match owner photo/swatch</td></tr>
           <tr><td>Optional stainless pintles + lock</td><td>$40 – 100</td><td>same</td><td>Only metal parts</td></tr>
-          <tr class="total"><td>Total</td><td>$880 – 1,570</td><td>$1,400 – 2,500</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
+          <tr class="total"><td>Total</td><td>$760 – 1,380</td><td>$1,280 – 2,300</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
         </tbody>
       </table>
     </div>
@@ -401,8 +402,10 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <h3>Design pages</h3>
       <p>
         <a class="dl" href="../martin/">MARTIN design page</a>
+        <a class="dl" href="../martin/fab/">MARTIN fabrication package</a>
         <a class="dl" href="../martin/app/">MARTIN Build app</a>
-        <a class="dl" href="../stele/">STELE (archive)</a>
+        <a class="dl" href="../stele/">STELE</a>
+        <a class="dl" href="../fab/">Shop fabrication model (Rev B)</a>
         <a class="dl" href="../">HASHIRA joinery guide</a>
       </p>
       <h3>MARTIN CAD</h3>
@@ -410,6 +413,8 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <a class="dl" href="../martin/cad/exports/martin.FCStd" download>martin.FCStd</a>
         <a class="dl" href="../martin/cad/exports/martin_assembly.step" download>STEP</a>
         <a class="dl" href="../martin/cad/martin_fence.py" download>martin_fence.py</a>
+        <a class="dl" href="../martin/martin_kernel.py" download>martin_kernel.py</a>
+        <a class="dl" href="../martin/fab/00_SOURCE/martin_project.json" download>martin_project.json</a>
       </p>
       <h3>MARTIN plan sheets</h3>
       <p>
@@ -424,9 +429,11 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       </p>
       <h3>Regenerate</h3>
       <p class="mono" style="background:#fff;border:1px solid var(--line2);padding:16px 18px;max-width:66ch">
-        ./scripts/build_martin.sh&nbsp;&nbsp;# FreeCAD → renders → plans<br />
+        ./scripts/build_martin.sh&nbsp;&nbsp;# kernel → FreeCAD → MARTIN fab package → plans<br />
         ./scripts/build_stele.sh&nbsp;&nbsp;# STELE archive pipeline<br />
-        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models
+        ./scripts/render_hashira_cad.sh&nbsp;&nbsp;# HASHIRA joint models<br />
+        python3 scripts/export_martin_fab.py&nbsp;&nbsp;# MARTIN BOM, drawings, JSON/CSV<br />
+        python3 scripts/fab_system.py&nbsp;&nbsp;# STELE BOM, cut lists, shop drawings, JSON/CSV
       </p>
       <div class="callout">
         <p class="t">Disclaimer</p>
@@ -438,7 +445,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
 <footer>
   <div class="wrap">
-    MARTIN + STELE + HASHIRA · Fence Design &amp; Engineering Report · Rev B — generated from parametric CAD sources in this repository.
+    MARTIN + STELE + HASHIRA · Fence Design &amp; Engineering Report · Rev C — generated from martin_kernel.py.
   </div>
 </footer>
 </body>

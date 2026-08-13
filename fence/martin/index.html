@@ -135,6 +135,7 @@ body::before{
     <a class="brand" href="#top"><i aria-hidden="true"></i> Martin</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="app/">Build app</a>
+      <a href="fab/">Fab</a>
       <a href="#brief">Brief</a>
       <a href="#system">System</a>
       <a href="#model">Model</a>
@@ -156,6 +157,7 @@ body::before{
       <p class="lead hero-copy reveal">A freestanding Prairie fence — Darwin Martin horizontals, hand-cut joinery, no nails in the timber — engineered to lift out for winter and sit level across the driveway-to-garden drop.</p>
       <div class="cta-row reveal">
         <a class="btn" href="app/">Launch visual walk <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="fab/">Fabrication package</a>
         <a class="btn ghost" href="#plans">Blueprints</a>
         <a class="btn ghost" href="cad/exports/martin.FCStd" download>FreeCAD model</a>
       </div>
@@ -306,6 +308,7 @@ body::before{
         <pre>./scripts/build_martin.sh
 # or stepwise:
 freecadcmd fence/martin/cad/martin_fence.py
+python3 scripts/export_martin_fab.py
 python3 scripts/gen_martin_plans.py</pre>
       </div>
       <p class="note">Planning design for DIY construction — not a stamped PE document. Confirm Buffalo Green Code fence height / front-yard rules and call 811 before digging. Upload site photos (drop-off, house latch wall, gray swatch) and we will lock final makeup thickness and latch receiver detail.</p>
@@ -316,7 +319,7 @@ python3 scripts/gen_martin_plans.py</pre>
 <footer class="foot">
   <div class="wrap">
     <span>MARTIN · Prairie removable fence · Buffalo NY</span>
-    <span>FreeCAD 1.1 · Rev A</span>
+    <span>FreeCAD 1.1 · Rev C · kernel SSOT</span>
   </div>
 </footer>
 <script>

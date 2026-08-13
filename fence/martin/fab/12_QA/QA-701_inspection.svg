@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
+<line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>QA-701  ·  Inspection plan</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Do not ship a part that fails its class</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-01  [VERIFIED/TBM]  Confirm overall opening 143.000″ ± 0.25″ on site  tol T1</text>
+<text x='40.0' y='92.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-02  [TBM]  Measure driveway→garden drop; set P.drop_off; do not pour on estimate  tol T1</text>
+<text x='40.0' y='114.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-03  [T0]  Stock moisture — avoid wet framing; paint-grade OK  tol —</text>
+<text x='40.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-04  [T2]  Four posts finished length 75.500" within ±1/32"  tol ±0.031</text>
+<text x='40.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-05  [T2]  Paired nuki rails R-001..003 identical length and groove  tol ±0.031</text>
+<text x='40.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-06  [T2]  Mortise CL AFF 10.000 / 28.000 / 46.000 from pad-shoulder datum  tol ±0.062</text>
+<text x='40.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-07  [T2]  Foot tenon 2.500×4.500 enters sleeve with drain clear  tol +0.03/−0</text>
+<text x='40.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-08  [T1]  Dry-assemble privacy: diagonals / plumb / no racking  tol plumb 1/8″ in 65″</text>
+<text x='40.0' y='246.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-09  [T2]  Gate leaf swings; lift-off pintles; latch bar travels 4″ into receiver  tol —</text>
+<text x='40.0' y='268.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-10  [T0]  No glue on kusabi or nuki locking faces  tol binary</text>
+<text x='40.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-11  [T0]  Paint masked on tenons, wedges, sleeve OD, pintle barrels  tol —</text>
+<text x='40.0' y='312.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-12  [T0]  Winter knock-down rehearsal before first storm season  tol —</text>
+<text x='40.0' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-13  [T1]  Pad top level; four sleeve centers match post CLs  tol ±0.125</text>
+<text x='40.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-14  [T2]  Gate vs cap clearance ≥ 0.50″ (Rev C)  tol min 0.38</text>
+<text x='40.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>GEOMETRY GATE (kernel)</text>
+<text x='40.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        gate/cap clearance  —  0.5" ≥ 0.50" spec</text>
+<text x='40.0' y='438.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        nuki cheek  —  2.0" each side of 1.50″ rail in 5.50″ post</text>
+<text x='40.0' y='460.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        foot tenon shoulders  —  0.5" × 0.5"</text>
+<text x='40.0' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        bay board pack  —  8 pcs, used 45.75" in 46.5"</text>
+<text x='40.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        unique PART_IDs  —  35</text>
+</svg>

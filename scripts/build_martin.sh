@@ -31,10 +31,11 @@ else
   echo "openscad not found — skipping preview renders"
 fi
 
-echo "==> Fabrication SSOT (JSON/CSV/part registry)"
-python3 "$ROOT/fence/martin/fab/martin_ssot.py"
-
-echo "==> Plan sheets (SVG) from SSOT"
+echo "==> Plan sheets (SVG) from mill SSOT"
 python3 "$ROOT/scripts/gen_martin_plans.py"
+
+# origin/main also added scripts/export_martin_fab.py (martin_kernel.py, hardware-store SPF).
+# It writes the same fence/martin/fab/*.csv paths as martin_ssot.py. Do not run both
+# in one pass until the two MARTIN kernels are unified — last writer would clobber BOM.
 
 echo "Done."

@@ -9,7 +9,7 @@ const ASSETS = [
   "./walk.js",
   "./martin.json",
   "./manifest.json",
-  "./icon.svg",
+    "./fab.json",
 ];
 
 self.addEventListener("install", (event) => {

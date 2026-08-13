@@ -1,0 +1,15 @@
+{
+  "PROJECT_ID": "STELE-BUF-001",
+  "PROJECT_NAME": "STELE masonry & timber fence \u2014 Buffalo NY",
+  "REVISION": "B",
+  "UNITS": "mm",
+  "UNIT_POLICY": "Internal millimetres. Convert only at drawing/CSV inch columns.",
+  "DESIGN_STANDARD": "Buffalo Green Code + ASCE 7 wind; frost per Erie County",
+  "MATERIAL_SYSTEM": "Cast stone / air-entrained concrete + western red cedar",
+  "TOLERANCE_CLASS": "T1 general woodworking / T2 joinery pockets / T3 templates",
+  "AUTHOR": "HASHIRA/STELE fabrication model",
+  "MODEL_VERSION": "2.0.0",
+  "DATE": "2026-08-13",
+  "CAD_PLATFORM": "FreeCAD 1.1 (geometry) + OpenSCAD (joint studies) + this registry",
+  "CONFIGURATION": "STANDARD \u2014 4 panel bays + 1 Roman arch gate"
+}

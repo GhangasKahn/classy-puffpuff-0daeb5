@@ -1,0 +1,10 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='280mm' height='200mm' viewBox='0 0 280 200'>
+<rect x='0' y='0' width='280' height='200' fill='#fff' stroke='#000' stroke-width='0.4'/>
+<text x='8' y='10' font-family='monospace' font-size='4'>T-502  Foot tenon section 1:1  MARTIN Rev C  PRINT 1:1</text>
+<rect x='8' y='14' width='100' height='10' fill='none' stroke='#000' stroke-width='0.35'/>
+<text x='8' y='28' font-family='monospace' font-size='3.2'>CHECK BOX = 100.000 mm  ·  measure before cutting  ·  if ≠100mm, abort print scale</text>
+<rect x='20' y='40' width='88.89999999999999' height='139.7' fill='none' stroke='#000' stroke-width='0.35'/>
+<rect x='32.699999999999996' y='52.699999999999996' width='63.5' height='114.3' fill='none' stroke='#000' stroke-width='0.5'/>
+<text x='20' y='38' font-family='monospace' font-size='3'>L-* foot tenon SECTION (looking +Z from below)  outer 3.50×5.50  inner 2.50×4.50</text>
+<text x='20' y='120' font-family='monospace' font-size='3'>Shoulder 0.500″ all around. GRAIN ⊙ (post axis). FACE A = bottom of this view toward garden when post stands.</text>
+</svg>
