@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-5  ·  Dust hood &amp; safety</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Kerf-bent guard · 4″ extraction</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev A solid-table redesign</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DUST HOOD — kerf-bent ¼″ ply (Walters method)</text>
+<polygon points='120.0,420.0 200.0,200.0 480.0,140.0 760.0,200.0 840.0,420.0 760.0,480.0 200.0,480.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<circle cx='480.0' cy='340.0' r='90.0' fill='#b8a990' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='480.0' y='345.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle' font-weight='600'>DRUM</text>
+<circle cx='780.0' cy='180.0' r='35.0' fill='none' stroke='#3d5a4c' stroke-width='2'/>
+<text x='780.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>4" PORT</text>
+<text x='920.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>1.  Cut ¼″ pine/birch blank oversized for the drum arc.</text>
+<text x='920.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2.  Kerf halfway through on the inside face — model-airplane style.</text>
+<text x='920.0' y='212.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>3.  Wet the outside face; wood cups toward the kerfs.</text>
+<text x='920.0' y='248.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>4.  Glue onto a form; clamp with sandbags / bands until dry.</text>
+<text x='920.0' y='284.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>5.  Fill kerfs with sawdust + glue; wipe smooth; sand; finish.</text>
+<text x='920.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>6.  Fit snug over the sides — paraffin on paint rubs for easy removal.</text>
+<text x='920.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>7.  Port to 4″ hose (Walters preferred 4″ over 3″ for this machine).</text>
+<text x='40.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SAFETY RULES</text>
+<text x='40.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Hood ON = primary guard. Open hood only when drum is stopped and unplugged.</text>
+<text x='40.0' y='630.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Hands never under the drum. Use push sticks; minimum stock length ~12″.</text>
+<text x='40.0' y='660.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Small parts: adhere to a longer sled. Kickback risk is real (Heslop).</text>
+<text x='40.0' y='690.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Not a planer — multiple light passes. Listen for motor bog; back off.</text>
+<text x='40.0' y='720.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Stay off paint/finish with the drum paper — loads and burns grit.</text>
+<text x='40.0' y='750.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Eye + hearing + respirator when truing MDF or running without full extraction.</text>
+<text x='40.0' y='780.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>▸  Disconnect power before paper changes, bearing work, or belt service.</text>
+</svg>

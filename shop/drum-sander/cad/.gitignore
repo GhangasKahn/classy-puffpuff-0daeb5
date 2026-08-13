@@ -1,0 +1,4 @@
+# Generated / local CAD artifacts
+*.stl
+*.FCStd
+__pycache__/

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='170.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>D-4  ·  Drive &amp; elevation</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Motor cradle · belt path · table lift</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev A solid-table redesign</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>MOTOR CRADLE — gravity tension + lock</text>
+<rect x='80.0' y='140.0' width='220.0' height='160.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
+<text x='190.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#f3f1ec' text-anchor='middle' font-weight='600'>MOTOR</text>
+<circle cx='190.0' cy='360.0' r='40.0' fill='none' stroke='#8a9098' stroke-width='3'/>
+<text x='190.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>3" PULLEY</text>
+<line x1='230.0' y1='360.0' x2='520.0' y2='200.0' stroke='#8a9098' stroke-width='3'/>
+<text x='360.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a9098' text-anchor='start'>V-BELT</text>
+<circle cx='560.0' cy='180.0' r='60.0' fill='#b8a990' stroke='#1a1f24' stroke-width='2'/>
+<text x='560.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>5" DRUM PULLEY</text>
+<circle cx='120.0' cy='380.0' r='12.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2'/>
+<text x='120.0' y='460.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>PIVOT DOWEL</text>
+<line x1='280.0' y1='200.0' x2='280.0' y2='120.0' stroke='#3d5a4c' stroke-width='2' stroke-dasharray='4 3'/>
+<text x='300.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start'>LOCK SCREW — set after tension</text>
+<text x='700.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Hang motor so weight tensions the belt (Walters).</text>
+<text x='700.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  After tension is right, lock the cradle — running belts pump a free hinge (Wandel).</text>
+<text x='700.0' y='204.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Keep pulley faces coplanar; misalignment eats belts and throws vibration.</text>
+<text x='700.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Use a switch box on the frame — no dangling cords across the feed path.</text>
+<text x='40.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>TABLE ELEVATION</text>
+<rect x='80.0' y='560.0' width='400.0' height='30.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='2'/>
+<text x='280.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>TABLE</text>
+<line x1='280.0' y1='590.0' x2='280.0' y2='780.0' stroke='#8a9098' stroke-width='4'/>
+<rect x='250.0' y='720.0' width='60.0' height='40.0' fill='#c4a574' stroke='#1a1f24' stroke-width='2'/>
+<text x='280.0' y='745.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='middle' font-weight='600'>NUT</text>
+<text x='320.0' y='700.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>ACME / WOOD THREAD</text>
+<rect x='120.0' y='620.0' width='40.0' height='80.0' fill='#8a9098' stroke='#1a1f24' stroke-width='2'/>
+<rect x='400.0' y='620.0' width='40.0' height='80.0' fill='#8a9098' stroke='#1a1f24' stroke-width='2'/>
+<text x='140.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#f3f1ec' text-anchor='middle'>LOCK</text>
+<text x='420.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#f3f1ec' text-anchor='middle'>LOCK</text>
+<text x='700.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>1.  Loosen both star knobs.</text>
+<text x='700.0' y='592.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2.  Turn elevating screw — light contact only.</text>
+<text x='700.0' y='624.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>3.  Retighten knobs to unload the screw threads.</text>
+<text x='700.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>4.  Elongated Formica/phenolic washers protect paint (Walters tip).</text>
+<text x='700.0' y='688.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>5.  Never take a heavy cut — drum sanders remove thousandths per pass.</text>
+<text x='40.0' y='860.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>IDLER BEARING MICRO-ADJUST</text>
+<text x='40.0' y='895.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Jack screws or shim stock under the left (idler) flange bearing correct paper-thickness error and allow intentional light taper sanding.</text>
+<text x='40.0' y='925.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Reference oak locator blocks under both bearings so the drum returns to the same seat after removal.</text>
+</svg>

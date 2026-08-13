@@ -92,6 +92,48 @@
   to = "/fence/report/"
   status = 301
 
+# ---- WALTER DS-16 drum sander plans ----
+[[redirects]]
+  from = "/shop"
+  to = "/shop/drum-sander/"
+  status = 301
+
+[[redirects]]
+  from = "/drum"
+  to = "/shop/drum-sander/"
+  status = 301
+
+[[redirects]]
+  from = "/walter"
+  to = "/shop/drum-sander/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/app"
+  to = "/shop/drum-sander/app/"
+  status = 301
+
+[[redirects]]
+  from = "/drum/app"
+  to = "/shop/drum-sander/app/"
+  status = 301
+
+[[headers]]
+  for = "/shop/drum-sander/app/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/shop/drum-sander/app/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/shop/drum-sander/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
 # CAD downloads: force download with correct types
 [[headers]]
   for = "/fence/*/exports/*"

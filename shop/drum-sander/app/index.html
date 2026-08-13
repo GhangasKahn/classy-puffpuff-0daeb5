@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#14181c" />
+<meta name="description" content="WALTER DS-16 Build App — modern drum thickness sander plans from the Ron Walters / ShopNotes lineage. Assembly checklist, BOM, blueprints." />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="WALTER" />
+<title>WALTER DS-16 Build — Drum Sander Plans</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#overview" data-go="overview">
+      <i class="mark" aria-hidden="true"></i>
+      <div>
+        <b>Walter</b>
+        <span>DS-16 build</span>
+      </div>
+    </a>
+    <div class="top-actions">
+      <span class="progress-pill">0% built</span>
+      <button type="button" class="btn" id="printBtn">Print</button>
+      <a class="btn primary" href="../">Design</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button type="button" class="tab on" data-tab="overview">Overview</button>
+    <button type="button" class="tab" data-tab="viz">Explode</button>
+    <button type="button" class="tab" data-tab="assembly">Assembly</button>
+    <button type="button" class="tab" data-tab="materials">Materials</button>
+    <button type="button" class="tab" data-tab="gallery">Plans</button>
+    <button type="button" class="tab" data-tab="files">Files</button>
+  </nav>
+
+  <main>
+    <section class="panel on" data-panel="overview" id="overview">
+      <p class="kicker">15.5″ · ⌀5″ drum · dedicated ½ HP · Rev A</p>
+      <h1>Build WALTER DS-16</h1>
+      <p class="lead">Modern engineering plans for a shop-built drum thickness sander — evolved from ShopNotes No. 86 and Ron Walters’ dedicated-motor rebuild, with the conveyor deleted and the hard-won fixes baked in.</p>
+      <div class="grid3" id="overviewStats"></div>
+      <div class="hr"></div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Modernizations vs original</h3>
+          <ul id="modernList"></ul>
+        </div>
+        <div class="card">
+          <h3>Progress</h3>
+          <div style="height:10px;background:var(--ink2);border-radius:999px;overflow:hidden;margin:12px 0">
+            <div id="progressBar" style="height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--sage-hi));transition:width .35s"></div>
+          </div>
+          <p class="hint">Checklist progress stays in this browser (localStorage).</p>
+          <div class="row" style="margin-top:12px">
+            <button type="button" class="btn" onclick="document.querySelector('.tab[data-tab=assembly]').click()">Continue assembly</button>
+            <button type="button" class="btn" id="resetProgress">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <h2>Safety</h2>
+      <ul id="safetyList" style="color:var(--dim);font-size:14px"></ul>
+    </section>
+
+    <section class="panel" data-panel="viz">
+      <p class="kicker">Part breakdown</p>
+      <h1>Exploded stack</h1>
+      <p class="lead">Click parts to inspect. Open the SVG sheets or OpenSCAD model for true geometry.</p>
+      <div class="viz-wrap">
+        <div>
+          <div class="viz-stage" id="vizStage" aria-live="polite"></div>
+          <div class="viz-controls">
+            <label>Explode <input id="explodeRange" type="range" min="0" max="1" step="0.01" value="0" /> <span id="explodeVal" class="mono">0%</span></label>
+          </div>
+        </div>
+        <div>
+          <div class="card" id="partDetail" style="margin-bottom:10px">
+            <strong>Select a part</strong>
+            <p style="margin:6px 0 0;color:var(--dim);font-size:14px">Click the stack or the list.</p>
+          </div>
+          <div class="part-list" id="partList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="assembly">
+      <p class="kicker">Build sequence</p>
+      <h1>Assembly guide</h1>
+      <p class="lead">Ten steps from frame to first light passes. Check items off as you go.</p>
+      <div class="phase-rail">
+        <button type="button" class="chip on" data-phase="all">All</button>
+        <button type="button" class="chip" data-phase="frame">Frame</button>
+        <button type="button" class="chip" data-phase="drum">Drum</button>
+        <button type="button" class="chip" data-phase="drive">Drive</button>
+        <button type="button" class="chip" data-phase="table">Table</button>
+        <button type="button" class="chip" data-phase="hood">Hood</button>
+        <button type="button" class="chip" data-phase="wrap">Wrap</button>
+        <button type="button" class="chip" data-phase="tune">Tune</button>
+      </div>
+      <div id="assemblyList"></div>
+    </section>
+
+    <section class="panel" data-panel="materials">
+      <p class="kicker">Shopping</p>
+      <h1>Materials &amp; hardware</h1>
+      <p class="lead">Cut list sized for 15.5″ capacity. Confirm Baltic birch is true ¾″ (imperial) vs 18 mm metric before cutting dados/slots.</p>
+      <h3>Cut list</h3>
+      <table class="bom">
+        <thead><tr><th>Qty</th><th>Size</th><th>Stock</th><th>Use</th></tr></thead>
+        <tbody id="cutList"></tbody>
+      </table>
+      <div class="hr"></div>
+      <h3>Hardware</h3>
+      <table class="bom">
+        <thead><tr><th>Qty</th><th>Item</th></tr></thead>
+        <tbody id="hardwareList"></tbody>
+      </table>
+      <div class="hr"></div>
+      <h3>Shop tools</h3>
+      <ul id="toolsList" style="color:var(--dim);font-size:14px"></ul>
+    </section>
+
+    <section class="panel" data-panel="gallery">
+      <p class="kicker">Blueprints D-1…D-6</p>
+      <h1>Plan sheets</h1>
+      <p class="lead">Printable A3-landscape SVG. Open any sheet full-size for print or tablet shop use.</p>
+      <div class="gal-grid" id="gallery"></div>
+    </section>
+
+    <section class="panel" data-panel="files">
+      <p class="kicker">Downloads &amp; lineage</p>
+      <h1>Files &amp; sources</h1>
+      <div id="filesList"></div>
+      <div class="hr"></div>
+      <h3>Primary sources</h3>
+      <ul id="sourcesList" style="color:var(--dim);font-size:14px"></ul>
+    </section>
+  </main>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js").catch(function () {});
+}
+</script>
+</body>
+</html>
