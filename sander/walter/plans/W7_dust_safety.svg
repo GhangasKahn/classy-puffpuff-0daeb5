@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-7  ·  Dust hood &amp; safety</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>400 CFM  ·  4" port  ·  this is not a planer</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev A  ·  Shop build</text>
+<text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>HOOD  —  ¼" BALTIC BIRCH  ·  SLIPS OVER THE DRUM  ·  LATCHES</text>
+<circle cx='256.0' cy='410.0' r='55.0' fill='#7a5a3a' stroke='#1c1914' stroke-width='2'/>
+<path d='M 296.0,363.0 A 55.0 55.0 0 0 1 303.0,430.0' fill='none' stroke='#b4532a' stroke-width='2.5'/>
+<text x='326.4' y='361.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>ROTATION</text>
+<text x='326.4' y='377.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>bottom moves toward infeed</text>
+<polygon points='146.0,335.2 146.0,436.4 366.0,436.4 366.0,335.2 357.2,335.2 357.2,427.6 154.8,427.6 154.8,335.2' fill='#c5cec8' stroke='#3d5a4c' stroke-width='2'/>
+<circle cx='379.2' cy='383.6' r='44.0' fill='none' stroke='#5c656c' stroke-width='2'/>
+<text x='379.2' y='387.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5c656c' text-anchor='middle' font-weight='600'>4"</text>
+<rect x='150.4' y='440.8' width='99.0' height='7.7' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='198.8' y='451.8' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='middle'>BRUSH STRIP</text>
+<rect x='91.0' y='467.2' width='220.0' height='13.2' fill='#d4cbb8' stroke='#1c1914' stroke-width='1.4'/>
+<text x='201.0' y='473.8' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='middle'>WORK  →</text>
+<text x='201.0' y='487.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle' font-weight='600'>INFEED</text>
+<text x='432.0' y='487.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='middle'>OUTFEED  (port faces back)</text>
+<rect x='40.0' y='600.0' width='760.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='52.0' y='622.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>DUST  —  WALTERS TOOK THE HOOD OFF ONCE AND ESTIMATED THE MACHINE</text>
+<text x='52.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>COULD LAY ¼" OF DUST ACROSS A SHOP IN 20 MINUTES. BELIEVE HIM.</text>
+<text x='52.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• 4" port into a real collector, 400+ CFM. A shop-vac is a joke on a 16" drum.</text>
+<text x='52.0' y='676.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Seal the hood to the walls with foam weatherstrip. Leakage is what you breathe.</text>
+<text x='52.0' y='694.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Board itself blocks side flow; some dust still exits the outfeed. Sweep.</text>
+<text x='52.0' y='712.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• MDF (if you ignore the drum spec) is the worst. Birch is merely bad.</text>
+<text x='860.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>SAFE USE  —  THIS IS NOT A PLANER</text>
+<rect x='860.0' y='82.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>LIGHT PASSES</text>
+<text x='1040.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>0.005–0.015" per pass. If the motor note changes, you took too much.</text>
+<rect x='860.0' y='132.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>NO SHORT STOCK</text>
+<text x='1040.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Minimum 12" long, or hot-melt to a carrier. Heslop kicked a small part.</text>
+<rect x='860.0' y='182.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>GRAIN</text>
+<text x='1040.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Feed with the grain when you can. Cross-grain is fine; just slower.</text>
+<rect x='860.0' y='232.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>GRIT</text>
+<text x='1040.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>80 for thicknessing. 120/150 for finish. Do not skip from 80 to 220 on the drum.</text>
+<rect x='860.0' y='282.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='300.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>SNIPE</text>
+<text x='1040.0' y='300.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Infeed and outfeed rollers/platen must be coplanar. Support long boards.</text>
+<rect x='860.0' y='332.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>TAPER</text>
+<text x='1040.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Idle jack can sand a controlled taper. Zero the jack for flat work.</text>
+<rect x='860.0' y='382.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>PAPER</text>
+<text x='1040.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Stop if you smell burning or see glaze. Dull paper heats the drum.</text>
+<rect x='860.0' y='432.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>HANDS</text>
+<text x='1040.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Never reach under the drum. Use a push block on the outfeed.</text>
+<rect x='860.0' y='482.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>HEARING</text>
+<text x='1040.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1 HP + drum is loud. Hearing protection is not optional.</text>
+<rect x='860.0' y='532.0' width='760.0' height='44.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<text x='876.0' y='550.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>FIRE</text>
+<text x='1040.0' y='550.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Empty the collector. Fine sanding dust is fuel. No finishing vapors in the shop.</text>
+<rect x='860.0' y='620.0' width='760.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='872.0' y='642.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>INTERLOCKS (minimum)</text>
+<text x='872.0' y='660.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• E-stop in reach of the operator's left hand (infeed corner).</text>
+<text x='872.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Magnetic starter — power blip does not auto-restart.</text>
+<text x='872.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Belt guard closed. Hood latched. No jewelry, no gloves on rotating shafts.</text>
+<text x='872.0' y='714.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Disconnect / lockout before paper changes or bearing work.</text>
+</svg>

@@ -1,0 +1,4 @@
+# FreeCAD autosave / backups
+*.FCBak
+*.fcstd1
+__pycache__/

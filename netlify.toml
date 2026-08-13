@@ -92,6 +92,17 @@
   to = "/fence/report/"
   status = 301
 
+# ---- shop machine suite (WALTER drum sander) ----
+[[redirects]]
+  from = "/sander"
+  to = "/sander/"
+  status = 301
+
+[[redirects]]
+  from = "/walter"
+  to = "/sander/walter/"
+  status = 301
+
 # CAD downloads: force download with correct types
 [[headers]]
   for = "/fence/*/exports/*"
@@ -130,3 +141,13 @@
   for = "/fence/martin/plans/*"
   [headers.values]
     Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/sander/*/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/sander/*/exports/*"
+  [headers.values]
+    Content-Disposition = "attachment"

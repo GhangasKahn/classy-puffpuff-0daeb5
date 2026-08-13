@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-1  ·  General arrangement</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Scale ~1:8  ·  dimensions in inches</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev A  ·  Shop build</text>
+<text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>INFEED ELEVATION</text>
+<text x='40.0' y='82.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Looking from the operator side  ·  drum above conveyor  ·  16″ capacity</text>
+<rect x='70.0' y='706.5' width='396.0' height='13.5' fill='#d4cbb8' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='70.0' y='360.0' width='27.0' height='346.5' fill='#c4b49a' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='394.0' y='360.0' width='27.0' height='346.5' fill='#c4b49a' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='421.0' y='405.0' width='39.6' height='297.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.2' stroke-dasharray='6 4'/>
+<ellipse cx='245.5' cy='477.0' rx='160.0' ry='45.0' fill='#7a5a3a' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='101.5' y='432.0' width='288.0' height='90.0' fill='#7a5a3a' stroke='#1c1914' stroke-width='1.8'/>
+<rect x='101.5' y='430.9' width='288.0' height='2.2' fill='#b4532a' stroke='none' stroke-width='0'/>
+<circle cx='77.2' cy='477.0' r='7.2' fill='#5c656c' stroke='#1c1914' stroke-width='1'/>
+<circle cx='437.2' cy='477.0' r='42.8' fill='#5c656c' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='99.2' y='549.0' width='292.7' height='16.2' fill='#e8eef0' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='98.8' y='419.4' width='293.4' height='28.8' fill='none' stroke='#3d5a4c' stroke-width='1.8' stroke-dasharray='8 4'/>
+<circle cx='440.8' cy='637.2' r='32.2' fill='#2a2a2c' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='70.0' y1='728.0' x2='70.0' y2='764.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='466.0' y1='728.0' x2='466.0' y2='764.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='70.0' y1='756.0' x2='466.0' y2='756.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='70.0,756.0 80.0,752.0 80.0,760.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='466.0,756.0 456.0,752.0 456.0,760.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='203.1' y='735.0' width='129.8' height='21.0' fill='#f4efe6'/>
+<text x='268.0' y='750.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>22.00" overall</text>
+<line x1='97.0' y1='352.0' x2='97.0' y2='322.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='394.0' y1='352.0' x2='394.0' y2='322.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='97.0' y1='330.0' x2='394.0' y2='330.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='97.0,330.0 107.0,326.0 107.0,334.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='394.0,330.0 384.0,326.0 384.0,334.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='115.4' y='309.0' width='260.3' height='21.0' fill='#f4efe6'/>
+<text x='245.5' y='324.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>16.50" inner / 16.00" sanding</text>
+<line x1='70.0' y1='360.0' x2='26.0' y2='360.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='70.0' y1='720.0' x2='26.0' y2='720.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='34.0' y1='360.0' x2='34.0' y2='720.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='34.0,360.0 30.0,370.0 38.0,370.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='34.0,720.0 30.0,710.0 38.0,710.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<text x='22.0' y='545.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='end' transform='rotate(-90 22.0 545.0)'>20.00" walls</text>
+<line x1='464.2' y1='432.0' x2='496.2' y2='432.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='464.2' y1='522.0' x2='496.2' y2='522.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='488.2' y1='432.0' x2='488.2' y2='522.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='488.2,432.0 484.2,442.0 492.2,442.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='488.2,522.0 484.2,512.0 492.2,512.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<text x='500.2' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='start' transform='rotate(-90 500.2 482.0)'>5.00" drum</text>
+<text x='245.5' y='541.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#6b5340' text-anchor='middle'>CONVEYOR / PLATEN</text>
+<text x='245.5' y='477.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f4efe6' text-anchor='middle' font-weight='600'>DRUM</text>
+<text x='440.8' y='399.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#6b5340' text-anchor='middle'>GUARD</text>
+<text x='520.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>DRIVE-SIDE ELEVATION</text>
+<text x='520.0' y='82.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Motor below outfeed  ·  4L belt  ·  crowned conveyor  ·  4″ dust port</text>
+<rect x='540.0' y='400.0' width='576.0' height='320.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='540.0' y='708.0' width='576.0' height='12.0' fill='#d4cbb8' stroke='#1c1914' stroke-width='1.4'/>
+<circle cx='828.0' cy='504.0' r='40.0' fill='#7a5a3a' stroke='#1c1914' stroke-width='1.8'/>
+<circle cx='828.0' cy='504.0' r='6.1' fill='#5c656c' stroke='#1c1914' stroke-width='1'/>
+<circle cx='828.0' cy='504.0' r='38.0' fill='none' stroke='#5c656c' stroke-width='1.4' stroke-dasharray='4 3'/>
+<circle cx='988.0' cy='646.4' r='52.0' fill='#2a2a2c' stroke='#1c1914' stroke-width='1.4'/>
+<circle cx='988.0' cy='646.4' r='24.0' fill='#5c656c' stroke='#1c1914' stroke-width='1'/>
+<line x1='828.0' y1='466.0' x2='988.0' y2='622.4' stroke='#2a2a2c' stroke-width='2.2'/>
+<line x1='828.0' y1='542.0' x2='988.0' y2='670.4' stroke='#2a2a2c' stroke-width='2.2'/>
+<circle cx='613.1' cy='584.0' r='16.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.2'/>
+<circle cx='1042.9' cy='584.0' r='16.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='613.1' y='568.0' width='429.8' height='1.9' fill='#2a2a2c' stroke='none' stroke-width='2'/>
+<rect x='628.0' y='568.0' width='400.0' height='12.0' fill='#e8eef0' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='760.8' y='451.2' width='134.4' height='38.4' fill='none' stroke='#3d5a4c' stroke-width='1.6'/>
+<circle cx='911.2' cy='491.2' r='32.0' fill='none' stroke='#5c656c' stroke-width='1.5'/>
+<text x='911.2' y='495.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5c656c' text-anchor='middle'>4"</text>
+<line x1='540.0' y1='728.0' x2='540.0' y2='764.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='1116.0' y1='728.0' x2='1116.0' y2='764.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='540.0' y1='756.0' x2='1116.0' y2='756.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='540.0,756.0 550.0,752.0 550.0,760.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='1116.0,756.0 1106.0,752.0 1106.0,760.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='771.8' y='735.0' width='112.4' height='21.0' fill='#f4efe6'/>
+<text x='828.0' y='750.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>36.00" depth</text>
+<line x1='613.1' y1='603.2' x2='613.1' y2='631.2' stroke='#6b5340' stroke-width='1'/>
+<line x1='1042.9' y1='603.2' x2='1042.9' y2='631.2' stroke='#6b5340' stroke-width='1'/>
+<line x1='613.1' y1='623.2' x2='1042.9' y2='623.2' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='613.1,623.2 623.1,619.2 623.1,627.2' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='1042.9,623.2 1032.9,619.2 1032.9,627.2' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='750.0' y='602.2' width='155.9' height='21.0' fill='#f4efe6'/>
+<text x='828.0' y='617.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>26.86" roller c-c</text>
+<line x1='540.0' y1='504.0' x2='500.0' y2='504.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='540.0' y1='720.0' x2='500.0' y2='720.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='508.0' y1='504.0' x2='508.0' y2='720.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='508.0,504.0 504.0,514.0 512.0,514.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='508.0,720.0 504.0,710.0 512.0,710.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<text x='496.0' y='617.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='end' transform='rotate(-90 496.0 617.0)'>13.50" axis</text>
+<text x='828.0' y='496.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#f4efe6' text-anchor='middle' font-weight='600'>DRUM 1089 RPM</text>
+<text x='988.0' y='651.4' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#f4efe6' text-anchor='middle' font-weight='600'>1 HP</text>
+<rect x='1160.0' y='48.0' width='496.0' height='980.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4'/>
+<text x='1180.0' y='78.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>DESIGN INTENT</text>
+<text x='1180.0' y='108.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>CAPACITY</text>
+<text x='1180.0' y='126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>16.00" wide  ×  0.06–4.00" thick</text>
+<line x1='1180.0' y1='136.0' x2='1636.0' y2='136.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>DRUM</text>
+<text x='1180.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>5.00" Ø  ×  16.00" face, birch stack</text>
+<line x1='1180.0' y1='180.0' x2='1636.0' y2='180.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>SHAFT</text>
+<text x='1180.0' y='214.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>¾" 1144 Stressproof × 22", 3/16" key</text>
+<line x1='1180.0' y1='224.0' x2='1636.0' y2='224.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>SPEED</text>
+<text x='1180.0' y='258.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1089 RPM  ·  1426 SFM</text>
+<line x1='1180.0' y1='268.0' x2='1636.0' y2='268.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='284.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>MOTOR</text>
+<text x='1180.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1 HP TEFC 1725 RPM, NEMA 56C</text>
+<line x1='1180.0' y1='312.0' x2='1636.0' y2='312.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='328.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>PULLEYS</text>
+<text x='1180.0' y='346.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>3.00" motor / 4.75" drum, 4L440</text>
+<line x1='1180.0' y1='356.0' x2='1636.0' y2='356.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='372.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>FEED</text>
+<text x='1180.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>16×60 PVC belt, 0–16 FPM PWM</text>
+<line x1='1180.0' y1='400.0' x2='1636.0' y2='400.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>ROLLERS</text>
+<text x='1180.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>2.00" Al tube, 0.030" crown</text>
+<line x1='1180.0' y1='444.0' x2='1636.0' y2='444.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='460.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>ELEVATION</text>
+<text x='1180.0' y='478.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>dual ¾-6 Acme, HTD-sync, 4.5" travel</text>
+<line x1='1180.0' y1='488.0' x2='1636.0' y2='488.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>WAYS</text>
+<text x='1180.0' y='522.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>UHMW-lined dados + phenolic platen</text>
+<line x1='1180.0' y1='532.0' x2='1636.0' y2='532.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>BEARINGS</text>
+<text x='1180.0' y='566.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>UCFL204-12 flange, self-aligning</text>
+<line x1='1180.0' y1='576.0' x2='1636.0' y2='576.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='592.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>DRUM JACK</text>
+<text x='1180.0' y='610.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>idle-end ¼-20 ±0.040" parallelism</text>
+<line x1='1180.0' y1='620.0' x2='1636.0' y2='620.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='636.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>DUST</text>
+<text x='1180.0' y='654.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>4" port, 400 CFM, brush strip</text>
+<line x1='1180.0' y1='664.0' x2='1636.0' y2='664.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='680.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>ENVELOPE</text>
+<text x='1180.0' y='698.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>22 × 36 × 22" benchtop</text>
+<line x1='1180.0' y1='708.0' x2='1636.0' y2='708.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='724.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#b4532a' text-anchor='start' font-weight='600'>MASS (EST.)</text>
+<text x='1180.0' y='742.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>95–110 lb without stand</text>
+<line x1='1180.0' y1='752.0' x2='1636.0' y2='752.0' stroke='#d4cbb8' stroke-width='0.6'/>
+<text x='1180.0' y='776.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#8a3a2a' text-anchor='start' font-weight='600'>NOT A COPY OF SHOPNOTES #86</text>
+<text x='1180.0' y='796.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Original redesign of Walters' documented</text>
+<text x='1180.0' y='814.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>failure modes. Do not reproduce magazine art.</text>
+</svg>

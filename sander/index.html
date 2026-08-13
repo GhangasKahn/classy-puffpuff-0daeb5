@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Shop machine design suite — WALTER 16-inch drum thickness sander." />
+<title>SHOP — Machine design suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#14110e;--paper:#f4efe6;--dim:#c4b49a;--copper:#b4532a;--line:rgba(244,239,230,.16);
+  --disp:"Newsreader",Georgia,serif;--sans:"Libre Franklin",sans-serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.55;min-height:100svh}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(820px,calc(100% - 40px));margin:0 auto;padding:72px 0 80px}
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--copper)}
+h1{font:600 clamp(48px,10vw,96px)/.9 var(--disp);letter-spacing:.04em;text-transform:uppercase;margin:14px 0 18px}
+.lead{color:var(--dim);max-width:48ch;font-size:18px}
+.card{display:block;margin-top:48px;border:1px solid var(--line);padding:28px 28px 24px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--copper);transform:translateY(-2px)}
+.card h2{font:600 32px/1 var(--disp);margin:8px 0 10px}
+.card p{color:var(--dim);max-width:54ch}
+.meta{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--copper);margin-top:16px}
+.foot{margin-top:64px;font:400 12px/1.6 var(--mono);color:#8a7a68}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Shop machines · CAD · A3 plans</p>
+    <h1>Shop</h1>
+    <p class="lead">Parametric shop tools in the same pipeline as MARTIN and STELE: OpenSCAD / FreeCAD, printable sheets, a landing page you can actually build from.</p>
+    <a class="card" href="walter/">
+      <p class="kicker">WALTER</p>
+      <h2>16″ drum thickness sander</h2>
+      <p>Closed-frame redesign of Ron Walters' published machine. Crowned conveyor, dual Acme elevation, 1 HP TEFC, idle-end drum jack. Eight A3 sheets.</p>
+      <p class="meta">22 × 36 × 22″ · 1089 RPM · Rev A →</p>
+    </a>
+    <p class="foot"><a href="../fence/">Fence suite ↗</a> · <a href="../">Bedrock ↗</a></p>
+  </div>
+</body>
+</html>

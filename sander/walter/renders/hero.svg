@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14110e"/>
+      <stop offset="100%" stop-color="#1c1914"/>
+    </linearGradient>
+    <linearGradient id="ply" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4a574"/>
+      <stop offset="100%" stop-color="#8a6a42"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a9298"/>
+      <stop offset="100%" stop-color="#4a5258"/>
+    </linearGradient>
+    <linearGradient id="drum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b4532a"/>
+      <stop offset="100%" stop-color="#6b2e18"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <g opacity=".12" fill="none" stroke="#b4532a" stroke-width="1">
+    <path d="M80 820 L1520 820 M80 860 L1480 860"/>
+    <path d="M200 200 L200 900 M400 220 L400 900 M600 240 L600 900"/>
+  </g>
+  <!-- isometric cabinet: x right-down, y left-down, z up. origin 820,720 -->
+  <g stroke="#1c1914" stroke-width="1.4" stroke-linejoin="round">
+    <!-- base -->
+    <polygon points="820,720 1180,780 820,840 460,780" fill="#5a4a38"/>
+    <polygon points="1180,780 1180,800 820,860 820,840" fill="#3a3228"/>
+    <polygon points="460,780 820,840 820,860 460,800" fill="#2e2820"/>
+    <!-- idle wall -->
+    <polygon points="460,780 820,720 820,420 460,480" fill="url(#ply)"/>
+    <polygon points="460,780 460,800 460,500 460,480" fill="#6a5238"/>
+    <!-- drive wall -->
+    <polygon points="1180,780 820,720 820,420 1180,480" fill="#a88858"/>
+    <polygon points="1180,780 1180,800 1180,500 1180,480" fill="#5a4630"/>
+    <!-- drum -->
+    <ellipse cx="820" cy="520" rx="210" ry="58" fill="url(#drum)"/>
+    <ellipse cx="820" cy="508" rx="210" ry="58" fill="#8a3a1c"/>
+    <ellipse cx="820" cy="508" rx="28" ry="10" fill="url(#steel)"/>
+    <!-- abrasive spiral hint -->
+    <path d="M640,500 Q820,560 1000,500" fill="none" stroke="#e8c4a0" stroke-width="2" opacity=".5"/>
+    <path d="M660,515 Q820,575 980,515" fill="none" stroke="#e8c4a0" stroke-width="2" opacity=".35"/>
+    <!-- conveyor -->
+    <polygon points="560,680 1080,680 1140,700 620,700" fill="#2a2c2e"/>
+    <polygon points="620,700 1140,700 1140,714 620,714" fill="#1a1c1e"/>
+    <ellipse cx="640" cy="692" rx="22" ry="10" fill="url(#steel)"/>
+    <ellipse cx="1100" cy="692" rx="22" ry="10" fill="url(#steel)"/>
+    <!-- hood -->
+    <polygon points="620,430 1020,430 1080,448 680,448" fill="#3d4a46" opacity=".85"/>
+    <polygon points="1020,430 1080,448 1080,500 1020,478" fill="#2a3330" opacity=".85"/>
+    <!-- 4" port -->
+    <ellipse cx="1095" cy="478" rx="28" ry="16" fill="none" stroke="#8a9298" stroke-width="4"/>
+    <!-- motor -->
+    <ellipse cx="1240" cy="700" rx="70" ry="36" fill="#161616"/>
+    <ellipse cx="1240" cy="688" rx="70" ry="36" fill="#222"/>
+    <ellipse cx="1240" cy="688" rx="18" ry="9" fill="url(#steel)"/>
+    <!-- belt -->
+    <path d="M1000,520 Q1180,560 1240,660" fill="none" stroke="#1a1a1a" stroke-width="10"/>
+    <path d="M980,545 Q1160,590 1210,680" fill="none" stroke="#1a1a1a" stroke-width="10"/>
+    <!-- guard ghost -->
+    <polygon points="1180,480 1320,504 1320,760 1180,800" fill="#c4a574" opacity=".18" stroke="#c4a574" stroke-dasharray="8 6"/>
+  </g>
+  <text x="80" y="120" fill="#b4532a" font-family="IBM Plex Mono, monospace" font-size="18" letter-spacing="6">WALTER · 16 INCH · 1089 RPM</text>
+  <text x="80" y="900" fill="#8a7a68" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="3">CLOSED FRAME · CROWNED CONVEYOR · ACME ELEVATION</text>
+</svg>

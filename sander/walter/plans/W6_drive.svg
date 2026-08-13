@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-6  ·  Drive, belt &amp; electrics</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>1 HP TEFC  ·  hinged mount  ·  no-volt release</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev A  ·  Shop build</text>
+<text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>BELT DRIVE  —  DO NOT HANG THE MOTOR ON GRAVITY ALONE</text>
+<text x='40.0' y='82.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Walters' motor pivoted on a wooden dowel; weight tensioned the belt. On startup the pulley climbed and the belt went slack.</text>
+<circle cx='280.0' cy='320.0' r='95.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<circle cx='280.0' cy='320.0' r='12.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1'/>
+<circle cx='280.0' cy='560.0' r='60.0' fill='#2a2a2c' stroke='#1c1914' stroke-width='2'/>
+<circle cx='280.0' cy='560.0' r='10.0' fill='#5c656c' stroke='#1c1914' stroke-width='1'/>
+<line x1='185.0' y1='320.0' x2='220.0' y2='560.0' stroke='#2a2a2c' stroke-width='8'/>
+<line x1='375.0' y1='320.0' x2='340.0' y2='560.0' stroke='#2a2a2c' stroke-width='8'/>
+<text x='280.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#f4efe6' text-anchor='middle' font-weight='600'>4.75"</text>
+<text x='280.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>3.00"</text>
+<text x='280.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle' font-weight='600'>DRUM PULLEY</text>
+<text x='280.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle' font-weight='600'>MOTOR PULLEY</text>
+<text x='430.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#b4532a' text-anchor='start' font-weight='600'>1089 RPM</text>
+<text x='430.0' y='454.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start'>1426 SFM</text>
+<text x='430.0' y='478.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>1725 × 3.00 / 4.75</text>
+<rect x='80.0' y='680.0' width='640.0' height='148.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='702.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>MOUNT</text>
+<text x='92.0' y='720.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• ¼" steel hinge plate, 8 × 10, bolted to the drive wall.</text>
+<text x='92.0' y='738.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Motor on 56C face (or foot) with slots for belt line-up.</text>
+<text x='92.0' y='756.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Turnbuckle or 5/16" all-thread from plate to base — set tension, lock nuts.</text>
+<text x='92.0' y='774.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Optional gas spring as a helper, not as the only tension.</text>
+<text x='92.0' y='792.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• 4L440 link belt preferred (install without tearing the machine down).</text>
+<text x='92.0' y='810.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Guard: ¼" BB or perforated steel, fully enclosed, latch, no finger holes.</text>
+<text x='760.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>ELECTRICAL  —  115 V BRANCH, DEDICATED 20 A</text>
+<rect x='780.0' y='110.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='880.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>NEMA 5-20</text>
+<rect x='1020.0' y='110.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='1120.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>E-STOP</text>
+<rect x='1260.0' y='110.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='1360.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>MAG STARTER</text>
+<rect x='780.0' y='230.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='880.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>OL RELAY</text>
+<rect x='1020.0' y='230.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='1120.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>DRUM MOTOR</text>
+<rect x='1260.0' y='230.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='1360.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>HOOD SW</text>
+<rect x='780.0' y='350.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='880.0' y='392.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>24 V PSU</text>
+<rect x='1020.0' y='350.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='1120.0' y='392.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>PWM</text>
+<rect x='1260.0' y='350.0' width='200.0' height='70.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.4' rx='4'/>
+<text x='1360.0' y='392.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle' font-weight='600'>FEED MOTOR</text>
+<line x1='980.0' y1='145.0' x2='1020.0' y2='145.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='1220.0' y1='145.0' x2='1260.0' y2='145.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='1360.0' y1='180.0' x2='1360.0' y2='230.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='1260.0' y1='265.0' x2='1220.0' y2='265.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='1020.0' y1='265.0' x2='980.0' y2='265.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='880.0' y1='180.0' x2='880.0' y2='230.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='880.0' y1='300.0' x2='880.0' y2='350.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='980.0' y1='385.0' x2='1020.0' y2='385.0' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='1220.0' y1='385.0' x2='1260.0' y2='385.0' stroke='#1c1914' stroke-width='1.6'/>
+<text x='780.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Magnetic starter = no-volt release. If the lights blink, the drum does not restart in your hands.</text>
+<text x='780.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Hood switch is optional but cheap: machine will not run with the guard off.</text>
+<text x='780.0' y='494.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Feed PWM is extra-low-voltage. Fuse the 24 V separately. E-stop kills both contactors.</text>
+<rect x='760.0' y='530.0' width='860.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='772.0' y='552.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>MOTOR SIZING</text>
+<text x='772.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Walters ran 1/3 HP successfully — with very light passes on a hand-fed table.</text>
+<text x='772.0' y='588.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Powered 16" feed at 10 FPM will stall 1/3 HP in oak. Spec 1 HP; 1.5 HP is luxury.</text>
+<text x='772.0' y='606.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Optional: 1 HP 3-phase + VFD, 800–1600 RPM drum for grit changes.</text>
+<text x='772.0' y='624.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• TEFC, not open drip-proof. This machine makes a dust storm (Walters' words).</text>
+<text x='772.0' y='642.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Have a licensed electrician sign off if you are not one. This sheet is not a code drawing.</text>
+<rect x='760.0' y='740.0' width='860.0' height='94.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='772.0' y='762.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>STARTUP SEQUENCE</text>
+<text x='772.0' y='780.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1. Dust collector on.  2. Hood latched.  3. Table locked.  4. Drum on, wait for speed.</text>
+<text x='772.0' y='798.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>5. Feed on, slow.  6. Board in.  7. If it stalls: feed off first, then drum.</text>
+<text x='772.0' y='816.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Never start the drum with a board already under it.</text>
+</svg>

@@ -5,9 +5,10 @@ A complete, self-contained website:
 - `index.html` — the public **landing page** (the marketing front door)
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
-- `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, plan generators)
+- `sander/` — the **shop machine suite**: WALTER (16″ closed-frame drum thickness sander) at `/walter/`
+- `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `build_walter.sh`, `render_hashira_cad.sh`, plan generators)
 - `fence/martin/app/` — interactive **MARTIN Build** PWA (visualize, assembly checklist, materials, joinery, gallery, drafts, downloads) at `/martin/app` or `/build`
-- `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`)
+- `netlify.toml` — server headers + redirects (`/martin`, `/martin/app`, `/build`, `/stele`, `/report`, `/walter`, `/sander`)
 
 
 ## What this is — and isn't
@@ -55,3 +56,13 @@ This package includes the full optimized front-end with:
 - All previous features (Quant/MC, goals, coach/agents, etc.)
 
 Upload the `bedrock-deploy` folder directly. The landing is at root; the terminal ("Enter the Dojo") is at /app/.
+
+## WALTER — 16″ drum thickness sander
+Shop-machine package at `/walter/` (source under `sander/walter/`). Original engineering from Ron Walters' published ShopNotes-derived machine (woodgears + YouTube W-5Sj6kBVic): dedicated 1 HP drive, crowned PVC conveyor, dual Acme elevation, idle-end drum jack. Not a reprint of copyrighted magazine drawings.
+
+```
+./scripts/build_walter.sh
+# plans only:
+python3 scripts/gen_walter_plans.py
+```
+

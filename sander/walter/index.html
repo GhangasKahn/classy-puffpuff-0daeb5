@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="WALTER — a modern 16-inch closed-frame drum thickness sander. Original engineering from Ron Walters' published failure modes. FreeCAD, OpenSCAD, eight A3 build sheets." />
+<title>WALTER — 16″ Drum Thickness Sander</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#14110e;
+  --ink2:#1c1914;
+  --gray:#8a7a68;
+  --gray-hi:#c4b49a;
+  --copper:#b4532a;
+  --copper-hi:#d47248;
+  --sage:#3d5a4c;
+  --sage-hi:#6b8f7a;
+  --paper:#f4efe6;
+  --paper-dim:#c4b49a;
+  --line:rgba(244,239,230,.14);
+  --line-strong:rgba(244,239,230,.32);
+  --disp:"Newsreader", Georgia, serif;
+  --sans:"Libre Franklin", "Avenir Next", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.55;overflow-x:hidden}
+::selection{background:var(--copper);color:var(--paper)}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 0%, rgba(180,83,42,.18), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(61,90,76,.12), transparent 50%),
+    linear-gradient(180deg,#0e0c0a 0%, var(--ink) 40%, #1a1612 100%);
+}
+.wrap{width:min(1140px,calc(100% - 40px));margin:0 auto;position:relative;z-index:2}
+.kicker{font:500 11px/1 var(--mono);letter-spacing:.28em;text-transform:uppercase;color:var(--copper-hi)}
+.display{font-family:var(--disp);font-weight:600;letter-spacing:.01em;line-height:1.02;text-wrap:balance}
+.lead{font-size:clamp(16px,1.7vw,19px);color:var(--paper-dim);max-width:54ch;font-weight:300}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;padding:16px 0;transition:background .35s var(--ease),border-color .35s var(--ease);border-bottom:1px solid transparent}
+.nav.on{background:rgba(20,17,14,.86);backdrop-filter:blur(12px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font:600 15px/1 var(--disp);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.brand i{width:22px;height:3px;background:var(--copper);display:inline-block}
+.nav-links{display:flex;gap:18px;flex-wrap:wrap}
+.nav-links a{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gray-hi);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+
+.hero{min-height:96svh;display:grid;align-items:end;position:relative;padding:130px 0 56px;overflow:hidden}
+.hero-img{position:absolute;inset:0;z-index:1}
+.hero-img img,.hero-img svg{width:100%;height:100%;object-fit:cover;object-position:center 55%;opacity:.72}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,14,.15) 0%,rgba(20,17,14,.45) 50%,rgba(20,17,14,.96) 100%)}
+.hero-inner{position:relative;z-index:3}
+.hero h1{font:600 clamp(64px,13vw,168px)/.9 var(--disp);letter-spacing:.04em;text-transform:uppercase;margin:14px 0 16px}
+.hero h1 span{color:var(--copper-hi)}
+.hero-copy{max-width:46ch;margin-bottom:24px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:.7em;font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:17px 24px;border:1px solid var(--copper);color:var(--paper);background:linear-gradient(180deg,rgba(180,83,42,.32),rgba(180,83,42,.06));transition:transform .25s var(--ease),background .25s,border-color .25s;min-height:48px}
+.btn:hover{transform:translateY(-2px);border-color:var(--copper-hi);background:rgba(180,83,42,.42)}
+.btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--paper-dim)}
+.btn.ghost:hover{color:var(--paper);border-color:var(--paper-dim)}
+
+.sec{padding:clamp(64px,10vh,120px) 0;position:relative;z-index:2}
+.sec-head{margin-bottom:32px;max-width:64ch}
+.sec-head h2.display{font-size:clamp(32px,5vw,60px);margin:10px 0 14px}
+.sec-head .num{font:500 11px/1 var(--mono);letter-spacing:.2em;color:var(--copper-hi)}
+.rule{height:1px;background:linear-gradient(90deg,var(--copper),transparent 70%);margin:0 0 36px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.on{opacity:1;transform:none}
+
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 36px}
+@media(max-width:760px){.spec-grid{grid-template-columns:1fr}}
+.spec{display:grid;grid-template-columns:140px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.spec dt{font:600 12px/1.5 var(--mono);color:var(--gray-hi);letter-spacing:.06em}
+.spec dd{color:var(--paper-dim);font-size:15px}
+
+.compare{width:100%;border-collapse:collapse;font-size:14px}
+.compare th,.compare td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.compare th{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--copper-hi)}
+.compare td{color:var(--paper-dim)}
+.compare td:first-child{color:var(--paper);font-family:var(--disp);font-size:17px;font-weight:600}
+.compare .was{color:#c47a6a}
+.compare .now{color:var(--sage-hi)}
+
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:820px){.gallery{grid-template-columns:1fr}}
+.shot{border:1px solid var(--line);background:#14110e;overflow:hidden}
+.shot.wide{grid-column:1/-1}
+.shot img{width:100%;height:auto;background:var(--paper)}
+.shot figcaption{font:500 10px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gray-hi);padding:12px 14px;border-top:1px solid var(--line)}
+.dl-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+
+.sheets{display:grid;gap:22px}
+.sheet{border:1px solid var(--line);background:#f4efe6;overflow:hidden}
+.sheet img{width:100%;height:auto}
+.sheet .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;background:#14110e;border-top:1px solid var(--line)}
+.sheet .bar b{font:600 12px/1 var(--mono);letter-spacing:.12em;color:var(--copper-hi);text-transform:uppercase}
+.sheet .bar span{font:400 12px/1.4 var(--mono);color:var(--gray-hi)}
+.sheet .bar a{font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gray-hi);text-decoration:none}
+.sheet .bar a:hover{color:var(--paper)}
+
+.mat-table{width:100%;border-collapse:collapse;font-size:14px}
+.mat-table th,.mat-table td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.mat-table th{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--copper-hi)}
+.mat-table td{color:var(--paper-dim)}
+.mat-table td:first-child{color:var(--paper);font-family:var(--disp);font-size:17px;font-weight:600}
+.mat-table tr.total td{border-top:2px solid var(--line-strong);color:var(--paper);font-weight:600}
+
+.phases{border-top:1px solid var(--line)}
+.phase{display:grid;grid-template-columns:140px 1fr;gap:22px;padding:24px 0;border-bottom:1px solid var(--line)}
+@media(max-width:700px){.phase{grid-template-columns:1fr;gap:8px}}
+.phase .when{font:500 12px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--copper-hi)}
+.phase h3{font:600 22px/1.2 var(--disp);margin-bottom:8px}
+.phase p{color:var(--paper-dim);max-width:64ch;font-size:15px}
+.phase ul{margin-top:8px;padding-left:18px;color:var(--paper-dim);font-size:14px}
+.phase li{margin:.28em 0}
+
+.trinity{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:860px){.trinity{grid-template-columns:1fr}}
+.civ{border-top:2px solid var(--copper);padding-top:18px}
+.civ h3{font:600 24px/1.15 var(--disp);margin:8px 0}
+.civ .rule-name{font:500 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--copper-hi);display:block;margin-bottom:8px}
+.civ p{color:var(--paper-dim);font-size:15px}
+
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+@media(max-width:800px){.calc{grid-template-columns:1fr 1fr}}
+.calc div{border:1px solid var(--line);padding:18px 16px}
+.calc b{display:block;font:600 28px/1 var(--disp);color:var(--paper);margin:6px 0 4px}
+.calc span{font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gray-hi)}
+.calc em{font-style:normal;color:var(--paper-dim);font-size:13px}
+
+.fc-box{margin-top:8px;border:1px solid var(--line);padding:24px 26px;background:rgba(0,0,0,.28)}
+.fc-box pre{margin-top:12px;padding:14px 16px;background:rgba(0,0,0,.4);border:1px solid var(--line);overflow-x:auto;font:400 12.5px/1.6 var(--mono);color:var(--paper-dim);white-space:pre-wrap}
+.note{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:var(--gray);font-size:13px;max-width:72ch}
+.foot{padding:44px 0 56px;border-top:1px solid var(--line);position:relative;z-index:2}
+.foot .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--gray);font:400 12px/1.6 var(--mono);letter-spacing:.06em}
+@media print{.nav,.cta-row{display:none}body{background:#fff;color:#111}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i aria-hidden="true"></i> Walter</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#brief">Brief</a>
+      <a href="#lineage">Lineage</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#plans">Plans</a>
+      <a href="#materials">BOM</a>
+      <a href="#build">Build</a>
+      <a href="../">Shop ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-img" aria-hidden="true"><img src="renders/hero.svg" alt="" /></div>
+    <div class="wrap hero-inner">
+      <p class="kicker reveal">16″ closed frame · 5″ drum · 1089 RPM · original engineering</p>
+      <h1 class="reveal">Wal<span>ter</span></h1>
+      <p class="lead hero-copy reveal">A shop-built drum thickness sander that keeps Ron Walters' dedicated motor and flange bearings, and throws out the three things that actually failed: PVC conveyor rollers, a sanding belt used as a belt, and an oak-thread table.</p>
+      <div class="cta-row reveal">
+        <a class="btn" href="#plans">Blueprints <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="cad/walter_sander.scad">OpenSCAD</a>
+        <a class="btn ghost" href="cad/walter_sander.py">FreeCAD</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="brief">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">01 — Design brief</p>
+        <h2 class="display">Sixteen inches of thickness sanding that you can repair</h2>
+        <p class="lead">Closed frame. Powered crowned conveyor. Dual Acme elevation. Idle-end drum jack. 1 HP, not a table-saw parasite.</p>
+      </div>
+      <div class="rule reveal"></div>
+      <dl class="spec-grid reveal">
+        <div class="spec"><dt>Capacity</dt><dd>16.00″ wide × 0.06–4.00″ thick</dd></div>
+        <div class="spec"><dt>Drum</dt><dd>5.00″ Ø × 16.00″ face · 21× Baltic birch discs · ¾″ Stressproof shaft</dd></div>
+        <div class="spec"><dt>Speed</dt><dd>1089 RPM · 1427 SFM (3.00″ / 4.75″ pulleys on 1725 RPM)</dd></div>
+        <div class="spec"><dt>Drive</dt><dd>1 HP TEFC 56C · hinged plate + turnbuckle · 4L link belt</dd></div>
+        <div class="spec"><dt>Feed</dt><dd>16×60 2-ply PVC conveyor · 2.00″ crowned Al rollers · 0–16 FPM PWM</dd></div>
+        <div class="spec"><dt>Elevation</dt><dd>Dual ¾-6 Acme, HTD-synced · 4.50″ travel · 0.167″/rev</dd></div>
+        <div class="spec"><dt>Parallelism</dt><dd>Idle-end UCFL204 on ¼-20 jack screws, ±0.040″</dd></div>
+        <div class="spec"><dt>Dust</dt><dd>¼″ birch hood · 4″ port · 400 CFM · brush strip</dd></div>
+        <div class="spec"><dt>Envelope</dt><dd>22 × 36 × 22″ benchtop · ~100 lb</dd></div>
+        <div class="spec"><dt>Budget</dt><dd>≈ $1,100–1,600 in 2026 hobby-shop pricing</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="lineage">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">02 — Lineage, not a reprint</p>
+        <h2 class="display">ShopNotes #86 failed in public. We redesigned the failures.</h2>
+        <p class="lead">The 2006 magazine machine sat on a table saw. Ron Walters published what happened when he made it a real tool. The YouTube walkthrough is the same machine. This package is original engineering from those notes — not a copy of copyrighted drawings.</p>
+      </div>
+      <div class="rule reveal"></div>
+      <div class="trinity">
+        <article class="civ reveal">
+          <span class="rule-name">Walters · woodgears</span>
+          <h3>What he got right</h3>
+          <p>Dedicated ⅓ HP motor instead of stealing the table saw. Flange bearings in single-skin Baltic birch. Velcro-wrap drum. Dust hood that actually works. He sanded rough oak to planer-grade in light passes at ~1100 RPM.</p>
+        </article>
+        <article class="civ reveal">
+          <span class="rule-name">Video · W-5Sj6kBVic</span>
+          <h3>What the camera showed</h3>
+          <p>Motor hanging on a wooden dowel goes slack on startup. Idle bearing needed shim stock. Formica platen scored. MDF discs hairline-cracked. The conveyor — a 16×48 sanding belt on PVC — was rebuilt three times and never tracked.</p>
+        </article>
+        <article class="civ reveal">
+          <span class="rule-name">WALTER · this machine</span>
+          <h3>What we changed</h3>
+          <p>1 HP, hinged tension, crowned aluminum rollers, PVC conveyor belt, dual Acme + digital readout, idle-end jack screws, birch drum with expansion gaps and paper-retainer slots, HDPE platen, magnetic starter.</p>
+        </article>
+      </div>
+
+      <table class="compare reveal" style="margin-top:48px">
+        <thead><tr><th>Subsystem</th><th>ShopNotes / Walters</th><th>WALTER</th></tr></thead>
+        <tbody>
+          <tr><td>Power</td><td class="was">Table-saw pulley, then ⅓ HP 1725</td><td class="now">1 HP TEFC 56C, optional VFD</td></tr>
+          <tr><td>Frame</td><td class="was">MDF, then single ¾″ birch</td><td class="now">Doubled ¾″ BB + ¼″ steel bearing plates</td></tr>
+          <tr><td>Drum</td><td class="was">19× MDF + 2 birch on CRS + piano wire</td><td class="now">21× birch, 0.5 mm gaps, 1144 keyed shaft</td></tr>
+          <tr><td>Paper</td><td class="was">Permanent Velcro (new drum to replace)</td><td class="now">Hook tape + end-bell retainer slots</td></tr>
+          <tr><td>Table</td><td class="was">Threaded oak dowel in a 2×4</td><td class="now">Dual ¾-6 Acme, HTD timed, UHMW ways</td></tr>
+          <tr><td>Platen</td><td class="was">Formica (scored immediately)</td><td class="now">HDPE / phenolic on a torsion box</td></tr>
+          <tr><td>Conveyor</td><td class="was">Sanding belt on PVC — never tracked</td><td class="now">PVC belt, 0.030″ crown, skew screws</td></tr>
+          <tr><td>Parallelism</td><td class="was">Shim stock under a flange bearing</td><td class="now">¼-20 jack screws, ±0.040″</td></tr>
+          <tr><td>Belt tension</td><td class="was">Motor weight on a dowel (slack on start)</td><td class="now">Hinge plate + turnbuckle + guard</td></tr>
+          <tr><td>Electrics</td><td class="was">Switch on a motor</td><td class="now">Magnetic starter, E-stop, 24 V feed</td></tr>
+        </tbody>
+      </table>
+      <p class="note reveal">Sources: <a href="https://woodgears.ca/reader/walters/drum_sander.html">woodgears.ca/reader/walters/drum_sander.html</a> and <a href="https://youtu.be/W-5Sj6kBVic">youtu.be/W-5Sj6kBVic</a>. Heslop (crowned plywood rollers, short-stock kickback) and Hunt (open C-frame) informed options, not geometry. ShopNotes issue 86 remains copyrighted — do not scan or redraw it.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="engineering">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">03 — Numbers that have to be true</p>
+        <h2 class="display">Surface speed, feed, and a drum that stays round</h2>
+      </div>
+      <div class="rule reveal"></div>
+      <div class="calc reveal">
+        <div><span>Drum speed</span><b>1089</b><em>RPM = 1725 × 3.00 / 4.75</em></div>
+        <div><span>Surface speed</span><b>1427</b><em>SFM = π × 5.00 × 1089 / 12</em></div>
+        <div><span>Feed at 30 rpm</span><b>15.7</b><em>FPM = π × 2.00 / 12 × 30</em></div>
+        <div><span>Elevation</span><b>0.167</b><em>inches per Acme revolution</em></div>
+      </div>
+      <p class="lead reveal" style="margin-top:36px">1427 SFM is the same neighborhood as a 16–32 SuperMax. It is fast enough for 80-grit thicknessing and not so fast that 150-grit burns. ⅓ HP survived because Walters took whisper passes by hand. A powered 16″ feed at 10 FPM in oak will stall that motor. Spec 1 HP; treat 1.5 HP as luxury.</p>
+      <dl class="spec-grid reveal" style="margin-top:28px">
+        <div class="spec"><dt>Drum inertia</dt><dd>Birch stack ~8 lb at 5″ Ø. Keep the key. Do not run an unbalanced blank.</dd></div>
+        <div class="spec"><dt>Expansion</dt><dd>0.5 mm glue-line gap every fourth disc. MDF cracked without this.</dd></div>
+        <div class="spec"><dt>Bearing load</dt><dd>Self-aligning ¾″ inserts in ¼″ plates. Idle slots take jack-screw motion.</dd></div>
+        <div class="spec"><dt>Platen flatness</dt><dd>A 0.010″ hump under the drum prints as a stripe on every board.</dd></div>
+        <div class="spec"><dt>Crown</dt><dd>0.030″ barrel on both 2″ rollers. Flat rollers do not self-center. PVC is not round.</dd></div>
+        <div class="spec"><dt>Rotation</dt><dd>Bottom of drum moves toward infeed (against feed), dust into the back hood.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="model">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">04 — Parametric CAD</p>
+        <h2 class="display">One parameter set. Model, STEP, and sheets stay in sync.</h2>
+        <p class="lead">OpenSCAD for preview. FreeCAD for STEP/STL. Plan generator in Python reads the same inches.</p>
+      </div>
+      <div class="gallery">
+        <figure class="shot wide reveal"><img src="renders/hero.svg" alt="Isometric" /><figcaption>Isometric — 22 × 36 × 22″ benchtop · drum over crowned conveyor</figcaption></figure>
+        <figure class="shot reveal"><img src="plans/W3_drum.svg" alt="Drum sheet" /><figcaption>W-3 — keyed shaft, birch stack, spiral wrap, retainer slots</figcaption></figure>
+        <figure class="shot reveal"><img src="plans/W5_conveyor.svg" alt="Conveyor sheet" /><figcaption>W-5 — crown, skew tracking, 16×60 PVC belt</figcaption></figure>
+      </div>
+      <div class="dl-row reveal">
+        <a class="btn ghost" href="cad/walter_sander.scad" download>walter_sander.scad</a>
+        <a class="btn ghost" href="cad/walter_sander.py" download>walter_sander.py</a>
+        <a class="btn ghost" href="cad/exports/walter_assembly.step" download>STEP (if built)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="plans">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">05 — Construction documents</p>
+        <h2 class="display">Eight blueprint sheets</h2>
+        <p class="lead">Print at 100% on A3 (or ~71% on Letter). Dimensions in inches. Generated from the same parameters as the 3D model.</p>
+      </div>
+      <div class="sheets">
+        <div class="sheet reveal"><img src="plans/W1_general.svg" alt="W-1" /><div class="bar"><b>W-1</b><span>General arrangement · elevations · spec</span><a href="plans/W1_general.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W2_frame.svg" alt="W-2" /><div class="bar"><b>W-2</b><span>Frame, doubled walls, bearing plate, jack screws</span><a href="plans/W2_frame.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W3_drum.svg" alt="W-3" /><div class="bar"><b>W-3</b><span>Drum, shaft, keyway, wrap, truing</span><a href="plans/W3_drum.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W4_elevation.svg" alt="W-4" /><div class="bar"><b>W-4</b><span>Dual Acme table · UHMW ways · readout</span><a href="plans/W4_elevation.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W5_conveyor.svg" alt="W-5" /><div class="bar"><b>W-5</b><span>Crowned conveyor · tracking · Option B slider</span><a href="plans/W5_conveyor.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W6_drive.svg" alt="W-6" /><div class="bar"><b>W-6</b><span>1 HP drive, hinge mount, electrics</span><a href="plans/W6_drive.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W7_dust_safety.svg" alt="W-7" /><div class="bar"><b>W-7</b><span>Dust hood, rotation, safe use</span><a href="plans/W7_dust_safety.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W8_bom.svg" alt="W-8" /><div class="bar"><b>W-8</b><span>Cut list, hardware BOM, sequence, budget</span><a href="plans/W8_bom.svg" download>SVG</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="materials">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">06 — Materials</p>
+        <h2 class="display">Baltic birch, Stressproof, and a real conveyor belt</h2>
+        <p class="lead">Do not substitute MDF for the drum or walls. Do not substitute a sanding belt for the conveyor. Full callouts are on sheet W-8.</p>
+      </div>
+      <table class="mat-table reveal">
+        <thead><tr><th>Item</th><th>Spec</th><th>Qty</th></tr></thead>
+        <tbody>
+          <tr><td>Baltic birch ¾″</td><td>5×5 or 5×10, void-free</td><td>3 sheets</td></tr>
+          <tr><td>Baltic birch ¼″</td><td>hood, guard, platen skins</td><td>1 sheet</td></tr>
+          <tr><td>Shaft</td><td>¾″ × 22″ 1144 Stressproof, 3/16″ keyways</td><td>1</td></tr>
+          <tr><td>Drum bearings</td><td>UCFL204-12 2-bolt flange</td><td>2</td></tr>
+          <tr><td>Roller bearings</td><td>UCFL201-10 ⅝″</td><td>4</td></tr>
+          <tr><td>Rollers</td><td>2.00″ Al tube × 16.25″, 0.030″ crown</td><td>2</td></tr>
+          <tr><td>Acme</td><td>¾-6 × 12″ + bronze nuts</td><td>2 + 2</td></tr>
+          <tr><td>Motor</td><td>1 HP TEFC 1725 RPM 115 V 56C</td><td>1</td></tr>
+          <tr><td>Feed</td><td>24 V worm gearmotor + PWM + 24 V PSU</td><td>1</td></tr>
+          <tr><td>Conveyor belt</td><td>16″ × 60″ 2-ply PVC, endless</td><td>1</td></tr>
+          <tr><td>Drive belt</td><td>4L440 link · 3.00″ / 4.75″ 4L pulleys</td><td>1 set</td></tr>
+          <tr><td>Electrics</td><td>Magnetic starter, OL, E-stop, 5-20 cord</td><td>1 set</td></tr>
+          <tr class="total"><td>Budget</td><td>See W-8</td><td>≈ $1,100–1,600</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" id="build">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="num">07 — Build sequence</p>
+        <h2 class="display">True the drum last. Track the belt empty first.</h2>
+      </div>
+      <div class="phases">
+        <div class="phase reveal"><div class="when">Phase 1</div><div><h3>Drum</h3><p>Bandsaw 21 discs Ø 5.125″. Bore 0.748″ on the drill press. Dry-stack on the keyed shaft with 0.5 mm gaps every four discs. Glue. True between centers or in the machine after the frame exists.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 2</div><div><h3>Frame</h3><p>Glue doubled walls, grain crossed, on a flat door. Steel plates as drill jigs. Idle wall gets vertical slots and jack screws; drive wall is fixed. Square the box before the glue grabs — this is the machine's accuracy.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 3</div><div><h3>Table</h3><p>Torsion-box platen, UHMW ways, nut blocks, Acme screws, HTD sync, digital caliper on the idle wall. Lock knobs. Confirm 4.5″ of parallel travel.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 4</div><div><h3>Conveyor</h3><p>Turn 0.030″ crowns. Mount rollers. Skew hardware on the idle end. Endless PVC belt. Track empty, then loaded. PWM feed last. Or skip this phase and run Option B: HDPE sliding table.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 5</div><div><h3>Drive &amp; dust</h3><p>Hinge plate, motor, pulleys, link belt, turnbuckle, full guard. Wire magnetic starter and E-stop. Hood, 4″ port, brush strip. Dust collector on before any test cut.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 6</div><div><h3>Tune</h3><p>Wrap paper. True the drum on a carrier board. Jack the idle bearing until a 16″ test board kisses both ends. 0.010″ passes in poplar, then oak. If the motor note changes, you took too much.</p>
+          <ul>
+            <li>Never sand pieces shorter than 12″ unless they are stuck to a carrier.</li>
+            <li>Never start the drum with a board already under it.</li>
+            <li>This is not a planer. Light passes until it is boring.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="fc-box reveal">
+        <p class="kicker">Regenerate CAD + plans</p>
+        <pre>./scripts/build_walter.sh
+# or stepwise:
+python3 scripts/gen_walter_plans.py
+openscad sander/walter/cad/walter_sander.scad
+freecadcmd sander/walter/cad/walter_sander.py</pre>
+      </div>
+      <p class="note">Shop-build design for experienced DIY construction — not a stamped PE document, not a wiring diagram for permit, not a substitute for a licensed electrician. Shafting, guarding, and 115 V are your responsibility. If a number on a sheet fights the CAD, trust the CAD parameters.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>WALTER · 16″ drum thickness sander · Rev A</span>
+    <span>OpenSCAD · FreeCAD · A3 sheets</span>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('on',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-2  ·  Frame &amp; bearing walls</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Scale ~1:6  ·  ¾" Baltic birch, doubled at bearings</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev A  ·  Shop build</text>
+<text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>IDLE-SIDE WALL — INNER FACE</text>
+<text x='40.0' y='82.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>1.50" (two layers ¾" BB, grain crossed)  ·  steel plate spreads flange-bearing load</text>
+<rect x='50.0' y='460.0' width='792.0' height='440.0' fill='#c4b49a' stroke='#1c1914' stroke-width='2'/>
+<rect x='149.0' y='707.5' width='594.0' height='49.5' fill='#efe8dc' stroke='#b4532a' stroke-width='1.4' stroke-dasharray='6 3'/>
+<text x='446.0' y='732.8' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle'>UHMW DADO  0.50 × 2.25 × 27"</text>
+<rect x='380.0' y='537.0' width='132.0' height='132.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.6'/>
+<circle cx='446.0' cy='603.0' r='12.1' fill='#f4efe6' stroke='#1c1914' stroke-width='1.4'/>
+<text x='446.0' y='528.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f4efe6' text-anchor='middle' font-weight='600'>¼" STEEL PLATE 6×6</text>
+<circle cx='397.6' cy='603.0' r='2.9' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='494.4' cy='603.0' r='2.9' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='446.0' y='680.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle'>¼-20 JACK SCREWS  (idle wall only)</text>
+<rect x='401.3' y='593.1' width='8.0' height='19.8' fill='#f4efe6' stroke='#1c1914' stroke-width='1'/>
+<rect x='482.7' y='593.1' width='8.0' height='19.8' fill='#f4efe6' stroke='#1c1914' stroke-width='1'/>
+<text x='547.2' y='603.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#6b5340' text-anchor='start' transform='rotate(-90 547.2 603.0)'>SLOTTED</text>
+<rect x='72.0' y='806.5' width='33.0' height='77.0' fill='#d4cbb8' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='787.0' y='806.5' width='33.0' height='77.0' fill='#d4cbb8' stroke='#1c1914' stroke-width='1.4'/>
+<line x1='50.0' y1='906.0' x2='50.0' y2='940.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='842.0' y1='906.0' x2='842.0' y2='940.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='50.0' y1='932.0' x2='842.0' y2='932.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='50.0,932.0 60.0,928.0 60.0,936.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='842.0,932.0 832.0,928.0 832.0,936.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='415.9' y='911.0' width='60.2' height='21.0' fill='#f4efe6'/>
+<text x='446.0' y='926.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>36.00"</text>
+<line x1='50.0' y1='460.0' x2='12.0' y2='460.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='50.0' y1='900.0' x2='12.0' y2='900.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='20.0' y1='460.0' x2='20.0' y2='900.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='20.0,460.0 16.0,470.0 24.0,470.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='20.0,900.0 16.0,890.0 24.0,890.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<text x='8.0' y='685.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='end' transform='rotate(-90 8.0 685.0)'>20.00"</text>
+<line x1='842.0' y1='548.0' x2='872.0' y2='548.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='842.0' y1='658.0' x2='872.0' y2='658.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='864.0' y1='548.0' x2='864.0' y2='658.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='864.0,548.0 860.0,558.0 868.0,558.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='864.0,658.0 860.0,648.0 868.0,648.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<text x='876.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='start' transform='rotate(-90 876.0 608.0)'>drum Ø shown dashed</text>
+<circle cx='446.0' cy='603.0' r='55.0' fill='none' stroke='#7a5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>
+<text x='900.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>BASE PLAN</text>
+<text x='900.0' y='82.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>¾" BB  22.00 × 36.00  ·  1½ × 1½ hardwood rails under, ¾" inset</text>
+<rect x='920.0' y='172.0' width='396.0' height='648.0' fill='#d4cbb8' stroke='#1c1914' stroke-width='2'/>
+<rect x='920.0' y='172.0' width='27.0' height='648.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='1244.0' y='172.0' width='27.0' height='648.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='947.0' y='775.0' width='297.0' height='27.0' fill='#b9aa90' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='947.0' y='190.0' width='297.0' height='27.0' fill='#b9aa90' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='1271.0' y='235.0' width='45.0' height='180.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.2' stroke-dasharray='5 3'/>
+<text x='1299.8' y='334.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#6b5340' text-anchor='middle' transform='rotate(-90 1299.8 334.0)'>MOTOR</text>
+<line x1='920.0' y1='828.0' x2='920.0' y2='860.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='1316.0' y1='828.0' x2='1316.0' y2='860.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='920.0' y1='852.0' x2='1316.0' y2='852.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='920.0,852.0 930.0,848.0 930.0,856.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='1316.0,852.0 1306.0,848.0 1306.0,856.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='1087.9' y='831.0' width='60.2' height='21.0' fill='#f4efe6'/>
+<text x='1118.0' y='846.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>22.00"</text>
+<line x1='947.0' y1='166.0' x2='947.0' y2='138.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='1244.0' y1='166.0' x2='1244.0' y2='138.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='947.0' y1='146.0' x2='1244.0' y2='146.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='947.0,146.0 957.0,142.0 957.0,150.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='1244.0,146.0 1234.0,142.0 1234.0,150.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<rect x='1039.3' y='125.0' width='112.4' height='21.0' fill='#f4efe6'/>
+<text x='1095.5' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='middle'>16.50" clear</text>
+<line x1='920.0' y1='172.0' x2='884.0' y2='172.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='920.0' y1='820.0' x2='884.0' y2='820.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='892.0' y1='172.0' x2='892.0' y2='820.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='892.0,172.0 888.0,182.0 896.0,182.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<polygon points='892.0,820.0 888.0,810.0 896.0,810.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5'/>
+<text x='880.0' y='501.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#6b5340' text-anchor='end' transform='rotate(-90 880.0 501.0)'>36.00"</text>
+<rect x='900.0' y='860.0' width='720.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='912.0' y='882.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>FRAME NOTES</text>
+<text x='912.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Glue two ¾" BB skins per wall, grain crossed, clamp on a flat door.</text>
+<text x='912.0' y='918.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Drill bearing holes after glue-up; use the steel plate as a drill jig.</text>
+<text x='912.0' y='936.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Idle wall: vertical slots + jack screws. Drive wall: round holes, fixed.</text>
+<text x='912.0' y='954.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Screw-and-glue stretchers with #8 × 2" and waterproof PVA (Titebond III).</text>
+<text x='912.0' y='972.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>• Do not use MDF for walls or drum. Walters' MDF discs cracked in service.</text>
+</svg>
