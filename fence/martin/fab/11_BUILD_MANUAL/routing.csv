@@ -1,0 +1,17 @@
+OP,SETUP,PARTS,TOOL,ACTION,REFERENCE,TOLERANCE,STOP
+OP010,S-001,all mill stock,visual + winding sticks + Incra,Select; reject pith-centered / twist >1/8″ in 8′ / ring shake,face grain,T0,—
+OP020,S-002,all DF,stickers ¾″ @ 12–16″,Sticker 14+ days; end-sealer; weight top,flat sleepers,MC stabilize to shop,—
+OP030,S-010,L-001…L-004,TS + LS 36 + Fence Guide V2,Rip 6×6 → 3½×5½; joint/plane reference garden face,REFERENCE FACE against fence,T1 ±1/32″ section,fence locked
+OP040,S-011,L-001…L-004,Festool track saw + MFT dogs,Crosscut finished length 75.5″ after tenon layout; rough 77″ first,DATUM END = tenon tip during rough; then shoulder,T1,MFT stop — DO NOT MOVE for all four
+OP050,S-012,L-001…L-004,TS LS 36,Shoulder foot tenon 2.5×4.5×12; plane cheeks; dry-fit H-010,shoulder = pad-top datum,T2 ±1/32″,fence locked
+OP060,S-013,L-001…L-004,story stick + M1 + Kuratoga,Layout nuki CL 10 / 28 / 46 from pad-top datum (shoulder),Datum End = tenon shoulder,T2 1/64″,story stick — one stick for all posts
+OP070,S-014,L-001…L-004,drill + Zenwu Y2 + Ti hammer + Temple flush trim,Bore waste; chisel mortise to measured rail thickness × (7.25+1/16),cheeks parallel to reference face,"T2 sliding, no rattle",—
+OP080,S-015,L-002 L-003 L-004,Bridge City kerf tools + chisel,Kusabi cheek slots; label K-001 to each seat,rail dry-assembled position,T2 hand-fit,—
+OP090,S-020,R-001 R-002 R-003,TS + LS 36,Rip 7¼″ from 2×12 OUTER zone (not pith); plane faces,VG/rift-leaning edge to garden,T1,fence locked — all three rails
+OP100,S-021,R-001 R-002 R-003,TS + LS 36,Plow ⅜×⅞ grooves; one setup all edges,REFERENCE FACE down / fence on reference edge,T2 test on scrap,DO NOT MOVE fence until all grooves done
+OP110,S-022,R-001 R-002 R-003,track saw / miter,Crosscut nuki to 104.5″ after dry-slide through posts,P1 overhang datum,T1,MFT stop
+OP120,S-030,P-C* G-030,TS + plane,Rip 1×12 edges to 5½″; plane ¾″; cut courses after rails exist,VG edge,T1,course stops per C1–C4
+OP130,S-040,R-004 R-005,protractor + Preda shoot,Kama-tsugi at P2; close to light; drawbore last,top face coplanar,T2,peg from MFT
+OP140,S-050,G-001 G-010 G-020,Bridge City tenon + Temple + Zenwu,Hozo frame; half-lap brace; drawbore ⅛″; wooden pintles,stile outer = leaf datum,T2,peg holes MFT
+OP150,S-060,all timber,brushes,Prime + gray ×2; mask locking faces,—,T0,—
+OP160,S-070,A-MASTER,level / plumb,Drop posts; re-wedge; hang gate; latch; plumb ≤⅛″ / 65″,pad top,T1 plumb,—

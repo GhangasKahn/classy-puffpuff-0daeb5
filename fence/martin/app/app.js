@@ -1,6 +1,17 @@
 /* MARTIN Build App — visual 5-phase walk + explode + checklist */
 (function () {
   const D = window.MARTIN_DATA;
+  let SSOT = null;
+
+  function loadSSOT() {
+    return fetch("martin.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        SSOT = j;
+        return j;
+      })
+      .catch(() => null);
+  }
   const W = window.MARTIN_WALK;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -54,6 +65,8 @@
     );
     if (id === "viz") drawViz();
     if (id === "walk") renderWalk();
+    if (id === "registry") renderRegistry();
+    if (id === "qa") renderQA();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -384,10 +397,99 @@
     }
   }
 
-  function renderJoinery() {
-    $("#joineryList").innerHTML = D.joinery
+  function fmtSize(p) {
+    const t = p.FINISHED_THICKNESS;
+    const w = p.FINISHED_WIDTH;
+    const l = p.FINISHED_LENGTH;
+    if (!t && !w && !l) return "—";
+    return `${t} × ${w} × ${l}`;
+  }
+
+  function renderRegistry() {
+    if (!SSOT) {
+      $("#registryBody").innerHTML = `<tr><td colspan="6">Loading martin.json…</td></tr>`;
+      return;
+    }
+    const ly = SSOT.layout || {};
+    const mat = SSOT.material || {};
+    $("#ssotStats").innerHTML = [
+      ["Rev", SSOT.project.REVISION],
+      ["Parts", String(SSOT.parts.length)],
+      ["Joints", String(SSOT.joints.length)],
+      ["Post L", ly.post_finished_length + "″"],
+      ["Nuki L", ly.nuki_length + "″"],
+      ["Buy bf", String(mat.procurement_board_feet)],
+    ]
+      .map(([k, v]) => `<div class="card stat"><span>${k}</span><b>${v}</b></div>`)
+      .join("");
+    $("#registryBody").innerHTML = SSOT.parts
       .map(
-        (j) => `<article class="join">
+        (p) => `<tr>
+          <td class="mono">${p.PART_ID}</td>
+          <td>${p.PART_NAME}</td>
+          <td>${p.QUANTITY}</td>
+          <td class="mono">${fmtSize(p)}</td>
+          <td>${p.JOINERY || ""}</td>
+          <td>${p.MAKE_OR_BUY}</td>
+        </tr>`
+      )
+      .join("");
+    $("#paramBody").innerHTML = Object.entries(SSOT.parameters)
+      .map(([k, meta]) => {
+        const val = Array.isArray(meta.value) ? meta.value.join(" / ") : meta.value;
+        return `<tr><td class="mono">${k}</td><td>${val}</td><td>${meta.class}</td><td>${meta.note}</td></tr>`;
+      })
+      .join("");
+  }
+
+  function renderQA() {
+    if (!SSOT) return;
+    $("#gateList").innerHTML = Object.entries(SSOT.gates || {})
+      .map(
+        ([k, v]) =>
+          `<div class="card"><span class="mono">${k}</span><p style="margin:6px 0 0;color:var(--dim)">${v}</p></div>`
+      )
+      .join("");
+    $("#qcList").innerHTML = (SSOT.inspection || [])
+      .map(
+        (q) => `<div class="step">
+          <div class="num">${q.QC.replace("QC-", "")}</div>
+          <div><h3>${q.CHECK}</h3><p>${q.CRITERIA} · ${q.GATE} · ${q.CLASS}</p></div>
+        </div>`
+      )
+      .join("");
+    $("#decisionList").innerHTML = (SSOT.decisions || [])
+      .map(
+        (d) => `<article class="join" style="grid-template-columns:80px 1fr;margin-bottom:10px">
+          <div class="glyph">${d.ID}</div>
+          <div><h3>${d.DECISION}</h3><p style="margin:0;color:var(--dim);font-size:14px">${d.REASON}<br><span class="mono">${d.AFFECTED}</span></p></div>
+        </article>`
+      )
+      .join("");
+    $("#unresolvedList").innerHTML = (SSOT.unresolved || [])
+      .map((u) => `<li><strong>${u.ID}</strong> ${u.ITEM} (${u.CLASS}) — ${u.ACTION}</li>`)
+      .join("");
+  }
+
+  function renderJoinery() {
+    const extra = SSOT
+      ? SSOT.joints
+          .map(
+            (j) => `<article class="join">
+          <div class="glyph">${j.JOINT_ID.replace("J-", "")}</div>
+          <div>
+            <h3>${j.JOINT_TYPE}</h3>
+            <p class="hint" style="margin:0 0 6px">${j.PART_A} ↔ ${j.PART_B} · <span class="mono">${j.FIT_CLASS}</span></p>
+            <p style="margin:0;color:var(--dim);font-size:14px">${j.LOCATION || ""} · ${j.TOOLING || ""}</p>
+          </div>
+        </article>`
+          )
+          .join("")
+      : "";
+    $("#joineryList").innerHTML =
+      D.joinery
+        .map(
+          (j) => `<article class="join">
           <div class="glyph">${j.jp}</div>
           <div>
             <h3>${j.name}</h3>
@@ -395,8 +497,8 @@
             <p style="margin:0;color:var(--dim);font-size:14px">${j.tip}</p>
           </div>
         </article>`
-      )
-      .join("");
+        )
+        .join("") + extra;
   }
 
   function renderGallery() {
@@ -429,7 +531,7 @@
     $("#downloadGrid").innerHTML = D.downloads
       .map(
         (d) =>
-          `<a class="dl" href="${d.href}" ${d.href.match(/\.(FCStd|step|stl|py|svg)$/) ? "download" : ""}>
+          `<a class="dl" href="${d.href}" ${d.href.match(/\.(FCStd|step|stl|py|svg|json|csv)$/) ? "download" : ""}>
             <b>${d.label}</b><span>${d.note}</span>
           </a>`
       )
@@ -488,6 +590,11 @@
   }
 
   function init() {
+    loadSSOT().then(() => {
+      renderRegistry();
+      renderQA();
+      renderJoinery();
+    });
     renderOverview();
     renderPartList();
     renderAssembly();

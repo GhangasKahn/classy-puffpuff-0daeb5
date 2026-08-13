@@ -38,8 +38,10 @@
     <button type="button" class="tab on" data-tab="walk">Walk</button>
     <button type="button" class="tab" data-tab="viz">Explode</button>
     <button type="button" class="tab" data-tab="assembly">Checklist</button>
+    <button type="button" class="tab" data-tab="registry">Parts</button>
     <button type="button" class="tab" data-tab="materials">BOM</button>
     <button type="button" class="tab" data-tab="joinery">Joinery</button>
+    <button type="button" class="tab" data-tab="qa">QA</button>
     <button type="button" class="tab" data-tab="gallery">Plans</button>
     <button type="button" class="tab" data-tab="drafts">Drafts</button>
     <button type="button" class="tab" data-tab="files">Files</button>
@@ -48,7 +50,7 @@
   <main>
     <!-- WALK — primary visual 5-phase journey -->
     <section class="panel on" data-panel="walk" id="walk">
-      <p class="kicker">Rev C · mill stock · Japanese joinery · 5 phases</p>
+      <p class="kicker">Rev D · parametric SSOT · Japanese joinery · 5 phases</p>
       <h1>See the whole build</h1>
       <p class="lead">Walk every phase visually — mill for grain, pour the pad, cut nuki, build the gate, paint and set. Check steps off as you go.</p>
 
@@ -137,6 +139,31 @@
       <div id="assemblyList"></div>
     </section>
 
+    <!-- REGISTRY -->
+    <section class="panel" data-panel="registry">
+      <p class="kicker">Single source of truth</p>
+      <h1>Part register</h1>
+      <p class="lead">Every fabricated and purchased component. Dimensions derived from fab/martin.json — change overall length and regenerate.</p>
+      <div class="grid3" id="ssotStats"></div>
+      <div class="card" style="overflow:auto;margin-top:14px">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Qty</th><th>Finished T×W×L</th><th>Joinery</th><th>M/B</th></tr>
+          </thead>
+          <tbody id="registryBody"></tbody>
+        </table>
+      </div>
+      <div class="hr"></div>
+      <h2>Parameters</h2>
+      <p class="hint">V = verified · D = derived · A = assumed · M = to be measured</p>
+      <div class="card" style="overflow:auto">
+        <table>
+          <thead><tr><th>Name</th><th>Value</th><th>Class</th><th>Note</th></tr></thead>
+          <tbody id="paramBody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- MATERIALS -->
     <section class="panel" data-panel="materials">
       <p class="kicker">Mill buy · then re-dimension</p>
@@ -187,6 +214,23 @@
       <h1>Japanese joinery vocabulary</h1>
       <p class="lead">Every structural connection is wood-on-wood. Wedges and pegs reverse for winter knock-down.</p>
       <div class="grid2" id="joineryList" style="align-items:stretch"></div>
+    </section>
+
+    <!-- QA -->
+    <section class="panel" data-panel="qa">
+      <p class="kicker">Gates M0–M8</p>
+      <h1>Inspection &amp; decisions</h1>
+      <p class="lead">QA checkpoints, fit classes, and engineering decisions (including D-001 post length). Sign off in the shop — not just on screen.</p>
+      <div class="grid2" id="gateList"></div>
+      <div class="hr"></div>
+      <h2>QC list</h2>
+      <div id="qcList"></div>
+      <div class="hr"></div>
+      <h2>Decisions</h2>
+      <div id="decisionList"></div>
+      <div class="hr"></div>
+      <h2>Unresolved</h2>
+      <ul id="unresolvedList" style="color:var(--dim)"></ul>
     </section>
 
     <!-- GALLERY -->
@@ -253,9 +297,9 @@
   <nav class="mobile-nav" aria-label="Mobile">
     <button type="button" class="on" data-tab="walk">Walk</button>
     <button type="button" data-tab="viz">Explode</button>
-    <button type="button" data-tab="assembly">List</button>
+    <button type="button" data-tab="registry">Parts</button>
     <button type="button" data-tab="materials">BOM</button>
-    <button type="button" data-tab="gallery">Plans</button>
+    <button type="button" data-tab="qa">QA</button>
   </nav>
 </div>
 

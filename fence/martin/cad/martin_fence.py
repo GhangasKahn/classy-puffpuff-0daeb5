@@ -33,6 +33,7 @@ Outputs (./exports):
 
 from __future__ import annotations
 
+import json
 import math
 import os
 
@@ -54,59 +55,55 @@ def inch(n: float) -> float:
 
 
 # ----------------------------------------------------------------------------
-# Parameters — inches are the owner language; FreeCAD works in mm
+# Parameters from fabrication SSOT (inches → mm). Do not duplicate.
 # ----------------------------------------------------------------------------
+_SSOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fab", "martin.json")
+with open(_SSOT_PATH) as _f:
+    _SSOT = json.load(_f)
+
+
+def _p(name: str):
+    v = _SSOT["parameters"][name]["value"]
+    if isinstance(v, list):
+        return tuple(inch(x) for x in v)
+    return inch(float(v))
+
+
 P = dict(
-    # envelope
-    length=inch(143.0),
-    height=inch(65.0),
-
-    # 4×6 posts (actual 3.5 × 5.5): face along run = 3.5, depth = 5.5
-    post_x=inch(3.5),
-    post_y=inch(5.5),
-    post_tenon_x=inch(2.5),
-    post_tenon_y=inch(4.5),
-    post_tenon_h=inch(12.0),
-
-    # gate
-    gate_clear=inch(36.0),
-    gate_gap=inch(0.5),          # each side of leaf
-    leaf_t=inch(1.5),            # 2× stock leaf thickness
-    stile_w=inch(3.5),           # 2×4 / ripped 2×6 stile face
-    rail_gate_h=inch(5.5),       # 2×6 gate rails
-    brace_w=inch(3.5),
-
-    # Prairie rails — 2×8 on edge (visible 7.25" bands)
-    rail_t=inch(1.5),
-    rail_h=inch(7.25),
-    # rail centerlines above pad (AFF)
-    rail_z_cl=(inch(10.0), inch(28.0), inch(46.0)),
-    # cap — 2×8 flat on top of posts
-    cap_t=inch(1.5),
-    cap_w=inch(7.25),
-
-    # privacy boards — 1×6 (matches existing ¾" fence thickness)
-    board_t=inch(0.75),
-    board_w=inch(5.5),
-    board_gap=inch(0.25),
-
-    # leveling pad + socket piers (removable piers sit on pad)
-    pad_overhang=inch(6.0),
-    pad_width=inch(28.0),
-    pad_thick=inch(6.0),
-    # assume driveway→garden drop of 5"; pad top is level — thick end absorbs it
-    drop_off=inch(5.0),
-    pier_xy=inch(14.0),
-    pier_h=inch(18.0),
-    sleeve_wall=inch(0.25),
-    gravel_h=inch(6.0),
-    gravel_pad_extra=inch(4.0),
-
-    # latch bar into house concrete (optional receiver shown at x=0)
-    latch_bar_x=inch(18.0),
-    latch_bar_y=inch(1.5),
-    latch_bar_z=inch(3.5),
-    house_receiver_depth=inch(4.0),
+    length=_p("overall_length"),
+    height=_p("overall_height"),
+    post_x=_p("post_x"),
+    post_y=_p("post_y"),
+    post_tenon_x=_p("post_tenon_x"),
+    post_tenon_y=_p("post_tenon_y"),
+    post_tenon_h=_p("post_tenon_h"),
+    gate_clear=_p("gate_clear"),
+    gate_gap=_p("gate_gap"),
+    leaf_t=_p("leaf_t"),
+    stile_w=_p("stile_w"),
+    rail_gate_h=_p("rail_gate_h"),
+    brace_w=_p("brace_w"),
+    rail_t=_p("rail_t"),
+    rail_h=_p("rail_h"),
+    rail_z_cl=_p("rail_z_cl"),
+    cap_t=_p("cap_t"),
+    cap_w=_p("cap_w"),
+    board_t=_p("board_t"),
+    board_w=_p("board_w"),
+    board_gap=_p("board_gap"),
+    pad_overhang=_p("pad_overhang"),
+    pad_width=_p("pad_width"),
+    pad_thick=_p("pad_thick"),
+    drop_off=_p("drop_off"),
+    pier_xy=_p("pier_xy"),
+    pier_h=_p("pier_h"),
+    sleeve_wall=_p("sleeve_wall"),
+    gravel_h=_p("gravel_h"),
+    gravel_pad_extra=_p("gravel_pad_extra"),
+    latch_bar_x=_p("latch_bar_x"),
+    latch_bar_y=_p("latch_bar_y"),
+    latch_bar_z=_p("latch_bar_z"),
+    house_receiver_depth=_p("house_receiver_depth"),
 )
 
 timber, concrete, gravel, sleeve = [], [], [], []

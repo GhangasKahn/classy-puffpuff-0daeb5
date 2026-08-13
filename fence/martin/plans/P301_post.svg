@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>P-301  ·  Posts L-001…L-004</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Datums · foot tenon · nuki CL · Rev D</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev D</text>
+<text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUMS — ALL POSTS</text>
+<text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Datum End A: tenon shoulder = pad top. Measure nuki CL up from A, not from tenon tip.</text>
+<text x='40.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Reference Face B: garden face (against fence when ripping). Reference Edge C: run-left arris.</text>
+<text x='40.0' y='148.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Finished: 3.5 × 5.5 × 75.5"  ·  Tenon 2.5 × 4.5 × 12"  ·  Shoulders ±1/32" (T2)</text>
+<rect x='80.0' y='472.0' width='28.0' height='508.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<rect x='84.0' y='980.0' width='20.0' height='96.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
+<line x1='60.0' y1='980.0' x2='160.0' y2='980.0' stroke='#3d5a4c' stroke-width='1' stroke-dasharray='4 3'/>
+<text x='170.0' y='984.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start'>DATUM A · PAD TOP / SHOULDER</text>
+<line x1='72.0' y1='900.0' x2='116.0' y2='900.0' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='3 2'/>
+<text x='124.0' y='904.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>R1 CL 10.0"</text>
+<line x1='72.0' y1='756.0' x2='116.0' y2='756.0' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='3 2'/>
+<text x='124.0' y='760.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>R2 CL 28.0"</text>
+<line x1='72.0' y1='612.0' x2='116.0' y2='612.0' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='3 2'/>
+<text x='124.0' y='616.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>R3 CL 46.0"</text>
+<line x1='80.0' y1='472.0' x2='32.0' y2='472.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='80.0' y1='980.0' x2='32.0' y2='980.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='40.0' y1='472.0' x2='40.0' y2='980.0' stroke='#5a6a4a' stroke-width='1.4'/>
+<polygon points='40.0,472.0 36.0,482.0 44.0,482.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<polygon points='40.0,980.0 36.0,970.0 44.0,970.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<text x='28.0' y='731.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='end' transform='rotate(-90 28.0 731.0)'>63.5" ABOVE</text>
+<line x1='108.0' y1='980.0' x2='166.0' y2='980.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='108.0' y1='1076.0' x2='166.0' y2='1076.0' stroke='#5a6a4a' stroke-width='1'/>
+<line x1='158.0' y1='980.0' x2='158.0' y2='1076.0' stroke='#5a6a4a' stroke-width='1.4'/>
+<polygon points='158.0,980.0 154.0,990.0 162.0,990.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<polygon points='158.0,1076.0 154.0,1066.0 162.0,1066.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
+<text x='170.0' y='1033.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='start' transform='rotate(-90 170.0 1033.0)'>12" TENON</text>
+<text x='420.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>HANDED / UNIQUE</text>
+<text x='420.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  L-001 P0 Latch — nuki mortises; NO kusabi slots; Latch B mortise optional.</text>
+<text x='420.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  L-002 P1 Hinge — nuki + kusabi; wooden pintle gudgeons on gate side.</text>
+<text x='420.0' y='148.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  L-003 P2 Mid — nuki + kusabi; bears kama-tsugi.</text>
+<text x='420.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  L-004 P3 End — nuki + kusabi; run terminus.</text>
+<text x='420.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Mortise: width = measured rail_t (sliding). Height = 7.25 + 1/16 ease.</text>
+<text x='420.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Cheeks ~1″ each side of rail (post_y − rail_t)/2.</text>
+<text x='420.0' y='244.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  OP040: one MFT stop for all four rough/finish lengths. DO NOT MOVE.</text>
+<text x='420.0' y='268.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Grain: more vertical grain on 5.5″ exposed faces. No pith in tenon.</text>
+<text x='420.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>QTY 4  ·  MAKE  ·  DF Select  ·  Purchase 6×6×8′</text>
+</svg>

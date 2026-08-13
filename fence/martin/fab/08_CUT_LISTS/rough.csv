@@ -1,0 +1,23 @@
+PART_ID,PART_NAME,QUANTITY,PURCHASE,ROUGH_THICKNESS,ROUGH_WIDTH,ROUGH_LENGTH,PROCESS
+L-001,P0 Latch post,1,6×6 × 8′,5.5,5.5,77.0,rip 6×6→3½×5½ · shoulder tenon · bore/chisel nuki · kusabi slots except L-001
+L-002,P1 Hinge post,1,6×6 × 8′,5.5,5.5,77.0,rip 6×6→3½×5½ · shoulder tenon · bore/chisel nuki · kusabi slots except L-001
+L-003,P2 Mid post,1,6×6 × 8′,5.5,5.5,77.0,rip 6×6→3½×5½ · shoulder tenon · bore/chisel nuki · kusabi slots except L-001
+L-004,P3 End post,1,6×6 × 8′,5.5,5.5,77.0,rip 6×6→3½×5½ · shoulder tenon · bore/chisel nuki · kusabi slots except L-001
+R-001,Nuki Prairie band R1,1,2×12 × 12′ outer zone,1.5,11.25,144.0,rip 7¼″ from 2×12 outer zone · plow grooves · dry-slide
+R-002,Nuki Prairie band R2,1,2×12 × 12′ outer zone,1.5,11.25,144.0,rip 7¼″ from 2×12 outer zone · plow grooves · dry-slide
+R-003,Nuki Prairie band R3,1,2×12 × 12′ outer zone,1.5,11.25,144.0,rip 7¼″ from 2×12 outer zone · plow grooves · dry-slide
+R-004,Cap scarf leaf A (P1–P2),1,2×12 × 12′,1.5,11.25,144.0,kama-tsugi · shoot · drawbore
+R-005,Cap scarf leaf B (P2–P3),1,2×12 × 12′,1.5,11.25,72.0,kama-tsugi · shoot · drawbore
+R-006,Cap stub over P0,1,2×12 offcut,1.5,7.25,12.0,crosscut · plane
+P-C1,Privacy board C1_below_R1,16,1×12 × 10′ edge strips,0.75,11.25,120.0,rip VG edge · plane ¾″ · cut to course
+P-C2,Privacy board C2_R1_R2,16,1×12 × 10′ edge strips,0.75,11.25,120.0,rip VG edge · plane ¾″ · cut to course
+P-C3,Privacy board C3_R2_R3,16,1×12 × 10′ edge strips,0.75,11.25,120.0,rip VG edge · plane ¾″ · cut to course
+P-C4,Privacy board C4_above_R3,16,1×12 × 10′ edge strips,0.75,11.25,120.0,rip VG edge · plane ¾″ · cut to course
+G-001,Gate stile (pair),2,2×12 remainder 3½″ strip,1.5,3.5,64.0,hozo mortises · pintle gudgeons on P1 stile
+G-010,Gate rails (Prairie-aligned + top/bottom),5,2×12 remainder,1.5,5.5,31.0,tenon both ends · drawbore from MFT stop
+G-020,Gate diagonal brace,1,2×12 remainder,1.5,3.5,61.942,protractor angle · half-lap · Preda shoot
+G-030,Gate infill boards,4,1×12 edge strips,0.75,5.5,63.0,float / retain in gate frame language
+K-001,Kusabi wedge,12,8/4 × 6″ × 6′,0.75,1.25,6.0,kerf tools set angle · rip · hand-fit each slot · label
+H-001,Drawbore peg,12,8/4 offcut,0.5,0.5,4.0,rasp/turn ⌀⅜ · light Taylor countersink on mortise mouth only
+H-002,Wooden pintle + gudgeon set,2,8/4,1.5,1.5,8.0,turn/rasp · dry-fit lift-off
+H-003,Sliding latch bar,1,8/4,1.75,3.75,20.0,plane · fit stile slot

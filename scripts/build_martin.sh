@@ -12,6 +12,9 @@ if [[ -x /home/ubuntu/tools/squashfs-root/usr/bin/freecadcmd ]]; then
   FREECADCMD=/home/ubuntu/tools/squashfs-root/usr/bin/freecadcmd
 fi
 
+echo "==> Fabrication SSOT (JSON/CSV/part registry)"
+python3 "$ROOT/fence/martin/fab/martin_ssot.py"
+
 echo "==> FreeCAD build (model + FCStd/STEP/STL exports)"
 (cd "$CAD" && "$FREECADCMD" martin_fence.py 2>&1 | grep -E "MARTIN|Run length|Height|Gate|Post|Bay|Drop" || true)
 
@@ -28,7 +31,10 @@ else
   echo "openscad not found — skipping preview renders"
 fi
 
-echo "==> Plan sheets (SVG)"
+echo "==> Fabrication SSOT (JSON/CSV/part registry)"
+python3 "$ROOT/fence/martin/fab/martin_ssot.py"
+
+echo "==> Plan sheets (SVG) from SSOT"
 python3 "$ROOT/scripts/gen_martin_plans.py"
 
 echo "Done."

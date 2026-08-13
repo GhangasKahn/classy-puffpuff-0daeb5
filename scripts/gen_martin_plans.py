@@ -8,6 +8,7 @@ Run:  python3 scripts/gen_martin_plans.py
 from __future__ import annotations
 
 import os
+import sys
 
 OUT = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "..", "fence", "martin", "plans"
@@ -16,47 +17,48 @@ os.makedirs(OUT, exist_ok=True)
 
 IN = 25.4
 
-# ---- parameters (must mirror martin_fence.py) --------------------------------
+# ---- parameters from fabrication SSOT (do not duplicate) --------------------
+_FAB = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "fence", "martin", "fab"
+)
+sys.path.insert(0, _FAB)
+from martin_ssot import PARAMS, PROJECT, layout as ssot_layout, pv  # noqa: E402
+
+LY = ssot_layout()
 P = dict(
-    length=143.0,
-    height=65.0,
-    post_x=3.5,
-    post_y=5.5,
-    post_tenon_x=2.5,
-    post_tenon_y=4.5,
-    post_tenon_h=12.0,
-    gate_clear=36.0,
-    gate_gap=0.5,
-    rail_t=1.5,
-    rail_h=7.25,
-    rail_z_cl=(10.0, 28.0, 46.0),
-    cap_t=1.5,
-    cap_w=7.25,
-    board_t=0.75,
-    board_w=5.5,
-    board_gap=0.25,
-    pad_overhang=6.0,
-    pad_width=28.0,
-    pad_thick=6.0,
-    drop_off=5.0,
-    pier_xy=14.0,
-    pier_h=18.0,
-    gravel_h=6.0,
-    latch_bar=18.0,
+    length=pv("overall_length"),
+    height=pv("overall_height"),
+    post_x=pv("post_x"),
+    post_y=pv("post_y"),
+    post_tenon_x=pv("post_tenon_x"),
+    post_tenon_y=pv("post_tenon_y"),
+    post_tenon_h=pv("post_tenon_h"),
+    gate_clear=pv("gate_clear"),
+    gate_gap=pv("gate_gap"),
+    rail_t=pv("rail_t"),
+    rail_h=pv("rail_h"),
+    rail_z_cl=tuple(PARAMS["rail_z_cl"]["value"]),
+    cap_t=pv("cap_t"),
+    cap_w=pv("cap_w"),
+    board_t=pv("board_t"),
+    board_w=pv("board_w"),
+    board_gap=pv("board_gap"),
+    pad_overhang=pv("pad_overhang"),
+    pad_width=pv("pad_width"),
+    pad_thick=pv("pad_thick"),
+    drop_off=pv("drop_off"),
+    pier_xy=pv("pier_xy"),
+    pier_h=pv("pier_h"),
+    gravel_h=pv("gravel_h"),
+    latch_bar=pv("latch_bar_x"),
 )
 
 fx = P["post_x"]
 L = P["length"]
 gate = P["gate_clear"]
-P0 = fx / 2.0
-P1 = fx + gate + fx / 2.0
-p1_right = P1 + fx / 2.0
-p3_left = L - fx
-clear_span = p3_left - p1_right
-bay_clear = (clear_span - fx) / 2.0
-P2 = p1_right + bay_clear + fx / 2.0
-P3 = L - fx / 2.0
-POSTS = (P0, P1, P2, P3)
+P0, P1, P2, P3 = LY["post_centers"]
+bay_clear = LY["bay_clear"]
+POSTS = LY["post_centers"]
 H = P["height"]
 
 # ---- sheet primitives --------------------------------------------------------
@@ -165,7 +167,7 @@ class Sheet:
         self.text(160, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "Buffalo NY · Prairie + Japanese joinery", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Removable · No nails in timber · Rev C", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, f"Removable · No nails in timber · Rev {PROJECT['REVISION']}", 13, DIM, "end")
 
     def save(self):
         path = os.path.join(OUT, f"{self.code}_{self.title.split()[0].lower()}.svg")
@@ -179,6 +181,10 @@ class Sheet:
             "M-6": "M6_cutlist.svg",
             "M-7": "M7_shop.svg",
             "M-8": "M8_mill.svg",
+            "G-000": "G000_cover.svg",
+            "S-402": "S402_cutlist.svg",
+            "QA-700": "QA700_inspection.svg",
+            "P-301": "P301_post.svg",
         }
         path = os.path.join(OUT, names[self.code])
         svg = (
@@ -565,7 +571,7 @@ def sheet_m6():
 
     rows = [
         ("Qty", "Nominal", "Length", "Grade / species", "Primary yield", "BF"),
-        ("4", "6×6", "8'", "DF Select / #1", "Posts → mill 3½×5½×77\"", "96.0"),
+        ("4", "6×6", "8'", "DF Select / #1", "Posts → mill 3½×5½×75.5\" fin. (rough 77\")", "96.0"),
         ("5", "2×12", "12'", "DF Select / #1", "Nuki R1–R3 + cap + gate frame", "120.0"),
         ("2", "2×12", "10'", "DF Select / #1", "Gate / brace / spare rail cheeks", "40.0"),
         ("6", "1×12", "10'", "DF Select / VG-ish", "Privacy + gate boards → ¾×5½", "60.0"),
@@ -584,7 +590,7 @@ def sheet_m6():
 
     s.text(40, yy + 58, "B — FINISHED PARTS (after re-dimension · Japanese joinery stock)", 16, ACC, bold=True)
     finished = [
-        ("4", "Posts P0–P3", '3½×5½×77"', "Foot tenon shouldered to 2½×4½×12\""),
+        ("4", "Posts P0–P3", '3½×5½×75.5"', "Foot tenon 2½×4½×12\" · D-001 derived length"),
         ("3", "Nuki rails R1–R3", '1½×7¼×~105"', "Through P1–P3 · plow ⅜×⅞ grooves"),
         ("2", "Cap (scarf pair)", '1½×7¼×~53" ea', "Kama-tsugi at P2 · + latch stub at P0"),
         ("2", "Gate stiles", '1½×3½×~62"', "Hozo mortises · wooden pintle gudgeons"),
@@ -747,7 +753,7 @@ def sheet_m8():
 
     s.text(40, 650, "RE-DIMENSION SEQUENCE (YOUR SAWS)", 16, ACC, bold=True)
     red = [
-        "POSTS: joint/rip 6×6 → 3½×5½ (LS 36 + Fence Guide). Track-saw length 77″ on MFT. Mark tenon end.",
+        "POSTS: joint/rip 6×6 → 3½×5½ (LS 36 + Fence Guide). Rough 77″ then finish 75.5″ (H − cap + tenon). Mark tenon end.",
         "RAILS/CAP: rip 2×12 outer third → 7¼\" wide × 1½\" thick. Plane reference faces. Crosscut ~105″ privacy rails.",
         "BOARDS: rip 1×12 edge strips → 5½\" wide; plane faces to true ¾\". Cut course lengths after dry-fit rails.",
         "OAK: rip kusabi blanks; turn/rasp ⌀⅜ pegs; shape pintles + latch bar. Never substitute softwood pegs outdoors.",
@@ -767,7 +773,158 @@ def sheet_m8():
 
     s.text(40, 920, "FINISHED ENVELOPE UNCHANGED: 143″ × 65″ · 36″ gate · 3½×5½ posts · 1½×7¼ Prairie bands · ¾×5½ boards.", 13, DIM)
     s.text(40, 944, "Only the source stock and grain strategy change — CAD geometry and Japanese joint sizes stay Rev A/B compatible.", 13, DIM)
-    s.text(40, 980, "BOM counts on M-6. Tool stations on M-7. Joinery geometry on M-3 / M-5.", 13, DIM)
+    s.text(40, 980, "BOM counts on M-6 / S-402. Tool stations on M-7. Joinery on M-3 / M-5. SSOT: fab/martin.json.", 13, DIM)
+    s.save()
+
+
+def sheet_g000():
+    s = Sheet("G-000", "Cover · drawing index", "Rev D parametric fabrication model · inches")
+    s.titleblock()
+    s.text(40, 70, "MARTIN — DIGITAL MANUFACTURING DEFINITION", 18, ACC, bold=True)
+    s.text(40, 100, "Parameter → geometry → metadata → drawings → BOM → cut list → build / QA", 14, DIM)
+    s.text(40, 140, "GATES M0–M8: PASS (see fab/martin.json). CAD solids still grouped; Part IDs live in SSOT.", 13, INK)
+    s.text(40, 180, "DRAWING INDEX", 16, ACC, bold=True)
+    idx = [
+        ("G-000", "This cover"),
+        ("GA-100 / M-1", "General arrangement"),
+        ("GA-110 / M-2", "Elevation & rail schedule"),
+        ("J-400 / M-3", "Joinery details"),
+        ("GA-140 / M-4", "Pad & socket piers"),
+        ("P-350 / M-5", "Gate & latch"),
+        ("S-401 / M-6", "Mill BOM & finished parts"),
+        ("S-410 / M-7", "Shop method · stops · owner tools"),
+        ("S-420 / M-8", "Grain · warpage · 2×12 yield"),
+        ("S-402", "Rough + finished cut list (this package)"),
+        ("P-301", "Post L-001…L-004 — datums & tenon"),
+        ("QA-700", "Inspection plan"),
+        ("EX-200", "Exploded / Walk app at /build"),
+    ]
+    yy = 210
+    for code, title in idx:
+        s.text(40, yy, code, 13, ACC, bold=True)
+        s.text(220, yy, title, 13, INK)
+        yy += 22
+    s.text(40, 520, "CONTROLLING EQUATIONS", 16, ACC, bold=True)
+    for i, (k, eq) in enumerate(LY["equations"].items()):
+        s.text(40, 548 + i * 20, f"{k} = {eq}", 13, INK)
+    s.text(40, 760, "D-001: post finished length = overall_height − cap_t + post_tenon_h = "
+           f"{LY['post_finished_length']}\" (not height+tenon).", 13, INK)
+    s.text(40, 784, "drop_off is class M — field-verify before pour. Fastener ban in timber.", 13, INK)
+    s.text(40, 820, "Machine-readable: fence/martin/fab/martin.json + CSV schedules.", 13, DIM)
+    s.text(40, 860, "Completeness: a craftsperson can fabricate from Part IDs, datums, and schedules without inferring critical sizes.", 13, DIM)
+    s.save()
+
+
+def sheet_s402():
+    s = Sheet("S-402", "Rough & finished cut list", "Generated from SSOT · do not hand-edit numbers")
+    s.titleblock()
+    s.text(40, 70, "FINISHED DIMENSION LIST (after milling)", 16, ACC, bold=True)
+    rows = [
+        ("ID", "Qty", "T", "W", "L", "Material", "Notes"),
+        ("L-001…004", "4", "3.5", "5.5", f"{LY['post_finished_length']}", "DF", "Shoulder = pad-top datum"),
+        ("R-001…003", "3", "1.5", "7.25", f"{LY['nuki_length']}", "DF", "Outer-zone rip from 2×12"),
+        ("R-004/005", "2", "1.5", "7.25", f"{round(LY['cap_length']/2, 2)}", "DF", "Kama-tsugi pair"),
+        ("R-006", "1", "1.5", "7.25", f"{round(P['post_x']+1, 2)}", "DF", "P0 stub — no gate span"),
+        ("G-001", "2", "1.5", "3.5", f"{LY['leaf_height']}", "DF", "LH/RH stiles"),
+        ("G-010", "5", "1.5", "5.5", f"{round(LY['leaf_width']-2*P.get('post_x', 3.5)+3.5, 2)}"[:6], "DF",
+         f"inner = leaf − 2×stile = {round(LY['leaf_width']-7, 2)}\""),
+        ("K-001", "12", "0.625", "1.125", "5.5", "W. oak", "Fit to slot · never glue"),
+        ("H-001", "12", "⌀0.375", "—", "3.0", "W. oak", "Drawbore pegs"),
+        ("H-003", "1", "1.5", "3.5", "18", "W. oak", "Sliding latch"),
+    ]
+    # fix G-010 length properly
+    rows[6] = ("G-010", "5", "1.5", "5.5", f"{round(LY['leaf_width']-7, 2)}", "DF", "Tenon extra not in finished L")
+    yy = 100
+    cols = [40, 160, 230, 300, 380, 500, 640]
+    for r in rows:
+        for i, cell in enumerate(r):
+            s.text(cols[i], yy, str(cell), 12, DIM if r[0] == "ID" else INK, bold=(r[0] == "ID"))
+        yy += 22
+        s.line(40, yy - 16, 1600, yy - 16, 0.5, LIGHT)
+
+    s.text(40, 360, "ROUGH / BREAKDOWN", 16, ACC, bold=True)
+    s.text(40, 388, "Posts: 6×6×8′ → rough 5.5×5.5×77″ → finish 3.5×5.5×75.5″. Rails: 2×12×12′ → rip 7.25″ outer zone → nuki 104.5″.", 13, INK)
+    s.text(40, 412, "Boards: cut COURSE HEIGHTS after rails exist (U-004). C1–C4 derived from rail CL ± rail_h/2 ± 0.125″.", 13, INK)
+    yy = 448
+    s.text(40, yy, "Course", 12, DIM, bold=True)
+    s.text(200, yy, "Finished L", 12, DIM, bold=True)
+    s.text(320, yy, "Qty (2 bays)", 12, DIM, bold=True)
+    yy += 22
+    n = LY["boards_per_bay"] * LY["bays"]
+    for cid, h, z0, z1 in LY["course_heights"]:
+        s.text(40, yy, cid, 13, INK)
+        s.text(200, yy, f"{h:.3f}\"", 13, INK)
+        s.text(320, yy, str(n), 13, INK)
+        s.text(420, yy, f"z {z0:.2f}–{z1:.2f} AFF", 13, DIM)
+        yy += 22
+    s.text(40, 640, f"Privacy boards total {LY['privacy_board_qty']}  ·  Gate infill {LY['boards_gate']}  ·  Procurement {322} bf  ·  waste_factor 0.22 explicit", 13, ACC, bold=True)
+    s.text(40, 680, "STOCK NESTS (2×12 × 12′): one nuki per board + remainder to gate. Do not nest pith zone into joinery. See fab/08_CUT_LISTS/stock_nests.csv", 13, INK)
+    s.text(40, 720, "STOP S-011: MFT length stop for all four posts. STOP S-021: TS fence locked for all grooves. STOP S-040: peg from MFT.", 13, INK)
+    s.text(40, 980, "Source: fence/martin/fab/martin_ssot.py  ·  Change overall_length and regenerate.", 13, DIM)
+    s.save()
+
+
+def sheet_p301():
+    s = Sheet("P-301", "Posts L-001…L-004", "Datums · foot tenon · nuki CL · Rev D")
+    s.titleblock()
+    s.text(40, 70, "DATUMS — ALL POSTS", 16, ACC, bold=True)
+    s.text(40, 100, "Datum End A: tenon shoulder = pad top. Measure nuki CL up from A, not from tenon tip.", 13, INK)
+    s.text(40, 124, "Reference Face B: garden face (against fence when ripping). Reference Edge C: run-left arris.", 13, INK)
+    s.text(40, 148, f"Finished: 3.5 × 5.5 × {LY['post_finished_length']}\"  ·  Tenon 2.5 × 4.5 × 12\"  ·  Shoulders ±1/32\" (T2)", 13, INK)
+
+    # simple post elevation
+    sc = 8.0
+    x0, y0 = 80, 980
+    body_h = LY["post_above_pad"] * sc
+    ten = P["post_tenon_h"] * sc
+    s.rect(x0, y0 - body_h, 3.5 * sc, body_h, fill="#d9dcde", stroke=INK, sw=2)
+    s.rect(x0 + 0.5 * sc, y0, 2.5 * sc, ten, fill="#d9dcde", stroke=INK, sw=2)
+    s.line(x0 - 20, y0, x0 + 80, y0, 1, ACC, dash="4 3")
+    s.text(x0 + 90, y0 + 4, "DATUM A · PAD TOP / SHOULDER", 12, ACC)
+    for cl, label in zip(P["rail_z_cl"], ("R1", "R2", "R3")):
+        yy = y0 - cl * sc
+        s.line(x0 - 8, yy, x0 + 3.5 * sc + 8, yy, 1, DIM, dash="3 2")
+        s.text(x0 + 3.5 * sc + 16, yy + 4, f"{label} CL {cl}\"", 12, DIM)
+    s.dim_v(y0 - body_h, y0, x0, f'{LY["post_above_pad"]}" ABOVE', offset=-40)
+    s.dim_v(y0, y0 + ten, x0 + 3.5 * sc, '12" TENON', offset=50)
+
+    s.text(420, 70, "HANDED / UNIQUE", 16, ACC, bold=True)
+    notes = [
+        "L-001 P0 Latch — nuki mortises; NO kusabi slots; Latch B mortise optional.",
+        "L-002 P1 Hinge — nuki + kusabi; wooden pintle gudgeons on gate side.",
+        "L-003 P2 Mid — nuki + kusabi; bears kama-tsugi.",
+        "L-004 P3 End — nuki + kusabi; run terminus.",
+        "Mortise: width = measured rail_t (sliding). Height = 7.25 + 1/16 ease.",
+        "Cheeks ~1″ each side of rail (post_y − rail_t)/2.",
+        "OP040: one MFT stop for all four rough/finish lengths. DO NOT MOVE.",
+        "Grain: more vertical grain on 5.5″ exposed faces. No pith in tenon.",
+    ]
+    for i, t in enumerate(notes):
+        s.text(420, 100 + i * 24, "•  " + t, 13, INK)
+    s.text(420, 360, "QTY 4  ·  MAKE  ·  DF Select  ·  Purchase 6×6×8′", 14, ACC, bold=True)
+    s.save()
+
+
+def sheet_qa700():
+    s = Sheet("QA-700", "Inspection plan", "QC checkpoints · tolerance class · gates")
+    s.titleblock()
+    s.text(40, 70, "DO NOT SKIP — SIGN OFF ON THE STICKER / DRY-FIT / SET", 16, ACC, bold=True)
+    from martin_ssot import inspection
+    yy = 110
+    s.text(40, yy, "QC", 12, DIM, bold=True)
+    s.text(120, yy, "Gate", 12, DIM, bold=True)
+    s.text(200, yy, "Check", 12, DIM, bold=True)
+    s.text(980, yy, "Criteria", 12, DIM, bold=True)
+    yy += 24
+    for q in inspection():
+        s.text(40, yy, q["QC"], 12, ACC, bold=True)
+        s.text(120, yy, q["GATE"], 12, INK)
+        s.text(200, yy, q["CHECK"][:70], 12, INK)
+        s.text(980, yy, q["CRITERIA"][:55], 12, DIM)
+        yy += 22
+    s.text(40, 430, "FIT CLASSES USED: SLIDING (nuki width) · CLEARANCE (foot tenon) · DRAWBORED (hozo/kama) · FLOATING (boards) · SNUG (brace lap)", 13, INK)
+    s.text(40, 460, "FAILURE MODES: cupping if pith in nuki; locked mortise if ease omitted; winter bind if sleeve clearance lost; racking if brace omitted.", 13, INK)
+    s.text(40, 500, "STRUCTURAL NOTE: Planning design — not a stamped PE document. Wind path: nuki compression + pier mass. No nail withdrawal.", 13, DIM)
     s.save()
 
 
@@ -780,4 +937,8 @@ if __name__ == "__main__":
     sheet_m6()
     sheet_m7()
     sheet_m8()
+    sheet_g000()
+    sheet_s402()
+    sheet_p301()
+    sheet_qa700()
     print("MARTIN plans done →", OUT)

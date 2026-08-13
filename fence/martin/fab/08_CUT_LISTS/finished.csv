@@ -1,0 +1,23 @@
+PART_ID,PART_NAME,QUANTITY,MATERIAL,FINISHED_THICKNESS,FINISHED_WIDTH,FINISHED_LENGTH,NOTES
+L-001,P0 Latch post,1,Douglas fir,3.5,5.5,75.5,"Latch / house side — nuki mortises, no kusabi; latch B mortise"
+L-002,P1 Hinge post,1,Douglas fir,3.5,5.5,75.5,Gate pintles; nuki + kusabi; gudgeon faces
+L-003,P2 Mid post,1,Douglas fir,3.5,5.5,75.5,Cap scarf bearing; nuki + kusabi
+L-004,P3 End post,1,Douglas fir,3.5,5.5,75.5,Run terminus; nuki + kusabi
+R-001,Nuki Prairie band R1,1,Douglas fir,1.5,7.25,104.5,CL AFF 10.0″
+R-002,Nuki Prairie band R2,1,Douglas fir,1.5,7.25,104.5,CL AFF 28.0″
+R-003,Nuki Prairie band R3,1,Douglas fir,1.5,7.25,104.5,CL AFF 46.0″
+R-004,Cap scarf leaf A (P1–P2),1,Douglas fir,1.5,7.25,52.5,Mates R-005 at P2
+R-005,Cap scarf leaf B (P2–P3),1,Douglas fir,1.5,7.25,52.5,Mates R-004 at P2
+R-006,Cap stub over P0,1,Douglas fir,1.5,7.25,4.5,Does not span gate opening
+P-C1,Privacy board C1_below_R1,16,Douglas fir,0.75,5.5,4.75,z 1.500–6.250 AFF; gap 0.25″
+P-C2,Privacy board C2_R1_R2,16,Douglas fir,0.75,5.5,10.5,z 13.750–24.250 AFF; gap 0.25″
+P-C3,Privacy board C3_R2_R3,16,Douglas fir,0.75,5.5,10.5,z 31.750–42.250 AFF; gap 0.25″
+P-C4,Privacy board C4_above_R3,16,Douglas fir,0.75,5.5,13.625,z 49.750–63.375 AFF; gap 0.25″
+G-001,Gate stile (pair),2,Douglas fir,1.5,3.5,63.0,G-001A latch stile · G-001B hinge stile — mark both
+G-010,Gate rails (Prairie-aligned + top/bottom),5,Douglas fir,1.5,5.5,28.0,Three align R1–R3 CL; extra top/bottom 3.5″ rails in CAD
+G-020,Gate diagonal brace,1,Douglas fir,1.5,3.5,59.942,"Compression brace; orientation: low at latch, high at hinge (confirm swing)"
+G-030,Gate infill boards,4,Douglas fir,0.75,5.5,55.0,Match privacy 1×6 language
+K-001,Kusabi wedge,12,White oak,0.625,1.125,5.5,9 seats + 3 spares. Softwood forbidden outdoors.
+H-001,Drawbore peg,12,White oak,0.375,0.375,3.0,Gate hozo + cap scarf. Not structural nails.
+H-002,Wooden pintle + gudgeon set,2,White oak / hard maple,1.0,1.0,6.0,On L-002. Optional stainless upgrade is only allowed metal hinge.
+H-003,Sliding latch bar,1,White oak,1.5,3.5,18.0,Cross-peg + optional padlock hasp (only metal lock)

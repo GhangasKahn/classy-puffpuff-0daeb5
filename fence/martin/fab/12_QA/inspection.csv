@@ -1,0 +1,12 @@
+QC,GATE,CHECK,CLASS,CRITERIA
+QC-01,M0,Site 143″ and drop-off re-measured,M,Record drop; do not pour on default 5″ if field differs
+QC-02,M4,Stock reject pith / twist / shake after sticker,T1,No pith in finished nuki/post section; twist ≤1/8″ in 8′
+QC-03,M4,Four posts finished length,T1,75.5″ ±1/16″
+QC-04,M3,Foot tenon drops/lifts in each sleeve,T2,"Hand drop, no twist bind; ¼″ clearance kept"
+QC-05,M3,Nuki slides each post dry before final wedge,T2,Sliding width; height ease 1/16″ only; no side rattle
+QC-06,M3,Mortise CL 10 / 28 / 46 from shoulder datum,T2,Story-stick match all posts
+QC-07,M5,Cap scarf closes to light,T2,Shoot-fit before peg
+QC-08,M5,Gate hangs plumb and lifts off pintles,T1,Straight-up winter removal; 36″ clear arc
+QC-09,M5,No nails/screws/glue on locking faces,T0,Visual; fastener ban
+QC-10,M7,Plumb ≤⅛″ over 65″ after set,T1,Walk the run
+QC-11,M7,Wedges labeled and reversible,T0,Winter knock-down dry-run once

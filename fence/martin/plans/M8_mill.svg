@@ -7,7 +7,7 @@
 <text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-8  ·  Mill stock · grain · warpage</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Select DF strategy · 2×12 yield · sticker · Japanese stock prep</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev C</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev D</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>SPECIES STRATEGY (BUFFALO · PAINTED · LOW WARP)</text>
 <text x='40.0' y='98.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Structure: Douglas fir Select / #1 (or Select Structural) in 6×6 and 2×12 — stiff, straight, common mill sizes.</text>
 <text x='40.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Boards: DF 1×12 select — rip VG/rift-leaning edge strips to ¾×5½ (no bandsaw resaw required).</text>
@@ -40,7 +40,7 @@
 <text x='40.0' y='592.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Minimum 14 days after delivery before final face milling; longer if stock arrived damp.</text>
 <text x='40.0' y='614.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Re-check with winding sticks before joinery. Re-sticker any board that moved &gt;1/16″ in 4′.</text>
 <text x='40.0' y='650.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>RE-DIMENSION SEQUENCE (YOUR SAWS)</text>
-<text x='40.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>POSTS: joint/rip 6×6 → 3½×5½ (LS 36 + Fence Guide). Track-saw length 77″ on MFT. Mark tenon end.</text>
+<text x='40.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>POSTS: joint/rip 6×6 → 3½×5½ (LS 36 + Fence Guide). Rough 77″ then finish 75.5″ (H − cap + tenon). Mark tenon end.</text>
 <text x='40.0' y='700.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>RAILS/CAP: rip 2×12 outer third → 7¼" wide × 1½" thick. Plane reference faces. Crosscut ~105″ privacy rails.</text>
 <text x='40.0' y='722.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>BOARDS: rip 1×12 edge strips → 5½" wide; plane faces to true ¾". Cut course lengths after dry-fit rails.</text>
 <text x='40.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OAK: rip kusabi blanks; turn/rasp ⌀⅜ pegs; shape pintles + latch bar. Never substitute softwood pegs outdoors.</text>
@@ -51,5 +51,5 @@
 <text x='40.0' y='874.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  All locking faces stay bare wood (no paint/glue). Paint after dry-fit; mask tenons, wedges, peg holes, sleeve zones.</text>
 <text x='40.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>FINISHED ENVELOPE UNCHANGED: 143″ × 65″ · 36″ gate · 3½×5½ posts · 1½×7¼ Prairie bands · ¾×5½ boards.</text>
 <text x='40.0' y='944.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Only the source stock and grain strategy change — CAD geometry and Japanese joint sizes stay Rev A/B compatible.</text>
-<text x='40.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>BOM counts on M-6. Tool stations on M-7. Joinery geometry on M-3 / M-5.</text>
+<text x='40.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>BOM counts on M-6 / S-402. Tool stations on M-7. Joinery on M-3 / M-5. SSOT: fab/martin.json.</text>
 </svg>

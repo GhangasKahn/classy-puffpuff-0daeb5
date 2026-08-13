@@ -1,0 +1,16 @@
+JOINT_ID,JOINT_TYPE,PART_A,PART_B,LOCATION,MORTISE_WIDTH,MORTISE_HEIGHT,MORTISE_DEPTH,FIT_CLASS,CONSTRAINT,ASSEMBLY_DIRECTION,TOOLING
+J-NUKI-21,nuki + kusabi,L-002,R-001,CL AFF 10.0″ through L-002,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-22,nuki + kusabi,L-002,R-002,CL AFF 28.0″ through L-002,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-23,nuki + kusabi,L-002,R-003,CL AFF 46.0″ through L-002,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-31,nuki + kusabi,L-003,R-001,CL AFF 10.0″ through L-003,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-32,nuki + kusabi,L-003,R-002,CL AFF 28.0″ through L-003,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-33,nuki + kusabi,L-003,R-003,CL AFF 46.0″ through L-003,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-41,nuki + kusabi,L-004,R-001,CL AFF 10.0″ through L-004,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-42,nuki + kusabi,L-004,R-002,CL AFF 28.0″ through L-004,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-NUKI-43,nuki + kusabi,L-004,R-003,CL AFF 46.0″ through L-004,1.5,7.3125,through,SLIDING then WEDGED,CLEARANCED height / locational width,+X rail through post,bore waste · Zenwu walls · Temple/flush trim · kerf-tool kusabi
+J-TENON-FOOT,shouldered foot tenon into sleeve,L-001…L-004,H-010 / C-002,pad top datum = tenon shoulder,,,,CLEARANCE (+¼″ sleeve),CLEARANCED — winter pull,-Z drop in,TS LS 36 shoulders ±1/32″ · plane cheeks
+J-KAMA-01,kama-tsugi (sickle scarf),R-004,R-005,centered on L-003 / P2,,,,DRAWBORED,FIXED along run after peg,in-plane scarf,Universal V2 protractor · Preda shoot · MFT peg stop
+J-HOZO-GATE,hozo mortise & tenon drawbored,G-001,G-010,every stile/rail intersection,,,,DRAWBORED,FIXED after peg; reverse by driving pegs out,rails into stiles,Bridge City tenon + kerf tools · Temple saws · Zenwu · MFT stop
+J-LAP-BRACE,half-lap,G-020,G-010,diagonal across gate leaf,,,,SNUG geometry / friction — no fasteners,FIXED in-plane,into rail faces,protractor · shoot on Preda board
+J-GROOVE,floating plow,R-001…R-003,P-C* boards,"rail edges, ⅜×⅞",,,,FREE / FLOATING,FLOATING,-Z drop from top before cap,one locked TS + LS 36 setup for all rails — no router
+J-LATCH,sliding bar,H-003,house sleeve (A) or L-001 mortise (B),R2 height,,,,SLIDING,SLIDING,-X toward house / P0,plane to slot; epoxy sleeve Latch A only (not timber fasteners)
