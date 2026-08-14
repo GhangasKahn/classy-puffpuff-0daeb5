@@ -41,13 +41,15 @@ P = dict(
     board_t=kv("board_t"),
     board_w=kv("board_w"),
     board_gap=kv("board_gap"),
-    pad_overhang=kv("pad_overhang"),
-    pad_width=kv("pad_width"),
-    pad_thick=kv("pad_thick"),
+    sill_overhang=kv("sill_overhang"),
+    base_width=LY["base_width"],
+    sill_h=kv("sill_h"),
+    sill_t=kv("sill_t"),
     drop_off=kv("drop_off"),
-    pier_xy=kv("pier_xy"),
-    pier_h=kv("pier_h"),
-    gravel_h=kv("gravel_h"),
+    tie_len=LY["tie_len"],
+    pack_h=LY["pack_h"],
+    furniture_pad_t=kv("furniture_pad_t"),
+    base_spread_cl=LY["base_spread_cl"],
     latch_bar=kv("latch_bar_l"),
 )
 
@@ -165,7 +167,7 @@ class Sheet:
         self.text(160, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "Buffalo NY · Prairie + Japanese joinery", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Removable · No nails in timber · Rev A", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, "Sit-on-grade · No nails in timber · Rev D", 13, DIM, "end")
 
     def save(self):
         path = os.path.join(OUT, f"{self.code}_{self.title.split()[0].lower()}.svg")
@@ -195,7 +197,7 @@ class Sheet:
 # ---- drawing helpers in inches → px -----------------------------------------
 # elevation scale: 143" fits in ~1200 px → ~8.4 px/in
 S = 8.2
-OX, OY = 80, 820  # origin at pad top, left outer face
+OX, OY = 80, 820  # origin at sill top, left outer face
 
 
 def X(xin):
@@ -203,7 +205,7 @@ def X(xin):
 
 
 def Y(zin):
-    """z up from pad; SVG y down."""
+    """z up from sill top; SVG y down."""
     return OY - zin * S
 
 
@@ -213,10 +215,10 @@ def sheet_m1():
     s.text(40, 70, "FRONT ELEVATION — garden face", 16, ACC, bold=True)
     s.text(40, 94, "143\" overall · 65\" high · 36\" gate · four 4×6 posts · three 2×8 Prairie bands", 14, DIM)
 
-    # pad
-    s.rect(X(-P["pad_overhang"]), Y(0), (L + 2 * P["pad_overhang"]) * S, P["pad_thick"] * S,
+    # dodai sill (elevation)
+    s.rect(X(-P["sill_overhang"]), Y(0), (L + 2 * P["sill_overhang"]) * S, P["sill_h"] * S,
            fill=LIGHT, stroke=INK, sw=1.5)
-    s.text(X(L / 2), Y(-P["pad_thick"] / 2) + 5, "LEVELING PAD", 12, DIM, "middle")
+    s.text(X(L / 2), Y(-P["sill_h"] / 2) + 5, "DODAI SILL — SIT ON GRADE", 12, DIM, "middle")
 
     # posts
     for i, cx in enumerate(POSTS):
@@ -260,25 +262,25 @@ def sheet_m1():
     s.dim_v(Y(0), Y(H), X(L), '65"', offset=40)
 
     # plan mini
-    s.text(40, 980, "PLAN (pad top)", 14, ACC, bold=True)
+    s.text(40, 980, "PLAN (ladder)", 14, ACC, bold=True)
     py = 1040
     ps = 4.5
     for cx in POSTS:
         s.rect(80 + cx * ps - fx * ps / 2, py - P["post_y"] * ps / 2,
                fx * ps, P["post_y"] * ps, fill="#d9dcde", stroke=INK, sw=1.2)
-    s.rect(80 - P["pad_overhang"] * ps, py - P["pad_width"] * ps / 2,
-           (L + 2 * P["pad_overhang"]) * ps, P["pad_width"] * ps,
+    s.rect(80 - P["sill_overhang"] * ps, py - P["base_width"] * ps / 2,
+           (L + 2 * P["sill_overhang"]) * ps, P["base_width"] * ps,
            fill="none", stroke=DIM, sw=1, dash="4 3")
-    s.text(80 + L * ps / 2, py + P["pad_width"] * ps / 2 + 22,
-           'PAD 28" WIDE · SOCKET PIERS AT POSTS', 12, DIM, "middle")
+    s.text(80 + L * ps / 2, py + P["base_width"] * ps / 2 + 22,
+           f'LADDER {P["base_width"]:g}" WIDE · CROSS-TIES AT POSTS · NO DIGGING', 12, DIM, "middle")
 
     # notes
     notes = [
         "DESIGN: Prairie horizontals (Darwin Martin / FLW) + Japanese nuki / hozo / kama-tsugi.",
         "JOINERY: No nails or screws in timber. Wedge-locked through-rails. Drawbored gate M&T.",
-        "WINTER: Knock wedges → withdraw nuki rails → lift gate off pintles → lift posts → tip piers.",
-        "FINISH: Exterior primer + owner gray. Mask wedge faces, tenons, and sleeve contact.",
-        "ENGINEERING NOTE: Planning design — have a NY PE review foundations if required by permit.",
+        "WINTER: Knock wedges → withdraw nuki → lift gate → lift posts → empty sandbags → carry ladder.",
+        "FINISH: Exterior primer + owner gray. Mask wedge faces, tenons, and sill laps.",
+        "ENGINEERING NOTE: Planning design — wind ballast is a calc, not a PE stamp. No foundations.",
     ]
     for i, n in enumerate(notes):
         s.text(780, 70 + i * 22, n, 12, INK)
@@ -338,7 +340,7 @@ def sheet_m2():
         ("R3", "2×8", "on edge", '46"', "Upper Prairie band"),
         ("CAP", "2×8", "flat", '65" top', "Continuous weather cap"),
         ("B", "1×6", "vertical", "between rails", "Privacy — floats in grooves"),
-        ("POST", "4×6", "3.5×5.5", "full height", "Nuki posts + 12\" foot tenon"),
+        ("POST", "4×6", "3.5×5.5", "full height", "Nuki posts + 3.5\" tenon into F-003"),
     ]
     yy = 110
     for r in rows:
@@ -381,18 +383,17 @@ def sheet_m3():
     s.text(sx - 10, 70 + 62, 'Wedge: hardwood ⅝" × 1⅛" × 5.5" — tap to lock, reverse to release', 13, INK)
 
     # Foot tenon
-    s.text(520, 70, "DETAIL 2 — FOOT TENON INTO SLEEVE", 16, ACC, bold=True)
+    s.text(520, 70, "DETAIL 2 — FOOT TENON INTO CROSS-TIE", 16, ACC, bold=True)
     tx, ty = 560, 380
     s.rect(tx, ty - 160, 70, 160, fill="#d9dcde", stroke=INK, sw=2)
-    s.rect(tx + 10, ty, 50, 130, fill="#d9dcde", stroke=INK, sw=2)
-    s.rect(tx - 20, ty - 10, 110, 160, fill="none", stroke=DIM, sw=1.5, dash="5 3")
-    s.rect(tx - 40, ty + 150, 150, 40, fill=LIGHT, stroke=INK)
+    s.rect(tx + 10, ty, 50, 80, fill="#d9dcde", stroke=INK, sw=2)
+    s.rect(tx - 50, ty, 170, 90, fill=LIGHT, stroke=INK, sw=2)
     s.text(tx + 35, ty - 175, "POST", 13, DIM, "middle")
-    s.text(tx + 35, ty + 70, "TENON", 12, ACC, "middle", bold=True)
-    s.text(tx + 35, ty + 200, "PIER", 12, DIM, "middle")
-    s.text(520, 100, 'Shouldered tenon 2.5" × 4.5" × 12" into sleeved pier', 13, INK)
-    s.text(520, 122, "Drain hole at sleeve bottom · never trap water", 13, INK)
-    s.text(520, 144, "Cross-wedge optional through pier cheeks for storm lock", 13, INK)
+    s.text(tx + 35, ty + 40, "TENON", 12, ACC, "middle", bold=True)
+    s.text(tx + 35, ty + 78, "F-003 TIE", 12, DIM, "middle")
+    s.text(520, 100, 'Shouldered tenon 2.5" × 4.5" × 3.5" into F-003 (sit-on-grade)', 13, INK)
+    s.text(520, 122, "No sleeve, no pour, no post hole. Lift post +Z for winter.", 13, INK)
+    s.text(520, 144, "Ladder sills + sandbag boxes resist overturning", 13, INK)
 
     # Scarf
     s.text(40, 560, "DETAIL 3 — KAMA-TSUGI CAP SCARF AT P2", 16, ACC, bold=True)
@@ -419,59 +420,86 @@ def sheet_m3():
 
 
 def sheet_m4():
-    s = Sheet("M-4", "Pad & socket piers", "Scale ~1:20 · Buffalo frost / removable winter system")
+    s = Sheet("M-4", "Sit-on-grade ladder base", "No digging · no cement · no stone pad · Buffalo")
     s.titleblock()
-    s.text(40, 70, "SECTION — LEVELING PAD + TIP-OUT SOCKET PIER", 16, ACC, bold=True)
+    s.text(40, 70, "SECTION — LOOKING ALONG RUN (driveway −Y / garden +Y)", 16, ACC, bold=True)
 
-    S4 = 9.0
-    ox, oy = 200, 520
+    S4 = 8.0
+    ox, oy = 80, 430  # oy = sill top
 
-    def x(v):
-        return ox + v * S4
+    def sx(yin):
+        return ox + 240 + yin * S4
 
-    def y(v):
-        return oy - v * S4
+    def sy(zin):
+        return oy - zin * S4
 
-    # gravel
-    s.rect(ox - 80, oy + (P["pad_thick"] + P["drop_off"]) * S4,
-           420, P["gravel_h"] * S4, fill="#6a6864", stroke=INK)
-    s.text(ox + 130, oy + (P["pad_thick"] + P["drop_off"] + P["gravel_h"] / 2) * S4 + 5,
-           '6" COMPACTED #57 GRAVEL', 12, PAPER, "middle", bold=True)
+    sh = P["sill_h"]
+    st = P["sill_t"]
+    spread = P["base_spread_cl"]
+    pad_t = P["furniture_pad_t"]
+    pack = P["pack_h"]
+    drive_cy = -spread / 2.0
+    garden_cy = spread / 2.0
+    tie_half = P["tie_len"] / 2.0
 
-    # makeup / drop
-    s.rect(ox - 40, oy + P["pad_thick"] * S4, 360, P["drop_off"] * S4, fill="#9a9890", stroke=INK)
-    s.text(ox + 140, oy + (P["pad_thick"] + P["drop_off"] / 2) * S4 + 5,
-           f'DROP-OFF MAKEUP ({P["drop_off"]:g}") — FIELD VERIFY', 12, INK, "middle")
+    # driveway grade
+    s.line(sx(-28), sy(-sh - pad_t), sx(-2), sy(-sh - pad_t), 2, "#5a5854")
+    s.text(sx(-26), sy(-sh - pad_t) + 18, "DRIVEWAY (EXISTING)", 11, DIM)
+    # garden grade
+    s.line(sx(2), sy(-sh - pack), sx(28), sy(-sh - pack), 2, "#5a6a4a")
+    s.text(sx(8), sy(-sh - pack) + 18, "GARDEN GRADE (LOWER)", 11, DIM)
 
-    # pad
-    s.rect(ox - 60, oy, 400, P["pad_thick"] * S4, fill=LIGHT, stroke=INK, sw=2)
-    s.text(ox + 140, oy + P["pad_thick"] * S4 / 2 + 5, '6" LEVELING PAD (TOP LEVEL)', 13, INK, "middle", bold=True)
+    # rubber pads under driveway sill
+    s.rect(sx(drive_cy - st / 2), sy(-sh), st * S4, pad_t * S4, fill="#3d3530", stroke=INK, sw=1)
+    s.text(sx(drive_cy), sy(-sh - pad_t) - 6, "H-001 PADS", 10, DIM, "middle")
 
-    # pier
-    s.rect(ox + 120, oy, 14 * S4, P["pier_h"] * S4, fill="#b8b6b0", stroke=INK, sw=2)
-    # sleeve
-    s.rect(ox + 120 + 3.5 * S4, oy, 5 * S4, 13 * S4, fill="none", stroke=ACC, sw=2, dash="4 3")
-    # tenon
-    s.rect(ox + 120 + 4 * S4, oy - 8 * S4, 4 * S4, 12 * S4, fill="#d9dcde", stroke=INK, sw=2)
+    # packing cribs under garden sill
+    s.rect(sx(garden_cy - st / 2 - 1), sy(-sh), (st + 2) * S4, pack * S4, fill="#9a9890", stroke=INK, sw=1.5)
+    s.text(sx(garden_cy), sy(-sh - pack / 2) + 4, f'F-004 PACK {pack:g}" TBM', 11, INK, "middle", bold=True)
+
+    # cross-tie (behind sills, shown as long beam)
+    s.rect(sx(-tie_half), sy(0), P["tie_len"] * S4, sh * S4, fill="#c5c8c2", stroke=INK, sw=2)
+    s.text(sx(0), sy(-sh / 2) + 5, "F-003 CROSS-TIE", 12, INK, "middle", bold=True)
+
+    # two sills on edge
+    s.rect(sx(drive_cy - st / 2), sy(0), st * S4, sh * S4, fill=LIGHT, stroke=INK, sw=2)
+    s.rect(sx(garden_cy - st / 2), sy(0), st * S4, sh * S4, fill=LIGHT, stroke=INK, sw=2)
+    s.text(sx(drive_cy), sy(0) - 8, "F-001", 11, ACC, "middle", bold=True)
+    s.text(sx(garden_cy), sy(0) - 8, "F-002", 11, ACC, "middle", bold=True)
+
+    # tenon into tie
+    s.rect(sx(-P["post_tenon_y"] / 2), sy(0), P["post_tenon_y"] * S4, P["post_tenon_h"] * S4,
+           fill="#d9dcde", stroke=INK, sw=2)
     # post above
-    s.rect(ox + 120 + 3 * S4, oy - 40 * S4, 5.5 * S4, 40 * S4, fill="#d9dcde", stroke=INK, sw=2)
+    s.rect(sx(-P["post_y"] / 2), sy(36), P["post_y"] * S4, 36 * S4, fill="#d9dcde", stroke=INK, sw=2)
+    s.text(sx(0), sy(28), "POST", 12, ACC, "middle", bold=True)
 
-    s.dim_v(oy, oy + P["pier_h"] * S4, ox + 120 + 14 * S4, '18" PIER', offset=28)
-    s.dim_v(oy - 12 * S4, oy, ox + 100, '12" TENON', offset=-30)
-    s.dim_h(ox + 120, ox + 120 + 14 * S4, oy + P["pier_h"] * S4, '14" SQ', offset=36)
+    # ballast box on driveway side
+    s.rect(sx(drive_cy - 5), sy(10), 10 * S4, 10 * S4, fill="#b8b6b0", stroke=INK, sw=1.5)
+    s.text(sx(drive_cy), sy(5), "F-005 + H-007", 10, INK, "middle")
 
-    # plan of pad
-    s.text(780, 70, "PAD PLAN", 16, ACC, bold=True)
-    px0, py0 = 800, 200
-    # simplify: draw proportional
-    scale = 4.2
-    s.rect(px0, py0, (L + 12) * scale, P["pad_width"] * scale, fill=LIGHT, stroke=INK, sw=2)
+    s.dim_v(sy(0), sy(-P["post_tenon_h"]), sx(P["post_y"] / 2), '3.5" TENON', offset=36)
+    s.dim_h(sx(-tie_half), sx(tie_half), sy(-sh - pack) + 40, f'{P["tie_len"]:g}" TIE', offset=8)
+    s.dim_h(sx(drive_cy), sx(garden_cy), sy(0), f'{spread:g}" SILL CL', offset=-28)
+
+    # plan of ladder
+    s.text(780, 70, "LADDER PLAN", 16, ACC, bold=True)
+    px0, py0 = 800, 160
+    scale = 4.0
+    oh = P["sill_overhang"]
+    s.rect(px0, py0, LY["sill_len"] * scale, P["base_width"] * scale, fill="none", stroke=DIM, sw=1, dash="4 3")
+    # two sills
+    s.rect(px0, py0, LY["sill_len"] * scale, P["sill_t"] * scale, fill=LIGHT, stroke=INK, sw=1.5)
+    s.rect(px0, py0 + (P["base_width"] - P["sill_t"]) * scale, LY["sill_len"] * scale, P["sill_t"] * scale,
+           fill=LIGHT, stroke=INK, sw=1.5)
     for i, cx in enumerate(POSTS):
-        s.rect(px0 + (6 + cx - 7) * scale, py0 + (P["pad_width"] - P["pier_xy"]) / 2 * scale,
-               P["pier_xy"] * scale, P["pier_xy"] * scale, fill="#b8b6b0", stroke=INK, sw=1.5)
-        s.text(px0 + (6 + cx) * scale, py0 - 12, f"P{i}", 12, ACC, "middle", bold=True)
-    s.text(px0, py0 + P["pad_width"] * scale + 30,
-           f'PAD: {L + 2*P["pad_overhang"]:.0f}" × {P["pad_width"]:g}" × {P["pad_thick"]:g}" (+ {P["drop_off"]:g}" makeup)',
+        tx = px0 + (oh + cx - fx / 2) * scale
+        s.rect(tx, py0 - 1, fx * scale, P["tie_len"] * scale * 0.95, fill="#c5c8c2", stroke=INK, sw=1.2)
+        s.rect(tx, py0 + (P["base_width"] / 2 - P["post_y"] / 2) * scale,
+               fx * scale, P["post_y"] * scale, fill="#d9dcde", stroke=INK, sw=1.5)
+        s.text(px0 + (oh + cx) * scale, py0 - 14, f"P{i}", 12, ACC, "middle", bold=True)
+    s.text(px0, py0 + P["base_width"] * scale + 28,
+           f'SILLS {LY["sill_len"]:.0f}" × 4×6  ·  BASE {P["base_width"]:g}" WIDE  ·  DROP {P["drop_off"]:g}" PACKING TBM',
            13, INK)
 
     s.text(780, 420, "WINTER REMOVAL SEQUENCE", 16, ACC, bold=True)
@@ -481,18 +509,19 @@ def sheet_m4():
         "3. Slide nuki rails out of posts (two-person).",
         "4. Lift vertical boards out of grooves; bundle flat.",
         "5. Lift gate leaf off wooden pintles.",
-        "6. Lift each post straight up out of sleeve.",
-        "7. Tip socket piers onto dolly; store dry.",
-        "8. Leave leveling pad in place (or cover); mark sleeve holes.",
+        "6. Lift each post straight up out of F-003.",
+        "7. Empty sandbags; store dry. Lift ladder or leave sills.",
+        "8. Nothing is poured. Nothing is buried. No post holes.",
     ]
     for i, t in enumerate(steps):
         s.text(780, 455 + i * 24, t, 13, INK)
 
-    s.text(40, 900, "NOTES", 14, ACC, bold=True)
-    s.text(40, 928, "• Field-measure driveway→garden drop; adjust makeup thickness. Default shown: 5\".", 13, INK)
-    s.text(40, 952, "• Sleeve: Schedule 40 PVC or galv. tube sized to 2.5\"×4.5\" tenon + ¼\" clearance; drill ⌀½\" drain at bottom.", 13, INK)
-    s.text(40, 976, "• Concrete: 4000 psi air-entrained. Piers may be precast for true tip-out removal.", 13, INK)
-    s.text(40, 1000, "• For permanent frost piers instead: extend stems to 48\" bearing — see STELE report method.", 13, INK)
+    s.text(40, 780, "NOTES", 14, ACC, bold=True)
+    s.text(40, 808, "• Entirely freestanding furniture fence. NO post holes. NO cement. NO gravel or stone pads.", 13, INK)
+    s.text(40, 832, "• Field-measure driveway→garden drop; stack F-004 2×6 cribs to match. Default shown: 5\".", 13, INK)
+    s.text(40, 856, "• H-001 rubber furniture pads under F-001 protect the driveway — no fasteners into pavement.", 13, INK)
+    s.text(40, 880, "• Wind ballast: removable 50 lb bags in F-005 (planning count from kernel — not a PE stamp).", 13, INK)
+    s.text(40, 904, "• Latch B default (mortise in P0). Do not epoxy into the house.", 13, INK)
 
     s.save()
 
@@ -529,13 +558,13 @@ def sheet_m5():
         "HINGE: Wooden pintle + gudgeon (hard maple / white oak).",
         "  — Two pintles on P1; gate lifts straight up to remove.",
         "  — Optional upgrade: stainless pintle set (only metal on fence).",
-        "LATCH A — HOUSE RECEIVER (preferred if wall available):",
+        "LATCH B — DEFAULT (fully freestanding):",
         "  — 1.5\" × 3.5\" × 18\" sliding oak bar through latch stile.",
-        "  — Bar enters 4\" deep hardwood sleeve epoxied into house",
-        "    concrete (or lag-bolted receiver block on foundation).",
+        "  — Bar enters mortise in P0 latch post; gravity catch.",
         "  — Cross-peg + optional keyed padlock hasp on bar.",
-        "LATCH B — SELF-CONTAINED:",
-        "  — Same bar into mortise in P0 latch post; gravity catch.",
+        "  — NO epoxy, NO house receiver, NO fasteners into the wall.",
+        "LATCH A — OPTIONAL ONLY (if you later choose a house strike):",
+        "  — Oak strike block on the wall you own — not in this default kit.",
         "SWING: Into garden (or driveway — confirm site). Clear arc 36\".",
         "JOINERY: Drawbored mortise & tenon at every stile/rail (hozo).",
         "  Diagonal brace half-lapped into rails — no fasteners.",
@@ -554,7 +583,8 @@ def sheet_m6():
     s.text(40, 70, "LUMBER BUY LIST — DIMENSIONAL STOCK (paint-grade OK)", 16, ACC, bold=True)
 
     fam_meta = {
-        "4x6x8": ("4×6", "8'", "Posts L-001…004 — stop S-014 75.50″"),
+        "4x6x8": ("4×6", "8'", "Posts + cross-ties nested"),
+        "4x6x16": ("4×6", "16'", "Dodai sills F-001 / F-002"),
         "2x8x10": ("2×8", "10'", "Nuki rails R-001…003 (104.50″)"),
         "2x8x12": ("2×8", "12'", "Cap C-001 + stub C-002 nested"),
         "2x6x8": ("2×6", "8'", "Gate G-001…008 nested"),
@@ -566,7 +596,7 @@ def sheet_m6():
     for b in NEST["boards"]:
         bf_by[b["PURCHASE"]] = bf_by.get(b["PURCHASE"], 0) + b["BF"]
     rows = [("Qty", "Nominal", "Length", "Use", "Board feet")]
-    for fam in ("4x6x8", "2x8x10", "2x8x12", "2x6x8", "1x6x8", "2x4x8", "oak_1x4x4"):
+    for fam in ("4x6x8", "4x6x16", "2x8x10", "2x8x12", "2x6x8", "1x6x8", "2x4x8", "oak_1x4x4"):
         nom, length, use = fam_meta[fam]
         rows.append((str(NEST["buy_counts"].get(fam, 0)), nom, length, use, f"{bf_by.get(fam, 0):.1f}"))
     yy = 110
@@ -588,18 +618,15 @@ def sheet_m6():
 
     s.text(40, yy + 55, "NON-TIMBER", 16, ACC, bold=True)
     misc = [
-        "Concrete 4000 psi air-entrained: ~0.35 yd³ (pad + 4 piers) — or 12–14 bags 80 lb + pier precast option",
-        "#57 crushed stone: ~0.4 yd³ under pad",
-        "Sleeve liners: 4 pcs — PVC Sch40 or galv. sized to tenon (or form sleeves and remove)",
-        "Exterior primer + owner gray paint (2 coats); end-grain sealer",
+        "Rubber furniture pads: 8 pcs under driveway sill (protect pavement)",
+        "Sandbags 50 lb: see kernel ballast.n_bags — removable wind ballast, NOT a pad",
         "Optional: stainless pintle hinges, keyed padlock hasp (only metal parts)",
-        "Epoxy anchoring adhesive for house receiver sleeve (Latch A)",
-        "Plastic shim pack / construction adhesive — NOT for joinery (pad leveling only)",
+        "NO concrete. NO gravel bed. NO post-hole digger. NO epoxy into the house.",
     ]
     for i, t in enumerate(misc):
         s.text(40, yy + 85 + i * 24, "•  " + t, 13, INK)
 
-    s.text(40, 980, "CUT ORDER: posts → mortises → rails → dry assemble → boards → cap scarf → gate → paint → set piers/pad → drop in.", 13, DIM)
+    s.text(40, 980, "CUT ORDER: sills/ties → posts → mortises → rails → dry assemble → boards → cap scarf → gate → paint → set ladder → drop in.", 13, DIM)
     s.save()
 
 

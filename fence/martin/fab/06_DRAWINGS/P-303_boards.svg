@@ -6,8 +6,8 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-303  ·  Privacy boards</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Stop setups  ·  FLOATING  ·  ¼″ gaps</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Bay clear 46.500"  ·  8 boards/bay × 2 bays  ·  inset 0.375"</text>
 <text x='40.0' y='130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>B-001  qty 16  0.750 × 5.500 × 4.750"  Privacy board course C1 (below R1)</text>
 <text x='40.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>B-002  qty 32  0.750 × 5.500 × 10.500"  Privacy board courses C2+C3 (between rails)</text>

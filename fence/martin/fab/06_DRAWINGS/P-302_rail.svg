@@ -6,8 +6,8 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-302  ·  Nuki rail R-001..003</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>FINISHED 104.500" × 1.500 × 7.250  ·  qty 3  ·  S-021</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <rect x='80.0' y='200.0' width='1200.0' height='90.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
 <line x1='80.0' y1='290.0' x2='80.0' y2='324.0' stroke='#5a6a4a' stroke-width='1'/>
 <line x1='1280.0' y1='290.0' x2='1280.0' y2='324.0' stroke='#5a6a4a' stroke-width='1'/>

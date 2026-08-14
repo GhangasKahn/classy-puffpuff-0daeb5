@@ -1,7 +1,7 @@
 HARDWARE_ID,DESCRIPTION,STANDARD,SIZE,QTY,MATERIAL,MAKE_OR_BUY
-H-001,"Sleeve liner, PVC Sch40 or galvanized, ID to 2.75″×4.75″ tenon pocket, drain ⌀½″",ASTM D1785 / ASTM A53,custom / formed,4,PVC or zinc-coated steel,BUY
-H-002,"House foundation latch receiver, 4.00″ deep hardwood/pipe sleeve",site,fits G-010 1.50″×3.50″ bar,1,oak + epoxy,BUY/MAKE
+H-001,"Rubber / composite furniture pad, 4″ sq × ½″, under driveway sill",furniture / anti-vibration,4″ × 4″ × 0.50″,8,rubber,BUY
+H-002,Optional oak latch strike block — Latch B (mortise in L-001) is default; no epoxy into concrete,site,1.50″ × 3.50″ × 6.00″,1,white oak,MAKE
 H-003,"Optional stainless lift-off pintle hinge set, 2 leaves",manufacturer,to suit 1.50″ gate + 3.50″ post,1,stainless steel,BUY
 H-004,Optional keyed padlock hasp for latch bar,manufacturer,to suit G-010,1,stainless or galvanized,BUY
 H-005,"Exterior primer + owner gray enamel, 2 finish coats",exterior grade,kit,1,coating,BUY
-H-006,ICC-rated epoxy anchoring adhesive for Latch A sleeve,ICC-ES,cartridge,1,epoxy,BUY
+H-007,"Removable 50 lb sandbags (or water jugs) in F-005 boxes — wind ballast, not a pad",woven poly bag,50 lb,27,sand + bag,BUY

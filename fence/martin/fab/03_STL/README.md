@@ -1,1 +1,1 @@
-STL meshes copied from `../cad/exports/` (timber / concrete / gravel / sleeve).
+STL meshes copied from `../cad/exports/` (timber / ballast). No concrete/gravel/sleeve.

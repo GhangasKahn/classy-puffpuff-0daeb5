@@ -13,5 +13,10 @@
     "REV": "C",
     "DATE": "2026-08-13",
     "NOTE": "Fabrication kernel: semantic parts, joints, BOM, cut lists, nesting, QA; gate_h derived to clear cap; post blank 75.50\u2033 (was documented 77\u2033)."
+  },
+  {
+    "REV": "D",
+    "DATE": "2026-08-14",
+    "NOTE": "Sit-on-grade freestanding ladder: timber sills + cross-ties + packing + sandbag ballast. Removed poured pad, piers, gravel, sleeves. Post tenon 3.50\u2033. No digging, no cement."
   }
 ]

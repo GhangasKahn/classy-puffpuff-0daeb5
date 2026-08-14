@@ -1,5 +1,5 @@
 """
-MARTIN FreeCAD model — Rev C
+MARTIN FreeCAD model — Rev D sit-on-grade ladder (no concrete).
 Semantic parts from martin_kernel.build_project(). Native CAD unit: mm.
 
 Run:  freecadcmd martin_fence.py
@@ -96,32 +96,21 @@ def main_build():
     master.addObject(a_gate)
 
     feature_objs = []
-    timber, concrete, gravel, sleeve = [], [], [], []
-
-    # pad
-    pad = cbox_in(ly["pad_len"], ly["pad_width"], v("pad_thick"),
-                  ly["overall_length"] / 2.0, 0, -v("pad_thick"))
-    feature_objs.append(add_shape(doc, "F001_Leveling_Pad", pad, parts_by_id["F-001"], a_base))
-    concrete.append(pad)
-
-    makeup = cbox_in(ly["pad_len"], v("pad_width") * 0.45, v("drop_off"),
-                     ly["overall_length"] / 2.0, v("pad_width") * 0.28,
-                     -v("pad_thick") - v("drop_off"))
-    feature_objs.append(add_shape(doc, "F002_Dropoff_Makeup", makeup, parts_by_id["F-002"], a_base))
-    concrete.append(makeup)
-
-    grav = cbox_in(
-        ly["pad_len"] + 2 * v("gravel_extra"),
-        v("pad_width") + 2 * v("gravel_extra"),
-        v("gravel_h"),
-        ly["overall_length"] / 2.0, 0,
-        -v("pad_thick") - v("drop_off") - v("gravel_h"),
-    )
-    feature_objs.append(add_shape(doc, "F004_Gravel_Bed", grav, parts_by_id["F-004"], a_base))
-    gravel.append(grav)
+    timber, ballast = [], []
 
     fx, fy = v("post_x"), v("post_y")
     rh, rt = v("rail_h"), v("rail_t")
+    sh, st = ly["sill_h"], ly["sill_t"]
+    sill_x0 = -v("sill_overhang")
+
+    # driveway sill (high, y negative)
+    ds = box_in(ly["sill_len"], st, sh, sill_x0, ly["drive_sill_cy"] - st / 2.0, -sh)
+    feature_objs.append(add_shape(doc, "F001_Driveway_Sill", ds, parts_by_id["F-001"], a_base))
+    timber.append(ds)
+    # garden sill (low, packing under)
+    gs = box_in(ly["sill_len"], st, sh, sill_x0, ly["garden_sill_cy"] - st / 2.0, -sh)
+    feature_objs.append(add_shape(doc, "F002_Garden_Sill", gs, parts_by_id["F-002"], a_base))
+    timber.append(gs)
 
     for i, pst in enumerate(ly["posts"]):
         cx = pst["cx"]
@@ -143,21 +132,45 @@ def main_build():
         feature_objs.append(add_shape(doc, nm, post, parts_by_id[pid], a_posts))
         timber.append(post)
 
-        pier = cbox_in(v("pier_xy"), v("pier_xy"), v("pier_h"), cx, 0, -v("pier_h"))
-        pocket = cbox_in(ly["sleeve_id_x"], ly["sleeve_id_y"], v("post_tenon_h") + 2.0,
-                         cx, 0, -v("post_tenon_h") - 1.0)
-        pier = pier.cut(pocket)
-        feature_objs.append(add_shape(doc, f"F003_Pier_{pst['mark']}", pier, parts_by_id["F-003"], a_base))
-        concrete.append(pier)
+        # cross-tie
+        ty0 = ly["drive_sill_cy"] - st / 2.0 - v("tie_reveal")
+        tie = box_in(fx, ly["tie_len"], sh, cx - fx / 2.0, ty0, -sh)
+        mort = cbox_in(v("post_tenon_x") + 0.04, v("post_tenon_y") + 0.04, v("post_tenon_h") + 0.1,
+                       cx, 0, -v("post_tenon_h"))
+        tie = tie.cut(mort)
+        feature_objs.append(add_shape(doc, f"F003_Tie_{pst['mark']}", tie, parts_by_id["F-003"], a_base))
+        timber.append(tie)
 
-        sw = v("sleeve_wall")
-        outer = cbox_in(ly["sleeve_id_x"] + 2 * sw, ly["sleeve_id_y"] + 2 * sw,
-                        v("post_tenon_h") + 1.5, cx, 0, -v("post_tenon_h") - 0.5)
-        inner = cbox_in(ly["sleeve_id_x"], ly["sleeve_id_y"], v("post_tenon_h") + 2.0,
-                        cx, 0, -v("post_tenon_h") - 0.5)
-        sl = outer.cut(inner)
-        feature_objs.append(add_shape(doc, f"H001_Sleeve_{pst['mark']}", sl, parts_by_id["H-001"], a_base))
-        sleeve.append(sl)
+        # packing under garden sill
+        pack = cbox_in(v("pack_len"), v("pack_w"), ly["pack_h"],
+                       cx, ly["garden_sill_cy"], -sh - ly["pack_h"])
+        feature_objs.append(add_shape(doc, f"F004_Pack_{pst['mark']}", pack, parts_by_id["F-004"], a_base))
+        timber.append(pack)
+
+    # ballast boxes at four corners
+    bx, by, bh = v("ballast_box_x"), v("ballast_box_y"), v("ballast_box_h")
+    corners = [
+        (sill_x0 + 8, ly["drive_sill_cy"]),
+        (sill_x0 + ly["sill_len"] - 8 - bx, ly["drive_sill_cy"]),
+        (sill_x0 + 8, ly["garden_sill_cy"]),
+        (sill_x0 + ly["sill_len"] - 8 - bx, ly["garden_sill_cy"]),
+    ]
+    for i, (x, y) in enumerate(corners, 1):
+        box = box_in(bx, by, bh, x, y - by / 2.0, 0)
+        feature_objs.append(add_shape(doc, f"F005_BallastBox_{i}", box, parts_by_id["F-005"], a_base))
+        timber.append(box)
+        fill = box_in(bx - 1.5, by - 1.5, bh * 0.7, x + 0.75, y - (by - 1.5) / 2.0, 0.2)
+        feature_objs.append(add_shape(doc, f"H007_Bags_{i}", fill, parts_by_id["H-007"], a_base))
+        ballast.append(fill)
+
+    # sujikai braces (simplified boxes)
+    for i, pst in enumerate(ly["posts"]):
+        if pst["mark"] not in ("P0", "P3"):
+            continue
+        bl = ly["brace_len"]
+        br = box_in(1.5, v("brace_w"), bl, pst["cx"] - 0.75, ly["drive_sill_cy"] - v("brace_w") / 2.0, 0)
+        feature_objs.append(add_shape(doc, f"F006_Brace_{pst['mark']}", br, parts_by_id["F-006"], a_base))
+        timber.append(br)
 
     # nuki rails
     for j, (rid, cl) in enumerate(zip(("R-001", "R-002", "R-003"), ly["rail_cls"])):
@@ -247,7 +260,7 @@ def main_build():
     import Import
     Import.export(feature_objs, os.path.join(OUT, "martin_assembly.step"))
 
-    for name, shapes in (("timber", timber), ("concrete", concrete), ("gravel", gravel), ("sleeve", sleeve)):
+    for name, shapes in (("timber", timber), ("ballast", ballast)):
         if not shapes:
             continue
         comp = Part.makeCompound(shapes)

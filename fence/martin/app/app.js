@@ -29,7 +29,7 @@
     drafts: store.get("drafts", {
       dropOff: D.meta.dropDefault,
       grayHex: "#6e7578",
-      latch: "A",
+      latch: "B",
       notes: "",
       site: "",
     }),
@@ -159,12 +159,12 @@
 
     const latch = `<rect class="fence-part${dim("latch")}" data-part="latch" x="${xOf(3.5 + 0.5) - 18 * S * (0.35 + explode * 0.4)}" y="${yOf(28 + 1.75)}" width="${18 * S * (0.35 + explode * 0.25)}" height="${3.5 * S}" fill="#aeb6ba" stroke="#1a1f24"/>`;
 
-    const pad = `<rect class="fence-part${dim("pad")}" data-part="pad" x="${xOf(-6)}" y="${yOf(0)}" width="${(L + 12) * S}" height="${6 * S}" fill="#9a9890" stroke="#1a1f24"/>`;
+    const sills = `<rect class="fence-part${dim("sills")}" data-part="sills" x="${xOf(-6)}" y="${yOf(0)}" width="${(L + 12) * S}" height="${5.5 * S}" fill="#9a9890" stroke="#1a1f24"/>`;
 
-    const piers = D.posts
+    const ties = D.posts
       .map((p, i) => {
-        const x = xOf(p.x - 7);
-        return `<rect class="fence-part${dim("piers")}" data-part="piers" x="${x}" y="${yOf(0) + 2}" width="${14 * S * 0.35}" height="${10 * S * 0.35}" fill="#b8b6b0" stroke="#1a1f24" transform="translate(0,${i * lift * 0.05})"/>`;
+        const x = xOf(p.x - 1.75);
+        return `<rect class="fence-part${dim("ties")}" data-part="ties" x="${x}" y="${yOf(0) + 2}" width="${3.5 * S}" height="${8 * S * 0.35}" fill="#b8b6b0" stroke="#1a1f24" transform="translate(0,${i * lift * 0.05})"/>`;
       })
       .join("");
 
@@ -172,7 +172,7 @@
       <defs>
         <filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#8fad78"/></filter>
       </defs>
-      ${pad}${piers}${posts}${boards}${rails}${cap}${gateLeaf}${latch}
+      ${sills}${ties}${posts}${boards}${rails}${cap}${gateLeaf}${latch}
       <text x="${padX}" y="${VH - 10}" fill="#6e7578" font-size="11" font-family="IBM Plex Mono,monospace">143″ overall · explode ${Math.round(explode * 100)}%</text>
     </svg>`;
 
@@ -374,7 +374,7 @@
       ["Joints", fab.joints.length],
       ["Net bf", nest.net_bf],
       ["Buy bf", nest.procurement_bf],
-      ["Concrete", (fab.concrete && fab.concrete.concrete_yd3) + " yd³"],
+      ["Ballast", (fab.ballast && fab.ballast.n_bags) + " bags"],
       ["Rev", fab.project.REVISION],
     ]
       .map(([k, v]) => `<div class="card stat"><span>${k}</span><b>${v}</b></div>`)

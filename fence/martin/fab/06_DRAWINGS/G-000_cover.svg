@@ -5,31 +5,31 @@
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>G-000  ·  Cover / index</text>
-<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Rev C fabrication model · Buffalo NY</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Rev D fabrication model · Buffalo NY</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='70.0' font-family='Georgia, serif' font-size='22' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN — DIGITAL MANUFACTURING DEFINITION</text>
 <text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Prairie removable fence  ·  143″ × 65″  ·  Japanese joinery  ·  no nails in timber</text>
 <text x='40.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>WHAT  Freestanding winter-removable privacy fence + locking gate</text>
-<text x='40.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>FROM  Dimensional lumber (paint-grade) + 4000 psi AE concrete + sleeves</text>
+<text x='40.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>FROM  Dimensional lumber only + removable sandbag ballast — NO concrete, NO post holes</text>
 <text x='40.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>SIZE  overall_length=143.000  overall_height=65.000  gate_clear=36.000 (ASSUMED)</text>
 <text x='40.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>QTY   One run; part quantities in S-601</text>
-<text x='40.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CONNECT  nuki+kusabi, hozo drawbore, foot tenon/sleeve, floating grooves</text>
-<text x='40.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>MAKE  See routings + AS-01..12  ·  MEASURE from pad-shoulder datum</text>
+<text x='40.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CONNECT  nuki+kusabi, hozo drawbore, foot tenon into F-003, floating grooves, sill laps</text>
+<text x='40.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>MAKE  See routings + AS-01..12  ·  MEASURE from sill-shoulder datum</text>
 <text x='40.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>ASSEMBLE  Base → posts → rails → boards → cap → gate → latch</text>
 <text x='40.0' y='336.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CHECK  QA-701  ·  CHANGE  edit kernel P[] then re-export</text>
 <text x='40.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DRAWING INDEX</text>
 <text x='40.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-000    Cover / drawing index / revision</text>
 <text x='40.0' y='438.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GA-100   General arrangement — elevation + notes</text>
 <text x='40.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GA-110   Front elevation — datums + overall</text>
-<text x='40.0' y='474.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GA-130   Plan at pad / post centers</text>
+<text x='40.0' y='474.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GA-130   Plan at ladder base / post centers</text>
 <text x='40.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>EX-200   Exploded assembly — insertion directions</text>
 <text x='40.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-301    Post typical L-001..004</text>
 <text x='40.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-302    Nuki rail R-001..003</text>
 <text x='40.0' y='546.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-303    Privacy boards B-001..003</text>
 <text x='40.0' y='564.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-304    Gate leaf G-001..010</text>
 <text x='40.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-401    Nuki + kusabi</text>
-<text x='40.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-402    Foot tenon / sleeve</text>
+<text x='40.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-402    Foot tenon / cross-tie shoe</text>
 <text x='40.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-403    Kama-tsugi cap scarf</text>
 <text x='40.0' y='636.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-404    Gate hozo drawbore</text>
 <text x='40.0' y='654.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>T-501    Kusabi full-size template</text>
@@ -43,7 +43,7 @@
 <text x='40.0' y='798.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>L-801    Part labels</text>
 <text x='900.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>UNRESOLVED (TBM)</text>
 <text x='900.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-01  Driveway→garden drop  [TBM]</text>
-<text x='900.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-02  House wall for Latch A  [TBM]</text>
+<text x='900.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-02  Latch: default B (mortise in L-001). House wall strike is opt-in, no epoxy.  [ASSUMED]</text>
 <text x='900.0' y='464.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-03  Owner gray exact color  [TBM]</text>
 <text x='900.0' y='486.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-04  Buffalo Green Code district height / front-yard  [TBM]</text>
 <text x='900.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-05  Swing direction (garden vs driveway)  [ASSUMED]</text>

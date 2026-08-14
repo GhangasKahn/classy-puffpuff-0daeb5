@@ -16,6 +16,6 @@ module C_cap() { cube([cap_len, cap_w, cap_t]); }
 
 module B_board(h) { cube([board_w, board_t, h]); }
 
-module F_pad() { cube([pad_len, pad_width, pad_thick]); }
+module F_sill() { cube([sill_len, 3.5*25.4, sill_h]); }
 
-module F_pier() { cube([pier_xy, pier_xy, pier_h]); }
+module F_tie() { cube([post_x, tie_len, sill_h]); }

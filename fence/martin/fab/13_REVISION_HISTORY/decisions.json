@@ -19,9 +19,9 @@
   },
   {
     "ID": "D-004",
-    "Decision": "Tip-out 18\u2033 piers rather than 48\u2033 frost stems",
-    "Reason": "removability; pad stays. Permanent frost option is STELE method.",
-    "Parts": "F-003"
+    "Decision": "Sit-on-grade timber ladder (dodai + cross-ties) instead of poured pad/piers",
+    "Reason": "Owner: entirely freestanding \u2014 no post holes, no cement, no massive stone pads. Winter: lift timber, empty sandbags.",
+    "Parts": "F-001..F-006, H-001, H-007"
   },
   {
     "ID": "D-005",
@@ -31,9 +31,9 @@
   },
   {
     "ID": "D-006",
-    "Decision": "Tenon 2.50\u00d74.50 (\u2153-ish of 3.50\u00d75.50 with 0.50\u2033 shoulders)",
-    "Reason": "cheek thickness \u2265 0.50\u2033; socket couple 12\u2033",
-    "Parts": "L-001..004"
+    "Decision": "Foot tenon 2.50\u00d74.50\u00d73.50 into F-003 (not 12\u2033 concrete socket)",
+    "Reason": "Cross-tie is 5.50\u2033 tall; leave ~2\u2033 below mortise. Overturning resisted by ladder width + ballast, not buried couple.",
+    "Parts": "L-001..004, F-003"
   },
   {
     "ID": "D-007",
@@ -43,8 +43,14 @@
   },
   {
     "ID": "D-008",
-    "Decision": "Latch A preferred (house concrete) with Latch B parametric fallback",
-    "Reason": "privacy lock without relying on a strike that can be lifted with the gate",
+    "Decision": "Latch B default (mortise in L-001). No epoxy into house concrete.",
+    "Reason": "Owner: no cement. Latch A oak strike is opt-in only if a wall exists and they accept fasteners into existing structure \u2014 still no pour.",
     "Parts": "G-010, H-002, L-001"
+  },
+  {
+    "ID": "D-009",
+    "Decision": "Removable sandbags in timber boxes for wind ballast",
+    "Reason": "Freestanding fence in Buffalo wind needs mass \u00d7 lever. Bags leave in winter. Not a stone pad, not poured.",
+    "Parts": "F-005, H-007"
   }
 ]

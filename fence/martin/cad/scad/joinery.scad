@@ -1,4 +1,4 @@
-// Joinery cutters (nuki mortise, kusabi slot, sleeve pocket)
+// Joinery cutters (nuki mortise, kusabi slot, tie mortise)
 include <parameters.scad>;
 module nuki_mortise() {
     cube([post_x+2, rail_t+1, rail_h+1], center=true);

@@ -6,8 +6,8 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>J-401  ·  Nuki + kusabi</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Joinery register — see JSON joints[]</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev C  ·  inches  ·  kernel 3.0</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: pad top / latch face x=0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Mortise THROUGH post: 1.50″ (rail_t + fit) × 7.25″ (rail_h).</text>
 <text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Cheeks: 2.00″ of 5.50″ post each side of rail — OK (QA).</text>
 <text x='40.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Kusabi W-001 0.625 × 1.125 × 5.500 through cheek slot. Drive to lock; reverse to release.</text>

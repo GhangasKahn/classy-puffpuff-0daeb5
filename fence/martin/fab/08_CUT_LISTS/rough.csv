@@ -1,8 +1,8 @@
 PART_ID,PART_NAME,QUANTITY,ROUGH_THICKNESS,ROUGH_WIDTH,ROUGH_LENGTH,MATERIAL,PURCHASE,NOTES
-L-001,P0 latch post,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,latch post
-L-002,P1 hinge post,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,hinge post
-L-003,P2 mid post / cap scarf,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,mid post / cap scarf
-L-004,P3 end post,1,3.5,5.5,76.5,solid lumber,4×6 × 8′,end post
+L-001,P0 latch post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,latch post
+L-002,P1 hinge post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,hinge post
+L-003,P2 mid post / cap scarf,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,mid post / cap scarf
+L-004,P3 end post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,end post
 R-001,R1 bottom Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
 R-002,R2 mid Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
 R-003,R3 upper Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
@@ -21,16 +21,18 @@ G-007,Gate top rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
 G-008,Gate diagonal brace,1,1.5,3.5,60.059,solid lumber,2×4 / 2×6 offcut,
 G-009,Gate infill board,4,0.75,5.5,54.5,solid lumber,1×6 × 8′,
 G-010,Sliding latch bar,1,1.5,3.5,19.0,white oak (preferred) or hard maple,1×4 oak × 4′ / 2×4,
-W-001,Kusabi locking wedge,9,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,Make 3 extras (qty buy 12 blanks). Label bag for winter.
+W-001,Kusabi locking wedge,17,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,9 rail + 8 sill/tie + 3 extras. Label bag for winter. NEVER glue.
 W-002,Drawbore / latch oak peg,14,0.375,0.375,2.5,white oak,1×4 oak × 4′,10 gate M&T + 1 cap scarf + 1 latch cross-peg + 2 spare
 W-003,Wooden pintle (or stainless upgrade),2,1.0,1.0,4.0,white oak / hard maple (BUY: stainless pintle set),oak offcut or H-003,Gate lifts straight up for winter. Metal optional — only purchased metal on fence if used.
-F-001,Leveling pad,1,6.0,28.0,155.0,4000 psi air-entrained concrete 5–7%,bag mix or small ready-mix,Top dead level. Makeup F-002 absorbs drop_off (TBM).
-F-002,Drop-off makeup,1,5.0,12.6,155.0,4000 psi air-entrained concrete,poured with F-001,ESTIMATED 5″ — TBM before pour
-F-003,Socket pier,4,14.0,14.0,18.0,4000 psi air-entrained (precast preferred for tip-out),form or precast,
-F-004,Gravel drainage bed,1,6.0,36.0,163.0,#57 crushed stone,~0.4 yd³,
-H-001,Sleeve liner,4,0.25,3.25,13.5,PVC Schedule 40 or galvanized tube,sized to sleeve ID + wall,ID ≈ 2.75″ × 4.75″ (tenon + sleeve_clear)
-H-002,House latch receiver sleeve (Latch A),1,2.0,4.0,4.0,hardwood sleeve + epoxy into foundation,oak block or pipe sleeve,TBM at house wall. Latch B omits this — mortise L-001 instead.
-H-003,Optional stainless pintle set,1,0,0,0,stainless steel,"lift-off pintle hinges, 2-pack",Replaces W-003 if preferred. Only metal on fence.
+F-001,Driveway dodai sill,1,3.5,5.5,156.0,solid lumber,4×6 × 16′,High side. Sit on existing driveway. Rubber pads protect pavement.
+F-002,Garden dodai sill,1,3.5,5.5,156.0,solid lumber,4×6 × 16′,Low side. Level with F-001 via timber packing — drop_off TBM. No cement.
+F-003,Cross-tie / post shoe,4,3.5,5.5,42.5,solid lumber,4×6 × 8′,One at each post CL. Posts drop in for winter lift-out.
+F-004,Garden packing crib,4,1.5,5.5,12.0,solid lumber,2×6 × 8′,"4 layers of 1.50″ 2×6 ≈ 6.0"" to match estimated 5.0"" drop. Field-fit."
+F-005,Ballast box (empty timber frame),4,1.5,1.5,56.0,solid lumber,2×6 × 8′,Holds H-007 sandbags. Empty for winter. Not a stone pad. Not poured.
+F-006,Sujikai base brace,4,1.5,3.5,26.456,solid lumber,2×6 × 8′,"Transfers wind moment into ladder. Two garden-side, two driveway-side."
+H-001,Rubber furniture pad (driveway sill),8,0.5,4.0,4.0,rubber / composite,4″ furniture / anti-vibration pads,Under F-001. Protects pavement. No fasteners into driveway.
+H-002,Optional oak latch strike (Latch A opt-in),1,1.5,3.5,6.0,white oak block,oak offcut,DEFAULT is Latch B (mortise in L-001). Do not epoxy into concrete.
+H-003,Optional stainless pintle set,1,0,0,0,stainless steel,"lift-off pintle hinges, 2-pack",Replaces W-003 if preferred. Only metal on fence if used.
 H-004,Keyed padlock hasp (optional),1,0,0,0,stainless / galvanized,,On latch bar — not structural
-H-005,Exterior primer + owner gray enamel,1,0,0,0,exterior acrylic / alkyd,,"Mask wedges, tenons, sleeve contact, pintle faces"
-H-006,Epoxy anchoring adhesive (Latch A),1,0,0,0,ICC-rated epoxy,,Foundation receiver only
+H-005,Exterior primer + owner gray enamel,1,0,0,0,exterior acrylic / alkyd,,"Mask wedges, tenons, sill laps, pintle faces"
+H-007,Removable sandbag ballast,27,0,0,0,woven poly sandbag + sand (or water jugs),50 lb bags,Qty from wind/ballast calc. Store dry in winter. NOT poured concrete. NOT a stone pad.

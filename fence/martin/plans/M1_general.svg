@@ -7,11 +7,11 @@
 <text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-1  ·  General arrangement</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Scale 1:16 approx · dimensions in inches</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev A</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Sit-on-grade · No nails in timber · Rev D</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>FRONT ELEVATION — garden face</text>
 <text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>143" overall · 65" high · 36" gate · four 4×6 posts · three 2×8 Prairie bands</text>
-<rect x='30.8' y='820.0' width='1271.0' height='49.2' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
-<text x='666.3' y='849.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>LEVELING PAD</text>
+<rect x='30.8' y='820.0' width='1271.0' height='45.1' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='666.3' y='847.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>DODAI SILL — SIT ON GRADE</text>
 <rect x='80.0' y='299.3' width='28.7' height='520.7' fill='#d9dcde' stroke='#1a1f24' stroke-width='1.8'/>
 <text x='94.3' y='269.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P0</text>
 <rect x='403.9' y='299.3' width='28.7' height='520.7' fill='#d9dcde' stroke='#1a1f24' stroke-width='1.8'/>
@@ -74,16 +74,16 @@
 <polygon points='1292.6,820.0 1288.6,830.0 1296.6,830.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
 <polygon points='1292.6,287.0 1288.6,277.0 1296.6,277.0' fill='#5a6a4a' stroke='#5a6a4a' stroke-width='0.5'/>
 <text x='1304.6' y='558.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#5a6a4a' text-anchor='start' transform='rotate(-90 1304.6 558.5)'>65"</text>
-<text x='40.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>PLAN (pad top)</text>
+<text x='40.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>PLAN (ladder)</text>
 <rect x='80.0' y='1027.6' width='15.8' height='24.8' fill='#d9dcde' stroke='#1a1f24' stroke-width='1.2'/>
 <rect x='257.8' y='1027.6' width='15.8' height='24.8' fill='#d9dcde' stroke='#1a1f24' stroke-width='1.2'/>
 <rect x='482.8' y='1027.6' width='15.8' height='24.8' fill='#d9dcde' stroke='#1a1f24' stroke-width='1.2'/>
 <rect x='707.8' y='1027.6' width='15.8' height='24.8' fill='#d9dcde' stroke='#1a1f24' stroke-width='1.2'/>
-<rect x='53.0' y='977.0' width='697.5' height='126.0' fill='none' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='4 3'/>
-<text x='401.8' y='1125.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>PAD 28" WIDE · SOCKET PIERS AT POSTS</text>
+<rect x='53.0' y='951.1' width='697.5' height='177.8' fill='none' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='4 3'/>
+<text x='401.8' y='1150.9' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>LADDER 39.5" WIDE · CROSS-TIES AT POSTS · NO DIGGING</text>
 <text x='780.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>DESIGN: Prairie horizontals (Darwin Martin / FLW) + Japanese nuki / hozo / kama-tsugi.</text>
 <text x='780.0' y='92.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>JOINERY: No nails or screws in timber. Wedge-locked through-rails. Drawbored gate M&amp;T.</text>
-<text x='780.0' y='114.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>WINTER: Knock wedges → withdraw nuki rails → lift gate off pintles → lift posts → tip piers.</text>
-<text x='780.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>FINISH: Exterior primer + owner gray. Mask wedge faces, tenons, and sleeve contact.</text>
-<text x='780.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>ENGINEERING NOTE: Planning design — have a NY PE review foundations if required by permit.</text>
+<text x='780.0' y='114.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>WINTER: Knock wedges → withdraw nuki → lift gate → lift posts → empty sandbags → carry ladder.</text>
+<text x='780.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>FINISH: Exterior primer + owner gray. Mask wedge faces, tenons, and sill laps.</text>
+<text x='780.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>ENGINEERING NOTE: Planning design — wind ballast is a calc, not a PE stamp. No foundations.</text>
 </svg>

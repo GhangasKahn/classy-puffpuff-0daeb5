@@ -11,9 +11,10 @@ module A020_rails() {
         translate([nuki_x0, -rail_t/2, z-rail_h/2]) R_nuki();
 }
 module A001_base() {
-    translate([-6*25.4, -pad_width/2, -pad_thick]) F_pad();
+    translate([-6*25.4, -base_spread_cl/2 - 3.5*25.4/2, -sill_h]) F_sill();
+    translate([-6*25.4,  base_spread_cl/2 - 3.5*25.4/2, -sill_h]) F_sill();
     for (i=[0:3])
-        translate([post_cx[i]-pier_xy/2, -pier_xy/2, -pier_h]) F_pier();
+        translate([post_cx[i]-post_x/2, -tie_len/2, -sill_h]) F_tie();
 }
 module A000_master() {
     A001_base();

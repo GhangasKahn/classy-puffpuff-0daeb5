@@ -7,7 +7,7 @@
 <text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-5  ·  Gate &amp; latch</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Gate leaf · wooden pintles · house or post latch</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Removable · No nails in timber · Rev A</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Sit-on-grade · No nails in timber · Rev D</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>GATE LEAF — 36" CLEAR OPENING</text>
 <rect x='100.0' y='178.0' width='385.0' height='682.0' fill='#e8eaeb' stroke='#1a1f24' stroke-width='2'/>
 <rect x='100.0' y='178.0' width='38.5' height='682.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
@@ -33,13 +33,13 @@
 <text x='620.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>HINGE: Wooden pintle + gudgeon (hard maple / white oak).</text>
 <text x='620.0' y='122.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Two pintles on P1; gate lifts straight up to remove.</text>
 <text x='620.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Optional upgrade: stainless pintle set (only metal on fence).</text>
-<text x='620.0' y='166.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LATCH A — HOUSE RECEIVER (preferred if wall available):</text>
+<text x='620.0' y='166.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LATCH B — DEFAULT (fully freestanding):</text>
 <text x='620.0' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — 1.5" × 3.5" × 18" sliding oak bar through latch stile.</text>
-<text x='620.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Bar enters 4" deep hardwood sleeve epoxied into house</text>
-<text x='620.0' y='232.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>    concrete (or lag-bolted receiver block on foundation).</text>
-<text x='620.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Cross-peg + optional keyed padlock hasp on bar.</text>
-<text x='620.0' y='276.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LATCH B — SELF-CONTAINED:</text>
-<text x='620.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Same bar into mortise in P0 latch post; gravity catch.</text>
+<text x='620.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Bar enters mortise in P0 latch post; gravity catch.</text>
+<text x='620.0' y='232.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Cross-peg + optional keyed padlock hasp on bar.</text>
+<text x='620.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — NO epoxy, NO house receiver, NO fasteners into the wall.</text>
+<text x='620.0' y='276.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>LATCH A — OPTIONAL ONLY (if you later choose a house strike):</text>
+<text x='620.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  — Oak strike block on the wall you own — not in this default kit.</text>
 <text x='620.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>SWING: Into garden (or driveway — confirm site). Clear arc 36".</text>
 <text x='620.0' y='342.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>JOINERY: Drawbored mortise &amp; tenon at every stile/rail (hozo).</text>
 <text x='620.0' y='364.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>  Diagonal brace half-lapped into rails — no fasteners.</text>
