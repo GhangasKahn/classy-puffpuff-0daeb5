@@ -1,12 +1,12 @@
 {
-  "MODE": "B \u2014 Rev E Prairie screen on sit-on-grade ladder (no digging / no cement)",
+  "MODE": "B \u2014 Rev F Darwin Martin Tree of Life light-screen on sit-on-grade ladder (no digging / no cement)",
   "MODEL_ARCHITECTURE": "GOOD \u2014 kernel SSOT; FreeCAD App::Part hierarchy; OpenSCAD modules",
   "PARAMETERIZATION_QUALITY": "GOOD \u2014 envelope, stock, joinery, kerf, waste, planter mass as named parameters",
-  "PART_SEPARATION": "GOOD \u2014 persistent PART_IDs L/R/K/C/G/W/F/H/T",
+  "PART_SEPARATION": "GOOD \u2014 persistent PART_IDs L/R/K/C/G/W/F/H/T/Q",
   "METADATA_QUALITY": "GOOD \u2014 Fabrication properties on FreeCAD; JSON/CSV registry",
   "ASSEMBLY_STRUCTURE": "GOOD \u2014 A000 / A001 ladder+planters / A010 / A020 / A030",
-  "JOINERY_STRUCTURE": "GOOD \u2014 joint register with fit class; nuki vs housed dado rule",
-  "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA generated from kernel",
+  "JOINERY_STRUCTURE": "GOOD \u2014 joint register with fit class; nuki vs cassette groove rule",
+  "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA generated from kernel; elevation paints motifs",
   "BOM_READINESS": "GOOD \u2014 BOM + nest from parts; planter mass from wind calc",
   "CUT_LIST_READINESS": "GOOD \u2014 rough, finished, nest CSV",
   "EXPORT_READINESS": "GOOD \u2014 FCStd/STEP/STL/JSON/CSV/SVG/DXF",
@@ -14,13 +14,14 @@
     "overall_length TBM remeasure on driveway",
     "gate_clear ASSUMED 36\u2033",
     "wind ballast is a planning calc (not PE) \u2014 plant F-005 + optional in-box stone",
-    "Photos confirm driveway span and house-side gate; gray swatch still TBM"
+    "Photos confirm driveway span and house-side gate; gray swatch still TBM",
+    "Tree of Life is an original wood interpretation \u2014 not a licensed reproduction of Wright glass"
   ],
-  "CLOSED_REV_E": [
-    "Vertical 1\u00d76 privacy replaced by horizontal Prairie screen",
-    "Sandbags replaced by live planters (not at P0/house)",
-    "Oak pivots instead of pintles as primary hinge",
-    "Dog seal: \u00be\u2033 gaps + kick nuki + 0.375\u2033 gate bottom",
+  "CLOSED_REV_F": [
+    "Stacked 2\u00d710/2\u00d76 ranch-fence face replaced by Wright light-screen (eave, belts, piers, patterned cassettes)",
+    "\u00be\u2033 radiator gaps replaced by 1.50\u2033 max muntin apertures + solid 2\u00d712 water table",
+    "Gate face is Tree of Life, not a Z-brace panel",
+    "Cap is a 2\u00d712 cantilevered eave with hanging fascia",
     "No concrete, no post holes, no gravel/stone PAD"
   ],
   "REFACTORING": "Kernel is source of truth. FreeCAD/OpenSCAD/drawings/BOM consume it."

@@ -5,20 +5,21 @@
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>G-000  ·  Cover / index</text>
-<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Rev E Prairie fabrication model · Buffalo NY</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Rev F Darwin Martin Tree of Life · Buffalo NY</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='70.0' font-family='Georgia, serif' font-size='22' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN — DIGITAL MANUFACTURING DEFINITION</text>
-<text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Prairie removable fence  ·  143″ × 65″  ·  Darwin Martin + Japanese joinery  ·  wood + light + latch</text>
-<text x='40.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>WHAT  Freestanding winter-removable Prairie screen + locking gate against the house</text>
+<text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Prairie removable fence  ·  143″ × 65″  ·  Darwin Martin Tree of Life + Japanese joinery  ·  wood + light + latch</text>
+<text x='40.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>WHAT  Freestanding winter-removable Wright light-screen + Tree of Life gate against the house</text>
 <text x='40.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>FROM  Dimensional lumber + live planters (stone in-box only) — NO concrete, NO post holes, NO pad</text>
 <text x='40.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>SIZE  overall_length=143.000  overall_height=65.000  gate_clear=36.000 (ASSUMED)  drop_off=0 (slab)</text>
-<text x='40.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>FACE  Horizontal 2×10 / 2×6 bands, ¾″ dog-tight gaps, PT kick nuki, φ-adjacent 9.25/5.5=1.682</text>
-<text x='40.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>QTY   One run; part quantities in S-601</text>
-<text x='40.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CONNECT  nuki+kusabi (4 bands), housed dado (4 bands), hozo drawbore, oak pivots, sill laps</text>
-<text x='40.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>MAKE  See routings + AS-01..12  ·  MEASURE from sill-shoulder datum</text>
-<text x='40.0' y='336.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>ASSEMBLE  Base → posts → bands → cap/light → gate on oak pivots → plant troughs (not at house)</text>
-<text x='40.0' y='364.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CHECK  QA-701  ·  CHANGE  edit kernel P[] then re-export</text>
+<text x='40.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>FACE  2×12 eave + fascia, projecting 2×10 belts, Roman-brick piers, Tree of Life / nested-rect cassettes</text>
+<text x='40.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>DOG   Solid 2×12 PT water table; 1.50″ max muntin aperture; gate bottom 0.375″</text>
+<text x='40.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>QTY   One run; part quantities in S-601</text>
+<text x='40.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CONNECT  nuki+kusabi (K-001, R-001, R-002), cassette grooves, hozo drawbore, oak pivots, sill laps</text>
+<text x='40.0' y='336.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>MAKE  See routings + AS-01..12  ·  MEASURE from sill-shoulder datum</text>
+<text x='40.0' y='364.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>ASSEMBLE  Base → posts → belts/water table → cassettes → eave/light → gate on oak pivots → plant troughs</text>
+<text x='40.0' y='392.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>CHECK  QA-701  ·  CHANGE  edit kernel P[] then re-export</text>
 <text x='40.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DRAWING INDEX</text>
 <text x='40.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-000    Cover / drawing index / revision</text>
 <text x='40.0' y='438.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GA-100   General arrangement — elevation + notes</text>
@@ -26,8 +27,8 @@
 <text x='40.0' y='474.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>GA-130   Plan at ladder base / post centers</text>
 <text x='40.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>EX-200   Exploded assembly — insertion directions</text>
 <text x='40.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-301    Post typical L-001..004</text>
-<text x='40.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-302    Prairie bands R-001..007 + K-001</text>
-<text x='40.0' y='546.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-303    Tectonic blocks T-001 + slat schedule</text>
+<text x='40.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-302    Water table + Prairie belts K-001 / R-001 / R-002</text>
+<text x='40.0' y='546.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-303    Tree of Life + nested-rect cassettes Q-001..003</text>
 <text x='40.0' y='564.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>P-304    Gate leaf G-001..010</text>
 <text x='40.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-401    Nuki + kusabi / housed dado</text>
 <text x='40.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>J-402    Foot tenon / cross-tie shoe</text>

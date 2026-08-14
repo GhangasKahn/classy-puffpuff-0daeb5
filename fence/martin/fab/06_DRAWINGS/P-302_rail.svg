@@ -4,26 +4,24 @@
 <rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
-<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-302  ·  Prairie bands K-001 + R-001..007</text>
-<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>FINISHED 104.500"  ·  S-021  ·  ¾″ dog gaps</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-302  ·  Water table + Prairie belts</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>FINISHED 109.500"  ·  S-021  ·  project 3″ past piers</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
-<rect x='80.0' y='200.0' width='1200.0' height='90.0' fill='#6e7578' stroke='#1a1f24' stroke-width='2'/>
+<rect x='80.0' y='200.0' width='1200.0' height='90.0' fill='#5a5e58' stroke='#1a1f24' stroke-width='2'/>
 <line x1='80.0' y1='290.0' x2='80.0' y2='324.0' stroke='#5a6a4a' stroke-width='1'/>
 <line x1='1280.0' y1='290.0' x2='1280.0' y2='324.0' stroke='#5a6a4a' stroke-width='1'/>
 <line x1='80.0' y1='318.0' x2='1280.0' y2='318.0' stroke='#5a6a4a' stroke-width='1.3'/>
-<text x='680.0' y='313.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='middle'>104.500" nuki_len  DERIVED</text>
-<text x='80.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Through-nuki + kusabi: K-001, R-001, R-003, R-005. Housed 0.75″ dado: R-002, R-004, R-006, R-007.</text>
-<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Kick is PT splash / dog seal.</text>
-<text x='80.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Fit: SLIDING then INTERFERENCE via W-001 on nuki. Do not through-mortise housed bands (¾″ web would fail).</text>
-<text x='80.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>SLAT SCHEDULE  (z0 → z1  AFF, sill top = 0)</text>
-<text x='80.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>K-001   KICK   2x6 PT    5.500"  z 0.000–5.500  CL 2.750  NUKI  dog seal / splash nuki</text>
-<text x='80.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-001   S1     2x10      9.250"  z 5.500–14.750  CL 10.125  NUKI  major Prairie nuki</text>
-<text x='80.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-002   S2     2x6       5.500"  z 15.500–21.000  CL 18.250  HOUSED  housed screen</text>
-<text x='80.0' y='454.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-003   S3     2x10      9.250"  z 21.750–31.000  CL 26.375  NUKI  major Prairie nuki / latch CL</text>
-<text x='80.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-004   S4     2x6       5.500"  z 31.750–37.250  CL 34.500  HOUSED  housed screen</text>
-<text x='80.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-005   S5     2x10      9.250"  z 38.000–47.250  CL 42.625  NUKI  major Prairie nuki</text>
-<text x='80.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-006   S6     2x6       5.500"  z 48.000–53.500  CL 50.750  HOUSED  housed screen</text>
-<text x='80.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-007   S7     2x10      9.250"  z 54.250–63.500  CL 58.875  HOUSED  housed upper band — not nuki (keep post web)</text>
-<text x='80.0' y='572.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Band ratio 2×10/2×6 = 1.682 ≈ φ=1.61803. Stack + cap = 65.000″. Gaps 0.750″ dog-tight.</text>
+<text x='680.0' y='313.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='middle'>109.500" nuki_len  DERIVED</text>
+<text x='80.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Through-nuki + kusabi: K-001 (2×12 PT water table), R-001 and R-002 (2×10 belts).</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Belts cantilever 3″ past pier faces.</text>
+<text x='80.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Fit: SLIDING then INTERFERENCE via W-001. Do not through-mortise the Q cassettes.</text>
+<text x='80.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>LAYER SCHEDULE  (z0 → z1  AFF, sill top = 0)</text>
+<text x='80.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>K-001   WATER  2x12 PT       11.250"  z 0.000–11.250  CL 5.625  NUKI  water table / dog seal / earth line</text>
+<text x='80.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Q-001   L1     cassette      8.085"  z 12.000–20.085  CL 16.043  CASSETTE  nested-rects light (roots)</text>
+<text x='80.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-001   BELT1  2x10          9.250"  z 20.835–30.085  CL 25.460  NUKI  projecting Prairie belt</text>
+<text x='80.0' y='454.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Q-002   L2     cassette      13.081"  z 30.835–43.916  CL 37.376  CASSETTE  Tree of Life light (three trees)</text>
+<text x='80.0' y='476.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>R-002   BELT2  2x10          9.250"  z 44.666–53.916  CL 49.291  NUKI  projecting Prairie belt / latch CL</text>
+<text x='80.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Q-003   L3     cassette      8.085"  z 54.666–62.751  CL 58.709  CASSETTE  nested-rects light (foliage)</text>
+<text x='80.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Cassette φ pair L2/L1 = 1.618 ≈ φ=1.61803. Stack + eave = 65.000″. Max aperture 1.50″.</text>
 </svg>

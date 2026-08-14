@@ -16,9 +16,11 @@ import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.path.insert(0, os.path.join(ROOT, "fence", "martin"))
 
 from martin_kernel import PROJECT, MM, build_project, inch_mm, layout, v  # noqa: E402
+from martin_elevation import paint_front_elevation, paint_motif, CASS, BELT, EARTH, EAVE, PIER  # noqa: E402
 
 FAB = os.path.join(ROOT, "fence", "martin", "fab")
 SCAD = os.path.join(ROOT, "fence", "martin", "cad", "scad")
@@ -115,7 +117,7 @@ class Sheet:
         self.text(40, Hpx - 56, "MARTIN", 26, ACC, bold=True, mono=False)
         self.text(170, Hpx - 58, f"{self.code}  ·  {self.title}", 16, INK, bold=True)
         self.text(40, Hpx - 34, self.note, 12, DIM)
-        self.text(W - 40, Hpx - 56, f"Rev {PROJECT['REVISION']}  ·  inches  ·  kernel 5.0", 13, DIM, "end")
+        self.text(W - 40, Hpx - 56, f"Rev {PROJECT['REVISION']}  ·  inches  ·  kernel 6.0", 13, DIM, "end")
         self.text(W - 40, Hpx - 34, "PARAMETRIC — do not scale. Datum: sill top / latch face x=0", 12, DIM, "end")
 
     def save(self, folder, filename):
@@ -305,19 +307,20 @@ def drawings(proj):
         return OY - zin * S
 
     # G-000
-    s = Sheet("G-000", "Cover / index", "Rev E Prairie fabrication model · Buffalo NY")
+    s = Sheet("G-000", "Cover / index", "Rev F Darwin Martin Tree of Life · Buffalo NY")
     s.titleblock()
     s.text(40, 70, "MARTIN — DIGITAL MANUFACTURING DEFINITION", 22, ACC, bold=True, mono=False)
-    s.text(40, 100, "Prairie removable fence  ·  143″ × 65″  ·  Darwin Martin + Japanese joinery  ·  wood + light + latch", 14, DIM)
+    s.text(40, 100, "Prairie removable fence  ·  143″ × 65″  ·  Darwin Martin Tree of Life + Japanese joinery  ·  wood + light + latch", 14, DIM)
     rows = [
-        "WHAT  Freestanding winter-removable Prairie screen + locking gate against the house",
+        "WHAT  Freestanding winter-removable Wright light-screen + Tree of Life gate against the house",
         "FROM  Dimensional lumber + live planters (stone in-box only) — NO concrete, NO post holes, NO pad",
         "SIZE  overall_length=143.000  overall_height=65.000  gate_clear=36.000 (ASSUMED)  drop_off=0 (slab)",
-        "FACE  Horizontal 2×10 / 2×6 bands, ¾″ dog-tight gaps, PT kick nuki, φ-adjacent 9.25/5.5=1.682",
+        "FACE  2×12 eave + fascia, projecting 2×10 belts, Roman-brick piers, Tree of Life / nested-rect cassettes",
+        "DOG   Solid 2×12 PT water table; 1.50″ max muntin aperture; gate bottom 0.375″",
         "QTY   One run; part quantities in S-601",
-        "CONNECT  nuki+kusabi (4 bands), housed dado (4 bands), hozo drawbore, oak pivots, sill laps",
+        "CONNECT  nuki+kusabi (K-001, R-001, R-002), cassette grooves, hozo drawbore, oak pivots, sill laps",
         "MAKE  See routings + AS-01..12  ·  MEASURE from sill-shoulder datum",
-        "ASSEMBLE  Base → posts → bands → cap/light → gate on oak pivots → plant troughs (not at house)",
+        "ASSEMBLE  Base → posts → belts/water table → cassettes → eave/light → gate on oak pivots → plant troughs",
         "CHECK  QA-701  ·  CHANGE  edit kernel P[] then re-export",
     ]
     for i, r in enumerate(rows):
@@ -337,35 +340,26 @@ def drawings(proj):
     s.save(ddir, "G-000_cover.svg")
 
     # GA-110 elevation
-    s = Sheet("GA-110", "Front elevation", "Scale ~1:16  ·  datums at sill top / x=0")
+    s = Sheet("GA-110", "Front elevation", "Scale ~1:16  ·  datums at sill top / x=0  ·  Tree of Life")
     s.titleblock()
     L, H = ly["overall_length"], ly["overall_height"]
-    s.rect(X(-v("sill_overhang")), Y(0), (L + 2 * v("sill_overhang")) * S, v("sill_h") * S, fill=LIGHT)
-    for p in ly["posts"]:
-        s.rect(X(p["cx"] - v("post_x") / 2), Y(ly["post_body_h"]), v("post_x") * S, ly["post_body_h"] * S, fill="#d9dcde")
-        s.text(X(p["cx"]), Y(H) - 16, p["id"], 12, ACC, "middle", bold=True)
-    for sl in ly["slats"]:
-        fill = GRAY if sl["nuki"] else "#c5c8c2"
-        s.rect(X(ly["nuki_x0"]), Y(sl["z1"]), ly["nuki_len"] * S, sl["h"] * S, fill=fill)
-    s.rect(X(ly["cap_x0"]), Y(H), ly["cap_len"] * S, v("cap_t") * S, fill="#8a9094")
-    s.rect(X(v("post_x") + v("gate_gap")), Y(v("gate_bottom_clear") + ly["gate_h"]),
-           ly["gate_leaf_w"] * S, ly["gate_h"] * S, fill="#e8eaeb", stroke=ACC, dash="5 4")
+    paint_front_elevation(s, ly, X, Y, S, v, gate=True, labels=True, planters=True)
     s.dim_h(X(0), X(L), Y(0), '143.000" OVERALL  VERIFIED', offset=50)
     s.dim_h(X(v("post_x")), X(v("post_x") + v("gate_clear")), Y(0), '36.000" GATE CLEAR  ASSUMED', offset=78)
     s.dim_h(X(ly["posts"][1]["cx"] + v("post_x") / 2), X(ly["posts"][2]["cx"] - v("post_x") / 2),
             Y(H), f'{ly["bay_clear"]:.3f}" BAY  DERIVED', offset=-32)
     s.dim_v(Y(0), Y(H), X(L), '65.000"', offset=36)
-    s.text(40, 70, "DATUM A: sill top  ·  DATUM B: latch-side outer face x=0  ·  grain: posts vertical, rails long", 13, DIM)
+    s.text(40, 70, "DATUM A: sill top  ·  DATUM B: latch-side outer face x=0  ·  eave cantilevers; belts project 3″ past piers", 13, DIM)
     s.save(ddir, "GA-110_elevation.svg")
 
     # copy as GA-100
     s2 = Sheet("GA-100", "General arrangement", "Same geometry as GA-110 with assembly notes")
     s2.titleblock()
     s2.text(40, 70, "See GA-110 for dimensions. Assemblies: A-001 BASE · A-010 POSTS · A-020 FRAME · A-030 GATE", 14)
-    s2.text(40, 100, "Insertion: posts −Z into F-003; nuki +X (K-001, R-001/003/005); housed bands; gate +Z on oak pivots; no planter at P0.", 14)
+    s2.text(40, 100, "Insertion: posts −Z into F-003; nuki +X (K-001, R-001, R-002); cassettes groove in; gate +Z on oak pivots; no planter at P0.", 14)
     for i, p in enumerate(ly["posts"]):
         s2.text(40, 150 + i * 24, f"{p['id']}  {p['mark']}  cx={p['cx']:.3f}\"  {p['role']}", 14)
-    s2.text(40, 280, f"Rev E: Prairie screen. slat_top {ly['slat_top']}\" + cap 1.50\" = 65.000\". Gate against house. Band ratio {ly['band_ratio']} ≈ φ.", 14, ACC)
+    s2.text(40, 280, f"Rev F: Tree of Life light-screen. slat_top {ly['slat_top']}\" + cap 1.50\" = 65.000\". Cassette φ pair {ly['light_minor']}/{ly['light_major']}.", 14, ACC)
     s2.save(ddir, "GA-100_arrangement.svg")
 
     # GA-130 plan
@@ -394,7 +388,7 @@ def drawings(proj):
     steps = [
         "1  H-001 pads on driveway  →  F-001/F-002 sills + F-003 ties (ladder). F-004 only if outriggers leave slab.",
         "2  L-001..004 drop −Z into F-003 (shoulder on sill top = DATUM). P0 is latch / house — no planter.",
-        "3  K-001 + R-001/003/005 slide +X through nuki; R-002/004/006/007 house 0.75″",
+        "3  K-001 + R-001/R-002 slide +X through nuki; Q-001/002/003 cassettes drop into grooves",
         "4  T-001 tectonic chevrons peg to post faces (ornament)",
         "5  C-001 cap +Z; kama-tsugi peg at L-003; H-006 tape in soffit dado",
         "6  W-001 kusabi driven in cheeks (lock); NEVER glue",
@@ -424,61 +418,85 @@ def drawings(proj):
     s.dim_h(x0, x0 + 3.5 * sc, y0 - body, '3.500"', offset=-24)
     s.text(400, 80, "DATUM: tenon shoulder = sill top. Measure mortise CL AFF from this shoulder, not from tenon tip.", 14, ACC)
     s.text(400, 120, f'FINISHED LENGTH {ly["post_blank_l"]:.3f}"   SETUP S-014 — do not move stop.', 14)
-    s.text(400, 160, "THROUGH-nuki ONLY: K-001 (2×6), R-001/003/005 (2×10). HOUSE 0.75″: R-002/004/006/007.", 14)
+    s.text(400, 160, "THROUGH-nuki ONLY: K-001 (2×12), R-001/R-002 (2×10). Cassette grooves for Q-001/002/003.", 14)
     s.text(400, 200, "Foot tenon 2.500 × 4.500  ·  shoulders 0.500 all around  ·  T2 ±0.031", 14)
     s.text(400, 240, "L-001: omit kusabi; Latch-B mortise; NO planter.  L-002: oak pivot sockets top+bottom.", 14)
     s.text(400, 280, "GRAIN: length vertical. FACE A = garden. END A = shoulder.", 14)
-    s.text(400, 320, "Rev E: blank is body + 3.50″ tenon into F-003. Do not through-mortise all seven bands.", 14, ACC)
+    s.text(400, 320, "Rev F: blank is body + 3.50″ tenon into F-003. Three through-mortises — not seven.", 14, ACC)
     s.save(ddir, "P-301_post.svg")
 
-    # P-302 rails / bands
-    s = Sheet("P-302", "Prairie bands K-001 + R-001..007", f'FINISHED {ly["nuki_len"]:.3f}"  ·  S-021  ·  ¾″ dog gaps')
+    # P-302 rails / belts
+    s = Sheet("P-302", "Water table + Prairie belts", f'FINISHED {ly["nuki_len"]:.3f}"  ·  S-021  ·  project 3″ past piers')
     s.titleblock()
-    s.rect(80, 200, 1200, 90, fill=GRAY)
+    s.rect(80, 200, 1200, 90, fill=BELT)
     s.dim_h(80, 1280, 290, f'{ly["nuki_len"]:.3f}" nuki_len  DERIVED')
-    s.text(80, 80, "Through-nuki + kusabi: K-001, R-001, R-003, R-005. Housed 0.75″ dado: R-002, R-004, R-006, R-007.", 14)
-    s.text(80, 110, "Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Kick is PT splash / dog seal.", 14)
-    s.text(80, 140, "Fit: SLIDING then INTERFERENCE via W-001 on nuki. Do not through-mortise housed bands (¾″ web would fail).", 14)
+    s.text(80, 80, "Through-nuki + kusabi: K-001 (2×12 PT water table), R-001 and R-002 (2×10 belts).", 14)
+    s.text(80, 110, "Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Belts cantilever 3″ past pier faces.", 14)
+    s.text(80, 140, "Fit: SLIDING then INTERFERENCE via W-001. Do not through-mortise the Q cassettes.", 14)
     y = 360
-    s.text(80, y, "SLAT SCHEDULE  (z0 → z1  AFF, sill top = 0)", 14, ACC, bold=True)
+    s.text(80, y, "LAYER SCHEDULE  (z0 → z1  AFF, sill top = 0)", 14, ACC, bold=True)
     y += 28
     for sl in ly["slats"]:
-        kind = "NUKI" if sl["nuki"] else "HOUSED"
-        s.text(80, y, f'{sl["id"]:6}  {sl["mark"]:5}  {sl["stock"]:8}  {sl["h"]:.3f}"  z {sl["z0"]:.3f}–{sl["z1"]:.3f}  CL {sl["cl"]:.3f}  {kind}  {sl["role"]}', 13)
+        kind = "NUKI" if sl["nuki"] else "CASSETTE"
+        s.text(80, y, f'{sl["id"]:6}  {sl["mark"]:5}  {sl["stock"]:12}  {sl["h"]:.3f}"  z {sl["z0"]:.3f}–{sl["z1"]:.3f}  CL {sl["cl"]:.3f}  {kind}  {sl["role"]}', 13)
         y += 22
-    s.text(80, y + 8, f'Band ratio 2×10/2×6 = {ly["band_ratio"]} ≈ φ={ly["phi"]}. Stack + cap = 65.000″. Gaps 0.750″ dog-tight.', 14, ACC)
+    s.text(80, y + 8, f'Cassette φ pair L2/L1 = {ly["band_ratio"]} ≈ φ={ly["phi"]}. Stack + eave = 65.000″. Max aperture 1.50″.', 14, ACC)
     s.save(ddir, "P-302_rail.svg")
 
-    # P-303 tectonic + dog seal
-    s = Sheet("P-303", "Tectonic blocks + dog seal", "Darwin Martin pier texture  ·  ¾″ light-screen")
+    # P-303 Tree of Life cassettes
+    s = Sheet("P-303", "Tree of Life + nested-rect cassettes", "Darwin Martin light-screen  ·  1.50″ max aperture")
     s.titleblock()
     s.text(40, 80, f'Bay clear {ly["bay_clear"]:.3f}"  ·  two privacy bays  ·  gate against house (no planter at P0)', 14)
-    s.text(40, 112, "T-001  qty 36  1.50 × 1.50 × 7.00″  2×2  ·  ¼″ pegs only (½″ splits the 2×2)", 14)
-    s.text(40, 144, "3-block chevrons × 2 heights × P1/P2/P3 × 2 faces. Ornament — not structure.", 14)
-    s.text(40, 176, "DOG SEAL: PT kick nuki K-001 at z=0–5.50; 0.75″ gaps between bands; gate bottom clear 0.375″.", 14, ACC)
-    s.text(40, 208, "A ¾″ gauge must NOT pass the screen. Kick stops crawl. Gate leaf matches the band rhythm.", 14)
-    s.text(40, 250, "Do not caulk the ¾″ gaps — they are the Prairie light-screen and the rain-screen.", 14, DIM)
+    s.text(40, 112, "Q-001 nested-rects (roots)  ·  Q-002 Tree of Life — three trees  ·  Q-003 nested-rects (foliage)", 14)
+    s.text(40, 144, "Original wood muntin interpretation of Darwin Martin House art glass — not a licensed reproduction.", 14, ACC)
+    s.text(40, 176, "DOG SEAL: PT 2×12 water table K-001 at z=0; 1.50″ max muntin gap; gate bottom clear 0.375″.", 14, ACC)
+    s.text(40, 208, "T-001 qty 36  1.50 × 1.50 × 7.00″  2×2 Roman-brick wrap on P1/P2/P3. Ornament — not structure.", 14)
+    s.text(40, 250, "Cassettes recess behind the belt courses. Winter-withdraw toward P3. Do not caulk the lights.", 14, DIM)
+    # paint one Tree of Life cassette at large scale
+    for m in ly["motifs"]:
+        if m.get("part") == "Q-002" and m.get("bay") == 0:
+            def Xm(xin, _m=m):
+                return 80 + (xin - _m["x0"]) * 14
+            def Ym(zin, _m=m):
+                return 980 - (zin - _m["z0"]) * 14
+            s.rect(80, 980 - m["h"] * 14, m["w"] * 14, m["h"] * 14, fill=CASS)
+            paint_motif(s, m, Xm, Ym, 14)
+            s.text(80, 500, "Q-002 TREE OF LIFE — typical bay (enlarged)", 14, ACC, bold=True)
+            break
     s.save(ddir, "P-303_boards.svg")
 
     # P-304 gate
-    s = Sheet("P-304", "Gate leaf", f'leaf {ly["gate_leaf_w"]:.3f}" × {ly["gate_h"]:.3f}"  ·  36" clear  ·  T2')
+    s = Sheet("P-304", "Gate leaf — Tree of Life", f'leaf {ly["gate_leaf_w"]:.3f}" × {ly["gate_h"]:.3f}"  ·  36" clear  ·  T2')
     s.titleblock()
-    sc = 12
-    s.rect(80, 160, ly["gate_leaf_w"] * sc, ly["gate_h"] * sc * 0.55, fill="#e8eaeb")
-    s.text(40, 80, "G-001 hinge stile (P1 oak pivots)  ·  G-002 latch stile (P0)  ·  rails align to Prairie nuki bands", 13)
-    s.text(40, 108, "Hozo tenon thickness ≈ leaf_t/3 = 0.500″  ·  tenon length 1.250″  ·  drawbore 0.125″ toward shoulder", 13)
-    s.text(40, 136, "Oak pivots W-003: bottom socket in sill at P1, top in cap soffit. Leaf weight in compression to the driveway. Lift-off +Z.", 13)
-    s.text(40, 164, f'Gate against the house. Latch B into P0 at R-003 CL {ly["latch_cl"]:.3f}" AFF. No planter at P0.', 13, ACC)
+    sc = 10
+    gx, gy = 80, 980
+    s.rect(gx, gy - ly["gate_h"] * sc, ly["gate_leaf_w"] * sc, ly["gate_h"] * sc, fill="#e4e0d6")
+    world_gx = v("post_x") + v("gate_gap")
+
+    def Gx(xin):
+        return gx + (xin - world_gx) * sc
+
+    def Gy(zin):
+        return gy - zin * sc
+
+    for m in ly["motifs"]:
+        if m.get("bay") == "gate":
+            paint_motif(s, m, Gx, Gy, sc)
+    s.text(520, 80, "G-001 hinge stile (P1 oak pivots)  ·  G-002 latch stile (P0)", 13)
+    s.text(520, 108, "Garden face is Tree of Life. Shop brace G-008 is on the driveway face — not this elevation.", 13, ACC)
+    s.text(520, 136, "Hozo tenon ≈ leaf_t/3 = 0.500″  ·  tenon 1.250″  ·  drawbore 0.125″ toward shoulder", 13)
+    s.text(520, 164, "Oak pivots W-003: bottom in sill at P1, top in cap soffit. Lift-off +Z.", 13)
+    s.text(520, 192, f'Latch B into P0 at R-002 belt CL {ly["latch_cl"]:.3f}" AFF. No planter at P0.', 13, ACC)
     s.save(ddir, "P-304_gate.svg")
 
     # Joinery sheets
     for code, title, lines, fn in [
-        ("J-401", "Nuki + housed dado", [
-            "THROUGH-nuki: K-001 (2×6) and R-001/003/005 (2×10). Mortise 1.50″ × band height through the post.",
-            "Cheeks: 2.00″ of 5.50″ post each side of 1.50″ slat — OK (QA).",
-            "HOUSED 0.75″ dado: R-002/004/006/007. Do NOT through-mortise — ¾″ gaps would leave a ¾″ web.",
+        ("J-401", "Nuki + cassette groove", [
+            "THROUGH-nuki: K-001 (2×12 PT) and R-001/R-002 (2×10 belts). Mortise 1.50″ × band height through the post.",
+            "Cheeks: 2.00″ of 5.50″ post each side of 1.50″ belt — OK (QA).",
+            "CASSETTES Q-001/002/003 groove into nuki edges. Do NOT through-mortise — keep the post web.",
             "Kusabi W-001 0.625 × 1.125 × 5.500 through cheek slot on nuki posts. NEVER glue.",
-            "Assembly +X. Winter withdraw bands toward P3 after knocking wedges.",
+            "Assembly +X. Winter withdraw cassettes toward P3 after knocking wedges.",
         ], "J-401_nuki.svg"),
         ("J-402", "Foot tenon / cross-tie", [
             "Tenon 2.500 × 4.500 × 3.500 from sill-shoulder datum (END A).",
@@ -682,7 +700,7 @@ def build_manual(proj):
         f"- bay_clear = {ly['bay_clear']:.3f} DERIVED `(L - 4*post_x - gate_clear)/2`",
         f"- nuki_len = {ly['nuki_len']:.3f} DERIVED",
         f"- slat_top = {ly['slat_top']:.3f} + cap 1.50 = 65.000",
-        f"- band_ratio = {ly['band_ratio']} ≈ φ (2×10/2×6, not ripped)",
+        f"- cassette φ pair = {ly['light_minor']} / {ly['light_major']} (L2/L1 = {ly['band_ratio']} ≈ φ)",
         f"- drop_off = {v('drop_off'):.3f} (0 on slab; packing only if outriggers leave)",
         "",
         "## C–I. Registers",
@@ -741,7 +759,7 @@ h1{{font-size:42px;margin:8px 0 12px}}
 .grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:18px 0}}
 .grid a{{display:block;padding:12px;background:#fff;border:1px solid #c5c8c2;text-decoration:none;color:inherit}}
 </style></head><body>
-<p class="k">REV {PROJECT['REVISION']} · KERNEL 5.0 · INCHES</p>
+<p class="k">REV {PROJECT['REVISION']} · KERNEL 6.0 · INCHES</p>
 <h1>MARTIN fabrication package</h1>
 <p>Single source of truth: <code>martin_kernel.py</code>. Geometry, BOM, cut lists, joinery, and drawings are generated — not hand-copied.</p>
 <p><b>bay_clear</b> {ly['bay_clear']}\" · <b>nuki_len</b> {ly['nuki_len']}\" · <b>post blank</b> {ly['post_blank_l']}\" · <b>gate_h</b> {ly['gate_h']}\" · nest <b>{nest['net_bf']} bf</b> net / <b>{nest['procurement_bf']} bf</b> buy · ballast ratio <b>{proj['ballast']['ratio']}</b></p>
@@ -759,7 +777,7 @@ h1{{font-size:42px;margin:8px 0 12px}}
 </div>
 <h2>Drawings</h2>
 <table><thead><tr><th>DWG</th><th>Title</th></tr></thead><tbody>{cards}</tbody></table>
-<p style="margin-top:28px;color:#6e7578;font-size:13px">Sit-on-grade Prairie screen — no digging, no cement, no stone pad. Gate against the house. Not a stamped engineering document. Verify Green Code.</p>
+<p style="margin-top:28px;color:#6e7578;font-size:13px">Sit-on-grade Darwin Martin Tree of Life light-screen — no digging, no cement, no stone pad. Gate against the house. Not a stamped engineering document. Verify Green Code.</p>
 </body></html>"""
     write(os.path.join(FAB, "index.html"), html)
 

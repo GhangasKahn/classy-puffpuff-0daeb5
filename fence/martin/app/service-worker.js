@@ -1,5 +1,5 @@
 /* MARTIN Build App — offline shell */
-const CACHE = "martin-build-v6";
+const CACHE = "martin-build-v7";
 const ASSETS = [
   "./",
   "./index.html",

@@ -4,14 +4,81 @@
 <rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
-<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-303  ·  Tectonic blocks + dog seal</text>
-<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Darwin Martin pier texture  ·  ¾″ light-screen</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-303  ·  Tree of Life + nested-rect cassettes</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Darwin Martin light-screen  ·  1.50″ max aperture</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Bay clear 46.500"  ·  two privacy bays  ·  gate against house (no planter at P0)</text>
-<text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>T-001  qty 36  1.50 × 1.50 × 7.00″  2×2  ·  ¼″ pegs only (½″ splits the 2×2)</text>
-<text x='40.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>3-block chevrons × 2 heights × P1/P2/P3 × 2 faces. Ornament — not structure.</text>
-<text x='40.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>DOG SEAL: PT kick nuki K-001 at z=0–5.50; 0.75″ gaps between bands; gate bottom clear 0.375″.</text>
-<text x='40.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>A ¾″ gauge must NOT pass the screen. Kick stops crawl. Gate leaf matches the band rhythm.</text>
-<text x='40.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Do not caulk the ¾″ gaps — they are the Prairie light-screen and the rain-screen.</text>
+<text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Q-001 nested-rects (roots)  ·  Q-002 Tree of Life — three trees  ·  Q-003 nested-rects (foliage)</text>
+<text x='40.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Original wood muntin interpretation of Darwin Martin House art glass — not a licensed reproduction.</text>
+<text x='40.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>DOG SEAL: PT 2×12 water table K-001 at z=0; 1.50″ max muntin gap; gate bottom clear 0.375″.</text>
+<text x='40.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>T-001 qty 36  1.50 × 1.50 × 7.00″  2×2 Roman-brick wrap on P1/P2/P3. Ornament — not structure.</text>
+<text x='40.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Cassettes recess behind the belt courses. Winter-withdraw toward P3. Do not caulk the lights.</text>
+<rect x='80.0' y='796.9' width='651.0' height='183.1' fill='#d6d2c8' stroke='#1a1f24' stroke-width='2'/>
+<rect x='172.0' y='943.3' width='33.0' height='33.0' fill='#3d4540' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='90.5' y='952.7' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='269.7' y='952.7' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='180.1' y='941.8' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='135.5' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='183.2' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='231.0' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='100.9' y='854.2' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='257.2' y='854.2' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='111.8' y='831.0' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='246.3' y='831.0' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='122.6' y='807.8' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='235.5' y='807.8' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='80.0' y='796.9' width='10.5' height='183.1' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='290.7' y='796.9' width='6.3' height='183.1' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='389.0' y='943.3' width='33.0' height='33.0' fill='#3d4540' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='307.5' y='952.7' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='486.7' y='952.7' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='397.1' y='941.8' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='352.5' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='400.2' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='448.0' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='317.9' y='854.2' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='474.2' y='854.2' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='328.8' y='831.0' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='463.3' y='831.0' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='339.6' y='807.8' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='452.5' y='807.8' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='297.0' y='796.9' width='6.3' height='183.1' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='507.7' y='796.9' width='6.3' height='183.1' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='606.0' y='943.3' width='33.0' height='33.0' fill='#3d4540' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='524.5' y='952.7' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='703.7' y='952.7' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='614.1' y='941.8' width='16.8' height='16.8' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='569.5' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='617.2' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='665.0' y='866.5' width='10.5' height='73.2' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='534.9' y='854.2' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='691.2' y='854.2' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='545.8' y='831.0' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='680.3' y='831.0' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='556.6' y='807.8' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='669.5' y='807.8' width='18.9' height='18.9' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='514.0' y='796.9' width='6.3' height='183.1' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='720.5' y='796.9' width='10.5' height='183.1' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='80.0' y='969.5' width='651.0' height='10.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='80.0' y='796.9' width='651.0' height='10.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<line x1='110.4' y1='863.7' x2='188.5' y2='847.4' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='266.6' y1='863.7' x2='188.5' y2='847.4' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='121.2' y1='840.5' x2='188.5' y2='824.2' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='255.8' y1='840.5' x2='188.5' y2='824.2' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='132.1' y1='817.3' x2='188.5' y2='801.0' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='244.9' y1='817.3' x2='188.5' y2='801.0' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='327.4' y1='863.7' x2='405.5' y2='847.4' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='483.6' y1='863.7' x2='405.5' y2='847.4' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='338.2' y1='840.5' x2='405.5' y2='824.2' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='472.8' y1='840.5' x2='405.5' y2='824.2' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='349.1' y1='817.3' x2='405.5' y2='801.0' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='461.9' y1='817.3' x2='405.5' y2='801.0' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='544.4' y1='863.7' x2='622.5' y2='847.4' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='700.6' y1='863.7' x2='622.5' y2='847.4' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='555.2' y1='840.5' x2='622.5' y2='824.2' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='689.8' y1='840.5' x2='622.5' y2='824.2' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='566.1' y1='817.3' x2='622.5' y2='801.0' stroke='#1a1f24' stroke-width='5.775'/>
+<line x1='678.9' y1='817.3' x2='622.5' y2='801.0' stroke='#1a1f24' stroke-width='5.775'/>
+<text x='80.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>Q-002 TREE OF LIFE — typical bay (enlarged)</text>
 </svg>

@@ -5,10 +5,9 @@ Native unit: inch. Convert to millimetres only at CAD / export interfaces.
 FreeCAD, OpenSCAD, drawings, BOM, cut lists, and the Build app all derive
 from build_project(). Do not duplicate controlling dimensions elsewhere.
 
-Rev E — Darwin Martin Prairie screen: φ-adjacent horizontal bands, dog-tight
-gaps, live planters as ballast on the driveway, gate against the house.
-No post holes, no cement, no stone pads. Planter stone is drainage/weight
-inside the boxes only.
+Rev F — Darwin Martin Tree of Life light-screen: cantilevered eave, projecting
+belt courses, brick-pier texture, art-glass muntins in wood. Not a ranch fence.
+Gate against the house. No post holes, no cement, no stone pads.
 """
 
 from __future__ import annotations
@@ -25,13 +24,13 @@ PHI = (1.0 + 5.0 ** 0.5) / 2.0  # 1.618… — used where it does not thin struc
 PROJECT = {
     "PROJECT_ID": "MARTIN",
     "PROJECT_NAME": "Prairie removable fence — Buffalo NY",
-    "REVISION": "E",
+    "REVISION": "F",
     "UNITS": "inch",
-    "DESIGN_STANDARD": "Prairie / Darwin Martin House + Japanese joinery; Buffalo Green Code verify",
+    "DESIGN_STANDARD": "Prairie / Darwin Martin House Tree of Life + Japanese joinery; Buffalo Green Code verify",
     "MATERIAL_SYSTEM": "dimensional lumber + live planters (optional drainage stone in boxes only)",
-    "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore / housed slats",
+    "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore / muntin cassettes",
     "AUTHOR": "MARTIN fabrication model",
-    "MODEL_VERSION": "5.0.0",
+    "MODEL_VERSION": "6.0.0",
     "DATE": "2026-08-14",
     "CAD": ["FreeCAD 1.1", "OpenSCAD"],
 }
@@ -50,13 +49,16 @@ P = {
     "post_y": {"v": 5.5, "src": "DERIVED", "note": "4×6 actual depth"},
     "rail_t": {"v": 1.5, "src": "DERIVED", "note": "2×8 actual thickness"},
     "rail_h": {"v": 7.25, "src": "DERIVED", "note": "2×8 actual width, on edge"},
-    "cap_t": {"v": 1.5, "src": "DERIVED", "note": "2×8 flat"},
-    "cap_w": {"v": 7.25, "src": "DERIVED", "note": "2×8 flat width"},
-    "board_t": {"v": 1.5, "src": "DERIVED", "note": "2× slat thickness — Prairie screen (was ¾″ vertical 1×6)"},
-    "board_w": {"v": 9.25, "src": "DERIVED", "note": "2×10 actual — major Prairie band"},
-    "board_gap": {"v": 0.75, "src": "ASSUMED", "note": "dog-tight light-screen gap; 100% containment with kickboard"},
-    "band_minor_h": {"v": 5.5, "src": "DERIVED", "note": "2×6 actual — minor band; 9.25/5.5=1.682 ≈ φ without ripping"},
-    "kick_h": {"v": 5.5, "src": "DERIVED", "note": "2×6 PT kickboard / bottom nuki — dog crawl stop"},
+    "cap_t": {"v": 1.5, "src": "DERIVED", "note": "2×12 flat — Wright eave (thin and wide, not a lid)"},
+    "cap_w": {"v": 11.25, "src": "DERIVED", "note": "2×12 actual — cantilevers past 5.5″ pier ~2.9″ each side"},
+    "board_t": {"v": 0.75, "src": "DERIVED", "note": "1× muntin / cassette thickness, recessed behind nuki face"},
+    "board_w": {"v": 9.25, "src": "DERIVED", "note": "2×10 actual — projecting Prairie belt course"},
+    "board_gap": {"v": 0.75, "src": "ASSUMED", "note": "shadow reveal between belts and cassettes"},
+    "band_minor_h": {"v": 8.085, "src": "DERIVED", "note": "upper/lower light cassette; φ pair with middle 13.08"},
+    "kick_h": {"v": 11.25, "src": "DERIVED", "note": "2×12 PT water table — solid earth line; dog crawl stop"},
+    "muntin_t": {"v": 0.75, "src": "DERIVED", "note": "1×2 face — Wright came, in wood"},
+    "pattern_gap": {"v": 1.50, "src": "ASSUMED", "note": "max aperture in Tree of Life; kick is the crawl seal"},
+    "fascia_h": {"v": 3.5, "src": "DERIVED", "note": "1×4 hanging fascia under eave — shadow line"},
     "stile_w": {"v": 3.5, "src": "DERIVED", "note": "2×4 / ripped 2×6 face"},
     "leaf_t": {"v": 1.5, "src": "DERIVED", "note": "2× stock gate thickness"},
     "rail_gate_h": {"v": 5.5, "src": "DERIVED", "note": "2×6 gate rail"},
@@ -66,8 +68,8 @@ P = {
     "post_tenon_x": {"v": 2.5, "src": "ASSUMED", "note": "shoulder 0.5″ each side of 3.5"},
     "post_tenon_y": {"v": 4.5, "src": "ASSUMED", "note": "shoulder 0.5″ each side of 5.5"},
     "post_tenon_h": {"v": 3.5, "src": "ASSUMED", "note": "into 5.5″ cross-tie; leave ~2″ below mortise"},
-    "rail_reveal": {"v": 0.50, "src": "ASSUMED", "note": "nuki projection past outer post faces"},
-    "cap_overhang": {"v": 0.75, "src": "ASSUMED"},
+    "rail_reveal": {"v": 3.00, "src": "ASSUMED", "note": "belt courses cantilever past piers like Wright planes"},
+    "cap_overhang": {"v": 3.50, "src": "ASSUMED", "note": "eave past outer pier faces along the run"},
     "groove_d": {"v": 0.375, "src": "ASSUMED", "note": "board dado depth in rail edge"},
     "groove_w": {"v": 0.875, "src": "ASSUMED", "note": "board t + 1/8″ clearance"},
     "board_end_clear": {"v": 0.125, "src": "ASSUMED", "note": "float gap at rail"},
@@ -144,6 +146,91 @@ def bf_nominal(nom_t: float, nom_w: float, length_ft: float) -> float:
     return rnd(nom_t * nom_w * length_ft / 12.0, 2)
 
 
+def motif_tree_of_life(x0, z0, w, h, t=None):
+    """Darwin Martin Tree of Life — three stylized trees in a cassette.
+    z0 is the BOTTOM of the panel. Returns JSON-safe rects + lines in inches.
+    """
+    t = float(t if t is not None else v("muntin_t"))
+    rects, lines = [], []
+    n = 3
+    cw = w / n
+    h_root = h * 0.22
+    h_fol = h * 0.38
+    h_trunk = h - h_root - h_fol
+    for i in range(n):
+        left = x0 + i * cw
+        cx = left + cw / 2.0
+        # pot / root square (Wright gold squares at the base)
+        ps = min(cw * 0.42, h_root * 0.82)
+        rects.append({"x": rnd(cx - ps / 2), "z": rnd(z0 + (h_root - ps) / 2), "w": rnd(ps), "h": rnd(ps), "role": "pot"})
+        # satellite squares
+        ss = t * 1.6
+        for sx, sz in (
+            (left + t, z0 + t),
+            (left + cw - t - ss, z0 + t),
+            (cx - ss / 2, z0 + h_root - ss - t * 0.2),
+        ):
+            rects.append({"x": rnd(sx), "z": rnd(sz), "w": rnd(ss), "h": rnd(ss), "role": "root-sq"})
+        # three trunks
+        span = cw * 0.22
+        for dx in (-span, 0.0, span):
+            rects.append({
+                "x": rnd(cx + dx - t / 2), "z": rnd(z0 + h_root),
+                "w": rnd(t), "h": rnd(h_trunk), "role": "trunk",
+            })
+        # chevron branches — V pointing UP, three rows (foliage)
+        z_fol = z0 + h_root + h_trunk
+        n_rows = 3
+        rh = h_fol / n_rows
+        for r in range(n_rows):
+            z_meet = z_fol + (r + 0.82) * rh
+            z_tip = z_fol + (r + 0.12) * rh
+            half = cw * (0.36 - r * 0.05)
+            lines.append({"x1": rnd(cx - half), "z1": rnd(z_tip), "x2": rnd(cx), "z2": rnd(z_meet), "t": t, "role": "branch"})
+            lines.append({"x1": rnd(cx + half), "z1": rnd(z_tip), "x2": rnd(cx), "z2": rnd(z_meet), "t": t, "role": "branch"})
+            ls = t * 1.8
+            for lx in (cx - half, cx + half):
+                rects.append({"x": rnd(lx - ls / 2), "z": rnd(z_tip - ls / 2), "w": rnd(ls), "h": rnd(ls), "role": "leaf"})
+        # cassette frame
+        for fr in (
+            (x0 if i == 0 else left, z0, t if i == 0 else t * 0.6, h),
+            (left + cw - (t if i == n - 1 else t * 0.6), z0, t if i == n - 1 else t * 0.6, h),
+        ):
+            rects.append({"x": rnd(fr[0]), "z": rnd(fr[1]), "w": rnd(fr[2]), "h": rnd(fr[3]), "role": "frame"})
+    rects.append({"x": rnd(x0), "z": rnd(z0), "w": rnd(w), "h": rnd(t), "role": "frame"})
+    rects.append({"x": rnd(x0), "z": rnd(z0 + h - t), "w": rnd(w), "h": rnd(t), "role": "frame"})
+    return {"kind": "tree-of-life", "x0": rnd(x0), "z0": rnd(z0), "w": rnd(w), "h": rnd(h), "rects": rects, "lines": lines}
+
+
+def motif_nested_rects(x0, z0, w, h, t=None):
+    """Wright nested squares / ribbon-window grid — upper and lower lights."""
+    t = float(t if t is not None else v("muntin_t"))
+    rects, lines = [], []
+    # outer + inner frames
+    for inset, role in ((0.0, "frame"), (t + 1.5, "inner"), (2 * t + 3.0, "jewel")):
+        if w - 2 * inset < 3 or h - 2 * inset < 2:
+            continue
+        x, z, ww, hh = x0 + inset, z0 + inset, w - 2 * inset, h - 2 * inset
+        rects.append({"x": rnd(x), "z": rnd(z), "w": rnd(ww), "h": rnd(t), "role": role})
+        rects.append({"x": rnd(x), "z": rnd(z + hh - t), "w": rnd(ww), "h": rnd(t), "role": role})
+        rects.append({"x": rnd(x), "z": rnd(z), "w": rnd(t), "h": rnd(hh), "role": role})
+        rects.append({"x": rnd(x + ww - t), "z": rnd(z), "w": rnd(t), "h": rnd(hh), "role": role})
+    # φ verticals
+    for f in (1 / (PHI + 1), PHI / (PHI + 1)):
+        vx = x0 + w * f - t / 2
+        rects.append({"x": rnd(vx), "z": rnd(z0), "w": rnd(t), "h": rnd(h), "role": "mullion"})
+    # corner jewels
+    js = t * 2.2
+    for jx, jz in (
+        (x0 + t + 1.6, z0 + t + 1.6),
+        (x0 + w - t - 1.6 - js, z0 + t + 1.6),
+        (x0 + t + 1.6, z0 + h - t - 1.6 - js),
+        (x0 + w - t - 1.6 - js, z0 + h - t - 1.6 - js),
+    ):
+        rects.append({"x": rnd(jx), "z": rnd(jz), "w": rnd(js), "h": rnd(js), "role": "leaf"})
+    return {"kind": "nested-rects", "x0": rnd(x0), "z0": rnd(z0), "w": rnd(w), "h": rnd(h), "rects": rects, "lines": lines}
+
+
 # ---------------------------------------------------------------------------
 # Derived layout
 # ---------------------------------------------------------------------------
@@ -183,48 +270,72 @@ def layout() -> dict:
     post_body_h = H - cap_t
     post_blank_l = post_body_h + v("post_tenon_h")
 
-    # Elevation: kick + (2×10 / gap / 2×6 / gap)×3 + 2×10 + cap = 65.000 exactly.
-    # 9.25/5.5 = 1.682 ≈ φ; do not rip 2×10 (diminishing returns).
-    major, minor, gap, kick_h = v("board_w"), v("band_minor_h"), v("board_gap"), v("kick_h")
+    # Elevation — Wright ribbon window, not a ranch fence.
+    # Water table + 2 projecting belts + 3 light cassettes (φ: 8.085 / 13.080 / 8.085) + eave.
+    # 11.25 + 2*9.25 + 1.50 + 6*0.75 + 29.25 = 65.000  (5 inter-layer gaps + 1 under eave)
+    gap = v("board_gap")
+    kick_h = v("kick_h")
+    belt = v("board_w")
+    L1 = (H - kick_h - cap_t - 2 * belt - 6 * gap) / (2.0 + PHI)
+    L2 = L1 * PHI
     z = 0.0
     slats = []
-    slats.append({
-        "id": "K-001", "mark": "KICK", "stock": "2x6 PT", "h": kick_h,
-        "z0": 0.0, "z1": kick_h, "cl": rnd(kick_h / 2.0),
-        "nuki": True, "role": "dog seal / splash nuki",
-    })
-    z = kick_h
-    pattern = [
-        ("R-001", "S1", "2x10", major, True, "major Prairie nuki"),
-        ("R-002", "S2", "2x6", minor, False, "housed screen"),
-        ("R-003", "S3", "2x10", major, True, "major Prairie nuki / latch CL"),
-        ("R-004", "S4", "2x6", minor, False, "housed screen"),
-        ("R-005", "S5", "2x10", major, True, "major Prairie nuki"),
-        ("R-006", "S6", "2x6", minor, False, "housed screen"),
-        ("R-007", "S7", "2x10", major, False, "housed upper band — not nuki (keep post web)"),
+    layers = [
+        ("K-001", "WATER", "2x12 PT", kick_h, True, "water table / dog seal / earth line"),
+        ("Q-001", "L1", "cassette", rnd(L1), False, "nested-rects light (roots)"),
+        ("R-001", "BELT1", "2x10", belt, True, "projecting Prairie belt"),
+        ("Q-002", "L2", "cassette", rnd(L2), False, "Tree of Life light (three trees)"),
+        ("R-002", "BELT2", "2x10", belt, True, "projecting Prairie belt / latch CL"),
+        ("Q-003", "L3", "cassette", rnd(L1), False, "nested-rects light (foliage)"),
     ]
-    for i, (pid, mark, stock, h, is_nuki, role) in enumerate(pattern):
+    for i, (pid, mark, stock, h, is_nuki, role) in enumerate(layers):
         slats.append({
             "id": pid, "mark": mark, "stock": stock, "h": h,
             "z0": rnd(z), "z1": rnd(z + h), "cl": rnd(z + h / 2.0),
             "nuki": is_nuki, "role": role,
         })
         z = z + h
-        if i < len(pattern) - 1:
+        if i < len(layers) - 1:
             z = z + gap
+    z = z + gap  # shadow reveal under the eave
     slat_top = rnd(z)
     rail_cls = tuple(s["cl"] for s in slats if s["nuki"] and s["id"].startswith("R-"))
-    latch_cl = next(s["cl"] for s in slats if s["id"] == "R-003")
+    latch_cl = next(s["cl"] for s in slats if s["id"] == "R-002")
+
+    # Light-screen motifs — one per privacy bay per cassette, plus the gate leaf
+    lights = [s for s in slats if s["id"].startswith("Q-")]
+    motifs = []
+    for bay_i, (la, rb) in enumerate(((1, 2), (2, 3))):
+        x0 = posts[la]["cx"] + fx / 2.0
+        ww = bay_clear
+        for s in lights:
+            kind = "tree-of-life" if s["id"] == "Q-002" else "nested-rects"
+            fn = motif_tree_of_life if kind == "tree-of-life" else motif_nested_rects
+            m = fn(x0, s["z0"], ww, s["h"])
+            m["bay"] = bay_i
+            m["part"] = s["id"]
+            motifs.append(m)
+    # gate — Tree of Life as the hero next to the house
+    gx0 = fx + v("gate_gap") + v("stile_w")
+    gw = (gate - 2.0 * v("gate_gap")) - 2.0 * v("stile_w")
+    for s in lights:
+        kind = "tree-of-life" if s["id"] == "Q-002" else "nested-rects"
+        fn = motif_tree_of_life if kind == "tree-of-life" else motif_nested_rects
+        # gate lights align in z with screen lights
+        m = fn(gx0, s["z0"], gw, s["h"])
+        m["bay"] = "gate"
+        m["part"] = s["id"]
+        motifs.append(m)
 
     courses = [{"id": s["id"], "z0": s["z0"], "z1": s["z1"], "h": s["h"]} for s in slats]
-    n_bay = 1
+    n_bay = 2
     used = bay_clear
     board_inset = 0.0
 
     gate_leaf_w = gate - 2.0 * v("gate_gap")
     gate_h = H - cap_t - v("gate_bottom_clear") - v("gate_top_clear")
     gate_inner = gate_leaf_w - 2.0 * v("stile_w")
-    n_gate_b = len(pattern)
+    n_gate_b = 3
 
     sill_len = L + 2.0 * v("sill_overhang")
     spread = v("base_spread_cl")
@@ -261,10 +372,14 @@ def layout() -> dict:
         "post_blank_l": rnd(post_blank_l),
         "rail_cls": rail_cls,
         "slats": slats,
+        "lights": lights,
+        "motifs": motifs,
         "slat_top": slat_top,
         "latch_cl": latch_cl,
         "phi": rnd(PHI, 5),
-        "band_ratio": rnd(major / minor, 3),
+        "band_ratio": rnd(L2 / L1, 3),
+        "light_minor": rnd(L1),
+        "light_major": rnd(L2),
         "courses": courses,
         "n_bay": n_bay,
         "board_inset": board_inset,
@@ -330,7 +445,7 @@ def parts(ly=None):
     posts = []
     for p in ly["posts"]:
         notes = p["role"]
-        joinery = "foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands"
+        joinery = "foot tenon into F-003; through-nuki K-001 + R-001 + R-002; cassette dados for Q-001/002/003"
         if p["mark"] == "P0":
             joinery += "; latch-bar mortise (Latch B); no kusabi (gate side); NO planter"
         elif p["mark"] == "P1":
@@ -400,44 +515,72 @@ def parts(ly=None):
         )
     kick = _part(
         PART_ID="K-001",
-        PART_NAME="Kickboard nuki (dog seal)",
+        PART_NAME="Water table nuki (earth line / dog seal)",
         PART_CATEGORY="R",
         ASSEMBLY="A-020 PRIVACY_FRAME",
         QUANTITY=1,
-        MATERIAL="PT UC4A 2×6 (paint after dry)",
+        MATERIAL="PT UC4A 2×12 (paint after dry)",
         SPECIES="southern yellow pine",
-        PURCHASE="2×6 PT × 10′",
+        PURCHASE="2×12 PT × 10′",
         ROUGH_THICKNESS=1.5,
-        ROUGH_WIDTH=5.5,
+        ROUGH_WIDTH=11.25,
         ROUGH_LENGTH=rnd(ly["nuki_len"] + 1.0),
         FINISHED_THICKNESS=1.5,
-        FINISHED_WIDTH=5.5,
+        FINISHED_WIDTH=11.25,
         FINISHED_LENGTH=ly["nuki_len"],
-        BOARD_FEET=bf_nominal(2, 6, 10),
-        JOINERY="nuki through L-002/003/004 at z=0–5.5; wear part 8–12 yr",
-        NOTES="Bottom of screen. ¾″ gaps above. Dog cannot crawl under. PT because splash.",
+        BOARD_FEET=bf_nominal(2, 12, 10),
+        JOINERY="nuki through L-002/003/004; projects 3″ past piers",
+        NOTES="Wright earth line. Solid. Dog cannot crawl. PT because splash. Cassette Q-001 sits in the top edge groove.",
         TOLERANCE_CLASS="T2",
         cl=ly["slats"][0]["cl"],
     )
+    cassettes = []
+    for s in ly["slats"]:
+        if not s["id"].startswith("Q-"):
+            continue
+        cassettes.append(
+            _part(
+                PART_ID=s["id"],
+                PART_NAME=f'{s["mark"]} {s["role"]}',
+                PART_CATEGORY="Q",
+                ASSEMBLY="A-020 PRIVACY_FRAME",
+                QUANTITY=2,
+                MATERIAL="1×2 / 1×3 ripped muntins in a 1× frame",
+                SPECIES="SPF/SYP paint-grade",
+                PURCHASE="1×4 × 8′ (rip to ¾″ muntins)",
+                ROUGH_THICKNESS=0.75,
+                ROUGH_WIDTH=3.5,
+                ROUGH_LENGTH=rnd(ly["bay_clear"] + 1.0),
+                FINISHED_THICKNESS=0.75,
+                FINISHED_WIDTH=s["h"],
+                FINISHED_LENGTH=ly["bay_clear"],
+                BOARD_FEET=0,
+                JOINERY="framed cassette; drops into nuki grooves; winter pull toward P3",
+                NOTES="Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50″.",
+                TOLERANCE_CLASS="T2",
+                MOVEMENT="FLOATING cassette",
+                cl=s["cl"],
+            )
+        )
 
     cap = _part(
         PART_ID="C-001",
-        PART_NAME="Privacy cap (kama-tsugi pair)",
+        PART_NAME="Prairie eave (kama-tsugi pair)",
         PART_CATEGORY="C",
         ASSEMBLY="A-020 PRIVACY_FRAME",
         QUANTITY=1,
         MATERIAL="solid lumber",
         SPECIES="SPF/SYP paint-grade",
-        PURCHASE="2×8 × 12′",
+        PURCHASE="2×12 × 12′",
         ROUGH_THICKNESS=1.5,
-        ROUGH_WIDTH=7.25,
+        ROUGH_WIDTH=11.25,
         ROUGH_LENGTH=rnd(ly["cap_len"] + 1.0),
         FINISHED_THICKNESS=1.5,
-        FINISHED_WIDTH=7.25,
+        FINISHED_WIDTH=11.25,
         FINISHED_LENGTH=ly["cap_len"],
-        BOARD_FEET=bf_nominal(2, 8, 12),
+        BOARD_FEET=bf_nominal(2, 12, 12),
         JOINERY="kama-tsugi scarf at L-003 centerline, drawbored; soffit dado for H-006 tape light",
-        NOTES="Cut as two halves after scarf layout. Light channel on yard soffit — wood cover slat. Wright ‘light screen’.",
+        NOTES="Wright eave — thin and wide. Cantilevers past the 4×6 piers. Light channel on yard soffit. 1×4 fascia C-003 hangs on the garden edge.",
         TOLERANCE_CLASS="T2",
         HANDED="LEFT-HAND + RIGHT-HAND halves after scarf",
         MOVEMENT="FIXED at scarf; cap floats slightly on post tops",
@@ -450,16 +593,35 @@ def parts(ly=None):
         QUANTITY=1,
         MATERIAL="solid lumber",
         SPECIES="SPF/SYP paint-grade",
-        PURCHASE="from C-001 offcut / 2×8",
+        PURCHASE="from C-001 offcut / 2×12",
         ROUGH_THICKNESS=1.5,
-        ROUGH_WIDTH=7.25,
+        ROUGH_WIDTH=11.25,
         ROUGH_LENGTH=rnd(ly["cap_stub_len"] + 0.5),
         FINISHED_THICKNESS=1.5,
-        FINISHED_WIDTH=7.25,
+        FINISHED_WIDTH=11.25,
         FINISHED_LENGTH=ly["cap_stub_len"],
         BOARD_FEET=0,
         JOINERY="hozo to L-001 top",
         NOTES="Does not bridge gate",
+    )
+    fascia = _part(
+        PART_ID="C-003",
+        PART_NAME="Eave fascia (garden shadow)",
+        PART_CATEGORY="C",
+        ASSEMBLY="A-020 PRIVACY_FRAME",
+        QUANTITY=1,
+        MATERIAL="solid lumber",
+        SPECIES="SPF/SYP",
+        PURCHASE="1×4 × 12′",
+        ROUGH_THICKNESS=0.75,
+        ROUGH_WIDTH=3.5,
+        ROUGH_LENGTH=rnd(ly["cap_len"] + 1.0),
+        FINISHED_THICKNESS=0.75,
+        FINISHED_WIDTH=v("fascia_h"),
+        FINISHED_LENGTH=ly["cap_len"],
+        BOARD_FEET=bf_nominal(1, 4, 12),
+        JOINERY="housed under C-001 garden edge; oak pegs",
+        NOTES="The shadow line that makes the cap read as a Wright eave, not a 2× lid.",
     )
 
     boards = [
@@ -480,7 +642,7 @@ def parts(ly=None):
             FINISHED_LENGTH=v("block_l"),
             BOARD_FEET=0,
             JOINERY="¼″ retention pegs — ½″ will split the 2×2",
-            NOTES="3-block chevron clusters × 2 heights × P1/P2/P3 × 2 faces. Ornament only — not structure.",
+            NOTES="Roman-brick wrapping on P1/P2/P3 — stacked 2×2 with ⅜″ raked shadow joints. Darwin Martin pier texture. Ornament + shadow, not structure.",
             TOLERANCE_CLASS="T1",
         ),
     ]
@@ -526,7 +688,7 @@ def parts(ly=None):
         ),
         _part(
             PART_ID="G-003",
-            PART_NAME="Gate rail aligned to R1",
+            PART_NAME="Gate rail aligned to BELT1",
             PART_CATEGORY="G",
             ASSEMBLY="A-030 GATE",
             QUANTITY=1,
@@ -544,7 +706,7 @@ def parts(ly=None):
         ),
         _part(
             PART_ID="G-004",
-            PART_NAME="Gate rail aligned to R2 (latch)",
+            PART_NAME="Gate rail aligned to BELT2 (latch)",
             PART_CATEGORY="G",
             ASSEMBLY="A-030 GATE",
             QUANTITY=1,
@@ -561,7 +723,7 @@ def parts(ly=None):
         ),
         _part(
             PART_ID="G-005",
-            PART_NAME="Gate rail aligned to R3",
+            PART_NAME="Gate top belt rail",
             PART_CATEGORY="G",
             ASSEMBLY="A-030 GATE",
             QUANTITY=1,
@@ -624,27 +786,28 @@ def parts(ly=None):
             FINISHED_THICKNESS=1.5,
             FINISHED_WIDTH=3.5,
             FINISHED_LENGTH=rnd(math.hypot(ly["gate_inner"], ly["gate_h"] - 10.0)),
-            JOINERY="half-lap into G-003 and G-007 (compression brace, hinge-bottom to latch-top)",
+            JOINERY="half-lap into G-003 and G-007 (compression, hinge-bottom to latch-top)",
             FIT="GLUE optional on laps; still mechanically captured",
+            NOTES="Shop-side compression only — sits on the driveway face. Not the garden elevation. Do not let this read as a ranch Z-brace.",
         ),
         _part(
             PART_ID="G-009",
-            PART_NAME="Gate horizontal infill (matches screen bands)",
-            PART_CATEGORY="B",
+            PART_NAME="Gate Tree of Life / nested-rect cassettes",
+            PART_CATEGORY="Q",
             ASSEMBLY="A-030 GATE",
             QUANTITY=ly["n_gate_boards"],
-            MATERIAL="solid lumber",
-            SPECIES="2×6 / 2×10 offcuts",
-            PURCHASE="2×6 × 8′",
-            ROUGH_THICKNESS=1.5,
-            ROUGH_WIDTH=5.5,
+            MATERIAL="1×2 / 1×3 ripped muntins in a 1× frame",
+            SPECIES="SPF/SYP paint-grade",
+            PURCHASE="1×4 × 8′ (rip to ¾″ muntins)",
+            ROUGH_THICKNESS=0.75,
+            ROUGH_WIDTH=3.5,
             ROUGH_LENGTH=rnd(ly["gate_inner"] + 0.5),
-            FINISHED_THICKNESS=1.5,
-            FINISHED_WIDTH=5.5,
+            FINISHED_THICKNESS=0.75,
+            FINISHED_WIDTH=ly["light_major"],
             FINISHED_LENGTH=ly["gate_inner"],
-            JOINERY="groove / stop in gate stiles — FLOATING; ¾″ gaps; dog-tight",
+            JOINERY="framed cassettes; groove in gate stiles — FLOATING",
             MOVEMENT="FLOATING",
-            NOTES="Same 2×10 / 2×6 / ¾″ rhythm as the screen so Prairie lines continue across the gate.",
+            NOTES="Garden face is Darwin Martin Tree of Life (middle light) + nested squares. Matches Q-001/002/003. Max aperture 1.50″.",
         ),
         _part(
             PART_ID="G-010",
@@ -672,7 +835,7 @@ def parts(ly=None):
         PART_NAME="Kusabi locking wedge",
         PART_CATEGORY="W",
         ASSEMBLY="A-020 PRIVACY_FRAME",
-        QUANTITY=16,  # 4 nuki × 3 posts + extras
+        QUANTITY=12,  # 3 nuki × 3 posts + extras
         MATERIAL="white oak / hard maple",
         SPECIES="oak",
         PURCHASE="2×4 × 8′ ripped",
@@ -685,7 +848,7 @@ def parts(ly=None):
         JOINERY="driven in cheek slot; NEVER glue",
         FIT="INTERFERENCE (tapered drive)",
         TOLERANCE_CLASS="T2",
-        NOTES="12 nuki + 4 spare. Label bag for winter. NEVER glue.",
+        NOTES="9 nuki (K-001 + R-001 + R-002 × P1/P2/P3) + 3 spare. Label bag for winter. NEVER glue.",
     )
     pegs = _part(
         PART_ID="W-002",
@@ -969,7 +1132,7 @@ def parts(ly=None):
         ),
     ]
 
-    allp = posts + rails + [kick, cap, cap_stub] + boards + gate_parts + [wedges, pegs, pintle] + civil
+    allp = posts + rails + [kick, cap, cap_stub, fascia] + cassettes + boards + gate_parts + [wedges, pegs, pintle] + civil
     return allp
 
 
@@ -1015,15 +1178,15 @@ def joints(ly=None):
             continue
         J(
             JOINT_ID=f"J-{n:03d}",
-            JOINT_TYPE="housed dado (Prairie slat)",
-            PART_A="L-002/003/004",
+            JOINT_TYPE="cassette groove / housed dado",
+            PART_A="L-002/003/004 + nuki edges",
             PART_B=s["id"],
             LOCATION=f"{s['id']} @ z_cl={s['cl']}\"",
-            MORTISE_WIDTH=v("rail_t") + v("nuki_fit"),
+            MORTISE_WIDTH=v("board_t") + v("nuki_fit"),
             MORTISE_HEIGHT=s["h"],
-            MORTISE_DEPTH=v("slat_housing_d"),
+            MORTISE_DEPTH=v("groove_d"),
             FIT_CLASS="SLIDING",
-            NOTES="Do not through-mortise — ¾″ gaps would leave a ¾″ web. Housing keeps the post continuous.",
+            NOTES="Q cassettes drop into grooves in the nuki edges and shallow dados in the posts. Recessed behind belt courses. Winter withdraw toward P3.",
             ASSEMBLY_DIRECTION="+X from P3",
         )
         n += 1
@@ -1107,9 +1270,9 @@ def joints(ly=None):
     J(
         JOINT_ID=f"J-{n:03d}",
         JOINT_TYPE="floating groove",
-        PART_A="R-001..R-003 / C-001",
+        PART_A="R-001 / R-002 / C-001",
         PART_B="T-001 / G-009",
-        LOCATION="posts (blocks) / gate stiles (infill)",
+        LOCATION="pier wrapping (T-001) / gate cassette grooves (G-009)",
         MORTISE_DEPTH=v("groove_d"),
         MORTISE_WIDTH=v("groove_w"),
         FIT_CLASS="CLEARANCE",
@@ -1133,7 +1296,7 @@ def joints(ly=None):
         JOINT_TYPE="sliding latch",
         PART_A="G-010",
         PART_B="H-002 or L-001",
-        LOCATION=f"z_cl={ly['latch_cl']}\" (R-003 major band)",
+        LOCATION=f"z_cl={ly['latch_cl']}\" (R-002 belt / latch CL)",
         FIT_CLASS="SLIDING",
         NOTES="DEFAULT Latch B mortise in L-001. No epoxy, no house pour.",
     )
@@ -1220,16 +1383,14 @@ def assemblies():
         "A-001 BASE": ["F-001", "F-002", "F-003×4", "F-005×2 planters (not at house)", "F-006×4", "H-001", "H-007 stone in-box"],
         "A-010 POSTS": ["L-001", "L-002", "L-003", "L-004", "C-002"],
         "A-020 PRIVACY_FRAME": [
-            "K-001 kick",
-            "R-001 nuki 2×10",
-            "R-002 housed 2×6",
-            "R-003 nuki 2×10",
-            "R-004 housed 2×6",
-            "R-005 nuki 2×10",
-            "R-006 housed 2×6",
-            "R-007 housed 2×10",
-            "C-001 cap + light dado",
-            "T-001×36 tectonic",
+            "K-001 water table 2×12 PT",
+            "Q-001 nested-rects cassette ×2",
+            "R-001 belt nuki 2×10",
+            "Q-002 Tree of Life cassette ×2",
+            "R-002 belt nuki 2×10 (latch CL)",
+            "Q-003 nested-rects cassette ×2",
+            "C-001 2×12 eave + C-003 fascia",
+            "T-001×36 Roman-brick pier wrap",
             "W-001 kusabi",
         ],
         "A-030 GATE": [
@@ -1261,15 +1422,15 @@ def operations():
         ("OP040", "Verify section 3.50×5.50", "caliper / combo square", "S4S skip if in-tol", "T1 ±1/32″"),
         ("OP050", "Final length post_blank_l", "stop S-014", "DATUM END A = tenon tip; overall", "T1 ±1/32″"),
         ("OP060", "Shoulder foot tenon 2.50×4.50×3.50", "Bridge City kerf/tenon + Zenwu chisels", "measure from sill-shoulder datum", "T2 ±1/32″"),
-        ("OP070", f"Through-nuki at CL {nuki_cls} AFF (K-001 + R-001/003/005 only)", "chisel / Japanese saw", "from DATUM END = shoulder (sill top)", "T2"),
-        ("OP075", "Housed 0.75″ dados for R-002/004/006/007", "router + chisel", "do NOT through-mortise — keep post web", "T2"),
+        ("OP070", f"Through-nuki at CL {nuki_cls} AFF (K-001 + R-001 + R-002 only)", "chisel / Japanese saw", "from DATUM END = shoulder (sill top)", "T2"),
+        ("OP075", "Cassette dados + nuki-edge grooves for Q-001/002/003", "router + chisel", "do NOT through-mortise cassettes — keep post web", "T2"),
         ("OP080", "Kusabi slots (L-002/003/004)", "saw + chisel", "see J-401", "T2"),
         ("OP090", "Oak pivot sockets (L-002 / F-003 / C-001)", "brace + chisel", "bottom in sill, top in cap soffit", "T2"),
         ("OP100", "Ease 1/16″; seal end grain; dry-fit in F-003", "block plane + brush", "tenon faces unpainted contact", "—"),
     ]
     return {
         "L-001": [o for o in post_ops if "Kusabi" not in o[1] and "Oak pivot" not in o[1]]
-        + [("OP085", "Latch-B mortise", "chisel", f'CL {ly["latch_cl"]:.2f}" AFF (R-003)', "T2")],
+        + [("OP085", "Latch-B mortise", "chisel", f'CL {ly["latch_cl"]:.2f}" AFF (R-002 belt)', "T2")],
         "L-002": post_ops,
         "L-003": [o for o in post_ops if "Oak pivot" not in o[1]],
         "L-004": [o for o in post_ops if "Oak pivot" not in o[1]],
@@ -1302,20 +1463,20 @@ def stops():
             "SETUP": "S-021",
             "TOOL": "Track / circular saw + stop",
             "STOP": f'{ly["nuki_len"]:.3f}"',
-            "PARTS": ["K-001", "R-001..007"],
-            "NOTE": "All screen bands share nuki_len. 2×10 and 2×6 families.",
+            "PARTS": ["K-001", "R-001", "R-002"],
+            "NOTE": "Through-nuki share nuki_len. Cassettes Q-* are bay_clear, not nuki_len.",
         },
         {
             "SETUP": "S-030",
             "TOOL": "Track saw + Bridge City kerf/tenon + Zenwu chisels",
-            "STOP": "nuki mortise 1.50″ × 9.25″ (2×10) or 5.50″ (2×6 / kick)",
+            "STOP": "nuki mortise 1.50″ × 9.25″ (belts) or 11.25″ (2×12 water table)",
             "PARTS": ["L-002..004"],
-            "NOTE": "Through-mortise ONLY K-001, R-001, R-003, R-005. House the rest 0.75″.",
+            "NOTE": "Through-mortise ONLY K-001, R-001, R-002. Cassettes groove into nuki edges.",
         },
         {
             "SETUP": "S-040",
             "TOOL": "Mortise gauge from FACE A",
-            "STOP": f'latch CL {ly["latch_cl"]:.3f}" AFF (R-003)',
+            "STOP": f'latch CL {ly["latch_cl"]:.3f}" AFF (R-002 belt)',
             "PARTS": ["L-001", "G-002", "G-010"],
             "NOTE": "Latch B into P0. Gate against the house. No planter at P0.",
         },
@@ -1329,10 +1490,10 @@ def inspection():
         {"QC": "QC-02", "CHECK": "Run sits on driveway slab; pack only if outriggers leave slab (drop_off default 0)", "CLASS": "VERIFIED", "TOL": "T1"},
         {"QC": "QC-03", "CHECK": "Stock moisture — PT for kick + planters dry before prime; SPF acclimate", "CLASS": "T0", "TOL": "—"},
         {"QC": "QC-04", "CHECK": f'Four posts finished length {ly["post_blank_l"]:.3f}" within ±1/32"', "CLASS": "T2", "TOL": "±0.031"},
-        {"QC": "QC-05", "CHECK": "Screen bands R-001..007 identical nuki_len; ¾″ dog gaps", "CLASS": "T2", "TOL": "±0.031"},
-        {"QC": "QC-06", "CHECK": "Through-nuki only K-001/R-001/R-003/R-005; others housed 0.75″", "CLASS": "T2", "TOL": "binary"},
+        {"QC": "QC-05", "CHECK": "K-001 + R-001 + R-002 identical nuki_len; cassettes = bay_clear", "CLASS": "T2", "TOL": "±0.031"},
+        {"QC": "QC-06", "CHECK": "Through-nuki only K-001/R-001/R-002; Q cassettes in grooves; 1.50″ max aperture", "CLASS": "T2", "TOL": "binary"},
         {"QC": "QC-07", "CHECK": "Foot tenon 2.500×4.500×3.500 enters F-003; lifts out for winter", "CLASS": "T2", "TOL": "+0.03/−0"},
-        {"QC": "QC-08", "CHECK": "Dry-assemble screen: diagonals / plumb / no racking; ¾″ gaps hold a ¾″ gauge", "CLASS": "T1", "TOL": "plumb 1/8″ in 65″"},
+        {"QC": "QC-08", "CHECK": "Dry-assemble: plumb / no racking; Tree of Life + nested-rect cassettes seat; 1.50″ gauge must not pass pattern", "CLASS": "T1", "TOL": "plumb 1/8″ in 65″"},
         {"QC": "QC-09", "CHECK": "Gate against house; oak pivots lift-off; latch into P0; no planter at P0", "CLASS": "T2", "TOL": "—"},
         {"QC": "QC-10", "CHECK": "No glue on kusabi or nuki locking faces", "CLASS": "T0", "TOL": "binary"},
         {"QC": "QC-11", "CHECK": "Paint: ease arrises, end-grain sealer, PT dry then prime, 2 finish coats; mask joinery", "CLASS": "T0", "TOL": "—"},
@@ -1374,7 +1535,7 @@ def qa_geometry(ly, parts_list):
     if abs(ly["band_ratio"] - PHI) > 0.15:
         issues.append({"level": "NOTE", "item": "band ratio vs φ", "detail": ly["band_ratio"]})
     else:
-        issues.append({"level": "OK", "item": "Prairie band ratio ≈ φ", "detail": f'{ly["band_ratio"]} (9.25/5.5; not ripped)'})
+        issues.append({"level": "OK", "item": "Prairie cassette ratio ≈ φ", "detail": f'{ly["band_ratio"]} (L2/L1 lights; belts stay full 2×10)'})
     # duplicate part ids
     ids = [p["PART_ID"] for p in parts_list]
     if len(ids) != len(set(ids)):
@@ -1396,7 +1557,10 @@ def nest_lumber(parts_list):
         "4x6x8": {"nom": (4, 6), "len": 96.0, "parts": []},
         "4x6x16": {"nom": (4, 6), "len": 192.0, "parts": []},
         "2x10x10": {"nom": (2, 10), "len": 120.0, "parts": []},
-        "2x8x12": {"nom": (2, 8), "len": 144.0, "parts": []},
+        "2x12x10": {"nom": (2, 12), "len": 120.0, "parts": []},
+        "2x12x12": {"nom": (2, 12), "len": 144.0, "parts": []},
+        "1x4x8": {"nom": (1, 4), "len": 96.0, "parts": []},
+        "1x4x12": {"nom": (1, 4), "len": 144.0, "parts": []},
         "2x6x10": {"nom": (2, 6), "len": 120.0, "parts": []},
         "2x6x8": {"nom": (2, 6), "len": 96.0, "parts": []},
         "2x2x8": {"nom": (2, 2), "len": 96.0, "parts": []},
@@ -1412,15 +1576,14 @@ def nest_lumber(parts_list):
         "F-002": "4x6x16",
         "F-003": "4x6x8",
         "R-001": "2x10x10",
-        "R-003": "2x10x10",
-        "R-005": "2x10x10",
-        "R-007": "2x10x10",
-        "R-002": "2x6x10",
-        "R-004": "2x6x10",
-        "R-006": "2x6x10",
-        "K-001": "2x6x10",
-        "C-001": "2x8x12",
-        "C-002": "2x8x12",
+        "R-002": "2x10x10",
+        "K-001": "2x12x10",
+        "C-001": "2x12x12",
+        "C-002": "2x12x12",
+        "C-003": "1x4x12",
+        "Q-001": "1x4x8",
+        "Q-002": "1x4x8",
+        "Q-003": "1x4x8",
         "G-001": "2x6x8",
         "G-002": "2x6x8",
         "G-003": "2x6x8",
@@ -1429,7 +1592,7 @@ def nest_lumber(parts_list):
         "G-006": "2x6x8",
         "G-007": "2x6x8",
         "G-008": "2x6x8",
-        "G-009": "2x6x8",
+        "G-009": "1x4x8",
         "F-004": "2x6x8",
         "F-005": "2x6x8",
         "F-006": "2x6x8",
@@ -1552,9 +1715,9 @@ def decisions():
         },
         {
             "ID": "D-002",
-            "Decision": "φ-adjacent 2×10 / 2×6 Prairie bands (9.25/5.5=1.682). Do not rip 2×10.",
-            "Reason": "Golden ratio where it does not thin structure. Full 2×10 nuki bearing. Darwin Martin belt courses.",
-            "Parts": "R-001..007, K-001",
+            "Decision": "Darwin Martin Tree of Life light-screen: 2×12 water table + two projecting 2×10 belts + three recessed muntin cassettes (φ 8.085 / 13.080 / 8.085).",
+            "Reason": "Stacked 2×10/2×6 boards read as a Home Depot ranch fence. Wright at a distance is eave + belts + piers + patterned lights. φ sizes the cassette pair, not ripped 2×10.",
+            "Parts": "K-001, Q-001/002/003, R-001/002, C-001, C-003",
         },
         {
             "ID": "D-003",
@@ -1582,9 +1745,9 @@ def decisions():
         },
         {
             "ID": "D-007",
-            "Decision": "Through-nuki only K-001 + R-001/003/005. House remaining bands 0.75″.",
-            "Reason": "0.75″ slat gaps would leave a 0.75″ web if every band were through-mortised.",
-            "Parts": "R-001..007, K-001, L-002..004",
+            "Decision": "Through-nuki only K-001 + R-001 + R-002. Cassettes groove into nuki edges; three mortises keep the post web.",
+            "Reason": "Seven through-mortises would shred the 4×6. Belts + water table are the structure. Lights are withdrawable cassettes.",
+            "Parts": "R-001, R-002, K-001, Q-001/002/003, L-002..004",
         },
         {
             "ID": "D-008",
@@ -1606,9 +1769,9 @@ def decisions():
         },
         {
             "ID": "D-011",
-            "Decision": "0.75″ slat gaps + PT kickboard + 0.375″ gate bottom clear.",
-            "Reason": "100% dog containment. Kick nuki at grade. Gaps are a light-screen, not a crawl path.",
-            "Parts": "K-001, R-001..007, G-009",
+            "Decision": "Solid 2×12 PT water table + 1.50″ max pattern apertures + 0.375″ gate bottom clear.",
+            "Reason": "100% dog containment. Kick is the crawl stop. Pattern is a Wright light-screen, not a radiator of ¾″ gaps.",
+            "Parts": "K-001, Q-001/002/003, G-009",
         },
         {
             "ID": "D-012",
@@ -1623,8 +1786,8 @@ def fmea():
     return [
         {"MODE": "Wind overturning", "CAUSE": "lake-effect gusts on ~64 sf face", "EFFECT": "ladder tips", "SEV": 8, "LKL": 5, "DET": 6, "MIT": "36″ sill spread + F-006 braces + wet soil/stone in two garden troughs (planning FS 1.5); deepen planters if QC-15 ratio < 1"},
         {"MODE": "Slide on pavement", "CAUSE": "ice / low friction", "EFFECT": "walks off station", "SEV": 5, "LKL": 4, "DET": 7, "MIT": "rubber pads H-001; planter weight; optional non-marking chocks — still no fasteners into driveway"},
-        {"MODE": "Dog crawl", "CAUSE": "gap under gate or kick", "EFFECT": "containment fail", "SEV": 7, "LKL": 3, "DET": 8, "MIT": "K-001 nuki at z=0; ¾″ slat gaps; gate bottom 0.375″"},
-        {"MODE": "Post web failure", "CAUSE": "through-mortising all 7 bands", "EFFECT": "split post at ¾″ webs", "SEV": 8, "LKL": 2, "DET": 9, "MIT": "through-nuki only 4 bands; house the rest 0.75″"},
+        {"MODE": "Dog crawl", "CAUSE": "gap under gate or kick, or pattern aperture > 1.50″", "EFFECT": "containment fail", "SEV": 7, "LKL": 3, "DET": 8, "MIT": "K-001 2×12 nuki at z=0; 1.50″ max muntin gap; gate bottom 0.375″"},
+        {"MODE": "Post web failure", "CAUSE": "through-mortising every layer", "EFFECT": "split post", "SEV": 8, "LKL": 2, "DET": 9, "MIT": "through-nuki only water table + two belts; cassettes groove in"},
         {"MODE": "Planter rot / wet posts", "CAUSE": "live watering against timber", "EFFECT": "post / box decay", "SEV": 6, "LKL": 5, "DET": 6, "MIT": "PT boxes; ½″ air gap; drainage slots; extra interior paint; kick is PT"},
         {"MODE": "Gate/cap collision", "CAUSE": "height stack", "EFFECT": "won't close / crushed cap", "SEV": 5, "LKL": 1, "DET": 9, "MIT": "derived gate_h; QC-14"},
         {"MODE": "Glued kusabi", "CAUSE": "habit", "EFFECT": "cannot winter-strip", "SEV": 6, "LKL": 3, "DET": 8, "MIT": "QC-10; labels NEVER GLUE"},
@@ -1661,10 +1824,10 @@ def sequence():
         {"phase": "SITE", "id": "AS-02", "title": "TBM 143″ opening on the driveway. Gate at the house. Do not dig. Do not pour.", "deps": [], "parts": ""},
         {"phase": "BASE", "id": "AS-03", "title": "Mill F-001..F-003 ladder; half-lap; dry-fit on slab pads; build two F-005 troughs (not at house)", "deps": ["AS-01", "AS-02"], "parts": "F-*"},
         {"phase": "MILL", "id": "AS-04", "title": "Posts L-001..004 to S-014; 3.50″ tenons; through-nuki + housed dados", "deps": ["AS-01"], "parts": "L-*"},
-        {"phase": "MILL", "id": "AS-05", "title": "Bands K-001 + R-001..007; tectonic T-001 chevrons", "deps": ["AS-01"], "parts": "R-*,K-001,T-001"},
+        {"phase": "MILL", "id": "AS-05", "title": "Water table K-001 + belts R-001/002; mill Tree of Life + nested-rect cassettes Q-*", "deps": ["AS-01"], "parts": "R-*,K-001,Q-*,T-001"},
         {"phase": "MILL", "id": "AS-06", "title": "Gate G-* hozo dry fit; brace; oak pivot sockets", "deps": ["AS-01"], "parts": "G-*,W-003"},
         {"phase": "JOINERY", "id": "AS-07", "title": "Kusabi W-001; pegs W-002; cap scarf C-001 + light dado", "deps": ["AS-04", "AS-05"], "parts": "W-*,C-001"},
-        {"phase": "DRY", "id": "AS-08", "title": "Dry-assemble A-020 on horses; ¾″ gap gauge; QA QC-08", "deps": ["AS-07"], "parts": "A-020"},
+        {"phase": "DRY", "id": "AS-08", "title": "Dry-assemble A-020: belts, cassettes, 1.50″ aperture gauge; QA QC-08", "deps": ["AS-07"], "parts": "A-020"},
         {"phase": "DRY", "id": "AS-09", "title": "Hang gate on oak pivots at P1; latch travel into P0", "deps": ["AS-06", "AS-04"], "parts": "A-030"},
         {"phase": "FINISH", "id": "AS-10", "title": "Ease, seal, PT dry, prime, two gray coats; extra on planter interiors; mask locking faces", "deps": ["AS-08", "AS-09"], "parts": "H-005"},
         {"phase": "SET", "id": "AS-11", "title": "Set ladder on pads; drop posts; bands; wedges; cap light; gate; plant troughs + optional in-box stone", "deps": ["AS-03", "AS-10"], "parts": "A-000"},
@@ -1680,8 +1843,8 @@ def drawing_index():
         {"DWG": "GA-130", "TITLE": "Plan at ladder base / post centers", "FILE": "GA-130_plan.svg"},
         {"DWG": "EX-200", "TITLE": "Exploded assembly — insertion directions", "FILE": "EX-200_exploded.svg"},
         {"DWG": "P-301", "TITLE": "Post typical L-001..004", "FILE": "P-301_post.svg"},
-        {"DWG": "P-302", "TITLE": "Prairie bands R-001..007 + K-001", "FILE": "P-302_rail.svg"},
-        {"DWG": "P-303", "TITLE": "Tectonic blocks T-001 + slat schedule", "FILE": "P-303_boards.svg"},
+        {"DWG": "P-302", "TITLE": "Water table + Prairie belts K-001 / R-001 / R-002", "FILE": "P-302_rail.svg"},
+        {"DWG": "P-303", "TITLE": "Tree of Life + nested-rect cassettes Q-001..003", "FILE": "P-303_boards.svg"},
         {"DWG": "P-304", "TITLE": "Gate leaf G-001..010", "FILE": "P-304_gate.svg"},
         {"DWG": "J-401", "TITLE": "Nuki + kusabi / housed dado", "FILE": "J-401_nuki.svg"},
         {"DWG": "J-402", "TITLE": "Foot tenon / cross-tie shoe", "FILE": "J-402_tenon.svg"},
@@ -1719,19 +1882,20 @@ def revisions():
         {"REV": "C", "DATE": "2026-08-13", "NOTE": "Fabrication kernel: semantic parts, joints, BOM, cut lists, nesting, QA; gate_h derived to clear cap; post blank 75.50″ (was documented 77″)."},
         {"REV": "D", "DATE": "2026-08-14", "NOTE": "Sit-on-grade freestanding ladder: timber sills + cross-ties + packing + sandbag ballast. Removed poured pad, piers, gravel, sleeves. Post tenon 3.50″. No digging, no cement."},
         {"REV": "E", "DATE": "2026-08-14", "NOTE": "Darwin Martin Prairie screen: φ-adjacent 2×10/2×6 bands, ¾″ dog gaps, PT kick, live planters (not at house), oak pivots, cap soffit lighting. Gate against the house. No sandbags, no patio-stone pad."},
+        {"REV": "F", "DATE": "2026-08-14", "NOTE": "Tree of Life light-screen: cantilevered 2×12 eave + fascia, projecting belts, Roman-brick piers, recessed muntin cassettes (nested-rects / three trees / nested-rects), solid 2×12 water table, Tree of Life gate. Not a ranch fence."},
     ]
 
 
 def audit():
     return {
-        "MODE": "B — Rev E Prairie screen on sit-on-grade ladder (no digging / no cement)",
+        "MODE": "B — Rev F Darwin Martin Tree of Life light-screen on sit-on-grade ladder (no digging / no cement)",
         "MODEL_ARCHITECTURE": "GOOD — kernel SSOT; FreeCAD App::Part hierarchy; OpenSCAD modules",
         "PARAMETERIZATION_QUALITY": "GOOD — envelope, stock, joinery, kerf, waste, planter mass as named parameters",
-        "PART_SEPARATION": "GOOD — persistent PART_IDs L/R/K/C/G/W/F/H/T",
+        "PART_SEPARATION": "GOOD — persistent PART_IDs L/R/K/C/G/W/F/H/T/Q",
         "METADATA_QUALITY": "GOOD — Fabrication properties on FreeCAD; JSON/CSV registry",
         "ASSEMBLY_STRUCTURE": "GOOD — A000 / A001 ladder+planters / A010 / A020 / A030",
-        "JOINERY_STRUCTURE": "GOOD — joint register with fit class; nuki vs housed dado rule",
-        "DRAWING_READINESS": "GOOD — G/GA/EX/P/J/T/S/QA generated from kernel",
+        "JOINERY_STRUCTURE": "GOOD — joint register with fit class; nuki vs cassette groove rule",
+        "DRAWING_READINESS": "GOOD — G/GA/EX/P/J/T/S/QA generated from kernel; elevation paints motifs",
         "BOM_READINESS": "GOOD — BOM + nest from parts; planter mass from wind calc",
         "CUT_LIST_READINESS": "GOOD — rough, finished, nest CSV",
         "EXPORT_READINESS": "GOOD — FCStd/STEP/STL/JSON/CSV/SVG/DXF",
@@ -1740,12 +1904,13 @@ def audit():
             "gate_clear ASSUMED 36″",
             "wind ballast is a planning calc (not PE) — plant F-005 + optional in-box stone",
             "Photos confirm driveway span and house-side gate; gray swatch still TBM",
+            "Tree of Life is an original wood interpretation — not a licensed reproduction of Wright glass",
         ],
-        "CLOSED_REV_E": [
-            "Vertical 1×6 privacy replaced by horizontal Prairie screen",
-            "Sandbags replaced by live planters (not at P0/house)",
-            "Oak pivots instead of pintles as primary hinge",
-            "Dog seal: ¾″ gaps + kick nuki + 0.375″ gate bottom",
+        "CLOSED_REV_F": [
+            "Stacked 2×10/2×6 ranch-fence face replaced by Wright light-screen (eave, belts, piers, patterned cassettes)",
+            "¾″ radiator gaps replaced by 1.50″ max muntin apertures + solid 2×12 water table",
+            "Gate face is Tree of Life, not a Z-brace panel",
+            "Cap is a 2×12 cantilevered eave with hanging fascia",
             "No concrete, no post holes, no gravel/stone PAD",
         ],
         "REFACTORING": "Kernel is source of truth. FreeCAD/OpenSCAD/drawings/BOM consume it.",
@@ -1758,7 +1923,7 @@ def parameters_flat():
         out[k] = {"value_in": meta["v"], "mm": rnd(inch_mm(meta["v"]), 3), "src": meta["src"], "note": meta.get("note", "")}
     ly = layout()
     for k, val in ly.items():
-        if k in ("posts", "courses", "equations", "rail_cls", "slats"):
+        if k in ("posts", "courses", "equations", "rail_cls", "slats", "lights", "motifs"):
             continue
         if isinstance(val, (int, float)):
             out[k] = {"value_in": val, "mm": rnd(inch_mm(val), 3), "src": "DERIVED", "note": ly["equations"].get(k, "")}
@@ -1822,7 +1987,8 @@ if __name__ == "__main__":
     print(" post_blank_l", ly["post_blank_l"])
     print(" gate_h", ly["gate_h"])
     print(" sill_len", ly["sill_len"], "tie_len", ly["tie_len"], "base_width", ly["base_width"])
-    print(" parts", len(proj["parts"]), "joints", len(proj["joints"]))
+    print(" slat_top", ly["slat_top"], "band_ratio", ly["band_ratio"], "lights", ly["light_minor"], ly["light_major"])
+    print(" motifs", len(ly["motifs"]), "nuki_cls", ly["rail_cls"])
     print(" buy", proj["nest"]["buy_counts"], "net_bf", proj["nest"]["net_bf"], "proc_bf", proj["nest"]["procurement_bf"])
     print(" ballast soil+stone", proj["ballast"]["provided_lb"], "req_lb", proj["ballast"]["required_lb"], "ratio", proj["ballast"]["ratio"])
     print(" QA", proj["qa_geometry"])

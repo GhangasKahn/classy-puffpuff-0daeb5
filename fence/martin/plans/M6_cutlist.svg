@@ -7,7 +7,7 @@
 <text x='160.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>M-6  ·  Cut list &amp; board feet</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Buy list for one hardware-store run · Buffalo</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>Buffalo NY · Prairie + Japanese joinery</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Sit-on-grade · No nails in timber · Rev D</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Sit-on-grade · No nails in timber · Rev F</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>LUMBER BUY LIST — DIMENSIONAL STOCK (paint-grade OK)</text>
 <text x='40.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start' font-weight='600'>Qty</text>
 <text x='120.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start' font-weight='600'>Nominal</text>
@@ -27,54 +27,66 @@
 <text x='360.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Dodai sills F-001 / F-002</text>
 <text x='1180.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>64.0</text>
 <line x1='40.0' y1='180.0' x2='1400.0' y2='180.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>4</text>
+<text x='40.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>2</text>
 <text x='120.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×10</text>
 <text x='250.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>10'</text>
-<text x='360.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Prairie nuki / housed bands R-001/003/005/007</text>
-<text x='1180.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>66.7</text>
+<text x='360.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Projecting Prairie belts R-001 / R-002</text>
+<text x='1180.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>33.3</text>
 <line x1='40.0' y1='210.0' x2='1400.0' y2='210.0' stroke='#c5c8c2' stroke-width='0.7'/>
 <text x='40.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>1</text>
-<text x='120.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×8</text>
-<text x='250.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>12'</text>
-<text x='360.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Cap C-001 + stub C-002 nested</text>
-<text x='1180.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>16.0</text>
+<text x='120.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×12 PT</text>
+<text x='250.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>10'</text>
+<text x='360.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Water table K-001</text>
+<text x='1180.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>20.0</text>
 <line x1='40.0' y1='240.0' x2='1400.0' y2='240.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>4</text>
-<text x='120.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×6</text>
-<text x='250.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>10'</text>
-<text x='360.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Kick K-001 + housed 2×6 bands</text>
-<text x='1180.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>40.0</text>
+<text x='40.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>1</text>
+<text x='120.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×12</text>
+<text x='250.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>12'</text>
+<text x='360.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Eave C-001 + stub C-002</text>
+<text x='1180.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>24.0</text>
 <line x1='40.0' y1='270.0' x2='1400.0' y2='270.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>9</text>
-<text x='120.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×6</text>
+<text x='40.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>4</text>
+<text x='120.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>1×4</text>
 <text x='250.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8'</text>
-<text x='360.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Gate + planters + braces nested</text>
-<text x='1180.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>72.0</text>
+<text x='360.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Tree of Life / nested-rect muntins</text>
+<text x='1180.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>10.7</text>
 <line x1='40.0' y1='300.0' x2='1400.0' y2='300.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>3</text>
-<text x='120.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×2</text>
-<text x='250.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8'</text>
-<text x='360.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Tectonic T-001 Darwin Martin blocks</text>
-<text x='1180.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8.0</text>
+<text x='40.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>1</text>
+<text x='120.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>1×4</text>
+<text x='250.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>12'</text>
+<text x='360.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Eave fascia C-003</text>
+<text x='1180.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>4.0</text>
 <line x1='40.0' y1='330.0' x2='1400.0' y2='330.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>1</text>
-<text x='120.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×4</text>
+<text x='40.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>6</text>
+<text x='120.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×6</text>
 <text x='250.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8'</text>
-<text x='360.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Kusabi W-001 blanks</text>
-<text x='1180.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>5.3</text>
+<text x='360.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Gate frame + planters + braces</text>
+<text x='1180.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>48.0</text>
 <line x1='40.0' y1='360.0' x2='1400.0' y2='360.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>2</text>
-<text x='120.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>1×4 oak</text>
-<text x='250.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>4'</text>
-<text x='360.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Pegs / latch / oak pivots</text>
-<text x='1180.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2.7</text>
+<text x='40.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>3</text>
+<text x='120.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×2</text>
+<text x='250.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8'</text>
+<text x='360.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Roman-brick T-001 pier wrap</text>
+<text x='1180.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8.0</text>
 <line x1='40.0' y1='390.0' x2='1400.0' y2='390.0' stroke='#c5c8c2' stroke-width='0.7'/>
-<text x='40.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>NET 371 bf  ·  waste 15%  ·  PROCUREMENT 426 bf  ·  counts from kernel nest (not a hand list)</text>
-<text x='40.0' y='465.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>NON-TIMBER</text>
-<text x='40.0' y='495.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Rubber furniture pads: 8 pcs under driveway sill (protect pavement)</text>
-<text x='40.0' y='519.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Live planter mix + optional pea gravel IN two F-005 troughs (drainage + mass — not a pad)</text>
-<text x='40.0' y='543.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  12V IP65 LED tape + driver (cap soffit). Driver in P3 planter niche — not at the house.</text>
-<text x='40.0' y='567.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Optional: stainless pintle backup, keyed padlock hasp. Allowed metal: lighting + latch.</text>
-<text x='40.0' y='591.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  NO concrete. NO gravel bed. NO post-hole digger. NO epoxy into the house. NO planter at the gate.</text>
-<text x='40.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>CUT ORDER: sills/ties → posts → nuki/housed dados → bands → dry assemble → cap scarf + light dado → gate + oak pivots → paint → set → plant.</text>
+<text x='40.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>1</text>
+<text x='120.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2×4</text>
+<text x='250.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>8'</text>
+<text x='360.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Kusabi W-001 blanks</text>
+<text x='1180.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>5.3</text>
+<line x1='40.0' y1='420.0' x2='1400.0' y2='420.0' stroke='#c5c8c2' stroke-width='0.7'/>
+<text x='40.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start' font-weight='600'>2</text>
+<text x='120.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>1×4 oak</text>
+<text x='250.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>4'</text>
+<text x='360.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Pegs / latch / oak pivots</text>
+<text x='1180.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>2.7</text>
+<line x1='40.0' y1='450.0' x2='1400.0' y2='450.0' stroke='#c5c8c2' stroke-width='0.7'/>
+<text x='40.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>NET 316 bf  ·  waste 15%  ·  PROCUREMENT 363 bf  ·  counts from kernel nest (not a hand list)</text>
+<text x='40.0' y='525.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>NON-TIMBER</text>
+<text x='40.0' y='555.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Rubber furniture pads: 8 pcs under driveway sill (protect pavement)</text>
+<text x='40.0' y='579.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Live planter mix + optional pea gravel IN two F-005 troughs (drainage + mass — not a pad)</text>
+<text x='40.0' y='603.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  12V IP65 LED tape + driver (cap soffit). Driver in P3 planter niche — not at the house.</text>
+<text x='40.0' y='627.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  Optional: stainless pintle backup, keyed padlock hasp. Allowed metal: lighting + latch.</text>
+<text x='40.0' y='651.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>•  NO concrete. NO gravel bed. NO post-hole digger. NO epoxy into the house. NO planter at the gate.</text>
+<text x='40.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>CUT ORDER: sills/ties → posts → nuki + cassette grooves → belts/water table → Tree of Life cassettes → eave scarf → gate → paint → set → plant.</text>
 </svg>

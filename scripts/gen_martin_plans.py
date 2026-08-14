@@ -11,8 +11,10 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.path.insert(0, os.path.join(ROOT, "fence", "martin"))
 from martin_kernel import build_project, v as kv  # noqa: E402
+from martin_elevation import paint_front_elevation, paint_motif, paint_pier_bricks, CASS, BELT, EARTH, EAVE, MUNTIN, PIER  # noqa: E402
 
 OUT = os.path.join(ROOT, "fence", "martin", "plans")
 os.makedirs(OUT, exist_ok=True)
@@ -170,7 +172,7 @@ class Sheet:
         self.text(160, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "Buffalo NY · Prairie + Japanese joinery", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Sit-on-grade · No nails in timber · Rev D", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, "Sit-on-grade · No nails in timber · Rev F", 13, DIM, "end")
 
     def save(self):
         path = os.path.join(OUT, f"{self.code}_{self.title.split()[0].lower()}.svg")
@@ -213,42 +215,12 @@ def Y(zin):
 
 
 def sheet_m1():
-    s = Sheet("M-1", "General arrangement", "Scale 1:16 approx · dimensions in inches")
+    s = Sheet("M-1", "General arrangement", "Scale 1:16 approx · dimensions in inches · Rev F Tree of Life")
     s.titleblock()
     s.text(40, 70, "FRONT ELEVATION — garden face", 16, ACC, bold=True)
-    s.text(40, 94, '143" overall · 65" high · 36" gate against house · φ Prairie 2×10/2×6 bands · ¾" dog gaps', 14, DIM)
+    s.text(40, 94, '143" overall · 65" high · Darwin Martin Tree of Life · cantilevered eave · projecting belts · live planters', 13, DIM)
 
-    # dodai sill (elevation)
-    s.rect(X(-P["sill_overhang"]), Y(0), (L + 2 * P["sill_overhang"]) * S, P["sill_h"] * S,
-           fill=LIGHT, stroke=INK, sw=1.5)
-    s.text(X(L / 2), Y(-P["sill_h"] / 2) + 5, "DODAI SILL — SIT ON DRIVEWAY", 12, DIM, "middle")
-
-    # posts
-    for i, cx in enumerate(POSTS):
-        s.rect(X(cx - fx / 2), Y(H - P["cap_t"]), fx * S, (H - P["cap_t"]) * S,
-               fill="#d9dcde", stroke=INK, sw=1.8)
-        s.text(X(cx), Y(H) - 18, f"P{i}", 14, ACC, "middle", bold=True)
-
-    # Prairie horizontal bands (privacy run P1–P3)
-    for sl in LY["slats"]:
-        fill = GRAY if sl["nuki"] else "#c5c8c2"
-        s.rect(X(P1 - fx / 2 - 0.5), Y(sl["z1"]),
-               (P3 - P1 + fx + 1) * S, sl["h"] * S, fill=fill, stroke=INK, sw=1.0)
-
-    # cap
-    s.rect(X(P1 - fx / 2 - 0.75), Y(H), (P3 - P1 + fx + 1.5) * S, P["cap_t"] * S,
-           fill="#8a9094", stroke=INK, sw=1.2)
-    s.rect(X(P0 - fx / 2 - 0.5), Y(H), (fx + 1) * S, P["cap_t"] * S,
-           fill="#8a9094", stroke=INK, sw=1.2)
-
-    # gate leaf outline + matching bands
-    s.rect(X(fx + 0.5), Y(H - 0.5), (gate - 1) * S, (H - 1.5) * S,
-           fill="#e8eaeb", stroke=ACC, sw=2, dash="6 4")
-    for sl in LY["slats"]:
-        s.rect(X(fx + 1.2), Y(sl["z1"]), (gate - 2.4) * S, sl["h"] * S,
-               fill="#d0d3d5", stroke=LIGHT, sw=0.6)
-    s.text(X(fx + gate / 2), Y(H / 2), "GATE", 16, ACC, "middle", bold=True)
-    s.text(X(fx + gate / 2), Y(H / 2) + 22, 'AT HOUSE · 36" CLEAR', 11, DIM, "middle")
+    paint_front_elevation(s, LY, X, Y, S, kv, gate=True, labels=True, planters=True)
 
     # dimensions
     s.dim_h(X(0), X(L), Y(0), '143" OVERALL', offset=48)
@@ -261,95 +233,129 @@ def sheet_m1():
     s.text(40, 980, "PLAN (ladder)", 14, ACC, bold=True)
     py = 1040
     ps = 4.5
-    for cx in POSTS:
+    for i, cx in enumerate(POSTS):
         s.rect(80 + cx * ps - fx * ps / 2, py - P["post_y"] * ps / 2,
                fx * ps, P["post_y"] * ps, fill="#d9dcde", stroke=INK, sw=1.2)
+        if i > 0:
+            s.rect(80 + cx * ps - (fx + 1.4) * ps / 2, py - (P["post_y"] + 1.2) * ps / 2,
+                   (fx + 1.4) * ps, (P["post_y"] + 1.2) * ps, fill="none", stroke=DIM, sw=0.6)
     s.rect(80 - P["sill_overhang"] * ps, py - P["base_width"] * ps / 2,
            (L + 2 * P["sill_overhang"]) * ps, P["base_width"] * ps,
            fill="none", stroke=DIM, sw=1, dash="4 3")
+    # planters as troughs garden-side of P1–P3
+    for la, rb in ((1, 2), (2, 3)):
+        x0 = 80 + POSTS[la] * ps
+        x1 = 80 + POSTS[rb] * ps
+        s.rect(x0 + 4, py + P["post_y"] * ps / 2 + 4, x1 - x0 - 8, 18 * ps * 0.35,
+               fill="#6a6e66", stroke=INK, sw=0.8)
     s.text(80 + L * ps / 2, py + P["base_width"] * ps / 2 + 22,
-           f'LADDER {P["base_width"]:g}" WIDE · PLANTERS GARDEN-SIDE OF P1–P3 · NO PLANTER AT HOUSE', 12, DIM, "middle")
+           f'LADDER {P["base_width"]:g}" WIDE · PLANTER TROUGHS GARDEN-SIDE OF P1–P3 · NO PLANTER AT HOUSE', 12, DIM, "middle")
 
-    # notes
     notes = [
-        "DESIGN: Darwin Martin / FLW Prairie horizontals + Japanese nuki / hozo / kama-tsugi.",
-        "SCREEN: 2×10 / 2×6 bands, ¾″ gaps, PT kick — beautiful and 100% dog containment.",
-        "GATE: Flush to the house (P0). Oak pivots at P1. Latch B into P0. No planter at the gate.",
+        "DESIGN: Darwin Martin House Tree of Life — original wood muntins, not licensed glass.",
+        "MACRO: deep eave + fascia shadow, belts that stick past the piers, Roman-brick piers, recessed lights.",
+        "LIGHTS: nested-rects / three trees / nested-rects. 1.50″ max aperture. Solid 2×12 water table (dog).",
+        "GATE: Tree of Life portal flush to the house. Oak pivots at P1. No Z-brace on the garden face.",
         "BALLAST: Live planters P1–P2 and P2–P3. Stone inside boxes only — not a pad.",
-        "WINTER: Knock wedges → withdraw bands → lift gate off oak pivots → lift posts → empty troughs.",
+        "WINTER: Knock wedges → withdraw cassettes → lift gate off oak pivots → lift posts → empty troughs.",
         "FINISH: Ease 1/16″, end-grain sealer, PT dry then prime, two owner-gray coats. Buffalo 4-season.",
-        "ENGINEERING NOTE: Planning design — planter mass is a calc, not a PE stamp. No foundations.",
     ]
     for i, n in enumerate(notes):
-        s.text(780, 70 + i * 22, n, 12, INK)
+        s.text(40, 118 + i * 18, n, 11, INK)
 
     s.save()
 
 
 def sheet_m2():
-    s = Sheet("M-2", "Elevation & rail schedule", "Scale ~1:12 · rail centerlines AFF")
+    s = Sheet("M-2", "Elevation & light-screen", "Scale ~1:12 · one privacy bay · Tree of Life")
     s.titleblock()
-    s.text(40, 70, "PRIVACY BAY ELEVATION — typical", 16, ACC, bold=True)
+    s.text(40, 70, "PRIVACY BAY — TREE OF LIFE BETWEEN PROJECTING BELTS", 16, ACC, bold=True)
 
-    # larger scale detail of one bay + post
     S2 = 12.0
-    ox, oy = 120, 880
+    ox, oy = 80, 900
 
-    def x(v):
-        return ox + v * S2
+    def x(vin):
+        return ox + vin * S2
 
-    def y(v):
-        return oy - v * S2
+    def y(vin):
+        return oy - vin * S2
 
     bay = bay_clear
-    # posts left/right
-    s.rect(x(0), y(H - P["cap_t"]), fx * S2, (H - P["cap_t"]) * S2, fill="#d9dcde", stroke=INK)
-    s.rect(x(fx + bay), y(H - P["cap_t"]), fx * S2, (H - P["cap_t"]) * S2, fill="#d9dcde", stroke=INK)
-    # Prairie bands
+    # local coords: post left at 0, bay, post right
+    # Shift motifs from actual P1 bay into this frame
+    x_shift = P1 + fx / 2  # world x of left bay inner face
+
+    def Xx(xin):
+        return x(xin - x_shift + fx)
+
+    def Yy(zin):
+        return y(zin)
+
+    # cassette field
     for sl in LY["slats"]:
-        fill = GRAY if sl["nuki"] else "#c5c8c2"
-        s.rect(x(-0.5), y(sl["z1"]),
-               (fx + bay + fx + 1) * S2, sl["h"] * S2, fill=fill, stroke=INK)
-        label = f'{sl["stock"].upper()}  {sl["id"]}  {"NUKI" if sl["nuki"] else "HOUSED"}'
-        s.text(x(fx + bay / 2), y(sl["cl"]) + 4, label, 11, PAPER if sl["nuki"] else INK, "middle", bold=True)
-    # cap
-    s.rect(x(-0.75), y(H), (fx + bay + fx + 1.5) * S2, P["cap_t"] * S2, fill="#8a9094", stroke=INK)
+        if sl["id"].startswith("Q-"):
+            s.rect(x(fx), y(sl["z1"]), bay * S2, sl["h"] * S2, fill=CASS, stroke="none", sw=0)
+    for m in LY["motifs"]:
+        if m.get("bay") == 0:
+            paint_motif(s, m, Xx, Yy, S2)
+
+    # water table + belts spanning past piers
+    for sl in LY["slats"]:
+        if sl["id"] == "K-001":
+            s.rect(x(-1.5), y(sl["z1"]), (fx + bay + fx + 3) * S2, sl["h"] * S2, fill=EARTH, stroke=INK, sw=1.4)
+        elif sl["id"].startswith("R-"):
+            s.rect(x(-1.5), y(sl["z1"]), (fx + bay + fx + 3) * S2, sl["h"] * S2, fill=BELT, stroke=INK, sw=1.3)
+
+    # piers
+    s.rect(x(0), y(H - P["cap_t"]), fx * S2, (H - P["cap_t"]) * S2, fill=PIER, stroke=INK)
+    s.rect(x(fx + bay), y(H - P["cap_t"]), fx * S2, (H - P["cap_t"]) * S2, fill=PIER, stroke=INK)
+    paint_pier_bricks(s, x, y, S2, fx / 2, fx, 1.5, H - P["cap_t"] - 1)
+    paint_pier_bricks(s, x, y, S2, fx + bay + fx / 2, fx, 1.5, H - P["cap_t"] - 1)
+
+    # eave + fascia
+    s.rect(x(-2.0), y(H), (fx + bay + fx + 4) * S2, P["cap_t"] * S2, fill=EAVE, stroke=INK)
+    s.rect(x(-2.0), y(H - P["cap_t"]), (fx + bay + fx + 4) * S2, kv("fascia_h") * S2, fill="#1a1f24", stroke=INK, sw=1)
 
     s.dim_v(y(0), y(H), x(fx + bay + fx), '65"', offset=36)
     for sl in LY["slats"]:
         if sl["nuki"]:
-            s.dim_v(y(0), y(sl["cl"]), x(-0.5), f'{sl["cl"]:g}" CL', offset=-50)
+            s.dim_v(y(0), y(sl["cl"]), x(-1.5), f'{sl["cl"]:g}" CL', offset=-46)
     s.dim_h(x(fx), x(fx + bay), y(0), f'{bay:.2f}" CLEAR', offset=40)
-    s.dim_h(x(0), x(fx), y(H), '3.5"', offset=-28)
 
-    # schedule table
-    s.text(980, 70, "SLAT / BAND SCHEDULE", 16, ACC, bold=True)
+    s.text(x(fx + bay / 2), y(LY["slats"][2]["cl"]) + 4, "BELT", 11, PAPER, "middle", bold=True)
+
+    # schedule
+    s.text(980, 70, "LAYER SCHEDULE (bottom → top)", 16, ACC, bold=True)
     rows = [("Mark", "Stock", "Joinery", "CL AFF", "Role")]
     for sl in LY["slats"]:
-        rows.append((sl["id"], sl["stock"], "nuki" if sl["nuki"] else "housed 0.75\"", f'{sl["cl"]:g}"', sl["role"][:28]))
-    rows.append(("CAP", "2×8", "kama-tsugi + light dado", '65" top', "Weather cap / Wright light screen"))
-    rows.append(("POST", "4×6", "3.5×5.5", "full height", "Nuki posts + 3.5\" tenon"))
+        j = "nuki + kusabi" if sl["nuki"] else "cassette groove"
+        rows.append((sl["id"], sl["stock"], j, f'{sl["cl"]:g}"', sl["role"][:32]))
+    rows.append(("C-001", "2×12", "kama-tsugi + light dado", '65" top', "Wright eave (cantilever)"))
+    rows.append(("C-003", "1×4", "housed under eave", "soffit", "Fascia / shadow line"))
+    rows.append(("POST", "4×6 + 2×2 wrap", "3.5×5.5 + Roman brick", "full height", "Piers P1–P3"))
     yy = 110
     for r in rows:
         xx = 980
-        widths = (70, 70, 130, 80, 200)
+        widths = (70, 90, 130, 80, 200)
         for i, cell in enumerate(r):
             s.text(xx, yy, cell, 12, INK if r[0] != "Mark" else DIM, bold=(r[0] == "Mark"))
             xx += widths[i]
         yy += 22
         s.line(980, yy - 16, 1620, yy - 16, 0.6, LIGHT)
 
-    s.text(980, 430, "JOINERY RULE (STRENGTH)", 16, ACC, bold=True)
+    s.text(980, 430, "WHY THIS IS NOT A RANCH FENCE", 16, ACC, bold=True)
     bullets = [
-        "Through-nuki + kusabi: K-001, R-001, R-003, R-005 only.",
-        "Housed 0.75″ dado: remaining bands — keep the post web.",
-        "Do not rip 2×10 to force φ. 9.25/5.5 = 1.682 ≈ φ.",
-        "¾″ gaps + PT kick = dog seal. Do not caulk the light-screen.",
-        "Cap scarf (kama-tsugi) on P2, drawbored. IP65 tape in soffit.",
-        "Never glue locking faces. Paint after dry-fit; mask joinery.",
+        "Deep 2×12 eave + 1×4 fascia — Wright plane, not a 2× lid.",
+        "Belts cantilever 3″ past the piers (rail_reveal).",
+        "Piers wrapped in Roman-brick 2×2 (Darwin Martin texture).",
+        "Three recessed lights: nested squares / Tree of Life / nested squares.",
+        "Solid 2×12 PT water table — dog cannot crawl. Pattern max 1.50″.",
+        "φ sizes the cassette pair (8.085 / 13.080). Do not rip 2×10.",
+        "Through-nuki only K-001 + R-001 + R-002. Cassettes withdraw for winter.",
+        "Original wood interpretation of Darwin Martin Tree of Life — not licensed glass.",
     ]
     for i, b in enumerate(bullets):
-        s.text(980, 465 + i * 26, "•  " + b, 14, INK)
+        s.text(980, 465 + i * 26, "•  " + b, 13, INK)
 
     s.save()
 
@@ -359,7 +365,7 @@ def sheet_m3():
     s.titleblock()
 
     # Nuki detail
-    s.text(40, 70, "DETAIL 1 — NUKI THROUGH-BAND (2×10 IN 4×6)", 16, ACC, bold=True)
+    s.text(40, 70, "DETAIL 1 — NUKI THROUGH-BELT (2×10 IN 4×6)", 16, ACC, bold=True)
     sx, sy = 80, 420
     # post section
     s.rect(sx, sy - 120, 90, 240, fill="#d9dcde", stroke=INK, sw=2)  # post
@@ -368,8 +374,8 @@ def sheet_m3():
     s.text(sx + 45, sy + 150, "4×6 POST", 13, DIM, "middle")
     s.text(sx + 170, sy - 65, "2×10 NUKI", 13, DIM)
     s.text(sx + 110, sy + 5, "WEDGE", 12, ACC, bold=True)
-    s.text(sx - 10, 70 + 40, 'Mortise: 1.5" × 9.25" through · cheeks 2" each side of slat', 13, INK)
-    s.text(sx - 10, 70 + 62, 'Through-nuki only 4 bands. House the rest 0.75" — keep the post web.', 13, INK)
+    s.text(sx - 10, 70 + 40, 'Mortise: 1.5" × 9.25" through · cheeks 2" each side of belt', 13, INK)
+    s.text(sx - 10, 70 + 62, 'Through-nuki only water table + two belts. Cassettes groove in — keep the post web.', 13, INK)
 
     # Foot tenon
     s.text(520, 70, "DETAIL 2 — FOOT TENON INTO CROSS-TIE", 16, ACC, bold=True)
@@ -391,15 +397,17 @@ def sheet_m3():
            fill="#8a9094", stroke=INK, sw=2)
     s.line(215, 675, 215, 725, 2, ACC)
     s.text(215, 745, "OAK PEG (drawbore)", 12, ACC, "middle")
-    s.text(40, 590, "Cut sickle scarf in 2×8 cap · dry fit · drawbore ⅛\" offset · oak peg ⅜\"", 13, INK)
+    s.text(40, 590, "Cut sickle scarf in 2×12 eave · dry fit · drawbore ⅛\" offset · oak peg ⅜\"", 13, INK)
 
     # Light-screen gaps
-    s.text(520, 560, "DETAIL 4 — ¾″ PRAIRIE LIGHT-SCREEN (DOG SEAL)", 16, ACC, bold=True)
-    s.rect(560, 620, 200, 40, fill=GRAY, stroke=INK, sw=2)
-    s.rect(560, 668, 200, 12, fill="none", stroke=DIM, sw=1, dash="3 2")
-    s.rect(560, 688, 200, 28, fill="#c5c8c2", stroke=INK, sw=1.5)
-    s.text(520, 590, '0.75" gaps between 2×10 / 2×6 bands. Kick nuki at grade. Gauge must not pass.', 13, INK)
-    s.text(520, 612, "Do not through-mortise every band — ¾″ web would split the post.", 13, INK)
+    s.text(520, 560, "DETAIL 4 — TREE OF LIFE APERTURE (DOG SEAL)", 16, ACC, bold=True)
+    s.rect(560, 620, 200, 40, fill=BELT, stroke=INK, sw=2)
+    s.rect(560, 668, 200, 48, fill=CASS, stroke=INK, sw=1)
+    s.rect(590, 678, 8, 28, fill=MUNTIN, stroke=INK, sw=0.6)
+    s.rect(720, 678, 8, 28, fill=MUNTIN, stroke=INK, sw=0.6)
+    s.rect(560, 724, 200, 40, fill=EARTH, stroke=INK, sw=2)
+    s.text(520, 590, '1.50" max muntin gap. Solid 2×12 water table at grade. Gauge must not pass.', 13, INK)
+    s.text(520, 612, "Do not through-mortise cassettes — three nuki keep the post continuous.", 13, INK)
 
     s.text(40, 820, "JOINT VOCABULARY USED", 14, ACC, bold=True)
     s.text(40, 848, "Nuki 貫 · Kusabi wedge · Hozo ほぞ (gate) · Kama-tsugi 鎌継ぎ (cap) · Ari-kake optional at corners", 13, INK)
@@ -490,7 +498,7 @@ def sheet_m4():
         "1. Open gate · remove oak latch peg / padlock.",
         "2. Knock out rail wedges (kusabi) — save in labeled bag.",
         "3. Slide nuki bands out of posts (two-person).",
-        "4. Withdraw housed slats toward P3.",
+        "4. Withdraw light cassettes toward P3.",
         "5. Lift gate leaf off oak pivots (W-003).",
         "6. Lift each post straight up out of F-003.",
         "7. Empty planters (or lift troughs); store dry. Lift ladder or leave sills.",
@@ -510,56 +518,69 @@ def sheet_m4():
 
 
 def sheet_m5():
-    s = Sheet("M-5", "Gate & latch", "Gate leaf · oak pivots · Latch B into P0 · against the house")
+    s = Sheet("M-5", "Gate & latch", "Tree of Life portal · oak pivots · Latch B into P0 · against the house")
     s.titleblock()
-    s.text(40, 70, "GATE LEAF — 36\" CLEAR · FLUSH TO THE HOUSE (NO PLANTER AT P0)", 16, ACC, bold=True)
+    s.text(40, 70, "GATE LEAF — DARWIN MARTIN TREE OF LIFE · FLUSH TO THE HOUSE (NO PLANTER AT P0)", 15, ACC, bold=True)
 
     S5 = 11
-    ox, oy = 100, 860
+    ox, oy = 90, 900
 
-    def x(v):
-        return ox + v * S5
+    def x(vin):
+        return ox + vin * S5
 
-    def y(v):
-        return oy - v * S5
+    def y(vin):
+        return oy - vin * S5
 
     gw = LY["gate_leaf_w"]
     gh = LY["gate_h"]
-    s.rect(x(0), y(gh), gw * S5, gh * S5, fill="#e8eaeb", stroke=INK, sw=2)
-    # stiles
-    s.rect(x(0), y(gh), 3.5 * S5, gh * S5, fill="#d9dcde", stroke=INK)
-    s.rect(x(gw - 3.5), y(gh), 3.5 * S5, gh * S5, fill="#d9dcde", stroke=INK)
+    stile = 3.5
+    s.rect(x(0), y(gh), gw * S5, gh * S5, fill="#e4e0d6", stroke=INK, sw=2)
+    s.rect(x(0), y(gh), stile * S5, gh * S5, fill=PIER, stroke=INK)
+    s.rect(x(gw - stile), y(gh), stile * S5, gh * S5, fill=PIER, stroke=INK)
+
+    # cassette fields + motifs (gate bay) — world x already in motif
+    gx0 = kv("post_x") + kv("gate_gap")
+
+    def Xx(xin):
+        return x(xin - gx0)
+
+    for m in LY["motifs"]:
+        if m.get("bay") == "gate":
+            s.rect(Xx(m["x0"]), y(m["z0"] + m["h"]), m["w"] * S5, m["h"] * S5, fill=CASS, stroke="none", sw=0)
+            paint_motif(s, m, Xx, y, S5)
+
+    # projecting belts across the leaf (align to screen)
     for sl in LY["slats"]:
-        s.rect(x(3.5), y(sl["z1"]), (gw - 7) * S5, sl["h"] * S5, fill="#c5c8c2", stroke=INK, sw=0.8)
-    for zc in P["rail_z_cl"]:
-        s.rect(x(3.5), y(zc + 2.75), (gw - 7) * S5, 5.5 * S5, fill=GRAY, stroke=INK)
-    # brace
-    s.line(x(3.5), y(8), x(gw - 3.5), y(gh - 8), 6, ACC)
+        if sl["id"].startswith("R-"):
+            s.rect(x(stile), y(sl["z1"]), (gw - 2 * stile) * S5, sl["h"] * S5, fill=BELT, stroke=INK, sw=1.0)
+        elif sl["id"] == "K-001":
+            s.rect(x(stile), y(min(sl["z1"], gh)), (gw - 2 * stile) * S5, min(sl["h"], gh) * S5, fill=EARTH, stroke=INK, sw=1.0)
+
     s.dim_h(x(0), x(gw), y(0), f'{gw:.1f}" LEAF WIDTH', offset=40)
     s.dim_v(y(0), y(gh), x(gw), f'{gh:.1f}"', offset=36)
+    s.text(x(gw / 2), y(3.2), "TREE OF LIFE", 11, PAPER, "middle", bold=True)
 
     s.text(620, 70, "HARDWARE (WOOD-FIRST)", 16, ACC, bold=True)
     lines = [
+        "FACE: Tree of Life (middle light) + nested squares. Not a Z-brace ranch gate.",
+        "  Shop brace G-008 lives on the driveway face — not the garden elevation.",
         "HINGE: 1.25\" oak pivots W-003 (structurally best on a freestanding P1).",
         "  — Bottom socket in the sill/threshold at P1; top in the cap soffit.",
         "  — Leaf weight in compression to the driveway — not a cantilever pintle.",
         "  — Gate lifts straight up (+Z) for winter. Optional stainless pintle is backup only.",
         "LATCH B — DEFAULT (fully freestanding, against the house):",
         "  — 1.5\" × 3.5\" × 18\" sliding oak bar through latch stile.",
-        "  — Bar enters mortise in P0 latch post; gravity catch.",
+        "  — Bar enters mortise in P0 latch post; gravity catch. CL on R-002 belt.",
         "  — Cross-peg + optional keyed padlock hasp on bar.",
         "  — NO epoxy, NO house receiver, NO planter at P0.",
-        "LATCH A — OPTIONAL ONLY (if you later choose a house strike):",
-        "  — Oak strike block on the wall you own — not in this default kit.",
         "SWING: Into garden (confirm site). Clear arc 36\".",
         "JOINERY: Drawbored mortise & tenon at every stile/rail (hozo).",
-        "  Diagonal brace half-lapped into rails — no fasteners.",
-        "INFILL: Horizontal bands match the Prairie screen — ¾\" dog gaps.",
+        "DOG: Solid water-table rail + 1.50″ max muntin gap + 0.375″ bottom clear.",
     ]
     for i, t in enumerate(lines):
         s.text(620, 100 + i * 22, t, 13, INK)
 
-    s.text(40, 980, "PRIVACY: Gate infill matches the Prairie band rhythm. Bottom clear 0.375\" (dog). Top clear 0.50\" under cap.", 13, DIM)
+    s.text(40, 980, "Garden face is Wright. Shop brace is hidden. Bottom clear 0.375\" (dog). Top clear 0.50\" under the eave.", 13, DIM)
 
     s.save()
 
@@ -572,11 +593,13 @@ def sheet_m6():
     fam_meta = {
         "4x6x8": ("4×6", "8'", "Posts + cross-ties nested"),
         "4x6x16": ("4×6", "16'", "Dodai sills F-001 / F-002"),
-        "2x10x10": ("2×10", "10'", "Prairie nuki / housed bands R-001/003/005/007"),
-        "2x8x12": ("2×8", "12'", "Cap C-001 + stub C-002 nested"),
-        "2x6x10": ("2×6", "10'", "Kick K-001 + housed 2×6 bands"),
-        "2x6x8": ("2×6", "8'", "Gate + planters + braces nested"),
-        "2x2x8": ("2×2", "8'", "Tectonic T-001 Darwin Martin blocks"),
+        "2x10x10": ("2×10", "10'", "Projecting Prairie belts R-001 / R-002"),
+        "2x12x10": ("2×12 PT", "10'", "Water table K-001"),
+        "2x12x12": ("2×12", "12'", "Eave C-001 + stub C-002"),
+        "1x4x8": ("1×4", "8'", "Tree of Life / nested-rect muntins"),
+        "1x4x12": ("1×4", "12'", "Eave fascia C-003"),
+        "2x6x8": ("2×6", "8'", "Gate frame + planters + braces"),
+        "2x2x8": ("2×2", "8'", "Roman-brick T-001 pier wrap"),
         "2x4x8": ("2×4", "8'", "Kusabi W-001 blanks"),
         "oak_1x4x4": ("1×4 oak", "4'", "Pegs / latch / oak pivots"),
     }
@@ -584,7 +607,8 @@ def sheet_m6():
     for b in NEST["boards"]:
         bf_by[b["PURCHASE"]] = bf_by.get(b["PURCHASE"], 0) + b["BF"]
     rows = [("Qty", "Nominal", "Length", "Use", "Board feet")]
-    for fam in ("4x6x8", "4x6x16", "2x10x10", "2x8x12", "2x6x10", "2x6x8", "2x2x8", "2x4x8", "oak_1x4x4"):
+    fams = ("4x6x8", "4x6x16", "2x10x10", "2x12x10", "2x12x12", "1x4x8", "1x4x12", "2x6x8", "2x2x8", "2x4x8", "oak_1x4x4")
+    for fam in fams:
         nom, length, use = fam_meta[fam]
         rows.append((str(NEST["buy_counts"].get(fam, 0)), nom, length, use, f"{bf_by.get(fam, 0):.1f}"))
     yy = 110
@@ -615,7 +639,7 @@ def sheet_m6():
     for i, t in enumerate(misc):
         s.text(40, yy + 85 + i * 24, "•  " + t, 13, INK)
 
-    s.text(40, 980, "CUT ORDER: sills/ties → posts → nuki/housed dados → bands → dry assemble → cap scarf + light dado → gate + oak pivots → paint → set → plant.", 13, DIM)
+    s.text(40, 980, "CUT ORDER: sills/ties → posts → nuki + cassette grooves → belts/water table → Tree of Life cassettes → eave scarf → gate → paint → set → plant.", 13, DIM)
     s.save()
 
 

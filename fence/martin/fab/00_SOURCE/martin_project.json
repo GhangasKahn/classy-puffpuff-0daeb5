@@ -2,13 +2,13 @@
   "project": {
     "PROJECT_ID": "MARTIN",
     "PROJECT_NAME": "Prairie removable fence \u2014 Buffalo NY",
-    "REVISION": "E",
+    "REVISION": "F",
     "UNITS": "inch",
-    "DESIGN_STANDARD": "Prairie / Darwin Martin House + Japanese joinery; Buffalo Green Code verify",
+    "DESIGN_STANDARD": "Prairie / Darwin Martin House Tree of Life + Japanese joinery; Buffalo Green Code verify",
     "MATERIAL_SYSTEM": "dimensional lumber + live planters (optional drainage stone in boxes only)",
-    "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore / housed slats",
+    "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore / muntin cassettes",
     "AUTHOR": "MARTIN fabrication model",
-    "MODEL_VERSION": "5.0.0",
+    "MODEL_VERSION": "6.0.0",
     "DATE": "2026-08-14",
     "CAD": [
       "FreeCAD 1.1",
@@ -16,14 +16,14 @@
     ]
   },
   "audit": {
-    "MODE": "B \u2014 Rev E Prairie screen on sit-on-grade ladder (no digging / no cement)",
+    "MODE": "B \u2014 Rev F Darwin Martin Tree of Life light-screen on sit-on-grade ladder (no digging / no cement)",
     "MODEL_ARCHITECTURE": "GOOD \u2014 kernel SSOT; FreeCAD App::Part hierarchy; OpenSCAD modules",
     "PARAMETERIZATION_QUALITY": "GOOD \u2014 envelope, stock, joinery, kerf, waste, planter mass as named parameters",
-    "PART_SEPARATION": "GOOD \u2014 persistent PART_IDs L/R/K/C/G/W/F/H/T",
+    "PART_SEPARATION": "GOOD \u2014 persistent PART_IDs L/R/K/C/G/W/F/H/T/Q",
     "METADATA_QUALITY": "GOOD \u2014 Fabrication properties on FreeCAD; JSON/CSV registry",
     "ASSEMBLY_STRUCTURE": "GOOD \u2014 A000 / A001 ladder+planters / A010 / A020 / A030",
-    "JOINERY_STRUCTURE": "GOOD \u2014 joint register with fit class; nuki vs housed dado rule",
-    "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA generated from kernel",
+    "JOINERY_STRUCTURE": "GOOD \u2014 joint register with fit class; nuki vs cassette groove rule",
+    "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA generated from kernel; elevation paints motifs",
     "BOM_READINESS": "GOOD \u2014 BOM + nest from parts; planter mass from wind calc",
     "CUT_LIST_READINESS": "GOOD \u2014 rough, finished, nest CSV",
     "EXPORT_READINESS": "GOOD \u2014 FCStd/STEP/STL/JSON/CSV/SVG/DXF",
@@ -31,13 +31,14 @@
       "overall_length TBM remeasure on driveway",
       "gate_clear ASSUMED 36\u2033",
       "wind ballast is a planning calc (not PE) \u2014 plant F-005 + optional in-box stone",
-      "Photos confirm driveway span and house-side gate; gray swatch still TBM"
+      "Photos confirm driveway span and house-side gate; gray swatch still TBM",
+      "Tree of Life is an original wood interpretation \u2014 not a licensed reproduction of Wright glass"
     ],
-    "CLOSED_REV_E": [
-      "Vertical 1\u00d76 privacy replaced by horizontal Prairie screen",
-      "Sandbags replaced by live planters (not at P0/house)",
-      "Oak pivots instead of pintles as primary hinge",
-      "Dog seal: \u00be\u2033 gaps + kick nuki + 0.375\u2033 gate bottom",
+    "CLOSED_REV_F": [
+      "Stacked 2\u00d710/2\u00d76 ranch-fence face replaced by Wright light-screen (eave, belts, piers, patterned cassettes)",
+      "\u00be\u2033 radiator gaps replaced by 1.50\u2033 max muntin apertures + solid 2\u00d712 water table",
+      "Gate face is Tree of Life, not a Z-brace panel",
+      "Cap is a 2\u00d712 cantilevered eave with hanging fascia",
       "No concrete, no post holes, no gravel/stone PAD"
     ],
     "REFACTORING": "Kernel is source of truth. FreeCAD/OpenSCAD/drawings/BOM consume it."
@@ -89,43 +90,61 @@
       "value_in": 1.5,
       "mm": 38.1,
       "src": "DERIVED",
-      "note": "2\u00d78 flat"
+      "note": "2\u00d712 flat \u2014 Wright eave (thin and wide, not a lid)"
     },
     "cap_w": {
-      "value_in": 7.25,
-      "mm": 184.15,
+      "value_in": 11.25,
+      "mm": 285.75,
       "src": "DERIVED",
-      "note": "2\u00d78 flat width"
+      "note": "2\u00d712 actual \u2014 cantilevers past 5.5\u2033 pier ~2.9\u2033 each side"
     },
     "board_t": {
-      "value_in": 1.5,
-      "mm": 38.1,
+      "value_in": 0.75,
+      "mm": 19.05,
       "src": "DERIVED",
-      "note": "2\u00d7 slat thickness \u2014 Prairie screen (was \u00be\u2033 vertical 1\u00d76)"
+      "note": "1\u00d7 muntin / cassette thickness, recessed behind nuki face"
     },
     "board_w": {
       "value_in": 9.25,
       "mm": 234.95,
       "src": "DERIVED",
-      "note": "2\u00d710 actual \u2014 major Prairie band"
+      "note": "2\u00d710 actual \u2014 projecting Prairie belt course"
     },
     "board_gap": {
       "value_in": 0.75,
       "mm": 19.05,
       "src": "ASSUMED",
-      "note": "dog-tight light-screen gap; 100% containment with kickboard"
+      "note": "shadow reveal between belts and cassettes"
     },
     "band_minor_h": {
-      "value_in": 5.5,
-      "mm": 139.7,
+      "value_in": 8.085,
+      "mm": 205.359,
       "src": "DERIVED",
-      "note": "2\u00d76 actual \u2014 minor band; 9.25/5.5=1.682 \u2248 \u03c6 without ripping"
+      "note": "upper/lower light cassette; \u03c6 pair with middle 13.08"
     },
     "kick_h": {
-      "value_in": 5.5,
-      "mm": 139.7,
+      "value_in": 11.25,
+      "mm": 285.75,
       "src": "DERIVED",
-      "note": "2\u00d76 PT kickboard / bottom nuki \u2014 dog crawl stop"
+      "note": "2\u00d712 PT water table \u2014 solid earth line; dog crawl stop"
+    },
+    "muntin_t": {
+      "value_in": 0.75,
+      "mm": 19.05,
+      "src": "DERIVED",
+      "note": "1\u00d72 face \u2014 Wright came, in wood"
+    },
+    "pattern_gap": {
+      "value_in": 1.5,
+      "mm": 38.1,
+      "src": "ASSUMED",
+      "note": "max aperture in Tree of Life; kick is the crawl seal"
+    },
+    "fascia_h": {
+      "value_in": 3.5,
+      "mm": 88.9,
+      "src": "DERIVED",
+      "note": "1\u00d74 hanging fascia under eave \u2014 shadow line"
     },
     "stile_w": {
       "value_in": 3.5,
@@ -170,16 +189,16 @@
       "note": "into 5.5\u2033 cross-tie; leave ~2\u2033 below mortise"
     },
     "rail_reveal": {
-      "value_in": 0.5,
-      "mm": 12.7,
+      "value_in": 3.0,
+      "mm": 76.2,
       "src": "ASSUMED",
-      "note": "nuki projection past outer post faces"
+      "note": "belt courses cantilever past piers like Wright planes"
     },
     "cap_overhang": {
-      "value_in": 0.75,
-      "mm": 19.05,
+      "value_in": 3.5,
+      "mm": 88.9,
       "src": "ASSUMED",
-      "note": ""
+      "note": "eave past outer pier faces along the run"
     },
     "groove_d": {
       "value_in": 0.375,
@@ -464,32 +483,32 @@
       "note": "(overall_length - 4*post_x - gate_clear) / 2"
     },
     "nuki_x0": {
-      "value_in": 39.0,
-      "mm": 990.6,
+      "value_in": 36.5,
+      "mm": 927.1,
       "src": "DERIVED",
       "note": ""
     },
     "nuki_x1": {
-      "value_in": 143.5,
-      "mm": 3644.9,
+      "value_in": 146.0,
+      "mm": 3708.4,
       "src": "DERIVED",
       "note": ""
     },
     "nuki_len": {
-      "value_in": 104.5,
-      "mm": 2654.3,
+      "value_in": 109.5,
+      "mm": 2781.3,
       "src": "DERIVED",
       "note": "(P3_outer + rail_reveal) - (P1_outer - rail_reveal)"
     },
     "cap_x0": {
-      "value_in": 38.75,
-      "mm": 984.25,
+      "value_in": 36.0,
+      "mm": 914.4,
       "src": "DERIVED",
       "note": ""
     },
     "cap_len": {
-      "value_in": 105.0,
-      "mm": 2667.0,
+      "value_in": 110.5,
+      "mm": 2806.7,
       "src": "DERIVED",
       "note": ""
     },
@@ -512,14 +531,14 @@
       "note": "overall_height - cap_t + post_tenon_h"
     },
     "slat_top": {
-      "value_in": 63.5,
-      "mm": 1612.9,
+      "value_in": 63.501,
+      "mm": 1612.925,
       "src": "DERIVED",
       "note": ""
     },
     "latch_cl": {
-      "value_in": 26.375,
-      "mm": 669.925,
+      "value_in": 49.291,
+      "mm": 1251.991,
       "src": "DERIVED",
       "note": ""
     },
@@ -530,14 +549,26 @@
       "note": ""
     },
     "band_ratio": {
-      "value_in": 1.682,
-      "mm": 42.723,
+      "value_in": 1.618,
+      "mm": 41.097,
+      "src": "DERIVED",
+      "note": ""
+    },
+    "light_minor": {
+      "value_in": 8.085,
+      "mm": 205.359,
+      "src": "DERIVED",
+      "note": ""
+    },
+    "light_major": {
+      "value_in": 13.081,
+      "mm": 332.257,
       "src": "DERIVED",
       "note": ""
     },
     "n_bay": {
-      "value_in": 1,
-      "mm": 25.4,
+      "value_in": 2,
+      "mm": 50.8,
       "src": "DERIVED",
       "note": ""
     },
@@ -572,8 +603,8 @@
       "note": ""
     },
     "n_gate_boards": {
-      "value_in": 7,
-      "mm": 177.8,
+      "value_in": 3,
+      "mm": 76.2,
       "src": "DERIVED",
       "note": ""
     },
@@ -687,170 +718,2292 @@
     ],
     "bay_clear": 46.5,
     "gate_clear": 36.0,
-    "nuki_x0": 39.0,
-    "nuki_x1": 143.5,
-    "nuki_len": 104.5,
-    "cap_x0": 38.75,
-    "cap_len": 105.0,
+    "nuki_x0": 36.5,
+    "nuki_x1": 146.0,
+    "nuki_len": 109.5,
+    "cap_x0": 36.0,
+    "cap_len": 110.5,
     "cap_stub_len": 4.5,
     "post_body_h": 63.5,
     "post_blank_l": 67.0,
     "rail_cls": [
-      10.125,
-      26.375,
-      42.625
+      25.46,
+      49.291
     ],
     "slats": [
       {
         "id": "K-001",
-        "mark": "KICK",
-        "stock": "2x6 PT",
-        "h": 5.5,
+        "mark": "WATER",
+        "stock": "2x12 PT",
+        "h": 11.25,
         "z0": 0.0,
-        "z1": 5.5,
-        "cl": 2.75,
+        "z1": 11.25,
+        "cl": 5.625,
         "nuki": true,
-        "role": "dog seal / splash nuki"
+        "role": "water table / dog seal / earth line"
+      },
+      {
+        "id": "Q-001",
+        "mark": "L1",
+        "stock": "cassette",
+        "h": 8.085,
+        "z0": 12.0,
+        "z1": 20.085,
+        "cl": 16.043,
+        "nuki": false,
+        "role": "nested-rects light (roots)"
       },
       {
         "id": "R-001",
-        "mark": "S1",
+        "mark": "BELT1",
         "stock": "2x10",
         "h": 9.25,
-        "z0": 5.5,
-        "z1": 14.75,
-        "cl": 10.125,
+        "z0": 20.835,
+        "z1": 30.085,
+        "cl": 25.46,
         "nuki": true,
-        "role": "major Prairie nuki"
+        "role": "projecting Prairie belt"
+      },
+      {
+        "id": "Q-002",
+        "mark": "L2",
+        "stock": "cassette",
+        "h": 13.081,
+        "z0": 30.835,
+        "z1": 43.916,
+        "cl": 37.376,
+        "nuki": false,
+        "role": "Tree of Life light (three trees)"
       },
       {
         "id": "R-002",
-        "mark": "S2",
-        "stock": "2x6",
-        "h": 5.5,
-        "z0": 15.5,
-        "z1": 21.0,
-        "cl": 18.25,
-        "nuki": false,
-        "role": "housed screen"
-      },
-      {
-        "id": "R-003",
-        "mark": "S3",
+        "mark": "BELT2",
         "stock": "2x10",
         "h": 9.25,
-        "z0": 21.75,
-        "z1": 31.0,
-        "cl": 26.375,
+        "z0": 44.666,
+        "z1": 53.916,
+        "cl": 49.291,
         "nuki": true,
-        "role": "major Prairie nuki / latch CL"
+        "role": "projecting Prairie belt / latch CL"
       },
       {
-        "id": "R-004",
-        "mark": "S4",
-        "stock": "2x6",
-        "h": 5.5,
-        "z0": 31.75,
-        "z1": 37.25,
-        "cl": 34.5,
+        "id": "Q-003",
+        "mark": "L3",
+        "stock": "cassette",
+        "h": 8.085,
+        "z0": 54.666,
+        "z1": 62.751,
+        "cl": 58.709,
         "nuki": false,
-        "role": "housed screen"
-      },
-      {
-        "id": "R-005",
-        "mark": "S5",
-        "stock": "2x10",
-        "h": 9.25,
-        "z0": 38.0,
-        "z1": 47.25,
-        "cl": 42.625,
-        "nuki": true,
-        "role": "major Prairie nuki"
-      },
-      {
-        "id": "R-006",
-        "mark": "S6",
-        "stock": "2x6",
-        "h": 5.5,
-        "z0": 48.0,
-        "z1": 53.5,
-        "cl": 50.75,
-        "nuki": false,
-        "role": "housed screen"
-      },
-      {
-        "id": "R-007",
-        "mark": "S7",
-        "stock": "2x10",
-        "h": 9.25,
-        "z0": 54.25,
-        "z1": 63.5,
-        "cl": 58.875,
-        "nuki": false,
-        "role": "housed upper band \u2014 not nuki (keep post web)"
+        "role": "nested-rects light (foliage)"
       }
     ],
-    "slat_top": 63.5,
-    "latch_cl": 26.375,
+    "lights": [
+      {
+        "id": "Q-001",
+        "mark": "L1",
+        "stock": "cassette",
+        "h": 8.085,
+        "z0": 12.0,
+        "z1": 20.085,
+        "cl": 16.043,
+        "nuki": false,
+        "role": "nested-rects light (roots)"
+      },
+      {
+        "id": "Q-002",
+        "mark": "L2",
+        "stock": "cassette",
+        "h": 13.081,
+        "z0": 30.835,
+        "z1": 43.916,
+        "cl": 37.376,
+        "nuki": false,
+        "role": "Tree of Life light (three trees)"
+      },
+      {
+        "id": "Q-003",
+        "mark": "L3",
+        "stock": "cassette",
+        "h": 8.085,
+        "z0": 54.666,
+        "z1": 62.751,
+        "cl": 58.709,
+        "nuki": false,
+        "role": "nested-rects light (foliage)"
+      }
+    ],
+    "motifs": [
+      {
+        "kind": "nested-rects",
+        "x0": 43.0,
+        "z0": 12.0,
+        "w": 46.5,
+        "h": 8.085,
+        "rects": [
+          {
+            "x": 43.0,
+            "z": 12.0,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 43.0,
+            "z": 19.335,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 43.0,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 88.75,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 45.25,
+            "z": 14.25,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 45.25,
+            "z": 17.085,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 45.25,
+            "z": 14.25,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 86.5,
+            "z": 14.25,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 60.386,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 71.364,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 45.35,
+            "z": 14.35,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 85.5,
+            "z": 14.35,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 45.35,
+            "z": 16.085,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 85.5,
+            "z": 16.085,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          }
+        ],
+        "lines": [],
+        "bay": 0,
+        "part": "Q-001"
+      },
+      {
+        "kind": "tree-of-life",
+        "x0": 43.0,
+        "z0": 30.835,
+        "w": 46.5,
+        "h": 13.081,
+        "rects": [
+          {
+            "x": 49.57,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 43.75,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 56.55,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 50.15,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 46.965,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 50.375,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 53.785,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 44.495,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 55.655,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 45.27,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 54.88,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 46.045,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 54.105,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 43.0,
+            "z": 30.835,
+            "w": 0.75,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 58.05,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 65.07,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 59.25,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 72.05,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 65.65,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 62.465,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 65.875,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 69.285,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 59.995,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 71.155,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 60.77,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 70.38,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 61.545,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 69.605,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 58.5,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 73.55,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 80.57,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 74.75,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 87.55,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 81.15,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 77.965,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 81.375,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 84.785,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 75.495,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 86.655,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 76.27,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 85.88,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 77.045,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 85.105,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 74.0,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 88.75,
+            "z": 30.835,
+            "w": 0.75,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 43.0,
+            "z": 30.835,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 43.0,
+            "z": 43.166,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          }
+        ],
+        "lines": [
+          {
+            "x1": 45.17,
+            "z1": 39.144,
+            "x2": 50.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 56.33,
+            "z1": 39.144,
+            "x2": 50.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 45.945,
+            "z1": 40.801,
+            "x2": 50.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 55.555,
+            "z1": 40.801,
+            "x2": 50.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 46.72,
+            "z1": 42.458,
+            "x2": 50.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 54.78,
+            "z1": 42.458,
+            "x2": 50.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 60.67,
+            "z1": 39.144,
+            "x2": 66.25,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 71.83,
+            "z1": 39.144,
+            "x2": 66.25,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 61.445,
+            "z1": 40.801,
+            "x2": 66.25,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 71.055,
+            "z1": 40.801,
+            "x2": 66.25,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 62.22,
+            "z1": 42.458,
+            "x2": 66.25,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 70.28,
+            "z1": 42.458,
+            "x2": 66.25,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 76.17,
+            "z1": 39.144,
+            "x2": 81.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 87.33,
+            "z1": 39.144,
+            "x2": 81.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 76.945,
+            "z1": 40.801,
+            "x2": 81.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 86.555,
+            "z1": 40.801,
+            "x2": 81.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 77.72,
+            "z1": 42.458,
+            "x2": 81.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 85.78,
+            "z1": 42.458,
+            "x2": 81.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          }
+        ],
+        "bay": 0,
+        "part": "Q-002"
+      },
+      {
+        "kind": "nested-rects",
+        "x0": 43.0,
+        "z0": 54.666,
+        "w": 46.5,
+        "h": 8.085,
+        "rects": [
+          {
+            "x": 43.0,
+            "z": 54.666,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 43.0,
+            "z": 62.001,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 43.0,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 88.75,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 45.25,
+            "z": 56.916,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 45.25,
+            "z": 59.751,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 45.25,
+            "z": 56.916,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 86.5,
+            "z": 56.916,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 60.386,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 71.364,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 45.35,
+            "z": 57.016,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 85.5,
+            "z": 57.016,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 45.35,
+            "z": 58.751,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 85.5,
+            "z": 58.751,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          }
+        ],
+        "lines": [],
+        "bay": 0,
+        "part": "Q-003"
+      },
+      {
+        "kind": "nested-rects",
+        "x0": 93.0,
+        "z0": 12.0,
+        "w": 46.5,
+        "h": 8.085,
+        "rects": [
+          {
+            "x": 93.0,
+            "z": 12.0,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 93.0,
+            "z": 19.335,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 93.0,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 138.75,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 95.25,
+            "z": 14.25,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 95.25,
+            "z": 17.085,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 95.25,
+            "z": 14.25,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 136.5,
+            "z": 14.25,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 110.386,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 121.364,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 95.35,
+            "z": 14.35,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 135.5,
+            "z": 14.35,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 95.35,
+            "z": 16.085,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 135.5,
+            "z": 16.085,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          }
+        ],
+        "lines": [],
+        "bay": 1,
+        "part": "Q-001"
+      },
+      {
+        "kind": "tree-of-life",
+        "x0": 93.0,
+        "z0": 30.835,
+        "w": 46.5,
+        "h": 13.081,
+        "rects": [
+          {
+            "x": 99.57,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 93.75,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 106.55,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 100.15,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 96.965,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 100.375,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 103.785,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 94.495,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 105.655,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 95.27,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 104.88,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 96.045,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 104.105,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 93.0,
+            "z": 30.835,
+            "w": 0.75,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 108.05,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 115.07,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 109.25,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 122.05,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 115.65,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 112.465,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 115.875,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 119.285,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 109.995,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 121.155,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 110.77,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 120.38,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 111.545,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 119.605,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 108.5,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 123.55,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 130.57,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 124.75,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 137.55,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 131.15,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 127.965,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 131.375,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 134.785,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 125.495,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 136.655,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 126.27,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 135.88,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 127.045,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 135.105,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 124.0,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 138.75,
+            "z": 30.835,
+            "w": 0.75,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 93.0,
+            "z": 30.835,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 93.0,
+            "z": 43.166,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          }
+        ],
+        "lines": [
+          {
+            "x1": 95.17,
+            "z1": 39.144,
+            "x2": 100.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 106.33,
+            "z1": 39.144,
+            "x2": 100.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 95.945,
+            "z1": 40.801,
+            "x2": 100.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 105.555,
+            "z1": 40.801,
+            "x2": 100.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 96.72,
+            "z1": 42.458,
+            "x2": 100.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 104.78,
+            "z1": 42.458,
+            "x2": 100.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 110.67,
+            "z1": 39.144,
+            "x2": 116.25,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 121.83,
+            "z1": 39.144,
+            "x2": 116.25,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 111.445,
+            "z1": 40.801,
+            "x2": 116.25,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 121.055,
+            "z1": 40.801,
+            "x2": 116.25,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 112.22,
+            "z1": 42.458,
+            "x2": 116.25,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 120.28,
+            "z1": 42.458,
+            "x2": 116.25,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 126.17,
+            "z1": 39.144,
+            "x2": 131.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 137.33,
+            "z1": 39.144,
+            "x2": 131.75,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 126.945,
+            "z1": 40.801,
+            "x2": 131.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 136.555,
+            "z1": 40.801,
+            "x2": 131.75,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 127.72,
+            "z1": 42.458,
+            "x2": 131.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 135.78,
+            "z1": 42.458,
+            "x2": 131.75,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          }
+        ],
+        "bay": 1,
+        "part": "Q-002"
+      },
+      {
+        "kind": "nested-rects",
+        "x0": 93.0,
+        "z0": 54.666,
+        "w": 46.5,
+        "h": 8.085,
+        "rects": [
+          {
+            "x": 93.0,
+            "z": 54.666,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 93.0,
+            "z": 62.001,
+            "w": 46.5,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 93.0,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 138.75,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 95.25,
+            "z": 56.916,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 95.25,
+            "z": 59.751,
+            "w": 42.0,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 95.25,
+            "z": 56.916,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 136.5,
+            "z": 56.916,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 110.386,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 121.364,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 95.35,
+            "z": 57.016,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 135.5,
+            "z": 57.016,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 95.35,
+            "z": 58.751,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 135.5,
+            "z": 58.751,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          }
+        ],
+        "lines": [],
+        "bay": 1,
+        "part": "Q-003"
+      },
+      {
+        "kind": "nested-rects",
+        "x0": 7.5,
+        "z0": 12.0,
+        "w": 28.0,
+        "h": 8.085,
+        "rects": [
+          {
+            "x": 7.5,
+            "z": 12.0,
+            "w": 28.0,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 7.5,
+            "z": 19.335,
+            "w": 28.0,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 7.5,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 34.75,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 9.75,
+            "z": 14.25,
+            "w": 23.5,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 9.75,
+            "z": 17.085,
+            "w": 23.5,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 9.75,
+            "z": 14.25,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 32.5,
+            "z": 14.25,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 17.82,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 24.43,
+            "z": 12.0,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 9.85,
+            "z": 14.35,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 31.5,
+            "z": 14.35,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 9.85,
+            "z": 16.085,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 31.5,
+            "z": 16.085,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          }
+        ],
+        "lines": [],
+        "bay": "gate",
+        "part": "Q-001"
+      },
+      {
+        "kind": "tree-of-life",
+        "x0": 7.5,
+        "z0": 30.835,
+        "w": 28.0,
+        "h": 13.081,
+        "rects": [
+          {
+            "x": 10.987,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 8.25,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 14.883,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 11.567,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 9.738,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 11.792,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 13.845,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 8.132,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 14.852,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 8.598,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 14.385,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 9.065,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 13.918,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 7.5,
+            "z": 30.835,
+            "w": 0.75,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 16.383,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 20.32,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 17.583,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 24.217,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 20.9,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 19.072,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 21.125,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 23.178,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 17.465,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 24.185,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 17.932,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 23.718,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 18.398,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 23.252,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 16.833,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 25.717,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 29.653,
+            "z": 31.094,
+            "w": 2.36,
+            "h": 2.36,
+            "role": "pot"
+          },
+          {
+            "x": 26.917,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 33.55,
+            "z": 31.585,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 30.233,
+            "z": 32.363,
+            "w": 1.2,
+            "h": 1.2,
+            "role": "root-sq"
+          },
+          {
+            "x": 28.405,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 30.458,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 32.512,
+            "z": 33.713,
+            "w": 0.75,
+            "h": 5.232,
+            "role": "trunk"
+          },
+          {
+            "x": 26.798,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 33.518,
+            "z": 38.469,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 27.265,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 33.052,
+            "z": 40.126,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 27.732,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 32.585,
+            "z": 41.783,
+            "w": 1.35,
+            "h": 1.35,
+            "role": "leaf"
+          },
+          {
+            "x": 26.167,
+            "z": 30.835,
+            "w": 0.45,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 34.75,
+            "z": 30.835,
+            "w": 0.75,
+            "h": 13.081,
+            "role": "frame"
+          },
+          {
+            "x": 7.5,
+            "z": 30.835,
+            "w": 28.0,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 7.5,
+            "z": 43.166,
+            "w": 28.0,
+            "h": 0.75,
+            "role": "frame"
+          }
+        ],
+        "lines": [
+          {
+            "x1": 8.807,
+            "z1": 39.144,
+            "x2": 12.167,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 15.527,
+            "z1": 39.144,
+            "x2": 12.167,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 9.273,
+            "z1": 40.801,
+            "x2": 12.167,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 15.06,
+            "z1": 40.801,
+            "x2": 12.167,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 9.74,
+            "z1": 42.458,
+            "x2": 12.167,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 14.593,
+            "z1": 42.458,
+            "x2": 12.167,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 18.14,
+            "z1": 39.144,
+            "x2": 21.5,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 24.86,
+            "z1": 39.144,
+            "x2": 21.5,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 18.607,
+            "z1": 40.801,
+            "x2": 21.5,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 24.393,
+            "z1": 40.801,
+            "x2": 21.5,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 19.073,
+            "z1": 42.458,
+            "x2": 21.5,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 23.927,
+            "z1": 42.458,
+            "x2": 21.5,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 27.473,
+            "z1": 39.144,
+            "x2": 30.833,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 34.193,
+            "z1": 39.144,
+            "x2": 30.833,
+            "z2": 40.304,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 27.94,
+            "z1": 40.801,
+            "x2": 30.833,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 33.727,
+            "z1": 40.801,
+            "x2": 30.833,
+            "z2": 41.961,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 28.407,
+            "z1": 42.458,
+            "x2": 30.833,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          },
+          {
+            "x1": 33.26,
+            "z1": 42.458,
+            "x2": 30.833,
+            "z2": 43.618,
+            "t": 0.75,
+            "role": "branch"
+          }
+        ],
+        "bay": "gate",
+        "part": "Q-002"
+      },
+      {
+        "kind": "nested-rects",
+        "x0": 7.5,
+        "z0": 54.666,
+        "w": 28.0,
+        "h": 8.085,
+        "rects": [
+          {
+            "x": 7.5,
+            "z": 54.666,
+            "w": 28.0,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 7.5,
+            "z": 62.001,
+            "w": 28.0,
+            "h": 0.75,
+            "role": "frame"
+          },
+          {
+            "x": 7.5,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 34.75,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "frame"
+          },
+          {
+            "x": 9.75,
+            "z": 56.916,
+            "w": 23.5,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 9.75,
+            "z": 59.751,
+            "w": 23.5,
+            "h": 0.75,
+            "role": "inner"
+          },
+          {
+            "x": 9.75,
+            "z": 56.916,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 32.5,
+            "z": 56.916,
+            "w": 0.75,
+            "h": 3.585,
+            "role": "inner"
+          },
+          {
+            "x": 17.82,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 24.43,
+            "z": 54.666,
+            "w": 0.75,
+            "h": 8.085,
+            "role": "mullion"
+          },
+          {
+            "x": 9.85,
+            "z": 57.016,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 31.5,
+            "z": 57.016,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 9.85,
+            "z": 58.751,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          },
+          {
+            "x": 31.5,
+            "z": 58.751,
+            "w": 1.65,
+            "h": 1.65,
+            "role": "leaf"
+          }
+        ],
+        "lines": [],
+        "bay": "gate",
+        "part": "Q-003"
+      }
+    ],
+    "slat_top": 63.501,
+    "latch_cl": 49.291,
     "phi": 1.61803,
-    "band_ratio": 1.682,
+    "band_ratio": 1.618,
+    "light_minor": 8.085,
+    "light_major": 13.081,
     "courses": [
       {
         "id": "K-001",
         "z0": 0.0,
-        "z1": 5.5,
-        "h": 5.5
+        "z1": 11.25,
+        "h": 11.25
+      },
+      {
+        "id": "Q-001",
+        "z0": 12.0,
+        "z1": 20.085,
+        "h": 8.085
       },
       {
         "id": "R-001",
-        "z0": 5.5,
-        "z1": 14.75,
+        "z0": 20.835,
+        "z1": 30.085,
         "h": 9.25
+      },
+      {
+        "id": "Q-002",
+        "z0": 30.835,
+        "z1": 43.916,
+        "h": 13.081
       },
       {
         "id": "R-002",
-        "z0": 15.5,
-        "z1": 21.0,
-        "h": 5.5
-      },
-      {
-        "id": "R-003",
-        "z0": 21.75,
-        "z1": 31.0,
+        "z0": 44.666,
+        "z1": 53.916,
         "h": 9.25
       },
       {
-        "id": "R-004",
-        "z0": 31.75,
-        "z1": 37.25,
-        "h": 5.5
-      },
-      {
-        "id": "R-005",
-        "z0": 38.0,
-        "z1": 47.25,
-        "h": 9.25
-      },
-      {
-        "id": "R-006",
-        "z0": 48.0,
-        "z1": 53.5,
-        "h": 5.5
-      },
-      {
-        "id": "R-007",
-        "z0": 54.25,
-        "z1": 63.5,
-        "h": 9.25
+        "id": "Q-003",
+        "z0": 54.666,
+        "z1": 62.751,
+        "h": 8.085
       }
     ],
-    "n_bay": 1,
+    "n_bay": 2,
     "board_inset": 0.0,
     "used_bay": 46.5,
     "gate_leaf_w": 35.0,
     "gate_h": 62.625,
     "gate_inner": 28.0,
-    "n_gate_boards": 7,
+    "n_gate_boards": 3,
     "sill_len": 155.0,
     "sill_t": 3.5,
     "sill_h": 5.5,
@@ -884,9 +3037,9 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "OP010\u2013OP100 post routing",
-      "JOINERY": "foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; latch-bar mortise (Latch B); no kusabi (gate side); NO planter",
+      "JOINERY": "foot tenon into F-003; through-nuki K-001 + R-001 + R-002; cassette dados for Q-001/002/003; latch-bar mortise (Latch B); no kusabi (gate side); NO planter",
       "NOTES": "latch post",
       "HANDED": "IDENTICAL",
       "FIT": "",
@@ -918,9 +3071,9 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "OP010\u2013OP100 post routing",
-      "JOINERY": "foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; kusabi slots on nuki; oak pivot sockets top+bottom",
+      "JOINERY": "foot tenon into F-003; through-nuki K-001 + R-001 + R-002; cassette dados for Q-001/002/003; kusabi slots on nuki; oak pivot sockets top+bottom",
       "NOTES": "hinge post",
       "HANDED": "IDENTICAL",
       "FIT": "",
@@ -952,9 +3105,9 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "OP010\u2013OP100 post routing",
-      "JOINERY": "foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; kusabi slots; cap scarf bearing",
+      "JOINERY": "foot tenon into F-003; through-nuki K-001 + R-001 + R-002; cassette dados for Q-001/002/003; kusabi slots; cap scarf bearing",
       "NOTES": "mid post / cap scarf",
       "HANDED": "IDENTICAL",
       "FIT": "",
@@ -986,9 +3139,9 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "OP010\u2013OP100 post routing",
-      "JOINERY": "foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; kusabi slots; slats withdraw toward P3",
+      "JOINERY": "foot tenon into F-003; through-nuki K-001 + R-001 + R-002; cassette dados for Q-001/002/003; kusabi slots; slats withdraw toward P3",
       "NOTES": "end post",
       "HANDED": "IDENTICAL",
       "FIT": "",
@@ -1020,7 +3173,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "OP010\u2013OP080 slat routing",
       "JOINERY": "nuki through L-002/003/004; kusabi",
       "NOTES": "",
@@ -1029,7 +3182,7 @@
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
       "PART_ID": "R-001",
-      "PART_NAME": "S1 major Prairie nuki",
+      "PART_NAME": "BELT1 projecting Prairie belt",
       "PART_CATEGORY": "R",
       "ASSEMBLY": "A-020 PRIVACY_FRAME",
       "QUANTITY": 1,
@@ -1038,12 +3191,12 @@
       "PURCHASE": "2\u00d710 \u00d7 10\u2032",
       "ROUGH_THICKNESS": 1.5,
       "ROUGH_WIDTH": 9.25,
-      "ROUGH_LENGTH": 105.5,
+      "ROUGH_LENGTH": 110.5,
       "FINISHED_THICKNESS": 1.5,
       "FINISHED_WIDTH": 9.25,
-      "FINISHED_LENGTH": 104.5,
+      "FINISHED_LENGTH": 109.5,
       "BOARD_FEET": 16.67,
-      "cl": 10.125,
+      "cl": 25.46,
       "nuki": true
     },
     {
@@ -1053,49 +3206,16 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "OP010\u2013OP080 slat routing",
-      "JOINERY": "housed 0.75\" dado in posts; lock batten / friction",
+      "JOINERY": "nuki through L-002/003/004; kusabi",
       "NOTES": "",
       "HANDED": "IDENTICAL",
       "FIT": "SLIDING in mortise/dado",
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
       "PART_ID": "R-002",
-      "PART_NAME": "S2 housed screen",
-      "PART_CATEGORY": "R",
-      "ASSEMBLY": "A-020 PRIVACY_FRAME",
-      "QUANTITY": 1,
-      "MATERIAL": "solid lumber",
-      "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "2\u00d76 \u00d7 10\u2032",
-      "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 5.5,
-      "ROUGH_LENGTH": 105.5,
-      "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 5.5,
-      "FINISHED_LENGTH": 104.5,
-      "BOARD_FEET": 10.0,
-      "cl": 18.25,
-      "nuki": false
-    },
-    {
-      "MAKE_OR_BUY": "MAKE",
-      "GRADE": "paint-grade #2 or better, straight",
-      "GRAIN_DIRECTION": "length",
-      "REFERENCE_FACE": "garden face (Y-)",
-      "REFERENCE_EDGE": "latch-side (X-)",
-      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
-      "PROCESS": "OP010\u2013OP080 slat routing",
-      "JOINERY": "nuki through L-002/003/004; kusabi",
-      "NOTES": "",
-      "HANDED": "IDENTICAL",
-      "FIT": "SLIDING in mortise/dado",
-      "TOLERANCE_CLASS": "T2",
-      "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
-      "PART_ID": "R-003",
-      "PART_NAME": "S3 major Prairie nuki / latch CL",
+      "PART_NAME": "BELT2 projecting Prairie belt / latch CL",
       "PART_CATEGORY": "R",
       "ASSEMBLY": "A-020 PRIVACY_FRAME",
       "QUANTITY": 1,
@@ -1104,12 +3224,12 @@
       "PURCHASE": "2\u00d710 \u00d7 10\u2032",
       "ROUGH_THICKNESS": 1.5,
       "ROUGH_WIDTH": 9.25,
-      "ROUGH_LENGTH": 105.5,
+      "ROUGH_LENGTH": 110.5,
       "FINISHED_THICKNESS": 1.5,
       "FINISHED_WIDTH": 9.25,
-      "FINISHED_LENGTH": 104.5,
+      "FINISHED_LENGTH": 109.5,
       "BOARD_FEET": 16.67,
-      "cl": 26.375,
+      "cl": 49.291,
       "nuki": true
     },
     {
@@ -1119,162 +3239,30 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
-      "PROCESS": "OP010\u2013OP080 slat routing",
-      "JOINERY": "housed 0.75\" dado in posts; lock batten / friction",
-      "NOTES": "",
-      "HANDED": "IDENTICAL",
-      "FIT": "SLIDING in mortise/dado",
-      "TOLERANCE_CLASS": "T2",
-      "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
-      "PART_ID": "R-004",
-      "PART_NAME": "S4 housed screen",
-      "PART_CATEGORY": "R",
-      "ASSEMBLY": "A-020 PRIVACY_FRAME",
-      "QUANTITY": 1,
-      "MATERIAL": "solid lumber",
-      "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "2\u00d76 \u00d7 10\u2032",
-      "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 5.5,
-      "ROUGH_LENGTH": 105.5,
-      "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 5.5,
-      "FINISHED_LENGTH": 104.5,
-      "BOARD_FEET": 10.0,
-      "cl": 34.5,
-      "nuki": false
-    },
-    {
-      "MAKE_OR_BUY": "MAKE",
-      "GRADE": "paint-grade #2 or better, straight",
-      "GRAIN_DIRECTION": "length",
-      "REFERENCE_FACE": "garden face (Y-)",
-      "REFERENCE_EDGE": "latch-side (X-)",
-      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
-      "PROCESS": "OP010\u2013OP080 slat routing",
-      "JOINERY": "nuki through L-002/003/004; kusabi",
-      "NOTES": "",
-      "HANDED": "IDENTICAL",
-      "FIT": "SLIDING in mortise/dado",
-      "TOLERANCE_CLASS": "T2",
-      "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
-      "PART_ID": "R-005",
-      "PART_NAME": "S5 major Prairie nuki",
-      "PART_CATEGORY": "R",
-      "ASSEMBLY": "A-020 PRIVACY_FRAME",
-      "QUANTITY": 1,
-      "MATERIAL": "solid lumber",
-      "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "2\u00d710 \u00d7 10\u2032",
-      "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 9.25,
-      "ROUGH_LENGTH": 105.5,
-      "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 9.25,
-      "FINISHED_LENGTH": 104.5,
-      "BOARD_FEET": 16.67,
-      "cl": 42.625,
-      "nuki": true
-    },
-    {
-      "MAKE_OR_BUY": "MAKE",
-      "GRADE": "paint-grade #2 or better, straight",
-      "GRAIN_DIRECTION": "length",
-      "REFERENCE_FACE": "garden face (Y-)",
-      "REFERENCE_EDGE": "latch-side (X-)",
-      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
-      "PROCESS": "OP010\u2013OP080 slat routing",
-      "JOINERY": "housed 0.75\" dado in posts; lock batten / friction",
-      "NOTES": "",
-      "HANDED": "IDENTICAL",
-      "FIT": "SLIDING in mortise/dado",
-      "TOLERANCE_CLASS": "T2",
-      "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
-      "PART_ID": "R-006",
-      "PART_NAME": "S6 housed screen",
-      "PART_CATEGORY": "R",
-      "ASSEMBLY": "A-020 PRIVACY_FRAME",
-      "QUANTITY": 1,
-      "MATERIAL": "solid lumber",
-      "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "2\u00d76 \u00d7 10\u2032",
-      "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 5.5,
-      "ROUGH_LENGTH": 105.5,
-      "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 5.5,
-      "FINISHED_LENGTH": 104.5,
-      "BOARD_FEET": 10.0,
-      "cl": 50.75,
-      "nuki": false
-    },
-    {
-      "MAKE_OR_BUY": "MAKE",
-      "GRADE": "paint-grade #2 or better, straight",
-      "GRAIN_DIRECTION": "length",
-      "REFERENCE_FACE": "garden face (Y-)",
-      "REFERENCE_EDGE": "latch-side (X-)",
-      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
-      "PROCESS": "OP010\u2013OP080 slat routing",
-      "JOINERY": "housed 0.75\" dado in posts; lock batten / friction",
-      "NOTES": "",
-      "HANDED": "IDENTICAL",
-      "FIT": "SLIDING in mortise/dado",
-      "TOLERANCE_CLASS": "T2",
-      "MOVEMENT": "FLOATING along length; locked by kusabi at nuki posts",
-      "PART_ID": "R-007",
-      "PART_NAME": "S7 housed upper band \u2014 not nuki (keep post web)",
-      "PART_CATEGORY": "R",
-      "ASSEMBLY": "A-020 PRIVACY_FRAME",
-      "QUANTITY": 1,
-      "MATERIAL": "solid lumber",
-      "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "2\u00d710 \u00d7 10\u2032",
-      "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 9.25,
-      "ROUGH_LENGTH": 105.5,
-      "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 9.25,
-      "FINISHED_LENGTH": 104.5,
-      "BOARD_FEET": 16.67,
-      "cl": 58.875,
-      "nuki": false
-    },
-    {
-      "MAKE_OR_BUY": "MAKE",
-      "GRADE": "paint-grade #2 or better, straight",
-      "GRAIN_DIRECTION": "length",
-      "REFERENCE_FACE": "garden face (Y-)",
-      "REFERENCE_EDGE": "latch-side (X-)",
-      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
-      "JOINERY": "nuki through L-002/003/004 at z=0\u20135.5; wear part 8\u201312 yr",
-      "NOTES": "Bottom of screen. \u00be\u2033 gaps above. Dog cannot crawl under. PT because splash.",
+      "JOINERY": "nuki through L-002/003/004; projects 3\u2033 past piers",
+      "NOTES": "Wright earth line. Solid. Dog cannot crawl. PT because splash. Cassette Q-001 sits in the top edge groove.",
       "HANDED": "IDENTICAL",
       "FIT": "",
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FIXED",
       "PART_ID": "K-001",
-      "PART_NAME": "Kickboard nuki (dog seal)",
+      "PART_NAME": "Water table nuki (earth line / dog seal)",
       "PART_CATEGORY": "R",
       "ASSEMBLY": "A-020 PRIVACY_FRAME",
       "QUANTITY": 1,
-      "MATERIAL": "PT UC4A 2\u00d76 (paint after dry)",
+      "MATERIAL": "PT UC4A 2\u00d712 (paint after dry)",
       "SPECIES": "southern yellow pine",
-      "PURCHASE": "2\u00d76 PT \u00d7 10\u2032",
+      "PURCHASE": "2\u00d712 PT \u00d7 10\u2032",
       "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 5.5,
-      "ROUGH_LENGTH": 105.5,
+      "ROUGH_WIDTH": 11.25,
+      "ROUGH_LENGTH": 110.5,
       "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 5.5,
-      "FINISHED_LENGTH": 104.5,
-      "BOARD_FEET": 10.0,
-      "cl": 2.75
+      "FINISHED_WIDTH": 11.25,
+      "FINISHED_LENGTH": 109.5,
+      "BOARD_FEET": 20.0,
+      "cl": 5.625
     },
     {
       "MAKE_OR_BUY": "MAKE",
@@ -1283,29 +3271,29 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "kama-tsugi scarf at L-003 centerline, drawbored; soffit dado for H-006 tape light",
-      "NOTES": "Cut as two halves after scarf layout. Light channel on yard soffit \u2014 wood cover slat. Wright \u2018light screen\u2019.",
+      "NOTES": "Wright eave \u2014 thin and wide. Cantilevers past the 4\u00d76 piers. Light channel on yard soffit. 1\u00d74 fascia C-003 hangs on the garden edge.",
       "HANDED": "LEFT-HAND + RIGHT-HAND halves after scarf",
       "FIT": "",
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FIXED at scarf; cap floats slightly on post tops",
       "PART_ID": "C-001",
-      "PART_NAME": "Privacy cap (kama-tsugi pair)",
+      "PART_NAME": "Prairie eave (kama-tsugi pair)",
       "PART_CATEGORY": "C",
       "ASSEMBLY": "A-020 PRIVACY_FRAME",
       "QUANTITY": 1,
       "MATERIAL": "solid lumber",
       "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "2\u00d78 \u00d7 12\u2032",
+      "PURCHASE": "2\u00d712 \u00d7 12\u2032",
       "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 7.25,
-      "ROUGH_LENGTH": 106.0,
+      "ROUGH_WIDTH": 11.25,
+      "ROUGH_LENGTH": 111.5,
       "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 7.25,
-      "FINISHED_LENGTH": 105.0,
-      "BOARD_FEET": 16.0
+      "FINISHED_WIDTH": 11.25,
+      "FINISHED_LENGTH": 110.5,
+      "BOARD_FEET": 24.0
     },
     {
       "MAKE_OR_BUY": "MAKE",
@@ -1314,7 +3302,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "hozo to L-001 top",
       "NOTES": "Does not bridge gate",
@@ -1329,12 +3317,12 @@
       "QUANTITY": 1,
       "MATERIAL": "solid lumber",
       "SPECIES": "SPF/SYP paint-grade",
-      "PURCHASE": "from C-001 offcut / 2\u00d78",
+      "PURCHASE": "from C-001 offcut / 2\u00d712",
       "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 7.25,
+      "ROUGH_WIDTH": 11.25,
       "ROUGH_LENGTH": 5.0,
       "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 7.25,
+      "FINISHED_WIDTH": 11.25,
       "FINISHED_LENGTH": 4.5,
       "BOARD_FEET": 0
     },
@@ -1345,10 +3333,137 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
+      "PROCESS": "",
+      "JOINERY": "housed under C-001 garden edge; oak pegs",
+      "NOTES": "The shadow line that makes the cap read as a Wright eave, not a 2\u00d7 lid.",
+      "HANDED": "IDENTICAL",
+      "FIT": "",
+      "TOLERANCE_CLASS": "T1",
+      "MOVEMENT": "FIXED",
+      "PART_ID": "C-003",
+      "PART_NAME": "Eave fascia (garden shadow)",
+      "PART_CATEGORY": "C",
+      "ASSEMBLY": "A-020 PRIVACY_FRAME",
+      "QUANTITY": 1,
+      "MATERIAL": "solid lumber",
+      "SPECIES": "SPF/SYP",
+      "PURCHASE": "1\u00d74 \u00d7 12\u2032",
+      "ROUGH_THICKNESS": 0.75,
+      "ROUGH_WIDTH": 3.5,
+      "ROUGH_LENGTH": 111.5,
+      "FINISHED_THICKNESS": 0.75,
+      "FINISHED_WIDTH": 3.5,
+      "FINISHED_LENGTH": 110.5,
+      "BOARD_FEET": 4.0
+    },
+    {
+      "MAKE_OR_BUY": "MAKE",
+      "GRADE": "paint-grade #2 or better, straight",
+      "GRAIN_DIRECTION": "length",
+      "REFERENCE_FACE": "garden face (Y-)",
+      "REFERENCE_EDGE": "latch-side (X-)",
+      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
+      "REVISION": "F",
+      "PROCESS": "",
+      "JOINERY": "framed cassette; drops into nuki grooves; winter pull toward P3",
+      "NOTES": "Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50\u2033.",
+      "HANDED": "IDENTICAL",
+      "FIT": "",
+      "TOLERANCE_CLASS": "T2",
+      "MOVEMENT": "FLOATING cassette",
+      "PART_ID": "Q-001",
+      "PART_NAME": "L1 nested-rects light (roots)",
+      "PART_CATEGORY": "Q",
+      "ASSEMBLY": "A-020 PRIVACY_FRAME",
+      "QUANTITY": 2,
+      "MATERIAL": "1\u00d72 / 1\u00d73 ripped muntins in a 1\u00d7 frame",
+      "SPECIES": "SPF/SYP paint-grade",
+      "PURCHASE": "1\u00d74 \u00d7 8\u2032 (rip to \u00be\u2033 muntins)",
+      "ROUGH_THICKNESS": 0.75,
+      "ROUGH_WIDTH": 3.5,
+      "ROUGH_LENGTH": 47.5,
+      "FINISHED_THICKNESS": 0.75,
+      "FINISHED_WIDTH": 8.085,
+      "FINISHED_LENGTH": 46.5,
+      "BOARD_FEET": 0,
+      "cl": 16.043
+    },
+    {
+      "MAKE_OR_BUY": "MAKE",
+      "GRADE": "paint-grade #2 or better, straight",
+      "GRAIN_DIRECTION": "length",
+      "REFERENCE_FACE": "garden face (Y-)",
+      "REFERENCE_EDGE": "latch-side (X-)",
+      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
+      "REVISION": "F",
+      "PROCESS": "",
+      "JOINERY": "framed cassette; drops into nuki grooves; winter pull toward P3",
+      "NOTES": "Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50\u2033.",
+      "HANDED": "IDENTICAL",
+      "FIT": "",
+      "TOLERANCE_CLASS": "T2",
+      "MOVEMENT": "FLOATING cassette",
+      "PART_ID": "Q-002",
+      "PART_NAME": "L2 Tree of Life light (three trees)",
+      "PART_CATEGORY": "Q",
+      "ASSEMBLY": "A-020 PRIVACY_FRAME",
+      "QUANTITY": 2,
+      "MATERIAL": "1\u00d72 / 1\u00d73 ripped muntins in a 1\u00d7 frame",
+      "SPECIES": "SPF/SYP paint-grade",
+      "PURCHASE": "1\u00d74 \u00d7 8\u2032 (rip to \u00be\u2033 muntins)",
+      "ROUGH_THICKNESS": 0.75,
+      "ROUGH_WIDTH": 3.5,
+      "ROUGH_LENGTH": 47.5,
+      "FINISHED_THICKNESS": 0.75,
+      "FINISHED_WIDTH": 13.081,
+      "FINISHED_LENGTH": 46.5,
+      "BOARD_FEET": 0,
+      "cl": 37.376
+    },
+    {
+      "MAKE_OR_BUY": "MAKE",
+      "GRADE": "paint-grade #2 or better, straight",
+      "GRAIN_DIRECTION": "length",
+      "REFERENCE_FACE": "garden face (Y-)",
+      "REFERENCE_EDGE": "latch-side (X-)",
+      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
+      "REVISION": "F",
+      "PROCESS": "",
+      "JOINERY": "framed cassette; drops into nuki grooves; winter pull toward P3",
+      "NOTES": "Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50\u2033.",
+      "HANDED": "IDENTICAL",
+      "FIT": "",
+      "TOLERANCE_CLASS": "T2",
+      "MOVEMENT": "FLOATING cassette",
+      "PART_ID": "Q-003",
+      "PART_NAME": "L3 nested-rects light (foliage)",
+      "PART_CATEGORY": "Q",
+      "ASSEMBLY": "A-020 PRIVACY_FRAME",
+      "QUANTITY": 2,
+      "MATERIAL": "1\u00d72 / 1\u00d73 ripped muntins in a 1\u00d7 frame",
+      "SPECIES": "SPF/SYP paint-grade",
+      "PURCHASE": "1\u00d74 \u00d7 8\u2032 (rip to \u00be\u2033 muntins)",
+      "ROUGH_THICKNESS": 0.75,
+      "ROUGH_WIDTH": 3.5,
+      "ROUGH_LENGTH": 47.5,
+      "FINISHED_THICKNESS": 0.75,
+      "FINISHED_WIDTH": 8.085,
+      "FINISHED_LENGTH": 46.5,
+      "BOARD_FEET": 0,
+      "cl": 58.709
+    },
+    {
+      "MAKE_OR_BUY": "MAKE",
+      "GRADE": "paint-grade #2 or better, straight",
+      "GRAIN_DIRECTION": "length",
+      "REFERENCE_FACE": "garden face (Y-)",
+      "REFERENCE_EDGE": "latch-side (X-)",
+      "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "\u00bc\u2033 retention pegs \u2014 \u00bd\u2033 will split the 2\u00d72",
-      "NOTES": "3-block chevron clusters \u00d7 2 heights \u00d7 P1/P2/P3 \u00d7 2 faces. Ornament only \u2014 not structure.",
+      "NOTES": "Roman-brick wrapping on P1/P2/P3 \u2014 stacked 2\u00d72 with \u215c\u2033 raked shadow joints. Darwin Martin pier texture. Ornament + shadow, not structure.",
       "HANDED": "IDENTICAL",
       "FIT": "",
       "TOLERANCE_CLASS": "T1",
@@ -1376,7 +3491,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "hozo mortises for gate bands; oak pivot gudgeons top+bottom (not pintles)",
       "NOTES": "",
@@ -1406,7 +3521,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "hozo mortises; latch-bar mortise",
       "NOTES": "",
@@ -1436,7 +3551,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "haunched hozo both ends, drawbored",
       "NOTES": "finished length includes tenons; shoulder-to-shoulder = gate_inner",
@@ -1445,7 +3560,7 @@
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FIXED",
       "PART_ID": "G-003",
-      "PART_NAME": "Gate rail aligned to R1",
+      "PART_NAME": "Gate rail aligned to BELT1",
       "PART_CATEGORY": "G",
       "ASSEMBLY": "A-030 GATE",
       "QUANTITY": 1,
@@ -1465,7 +3580,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "haunched hozo, drawbored; latch path",
       "NOTES": "",
@@ -1474,7 +3589,7 @@
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FIXED",
       "PART_ID": "G-004",
-      "PART_NAME": "Gate rail aligned to R2 (latch)",
+      "PART_NAME": "Gate rail aligned to BELT2 (latch)",
       "PART_CATEGORY": "G",
       "ASSEMBLY": "A-030 GATE",
       "QUANTITY": 1,
@@ -1494,7 +3609,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "haunched hozo, drawbored",
       "NOTES": "",
@@ -1503,7 +3618,7 @@
       "TOLERANCE_CLASS": "T2",
       "MOVEMENT": "FIXED",
       "PART_ID": "G-005",
-      "PART_NAME": "Gate rail aligned to R3",
+      "PART_NAME": "Gate top belt rail",
       "PART_CATEGORY": "G",
       "ASSEMBLY": "A-030 GATE",
       "QUANTITY": 1,
@@ -1523,7 +3638,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "hozo, drawbored",
       "NOTES": "",
@@ -1552,7 +3667,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "hozo, drawbored",
       "NOTES": "",
@@ -1581,10 +3696,10 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
-      "JOINERY": "half-lap into G-003 and G-007 (compression brace, hinge-bottom to latch-top)",
-      "NOTES": "",
+      "JOINERY": "half-lap into G-003 and G-007 (compression, hinge-bottom to latch-top)",
+      "NOTES": "Shop-side compression only \u2014 sits on the driveway face. Not the garden elevation. Do not let this read as a ranch Z-brace.",
       "HANDED": "IDENTICAL",
       "FIT": "GLUE optional on laps; still mechanically captured",
       "TOLERANCE_CLASS": "T1",
@@ -1610,27 +3725,27 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
-      "JOINERY": "groove / stop in gate stiles \u2014 FLOATING; \u00be\u2033 gaps; dog-tight",
-      "NOTES": "Same 2\u00d710 / 2\u00d76 / \u00be\u2033 rhythm as the screen so Prairie lines continue across the gate.",
+      "JOINERY": "framed cassettes; groove in gate stiles \u2014 FLOATING",
+      "NOTES": "Garden face is Darwin Martin Tree of Life (middle light) + nested squares. Matches Q-001/002/003. Max aperture 1.50\u2033.",
       "HANDED": "IDENTICAL",
       "FIT": "",
       "TOLERANCE_CLASS": "T1",
       "MOVEMENT": "FLOATING",
       "PART_ID": "G-009",
-      "PART_NAME": "Gate horizontal infill (matches screen bands)",
-      "PART_CATEGORY": "B",
+      "PART_NAME": "Gate Tree of Life / nested-rect cassettes",
+      "PART_CATEGORY": "Q",
       "ASSEMBLY": "A-030 GATE",
-      "QUANTITY": 7,
-      "MATERIAL": "solid lumber",
-      "SPECIES": "2\u00d76 / 2\u00d710 offcuts",
-      "PURCHASE": "2\u00d76 \u00d7 8\u2032",
-      "ROUGH_THICKNESS": 1.5,
-      "ROUGH_WIDTH": 5.5,
+      "QUANTITY": 3,
+      "MATERIAL": "1\u00d72 / 1\u00d73 ripped muntins in a 1\u00d7 frame",
+      "SPECIES": "SPF/SYP paint-grade",
+      "PURCHASE": "1\u00d74 \u00d7 8\u2032 (rip to \u00be\u2033 muntins)",
+      "ROUGH_THICKNESS": 0.75,
+      "ROUGH_WIDTH": 3.5,
       "ROUGH_LENGTH": 28.5,
-      "FINISHED_THICKNESS": 1.5,
-      "FINISHED_WIDTH": 5.5,
+      "FINISHED_THICKNESS": 0.75,
+      "FINISHED_WIDTH": 13.081,
       "FINISHED_LENGTH": 28.0
     },
     {
@@ -1640,7 +3755,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "slides in G-002 into L-001 mortise (Latch B default); cross-peg hole",
       "NOTES": "",
@@ -1670,10 +3785,10 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "driven in cheek slot; NEVER glue",
-      "NOTES": "12 nuki + 4 spare. Label bag for winter. NEVER glue.",
+      "NOTES": "9 nuki (K-001 + R-001 + R-002 \u00d7 P1/P2/P3) + 3 spare. Label bag for winter. NEVER glue.",
       "HANDED": "IDENTICAL",
       "FIT": "INTERFERENCE (tapered drive)",
       "TOLERANCE_CLASS": "T2",
@@ -1682,7 +3797,7 @@
       "PART_NAME": "Kusabi locking wedge",
       "PART_CATEGORY": "W",
       "ASSEMBLY": "A-020 PRIVACY_FRAME",
-      "QUANTITY": 16,
+      "QUANTITY": 12,
       "MATERIAL": "white oak / hard maple",
       "SPECIES": "oak",
       "PURCHASE": "2\u00d74 \u00d7 8\u2032 ripped",
@@ -1700,7 +3815,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "drawbore 1/8\u2033 offset",
       "NOTES": "10 gate M&T + 1 cap scarf + 1 latch cross-peg + 2 spare",
@@ -1729,7 +3844,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "waxed pin: bottom socket in threshold/sill at P1; top in cap soffit",
       "NOTES": "Structurally best on a freestanding hinge post: leaf weight goes into the sill, not a cantilever pintle. P0 (house) has no planter.",
@@ -1758,7 +3873,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "half-lap + peg at four F-003 ties; sits on H-001 pads \u2014 NO pour",
       "NOTES": "High side. Sit on existing driveway. Rubber pads protect pavement.",
@@ -1789,7 +3904,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "half-lap + peg at four F-003 ties; bears on F-004 packing",
       "NOTES": "Low side. Level with F-001 via timber packing \u2014 drop_off TBM. No cement.",
@@ -1820,7 +3935,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "mortise for post foot tenon; half-lap to F-001/F-002",
       "NOTES": "One at each post CL. Posts drop in for winter lift-out.",
@@ -1851,7 +3966,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "dry-stacked layers; no glue; shims to TBM drop_off",
       "NOTES": "Qty 0 while the run sits on the driveway slab (photos). Use only if outriggers leave the slab.",
@@ -1882,7 +3997,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "dovetail corners; drainage slots in bottom slats; \u00bd\u2033 air gap from posts",
       "NOTES": "P1\u2013P2 and P2\u2013P3 only. NOT at the house/gate. Live plants + watering. Optional stone in the bottom 4\u2033 for drainage and mass \u2014 inside the box, not a pad. Winter: empty or lift with the ladder.",
@@ -1913,7 +4028,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "housed half-lap into post and sill; oak peg; NO glue",
       "NOTES": "Transfers wind moment into ladder. Two garden-side, two driveway-side.",
@@ -1944,7 +4059,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "n/a",
       "NOTES": "Under F-001. Protects pavement. No fasteners into driveway.",
@@ -1973,7 +4088,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
       "NOTES": "DEFAULT is Latch B (mortise in L-001). Do not epoxy into concrete.",
@@ -2002,7 +4117,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
       "NOTES": "Replaces W-003 if preferred. Only metal on fence if used.",
@@ -2031,7 +4146,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
       "NOTES": "On latch bar \u2014 not structural",
@@ -2059,7 +4174,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
       "NOTES": "Ease arrises 1/16\u2033; end-grain sealer; PT dry then prime; 2 finish coats owner gray; extra coat on planter interiors; mask joinery faces and oak pivot sockets",
@@ -2087,7 +4202,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
       "NOTES": "Sits in C-001 soffit dado. Driver in a dry niche of the P3 planter \u2014 not at the house. Allowed metal: lighting only.",
@@ -2116,7 +4231,7 @@
       "REFERENCE_FACE": "garden face (Y-)",
       "REFERENCE_EDGE": "latch-side (X-)",
       "REFERENCE_END": "datum end A \u2014 tenon shoulder / sill top",
-      "REVISION": "E",
+      "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
       "NOTES": "In-box stone 3.67 cu ft / 366.7 lb. Soil 1155.0 lb. Provided 1521.7 vs required 1311.1 lb (planning).",
@@ -2148,12 +4263,12 @@
       "JOINT_TYPE": "kick nuki \u8cab",
       "PART_A": "L-002",
       "PART_B": "K-001",
-      "LOCATION": "L-002 \u00d7 K-001 @ z_cl=2.75\"",
+      "LOCATION": "L-002 \u00d7 K-001 @ z_cl=5.625\"",
       "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 5.5,
+      "MORTISE_HEIGHT": 11.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
       "TENON_WIDTH": 1.5,
-      "TENON_HEIGHT": 5.5,
+      "TENON_HEIGHT": 11.25,
       "TENON_LENGTH": "THROUGH + rail_reveal"
     },
     {
@@ -2164,12 +4279,12 @@
       "JOINT_TYPE": "kick nuki \u8cab",
       "PART_A": "L-003",
       "PART_B": "K-001",
-      "LOCATION": "L-003 \u00d7 K-001 @ z_cl=2.75\"",
+      "LOCATION": "L-003 \u00d7 K-001 @ z_cl=5.625\"",
       "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 5.5,
+      "MORTISE_HEIGHT": 11.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
       "TENON_WIDTH": 1.5,
-      "TENON_HEIGHT": 5.5,
+      "TENON_HEIGHT": 11.25,
       "TENON_LENGTH": "THROUGH + rail_reveal"
     },
     {
@@ -2180,12 +4295,12 @@
       "JOINT_TYPE": "kick nuki \u8cab",
       "PART_A": "L-004",
       "PART_B": "K-001",
-      "LOCATION": "L-004 \u00d7 K-001 @ z_cl=2.75\"",
+      "LOCATION": "L-004 \u00d7 K-001 @ z_cl=5.625\"",
       "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 5.5,
+      "MORTISE_HEIGHT": 11.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
       "TENON_WIDTH": 1.5,
-      "TENON_HEIGHT": 5.5,
+      "TENON_HEIGHT": 11.25,
       "TENON_LENGTH": "THROUGH + rail_reveal"
     },
     {
@@ -2196,7 +4311,7 @@
       "JOINT_TYPE": "nuki \u8cab + kusabi",
       "PART_A": "L-002",
       "PART_B": "R-001",
-      "LOCATION": "L-002 \u00d7 R-001 @ z_cl=10.125\"",
+      "LOCATION": "L-002 \u00d7 R-001 @ z_cl=25.46\"",
       "MORTISE_WIDTH": 1.53,
       "MORTISE_HEIGHT": 9.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
@@ -2212,7 +4327,7 @@
       "JOINT_TYPE": "nuki \u8cab + kusabi",
       "PART_A": "L-003",
       "PART_B": "R-001",
-      "LOCATION": "L-003 \u00d7 R-001 @ z_cl=10.125\"",
+      "LOCATION": "L-003 \u00d7 R-001 @ z_cl=25.46\"",
       "MORTISE_WIDTH": 1.53,
       "MORTISE_HEIGHT": 9.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
@@ -2228,7 +4343,7 @@
       "JOINT_TYPE": "nuki \u8cab + kusabi",
       "PART_A": "L-004",
       "PART_B": "R-001",
-      "LOCATION": "L-004 \u00d7 R-001 @ z_cl=10.125\"",
+      "LOCATION": "L-004 \u00d7 R-001 @ z_cl=25.46\"",
       "MORTISE_WIDTH": 1.53,
       "MORTISE_HEIGHT": 9.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
@@ -2243,8 +4358,8 @@
       "JOINT_ID": "J-007",
       "JOINT_TYPE": "nuki \u8cab + kusabi",
       "PART_A": "L-002",
-      "PART_B": "R-003",
-      "LOCATION": "L-002 \u00d7 R-003 @ z_cl=26.375\"",
+      "PART_B": "R-002",
+      "LOCATION": "L-002 \u00d7 R-002 @ z_cl=49.291\"",
       "MORTISE_WIDTH": 1.53,
       "MORTISE_HEIGHT": 9.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
@@ -2259,8 +4374,8 @@
       "JOINT_ID": "J-008",
       "JOINT_TYPE": "nuki \u8cab + kusabi",
       "PART_A": "L-003",
-      "PART_B": "R-003",
-      "LOCATION": "L-003 \u00d7 R-003 @ z_cl=26.375\"",
+      "PART_B": "R-002",
+      "LOCATION": "L-003 \u00d7 R-002 @ z_cl=49.291\"",
       "MORTISE_WIDTH": 1.53,
       "MORTISE_HEIGHT": 9.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
@@ -2275,8 +4390,8 @@
       "JOINT_ID": "J-009",
       "JOINT_TYPE": "nuki \u8cab + kusabi",
       "PART_A": "L-004",
-      "PART_B": "R-003",
-      "LOCATION": "L-004 \u00d7 R-003 @ z_cl=26.375\"",
+      "PART_B": "R-002",
+      "LOCATION": "L-004 \u00d7 R-002 @ z_cl=49.291\"",
       "MORTISE_WIDTH": 1.53,
       "MORTISE_HEIGHT": 9.25,
       "MORTISE_DEPTH": "THROUGH (post_x)",
@@ -2285,114 +4400,52 @@
       "TENON_LENGTH": "THROUGH + rail_reveal"
     },
     {
-      "FIT_CLASS": "SLIDING then INTERFERENCE via W-001",
-      "ASSEMBLY_DIRECTION": "+X (withdraw toward P3 for winter)",
+      "FIT_CLASS": "SLIDING",
+      "ASSEMBLY_DIRECTION": "+X from P3",
       "GLUE": "NO \u2014 winter removable",
       "JOINT_ID": "J-010",
-      "JOINT_TYPE": "nuki \u8cab + kusabi",
-      "PART_A": "L-002",
-      "PART_B": "R-005",
-      "LOCATION": "L-002 \u00d7 R-005 @ z_cl=42.625\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 9.25,
-      "MORTISE_DEPTH": "THROUGH (post_x)",
-      "TENON_WIDTH": 1.5,
-      "TENON_HEIGHT": 9.25,
-      "TENON_LENGTH": "THROUGH + rail_reveal"
+      "JOINT_TYPE": "cassette groove / housed dado",
+      "PART_A": "L-002/003/004 + nuki edges",
+      "PART_B": "Q-001",
+      "LOCATION": "Q-001 @ z_cl=16.043\"",
+      "MORTISE_WIDTH": 0.78,
+      "MORTISE_HEIGHT": 8.085,
+      "MORTISE_DEPTH": 0.375,
+      "NOTES": "Q cassettes drop into grooves in the nuki edges and shallow dados in the posts. Recessed behind belt courses. Winter withdraw toward P3."
     },
     {
-      "FIT_CLASS": "SLIDING then INTERFERENCE via W-001",
-      "ASSEMBLY_DIRECTION": "+X (withdraw toward P3 for winter)",
+      "FIT_CLASS": "SLIDING",
+      "ASSEMBLY_DIRECTION": "+X from P3",
       "GLUE": "NO \u2014 winter removable",
       "JOINT_ID": "J-011",
-      "JOINT_TYPE": "nuki \u8cab + kusabi",
-      "PART_A": "L-003",
-      "PART_B": "R-005",
-      "LOCATION": "L-003 \u00d7 R-005 @ z_cl=42.625\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 9.25,
-      "MORTISE_DEPTH": "THROUGH (post_x)",
-      "TENON_WIDTH": 1.5,
-      "TENON_HEIGHT": 9.25,
-      "TENON_LENGTH": "THROUGH + rail_reveal"
+      "JOINT_TYPE": "cassette groove / housed dado",
+      "PART_A": "L-002/003/004 + nuki edges",
+      "PART_B": "Q-002",
+      "LOCATION": "Q-002 @ z_cl=37.376\"",
+      "MORTISE_WIDTH": 0.78,
+      "MORTISE_HEIGHT": 13.081,
+      "MORTISE_DEPTH": 0.375,
+      "NOTES": "Q cassettes drop into grooves in the nuki edges and shallow dados in the posts. Recessed behind belt courses. Winter withdraw toward P3."
     },
     {
-      "FIT_CLASS": "SLIDING then INTERFERENCE via W-001",
-      "ASSEMBLY_DIRECTION": "+X (withdraw toward P3 for winter)",
+      "FIT_CLASS": "SLIDING",
+      "ASSEMBLY_DIRECTION": "+X from P3",
       "GLUE": "NO \u2014 winter removable",
       "JOINT_ID": "J-012",
-      "JOINT_TYPE": "nuki \u8cab + kusabi",
-      "PART_A": "L-004",
-      "PART_B": "R-005",
-      "LOCATION": "L-004 \u00d7 R-005 @ z_cl=42.625\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 9.25,
-      "MORTISE_DEPTH": "THROUGH (post_x)",
-      "TENON_WIDTH": 1.5,
-      "TENON_HEIGHT": 9.25,
-      "TENON_LENGTH": "THROUGH + rail_reveal"
-    },
-    {
-      "FIT_CLASS": "SLIDING",
-      "ASSEMBLY_DIRECTION": "+X from P3",
-      "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-013",
-      "JOINT_TYPE": "housed dado (Prairie slat)",
-      "PART_A": "L-002/003/004",
-      "PART_B": "R-002",
-      "LOCATION": "R-002 @ z_cl=18.25\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 5.5,
-      "MORTISE_DEPTH": 0.75,
-      "NOTES": "Do not through-mortise \u2014 \u00be\u2033 gaps would leave a \u00be\u2033 web. Housing keeps the post continuous."
-    },
-    {
-      "FIT_CLASS": "SLIDING",
-      "ASSEMBLY_DIRECTION": "+X from P3",
-      "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-014",
-      "JOINT_TYPE": "housed dado (Prairie slat)",
-      "PART_A": "L-002/003/004",
-      "PART_B": "R-004",
-      "LOCATION": "R-004 @ z_cl=34.5\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 5.5,
-      "MORTISE_DEPTH": 0.75,
-      "NOTES": "Do not through-mortise \u2014 \u00be\u2033 gaps would leave a \u00be\u2033 web. Housing keeps the post continuous."
-    },
-    {
-      "FIT_CLASS": "SLIDING",
-      "ASSEMBLY_DIRECTION": "+X from P3",
-      "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-015",
-      "JOINT_TYPE": "housed dado (Prairie slat)",
-      "PART_A": "L-002/003/004",
-      "PART_B": "R-006",
-      "LOCATION": "R-006 @ z_cl=50.75\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 5.5,
-      "MORTISE_DEPTH": 0.75,
-      "NOTES": "Do not through-mortise \u2014 \u00be\u2033 gaps would leave a \u00be\u2033 web. Housing keeps the post continuous."
-    },
-    {
-      "FIT_CLASS": "SLIDING",
-      "ASSEMBLY_DIRECTION": "+X from P3",
-      "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-016",
-      "JOINT_TYPE": "housed dado (Prairie slat)",
-      "PART_A": "L-002/003/004",
-      "PART_B": "R-007",
-      "LOCATION": "R-007 @ z_cl=58.875\"",
-      "MORTISE_WIDTH": 1.53,
-      "MORTISE_HEIGHT": 9.25,
-      "MORTISE_DEPTH": 0.75,
-      "NOTES": "Do not through-mortise \u2014 \u00be\u2033 gaps would leave a \u00be\u2033 web. Housing keeps the post continuous."
+      "JOINT_TYPE": "cassette groove / housed dado",
+      "PART_A": "L-002/003/004 + nuki edges",
+      "PART_B": "Q-003",
+      "LOCATION": "Q-003 @ z_cl=58.709\"",
+      "MORTISE_WIDTH": 0.78,
+      "MORTISE_HEIGHT": 8.085,
+      "MORTISE_DEPTH": 0.375,
+      "NOTES": "Q cassettes drop into grooves in the nuki edges and shallow dados in the posts. Recessed behind belt courses. Winter withdraw toward P3."
     },
     {
       "FIT_CLASS": "CLEARANCE / GRAVITY drop-in \u2014 winter lift-out",
       "ASSEMBLY_DIRECTION": "\u2212Z drop-in",
       "GLUE": "NO",
-      "JOINT_ID": "J-017",
+      "JOINT_ID": "J-013",
       "JOINT_TYPE": "foot tenon into cross-tie shoe",
       "PART_A": "L-001",
       "PART_B": "F-003",
@@ -2406,7 +4459,7 @@
       "FIT_CLASS": "CLEARANCE / GRAVITY drop-in \u2014 winter lift-out",
       "ASSEMBLY_DIRECTION": "\u2212Z drop-in",
       "GLUE": "NO",
-      "JOINT_ID": "J-018",
+      "JOINT_ID": "J-014",
       "JOINT_TYPE": "foot tenon into cross-tie shoe",
       "PART_A": "L-002",
       "PART_B": "F-003",
@@ -2420,7 +4473,7 @@
       "FIT_CLASS": "CLEARANCE / GRAVITY drop-in \u2014 winter lift-out",
       "ASSEMBLY_DIRECTION": "\u2212Z drop-in",
       "GLUE": "NO",
-      "JOINT_ID": "J-019",
+      "JOINT_ID": "J-015",
       "JOINT_TYPE": "foot tenon into cross-tie shoe",
       "PART_A": "L-003",
       "PART_B": "F-003",
@@ -2434,7 +4487,7 @@
       "FIT_CLASS": "CLEARANCE / GRAVITY drop-in \u2014 winter lift-out",
       "ASSEMBLY_DIRECTION": "\u2212Z drop-in",
       "GLUE": "NO",
-      "JOINT_ID": "J-020",
+      "JOINT_ID": "J-016",
       "JOINT_TYPE": "foot tenon into cross-tie shoe",
       "PART_A": "L-004",
       "PART_B": "F-003",
@@ -2448,7 +4501,7 @@
       "FIT_CLASS": "SNUG + oak peg",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO",
-      "JOINT_ID": "J-021",
+      "JOINT_ID": "J-017",
       "JOINT_TYPE": "half-lap pegged (sill \u00d7 tie)",
       "PART_A": "F-001 / F-002",
       "PART_B": "F-003",
@@ -2459,7 +4512,7 @@
       "FIT_CLASS": "SNUG + oak peg",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO",
-      "JOINT_ID": "J-022",
+      "JOINT_ID": "J-018",
       "JOINT_TYPE": "half-lap pegged (sill \u00d7 tie)",
       "PART_A": "F-001 / F-002",
       "PART_B": "F-003",
@@ -2470,7 +4523,7 @@
       "FIT_CLASS": "SNUG + oak peg",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO",
-      "JOINT_ID": "J-023",
+      "JOINT_ID": "J-019",
       "JOINT_TYPE": "half-lap pegged (sill \u00d7 tie)",
       "PART_A": "F-001 / F-002",
       "PART_B": "F-003",
@@ -2481,7 +4534,7 @@
       "FIT_CLASS": "SNUG + oak peg",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO",
-      "JOINT_ID": "J-024",
+      "JOINT_ID": "J-020",
       "JOINT_TYPE": "half-lap pegged (sill \u00d7 tie)",
       "PART_A": "F-001 / F-002",
       "PART_B": "F-003",
@@ -2492,7 +4545,7 @@
       "FIT_CLASS": "SNUG + peg",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO",
-      "JOINT_ID": "J-025",
+      "JOINT_ID": "J-021",
       "JOINT_TYPE": "sujikai housed half-lap",
       "PART_A": "F-006",
       "PART_B": "L-00x / F-001 / F-002",
@@ -2502,7 +4555,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO (or hide glue if not disassembling cap)",
-      "JOINT_ID": "J-026",
+      "JOINT_ID": "J-022",
       "JOINT_TYPE": "kama-tsugi \u938c\u7d99\u304e",
       "PART_A": "C-001-L",
       "PART_B": "C-001-R",
@@ -2514,7 +4567,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-027",
+      "JOINT_ID": "J-023",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-001",
       "PART_B": "G-003",
@@ -2529,7 +4582,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-028",
+      "JOINT_ID": "J-024",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-002",
       "PART_B": "G-003",
@@ -2544,7 +4597,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-029",
+      "JOINT_ID": "J-025",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-001",
       "PART_B": "G-004",
@@ -2559,7 +4612,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-030",
+      "JOINT_ID": "J-026",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-002",
       "PART_B": "G-004",
@@ -2574,7 +4627,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-031",
+      "JOINT_ID": "J-027",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-001",
       "PART_B": "G-005",
@@ -2589,7 +4642,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-032",
+      "JOINT_ID": "J-028",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-002",
       "PART_B": "G-005",
@@ -2604,7 +4657,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-033",
+      "JOINT_ID": "J-029",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-001",
       "PART_B": "G-006",
@@ -2619,7 +4672,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-034",
+      "JOINT_ID": "J-030",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-002",
       "PART_B": "G-006",
@@ -2634,7 +4687,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-035",
+      "JOINT_ID": "J-031",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-001",
       "PART_B": "G-007",
@@ -2649,7 +4702,7 @@
       "FIT_CLASS": "DRAWBORED",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "optional hide glue \u2014 gate is a keep-together subassembly",
-      "JOINT_ID": "J-036",
+      "JOINT_ID": "J-032",
       "JOINT_TYPE": "hozo \u307b\u305e drawbored M&T",
       "PART_A": "G-002",
       "PART_B": "G-007",
@@ -2664,7 +4717,7 @@
       "FIT_CLASS": "GLUE + geometry",
       "ASSEMBLY_DIRECTION": "in plane of leaf",
       "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-037",
+      "JOINT_ID": "J-033",
       "JOINT_TYPE": "half-lap brace",
       "PART_A": "G-008",
       "PART_B": "G-003 / G-007",
@@ -2674,11 +4727,11 @@
       "FIT_CLASS": "CLEARANCE",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO",
-      "JOINT_ID": "J-038",
+      "JOINT_ID": "J-034",
       "JOINT_TYPE": "floating groove",
-      "PART_A": "R-001..R-003 / C-001",
+      "PART_A": "R-001 / R-002 / C-001",
       "PART_B": "T-001 / G-009",
-      "LOCATION": "posts (blocks) / gate stiles (infill)",
+      "LOCATION": "pier wrapping (T-001) / gate cassette grooves (G-009)",
       "MORTISE_DEPTH": 0.375,
       "MORTISE_WIDTH": 0.875,
       "MOVEMENT": "FLOATING"
@@ -2687,7 +4740,7 @@
       "FIT_CLASS": "LOCATIONAL",
       "ASSEMBLY_DIRECTION": "+Z to remove",
       "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-039",
+      "JOINT_ID": "J-035",
       "JOINT_TYPE": "oak pivot / socket",
       "PART_A": "L-002 / F-003 / C-001",
       "PART_B": "G-001 / W-003",
@@ -2698,11 +4751,11 @@
       "FIT_CLASS": "SLIDING",
       "ASSEMBLY_DIRECTION": "+X nuki / \u2212Z tenon",
       "GLUE": "NO \u2014 winter removable",
-      "JOINT_ID": "J-040",
+      "JOINT_ID": "J-036",
       "JOINT_TYPE": "sliding latch",
       "PART_A": "G-010",
       "PART_B": "H-002 or L-001",
-      "LOCATION": "z_cl=26.375\" (R-003 major band)",
+      "LOCATION": "z_cl=49.291\" (R-002 belt / latch CL)",
       "NOTES": "DEFAULT Latch B mortise in L-001. No epoxy, no house pour."
     }
   ],
@@ -2796,16 +4849,14 @@
       "C-002"
     ],
     "A-020 PRIVACY_FRAME": [
-      "K-001 kick",
-      "R-001 nuki 2\u00d710",
-      "R-002 housed 2\u00d76",
-      "R-003 nuki 2\u00d710",
-      "R-004 housed 2\u00d76",
-      "R-005 nuki 2\u00d710",
-      "R-006 housed 2\u00d76",
-      "R-007 housed 2\u00d710",
-      "C-001 cap + light dado",
-      "T-001\u00d736 tectonic",
+      "K-001 water table 2\u00d712 PT",
+      "Q-001 nested-rects cassette \u00d72",
+      "R-001 belt nuki 2\u00d710",
+      "Q-002 Tree of Life cassette \u00d72",
+      "R-002 belt nuki 2\u00d710 (latch CL)",
+      "Q-003 nested-rects cassette \u00d72",
+      "C-001 2\u00d712 eave + C-003 fascia",
+      "T-001\u00d736 Roman-brick pier wrap",
       "W-001 kusabi"
     ],
     "A-030 GATE": [
@@ -2873,16 +4924,16 @@
       ],
       [
         "OP070",
-        "Through-nuki at CL 2.75, 10.12, 26.38, 42.62 AFF (K-001 + R-001/003/005 only)",
+        "Through-nuki at CL 5.62, 25.46, 49.29 AFF (K-001 + R-001 + R-002 only)",
         "chisel / Japanese saw",
         "from DATUM END = shoulder (sill top)",
         "T2"
       ],
       [
         "OP075",
-        "Housed 0.75\u2033 dados for R-002/004/006/007",
+        "Cassette dados + nuki-edge grooves for Q-001/002/003",
         "router + chisel",
-        "do NOT through-mortise \u2014 keep post web",
+        "do NOT through-mortise cassettes \u2014 keep post web",
         "T2"
       ],
       [
@@ -2896,7 +4947,7 @@
         "OP085",
         "Latch-B mortise",
         "chisel",
-        "CL 26.38\" AFF (R-003)",
+        "CL 49.29\" AFF (R-002 belt)",
         "T2"
       ]
     ],
@@ -2945,16 +4996,16 @@
       ],
       [
         "OP070",
-        "Through-nuki at CL 2.75, 10.12, 26.38, 42.62 AFF (K-001 + R-001/003/005 only)",
+        "Through-nuki at CL 5.62, 25.46, 49.29 AFF (K-001 + R-001 + R-002 only)",
         "chisel / Japanese saw",
         "from DATUM END = shoulder (sill top)",
         "T2"
       ],
       [
         "OP075",
-        "Housed 0.75\u2033 dados for R-002/004/006/007",
+        "Cassette dados + nuki-edge grooves for Q-001/002/003",
         "router + chisel",
-        "do NOT through-mortise \u2014 keep post web",
+        "do NOT through-mortise cassettes \u2014 keep post web",
         "T2"
       ],
       [
@@ -3024,16 +5075,16 @@
       ],
       [
         "OP070",
-        "Through-nuki at CL 2.75, 10.12, 26.38, 42.62 AFF (K-001 + R-001/003/005 only)",
+        "Through-nuki at CL 5.62, 25.46, 49.29 AFF (K-001 + R-001 + R-002 only)",
         "chisel / Japanese saw",
         "from DATUM END = shoulder (sill top)",
         "T2"
       ],
       [
         "OP075",
-        "Housed 0.75\u2033 dados for R-002/004/006/007",
+        "Cassette dados + nuki-edge grooves for Q-001/002/003",
         "router + chisel",
-        "do NOT through-mortise \u2014 keep post web",
+        "do NOT through-mortise cassettes \u2014 keep post web",
         "T2"
       ],
       [
@@ -3096,16 +5147,16 @@
       ],
       [
         "OP070",
-        "Through-nuki at CL 2.75, 10.12, 26.38, 42.62 AFF (K-001 + R-001/003/005 only)",
+        "Through-nuki at CL 5.62, 25.46, 49.29 AFF (K-001 + R-001 + R-002 only)",
         "chisel / Japanese saw",
         "from DATUM END = shoulder (sill top)",
         "T2"
       ],
       [
         "OP075",
-        "Housed 0.75\u2033 dados for R-002/004/006/007",
+        "Cassette dados + nuki-edge grooves for Q-001/002/003",
         "router + chisel",
-        "do NOT through-mortise \u2014 keep post web",
+        "do NOT through-mortise cassettes \u2014 keep post web",
         "T2"
       ],
       [
@@ -3200,26 +5251,27 @@
     {
       "SETUP": "S-021",
       "TOOL": "Track / circular saw + stop",
-      "STOP": "104.500\"",
+      "STOP": "109.500\"",
       "PARTS": [
         "K-001",
-        "R-001..007"
+        "R-001",
+        "R-002"
       ],
-      "NOTE": "All screen bands share nuki_len. 2\u00d710 and 2\u00d76 families."
+      "NOTE": "Through-nuki share nuki_len. Cassettes Q-* are bay_clear, not nuki_len."
     },
     {
       "SETUP": "S-030",
       "TOOL": "Track saw + Bridge City kerf/tenon + Zenwu chisels",
-      "STOP": "nuki mortise 1.50\u2033 \u00d7 9.25\u2033 (2\u00d710) or 5.50\u2033 (2\u00d76 / kick)",
+      "STOP": "nuki mortise 1.50\u2033 \u00d7 9.25\u2033 (belts) or 11.25\u2033 (2\u00d712 water table)",
       "PARTS": [
         "L-002..004"
       ],
-      "NOTE": "Through-mortise ONLY K-001, R-001, R-003, R-005. House the rest 0.75\u2033."
+      "NOTE": "Through-mortise ONLY K-001, R-001, R-002. Cassettes groove into nuki edges."
     },
     {
       "SETUP": "S-040",
       "TOOL": "Mortise gauge from FACE A",
-      "STOP": "latch CL 26.375\" AFF (R-003)",
+      "STOP": "latch CL 49.291\" AFF (R-002 belt)",
       "PARTS": [
         "L-001",
         "G-002",
@@ -3255,13 +5307,13 @@
     },
     {
       "QC": "QC-05",
-      "CHECK": "Screen bands R-001..007 identical nuki_len; \u00be\u2033 dog gaps",
+      "CHECK": "K-001 + R-001 + R-002 identical nuki_len; cassettes = bay_clear",
       "CLASS": "T2",
       "TOL": "\u00b10.031"
     },
     {
       "QC": "QC-06",
-      "CHECK": "Through-nuki only K-001/R-001/R-003/R-005; others housed 0.75\u2033",
+      "CHECK": "Through-nuki only K-001/R-001/R-002; Q cassettes in grooves; 1.50\u2033 max aperture",
       "CLASS": "T2",
       "TOL": "binary"
     },
@@ -3273,7 +5325,7 @@
     },
     {
       "QC": "QC-08",
-      "CHECK": "Dry-assemble screen: diagonals / plumb / no racking; \u00be\u2033 gaps hold a \u00be\u2033 gauge",
+      "CHECK": "Dry-assemble: plumb / no racking; Tree of Life + nested-rect cassettes seat; 1.50\u2033 gauge must not pass pattern",
       "CLASS": "T1",
       "TOL": "plumb 1/8\u2033 in 65\u2033"
     },
@@ -3351,17 +5403,17 @@
     {
       "level": "OK",
       "item": "elevation stack",
-      "detail": "63.5\" slats + 1.5\" cap = 65.0\""
+      "detail": "63.501\" slats + 1.5\" cap = 65.001\""
     },
     {
       "level": "OK",
-      "item": "Prairie band ratio \u2248 \u03c6",
-      "detail": "1.682 (9.25/5.5; not ripped)"
+      "item": "Prairie cassette ratio \u2248 \u03c6",
+      "detail": "1.618 (L2/L1 lights; belts stay full 2\u00d710)"
     },
     {
       "level": "OK",
       "item": "unique PART_IDs",
-      "detail": "41"
+      "detail": "40"
     },
     {
       "level": "OK",
@@ -3475,11 +5527,11 @@
         "PURCHASE": "2x10x10",
         "LENGTH": 120.0,
         "PARTS": [
-          "R-001:104.5"
+          "R-001:109.5"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
+        "USED": 109.5,
+        "REMAINDER": 10.5,
+        "YIELD_PCT": 91.2,
         "BF": 16.67
       },
       {
@@ -3487,97 +5539,102 @@
         "PURCHASE": "2x10x10",
         "LENGTH": 120.0,
         "PARTS": [
-          "R-003:104.5"
+          "R-002:109.5"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
+        "USED": 109.5,
+        "REMAINDER": 10.5,
+        "YIELD_PCT": 91.2,
         "BF": 16.67
       },
       {
-        "BOARD_ID": "2x10x10-03",
-        "PURCHASE": "2x10x10",
+        "BOARD_ID": "2x12x10-01",
+        "PURCHASE": "2x12x10",
         "LENGTH": 120.0,
         "PARTS": [
-          "R-005:104.5"
+          "K-001:109.5"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
-        "BF": 16.67
+        "USED": 109.5,
+        "REMAINDER": 10.5,
+        "YIELD_PCT": 91.2,
+        "BF": 20.0
       },
       {
-        "BOARD_ID": "2x10x10-04",
-        "PURCHASE": "2x10x10",
-        "LENGTH": 120.0,
-        "PARTS": [
-          "R-007:104.5"
-        ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
-        "BF": 16.67
-      },
-      {
-        "BOARD_ID": "2x8x12-01",
-        "PURCHASE": "2x8x12",
+        "BOARD_ID": "2x12x12-01",
+        "PURCHASE": "2x12x12",
         "LENGTH": 144.0,
         "PARTS": [
-          "C-001:105.0",
+          "C-001:110.5",
           "C-002:4.5"
         ],
-        "USED": 109.625,
-        "REMAINDER": 34.375,
-        "YIELD_PCT": 76.1,
-        "BF": 16.0
+        "USED": 115.125,
+        "REMAINDER": 28.875,
+        "YIELD_PCT": 79.9,
+        "BF": 24.0
       },
       {
-        "BOARD_ID": "2x6x10-01",
-        "PURCHASE": "2x6x10",
-        "LENGTH": 120.0,
+        "BOARD_ID": "1x4x8-01",
+        "PURCHASE": "1x4x8",
+        "LENGTH": 96.0,
         "PARTS": [
-          "R-002:104.5"
+          "Q-001:46.5",
+          "Q-001:46.5"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
-        "BF": 10.0
+        "USED": 93.125,
+        "REMAINDER": 2.875,
+        "YIELD_PCT": 97.0,
+        "BF": 2.67
       },
       {
-        "BOARD_ID": "2x6x10-02",
-        "PURCHASE": "2x6x10",
-        "LENGTH": 120.0,
+        "BOARD_ID": "1x4x8-02",
+        "PURCHASE": "1x4x8",
+        "LENGTH": 96.0,
         "PARTS": [
-          "R-004:104.5"
+          "Q-002:46.5",
+          "Q-002:46.5"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
-        "BF": 10.0
+        "USED": 93.125,
+        "REMAINDER": 2.875,
+        "YIELD_PCT": 97.0,
+        "BF": 2.67
       },
       {
-        "BOARD_ID": "2x6x10-03",
-        "PURCHASE": "2x6x10",
-        "LENGTH": 120.0,
+        "BOARD_ID": "1x4x8-03",
+        "PURCHASE": "1x4x8",
+        "LENGTH": 96.0,
         "PARTS": [
-          "R-006:104.5"
+          "Q-003:46.5",
+          "Q-003:46.5"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
-        "BF": 10.0
+        "USED": 93.125,
+        "REMAINDER": 2.875,
+        "YIELD_PCT": 97.0,
+        "BF": 2.67
       },
       {
-        "BOARD_ID": "2x6x10-04",
-        "PURCHASE": "2x6x10",
-        "LENGTH": 120.0,
+        "BOARD_ID": "1x4x8-04",
+        "PURCHASE": "1x4x8",
+        "LENGTH": 96.0,
         "PARTS": [
-          "K-001:104.5"
+          "G-009:28.0",
+          "G-009:28.0",
+          "G-009:28.0"
         ],
-        "USED": 104.5,
-        "REMAINDER": 15.5,
-        "YIELD_PCT": 87.1,
-        "BF": 10.0
+        "USED": 84.25,
+        "REMAINDER": 11.75,
+        "YIELD_PCT": 87.8,
+        "BF": 2.67
+      },
+      {
+        "BOARD_ID": "1x4x12-01",
+        "PURCHASE": "1x4x12",
+        "LENGTH": 144.0,
+        "PARTS": [
+          "C-003:110.5"
+        ],
+        "USED": 110.5,
+        "REMAINDER": 33.5,
+        "YIELD_PCT": 76.7,
+        "BF": 4.0
       },
       {
         "BOARD_ID": "2x6x8-01",
@@ -3638,43 +5695,15 @@
         "PARTS": [
           "G-006:30.5",
           "G-007:30.5",
-          "G-009:28.0"
+          "F-006:25.456"
         ],
-        "USED": 89.25,
-        "REMAINDER": 6.75,
-        "YIELD_PCT": 93.0,
+        "USED": 86.706,
+        "REMAINDER": 9.294,
+        "YIELD_PCT": 90.3,
         "BF": 8.0
       },
       {
         "BOARD_ID": "2x6x8-06",
-        "PURCHASE": "2x6x8",
-        "LENGTH": 96.0,
-        "PARTS": [
-          "G-009:28.0",
-          "G-009:28.0",
-          "G-009:28.0"
-        ],
-        "USED": 84.25,
-        "REMAINDER": 11.75,
-        "YIELD_PCT": 87.8,
-        "BF": 8.0
-      },
-      {
-        "BOARD_ID": "2x6x8-07",
-        "PURCHASE": "2x6x8",
-        "LENGTH": 96.0,
-        "PARTS": [
-          "G-009:28.0",
-          "G-009:28.0",
-          "G-009:28.0"
-        ],
-        "USED": 84.25,
-        "REMAINDER": 11.75,
-        "YIELD_PCT": 87.8,
-        "BF": 8.0
-      },
-      {
-        "BOARD_ID": "2x6x8-08",
         "PURCHASE": "2x6x8",
         "LENGTH": 96.0,
         "PARTS": [
@@ -3685,18 +5714,6 @@
         "USED": 76.618,
         "REMAINDER": 19.382,
         "YIELD_PCT": 79.8,
-        "BF": 8.0
-      },
-      {
-        "BOARD_ID": "2x6x8-09",
-        "PURCHASE": "2x6x8",
-        "LENGTH": 96.0,
-        "PARTS": [
-          "F-006:25.456"
-        ],
-        "USED": 25.456,
-        "REMAINDER": 70.544,
-        "YIELD_PCT": 26.5,
         "BF": 8.0
       },
       {
@@ -3784,15 +5801,11 @@
           "W-001:5.5",
           "W-001:5.5",
           "W-001:5.5",
-          "W-001:5.5",
-          "W-001:5.5",
-          "W-001:5.5",
-          "W-001:5.5",
           "W-001:5.5"
         ],
-        "USED": 89.875,
-        "REMAINDER": 6.125,
-        "YIELD_PCT": 93.6,
+        "USED": 67.375,
+        "REMAINDER": 28.625,
+        "YIELD_PCT": 70.2,
         "BF": 5.33
       },
       {
@@ -3838,17 +5851,19 @@
     "buy_counts": {
       "4x6x8": 6,
       "4x6x16": 2,
-      "2x10x10": 4,
-      "2x8x12": 1,
-      "2x6x10": 4,
-      "2x6x8": 9,
+      "2x10x10": 2,
+      "2x12x10": 1,
+      "2x12x12": 1,
+      "1x4x8": 4,
+      "1x4x12": 1,
+      "2x6x8": 6,
       "2x2x8": 3,
       "2x4x8": 1,
       "oak_1x4x4": 2
     },
-    "net_bf": 370.68,
+    "net_bf": 316.02,
     "waste_factor": 0.15,
-    "procurement_bf": 426.28,
+    "procurement_bf": 363.42,
     "note": "Nesting uses FINISHED lengths + kerf. Extra waste_factor covers defects/joinery practice."
   },
   "ballast": {
@@ -3902,9 +5917,9 @@
     },
     {
       "ID": "D-002",
-      "Decision": "\u03c6-adjacent 2\u00d710 / 2\u00d76 Prairie bands (9.25/5.5=1.682). Do not rip 2\u00d710.",
-      "Reason": "Golden ratio where it does not thin structure. Full 2\u00d710 nuki bearing. Darwin Martin belt courses.",
-      "Parts": "R-001..007, K-001"
+      "Decision": "Darwin Martin Tree of Life light-screen: 2\u00d712 water table + two projecting 2\u00d710 belts + three recessed muntin cassettes (\u03c6 8.085 / 13.080 / 8.085).",
+      "Reason": "Stacked 2\u00d710/2\u00d76 boards read as a Home Depot ranch fence. Wright at a distance is eave + belts + piers + patterned lights. \u03c6 sizes the cassette pair, not ripped 2\u00d710.",
+      "Parts": "K-001, Q-001/002/003, R-001/002, C-001, C-003"
     },
     {
       "ID": "D-003",
@@ -3932,9 +5947,9 @@
     },
     {
       "ID": "D-007",
-      "Decision": "Through-nuki only K-001 + R-001/003/005. House remaining bands 0.75\u2033.",
-      "Reason": "0.75\u2033 slat gaps would leave a 0.75\u2033 web if every band were through-mortised.",
-      "Parts": "R-001..007, K-001, L-002..004"
+      "Decision": "Through-nuki only K-001 + R-001 + R-002. Cassettes groove into nuki edges; three mortises keep the post web.",
+      "Reason": "Seven through-mortises would shred the 4\u00d76. Belts + water table are the structure. Lights are withdrawable cassettes.",
+      "Parts": "R-001, R-002, K-001, Q-001/002/003, L-002..004"
     },
     {
       "ID": "D-008",
@@ -3956,9 +5971,9 @@
     },
     {
       "ID": "D-011",
-      "Decision": "0.75\u2033 slat gaps + PT kickboard + 0.375\u2033 gate bottom clear.",
-      "Reason": "100% dog containment. Kick nuki at grade. Gaps are a light-screen, not a crawl path.",
-      "Parts": "K-001, R-001..007, G-009"
+      "Decision": "Solid 2\u00d712 PT water table + 1.50\u2033 max pattern apertures + 0.375\u2033 gate bottom clear.",
+      "Reason": "100% dog containment. Kick is the crawl stop. Pattern is a Wright light-screen, not a radiator of \u00be\u2033 gaps.",
+      "Parts": "K-001, Q-001/002/003, G-009"
     },
     {
       "ID": "D-012",
@@ -3988,21 +6003,21 @@
     },
     {
       "MODE": "Dog crawl",
-      "CAUSE": "gap under gate or kick",
+      "CAUSE": "gap under gate or kick, or pattern aperture > 1.50\u2033",
       "EFFECT": "containment fail",
       "SEV": 7,
       "LKL": 3,
       "DET": 8,
-      "MIT": "K-001 nuki at z=0; \u00be\u2033 slat gaps; gate bottom 0.375\u2033"
+      "MIT": "K-001 2\u00d712 nuki at z=0; 1.50\u2033 max muntin gap; gate bottom 0.375\u2033"
     },
     {
       "MODE": "Post web failure",
-      "CAUSE": "through-mortising all 7 bands",
-      "EFFECT": "split post at \u00be\u2033 webs",
+      "CAUSE": "through-mortising every layer",
+      "EFFECT": "split post",
       "SEV": 8,
       "LKL": 2,
       "DET": 9,
-      "MIT": "through-nuki only 4 bands; house the rest 0.75\u2033"
+      "MIT": "through-nuki only water table + two belts; cassettes groove in"
     },
     {
       "MODE": "Planter rot / wet posts",
@@ -4126,11 +6141,11 @@
     {
       "phase": "MILL",
       "id": "AS-05",
-      "title": "Bands K-001 + R-001..007; tectonic T-001 chevrons",
+      "title": "Water table K-001 + belts R-001/002; mill Tree of Life + nested-rect cassettes Q-*",
       "deps": [
         "AS-01"
       ],
-      "parts": "R-*,K-001,T-001"
+      "parts": "R-*,K-001,Q-*,T-001"
     },
     {
       "phase": "MILL",
@@ -4154,7 +6169,7 @@
     {
       "phase": "DRY",
       "id": "AS-08",
-      "title": "Dry-assemble A-020 on horses; \u00be\u2033 gap gauge; QA QC-08",
+      "title": "Dry-assemble A-020: belts, cassettes, 1.50\u2033 aperture gauge; QA QC-08",
       "deps": [
         "AS-07"
       ],
@@ -4233,12 +6248,12 @@
     },
     {
       "DWG": "P-302",
-      "TITLE": "Prairie bands R-001..007 + K-001",
+      "TITLE": "Water table + Prairie belts K-001 / R-001 / R-002",
       "FILE": "P-302_rail.svg"
     },
     {
       "DWG": "P-303",
-      "TITLE": "Tectonic blocks T-001 + slat schedule",
+      "TITLE": "Tree of Life + nested-rect cassettes Q-001..003",
       "FILE": "P-303_boards.svg"
     },
     {
@@ -4403,6 +6418,11 @@
       "REV": "E",
       "DATE": "2026-08-14",
       "NOTE": "Darwin Martin Prairie screen: \u03c6-adjacent 2\u00d710/2\u00d76 bands, \u00be\u2033 dog gaps, PT kick, live planters (not at house), oak pivots, cap soffit lighting. Gate against the house. No sandbags, no patio-stone pad."
+    },
+    {
+      "REV": "F",
+      "DATE": "2026-08-14",
+      "NOTE": "Tree of Life light-screen: cantilevered 2\u00d712 eave + fascia, projecting belts, Roman-brick piers, recessed muntin cassettes (nested-rects / three trees / nested-rects), solid 2\u00d712 water table, Tree of Life gate. Not a ranch fence."
     }
   ],
   "tolerance_classes": {

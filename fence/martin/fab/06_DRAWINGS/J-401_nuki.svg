@@ -4,13 +4,13 @@
 <rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
-<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>J-401  ·  Nuki + housed dado</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>J-401  ·  Nuki + cassette groove</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Joinery register — see JSON joints[]</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
-<text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>THROUGH-nuki: K-001 (2×6) and R-001/003/005 (2×10). Mortise 1.50″ × band height through the post.</text>
-<text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Cheeks: 2.00″ of 5.50″ post each side of 1.50″ slat — OK (QA).</text>
-<text x='40.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>HOUSED 0.75″ dado: R-002/004/006/007. Do NOT through-mortise — ¾″ gaps would leave a ¾″ web.</text>
+<text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>THROUGH-nuki: K-001 (2×12 PT) and R-001/R-002 (2×10 belts). Mortise 1.50″ × band height through the post.</text>
+<text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Cheeks: 2.00″ of 5.50″ post each side of 1.50″ belt — OK (QA).</text>
+<text x='40.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>CASSETTES Q-001/002/003 groove into nuki edges. Do NOT through-mortise — keep the post web.</text>
 <text x='40.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Kusabi W-001 0.625 × 1.125 × 5.500 through cheek slot on nuki posts. NEVER glue.</text>
-<text x='40.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Assembly +X. Winter withdraw bands toward P3 after knocking wedges.</text>
+<text x='40.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Assembly +X. Winter withdraw cassettes toward P3 after knocking wedges.</text>
 </svg>

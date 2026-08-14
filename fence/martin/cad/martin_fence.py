@@ -1,5 +1,5 @@
 """
-MARTIN FreeCAD model — Rev E Prairie screen on sit-on-grade ladder.
+MARTIN FreeCAD model — Rev F Darwin Martin Tree of Life light-screen.
 Semantic parts from martin_kernel.build_project(). Native CAD unit: mm.
 
 Run:  freecadcmd martin_fence.py
@@ -129,11 +129,11 @@ def main_build():
                     slot = cbox_in(v("kusabi_t"), fy + 0.08, v("kusabi_w"),
                                    cx + fx * 0.28, 0, s["cl"])
                     post = post.cut(slot)
-                else:
-                    dx = v("slat_housing_d")
+                elif s["id"].startswith("Q-"):
+                    dx = v("groove_d")
                     for sign in (-1.0, 1.0):
                         hx = cx + sign * (fx / 2.0 - dx / 2.0)
-                        dado = cbox_in(dx + 0.04, rt + v("nuki_fit"), hh + 0.04, hx, 0, mz)
+                        dado = cbox_in(dx + 0.04, v("board_t") + v("nuki_fit"), hh + 0.04, hx, 0, mz)
                         post = post.cut(dado)
         nm = pid.replace("-", "") + "_" + pst["mark"] + "_" + pst["role"].replace(" ", "_")[:24]
         feature_objs.append(add_shape(doc, nm, post, parts_by_id[pid], a_posts))
@@ -177,36 +177,53 @@ def main_build():
         feature_objs.append(add_shape(doc, f"F006_Brace_{pst['mark']}", br, parts_by_id["F-006"], a_base))
         timber.append(br)
 
-    # Prairie bands (kick + 7 slats)
+    # Water table + belts (full nuki_len) and per-bay recessed cassettes
     for s in ly["slats"]:
+        if s["id"].startswith("Q-"):
+            rec = v("board_t")
+            for bi, (la, rb) in enumerate(((1, 2), (2, 3))):
+                x0 = ly["posts"][la]["cx"] + fx / 2.0
+                ww = ly["bay_clear"]
+                panel = box_in(ww, rec, s["h"], x0, -rec / 2.0 - 0.35, s["z0"])
+                tag = "TreeOfLife" if s["id"] == "Q-002" else "NestedRects"
+                feature_objs.append(add_shape(doc, s["id"].replace("-", "") + f"_{tag}_B{bi}", panel, parts_by_id[s["id"]], a_frame))
+                timber.append(panel)
+            continue
         band = box_in(ly["nuki_len"], rt, s["h"], ly["nuki_x0"], -rt / 2.0, s["z0"])
-        tag = "Kick" if s["id"] == "K-001" else ("Nuki" if s["nuki"] else "Housed")
+        tag = "WaterTable" if s["id"] == "K-001" else "Belt"
         feature_objs.append(add_shape(doc, s["id"].replace("-", "") + "_" + tag, band, parts_by_id[s["id"]], a_frame))
         timber.append(band)
 
     cap = box_in(ly["cap_len"], v("cap_w"), v("cap_t"),
                  ly["cap_x0"], -v("cap_w") / 2.0, ly["overall_height"] - v("cap_t"))
-    feature_objs.append(add_shape(doc, "C001_Privacy_Cap", cap, parts_by_id["C-001"], a_frame))
+    feature_objs.append(add_shape(doc, "C001_Prairie_Eave", cap, parts_by_id["C-001"], a_frame))
     timber.append(cap)
+
+    fascia = box_in(ly["cap_len"], v("board_t"), v("fascia_h"),
+                    ly["cap_x0"], v("cap_w") / 2.0 - v("board_t"),
+                    ly["overall_height"] - v("cap_t") - v("fascia_h"))
+    feature_objs.append(add_shape(doc, "C003_Eave_Fascia", fascia, parts_by_id["C-003"], a_frame))
+    timber.append(fascia)
 
     stub = cbox_in(ly["cap_stub_len"], v("cap_w"), v("cap_t"),
                    ly["posts"][0]["cx"], 0, ly["overall_height"] - v("cap_t"))
     feature_objs.append(add_shape(doc, "C002_Latch_Cap_Stub", stub, parts_by_id["C-002"], a_posts))
     timber.append(stub)
 
-    # tectonic chevrons — garden-face clusters at two heights on P1/P2/P3
+    # Roman-brick wrap on P1/P2/P3 — garden face at belt heights
     bs = v("block_s")
+    belts = [s for s in ly["slats"] if s["id"].startswith("R-")]
     for pst in ly["posts"]:
         if pst["mark"] == "P0":
             continue
-        for zi, zc in enumerate((ly["slats"][1]["cl"], ly["slats"][5]["cl"])):
+        for zi, sl in enumerate(belts):
+            zc = sl["cl"]
             for k in range(3):
                 blk = cbox_in(bs, bs, bs, pst["cx"] + (k - 1) * (bs + 0.12), fy / 2.0 + bs / 2.0 + 0.05, zc - bs / 2.0)
                 feature_objs.append(add_shape(doc, f"T001_{pst['mark']}_{zi}_{k}", blk, parts_by_id["T-001"], a_frame))
                 timber.append(blk)
 
     # gate
-    import math
     gap = v("gate_gap")
     x0 = fx + gap
     w = ly["gate_leaf_w"]
@@ -221,30 +238,44 @@ def main_build():
     feature_objs.append(add_shape(doc, "G002_Latch_Stile", ls, parts_by_id["G-002"], a_gate))
     timber += [hs, ls]
     nuki_rails = [s for s in ly["slats"] if s["nuki"] and s["id"].startswith("R-")]
-    for rid, sl in zip(("G-003", "G-004", "G-005"), nuki_rails):
+    for rid, sl in zip(("G-003", "G-004"), nuki_rails):
         gw = v("rail_gate_h")
         g = box_in(w - 2 * stile, t, gw, x0 + stile, y0, sl["cl"] - gw / 2.0)
         feature_objs.append(add_shape(doc, rid.replace("-", "") + "_Gate_Rail", g, parts_by_id[rid], a_gate))
         timber.append(g)
+    q3 = next(s for s in ly["slats"] if s["id"] == "Q-003")
+    g5 = box_in(w - 2 * stile, t, v("rail_gate_h"), x0 + stile, y0, q3["cl"] - v("rail_gate_h") / 2.0)
+    feature_objs.append(add_shape(doc, "G005_Gate_Rail", g5, parts_by_id["G-005"], a_gate))
+    timber.append(g5)
     for rid, zz, ht in (("G-006", z0, 3.5), ("G-007", z0 + gh - 3.5, 3.5)):
         g = box_in(w - 2 * stile, t, ht, x0 + stile, y0, zz)
         feature_objs.append(add_shape(doc, rid.replace("-", "") + "_Gate_Rail", g, parts_by_id[rid], a_gate))
         timber.append(g)
-    brace_len = math.hypot(ly["gate_inner"], gh - 10.0)
-    brace = box_in(brace_len, t, v("brace_w"), 0, y0, 0)
-    brace.rotate(V(0, 0, 0), V(0, 1, 0), -math.degrees(math.atan2(gh - 10.0, ly["gate_inner"])))
-    brace.translate(V(inch_mm(x0 + stile), 0, inch_mm(z0 + 5)))
-    feature_objs.append(add_shape(doc, "G008_Brace", brace, parts_by_id["G-008"], a_gate))
-    timber.append(brace)
+    # G-008 shop brace is driveway-face only — omit from garden-facing CAD solids
 
+    rec = v("board_t")
     for i, s in enumerate(ly["slats"]):
+        if not s["id"].startswith("Q-"):
+            continue
         z0b = max(s["z0"], z0)
         z1b = min(s["z1"], z0 + gh)
         if z1b - z0b < 0.4:
             continue
-        g = box_in(ly["gate_inner"], t * 0.7, z1b - z0b, x0 + stile, y0 + t * 0.15, z0b)
-        feature_objs.append(add_shape(doc, f"G009_Infill_{i}", g, parts_by_id["G-009"], a_gate))
+        g = box_in(ly["gate_inner"], rec, z1b - z0b, x0 + stile, y0 + t * 0.2, z0b)
+        feature_objs.append(add_shape(doc, f"G009_Cassette_{s['id'].replace('-', '')}", g, parts_by_id["G-009"], a_gate))
         timber.append(g)
+    # Tree of Life muntins on the gate (trunks / pots / frames — not every jewel)
+    for m in ly["motifs"]:
+        if m.get("bay") != "gate" or m.get("kind") != "tree-of-life":
+            continue
+        for j, r in enumerate(m.get("rects") or []):
+            if r.get("role") not in ("trunk", "pot", "frame"):
+                continue
+            if r["w"] < 0.3 or r["h"] < 0.3:
+                continue
+            mun = box_in(r["w"], rec, r["h"], r["x"], y0 + t * 0.35, r["z"])
+            feature_objs.append(add_shape(doc, f"G009_Muntin_{j}", mun, parts_by_id["G-009"], a_gate))
+            timber.append(mun)
 
     bar = box_in(v("latch_bar_l"), v("latch_bar_t"), v("latch_bar_w"),
                  x0 - v("latch_bar_l") + 2.0, -v("latch_bar_t") / 2.0,

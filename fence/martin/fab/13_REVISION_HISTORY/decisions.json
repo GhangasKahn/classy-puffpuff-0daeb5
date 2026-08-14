@@ -7,9 +7,9 @@
   },
   {
     "ID": "D-002",
-    "Decision": "\u03c6-adjacent 2\u00d710 / 2\u00d76 Prairie bands (9.25/5.5=1.682). Do not rip 2\u00d710.",
-    "Reason": "Golden ratio where it does not thin structure. Full 2\u00d710 nuki bearing. Darwin Martin belt courses.",
-    "Parts": "R-001..007, K-001"
+    "Decision": "Darwin Martin Tree of Life light-screen: 2\u00d712 water table + two projecting 2\u00d710 belts + three recessed muntin cassettes (\u03c6 8.085 / 13.080 / 8.085).",
+    "Reason": "Stacked 2\u00d710/2\u00d76 boards read as a Home Depot ranch fence. Wright at a distance is eave + belts + piers + patterned lights. \u03c6 sizes the cassette pair, not ripped 2\u00d710.",
+    "Parts": "K-001, Q-001/002/003, R-001/002, C-001, C-003"
   },
   {
     "ID": "D-003",
@@ -37,9 +37,9 @@
   },
   {
     "ID": "D-007",
-    "Decision": "Through-nuki only K-001 + R-001/003/005. House remaining bands 0.75\u2033.",
-    "Reason": "0.75\u2033 slat gaps would leave a 0.75\u2033 web if every band were through-mortised.",
-    "Parts": "R-001..007, K-001, L-002..004"
+    "Decision": "Through-nuki only K-001 + R-001 + R-002. Cassettes groove into nuki edges; three mortises keep the post web.",
+    "Reason": "Seven through-mortises would shred the 4\u00d76. Belts + water table are the structure. Lights are withdrawable cassettes.",
+    "Parts": "R-001, R-002, K-001, Q-001/002/003, L-002..004"
   },
   {
     "ID": "D-008",
@@ -61,9 +61,9 @@
   },
   {
     "ID": "D-011",
-    "Decision": "0.75\u2033 slat gaps + PT kickboard + 0.375\u2033 gate bottom clear.",
-    "Reason": "100% dog containment. Kick nuki at grade. Gaps are a light-screen, not a crawl path.",
-    "Parts": "K-001, R-001..007, G-009"
+    "Decision": "Solid 2\u00d712 PT water table + 1.50\u2033 max pattern apertures + 0.375\u2033 gate bottom clear.",
+    "Reason": "100% dog containment. Kick is the crawl stop. Pattern is a Wright light-screen, not a radiator of \u00be\u2033 gaps.",
+    "Parts": "K-001, Q-001/002/003, G-009"
   },
   {
     "ID": "D-012",

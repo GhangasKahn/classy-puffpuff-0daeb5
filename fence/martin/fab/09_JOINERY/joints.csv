@@ -1,41 +1,37 @@
 JOINT_ID,JOINT_TYPE,PART_A,PART_B,LOCATION,FIT_CLASS,GLUE,ASSEMBLY_DIRECTION
-J-001,kick nuki 貫,L-002,K-001,"L-002 × K-001 @ z_cl=2.75""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-002,kick nuki 貫,L-003,K-001,"L-003 × K-001 @ z_cl=2.75""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-003,kick nuki 貫,L-004,K-001,"L-004 × K-001 @ z_cl=2.75""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-004,nuki 貫 + kusabi,L-002,R-001,"L-002 × R-001 @ z_cl=10.125""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-005,nuki 貫 + kusabi,L-003,R-001,"L-003 × R-001 @ z_cl=10.125""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-006,nuki 貫 + kusabi,L-004,R-001,"L-004 × R-001 @ z_cl=10.125""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-007,nuki 貫 + kusabi,L-002,R-003,"L-002 × R-003 @ z_cl=26.375""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-008,nuki 貫 + kusabi,L-003,R-003,"L-003 × R-003 @ z_cl=26.375""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-009,nuki 貫 + kusabi,L-004,R-003,"L-004 × R-003 @ z_cl=26.375""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-010,nuki 貫 + kusabi,L-002,R-005,"L-002 × R-005 @ z_cl=42.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-011,nuki 貫 + kusabi,L-003,R-005,"L-003 × R-005 @ z_cl=42.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-012,nuki 貫 + kusabi,L-004,R-005,"L-004 × R-005 @ z_cl=42.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-013,housed dado (Prairie slat),L-002/003/004,R-002,"R-002 @ z_cl=18.25""",SLIDING,NO — winter removable,+X from P3
-J-014,housed dado (Prairie slat),L-002/003/004,R-004,"R-004 @ z_cl=34.5""",SLIDING,NO — winter removable,+X from P3
-J-015,housed dado (Prairie slat),L-002/003/004,R-006,"R-006 @ z_cl=50.75""",SLIDING,NO — winter removable,+X from P3
-J-016,housed dado (Prairie slat),L-002/003/004,R-007,"R-007 @ z_cl=58.875""",SLIDING,NO — winter removable,+X from P3
-J-017,foot tenon into cross-tie shoe,L-001,F-003,"P0 cx=1.75"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
-J-018,foot tenon into cross-tie shoe,L-002,F-003,"P1 cx=41.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
-J-019,foot tenon into cross-tie shoe,L-003,F-003,"P2 cx=91.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
-J-020,foot tenon into cross-tie shoe,L-004,F-003,"P3 cx=141.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
-J-021,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P0,SNUG + oak peg,NO,+X nuki / −Z tenon
-J-022,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P1,SNUG + oak peg,NO,+X nuki / −Z tenon
-J-023,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P2,SNUG + oak peg,NO,+X nuki / −Z tenon
-J-024,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P3,SNUG + oak peg,NO,+X nuki / −Z tenon
-J-025,sujikai housed half-lap,F-006,L-00x / F-001 / F-002,"post to sill, z≈18″ AFF",SNUG + peg,NO,+X nuki / −Z tenon
-J-026,kama-tsugi 鎌継ぎ,C-001-L,C-001-R,centered on L-003,DRAWBORED,NO (or hide glue if not disassembling cap),+X nuki / −Z tenon
-J-027,hozo ほぞ drawbored M&T,G-001,G-003,G-001 × G-003,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-028,hozo ほぞ drawbored M&T,G-002,G-003,G-002 × G-003,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-029,hozo ほぞ drawbored M&T,G-001,G-004,G-001 × G-004,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-030,hozo ほぞ drawbored M&T,G-002,G-004,G-002 × G-004,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-031,hozo ほぞ drawbored M&T,G-001,G-005,G-001 × G-005,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-032,hozo ほぞ drawbored M&T,G-002,G-005,G-002 × G-005,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-033,hozo ほぞ drawbored M&T,G-001,G-006,G-001 × G-006,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-034,hozo ほぞ drawbored M&T,G-002,G-006,G-002 × G-006,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-035,hozo ほぞ drawbored M&T,G-001,G-007,G-001 × G-007,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-036,hozo ほぞ drawbored M&T,G-002,G-007,G-002 × G-007,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
-J-037,half-lap brace,G-008,G-003 / G-007,compression diagonal,GLUE + geometry,NO — winter removable,in plane of leaf
-J-038,floating groove,R-001..R-003 / C-001,T-001 / G-009,posts (blocks) / gate stiles (infill),CLEARANCE,NO,+X nuki / −Z tenon
-J-039,oak pivot / socket,L-002 / F-003 / C-001,G-001 / W-003,bottom in sill at P1; top in cap soffit — lift-off +Z,LOCATIONAL,NO — winter removable,+Z to remove
-J-040,sliding latch,G-010,H-002 or L-001,"z_cl=26.375"" (R-003 major band)",SLIDING,NO — winter removable,+X nuki / −Z tenon
+J-001,kick nuki 貫,L-002,K-001,"L-002 × K-001 @ z_cl=5.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-002,kick nuki 貫,L-003,K-001,"L-003 × K-001 @ z_cl=5.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-003,kick nuki 貫,L-004,K-001,"L-004 × K-001 @ z_cl=5.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-004,nuki 貫 + kusabi,L-002,R-001,"L-002 × R-001 @ z_cl=25.46""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-005,nuki 貫 + kusabi,L-003,R-001,"L-003 × R-001 @ z_cl=25.46""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-006,nuki 貫 + kusabi,L-004,R-001,"L-004 × R-001 @ z_cl=25.46""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-007,nuki 貫 + kusabi,L-002,R-002,"L-002 × R-002 @ z_cl=49.291""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-008,nuki 貫 + kusabi,L-003,R-002,"L-003 × R-002 @ z_cl=49.291""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-009,nuki 貫 + kusabi,L-004,R-002,"L-004 × R-002 @ z_cl=49.291""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-010,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-001,"Q-001 @ z_cl=16.043""",SLIDING,NO — winter removable,+X from P3
+J-011,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-002,"Q-002 @ z_cl=37.376""",SLIDING,NO — winter removable,+X from P3
+J-012,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-003,"Q-003 @ z_cl=58.709""",SLIDING,NO — winter removable,+X from P3
+J-013,foot tenon into cross-tie shoe,L-001,F-003,"P0 cx=1.75"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
+J-014,foot tenon into cross-tie shoe,L-002,F-003,"P1 cx=41.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
+J-015,foot tenon into cross-tie shoe,L-003,F-003,"P2 cx=91.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
+J-016,foot tenon into cross-tie shoe,L-004,F-003,"P3 cx=141.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
+J-017,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P0,SNUG + oak peg,NO,+X nuki / −Z tenon
+J-018,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P1,SNUG + oak peg,NO,+X nuki / −Z tenon
+J-019,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P2,SNUG + oak peg,NO,+X nuki / −Z tenon
+J-020,half-lap pegged (sill × tie),F-001 / F-002,F-003,tie at P3,SNUG + oak peg,NO,+X nuki / −Z tenon
+J-021,sujikai housed half-lap,F-006,L-00x / F-001 / F-002,"post to sill, z≈18″ AFF",SNUG + peg,NO,+X nuki / −Z tenon
+J-022,kama-tsugi 鎌継ぎ,C-001-L,C-001-R,centered on L-003,DRAWBORED,NO (or hide glue if not disassembling cap),+X nuki / −Z tenon
+J-023,hozo ほぞ drawbored M&T,G-001,G-003,G-001 × G-003,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-024,hozo ほぞ drawbored M&T,G-002,G-003,G-002 × G-003,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-025,hozo ほぞ drawbored M&T,G-001,G-004,G-001 × G-004,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-026,hozo ほぞ drawbored M&T,G-002,G-004,G-002 × G-004,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-027,hozo ほぞ drawbored M&T,G-001,G-005,G-001 × G-005,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-028,hozo ほぞ drawbored M&T,G-002,G-005,G-002 × G-005,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-029,hozo ほぞ drawbored M&T,G-001,G-006,G-001 × G-006,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-030,hozo ほぞ drawbored M&T,G-002,G-006,G-002 × G-006,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-031,hozo ほぞ drawbored M&T,G-001,G-007,G-001 × G-007,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-032,hozo ほぞ drawbored M&T,G-002,G-007,G-002 × G-007,DRAWBORED,optional hide glue — gate is a keep-together subassembly,+X nuki / −Z tenon
+J-033,half-lap brace,G-008,G-003 / G-007,compression diagonal,GLUE + geometry,NO — winter removable,in plane of leaf
+J-034,floating groove,R-001 / R-002 / C-001,T-001 / G-009,pier wrapping (T-001) / gate cassette grooves (G-009),CLEARANCE,NO,+X nuki / −Z tenon
+J-035,oak pivot / socket,L-002 / F-003 / C-001,G-001 / W-003,bottom in sill at P1; top in cap soffit — lift-off +Z,LOCATIONAL,NO — winter removable,+Z to remove
+J-036,sliding latch,G-010,H-002 or L-001,"z_cl=49.291"" (R-002 belt / latch CL)",SLIDING,NO — winter removable,+X nuki / −Z tenon

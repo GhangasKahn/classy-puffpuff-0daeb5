@@ -3,28 +3,27 @@ L-001,P0 latch post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,latch post
 L-002,P1 hinge post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,hinge post
 L-003,P2 mid post / cap scarf,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,mid post / cap scarf
 L-004,P3 end post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,end post
-R-001,S1 major Prairie nuki,1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
-R-002,S2 housed screen,1,1.5,5.5,105.5,solid lumber,2×6 × 10′,
-R-003,S3 major Prairie nuki / latch CL,1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
-R-004,S4 housed screen,1,1.5,5.5,105.5,solid lumber,2×6 × 10′,
-R-005,S5 major Prairie nuki,1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
-R-006,S6 housed screen,1,1.5,5.5,105.5,solid lumber,2×6 × 10′,
-R-007,S7 housed upper band — not nuki (keep post web),1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
-K-001,Kickboard nuki (dog seal),1,1.5,5.5,105.5,PT UC4A 2×6 (paint after dry),2×6 PT × 10′,Bottom of screen. ¾″ gaps above. Dog cannot crawl under. PT because splash.
-C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,106.0,solid lumber,2×8 × 12′,Cut as two halves after scarf layout. Light channel on yard soffit — wood cover slat. Wright ‘light screen’.
-C-002,Latch-post cap stub,1,1.5,7.25,5.0,solid lumber,from C-001 offcut / 2×8,Does not bridge gate
-T-001,Tectonic block (Darwin Martin pier texture),36,1.5,1.5,7.5,solid lumber,2×2 × 8′ / ripped 2×4,3-block chevron clusters × 2 heights × P1/P2/P3 × 2 faces. Ornament only — not structure.
+R-001,BELT1 projecting Prairie belt,1,1.5,9.25,110.5,solid lumber,2×10 × 10′,
+R-002,BELT2 projecting Prairie belt / latch CL,1,1.5,9.25,110.5,solid lumber,2×10 × 10′,
+K-001,Water table nuki (earth line / dog seal),1,1.5,11.25,110.5,PT UC4A 2×12 (paint after dry),2×12 PT × 10′,Wright earth line. Solid. Dog cannot crawl. PT because splash. Cassette Q-001 sits in the top edge groove.
+C-001,Prairie eave (kama-tsugi pair),1,1.5,11.25,111.5,solid lumber,2×12 × 12′,Wright eave — thin and wide. Cantilevers past the 4×6 piers. Light channel on yard soffit. 1×4 fascia C-003 hangs on the garden edge.
+C-002,Latch-post cap stub,1,1.5,11.25,5.0,solid lumber,from C-001 offcut / 2×12,Does not bridge gate
+C-003,Eave fascia (garden shadow),1,0.75,3.5,111.5,solid lumber,1×4 × 12′,"The shadow line that makes the cap read as a Wright eave, not a 2× lid."
+Q-001,L1 nested-rects light (roots),2,0.75,3.5,47.5,1×2 / 1×3 ripped muntins in a 1× frame,1×4 × 8′ (rip to ¾″ muntins),Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50″.
+Q-002,L2 Tree of Life light (three trees),2,0.75,3.5,47.5,1×2 / 1×3 ripped muntins in a 1× frame,1×4 × 8′ (rip to ¾″ muntins),Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50″.
+Q-003,L3 nested-rects light (foliage),2,0.75,3.5,47.5,1×2 / 1×3 ripped muntins in a 1× frame,1×4 × 8′ (rip to ¾″ muntins),Recessed behind belt courses. Tree of Life (Q-002) or nested squares (Q-001/003). Max aperture 1.50″.
+T-001,Tectonic block (Darwin Martin pier texture),36,1.5,1.5,7.5,solid lumber,2×2 × 8′ / ripped 2×4,"Roman-brick wrapping on P1/P2/P3 — stacked 2×2 with ⅜″ raked shadow joints. Darwin Martin pier texture. Ornament + shadow, not structure."
 G-001,Gate hinge stile,1,1.5,3.5,63.625,solid lumber,2×6 × 8′,
 G-002,Gate latch stile,1,1.5,3.5,63.625,solid lumber,2×6 × 8′,
-G-003,Gate rail aligned to R1,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,finished length includes tenons; shoulder-to-shoulder = gate_inner
-G-004,Gate rail aligned to R2 (latch),1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
-G-005,Gate rail aligned to R3,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
+G-003,Gate rail aligned to BELT1,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,finished length includes tenons; shoulder-to-shoulder = gate_inner
+G-004,Gate rail aligned to BELT2 (latch),1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
+G-005,Gate top belt rail,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
 G-006,Gate bottom rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
 G-007,Gate top rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
-G-008,Gate diagonal brace,1,1.5,3.5,60.61,solid lumber,2×4 / 2×6 offcut,
-G-009,Gate horizontal infill (matches screen bands),7,1.5,5.5,28.5,solid lumber,2×6 × 8′,Same 2×10 / 2×6 / ¾″ rhythm as the screen so Prairie lines continue across the gate.
+G-008,Gate diagonal brace,1,1.5,3.5,60.61,solid lumber,2×4 / 2×6 offcut,Shop-side compression only — sits on the driveway face. Not the garden elevation. Do not let this read as a ranch Z-brace.
+G-009,Gate Tree of Life / nested-rect cassettes,3,0.75,3.5,28.5,1×2 / 1×3 ripped muntins in a 1× frame,1×4 × 8′ (rip to ¾″ muntins),Garden face is Darwin Martin Tree of Life (middle light) + nested squares. Matches Q-001/002/003. Max aperture 1.50″.
 G-010,Sliding latch bar,1,1.5,3.5,19.0,white oak (preferred) or hard maple,1×4 oak × 4′ / 2×4,
-W-001,Kusabi locking wedge,16,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,12 nuki + 4 spare. Label bag for winter. NEVER glue.
+W-001,Kusabi locking wedge,12,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,9 nuki (K-001 + R-001 + R-002 × P1/P2/P3) + 3 spare. Label bag for winter. NEVER glue.
 W-002,Drawbore / latch oak peg,14,0.375,0.375,2.5,white oak,1×4 oak × 4′,10 gate M&T + 1 cap scarf + 1 latch cross-peg + 2 spare
 W-003,Oak gate pivot pin,2,1.25,1.25,4.5,white oak,oak 5/4 or 1-1/4″ dowel,"Structurally best on a freestanding hinge post: leaf weight goes into the sill, not a cantilever pintle. P0 (house) has no planter."
 F-001,Driveway dodai sill,1,3.5,5.5,156.0,solid lumber,4×6 × 16′,High side. Sit on existing driveway. Rubber pads protect pavement.

@@ -4,13 +4,107 @@
 <rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
-<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-304  ·  Gate leaf</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-304  ·  Gate leaf — Tree of Life</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>leaf 35.000" × 62.625"  ·  36" clear  ·  T2</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
-<rect x='80.0' y='160.0' width='420.0' height='413.3' fill='#e8eaeb' stroke='#1a1f24' stroke-width='2'/>
-<text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-001 hinge stile (P1 oak pivots)  ·  G-002 latch stile (P0)  ·  rails align to Prairie nuki bands</text>
-<text x='40.0' y='108.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Hozo tenon thickness ≈ leaf_t/3 = 0.500″  ·  tenon length 1.250″  ·  drawbore 0.125″ toward shoulder</text>
-<text x='40.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Oak pivots W-003: bottom socket in sill at P1, top in cap soffit. Leaf weight in compression to the driveway. Lift-off +Z.</text>
-<text x='40.0' y='164.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start'>Gate against the house. Latch B into P0 at R-003 CL 26.375" AFF. No planter at P0.</text>
+<rect x='80.0' y='353.8' width='350.0' height='626.2' fill='#e4e0d6' stroke='#1a1f24' stroke-width='2'/>
+<rect x='115.0' y='852.5' width='280.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='779.1' width='280.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='779.1' width='7.5' height='80.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='387.5' y='779.1' width='7.5' height='80.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.5' y='830.0' width='235.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.5' y='801.6' width='235.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.5' y='801.6' width='7.5' height='35.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='365.0' y='801.6' width='7.5' height='35.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='218.2' y='779.1' width='7.5' height='80.9' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='284.3' y='779.1' width='7.5' height='80.9' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='138.5' y='820.0' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='355.0' y='820.0' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='138.5' y='802.6' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='355.0' y='802.6' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='149.9' y='645.5' width='23.6' height='23.6' fill='#3d4540' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='122.5' y='652.1' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='188.8' y='652.1' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='155.7' y='644.4' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.4' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='157.9' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='178.4' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='121.3' y='581.8' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='188.5' y='581.8' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='126.0' y='565.2' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='183.8' y='565.2' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='130.6' y='548.7' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='179.2' y='548.7' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='540.8' width='7.5' height='130.8' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='203.8' y='540.8' width='4.5' height='130.8' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='243.2' y='645.5' width='23.6' height='23.6' fill='#3d4540' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='215.8' y='652.1' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='282.2' y='652.1' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='249.0' y='644.4' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='230.7' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='251.2' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='271.8' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='214.7' y='581.8' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='281.9' y='581.8' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='219.3' y='565.2' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='277.2' y='565.2' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='224.0' y='548.7' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='272.5' y='548.7' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='208.3' y='540.8' width='4.5' height='130.8' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='297.2' y='540.8' width='4.5' height='130.8' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='336.5' y='645.5' width='23.6' height='23.6' fill='#3d4540' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='309.2' y='652.1' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='375.5' y='652.1' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='342.3' y='644.4' width='12.0' height='12.0' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='324.1' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='344.6' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='365.1' y='590.5' width='7.5' height='52.3' fill='#242820' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='308.0' y='581.8' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='375.2' y='581.8' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='312.6' y='565.2' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='370.5' y='565.2' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='317.3' y='548.7' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='365.9' y='548.7' width='13.5' height='13.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='301.7' y='540.8' width='4.5' height='130.8' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='387.5' y='540.8' width='7.5' height='130.8' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='664.1' width='280.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='540.8' width='280.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<line x1='128.1' y1='588.6' x2='161.7' y2='577.0' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='195.3' y1='588.6' x2='161.7' y2='577.0' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='132.7' y1='572.0' x2='161.7' y2='560.4' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='190.6' y1='572.0' x2='161.7' y2='560.4' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='137.4' y1='555.4' x2='161.7' y2='543.8' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='185.9' y1='555.4' x2='161.7' y2='543.8' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='221.4' y1='588.6' x2='255.0' y2='577.0' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='288.6' y1='588.6' x2='255.0' y2='577.0' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='226.1' y1='572.0' x2='255.0' y2='560.4' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='283.9' y1='572.0' x2='255.0' y2='560.4' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='230.7' y1='555.4' x2='255.0' y2='543.8' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='279.3' y1='555.4' x2='255.0' y2='543.8' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='314.7' y1='588.6' x2='348.3' y2='577.0' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='381.9' y1='588.6' x2='348.3' y2='577.0' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='319.4' y1='572.0' x2='348.3' y2='560.4' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='377.3' y1='572.0' x2='348.3' y2='560.4' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='324.1' y1='555.4' x2='348.3' y2='543.8' stroke='#1a1f24' stroke-width='4.125'/>
+<line x1='372.6' y1='555.4' x2='348.3' y2='543.8' stroke='#1a1f24' stroke-width='4.125'/>
+<rect x='115.0' y='425.8' width='280.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='352.5' width='280.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='115.0' y='352.5' width='7.5' height='80.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='387.5' y='352.5' width='7.5' height='80.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.5' y='403.3' width='235.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.5' y='375.0' width='235.0' height='7.5' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='137.5' y='375.0' width='7.5' height='35.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='365.0' y='375.0' width='7.5' height='35.9' fill='#3a403c' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='218.2' y='352.5' width='7.5' height='80.9' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='284.3' y='352.5' width='7.5' height='80.9' fill='#2c322e' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='138.5' y='393.3' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='355.0' y='393.3' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='138.5' y='376.0' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<rect x='355.0' y='376.0' width='16.5' height='16.5' fill='#4a5a40' stroke='#1a1f24' stroke-width='0.7'/>
+<text x='520.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>G-001 hinge stile (P1 oak pivots)  ·  G-002 latch stile (P0)</text>
+<text x='520.0' y='108.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start'>Garden face is Tree of Life. Shop brace G-008 is on the driveway face — not this elevation.</text>
+<text x='520.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Hozo tenon ≈ leaf_t/3 = 0.500″  ·  tenon 1.250″  ·  drawbore 0.125″ toward shoulder</text>
+<text x='520.0' y='164.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Oak pivots W-003: bottom in sill at P1, top in cap soffit. Lift-off +Z.</text>
+<text x='520.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start'>Latch B into P0 at R-002 belt CL 49.291" AFF. No planter at P0.</text>
 </svg>
