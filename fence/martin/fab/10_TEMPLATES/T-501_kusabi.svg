@@ -1,6 +1,6 @@
 <svg xmlns='http://www.w3.org/2000/svg' width='280mm' height='200mm' viewBox='0 0 280 200'>
 <rect x='0' y='0' width='280' height='200' fill='#fff' stroke='#000' stroke-width='0.4'/>
-<text x='8' y='10' font-family='monospace' font-size='4'>T-501  Kusabi blank 1:1  MARTIN Rev D  PRINT 1:1</text>
+<text x='8' y='10' font-family='monospace' font-size='4'>T-501  Kusabi blank 1:1  MARTIN Rev E  PRINT 1:1</text>
 <rect x='8' y='14' width='100' height='10' fill='none' stroke='#000' stroke-width='0.35'/>
 <text x='8' y='28' font-family='monospace' font-size='3.2'>CHECK BOX = 100.000 mm  ·  measure before cutting  ·  if ≠100mm, abort print scale</text>
 <rect x='20' y='40' width='139.7' height='28.575' fill='none' stroke='#000' stroke-width='0.4'/>

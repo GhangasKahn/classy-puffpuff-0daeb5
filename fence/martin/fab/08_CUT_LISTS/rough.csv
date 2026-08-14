@@ -3,36 +3,40 @@ L-001,P0 latch post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,latch post
 L-002,P1 hinge post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,hinge post
 L-003,P2 mid post / cap scarf,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,mid post / cap scarf
 L-004,P3 end post,1,3.5,5.5,68.0,solid lumber,4×6 × 8′,end post
-R-001,R1 bottom Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
-R-002,R2 mid Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
-R-003,R3 upper Prairie nuki,1,1.5,7.25,105.5,solid lumber,2×8 × 10′,
-C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,106.0,solid lumber,2×8 × 12′,Cut as two halves after scarf layout; still one Part ID for the finished cap
+R-001,S1 major Prairie nuki,1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
+R-002,S2 housed screen,1,1.5,5.5,105.5,solid lumber,2×6 × 10′,
+R-003,S3 major Prairie nuki / latch CL,1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
+R-004,S4 housed screen,1,1.5,5.5,105.5,solid lumber,2×6 × 10′,
+R-005,S5 major Prairie nuki,1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
+R-006,S6 housed screen,1,1.5,5.5,105.5,solid lumber,2×6 × 10′,
+R-007,S7 housed upper band — not nuki (keep post web),1,1.5,9.25,105.5,solid lumber,2×10 × 10′,
+K-001,Kickboard nuki (dog seal),1,1.5,5.5,105.5,PT UC4A 2×6 (paint after dry),2×6 PT × 10′,Bottom of screen. ¾″ gaps above. Dog cannot crawl under. PT because splash.
+C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,106.0,solid lumber,2×8 × 12′,Cut as two halves after scarf layout. Light channel on yard soffit — wood cover slat. Wright ‘light screen’.
 C-002,Latch-post cap stub,1,1.5,7.25,5.0,solid lumber,from C-001 offcut / 2×8,Does not bridge gate
-B-001,Privacy board course C1 (below R1),16,0.75,5.5,5.25,solid lumber,1×6 × 8′,
-B-002,Privacy board courses C2+C3 (between rails),32,0.75,5.5,11.0,solid lumber,1×6 × 8′,
-B-003,Privacy board course C4 (above R3),16,0.75,5.5,14.125,solid lumber,1×6 × 8′,
-G-001,Gate hinge stile,1,1.5,3.5,63.0,solid lumber,2×6 × 8′,
-G-002,Gate latch stile,1,1.5,3.5,63.0,solid lumber,2×6 × 8′,
+T-001,Tectonic block (Darwin Martin pier texture),36,1.5,1.5,7.5,solid lumber,2×2 × 8′ / ripped 2×4,3-block chevron clusters × 2 heights × P1/P2/P3 × 2 faces. Ornament only — not structure.
+G-001,Gate hinge stile,1,1.5,3.5,63.625,solid lumber,2×6 × 8′,
+G-002,Gate latch stile,1,1.5,3.5,63.625,solid lumber,2×6 × 8′,
 G-003,Gate rail aligned to R1,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,finished length includes tenons; shoulder-to-shoulder = gate_inner
 G-004,Gate rail aligned to R2 (latch),1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
 G-005,Gate rail aligned to R3,1,1.5,5.5,31.0,solid lumber,2×6 × 8′,
 G-006,Gate bottom rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
 G-007,Gate top rail,1,1.5,3.5,31.0,solid lumber,2×6 × 8′,
-G-008,Gate diagonal brace,1,1.5,3.5,60.059,solid lumber,2×4 / 2×6 offcut,
-G-009,Gate infill board,4,0.75,5.5,54.5,solid lumber,1×6 × 8′,
+G-008,Gate diagonal brace,1,1.5,3.5,60.61,solid lumber,2×4 / 2×6 offcut,
+G-009,Gate horizontal infill (matches screen bands),7,1.5,5.5,28.5,solid lumber,2×6 × 8′,Same 2×10 / 2×6 / ¾″ rhythm as the screen so Prairie lines continue across the gate.
 G-010,Sliding latch bar,1,1.5,3.5,19.0,white oak (preferred) or hard maple,1×4 oak × 4′ / 2×4,
-W-001,Kusabi locking wedge,17,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,9 rail + 8 sill/tie + 3 extras. Label bag for winter. NEVER glue.
+W-001,Kusabi locking wedge,16,0.625,1.125,6.0,white oak / hard maple,2×4 × 8′ ripped,12 nuki + 4 spare. Label bag for winter. NEVER glue.
 W-002,Drawbore / latch oak peg,14,0.375,0.375,2.5,white oak,1×4 oak × 4′,10 gate M&T + 1 cap scarf + 1 latch cross-peg + 2 spare
-W-003,Wooden pintle (or stainless upgrade),2,1.0,1.0,4.0,white oak / hard maple (BUY: stainless pintle set),oak offcut or H-003,Gate lifts straight up for winter. Metal optional — only purchased metal on fence if used.
+W-003,Oak gate pivot pin,2,1.25,1.25,4.5,white oak,oak 5/4 or 1-1/4″ dowel,"Structurally best on a freestanding hinge post: leaf weight goes into the sill, not a cantilever pintle. P0 (house) has no planter."
 F-001,Driveway dodai sill,1,3.5,5.5,156.0,solid lumber,4×6 × 16′,High side. Sit on existing driveway. Rubber pads protect pavement.
 F-002,Garden dodai sill,1,3.5,5.5,156.0,solid lumber,4×6 × 16′,Low side. Level with F-001 via timber packing — drop_off TBM. No cement.
 F-003,Cross-tie / post shoe,4,3.5,5.5,42.5,solid lumber,4×6 × 8′,One at each post CL. Posts drop in for winter lift-out.
-F-004,Garden packing crib,4,1.5,5.5,12.0,solid lumber,2×6 × 8′,"4 layers of 1.50″ 2×6 ≈ 6.0"" to match estimated 5.0"" drop. Field-fit."
-F-005,Ballast box (empty timber frame),4,1.5,1.5,56.0,solid lumber,2×6 × 8′,Holds H-007 sandbags. Empty for winter. Not a stone pad. Not poured.
+F-004,Garden packing crib,0,1.5,5.5,12.0,solid lumber,2×6 × 8′,Qty 0 while the run sits on the driveway slab (photos). Use only if outriggers leave the slab.
+F-005,Live planter trough (garden side),2,1.5,5.5,48.0,PT UC4A 2×6 / 2×8 (paint after dry),2×6 × 8′,"P1–P2 and P2–P3 only. NOT at the house/gate. Live plants + watering. Optional stone in the bottom 4″ for drainage and mass — inside the box, not a pad. Winter: empty or lift with the ladder."
 F-006,Sujikai base brace,4,1.5,3.5,26.456,solid lumber,2×6 × 8′,"Transfers wind moment into ladder. Two garden-side, two driveway-side."
 H-001,Rubber furniture pad (driveway sill),8,0.5,4.0,4.0,rubber / composite,4″ furniture / anti-vibration pads,Under F-001. Protects pavement. No fasteners into driveway.
 H-002,Optional oak latch strike (Latch A opt-in),1,1.5,3.5,6.0,white oak block,oak offcut,DEFAULT is Latch B (mortise in L-001). Do not epoxy into concrete.
 H-003,Optional stainless pintle set,1,0,0,0,stainless steel,"lift-off pintle hinges, 2-pack",Replaces W-003 if preferred. Only metal on fence if used.
 H-004,Keyed padlock hasp (optional),1,0,0,0,stainless / galvanized,,On latch bar — not structural
-H-005,Exterior primer + owner gray enamel,1,0,0,0,exterior acrylic / alkyd,,"Mask wedges, tenons, sill laps, pintle faces"
-H-007,Removable sandbag ballast,27,0,0,0,woven poly sandbag + sand (or water jugs),50 lb bags,Qty from wind/ballast calc. Store dry in winter. NOT poured concrete. NOT a stone pad.
+H-005,Exterior primer + owner gray enamel,1,0,0,0,exterior acrylic / alkyd,,Ease arrises 1/16″; end-grain sealer; PT dry then prime; 2 finish coats owner gray; extra coat on planter interiors; mask joinery faces and oak pivot sockets
+H-006,12V IP65 LED tape + driver (cap soffit),1,0,0,0,low-voltage LED,outdoor tape 16′ + 60W driver + wood cover slat,Sits in C-001 soffit dado. Driver in a dry niche of the P3 planter — not at the house. Allowed metal: lighting only.
+H-007,Planter drainage stone (in-box only),1,0,0,0,pea gravel / lava rock,bags to fill 4″ in two troughs,In-box stone 3.67 cu ft / 366.7 lb. Soil 1155.0 lb. Provided 1521.7 vs required 1311.1 lb (planning).

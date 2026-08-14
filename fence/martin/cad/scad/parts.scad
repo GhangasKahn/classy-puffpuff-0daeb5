@@ -12,9 +12,11 @@ module R_nuki(part_id="R-001") {
     cube([nuki_len, rail_t, rail_h]);
 }
 
+module R_slat(h) { cube([nuki_len, rail_t, h]); }
+
 module C_cap() { cube([cap_len, cap_w, cap_t]); }
 
-module B_board(h) { cube([board_w, board_t, h]); }
+module F_planter() { cube([planter_x, planter_y, planter_h]); }
 
 module F_sill() { cube([sill_len, 3.5*25.4, sill_h]); }
 

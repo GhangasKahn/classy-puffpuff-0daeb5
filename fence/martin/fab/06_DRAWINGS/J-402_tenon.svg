@@ -6,7 +6,7 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>J-402  ·  Foot tenon / cross-tie</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Joinery register — see JSON joints[]</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Tenon 2.500 × 4.500 × 3.500 from sill-shoulder datum (END A).</text>
 <text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start'>Shoulders 0.500 all around. Mortise in F-003; leave ~2″ wood below.</text>

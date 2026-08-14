@@ -1,5 +1,5 @@
 // MARTIN — Prairie removable fence render scene (OpenSCAD)
-// Composed from FreeCAD-exported STLs. Sit-on-grade timber ladder — no concrete.
+// Composed from FreeCAD-exported STLs. Sit-on-grade timber ladder + live planters — no concrete.
 // Usage: openscad -o out.png --imgsize=1600,1000 --autocenter --viewall scene.scad
 
 show_ground = true;

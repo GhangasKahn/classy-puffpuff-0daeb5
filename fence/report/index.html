@@ -113,9 +113,9 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
 
 <header class="cover">
   <div class="wrap">
-    <p class="tag">Design &amp; Engineering Report · Rev D</p>
+    <p class="tag">Design &amp; Engineering Report · Rev E</p>
     <h1>MARTIN — Prairie Fence for a 143″ Opening</h1>
-    <p class="sub">Removable freestanding fence: Darwin Martin / Prairie horizontals + Japanese hand joinery, sized 143″ × 65″ for Buffalo, New York — sit-on-grade timber ladder, locking gate, FreeCAD model, and full build plans. No post holes, no cement, no stone pads.</p>
+    <p class="sub">Removable freestanding Prairie screen: Darwin Martin / FLW horizontals + Japanese hand joinery, sized 143″ × 65″ for Buffalo, New York — sit-on-grade timber ladder on the driveway, live planters, gate flush to the house, FreeCAD model, and full build plans. No post holes, no cement, no stone pads.</p>
     <div class="meta">
       <div><b>Location basis</b>Buffalo / Erie County NY</div>
       <div><b>Design run</b>143″ · 3632 mm × 65″ high</div>
@@ -129,17 +129,18 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
   <section id="summary">
     <div class="wrap">
       <h2><span class="no">1</span>Executive summary</h2>
-      <p class="intro">This report delivers a buildable, winter-removable fence for a 143″ × 65″ site opening: FreeCAD model, dimensioned blueprints, cut list with board feet, joinery vocabulary, a sit-on-grade timber ladder for the driveway drop-off, and a locking privacy gate.</p>
-      <p><strong>The design problem.</strong> The existing fence is 143″ long, 65″ high, and ¾″ thick. It must become entirely freestanding — no post-hole digging, no cement, no massive stone or gravel pads — and solid in Buffalo wind, frost, and wet–dry cycling; include a locking privacy gate; sit level across a driveway→garden drop; and come apart so the timber can be stored for winter. Aesthetic: Prairie School / Darwin Martin horizontals, built entirely with Japanese hand joinery from hardware-store dimensional lumber, painted owner gray — prefer 2×6 / 2×8 over 2×4, no nails or screws in the timber.</p>
-      <p><strong>The answer — MARTIN</strong> (primary for this site):</p>
+      <p class="intro">This report delivers a buildable, winter-removable Prairie screen for a 143″ × 65″ site opening that crosses the driveway: FreeCAD model, dimensioned blueprints, cut list with board feet, joinery vocabulary, live planters as ballast, and a locking gate flush to the house.</p>
+      <p><strong>The design problem.</strong> The existing run is 143″ long and 65″ high. It must be entirely freestanding — no post-hole digging, no cement, no massive stone or gravel pads — and solid in Buffalo wind, frost, and wet–dry cycling; include a locking privacy gate <em>right next to the house</em>; sit on the driveway slab; contain a dog 100%; and come apart so the timber can be stored for winter. Aesthetic: Prairie School / Darwin Martin House (visited), golden-ratio proportions where they do not thin structure, Japanese hand joinery, wood + lighting + a gate latch, painted owner gray.</p>
+      <p><strong>The answer — MARTIN Rev E</strong> (primary for this site):</p>
       <ul>
-        <li>Four 4×6 posts tenoned into a timber dodai ladder (sills + cross-ties) that sits on the existing driveway and garden grade.</li>
-        <li>Three continuous 2×8 Prairie nuki bands + 2×8 cap; 1×6 (¾″) vertical privacy boards floating in grooves.</li>
-        <li>36″ gate with wooden pintles and sliding oak latch into P0 (Latch B default — no epoxy into the house).</li>
-        <li>Knock-down winter sequence: wedges → rails → boards → gate → posts → empty sandbags → carry ladder.</li>
+        <li>Four 4×6 posts tenoned into a timber dodai ladder that sits on the existing driveway.</li>
+        <li>φ-adjacent 2×10 / 2×6 Prairie bands (9.25/5.5 = 1.682, not ripped) with ¾″ dog-tight gaps and a PT kick nuki at grade.</li>
+        <li>36″ gate flush to the house (no planter at P0), oak pivots at P1, sliding oak latch into P0.</li>
+        <li>Two live planters (privacy bays only) as wind ballast; optional stone inside the boxes for drainage and mass.</li>
+        <li>Cap soffit 12V IP65 lighting. Knock-down winter sequence. No holes, no cement, no pad.</li>
       </ul>
       <p><strong>Related systems archived in this suite:</strong> STELE (permanent masonry-pier fence for longer runs) and HASHIRA (standalone joinery reinforcement method). Use them if you later extend beyond 143″ or reinforce another fence.</p>
-      <p><strong>Status — Rev D.</strong> Sit-on-grade freestanding ladder: timber dodai sills, cross-tie post shoes, packing for the drop-off, removable sandbag ballast. <strong>No post holes, no cement, no gravel pad.</strong> Parametric kernel remains the single source of truth. Not a stamped PE document — confirm Green Code and engineer review if the city requires it.</p>
+      <p><strong>Status — Rev E.</strong> Darwin Martin Prairie screen on the Rev D sit-on-grade ladder. Vertical 1×6 privacy and sandbag boxes are retired. Parametric kernel remains the single source of truth. Not a stamped PE document — confirm Green Code and engineer review if the city requires it.</p>
       <figure class="frame">
         <img src="../martin/renders/martin_front.png" alt="MARTIN front elevation render" />
         <figcaption>MARTIN — front elevation. 36″ gate + two 46.5″ privacy bays · 143″ overall · owner-gray timber.</figcaption>
@@ -155,12 +156,12 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <thead><tr><th>Load / hazard</th><th>Design value</th><th>Design response (MARTIN)</th></tr></thead>
         <tbody>
           <tr><td>Opening</td><td>143″ L × 65″ H</td><td>Exact envelope; posts at 1.75 / 41.25 / 91.25 / 141.25″ centers</td></tr>
-          <tr><td>Grade drop</td><td>Field-verify (default 5″)</td><td>Timber packing cribs F-004 under garden sill; driveway sill sits on rubber pads</td></tr>
-          <tr><td>Wind</td><td>115 mph ultimate (ASCE 7)</td><td>4×6 posts, 2×8 through-rails, 36″ ladder spread + removable sandbag ballast; no fastener withdrawal path</td></tr>
+          <tr><td>Grade</td><td>Driveway slab (photos)</td><td>Ladder sits on existing concrete; packing only if outriggers leave the slab</td></tr>
+          <tr><td>Wind</td><td>115 mph ultimate (ASCE 7)</td><td>4×6 posts, 2×10 nuki bands, 36″ ladder spread + live planter mass (planning FS 1.5); no fastener withdrawal path</td></tr>
           <tr><td>Frost / heave</td><td>48″ Erie County</td><td>Nothing is buried. Fence sits on grade and leaves for winter — frost cannot jack what is not in the ground</td></tr>
           <tr><td>Freeze-thaw</td><td>Severe (&gt;60 cycles/yr)</td><td>Rain-screen board gaps; no trapped water in nuki; paint; annual lift of sills</td></tr>
-          <tr><td>Winter storage</td><td>Owner requirement</td><td>Full knock-down: timber modules store dry; empty sandbags; nothing poured remains</td></tr>
-          <tr><td>Snow / plow</td><td>Lake-effect + berms</td><td>Bottom rail CL at 10″ AFF; boards start above splash; fence is gone before plow season</td></tr>
+          <tr><td>Winter storage</td><td>Owner requirement</td><td>Full knock-down: timber modules store dry; empty planters; nothing poured remains</td></tr>
+          <tr><td>Snow / plow</td><td>Lake-effect + berms</td><td>PT kick at grade; ¾″ light-screen; fence is gone before plow season</td></tr>
         </tbody>
       </table>
       <div class="callout">
@@ -177,7 +178,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <div class="grid2">
         <figure class="frame">
           <img src="../martin/renders/martin_iso.png" alt="MARTIN isometric" />
-          <figcaption>Isometric — gate left, privacy bays right, sit-on-grade ladder spanning drop-off</figcaption>
+          <figcaption>Isometric — gate against the house (left), Prairie screen across the driveway, live planters garden-side</figcaption>
         </figure>
         <figure class="frame">
           <img src="../martin/renders/martin_gate.png" alt="Gate detail" />
@@ -193,22 +194,22 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
           <tr><td>Gate clear</td><td>36″</td><td>Between P0 and P1</td></tr>
           <tr><td>Privacy bay clear</td><td>46.5″ each</td><td>P1–P2 and P2–P3</td></tr>
           <tr><td>Posts</td><td>4×6 actual 3.5×5.5</td><td>3.5″ foot tenon into F-003</td></tr>
-          <tr><td>Rails R1 / R2 / R3</td><td>2×8 on edge @ 10″ / 28″ / 46″ CL</td><td>Nuki through-posts, wedge-locked</td></tr>
-          <tr><td>Cap</td><td>2×8 flat</td><td>Kama-tsugi scarf at P2</td></tr>
-          <tr><td>Privacy boards</td><td>1×6 × ¾″</td><td>Float in ⅜″ rail grooves; ¼″ gaps</td></tr>
-          <tr><td>Ladder</td><td>155″ sills × 39.5″ wide</td><td>4×6 dodai + cross-ties; sit on grade</td></tr>
-          <tr><td>Packing / ballast</td><td>F-004 cribs + 27×50 lb bags</td><td>Drop TBM 5″; bags empty for winter</td></tr>
+          <tr><td>Rails / bands</td><td>2×10 + 2×6, ¾″ gaps</td><td>Nuki K-001+R-001/003/005; housed remainder; φ-adjacent 1.682</td></tr>
+          <tr><td>Cap</td><td>2×8 flat</td><td>Kama-tsugi scarf at P2; soffit light dado</td></tr>
+          <tr><td>Screen / dog seal</td><td>PT kick + ¾″ gaps + 0.375″ gate bottom</td><td>100% containment; Prairie light-screen</td></tr>
+          <tr><td>Ladder</td><td>155″ sills × 39.5″ wide</td><td>4×6 dodai + cross-ties; sit on driveway</td></tr>
+          <tr><td>Planters / ballast</td><td>2 troughs 44×18×18″</td><td>P1–P2 and P2–P3 only; ~1522 lb wet soil+stone vs 1311 lb required</td></tr>
         </tbody>
       </table>
       <h3>Joinery (no nails / screws in timber)</h3>
       <table>
         <thead><tr><th>Joint</th><th>Where</th><th>Lock</th></tr></thead>
         <tbody>
-          <tr><td>Nuki 貫</td><td>All Prairie rails through posts</td><td>Hardwood kusabi wedges</td></tr>
+          <tr><td>Nuki 貫</td><td>K-001 + R-001/003/005 through posts</td><td>Hardwood kusabi wedges</td></tr>
+          <tr><td>Housed dado</td><td>R-002/004/006/007</td><td>0.75″ housing — keep post web</td></tr>
           <tr><td>Hozo ほぞ</td><td>Gate stile/rail frame</td><td>Drawbored oak peg</td></tr>
           <tr><td>Kama-tsugi 鎌継ぎ</td><td>Cap scarf at P2</td><td>Drawbored peg</td></tr>
-          <tr><td>Half-lap</td><td>Gate diagonal brace</td><td>Geometry + friction</td></tr>
-          <tr><td>Floating groove</td><td>1×6 boards in rail dados</td><td>Cap retains; no fasteners</td></tr>
+          <tr><td>Oak pivot</td><td>Sill + cap at P1</td><td>Lift-off +Z; weight into driveway</td></tr>
           <tr><td>Foot tenon</td><td>Post into F-003 cross-tie</td><td>Gravity drop-in; lift for winter</td></tr>
         </tbody>
       </table>
@@ -216,11 +217,11 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <ul>
         <li><strong>Latch B (default):</strong> 1.5″ × 3.5″ × 18″ oak sliding bar into a mortise in latch post P0 with gravity catch — fully freestanding. Cross-peg + optional keyed padlock hasp. No epoxy into the house.</li>
         <li><strong>Latch A (opt-in only):</strong> Same bar into an oak strike you add later on a wall you own. Not in the default kit.</li>
-        <li><strong>Hinges:</strong> Wooden pintles (lift-off for winter). Optional stainless pintle upgrade is the only recommended metal on the fence.</li>
+        <li><strong>Hinges:</strong> 1.25″ oak pivots (W-003) — bottom in the sill at P1, top in the cap soffit. Leaf weight in compression to the driveway. Optional stainless pintle is backup only. P0 has no planter, so the gate is not hung as a cantilever off the house post.</li>
       </ul>
       <figure class="frame">
         <img src="../martin/plans/M4_pad_piers.svg" alt="Sit-on-grade ladder" />
-        <figcaption>Sit-on-grade — timber packing for the drop-off, rubber pads on the driveway, ballast boxes at the corners</figcaption>
+        <figcaption>Sit-on-grade — rubber pads on the driveway, live planters garden-side of the privacy bays, no planter at the house</figcaption>
       </figure>
     </div>
   </section>
@@ -293,16 +294,16 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
     <div class="wrap">
       <h2><span class="no">6</span>Engineering rationale</h2>
       <h3>Why MARTIN stands in wind without nails</h3>
-      <p>Wind on a 65″ × 143″ face delivers shear and overturning into the posts. Through-rails (nuki) turn that shear into wood-on-wood compression inside the posts; wedges keep the rails from walking. Overturning is resisted by the 36″ ladder spread plus removable sandbag ballast in the corner boxes. There is no nail withdrawal path to fatigue in freeze-thaw.</p>
+      <p>Wind on a 65″ × 143″ face delivers shear and overturning into the posts. Through-bands (nuki) turn that shear into wood-on-wood compression inside the posts; wedges keep the bands from walking. Remaining bands are housed 0.75″ so the ¾″ light-screen gaps do not leave a ¾″ web. Overturning is resisted by the 36″ ladder spread plus wet soil and in-box stone in two garden-side planters (planning 1522 lb vs 1311 lb required at FS 1.5). There is no nail withdrawal path to fatigue in freeze-thaw.</p>
       <h3>Why the ladder matters</h3>
-      <p>A fence that is not level racks its joints on day one. Two 4×6 dodai sills and four cross-ties create a single plane. The driveway sill sits on rubber furniture pads; the garden sill sits on dry-stacked 2×6 packing cribs sized to the measured drop. Makeup height is a field dimension — default 5″ until site photos confirm. Nothing is poured.</p>
+      <p>A fence that is not level racks its joints on day one. Two 4×6 dodai sills and four cross-ties create a single plane that sits on the driveway slab (photos). Rubber furniture pads protect the pavement. Packing cribs exist only if outriggers leave the slab. Nothing is poured.</p>
       <h3>Why winter removal is structural, not a compromise</h3>
-      <p>Buffalo snowplows and ice berms destroy fences that stay at the curb. Designing the timber as a wedge-locked knock-down furniture fence means it survives by leaving. Empty the bags, lift the ladder, store dry. Nothing remains in the ground.</p>
+      <p>Buffalo snowplows and ice berms destroy fences that stay at the curb. Designing the timber as a wedge-locked knock-down furniture fence means it survives by leaving. Empty the planters, lift the ladder, store dry. Nothing remains in the ground.</p>
       <h3>STELE archive notes (Egypt / Rome / Maya)</h3>
       <p>For permanent longer runs, STELE's battered piers keep bed joints in compression, 48″ drained footings beat frost, and raised curbs keep wood out of snowpack — see the STELE design page. STELE is a different project; MARTIN does not borrow its foundations.</p>
       <div class="callout">
         <p class="t">Failure-mode audit (MARTIN)</p>
-        <p>Wind racking → nuki compression + ladder spread + sandbag ballast. Grade drop → timber packing. Rot → pads + paint + annual lift. Fastener corrosion → no fasteners in timber. Plow impact → fence stored indoors. Theft / privacy → locking latch into P0.</p>
+        <p>Wind racking → nuki compression + ladder spread + live planter mass. Dog crawl → PT kick + ¾″ gaps + 0.375″ gate bottom. Rot → pads + PT splash + paint + air gap at planters. Fastener corrosion → no fasteners in timber. Plow impact → fence stored indoors. Theft / privacy → locking latch into P0. Hinge racking → oak pivots into the sill, not a pintle off P0.</p>
       </div>
     </div>
   </section>
@@ -314,9 +315,9 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <div class="sheetlist">
         <figure class="frame"><img src="../martin/plans/M1_general.svg" alt="Sheet M-1" /><figcaption>M-1 · General arrangement — elevation, plan, design notes</figcaption></figure>
         <figure class="frame"><img src="../martin/plans/M2_elevation.svg" alt="Sheet M-2" /><figcaption>M-2 · Bay elevation &amp; rail schedule</figcaption></figure>
-        <figure class="frame"><img src="../martin/plans/M3_joinery.svg" alt="Sheet M-3" /><figcaption>M-3 · Nuki, foot tenon, kama-tsugi, floating boards</figcaption></figure>
-        <figure class="frame"><img src="../martin/plans/M4_pad_piers.svg" alt="Sheet M-4" /><figcaption>M-4 · Sit-on-grade ladder, packing, winter sequence</figcaption></figure>
-        <figure class="frame"><img src="../martin/plans/M5_gate_latch.svg" alt="Sheet M-5" /><figcaption>M-5 · Gate leaf, pintles, house / post latch</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M3_joinery.svg" alt="Sheet M-3" /><figcaption>M-3 · Nuki, housed dado, foot tenon, kama-tsugi, ¾″ light-screen</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M4_pad_piers.svg" alt="Sheet M-4" /><figcaption>M-4 · Sit-on-grade ladder, live planters, winter sequence</figcaption></figure>
+        <figure class="frame"><img src="../martin/plans/M5_gate_latch.svg" alt="Sheet M-5" /><figcaption>M-5 · Gate leaf, oak pivots, Latch B against the house</figcaption></figure>
         <figure class="frame"><img src="../martin/plans/M6_cutlist.svg" alt="Sheet M-6" /><figcaption>M-6 · Cut list &amp; board feet</figcaption></figure>
       </div>
       <p>STELE archive sheets (S-1…S-5) remain at <a href="../stele/#plans">STELE plans</a>.</p>
@@ -331,16 +332,18 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
         <tbody>
           <tr><td>Posts + ties</td><td>4×6 × 8′</td><td>6</td><td>96.0</td></tr>
           <tr><td>Dodai sills</td><td>4×6 × 16′</td><td>2</td><td>64.0</td></tr>
-          <tr><td>Prairie rails</td><td>2×8 × 10′</td><td>3</td><td>40.0</td></tr>
+          <tr><td>Prairie 2×10 bands</td><td>2×10 × 10′</td><td>4</td><td>66.7</td></tr>
           <tr><td>Cap / stub</td><td>2×8 × 12′</td><td>1</td><td>16.0</td></tr>
-          <tr><td>Gate / packing / boxes</td><td>2×6 × 8′</td><td>8</td><td>64.0</td></tr>
-          <tr><td>Privacy + gate boards</td><td>1×6 × 8′ (¾″)</td><td>9</td><td>36.0</td></tr>
+          <tr><td>Kick + 2×6 bands</td><td>2×6 × 10′</td><td>4</td><td>40.0</td></tr>
+          <tr><td>Gate / planters / braces</td><td>2×6 × 8′</td><td>9</td><td>72.0</td></tr>
+          <tr><td>Tectonic blocks</td><td>2×2 × 8′</td><td>3</td><td>8.0</td></tr>
           <tr><td>Wedge stock</td><td>2×4 × 8′</td><td>1</td><td>5.3</td></tr>
-          <tr><td>Oak pegs / pintles</td><td>1×4 × 4′</td><td>2</td><td>2.7</td></tr>
-          <tr class="total"><td>Timber net / buy</td><td>kernel nest · 15% waste</td><td></td><td>324 / 373 bf</td></tr>
-          <tr><td>Sandbags</td><td>50 lb removable</td><td>27</td><td>wind ballast — not a pad</td></tr>
+          <tr><td>Oak pegs / pivots</td><td>1×4 × 4′</td><td>2</td><td>2.7</td></tr>
+          <tr class="total"><td>Timber net / buy</td><td>kernel nest · 15% waste</td><td></td><td>371 / 426 bf</td></tr>
+          <tr><td>Planters</td><td>live soil + optional in-box stone</td><td>2 troughs</td><td>~1522 lb planning mass</td></tr>
           <tr><td>Rubber pads</td><td>4″ furniture</td><td>8</td><td>under driveway sill</td></tr>
-          <tr><td>Paint</td><td>primer + owner gray ×2</td><td>—</td><td>mask locking faces</td></tr>
+          <tr><td>Lighting</td><td>12V IP65 tape + driver</td><td>1</td><td>cap soffit</td></tr>
+          <tr><td>Paint</td><td>ease, seal, PT dry, prime, gray ×2</td><td>—</td><td>extra coat in planter interiors</td></tr>
         </tbody>
       </table>
       <p>Full schedules also on <a href="../martin/#materials">MARTIN materials</a> and sheet M-6.</p>
@@ -354,12 +357,12 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <table>
         <thead><tr><th>Scope</th><th>DIY materials</th><th>With help / contracted</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Dimensional lumber (373 bf buy)</td><td>$480 – 780</td><td>same</td><td>SPF paint-grade; cedar upgrade +40–60%</td></tr>
-          <tr><td>Sandbags + rubber pads</td><td>$80 – 160</td><td>same</td><td>27×50 lb planning; empty for winter</td></tr>
-          <tr><td>Hardwood / misc</td><td>$40 – 90</td><td>same</td><td>Oak pegs, latch, pintles</td></tr>
-          <tr><td>Primer + gray paint</td><td>$60 – 120</td><td>same</td><td>Match owner photo/swatch</td></tr>
-          <tr><td>Optional stainless pintles + lock</td><td>$40 – 100</td><td>same</td><td>Only metal parts</td></tr>
-          <tr class="total"><td>Total</td><td>$700 – 1,250</td><td>$700 – 1,250</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
+          <tr><td>Dimensional lumber (426 bf buy)</td><td>$550 – 900</td><td>same</td><td>SPF paint-grade + PT kick/planters; cedar upgrade +40–60%</td></tr>
+          <tr><td>Planter mix + in-box stone + pads</td><td>$80 – 180</td><td>same</td><td>Two troughs; stone is drainage/mass inside boxes</td></tr>
+          <tr><td>Hardwood / lighting / latch</td><td>$80 – 160</td><td>same</td><td>Oak pegs, latch, pivots, IP65 tape</td></tr>
+          <tr><td>Primer + gray paint</td><td>$60 – 120</td><td>same</td><td>Ease, seal, extra planter interior coat</td></tr>
+          <tr><td>Optional stainless pintles + lock</td><td>$40 – 100</td><td>same</td><td>Backup metal only</td></tr>
+          <tr class="total"><td>Total</td><td>$810 – 1,460</td><td>$810 – 1,460</td><td>STELE-scale masonry is a different project ($8k–33k)</td></tr>
         </tbody>
       </table>
     </div>
@@ -385,11 +388,11 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       <table>
         <thead><tr><th>When</th><th>Task</th><th>Why</th></tr></thead>
         <tbody>
-          <tr><td>Late fall</td><td>Full knock-down; store timber indoors/dry; empty sandbags</td><td>Avoid plow berms and ice jacking</td></tr>
-          <tr><td>Spring</td><td>Re-set ladder on pads, drop posts, re-wedge, hang gate, refill bags; touch up paint</td><td>Joints seat better dry and warm</td></tr>
+          <tr><td>Late fall</td><td>Full knock-down; store timber indoors/dry; empty planters</td><td>Avoid plow berms and ice jacking</td></tr>
+          <tr><td>Spring</td><td>Re-set ladder on pads, drop posts, re-wedge, hang gate, replant; touch up paint</td><td>Joints seat better dry and warm</td></tr>
           <tr><td>Every 18–24 mo</td><td>Re-paint end grain; re-seat wedges (tap, don't glue)</td><td>End grain drinks; wedges work by friction</td></tr>
-          <tr><td>After major storms</td><td>Check latch bar and pintles</td><td>Only moving parts</td></tr>
-          <tr><td>Never</td><td>Glue locking faces or caulk board gaps</td><td>Trapped moisture + non-removable joints defeat the design</td></tr>
+          <tr><td>After major storms</td><td>Check latch bar and oak pivots; confirm planter mass</td><td>Moving parts + ballast</td></tr>
+          <tr><td>Never</td><td>Glue locking faces, caulk ¾″ gaps, or hang the gate off P0 pintles</td><td>Trapped moisture + non-removable joints + hinge racking defeat the design</td></tr>
         </tbody>
       </table>
     </div>
@@ -435,7 +438,7 @@ footer{padding:56px 0 80px;font:500 12px/1.8 var(--mono);color:var(--dim)}
       </p>
       <div class="callout">
         <p class="t">Disclaimer</p>
-        <p>This report is a design package, not a stamped engineering document. Verify Buffalo Green Code limits and obtain any required permits before construction. Upload site photos (drop-off, gray paint reference) to finalize field dimensions. Wind ballast is a planning calc, not a PE stamp.</p>
+        <p>This report is a design package, not a stamped engineering document. Verify Buffalo Green Code limits and obtain any required permits before construction. Remeasure the 143″ driveway span. Wind ballast is a planning calc, not a PE stamp. Match owner gray when a swatch is provided.</p>
       </div>
     </div>
   </section>

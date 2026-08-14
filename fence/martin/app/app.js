@@ -125,8 +125,10 @@
       .map((r, i) => {
         const x0 = xOf(41.25 - 1.75 - 0.5);
         const w = (141.25 + 1.75 + 0.5 - (41.25 - 1.75 - 0.5)) * S;
-        const y = yOf(r.cl + 3.625);
-        return `<rect class="fence-part${dim("rails")}" data-part="rails" x="${x0}" y="${y - i * lift * 0.08}" width="${w}" height="${7.25 * S}" fill="#6e7578" stroke="#1a1f24" stroke-width="1"/>`;
+        const hh = (r.h || 7.25) * S;
+        const y = yOf(r.cl + (r.h || 7.25) / 2);
+        const fill = r.nuki ? "#6e7578" : "#c5c8c2";
+        return `<rect class="fence-part${dim("rails")}" data-part="rails" x="${x0}" y="${y - i * lift * 0.04}" width="${w}" height="${hh}" fill="${fill}" stroke="#1a1f24" stroke-width="1"/>`;
       })
       .join("");
 
@@ -136,18 +138,14 @@
       return `<rect class="fence-part${dim("cap")}" data-part="cap" x="${x0}" y="${yOf(H) - lift * 0.4}" width="${w}" height="${1.5 * S}" fill="#8a9094" stroke="#1a1f24"/>`;
     })();
 
-    // boards hint
+    // tectonic blocks hint on P1–P3
     let boards = "";
-    for (const bay of [
-      [41.25 + 1.75, 91.25 - 1.75],
-      [91.25 + 1.75, 141.25 - 1.75],
-    ]) {
-      const clear = bay[1] - bay[0];
-      const n = 7;
-      const pitch = clear / n;
-      for (let i = 0; i < n; i++) {
-        const x = xOf(bay[0] + i * pitch + 0.15);
-        boards += `<rect class="fence-part${dim("boards")}" data-part="boards" x="${x}" y="${yOf(10 - 3.625) + lift * 0.2}" width="${(pitch - 0.3) * S}" height="${(10 - 3.625 - 1.5) * S}" fill="#cfd3d5" stroke="#9aa3a6" stroke-width=".5"/>`;
+    for (const px of [41.25, 91.25, 141.25]) {
+      for (const z of [18.25, 50.75]) {
+        for (let k = 0; k < 3; k++) {
+          const x = xOf(px - 2.4 + k * 1.7);
+          boards += `<rect class="fence-part${dim("boards")}" data-part="boards" x="${x}" y="${yOf(z + 0.75) + lift * 0.15}" width="${1.5 * S}" height="${1.5 * S}" fill="#cfd3d5" stroke="#9aa3a6" stroke-width=".5"/>`;
+        }
       }
     }
 
@@ -157,7 +155,7 @@
       <text x="${xOf(3.5 + gate / 2)}" y="${yOf(H / 2)}" text-anchor="middle" fill="#5a6a4a" font-size="13" font-family="IBM Plex Mono,monospace" font-weight="600">GATE</text>
     </g>`;
 
-    const latch = `<rect class="fence-part${dim("latch")}" data-part="latch" x="${xOf(3.5 + 0.5) - 18 * S * (0.35 + explode * 0.4)}" y="${yOf(28 + 1.75)}" width="${18 * S * (0.35 + explode * 0.25)}" height="${3.5 * S}" fill="#aeb6ba" stroke="#1a1f24"/>`;
+    const latch = `<rect class="fence-part${dim("latch")}" data-part="latch" x="${xOf(3.5 + 0.5) - 18 * S * (0.35 + explode * 0.4)}" y="${yOf(26.375 + 1.75)}" width="${18 * S * (0.35 + explode * 0.25)}" height="${3.5 * S}" fill="#aeb6ba" stroke="#1a1f24"/>`;
 
     const sills = `<rect class="fence-part${dim("sills")}" data-part="sills" x="${xOf(-6)}" y="${yOf(0)}" width="${(L + 12) * S}" height="${5.5 * S}" fill="#9a9890" stroke="#1a1f24"/>`;
 
@@ -374,7 +372,7 @@
       ["Joints", fab.joints.length],
       ["Net bf", nest.net_bf],
       ["Buy bf", nest.procurement_bf],
-      ["Ballast", (fab.ballast && fab.ballast.n_bags) + " bags"],
+      ["Ballast", fab.ballast ? Math.round(fab.ballast.provided_lb) + " lb" : "—"],
       ["Rev", fab.project.REVISION],
     ]
       .map(([k, v]) => `<div class="card stat"><span>${k}</span><b>${v}</b></div>`)

@@ -115,7 +115,7 @@ class Sheet:
         self.text(40, Hpx - 56, "MARTIN", 26, ACC, bold=True, mono=False)
         self.text(170, Hpx - 58, f"{self.code}  ·  {self.title}", 16, INK, bold=True)
         self.text(40, Hpx - 34, self.note, 12, DIM)
-        self.text(W - 40, Hpx - 56, f"Rev {PROJECT['REVISION']}  ·  inches  ·  kernel 3.0", 13, DIM, "end")
+        self.text(W - 40, Hpx - 56, f"Rev {PROJECT['REVISION']}  ·  inches  ·  kernel 5.0", 13, DIM, "end")
         self.text(W - 40, Hpx - 34, "PARAMETRIC — do not scale. Datum: sill top / latch face x=0", 12, DIM, "end")
 
     def save(self, folder, filename):
@@ -177,9 +177,9 @@ def write_scad(proj):
         "base_spread_cl": ly["base_spread_cl"],
         "tie_len": ly["tie_len"],
         "drop_off": v("drop_off"),
-        "rail_cl_1": v("rail_cl_1"),
-        "rail_cl_2": v("rail_cl_2"),
-        "rail_cl_3": v("rail_cl_3"),
+        "planter_x": v("planter_x"),
+        "planter_y": v("planter_y"),
+        "planter_h": v("planter_h"),
         "n_bay": ly["n_bay"],
         "board_inset": ly["board_inset"],
         "cap_x0": ly["cap_x0"],
@@ -192,6 +192,8 @@ def write_scad(proj):
             p.append(f"{k} = {round(inch_mm(val), 2)};\n")
     p.append("post_cx = [%s];\n" % ", ".join(f"{round(inch_mm(x['cx']), 2)}" for x in ly["posts"]))
     p.append("rail_cls = [%s];\n" % ", ".join(f"{round(inch_mm(c), 2)}" for c in ly["rail_cls"]))
+    p.append("slat_z0 = [%s];\n" % ", ".join(f"{round(inch_mm(s['z0']), 2)}" for s in ly["slats"]))
+    p.append("slat_h = [%s];\n" % ", ".join(f"{round(inch_mm(s['h']), 2)}" for s in ly["slats"]))
     write(os.path.join(SCAD, "parameters.scad"), "".join(p))
 
     write(
@@ -210,9 +212,11 @@ module R_nuki(part_id="R-001") {
     cube([nuki_len, rail_t, rail_h]);
 }
 
+module R_slat(h) { cube([nuki_len, rail_t, h]); }
+
 module C_cap() { cube([cap_len, cap_w, cap_t]); }
 
-module B_board(h) { cube([board_w, board_t, h]); }
+module F_planter() { cube([planter_x, planter_y, planter_h]); }
 
 module F_sill() { cube([sill_len, 3.5*25.4, sill_h]); }
 
@@ -242,8 +246,8 @@ module A010_posts() {
     }
 }
 module A020_rails() {
-    for (z=rail_cls)
-        translate([nuki_x0, -rail_t/2, z-rail_h/2]) R_nuki();
+    for (i=[0:len(slat_z0)-1])
+        translate([nuki_x0, -rail_t/2, slat_z0[i]]) R_slat(slat_h[i]);
 }
 module A001_base() {
     translate([-6*25.4, -base_spread_cl/2 - 3.5*25.4/2, -sill_h]) F_sill();
@@ -301,18 +305,19 @@ def drawings(proj):
         return OY - zin * S
 
     # G-000
-    s = Sheet("G-000", "Cover / index", "Rev D fabrication model · Buffalo NY")
+    s = Sheet("G-000", "Cover / index", "Rev E Prairie fabrication model · Buffalo NY")
     s.titleblock()
     s.text(40, 70, "MARTIN — DIGITAL MANUFACTURING DEFINITION", 22, ACC, bold=True, mono=False)
-    s.text(40, 100, "Prairie removable fence  ·  143″ × 65″  ·  Japanese joinery  ·  no nails in timber", 14, DIM)
+    s.text(40, 100, "Prairie removable fence  ·  143″ × 65″  ·  Darwin Martin + Japanese joinery  ·  wood + light + latch", 14, DIM)
     rows = [
-        "WHAT  Freestanding winter-removable privacy fence + locking gate",
-        "FROM  Dimensional lumber only + removable sandbag ballast — NO concrete, NO post holes",
-        "SIZE  overall_length=143.000  overall_height=65.000  gate_clear=36.000 (ASSUMED)",
+        "WHAT  Freestanding winter-removable Prairie screen + locking gate against the house",
+        "FROM  Dimensional lumber + live planters (stone in-box only) — NO concrete, NO post holes, NO pad",
+        "SIZE  overall_length=143.000  overall_height=65.000  gate_clear=36.000 (ASSUMED)  drop_off=0 (slab)",
+        "FACE  Horizontal 2×10 / 2×6 bands, ¾″ dog-tight gaps, PT kick nuki, φ-adjacent 9.25/5.5=1.682",
         "QTY   One run; part quantities in S-601",
-        "CONNECT  nuki+kusabi, hozo drawbore, foot tenon into F-003, floating grooves, sill laps",
+        "CONNECT  nuki+kusabi (4 bands), housed dado (4 bands), hozo drawbore, oak pivots, sill laps",
         "MAKE  See routings + AS-01..12  ·  MEASURE from sill-shoulder datum",
-        "ASSEMBLE  Base → posts → rails → boards → cap → gate → latch",
+        "ASSEMBLE  Base → posts → bands → cap/light → gate on oak pivots → plant troughs (not at house)",
         "CHECK  QA-701  ·  CHANGE  edit kernel P[] then re-export",
     ]
     for i, r in enumerate(rows):
@@ -339,8 +344,9 @@ def drawings(proj):
     for p in ly["posts"]:
         s.rect(X(p["cx"] - v("post_x") / 2), Y(ly["post_body_h"]), v("post_x") * S, ly["post_body_h"] * S, fill="#d9dcde")
         s.text(X(p["cx"]), Y(H) - 16, p["id"], 12, ACC, "middle", bold=True)
-    for cl in ly["rail_cls"]:
-        s.rect(X(ly["nuki_x0"]), Y(cl + v("rail_h") / 2), ly["nuki_len"] * S, v("rail_h") * S, fill=GRAY)
+    for sl in ly["slats"]:
+        fill = GRAY if sl["nuki"] else "#c5c8c2"
+        s.rect(X(ly["nuki_x0"]), Y(sl["z1"]), ly["nuki_len"] * S, sl["h"] * S, fill=fill)
     s.rect(X(ly["cap_x0"]), Y(H), ly["cap_len"] * S, v("cap_t") * S, fill="#8a9094")
     s.rect(X(v("post_x") + v("gate_gap")), Y(v("gate_bottom_clear") + ly["gate_h"]),
            ly["gate_leaf_w"] * S, ly["gate_h"] * S, fill="#e8eaeb", stroke=ACC, dash="5 4")
@@ -356,10 +362,10 @@ def drawings(proj):
     s2 = Sheet("GA-100", "General arrangement", "Same geometry as GA-110 with assembly notes")
     s2.titleblock()
     s2.text(40, 70, "See GA-110 for dimensions. Assemblies: A-001 BASE · A-010 POSTS · A-020 FRAME · A-030 GATE", 14)
-    s2.text(40, 100, "Insertion: posts −Z into F-003 cross-ties; rails +X through nuki; gate +Z onto pintles; boards drop −Z into grooves.", 14)
+    s2.text(40, 100, "Insertion: posts −Z into F-003; nuki +X (K-001, R-001/003/005); housed bands; gate +Z on oak pivots; no planter at P0.", 14)
     for i, p in enumerate(ly["posts"]):
         s2.text(40, 150 + i * 24, f"{p['id']}  {p['mark']}  cx={p['cx']:.3f}\"  {p['role']}", 14)
-    s2.text(40, 280, "Rev D: sit-on-grade ladder. No pour. gate_h = 62.000″ → 0.500″ cap clearance. Post blank 67.000″.", 14, ACC)
+    s2.text(40, 280, f"Rev E: Prairie screen. slat_top {ly['slat_top']}\" + cap 1.50\" = 65.000\". Gate against house. Band ratio {ly['band_ratio']} ≈ φ.", 14, ACC)
     s2.save(ddir, "GA-100_arrangement.svg")
 
     # GA-130 plan
@@ -377,7 +383,8 @@ def drawings(proj):
                v("post_x") * sc, v("post_y") * sc, fill="#d9dcde")
         s.text(80 + (v("sill_overhang") + p["cx"]) * sc, 188, p["id"], 12, ACC, "middle", bold=True)
     s.dim_h(80, 80 + ly["sill_len"] * sc, 200 + ly["base_width"] * sc, f'LADDER {ly["sill_len"]:.1f}" × {ly["base_width"]:.1f}"')
-    s.text(40, 70, "Garden +Y (top of sheet)  ·  Driveway −Y  ·  House / latch at left (x=0)", 14, DIM)
+    s.text(40, 70, "Garden +Y (top of sheet)  ·  Driveway −Y  ·  House / latch at left (x=0)  ·  planters on garden side of P1–P3 only", 14, DIM)
+    s.text(40, 96, "NO planter at the gate / house (P0). Gate leaf sits between P0 and P1.", 14, ACC)
     s.save(ddir, "GA-130_plan.svg")
 
     # EX-200 exploded
@@ -385,14 +392,14 @@ def drawings(proj):
     s.titleblock()
     s.text(40, 70, "WINTER / ASSEMBLY LOGIC  (reverse for knock-down)", 16, ACC, bold=True)
     steps = [
-        "1  H-001 pads on driveway  →  F-001/F-002 sills + F-003 ties (ladder)  →  F-004 pack garden drop",
-        "2  L-001..004 drop −Z into F-003 (shoulder on sill top = DATUM)",
-        "3  R-001..003 slide +X through nuki mortises (P1→P3)",
-        "4  B-001..003 drop −Z into rail grooves",
-        "5  C-001 cap +Z onto posts; kama-tsugi peg at L-003",
+        "1  H-001 pads on driveway  →  F-001/F-002 sills + F-003 ties (ladder). F-004 only if outriggers leave slab.",
+        "2  L-001..004 drop −Z into F-003 (shoulder on sill top = DATUM). P0 is latch / house — no planter.",
+        "3  K-001 + R-001/003/005 slide +X through nuki; R-002/004/006/007 house 0.75″",
+        "4  T-001 tectonic chevrons peg to post faces (ornament)",
+        "5  C-001 cap +Z; kama-tsugi peg at L-003; H-006 tape in soffit dado",
         "6  W-001 kusabi driven in cheeks (lock); NEVER glue",
-        "7  A-030 gate +Z onto L-002 pintles; G-010 slides into L-001 (Latch B)",
-        "8  F-005 boxes + H-007 sandbags (remove for winter)",
+        "7  A-030 gate +Z onto W-003 oak pivots at P1; G-010 slides into L-001 (Latch B)",
+        "8  F-005 troughs garden-side of privacy bays; plant + optional in-box stone H-007",
     ]
     for i, t in enumerate(steps):
         s.text(40, 110 + i * 36, t, 15)
@@ -417,33 +424,40 @@ def drawings(proj):
     s.dim_h(x0, x0 + 3.5 * sc, y0 - body, '3.500"', offset=-24)
     s.text(400, 80, "DATUM: tenon shoulder = sill top. Measure mortise CL AFF from this shoulder, not from tenon tip.", 14, ACC)
     s.text(400, 120, f'FINISHED LENGTH {ly["post_blank_l"]:.3f}"   SETUP S-014 — do not move stop.', 14)
-    s.text(400, 160, "Nuki mortises THROUGH 1.50×7.25 at CL 10.000 / 28.000 / 46.000 AFF", 14)
+    s.text(400, 160, "THROUGH-nuki ONLY: K-001 (2×6), R-001/003/005 (2×10). HOUSE 0.75″: R-002/004/006/007.", 14)
     s.text(400, 200, "Foot tenon 2.500 × 4.500  ·  shoulders 0.500 all around  ·  T2 ±0.031", 14)
-    s.text(400, 240, "L-001: omit kusabi; add Latch-B mortise if used.  L-002: add 2 pintle seats.", 14)
+    s.text(400, 240, "L-001: omit kusabi; Latch-B mortise; NO planter.  L-002: oak pivot sockets top+bottom.", 14)
     s.text(400, 280, "GRAIN: length vertical. FACE A = garden. END A = shoulder.", 14)
-    s.text(400, 320, "Rev D: blank is body + 3.50″ tenon into F-003 (no 12″ concrete socket).", 14, ACC)
+    s.text(400, 320, "Rev E: blank is body + 3.50″ tenon into F-003. Do not through-mortise all seven bands.", 14, ACC)
     s.save(ddir, "P-301_post.svg")
 
-    # P-302 rail
-    s = Sheet("P-302", "Nuki rail R-001..003", f'FINISHED {ly["nuki_len"]:.3f}" × 1.500 × 7.250  ·  qty 3  ·  S-021')
+    # P-302 rails / bands
+    s = Sheet("P-302", "Prairie bands K-001 + R-001..007", f'FINISHED {ly["nuki_len"]:.3f}"  ·  S-021  ·  ¾″ dog gaps')
     s.titleblock()
     s.rect(80, 200, 1200, 90, fill=GRAY)
     s.dim_h(80, 1280, 290, f'{ly["nuki_len"]:.3f}" nuki_len  DERIVED')
-    s.text(80, 80, "Groove both long edges: 0.375″ deep × 0.875″ wide. FACE A against fence. Boards FLOAT — no glue.", 14)
-    s.text(80, 110, "Stations: through L-002, L-003, L-004. Withdraw toward P3 for winter.", 14)
-    s.text(80, 140, "Fit class SLIDING in mortise (nuki_fit 0.030″) then INTERFERENCE via W-001 kusabi.", 14)
+    s.text(80, 80, "Through-nuki + kusabi: K-001, R-001, R-003, R-005. Housed 0.75″ dado: R-002, R-004, R-006, R-007.", 14)
+    s.text(80, 110, "Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Kick is PT splash / dog seal.", 14)
+    s.text(80, 140, "Fit: SLIDING then INTERFERENCE via W-001 on nuki. Do not through-mortise housed bands (¾″ web would fail).", 14)
+    y = 360
+    s.text(80, y, "SLAT SCHEDULE  (z0 → z1  AFF, sill top = 0)", 14, ACC, bold=True)
+    y += 28
+    for sl in ly["slats"]:
+        kind = "NUKI" if sl["nuki"] else "HOUSED"
+        s.text(80, y, f'{sl["id"]:6}  {sl["mark"]:5}  {sl["stock"]:8}  {sl["h"]:.3f}"  z {sl["z0"]:.3f}–{sl["z1"]:.3f}  CL {sl["cl"]:.3f}  {kind}  {sl["role"]}', 13)
+        y += 22
+    s.text(80, y + 8, f'Band ratio 2×10/2×6 = {ly["band_ratio"]} ≈ φ={ly["phi"]}. Stack + cap = 65.000″. Gaps 0.750″ dog-tight.', 14, ACC)
     s.save(ddir, "P-302_rail.svg")
 
-    # P-303 boards
-    s = Sheet("P-303", "Privacy boards", "Stop setups  ·  FLOATING  ·  ¼″ gaps")
+    # P-303 tectonic + dog seal
+    s = Sheet("P-303", "Tectonic blocks + dog seal", "Darwin Martin pier texture  ·  ¾″ light-screen")
     s.titleblock()
-    s.text(40, 80, f'Bay clear {ly["bay_clear"]:.3f}"  ·  {ly["n_bay"]} boards/bay × 2 bays  ·  inset {ly["board_inset"]:.3f}"', 14)
-    y = 130
-    for p in proj["parts"]:
-        if p["PART_ID"].startswith("B-"):
-            s.text(40, y, f'{p["PART_ID"]}  qty {p["QUANTITY"]:2}  {p["FINISHED_THICKNESS"]:.3f} × {p["FINISHED_WIDTH"]:.3f} × {p["FINISHED_LENGTH"]:.3f}"  {p["PART_NAME"]}', 14)
-            y += 28
-    s.text(40, y + 20, "Grain vertical. End grain sealed. Do not caulk gaps.", 14, DIM)
+    s.text(40, 80, f'Bay clear {ly["bay_clear"]:.3f}"  ·  two privacy bays  ·  gate against house (no planter at P0)', 14)
+    s.text(40, 112, "T-001  qty 36  1.50 × 1.50 × 7.00″  2×2  ·  ¼″ pegs only (½″ splits the 2×2)", 14)
+    s.text(40, 144, "3-block chevrons × 2 heights × P1/P2/P3 × 2 faces. Ornament — not structure.", 14)
+    s.text(40, 176, "DOG SEAL: PT kick nuki K-001 at z=0–5.50; 0.75″ gaps between bands; gate bottom clear 0.375″.", 14, ACC)
+    s.text(40, 208, "A ¾″ gauge must NOT pass the screen. Kick stops crawl. Gate leaf matches the band rhythm.", 14)
+    s.text(40, 250, "Do not caulk the ¾″ gaps — they are the Prairie light-screen and the rain-screen.", 14, DIM)
     s.save(ddir, "P-303_boards.svg")
 
     # P-304 gate
@@ -451,19 +465,20 @@ def drawings(proj):
     s.titleblock()
     sc = 12
     s.rect(80, 160, ly["gate_leaf_w"] * sc, ly["gate_h"] * sc * 0.55, fill="#e8eaeb")
-    s.text(40, 80, "G-001 hinge stile  ·  G-002 latch stile  ·  G-003/004/005 prairie-aligned rails  ·  G-006/007 bottom/top", 13)
+    s.text(40, 80, "G-001 hinge stile (P1 oak pivots)  ·  G-002 latch stile (P0)  ·  rails align to Prairie nuki bands", 13)
     s.text(40, 108, "Hozo tenon thickness ≈ leaf_t/3 = 0.500″  ·  tenon length 1.250″  ·  drawbore 0.125″ toward shoulder", 13)
-    s.text(40, 136, "Lift-off pintles: assembly +Z. Brace G-008 half-lap compression (hinge-bottom → latch-top).", 13)
+    s.text(40, 136, "Oak pivots W-003: bottom socket in sill at P1, top in cap soffit. Leaf weight in compression to the driveway. Lift-off +Z.", 13)
+    s.text(40, 164, f'Gate against the house. Latch B into P0 at R-003 CL {ly["latch_cl"]:.3f}" AFF. No planter at P0.', 13, ACC)
     s.save(ddir, "P-304_gate.svg")
 
     # Joinery sheets
     for code, title, lines, fn in [
-        ("J-401", "Nuki + kusabi", [
-            "Mortise THROUGH post: 1.50″ (rail_t + fit) × 7.25″ (rail_h).",
-            "Cheeks: 2.00″ of 5.50″ post each side of rail — OK (QA).",
-            "Kusabi W-001 0.625 × 1.125 × 5.500 through cheek slot. Drive to lock; reverse to release.",
-            "NEVER glue. Bag wedges labeled by joint ID for winter.",
-            "Assembly +X. Winter withdraw rails toward P3 after knocking wedges.",
+        ("J-401", "Nuki + housed dado", [
+            "THROUGH-nuki: K-001 (2×6) and R-001/003/005 (2×10). Mortise 1.50″ × band height through the post.",
+            "Cheeks: 2.00″ of 5.50″ post each side of 1.50″ slat — OK (QA).",
+            "HOUSED 0.75″ dado: R-002/004/006/007. Do NOT through-mortise — ¾″ gaps would leave a ¾″ web.",
+            "Kusabi W-001 0.625 × 1.125 × 5.500 through cheek slot on nuki posts. NEVER glue.",
+            "Assembly +X. Winter withdraw bands toward P3 after knocking wedges.",
         ], "J-401_nuki.svg"),
         ("J-402", "Foot tenon / cross-tie", [
             "Tenon 2.500 × 4.500 × 3.500 from sill-shoulder datum (END A).",
@@ -477,11 +492,11 @@ def drawings(proj):
             "Dry fit before peg. Cap may be two labeled halves (LH/RH) after cut.",
             "Grain along run. Does not lock wide panel across grain (cap is narrow).",
         ], "J-403_kama.svg"),
-        ("J-404", "Gate hozo drawbore", [
+        ("J-404", "Gate hozo + oak pivot", [
             "Tenon thickness ≈ 1/3 of 1.50″ leaf = 0.50″. Cheeks remain ≈ 0.50″.",
-            "Tenon length 1.25″ into stile. Haunch on prairie rails if needed for groove.",
-            "Peg hole in stile on CL; tenon hole offset 0.125″ TOWARD shoulder.",
-            "Fit DRAWBORED. Gate is a keep-together subassembly (hide glue optional).",
+            "Tenon length 1.25″ into stile. Peg hole in stile on CL; tenon hole offset 0.125″ TOWARD shoulder.",
+            "W-003 oak pivot ⌀1.25″: bottom socket in sill/threshold at P1; top in cap soffit. Lift-off +Z.",
+            "Leaf weight in compression to the driveway sill — not a cantilever pintle off P0 (no planter at house).",
         ], "J-404_hozo.svg"),
     ]:
         s = Sheet(code, title, "Joinery register — see JSON joints[]")
@@ -658,21 +673,23 @@ def build_manual(proj):
         "",
         "## A. Model status",
         "Semantic fabrication model. Every MAKE part has a Part ID. Joinery is a register, not only booleans.",
-        f"Gate/cap clearance **0.500″**. Post blank **{ly['post_blank_l']:.3f}″**. Sit-on-grade — **no concrete**.",
+        f"Gate/cap clearance **0.500″**. Post blank **{ly['post_blank_l']:.3f}″**. Sit-on-grade — **no concrete**. Gate against the house.",
         "",
         "## B. Controlling parameters (inch)",
-        f"- overall_length = 143.000 VERIFIED",
+        f"- overall_length = 143.000 VERIFIED (driveway span)",
         f"- overall_height = 65.000 VERIFIED",
-        f"- gate_clear = 36.000 ASSUMED",
+        f"- gate_clear = 36.000 ASSUMED — gate at house, no planter at P0",
         f"- bay_clear = {ly['bay_clear']:.3f} DERIVED `(L - 4*post_x - gate_clear)/2`",
         f"- nuki_len = {ly['nuki_len']:.3f} DERIVED",
-        f"- drop_off = 5.000 ESTIMATED **TBM**",
+        f"- slat_top = {ly['slat_top']:.3f} + cap 1.50 = 65.000",
+        f"- band_ratio = {ly['band_ratio']} ≈ φ (2×10/2×6, not ripped)",
+        f"- drop_off = {v('drop_off'):.3f} (0 on slab; packing only if outriggers leave)",
         "",
         "## C–I. Registers",
         "See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.",
         "",
         f"**Nest buy:** `{nest['buy_counts']}`  net **{nest['net_bf']} bf**  procurement **{nest['procurement_bf']} bf** (waste_factor={nest['waste_factor']}).",
-        f"**Ballast:** {proj['ballast']['n_bags']} × {proj['ballast']['bag_lb']:.0f} lb bags (planning {proj['ballast']['required_lb']} lb). Concrete **0**. Gravel **0**.",
+        f"**Ballast:** two live planters, soil {proj['ballast']['soil_lb']} lb + in-box stone {proj['ballast']['stone_lb']} lb = {proj['ballast']['provided_lb']} lb vs required {proj['ballast']['required_lb']} lb (planning FS {proj['ballast']['fs']}). Concrete **0**. Gravel pad **0**.",
         "",
         "## K. Assembly order",
     ]
@@ -724,10 +741,10 @@ h1{{font-size:42px;margin:8px 0 12px}}
 .grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:18px 0}}
 .grid a{{display:block;padding:12px;background:#fff;border:1px solid #c5c8c2;text-decoration:none;color:inherit}}
 </style></head><body>
-<p class="k">REV {PROJECT['REVISION']} · KERNEL 3.0 · INCHES</p>
+<p class="k">REV {PROJECT['REVISION']} · KERNEL 5.0 · INCHES</p>
 <h1>MARTIN fabrication package</h1>
 <p>Single source of truth: <code>martin_kernel.py</code>. Geometry, BOM, cut lists, joinery, and drawings are generated — not hand-copied.</p>
-<p><b>bay_clear</b> {ly['bay_clear']}\" · <b>nuki_len</b> {ly['nuki_len']}\" · <b>post blank</b> {ly['post_blank_l']}\" · <b>gate_h</b> {ly['gate_h']}\" · nest <b>{nest['net_bf']} bf</b> net / <b>{nest['procurement_bf']} bf</b> buy</p>
+<p><b>bay_clear</b> {ly['bay_clear']}\" · <b>nuki_len</b> {ly['nuki_len']}\" · <b>post blank</b> {ly['post_blank_l']}\" · <b>gate_h</b> {ly['gate_h']}\" · nest <b>{nest['net_bf']} bf</b> net / <b>{nest['procurement_bf']} bf</b> buy · ballast ratio <b>{proj['ballast']['ratio']}</b></p>
 <div class="grid">
 <a href="00_SOURCE/martin_project.json">JSON project</a>
 <a href="07_BOM/bom.csv">BOM CSV</a>
@@ -742,7 +759,7 @@ h1{{font-size:42px;margin:8px 0 12px}}
 </div>
 <h2>Drawings</h2>
 <table><thead><tr><th>DWG</th><th>Title</th></tr></thead><tbody>{cards}</tbody></table>
-<p style="margin-top:28px;color:#6e7578;font-size:13px">Sit-on-grade — no digging, no cement. Not a stamped engineering document. drop_off is ESTIMATED. Verify Green Code.</p>
+<p style="margin-top:28px;color:#6e7578;font-size:13px">Sit-on-grade Prairie screen — no digging, no cement, no stone pad. Gate against the house. Not a stamped engineering document. Verify Green Code.</p>
 </body></html>"""
     write(os.path.join(FAB, "index.html"), html)
 

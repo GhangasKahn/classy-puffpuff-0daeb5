@@ -1,56 +1,74 @@
 [
   {
     "ID": "D-001",
-    "Decision": "4\u00d76 posts not 4\u00d74 / 2\u00d74",
-    "Reason": "nuki cheeks and overturning couple; owner asked to overbuild",
+    "Decision": "4\u00d76 posts not 4\u00d74",
+    "Reason": "nuki cheeks + housed-slat web; owner asked to overbuild",
     "Parts": "L-001..004"
   },
   {
     "ID": "D-002",
-    "Decision": "2\u00d78 Prairie bands on edge, not 2\u00d74",
-    "Reason": "Prairie read + nuki bearing area",
-    "Parts": "R-001..003"
+    "Decision": "\u03c6-adjacent 2\u00d710 / 2\u00d76 Prairie bands (9.25/5.5=1.682). Do not rip 2\u00d710.",
+    "Reason": "Golden ratio where it does not thin structure. Full 2\u00d710 nuki bearing. Darwin Martin belt courses.",
+    "Parts": "R-001..007, K-001"
   },
   {
     "ID": "D-003",
-    "Decision": "No nails/screws in timber",
+    "Decision": "No nails/screws in timber. Allowed metal: lighting + optional latch hardware.",
     "Reason": "owner + winter knock-down + fastener corrosion in Buffalo",
     "Parts": "all MAKE lumber"
   },
   {
     "ID": "D-004",
-    "Decision": "Sit-on-grade timber ladder (dodai + cross-ties) instead of poured pad/piers",
-    "Reason": "Owner: entirely freestanding \u2014 no post holes, no cement, no massive stone pads. Winter: lift timber, empty sandbags.",
-    "Parts": "F-001..F-006, H-001, H-007"
+    "Decision": "Sit-on-grade timber ladder on the driveway slab. No packing unless outriggers leave the slab.",
+    "Reason": "Photos: run crosses the driveway. No post holes, no cement, no stone pads.",
+    "Parts": "F-001..F-006, H-001"
   },
   {
     "ID": "D-005",
-    "Decision": "Rev C gate_h derived to clear cap by 0.50\u2033",
-    "Reason": "Rev B model overlapped cap by 0.50\u2033 (z0=1.0, h=63.0 \u2192 top 64.0 vs cap 63.5)",
-    "Parts": "G-001..009"
+    "Decision": "Gate flush to the house (P0). No planter at the gate.",
+    "Reason": "Owner: planter next to gate is unwanted. Latch B into P0. Driver lives in P3 planter.",
+    "Parts": "G-001..010, L-001, F-005"
   },
   {
     "ID": "D-006",
-    "Decision": "Foot tenon 2.50\u00d74.50\u00d73.50 into F-003 (not 12\u2033 concrete socket)",
-    "Reason": "Cross-tie is 5.50\u2033 tall; leave ~2\u2033 below mortise. Overturning resisted by ladder width + ballast, not buried couple.",
+    "Decision": "Foot tenon 2.50\u00d74.50\u00d73.50 into F-003",
+    "Reason": "Cross-tie is 5.50\u2033 tall; leave ~2\u2033 below mortise. Overturning resisted by ladder + live planters.",
     "Parts": "L-001..004, F-003"
   },
   {
     "ID": "D-007",
-    "Decision": "Privacy boards FLOATING in grooves",
-    "Reason": "seasonal movement; rain-screen; zero fasteners; winter pull-out",
-    "Parts": "B-001..003"
+    "Decision": "Through-nuki only K-001 + R-001/003/005. House remaining bands 0.75\u2033.",
+    "Reason": "0.75\u2033 slat gaps would leave a 0.75\u2033 web if every band were through-mortised.",
+    "Parts": "R-001..007, K-001, L-002..004"
   },
   {
     "ID": "D-008",
-    "Decision": "Latch B default (mortise in L-001). No epoxy into house concrete.",
-    "Reason": "Owner: no cement. Latch A oak strike is opt-in only if a wall exists and they accept fasteners into existing structure \u2014 still no pour.",
+    "Decision": "Latch B default (mortise in L-001). No epoxy into house.",
+    "Reason": "Owner: wood + lighting + a gate latch. Latch A oak strike is opt-in only.",
     "Parts": "G-010, H-002, L-001"
   },
   {
     "ID": "D-009",
-    "Decision": "Removable sandbags in timber boxes for wind ballast",
-    "Reason": "Freestanding fence in Buffalo wind needs mass \u00d7 lever. Bags leave in winter. Not a stone pad, not poured.",
+    "Decision": "Live planters (P1\u2013P2 and P2\u2013P3) as wind ballast. Stone inside boxes only.",
+    "Reason": "Owner: planters are planters with watering. Mass = wet soil + optional drainage stone. Not bags, not a pad.",
     "Parts": "F-005, H-007"
+  },
+  {
+    "ID": "D-010",
+    "Decision": "1.25\u2033 oak pivots (W-003): bottom in sill at P1, top in cap soffit.",
+    "Reason": "Structurally best on a freestanding hinge post: leaf weight in compression to the driveway sill, not a cantilever pintle off P0 (no planter at house).",
+    "Parts": "W-003, G-001, L-002, F-003, C-001"
+  },
+  {
+    "ID": "D-011",
+    "Decision": "0.75\u2033 slat gaps + PT kickboard + 0.375\u2033 gate bottom clear.",
+    "Reason": "100% dog containment. Kick nuki at grade. Gaps are a light-screen, not a crawl path.",
+    "Parts": "K-001, R-001..007, G-009"
+  },
+  {
+    "ID": "D-012",
+    "Decision": "Buffalo painted finish: ease 1/16\u2033, end-grain sealer, PT dry then prime, 2 coats, extra on planter interiors.",
+    "Reason": "Four-season Erie County. Mask joinery faces. Paint is the weather system.",
+    "Parts": "H-005"
   }
 ]

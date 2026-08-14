@@ -1,17 +1,18 @@
 QC,CHECK,CLASS,TOL
 QC-01,Confirm overall opening 143.000″ ± 0.25″ on site,VERIFIED/TBM,T1
-QC-02,Measure driveway→garden drop; set P.drop_off; stack F-004 packing — do not pour,TBM,T1
-QC-03,Stock moisture — avoid wet framing; paint-grade OK,T0,—
+QC-02,Run sits on driveway slab; pack only if outriggers leave slab (drop_off default 0),VERIFIED,T1
+QC-03,Stock moisture — PT for kick + planters dry before prime; SPF acclimate,T0,—
 QC-04,"Four posts finished length 67.000"" within ±1/32""",T2,±0.031
-QC-05,Paired nuki rails R-001..003 identical length and groove,T2,±0.031
-QC-06,Mortise CL AFF 10.000 / 28.000 / 46.000 from sill-shoulder datum,T2,±0.062
+QC-05,Screen bands R-001..007 identical nuki_len; ¾″ dog gaps,T2,±0.031
+QC-06,Through-nuki only K-001/R-001/R-003/R-005; others housed 0.75″,T2,binary
 QC-07,Foot tenon 2.500×4.500×3.500 enters F-003; lifts out for winter,T2,+0.03/−0
-QC-08,Dry-assemble privacy: diagonals / plumb / no racking,T1,plumb 1/8″ in 65″
-QC-09,Gate leaf swings; lift-off pintles; latch bar travels 4″ into receiver,T2,—
+QC-08,Dry-assemble screen: diagonals / plumb / no racking; ¾″ gaps hold a ¾″ gauge,T1,plumb 1/8″ in 65″
+QC-09,Gate against house; oak pivots lift-off; latch into P0; no planter at P0,T2,—
 QC-10,No glue on kusabi or nuki locking faces,T0,binary
-QC-11,"Paint masked on tenons, wedges, sill laps, pintle barrels",T0,—
+QC-11,"Paint: ease arrises, end-grain sealer, PT dry then prime, 2 finish coats; mask joinery",T0,—
 QC-12,Winter knock-down rehearsal before first storm season,T0,—
-QC-13,Ladder sills sit level; packing matches measured drop; no excavation,T1,±0.125
-QC-14,Gate vs cap clearance ≥ 0.50″,T2,min 0.38
-QC-15,Sandbag count ≥ ballast.n_bags in four F-005 boxes; empty for winter,T1,count
-QC-16,"No concrete, no post holes, no gravel pad on this build",T0,binary
+QC-13,Ladder sills sit on driveway; two planters garden-side of privacy bays only,T1,±0.125
+QC-14,Gate vs cap clearance ≥ 0.50″; gate bottom ≤ 0.375″ (dog),T2,min 0.38 cap / max 0.50 bottom
+QC-15,Planters planted + optional in-box stone; air gap from posts; drainage slots,T1,—
+QC-16,"No concrete, no post holes, no gravel/stone PAD; stone only inside planters",T0,binary
+QC-17,Cap soffit light dado + IP65 tape; driver not at house wall,T1,—

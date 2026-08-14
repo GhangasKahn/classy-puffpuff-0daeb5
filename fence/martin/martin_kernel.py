@@ -5,7 +5,10 @@ Native unit: inch. Convert to millimetres only at CAD / export interfaces.
 FreeCAD, OpenSCAD, drawings, BOM, cut lists, and the Build app all derive
 from build_project(). Do not duplicate controlling dimensions elsewhere.
 
-Rev D — sit-on-grade freestanding ladder base (no digging, no cement, no stone pads).
+Rev E — Darwin Martin Prairie screen: φ-adjacent horizontal bands, dog-tight
+gaps, live planters as ballast on the driveway, gate against the house.
+No post holes, no cement, no stone pads. Planter stone is drainage/weight
+inside the boxes only.
 """
 
 from __future__ import annotations
@@ -14,6 +17,7 @@ import math
 from copy import deepcopy
 
 MM = 25.4
+PHI = (1.0 + 5.0 ** 0.5) / 2.0  # 1.618… — used where it does not thin structure
 
 # ---------------------------------------------------------------------------
 # Project
@@ -21,13 +25,13 @@ MM = 25.4
 PROJECT = {
     "PROJECT_ID": "MARTIN",
     "PROJECT_NAME": "Prairie removable fence — Buffalo NY",
-    "REVISION": "D",
+    "REVISION": "E",
     "UNITS": "inch",
-    "DESIGN_STANDARD": "Prairie / Darwin Martin + Japanese joinery; Buffalo Green Code verify",
-    "MATERIAL_SYSTEM": "dimensional lumber only (paint-grade SPF or equivalent) + removable sandbag ballast",
-    "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore",
+    "DESIGN_STANDARD": "Prairie / Darwin Martin House + Japanese joinery; Buffalo Green Code verify",
+    "MATERIAL_SYSTEM": "dimensional lumber + live planters (optional drainage stone in boxes only)",
+    "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore / housed slats",
     "AUTHOR": "MARTIN fabrication model",
-    "MODEL_VERSION": "4.0.0",
+    "MODEL_VERSION": "5.0.0",
     "DATE": "2026-08-14",
     "CAD": ["FreeCAD 1.1", "OpenSCAD"],
 }
@@ -48,9 +52,11 @@ P = {
     "rail_h": {"v": 7.25, "src": "DERIVED", "note": "2×8 actual width, on edge"},
     "cap_t": {"v": 1.5, "src": "DERIVED", "note": "2×8 flat"},
     "cap_w": {"v": 7.25, "src": "DERIVED", "note": "2×8 flat width"},
-    "board_t": {"v": 0.75, "src": "VERIFIED", "note": "1×6 actual = existing ¾″"},
-    "board_w": {"v": 5.5, "src": "DERIVED", "note": "1×6 actual"},
-    "board_gap": {"v": 0.25, "src": "ASSUMED", "note": "rain-screen drainage gap"},
+    "board_t": {"v": 1.5, "src": "DERIVED", "note": "2× slat thickness — Prairie screen (was ¾″ vertical 1×6)"},
+    "board_w": {"v": 9.25, "src": "DERIVED", "note": "2×10 actual — major Prairie band"},
+    "board_gap": {"v": 0.75, "src": "ASSUMED", "note": "dog-tight light-screen gap; 100% containment with kickboard"},
+    "band_minor_h": {"v": 5.5, "src": "DERIVED", "note": "2×6 actual — minor band; 9.25/5.5=1.682 ≈ φ without ripping"},
+    "kick_h": {"v": 5.5, "src": "DERIVED", "note": "2×6 PT kickboard / bottom nuki — dog crawl stop"},
     "stile_w": {"v": 3.5, "src": "DERIVED", "note": "2×4 / ripped 2×6 face"},
     "leaf_t": {"v": 1.5, "src": "DERIVED", "note": "2× stock gate thickness"},
     "rail_gate_h": {"v": 5.5, "src": "DERIVED", "note": "2×6 gate rail"},
@@ -73,20 +79,17 @@ P = {
     "nuki_fit": {"v": 0.03, "src": "ASSUMED", "note": "sliding/clearance on rail thickness, ~1/32″"},
 
     # gate
-    "gate_clear": {"v": 36.0, "src": "ASSUMED", "note": "design — mower/cart; not owner-measured"},
+    "gate_clear": {"v": 36.0, "src": "ASSUMED", "note": "clear walk-through; gate against house (P0)"},
     "gate_gap": {"v": 0.50, "src": "ASSUMED", "note": "each side of leaf"},
-    "gate_bottom_clear": {"v": 1.00, "src": "ASSUMED", "note": "above sill top — snow/splash"},
-    "gate_top_clear": {"v": 0.50, "src": "ASSUMED", "note": "under cap — Rev C fix vs Rev B overlap"},
+    "gate_bottom_clear": {"v": 0.375, "src": "ASSUMED", "note": "dog seal — swing clearance above threshold"},
+    "gate_top_clear": {"v": 0.50, "src": "ASSUMED", "note": "under cap"},
     "latch_bar_l": {"v": 18.0, "src": "ASSUMED"},
     "latch_bar_t": {"v": 1.50, "src": "DERIVED", "note": "2× stock"},
     "latch_bar_w": {"v": 3.50, "src": "DERIVED", "note": "2×4 actual"},
-    "house_receiver_depth": {"v": 4.0, "src": "ASSUMED", "note": "Latch A — TBM at wall"},
-    "pintle_count": {"v": 2.0, "src": "ASSUMED"},
-
-    # prairie bands (AFF to rail centerline)
-    "rail_cl_1": {"v": 10.0, "src": "ASSUMED", "note": "splash rail"},
-    "rail_cl_2": {"v": 28.0, "src": "ASSUMED", "note": "latch alignment"},
-    "rail_cl_3": {"v": 46.0, "src": "ASSUMED", "note": "upper band"},
+    "house_receiver_depth": {"v": 4.0, "src": "ASSUMED", "note": "Latch A opt-in only — default is Latch B"},
+    "pivot_d": {"v": 1.25, "src": "ASSUMED", "note": "oak pivot pin — structurally better than pintles on a freestanding P1"},
+    "pivot_l": {"v": 4.0, "src": "ASSUMED"},
+    "slat_housing_d": {"v": 0.75, "src": "ASSUMED", "note": "housed dado in post; do NOT through-mortise all 7 bands (0.75″ web would fail)"},
 
     # sit-on-grade ladder base (NO digging, NO cement, NO stone pads)
     "sill_overhang": {"v": 6.0, "src": "ASSUMED", "note": "dodai past outer post faces"},
@@ -94,17 +97,24 @@ P = {
     "sill_h": {"v": 5.5, "src": "DERIVED", "note": "4×6 on edge — Prairie base beam"},
     "base_spread_cl": {"v": 36.0, "src": "ASSUMED", "note": "driveway-sill CL to garden-sill CL; wind lever"},
     "tie_reveal": {"v": 1.0, "src": "ASSUMED", "note": "cross-tie past outer sill faces"},
-    "drop_off": {"v": 5.0, "src": "ESTIMATED", "note": "TBM — driveway→garden; timber packing under garden sill"},
-    "pack_w": {"v": 5.5, "src": "DERIVED", "note": "packing crib matches sill height face"},
+    "drop_off": {"v": 0.0, "src": "VERIFIED", "note": "run sits on driveway slab (photos). Packing only if outriggers leave the slab"},
+    "pack_w": {"v": 5.5, "src": "DERIVED", "note": "packing crib if drop_off > 0"},
     "pack_len": {"v": 12.0, "src": "ASSUMED", "note": "crib length along sill at each tie"},
-    "ballast_box_x": {"v": 14.0, "src": "ASSUMED", "note": "timber box inside, along run"},
-    "ballast_box_y": {"v": 10.0, "src": "ASSUMED", "note": "timber box inside, across run"},
-    "ballast_box_h": {"v": 10.0, "src": "ASSUMED"},
-    "ballast_bag_lb": {"v": 50.0, "src": "ASSUMED", "note": "woven sandbag, removable"},
+    "planter_x": {"v": 44.0, "src": "DERIVED", "note": "one trough per privacy bay, garden side — NOT at house/gate"},
+    "planter_y": {"v": 18.0, "src": "ASSUMED", "note": "depth into yard; sized for wind mass, not φ (shrinking height would under-ballast)"},
+    "planter_h": {"v": 18.0, "src": "ASSUMED", "note": "deep Prairie trough — live plants + watering; φ not applied (would cut soil volume)"},
+    "planter_stone_h": {"v": 4.0, "src": "ASSUMED", "note": "drainage / ballast stone IN the box only — not a pad"},
+    "planter_soil_pcf": {"v": 90.0, "src": "ASSUMED", "note": "wet potting mix planning density"},
+    "planter_stone_pcf": {"v": 100.0, "src": "ASSUMED", "note": "pea gravel in box"},
+    "n_planters": {"v": 2.0, "src": "ASSUMED", "note": "bays P1–P2 and P2–P3 only; zero at P0/house"},
     "wind_psf": {"v": 15.0, "src": "ASSUMED", "note": "planning pressure, not PE; Buffalo ~90 mph simplified"},
     "wind_fs": {"v": 1.5, "src": "ASSUMED", "note": "planning factor of safety on overturning"},
-    "furniture_pad_t": {"v": 0.5, "src": "ASSUMED", "note": "rubber pads under driveway sill — protect pavement"},
+    "furniture_pad_t": {"v": 0.5, "src": "ASSUMED", "note": "wood or rubber pads under driveway sill — protect pavement"},
     "brace_z": {"v": 18.0, "src": "ASSUMED", "note": "sujikai meets post above sill top"},
+    "light_dado_w": {"v": 0.50, "src": "ASSUMED", "note": "cap soffit channel for 12V IP65 tape"},
+    "light_dado_d": {"v": 0.375, "src": "ASSUMED"},
+    "block_l": {"v": 7.0, "src": "ASSUMED", "note": "tectonic 2×2 block — Darwin Martin pier texture"},
+    "block_s": {"v": 1.5, "src": "DERIVED", "note": "2×2 actual"},
 
     # manufacture
     "saw_kerf": {"v": 0.125, "src": "ASSUMED", "note": "thin-kerf circular / table saw"},
@@ -144,7 +154,6 @@ def layout() -> dict:
     fy = v("post_y")
     gate = v("gate_clear")
     cap_t = v("cap_t")
-    rh = v("rail_h")
     rt = v("rail_t")
 
     # Datum: outer latch-side face x=0, sill top z=0, post centerline y=0
@@ -174,45 +183,48 @@ def layout() -> dict:
     post_body_h = H - cap_t
     post_blank_l = post_body_h + v("post_tenon_h")
 
-    rail_cls = (v("rail_cl_1"), v("rail_cl_2"), v("rail_cl_3"))
-    courses = []
-    # bottom course
-    courses.append(
-        {
-            "id": "C1",
-            "z0": v("board_above_pad"),
-            "z1": rail_cls[0] - rh / 2.0 - v("board_end_clear"),
-        }
-    )
-    for a, b in zip(rail_cls, rail_cls[1:]):
-        courses.append(
-            {
-                "id": "C" + str(len(courses) + 1),
-                "z0": a + rh / 2.0 + v("board_end_clear"),
-                "z1": b - rh / 2.0 - v("board_end_clear"),
-            }
-        )
-    courses.append(
-        {
-            "id": "C4",
-            "z0": rail_cls[-1] + rh / 2.0 + v("board_end_clear"),
-            "z1": H - cap_t - v("board_end_clear"),
-        }
-    )
-    for c in courses:
-        c["h"] = rnd(c["z1"] - c["z0"])
-        c["z0"] = rnd(c["z0"])
-        c["z1"] = rnd(c["z1"])
+    # Elevation: kick + (2×10 / gap / 2×6 / gap)×3 + 2×10 + cap = 65.000 exactly.
+    # 9.25/5.5 = 1.682 ≈ φ; do not rip 2×10 (diminishing returns).
+    major, minor, gap, kick_h = v("board_w"), v("band_minor_h"), v("board_gap"), v("kick_h")
+    z = 0.0
+    slats = []
+    slats.append({
+        "id": "K-001", "mark": "KICK", "stock": "2x6 PT", "h": kick_h,
+        "z0": 0.0, "z1": kick_h, "cl": rnd(kick_h / 2.0),
+        "nuki": True, "role": "dog seal / splash nuki",
+    })
+    z = kick_h
+    pattern = [
+        ("R-001", "S1", "2x10", major, True, "major Prairie nuki"),
+        ("R-002", "S2", "2x6", minor, False, "housed screen"),
+        ("R-003", "S3", "2x10", major, True, "major Prairie nuki / latch CL"),
+        ("R-004", "S4", "2x6", minor, False, "housed screen"),
+        ("R-005", "S5", "2x10", major, True, "major Prairie nuki"),
+        ("R-006", "S6", "2x6", minor, False, "housed screen"),
+        ("R-007", "S7", "2x10", major, False, "housed upper band — not nuki (keep post web)"),
+    ]
+    for i, (pid, mark, stock, h, is_nuki, role) in enumerate(pattern):
+        slats.append({
+            "id": pid, "mark": mark, "stock": stock, "h": h,
+            "z0": rnd(z), "z1": rnd(z + h), "cl": rnd(z + h / 2.0),
+            "nuki": is_nuki, "role": role,
+        })
+        z = z + h
+        if i < len(pattern) - 1:
+            z = z + gap
+    slat_top = rnd(z)
+    rail_cls = tuple(s["cl"] for s in slats if s["nuki"] and s["id"].startswith("R-"))
+    latch_cl = next(s["cl"] for s in slats if s["id"] == "R-003")
 
-    pitch = v("board_w") + v("board_gap")
-    n_bay = max(1, int(math.floor((bay_clear + v("board_gap")) / pitch)))
-    used = n_bay * v("board_w") + (n_bay - 1) * v("board_gap")
-    board_inset = rnd((bay_clear - used) / 2.0)
+    courses = [{"id": s["id"], "z0": s["z0"], "z1": s["z1"], "h": s["h"]} for s in slats]
+    n_bay = 1
+    used = bay_clear
+    board_inset = 0.0
 
     gate_leaf_w = gate - 2.0 * v("gate_gap")
     gate_h = H - cap_t - v("gate_bottom_clear") - v("gate_top_clear")
     gate_inner = gate_leaf_w - 2.0 * v("stile_w")
-    n_gate_b = max(1, int(math.floor((gate_inner + v("board_gap")) / pitch)))
+    n_gate_b = len(pattern)
 
     sill_len = L + 2.0 * v("sill_overhang")
     spread = v("base_spread_cl")
@@ -222,7 +234,7 @@ def layout() -> dict:
     garden_sill_cy = spread / 2.0
     drive_sill_cy = -spread / 2.0
     brace_len = math.hypot(spread / 2.0, v("brace_z"))
-    pack_layers = max(1, int(math.ceil(v("drop_off") / 1.5)))  # 2×6 actual 1.5″
+    pack_layers = 0 if v("drop_off") <= 0 else max(1, int(math.ceil(v("drop_off") / 1.5)))
     pack_h = rnd(pack_layers * 1.5)
 
     # tenon ratio check
@@ -248,6 +260,11 @@ def layout() -> dict:
         "post_body_h": rnd(post_body_h),
         "post_blank_l": rnd(post_blank_l),
         "rail_cls": rail_cls,
+        "slats": slats,
+        "slat_top": slat_top,
+        "latch_cl": latch_cl,
+        "phi": rnd(PHI, 5),
+        "band_ratio": rnd(major / minor, 3),
         "courses": courses,
         "n_bay": n_bay,
         "board_inset": board_inset,
@@ -313,15 +330,15 @@ def parts(ly=None):
     posts = []
     for p in ly["posts"]:
         notes = p["role"]
-        joinery = "foot tenon into F-003 cross-tie + 3 nuki mortises"
+        joinery = "foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands"
         if p["mark"] == "P0":
-            joinery += "; latch-bar mortise (Latch B); no kusabi (gate side)"
+            joinery += "; latch-bar mortise (Latch B); no kusabi (gate side); NO planter"
         elif p["mark"] == "P1":
-            joinery += "; 3 kusabi slots; 2 pintle mortises"
+            joinery += "; kusabi slots on nuki; oak pivot sockets top+bottom"
         elif p["mark"] == "P2":
-            joinery += "; 3 kusabi slots; cap scarf bearing"
+            joinery += "; kusabi slots; cap scarf bearing"
         else:
-            joinery += "; 3 kusabi slots"
+            joinery += "; kusabi slots; slats withdraw toward P3"
         posts.append(
             _part(
                 PART_ID=p["id"],
@@ -349,38 +366,59 @@ def parts(ly=None):
             )
         )
 
-    rail_names = [
-        ("R-001", "R1 bottom Prairie nuki", v("rail_cl_1")),
-        ("R-002", "R2 mid Prairie nuki", v("rail_cl_2")),
-        ("R-003", "R3 upper Prairie nuki", v("rail_cl_3")),
-    ]
     rails = []
-    for pid, name, cl in rail_names:
+    for s in ly["slats"]:
+        if not s["id"].startswith("R-"):
+            continue
+        is10 = s["stock"] == "2x10"
         rails.append(
             _part(
-                PART_ID=pid,
-                PART_NAME=name,
+                PART_ID=s["id"],
+                PART_NAME=f'{s["mark"]} {s["role"]}',
                 PART_CATEGORY="R",
                 ASSEMBLY="A-020 PRIVACY_FRAME",
                 QUANTITY=1,
                 MATERIAL="solid lumber",
                 SPECIES="SPF/SYP paint-grade",
-                PURCHASE="2×8 × 10′",
+                PURCHASE="2×10 × 10′" if is10 else "2×6 × 10′",
                 ROUGH_THICKNESS=1.5,
-                ROUGH_WIDTH=7.25,
+                ROUGH_WIDTH=s["h"],
                 ROUGH_LENGTH=rnd(ly["nuki_len"] + 1.0),
                 FINISHED_THICKNESS=1.5,
-                FINISHED_WIDTH=7.25,
+                FINISHED_WIDTH=s["h"],
                 FINISHED_LENGTH=ly["nuki_len"],
-                BOARD_FEET=bf_nominal(2, 8, 10),
-                JOINERY="nuki through L-002/003/004; board grooves both edges; kusabi slots",
-                PROCESS="OP010–OP080 rail routing",
+                BOARD_FEET=bf_nominal(2, 10 if is10 else 6, 10),
+                JOINERY=("nuki through L-002/003/004; kusabi" if s["nuki"]
+                         else f'housed {v("slat_housing_d")}" dado in posts; lock batten / friction'),
+                PROCESS="OP010–OP080 slat routing",
                 TOLERANCE_CLASS="T2",
-                FIT="SLIDING in mortise (nuki_fit)",
-                MOVEMENT="FLOATING along length (seasonal); locked by kusabi at posts",
-                cl=cl,
+                FIT="SLIDING in mortise/dado",
+                MOVEMENT="FLOATING along length; locked by kusabi at nuki posts",
+                cl=s["cl"],
+                nuki=s["nuki"],
             )
         )
+    kick = _part(
+        PART_ID="K-001",
+        PART_NAME="Kickboard nuki (dog seal)",
+        PART_CATEGORY="R",
+        ASSEMBLY="A-020 PRIVACY_FRAME",
+        QUANTITY=1,
+        MATERIAL="PT UC4A 2×6 (paint after dry)",
+        SPECIES="southern yellow pine",
+        PURCHASE="2×6 PT × 10′",
+        ROUGH_THICKNESS=1.5,
+        ROUGH_WIDTH=5.5,
+        ROUGH_LENGTH=rnd(ly["nuki_len"] + 1.0),
+        FINISHED_THICKNESS=1.5,
+        FINISHED_WIDTH=5.5,
+        FINISHED_LENGTH=ly["nuki_len"],
+        BOARD_FEET=bf_nominal(2, 6, 10),
+        JOINERY="nuki through L-002/003/004 at z=0–5.5; wear part 8–12 yr",
+        NOTES="Bottom of screen. ¾″ gaps above. Dog cannot crawl under. PT because splash.",
+        TOLERANCE_CLASS="T2",
+        cl=ly["slats"][0]["cl"],
+    )
 
     cap = _part(
         PART_ID="C-001",
@@ -398,8 +436,8 @@ def parts(ly=None):
         FINISHED_WIDTH=7.25,
         FINISHED_LENGTH=ly["cap_len"],
         BOARD_FEET=bf_nominal(2, 8, 12),
-        JOINERY="kama-tsugi scarf at L-003 centerline, drawbored",
-        NOTES="Cut as two halves after scarf layout; still one Part ID for the finished cap",
+        JOINERY="kama-tsugi scarf at L-003 centerline, drawbored; soffit dado for H-006 tape light",
+        NOTES="Cut as two halves after scarf layout. Light channel on yard soffit — wood cover slat. Wright ‘light screen’.",
         TOLERANCE_CLASS="T2",
         HANDED="LEFT-HAND + RIGHT-HAND halves after scarf",
         MOVEMENT="FIXED at scarf; cap floats slightly on post tops",
@@ -424,77 +462,28 @@ def parts(ly=None):
         NOTES="Does not bridge gate",
     )
 
-    boards = []
-    # C2 and C3 same height → one ID
-    h_c1 = ly["courses"][0]["h"]
-    h_mid = ly["courses"][1]["h"]
-    h_c4 = ly["courses"][3]["h"]
-    n_per_course = ly["n_bay"] * 2  # two bays
-    boards.append(
+    boards = [
         _part(
-            PART_ID="B-001",
-            PART_NAME="Privacy board course C1 (below R1)",
+            PART_ID="T-001",
+            PART_NAME="Tectonic block (Darwin Martin pier texture)",
             PART_CATEGORY="B",
             ASSEMBLY="A-020 PRIVACY_FRAME",
-            QUANTITY=n_per_course,
+            QUANTITY=36,
             MATERIAL="solid lumber",
-            SPECIES="SPF/SYP 1×6",
-            PURCHASE="1×6 × 8′",
-            ROUGH_THICKNESS=0.75,
-            ROUGH_WIDTH=5.5,
-            ROUGH_LENGTH=rnd(h_c1 + 0.5),
-            FINISHED_THICKNESS=0.75,
-            FINISHED_WIDTH=5.5,
-            FINISHED_LENGTH=h_c1,
+            SPECIES="SPF 2×2",
+            PURCHASE="2×2 × 8′ / ripped 2×4",
+            ROUGH_THICKNESS=v("block_s"),
+            ROUGH_WIDTH=v("block_s"),
+            ROUGH_LENGTH=rnd(v("block_l") + 0.5),
+            FINISHED_THICKNESS=v("block_s"),
+            FINISHED_WIDTH=v("block_s"),
+            FINISHED_LENGTH=v("block_l"),
             BOARD_FEET=0,
-            JOINERY="floats in R-001 bottom groove; no fasteners",
-            MOVEMENT="FLOATING",
-            FIT="CLEARANCE in groove",
-        )
-    )
-    boards.append(
-        _part(
-            PART_ID="B-002",
-            PART_NAME="Privacy board courses C2+C3 (between rails)",
-            PART_CATEGORY="B",
-            ASSEMBLY="A-020 PRIVACY_FRAME",
-            QUANTITY=n_per_course * 2,
-            MATERIAL="solid lumber",
-            SPECIES="SPF/SYP 1×6",
-            PURCHASE="1×6 × 8′",
-            ROUGH_THICKNESS=0.75,
-            ROUGH_WIDTH=5.5,
-            ROUGH_LENGTH=rnd(h_mid + 0.5),
-            FINISHED_THICKNESS=0.75,
-            FINISHED_WIDTH=5.5,
-            FINISHED_LENGTH=h_mid,
-            BOARD_FEET=0,
-            JOINERY="floats in rail grooves",
-            MOVEMENT="FLOATING",
-            FIT="CLEARANCE",
-        )
-    )
-    boards.append(
-        _part(
-            PART_ID="B-003",
-            PART_NAME="Privacy board course C4 (above R3)",
-            PART_CATEGORY="B",
-            ASSEMBLY="A-020 PRIVACY_FRAME",
-            QUANTITY=n_per_course,
-            MATERIAL="solid lumber",
-            SPECIES="SPF/SYP 1×6",
-            PURCHASE="1×6 × 8′",
-            ROUGH_THICKNESS=0.75,
-            ROUGH_WIDTH=5.5,
-            ROUGH_LENGTH=rnd(h_c4 + 0.5),
-            FINISHED_THICKNESS=0.75,
-            FINISHED_WIDTH=5.5,
-            FINISHED_LENGTH=h_c4,
-            BOARD_FEET=0,
-            JOINERY="floats; retained by C-001",
-            MOVEMENT="FLOATING",
-        )
-    )
+            JOINERY="¼″ retention pegs — ½″ will split the 2×2",
+            NOTES="3-block chevron clusters × 2 heights × P1/P2/P3 × 2 faces. Ornament only — not structure.",
+            TOLERANCE_CLASS="T1",
+        ),
+    ]
 
     gate_parts = [
         _part(
@@ -512,7 +501,7 @@ def parts(ly=None):
             FINISHED_THICKNESS=1.5,
             FINISHED_WIDTH=3.5,
             FINISHED_LENGTH=ly["gate_h"],
-            JOINERY="hozo mortises for G-003..G-007; pintle gudgeons",
+            JOINERY="hozo mortises for gate bands; oak pivot gudgeons top+bottom (not pintles)",
             HANDED="HINGE-HAND (P1)",
             TOLERANCE_CLASS="T2",
         ),
@@ -640,21 +629,22 @@ def parts(ly=None):
         ),
         _part(
             PART_ID="G-009",
-            PART_NAME="Gate infill board",
+            PART_NAME="Gate horizontal infill (matches screen bands)",
             PART_CATEGORY="B",
             ASSEMBLY="A-030 GATE",
             QUANTITY=ly["n_gate_boards"],
             MATERIAL="solid lumber",
-            SPECIES="1×6",
-            PURCHASE="1×6 × 8′",
-            ROUGH_THICKNESS=0.75,
+            SPECIES="2×6 / 2×10 offcuts",
+            PURCHASE="2×6 × 8′",
+            ROUGH_THICKNESS=1.5,
             ROUGH_WIDTH=5.5,
-            ROUGH_LENGTH=rnd(ly["gate_h"] - 8.0 + 0.5),
-            FINISHED_THICKNESS=0.75,
+            ROUGH_LENGTH=rnd(ly["gate_inner"] + 0.5),
+            FINISHED_THICKNESS=1.5,
             FINISHED_WIDTH=5.5,
-            FINISHED_LENGTH=rnd(ly["gate_h"] - 8.0),
-            JOINERY="groove / stop in gate rails — FLOATING",
+            FINISHED_LENGTH=ly["gate_inner"],
+            JOINERY="groove / stop in gate stiles — FLOATING; ¾″ gaps; dog-tight",
             MOVEMENT="FLOATING",
+            NOTES="Same 2×10 / 2×6 / ¾″ rhythm as the screen so Prairie lines continue across the gate.",
         ),
         _part(
             PART_ID="G-010",
@@ -682,7 +672,7 @@ def parts(ly=None):
         PART_NAME="Kusabi locking wedge",
         PART_CATEGORY="W",
         ASSEMBLY="A-020 PRIVACY_FRAME",
-        QUANTITY=17,  # 3 rails × 3 posts + 2 sills × 4 ties
+        QUANTITY=16,  # 4 nuki × 3 posts + extras
         MATERIAL="white oak / hard maple",
         SPECIES="oak",
         PURCHASE="2×4 × 8′ ripped",
@@ -695,7 +685,7 @@ def parts(ly=None):
         JOINERY="driven in cheek slot; NEVER glue",
         FIT="INTERFERENCE (tapered drive)",
         TOLERANCE_CLASS="T2",
-        NOTES="9 rail + 8 sill/tie + 3 extras. Label bag for winter. NEVER glue.",
+        NOTES="12 nuki + 4 spare. Label bag for winter. NEVER glue.",
     )
     pegs = _part(
         PART_ID="W-002",
@@ -718,22 +708,22 @@ def parts(ly=None):
     )
     pintle = _part(
         PART_ID="W-003",
-        PART_NAME="Wooden pintle (or stainless upgrade)",
+        PART_NAME="Oak gate pivot pin",
         PART_CATEGORY="W",
         ASSEMBLY="A-030 GATE",
         QUANTITY=2,
         MAKE_OR_BUY="MAKE",
-        MATERIAL="white oak / hard maple (BUY: stainless pintle set)",
-        PURCHASE="oak offcut or H-003",
-        ROUGH_THICKNESS=1.0,
-        ROUGH_WIDTH=1.0,
-        ROUGH_LENGTH=4.0,
-        FINISHED_THICKNESS=0.75,
-        FINISHED_WIDTH=0.75,
-        FINISHED_LENGTH=3.5,
-        JOINERY="gudgeon in G-001; pintle in L-002",
-        FIT="LOCATIONAL / lift-off",
-        NOTES="Gate lifts straight up for winter. Metal optional — only purchased metal on fence if used.",
+        MATERIAL="white oak",
+        PURCHASE="oak 5/4 or 1-1/4″ dowel",
+        ROUGH_THICKNESS=v("pivot_d"),
+        ROUGH_WIDTH=v("pivot_d"),
+        ROUGH_LENGTH=rnd(v("pivot_l") + 0.5),
+        FINISHED_THICKNESS=v("pivot_d"),
+        FINISHED_WIDTH=v("pivot_d"),
+        FINISHED_LENGTH=v("pivot_l"),
+        JOINERY="waxed pin: bottom socket in threshold/sill at P1; top in cap soffit",
+        FIT="LOCATIONAL / lift-off +Z",
+        NOTES="Structurally best on a freestanding hinge post: leaf weight goes into the sill, not a cantilever pintle. P0 (house) has no planter.",
     )
 
     civil = [
@@ -803,39 +793,39 @@ def parts(ly=None):
             PART_NAME="Garden packing crib",
             PART_CATEGORY="F",
             ASSEMBLY="A-001 BASE",
-            QUANTITY=4,
+            QUANTITY=0 if ly["pack_layers"] == 0 else 4,
             MATERIAL="solid lumber",
             SPECIES="SPF/SYP 2×6 stacked",
             PURCHASE="2×6 × 8′",
             ROUGH_THICKNESS=1.5,
             ROUGH_WIDTH=v("pack_w"),
             ROUGH_LENGTH=v("pack_len"),
-            FINISHED_THICKNESS=ly["pack_h"],
+            FINISHED_THICKNESS=max(ly["pack_h"], 1.5),
             FINISHED_WIDTH=v("pack_w"),
             FINISHED_LENGTH=v("pack_len"),
             BOARD_FEET=0,
             JOINERY="dry-stacked layers; no glue; shims to TBM drop_off",
-            NOTES=f'{ly["pack_layers"]} layers of 1.50″ 2×6 ≈ {ly["pack_h"]}" to match estimated {v("drop_off")}" drop. Field-fit.',
+            NOTES="Qty 0 while the run sits on the driveway slab (photos). Use only if outriggers leave the slab.",
             MOVEMENT="SLOTTED / shimmable",
         ),
         _part(
             PART_ID="F-005",
-            PART_NAME="Ballast box (empty timber frame)",
+            PART_NAME="Live planter trough (garden side)",
             PART_CATEGORY="F",
             ASSEMBLY="A-001 BASE",
-            QUANTITY=4,
-            MATERIAL="solid lumber",
-            SPECIES="SPF/SYP 2×6",
+            QUANTITY=int(v("n_planters")),
+            MATERIAL="PT UC4A 2×6 / 2×8 (paint after dry)",
+            SPECIES="southern yellow pine",
             PURCHASE="2×6 × 8′",
             ROUGH_THICKNESS=1.5,
-            ROUGH_WIDTH=1.5,
-            ROUGH_LENGTH=rnd(2 * (v("ballast_box_x") + v("ballast_box_y")) + 8),
-            FINISHED_THICKNESS=v("ballast_box_h"),
-            FINISHED_WIDTH=v("ballast_box_y") + 3.0,
-            FINISHED_LENGTH=rnd(2 * (v("ballast_box_x") + v("ballast_box_y"))),
+            ROUGH_WIDTH=5.5,
+            ROUGH_LENGTH=rnd(v("planter_x") + 4.0),
+            FINISHED_THICKNESS=v("planter_h"),
+            FINISHED_WIDTH=v("planter_y"),
+            FINISHED_LENGTH=v("planter_x"),
             BOARD_FEET=0,
-            JOINERY="pegged frame; sits on sills at four corners",
-            NOTES="Holds H-007 sandbags. Empty for winter. Not a stone pad. Not poured.",
+            JOINERY="dovetail corners; drainage slots in bottom slats; ½″ air gap from posts",
+            NOTES="P1–P2 and P2–P3 only. NOT at the house/gate. Live plants + watering. Optional stone in the bottom 4″ for drainage and mass — inside the box, not a pad. Winter: empty or lift with the ladder.",
         ),
         _part(
             PART_ID="F-006",
@@ -934,7 +924,24 @@ def parts(ly=None):
             QUANTITY=1,
             MAKE_OR_BUY="BUY",
             MATERIAL="exterior acrylic / alkyd",
-            NOTES="Mask wedges, tenons, sill laps, pintle faces",
+            NOTES="Ease arrises 1/16″; end-grain sealer; PT dry then prime; 2 finish coats owner gray; extra coat on planter interiors; mask joinery faces and oak pivot sockets",
+            ROUGH_THICKNESS=0,
+            ROUGH_WIDTH=0,
+            ROUGH_LENGTH=0,
+            FINISHED_THICKNESS=0,
+            FINISHED_WIDTH=0,
+            FINISHED_LENGTH=0,
+        ),
+        _part(
+            PART_ID="H-006",
+            PART_NAME="12V IP65 LED tape + driver (cap soffit)",
+            PART_CATEGORY="H",
+            ASSEMBLY="A-040 FINISH",
+            QUANTITY=1,
+            MAKE_OR_BUY="BUY",
+            MATERIAL="low-voltage LED",
+            PURCHASE="outdoor tape 16′ + 60W driver + wood cover slat",
+            NOTES="Sits in C-001 soffit dado. Driver in a dry niche of the P3 planter — not at the house. Allowed metal: lighting only.",
             ROUGH_THICKNESS=0,
             ROUGH_WIDTH=0,
             ROUGH_LENGTH=0,
@@ -944,25 +951,25 @@ def parts(ly=None):
         ),
         _part(
             PART_ID="H-007",
-            PART_NAME="Removable sandbag ballast",
+            PART_NAME="Planter drainage stone (in-box only)",
             PART_CATEGORY="H",
             ASSEMBLY="A-001 BASE",
-            QUANTITY=0,
+            QUANTITY=1,
             MAKE_OR_BUY="BUY",
-            MATERIAL="woven poly sandbag + sand (or water jugs)",
-            PURCHASE="50 lb bags",
+            MATERIAL="pea gravel / lava rock",
+            PURCHASE="bags to fill 4″ in two troughs",
+            NOTES="INSIDE F-005 only — drainage + mass. Not a pad, not on the driveway, not poured. Live soil goes on top. Winter empty or store.",
+            GRAIN_DIRECTION="n/a",
             ROUGH_THICKNESS=0,
             ROUGH_WIDTH=0,
             ROUGH_LENGTH=0,
             FINISHED_THICKNESS=0,
             FINISHED_WIDTH=0,
             FINISHED_LENGTH=0,
-            NOTES="Qty from wind/ballast calc. Store dry in winter. NOT poured concrete. NOT a stone pad.",
-            GRAIN_DIRECTION="n/a",
         ),
     ]
 
-    allp = posts + rails + [cap, cap_stub] + boards + gate_parts + [wedges, pegs, pintle] + civil
+    allp = posts + rails + [kick, cap, cap_stub] + boards + gate_parts + [wedges, pegs, pintle] + civil
     return allp
 
 
@@ -983,24 +990,43 @@ def joints(ly=None):
         js.append(d)
 
     n = 1
-    for rail, cl in zip(("R-001", "R-002", "R-003"), ly["rail_cls"]):
+    for s in ly["slats"]:
+        if not s["nuki"]:
+            continue
         for post in ("L-002", "L-003", "L-004"):
             J(
                 JOINT_ID=f"J-{n:03d}",
-                JOINT_TYPE="nuki 貫 + kusabi",
+                JOINT_TYPE="nuki 貫 + kusabi" if s["id"].startswith("R-") else "kick nuki 貫",
                 PART_A=post,
-                PART_B=rail,
-                LOCATION=f"{post} × {rail} @ z_cl={cl}\"",
+                PART_B=s["id"],
+                LOCATION=f"{post} × {s['id']} @ z_cl={s['cl']}\"",
                 MORTISE_WIDTH=v("rail_t") + v("nuki_fit"),
-                MORTISE_HEIGHT=v("rail_h"),
+                MORTISE_HEIGHT=s["h"],
                 MORTISE_DEPTH="THROUGH (post_x)",
                 TENON_WIDTH=v("rail_t"),
-                TENON_HEIGHT=v("rail_h"),
+                TENON_HEIGHT=s["h"],
                 TENON_LENGTH="THROUGH + rail_reveal",
                 FIT_CLASS="SLIDING then INTERFERENCE via W-001",
-                ASSEMBLY_DIRECTION="+X (rails withdraw toward P3 for winter)",
+                ASSEMBLY_DIRECTION="+X (withdraw toward P3 for winter)",
             )
             n += 1
+    for s in ly["slats"]:
+        if s["nuki"]:
+            continue
+        J(
+            JOINT_ID=f"J-{n:03d}",
+            JOINT_TYPE="housed dado (Prairie slat)",
+            PART_A="L-002/003/004",
+            PART_B=s["id"],
+            LOCATION=f"{s['id']} @ z_cl={s['cl']}\"",
+            MORTISE_WIDTH=v("rail_t") + v("nuki_fit"),
+            MORTISE_HEIGHT=s["h"],
+            MORTISE_DEPTH=v("slat_housing_d"),
+            FIT_CLASS="SLIDING",
+            NOTES="Do not through-mortise — ¾″ gaps would leave a ¾″ web. Housing keeps the post continuous.",
+            ASSEMBLY_DIRECTION="+X from P3",
+        )
+        n += 1
     for post in ly["posts"]:
         J(
             JOINT_ID=f"J-{n:03d}",
@@ -1082,8 +1108,8 @@ def joints(ly=None):
         JOINT_ID=f"J-{n:03d}",
         JOINT_TYPE="floating groove",
         PART_A="R-001..R-003 / C-001",
-        PART_B="B-001..B-003",
-        LOCATION="rail edges",
+        PART_B="T-001 / G-009",
+        LOCATION="posts (blocks) / gate stiles (infill)",
         MORTISE_DEPTH=v("groove_d"),
         MORTISE_WIDTH=v("groove_w"),
         FIT_CLASS="CLEARANCE",
@@ -1093,12 +1119,13 @@ def joints(ly=None):
     n += 1
     J(
         JOINT_ID=f"J-{n:03d}",
-        JOINT_TYPE="pintle / gudgeon",
-        PART_A="L-002",
-        PART_B="G-001",
-        LOCATION="two pintles, lift-off +Z",
+        JOINT_TYPE="oak pivot / socket",
+        PART_A="L-002 / F-003 / C-001",
+        PART_B="G-001 / W-003",
+        LOCATION="bottom in sill at P1; top in cap soffit — lift-off +Z",
         FIT_CLASS="LOCATIONAL",
         ASSEMBLY_DIRECTION="+Z to remove",
+        NOTES="Leaf weight in compression to the driveway sill. No planter at P0/house.",
     )
     n += 1
     J(
@@ -1106,7 +1133,7 @@ def joints(ly=None):
         JOINT_TYPE="sliding latch",
         PART_A="G-010",
         PART_B="H-002 or L-001",
-        LOCATION=f"z_cl={v('rail_cl_2')}\" (R2)",
+        LOCATION=f"z_cl={ly['latch_cl']}\" (R-003 major band)",
         FIT_CLASS="SLIDING",
         NOTES="DEFAULT Latch B mortise in L-001. No epoxy, no house pour.",
     )
@@ -1153,7 +1180,7 @@ def hardware():
         },
         {
             "HARDWARE_ID": "H-005",
-            "DESCRIPTION": "Exterior primer + owner gray enamel, 2 finish coats",
+            "DESCRIPTION": "Exterior primer + owner gray enamel, 2 finish coats (ease, seal, PT dry first)",
             "STANDARD": "exterior grade",
             "SIZE": "kit",
             "QTY": 1,
@@ -1161,12 +1188,21 @@ def hardware():
             "MAKE_OR_BUY": "BUY",
         },
         {
+            "HARDWARE_ID": "H-006",
+            "DESCRIPTION": "12V IP65 LED tape + driver in cap soffit dado",
+            "STANDARD": "low-voltage outdoor",
+            "SIZE": "16′ tape + 60W driver",
+            "QTY": 1,
+            "MATERIAL": "LED + wood cover slat",
+            "MAKE_OR_BUY": "BUY",
+        },
+        {
             "HARDWARE_ID": "H-007",
-            "DESCRIPTION": "Removable 50 lb sandbags (or water jugs) in F-005 boxes — wind ballast, not a pad",
-            "STANDARD": "woven poly bag",
-            "SIZE": "50 lb",
-            "QTY": "see ballast.n_bags",
-            "MATERIAL": "sand + bag",
+            "DESCRIPTION": "Pea gravel / lava in F-005 troughs — 4″ drainage layer, in-box only",
+            "STANDARD": "landscape stone",
+            "SIZE": "see ballast.stone_cuft",
+            "QTY": "2 troughs",
+            "MATERIAL": "stone",
             "MAKE_OR_BUY": "BUY",
         },
     ]
@@ -1181,17 +1217,20 @@ def assemblies():
             "A-030 GATE",
             "A-040 FINISH",
         ],
-        "A-001 BASE": ["F-001", "F-002", "F-003×4", "F-004×4", "F-005×4", "F-006×4", "H-001×8", "H-007"],
+        "A-001 BASE": ["F-001", "F-002", "F-003×4", "F-005×2 planters (not at house)", "F-006×4", "H-001", "H-007 stone in-box"],
         "A-010 POSTS": ["L-001", "L-002", "L-003", "L-004", "C-002"],
         "A-020 PRIVACY_FRAME": [
-            "R-001",
-            "R-002",
-            "R-003",
-            "B-001×16",
-            "B-002×32",
-            "B-003×16",
-            "C-001",
-            "W-001×17",
+            "K-001 kick",
+            "R-001 nuki 2×10",
+            "R-002 housed 2×6",
+            "R-003 nuki 2×10",
+            "R-004 housed 2×6",
+            "R-005 nuki 2×10",
+            "R-006 housed 2×6",
+            "R-007 housed 2×10",
+            "C-001 cap + light dado",
+            "T-001×36 tectonic",
+            "W-001 kusabi",
         ],
         "A-030 GATE": [
             "G-001",
@@ -1207,42 +1246,44 @@ def assemblies():
             "W-002",
             "W-003",
         ],
-        "A-040 FINISH": ["H-005"],
+        "A-040 FINISH": ["H-005", "H-006 lighting"],
     }
 
 
 def operations():
     """Typical routing — posts shown fully; others summarized by family."""
+    ly = layout()
+    nuki_cls = ", ".join(f'{s["cl"]:.2f}' for s in ly["slats"] if s["nuki"])
     post_ops = [
-        ("OP010", "Rough crosscut", "circular / miter saw", "blank +1″", "T1 ±1/8″"),
-        ("OP020", "Joint reference face", "jointer / plane / factory S4S", "FACE A", "T1"),
+        ("OP010", "Rough crosscut", "track / miter / table saw", "blank +1″", "T1 ±1/8″"),
+        ("OP020", "Joint reference face", "hand plane / factory S4S", "FACE A", "T1"),
         ("OP030", "Joint reference edge", "same", "EDGE B", "T1"),
         ("OP040", "Verify section 3.50×5.50", "caliper / combo square", "S4S skip if in-tol", "T1 ±1/32″"),
         ("OP050", "Final length post_blank_l", "stop S-014", "DATUM END A = tenon tip; overall", "T1 ±1/32″"),
-        ("OP060", "Shoulder foot tenon 2.50×4.50×3.50", "saw + chisel / router", "measure from sill-shoulder datum", "T2 ±1/32″"),
-        ("OP070", "Nuki mortises at CL 10 / 28 / 46 AFF", "chisel / mortiser", "from DATUM END = shoulder (sill top)", "T2"),
+        ("OP060", "Shoulder foot tenon 2.50×4.50×3.50", "Bridge City kerf/tenon + Zenwu chisels", "measure from sill-shoulder datum", "T2 ±1/32″"),
+        ("OP070", f"Through-nuki at CL {nuki_cls} AFF (K-001 + R-001/003/005 only)", "chisel / Japanese saw", "from DATUM END = shoulder (sill top)", "T2"),
+        ("OP075", "Housed 0.75″ dados for R-002/004/006/007", "router + chisel", "do NOT through-mortise — keep post web", "T2"),
         ("OP080", "Kusabi slots (L-002/003/004)", "saw + chisel", "see J-401", "T2"),
-        ("OP090", "Pintle mortises (L-002 only)", "drill + chisel", "two, aligned", "T2"),
-        ("OP100", "Seal end grain; dry-fit in F-003", "brush", "tenon faces unpainted contact", "—"),
+        ("OP090", "Oak pivot sockets (L-002 / F-003 / C-001)", "brace + chisel", "bottom in sill, top in cap soffit", "T2"),
+        ("OP100", "Ease 1/16″; seal end grain; dry-fit in F-003", "block plane + brush", "tenon faces unpainted contact", "—"),
     ]
     return {
-        "L-001": [o for o in post_ops if "Kusabi" not in o[1] and "Pintle" not in o[1]]
-        + [("OP085", "Latch-B mortise (if used)", "chisel", "CL 28″ AFF", "T2")],
+        "L-001": [o for o in post_ops if "Kusabi" not in o[1] and "Oak pivot" not in o[1]]
+        + [("OP085", "Latch-B mortise", "chisel", f'CL {ly["latch_cl"]:.2f}" AFF (R-003)', "T2")],
         "L-002": post_ops,
-        "L-003": [o for o in post_ops if "Pintle" not in o[1]],
-        "L-004": [o for o in post_ops if "Pintle" not in o[1]],
+        "L-003": [o for o in post_ops if "Oak pivot" not in o[1]],
+        "L-004": [o for o in post_ops if "Oak pivot" not in o[1]],
         "R-00x": [
             ("OP010", "Crosscut finished length nuki_len", "stop S-021", "DATUM END = P1 reveal", "T1"),
-            ("OP020", "Plow grooves ⅜×⅞ both edges", "router table", "FACE A against fence", "T2"),
+            ("OP020", "Ease arrises 1/16″; do not paint locking faces yet", "block plane", "", "—"),
             ("OP030", "Mark nuki stations at post CLs", "square", "from DATUM END", "T2"),
-            ("OP040", "Ease arrises; do not paint locking faces yet", "block plane", "", "—"),
         ],
         "G-00x": [
-            ("OP010", "Mill stiles/rails to finished section", "saw", "", "T1"),
-            ("OP020", "Cut hozo; dry fit", "chisel", "tenon ⅓ stock", "T2"),
+            ("OP010", "Mill stiles/rails to finished section", "table / track saw", "", "T1"),
+            ("OP020", "Cut hozo; dry fit", "Bridge City tenon + Zenwu chisels", "tenon ⅓ stock", "T2"),
             ("OP030", "Drawbore ⅛″ toward shoulder", "⅜″ brad point", "offset toward shoulder", "T2"),
             ("OP040", "Half-lap brace", "saw", "", "T2"),
-            ("OP050", "Peg, trim, hang on pintles", "mallet", "lift-off check", "T2"),
+            ("OP050", "Peg, trim, hang on oak pivots W-003", "mallet", "lift-off +Z check", "T2"),
         ],
     }
 
@@ -1261,22 +1302,22 @@ def stops():
             "SETUP": "S-021",
             "TOOL": "Track / circular saw + stop",
             "STOP": f'{ly["nuki_len"]:.3f}"',
-            "PARTS": ["R-001", "R-002", "R-003"],
-            "NOTE": "Three identical nuki rails.",
+            "PARTS": ["K-001", "R-001..007"],
+            "NOTE": "All screen bands share nuki_len. 2×10 and 2×6 families.",
         },
         {
             "SETUP": "S-030",
-            "TOOL": "Miter saw + stop",
-            "STOP": f'{ly["courses"][1]["h"]:.3f}"',
-            "PARTS": ["B-002 × 32"],
-            "NOTE": "Largest repeating board. Then reset for B-001 and B-003.",
+            "TOOL": "Track saw + Bridge City kerf/tenon + Zenwu chisels",
+            "STOP": "nuki mortise 1.50″ × 9.25″ (2×10) or 5.50″ (2×6 / kick)",
+            "PARTS": ["L-002..004"],
+            "NOTE": "Through-mortise ONLY K-001, R-001, R-003, R-005. House the rest 0.75″.",
         },
         {
             "SETUP": "S-040",
             "TOOL": "Mortise gauge from FACE A",
-            "STOP": "nuki mortise 1.50″ × 7.25″ through",
-            "PARTS": ["L-001..L-004"],
-            "NOTE": "CL AFF 10.000 / 28.000 / 46.000 from sill-shoulder datum.",
+            "STOP": f'latch CL {ly["latch_cl"]:.3f}" AFF (R-003)',
+            "PARTS": ["L-001", "G-002", "G-010"],
+            "NOTE": "Latch B into P0. Gate against the house. No planter at P0.",
         },
     ]
 
@@ -1285,21 +1326,22 @@ def inspection():
     ly = layout()
     return [
         {"QC": "QC-01", "CHECK": "Confirm overall opening 143.000″ ± 0.25″ on site", "CLASS": "VERIFIED/TBM", "TOL": "T1"},
-        {"QC": "QC-02", "CHECK": "Measure driveway→garden drop; set P.drop_off; stack F-004 packing — do not pour", "CLASS": "TBM", "TOL": "T1"},
-        {"QC": "QC-03", "CHECK": "Stock moisture — avoid wet framing; paint-grade OK", "CLASS": "T0", "TOL": "—"},
+        {"QC": "QC-02", "CHECK": "Run sits on driveway slab; pack only if outriggers leave slab (drop_off default 0)", "CLASS": "VERIFIED", "TOL": "T1"},
+        {"QC": "QC-03", "CHECK": "Stock moisture — PT for kick + planters dry before prime; SPF acclimate", "CLASS": "T0", "TOL": "—"},
         {"QC": "QC-04", "CHECK": f'Four posts finished length {ly["post_blank_l"]:.3f}" within ±1/32"', "CLASS": "T2", "TOL": "±0.031"},
-        {"QC": "QC-05", "CHECK": "Paired nuki rails R-001..003 identical length and groove", "CLASS": "T2", "TOL": "±0.031"},
-        {"QC": "QC-06", "CHECK": "Mortise CL AFF 10.000 / 28.000 / 46.000 from sill-shoulder datum", "CLASS": "T2", "TOL": "±0.062"},
+        {"QC": "QC-05", "CHECK": "Screen bands R-001..007 identical nuki_len; ¾″ dog gaps", "CLASS": "T2", "TOL": "±0.031"},
+        {"QC": "QC-06", "CHECK": "Through-nuki only K-001/R-001/R-003/R-005; others housed 0.75″", "CLASS": "T2", "TOL": "binary"},
         {"QC": "QC-07", "CHECK": "Foot tenon 2.500×4.500×3.500 enters F-003; lifts out for winter", "CLASS": "T2", "TOL": "+0.03/−0"},
-        {"QC": "QC-08", "CHECK": "Dry-assemble privacy: diagonals / plumb / no racking", "CLASS": "T1", "TOL": "plumb 1/8″ in 65″"},
-        {"QC": "QC-09", "CHECK": "Gate leaf swings; lift-off pintles; latch bar travels 4″ into receiver", "CLASS": "T2", "TOL": "—"},
+        {"QC": "QC-08", "CHECK": "Dry-assemble screen: diagonals / plumb / no racking; ¾″ gaps hold a ¾″ gauge", "CLASS": "T1", "TOL": "plumb 1/8″ in 65″"},
+        {"QC": "QC-09", "CHECK": "Gate against house; oak pivots lift-off; latch into P0; no planter at P0", "CLASS": "T2", "TOL": "—"},
         {"QC": "QC-10", "CHECK": "No glue on kusabi or nuki locking faces", "CLASS": "T0", "TOL": "binary"},
-        {"QC": "QC-11", "CHECK": "Paint masked on tenons, wedges, sill laps, pintle barrels", "CLASS": "T0", "TOL": "—"},
+        {"QC": "QC-11", "CHECK": "Paint: ease arrises, end-grain sealer, PT dry then prime, 2 finish coats; mask joinery", "CLASS": "T0", "TOL": "—"},
         {"QC": "QC-12", "CHECK": "Winter knock-down rehearsal before first storm season", "CLASS": "T0", "TOL": "—"},
-        {"QC": "QC-13", "CHECK": "Ladder sills sit level; packing matches measured drop; no excavation", "CLASS": "T1", "TOL": "±0.125"},
-        {"QC": "QC-14", "CHECK": "Gate vs cap clearance ≥ 0.50″", "CLASS": "T2", "TOL": "min 0.38"},
-        {"QC": "QC-15", "CHECK": "Sandbag count ≥ ballast.n_bags in four F-005 boxes; empty for winter", "CLASS": "T1", "TOL": "count"},
-        {"QC": "QC-16", "CHECK": "No concrete, no post holes, no gravel pad on this build", "CLASS": "T0", "TOL": "binary"},
+        {"QC": "QC-13", "CHECK": "Ladder sills sit on driveway; two planters garden-side of privacy bays only", "CLASS": "T1", "TOL": "±0.125"},
+        {"QC": "QC-14", "CHECK": "Gate vs cap clearance ≥ 0.50″; gate bottom ≤ 0.375″ (dog)", "CLASS": "T2", "TOL": "min 0.38 cap / max 0.50 bottom"},
+        {"QC": "QC-15", "CHECK": "Planters planted + optional in-box stone; air gap from posts; drainage slots", "CLASS": "T1", "TOL": "—"},
+        {"QC": "QC-16", "CHECK": "No concrete, no post holes, no gravel/stone PAD; stone only inside planters", "CLASS": "T0", "TOL": "binary"},
+        {"QC": "QC-17", "CHECK": "Cap soffit light dado + IP65 tape; driver not at house wall", "CLASS": "T1", "TOL": "—"},
     ]
 
 
@@ -1323,17 +1365,27 @@ def qa_geometry(ly, parts_list):
         issues.append({"level": "WEAK", "item": "foot tenon shoulder", "detail": ly})
     else:
         issues.append({"level": "OK", "item": "foot tenon shoulders", "detail": f'{ly["cheek_x"]}" × {ly["cheek_y"]}"'})
-    # bay boards fit
-    if ly["used_bay"] > ly["bay_clear"] + 0.01:
-        issues.append({"level": "CRITICAL", "item": "boards overflow bay", "detail": ly["used_bay"]})
+    # elevation stack: slat_top + cap = overall_height
+    stack = rnd(ly["slat_top"] + v("cap_t"))
+    if abs(stack - v("overall_height")) > 0.01:
+        issues.append({"level": "CRITICAL", "item": "elevation stack", "detail": f"slat_top+cap={stack} vs H={v('overall_height')}"})
     else:
-        issues.append({"level": "OK", "item": "bay board pack", "detail": f'{ly["n_bay"]} pcs, used {ly["used_bay"]}" in {ly["bay_clear"]}"'})
+        issues.append({"level": "OK", "item": "elevation stack", "detail": f'{ly["slat_top"]}" slats + {v("cap_t")}" cap = {stack}"'})
+    if abs(ly["band_ratio"] - PHI) > 0.15:
+        issues.append({"level": "NOTE", "item": "band ratio vs φ", "detail": ly["band_ratio"]})
+    else:
+        issues.append({"level": "OK", "item": "Prairie band ratio ≈ φ", "detail": f'{ly["band_ratio"]} (9.25/5.5; not ripped)'})
     # duplicate part ids
     ids = [p["PART_ID"] for p in parts_list]
     if len(ids) != len(set(ids)):
         issues.append({"level": "CRITICAL", "item": "duplicate PART_ID"})
     else:
         issues.append({"level": "OK", "item": "unique PART_IDs", "detail": str(len(ids))})
+    bal = ballast(ly)
+    if bal["provided_lb"] + 1e-6 < bal["required_lb"]:
+        issues.append({"level": "WEAK", "item": "planter ballast short of planning FS", "detail": f'{bal["provided_lb"]} lb < {bal["required_lb"]} lb'})
+    else:
+        issues.append({"level": "OK", "item": "planter ballast vs wind (planning)", "detail": f'{bal["provided_lb"]} lb / {bal["required_lb"]} lb  ratio {bal["ratio"]}'})
     return issues
 
 
@@ -1343,10 +1395,11 @@ def nest_lumber(parts_list):
     families = {
         "4x6x8": {"nom": (4, 6), "len": 96.0, "parts": []},
         "4x6x16": {"nom": (4, 6), "len": 192.0, "parts": []},
-        "2x8x10": {"nom": (2, 8), "len": 120.0, "parts": []},
+        "2x10x10": {"nom": (2, 10), "len": 120.0, "parts": []},
         "2x8x12": {"nom": (2, 8), "len": 144.0, "parts": []},
+        "2x6x10": {"nom": (2, 6), "len": 120.0, "parts": []},
         "2x6x8": {"nom": (2, 6), "len": 96.0, "parts": []},
-        "1x6x8": {"nom": (1, 6), "len": 96.0, "parts": []},
+        "2x2x8": {"nom": (2, 2), "len": 96.0, "parts": []},
         "2x4x8": {"nom": (2, 4), "len": 96.0, "parts": []},
         "oak_1x4x4": {"nom": (1, 4), "len": 48.0, "parts": []},
     }
@@ -1358,9 +1411,14 @@ def nest_lumber(parts_list):
         "F-001": "4x6x16",
         "F-002": "4x6x16",
         "F-003": "4x6x8",
-        "R-001": "2x8x10",
-        "R-002": "2x8x10",
-        "R-003": "2x8x10",
+        "R-001": "2x10x10",
+        "R-003": "2x10x10",
+        "R-005": "2x10x10",
+        "R-007": "2x10x10",
+        "R-002": "2x6x10",
+        "R-004": "2x6x10",
+        "R-006": "2x6x10",
+        "K-001": "2x6x10",
         "C-001": "2x8x12",
         "C-002": "2x8x12",
         "G-001": "2x6x8",
@@ -1371,13 +1429,11 @@ def nest_lumber(parts_list):
         "G-006": "2x6x8",
         "G-007": "2x6x8",
         "G-008": "2x6x8",
+        "G-009": "2x6x8",
         "F-004": "2x6x8",
         "F-005": "2x6x8",
         "F-006": "2x6x8",
-        "B-001": "1x6x8",
-        "B-002": "1x6x8",
-        "B-003": "1x6x8",
-        "G-009": "1x6x8",
+        "T-001": "2x2x8",
         "W-001": "2x4x8",
         "G-010": "oak_1x4x4",
         "W-002": "oak_1x4x4",
@@ -1441,7 +1497,7 @@ def nest_lumber(parts_list):
 
 
 def ballast(ly=None):
-    """Planning overturning check — not a PE stamp. No concrete volume."""
+    """Planning overturning check — not a PE stamp. Live planters, not bags."""
     ly = ly or layout()
     L = ly["overall_length"]
     H = ly["overall_height"]
@@ -1452,8 +1508,12 @@ def ballast(ly=None):
     spread_ft = v("base_spread_cl") / 12.0
     fs = v("wind_fs")
     req = rnd(fs * M / max(spread_ft, 0.1), 1)
-    bag = v("ballast_bag_lb")
-    n_bags = int(math.ceil(req / bag))
+    n = int(v("n_planters"))
+    vx = v("planter_x") * v("planter_y") * (v("planter_h") - v("planter_stone_h")) / 1728.0
+    vs = v("planter_x") * v("planter_y") * v("planter_stone_h") / 1728.0
+    soil_lb = rnd(n * vx * v("planter_soil_pcf"), 1)
+    stone_lb = rnd(n * vs * v("planter_stone_pcf"), 1)
+    provided = rnd(soil_lb + stone_lb, 1)
     return {
         "wind_area_sf": area_sf,
         "planning_pressure_psf": q,
@@ -1462,11 +1522,18 @@ def ballast(ly=None):
         "base_spread_in": v("base_spread_cl"),
         "fs": fs,
         "required_lb": req,
-        "bag_lb": bag,
-        "n_bags": n_bags,
+        "n_planters": n,
+        "soil_cuft": rnd(n * vx, 2),
+        "stone_cuft": rnd(n * vs, 2),
+        "soil_lb": soil_lb,
+        "stone_lb": stone_lb,
+        "provided_lb": provided,
+        "ratio": rnd(provided / req, 2) if req else 0,
+        "n_bags": 0,
+        "bag_lb": 0,
         "concrete_yd3": 0.0,
         "gravel_yd3": 0.0,
-        "note": "NO pour, NO post holes, NO stone pad. Removable sandbags in F-005. Planning calc only — not PE certified.",
+        "note": "NO pour, NO post holes, NO stone pad. Mass is wet soil + in-box drainage stone in two garden-side troughs (not at the house). Planning calc only — not PE certified.",
     }
 
 
@@ -1479,107 +1546,129 @@ def decisions():
     return [
         {
             "ID": "D-001",
-            "Decision": "4×6 posts not 4×4 / 2×4",
-            "Reason": "nuki cheeks and overturning couple; owner asked to overbuild",
+            "Decision": "4×6 posts not 4×4",
+            "Reason": "nuki cheeks + housed-slat web; owner asked to overbuild",
             "Parts": "L-001..004",
         },
         {
             "ID": "D-002",
-            "Decision": "2×8 Prairie bands on edge, not 2×4",
-            "Reason": "Prairie read + nuki bearing area",
-            "Parts": "R-001..003",
+            "Decision": "φ-adjacent 2×10 / 2×6 Prairie bands (9.25/5.5=1.682). Do not rip 2×10.",
+            "Reason": "Golden ratio where it does not thin structure. Full 2×10 nuki bearing. Darwin Martin belt courses.",
+            "Parts": "R-001..007, K-001",
         },
         {
             "ID": "D-003",
-            "Decision": "No nails/screws in timber",
+            "Decision": "No nails/screws in timber. Allowed metal: lighting + optional latch hardware.",
             "Reason": "owner + winter knock-down + fastener corrosion in Buffalo",
             "Parts": "all MAKE lumber",
         },
         {
             "ID": "D-004",
-            "Decision": "Sit-on-grade timber ladder (dodai + cross-ties) instead of poured pad/piers",
-            "Reason": "Owner: entirely freestanding — no post holes, no cement, no massive stone pads. Winter: lift timber, empty sandbags.",
-            "Parts": "F-001..F-006, H-001, H-007",
+            "Decision": "Sit-on-grade timber ladder on the driveway slab. No packing unless outriggers leave the slab.",
+            "Reason": "Photos: run crosses the driveway. No post holes, no cement, no stone pads.",
+            "Parts": "F-001..F-006, H-001",
         },
         {
             "ID": "D-005",
-            "Decision": "Rev C gate_h derived to clear cap by 0.50″",
-            "Reason": "Rev B model overlapped cap by 0.50″ (z0=1.0, h=63.0 → top 64.0 vs cap 63.5)",
-            "Parts": "G-001..009",
+            "Decision": "Gate flush to the house (P0). No planter at the gate.",
+            "Reason": "Owner: planter next to gate is unwanted. Latch B into P0. Driver lives in P3 planter.",
+            "Parts": "G-001..010, L-001, F-005",
         },
         {
             "ID": "D-006",
-            "Decision": "Foot tenon 2.50×4.50×3.50 into F-003 (not 12″ concrete socket)",
-            "Reason": "Cross-tie is 5.50″ tall; leave ~2″ below mortise. Overturning resisted by ladder width + ballast, not buried couple.",
+            "Decision": "Foot tenon 2.50×4.50×3.50 into F-003",
+            "Reason": "Cross-tie is 5.50″ tall; leave ~2″ below mortise. Overturning resisted by ladder + live planters.",
             "Parts": "L-001..004, F-003",
         },
         {
             "ID": "D-007",
-            "Decision": "Privacy boards FLOATING in grooves",
-            "Reason": "seasonal movement; rain-screen; zero fasteners; winter pull-out",
-            "Parts": "B-001..003",
+            "Decision": "Through-nuki only K-001 + R-001/003/005. House remaining bands 0.75″.",
+            "Reason": "0.75″ slat gaps would leave a 0.75″ web if every band were through-mortised.",
+            "Parts": "R-001..007, K-001, L-002..004",
         },
         {
             "ID": "D-008",
-            "Decision": "Latch B default (mortise in L-001). No epoxy into house concrete.",
-            "Reason": "Owner: no cement. Latch A oak strike is opt-in only if a wall exists and they accept fasteners into existing structure — still no pour.",
+            "Decision": "Latch B default (mortise in L-001). No epoxy into house.",
+            "Reason": "Owner: wood + lighting + a gate latch. Latch A oak strike is opt-in only.",
             "Parts": "G-010, H-002, L-001",
         },
         {
             "ID": "D-009",
-            "Decision": "Removable sandbags in timber boxes for wind ballast",
-            "Reason": "Freestanding fence in Buffalo wind needs mass × lever. Bags leave in winter. Not a stone pad, not poured.",
+            "Decision": "Live planters (P1–P2 and P2–P3) as wind ballast. Stone inside boxes only.",
+            "Reason": "Owner: planters are planters with watering. Mass = wet soil + optional drainage stone. Not bags, not a pad.",
             "Parts": "F-005, H-007",
+        },
+        {
+            "ID": "D-010",
+            "Decision": "1.25″ oak pivots (W-003): bottom in sill at P1, top in cap soffit.",
+            "Reason": "Structurally best on a freestanding hinge post: leaf weight in compression to the driveway sill, not a cantilever pintle off P0 (no planter at house).",
+            "Parts": "W-003, G-001, L-002, F-003, C-001",
+        },
+        {
+            "ID": "D-011",
+            "Decision": "0.75″ slat gaps + PT kickboard + 0.375″ gate bottom clear.",
+            "Reason": "100% dog containment. Kick nuki at grade. Gaps are a light-screen, not a crawl path.",
+            "Parts": "K-001, R-001..007, G-009",
+        },
+        {
+            "ID": "D-012",
+            "Decision": "Buffalo painted finish: ease 1/16″, end-grain sealer, PT dry then prime, 2 coats, extra on planter interiors.",
+            "Reason": "Four-season Erie County. Mask joinery faces. Paint is the weather system.",
+            "Parts": "H-005",
         },
     ]
 
 
 def fmea():
     return [
-        {"MODE": "Wind overturning", "CAUSE": "lake-effect gusts on 64 sf face", "EFFECT": "ladder tips", "SEV": 8, "LKL": 5, "DET": 6, "MIT": "36″ sill spread + F-006 braces + H-007 sandbags (planning FS 1.5); widen base_spread_cl if needed"},
-        {"MODE": "Slide on pavement", "CAUSE": "ice / low friction", "EFFECT": "walks off station", "SEV": 5, "LKL": 4, "DET": 7, "MIT": "rubber pads H-001; ballast weight; optional non-marking chocks — still no fasteners into driveway"},
-        {"MODE": "Unlevel drop-off", "CAUSE": "5″ estimate", "EFFECT": "racked joints", "SEV": 6, "LKL": 5, "DET": 8, "MIT": "TBM QC-02; F-004 shimmable packing; no pour to lock in a wrong number"},
-        {"MODE": "Trapped water on sill", "CAUSE": "sill on grade", "EFFECT": "sill rot", "SEV": 6, "LKL": 5, "DET": 6, "MIT": "pads lift F-001 ½″; paint; annual lift; cedar upgrade optional"},
-        {"MODE": "Gate/cap collision", "CAUSE": "Rev B height stack", "EFFECT": "won't close / crushed cap", "SEV": 5, "LKL": 1, "DET": 9, "MIT": "derived gate_h; QC-14"},
+        {"MODE": "Wind overturning", "CAUSE": "lake-effect gusts on ~64 sf face", "EFFECT": "ladder tips", "SEV": 8, "LKL": 5, "DET": 6, "MIT": "36″ sill spread + F-006 braces + wet soil/stone in two garden troughs (planning FS 1.5); deepen planters if QC-15 ratio < 1"},
+        {"MODE": "Slide on pavement", "CAUSE": "ice / low friction", "EFFECT": "walks off station", "SEV": 5, "LKL": 4, "DET": 7, "MIT": "rubber pads H-001; planter weight; optional non-marking chocks — still no fasteners into driveway"},
+        {"MODE": "Dog crawl", "CAUSE": "gap under gate or kick", "EFFECT": "containment fail", "SEV": 7, "LKL": 3, "DET": 8, "MIT": "K-001 nuki at z=0; ¾″ slat gaps; gate bottom 0.375″"},
+        {"MODE": "Post web failure", "CAUSE": "through-mortising all 7 bands", "EFFECT": "split post at ¾″ webs", "SEV": 8, "LKL": 2, "DET": 9, "MIT": "through-nuki only 4 bands; house the rest 0.75″"},
+        {"MODE": "Planter rot / wet posts", "CAUSE": "live watering against timber", "EFFECT": "post / box decay", "SEV": 6, "LKL": 5, "DET": 6, "MIT": "PT boxes; ½″ air gap; drainage slots; extra interior paint; kick is PT"},
+        {"MODE": "Gate/cap collision", "CAUSE": "height stack", "EFFECT": "won't close / crushed cap", "SEV": 5, "LKL": 1, "DET": 9, "MIT": "derived gate_h; QC-14"},
         {"MODE": "Glued kusabi", "CAUSE": "habit", "EFFECT": "cannot winter-strip", "SEV": 6, "LKL": 3, "DET": 8, "MIT": "QC-10; labels NEVER GLUE"},
-        {"MODE": "Plow berm hit", "CAUSE": "winter leave-in-place", "EFFECT": "broken rails", "SEV": 7, "LKL": 7, "DET": 9, "MIT": "designed knock-down: bags → braces → posts → ladder"},
-        {"MODE": "Insufficient ballast", "CAUSE": "bags not placed", "EFFECT": "tip in storm", "SEV": 8, "LKL": 4, "DET": 8, "MIT": "QC-15; label required count on F-005"},
+        {"MODE": "Plow berm hit", "CAUSE": "winter leave-in-place", "EFFECT": "broken rails", "SEV": 7, "LKL": 7, "DET": 9, "MIT": "designed knock-down: empty planters → braces → posts → ladder"},
+        {"MODE": "Insufficient ballast", "CAUSE": "empty planters in a storm", "EFFECT": "tip", "SEV": 8, "LKL": 4, "DET": 8, "MIT": "QC-15; plant + optional in-box stone before wind season"},
+        {"MODE": "Hinge cantilever", "CAUSE": "pintles on unbraced P0", "EFFECT": "post rack / latch bind", "SEV": 7, "LKL": 3, "DET": 8, "MIT": "oak pivots: leaf weight into sill at P1, not off P0"},
     ]
 
 
 def tools():
     return {
-        "ASSUMED_SHOP": "homeowner / circular saw / chisels / router / drill — not a full millwork shop",
+        "ASSUMED_SHOP": "owner millwork: track saw, miter, table saw, hand planes, Japanese saws, Bridge City kerf/tenon, Zenwu pairing chisels, layout tools",
         "REQUIRED": [
-            "circular or miter saw",
-            "rip capacity (table / track / circular + guide)",
-            "chisels ¼–1″ + mallet",
-            "marking gauge / knife / combination square",
-            "router + ⅜″ and ⅞″ straight bits (dados)",
-            "brace of clamps",
+            "track saw",
+            "miter saw",
+            "table saw",
+            "hand planes",
+            "Japanese saws",
+            "Bridge City kerf and tenon makers",
+            "Zenwu pairing chisels",
+            "layout tools (gauge, knife, square)",
             "⅜″ brad-point bits (drawbore)",
             "level + string line",
-            "tape 1/16″; square",
+            "tape 1/16″",
         ],
-        "OPTIONAL": ["mortiser", "table saw", "drill press", "stainless pintles", "PE review"],
-        "DO_NOT_ASSUME": ["CNC", "hollow-chisel mortiser", "post-hole digger", "concrete mixer", "frost auger"],
+        "OPTIONAL": ["mortiser", "router + ¾″ straight bit (housed dados)", "drill press", "stainless pintle upgrade", "PE review"],
+        "DO_NOT_ASSUME": ["CNC", "post-hole digger", "concrete mixer", "frost auger", "patio-stone pad"],
     }
 
 
 def sequence():
     return [
-        {"phase": "STOCK", "id": "AS-01", "title": "Procure nested lumber + sandbags + rubber pads", "deps": [], "parts": "buy_counts"},
-        {"phase": "SITE", "id": "AS-02", "title": "TBM opening + drop-off. Do not dig. Do not pour.", "deps": [], "parts": ""},
-        {"phase": "BASE", "id": "AS-03", "title": "Mill F-001..F-003 ladder; half-lap; dry-fit on grade; F-004 pack garden side", "deps": ["AS-01", "AS-02"], "parts": "F-*"},
-        {"phase": "MILL", "id": "AS-04", "title": "Posts L-001..004 to S-014; 3.50″ tenons; mortises", "deps": ["AS-01"], "parts": "L-*"},
-        {"phase": "MILL", "id": "AS-05", "title": "Rails R-001..003 grooves; boards B-* stop cuts", "deps": ["AS-01"], "parts": "R-*,B-*"},
-        {"phase": "MILL", "id": "AS-06", "title": "Gate G-* hozo dry fit; brace; pintles", "deps": ["AS-01"], "parts": "G-*"},
-        {"phase": "JOINERY", "id": "AS-07", "title": "Kusabi W-001; pegs W-002; cap scarf C-001", "deps": ["AS-04", "AS-05"], "parts": "W-*,C-001"},
-        {"phase": "DRY", "id": "AS-08", "title": "Dry-assemble A-020 on horses; QA QC-08", "deps": ["AS-07"], "parts": "A-020"},
-        {"phase": "DRY", "id": "AS-09", "title": "Hang gate on L-002; latch travel", "deps": ["AS-06", "AS-04"], "parts": "A-030"},
-        {"phase": "FINISH", "id": "AS-10", "title": "Disassemble paint; mask locking faces", "deps": ["AS-08", "AS-09"], "parts": "H-005"},
-        {"phase": "SET", "id": "AS-11", "title": "Set ladder on pads; drop posts in F-003; rails; wedges; boards; cap; gate; fill F-005 with H-007", "deps": ["AS-03", "AS-10"], "parts": "A-000"},
-        {"phase": "QA", "id": "AS-12", "title": "QC-08..14; winter rehearsal", "deps": ["AS-11"], "parts": ""},
+        {"phase": "STOCK", "id": "AS-01", "title": "Procure nested lumber + PT for kick/planters + oak + rubber pads + IP65 tape", "deps": [], "parts": "buy_counts"},
+        {"phase": "SITE", "id": "AS-02", "title": "TBM 143″ opening on the driveway. Gate at the house. Do not dig. Do not pour.", "deps": [], "parts": ""},
+        {"phase": "BASE", "id": "AS-03", "title": "Mill F-001..F-003 ladder; half-lap; dry-fit on slab pads; build two F-005 troughs (not at house)", "deps": ["AS-01", "AS-02"], "parts": "F-*"},
+        {"phase": "MILL", "id": "AS-04", "title": "Posts L-001..004 to S-014; 3.50″ tenons; through-nuki + housed dados", "deps": ["AS-01"], "parts": "L-*"},
+        {"phase": "MILL", "id": "AS-05", "title": "Bands K-001 + R-001..007; tectonic T-001 chevrons", "deps": ["AS-01"], "parts": "R-*,K-001,T-001"},
+        {"phase": "MILL", "id": "AS-06", "title": "Gate G-* hozo dry fit; brace; oak pivot sockets", "deps": ["AS-01"], "parts": "G-*,W-003"},
+        {"phase": "JOINERY", "id": "AS-07", "title": "Kusabi W-001; pegs W-002; cap scarf C-001 + light dado", "deps": ["AS-04", "AS-05"], "parts": "W-*,C-001"},
+        {"phase": "DRY", "id": "AS-08", "title": "Dry-assemble A-020 on horses; ¾″ gap gauge; QA QC-08", "deps": ["AS-07"], "parts": "A-020"},
+        {"phase": "DRY", "id": "AS-09", "title": "Hang gate on oak pivots at P1; latch travel into P0", "deps": ["AS-06", "AS-04"], "parts": "A-030"},
+        {"phase": "FINISH", "id": "AS-10", "title": "Ease, seal, PT dry, prime, two gray coats; extra on planter interiors; mask locking faces", "deps": ["AS-08", "AS-09"], "parts": "H-005"},
+        {"phase": "SET", "id": "AS-11", "title": "Set ladder on pads; drop posts; bands; wedges; cap light; gate; plant troughs + optional in-box stone", "deps": ["AS-03", "AS-10"], "parts": "A-000"},
+        {"phase": "QA", "id": "AS-12", "title": "QC-08..17; winter rehearsal", "deps": ["AS-11"], "parts": ""},
     ]
 
 
@@ -1591,13 +1680,13 @@ def drawing_index():
         {"DWG": "GA-130", "TITLE": "Plan at ladder base / post centers", "FILE": "GA-130_plan.svg"},
         {"DWG": "EX-200", "TITLE": "Exploded assembly — insertion directions", "FILE": "EX-200_exploded.svg"},
         {"DWG": "P-301", "TITLE": "Post typical L-001..004", "FILE": "P-301_post.svg"},
-        {"DWG": "P-302", "TITLE": "Nuki rail R-001..003", "FILE": "P-302_rail.svg"},
-        {"DWG": "P-303", "TITLE": "Privacy boards B-001..003", "FILE": "P-303_boards.svg"},
+        {"DWG": "P-302", "TITLE": "Prairie bands R-001..007 + K-001", "FILE": "P-302_rail.svg"},
+        {"DWG": "P-303", "TITLE": "Tectonic blocks T-001 + slat schedule", "FILE": "P-303_boards.svg"},
         {"DWG": "P-304", "TITLE": "Gate leaf G-001..010", "FILE": "P-304_gate.svg"},
-        {"DWG": "J-401", "TITLE": "Nuki + kusabi", "FILE": "J-401_nuki.svg"},
+        {"DWG": "J-401", "TITLE": "Nuki + kusabi / housed dado", "FILE": "J-401_nuki.svg"},
         {"DWG": "J-402", "TITLE": "Foot tenon / cross-tie shoe", "FILE": "J-402_tenon.svg"},
         {"DWG": "J-403", "TITLE": "Kama-tsugi cap scarf", "FILE": "J-403_kama.svg"},
-        {"DWG": "J-404", "TITLE": "Gate hozo drawbore", "FILE": "J-404_hozo.svg"},
+        {"DWG": "J-404", "TITLE": "Gate hozo drawbore + oak pivot", "FILE": "J-404_hozo.svg"},
         {"DWG": "T-501", "TITLE": "Kusabi full-size template", "FILE": "T-501_kusabi.svg"},
         {"DWG": "T-502", "TITLE": "Foot tenon full-size template", "FILE": "T-502_tenon.svg"},
         {"DWG": "S-601", "TITLE": "Master BOM", "FILE": "S-601_bom.svg"},
@@ -1612,13 +1701,14 @@ def drawing_index():
 
 def unresolved():
     return [
-        {"ID": "U-01", "ITEM": "Driveway→garden drop", "CLASS": "TBM", "PARAM": "drop_off", "DEFAULT": 5.0, "IMPACT": "F-004 packing height only — no pour"},
+        {"ID": "U-01", "ITEM": "Outrigger packing only if garden sill leaves the slab (default 0 — photos show driveway run)", "CLASS": "VERIFIED/TBM", "PARAM": "drop_off", "DEFAULT": 0.0, "IMPACT": "F-004 qty"},
         {"ID": "U-02", "ITEM": "Latch: default B (mortise in L-001). House wall strike is opt-in, no epoxy.", "CLASS": "ASSUMED", "PARAM": "latch mode", "DEFAULT": "B", "IMPACT": "H-002 optional"},
         {"ID": "U-03", "ITEM": "Owner gray exact color", "CLASS": "TBM", "PARAM": "finish hex", "DEFAULT": "#6e7578", "IMPACT": "H-005 only"},
         {"ID": "U-04", "ITEM": "Buffalo Green Code district height / front-yard", "CLASS": "TBM", "PARAM": "overall_height 65″ designed under 6′", "DEFAULT": "verify", "IMPACT": "permit"},
-        {"ID": "U-05", "ITEM": "Swing direction (garden vs driveway)", "CLASS": "ASSUMED", "PARAM": "gate swing +Y garden", "DEFAULT": "garden", "IMPACT": "pintle side remains L-002"},
-        {"ID": "U-06", "ITEM": "Species upgrade (cedar / locust)", "CLASS": "OPTIONAL", "PARAM": "SPECIES", "DEFAULT": "paint-grade SPF", "IMPACT": "durability / cost, not geometry"},
+        {"ID": "U-05", "ITEM": "Swing direction (garden vs driveway)", "CLASS": "ASSUMED", "PARAM": "gate swing +Y garden", "DEFAULT": "garden", "IMPACT": "pivot remains at P1"},
+        {"ID": "U-06", "ITEM": "Species upgrade (cedar / locust)", "CLASS": "OPTIONAL", "PARAM": "SPECIES", "DEFAULT": "paint-grade SPF + PT splash", "IMPACT": "durability / cost, not geometry"},
         {"ID": "U-07", "ITEM": "Licensed PE stamp", "CLASS": "NOT THIS PACKAGE", "PARAM": "n/a", "DEFAULT": "planning design", "IMPACT": "if city requires"},
+        {"ID": "U-08", "ITEM": "Remeasure 143″ on the driveway (photos confirm span to house siding)", "CLASS": "TBM", "PARAM": "overall_length", "DEFAULT": 143.0, "IMPACT": "all derived X"},
     ]
 
 
@@ -1628,30 +1718,35 @@ def revisions():
         {"REV": "B", "DATE": "2026-07-18", "NOTE": "Build app + Netlify; same geometry. Gate/cap overlap latent."},
         {"REV": "C", "DATE": "2026-08-13", "NOTE": "Fabrication kernel: semantic parts, joints, BOM, cut lists, nesting, QA; gate_h derived to clear cap; post blank 75.50″ (was documented 77″)."},
         {"REV": "D", "DATE": "2026-08-14", "NOTE": "Sit-on-grade freestanding ladder: timber sills + cross-ties + packing + sandbag ballast. Removed poured pad, piers, gravel, sleeves. Post tenon 3.50″. No digging, no cement."},
+        {"REV": "E", "DATE": "2026-08-14", "NOTE": "Darwin Martin Prairie screen: φ-adjacent 2×10/2×6 bands, ¾″ dog gaps, PT kick, live planters (not at house), oak pivots, cap soffit lighting. Gate against the house. No sandbags, no patio-stone pad."},
     ]
 
 
 def audit():
     return {
-        "MODE": "B — Rev D sit-on-grade (no digging / no cement)",
+        "MODE": "B — Rev E Prairie screen on sit-on-grade ladder (no digging / no cement)",
         "MODEL_ARCHITECTURE": "GOOD — kernel SSOT; FreeCAD App::Part hierarchy; OpenSCAD modules",
-        "PARAMETERIZATION_QUALITY": "GOOD — envelope, stock, joinery, kerf, waste, base spread as named parameters",
-        "PART_SEPARATION": "GOOD — persistent PART_IDs L/R/B/C/G/W/F/H",
+        "PARAMETERIZATION_QUALITY": "GOOD — envelope, stock, joinery, kerf, waste, planter mass as named parameters",
+        "PART_SEPARATION": "GOOD — persistent PART_IDs L/R/K/C/G/W/F/H/T",
         "METADATA_QUALITY": "GOOD — Fabrication properties on FreeCAD; JSON/CSV registry",
-        "ASSEMBLY_STRUCTURE": "GOOD — A000 / A001 ladder base / A010 / A020 / A030",
-        "JOINERY_STRUCTURE": "GOOD — joint register with fit class",
+        "ASSEMBLY_STRUCTURE": "GOOD — A000 / A001 ladder+planters / A010 / A020 / A030",
+        "JOINERY_STRUCTURE": "GOOD — joint register with fit class; nuki vs housed dado rule",
         "DRAWING_READINESS": "GOOD — G/GA/EX/P/J/T/S/QA generated from kernel",
-        "BOM_READINESS": "GOOD — BOM + nest from parts; ballast count from wind calc",
+        "BOM_READINESS": "GOOD — BOM + nest from parts; planter mass from wind calc",
         "CUT_LIST_READINESS": "GOOD — rough, finished, nest CSV",
         "EXPORT_READINESS": "GOOD — FCStd/STEP/STL/JSON/CSV/SVG/DXF",
         "MAJOR_RISKS": [
-            "drop_off ESTIMATED (TBM U-01) — packing only",
+            "overall_length TBM remeasure on driveway",
             "gate_clear ASSUMED 36″",
-            "wind ballast is a planning calc (not PE) — place H-007",
-            "Photos still missing: drop-off, gray swatch",
+            "wind ballast is a planning calc (not PE) — plant F-005 + optional in-box stone",
+            "Photos confirm driveway span and house-side gate; gray swatch still TBM",
         ],
-        "CLOSED_REV_C": [
-            "Poured pad / piers / gravel / sleeves removed per owner: no digging, no cement, no stone pads",
+        "CLOSED_REV_E": [
+            "Vertical 1×6 privacy replaced by horizontal Prairie screen",
+            "Sandbags replaced by live planters (not at P0/house)",
+            "Oak pivots instead of pintles as primary hinge",
+            "Dog seal: ¾″ gaps + kick nuki + 0.375″ gate bottom",
+            "No concrete, no post holes, no gravel/stone PAD",
         ],
         "REFACTORING": "Kernel is source of truth. FreeCAD/OpenSCAD/drawings/BOM consume it.",
     }
@@ -1663,7 +1758,7 @@ def parameters_flat():
         out[k] = {"value_in": meta["v"], "mm": rnd(inch_mm(meta["v"]), 3), "src": meta["src"], "note": meta.get("note", "")}
     ly = layout()
     for k, val in ly.items():
-        if k in ("posts", "courses", "equations", "rail_cls"):
+        if k in ("posts", "courses", "equations", "rail_cls", "slats"):
             continue
         if isinstance(val, (int, float)):
             out[k] = {"value_in": val, "mm": rnd(inch_mm(val), 3), "src": "DERIVED", "note": ly["equations"].get(k, "")}
@@ -1678,11 +1773,11 @@ def build_project() -> dict:
     bal = ballast(ly)
     for p in pts:
         if p["PART_ID"] == "H-007":
-            p["QUANTITY"] = bal["n_bags"]
+            p["NOTES"] = f'In-box stone {bal["stone_cuft"]} cu ft / {bal["stone_lb"]} lb. Soil {bal["soil_lb"]} lb. Provided {bal["provided_lb"]} vs required {bal["required_lb"]} lb (planning).'
     hw = hardware()
     for h in hw:
         if h["HARDWARE_ID"] == "H-007":
-            h["QTY"] = bal["n_bags"]
+            h["QTY"] = f'{bal["stone_cuft"]} cu ft'
     return {
         "project": PROJECT,
         "audit": audit(),
@@ -1729,5 +1824,5 @@ if __name__ == "__main__":
     print(" sill_len", ly["sill_len"], "tie_len", ly["tie_len"], "base_width", ly["base_width"])
     print(" parts", len(proj["parts"]), "joints", len(proj["joints"]))
     print(" buy", proj["nest"]["buy_counts"], "net_bf", proj["nest"]["net_bf"], "proc_bf", proj["nest"]["procurement_bf"])
-    print(" ballast bags", proj["ballast"]["n_bags"], "req_lb", proj["ballast"]["required_lb"])
+    print(" ballast soil+stone", proj["ballast"]["provided_lb"], "req_lb", proj["ballast"]["required_lb"], "ratio", proj["ballast"]["ratio"])
     print(" QA", proj["qa_geometry"])

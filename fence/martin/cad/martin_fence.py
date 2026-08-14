@@ -1,5 +1,5 @@
 """
-MARTIN FreeCAD model — Rev D sit-on-grade ladder (no concrete).
+MARTIN FreeCAD model — Rev E Prairie screen on sit-on-grade ladder.
 Semantic parts from martin_kernel.build_project(). Native CAD unit: mm.
 
 Run:  freecadcmd martin_fence.py
@@ -99,7 +99,7 @@ def main_build():
     timber, ballast = [], []
 
     fx, fy = v("post_x"), v("post_y")
-    rh, rt = v("rail_h"), v("rail_t")
+    rt = v("rail_t")
     sh, st = ly["sill_h"], ly["sill_t"]
     sill_x0 = -v("sill_overhang")
 
@@ -119,15 +119,22 @@ def main_build():
         ten = cbox_in(v("post_tenon_x"), v("post_tenon_y"), v("post_tenon_h"),
                       cx, 0, -v("post_tenon_h"))
         post = body.fuse(ten)
-        for zc in ly["rail_cls"]:
-            mz = zc - rh / 2.0
-            pocket = cbox_in(fx + 0.08, rt + v("nuki_fit"), rh + 0.04, cx, 0, mz)
-            post = post.cut(pocket)
         if pst["mark"] != "P0":
-            for zc in ly["rail_cls"]:
-                slot = cbox_in(v("kusabi_t"), fy + 0.08, v("kusabi_w"),
-                               cx + fx * 0.28, 0, zc)
-                post = post.cut(slot)
+            for s in ly["slats"]:
+                mz = s["z0"]
+                hh = s["h"]
+                if s["nuki"]:
+                    pocket = cbox_in(fx + 0.08, rt + v("nuki_fit"), hh + 0.04, cx, 0, mz)
+                    post = post.cut(pocket)
+                    slot = cbox_in(v("kusabi_t"), fy + 0.08, v("kusabi_w"),
+                                   cx + fx * 0.28, 0, s["cl"])
+                    post = post.cut(slot)
+                else:
+                    dx = v("slat_housing_d")
+                    for sign in (-1.0, 1.0):
+                        hx = cx + sign * (fx / 2.0 - dx / 2.0)
+                        dado = cbox_in(dx + 0.04, rt + v("nuki_fit"), hh + 0.04, hx, 0, mz)
+                        post = post.cut(dado)
         nm = pid.replace("-", "") + "_" + pst["mark"] + "_" + pst["role"].replace(" ", "_")[:24]
         feature_objs.append(add_shape(doc, nm, post, parts_by_id[pid], a_posts))
         timber.append(post)
@@ -141,26 +148,24 @@ def main_build():
         feature_objs.append(add_shape(doc, f"F003_Tie_{pst['mark']}", tie, parts_by_id["F-003"], a_base))
         timber.append(tie)
 
-        # packing under garden sill
-        pack = cbox_in(v("pack_len"), v("pack_w"), ly["pack_h"],
-                       cx, ly["garden_sill_cy"], -sh - ly["pack_h"])
-        feature_objs.append(add_shape(doc, f"F004_Pack_{pst['mark']}", pack, parts_by_id["F-004"], a_base))
-        timber.append(pack)
+        # packing under garden sill — only if outriggers leave the slab
+        if ly["pack_h"] > 0.05:
+            pack = cbox_in(v("pack_len"), v("pack_w"), ly["pack_h"],
+                           cx, ly["garden_sill_cy"], -sh - ly["pack_h"])
+            feature_objs.append(add_shape(doc, f"F004_Pack_{pst['mark']}", pack, parts_by_id["F-004"], a_base))
+            timber.append(pack)
 
-    # ballast boxes at four corners
-    bx, by, bh = v("ballast_box_x"), v("ballast_box_y"), v("ballast_box_h")
-    corners = [
-        (sill_x0 + 8, ly["drive_sill_cy"]),
-        (sill_x0 + ly["sill_len"] - 8 - bx, ly["drive_sill_cy"]),
-        (sill_x0 + 8, ly["garden_sill_cy"]),
-        (sill_x0 + ly["sill_len"] - 8 - bx, ly["garden_sill_cy"]),
-    ]
-    for i, (x, y) in enumerate(corners, 1):
-        box = box_in(bx, by, bh, x, y - by / 2.0, 0)
-        feature_objs.append(add_shape(doc, f"F005_BallastBox_{i}", box, parts_by_id["F-005"], a_base))
+    # live planters — garden side of privacy bays only (NOT at house / P0)
+    px, py, ph = v("planter_x"), v("planter_y"), v("planter_h")
+    stone_h = v("planter_stone_h")
+    for i, (left, right) in enumerate(((1, 2), (2, 3)), 1):
+        pcx = (ly["posts"][left]["cx"] + ly["posts"][right]["cx"]) / 2.0
+        y0 = fy / 2.0 + 0.5
+        box = box_in(px, py, ph, pcx - px / 2.0, y0, 0)
+        feature_objs.append(add_shape(doc, f"F005_Planter_{i}", box, parts_by_id["F-005"], a_base))
         timber.append(box)
-        fill = box_in(bx - 1.5, by - 1.5, bh * 0.7, x + 0.75, y - (by - 1.5) / 2.0, 0.2)
-        feature_objs.append(add_shape(doc, f"H007_Bags_{i}", fill, parts_by_id["H-007"], a_base))
+        fill = box_in(px - 2.0, py - 2.0, stone_h, pcx - (px - 2.0) / 2.0, y0 + 1.0, 0.25)
+        feature_objs.append(add_shape(doc, f"H007_Stone_{i}", fill, parts_by_id["H-007"], a_base))
         ballast.append(fill)
 
     # sujikai braces (simplified boxes)
@@ -172,11 +177,12 @@ def main_build():
         feature_objs.append(add_shape(doc, f"F006_Brace_{pst['mark']}", br, parts_by_id["F-006"], a_base))
         timber.append(br)
 
-    # nuki rails
-    for j, (rid, cl) in enumerate(zip(("R-001", "R-002", "R-003"), ly["rail_cls"])):
-        rail = box_in(ly["nuki_len"], rt, rh, ly["nuki_x0"], -rt / 2.0, cl - rh / 2.0)
-        feature_objs.append(add_shape(doc, rid.replace("-", "") + "_Nuki", rail, parts_by_id[rid], a_frame))
-        timber.append(rail)
+    # Prairie bands (kick + 7 slats)
+    for s in ly["slats"]:
+        band = box_in(ly["nuki_len"], rt, s["h"], ly["nuki_x0"], -rt / 2.0, s["z0"])
+        tag = "Kick" if s["id"] == "K-001" else ("Nuki" if s["nuki"] else "Housed")
+        feature_objs.append(add_shape(doc, s["id"].replace("-", "") + "_" + tag, band, parts_by_id[s["id"]], a_frame))
+        timber.append(band)
 
     cap = box_in(ly["cap_len"], v("cap_w"), v("cap_t"),
                  ly["cap_x0"], -v("cap_w") / 2.0, ly["overall_height"] - v("cap_t"))
@@ -188,21 +194,16 @@ def main_build():
     feature_objs.append(add_shape(doc, "C002_Latch_Cap_Stub", stub, parts_by_id["C-002"], a_posts))
     timber.append(stub)
 
-    # privacy boards
-    pitch = v("board_w") + v("board_gap")
-    yb = -fy / 2.0 + 0.5
-    for bay_i, (left_id, right_id) in enumerate(((1, 2), (2, 3))):
-        x_left = ly["posts"][left_id]["cx"] + fx / 2.0
-        x_start = x_left + ly["board_inset"]
-        for ci, course in enumerate(ly["courses"]):
-            bh = course["h"]
-            bid = "B-001" if ci == 0 else ("B-003" if ci == 3 else "B-002")
-            for i in range(ly["n_bay"]):
-                x = x_start + i * pitch
-                brd = box_in(v("board_w"), v("board_t"), bh, x, yb, course["z0"])
-                nm = f"{bid.replace('-', '')}_bay{bay_i}_c{ci}_i{i}"
-                feature_objs.append(add_shape(doc, nm, brd, parts_by_id[bid], a_frame))
-                timber.append(brd)
+    # tectonic chevrons — garden-face clusters at two heights on P1/P2/P3
+    bs = v("block_s")
+    for pst in ly["posts"]:
+        if pst["mark"] == "P0":
+            continue
+        for zi, zc in enumerate((ly["slats"][1]["cl"], ly["slats"][5]["cl"])):
+            for k in range(3):
+                blk = cbox_in(bs, bs, bs, pst["cx"] + (k - 1) * (bs + 0.12), fy / 2.0 + bs / 2.0 + 0.05, zc - bs / 2.0)
+                feature_objs.append(add_shape(doc, f"T001_{pst['mark']}_{zi}_{k}", blk, parts_by_id["T-001"], a_frame))
+                timber.append(blk)
 
     # gate
     import math
@@ -219,12 +220,10 @@ def main_build():
     feature_objs.append(add_shape(doc, "G001_Hinge_Stile", hs, parts_by_id["G-001"], a_gate))
     feature_objs.append(add_shape(doc, "G002_Latch_Stile", ls, parts_by_id["G-002"], a_gate))
     timber += [hs, ls]
-    for rid, cl, gw in (
-        ("G-003", v("rail_cl_1"), v("rail_gate_h")),
-        ("G-004", v("rail_cl_2"), v("rail_gate_h")),
-        ("G-005", v("rail_cl_3"), v("rail_gate_h")),
-    ):
-        g = box_in(w - 2 * stile, t, gw, x0 + stile, y0, cl - gw / 2.0)
+    nuki_rails = [s for s in ly["slats"] if s["nuki"] and s["id"].startswith("R-")]
+    for rid, sl in zip(("G-003", "G-004", "G-005"), nuki_rails):
+        gw = v("rail_gate_h")
+        g = box_in(w - 2 * stile, t, gw, x0 + stile, y0, sl["cl"] - gw / 2.0)
         feature_objs.append(add_shape(doc, rid.replace("-", "") + "_Gate_Rail", g, parts_by_id[rid], a_gate))
         timber.append(g)
     for rid, zz, ht in (("G-006", z0, 3.5), ("G-007", z0 + gh - 3.5, 3.5)):
@@ -238,19 +237,18 @@ def main_build():
     feature_objs.append(add_shape(doc, "G008_Brace", brace, parts_by_id["G-008"], a_gate))
     timber.append(brace)
 
-    inner = ly["gate_inner"]
-    n = ly["n_gate_boards"]
-    used = n * v("board_w") + (n - 1) * v("board_gap")
-    xs = x0 + stile + (inner - used) / 2.0
-    bh = gh - 8.0
-    for i in range(n):
-        g = box_in(v("board_w"), v("board_t"), bh, xs + i * pitch, y0 + t * 0.15, z0 + 4.0)
+    for i, s in enumerate(ly["slats"]):
+        z0b = max(s["z0"], z0)
+        z1b = min(s["z1"], z0 + gh)
+        if z1b - z0b < 0.4:
+            continue
+        g = box_in(ly["gate_inner"], t * 0.7, z1b - z0b, x0 + stile, y0 + t * 0.15, z0b)
         feature_objs.append(add_shape(doc, f"G009_Infill_{i}", g, parts_by_id["G-009"], a_gate))
         timber.append(g)
 
     bar = box_in(v("latch_bar_l"), v("latch_bar_t"), v("latch_bar_w"),
                  x0 - v("latch_bar_l") + 2.0, -v("latch_bar_t") / 2.0,
-                 v("rail_cl_2") - v("latch_bar_w") / 2.0)
+                 ly["latch_cl"] - v("latch_bar_w") / 2.0)
     feature_objs.append(add_shape(doc, "G010_Latch_Bar", bar, parts_by_id["G-010"], a_gate))
     timber.append(bar)
 

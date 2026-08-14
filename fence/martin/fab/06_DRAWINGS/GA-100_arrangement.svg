@@ -6,13 +6,13 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>GA-100  ·  General arrangement</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Same geometry as GA-110 with assembly notes</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>See GA-110 for dimensions. Assemblies: A-001 BASE · A-010 POSTS · A-020 FRAME · A-030 GATE</text>
-<text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Insertion: posts −Z into F-003 cross-ties; rails +X through nuki; gate +Z onto pintles; boards drop −Z into grooves.</text>
+<text x='40.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Insertion: posts −Z into F-003; nuki +X (K-001, R-001/003/005); housed bands; gate +Z on oak pivots; no planter at P0.</text>
 <text x='40.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>L-001  P0  cx=1.750"  latch post</text>
 <text x='40.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>L-002  P1  cx=41.250"  hinge post</text>
 <text x='40.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>L-003  P2  cx=91.250"  mid post / cap scarf</text>
 <text x='40.0' y='222.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>L-004  P3  cx=141.250"  end post</text>
-<text x='40.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Rev D: sit-on-grade ladder. No pour. gate_h = 62.000″ → 0.500″ cap clearance. Post blank 67.000″.</text>
+<text x='40.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Rev E: Prairie screen. slat_top 63.5" + cap 1.50" = 65.000". Gate against house. Band ratio 1.682 ≈ φ.</text>
 </svg>

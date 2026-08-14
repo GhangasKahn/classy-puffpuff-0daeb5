@@ -1,38 +1,40 @@
-# MARTIN Build Manual — Rev D
+# MARTIN Build Manual — Rev E
 
 Source of truth: `fence/martin/martin_kernel.py` → `fab/00_SOURCE/martin_project.json`.
 
 ## A. Model status
 Semantic fabrication model. Every MAKE part has a Part ID. Joinery is a register, not only booleans.
-Gate/cap clearance **0.500″**. Post blank **67.000″**. Sit-on-grade — **no concrete**.
+Gate/cap clearance **0.500″**. Post blank **67.000″**. Sit-on-grade — **no concrete**. Gate against the house.
 
 ## B. Controlling parameters (inch)
-- overall_length = 143.000 VERIFIED
+- overall_length = 143.000 VERIFIED (driveway span)
 - overall_height = 65.000 VERIFIED
-- gate_clear = 36.000 ASSUMED
+- gate_clear = 36.000 ASSUMED — gate at house, no planter at P0
 - bay_clear = 46.500 DERIVED `(L - 4*post_x - gate_clear)/2`
 - nuki_len = 104.500 DERIVED
-- drop_off = 5.000 ESTIMATED **TBM**
+- slat_top = 63.500 + cap 1.50 = 65.000
+- band_ratio = 1.682 ≈ φ (2×10/2×6, not ripped)
+- drop_off = 0.000 (0 on slab; packing only if outriggers leave)
 
 ## C–I. Registers
 See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 
-**Nest buy:** `{'4x6x8': 6, '4x6x16': 2, '2x8x10': 3, '2x8x12': 1, '2x6x8': 8, '1x6x8': 9, '2x4x8': 1, 'oak_1x4x4': 2}`  net **323.98 bf**  procurement **372.58 bf** (waste_factor=0.15).
-**Ballast:** 27 × 50 lb bags (planning 1311.1 lb). Concrete **0**. Gravel **0**.
+**Nest buy:** `{'4x6x8': 6, '4x6x16': 2, '2x10x10': 4, '2x8x12': 1, '2x6x10': 4, '2x6x8': 9, '2x2x8': 3, '2x4x8': 1, 'oak_1x4x4': 2}`  net **370.68 bf**  procurement **426.28 bf** (waste_factor=0.15).
+**Ballast:** two live planters, soil 1155.0 lb + in-box stone 366.7 lb = 1521.7 lb vs required 1311.1 lb (planning FS 1.5). Concrete **0**. Gravel pad **0**.
 
 ## K. Assembly order
-- **AS-01** (STOCK) Procure nested lumber + sandbags + rubber pads
-- **AS-02** (SITE) TBM opening + drop-off. Do not dig. Do not pour.
-- **AS-03** (BASE) Mill F-001..F-003 ladder; half-lap; dry-fit on grade; F-004 pack garden side
-- **AS-04** (MILL) Posts L-001..004 to S-014; 3.50″ tenons; mortises
-- **AS-05** (MILL) Rails R-001..003 grooves; boards B-* stop cuts
-- **AS-06** (MILL) Gate G-* hozo dry fit; brace; pintles
-- **AS-07** (JOINERY) Kusabi W-001; pegs W-002; cap scarf C-001
-- **AS-08** (DRY) Dry-assemble A-020 on horses; QA QC-08
-- **AS-09** (DRY) Hang gate on L-002; latch travel
-- **AS-10** (FINISH) Disassemble paint; mask locking faces
-- **AS-11** (SET) Set ladder on pads; drop posts in F-003; rails; wedges; boards; cap; gate; fill F-005 with H-007
-- **AS-12** (QA) QC-08..14; winter rehearsal
+- **AS-01** (STOCK) Procure nested lumber + PT for kick/planters + oak + rubber pads + IP65 tape
+- **AS-02** (SITE) TBM 143″ opening on the driveway. Gate at the house. Do not dig. Do not pour.
+- **AS-03** (BASE) Mill F-001..F-003 ladder; half-lap; dry-fit on slab pads; build two F-005 troughs (not at house)
+- **AS-04** (MILL) Posts L-001..004 to S-014; 3.50″ tenons; through-nuki + housed dados
+- **AS-05** (MILL) Bands K-001 + R-001..007; tectonic T-001 chevrons
+- **AS-06** (MILL) Gate G-* hozo dry fit; brace; oak pivot sockets
+- **AS-07** (JOINERY) Kusabi W-001; pegs W-002; cap scarf C-001 + light dado
+- **AS-08** (DRY) Dry-assemble A-020 on horses; ¾″ gap gauge; QA QC-08
+- **AS-09** (DRY) Hang gate on oak pivots at P1; latch travel into P0
+- **AS-10** (FINISH) Ease, seal, PT dry, prime, two gray coats; extra on planter interiors; mask locking faces
+- **AS-11** (SET) Set ladder on pads; drop posts; bands; wedges; cap light; gate; plant troughs + optional in-box stone
+- **AS-12** (QA) QC-08..17; winter rehearsal
 
 ## L. Drawing index
 - G-000 Cover / drawing index / revision
@@ -41,13 +43,13 @@ See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 - GA-130 Plan at ladder base / post centers
 - EX-200 Exploded assembly — insertion directions
 - P-301 Post typical L-001..004
-- P-302 Nuki rail R-001..003
-- P-303 Privacy boards B-001..003
+- P-302 Prairie bands R-001..007 + K-001
+- P-303 Tectonic blocks T-001 + slat schedule
 - P-304 Gate leaf G-001..010
-- J-401 Nuki + kusabi
+- J-401 Nuki + kusabi / housed dado
 - J-402 Foot tenon / cross-tie shoe
 - J-403 Kama-tsugi cap scarf
-- J-404 Gate hozo drawbore
+- J-404 Gate hozo drawbore + oak pivot
 - T-501 Kusabi full-size template
 - T-502 Foot tenon full-size template
 - S-601 Master BOM
@@ -59,13 +61,14 @@ See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 - L-801 Part labels
 
 ## O. Unresolved
-- U-01 Driveway→garden drop [TBM] param `drop_off`
+- U-01 Outrigger packing only if garden sill leaves the slab (default 0 — photos show driveway run) [VERIFIED/TBM] param `drop_off`
 - U-02 Latch: default B (mortise in L-001). House wall strike is opt-in, no epoxy. [ASSUMED] param `latch mode`
 - U-03 Owner gray exact color [TBM] param `finish hex`
 - U-04 Buffalo Green Code district height / front-yard [TBM] param `overall_height 65″ designed under 6′`
 - U-05 Swing direction (garden vs driveway) [ASSUMED] param `gate swing +Y garden`
 - U-06 Species upgrade (cedar / locust) [OPTIONAL] param `SPECIES`
 - U-07 Licensed PE stamp [NOT THIS PACKAGE] param `n/a`
+- U-08 Remeasure 143″ on the driveway (photos confirm span to house siding) [TBM] param `overall_length`
 
 ## Completeness tests
 1. Craftsperson: critical dims are numeric from datums (P-301, S-014, QC-04..14).

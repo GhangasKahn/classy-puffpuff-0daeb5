@@ -4,13 +4,14 @@
 <rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1a1f24' stroke-width='1'/>
 <line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
-<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-303  ·  Privacy boards</text>
-<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Stop setups  ·  FLOATING  ·  ¼″ gaps</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-303  ·  Tectonic blocks + dog seal</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Darwin Martin pier texture  ·  ¾″ light-screen</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
-<text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Bay clear 46.500"  ·  8 boards/bay × 2 bays  ·  inset 0.375"</text>
-<text x='40.0' y='130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>B-001  qty 16  0.750 × 5.500 × 4.750"  Privacy board course C1 (below R1)</text>
-<text x='40.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>B-002  qty 32  0.750 × 5.500 × 10.500"  Privacy board courses C2+C3 (between rails)</text>
-<text x='40.0' y='186.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>B-003  qty 16  0.750 × 5.500 × 13.625"  Privacy board course C4 (above R3)</text>
-<text x='40.0' y='234.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Grain vertical. End grain sealed. Do not caulk gaps.</text>
+<text x='40.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Bay clear 46.500"  ·  two privacy bays  ·  gate against house (no planter at P0)</text>
+<text x='40.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>T-001  qty 36  1.50 × 1.50 × 7.00″  2×2  ·  ¼″ pegs only (½″ splits the 2×2)</text>
+<text x='40.0' y='144.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>3-block chevrons × 2 heights × P1/P2/P3 × 2 faces. Ornament — not structure.</text>
+<text x='40.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>DOG SEAL: PT kick nuki K-001 at z=0–5.50; 0.75″ gaps between bands; gate bottom clear 0.375″.</text>
+<text x='40.0' y='208.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>A ¾″ gauge must NOT pass the screen. Kick stops crawl. Gate leaf matches the band rhythm.</text>
+<text x='40.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Do not caulk the ¾″ gaps — they are the Prairie light-screen and the rain-screen.</text>
 </svg>

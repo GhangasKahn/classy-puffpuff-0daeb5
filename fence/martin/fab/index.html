@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>MARTIN Fabrication Package — Rev D</title>
+<title>MARTIN Fabrication Package — Rev E</title>
 <style>
 body{font-family:Georgia,serif;background:#f3f1ec;color:#1a1f24;margin:0;padding:32px;line-height:1.5}
 a{color:#3d5a4c} table{border-collapse:collapse;width:100%;font-size:14px}
@@ -11,10 +11,10 @@ h1{font-size:42px;margin:8px 0 12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:18px 0}
 .grid a{display:block;padding:12px;background:#fff;border:1px solid #c5c8c2;text-decoration:none;color:inherit}
 </style></head><body>
-<p class="k">REV D · KERNEL 3.0 · INCHES</p>
+<p class="k">REV E · KERNEL 5.0 · INCHES</p>
 <h1>MARTIN fabrication package</h1>
 <p>Single source of truth: <code>martin_kernel.py</code>. Geometry, BOM, cut lists, joinery, and drawings are generated — not hand-copied.</p>
-<p><b>bay_clear</b> 46.5" · <b>nuki_len</b> 104.5" · <b>post blank</b> 67.0" · <b>gate_h</b> 62.0" · nest <b>323.98 bf</b> net / <b>372.58 bf</b> buy</p>
+<p><b>bay_clear</b> 46.5" · <b>nuki_len</b> 104.5" · <b>post blank</b> 67.0" · <b>gate_h</b> 62.625" · nest <b>370.68 bf</b> net / <b>426.28 bf</b> buy · ballast ratio <b>1.16</b></p>
 <div class="grid">
 <a href="00_SOURCE/martin_project.json">JSON project</a>
 <a href="07_BOM/bom.csv">BOM CSV</a>
@@ -28,6 +28,6 @@ h1{font-size:42px;margin:8px 0 12px}
 <a href="../../fab/">STELE fab</a>
 </div>
 <h2>Drawings</h2>
-<table><thead><tr><th>DWG</th><th>Title</th></tr></thead><tbody><tr><td><a href='06_DRAWINGS/G-000_cover.svg'>G-000</a></td><td>Cover / drawing index / revision</td></tr><tr><td><a href='06_DRAWINGS/GA-100_arrangement.svg'>GA-100</a></td><td>General arrangement — elevation + notes</td></tr><tr><td><a href='06_DRAWINGS/GA-110_elevation.svg'>GA-110</a></td><td>Front elevation — datums + overall</td></tr><tr><td><a href='06_DRAWINGS/GA-130_plan.svg'>GA-130</a></td><td>Plan at ladder base / post centers</td></tr><tr><td><a href='06_DRAWINGS/EX-200_exploded.svg'>EX-200</a></td><td>Exploded assembly — insertion directions</td></tr><tr><td><a href='06_DRAWINGS/P-301_post.svg'>P-301</a></td><td>Post typical L-001..004</td></tr><tr><td><a href='06_DRAWINGS/P-302_rail.svg'>P-302</a></td><td>Nuki rail R-001..003</td></tr><tr><td><a href='06_DRAWINGS/P-303_boards.svg'>P-303</a></td><td>Privacy boards B-001..003</td></tr><tr><td><a href='06_DRAWINGS/P-304_gate.svg'>P-304</a></td><td>Gate leaf G-001..010</td></tr><tr><td><a href='06_DRAWINGS/J-401_nuki.svg'>J-401</a></td><td>Nuki + kusabi</td></tr><tr><td><a href='06_DRAWINGS/J-402_tenon.svg'>J-402</a></td><td>Foot tenon / cross-tie shoe</td></tr><tr><td><a href='06_DRAWINGS/J-403_kama.svg'>J-403</a></td><td>Kama-tsugi cap scarf</td></tr><tr><td><a href='06_DRAWINGS/J-404_hozo.svg'>J-404</a></td><td>Gate hozo drawbore</td></tr><tr><td>T-501</td><td>Kusabi full-size template — see CSV/JSON</td></tr><tr><td>T-502</td><td>Foot tenon full-size template — see CSV/JSON</td></tr><tr><td><a href='06_DRAWINGS/S-601_bom.svg'>S-601</a></td><td>Master BOM</td></tr><tr><td>S-602</td><td>Rough cut list — see CSV/JSON</td></tr><tr><td>S-603</td><td>Finished cut list — see CSV/JSON</td></tr><tr><td>S-604</td><td>Hardware schedule — see CSV/JSON</td></tr><tr><td>S-605</td><td>Board nesting / yield — see CSV/JSON</td></tr><tr><td>QA-701</td><td>Inspection plan — see CSV/JSON</td></tr><tr><td>L-801</td><td>Part labels — see CSV/JSON</td></tr></tbody></table>
-<p style="margin-top:28px;color:#6e7578;font-size:13px">Sit-on-grade — no digging, no cement. Not a stamped engineering document. drop_off is ESTIMATED. Verify Green Code.</p>
+<table><thead><tr><th>DWG</th><th>Title</th></tr></thead><tbody><tr><td><a href='06_DRAWINGS/G-000_cover.svg'>G-000</a></td><td>Cover / drawing index / revision</td></tr><tr><td><a href='06_DRAWINGS/GA-100_arrangement.svg'>GA-100</a></td><td>General arrangement — elevation + notes</td></tr><tr><td><a href='06_DRAWINGS/GA-110_elevation.svg'>GA-110</a></td><td>Front elevation — datums + overall</td></tr><tr><td><a href='06_DRAWINGS/GA-130_plan.svg'>GA-130</a></td><td>Plan at ladder base / post centers</td></tr><tr><td><a href='06_DRAWINGS/EX-200_exploded.svg'>EX-200</a></td><td>Exploded assembly — insertion directions</td></tr><tr><td><a href='06_DRAWINGS/P-301_post.svg'>P-301</a></td><td>Post typical L-001..004</td></tr><tr><td><a href='06_DRAWINGS/P-302_rail.svg'>P-302</a></td><td>Prairie bands R-001..007 + K-001</td></tr><tr><td><a href='06_DRAWINGS/P-303_boards.svg'>P-303</a></td><td>Tectonic blocks T-001 + slat schedule</td></tr><tr><td><a href='06_DRAWINGS/P-304_gate.svg'>P-304</a></td><td>Gate leaf G-001..010</td></tr><tr><td><a href='06_DRAWINGS/J-401_nuki.svg'>J-401</a></td><td>Nuki + kusabi / housed dado</td></tr><tr><td><a href='06_DRAWINGS/J-402_tenon.svg'>J-402</a></td><td>Foot tenon / cross-tie shoe</td></tr><tr><td><a href='06_DRAWINGS/J-403_kama.svg'>J-403</a></td><td>Kama-tsugi cap scarf</td></tr><tr><td><a href='06_DRAWINGS/J-404_hozo.svg'>J-404</a></td><td>Gate hozo drawbore + oak pivot</td></tr><tr><td>T-501</td><td>Kusabi full-size template — see CSV/JSON</td></tr><tr><td>T-502</td><td>Foot tenon full-size template — see CSV/JSON</td></tr><tr><td><a href='06_DRAWINGS/S-601_bom.svg'>S-601</a></td><td>Master BOM</td></tr><tr><td>S-602</td><td>Rough cut list — see CSV/JSON</td></tr><tr><td>S-603</td><td>Finished cut list — see CSV/JSON</td></tr><tr><td>S-604</td><td>Hardware schedule — see CSV/JSON</td></tr><tr><td>S-605</td><td>Board nesting / yield — see CSV/JSON</td></tr><tr><td>QA-701</td><td>Inspection plan — see CSV/JSON</td></tr><tr><td>L-801</td><td>Part labels — see CSV/JSON</td></tr></tbody></table>
+<p style="margin-top:28px;color:#6e7578;font-size:13px">Sit-on-grade Prairie screen — no digging, no cement, no stone pad. Gate against the house. Not a stamped engineering document. Verify Green Code.</p>
 </body></html>

@@ -6,7 +6,7 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>P-301  ·  Post typical L-001..004</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Scale ~1:8  ·  T2  ·  qty 4</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev D  ·  inches  ·  kernel 3.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev E  ·  inches  ·  kernel 5.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <rect x='120.0' y='265.0' width='35.0' height='635.0' fill='#d9dcde' stroke='#1a1f24' stroke-width='2'/>
 <rect x='125.0' y='900.0' width='25.0' height='35.0' fill='#c5cbcf' stroke='#1a1f24' stroke-width='2'/>
@@ -24,9 +24,9 @@
 <text x='137.5' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='middle'>3.500"</text>
 <text x='400.0' y='80.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>DATUM: tenon shoulder = sill top. Measure mortise CL AFF from this shoulder, not from tenon tip.</text>
 <text x='400.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>FINISHED LENGTH 67.000"   SETUP S-014 — do not move stop.</text>
-<text x='400.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Nuki mortises THROUGH 1.50×7.25 at CL 10.000 / 28.000 / 46.000 AFF</text>
+<text x='400.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>THROUGH-nuki ONLY: K-001 (2×6), R-001/003/005 (2×10). HOUSE 0.75″: R-002/004/006/007.</text>
 <text x='400.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>Foot tenon 2.500 × 4.500  ·  shoulders 0.500 all around  ·  T2 ±0.031</text>
-<text x='400.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>L-001: omit kusabi; add Latch-B mortise if used.  L-002: add 2 pintle seats.</text>
+<text x='400.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>L-001: omit kusabi; Latch-B mortise; NO planter.  L-002: oak pivot sockets top+bottom.</text>
 <text x='400.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>GRAIN: length vertical. FACE A = garden. END A = shoulder.</text>
-<text x='400.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Rev D: blank is body + 3.50″ tenon into F-003 (no 12″ concrete socket).</text>
+<text x='400.0' y='320.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start'>Rev E: blank is body + 3.50″ tenon into F-003. Do not through-mortise all seven bands.</text>
 </svg>

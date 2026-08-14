@@ -1,38 +1,42 @@
 PART_ID,PART_NAME,QUANTITY,FINISHED_THICKNESS,FINISHED_WIDTH,FINISHED_LENGTH,JOINERY,TOLERANCE_CLASS
-L-001,P0 latch post,1,3.5,5.5,67.0,foot tenon into F-003 cross-tie + 3 nuki mortises; latch-bar mortise (Latch B); no kusabi (gate side),T2
-L-002,P1 hinge post,1,3.5,5.5,67.0,foot tenon into F-003 cross-tie + 3 nuki mortises; 3 kusabi slots; 2 pintle mortises,T2
-L-003,P2 mid post / cap scarf,1,3.5,5.5,67.0,foot tenon into F-003 cross-tie + 3 nuki mortises; 3 kusabi slots; cap scarf bearing,T2
-L-004,P3 end post,1,3.5,5.5,67.0,foot tenon into F-003 cross-tie + 3 nuki mortises; 3 kusabi slots,T2
-R-001,R1 bottom Prairie nuki,1,1.5,7.25,104.5,nuki through L-002/003/004; board grooves both edges; kusabi slots,T2
-R-002,R2 mid Prairie nuki,1,1.5,7.25,104.5,nuki through L-002/003/004; board grooves both edges; kusabi slots,T2
-R-003,R3 upper Prairie nuki,1,1.5,7.25,104.5,nuki through L-002/003/004; board grooves both edges; kusabi slots,T2
-C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,105.0,"kama-tsugi scarf at L-003 centerline, drawbored",T2
+L-001,P0 latch post,1,3.5,5.5,67.0,foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; latch-bar mortise (Latch B); no kusabi (gate side); NO planter,T2
+L-002,P1 hinge post,1,3.5,5.5,67.0,foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; kusabi slots on nuki; oak pivot sockets top+bottom,T2
+L-003,P2 mid post / cap scarf,1,3.5,5.5,67.0,foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; kusabi slots; cap scarf bearing,T2
+L-004,P3 end post,1,3.5,5.5,67.0,foot tenon into F-003; 4 through-nuki (K-001+R-001+R-003+R-005); housed dados for remaining bands; kusabi slots; slats withdraw toward P3,T2
+R-001,S1 major Prairie nuki,1,1.5,9.25,104.5,nuki through L-002/003/004; kusabi,T2
+R-002,S2 housed screen,1,1.5,5.5,104.5,"housed 0.75"" dado in posts; lock batten / friction",T2
+R-003,S3 major Prairie nuki / latch CL,1,1.5,9.25,104.5,nuki through L-002/003/004; kusabi,T2
+R-004,S4 housed screen,1,1.5,5.5,104.5,"housed 0.75"" dado in posts; lock batten / friction",T2
+R-005,S5 major Prairie nuki,1,1.5,9.25,104.5,nuki through L-002/003/004; kusabi,T2
+R-006,S6 housed screen,1,1.5,5.5,104.5,"housed 0.75"" dado in posts; lock batten / friction",T2
+R-007,S7 housed upper band — not nuki (keep post web),1,1.5,9.25,104.5,"housed 0.75"" dado in posts; lock batten / friction",T2
+K-001,Kickboard nuki (dog seal),1,1.5,5.5,104.5,nuki through L-002/003/004 at z=0–5.5; wear part 8–12 yr,T2
+C-001,Privacy cap (kama-tsugi pair),1,1.5,7.25,105.0,"kama-tsugi scarf at L-003 centerline, drawbored; soffit dado for H-006 tape light",T2
 C-002,Latch-post cap stub,1,1.5,7.25,4.5,hozo to L-001 top,T1
-B-001,Privacy board course C1 (below R1),16,0.75,5.5,4.75,floats in R-001 bottom groove; no fasteners,T1
-B-002,Privacy board courses C2+C3 (between rails),32,0.75,5.5,10.5,floats in rail grooves,T1
-B-003,Privacy board course C4 (above R3),16,0.75,5.5,13.625,floats; retained by C-001,T1
-G-001,Gate hinge stile,1,1.5,3.5,62.0,hozo mortises for G-003..G-007; pintle gudgeons,T2
-G-002,Gate latch stile,1,1.5,3.5,62.0,hozo mortises; latch-bar mortise,T2
+T-001,Tectonic block (Darwin Martin pier texture),36,1.5,1.5,7.0,¼″ retention pegs — ½″ will split the 2×2,T1
+G-001,Gate hinge stile,1,1.5,3.5,62.625,hozo mortises for gate bands; oak pivot gudgeons top+bottom (not pintles),T2
+G-002,Gate latch stile,1,1.5,3.5,62.625,hozo mortises; latch-bar mortise,T2
 G-003,Gate rail aligned to R1,1,1.5,5.5,30.5,"haunched hozo both ends, drawbored",T2
 G-004,Gate rail aligned to R2 (latch),1,1.5,5.5,30.5,"haunched hozo, drawbored; latch path",T2
 G-005,Gate rail aligned to R3,1,1.5,5.5,30.5,"haunched hozo, drawbored",T2
 G-006,Gate bottom rail,1,1.5,3.5,30.5,"hozo, drawbored",T2
 G-007,Gate top rail,1,1.5,3.5,30.5,"hozo, drawbored",T2
-G-008,Gate diagonal brace,1,1.5,3.5,59.059,"half-lap into G-003 and G-007 (compression brace, hinge-bottom to latch-top)",T1
-G-009,Gate infill board,4,0.75,5.5,54.0,groove / stop in gate rails — FLOATING,T1
+G-008,Gate diagonal brace,1,1.5,3.5,59.61,"half-lap into G-003 and G-007 (compression brace, hinge-bottom to latch-top)",T1
+G-009,Gate horizontal infill (matches screen bands),7,1.5,5.5,28.0,groove / stop in gate stiles — FLOATING; ¾″ gaps; dog-tight,T1
 G-010,Sliding latch bar,1,1.5,3.5,18.0,slides in G-002 into L-001 mortise (Latch B default); cross-peg hole,T2
-W-001,Kusabi locking wedge,17,0.625,1.125,5.5,driven in cheek slot; NEVER glue,T2
+W-001,Kusabi locking wedge,16,0.625,1.125,5.5,driven in cheek slot; NEVER glue,T2
 W-002,Drawbore / latch oak peg,14,0.375,0.375,2.25,drawbore 1/8″ offset,T2
-W-003,Wooden pintle (or stainless upgrade),2,0.75,0.75,3.5,gudgeon in G-001; pintle in L-002,T1
+W-003,Oak gate pivot pin,2,1.25,1.25,4.0,waxed pin: bottom socket in threshold/sill at P1; top in cap soffit,T1
 F-001,Driveway dodai sill,1,3.5,5.5,155.0,half-lap + peg at four F-003 ties; sits on H-001 pads — NO pour,T2
 F-002,Garden dodai sill,1,3.5,5.5,155.0,half-lap + peg at four F-003 ties; bears on F-004 packing,T2
 F-003,Cross-tie / post shoe,4,3.5,5.5,41.5,mortise for post foot tenon; half-lap to F-001/F-002,T2
-F-004,Garden packing crib,4,6.0,5.5,12.0,dry-stacked layers; no glue; shims to TBM drop_off,T1
-F-005,Ballast box (empty timber frame),4,10.0,13.0,48.0,pegged frame; sits on sills at four corners,T1
+F-004,Garden packing crib,0,1.5,5.5,12.0,dry-stacked layers; no glue; shims to TBM drop_off,T1
+F-005,Live planter trough (garden side),2,18.0,18.0,44.0,dovetail corners; drainage slots in bottom slats; ½″ air gap from posts,T1
 F-006,Sujikai base brace,4,1.5,3.5,25.456,housed half-lap into post and sill; oak peg; NO glue,T2
 H-001,Rubber furniture pad (driveway sill),8,0.5,4.0,4.0,n/a,T1
 H-002,Optional oak latch strike (Latch A opt-in),1,1.5,3.5,6.0,,T1
 H-003,Optional stainless pintle set,1,0,0,0,,T1
 H-004,Keyed padlock hasp (optional),1,0,0,0,,T1
 H-005,Exterior primer + owner gray enamel,1,0,0,0,,T1
-H-007,Removable sandbag ballast,27,0,0,0,,T1
+H-006,12V IP65 LED tape + driver (cap soffit),1,0,0,0,,T1
+H-007,Planter drainage stone (in-box only),1,0,0,0,,T1
