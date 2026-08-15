@@ -704,3 +704,113 @@ html[data-motion="off"] .blade-mod { transition: none; }
     font-size: 0.62rem;
   }
 }
+
+/* ---- cover / inventory / metal ---- */
+.cover {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+}
+.cover img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #d8cbb6;
+}
+.cover figcaption {
+  width: min(100% - (var(--space) * 2), var(--max));
+  margin: 0.7rem auto 1.2rem;
+  font-family: var(--util);
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1.2rem 0;
+}
+.tag-btn {
+  appearance: none;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line-2);
+  background: #f4eee4;
+  color: var(--ink);
+  font-family: var(--data);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+.tag-btn[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.metal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+.metal-grid figure {
+  margin: 0;
+  background: #111;
+}
+.metal-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.metal-grid figcaption {
+  padding: 0.55rem 0.65rem 0.7rem;
+  font-family: var(--data);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9186;
+}
+
+.grind-board {
+  display: grid;
+  gap: 1.2rem;
+  padding: 1rem;
+  background: #161816;
+  color: #efe6d6;
+  border: 1px solid #3a3c3a;
+}
+@media (min-width: 860px) {
+  .grind-board { grid-template-columns: 0.9fr 1.1fr; }
+}
+.grind-board svg { width: 100%; height: auto; }
+.grind-read dt {
+  font-family: var(--data);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9eb4c2;
+  margin-top: 0.7rem;
+}
+.grind-read dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--disp);
+  font-size: 1.6rem;
+}
+.grind-read dd.job {
+  font-family: var(--read);
+  font-size: 1rem;
+  color: #cfc4b2;
+}
+[data-zone][aria-pressed="true"] {
+  background: #efe6d6;
+  color: #161816;
+}
+
+.pack-grid {
+  display: grid;
+  gap: 0.7rem;
+}
+@media (min-width: 800px) {
+  .pack-grid { grid-template-columns: 1fr 1fr; }
+}
