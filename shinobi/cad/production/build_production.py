@@ -51,7 +51,7 @@ def _bbox(wp: cq.Workplane) -> tuple[float, float, float]:
     return (round(bb.xlen, 3), round(bb.ylen, 3), round(bb.zlen, 3))
 
 
-def export_all(workplane: cq.Workplane, stem: str, stl_tol: float = 0.12) -> dict:
+def export_all(workplane: cq.Workplane, stem: str, stl_tol: float = 0.12, write_stl: bool = True) -> dict:
     STEP.mkdir(parents=True, exist_ok=True)
     STL.mkdir(parents=True, exist_ok=True)
     PROD_STEP.mkdir(parents=True, exist_ok=True)
@@ -62,19 +62,20 @@ def export_all(workplane: cq.Workplane, stem: str, stl_tol: float = 0.12) -> dic
     (PROD_STEP / f"{stem}.step").write_bytes(step_path.read_bytes())
     shape = wp.val()
     # Planar shop faces stay few-tri; fillets tessellate. Keep both honest.
-    try:
-        shape.exportStl(str(stl_path), tolerance=stl_tol, angularTolerance=0.22)
-    except TypeError:
-        cq.exporters.export(wp, str(stl_path))
-    if not stl_path.exists() or stl_path.stat().st_size < 200:
-        cq.exporters.export(wp, str(stl_path))
+    if write_stl:
+        try:
+            shape.exportStl(str(stl_path), tolerance=stl_tol, angularTolerance=0.22)
+        except TypeError:
+            cq.exporters.export(wp, str(stl_path))
+        if not stl_path.exists() or stl_path.stat().st_size < 200:
+            cq.exporters.export(wp, str(stl_path))
     rec = {
         "id": stem,
         "file": f"cad/stl/{stem}.stl",
         "step": f"cad/step/{stem}.step",
         "volume_mm3": round(float(shape.Volume()), 2),
         "bounds_mm": list(_bbox(wp)),
-        "triangles": _stl_tris(stl_path),
+        "triangles": _stl_tris(stl_path) if stl_path.exists() else 0,
     }
     print(
         f"  {stem:16s}  STEP {step_path.stat().st_size/1024:6.1f} KB  "
@@ -600,8 +601,7 @@ def main() -> None:
         try:
             wp = wire_coil(*args)
             built[stem] = wp
-            rec = export_all(wp, stem, stl_tol=0.35)
-            # Keep the lighter display-coil STL already on the site.
+            rec = export_all(wp, stem, write_stl=False)
             rec["note"] = "Viewer STL is a display coil. Production stock is straight Nitinol — see BOM."
             catalog.append(rec)
         except Exception as exc:
