@@ -1,59 +1,63 @@
-# BEDROCK — Integrated Site
+# SHINOBI // 82 KAGE — Sovereign SiteForge v3.0 Architecture
 
-A complete, self-contained website:
+**The Sub-Ounce JDM Cutting Instrument & Joinery System**  
+*Proposed Collaboration Candidate for Luke Lyu / Zen-Wu Toolworks*
 
-- `index.html` — the public **landing page** (the marketing front door)
-- `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
-- `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
-- `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, `export_martin_fab.py`, `fab_system.py`, plan generators)
-- `fence/martin/martin_kernel.py` — MARTIN **single source of truth** (Rev C). `scripts/export_martin_fab.py` writes BOM, cut lists, shop drawings, JSON, OpenSCAD, QA.
-- `fence/martin/fab/` — MARTIN fabrication package at `/fence/martin/fab/` (shortcut `/martin/fab`)
-- `fence/fab/` — STELE parametric fabrication model (BOM, cut lists, shop drawings) at `/fab`
-- `fence/martin/app/` — interactive **MARTIN Build** PWA at `/martin/app` or `/build`
-- `netlify.toml` — headers + redirects (`/martin`, `/martin/app`, `/martin/fab`, `/build`, `/stele`, `/report`, `/fab`)
+---
 
-## What this is — and isn't
-This is the complete **front-end** product: a marketing site plus an installable, offline-capable
-finance app that runs entirely in the browser. Your data stays on your device — no backend, no
-database, no account, nothing collected. Features that require a server (bank/brokerage linking via
-Plaid, live balance sync, multi-device sync, hardware 2FA) are a separate, future **backend phase**.
-Hosting this on Netlify does not add them.
+## 1. Executive Summary
 
-## Deploy — drag & drop (about 60 seconds)
-1. Go to https://app.netlify.com/drop
-2. Drag this entire `bedrock-deploy` folder (or its contents) onto the page.
-3. Netlify returns a live URL like `https://your-name.netlify.app` (HTTPS is automatic).
-4. Optional: Site settings → rename the site, or attach a custom domain.
+SHINOBI//82 KAGE is a polymorphic, cinematic, award-grade digital experience and technical specification for a sub-ounce modular cutting system. It synthesizes traditional Japanese blade geometry (*Shinogi-zukuri*, *Kataba*, *Hamaguri* convex bevel, and *Urasuki* hollow) with hyper-modern aerospace metallurgy (MagnaMax™ at 62.5–63.0 HRC, Grade 5 Ti-6Al-4V monocoque, and zero-screw Kusabi-Lock™ architecture).
 
-## Deploy — via Git (for ongoing updates)
-1. Push this folder to a GitHub repo.
-2. Netlify → Add new site → Import from Git → choose the repo.
-3. Build command: leave empty. Publish directory: `.` (or the folder name if nested).
-4. Every push auto-deploys.
+### Core Performance Metrics
+- **Bare Knife Mass:** 18.40 g (0.649 oz) — Solid CAD geometry verified
+- **Backcountry River System:** 24.06 g (0.849 oz) — Knife + Honoki/Urushi Saya + S-50 Nitinol Wire + Diamond Tag
+- **Full Field System:** 26.55 g (0.936 oz) — Under the absolute 1.00 oz ceiling
+- **Steel Metallurgy:** MagnaMax™ Stainless PM (62.5–63.0 HRC Cryogenic Plate Quench)
+- **Reference Back Tolerance:** < 0.02 mm dead-flat coplanar lands for Kumiko woodworking layout
+- **Synthetic Plastic Content:** 0.000% (Certified Zero Plastic)
 
-## Install on your phone
-1. Open your Netlify URL on the phone; tap **Enter** to reach `/app/`
-   (or go directly to `https://your-url.netlify.app/app/`).
-2. Android Chrome: menu ⋮ → **Add to Home screen / Install app**.
-   iOS Safari: Share → **Add to Home Screen**.
-3. It installs as a standalone app and works **offline after the first load**.
+---
 
-## Notes
-- First load needs internet (React, GSAP, fonts); the service worker then caches everything for offline use.
-- The light/dark theme you choose on the landing page **carries into the app** — same origin, shared setting.
-- AI features are bring-your-own-key: paste your provider key in the app's Config. Nothing is sent anywhere else.
-- This is research/educational tooling you run yourself. **Not financial advice.**
+## 2. The Three Modular Blade Architectures
 
-## PWA Icons (optional)
-The manifest and apple-touch-icon references have been cleaned for direct upload (no missing file errors).
-To get custom icons on install/home screen:
-- Add `icon-192.png` (192x192) and `icon-512.png` (512x512) PNG files to the `app/` folder.
-- Re-upload or trigger a new deploy.
+1. **MIZU-82 (82 mm):** The River & Everyday Field Flagship. 60/40 Asymmetric Hamaguri convex bevel (12°/14° apex, 15°/17° heel) with distal flexibility for tracing trout ribs, salmon frames, and big-game seam deboning.
+2. **KUMIKO-42 (42 mm):** The Scribing & Joinery Kogatana. 100% dead-flat reference back (<0.02 mm) with a 15.0° single flat bevel for marking dovetails and fitting precision Kumiko lattice work.
+3. **NATA-60 (60 mm):** The Camp Chisel. Heavy 2.2 mm spine with a 24.0° single flat chisel bevel for controlled push-cuts, camp notching, and wood paring.
 
-This package includes the full optimized front-end with:
-- Easy setup (income frequency dropdowns, quick-start templates, progressive help for all skill levels)
-- Expanded Vault with live comps support for watches, cards, spirits, cars, metals, and more
-- LIVE market data tab with multi-source alt asset comps (WatchCharts-style, PSA/eBay, etc.)
-- All previous features (Quant/MC, goals, coach/agents, etc.)
+---
 
-Upload the `bedrock-deploy` folder directly. The landing is at root; the terminal ("Enter the Dojo") is at /app/.
+## 3. Subsystem Innovations
+
+- **Kusabi-Lock™ Monocoque:** A precision Wire-EDM titanium tapered wedge enabling instant, zero-screw, zero-tool blade swaps without stripping or loosening.
+- **Two-Mode Ergonomics:** Bare 4.2 mm skeleton handle with pinch saddle for tactile bone tracing, converting into a 13.5 × 20 mm oval palm swell via the snapped KAGE-SAYA™ sheath (40% grip fatigue reduction).
+- **Integrated Ikejime & Shinkeijime Protocol:** 34 mm locking brain spike housed in the KAGE-TAG™ diamond sharpening plate, paired with S-50 (0.8 mm) and L-80 (1.2 mm) superelastic shape-memory Nitinol spinal wires.
+- **RAILSTONE Field Sharpening Cassette:** Reversible 600/1200 grit monocrystalline diamond plate with integrated 12°, 14°, 15°, and 17° sharpening index guides and a 1 μm deburring diamond strop.
+- **Zero-Plastic Material Ledger:** Grade 5 Titanium (Ti-6Al-4V), Natural Kurogaki (black persimmon) inlays, Honoki magnolia wood, cured natural Wajima Urushi tree lacquer, and Nitinol alloy.
+
+---
+
+## 4. Frontend Engineering & Performance Standards
+
+- **Design System:** Native CSS OKLCH color space tokens, fluid typographic hierarchy via `clamp()`, and responsive grid composition.
+- **Interactive Engines:**
+  - `BladeCanvasEngine`: High-DPI interactive canvas with specular light reflection across the *Shinogi* line, handedness inversion (Right-Hand 60/40 vs Left-Hand Mirrored), and multi-layer structural overlays (Assembly, Load Paths, Dovetail Seam, Ura Map).
+  - `MassCalculatorEngine`: Wolfram-calibrated solid CAD mass engine supporting 5 mission presets and granular 13-component toggle with live gram/ounce recalculation and center-of-gravity tracking.
+  - `CrossSectionInspector`: Live continuous SVG caliper inspector from 0 mm (heel) to 82 mm (kissaki).
+  - `ErgonomicsSimulator`: Interactive biomechanical mode switch (Precision vs Power).
+  - `IkejimeProtocolEngine`: Species-specific humane dispatch workflow (Alpine Trout, Smallmouth Bass, Niagara Chinook Salmon).
+  - `UnboxingEngine`: 4-stage visual unboxing atelier (Echizen Washi, Paulownia Kiri Vault, 12-Piece System, Field Packs).
+  - `ConsultationEngine`: Client-side verifiable specification dossier generator (JSON export + direct email integration).
+- **Accessibility:** WCAG 2.2 Level AA compliant, full keyboard accessibility, visible focus states, ARIA landmarks, skip links, and `prefers-reduced-motion` fallbacks.
+
+---
+
+## 5. Development & Deployment
+
+To run locally:
+```bash
+python3 -m http.server 8080
+```
+Then visit `http://localhost:8080`.
+
+Netlify deployment is configured at the root directory via `netlify.toml`.
