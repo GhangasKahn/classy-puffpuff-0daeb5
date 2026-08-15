@@ -1,0 +1,63 @@
+SHINOBI//82 KAGE — CAD TRANSMITTAL FOR ZEN-WU REVIEW
+=====================================================
+To:      Luke Lyu / Zen-Wu Toolworks  <luke@zenwutoolworks.com>
+From:    SHINOBI//82 KAGE proposal
+Date:    15 August 2026
+Status:  Proposed engineering package. Not a released manufacturing revision.
+Units:   millimetres. Coordinates: right-hand, X along length.
+Origin:  blades — shoulder at X=0, edge at Y=0, ura at Z=0.
+         frame  — nose at X=0, length +X.
+
+1. WHAT THIS IS
+   B-rep solids in STEP AP214 (ISO 10303), EDM/waterjet profiles in DXF,
+   and STL tessellations for viewing only. Built so the Wuhan shop can
+   open the parts in the same class of CAD used for Zen-Wu tools
+   (STEP in, EDM profile out). The website viewer is not the master.
+
+   Earlier site meshes were trimesh massing studies (boxy, 12–24 faces).
+   These files replace them.
+
+2. MATING CONTRACT — KUSABI
+   All blades share one tang:
+     tang length  28.00
+     tang height  10.00
+     tang thick    2.00
+   Frame slot: +0.12 H, +0.10 T, +0.20 L clearance.
+   Wedge: 16.00 long, 2.40 → 1.55 thick, 7.20 wide, drives from the spine.
+   First article: blue the tang, seat, check rock at the choil.
+
+3. MATERIALS (proposed)
+   Frame, wedge, cassette, tweezer, TOGI substrate : Ti-6Al-4V
+   MIZU-82 edge                                  : MagnaMax candidate, 62.5–63.0 HRC pending coupon
+   KUMIKO-42 edge                                : ZW-V1 or MagnaCut, workshop choice
+   NATA-60 edge                                  : MagnaCut candidate
+   Spike                                         : hardened stainless or tool steel, 58+ HRC, not the knife steel
+   Saya                                          : kiri or honoki, 1.8 wall
+   Wires                                         : Nitinol, straight stock 0.8×500 and 1.2×800
+   Tether                                        : Dyneema SK99, radiused 4.40 eye only
+
+4. FINISH
+   Frame: DLC or equivalent charcoal. Hammered / TOGI texture on contact rails only.
+   Edges: 800–1000 diamond, 1 μm deburr on MIZU. KUMIKO and NATA as flat bevels.
+   Food-contact: no adhesive, no trapped cavity, rinse-through apertures.
+
+5. TOLERANCES (proposed first-article)
+   Tang / slot     ±0.05
+   Reference ura   0.02 flatness on KUMIKO lands
+   Blade warp      0.15 max
+   Aperture webs   3.60 min
+   Lanyard eye     4.40 +0.10 / 0, full radius, no burr
+
+6. WHAT IS NOT IN THIS PACKAGE
+   Heat-treat recipe (Zen-Wu process).
+   FEA of the skeleton (required before a 50-unit pilot).
+   Left-hand mirrors (mirror the blade, ura, and lamination — do not resharpen opposite).
+   Weighed prototypes.
+   A claim that these files are ready to cut metal without workshop review.
+
+7. FILES
+   step/*.step     solids (master) — open these in CAD
+   dxf/*.dxf       EDM / waterjet profiles, 1:1 mm
+   BOM.csv         line items
+   parameters.json millimetre ledger
+   STL tessellations stay on the website for viewing. They are not the master.

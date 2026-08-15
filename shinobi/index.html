@@ -219,10 +219,17 @@
 
     <section class="act" id="cad">
       <div class="wrap">
-        <p class="kicker">CAD bench · proposed geometry</p>
-        <h2>Every part, as a model you can turn.</h2>
-        <p class="lede">Each piece was built from the same millimetre ledger, then exported as STL. In the viewer, every textured face wears the TOGI plate’s hammered map — one finish, not a new material for each object.</p>
-        <p class="fine">Drag to orbit. Scroll or pinch to zoom. Download the STL for the seated part, or take the OpenSCAD source and the parameter file. This is proposed CAD for conversation, not a released manufacturing package.</p>
+        <p class="kicker">CAD bench · production-intent B-rep</p>
+        <h2>What you send Luke is STEP, not this viewer.</h2>
+        <p class="lede">The first meshes on this bench were massing studies — boxy STL with a dozen faces. They were for looking, not for a shop. The files here now are CadQuery solids: STEP AP214 as the master, DXF profiles at 1:1 mm for EDM talk, STL only so you can orbit the same geometry.</p>
+        <p>Download the zip. Attach it to the studio brief. Luke can open <code>step/01-frame.step</code> in the same class of CAD Zen-Wu already uses. The viewer below is a tessellation of those solids, with the TOGI hammered map on every textured face. It is not the manufacturing file.</p>
+        <p class="fine">Proposed geometry. Not a released revision. No heat-treat ticket, no FEA, no weighed sample. The kusabi contract is in the transmittal: one tang, 28.00 × 10.00 × 2.00 mm, shared by every blade.</p>
+        <div class="cad-package">
+          <a class="btn" href="./cad/SHINOBI82-KAGE-Zen-Wu-review.zip" download>Download the Zen-Wu review zip</a>
+          <a class="btn ghost" href="./cad/TRANSMITTAL.txt" download>Transmittal</a>
+          <a class="btn ghost" href="./cad/BOM.csv" download>BOM.csv</a>
+          <a class="btn ghost" href="./cad/step/00-kit-layout.step" download>Kit layout STEP</a>
+        </div>
         <div class="cad-shell" style="margin-top:1.4rem">
           <div>
             <div class="cad-stage" id="cad-stage"></div>
@@ -230,9 +237,10 @@
           </div>
           <div class="cad-side">
             <div class="tag-row" id="cad-parts" aria-label="CAD parts"></div>
-            <a class="btn" id="cad-download" href="./cad/stl/01-frame.stl" download>Download 01-frame.stl</a>
-            <a class="btn ghost" href="./cad/SHINOBI.scad" download>OpenSCAD source</a>
+            <a class="btn" id="cad-step" href="./cad/step/01-frame.step" download>Download 01-frame.step</a>
+            <a class="btn ghost" id="cad-download" href="./cad/stl/01-frame.stl" download>Download 01-frame.stl</a>
             <a class="btn ghost" href="./cad/parameters.json" download>parameters.json</a>
+            <a class="btn ghost" href="./cad/SHINOBI.scad" download>OpenSCAD notes</a>
           </div>
         </div>
       </div>
@@ -472,7 +480,7 @@
           <p class="kicker">08 · Invitation</p>
           <h2>Compose a studio brief.</h2>
           <p class="lede">The brief is built on this device from the loadout you seated. This site has no inbox. It will not display a false “message sent.”</p>
-          <p>If the intended reader is Luke at Zen-Wu, start from <a href="https://zenwutoolworks.com/" rel="noopener noreferrer">zenwutoolworks.com</a>. Type a recipient yourself.</p>
+          <p>If the intended reader is Luke at Zen-Wu, start from <a href="https://zenwutoolworks.com/" rel="noopener noreferrer">zenwutoolworks.com</a>. Type a recipient yourself. Attach <a href="./cad/SHINOBI82-KAGE-Zen-Wu-review.zip" download>the review zip</a> — STEP solids, DXF profiles, transmittal, BOM. Do not send the website STL as if it were the master.</p>
         </div>
         <form class="form" id="inquiry" novalidate>
           <label class="field">

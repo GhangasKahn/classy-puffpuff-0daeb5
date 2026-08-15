@@ -39,6 +39,6 @@
   "s50": { "diameter": 0.8, "length": 500 },
   "l80": { "diameter": 1.2, "length": 800 },
   "locator": { "length": 22, "width": 8, "thick": 0.7 },
-  "wedge": { "length": 14, "width": 8, "thick": 3.1 },
+  "wedge": { "length": 16, "width": 7.2, "thick0": 2.4, "thick1": 1.55 },
   "chest": { "length": 168, "width": 78, "height": 22, "wall": 4 }
 }

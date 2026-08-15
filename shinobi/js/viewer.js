@@ -23,6 +23,7 @@ const host = document.getElementById("cad-stage");
 const list = document.getElementById("cad-parts");
 const status = document.getElementById("cad-status");
 const download = document.getElementById("cad-download");
+const stepLink = document.getElementById("cad-step");
 if (!host || !list) {
   throw new Error("CAD viewer markup missing");
 }
@@ -137,7 +138,12 @@ function loadPart(part) {
         download.setAttribute("download", `${part.id}.stl`);
         download.textContent = `Download ${part.id}.stl`;
       }
-      setStatus(`${part.label} — TOGI hammered map on every textured face. Proposed CAD, not a production release.`);
+      if (stepLink) {
+        stepLink.href = `./cad/step/${part.id}.step`;
+        stepLink.setAttribute("download", `${part.id}.step`);
+        stepLink.textContent = `Download ${part.id}.step`;
+      }
+      setStatus(`${part.label} — B-rep tessellation of the STEP solid. TOGI map on textured faces. Proposed, not a released revision.`);
       list.querySelectorAll("[data-cad]").forEach((btn) => {
         btn.setAttribute("aria-pressed", btn.dataset.cad === part.id ? "true" : "false");
       });

@@ -815,12 +815,18 @@ html[data-motion="off"] .blade-mod { transition: none; }
   .pack-grid { grid-template-columns: 1fr 1fr; }
 }
 
+.cad-package {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.2rem 0 0;
+}
 .cad-shell {
   display: grid;
   gap: 1rem;
 }
 @media (min-width: 960px) {
-  .cad-shell { grid-template-columns: 1fr 16rem; }
+  .cad-shell { grid-template-columns: 1fr 17rem; }
 }
 .cad-stage {
   background: #161816;

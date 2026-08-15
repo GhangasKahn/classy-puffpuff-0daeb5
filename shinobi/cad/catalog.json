@@ -2,141 +2,171 @@
   {
     "id": "01-frame",
     "file": "cad/stl/01-frame.stl",
-    "triangles": 196,
+    "step": "cad/step/01-frame.step",
+    "volume_mm3": 5192.75,
     "bounds_mm": [
-      104.53,
-      16.2,
-      4.6
-    ]
+      94.007,
+      16.207,
+      4.61
+    ],
+    "triangles": 14216
   },
   {
     "id": "02-mizu",
     "file": "cad/stl/02-mizu.stl",
-    "triangles": 24,
+    "step": "cad/step/02-mizu.step",
+    "volume_mm3": 1846.37,
     "bounds_mm": [
       110.0,
       15.2,
-      1.78
-    ]
+      2.0
+    ],
+    "triangles": 66
   },
   {
     "id": "03-kumiko",
     "file": "cad/stl/03-kumiko.stl",
-    "triangles": 24,
+    "step": "cad/step/03-kumiko.step",
+    "volume_mm3": 1137.88,
     "bounds_mm": [
       70.0,
       12.4,
-      2.2
-    ]
+      2.0
+    ],
+    "triangles": 44
   },
   {
     "id": "04-nata",
     "file": "cad/stl/04-nata.stl",
-    "triangles": 24,
+    "step": "cad/step/04-nata.step",
+    "volume_mm3": 2332.3,
     "bounds_mm": [
       88.0,
       17.8,
       2.4
-    ]
+    ],
+    "triangles": 42
   },
   {
     "id": "05-saya",
     "file": "cad/stl/05-saya.stl",
-    "triangles": 48,
+    "step": "cad/step/05-saya.step",
+    "volume_mm3": 9049.82,
     "bounds_mm": [
-      92.0,
-      20.0,
-      9.2
-    ]
+      92.004,
+      20.005,
+      9.203
+    ],
+    "triangles": 976
   },
   {
     "id": "06-spike",
     "file": "cad/stl/06-spike.stl",
-    "triangles": 280,
+    "step": "cad/step/06-spike.step",
+    "volume_mm3": 473.74,
     "bounds_mm": [
-      37.8,
-      8.4,
-      8.4
-    ]
+      55.216,
+      12.108,
+      8.2
+    ],
+    "triangles": 2364
   },
   {
     "id": "07-togi",
     "file": "cad/stl/07-togi.stl",
-    "triangles": 12,
+    "step": "cad/step/07-togi.step",
+    "volume_mm3": 2495.3,
     "bounds_mm": [
-      52.0,
-      18.0,
-      2.8
-    ]
+      52.01,
+      18.01,
+      2.81
+    ],
+    "triangles": 1772
   },
   {
     "id": "08-tweezer",
     "file": "cad/stl/08-tweezer.stl",
-    "triangles": 36,
+    "step": "cad/step/08-tweezer.step",
+    "volume_mm3": 147.15,
     "bounds_mm": [
-      46.0,
+      46.8,
       6.4,
-      1.32
-    ]
+      1.2
+    ],
+    "triangles": 44
   },
   {
     "id": "09-cassette",
     "file": "cad/stl/09-cassette.stl",
-    "triangles": 12,
+    "step": "cad/step/09-cassette.step",
+    "volume_mm3": 5274.53,
     "bounds_mm": [
-      64.0,
-      16.0,
-      8.2
-    ]
-  },
-  {
-    "id": "10-s50",
-    "file": "cad/stl/10-s50.stl",
-    "triangles": 6400,
-    "bounds_mm": [
-      13.17,
-      13.16,
-      7.55
-    ]
-  },
-  {
-    "id": "11-l80",
-    "file": "cad/stl/11-l80.stl",
-    "triangles": 7680,
-    "bounds_mm": [
-      17.94,
-      17.94,
-      9.3
-    ]
+      64.003,
+      16.003,
+      8.203
+    ],
+    "triangles": 2156
   },
   {
     "id": "12-locator",
     "file": "cad/stl/12-locator.stl",
-    "triangles": 12,
+    "step": "cad/step/12-locator.step",
+    "volume_mm3": 120.15,
     "bounds_mm": [
-      22.0,
-      8.0,
-      0.7
-    ]
+      22.002,
+      8.002,
+      0.703
+    ],
+    "triangles": 488
   },
   {
     "id": "13-wedge",
     "file": "cad/stl/13-wedge.stl",
-    "triangles": 24,
+    "step": "cad/step/13-wedge.step",
+    "volume_mm3": 227.13,
     "bounds_mm": [
-      14.1,
-      8.0,
-      3.1
-    ]
+      16.001,
+      2.387,
+      7.201
+    ],
+    "triangles": 248
   },
   {
     "id": "14-chest",
     "file": "cad/stl/14-chest.stl",
-    "triangles": 60,
+    "step": "cad/step/14-chest.step",
+    "volume_mm3": 86518.04,
     "bounds_mm": [
-      168.0,
-      78.0,
-      22.0
-    ]
+      168.008,
+      78.008,
+      22.008
+    ],
+    "triangles": 268
+  },
+  {
+    "id": "10-s50",
+    "file": "cad/stl/10-s50.stl",
+    "step": "cad/step/10-s50.step",
+    "volume_mm3": 97.93,
+    "bounds_mm": [
+      13.17,
+      13.16,
+      7.55
+    ],
+    "triangles": 6400,
+    "note": "Viewer STL is a display coil. Production stock is straight Nitinol — see BOM."
+  },
+  {
+    "id": "11-l80",
+    "file": "cad/stl/11-l80.stl",
+    "step": "cad/step/11-l80.step",
+    "volume_mm3": 358.13,
+    "bounds_mm": [
+      17.94,
+      17.94,
+      9.3
+    ],
+    "triangles": 7680,
+    "note": "Viewer STL is a display coil. Production stock is straight Nitinol — see BOM."
   }
 ]

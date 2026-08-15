@@ -348,6 +348,9 @@
       "",
       destination ? `Intended recipient: ${destination}` : "Intended recipient: (visitor will address)",
       "",
+      "CAD for the shop: attach SHINOBI82-KAGE-Zen-Wu-review.zip.",
+      "Master files are STEP AP214. STL on the site is viewing only.",
+      "",
       "This is a proposed instrument and a proposed Zen-Wu collaboration.",
       "It is not an announced Zen-Wu product and not available for purchase from this page."
     ].join("\n");
@@ -396,7 +399,7 @@
       downloadText("shinobi-82-kage-studio-brief.txt", buildBrief());
       showStatus(
         "ok",
-        "Brief downloaded on this device. Nothing was sent. Attach it to a message you address yourself."
+        "Brief downloaded on this device. Nothing was sent. Attach it with the Zen-Wu review zip from the CAD bench."
       );
     });
 

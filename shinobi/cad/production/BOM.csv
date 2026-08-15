@@ -1,0 +1,15 @@
+line,id,name,qty,material,blank_or_stock,notes
+01,01-frame,Handle frame,1,Ti-6Al-4V,94 x 16.2 x 4.6 plate,Rinse slots; kusabi slot; Ø4.40 eye
+02,02-mizu,MIZU-82,1,MagnaMax candidate,82 blade + 28 tang x 15.2 x 1.55,60/40 hamaguri as two flats; distal to 0.60
+03,03-kumiko,KUMIKO-42,1,ZW-V1 or MagnaCut,42 + 28 tang x 12.4 x 2.00,Dead-flat ura; 15° single bevel
+04,04-nata,NATA-60,1,MagnaCut candidate,60 + 28 tang x 17.8 x 2.40,24° chisel; no baton
+05,05-saya,Slip saya,1,kiri or honoki,92 x 20 x 9.2,1.8 wall; drain; cord eye
+06,06-spike,KAGE-HARI,1,hardened SS / tool steel,Ø3.4 x 55,58+ HRC; not the knife steel
+07,07-togi,TOGI plate,1,Ti-6Al-4V,52 x 18 x 2.8,Two Ø3.2; T-lock
+08,08-tweezer,Pinbone tweezer,1,beta titanium,46 x 6.4 x 1.1,Food-contact rinse
+09,09-cassette,SHINKEI cassette,1,Ti-6Al-4V,64 x 16 x 8.2,Open vents; no sealed cavity
+10,10-s50,S-50 wire,1,Nitinol,Ø0.80 x 500 straight,Coil on the site is display only
+11,11-l80,L-80 wire,1,Nitinol,Ø1.20 x 800 straight,Coil on the site is display only
+12,12-locator,Sleeve locator,1,cloth / polymer,22 x 8 x 0.7,Findable pale mark
+13,13-wedge,Kusabi wedge,1,Ti-6Al-4V,16 x 7.2 x 2.40→1.55,2° close from the spine
+14,14-chest,Studio chest,1,kiri,168 x 78 x 22 x 4 wall,Open top; miter-ready
