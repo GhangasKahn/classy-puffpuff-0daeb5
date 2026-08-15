@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0' y='0' width='1680' height='1188' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24' y='24' width='1632' height='1140' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='40.0' y='46.0' width='150.0' height='118.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='4' rx='16'/>
+<text x='115.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='84' fill='#1a1f24' text-anchor='middle' font-weight='600'>22</text>
+<rect x='206.0' y='46.0' width='128.0' height='40.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2' rx='10'/>
+<text x='270.0' y='72.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#f3f1ec' text-anchor='middle' font-weight='600'>BAG 6</text>
+<text x='206.0' y='122.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='21' fill='#3d5a4c' text-anchor='start' font-weight='600'>Knock down and paint</text>
+<text x='206.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>The paint IS the weather system — Buffalo four-season prep</text>
+<rect x='40.0' y='200.0' width='330.0' height='104.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<text x='56.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MATERIALS THIS STEP</text>
+<rect x='56.0' y='262.2' width='26.4' height='9.6' fill='#aeb6ba' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='94.4' y='266.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
+<text x='56.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>H-005  primer + owner-gray enamel</text>
+<rect x='430.0' y='260.0' width='370.0' height='160.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<circle cx='474.0' cy='310.0' r='26.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2'/>
+<text x='474.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f3f1ec' text-anchor='middle' font-weight='600'>1</text>
+<text x='516.0' y='304.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>EASE</text>
+<text x='454.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>break every arris 1/16″ — paint dies on sharp corners</text>
+<rect x='830.0' y='260.0' width='370.0' height='160.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<circle cx='874.0' cy='310.0' r='26.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2'/>
+<text x='874.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f3f1ec' text-anchor='middle' font-weight='600'>2</text>
+<text x='916.0' y='304.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>SEAL</text>
+<text x='854.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>end-grain sealer on every cut end</text>
+<rect x='1230.0' y='260.0' width='370.0' height='160.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<circle cx='1274.0' cy='310.0' r='26.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2'/>
+<text x='1274.0' y='318.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f3f1ec' text-anchor='middle' font-weight='600'>3</text>
+<text x='1316.0' y='304.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>DRY</text>
+<text x='1254.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>PT water table + troughs must be dry first</text>
+<rect x='430.0' y='470.0' width='370.0' height='160.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<circle cx='474.0' cy='520.0' r='26.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2'/>
+<text x='474.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f3f1ec' text-anchor='middle' font-weight='600'>4</text>
+<text x='516.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>PRIME</text>
+<text x='454.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>exterior primer, all faces</text>
+<rect x='830.0' y='470.0' width='370.0' height='160.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<circle cx='874.0' cy='520.0' r='26.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2'/>
+<text x='874.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f3f1ec' text-anchor='middle' font-weight='600'>5</text>
+<text x='916.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1a1f24' text-anchor='start' font-weight='600'>GRAY ×2</text>
+<text x='854.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>two finish coats owner gray · extra inside troughs</text>
+<rect x='430.0' y='700.0' width='1170.0' height='90.0' fill='#f7e8de' stroke='#b3541e' stroke-width='2.5' rx='14'/>
+<text x='450.0' y='736.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b3541e' text-anchor='start' font-weight='600'>MASK: every locking face — tenon cheeks, nuki bearing faces, kusabi slots, pivot sockets. Paint on a locking face = a stuck joint in February.</text>
+<text x='450.0' y='762.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Dry-fit first (steps 1–21), knock down in reverse, paint the parts flat, then rebuild. Label every wedge and cassette as it comes out.</text>
+<line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='172.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start' font-weight='600'>BUILD MANUAL · STEP 22 OF 24</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Buffalo NY · Darwin Martin Tree of Life · no nails, no glue on locking faces, no concrete</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>BAG 6 · Rev F</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>Generated from martin_kernel.py — do not scale</text>
+</svg>

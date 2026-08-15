@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0' y='0' width='1680' height='1188' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24' y='24' width='1632' height='1140' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='40.0' y='46.0' width='150.0' height='118.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='4' rx='16'/>
+<text x='115.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='84' fill='#1a1f24' text-anchor='middle' font-weight='600'>5</text>
+<rect x='206.0' y='46.0' width='128.0' height='40.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2' rx='10'/>
+<text x='270.0' y='72.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#f3f1ec' text-anchor='middle' font-weight='600'>BAG 2</text>
+<text x='206.0' y='122.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='21' fill='#3d5a4c' text-anchor='start' font-weight='600'>Drop P0 + P1 into their ties</text>
+<text x='206.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>Foot tenon straight down, gravity only. P1 carries the oak pivot sockets.</text>
+<rect x='40.0' y='200.0' width='330.0' height='162.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<text x='56.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PARTS THIS STEP</text>
+<rect x='56.0' y='260.4' width='73.7' height='13.2' fill='#c4c2ba' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='141.7' y='266.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
+<text x='56.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>L-001  P0 latch post</text>
+<rect x='56.0' y='318.4' width='73.7' height='13.2' fill='#c4c2ba' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='141.7' y='324.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
+<text x='56.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>L-002  P1 hinge post</text>
+<rect x='388.0' y='845.0' width='1085.0' height='38.5' fill='#9a9890' stroke='#1a1f24' stroke-width='1.4'/>
+<rect x='430.0' y='847.0' width='24.5' height='34.5' fill='#b8b6b0' stroke='#1a1f24' stroke-width='0.8'/>
+<rect x='706.5' y='847.0' width='24.5' height='34.5' fill='#b8b6b0' stroke='#1a1f24' stroke-width='0.8'/>
+<rect x='1056.5' y='847.0' width='24.5' height='34.5' fill='#b8b6b0' stroke='#1a1f24' stroke-width='0.8'/>
+<rect x='1406.5' y='847.0' width='24.5' height='34.5' fill='#b8b6b0' stroke='#1a1f24' stroke-width='0.8'/>
+<rect x='430.0' y='400.5' width='24.5' height='444.5' fill='#c4c2ba' stroke='#1a1f24' stroke-width='1.6'/>
+<text x='442.2' y='374.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P0</text>
+<rect x='706.5' y='400.5' width='24.5' height='444.5' fill='#c4c2ba' stroke='#1a1f24' stroke-width='1.6'/>
+<text x='718.8' y='374.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P1</text>
+<line x1='442.2' y1='300.0' x2='442.2' y2='352.0' stroke='#b3541e' stroke-width='7'/>
+<polygon points='442.2,366.0 453.2,344.0 431.2,344.0' fill='#b3541e' stroke='#b3541e' stroke-width='1'/>
+<rect x='425.0' y='395.5' width='34.5' height='454.5' fill='none' stroke='#b3541e' stroke-width='4' stroke-dasharray='12 7'/>
+<line x1='718.8' y1='300.0' x2='718.8' y2='352.0' stroke='#b3541e' stroke-width='7'/>
+<polygon points='718.8,366.0 729.8,344.0 707.8,344.0' fill='#b3541e' stroke='#b3541e' stroke-width='1'/>
+<rect x='701.5' y='395.5' width='34.5' height='454.5' fill='none' stroke='#b3541e' stroke-width='4' stroke-dasharray='12 7'/>
+<rect x='1350.0' y='210.0' width='270.0' height='170.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2' rx='12'/>
+<text x='1364.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P1 — OAK PIVOT SOCKETS</text>
+<circle cx='1420.0' cy='290.0' r='16.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='2'/>
+<circle cx='1420.0' cy='290.0' r='7.0' fill='#8a6a3d' stroke='#1a1f24' stroke-width='1'/>
+<text x='1450.0' y='286.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Ø1.25″ socket in the sill</text>
+<text x='1450.0' y='304.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>and later in the eave soffit.</text>
+<text x='1364.0' y='340.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>Gate weight goes into the ground</text>
+<text x='1364.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#5a6a4a' text-anchor='start'>through P1 — not off P0.</text>
+<line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='172.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start' font-weight='600'>BUILD MANUAL · STEP 5 OF 24</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Buffalo NY · Darwin Martin Tree of Life · no nails, no glue on locking faces, no concrete</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>BAG 2 · Rev F</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>Generated from martin_kernel.py — do not scale</text>
+</svg>

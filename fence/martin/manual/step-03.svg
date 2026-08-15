@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0' y='0' width='1680' height='1188' fill='#f3f1ec' stroke='#1a1f24' stroke-width='3'/>
+<rect x='24' y='24' width='1632' height='1140' fill='none' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='40.0' y='46.0' width='150.0' height='118.0' fill='#f3f1ec' stroke='#1a1f24' stroke-width='4' rx='16'/>
+<text x='115.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='84' fill='#1a1f24' text-anchor='middle' font-weight='600'>3</text>
+<rect x='206.0' y='46.0' width='128.0' height='40.0' fill='#3d5a4c' stroke='#1a1f24' stroke-width='2' rx='10'/>
+<text x='270.0' y='72.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#f3f1ec' text-anchor='middle' font-weight='600'>BAG 1</text>
+<text x='206.0' y='122.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='21' fill='#3d5a4c' text-anchor='start' font-weight='600'>Half-lap the four cross-ties</text>
+<text x='206.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>One tie per pier station · pegged, not glued</text>
+<rect x='40.0' y='200.0' width='330.0' height='162.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2.5' rx='14'/>
+<text x='56.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PARTS THIS STEP</text>
+<rect x='56.0' y='260.4' width='45.7' height='13.2' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='113.7' y='266.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>4×</text>
+<text x='56.0' y='298.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>F-003  cross-tie 4×6 × 41.5″</text>
+<rect x='56.0' y='320.5' width='26.0' height='9.0' fill='#8a6a3d' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='94.0' y='324.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>8×</text>
+<text x='56.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>W-002  oak peg Ø0.375″</text>
+<rect x='274.0' y='311.0' width='104.0' height='338.0' fill='#d9d5ca' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='326.0' y='485.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='middle' font-weight='600'>HOUSE</text>
+<rect x='391.0' y='351.6' width='1007.5' height='256.8' fill='none' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='5 4'/>
+<rect x='409.0' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='545.5' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='682.0' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='818.5' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='955.0' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='1091.5' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='1228.0' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='1364.5' y='589.0' width='16.0' height='16.0' fill='#3d3530' stroke='#1a1f24' stroke-width='1'/>
+<rect x='391.0' y='585.6' width='1007.5' height='22.8' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.6'/>
+<rect x='391.0' y='351.6' width='1007.5' height='22.8' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.6'/>
+<text x='894.8' y='625.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>F-001 DRIVEWAY SILL</text>
+<text x='894.8' y='345.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>F-002 GARDEN SILL</text>
+<rect x='430.0' y='345.1' width='22.8' height='269.8' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='441.4' y='335.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P0</text>
+<rect x='686.8' y='345.1' width='22.8' height='269.8' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='698.1' y='335.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P1</text>
+<rect x='1011.8' y='345.1' width='22.8' height='269.8' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1023.1' y='335.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P2</text>
+<rect x='1336.8' y='345.1' width='22.8' height='269.8' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
+<text x='1348.1' y='335.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>P3</text>
+<text x='894.8' y='655.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>DRIVEWAY (EXISTING SLAB — DO NOT DRILL, DO NOT POUR)</text>
+<text x='894.8' y='197.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>GARDEN</text>
+<line x1='441.4' y1='271.1' x2='441.4' y2='309.1' stroke='#b3541e' stroke-width='7'/>
+<polygon points='441.4,323.1 452.4,301.1 430.4,301.1' fill='#b3541e' stroke='#b3541e' stroke-width='1'/>
+<line x1='698.1' y1='271.1' x2='698.1' y2='309.1' stroke='#b3541e' stroke-width='7'/>
+<polygon points='698.1,323.1 709.1,301.1 687.1,301.1' fill='#b3541e' stroke='#b3541e' stroke-width='1'/>
+<line x1='1023.1' y1='271.1' x2='1023.1' y2='309.1' stroke='#b3541e' stroke-width='7'/>
+<polygon points='1023.1,323.1 1034.1,301.1 1012.1,301.1' fill='#b3541e' stroke='#b3541e' stroke-width='1'/>
+<line x1='1348.1' y1='271.1' x2='1348.1' y2='309.1' stroke='#b3541e' stroke-width='7'/>
+<polygon points='1348.1,323.1 1359.1,301.1 1337.1,301.1' fill='#b3541e' stroke='#b3541e' stroke-width='1'/>
+<rect x='1330.0' y='680.0' width='280.0' height='190.0' fill='#eceae2' stroke='#1a1f24' stroke-width='2' rx='12'/>
+<text x='1344.0' y='706.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DETAIL — HALF-LAP</text>
+<rect x='1370.0' y='750.0' width='200.0' height='34.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.6'/>
+<rect x='1440.0' y='732.0' width='52.0' height='70.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.6'/>
+<line x1='1466.0' y1='724.0' x2='1466.0' y2='810.0' stroke='#b3541e' stroke-width='2'/>
+<text x='1344.0' y='836.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Cut half the depth from each,</text>
+<text x='1344.0' y='852.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>peg through. Flush top face.</text>
+<rect x='1330.0' y='890.0' width='200.0' height='44.0' fill='#f7e8de' stroke='#b3541e' stroke-width='2.5' rx='10'/>
+<text x='1430.0' y='910.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b3541e' text-anchor='middle' font-weight='600'>NEVER GLUE</text>
+<text x='1430.0' y='926.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#5a6a4a' text-anchor='middle'>winter knock-down</text>
+<line x1='24.0' y1='1100.0' x2='1656.0' y2='1100.0' stroke='#1a1f24' stroke-width='1.4'/>
+<text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
+<text x='172.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start' font-weight='600'>BUILD MANUAL · STEP 3 OF 24</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Buffalo NY · Darwin Martin Tree of Life · no nails, no glue on locking faces, no concrete</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>BAG 1 · Rev F</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>Generated from martin_kernel.py — do not scale</text>
+</svg>

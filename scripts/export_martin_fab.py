@@ -769,7 +769,8 @@ h1{{font-size:42px;margin:8px 0 12px}}
 <a href="08_CUT_LISTS/finished.csv">Finished cut list</a>
 <a href="08_CUT_LISTS/nest.csv">Board nest</a>
 <a href="09_JOINERY/joints.csv">Joints</a>
-<a href="11_BUILD_MANUAL/BUILD_MANUAL.md">Build manual</a>
+<a href="11_BUILD_MANUAL/BUILD_MANUAL.md">Build manual (text)</a>
+<a href="../manual/">Build manual (step-by-step)</a>
 <a href="12_QA/QA-701_inspection.svg">QA-701</a>
 <a href="10_TEMPLATES/T-501_kusabi.svg">T-501 1:1</a>
 <a href="../app/">Build app</a>

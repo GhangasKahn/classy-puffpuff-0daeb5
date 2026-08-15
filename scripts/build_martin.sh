@@ -34,4 +34,7 @@ python3 "$ROOT/scripts/export_martin_fab.py"
 echo "==> Plan sheets (SVG, from kernel)"
 python3 "$ROOT/scripts/gen_martin_plans.py"
 
+echo "==> Build manual (LEGO-style steps, from kernel)"
+python3 "$ROOT/scripts/gen_martin_manual.py"
+
 echo "Done."

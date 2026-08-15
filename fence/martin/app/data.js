@@ -110,6 +110,7 @@ window.MARTIN_DATA = {
     { src: "../plans/M6_cutlist.svg", title: "M-6 Cut list", kind: "plan" },
   ],
   downloads: [
+    { href: "../manual/", label: "Build manual", note: "24 steps, LEGO style" },
     { href: "../fab/", label: "Fabrication package", note: "BOM, drawings, QA, JSON" },
     { href: "../fab/00_SOURCE/martin_project.json", label: "martin_project.json", note: "Machine-readable source" },
     { href: "../cad/exports/martin.FCStd", label: "martin.FCStd", note: "FreeCAD model" },
