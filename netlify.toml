@@ -102,6 +102,11 @@
   to = "/fence/fab/"
   status = 301
 
+[[redirects]]
+  from = "/shinobi"
+  to = "/shinobi/"
+  status = 301
+
 # CAD downloads: force download with correct types
 [[headers]]
   for = "/fence/*/exports/*"
