@@ -26,6 +26,7 @@ from walter_ds16 import (  # noqa: E402
     parts,
     shop_drawings,
     side_features,
+    stretcher_records,
 )
 
 OUT = os.path.join(ROOT, "shop", "drum-sander", "plans")
@@ -434,11 +435,11 @@ def sheet_p001(hand: str) -> None:
     sh.dim_v(Y(0), Y(S.side_height), X(0), f'{inch(S.side_height)}"', offset=-40)
     sh.dim_h(X(0), X(by), Y(S.side_height), f'{inch(by)}"', offset=-28)
     sh.dim_v(Y(0), Y(bz), X(S.side_depth), f'{inch(bz)}"', offset=32)
-    sh.dim_h(X(way["y0"]), X(way["y1"]), Y(way["z0"]), f'{inch(way["y1"] - way["y0"])}"', offset=22)
-    sh.dim_v(Y(way["z0"]), Y(way["z1"]), X(way["y0"]), f'{inch(S.way_stock)}"', offset=-22)
+    sh.dim_h(X(way["y0"]), X(way["y1"]), Y(way["z0"]), f'{inch(way["y1"] - way["y0"])}" way Y', offset=22)
+    sh.dim_v(Y(way["z0"]), Y(way["z1"]), X(way["y0"]), f'{inch(way["z1"] - way["z0"])}" way Z', offset=-22)
     d0 = feat["dados"][0]
     sh.dim_h(X(0), X(d0["y0"]), Y(d0["z0"]), f'{inch(d0["y0"])}"', offset=18)
-    sh.dim_h(X(d0["y0"]), X(d0["y1"]), Y(d0["z1"]), f'{inch(S.stretcher_height)}"', offset=-16)
+    sh.dim_v(Y(d0["z0"]), Y(d0["z1"]), X(d0["y1"]), f'{inch(S.stretcher_height)}"', offset=16)
 
     sh.text(X(1.0), Y(1.2), "DATUM Y0 infeed", 11, DIM)
     sh.text(X(0.3), Y(2.4), "DATUM Z0 bottom", 11, DIM, rot=-90)
@@ -446,7 +447,7 @@ def sheet_p001(hand: str) -> None:
     # isometric
     t, dpth, ht = G.side_thick, S.side_depth, S.side_height
     meshes = [box(GREEN, 0, 0, 0, t, ht, dpth)]
-    meshes.append(box(UHMW, t - way["depth"], way["z0"], way["y0"], way["depth"], S.way_stock, way["y1"] - way["y0"]))
+    meshes.append(box(UHMW, t - way["depth"], way["z0"], way["y0"], way["depth"], way["z1"] - way["z0"], way["y1"] - way["y0"]))
     for dd in feat["dados"]:
         meshes.append(box(TAN, t - dd["depth"], dd["z0"], dd["y0"], dd["depth"], dd["z1"] - dd["z0"], dd["y1"] - dd["y0"]))
     meshes.append(cyl_x(STEEL, t / 2, bz, by, t + 0.4, feat["bearing_cl"]["shaft_clear_dia"] / 2, 14))
@@ -481,7 +482,7 @@ def sheet_p001(hand: str) -> None:
     notes = [
         "Stack-drill P-001L and P-001R face-to-face (S-008) for bearing CL, flange bolts, and stretcher pilots. Then split.",
         "Dados J-001 and way rebate J-002 are INNER FACE only and mirrored. Do not dado the pair while stacked.",
-        f'Way rebate {inch(G.way_rebate, 3)}" deep × {inch(S.way_stock)}" wide so P-007 projects {inch(G.way_project, 3)}". Without the rebate a 16" table will not enter the 16.5" span.',
+        f'Way rebate {inch(G.way_rebate, 3)}" deep × {inch(S.way_width)}" wide × {inch(G.way_len)}" tall, centered on drum CL, so P-007 projects {inch(G.way_project, 3)}". Vertical — the table does not sit on this strip.',
         "Clamp each stretcher in its housing, then drill #8 pilots through the side into P-003 (S-006). Countersink from the outside.",
     ]
     if hand == "L":
@@ -615,8 +616,8 @@ def sheet_p003() -> None:
         TAN,
         [
             f'Rip {inch(S.stretcher_height)}" (S-004), then crosscut all three to {inch(G.stretcher_length)}" housed length (S-003).',
-            "Ends sit in ¼″ dados on the inner faces. Clamp in position, then drill pilots through the side (see P-001).",
-            "Ways — not stretchers — locate the table. These rails only fight racking.",
+            "Ends sit in ¼″ dados on the inner faces, standing on edge (4″ is Z). Clamp, then drill pilots through the side (see P-001).",
+            "Stations IN-LO / OUT-LO / OUT-HI miss the table envelope. Ways — not stretchers — locate the table.",
         ],
         extras=extras,
         iso_meshes=meshes,
@@ -694,17 +695,83 @@ def sheet_p006() -> None:
 
 
 def sheet_p007() -> None:
-    L, Ww, T = S.side_depth, S.way_stock, S.way_stock
+    L, Ww, T = G.way_len, S.way_width, S.way_stock
     meshes = [box(UHMW, 0, 0, 0, L, T, Ww)]
     sheet_rect(
         "P-007",
         "P007_uhmw_way.svg",
-        "UHMW WAY — make two  (let into J-002, then wax)",
+        "UHMW WAY — make two  (vertical strip, let into J-002, then wax)",
         UHMW,
         [
-            f'Projects {inch(G.way_project, 3)}" past the inner face. Rebate is {inch(G.way_rebate, 3)}" so a {inch(G.table_width)}" table still fits the {inch(S.clear_between_sides)}" span.',
+            f'Vertical. {inch(G.way_len)}" Z × {inch(S.way_width)}" Y, centered on drum CL. Projects {inch(G.way_project, 3)}" past the inner face.',
+            f'Rebate is {inch(G.way_rebate, 3)}" so a {inch(G.table_width)}" table still fits the {inch(S.clear_between_sides)}" span.',
             "Bond into the rebate. Optional #8 flush screws from the outer face. Dry lube with paste wax — no oil.",
-            "QC-04: winding sticks / indicator on both ways. Twist here becomes taper in the work.",
+            "QC-04: both ways plumb. The table shoes wrap this tongue; the Acme does the lifting.",
+        ],
+        iso_meshes=meshes,
+        l_dim=L,
+        w_dim=Ww,
+        t_dim=T,
+    )
+
+
+def sheet_p017() -> None:
+    L, Ww, T = G.shoe_h, G.shoe_w, G.shoe_t
+    meshes = [box(UHMW, 0, 0, 0, L, T, Ww)]
+    sheet_rect(
+        "P-017",
+        "P017_table_shoe.svg",
+        "TABLE SHOE — make two, mirror pair  (wraps the vertical tongue)",
+        UHMW,
+        [
+            f'Groove the outboard face {inch(G.shoe_groove_depth, 3)}" deep × {inch(G.shoe_groove_width, 3)}" wide.',
+            f'Tongue is {inch(G.way_project, 3)}" × {inch(G.way_width)}". X play {inch(G.shoe_groove_depth - G.way_project, 3)}", Y play {inch(G.shoe_groove_width - G.way_width, 3)}" (CALC-005).',
+            "Bolt under the table edge, centered on drum CL. Table moves in Z only (J-012).",
+            "Hardwood with a UHMW liner is acceptable if you cannot get a thick UHMW offcut.",
+        ],
+        iso_meshes=meshes,
+        l_dim=L,
+        w_dim=Ww,
+        t_dim=T,
+    )
+
+
+def sheet_p018() -> None:
+    L, Ww, T = G.thrust_l, G.thrust_w, G.thrust_h
+    def extras(sh, ox, oy, sc, LL, WW):
+        sh.circle(ox + LL * sc / 2, oy + WW * sc / 2, 0.25 * sc, fill=PAPER, stroke=INK, sw=1.4)
+        sh.leader(ox + LL * sc / 2, oy + WW * sc / 2, ox + LL * sc + 12, oy - 18, "⌀½″ through + thrust-washer counterbore", 12)
+    meshes = [box(TAN, 0, 0, 0, L, T, Ww)]
+    sheet_rect(
+        "P-018",
+        "P018_thrust_block.svg",
+        "ACME THRUST BLOCK — make two, screw to the base on drum CL",
+        TAN,
+        [
+            f'Both blocks at Y {inch(G.acme_y)}" (drum CL), left and right X. Not at the infeed and outfeed.',
+            "Thrust washer + e-clip under the screw (H-026). Sanding load tries to pull the screw out of the base.",
+            "Block size is ASSUMED. Hole follows ½-10 Acme.",
+        ],
+        extras=extras,
+        iso_meshes=meshes,
+        l_dim=L,
+        w_dim=Ww,
+        t_dim=T,
+    )
+
+
+def sheet_p019() -> None:
+    L, Ww, T = G.dog_l, G.dog_w, G.dog_h
+    meshes = [box(STEEL, 0, 0, 0, L, T, Ww)]
+    sheet_rect(
+        "P-019",
+        "P019_home_dog.svg",
+        "PARALLEL HOME DOG — make one, left side",
+        STEEL,
+        [
+            "Bolt to the base beside the left Acme. The left clutch hits this stop at last known |A−B|.",
+            "Set after paper-on parallel (ST-14). Uncouple left for taper; recouple against this dog.",
+            "Size is ASSUMED. Function is the stop, not the block.",
         ],
         iso_meshes=meshes,
         l_dim=L,
@@ -930,8 +997,8 @@ def sheet_p016() -> None:
 
 
 def sheet_a01() -> None:
-    sh = Sheet("A-01", "Frame assembly", "P-001L/R · P-002 · P-003 ×3 · P-007 ×2  ·  glue-up")
-    sh.titleblock(qty="A-FRAME", material="Baltic birch + UHMW", evidence="QC-03 diagonals · QC-04 ways")
+    sh = Sheet("A-01", "Frame assembly", "P-001L/R · P-002 · P-003 ×3 · P-007 ×2 · P-018 ×2  ·  glue-up")
+    sh.titleblock(qty="A-FRAME", material="Baltic birch + UHMW", evidence="QC-03 diagonals · QC-04 ways · QC-13 clearance")
     t, dpth, ht = G.side_thick, S.side_depth, S.side_height
     Wbox = G.overall_width
     meshes = [
@@ -939,11 +1006,11 @@ def sheet_a01() -> None:
         box(GREEN, 0, S.base_thick, 0, t, ht - S.base_thick, dpth),
         box(GREEN, Wbox - t, S.base_thick, 0, t, ht - S.base_thick, dpth),
     ]
-    for z in S.stretcher_z:
-        meshes.append(box(TAN, t - S.stretcher_housing, z, S.stretcher_dado_y0, G.stretcher_length, S.ply_actual, S.stretcher_height))
-    meshes.append(box(UHMW, t - G.way_rebate, S.way_z, S.way_end_inset, S.way_stock, S.way_stock, dpth - 2 * S.way_end_inset))
-    meshes.append(box(UHMW, Wbox - t - G.way_project, S.way_z, S.way_end_inset, S.way_stock, S.way_stock, dpth - 2 * S.way_end_inset))
-    sh.iso_frame(40, 100, 900, 700, "Box + ways — inner span 16.50″ is the constraint", meshes)
+    for rec in stretcher_records():
+        meshes.append(box(TAN, t - S.stretcher_housing, rec["z0"], rec["y0"], G.stretcher_length, S.stretcher_height, rec["y1"] - rec["y0"]))
+    meshes.append(box(UHMW, t - G.way_rebate, G.way_z0, G.way_y0, S.way_stock, G.way_len, G.way_width))
+    meshes.append(box(UHMW, Wbox - t - G.way_project, G.way_z0, G.way_y0, S.way_stock, G.way_len, G.way_width))
+    sh.iso_frame(40, 100, 900, 700, "Box + vertical ways — inner span 16.50″ is the constraint", meshes)
     sh.notes(
         980,
         140,
@@ -952,9 +1019,9 @@ def sheet_a01() -> None:
             "2. Stack-drill bearing CL, flange bolts, stretcher pilots (S-008).",
             "3. Split. Dado J-001 and rebate J-002 on inner faces only (mirror).",
             "4. Dry-fit P-003. Clamp, square diagonals, glue, through-screw.",
-            "5. Bond P-007. Wax. Table must slide; if it binds you stole the span.",
+            "5. Bond vertical P-007. Wax. Shoes wrap the tongue; if the table binds you stole the span.",
             f"Keep {inch(S.clear_between_sides)}\" (419 mm) between inner faces even if ply is 18 mm Euro BB.",
-            "Idler flange: axial pad. Drive flange: lock. Do not lock both.",
+            "Layout: HYBRID. Panel joinery is face/edge. Drum, Acme, and ways are centerline from DATUM-B/A.",
         ],
         "ASSEMBLY ORDER",
     )
@@ -1000,7 +1067,7 @@ def sheet_a02() -> None:
 
 
 def sheet_a03() -> None:
-    sh = Sheet("A-03", "Table assembly", "P-004 ×2 · P-005 ribs · P-006 wear · P-016 ×2 · H-007/H-008")
+    sh = Sheet("A-03", "Table assembly", "P-004 ×2 · P-005 ribs · P-006 wear · P-016 ×2 · P-017 ×2 · H-007/H-008")
     sh.titleblock(qty="A-TABLE", material="Torsion box + phenolic/MIC-6")
     tw, td, tt = G.table_width, G.table_depth, G.table_thick
     meshes = [
@@ -1013,9 +1080,9 @@ def sheet_a03() -> None:
         140,
         [
             "Glue the box. Flatten. Then bond the wear face. QC-05 before any sanding.",
-            "Bronze nuts P-016 on the underside, both ends. Chain-couple the ½-10 screws.",
-            "Uncouple LEFT for taper work. Recouple against the home dog — that dog is the last known parallel.",
-            f"Table must slide on the ways with {inch(S.slide_clearance, 3)}\" clearance per side. If it does not enter, the ways are proud — see D-020.",
+            "Bronze nuts P-016 on the underside, both on the drum centerline — not at infeed and outfeed.",
+            "P-017 shoes wrap the vertical ways. Uncouple LEFT for taper. Recouple against P-019 — last known parallel.",
+            f"Shoes capture X/Y with {inch(G.shoe_groove_depth - G.way_project, 3)}\" X play. If the table does not rise, the ways are proud — see D-020 / D-027.",
         ],
         "TABLE BUILD",
     )
@@ -1188,6 +1255,9 @@ def main() -> None:
     sheet_p014()
     sheet_p015()
     sheet_p016()
+    sheet_p017()
+    sheet_p018()
+    sheet_p019()
     sheet_a01()
     sheet_a02()
     sheet_a03()

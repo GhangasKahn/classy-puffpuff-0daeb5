@@ -1,4 +1,4 @@
-const CACHE = "walter-ds16-v8";
+const CACHE = "walter-ds16-v9";
 const ASSETS = [
   "./",
   "./index.html",
@@ -19,7 +19,16 @@ const ASSETS = [
   "../plans/G003_registers.svg",
   "../plans/G004_safety.svg",
   "../plans/E101_exploded.svg",
+  "../plans/M101_kinematics.svg",
+  "../plans/J001_stretcher.svg",
+  "../plans/J002_way.svg",
+  "../plans/J006_drive_bearing.svg",
+  "../plans/J007_idler_float.svg",
+  "../plans/J011_lift.svg",
+  "../plans/F101_routing.svg",
+  "../plans/S101_load_path.svg",
   "../plans/Q101_commissioning.svg",
+  "../plans/Q102_zero_gap.svg",
   "../plans/ST01_step.svg",
   "../plans/ST02_step.svg",
   "../plans/ST03_step.svg",
@@ -64,6 +73,9 @@ const ASSETS = [
   "../plans/P014_roller_yoke.svg",
   "../plans/P015_pack_bore.svg",
   "../plans/P016_nut_block.svg",
+  "../plans/P017_table_shoe.svg",
+  "../plans/P018_thrust_block.svg",
+  "../plans/P019_home_dog.svg",
   "../plans/A01_frame.svg",
   "../plans/A02_drum.svg",
   "../plans/A03_table.svg",

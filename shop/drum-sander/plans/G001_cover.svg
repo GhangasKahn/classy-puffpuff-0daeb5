@@ -6,11 +6,11 @@
 <line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
 <text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>G-001</text>
 <text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Master build guide — cover and release</text>
-<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>fab B.3</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>fab B.4</text>
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>WALTER DS-16 dedicated drum thickness sander</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Read this page before cutting anything</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
 <text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
@@ -19,23 +19,37 @@
 <text x='36.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='18' fill='#3d4a38' text-anchor='start'>Dedicated drum thickness sander · master build plans</text>
 <rect x='36.0' y='226.0' width='900.0' height='520.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='329.6,615.3 473.3,532.4 473.3,493.3 329.6,576.3' fill='#a2936c'/>
+<polygon points='329.6,576.3 473.3,493.3 467.0,489.7 323.3,572.6' fill='#a2936c'/>
+<polygon points='535.4,596.5 560.8,581.9 535.4,567.3 510.1,581.9' fill='#a2936c'/>
+<polygon points='535.4,611.2 560.8,596.5 560.8,581.9 535.4,596.5' fill='#a2936c'/>
+<polygon points='510.1,596.5 535.4,611.2 535.4,596.5 510.1,581.9' fill='#c0ae81'/>
 <polygon points='502.9,722.7 655.0,634.8 469.1,527.5 317.0,615.3' fill='#436545'/>
-<polygon points='469.3,446.9 638.3,544.5 638.3,537.1 469.3,439.5' fill='#b2b6ba'/>
-<polygon points='638.3,537.1 644.7,533.5 475.6,435.9 469.3,439.5' fill='#96999d'/>
+<polygon points='323.3,611.7 329.6,615.3 329.6,576.3 323.3,572.6' fill='#c0ae81'/>
+<polygon points='535.4,599.0 539.7,596.5 539.7,479.4 535.4,481.9' fill='#8b8d90'/>
+<polygon points='531.2,596.5 535.4,599.0 535.4,481.9 531.2,479.4' fill='#a5a7ab'/>
 <polygon points='522.1,412.9 519.5,412.2 517.6,413.3 516.9,416.0 517.6,419.4 519.5,422.8 522.1,425.1 524.8,425.8 526.7,424.7 527.4,422.1 526.7,418.6 524.8,415.3' fill='#242629'/>
 <polygon points='548.0,402.8 552.6,413.4 560.2,409.0 555.7,398.4' fill='#8b8d90'/>
 <polygon points='552.6,413.4 559.5,422.6 567.1,418.2 560.2,409.0' fill='#8b8d90'/>
 <polygon points='546.4,392.5 548.0,402.8 555.7,398.4 554.0,388.2' fill='#8b8d90'/>
 <polygon points='559.5,422.6 567.6,429.1 575.2,424.8 567.1,418.2' fill='#8b8d90'/>
+<polygon points='543.2,479.8 564.4,492.0 564.4,438.9 543.2,426.7' fill='#b2b6ba'/>
 <polygon points='548.0,384.1 546.4,392.5 554.0,388.2 555.7,379.7' fill='#8b8d90'/>
 <polygon points='567.6,429.1 575.7,432.0 583.3,427.6 575.2,424.8' fill='#8b8d90'/>
+<polygon points='564.4,492.0 570.7,488.3 570.7,435.3 564.4,438.9' fill='#96999d'/>
+<polygon points='535.4,481.9 539.7,479.4 535.4,477.0 531.2,479.4' fill='#8b8d90'/>
 <polygon points='462.8,531.1 648.7,638.5 648.7,353.0 462.8,245.7' fill='#4f7752'/>
 <polygon points='581.1,393.3 579.7,392.8 578.6,393.2 578.0,394.3 578.0,396.0 578.6,397.8 579.7,399.4 581.1,400.6 582.5,401.0 583.6,400.7 584.2,399.5 584.2,397.9 583.6,396.1 582.5,394.4' fill='#a5a7ab'/>
 <polygon points='552.6,378.9 548.0,384.1 555.7,379.7 560.2,374.5' fill='#9b9da0'/>
 <polygon points='575.7,432.0 582.5,430.6 590.1,426.2 583.3,427.6' fill='#8b8d90'/>
 <polygon points='575.2,376.0 567.1,373.1 560.2,374.5 555.7,379.7 554.0,388.2 555.7,398.4 560.2,409.0 567.1,418.2 575.2,424.8 583.3,427.6 590.1,426.2 594.7,421.0 596.3,412.6 594.7,402.3 590.1,391.7 583.3,382.5' fill='#a5a7ab'/>
-<polygon points='594.6,633.1 598.8,630.7 598.8,513.6 594.6,516.0' fill='#8b8d90'/>
-<polygon points='590.4,630.7 594.6,633.1 594.6,516.0 590.4,513.6' fill='#a5a7ab'/>
+<polygon points='564.4,438.9 570.7,435.3 549.6,423.1 543.2,426.7' fill='#96999d'/>
+<polygon points='436.6,653.6 461.9,639.0 436.6,624.3 411.2,639.0' fill='#a2936c'/>
+<polygon points='535.4,473.1 545.6,467.2 535.4,461.4 525.3,467.2' fill='#8a5429'/>
+<polygon points='535.4,482.8 545.6,477.0 545.6,467.2 535.4,473.1' fill='#8a5429'/>
+<polygon points='525.3,477.0 535.4,482.8 535.4,473.1 525.3,467.2' fill='#a46430'/>
+<polygon points='436.6,668.3 461.9,653.6 461.9,639.0 436.6,653.6' fill='#a2936c'/>
+<polygon points='411.2,653.6 436.6,668.3 436.6,653.6 411.2,639.0' fill='#c0ae81'/>
 <polygon points='317.0,622.6 502.9,730.0 502.9,722.7 317.0,615.3' fill='#4f7752'/>
 <polygon points='544.1,418.3 567.8,432.0 567.8,404.6 544.1,391.0' fill='#a5a7ab'/>
 <polygon points='552.6,389.0 546.6,386.6 541.1,386.3 536.6,388.2 533.3,392.2 531.6,397.9 531.6,404.8 533.3,412.4 536.6,420.2 541.1,427.3 546.6,433.4 552.6,437.8 558.5,440.3 564.0,440.5 568.5,438.6 571.8,434.6 573.5,429.0 573.5,422.0 571.8,414.4 568.5,406.7 564.0,399.5 558.5,393.4' fill='#a4977d'/>
@@ -46,25 +60,24 @@
 <polygon points='383.7,492.8 384.4,496.3 517.6,419.4 516.9,416.0' fill='#1f2023'/>
 <polygon points='386.4,499.6 389.0,502.0 522.1,425.1 519.5,422.8' fill='#1f2023'/>
 <polygon points='583.0,448.1 580.4,447.4 578.4,448.5 577.7,451.1 578.4,454.6 580.4,457.9 583.0,460.3 585.6,461.0 587.6,459.8 588.3,457.2 587.6,453.7 585.6,450.4' fill='#242629'/>
-<polygon points='638.3,544.5 644.7,540.8 644.7,533.5 638.3,537.1' fill='#96999d'/>
 <polygon points='384.4,490.2 383.7,492.8 516.9,416.0 517.6,413.3' fill='#1f2023'/>
 <polygon points='389.0,502.0 391.6,502.7 524.8,425.8 522.1,425.1' fill='#1f2023'/>
 <polygon points='386.4,489.1 384.4,490.2 517.6,413.3 519.5,412.2' fill='#242629'/>
 <polygon points='391.6,502.7 393.6,501.6 526.7,424.7 524.8,425.8' fill='#1f2023'/>
+<polygon points='436.6,656.1 440.8,653.6 440.8,536.5 436.6,538.9' fill='#8b8d90'/>
+<polygon points='432.3,653.6 436.6,656.1 436.6,538.9 432.3,536.5' fill='#a5a7ab'/>
 <polygon points='389.2,490.9 528.7,410.4 521.9,406.5 382.5,487.0' fill='#a2936c'/>
 <polygon points='389.2,494.8 528.7,414.3 528.7,410.4 389.2,490.9' fill='#a2936c'/>
-<polygon points='490.2,651.9 633.9,569.0 600.1,549.4 456.4,632.4' fill='#a2936c'/>
-<polygon points='594.6,516.0 598.8,513.6 594.6,511.1 590.4,513.6' fill='#8b8d90'/>
+<polygon points='505.0,716.6 648.7,633.6 648.7,594.6 505.0,677.5' fill='#a2936c'/>
+<polygon points='329.6,410.4 473.3,327.4 473.3,288.4 329.6,371.3' fill='#a2936c'/>
 <polygon points='403.5,497.0 408.0,504.2 541.1,427.3 536.6,420.2' fill='#8a7f6a'/>
 <polygon points='400.2,489.3 403.5,497.0 536.6,420.2 533.3,412.4' fill='#8a7f6a'/>
-<polygon points='594.6,507.2 604.8,501.4 594.6,495.5 584.5,501.4' fill='#8a5429'/>
 <polygon points='408.0,504.2 413.5,510.2 546.6,433.4 541.1,427.3' fill='#8a7f6a'/>
 <polygon points='511.4,576.3 646.6,498.2 460.6,390.8 325.4,468.9' fill='#436545'/>
-<polygon points='594.6,517.0 604.8,511.1 604.8,501.4 594.6,507.2' fill='#8a5429'/>
-<polygon points='584.5,511.1 594.6,517.0 594.6,507.2 584.5,501.4' fill='#a46430'/>
-<polygon points='490.2,659.2 633.9,576.3 633.9,569.0 490.2,651.9' fill='#a2936c'/>
+<polygon points='505.0,677.5 648.7,594.6 642.4,590.9 498.7,673.9' fill='#a2936c'/>
 <polygon points='398.5,481.7 400.2,489.3 533.3,412.4 531.6,404.8' fill='#8a7f6a'/>
 <polygon points='511.4,573.8 646.6,495.8 460.6,388.4 325.4,466.5' fill='#61656b'/>
+<polygon points='329.6,371.3 473.3,288.4 467.0,284.7 323.3,367.7' fill='#a2936c'/>
 <polygon points='413.5,510.2 419.4,514.7 552.6,437.8 546.6,433.4' fill='#8a7f6a'/>
 <polygon points='398.5,474.7 398.5,481.7 531.6,404.8 531.6,397.9' fill='#8a7f6a'/>
 <polygon points='419.4,514.7 425.4,517.1 558.5,440.3 552.6,437.8' fill='#8a7f6a'/>
@@ -82,63 +95,56 @@
 <polygon points='430.9,517.4 435.4,515.5 568.5,438.6 564.0,440.5' fill='#8a7f6a'/>
 <polygon points='388.4,503.0 387.8,504.1 578.0,394.3 578.6,393.2' fill='#949699'/>
 <polygon points='392.3,510.8 393.4,510.5 583.6,400.7 582.5,401.0' fill='#8b8d90'/>
+<polygon points='436.6,538.9 440.8,536.5 436.6,534.1 432.3,536.5' fill='#8b8d90'/>
 <polygon points='445.3,531.4 447.2,534.8 580.4,457.9 578.4,454.6' fill='#1f2023'/>
 <polygon points='447.2,534.8 449.9,537.1 583.0,460.3 580.4,457.9' fill='#1f2023'/>
 <polygon points='444.6,528.0 445.3,531.4 578.4,454.6 577.7,451.1' fill='#1f2023'/>
-<polygon points='327.3,528.8 496.4,626.4 496.4,619.1 327.3,521.5' fill='#b2b6ba'/>
-<polygon points='496.4,619.1 502.7,615.4 333.7,517.8 327.3,521.5' fill='#96999d'/>
 <polygon points='449.9,537.1 452.5,537.8 585.6,461.0 583.0,460.3' fill='#1f2023'/>
 <polygon points='445.3,525.3 444.6,528.0 577.7,451.1 578.4,448.5' fill='#1f2023'/>
 <polygon points='402.7,439.9 533.8,364.2 521.9,357.4 390.9,433.1' fill='#436545'/>
-<polygon points='490.2,593.4 633.9,510.4 600.1,490.9 456.4,573.8' fill='#a2936c'/>
-<polygon points='495.7,690.2 499.9,687.8 499.9,570.7 495.7,573.1' fill='#8b8d90'/>
-<polygon points='491.5,687.8 495.7,690.2 495.7,573.1 491.5,570.7' fill='#a5a7ab'/>
+<polygon points='436.6,530.2 446.7,524.3 436.6,518.5 426.4,524.3' fill='#8a5429'/>
+<polygon points='436.6,539.9 446.7,534.1 446.7,524.3 436.6,530.2' fill='#8a5429'/>
+<polygon points='426.4,534.1 436.6,539.9 436.6,530.2 426.4,524.3' fill='#a46430'/>
 <polygon points='402.7,443.3 533.8,367.7 533.8,364.2 402.7,439.9' fill='#436545'/>
 <polygon points='450.1,526.0 589.5,445.5 582.8,441.6 443.3,522.1' fill='#a2936c'/>
 <polygon points='450.1,529.9 589.5,449.4 589.5,445.5 450.1,526.0' fill='#a2936c'/>
 <polygon points='648.7,353.0 655.0,349.4 469.1,242.0 462.8,245.7' fill='#436545'/>
-<polygon points='490.2,600.7 633.9,517.7 633.9,510.4 490.2,593.4' fill='#a2936c'/>
 <polygon points='382.5,490.9 389.2,494.8 389.2,490.9 382.5,487.0' fill='#c0ae81'/>
 <polygon points='450.1,619.0 509.2,653.1 509.2,594.6 450.1,560.4' fill='#242629'/>
 <polygon points='509.2,594.6 560.0,565.3 500.8,531.1 450.1,560.4' fill='#1f2023'/>
-<polygon points='456.4,639.7 490.2,659.2 490.2,651.9 456.4,632.4' fill='#c0ae81'/>
+<polygon points='498.7,712.9 505.0,716.6 505.0,677.5 498.7,673.9' fill='#c0ae81'/>
 <polygon points='414.6,437.4 545.6,361.8 533.8,355.0 402.7,430.6' fill='#436545'/>
+<polygon points='323.3,406.7 329.6,410.4 329.6,371.3 323.3,367.7' fill='#c0ae81'/>
 <polygon points='509.2,653.1 560.0,623.9 560.0,565.3 509.2,594.6' fill='#1f2023'/>
+<polygon points='401.3,561.7 422.4,573.9 422.4,520.9 401.3,508.7' fill='#b2b6ba'/>
 <polygon points='325.4,481.1 511.4,588.5 511.4,576.3 325.4,468.9' fill='#4f7752'/>
 <polygon points='414.6,440.8 545.6,365.2 545.6,361.8 414.6,437.4' fill='#436545'/>
+<polygon points='422.4,573.9 428.8,570.3 428.8,517.2 422.4,520.9' fill='#96999d'/>
 <polygon points='325.4,468.9 511.4,576.3 511.4,573.8 325.4,466.5' fill='#73787f'/>
 <polygon points='426.4,440.9 557.4,365.2 545.6,358.4 414.6,434.0' fill='#436545'/>
 <polygon points='317.0,615.3 502.9,722.7 502.9,437.2 317.0,329.8' fill='#4f7752'/>
 <polygon points='426.4,444.3 557.4,368.6 557.4,365.2 426.4,440.9' fill='#436545'/>
 <polygon points='379.1,442.3 390.9,449.2 390.9,445.7 379.1,438.9' fill='#4f7752'/>
+<polygon points='422.4,520.9 428.8,517.2 407.6,505.0 401.3,508.7' fill='#96999d'/>
 <polygon points='438.2,451.1 569.3,375.5 557.4,368.6 426.4,444.3' fill='#436545'/>
 <polygon points='450.1,467.2 581.1,391.6 569.3,384.7 438.2,460.4' fill='#436545'/>
 <polygon points='438.2,454.5 569.3,378.9 569.3,375.5 438.2,451.1' fill='#436545'/>
 <polygon points='461.9,486.7 592.9,411.1 581.1,404.3 450.1,479.9' fill='#436545'/>
-<polygon points='495.7,573.1 499.9,570.7 495.7,568.2 491.5,570.7' fill='#8b8d90'/>
 <polygon points='511.4,588.5 646.6,510.4 646.6,498.2 511.4,576.3' fill='#436545'/>
 <polygon points='450.1,470.6 581.1,395.0 581.1,391.6 450.1,467.2' fill='#436545'/>
 <polygon points='461.9,490.1 592.9,414.5 592.9,411.1 461.9,486.7' fill='#436545'/>
 <polygon points='511.4,576.3 646.6,498.2 646.6,495.8 511.4,573.8' fill='#61656b'/>
-<polygon points='495.7,564.3 505.9,558.5 495.7,552.6 485.6,558.5' fill='#8a5429'/>
-<polygon points='495.7,574.1 505.9,568.2 505.9,558.5 495.7,564.3' fill='#8a5429'/>
-<polygon points='485.6,568.2 495.7,574.1 495.7,564.3 485.6,558.5' fill='#a46430'/>
 <polygon points='390.9,436.5 402.7,443.3 402.7,439.9 390.9,433.1' fill='#4f7752'/>
 <polygon points='398.3,502.5 422.0,516.1 422.0,488.8 398.3,475.1' fill='#a5a7ab'/>
-<polygon points='490.2,515.3 633.9,432.3 600.1,412.8 456.4,495.8' fill='#a2936c'/>
-<polygon points='456.4,581.2 490.2,600.7 490.2,593.4 456.4,573.8' fill='#c0ae81'/>
 <polygon points='422.0,516.1 427.9,512.7 427.9,485.4 422.0,488.8' fill='#8b8d90'/>
 <polygon points='422.0,488.8 427.9,485.4 404.2,471.7 398.3,475.1' fill='#8b8d90'/>
 <polygon points='443.3,526.0 450.1,529.9 450.1,526.0 443.3,522.1' fill='#c0ae81'/>
-<polygon points='496.4,626.4 502.7,622.7 502.7,615.4 496.4,619.1' fill='#96999d'/>
-<polygon points='490.2,522.6 633.9,439.6 633.9,432.3 490.2,515.3' fill='#a2936c'/>
 <polygon points='402.7,434.0 414.6,440.8 414.6,437.4 402.7,430.6' fill='#4f7752'/>
 <polygon points='414.6,437.4 426.4,444.3 426.4,440.9 414.6,434.0' fill='#4f7752'/>
 <polygon points='426.4,447.7 438.2,454.5 438.2,451.1 426.4,444.3' fill='#4f7752'/>
 <polygon points='438.2,463.8 450.1,470.6 450.1,467.2 438.2,460.4' fill='#4f7752'/>
 <polygon points='450.1,483.3 461.9,490.1 461.9,486.7 450.1,479.9' fill='#4f7752'/>
 <polygon points='502.9,722.7 509.2,719.0 509.2,433.5 502.9,437.2' fill='#436545'/>
-<polygon points='456.4,503.1 490.2,522.6 490.2,515.3 456.4,495.8' fill='#c0ae81'/>
 <polygon points='502.9,437.2 509.2,433.5 323.3,326.2 317.0,329.8' fill='#436545'/>
 </g>
 <text x='46.0' y='244.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>General arrangement — assembled</text>
@@ -196,8 +202,26 @@
 <text x='90.0' y='855.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Safety &amp; risk</text>
 <text x='36.0' y='868.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>E-101</text>
 <text x='90.0' y='868.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Exploded + BOM</text>
-<text x='36.0' y='881.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>Q-101</text>
-<text x='90.0' y='881.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Commissioning</text>
+<text x='36.0' y='881.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>M-101</text>
+<text x='90.0' y='881.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Kinematics</text>
+<text x='36.0' y='894.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-001</text>
+<text x='90.0' y='894.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Housed stretcher</text>
+<text x='36.0' y='907.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-002</text>
+<text x='90.0' y='907.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Vertical way</text>
+<text x='36.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-006</text>
+<text x='90.0' y='920.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Drive bearing</text>
+<text x='36.0' y='933.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-007</text>
+<text x='90.0' y='933.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Idler float</text>
+<text x='36.0' y='946.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-011</text>
+<text x='90.0' y='946.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Lift &amp; capture</text>
+<text x='36.0' y='959.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>F-101</text>
+<text x='90.0' y='959.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Part register</text>
+<text x='36.0' y='972.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>S-101</text>
+<text x='90.0' y='972.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Load path</text>
+<text x='36.0' y='985.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>Q-101</text>
+<text x='90.0' y='985.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Commissioning</text>
+<text x='36.0' y='998.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>Q-102</text>
+<text x='90.0' y='998.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Zero-gap</text>
 <text x='268.0' y='798.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Build steps</text>
 <text x='268.0' y='816.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-01</text>
 <text x='322.0' y='816.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>01 Stock</text>
@@ -262,6 +286,13 @@
 <text x='554.0' y='1011.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Pack-bore jig</text>
 <text x='500.0' y='1024.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-016</text>
 <text x='554.0' y='1024.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Nut block</text>
+<text x='500.0' y='1037.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-017</text>
+<text x='554.0' y='1037.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Table shoe</text>
+<text x='500.0' y='1050.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-018</text>
+<text x='554.0' y='1050.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Thrust block</text>
+<text x='500.0' y='1063.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-019</text>
+<text x='554.0' y='1063.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Home dog</text>
+<text x='500.0' y='1076.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>…</text>
 <text x='732.0' y='798.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Assembly &amp; overview</text>
 <text x='732.0' y='816.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d5a4c' text-anchor='start' font-weight='600'>IDX</text>
 <text x='786.0' y='816.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='10' fill='#1a1a1a' text-anchor='start'>Drawing index</text>

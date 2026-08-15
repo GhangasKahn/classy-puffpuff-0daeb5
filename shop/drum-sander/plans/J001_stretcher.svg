@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-001</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Housed stretcher — racking triangle</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Joinery</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>J-001</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P-003 ×3 into P-001L/R  ·  glue + #8 × 2″ through-screws</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<rect x='36.0' y='150.0' width='720.0' height='420.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='271.7,462.8 385.9,396.9 385.9,365.8 271.7,431.8' fill='#a2936c'/>
+<polygon points='271.7,431.8 385.9,365.8 380.9,362.9 266.6,428.9' fill='#a2936c'/>
+<polygon points='409.4,548.2 530.4,478.3 382.6,393.0 261.6,462.8' fill='#989895'/>
+<polygon points='266.6,459.9 271.7,462.8 271.7,431.8 266.6,428.9' fill='#c0ae81'/>
+<polygon points='377.5,395.9 525.4,481.2 525.4,254.3 377.5,168.9' fill='#b5b5b1'/>
+<polygon points='261.6,468.6 409.4,554.0 409.4,548.2 261.6,462.8' fill='#b5b5b1'/>
+<polygon points='409.4,554.0 530.4,484.2 530.4,478.3 409.4,548.2' fill='#989895'/>
+<polygon points='411.1,543.3 525.4,477.4 525.4,446.3 411.1,512.3' fill='#a2936c'/>
+<polygon points='271.7,299.9 385.9,233.9 385.9,202.9 271.7,268.8' fill='#a2936c'/>
+<polygon points='411.1,512.3 525.4,446.3 520.3,443.4 406.1,509.4' fill='#a2936c'/>
+<polygon points='271.7,268.8 385.9,202.9 380.9,199.9 266.6,265.9' fill='#a2936c'/>
+<polygon points='525.4,481.2 530.4,478.3 530.4,251.4 525.4,254.3' fill='#989895'/>
+<polygon points='525.4,254.3 530.4,251.4 382.6,166.0 377.5,168.9' fill='#989895'/>
+<polygon points='406.1,540.4 411.1,543.3 411.1,512.3 406.1,509.4' fill='#c0ae81'/>
+<polygon points='266.6,296.9 271.7,299.9 271.7,268.8 266.6,265.9' fill='#c0ae81'/>
+<polygon points='261.6,462.8 409.4,548.2 409.4,321.2 261.6,235.8' fill='#b5b5b1'/>
+<polygon points='409.4,548.2 414.5,545.3 414.5,318.3 409.4,321.2' fill='#989895'/>
+<polygon points='409.4,321.2 414.5,318.3 266.6,232.9 261.6,235.8' fill='#989895'/>
+</g>
+<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Joint geometry</text>
+<text x='780.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GEOMETRY</text>
+<text x='780.0' y='172.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Housed dado 0.25″ deep × 0.75″ wide × 4″ tall. Rails stand</text>
+<text x='780.0' y='188.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  on edge.</text>
+<text x='780.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• IN-LO: Y 0.25–1″ · Z 1–5″</text>
+<text x='780.0' y='228.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• OUT-LO: Y 21–21.75″ · Z 1–5″</text>
+<text x='780.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• OUT-HI: Y 21–21.75″ · Z 22–26″</text>
+<text x='780.0' y='268.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Stretcher finished length 17″ (housing 0.25″ each end).</text>
+<text x='780.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Min Z gap to table envelope 6.062″ (CALC-004). Do not</text>
+<text x='780.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  invent a fourth rail at Z=12.</text>
+<text x='780.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>CUT SEQUENCE</text>
+<text x='780.0' y='422.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Rip all three to 4″ on one fence (S-004). Crosscut to</text>
+<text x='780.0' y='438.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  housed length on one stop (S-003).</text>
+<text x='780.0' y='458.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Dado inner faces only, after the pair is split. Test width</text>
+<text x='780.0' y='474.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  on an offcut of the same ply.</text>
+<text x='780.0' y='494.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Dry-fit, measure inner span 16.50″, glue, pull diagonals,</text>
+<text x='780.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  then drill pilots through the side.</text>
+<text x='36.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ACCEPTANCE</text>
+<text x='36.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Housing snug — no daylight. Inner span 16.50″ at top,</text>
+<text x='36.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  middle, and bottom.</text>
+<text x='36.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Diagonals equal within 1/32″ (QC-03). No rail occupies</text>
+<text x='36.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  table Z 11.5–15.94″ (QC-13).</text>
+<text x='860.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MOVEMENT / CONSTRAINT</text>
+<text x='860.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Plywood — no seasonal lock. Joint is FIXED. Ways, not</text>
+<text x='860.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  these rails, locate the table.</text>
+<text x='860.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Load path: feed force → sides → this triangle. A missing</text>
+<text x='860.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  OUT-HI rail lets the box parallelogram.</text>
+</svg>

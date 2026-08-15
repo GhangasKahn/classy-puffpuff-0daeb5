@@ -15,6 +15,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "shop", "drum-sander", "cad"))
 from walter_ds16 import GEOM as G  # noqa: E402
 from walter_ds16 import SPEC as S  # noqa: E402
+from walter_ds16 import stretcher_records  # noqa: E402
 
 REND = os.path.join(ROOT, "shop", "drum-sander", "renders")
 PLANS = os.path.join(ROOT, "shop", "drum-sander", "plans")
@@ -129,14 +130,27 @@ def machine(explode: float = 0.0) -> list[Mesh]:
     meshes.append(box("sides", "#c4a574", -hx - ex_side, 0.75, -hz, side_t, H - 0.75, D))
     meshes.append(box("sides", "#c4a574", hx - side_t + ex_side, 0.75, -hz, side_t, H - 0.75, D))
 
-    # Stretchers (3) — housed length, drawn spanning inner faces
-    for y in S.stretcher_z:
-        meshes.append(box("stretch", "#8a7355", -hx + side_t - S.stretcher_housing, y, -2.0, G.stretcher_length, 0.75, S.stretcher_height))
+    # Stretchers (3) — on-edge rails at IN-LO / OUT-LO / OUT-HI
+    for rec in stretcher_records():
+        y0 = rec["y0"] - hz
+        meshes.append(
+            box(
+                "stretch",
+                "#8a7355",
+                -hx + side_t - S.stretcher_housing,
+                rec["z0"],
+                y0,
+                G.stretcher_length,
+                S.stretcher_height,
+                rec["y1"] - rec["y0"],
+            )
+        )
 
-    # Ways — projecting only (rebate is in the side)
+    # Vertical ways
     wp = G.way_project
-    meshes.append(box("ways", "#d9dcde", -hx + side_t, S.way_z, -hz + 1, wp, S.way_stock, D - 2))
-    meshes.append(box("ways", "#d9dcde", hx - side_t - wp, S.way_z, -hz + 1, wp, S.way_stock, D - 2))
+    way_y_world = G.way_y0 - hz
+    meshes.append(box("ways", "#d9dcde", -hx + side_t, G.way_z0, way_y_world, wp, G.way_len, G.way_width))
+    meshes.append(box("ways", "#d9dcde", hx - side_t - wp, G.way_z0, way_y_world, wp, G.way_len, G.way_width))
 
     # Table + wear
     tw, td, tt = G.table_width, G.table_depth, G.table_thick
@@ -144,9 +158,10 @@ def machine(explode: float = 0.0) -> list[Mesh]:
     meshes.append(box("table", "#c4b8a4", -tw / 2, ty, -td / 2, tw, tt - 0.25, td))
     meshes.append(box("table", "#d9dcde", -tw / 2, ty + tt - 0.25, -td / 2, tw, 0.25, td))
 
-    # Acme screws
-    for x in (-6.8, 6.8):
-        meshes.append(box("elev", "#8a9098", x - 0.25, 2.0, -6.25, 0.5, 14.0 + ey_table * 0.3, 0.5))
+    # Acme screws — both on drum CL (left/right X)
+    acme_z = G.acme_y - hz
+    for x in (G.acme_x_left - hx, G.acme_x_right - hx):
+        meshes.append(box("elev", "#8a9098", x - 0.25, 2.0, acme_z - 0.25, 0.5, 14.0 + ey_table * 0.3, 0.5))
 
     # Drum / shaft / bearings
     dy = G.bearing_cl_z + ey_drum

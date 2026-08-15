@@ -27,10 +27,10 @@ const COLORS = {
 const PARTS = {
   sides: { label: "Side panels (2)", detail: "¾″ Baltic birch · stack-drilled as a pair" },
   base: { label: "Base deck", detail: "¾″ BB spanning overall width" },
-  stretch: { label: "Stretchers (3)", detail: "P-003 housed in ¼″ dados — not the table datum" },
-  ways: { label: "UHMW ways", detail: "Inner-face vertical reference · no rack" },
+  stretch: { label: "Stretchers (3)", detail: "IN-LO / OUT-LO / OUT-HI · miss the table" },
+  ways: { label: "Vertical UHMW ways + shoes", detail: "Captured Z-lift · wrap the 0.23″ tongue" },
   table: { label: "Torsion-box table", detail: "Skins + ribs + phenolic/MIC-6 wear face" },
-  elev: { label: "Dual Acme lift", detail: "½-10 screws · chain couple · home dog" },
+  elev: { label: "Dual Acme lift", detail: "Both screws on drum CL · chain · home dog" },
   drum: { label: "Sanding drum", detail: "⌀5″ × 15.75″ · pack-bored discs" },
   shaft: { label: "Shaft + bearings", detail: "Fixed drive · floating idler" },
   rollers: { label: "Hold-down rollers", detail: "Infeed/outfeed · 0.030″ below drum" },
@@ -102,18 +102,31 @@ function buildMachine() {
   R.position.set(P.hx - P.sideT / 2, 0.75 + (P.sideH - 0.75) / 2, 0);
   grp("sides").add(tag(R, "sides"));
 
-  for (const y of P.stretcherZ.map((z) => z + 0.375)) {
-    const s = box(P.stretcherLen, 0.75, P.stretcherH, COLORS.stretch);
-    s.position.set(0, y, -6);
+  for (const st of P.stretcherStations) {
+    const yMid = (st.y0 + st.y1) / 2 - P.hz;
+    const zMid = (st.z0 + st.z1) / 2;
+    const s = box(P.stretcherLen, st.z1 - st.z0, st.y1 - st.y0, COLORS.stretch);
+    s.position.set(0, zMid, yMid);
     grp("stretch").add(tag(s, "stretch"));
   }
 
-  const wayL = box(P.wayProject, P.wayStock, P.sideD - 2, COLORS.ways, { roughness: 0.3 });
-  wayL.position.set(-P.hx + P.sideT + P.wayProject / 2, P.wayZ + P.wayStock / 2, 0);
+  const wayY = (P.wayY0 + P.wayWidth / 2) - P.hz;
+  const wayZc = P.wayZ0 + P.wayLen / 2;
+  const wayL = box(P.wayProject, P.wayLen, P.wayWidth, COLORS.ways, { roughness: 0.3 });
+  wayL.position.set(-P.hx + P.sideT + P.wayProject / 2, wayZc, wayY);
   grp("ways").add(tag(wayL, "ways"));
-  const wayR = box(P.wayProject, P.wayStock, P.sideD - 2, COLORS.ways, { roughness: 0.3 });
-  wayR.position.set(P.hx - P.sideT - P.wayProject / 2, P.wayZ + P.wayStock / 2, 0);
+  const wayR = box(P.wayProject, P.wayLen, P.wayWidth, COLORS.ways, { roughness: 0.3 });
+  wayR.position.set(P.hx - P.sideT - P.wayProject / 2, wayZc, wayY);
   grp("ways").add(tag(wayR, "ways"));
+
+  // Shoes wrap the tongue, hanging under the table
+  const shoeZ = P.tableY - 0.2;
+  const shoeL = box(P.shoeT, P.shoeH, P.wayWidth, 0xcfd3d5, { roughness: 0.35 });
+  shoeL.position.set(-P.hx + P.sideT + P.wayProject + P.shoeT / 2, shoeZ, wayY);
+  grp("ways").add(tag(shoeL, "ways"));
+  const shoeR = box(P.shoeT, P.shoeH, P.wayWidth, 0xcfd3d5, { roughness: 0.35 });
+  shoeR.position.set(P.hx - P.sideT - P.wayProject - P.shoeT / 2, shoeZ, wayY);
+  grp("ways").add(tag(shoeR, "ways"));
 
   const core = box(P.tableW, P.tableT - 0.25, P.tableD, COLORS.table);
   core.position.set(0, P.tableY + (P.tableT - 0.25) / 2, 0);
@@ -122,17 +135,21 @@ function buildMachine() {
   wear.position.set(0, P.tableY + P.tableT - 0.125, 0);
   grp("table").add(tag(wear, "table"));
 
-  for (const x of [-6.8, 6.8]) {
+  const acmeWorldZ = (P.acmeY ?? P.drumFeedY) - P.hz;
+  for (const x of [P.acmeX0 - P.hx, P.acmeX1 - P.hx]) {
     const sc = new THREE.Mesh(
       new THREE.CylinderGeometry(0.25, 0.25, 14, 16),
       mat(COLORS.elev, { metalness: 0.55, roughness: 0.35 })
     );
-    sc.position.set(x, 9, -6);
+    sc.position.set(x, 9, acmeWorldZ);
     sc.castShadow = true;
     grp("elev").add(tag(sc, "elev"));
     const nut = box(1.2, 0.5, 1.2, 0xb87333, { metalness: 0.4 });
-    nut.position.set(x, P.tableY - 0.1, -6);
+    nut.position.set(x, P.tableY - 0.1, acmeWorldZ);
     grp("elev").add(tag(nut, "elev"));
+    const thrust = box(P.thrustL || 3, P.thrustH || 1.5, P.thrustW || 3, 0x8a7355);
+    thrust.position.set(x, 0.75 + (P.thrustH || 1.5) / 2, acmeWorldZ);
+    grp("elev").add(tag(thrust, "elev"));
   }
 
   const drumSpin = new THREE.Group();

@@ -9,8 +9,8 @@
 <text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>A-TABLE</text>
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Torsion box + phenolic/MIC-6</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
-<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P-004 ×2 · P-005 ribs · P-006 wear · P-016 ×2 · H-007/H-008</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P-004 ×2 · P-005 ribs · P-006 wear · P-016 ×2 · P-017 ×2 · H-007/H-008</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · Internal inches. Millimetres are interface-only.</text>
 <rect x='40.0' y='100.0' width='900.0' height='520.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
@@ -25,10 +25,10 @@
 <text x='980.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>TABLE BUILD</text>
 <text x='980.0' y='160.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Glue the box. Flatten. Then bond the wear face. QC-05 before</text>
 <text x='980.0' y='176.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  any sanding.</text>
-<text x='980.0' y='196.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bronze nuts P-016 on the underside, both ends. Chain-couple</text>
-<text x='980.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the ½-10 screws.</text>
-<text x='980.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Uncouple LEFT for taper work. Recouple against the home dog —</text>
-<text x='980.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  that dog is the last known parallel.</text>
-<text x='980.0' y='268.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Table must slide on the ways with 0.02" clearance per side. If</text>
-<text x='980.0' y='284.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  it does not enter, the ways are proud — see D-020.</text>
+<text x='980.0' y='196.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bronze nuts P-016 on the underside, both on the drum</text>
+<text x='980.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  centerline — not at infeed and outfeed.</text>
+<text x='980.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• P-017 shoes wrap the vertical ways. Uncouple LEFT for taper.</text>
+<text x='980.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Recouple against P-019 — last known parallel.</text>
+<text x='980.0' y='268.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Shoes capture X/Y with 0.01" X play. If the table does not</text>
+<text x='980.0' y='284.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  rise, the ways are proud — see D-020 / D-027.</text>
 </svg>

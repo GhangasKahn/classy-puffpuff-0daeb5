@@ -11,7 +11,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>05 Drum</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 9 of 14  ·  05 Drum</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <circle cx='44.0' cy='112.0' r='9.0' fill='#d8d8d4' stroke='#1a1a1a' stroke-width='1.1'/>
 <text x='44.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>1</text>
@@ -44,24 +44,29 @@
 <text x='420.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>05 Drum</text>
 <rect x='36.0' y='150.0' width='820.0' height='560.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='276.8,569.9 432.3,480.2 432.3,437.9 276.8,527.7' fill='#989895'/>
+<polygon points='276.8,527.7 432.3,437.9 425.4,434.0 270.0,523.7' fill='#989895'/>
 <polygon points='464.3,686.1 628.9,591.0 427.7,474.9 263.1,569.9' fill='#989895'/>
-<polygon points='427.9,387.7 610.8,493.3 610.8,485.3 427.9,379.7' fill='#b5b5b1'/>
-<polygon points='610.8,485.3 617.7,481.4 434.8,375.8 427.9,379.7' fill='#989895'/>
+<polygon points='270.0,566.0 276.8,569.9 276.8,527.7 270.0,523.7' fill='#b5b5b1'/>
+<polygon points='507.9,423.3 530.8,436.5 530.8,379.1 507.9,365.9' fill='#b5b5b1'/>
+<polygon points='530.8,436.5 537.6,432.5 537.6,375.1 530.8,379.1' fill='#989895'/>
 <polygon points='420.9,478.8 622.0,595.0 622.0,286.1 420.9,170.0' fill='#b5b5b1'/>
 <polygon points='548.9,329.7 547.4,329.2 546.2,329.6 545.5,330.8 545.5,332.6 546.2,334.6 547.4,336.3 548.9,337.6 550.4,338.1 551.6,337.7 552.2,336.5 552.2,334.7 551.6,332.7 550.4,330.9' fill='#a5a7ab'/>
+<polygon points='530.8,379.1 537.6,375.1 514.8,361.9 507.9,365.9' fill='#989895'/>
 <polygon points='263.1,577.8 464.3,694.0 464.3,686.1 263.1,569.9' fill='#b5b5b1'/>
 <polygon points='508.9,356.7 534.5,371.5 534.5,342.0 508.9,327.2' fill='#a5a7ab'/>
 <polygon points='518.0,325.1 511.6,322.4 505.7,322.1 500.7,324.2 497.2,328.5 495.4,334.6 495.4,342.2 497.2,350.4 500.7,358.8 505.7,366.5 511.6,373.1 518.0,377.9 524.5,380.5 530.4,380.8 535.3,378.7 538.8,374.4 540.6,368.3 540.6,360.8 538.8,352.5 535.3,344.1 530.4,336.4 524.5,329.8' fill='#b5b5b1'/>
 <polygon points='534.5,371.5 540.9,367.8 540.9,338.3 534.5,342.0' fill='#8b8d90'/>
 <polygon points='534.5,342.0 540.9,338.3 515.3,323.5 508.9,327.2' fill='#8b8d90'/>
 <polygon points='464.3,694.0 628.9,599.0 628.9,591.0 464.3,686.1' fill='#989895'/>
-<polygon points='610.8,493.3 617.7,489.3 617.7,481.4 610.8,485.3' fill='#989895'/>
-<polygon points='450.6,609.5 606.0,519.8 569.5,498.6 414.0,588.4' fill='#989895'/>
+<polygon points='466.6,679.5 622.0,589.7 622.0,547.5 466.6,637.2' fill='#989895'/>
+<polygon points='276.8,348.2 432.3,258.4 432.3,216.2 276.8,305.9' fill='#989895'/>
 <polygon points='356.7,441.9 361.6,449.7 505.7,366.5 500.7,358.8' fill='#989895'/>
 <polygon points='353.2,433.6 356.7,441.9 500.7,358.8 497.2,350.4' fill='#989895'/>
 <polygon points='361.6,449.7 367.5,456.2 511.6,373.1 505.7,366.5' fill='#989895'/>
-<polygon points='450.6,617.4 606.0,527.7 606.0,519.8 450.6,609.5' fill='#989895'/>
+<polygon points='466.6,637.2 622.0,547.5 615.2,543.5 459.7,633.3' fill='#989895'/>
 <polygon points='351.4,425.3 353.2,433.6 497.2,350.4 495.4,342.2' fill='#989895'/>
+<polygon points='276.8,305.9 432.3,216.2 425.4,212.2 270.0,302.0' fill='#989895'/>
 <polygon points='367.5,456.2 374.0,461.0 518.0,377.9 511.6,373.1' fill='#989895'/>
 <polygon points='351.4,417.8 351.4,425.3 495.4,342.2 495.4,334.6' fill='#989895'/>
 <polygon points='374.0,461.0 380.4,463.7 524.5,380.5 518.0,377.9' fill='#989895'/>
@@ -77,22 +82,17 @@
 <polygon points='386.3,464.0 391.3,461.9 535.3,378.7 530.4,380.8' fill='#989895'/>
 <polygon points='340.4,448.4 339.8,449.6 545.5,330.8 546.2,329.6' fill='#949699'/>
 <polygon points='344.6,456.9 345.8,456.5 551.6,337.7 550.4,338.1' fill='#8b8d90'/>
-<polygon points='274.3,476.3 457.2,581.9 457.2,574.0 274.3,468.4' fill='#b5b5b1'/>
-<polygon points='457.2,574.0 464.1,570.0 281.2,464.4 274.3,468.4' fill='#989895'/>
-<polygon points='450.6,546.2 606.0,456.4 569.5,435.3 414.0,525.0' fill='#989895'/>
 <polygon points='622.0,286.1 628.9,282.2 427.7,166.0 420.9,170.0' fill='#989895'/>
-<polygon points='450.6,554.1 606.0,464.3 606.0,456.4 450.6,546.2' fill='#989895'/>
-<polygon points='414.0,596.3 450.6,617.4 450.6,609.5 414.0,588.4' fill='#b5b5b1'/>
+<polygon points='459.7,675.5 466.6,679.5 466.6,637.2 459.7,633.3' fill='#b5b5b1'/>
+<polygon points='270.0,344.2 276.8,348.2 276.8,305.9 270.0,302.0' fill='#b5b5b1'/>
+<polygon points='354.4,511.9 377.2,525.1 377.2,467.7 354.4,454.5' fill='#b5b5b1'/>
+<polygon points='377.2,525.1 384.1,521.2 384.1,463.8 377.2,467.7' fill='#989895'/>
 <polygon points='263.1,569.9 464.3,686.1 464.3,377.2 263.1,261.0' fill='#b5b5b1'/>
+<polygon points='377.2,467.7 384.1,463.8 361.2,450.6 354.4,454.5' fill='#989895'/>
 <polygon points='351.1,447.8 376.7,462.6 376.7,433.0 351.1,418.3' fill='#a5a7ab'/>
-<polygon points='450.6,461.7 606.0,371.9 569.5,350.8 414.0,440.6' fill='#989895'/>
-<polygon points='414.0,533.0 450.6,554.1 450.6,546.2 414.0,525.0' fill='#b5b5b1'/>
 <polygon points='376.7,462.6 383.1,458.9 383.1,429.3 376.7,433.0' fill='#8b8d90'/>
 <polygon points='376.7,433.0 383.1,429.3 357.5,414.6 351.1,418.3' fill='#8b8d90'/>
-<polygon points='457.2,581.9 464.1,577.9 464.1,570.0 457.2,574.0' fill='#989895'/>
-<polygon points='450.6,469.6 606.0,379.8 606.0,371.9 450.6,461.7' fill='#989895'/>
 <polygon points='464.3,686.1 471.1,682.1 471.1,373.2 464.3,377.2' fill='#989895'/>
-<polygon points='414.0,448.5 450.6,469.6 450.6,461.7 414.0,440.6' fill='#b5b5b1'/>
 <polygon points='464.3,377.2 471.1,373.2 270.0,257.1 263.1,261.0' fill='#989895'/>
 </g>
 <text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Grey = already built · colour = this step</text>

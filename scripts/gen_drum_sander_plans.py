@@ -311,13 +311,11 @@ def sheet_d2():
     s.circle(X(bx), Y(bz), 1.1 * sc, fill="none", stroke=ACC, sw=2)
     s.circle(X(bx), Y(bz), 0.375 * sc, fill=STEEL, stroke=INK)
     s.text(X(bx) + 30, Y(bz), "FLANGE BEARING CL", 12, ACC)
-    # UHMW way
-    s.rect(X(1.5), Y(S.way_z + S.way_stock), (S.side_depth - 3) * sc, S.way_stock * sc, fill=LIGHT, stroke=ACC, sw=1.5)
-    s.text(X(10.5), Y(S.way_z + S.way_stock + 0.4), f"P-007 WAY  rebate {G.way_rebate:.3f}\"  project {G.way_project:.3f}\"", 11, ACC, "middle", bold=True)
-    s.circle(X(G.acme_y_infeed), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
-    s.circle(X(G.acme_y_outfeed), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
-    s.text(X(G.acme_y_infeed), Y(10.6), "L ACME", 10, STEEL, "middle")
-    s.text(X(G.acme_y_outfeed), Y(10.6), "R ACME", 10, STEEL, "middle")
+    # vertical UHMW way
+    s.rect(X(G.way_y0), Y(G.way_z1), G.way_width * sc, G.way_len * sc, fill=LIGHT, stroke=ACC, sw=1.5)
+    s.text(X(G.bearing_cl_y), Y(G.way_z1) - 10, f"P-007 VERTICAL WAY  rebate {G.way_rebate:.3f}\"  project {G.way_project:.3f}\"", 11, ACC, "middle", bold=True)
+    s.circle(X(G.acme_y), Y(12), 0.25 * sc, fill="none", stroke=STEEL, sw=1.5)
+    s.text(X(G.acme_y), Y(10.6), "ACME PAIR ON DRUM CL", 10, STEEL, "middle")
     # motor pivot
     s.circle(X(4), Y(6), 0.4 * sc, fill="none", stroke=GRAY, sw=1.5)
     s.text(X(4), Y(4.5), "MOTOR PIVOT", 11, DIM, "middle")

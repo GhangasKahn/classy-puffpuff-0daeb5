@@ -10,7 +10,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>cad/walter_ds16.py</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Everything downstream is computed from this page</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
 <text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
@@ -45,67 +45,76 @@
 <text x='286.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18.5"</text>
 <text x='396.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>VERIFIED layout</text>
 <text x='536.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>From floor datum</text>
-<text x='36.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_z</text>
-<text x='286.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>10.00"</text>
-<text x='396.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>VERIFIED layout</text>
-<text x='536.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Way bottom from floor</text>
-<text x='36.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>flange_bolt_square</text>
-<text x='286.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.05"</text>
-<text x='396.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ASSUMED</text>
-<text x='536.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Transfer the bearing you buy</text>
-<text x='36.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>slide_clearance</text>
-<text x='286.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.020"</text>
-<text x='396.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
-<text x='536.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Per side, table in ways</text>
-<text x='36.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>stretcher_housing</text>
-<text x='286.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.25"</text>
+<text x='36.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>bearing_cl_y</text>
+<text x='286.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>11.00"</text>
+<text x='396.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
+<text x='536.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>side_depth / 2 — drum CL, Acme Y, way CL</text>
+<text x='36.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_z0 / way_z1</text>
+<text x='286.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>11.00" – 16.44"</text>
+<text x='396.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
+<text x='536.0' y='360.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Vertical way covers table travel</text>
+<text x='36.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>flange_bolt_square</text>
+<text x='286.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.05"</text>
+<text x='396.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ASSUMED</text>
+<text x='536.0' y='382.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Transfer the bearing you buy</text>
+<text x='36.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>slide_clearance</text>
+<text x='286.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.020"</text>
 <text x='396.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
-<text x='536.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Dado depth each end</text>
-<text x='36.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>DERIVED GEOMETRY — do not edit these by hand</text>
-<text x='36.0' y='466.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>VALUE</text>
-<text x='286.0' y='466.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>RESULT</text>
-<text x='396.0' y='466.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>EQUATION</text>
-<line x1='36.0' y1='472.0' x2='936.0' y2='472.0' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='36.0' y='488.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>overall_width</text>
-<text x='286.0' y='488.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18.00"</text>
-<text x='396.0' y='488.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>clear + 2 × ply_actual</text>
-<text x='36.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>table_width</text>
-<text x='286.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16.00"</text>
-<text x='396.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>capacity + 2 × margin</text>
-<text x='36.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_project</text>
-<text x='286.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.230"</text>
-<text x='396.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>(clear − table_width)/2 − slide_clearance</text>
-<text x='36.0' y='554.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_rebate</text>
-<text x='286.0' y='554.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.520"</text>
-<text x='396.0' y='554.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_stock − way_project</text>
-<text x='36.0' y='576.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>stretcher_length</text>
-<text x='286.0' y='576.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>17.00"</text>
-<text x='396.0' y='576.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>clear + 2 × housing</text>
-<text x='36.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>drum_length</text>
-<text x='286.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>15.75"</text>
-<text x='396.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>disc count × disc_thick</text>
-<text x='36.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>surface_fpm</text>
-<text x='286.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1355 sfpm</text>
-<text x='396.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>π × drum_od / 12 × drum_rpm</text>
-<text x='36.0' y='642.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>acme_per_turn</text>
-<text x='286.0' y='642.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.1000"</text>
-<text x='396.0' y='642.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1 / acme_tpi</text>
-<text x='36.0' y='680.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUMS</text>
-<text x='36.0' y='704.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-A</text>
-<text x='146.0' y='704.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L/R · Bottom edge</text>
-<text x='470.0' y='704.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Z = 0 floor / base top after install</text>
-<text x='36.0' y='724.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-B</text>
-<text x='146.0' y='724.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L/R · Infeed edge</text>
-<text x='470.0' y='724.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Y = 0; bearing_cl_y measured from here</text>
-<text x='36.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-C</text>
-<text x='146.0' y='744.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L/R · Inner face</text>
-<text x='470.0' y='744.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>X local; dados and way rebate</text>
-<text x='36.0' y='764.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-D</text>
-<text x='146.0' y='764.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-006 · Wear-face top</text>
-<text x='470.0' y='764.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Table plane; A/B indicator reference</text>
-<text x='36.0' y='784.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-E</text>
-<text x='146.0' y='784.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-010 · Drum axis</text>
-<text x='470.0' y='784.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Fixed by H-001; TIR and parallel</text>
+<text x='536.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Per side, table to tongue</text>
+<text x='36.0' y='426.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>stretcher_housing</text>
+<text x='286.0' y='426.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.25"</text>
+<text x='396.0' y='426.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
+<text x='536.0' y='426.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Dado depth each end</text>
+<text x='36.0' y='464.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>DERIVED GEOMETRY — do not edit these by hand</text>
+<text x='36.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>VALUE</text>
+<text x='286.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>RESULT</text>
+<text x='396.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>EQUATION</text>
+<line x1='36.0' y1='494.0' x2='936.0' y2='494.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='36.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>overall_width</text>
+<text x='286.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18.00"</text>
+<text x='396.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>clear + 2 × ply_actual</text>
+<text x='36.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>table_width</text>
+<text x='286.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16.00"</text>
+<text x='396.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>capacity + 2 × margin</text>
+<text x='36.0' y='554.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_project</text>
+<text x='286.0' y='554.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.230"</text>
+<text x='396.0' y='554.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>(clear − table_width)/2 − slide_clearance</text>
+<text x='36.0' y='576.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_rebate</text>
+<text x='286.0' y='576.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.520"</text>
+<text x='396.0' y='576.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_stock − way_project</text>
+<text x='36.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>stretcher_length</text>
+<text x='286.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>17.00"</text>
+<text x='396.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>clear + 2 × housing</text>
+<text x='36.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>drum_length</text>
+<text x='286.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>15.75"</text>
+<text x='396.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>disc count × disc_thick</text>
+<text x='36.0' y='642.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>surface_fpm</text>
+<text x='286.0' y='642.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1355 sfpm</text>
+<text x='396.0' y='642.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>π × drum_od / 12 × drum_rpm</text>
+<text x='36.0' y='664.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>acme_per_turn</text>
+<text x='286.0' y='664.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.1000"</text>
+<text x='396.0' y='664.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1 / acme_tpi</text>
+<text x='36.0' y='702.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUMS</text>
+<text x='36.0' y='726.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-A</text>
+<text x='146.0' y='726.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L/R · Bottom edge</text>
+<text x='470.0' y='726.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Z = 0 floor / base top after install</text>
+<text x='36.0' y='746.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-B</text>
+<text x='146.0' y='746.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L/R · Infeed edge</text>
+<text x='470.0' y='746.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Y = 0; bearing_cl_y measured from here</text>
+<text x='36.0' y='766.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-C</text>
+<text x='146.0' y='766.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L/R · Inner face</text>
+<text x='470.0' y='766.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>X local; dados and way rebate</text>
+<text x='36.0' y='786.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-D</text>
+<text x='146.0' y='786.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-006 · Wear-face top</text>
+<text x='470.0' y='786.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Table plane; A/B indicator reference</text>
+<text x='36.0' y='806.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>DATUM-E</text>
+<text x='146.0' y='806.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-010 · Drum axis</text>
+<text x='470.0' y='806.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Fixed by H-001; TIR and parallel</text>
+<text x='36.0' y='836.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>Primary layout system: HYBRID. Panel joinery is face/edge. Drum, lift, and ways are centerline from DATUM-B / DATUM-A.</text>
+<text x='36.0' y='854.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Face/edge: DATUM-A bottom edge, DATUM-B infeed edge, DATUM-C inner face. Panel size,</text>
+<text x='36.0' y='868.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>dado locations, and screw pilots originate here.</text>
+<text x='36.0' y='882.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Centerline: Drum axis (DATUM-E), both Acme screws, vertical ways, and the table midplane</text>
+<text x='36.0' y='896.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>all share Y = side_depth/2 from DATUM-B. Vertical locations originate from DATUM-A.</text>
 <text x='980.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>WHY THE GEOMETRY IS WHAT IT IS</text>
 <text x='980.0' y='184.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-001</text>
 <text x='1046.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Delete conveyor; solid sliding table</text>
@@ -151,12 +160,15 @@
 <text x='1046.0' y='864.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Because: A builder should follow numbered steps with</text>
 <text x='1046.0' y='878.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>per-step parts and QC gates, not reverse-engineer the</text>
 <text x='1046.0' y='892.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>order from overview sheets</text>
-<text x='980.0' y='914.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-026</text>
-<text x='1046.0' y='930.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Package release state is FABRICATION REVIEW, risk class</text>
-<text x='1046.0' y='945.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>R3</text>
-<text x='1046.0' y='960.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Because: Mains electrical work needs a qualified person,</text>
-<text x='1046.0' y='974.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>and the flange bolt circle is ASSUMED until the</text>
-<text x='1046.0' y='988.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>purchased bearing is transferred</text>
-<text x='980.0' y='1040.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Change a parameter, regenerate, and every sheet, CSV, and</text>
-<text x='980.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>the 3D model follow. Never edit a number on a drawing.</text>
+<text x='980.0' y='914.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-027</text>
+<text x='1046.0' y='930.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Vertical captured UHMW ways; table is a lifting carriage</text>
+<text x='1046.0' y='945.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Because: Horizontal ways at Z=10 never supported the</text>
+<text x='1046.0' y='959.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>table at operating height (11.5–15.9″). Capture in X/Y,</text>
+<text x='1046.0' y='973.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Acme in Z.</text>
+<text x='980.0' y='995.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-028</text>
+<text x='1046.0' y='1011.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Three stretcher stations IN-LO / OUT-LO / OUT-HI, rails</text>
+<text x='1046.0' y='1026.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>on edge</text>
+<text x='1046.0' y='1041.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>Because: A stretcher at Z=12 occupied the same volume as</text>
+<text x='1046.0' y='1055.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>a 3″-open table. Triangle in the YZ plane fights racking</text>
+<text x='1046.0' y='1069.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>without crossing the table.</text>
 </svg>

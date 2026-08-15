@@ -11,7 +11,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>03 Sides</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 5 of 14  ·  03 Sides</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <circle cx='44.0' cy='112.0' r='9.0' fill='#d8d8d4' stroke='#1a1a1a' stroke-width='1.1'/>
 <text x='44.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>1</text>
@@ -44,16 +44,16 @@
 <text x='420.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>03 Sides</text>
 <rect x='36.0' y='150.0' width='820.0' height='560.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
-<polygon points='427.6,391.0 613.3,498.2 613.3,490.2 427.6,383.0' fill='#b2b6ba'/>
-<polygon points='613.3,490.2 620.3,486.2 434.6,379.0 427.6,383.0' fill='#96999d'/>
+<polygon points='508.9,427.2 532.1,440.6 532.1,382.3 508.9,368.9' fill='#b2b6ba'/>
+<polygon points='532.1,440.6 539.0,436.6 539.0,378.3 532.1,382.3' fill='#96999d'/>
 <polygon points='420.5,483.6 624.7,601.5 624.7,287.9 420.5,170.0' fill='#b5b5b1'/>
-<polygon points='613.3,498.2 620.3,494.2 620.3,486.2 613.3,490.2' fill='#96999d'/>
+<polygon points='532.1,382.3 539.0,378.3 515.8,364.9 508.9,368.9' fill='#96999d'/>
 <polygon points='624.7,601.5 631.7,597.5 631.7,283.9 624.7,287.9' fill='#989895'/>
-<polygon points='271.7,481.0 457.4,588.2 457.4,580.2 271.7,473.0' fill='#b2b6ba'/>
-<polygon points='457.4,580.2 464.4,576.2 278.7,469.0 271.7,473.0' fill='#96999d'/>
 <polygon points='624.7,287.9 631.7,283.9 427.4,166.0 420.5,170.0' fill='#989895'/>
+<polygon points='353.0,517.2 376.2,530.6 376.2,472.3 353.0,458.9' fill='#b2b6ba'/>
+<polygon points='376.2,530.6 383.1,526.6 383.1,468.3 376.2,472.3' fill='#96999d'/>
 <polygon points='260.3,576.1 464.6,694.0 464.6,380.4 260.3,262.5' fill='#b5b5b1'/>
-<polygon points='457.4,588.2 464.4,584.2 464.4,576.2 457.4,580.2' fill='#96999d'/>
+<polygon points='376.2,472.3 383.1,468.3 359.9,454.9 353.0,458.9' fill='#96999d'/>
 <polygon points='464.6,694.0 471.5,690.0 471.5,376.4 464.6,380.4' fill='#989895'/>
 <polygon points='464.6,380.4 471.5,376.4 267.3,258.5 260.3,262.5' fill='#989895'/>
 </g>
@@ -65,16 +65,17 @@
 <text x='68.0' y='792.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>inner faces.</text>
 <circle cx='46.0' cy='813.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
 <text x='46.0' y='817.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>2</text>
-<text x='68.0' y='818.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Cut three stretcher housings 0.25″ deep × 0.75″ wide, Y 2″ to 6″, at Z 6, 12, 20″</text>
-<text x='68.0' y='836.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>(J-001, S-006).</text>
-<circle cx='46.0' cy='857.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='46.0' y='861.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>3</text>
-<text x='68.0' y='862.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Rout the way rebate 0.520″ deep × 0.75″ wide at Z 10″, stopping 1″ shy of each end</text>
-<text x='68.0' y='880.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>(J-002, S-007).</text>
-<circle cx='46.0' cy='901.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='46.0' y='905.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>4</text>
-<text x='68.0' y='906.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Test the dado width on an offcut of the same ply first. A sloppy housing is a</text>
-<text x='68.0' y='924.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>racking frame.</text>
+<text x='68.0' y='818.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Cut three stretcher housings 0.25″ deep × 0.75″ wide × 4″ tall at stations IN-LO,</text>
+<text x='68.0' y='836.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>OUT-LO, OUT-HI (J-001, S-006). Rails stand on edge. None of these dados may sit at Z</text>
+<text x='68.0' y='854.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>≈ 12 — that is the table.</text>
+<circle cx='46.0' cy='875.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='879.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>3</text>
+<text x='68.0' y='880.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Rout the vertical way rebate 0.520″ deep × 2.5″ wide, Y 9.75–12.25″ (drum CL), Z</text>
+<text x='68.0' y='898.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>11–16.438″ (J-002, S-007).</text>
+<circle cx='46.0' cy='919.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='923.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>4</text>
+<text x='68.0' y='924.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Test the dado width on an offcut of the same ply first. A sloppy housing is a</text>
+<text x='68.0' y='942.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>racking frame.</text>
 <rect x='900.0' y='150.0' width='720.0' height='30.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.2'/>
 <text x='912.0' y='171.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>PARTS TRAY — fetch these before you start</text>
 <rect x='900.0' y='180.0' width='720.0' height='54.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
@@ -89,9 +90,9 @@
 <text x='912.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>TOOLS: Dado stack or router + edge guide · Test offcut</text>
 <text x='912.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d5a4c' text-anchor='start'>OPEN THESE SHEETS: P-001L · P-001R · D-12</text>
 <rect x='900.0' y='286.0' width='720.0' height='30.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='1.2'/>
-<text x='912.0' y='307.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>BEFORE YOU MOVE ON   (QC-12)</text>
+<text x='912.0' y='307.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>BEFORE YOU MOVE ON   (QC-12 · QC-13)</text>
 <text x='912.0' y='338.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>Rebate 0.520″ deep ±0.010″; a scrap of way stock sits 0.230″</text>
-<text x='912.0' y='356.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>proud of the inner face.</text>
+<text x='912.0' y='356.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>proud. Dados at IN-LO / OUT-LO / OUT-HI only.</text>
 <text x='912.0' y='380.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Still correctable after this step: A rebate can go deeper,</text>
 <text x='912.0' y='397.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>never shallower.</text>
 <rect x='900.0' y='420.0' width='720.0' height='62.0' fill='#f6e7e4' stroke='#a8342a' stroke-width='1.4'/>

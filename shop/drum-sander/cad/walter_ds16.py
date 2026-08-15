@@ -13,6 +13,10 @@ Lineage:
   → Fab B.3: WOODWRIGHT PLANFORGE master build guide — design-basis sheets,
              ballooned exploded view, step-by-step assembly (LEGO-style parts
              trays), commissioning checklist, printable guide book.
+  → Fab B.4: mechanics. Vertical captured UHMW ways (table is a lifting
+             carriage, not a Y-slide in use). Stretchers relocated so they
+             never occupy the table envelope. Both ½-10 Acme screws sit on
+             the drum centerline so cutting force goes through the nuts.
 
 Units: inches internally. Convert only at export.
 Evidence: VERIFIED (spec), DERIVED (equation), ASSUMED (layout), ESTIMATED.
@@ -37,14 +41,14 @@ PROJECT = {
     "project_id": "WALTER-DS16",
     "project_name": "WALTER DS-16 dedicated drum thickness sander",
     "revision": "B",
-    "fabrication_rev": "B.3",
+    "fabrication_rev": "B.4",
     "units": "inch",
     "unit_policy": "Internal inches. Millimetres are interface-only.",
     "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on A/B",
     "material_system": "Baltic birch + MDF drum + UHMW ways + phenolic wear",
     "tolerance_class": "T2 joinery, T4 drum/table metrology",
     "author": "WALTER fabrication model",
-    "model_version": "B.3",
+    "model_version": "B.4",
     "cad_platform": "Python SSOT + OpenSCAD solids + SVG shop drawings",
     "lineage": "ShopNotes 86 → Ron Walters → Rev A solid table → Rev B geometry",
 }
@@ -77,13 +81,34 @@ RELEASE_STATE = {
     ],
 }
 
+# HYBRID layout (Planforge centerline protocol): face/edge datums on the
+# plywood panels, centerline for the three working planes (drum axis, Acme
+# pair, table midplane). Declared on G-002 / A-01 / M-101. Do not mix a
+# face measurement with a centerline measurement without converting.
+LAYOUT_PROTOCOL = {
+    "mode": "HYBRID",
+    "face_edge": (
+        "DATUM-A bottom edge, DATUM-B infeed edge, DATUM-C inner face. "
+        "Panel size, dado locations, and screw pilots originate here."
+    ),
+    "centerline": (
+        "Drum axis (DATUM-E), both Acme screws, vertical ways, and the table "
+        "midplane all share Y = side_depth/2 from DATUM-B. Vertical locations "
+        "originate from DATUM-A."
+    ),
+    "declaration": (
+        "Primary layout system: HYBRID. Panel joinery is face/edge. "
+        "Drum, lift, and ways are centerline from DATUM-B / DATUM-A."
+    ),
+}
+
 
 @dataclass(frozen=True)
 class Spec:
     """Controlling inputs. Dependent sizes live in Geom, not here."""
 
     revision: str = "B"
-    fabrication_rev: str = "B.3"
+    fabrication_rev: str = "B.4"
 
     # Capacity — VERIFIED design intent
     capacity_width: float = 15.5
@@ -138,13 +163,22 @@ class Spec:
     clear_between_sides: float = 16.5
     base_thick: float = 0.75
     stretcher_count: int = 3
-    stretcher_height: float = 4.0
+    stretcher_height: float = 4.0  # Z extent — rails stand on edge
     stretcher_housing: float = 0.25  # dado into each side, DERIVED joinery
-    stretcher_z: tuple = (6.0, 12.0, 20.0)
+    # B.4 stations: (id, y0 from infeed, z0 from bottom). Rail is ply thick
+    # in Y and stretcher_height in Z. Placed to miss the table envelope,
+    # the drum, and the motor. Do not put a rail at Z ≈ 12 — that is the table.
+    stretcher_stations: tuple = (
+        ("IN-LO", 0.25, 1.00),    # infeed low, above the base, infeed of the motor
+        ("OUT-LO", 21.00, 1.00),  # outfeed low
+        ("OUT-HI", 21.00, 22.00), # outfeed high, above the drum OD
+    )
 
     # Ways — stock vs projecting (table must actually fit)
     way_stock: float = 0.75
-    slide_clearance: float = 0.020  # T1 sliding, UHMW
+    way_width: float = 2.5  # Y extent of the vertical strip, centered on drum CL
+    way_z_margin: float = 0.50  # extra way above/below the table travel
+    slide_clearance: float = 0.020  # T1 sliding, UHMW (X gap, table to tongue)
     kerf: float = 0.125
     sheet_bb: float = 60.0
     waste_factor_sheet: float = 0.12
@@ -159,8 +193,18 @@ class Spec:
     acme_od: float = 0.5
     acme_tpi: float = 10.0
     acme_length: float = 12.0
-    acme_inset_y: float = 4.0  # from infeed / outfeed edges
-    acme_inset_x: float = 2.4  # from inner face toward center
+    acme_inset_x: float = 2.4  # from inner face toward center; Y is drum CL
+    # Table shoes wrap the 0.23″ UHMW tongue so the table can only move in Z
+    shoe_h: float = 4.0
+    shoe_t: float = 1.25  # X, hangs under the table edge
+    shoe_groove_extra: float = 0.010  # groove deeper than tongue, X
+    shoe_side_clear: float = 0.008  # per Y face of the 2.5″ way
+    thrust_l: float = 3.0
+    thrust_w: float = 3.0
+    thrust_h: float = 1.5
+    dog_l: float = 2.0
+    dog_w: float = 1.0
+    dog_h: float = 0.5
 
     # Hold-downs
     roller_od: float = 1.25
@@ -185,8 +229,6 @@ class Spec:
     bearing_cl_z: float = 18.5  # from floor datum (base bottom)
     motor_pivot_y: float = 4.0
     motor_pivot_z: float = 6.0
-    way_z: float = 10.0  # bottom of UHMW from floor
-    way_end_inset: float = 1.0  # rebate stops short of infeed/outfeed edges
     display_gap_under_drum: float = 0.50  # viz opening, not min capacity
 
     # Hole / cut patterns on P-001 (ASSUMED until flange BCD is USER_CONFIRM)
@@ -197,8 +239,7 @@ class Spec:
     indicator_pad_y: float = 8.0  # drive side only, from infeed
     indicator_pad_z: float = 16.0
     indicator_pad_dia: float = 0.201  # #7 tap-drill for ¼-20
-    stretcher_dado_y0: float = 2.0  # inner-face housing, from infeed (matches OpenSCAD)
-    stretcher_screw_inset: float = 0.75  # from dado Y ends, through from outside
+    stretcher_screw_inset: float = 0.75  # from dado Z ends, through from outside
     idler_float_pad: float = 0.25  # UHMW pad under H-002; axial, not YZ slots
 
     # Jigs
@@ -208,9 +249,9 @@ class Spec:
     bore_jig: float = 12.0
 
     modernizations: tuple[str, ...] = (
-        "Dual ½-10 Acme table screws, chain-coupled — coarse lift stays coplanar",
+        "Dual ½-10 Acme table screws on the drum centerline, chain-coupled",
         "Left screw uncouples for taper; dog stop returns to parallel home",
-        "UHMW ways let into side rebates — table cannot rack, and still fits",
+        "Vertical captured UHMW ways — table is a lifting carriage, not a Y-slide",
         "Housed stretchers (¼″ dados) + through-screws for racking stiffness",
         "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
         "Torsion-box table + phenolic / tooling-plate wear face",
@@ -248,11 +289,32 @@ class Geom:
     table_z_at_max_stock: float
     table_z_at_min_stock: float
     table_z_display: float
-    acme_y_infeed: float
+    acme_y: float
+    acme_y_infeed: float  # alias of acme_y — both screws share drum CL
     acme_y_outfeed: float
     acme_x_left: float
     acme_x_right: float
     acme_per_turn: float
+    way_y0: float
+    way_y1: float
+    way_z0: float
+    way_z1: float
+    way_len: float
+    way_width: float
+    shoe_h: float
+    shoe_w: float
+    shoe_t: float
+    shoe_groove_depth: float
+    shoe_groove_width: float
+    thrust_l: float
+    thrust_w: float
+    thrust_h: float
+    dog_l: float
+    dog_w: float
+    dog_h: float
+    stretcher_stations: tuple
+    drum_top_z: float
+    min_stretcher_table_clear: float
     roller_len: float
     roller_z: float
     surface_fpm: float
@@ -288,25 +350,56 @@ def build_geom(s: Spec = SPEC) -> Geom:
     table_z_display = drum_bottom_z - s.display_gap_under_drum - table_thick
     acme_x_left = side_thick + s.acme_inset_x
     acme_x_right = overall_width - side_thick - s.acme_inset_x
+    acme_y = bearing_cl_y  # both screws under the drum — cutting force through the nuts
+    way_z0 = round(table_z_at_max - s.way_z_margin, 3)
+    way_z1 = round(table_z_at_min + table_thick + s.way_z_margin, 3)
+    way_len = round(way_z1 - way_z0, 3)
+    way_y0 = round(bearing_cl_y - s.way_width / 2.0, 3)
+    way_y1 = round(bearing_cl_y + s.way_width / 2.0, 3)
+    shoe_groove_depth = round(way_project + s.shoe_groove_extra, 3)
+    shoe_groove_width = round(s.way_width + 2.0 * s.shoe_side_clear, 3)
+    stations = []
+    table_z_lo = table_z_at_max
+    table_z_hi = table_z_at_min + table_thick
+    min_clear = 1e9
+    for sid, y0, z0 in s.stretcher_stations:
+        y1 = y0 + side_thick
+        z1 = z0 + s.stretcher_height
+        # clearance in Z to the table envelope (full-depth table, so Y always overlaps)
+        if z1 <= table_z_lo:
+            clear_z = table_z_lo - z1
+        elif z0 >= table_z_hi:
+            clear_z = z0 - table_z_hi
+        else:
+            clear_z = -min(z1 - table_z_lo, table_z_hi - z0)  # overlap, negative
+        min_clear = min(min_clear, clear_z)
+        stations.append((sid, round(y0, 3), round(z0, 3), round(y1, 3), round(z1, 3)))
     roller_len = drum_length
     roller_z = table_z_display + table_thick + s.roller_od / 2.0 + s.roller_setbelow
     drum_end_gap = (s.clear_between_sides - drum_length) / 2.0
+    drum_top_z = s.bearing_cl_z + s.drum_od / 2.0
     sfpm = (PI * s.drum_od / 12.0) * s.drum_rpm
     eqs = {
         "overall_width": "clear_between_sides + 2 × ply_actual",
         "table_width": "capacity_width + 2 × table_margin_each",
         "way_project": "(clear_between_sides − table_width) / 2 − slide_clearance",
         "way_rebate": "way_stock − way_project  (let into inner face so table fits)",
+        "way_z0": "table_z_at_max_stock − way_z_margin",
+        "way_z1": "table_z_at_min_stock + table_thick + way_z_margin",
+        "way_y0": "bearing_cl_y − way_width / 2",
         "stretcher_length": "clear_between_sides + 2 × stretcher_housing",
         "drum_length": "(disc_count_core + disc_count_ends) × disc_thick",
         "bearing_cl_y": "side_depth / 2  (datum: infeed edge of side)",
         "drum_bottom_z": "bearing_cl_z − drum_od / 2",
+        "drum_top_z": "bearing_cl_z + drum_od / 2",
         "table_z_at_max_stock": "drum_bottom_z − max_stock − table_thick",
         "table_z_at_min_stock": "drum_bottom_z − min_stock − table_thick",
-        "acme_y_outfeed": "side_depth − acme_inset_y",
+        "acme_y": "bearing_cl_y  (both screws — not infeed/outfeed)",
         "acme_per_turn": "1 / acme_tpi",
         "surface_fpm": "π × drum_od / 12 × drum_rpm",
         "drum_end_gap": "(clear_between_sides − drum_length) / 2",
+        "shoe_groove_depth": "way_project + shoe_groove_extra",
+        "shoe_groove_width": "way_width + 2 × shoe_side_clear",
         "roller_len": "drum_length",
         "elev_travel_needed": "max_stock − min_stock  (≤ elev_travel)",
     }
@@ -330,11 +423,32 @@ def build_geom(s: Spec = SPEC) -> Geom:
         table_z_at_max_stock=round(table_z_at_max, 3),
         table_z_at_min_stock=round(table_z_at_min, 3),
         table_z_display=round(table_z_display, 3),
-        acme_y_infeed=s.acme_inset_y,
-        acme_y_outfeed=s.side_depth - s.acme_inset_y,
+        acme_y=acme_y,
+        acme_y_infeed=acme_y,
+        acme_y_outfeed=acme_y,
         acme_x_left=acme_x_left,
         acme_x_right=acme_x_right,
         acme_per_turn=1.0 / s.acme_tpi,
+        way_y0=way_y0,
+        way_y1=way_y1,
+        way_z0=way_z0,
+        way_z1=way_z1,
+        way_len=way_len,
+        way_width=s.way_width,
+        shoe_h=s.shoe_h,
+        shoe_w=s.way_width,
+        shoe_t=s.shoe_t,
+        shoe_groove_depth=shoe_groove_depth,
+        shoe_groove_width=shoe_groove_width,
+        thrust_l=s.thrust_l,
+        thrust_w=s.thrust_w,
+        thrust_h=s.thrust_h,
+        dog_l=s.dog_l,
+        dog_w=s.dog_w,
+        dog_h=s.dog_h,
+        stretcher_stations=tuple(stations),
+        drum_top_z=drum_top_z,
+        min_stretcher_table_clear=round(min_clear, 3),
         roller_len=roller_len,
         roller_z=round(roller_z, 3),
         surface_fpm=round(sfpm, 0),
@@ -348,6 +462,14 @@ def build_geom(s: Spec = SPEC) -> Geom:
 
 
 GEOM = build_geom(SPEC)
+
+
+def stretcher_records(g: Geom = GEOM) -> list[dict[str, Any]]:
+    """Named stretcher stations with AABBs in shop YZ (inner-face layout)."""
+    rows = []
+    for sid, y0, z0, y1, z1 in g.stretcher_stations:
+        rows.append({"id": sid, "y0": y0, "z0": z0, "y1": y1, "z1": z1})
+    return rows
 
 
 def fmt_in(v: float, nd: int = 2) -> str:
@@ -376,30 +498,33 @@ def side_features(s: Spec = SPEC, g: Geom = GEOM, hand: str = "L") -> dict[str, 
     dados = [
         {
             "id": f"J-001.{i+1}",
-            "y0": s.stretcher_dado_y0,
-            "y1": s.stretcher_dado_y0 + s.stretcher_height,
-            "z0": z,
-            "z1": z + s.ply_actual,
+            "station": sid,
+            "y0": y0,
+            "y1": y1,
+            "z0": z0,
+            "z1": z1,
             "depth": s.stretcher_housing,
         }
-        for i, z in enumerate(s.stretcher_z)
+        for i, (sid, y0, z0, y1, z1) in enumerate(g.stretcher_stations)
     ]
     way = {
         "id": "J-002",
-        "y0": s.way_end_inset,
-        "y1": s.side_depth - s.way_end_inset,
-        "z0": s.way_z,
-        "z1": s.way_z + s.way_stock,
+        "y0": g.way_y0,
+        "y1": g.way_y1,
+        "z0": g.way_z0,
+        "z1": g.way_z1,
         "depth": g.way_rebate,
         "project": g.way_project,
+        "orientation": "vertical",
     }
     screws = []
     for i, d in enumerate(dados):
-        for j, y in enumerate((d["y0"] + s.stretcher_screw_inset, d["y1"] - s.stretcher_screw_inset)):
+        mid_y = (d["y0"] + d["y1"]) / 2.0
+        for j, z in enumerate((d["z0"] + s.stretcher_screw_inset, d["z1"] - s.stretcher_screw_inset)):
             screws.append({
                 "id": f"SS{i+1}{chr(97+j)}",
-                "y": y,
-                "z": (d["z0"] + d["z1"]) / 2.0,
+                "y": mid_y,
+                "z": z,
                 "dia": 0.125,  # pilot; expand from outside after clamp-up
             })
     feats = {
@@ -418,8 +543,8 @@ def side_features(s: Spec = SPEC, g: Geom = GEOM, hand: str = "L") -> dict[str, 
             "outline": "VERIFIED",
             "bearing_cl": "VERIFIED layout",
             "flange_bcd": "ASSUMED — USER_CONFIRM vs purchased flange",
-            "dados": "DERIVED from stretcher_z / stretcher_dado_y0",
-            "way": "DERIVED J-002",
+            "dados": "DERIVED from stretcher_stations (B.4, miss table envelope)",
+            "way": "DERIVED J-002 vertical, centered on drum CL",
         },
     }
     if hand == "L":
@@ -499,8 +624,187 @@ def validate(s: Spec = SPEC, g: Geom = GEOM) -> list[str]:
     travel_need = s.max_stock_thickness - s.min_stock_thickness
     if travel_need > s.elev_travel:
         errors.append("Need more Acme travel")
+    errors.extend(validate_mechanics(s, g))
     errors.extend(validate_steps())
     return errors
+
+
+def _aabb_overlap(a: dict[str, float], b: dict[str, float], axes: str = "xyz") -> bool:
+    for ax in axes:
+        if a[f"{ax}1"] <= b[f"{ax}0"] or a[f"{ax}0"] >= b[f"{ax}1"]:
+            return False
+    return True
+
+
+def validate_mechanics(s: Spec = SPEC, g: Geom = GEOM) -> list[str]:
+    """Kinematic checks: stretchers miss the table, ways capture travel, Acme under the drum.
+
+    These are the B.4 regressions. A stretcher at Z=12 used to occupy the same
+    volume as a 3″-open table. Horizontal ways at Z=10 never supported the
+    table at operating height. Dual-end Acme was drawn as infeed/outfeed Y
+    instead of left/right X on the drum centerline.
+    """
+    errors: list[str] = []
+    table_env = {
+        "x0": s.ply_actual + (s.clear_between_sides - g.table_width) / 2.0,
+        "x1": s.ply_actual + (s.clear_between_sides - g.table_width) / 2.0 + g.table_width,
+        "y0": 0.0,
+        "y1": g.table_depth,
+        "z0": g.table_z_at_max_stock,
+        "z1": g.table_z_at_min_stock + g.table_thick,
+    }
+    drum = {
+        "x0": s.ply_actual + g.drum_end_gap,
+        "x1": s.ply_actual + g.drum_end_gap + g.drum_length,
+        "y0": g.bearing_cl_y - s.drum_od / 2.0,
+        "y1": g.bearing_cl_y + s.drum_od / 2.0,
+        "z0": g.drum_bottom_z,
+        "z1": g.drum_top_z,
+    }
+    # Motor as modeled: OpenSCAD translate([side_t+2.2, 3, 2]) cube([6, 8, 6])
+    motor = {
+        "x0": s.ply_actual + 2.2,
+        "x1": s.ply_actual + 8.2,
+        "y0": 3.0,
+        "y1": 11.0,
+        "z0": 2.0,
+        "z1": 8.0,
+    }
+    for rec in stretcher_records(g):
+        st = {
+            "x0": s.ply_actual - s.stretcher_housing,
+            "x1": s.ply_actual - s.stretcher_housing + g.stretcher_length,
+            "y0": rec["y0"],
+            "y1": rec["y1"],
+            "z0": rec["z0"],
+            "z1": rec["z1"],
+        }
+        if rec["z1"] > s.side_height - 0.25:
+            errors.append(f"Stretcher {rec['id']} exceeds side height")
+        if rec["y0"] < 0 or rec["y1"] > s.side_depth:
+            errors.append(f"Stretcher {rec['id']} exceeds side depth")
+        if _aabb_overlap(st, table_env, "xyz"):
+            errors.append(
+                f"Stretcher {rec['id']} intersects the table envelope "
+                f"Y {rec['y0']:g}–{rec['y1']:g} Z {rec['z0']:g}–{rec['z1']:g}"
+            )
+        if _aabb_overlap(st, drum, "xyz"):
+            errors.append(f"Stretcher {rec['id']} intersects the drum")
+        if _aabb_overlap(st, motor, "xyz"):
+            errors.append(f"Stretcher {rec['id']} intersects the motor envelope")
+    if g.min_stretcher_table_clear < 0.25:
+        errors.append(
+            f"Stretcher-to-table Z clearance {g.min_stretcher_table_clear:.3f}″ is under 0.25″"
+        )
+    if g.way_z0 > g.table_z_at_max_stock + 1e-6:
+        errors.append("Ways start above the table at max opening — table is unsupported")
+    if g.way_z1 < g.table_z_at_min_stock + g.table_thick - 1e-6:
+        errors.append("Ways end below the table at min opening — table walks off the way")
+    if abs((g.way_y0 + g.way_y1) / 2.0 - g.bearing_cl_y) > 1e-6:
+        errors.append("Vertical ways are not centered on the drum centerline")
+    if abs(g.acme_y - g.bearing_cl_y) > 1e-6:
+        errors.append("Acme Y is not on the drum centerline")
+    if abs(g.acme_y_infeed - g.acme_y) > 1e-6 or abs(g.acme_y_outfeed - g.acme_y) > 1e-6:
+        errors.append("Acme Y aliases drifted — both screws must share drum CL")
+    if g.shoe_groove_depth <= g.way_project:
+        errors.append("Shoe groove does not clear the way tongue")
+    if g.shoe_groove_width <= g.way_width:
+        errors.append("Shoe groove is tighter than the way in Y")
+    ids = {p["part_id"] for p in parts()}
+    for pid in ("P-017", "P-018", "P-019"):
+        if pid not in ids:
+            errors.append(f"Missing mechanical part {pid}")
+    calc_ids = {c["id"] for c in calculations(s, g)}
+    for cid in ("CALC-001", "CALC-002", "CALC-003", "CALC-004", "CALC-005"):
+        if cid not in calc_ids:
+            errors.append(f"Missing calculation {cid}")
+    if LAYOUT_PROTOCOL.get("mode") != "HYBRID":
+        errors.append("Layout protocol must declare HYBRID")
+    return errors
+
+
+def calculations(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
+    """Numbered calcs for G-003. Evidence: [D] derived, [E] estimated bound."""
+    belt_rpm = s.motor_rpm * s.pulley_motor_od / s.pulley_drum_od
+    turns_3in = 3.0 / g.acme_per_turn
+    # Table sag bound: simply supported 16″ span, 50 lbf mid-span, torsion-box I.
+    # Two ¾″ skins 22″ wide, effective I ≈ 2 × b t (d/2)² with d=1.5, t=0.75, b=22
+    # → I ≈ 18.6 in⁴. E_ply ≈ 1.5e6 psi. δ = P L³ / 48 E I.
+    sag_p, sag_l, sag_e, sag_i = 50.0, g.table_width, 1.5e6, 18.6
+    sag = sag_p * sag_l ** 3 / (48.0 * sag_e * sag_i)
+    # Drum KE: MDF cylinder, 48 pcf, plus birch ends. ESTIMATED.
+    vol = PI * (s.drum_od / 2.0) ** 2 * g.drum_length
+    mass_lb = vol * 0.0278 + 1.5  # MDF + birch ends / flanges
+    r_ft = (s.drum_od / 2.0) / 12.0
+    mass_slug = mass_lb / 32.174
+    inertia = 0.5 * mass_slug * r_ft ** 2
+    omega = s.drum_rpm * 2.0 * PI / 60.0
+    ke = 0.5 * inertia * omega ** 2
+    return [
+        {
+            "id": "CALC-001",
+            "name": "Belt ratio → drum RPM",
+            "expr": f"{s.motor_rpm:g} × {s.pulley_motor_od:g} / {s.pulley_drum_od:g}",
+            "result": f"{belt_rpm:g} RPM",
+            "value": belt_rpm,
+            "evidence": "D",
+            "ok": abs(belt_rpm - s.drum_rpm) < 1.0,
+        },
+        {
+            "id": "CALC-002",
+            "name": "Drum surface speed",
+            "expr": f"π × {s.drum_od:g} / 12 × {s.drum_rpm:g}",
+            "result": f"{g.surface_fpm:g} sfpm",
+            "value": g.surface_fpm,
+            "evidence": "D",
+            "ok": 800 <= g.surface_fpm <= 1800,
+        },
+        {
+            "id": "CALC-003",
+            "name": "Acme lead and 3″ travel",
+            "expr": f"1/{s.acme_tpi:g} TPI; 3″ / {g.acme_per_turn:.3f}″",
+            "result": f"{g.acme_per_turn:.3f}″/rev · {turns_3in:g} turns for 3″",
+            "value": turns_3in,
+            "evidence": "D",
+            "ok": abs(turns_3in - 30.0) < 1e-6,
+        },
+        {
+            "id": "CALC-004",
+            "name": "Stretcher vs table envelope",
+            "expr": "min Z gap, all three rails, table at every opening",
+            "result": f"{g.min_stretcher_table_clear:.3f}″ minimum clearance",
+            "value": g.min_stretcher_table_clear,
+            "evidence": "D",
+            "ok": g.min_stretcher_table_clear >= 0.25,
+        },
+        {
+            "id": "CALC-005",
+            "name": "Way capture / shoe clearance",
+            "expr": f"tongue {g.way_project:.3f}″ in groove {g.shoe_groove_depth:.3f}″; Y {g.way_width:g}″ + {2 * s.shoe_side_clear:.3f}″",
+            "result": f"X play {g.shoe_groove_depth - g.way_project:.3f}″ · Y play {g.shoe_groove_width - g.way_width:.3f}″",
+            "value": g.shoe_groove_depth - g.way_project,
+            "evidence": "D",
+            "ok": 0.008 <= (g.shoe_groove_depth - g.way_project) <= 0.020,
+        },
+        {
+            "id": "CALC-006",
+            "name": "Table sag bound (50 lbf mid-span)",
+            "expr": f"P L³ / 48 E I · L={sag_l:g}″ E={sag_e:g} I≈{sag_i:g} in⁴",
+            "result": f"{sag:.4f}″ estimated · spec flat ≤ {s.table_flat_tol:.3f}″",
+            "value": sag,
+            "evidence": "E",
+            "ok": sag < s.table_flat_tol,
+        },
+        {
+            "id": "CALC-007",
+            "name": "Drum rotational energy",
+            "expr": f"½ I ω² · m≈{mass_lb:.1f} lb · {s.drum_rpm:g} RPM",
+            "result": f"{ke:.0f} ft·lbf estimated",
+            "value": ke,
+            "evidence": "E",
+            "ok": True,
+        },
+    ]
 
 
 def validate_steps() -> list[str]:
@@ -661,8 +965,8 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             ref_edge="Front long edge", ref_end="Drive end",
             process="Rip 4″, crosscut to housed length, one stop for all three",
             joinery="J-001 ¼″ housing in sides + #8 × 2″ through-screws",
-            handed="IDENTICAL", viz="base", sheet="P003_stretcher.svg",
-            notes="Do not use stretchers as the table datum — ways are the datum.",
+            handed="IDENTICAL", viz="stretch", sheet="P003_stretcher.svg",
+            notes="Stand on edge (4″ is Z). Stations IN-LO / OUT-LO / OUT-HI miss the table. Ways locate the table.",
             purchase='¾" BB off sheet 1',
         ),
         _part(
@@ -700,13 +1004,13 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         _part(
             "P-007", "UHMW way", 2,
             category="way", assembly="A-FRAME", make="MAKE",
-            material="UHMW-PE", t=s.way_stock, w=s.way_stock, l=s.side_depth,
-            purchase='¾" × ¾" UHMW bar, 48" buys both + spare',
-            process="Cut to side depth; let into J-002 rebate; bond + wax",
-            joinery="J-002 rebate + glue; optional #8 flush screws from outer face",
+            material="UHMW-PE", t=s.way_stock, w=s.way_width, l=g.way_len,
+            purchase='¾" × 2½" UHMW bar, 12" buys both',
+            process="Cut to way_len; let into vertical J-002 rebate; bond + wax",
+            joinery="J-002 vertical rebate + glue; optional #8 flush screws from outer face",
             handed="IDENTICAL", viz="ways", sheet="P007_uhmw_way.svg",
-            notes=f"Projects {g.way_project:.3f}″ past inner face. Rebate {g.way_rebate:.3f}″.",
-            evidence="DERIVED project/rebate so 16″ table fits in 16.5″ span",
+            notes=f"Vertical strip, {g.way_len:g}″ Z × {s.way_width:g}″ Y, centered on drum CL. Projects {g.way_project:.3f}″. Rebate {g.way_rebate:.3f}″.",
+            evidence="DERIVED project/rebate so 16″ table fits in 16.5″ span; length follows table travel",
         ),
         _part(
             "P-008", "Drum disc, core", s.disc_count_core,
@@ -787,6 +1091,43 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             joinery="J-011 nut to table", handed="IDENTICAL", viz="elev",
             sheet="P016_nut_block.svg", evidence="ASSUMED block size; nut is BUY",
         ),
+        _part(
+            "P-017", "Table way shoe", 2,
+            category="way", assembly="A-TABLE", make="MAKE",
+            material="UHMW-PE or hardwood + UHMW liner",
+            t=g.shoe_t, w=g.shoe_w, l=g.shoe_h,
+            purchase='UHMW offcut or 5/4 hardwood, 2½" × 4"',
+            process="Groove the outboard face to wrap the vertical tongue; bolt under the table edge",
+            joinery="J-012 captured wrap on P-007; screws into table underside",
+            handed="MIRROR PAIR", viz="ways", sheet="P017_table_shoe.svg",
+            notes=(
+                f"Groove {g.shoe_groove_depth:.3f}″ deep × {g.shoe_groove_width:.3f}″ wide captures the "
+                f"{g.way_project:.3f}″ × {g.way_width:g}″ tongue. Table moves in Z only."
+            ),
+            evidence="DERIVED from way_project / way_width + clearance",
+        ),
+        _part(
+            "P-018", "Acme thrust block", 2,
+            category="lift", assembly="A-FRAME", make="MAKE",
+            material="Baltic birch plywood or hardwood",
+            t=g.thrust_h, w=g.thrust_w, l=g.thrust_l,
+            process="Bore ⌀½″ through; counterbore for thrust washer; screw to P-002 on drum CL",
+            joinery="J-013 screw to base; H-007 thrust",
+            handed="IDENTICAL", viz="elev", sheet="P018_thrust_block.svg",
+            notes="Takes axial load from the screw. Both blocks at Y = bearing_cl_y, left and right X.",
+            evidence="ASSUMED block size; hole follows Acme OD",
+        ),
+        _part(
+            "P-019", "Parallel home dog", 1,
+            category="lift", assembly="A-TABLE", make="MAKE",
+            material="Aluminum bar or hardwood",
+            t=g.dog_h, w=g.dog_w, l=g.dog_l,
+            process="Bolt to base beside the left screw; pin stops the left sprocket at last parallel",
+            joinery="J-014 dog to P-002 / left clutch",
+            handed="LEFT-HAND", viz="elev", sheet="P019_home_dog.svg",
+            notes="Last known |A−B| home. Uncouple left for taper; recouple against this stop.",
+            evidence="ASSUMED size; function is the stop, not the block",
+        ),
     ]
 
 
@@ -817,6 +1158,7 @@ def hardware(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"hardware_id": "H-023", "description": "Titebond III + thin CA", "qty": 1, "make_or_buy": "BUY", "assembly": "A-FRAME"},
         {"hardware_id": "H-024", "description": "Paste wax (UHMW dry lube — no oil)", "qty": 1, "make_or_buy": "BUY", "assembly": "A-FRAME"},
         {"hardware_id": "H-025", "description": "Optional 60–90 RPM gearmotor + scotch yoke oscillator", "qty": 1, "make_or_buy": "BUY", "assembly": "A-OSC", "notes": "Optional. Not drum RPM."},
+        {"hardware_id": "H-026", "description": "½″ thrust washer + e-clip (Acme lower end)", "qty": 2, "make_or_buy": "BUY", "assembly": "A-TABLE", "notes": "Under P-018. Sanding load tries to pull the screw up."},
     ]
 
 
@@ -828,13 +1170,14 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "part_a": "P-001L / P-001R",
             "part_b": "P-003",
             "qty": 6,
-            "location": f"Inner faces; Y {s.stretcher_dado_y0:g}–{s.stretcher_dado_y0 + s.stretcher_height:g}″ from infeed; Z bottoms {s.stretcher_z}",
+            "location": "Inner faces; three stations IN-LO / OUT-LO / OUT-HI — rails stand on edge (¾″ in Y, 4″ in Z)",
             "dado_width": s.ply_actual,
             "dado_depth": s.stretcher_housing,
             "fit_class": "GLUE",
             "assembly_direction": "stretchers into dados, then through-screws from outside",
             "grain": "Plywood — no seasonal panel lock",
-            "notes": "Racking stiffness. Ways, not stretchers, locate the table.",
+            "notes": "Racking triangle. Ways, not stretchers, locate the table. Stations miss the table envelope (CALC-004).",
+            "stations": [f"{r['id']} Y {r['y0']:g}–{r['y1']:g} Z {r['z0']:g}–{r['z1']:g}" for r in stretcher_records(g)],
         },
         {
             "joint_id": "J-002",
@@ -842,13 +1185,14 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "part_a": "P-001L / P-001R",
             "part_b": "P-007",
             "qty": 2,
-            "location": f"Inner face, way bottom Z = {s.way_z:g}″, full depth",
+            "location": f"Inner face, vertical, Y {g.way_y0:g}–{g.way_y1:g}″ (drum CL ± {s.way_width/2:g}″), Z {g.way_z0:g}–{g.way_z1:g}″",
             "rebate_depth": g.way_rebate,
-            "rebate_width": s.way_stock,
+            "rebate_width": s.way_width,
+            "rebate_height": g.way_len,
             "project": g.way_project,
             "fit_class": "GLUE",
-            "constraint": "FIXED to side; table is SLIDING on way",
-            "notes": "Without the rebate a ¾″ way would steal 1.5″ and the 16″ table would not fit.",
+            "constraint": "FIXED to side; table shoes SLIDE in Z",
+            "notes": "Vertical captured way. Without the rebate a ¾″ way would steal 1.5″ and the 16″ table would not fit.",
         },
         {
             "joint_id": "J-003",
@@ -930,7 +1274,41 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "part_a": "P-016",
             "part_b": "P-004 / H-007",
             "fit_class": "LOCATIONAL",
-            "notes": "Both nuts; chain-coupled rotation.",
+            "notes": "Both nuts on the drum-CL screws; chain-coupled rotation. Cutting force goes through the nuts.",
+        },
+        {
+            "joint_id": "J-012",
+            "joint_type": "captured shoe wrap",
+            "part_a": "P-017",
+            "part_b": "P-007 / P-004",
+            "qty": 2,
+            "fit_class": "SLIDING (Z only)",
+            "constraint": "FLOATING in Z, CAPTURED in X and Y",
+            "groove_depth": g.shoe_groove_depth,
+            "groove_width": g.shoe_groove_width,
+            "notes": (
+                f"Shoe hangs under the table edge and wraps the {g.way_project:.3f}″ tongue. "
+                f"X play {g.shoe_groove_depth - g.way_project:.3f}″, Y play {g.shoe_groove_width - g.way_width:.3f}″ (CALC-005)."
+            ),
+        },
+        {
+            "joint_id": "J-013",
+            "joint_type": "thrust block on base",
+            "part_a": "P-018",
+            "part_b": "P-002 / H-007",
+            "qty": 2,
+            "fit_class": "LOCATIONAL",
+            "location": f"Y = {g.acme_y:g}″ (drum CL), X left/right",
+            "notes": "Thrust washer + e-clip under the screw. Sanding load tries to pull the screw out of the base.",
+        },
+        {
+            "joint_id": "J-014",
+            "joint_type": "home dog stop",
+            "part_a": "P-019",
+            "part_b": "P-002 / H-008",
+            "qty": 1,
+            "fit_class": "ADJUSTABLE then LOCKED",
+            "notes": "Set after paper-on |A−B|. Left clutch hits this stop to recover parallel.",
         },
     ]
 
@@ -938,10 +1316,10 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
 def assemblies() -> list[dict[str, Any]]:
     return [
         {"assembly_id": "A-MASTER", "name": "WALTER DS-16", "children": ["A-FRAME", "A-DRUM", "A-DRIVE", "A-TABLE", "A-HOOD", "A-JIG"]},
-        {"assembly_id": "A-FRAME", "name": "Box + ways", "parts": ["P-001L", "P-001R", "P-002", "P-003", "P-007"], "stage": "glue-up"},
+        {"assembly_id": "A-FRAME", "name": "Box + ways", "parts": ["P-001L", "P-001R", "P-002", "P-003", "P-007", "P-018"], "stage": "glue-up"},
         {"assembly_id": "A-DRUM", "name": "Drum + shaft + bearings", "parts": ["P-008", "P-009", "P-010", "H-001", "H-002"]},
         {"assembly_id": "A-DRIVE", "name": "Motor + pulleys", "parts": ["P-012", "H-003", "H-004", "H-005", "H-006"]},
-        {"assembly_id": "A-TABLE", "name": "Table + lift + hold-downs", "parts": ["P-004", "P-005", "P-006", "P-014", "P-016", "H-007", "H-008", "H-009"]},
+        {"assembly_id": "A-TABLE", "name": "Table + lift + hold-downs", "parts": ["P-004", "P-005", "P-006", "P-014", "P-016", "P-017", "P-019", "H-007", "H-008", "H-009"]},
         {"assembly_id": "A-HOOD", "name": "Dust hood", "parts": ["P-011", "H-019"]},
         {"assembly_id": "A-JIG", "name": "Truing sled + pack-bore jig", "parts": ["P-013", "P-015"]},
         {"assembly_id": "A-QA", "name": "Metrology", "parts": ["H-021"]},
@@ -956,8 +1334,8 @@ def operations(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"op": "S-003", "title": "Stop: stretcher length (housed)", "tool": "Miter gauge + stop", "setting": f'{g.stretcher_length:g}"', "parts": ["P-003 ×3"], "rule": "DO NOT MOVE STOP until all three are cut"},
         {"op": "S-004", "title": "Stop: stretcher width", "tool": "Rip fence", "setting": f'{s.stretcher_height:g}"', "parts": ["P-003 ×3"]},
         {"op": "S-005", "title": "Stop: table skins", "tool": "Fence + stop", "setting": f'{g.table_width:g}" × {g.table_depth:g}"', "parts": ["P-004 ×2"]},
-        {"op": "S-006", "title": "Dado: stretcher housing", "tool": "Dado / router", "setting": f'depth {s.stretcher_housing:g}" · width {s.ply_actual:g}"', "parts": ["P-001L", "P-001R"], "ref": "Inner face. Datum Y0 = infeed edge."},
-        {"op": "S-007", "title": "Rebate: way", "tool": "Router + edge guide", "setting": f'depth {g.way_rebate:.3f}" · width {s.way_stock:g}"', "parts": ["P-001L", "P-001R"], "ref": "Inner face. Way bottom from floor datum."},
+        {"op": "S-006", "title": "Dado: stretcher housing", "tool": "Dado / router", "setting": f'depth {s.stretcher_housing:g}" · width {s.ply_actual:g}" · height {s.stretcher_height:g}"', "parts": ["P-001L", "P-001R"], "ref": "Inner face. Three stations IN-LO / OUT-LO / OUT-HI. Datum Y0 = infeed."},
+        {"op": "S-007", "title": "Rebate: vertical way", "tool": "Router + edge guide", "setting": f'depth {g.way_rebate:.3f}" · width {s.way_width:g}" · Z {g.way_z0:g}–{g.way_z1:g}"', "parts": ["P-001L", "P-001R"], "ref": "Inner face. Centered on drum CL."},
         {"op": "S-008", "title": "Stack-drill bearing CL", "tool": "Drill press, sides clamped face-to-face", "setting": f'Y {g.bearing_cl_y:g}" from infeed · Z {g.bearing_cl_z:g}" from bottom', "parts": ["P-001L+R"], "rule": "One stack. Then split for inner-face dados."},
         {"op": "S-009", "title": "Pack-bore discs", "tool": "P-015 jig + drill/ream", "setting": f'⌀{s.shaft_od:g}"', "parts": ["P-008", "P-009"]},
         {"op": "S-010", "title": "True drum", "tool": "P-013 sled on ways", "setting": f'TIR ≤ {s.drum_tir:.3f}"', "parts": ["A-DRUM"]},
@@ -970,7 +1348,7 @@ def inspection(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"qc": "QC-01", "check": "Ply thickness", "spec": f"Measure ply_actual (default {s.ply_actual:g}\"). Keep inner span {s.clear_between_sides:g}″.", "class": "T1", "gate": "M0"},
         {"qc": "QC-02", "check": "Paired sides", "spec": "P-001L/R identical hole pattern after stack-drill", "class": "T2", "gate": "M4"},
         {"qc": "QC-03", "check": "Box diagonals", "spec": "Base diagonals equal; no rack", "class": "T2", "gate": "M5"},
-        {"qc": "QC-04", "check": "Way coplanar", "spec": "Winding sticks / indicator on both UHMW — no twist", "class": "T3", "gate": "M5"},
+        {"qc": "QC-04", "check": "Way plumb + capture", "spec": "Both vertical ways plumb and coplanar in X; shoes wrap without bind through full travel", "class": "T3", "gate": "M5"},
         {"qc": "QC-05", "check": "Table flatness", "spec": f"≤ {s.table_flat_tol:.3f}″ on both diagonals of P-006", "class": "T3", "gate": "M7"},
         {"qc": "QC-06", "check": "Drum TIR paper off", "spec": f"≤ {s.drum_tir:.3f}″ mid-span", "class": "T4", "gate": "M7"},
         {"qc": "QC-07", "check": "Drum ∥ table paper on", "spec": f"|A−B| ≤ {s.parallel_tol:.3f}″ over {s.capacity_width:g}″", "class": "T4", "gate": "M7"},
@@ -978,7 +1356,9 @@ def inspection(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"qc": "QC-09", "check": "Pulley coplanar", "spec": "Straightedge across both pulley faces", "class": "T2", "gate": "M5"},
         {"qc": "QC-10", "check": "Thickness scatter", "spec": f"≤ {s.parallel_tol:.3f}″ on four corners of witness board", "class": "T4", "gate": "M7"},
         {"qc": "QC-11", "check": "Idler float", "spec": "Shaft can grow axially; no banana preload", "class": "T2", "gate": "M3"},
-        {"qc": "QC-12", "check": "Way/table fit", "spec": f"Table slides; project {g.way_project:.3f}″; clearance {s.slide_clearance:.3f}″/side", "class": "T2", "gate": "M4"},
+        {"qc": "QC-12", "check": "Way/table capture", "spec": f"Shoes wrap tongue; project {g.way_project:.3f}″; X play {g.shoe_groove_depth - g.way_project:.3f}″; table moves in Z only", "class": "T2", "gate": "M4"},
+        {"qc": "QC-13", "check": "Stretcher clearance", "spec": f"No rail in the table envelope; min Z gap {g.min_stretcher_table_clear:.3f}″ (CALC-004)", "class": "T2", "gate": "M5"},
+        {"qc": "QC-14", "check": "Acme on drum CL", "spec": f"Both screws at Y {g.acme_y:g}″; |left−right| travel match through 3″", "class": "T3", "gate": "M7"},
     ]
 
 
@@ -994,7 +1374,10 @@ def decisions() -> list[dict[str, str]]:
         {"id": "D-023", "decision": "Wandel-style individual part, assembly, and hardware sheets", "reason": "Overview D-sheets are not enough to fabricate P-001 from; each make part needs its own isometric + hole chart + callouts", "rev": "B.2", "affected": "plans/P*.svg, A*.svg, H01, IDX"},
         {"id": "D-024", "decision": "Idler float is an axial pad, not YZ slots in the side panel", "reason": "Face-plane slots let the drum axis wander; shaft growth is through the bearing", "rev": "B.2", "affected": "J-007, H-002, P-001R"},
         {"id": "D-025", "decision": "Master build guide: release state on every sheet, ballooned explosion, numbered step sheets with parts trays", "reason": "A builder should follow numbered steps with per-step parts and QC gates, not reverse-engineer the order from overview sheets", "rev": "B.3", "affected": "G-001…G-004, E-101, ST-01…ST-14, Q-101"},
-        {"id": "D-026", "decision": "Package release state is FABRICATION REVIEW, risk class R3", "reason": "Mains electrical work needs a qualified person, and the flange bolt circle is ASSUMED until the purchased bearing is transferred", "rev": "B.3", "affected": "G-001, G-004, ST-04, ST-10"},
+        {"id": "D-027", "decision": "Vertical captured UHMW ways; table is a lifting carriage", "reason": "Horizontal ways at Z=10 never supported the table at operating height (11.5–15.9″). Capture in X/Y, Acme in Z.", "rev": "B.4", "affected": "P-007, P-017, J-002, J-012"},
+        {"id": "D-028", "decision": "Three stretcher stations IN-LO / OUT-LO / OUT-HI, rails on edge", "reason": "A stretcher at Z=12 occupied the same volume as a 3″-open table. Triangle in the YZ plane fights racking without crossing the table.", "rev": "B.4", "affected": "P-001, P-003, J-001"},
+        {"id": "D-029", "decision": "Both Acme screws on the drum centerline (left/right X, one Y)", "reason": "Infeed/outfeed Y put the nuts off the cutting-force line and the 3D model only drew two screws at one Y anyway. Force through the nuts; chain couples them.", "rev": "B.4", "affected": "P-016, P-018, P-019, H-007, H-008"},
+        {"id": "D-030", "decision": "Layout protocol is HYBRID: face/edge on panels, centerline on drum/Acme/ways", "reason": "Planforge centerline protocol. Mixing a face measurement with a CL measurement without converting is how the drum axis drifts.", "rev": "B.4", "affected": "G-002, A-01, M-101"},
     ]
 
 
@@ -1005,6 +1388,7 @@ def revisions() -> list[dict[str, str]]:
         {"rev": "B.1", "note": "Fabrication model: part/joint IDs, housed stretchers, way rebate so table fits, derived geometry, JSON/CSV SSOT"},
         {"rev": "B.2", "note": "Individual Wandel-style part/assembly/hardware sheets; named hole patterns; idler axial pad (not YZ slots)"},
         {"rev": "B.3", "note": "Master build guide book: G-001…G-004 design basis, E-101 ballooned explosion, ST-01…ST-14 step sheets with parts trays, Q-101 commissioning"},
+        {"rev": "B.4", "note": "Mechanics: vertical captured ways, stretcher stations clear of the table, both Acme screws on the drum CL, P-017 shoes / P-018 thrust / P-019 home dog, Planforge J/M/F/S sheets, validate_mechanics()"},
     ]
 
 
@@ -1028,7 +1412,7 @@ def quality_targets() -> list[dict[str, str]]:
         {"check": "Table flatness", "tool": "Straightedge + feelers on wear face", "spec": f"≤ {s.table_flat_tol:.3f}″ on both diagonals", "qc": "QC-05"},
         {"check": "Drum TIR (paper off)", "tool": "Dial indicator on drum OD, mid-span", "spec": f"≤ {s.drum_tir:.3f}″ TIR", "qc": "QC-06"},
         {"check": "Drum ∥ table (paper on)", "tool": "Indicator at A (drive) and B (idler)", "spec": f"|A−B| ≤ {s.parallel_tol:.3f}″ over {s.capacity_width}″", "qc": "QC-07"},
-        {"check": "Way coplanar", "tool": "Winding sticks / indicator on both UHMW", "spec": "No twist; table slides without bind", "qc": "QC-04"},
+        {"check": "Way plumb + capture", "tool": "Square + indicator on both UHMW; table through travel", "spec": "Plumb; shoes wrap; no twist", "qc": "QC-04"},
         {"check": "Pulley coplanar", "tool": "Straightedge across both pulley faces", "spec": "Faces flush; belt tracks center", "qc": "QC-09"},
         {"check": "Hold-down set", "tool": "Feeler under roller vs drum (paper on)", "spec": f"Rollers {s.roller_setbelow:.3f}″ below drum OD", "qc": "QC-08"},
         {"check": "Thickness scatter", "tool": "Caliper 4 corners of test panel", "spec": f"≤ {s.parallel_tol:.3f}″ after finish pass", "qc": "QC-10"},
@@ -1070,7 +1454,7 @@ def lumberyard() -> list[dict[str, str]]:
         {"where": "MDF", "item": "¾″ MDF", "qty": "24″ × 48″", "alt": "Half a 4′×8′ sheet", "use": "P-008 ×19 + P-015 + P-005 if no ½″ offcuts"},
         {"where": "Plywood", "item": "¼″ birch or pine ply", "qty": "24″ × 24″", "alt": "Door-skin offcut is enough", "use": "P-011 hood blank"},
         {"where": "Plastics / order", "item": "½″ phenolic or ⅜″ MIC-6 / cast tooling plate", "qty": "16″ × 22″", "alt": "UHMW sheet if phenolic is a wait", "use": "P-006 wear face — metrology surface"},
-        {"where": "Plastics", "item": "UHMW bar ¾″ × ¾″", "qty": "48″", "alt": "Two 24″ sticks", "use": "P-007 ways, let into J-002 rebate"},
+        {"where": "Plastics", "item": "UHMW bar ¾″ × 2½″", "qty": "12″", "alt": "Two 6″ offcuts + a shoe blank", "use": "P-007 vertical ways + P-017 shoes"},
         {"where": "Hardwood / metal", "item": "Hardwood ¾″ or 1½″ aluminum angle", "qty": "36″", "alt": "BB offcuts from sheet 2", "use": "P-014 yokes"},
         {"where": "Abrasives", "item": "Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220", "qty": "1 roll + 4 grits", "alt": "PSA paper if you skip Velcro (harder to change)", "use": "H-022 spiral wrap after truing"},
         {"where": "Glue", "item": "Titebond III + thin CA", "qty": "1 qt + 1 oz", "alt": "Any Type I PVA for the box", "use": "H-023 torsion box, drum, Velcro edges"},
@@ -1181,18 +1565,18 @@ def assembly_phases() -> list[dict[str, str]]:
     return [
         {"id": "a1", "phase": "frame", "title": "Template & stack-drill sides",
          "body": f"Clamp P-001L/R face-to-face. Drill bearing CL at Y {GEOM.bearing_cl_y:g}″ / Z {GEOM.bearing_cl_z:g}″, Acme holes, indicator pad as one stack (S-008)."},
-        {"id": "a2", "phase": "frame", "title": "Dados, way rebates, box + UHMW",
-         "body": f"Split the pair. Dado J-001 ({SPEC.stretcher_housing:g}″) and rebate J-002 ({GEOM.way_rebate:.3f}″) on inner faces only. Glue P-003, square diagonals, bond P-007."},
+        {"id": "a2", "phase": "frame", "title": "Dados, vertical way rebates, box + UHMW",
+         "body": f"Split the pair. Dado J-001 stations IN-LO/OUT-LO/OUT-HI and rebate vertical J-002 ({GEOM.way_rebate:.3f}″) on inner faces only. Glue P-003, square diagonals, bond P-007."},
         {"id": "a3", "phase": "drum", "title": "Pack-bore discs & laminate drum",
          "body": "Bandsaw P-008/P-009 oversize. Stack in P-015; ream ⌀¾″ as a pack (J-005). Key, 1 mm MDF relief, static-balance P-009."},
         {"id": "a4", "phase": "drum", "title": "Fixed drive bearing, floating idler",
-         "body": "H-001 locked on P-001L (J-006). H-002 on axial-float slots on P-001R (J-007)."},
+         "body": "H-001 locked on P-001L (J-006). H-002 on a UHMW axial pad on P-001R (J-007). Do not slot the plywood in Y or Z."},
         {"id": "a5", "phase": "drive", "title": "Motor cradle, coplanar pulleys, lock",
          "body": "Straightedge across H-003/H-004. Gravity tension, lock P-012 (J-008)."},
-        {"id": "a6", "phase": "table", "title": "Torsion-box table + wear face",
-         "body": f"P-004 + P-005 @ {SPEC.table_rib_oc:g}″ o.c., glue. Flatten. Bond P-006. Diagonals ≤ {SPEC.table_flat_tol:.3f}″."},
-        {"id": "a7", "phase": "table", "title": "Dual Acme lift + chain couple",
-         "body": "P-016 + H-007. H-008 chain. Left clutch + home dog. Table must rise in the ways without twist."},
+        {"id": "a6", "phase": "table", "title": "Torsion-box table + wear face + shoes",
+         "body": f"P-004 + P-005 @ {SPEC.table_rib_oc:g}″ o.c., glue. Flatten. Bond P-006. Fit P-017 shoes. Diagonals ≤ {SPEC.table_flat_tol:.3f}″."},
+        {"id": "a7", "phase": "table", "title": "Dual Acme lift on drum CL + chain couple",
+         "body": "P-018 thrust on base, P-016 nuts, both screws at drum CL Y. H-008 chain. Left clutch + P-019 home dog. Table rises in Z; shoes stay wrapped."},
         {"id": "a8", "phase": "table", "title": "Hold-down roller yokes",
          "body": f"P-014 + H-009. Set {SPEC.roller_setbelow:.3f}″ below drum OD, paper on. Too much spring = snipe."},
         {"id": "a9", "phase": "hood", "title": "Kerf-bend dust hood",
@@ -1317,12 +1701,12 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "sheets": ["P-001L", "P-001R", "D-12"],
             "actions": [
                 "Split the pair. From here the panels are mirror images — work only on the marked inner faces.",
-                f"Cut three stretcher housings {s.stretcher_housing:g}″ deep × {s.ply_actual:g}″ wide, Y {s.stretcher_dado_y0:g}″ to {s.stretcher_dado_y0 + s.stretcher_height:g}″, at Z {', '.join(f'{z:g}' for z in s.stretcher_z)}″ (J-001, S-006).",
-                f"Rout the way rebate {g.way_rebate:.3f}″ deep × {s.way_stock:g}″ wide at Z {s.way_z:g}″, stopping {s.way_end_inset:g}″ shy of each end (J-002, S-007).",
+                f"Cut three stretcher housings {s.stretcher_housing:g}″ deep × {s.ply_actual:g}″ wide × {s.stretcher_height:g}″ tall at stations IN-LO, OUT-LO, OUT-HI (J-001, S-006). Rails stand on edge. None of these dados may sit at Z ≈ 12 — that is the table.",
+                f"Rout the vertical way rebate {g.way_rebate:.3f}″ deep × {s.way_width:g}″ wide, Y {g.way_y0:g}–{g.way_y1:g}″ (drum CL), Z {g.way_z0:g}–{g.way_z1:g}″ (J-002, S-007).",
                 "Test the dado width on an offcut of the same ply first. A sloppy housing is a racking frame.",
             ],
-            "qc": "QC-12",
-            "gate": f"Rebate {g.way_rebate:.3f}″ deep ±0.010″; a scrap of way stock sits {g.way_project:.3f}″ proud of the inner face.",
+            "qc": "QC-12 · QC-13",
+            "gate": f"Rebate {g.way_rebate:.3f}″ deep ±0.010″; a scrap of way stock sits {g.way_project:.3f}″ proud. Dados at IN-LO / OUT-LO / OUT-HI only.",
             "hold": "",
             "warn": "Do not dado the panels while they are still stacked. You will get two left-hand sides.",
             "shows": ["sides", "ways"],
@@ -1339,7 +1723,7 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "tools": ["Long clamps", "Framing square", "Tape measure", "Glue brush"],
             "sheets": ["A-01", "P-003", "P-002"],
             "actions": [
-                f"Dry-fit all three stretchers ({g.stretcher_length:g}″, housed {s.stretcher_housing:g}″ each end) into the dados. Check the inner span reads {s.clear_between_sides:g}″.",
+                f"Dry-fit all three stretchers ({g.stretcher_length:g}″, housed {s.stretcher_housing:g}″ each end) into IN-LO, OUT-LO, OUT-HI. Check the inner span reads {s.clear_between_sides:g}″. Confirm no rail sits in the table's Z range ({g.table_z_at_max_stock:g}–{g.table_z_at_min_stock + g.table_thick:.2f}″).",
                 "Glue and clamp. Measure both diagonals and pull them equal before the glue grabs.",
                 "Drill and drive #8 × 2″ screws from outside into each stretcher end.",
                 "Screw the base deck on, then measure the diagonals again.",
@@ -1355,20 +1739,20 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {
             "step": 7,
             "chapter": "04 Frame",
-            "title": "Bond the UHMW ways and wax them",
-            "goal": "Two coplanar rails for the table to ride on. These, not the stretchers, locate the table.",
+            "title": "Bond the vertical UHMW ways and wax them",
+            "goal": "Two plumb rails for the table shoes to wrap. These, not the stretchers, locate the table in X and Y.",
             "parts": ["P-007"],
             "hardware": ["H-023", "H-024"],
-            "tools": ["Winding sticks or straightedge", "Dial indicator", "Clamps"],
-            "sheets": ["P-007", "A-01"],
+            "tools": ["Square", "Dial indicator", "Clamps"],
+            "sheets": ["P-007", "A-01", "J-002"],
             "actions": [
-                f"Cut two UHMW bars to {s.side_depth:g}″ and set them into the rebates. They should project {g.way_project:.3f}″.",
+                f"Cut two UHMW strips {g.way_len:g}″ × {s.way_width:g}″ and set them into the vertical rebates. They should project {g.way_project:.3f}″.",
                 "Bond and clamp. Optional: #8 flush screws from the outer face.",
-                "Check both ways for twist with winding sticks or an indicator riding a flat bar.",
+                "Square both ways to the base. An indicator riding a tall square should read the same on left and right.",
                 "Paste wax only. Never oil — oil migrates into the wood and into your finish.",
             ],
             "qc": "QC-04",
-            "gate": f"No twist between the two ways. Projection {g.way_project:.3f}″ ±0.010″ along the full length.",
+            "gate": f"Ways plumb. Projection {g.way_project:.3f}″ ±0.010″. Centered on drum CL at Y {g.bearing_cl_y:g}″.",
             "hold": "",
             "warn": "",
             "shows": ["sides", "base", "stretch", "ways"],
@@ -1449,15 +1833,16 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "chapter": "07 Table",
             "title": "Build the torsion-box table and bond the wear face",
             "goal": "A flat plate that stays flat. This is the surface you measure against forever.",
-            "parts": ["P-004", "P-005", "P-006"],
+            "parts": ["P-004", "P-005", "P-006", "P-017"],
             "hardware": ["H-023"],
             "tools": ["Clamps and cauls", "Straightedge", "Feeler gauges", "Flat bench"],
-            "sheets": ["P-004", "P-005", "P-006", "A-03"],
+            "sheets": ["P-004", "P-005", "P-006", "P-017", "A-03"],
             "actions": [
                 f"Glue the rib grid at {s.table_rib_oc:g}″ o.c. between the two skins. Full glue, clamped on a flat reference.",
                 "Check the box flat in both directions and on both diagonals. Flatten it before going further.",
                 "Bond the phenolic or tooling-plate wear face on top (J-004).",
-                f"Confirm the finished plan size is {g.table_width:g}″ × {g.table_depth:g}″ so it enters the ways.",
+                f"Groove and bolt P-017 shoes under each long edge, centered on Y {g.bearing_cl_y:g}″. Groove {g.shoe_groove_depth:.3f}″ × {g.shoe_groove_width:.3f}″ wraps the way tongue (J-012).",
+                f"Confirm the finished plan size is {g.table_width:g}″ × {g.table_depth:g}″ so the wear face still carries {s.capacity_width:g}″ of work.",
             ],
             "qc": "QC-05",
             "gate": f"Wear face flat within {s.table_flat_tol:.3f}″ on both diagonals.",
@@ -1470,20 +1855,21 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {
             "step": 12,
             "chapter": "07 Table",
-            "title": "Fit the dual Acme lift and chain-couple it",
-            "goal": "Both ends of the table rise together, with a home position to return to.",
-            "parts": ["P-016"],
-            "hardware": ["H-007", "H-008", "H-013"],
-            "tools": ["Wrenches", "Drill", "Tape measure"],
-            "sheets": ["P-016", "A-03"],
+            "title": "Fit the dual Acme lift on the drum centerline",
+            "goal": "Both nuts sit under the cut. The table rises in Z without racking in X or Y.",
+            "parts": ["P-016", "P-018", "P-019"],
+            "hardware": ["H-007", "H-008", "H-013", "H-026"],
+            "tools": ["Wrenches", "Drill", "Tape measure", "Square"],
+            "sheets": ["P-016", "P-018", "P-019", "A-03", "M-101"],
             "actions": [
-                "Bolt a bronze nut block under each end of the table.",
-                f"Fit both ½-10 Acme screws. One turn is {g.acme_per_turn:.4f}″ — that is your fine adjustment.",
-                "Chain-couple the two screws so they turn together. Fit the left clutch and the home dog.",
-                f"Run the table through the full {s.elev_travel:g}″ of travel. It must rise without twist or bind.",
+                f"Screw both P-018 thrust blocks to the base at Y {g.acme_y:g}″ (drum CL), X left and right. Fit thrust washers and e-clips (J-013).",
+                "Bolt a bronze nut block under the table, each nut on the same Y as its screw — not at the infeed and outfeed ends.",
+                f"Fit both ½-10 Acme screws. One turn is {g.acme_per_turn:.4f}″. Thirty turns is 3″ (CALC-003).",
+                "Chain-couple the two screws. Fit the left clutch and P-019 home dog (J-014).",
+                f"Run the table through the full {s.elev_travel:g}″ of travel. Shoes must stay wrapped; the table must not yaw.",
             ],
-            "qc": "QC-12",
-            "gate": "Table rises and falls freely through full travel; both ends move the same amount.",
+            "qc": "QC-12 · QC-14",
+            "gate": "Table rises and falls freely through full travel; both ends move the same amount; shoes stay captured.",
             "hold": "",
             "warn": "",
             "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor", "table", "elev"],
@@ -1549,7 +1935,7 @@ def calibration_steps() -> list[dict[str, str]]:
     s = SPEC
     return [
         {"id": "c1", "title": "Disconnect power", "body": "Unplug. Hood off. Paper off for TIR; paper on for A/B parallel."},
-        {"id": "c2", "title": "Seat the table in the ways", "body": "Raise/lower through full travel. No bind, no rock. Winding sticks on wear face — no twist."},
+        {"id": "c2", "title": "Seat the table on the vertical ways", "body": "Raise/lower through full travel. Shoes stay wrapped. No bind, no yaw. Square on the wear face — no twist."},
         {"id": "c3", "title": "Drum TIR", "body": f"Indicator on mid-span OD. Rotate by hand. If > {s.drum_tir:.3f}″, re-true on P-013 before wrapping."},
         {"id": "c4", "title": "Wrap & re-clock", "body": "Velcro then spiral paper. Paper is not uniform — A/B will change. This is the measurement that matters."},
         {"id": "c5", "title": "A/B parallel", "body": f"Same indicator height, drive then idler. Uncouple left Acme; 1/{s.acme_tpi:g} turn ≈ {GEOM.acme_per_turn:.4f}″. Recouple. Set home dog."},
@@ -1561,7 +1947,7 @@ def calibration_steps() -> list[dict[str, str]]:
 
 def fmea() -> list[dict[str, str]]:
     return [
-        {"mode": "Table rack under feed", "cause": "Butt stretchers / proud ways", "effect": "Tapered cut, bind", "mitigation": "J-001 housing + J-002 rebate ways", "sev": "H"},
+        {"mode": "Table rack under feed", "cause": "Butt stretchers / uncaptured table / stretcher in the table path", "effect": "Tapered cut, bind, or a rail hitting the table", "mitigation": "J-001 triangle stations + J-012 captured shoes + CALC-004", "sev": "H"},
         {"mode": "Banana shaft", "cause": "Both flanges locked", "effect": "TIR and bearing death", "mitigation": "J-007 axial float", "sev": "H"},
         {"mode": "Snipe", "cause": "Hold-down springs too stiff / missing", "effect": "End thickness scatter", "mitigation": "Light H-011; 0.030″ set", "sev": "M"},
         {"mode": "Helical tracks", "cause": "Spiral wrap, no osc", "effect": "Visible stripes", "mitigation": "Optional H-025; or 90° finish pass", "sev": "L"},
@@ -1578,8 +1964,8 @@ def summary() -> dict[str, Any]:
     s, g = SPEC, GEOM
     errs = validate(s, g)
     spec_d = asdict(s)
-    spec_d.pop("stretcher_z", None)
-    spec_d["stretcher_z"] = list(s.stretcher_z)
+    spec_d.pop("stretcher_stations", None)
+    spec_d["stretcher_stations"] = [list(row) for row in s.stretcher_stations]
     return {
         "project": PROJECT,
         "parameters": spec_d,
@@ -1604,7 +1990,8 @@ def summary() -> dict[str, Any]:
         "nesting": nest_sheets(),
         "drawings": shop_drawings(),
         "build_steps": build_steps(),
-        "release_state": RELEASE_STATE,
+        "calculations": calculations(),
+        "layout_protocol": LAYOUT_PROTOCOL,
         "drawings": shop_drawings(),
         "assembly": assembly_phases(),
         "calibration": calibration_steps(),
@@ -1650,22 +2037,29 @@ def parameters_scad(s: Spec = SPEC, g: Geom = GEOM) -> str:
         f"way_project = {g.way_project};",
         f"way_stock = {s.way_stock};",
         f"way_rebate = {g.way_rebate};",
-        f"way_z = {s.way_z};",
+        f"way_width = {g.way_width};",
+        f"way_y0 = {g.way_y0};",
+        f"way_z0 = {g.way_z0};",
+        f"way_len = {g.way_len};",
         f"stretcher_h = {s.stretcher_height};",
         f"stretcher_len = {g.stretcher_length};",
         f"stretcher_housing = {s.stretcher_housing};",
-        f"stretcher_dado_y0 = {s.stretcher_dado_y0};",
+        f"stretcher_y = [{', '.join(str(r[1]) for r in g.stretcher_stations)}];",
+        f"stretcher_z = [{', '.join(str(r[2]) for r in g.stretcher_stations)}];",
         f"flange_bolt_square = {s.flange_bolt_square};",
         f"flange_bolt_clr = {s.flange_bolt_clr};",
         f"ply_shaft_clear_dia = {s.ply_shaft_clear_dia};",
         f"motor_pivot_y = {s.motor_pivot_y};",
         f"motor_pivot_z = {s.motor_pivot_z};",
-        f"way_end_inset = {s.way_end_inset};",
         f"idler_float_pad = {s.idler_float_pad};",
-        f"acme_y0 = {g.acme_y_infeed};",
-        f"acme_y1 = {g.acme_y_outfeed};",
+        f"acme_y = {g.acme_y};",
+        f"acme_y0 = {g.acme_y};",
+        f"acme_y1 = {g.acme_y};",
         f"acme_x0 = {g.acme_x_left};",
         f"acme_x1 = {g.acme_x_right};",
+        f"shoe_h = {g.shoe_h};",
+        f"shoe_t = {g.shoe_t};",
+        f"thrust_h = {g.thrust_h};",
         f"dust_port_od = {s.dust_port_od};",
         "",
     ]
@@ -1692,12 +2086,25 @@ def geometry_js(s: Spec = SPEC, g: Geom = GEOM) -> str:
         "rollerLen": g.roller_len,
         "wayProject": g.way_project,
         "wayStock": s.way_stock,
-        "wayZ": s.way_z,
+        "wayWidth": g.way_width,
+        "wayY0": g.way_y0,
+        "wayZ0": g.way_z0,
+        "wayLen": g.way_len,
         "stretcherLen": g.stretcher_length,
         "stretcherH": s.stretcher_height,
-        "stretcherZ": list(s.stretcher_z),
+        "stretcherStations": [
+            {"id": r[0], "y0": r[1], "z0": r[2], "y1": r[3], "z1": r[4]}
+            for r in g.stretcher_stations
+        ],
         "acmeX0": g.acme_x_left,
         "acmeX1": g.acme_x_right,
+        "acmeY": g.acme_y,
+        "shoeH": g.shoe_h,
+        "shoeT": g.shoe_t,
+        "shoeGroove": g.shoe_groove_depth,
+        "thrustL": g.thrust_l,
+        "thrustW": g.thrust_w,
+        "thrustH": g.thrust_h,
     }
     return (
         "/* AUTO-GENERATED from cad/walter_ds16.py — do not edit */\n"
@@ -1716,7 +2123,16 @@ def shop_drawings() -> list[dict[str, str]]:
         {"code": "G-003", "file": "G003_registers.svg", "title": "G-003 Evidence & calcs", "kind": "guide", "group": "guide"},
         {"code": "G-004", "file": "G004_safety.svg", "title": "G-004 Safety & risk", "kind": "guide", "group": "guide"},
         {"code": "E-101", "file": "E101_exploded.svg", "title": "E-101 Exploded + BOM", "kind": "guide", "group": "guide"},
+        {"code": "M-101", "file": "M101_kinematics.svg", "title": "M-101 Kinematics", "kind": "guide", "group": "guide"},
+        {"code": "J-001", "file": "J001_stretcher.svg", "title": "J-001 Housed stretcher", "kind": "guide", "group": "guide"},
+        {"code": "J-002", "file": "J002_way.svg", "title": "J-002 Vertical way", "kind": "guide", "group": "guide"},
+        {"code": "J-006", "file": "J006_drive_bearing.svg", "title": "J-006 Drive bearing", "kind": "guide", "group": "guide"},
+        {"code": "J-007", "file": "J007_idler_float.svg", "title": "J-007 Idler float", "kind": "guide", "group": "guide"},
+        {"code": "J-011", "file": "J011_lift.svg", "title": "J-011 Lift & capture", "kind": "guide", "group": "guide"},
+        {"code": "F-101", "file": "F101_routing.svg", "title": "F-101 Part register", "kind": "guide", "group": "guide"},
+        {"code": "S-101", "file": "S101_load_path.svg", "title": "S-101 Load path", "kind": "guide", "group": "guide"},
         {"code": "Q-101", "file": "Q101_commissioning.svg", "title": "Q-101 Commissioning", "kind": "guide", "group": "guide"},
+        {"code": "Q-102", "file": "Q102_zero_gap.svg", "title": "Q-102 Zero-gap", "kind": "guide", "group": "guide"},
         {"code": "IDX", "file": "IDX_drawings.svg", "title": "Drawing index", "kind": "plan", "group": "index"},
         {"code": "D-1", "file": "D1_general.svg", "title": "D-1 General", "kind": "plan", "group": "overview"},
         {"code": "D-2", "file": "D2_frame.svg", "title": "D-2 Frame", "kind": "plan", "group": "overview"},
@@ -1747,6 +2163,9 @@ def shop_drawings() -> list[dict[str, str]]:
         {"code": "P-014", "file": "P014_roller_yoke.svg", "title": "P-014 Roller yoke", "kind": "part", "group": "part"},
         {"code": "P-015", "file": "P015_pack_bore.svg", "title": "P-015 Pack-bore jig", "kind": "part", "group": "part"},
         {"code": "P-016", "file": "P016_nut_block.svg", "title": "P-016 Nut block", "kind": "part", "group": "part"},
+        {"code": "P-017", "file": "P017_table_shoe.svg", "title": "P-017 Table shoe", "kind": "part", "group": "part"},
+        {"code": "P-018", "file": "P018_thrust_block.svg", "title": "P-018 Thrust block", "kind": "part", "group": "part"},
+        {"code": "P-019", "file": "P019_home_dog.svg", "title": "P-019 Home dog", "kind": "part", "group": "part"},
         {"code": "A-01", "file": "A01_frame.svg", "title": "A-01 Frame assembly", "kind": "assembly", "group": "assembly"},
         {"code": "A-02", "file": "A02_drum.svg", "title": "A-02 Drum assembly", "kind": "assembly", "group": "assembly"},
         {"code": "A-03", "file": "A03_table.svg", "title": "A-03 Table assembly", "kind": "assembly", "group": "assembly"},
@@ -1791,12 +2210,12 @@ def viewer_data() -> dict[str, Any]:
         "modernizations": list(s.modernizations),
         "parts": [
             {"id": "sides", "fabIds": ["P-001L", "P-001R"], "group": "frame", "label": "Side panels P-001L/R", "detail": f"{s.ply_actual:g}″ BB · stack-drill then inner-face dado/rebate", "color": "#c4a574", "sheet": "P001L_side_drive.svg"},
-            {"id": "ways", "fabIds": ["P-007"], "group": "frame", "label": "UHMW ways P-007", "detail": f"Rebate {g.way_rebate:.3f}″ · project {g.way_project:.3f}″ · J-002", "color": "#d9dcde", "sheet": "P007_uhmw_way.svg"},
-            {"id": "base", "fabIds": ["P-002", "P-003"], "group": "frame", "label": "Base + stretchers", "detail": f"P-003 housed {g.stretcher_length:g}″ · J-001", "color": "#a89070", "sheet": "A01_frame.svg"},
+            {"id": "ways", "fabIds": ["P-007", "P-017"], "group": "frame", "label": "Vertical ways + shoes", "detail": f"P-007 rebate {g.way_rebate:.3f}″ · P-017 wrap · J-002/J-012", "color": "#d9dcde", "sheet": "P007_uhmw_way.svg"},
+            {"id": "base", "fabIds": ["P-002", "P-003", "P-018"], "group": "frame", "label": "Base + stretchers + thrust", "detail": f"P-003 housed {g.stretcher_length:g}″ · IN-LO/OUT-LO/OUT-HI · J-001", "color": "#a89070", "sheet": "A01_frame.svg"},
             {"id": "drum", "fabIds": ["P-008", "P-009"], "group": "drum", "label": "Sanding drum", "detail": f"⌀{s.drum_od:g}″ × {g.drum_length:g}″ · pack-bored · P-008/P-009", "color": "#b8a990", "sheet": "A02_drum.svg"},
             {"id": "shaft", "fabIds": ["P-010", "H-001", "H-002"], "group": "drum", "label": "Shaft + bearings", "detail": "P-010 · J-006 fixed · J-007 float", "color": "#8a9098", "sheet": "P010_shaft.svg"},
             {"id": "table", "fabIds": ["P-004", "P-005", "P-006"], "group": "table", "label": "Torsion-box table", "detail": "P-004/P-005/P-006 · J-003/J-004", "color": "#cfd3d5", "sheet": "A03_table.svg"},
-            {"id": "elev", "fabIds": ["P-016", "H-007", "H-008"], "group": "table", "label": "Dual Acme lift", "detail": "H-007/H-008 · left clutch · home dog", "color": "#6e7578", "sheet": "P016_nut_block.svg"},
+            {"id": "elev", "fabIds": ["P-016", "P-018", "P-019", "H-007", "H-008"], "group": "table", "label": "Dual Acme lift", "detail": f"Both screws at Y {g.acme_y:g}″ · left clutch · P-019 dog", "color": "#6e7578", "sheet": "P016_nut_block.svg"},
             {"id": "rollers", "fabIds": ["P-014", "H-009"], "group": "table", "label": "Hold-down rollers", "detail": f"P-014 · {s.roller_setbelow:.3f}″ below drum", "color": "#5a6068", "sheet": "A05_holddowns.svg"},
             {"id": "motor", "fabIds": ["P-012", "H-006"], "group": "drive", "label": "Motor + pulleys", "detail": f"{s.motor_hp:g} HP · coplanar {s.pulley_motor_od:g}″/{s.pulley_drum_od:g}″", "color": "#4a5058", "sheet": "A04_drive.svg"},
             {"id": "hood", "fabIds": ["P-011"], "group": "hood", "label": "Dust hood", "detail": "P-011 kerf-bent · 4″ port", "color": "#9aa8a0", "sheet": "P011_hood.svg"},

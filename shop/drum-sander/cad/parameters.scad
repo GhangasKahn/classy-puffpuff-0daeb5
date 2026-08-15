@@ -1,5 +1,5 @@
 // AUTO-GENERATED from walter_ds16.py — do not edit
-// WALTER DS-16 Rev B fab B.3 · inches
+// WALTER DS-16 Rev B fab B.4 · inches
 side_t = 0.75;
 side_h = 30.0;
 side_d = 22.0;
@@ -20,20 +20,27 @@ roller_len = 15.75;
 way_project = 0.23;
 way_stock = 0.75;
 way_rebate = 0.52;
-way_z = 10.0;
+way_width = 2.5;
+way_y0 = 9.75;
+way_z0 = 11.0;
+way_len = 5.438;
 stretcher_h = 4.0;
 stretcher_len = 17.0;
 stretcher_housing = 0.25;
-stretcher_dado_y0 = 2.0;
+stretcher_y = [0.25, 21.0, 21.0];
+stretcher_z = [1.0, 1.0, 22.0];
 flange_bolt_square = 2.05;
 flange_bolt_clr = 0.344;
 ply_shaft_clear_dia = 1.125;
 motor_pivot_y = 4.0;
 motor_pivot_z = 6.0;
-way_end_inset = 1.0;
 idler_float_pad = 0.25;
-acme_y0 = 4.0;
-acme_y1 = 18.0;
+acme_y = 11.0;
+acme_y0 = 11.0;
+acme_y1 = 11.0;
 acme_x0 = 3.15;
 acme_x1 = 14.85;
+shoe_h = 4.0;
+shoe_t = 1.25;
+thrust_h = 1.5;
 dust_port_od = 4.0;

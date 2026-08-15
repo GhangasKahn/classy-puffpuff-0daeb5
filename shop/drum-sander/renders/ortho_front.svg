@@ -2,6 +2,8 @@
 <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='900' viewBox='0 0 1200 900'>
 <title>WALTER DS-16 front elevation solid</title>
 <rect width='1200' height='900' fill='#f3f1ec'/>
+<polygon points='123.3,823.3 576.7,823.3 576.7,716.7 123.3,716.7' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='123.3,263.3 576.7,263.3 576.7,156.7 123.3,156.7' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='140.0,411.0 140.0,419.3 560.0,419.3 560.0,411.0' fill='#404449' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='140.0,419.3 140.0,427.7 560.0,427.7 560.0,419.3' fill='#3f4349' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='140.0,404.9 140.0,411.0 560.0,411.0 560.0,404.9' fill='#4a4f56' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
@@ -42,12 +44,13 @@
 <polygon points='50.0,361.7 50.0,365.3 650.0,365.3 650.0,361.7' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='50.0,365.3 50.0,366.7 650.0,366.7 650.0,365.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='50.0,346.7 50.0,348.0 650.0,348.0 650.0,346.7' fill='#80858d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='187.3,796.7 200.7,796.7 200.7,423.3 187.3,423.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='499.3,796.7 512.7,796.7 512.7,423.3 499.3,423.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='147.3,223.3 552.7,223.3 552.7,214.0 147.3,214.0' fill='#6c7671' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='130.0,556.7 136.1,556.7 136.1,411.7 130.0,411.7' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='563.9,556.7 570.0,556.7 570.0,411.7 563.9,411.7' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='124.7,394.0 143.3,394.0 143.3,319.3 124.7,319.3' fill='#4d5254' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='556.7,394.0 575.3,394.0 575.3,319.3 556.7,319.3' fill='#4d5254' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='123.3,690.0 576.7,690.0 576.7,670.0 123.3,670.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='123.3,530.0 576.7,530.0 576.7,510.0 123.3,510.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='123.3,316.7 576.7,316.7 576.7,296.7 123.3,296.7' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='590.0,582.4 590.0,600.2 611.3,600.2 611.3,582.4' fill='#3f4349' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='147.3,233.3 552.7,233.3 552.7,224.0 147.3,224.0' fill='#6c7671' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='590.0,566.4 590.0,582.4 611.3,582.4 611.3,566.4' fill='#43484e' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
@@ -65,11 +68,8 @@
 <polygon points='147.3,260.7 552.7,260.7 552.7,251.3 147.3,251.3' fill='#6c7671' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='131.3,408.7 568.7,408.7 568.7,398.0 131.3,398.0' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='147.3,298.0 552.7,298.0 552.7,288.7 147.3,288.7' fill='#6c7671' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='162.0,796.7 175.3,796.7 175.3,423.3 162.0,423.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='524.7,796.7 538.0,796.7 538.0,423.3 524.7,423.3' fill='#61656b' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='435.3,676.7 595.3,676.7 595.3,516.7 435.3,516.7' fill='#34383e' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='130.0,583.3 136.1,583.3 136.1,563.3 130.0,563.3' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
-<polygon points='563.9,583.3 570.0,583.3 570.0,563.3 563.9,563.3' fill='#999b9d' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
+<polygon points='123.3,823.3 576.7,823.3 576.7,716.7 123.3,716.7' fill='#61513c' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='110.0,850.0 590.0,850.0 590.0,830.0 110.0,830.0' fill='#76654f' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='110.0,830.0 130.0,830.0 130.0,50.0 110.0,50.0' fill='#8a7452' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>
 <polygon points='570.0,830.0 590.0,830.0 590.0,50.0 570.0,50.0' fill='#8a7452' stroke='#1a1f24' stroke-width='0.7' stroke-linejoin='round'/>

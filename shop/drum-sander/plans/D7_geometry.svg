@@ -44,8 +44,8 @@
 <text x='980.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.002″ TIR</text>
 <text x='700.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Drum ∥ table (paper on)</text>
 <text x='980.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>|A−B| ≤ 0.003″ over 15.5″</text>
-<text x='700.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Way coplanar</text>
-<text x='980.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>No twist; table slides without bind</text>
+<text x='700.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Way plumb + capture</text>
+<text x='980.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Plumb; shoes wrap; no twist</text>
 <text x='700.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Pulley coplanar</text>
 <text x='980.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Faces flush; belt tracks center</text>
 <text x='700.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Hold-down set</text>
@@ -56,7 +56,7 @@
 <text x='40.0' y='672.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C1</text>
 <text x='90.0' y='672.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Disconnect power — Unplug. Hood off. Paper off for TIR; paper on for A/B parallel.</text>
 <text x='40.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C2</text>
-<text x='90.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Seat the table in the ways — Raise/lower through full travel. No bind, no rock. Winding sticks on wear face — no twis</text>
+<text x='90.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Seat the table on the vertical ways — Raise/lower through full travel. Shoes stay wrapped. No bind, no yaw. Square on the wear</text>
 <text x='40.0' y='720.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C3</text>
 <text x='90.0' y='720.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Drum TIR — Indicator on mid-span OD. Rotate by hand. If &gt; 0.002″, re-true on P-013 before wrapping.</text>
 <text x='40.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C4</text>

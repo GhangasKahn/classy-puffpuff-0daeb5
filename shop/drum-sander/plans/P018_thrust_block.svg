@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-018</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Acme thrust block</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Takes axial load from the screw. Both blocks at Y = bearing_cl_y, left and right X.</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 2  ·  IDENTICAL</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Baltic birch plywood or hardwood  ·  3" × 3" × 1.5"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 2  ·  Bore ⌀½″ through; counterbore for thrust washer; screw to P-002 on drum CL</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · ASSUMED block size; hole follows Acme OD</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>ACME THRUST BLOCK — make two, screw to the base on drum CL</text>
+<rect x='80.0' y='160.0' width='144.0' height='144.0' fill='#e6d09a' stroke='#1a1a1a' stroke-width='2.0'/>
+<line x1='80.0' y1='304.0' x2='80.0' y2='338.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='224.0' y1='304.0' x2='224.0' y2='338.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='332.0' x2='224.0' y2='332.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,332.0 88.0,328.8 88.0,335.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='224.0,332.0 216.0,328.8 216.0,335.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='130.8' y='315.0' width='42.4' height='18.0' fill='#ffffff'/>
+<text x='152.0' y='327.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>3.00"</text>
+<line x1='80.0' y1='160.0' x2='42.0' y2='160.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='304.0' x2='42.0' y2='304.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='48.0' y1='160.0' x2='48.0' y2='304.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='48.0,160.0 44.8,168.0 51.2,168.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='48.0,304.0 44.8,296.0 51.2,296.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='38.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 236.0)'>3.00"</text>
+<text x='240.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 1.5"</text>
+<circle cx='152.0' cy='232.0' r='12.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='152.0' y1='232.0' x2='236.0' y2='142.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<circle cx='152.0' cy='232.0' r='2.2' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<text x='242.0' y='140.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>⌀½″ through + thrust-washer counterbore</text>
+<rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1291.3,388.0 1450.7,296.0 1450.7,204.0 1291.3,296.0' fill='#a2936c'/>
+<polygon points='1132.0,296.0 1291.3,388.0 1291.3,296.0 1132.0,204.0' fill='#c0ae81'/>
+<polygon points='1291.3,296.0 1450.7,204.0 1291.3,112.0 1132.0,204.0' fill='#a2936c'/>
+</g>
+<text x='1130.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric</text>
+<rect x='1120.0' y='420.0' width='500.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1136.0' y='444.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PART DATA</text>
+<text x='1136.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Stock</text>
+<text x='1260.0' y='470.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3.5" × 3.125" × 1.5"</text>
+<text x='1136.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Joinery</text>
+<text x='1260.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-013 screw to base; H-007 thrust</text>
+<text x='1136.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref face</text>
+<text x='1260.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref edge</text>
+<text x='1260.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Grain</text>
+<text x='1260.0' y='558.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
+<text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ASSUMED block size; hole follows Acme OD</text>
+<text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Both blocks at Y 11.00" (drum CL), left and right X. Not at</text>
+<text x='80.0' y='964.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the infeed and outfeed.</text>
+<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Thrust washer + e-clip under the screw (H-026). Sanding load</text>
+<text x='80.0' y='1000.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  tries to pull the screw out of the base.</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Block size is ASSUMED. Hole follows ½-10 Acme.</text>
+</svg>

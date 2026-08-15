@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-007</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Idler flange — FLOATING axial</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Joinery</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>J-007</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>H-002 on a 0.25″ UHMW pad  ·  P-001R</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<rect x='36.0' y='150.0' width='720.0' height='420.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='377.2,399.4 527.3,486.1 527.3,255.6 377.2,169.0' fill='#b5b5b1'/>
+<polygon points='472.8,288.1 471.6,287.8 470.8,288.1 470.3,289.0 470.3,290.3 470.8,291.8 471.6,293.1 472.8,294.0 473.9,294.4 474.8,294.1 475.2,293.2 475.2,291.8 474.8,290.4 473.9,289.0' fill='#a5a7ab'/>
+<polygon points='442.9,308.3 462.0,319.3 462.0,297.3 442.9,286.2' fill='#a5a7ab'/>
+<polygon points='449.7,284.7 444.9,282.7 440.5,282.5 436.8,284.0 434.2,287.2 432.8,291.8 432.8,297.4 434.2,303.6 436.8,309.8 440.5,315.6 444.9,320.5 449.7,324.1 454.5,326.0 459.0,326.3 462.6,324.7 465.2,321.5 466.6,316.9 466.6,311.3 465.2,305.1 462.6,298.9 459.0,293.1 454.5,288.2' fill='#b5b5b1'/>
+<polygon points='462.0,319.3 466.8,316.6 466.8,294.5 462.0,297.3' fill='#8b8d90'/>
+<polygon points='462.0,297.3 466.8,294.5 447.7,283.5 442.9,286.2' fill='#8b8d90'/>
+<polygon points='329.4,371.9 333.0,377.6 440.5,315.6 436.8,309.8' fill='#989895'/>
+<polygon points='326.8,365.6 329.4,371.9 436.8,309.8 434.2,303.6' fill='#989895'/>
+<polygon points='333.0,377.6 337.5,382.5 444.9,320.5 440.5,315.6' fill='#989895'/>
+<polygon points='325.4,359.5 326.8,365.6 434.2,303.6 432.8,297.4' fill='#989895'/>
+<polygon points='337.5,382.5 342.3,386.1 449.7,324.1 444.9,320.5' fill='#989895'/>
+<polygon points='325.4,353.9 325.4,359.5 432.8,297.4 432.8,291.8' fill='#989895'/>
+<polygon points='342.3,386.1 347.1,388.1 454.5,326.0 449.7,324.1' fill='#989895'/>
+<polygon points='326.8,349.3 325.4,353.9 432.8,291.8 434.2,287.2' fill='#9a9a97'/>
+<polygon points='347.1,388.1 351.5,388.3 459.0,326.3 454.5,326.0' fill='#989895'/>
+<polygon points='527.3,486.1 532.5,483.1 532.5,252.7 527.3,255.6' fill='#989895'/>
+<polygon points='329.4,346.1 326.8,349.3 434.2,287.2 436.8,284.0' fill='#a9a9a5'/>
+<polygon points='317.2,380.4 318.1,381.7 471.6,293.1 470.8,291.8' fill='#8b8d90'/>
+<polygon points='316.8,378.9 317.2,380.4 470.8,291.8 470.3,290.3' fill='#8b8d90'/>
+<polygon points='318.1,381.7 319.2,382.6 472.8,294.0 471.6,293.1' fill='#8b8d90'/>
+<polygon points='316.8,377.6 316.8,378.9 470.3,290.3 470.3,289.0' fill='#8b8d90'/>
+<polygon points='319.2,382.6 320.4,383.0 473.9,294.4 472.8,294.0' fill='#8b8d90'/>
+<polygon points='351.5,388.3 355.2,386.7 462.6,324.7 459.0,326.3' fill='#989895'/>
+<polygon points='317.2,376.7 316.8,377.6 470.3,289.0 470.8,288.1' fill='#949699'/>
+<polygon points='320.4,383.0 321.2,382.7 474.8,294.1 473.9,294.4' fill='#8b8d90'/>
+<polygon points='527.3,255.6 532.5,252.7 382.4,166.0 377.2,169.0' fill='#989895'/>
+<polygon points='259.5,467.3 409.6,554.0 409.6,323.6 259.5,236.9' fill='#b5b5b1'/>
+<polygon points='325.2,376.2 344.3,387.3 344.3,365.2 325.2,354.2' fill='#a5a7ab'/>
+<polygon points='344.3,387.3 349.1,384.5 349.1,362.5 344.3,365.2' fill='#8b8d90'/>
+<polygon points='344.3,365.2 349.1,362.5 330.0,351.4 325.2,354.2' fill='#8b8d90'/>
+<polygon points='409.6,554.0 414.8,551.0 414.8,320.6 409.6,323.6' fill='#989895'/>
+<polygon points='409.6,323.6 414.8,320.6 264.7,233.9 259.5,236.9' fill='#989895'/>
+</g>
+<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Joint geometry</text>
+<text x='780.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GEOMETRY</text>
+<text x='780.0' y='172.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• 0.25″ UHMW pad under the flange. Bolts snug, not torqued.</text>
+<text x='780.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Do not elongate the flange holes in Y or Z. Face-plane</text>
+<text x='780.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  slots let the drum axis wander.</text>
+<text x='780.0' y='228.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Shaft growth is through the bearing, not through the</text>
+<text x='780.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  plywood.</text>
+<text x='780.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>CUT SEQUENCE</text>
+<text x='780.0' y='422.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Stack-drill the bolt pattern with the drive panel so the</text>
+<text x='780.0' y='438.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  holes match.</text>
+<text x='780.0' y='458.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• After the shaft is in, set the pad, snug the bolts,</text>
+<text x='780.0' y='474.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  confirm axial float with a feeler.</text>
+<text x='36.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ACCEPTANCE</text>
+<text x='36.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Measurable axial float at the idler end (QC-11). Drum</text>
+<text x='36.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  coasts; it does not ring or bind.</text>
+<text x='860.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MOVEMENT / CONSTRAINT</text>
+<text x='860.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• FLOATING axially. CONSTRAINED in Y and Z by the un-slotted</text>
+<text x='860.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  bolt holes. Over-constraint is the banana.</text>
+</svg>

@@ -1,43 +1,47 @@
 item,description,qty,make_or_buy,material,finished_size,purchase_size,rev
-P-001L,"Side panel, drive (left)",1,MAKE,Baltic birch plywood,"30"" × 22"" × 0.75""",,B.3
-P-001R,"Side panel, idler (right)",1,MAKE,Baltic birch plywood,"30"" × 22"" × 0.75""",,B.3
-P-002,Base deck,1,MAKE,Baltic birch plywood,"18"" × 22"" × 0.75""",,B.3
-P-003,Stretcher,3,MAKE,Baltic birch plywood,"17"" × 4"" × 0.75""","¾"" BB off sheet 1",B.3
-P-004,Table torsion-box skin,2,MAKE,Baltic birch plywood,"16"" × 22"" × 0.75""",,B.3
-P-005,Torsion-box ribs,8,MAKE,Baltic birch or MDF,"15.5"" × 1.25"" × 0.5""",,B.3
-P-006,Table wear face,1,MAKE,Phenolic sheet or MIC-6 / cast tooling plate,"16"" × 22"" × 0.5""","½"" phenolic or ⅜"" MIC-6, 16"" × 22""",B.3
-P-007,UHMW way,2,MAKE,UHMW-PE,"22"" × 0.75"" × 0.75""","¾"" × ¾"" UHMW bar, 48"" buys both + spare",B.3
-P-008,"Drum disc, core",19,MAKE,MDF,"5.125"" × 5.125"" × 0.75""","¾"" MDF, bandsaw ⌀5⅛″",B.3
-P-009,"Drum disc, end",2,MAKE,Baltic birch plywood,"5.125"" × 5.125"" × 0.75""",,B.3
-P-010,Drum shaft,1,BUY-CUT,Precision-ground CRS / TG&P,"22.5"" × 0.75"" × 0.75""","¾"" TG&P × 24"", cut to 22.5""",B.3
-P-011,Dust hood blank,1,MAKE,Birch or pine plywood,"18"" × 12"" × 0.25""",,B.3
-P-012,Motor pivot cradle,1,MAKE,Baltic birch plywood,"12"" × 8"" × 0.75""",,B.3
-P-013,Full-width truing sled,1,MAKE,MDF or Baltic birch,"16"" × 8"" × 0.75""",,B.3
-P-014,Hold-down roller yoke,2,MAKE,Hardwood or 1½″ aluminum angle,"18"" × 3"" × 0.75""",,B.3
-P-015,Disc pack-bore jig,1,MAKE,MDF,"12"" × 12"" × 0.75""",,B.3
-P-016,Acme bronze nut block,2,MAKE,Hardwood or aluminum + bronze nut,"2.5"" × 2"" × 1.5""",,B.3
-H-001,"4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)",1,BUY,purchased,"¾"" bore",,B.3
-H-002,"4-bolt flange bearing, ¾″ bore, sealed, FLOATING (idler)",1,BUY,purchased,"¾"" bore",,B.3
-H-003,3″ motor 4L pulley,1,BUY,purchased,"3""",,B.3
-H-004,5″ drum 4L pulley,1,BUY,purchased,"5""",,B.3
-H-005,4L / A-section V-belt (size to center distance),1,BUY,purchased,,,B.3
-H-006,"0.5 HP 1725 RPM TEFC motor, 115 V",1,BUY,purchased,,,B.3
-H-007,½″-10 Acme rod × 12″ + bronze nut + flange,2,BUY,purchased,½-10 × 12″,,B.3
-H-008,#25 chain + ½″-bore sprockets + master link + left clutch/dog,1,BUY,purchased,,,B.3
-H-009,"Rubber roller ⌀1.25"" × ~15.75""",2,BUY,purchased,,,B.3
-H-010,⅜″ drill rod / bolts × 17″ (roller axles),2,BUY,purchased,,,B.3
-H-011,Light compression springs ~¾″ OD,4,BUY,purchased,,,B.3
-H-012,Shoulder bolts 5/16 × 1½″,4,BUY,purchased,,,B.3
-H-013,Star knobs ⅜-16 + 1½″ studs + washers,6,BUY,purchased,,,B.3
-H-014,#8 × 1¼″ coarse cabinet screws,100,BUY,purchased,,,B.3
-H-015,#8 × 2″ coarse screws (sides into stretchers),50,BUY,purchased,,,B.3
-H-016,¼-20 T-nuts + 1¼″ hex bolts + washers,8,BUY,purchased,,,B.3
-H-017,5/16-18 × 1″ hex + nylock + washer (flange bearings),8,BUY,purchased,,,B.3
-H-018,⅛″ piano wire,1,BUY,purchased,,12″,B.3
-H-019,4″ dust adapter + blast gate,1,BUY,purchased,,,B.3
-H-020,Switch box + 14/3 SJ cord + plug,1,BUY,purchased,,,B.3
-H-021,Dial indicator 0.001″ + mag base,1,BUY,purchased,,,B.3
-H-022,Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220,1,BUY,purchased,,,B.3
-H-023,Titebond III + thin CA,1,BUY,purchased,,,B.3
-H-024,Paste wax (UHMW dry lube — no oil),1,BUY,purchased,,,B.3
-H-025,Optional 60–90 RPM gearmotor + scotch yoke oscillator,1,BUY,purchased,,,B.3
+P-001L,"Side panel, drive (left)",1,MAKE,Baltic birch plywood,"30"" × 22"" × 0.75""",,B.4
+P-001R,"Side panel, idler (right)",1,MAKE,Baltic birch plywood,"30"" × 22"" × 0.75""",,B.4
+P-002,Base deck,1,MAKE,Baltic birch plywood,"18"" × 22"" × 0.75""",,B.4
+P-003,Stretcher,3,MAKE,Baltic birch plywood,"17"" × 4"" × 0.75""","¾"" BB off sheet 1",B.4
+P-004,Table torsion-box skin,2,MAKE,Baltic birch plywood,"16"" × 22"" × 0.75""",,B.4
+P-005,Torsion-box ribs,8,MAKE,Baltic birch or MDF,"15.5"" × 1.25"" × 0.5""",,B.4
+P-006,Table wear face,1,MAKE,Phenolic sheet or MIC-6 / cast tooling plate,"16"" × 22"" × 0.5""","½"" phenolic or ⅜"" MIC-6, 16"" × 22""",B.4
+P-007,UHMW way,2,MAKE,UHMW-PE,"5.438"" × 2.5"" × 0.75""","¾"" × 2½"" UHMW bar, 12"" buys both",B.4
+P-008,"Drum disc, core",19,MAKE,MDF,"5.125"" × 5.125"" × 0.75""","¾"" MDF, bandsaw ⌀5⅛″",B.4
+P-009,"Drum disc, end",2,MAKE,Baltic birch plywood,"5.125"" × 5.125"" × 0.75""",,B.4
+P-010,Drum shaft,1,BUY-CUT,Precision-ground CRS / TG&P,"22.5"" × 0.75"" × 0.75""","¾"" TG&P × 24"", cut to 22.5""",B.4
+P-011,Dust hood blank,1,MAKE,Birch or pine plywood,"18"" × 12"" × 0.25""",,B.4
+P-012,Motor pivot cradle,1,MAKE,Baltic birch plywood,"12"" × 8"" × 0.75""",,B.4
+P-013,Full-width truing sled,1,MAKE,MDF or Baltic birch,"16"" × 8"" × 0.75""",,B.4
+P-014,Hold-down roller yoke,2,MAKE,Hardwood or 1½″ aluminum angle,"18"" × 3"" × 0.75""",,B.4
+P-015,Disc pack-bore jig,1,MAKE,MDF,"12"" × 12"" × 0.75""",,B.4
+P-016,Acme bronze nut block,2,MAKE,Hardwood or aluminum + bronze nut,"2.5"" × 2"" × 1.5""",,B.4
+P-017,Table way shoe,2,MAKE,UHMW-PE or hardwood + UHMW liner,"4"" × 2.5"" × 1.25""","UHMW offcut or 5/4 hardwood, 2½"" × 4""",B.4
+P-018,Acme thrust block,2,MAKE,Baltic birch plywood or hardwood,"3"" × 3"" × 1.5""",,B.4
+P-019,Parallel home dog,1,MAKE,Aluminum bar or hardwood,"2"" × 1"" × 0.5""",,B.4
+H-001,"4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)",1,BUY,purchased,"¾"" bore",,B.4
+H-002,"4-bolt flange bearing, ¾″ bore, sealed, FLOATING (idler)",1,BUY,purchased,"¾"" bore",,B.4
+H-003,3″ motor 4L pulley,1,BUY,purchased,"3""",,B.4
+H-004,5″ drum 4L pulley,1,BUY,purchased,"5""",,B.4
+H-005,4L / A-section V-belt (size to center distance),1,BUY,purchased,,,B.4
+H-006,"0.5 HP 1725 RPM TEFC motor, 115 V",1,BUY,purchased,,,B.4
+H-007,½″-10 Acme rod × 12″ + bronze nut + flange,2,BUY,purchased,½-10 × 12″,,B.4
+H-008,#25 chain + ½″-bore sprockets + master link + left clutch/dog,1,BUY,purchased,,,B.4
+H-009,"Rubber roller ⌀1.25"" × ~15.75""",2,BUY,purchased,,,B.4
+H-010,⅜″ drill rod / bolts × 17″ (roller axles),2,BUY,purchased,,,B.4
+H-011,Light compression springs ~¾″ OD,4,BUY,purchased,,,B.4
+H-012,Shoulder bolts 5/16 × 1½″,4,BUY,purchased,,,B.4
+H-013,Star knobs ⅜-16 + 1½″ studs + washers,6,BUY,purchased,,,B.4
+H-014,#8 × 1¼″ coarse cabinet screws,100,BUY,purchased,,,B.4
+H-015,#8 × 2″ coarse screws (sides into stretchers),50,BUY,purchased,,,B.4
+H-016,¼-20 T-nuts + 1¼″ hex bolts + washers,8,BUY,purchased,,,B.4
+H-017,5/16-18 × 1″ hex + nylock + washer (flange bearings),8,BUY,purchased,,,B.4
+H-018,⅛″ piano wire,1,BUY,purchased,,12″,B.4
+H-019,4″ dust adapter + blast gate,1,BUY,purchased,,,B.4
+H-020,Switch box + 14/3 SJ cord + plug,1,BUY,purchased,,,B.4
+H-021,Dial indicator 0.001″ + mag base,1,BUY,purchased,,,B.4
+H-022,Hook Velcro 4″ PSA + 3″ loop paper 80/120/180/220,1,BUY,purchased,,,B.4
+H-023,Titebond III + thin CA,1,BUY,purchased,,,B.4
+H-024,Paste wax (UHMW dry lube — no oil),1,BUY,purchased,,,B.4
+H-025,Optional 60–90 RPM gearmotor + scotch yoke oscillator,1,BUY,purchased,,,B.4
+H-026,½″ thrust washer + e-clip (Acme lower end),2,BUY,purchased,,,B.4

@@ -3,9 +3,9 @@ window.WALTER_DATA = {
   "meta": {
     "name": "WALTER",
     "code": "DS-16",
-    "subtitle": "Dedicated drum thickness sander \u00b7 15.5\u2033 \u00b7 geometry Rev B \u00b7 fab B.3",
+    "subtitle": "Dedicated drum thickness sander \u00b7 15.5\u2033 \u00b7 geometry Rev B \u00b7 fab B.4",
     "revision": "B",
-    "fabricationRev": "B.3",
+    "fabricationRev": "B.4",
     "capacity": 15.5,
     "drumOd": 5.0,
     "drumRpm": 1035.0,
@@ -15,9 +15,9 @@ window.WALTER_DATA = {
     "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry"
   },
   "modernizations": [
-    "Dual \u00bd-10 Acme table screws, chain-coupled \u2014 coarse lift stays coplanar",
+    "Dual \u00bd-10 Acme table screws on the drum centerline, chain-coupled",
     "Left screw uncouples for taper; dog stop returns to parallel home",
-    "UHMW ways let into side rebates \u2014 table cannot rack, and still fits",
+    "Vertical captured UHMW ways \u2014 table is a lifting carriage, not a Y-slide",
     "Housed stretchers (\u00bc\u2033 dados) + through-screws for racking stiffness",
     "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
     "Torsion-box table + phenolic / tooling-plate wear face",
@@ -43,11 +43,12 @@ window.WALTER_DATA = {
     {
       "id": "ways",
       "fabIds": [
-        "P-007"
+        "P-007",
+        "P-017"
       ],
       "group": "frame",
-      "label": "UHMW ways P-007",
-      "detail": "Rebate 0.520\u2033 \u00b7 project 0.230\u2033 \u00b7 J-002",
+      "label": "Vertical ways + shoes",
+      "detail": "P-007 rebate 0.520\u2033 \u00b7 P-017 wrap \u00b7 J-002/J-012",
       "color": "#d9dcde",
       "sheet": "P007_uhmw_way.svg"
     },
@@ -55,11 +56,12 @@ window.WALTER_DATA = {
       "id": "base",
       "fabIds": [
         "P-002",
-        "P-003"
+        "P-003",
+        "P-018"
       ],
       "group": "frame",
-      "label": "Base + stretchers",
-      "detail": "P-003 housed 17\u2033 \u00b7 J-001",
+      "label": "Base + stretchers + thrust",
+      "detail": "P-003 housed 17\u2033 \u00b7 IN-LO/OUT-LO/OUT-HI \u00b7 J-001",
       "color": "#a89070",
       "sheet": "A01_frame.svg"
     },
@@ -105,12 +107,14 @@ window.WALTER_DATA = {
       "id": "elev",
       "fabIds": [
         "P-016",
+        "P-018",
+        "P-019",
         "H-007",
         "H-008"
       ],
       "group": "table",
       "label": "Dual Acme lift",
-      "detail": "H-007/H-008 \u00b7 left clutch \u00b7 home dog",
+      "detail": "Both screws at Y 11\u2033 \u00b7 left clutch \u00b7 P-019 dog",
       "color": "#6e7578",
       "sheet": "P016_nut_block.svg"
     },
@@ -180,7 +184,7 @@ window.WALTER_DATA = {
       "size": "17\" \u00d7 4\" \u00d7 0.75\"",
       "sizeMm": "432 \u00d7 102 \u00d7 19 mm",
       "stock": "Baltic birch plywood",
-      "use": "P-003 Stretcher \u2014 Do not use stretchers as the t",
+      "use": "P-003 Stretcher \u2014 Stand on edge (4\u2033 is Z). Stati",
       "partId": "P-003"
     },
     {
@@ -209,10 +213,10 @@ window.WALTER_DATA = {
     },
     {
       "qty": 2,
-      "size": "22\" \u00d7 0.75\" \u00d7 0.75\"",
-      "sizeMm": "559 \u00d7 19 \u00d7 19 mm",
+      "size": "5.438\" \u00d7 2.5\" \u00d7 0.75\"",
+      "sizeMm": "138 \u00d7 64 \u00d7 19 mm",
       "stock": "UHMW-PE",
-      "use": "P-007 UHMW way \u2014 Projects 0.230\u2033 past inner face",
+      "use": "P-007 UHMW way \u2014 Vertical strip, 5.438\u2033 Z \u00d7 2.5\u2033",
       "partId": "P-007"
     },
     {
@@ -286,6 +290,30 @@ window.WALTER_DATA = {
       "stock": "Hardwood or aluminum + bronze nut",
       "use": "P-016 Acme bronze nut block",
       "partId": "P-016"
+    },
+    {
+      "qty": 2,
+      "size": "4\" \u00d7 2.5\" \u00d7 1.25\"",
+      "sizeMm": "102 \u00d7 64 \u00d7 32 mm",
+      "stock": "UHMW-PE or hardwood + UHMW liner",
+      "use": "P-017 Table way shoe \u2014 Groove 0.240\u2033 deep \u00d7 2.51",
+      "partId": "P-017"
+    },
+    {
+      "qty": 2,
+      "size": "3\" \u00d7 3\" \u00d7 1.5\"",
+      "sizeMm": "76 \u00d7 76 \u00d7 38 mm",
+      "stock": "Baltic birch plywood or hardwood",
+      "use": "P-018 Acme thrust block \u2014 Takes axial load from ",
+      "partId": "P-018"
+    },
+    {
+      "qty": 1,
+      "size": "2\" \u00d7 1\" \u00d7 0.5\"",
+      "sizeMm": "51 \u00d7 25 \u00d7 13 mm",
+      "stock": "Aluminum bar or hardwood",
+      "use": "P-019 Parallel home dog \u2014 Last known |A\u2212B| home.",
+      "partId": "P-019"
     }
   ],
   "hardware": [
@@ -355,8 +383,8 @@ window.WALTER_DATA = {
     {
       "id": "a2",
       "phase": "frame",
-      "title": "Dados, way rebates, box + UHMW",
-      "body": "Split the pair. Dado J-001 (0.25\u2033) and rebate J-002 (0.520\u2033) on inner faces only. Glue P-003, square diagonals, bond P-007."
+      "title": "Dados, vertical way rebates, box + UHMW",
+      "body": "Split the pair. Dado J-001 stations IN-LO/OUT-LO/OUT-HI and rebate vertical J-002 (0.520\u2033) on inner faces only. Glue P-003, square diagonals, bond P-007."
     },
     {
       "id": "a3",
@@ -368,7 +396,7 @@ window.WALTER_DATA = {
       "id": "a4",
       "phase": "drum",
       "title": "Fixed drive bearing, floating idler",
-      "body": "H-001 locked on P-001L (J-006). H-002 on axial-float slots on P-001R (J-007)."
+      "body": "H-001 locked on P-001L (J-006). H-002 on a UHMW axial pad on P-001R (J-007). Do not slot the plywood in Y or Z."
     },
     {
       "id": "a5",
@@ -379,14 +407,14 @@ window.WALTER_DATA = {
     {
       "id": "a6",
       "phase": "table",
-      "title": "Torsion-box table + wear face",
-      "body": "P-004 + P-005 @ 4\u2033 o.c., glue. Flatten. Bond P-006. Diagonals \u2264 0.004\u2033."
+      "title": "Torsion-box table + wear face + shoes",
+      "body": "P-004 + P-005 @ 4\u2033 o.c., glue. Flatten. Bond P-006. Fit P-017 shoes. Diagonals \u2264 0.004\u2033."
     },
     {
       "id": "a7",
       "phase": "table",
-      "title": "Dual Acme lift + chain couple",
-      "body": "P-016 + H-007. H-008 chain. Left clutch + home dog. Table must rise in the ways without twist."
+      "title": "Dual Acme lift on drum CL + chain couple",
+      "body": "P-018 thrust on base, P-016 nuts, both screws at drum CL Y. H-008 chain. Left clutch + P-019 home dog. Table rises in Z; shoes stay wrapped."
     },
     {
       "id": "a8",
@@ -591,12 +619,12 @@ window.WALTER_DATA = {
       ],
       "actions": [
         "Split the pair. From here the panels are mirror images \u2014 work only on the marked inner faces.",
-        "Cut three stretcher housings 0.25\u2033 deep \u00d7 0.75\u2033 wide, Y 2\u2033 to 6\u2033, at Z 6, 12, 20\u2033 (J-001, S-006).",
-        "Rout the way rebate 0.520\u2033 deep \u00d7 0.75\u2033 wide at Z 10\u2033, stopping 1\u2033 shy of each end (J-002, S-007).",
+        "Cut three stretcher housings 0.25\u2033 deep \u00d7 0.75\u2033 wide \u00d7 4\u2033 tall at stations IN-LO, OUT-LO, OUT-HI (J-001, S-006). Rails stand on edge. None of these dados may sit at Z \u2248 12 \u2014 that is the table.",
+        "Rout the vertical way rebate 0.520\u2033 deep \u00d7 2.5\u2033 wide, Y 9.75\u201312.25\u2033 (drum CL), Z 11\u201316.438\u2033 (J-002, S-007).",
         "Test the dado width on an offcut of the same ply first. A sloppy housing is a racking frame."
       ],
-      "qc": "QC-12",
-      "gate": "Rebate 0.520\u2033 deep \u00b10.010\u2033; a scrap of way stock sits 0.230\u2033 proud of the inner face.",
+      "qc": "QC-12 \u00b7 QC-13",
+      "gate": "Rebate 0.520\u2033 deep \u00b10.010\u2033; a scrap of way stock sits 0.230\u2033 proud. Dados at IN-LO / OUT-LO / OUT-HI only.",
       "hold": "",
       "warn": "Do not dado the panels while they are still stacked. You will get two left-hand sides.",
       "shows": [
@@ -638,7 +666,7 @@ window.WALTER_DATA = {
         "P-002"
       ],
       "actions": [
-        "Dry-fit all three stretchers (17\u2033, housed 0.25\u2033 each end) into the dados. Check the inner span reads 16.5\u2033.",
+        "Dry-fit all three stretchers (17\u2033, housed 0.25\u2033 each end) into IN-LO, OUT-LO, OUT-HI. Check the inner span reads 16.5\u2033. Confirm no rail sits in the table's Z range (11.5\u201315.94\u2033).",
         "Glue and clamp. Measure both diagonals and pull them equal before the glue grabs.",
         "Drill and drive #8 \u00d7 2\u2033 screws from outside into each stretcher end.",
         "Screw the base deck on, then measure the diagonals again."
@@ -663,8 +691,8 @@ window.WALTER_DATA = {
     {
       "step": 7,
       "chapter": "04 Frame",
-      "title": "Bond the UHMW ways and wax them",
-      "goal": "Two coplanar rails for the table to ride on. These, not the stretchers, locate the table.",
+      "title": "Bond the vertical UHMW ways and wax them",
+      "goal": "Two plumb rails for the table shoes to wrap. These, not the stretchers, locate the table in X and Y.",
       "parts": [
         "P-007"
       ],
@@ -673,22 +701,23 @@ window.WALTER_DATA = {
         "H-024"
       ],
       "tools": [
-        "Winding sticks or straightedge",
+        "Square",
         "Dial indicator",
         "Clamps"
       ],
       "sheets": [
         "P-007",
-        "A-01"
+        "A-01",
+        "J-002"
       ],
       "actions": [
-        "Cut two UHMW bars to 22\u2033 and set them into the rebates. They should project 0.230\u2033.",
+        "Cut two UHMW strips 5.438\u2033 \u00d7 2.5\u2033 and set them into the vertical rebates. They should project 0.230\u2033.",
         "Bond and clamp. Optional: #8 flush screws from the outer face.",
-        "Check both ways for twist with winding sticks or an indicator riding a flat bar.",
+        "Square both ways to the base. An indicator riding a tall square should read the same on left and right.",
         "Paste wax only. Never oil \u2014 oil migrates into the wood and into your finish."
       ],
       "qc": "QC-04",
-      "gate": "No twist between the two ways. Projection 0.230\u2033 \u00b10.010\u2033 along the full length.",
+      "gate": "Ways plumb. Projection 0.230\u2033 \u00b10.010\u2033. Centered on drum CL at Y 11\u2033.",
       "hold": "",
       "warn": "",
       "shows": [
@@ -857,7 +886,8 @@ window.WALTER_DATA = {
       "parts": [
         "P-004",
         "P-005",
-        "P-006"
+        "P-006",
+        "P-017"
       ],
       "hardware": [
         "H-023"
@@ -872,13 +902,15 @@ window.WALTER_DATA = {
         "P-004",
         "P-005",
         "P-006",
+        "P-017",
         "A-03"
       ],
       "actions": [
         "Glue the rib grid at 4\u2033 o.c. between the two skins. Full glue, clamped on a flat reference.",
         "Check the box flat in both directions and on both diagonals. Flatten it before going further.",
         "Bond the phenolic or tooling-plate wear face on top (J-004).",
-        "Confirm the finished plan size is 16\u2033 \u00d7 22\u2033 so it enters the ways."
+        "Groove and bolt P-017 shoes under each long edge, centered on Y 11\u2033. Groove 0.240\u2033 \u00d7 2.516\u2033 wraps the way tongue (J-012).",
+        "Confirm the finished plan size is 16\u2033 \u00d7 22\u2033 so the wear face still carries 15.5\u2033 of work."
       ],
       "qc": "QC-05",
       "gate": "Wear face flat within 0.004\u2033 on both diagonals.",
@@ -897,33 +929,41 @@ window.WALTER_DATA = {
     {
       "step": 12,
       "chapter": "07 Table",
-      "title": "Fit the dual Acme lift and chain-couple it",
-      "goal": "Both ends of the table rise together, with a home position to return to.",
+      "title": "Fit the dual Acme lift on the drum centerline",
+      "goal": "Both nuts sit under the cut. The table rises in Z without racking in X or Y.",
       "parts": [
-        "P-016"
+        "P-016",
+        "P-018",
+        "P-019"
       ],
       "hardware": [
         "H-007",
         "H-008",
-        "H-013"
+        "H-013",
+        "H-026"
       ],
       "tools": [
         "Wrenches",
         "Drill",
-        "Tape measure"
+        "Tape measure",
+        "Square"
       ],
       "sheets": [
         "P-016",
-        "A-03"
+        "P-018",
+        "P-019",
+        "A-03",
+        "M-101"
       ],
       "actions": [
-        "Bolt a bronze nut block under each end of the table.",
-        "Fit both \u00bd-10 Acme screws. One turn is 0.1000\u2033 \u2014 that is your fine adjustment.",
-        "Chain-couple the two screws so they turn together. Fit the left clutch and the home dog.",
-        "Run the table through the full 3.25\u2033 of travel. It must rise without twist or bind."
+        "Screw both P-018 thrust blocks to the base at Y 11\u2033 (drum CL), X left and right. Fit thrust washers and e-clips (J-013).",
+        "Bolt a bronze nut block under the table, each nut on the same Y as its screw \u2014 not at the infeed and outfeed ends.",
+        "Fit both \u00bd-10 Acme screws. One turn is 0.1000\u2033. Thirty turns is 3\u2033 (CALC-003).",
+        "Chain-couple the two screws. Fit the left clutch and P-019 home dog (J-014).",
+        "Run the table through the full 3.25\u2033 of travel. Shoes must stay wrapped; the table must not yaw."
       ],
-      "qc": "QC-12",
-      "gate": "Table rises and falls freely through full travel; both ends move the same amount.",
+      "qc": "QC-12 \u00b7 QC-14",
+      "gate": "Table rises and falls freely through full travel; both ends move the same amount; shoes stay captured.",
       "hold": "",
       "warn": "",
       "shows": [
@@ -1125,9 +1165,9 @@ window.WALTER_DATA = {
       "tool": "Indicator at A (drive) and B (idler)"
     },
     {
-      "check": "Way coplanar",
-      "spec": "No twist; table slides without bind",
-      "tool": "Winding sticks / indicator on both UHMW"
+      "check": "Way plumb + capture",
+      "spec": "Plumb; shoes wrap; no twist",
+      "tool": "Square + indicator on both UHMW; table through travel"
     },
     {
       "check": "Pulley coplanar",
@@ -1153,8 +1193,8 @@ window.WALTER_DATA = {
     },
     {
       "id": "c2",
-      "title": "Seat the table in the ways",
-      "body": "Raise/lower through full travel. No bind, no rock. Winding sticks on wear face \u2014 no twist."
+      "title": "Seat the table on the vertical ways",
+      "body": "Raise/lower through full travel. Shoes stay wrapped. No bind, no yaw. Square on the wear face \u2014 no twist."
     },
     {
       "id": "c3",
@@ -1253,11 +1293,74 @@ window.WALTER_DATA = {
       "code": "E-101"
     },
     {
+      "src": "../plans/M101_kinematics.svg",
+      "title": "M-101 Kinematics",
+      "kind": "guide",
+      "group": "guide",
+      "code": "M-101"
+    },
+    {
+      "src": "../plans/J001_stretcher.svg",
+      "title": "J-001 Housed stretcher",
+      "kind": "guide",
+      "group": "guide",
+      "code": "J-001"
+    },
+    {
+      "src": "../plans/J002_way.svg",
+      "title": "J-002 Vertical way",
+      "kind": "guide",
+      "group": "guide",
+      "code": "J-002"
+    },
+    {
+      "src": "../plans/J006_drive_bearing.svg",
+      "title": "J-006 Drive bearing",
+      "kind": "guide",
+      "group": "guide",
+      "code": "J-006"
+    },
+    {
+      "src": "../plans/J007_idler_float.svg",
+      "title": "J-007 Idler float",
+      "kind": "guide",
+      "group": "guide",
+      "code": "J-007"
+    },
+    {
+      "src": "../plans/J011_lift.svg",
+      "title": "J-011 Lift & capture",
+      "kind": "guide",
+      "group": "guide",
+      "code": "J-011"
+    },
+    {
+      "src": "../plans/F101_routing.svg",
+      "title": "F-101 Part register",
+      "kind": "guide",
+      "group": "guide",
+      "code": "F-101"
+    },
+    {
+      "src": "../plans/S101_load_path.svg",
+      "title": "S-101 Load path",
+      "kind": "guide",
+      "group": "guide",
+      "code": "S-101"
+    },
+    {
       "src": "../plans/Q101_commissioning.svg",
       "title": "Q-101 Commissioning",
       "kind": "guide",
       "group": "guide",
       "code": "Q-101"
+    },
+    {
+      "src": "../plans/Q102_zero_gap.svg",
+      "title": "Q-102 Zero-gap",
+      "kind": "guide",
+      "group": "guide",
+      "code": "Q-102"
     },
     {
       "src": "../plans/IDX_drawings.svg",
@@ -1470,6 +1573,27 @@ window.WALTER_DATA = {
       "code": "P-016"
     },
     {
+      "src": "../plans/P017_table_shoe.svg",
+      "title": "P-017 Table shoe",
+      "kind": "part",
+      "group": "part",
+      "code": "P-017"
+    },
+    {
+      "src": "../plans/P018_thrust_block.svg",
+      "title": "P-018 Thrust block",
+      "kind": "part",
+      "group": "part",
+      "code": "P-018"
+    },
+    {
+      "src": "../plans/P019_home_dog.svg",
+      "title": "P-019 Home dog",
+      "kind": "part",
+      "group": "part",
+      "code": "P-019"
+    },
+    {
       "src": "../plans/A01_frame.svg",
       "title": "A-01 Frame assembly",
       "kind": "assembly",
@@ -1555,7 +1679,7 @@ window.WALTER_DATA = {
     },
     {
       "src": "../plans/ST07_step.svg",
-      "title": "ST-07 Bond the UHMW ways and wax them",
+      "title": "ST-07 Bond the vertical UHMW ways and wax them",
       "kind": "step",
       "group": "step",
       "code": "ST-07"
@@ -1590,7 +1714,7 @@ window.WALTER_DATA = {
     },
     {
       "src": "../plans/ST12_step.svg",
-      "title": "ST-12 Fit the dual Acme lift and chain-couple it",
+      "title": "ST-12 Fit the dual Acme lift on the drum centerline",
       "kind": "step",
       "group": "step",
       "code": "ST-12"
@@ -1665,9 +1789,9 @@ window.WALTER_DATA = {
     },
     {
       "where": "Plastics",
-      "item": "UHMW bar \u00be\u2033 \u00d7 \u00be\u2033",
-      "qty": "48\u2033",
-      "use": "P-007 ways, let into J-002 rebate"
+      "item": "UHMW bar \u00be\u2033 \u00d7 2\u00bd\u2033",
+      "qty": "12\u2033",
+      "use": "P-007 vertical ways + P-017 shoes"
     },
     {
       "where": "Hardwood / metal",

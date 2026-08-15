@@ -1,7 +1,10 @@
-// WALTER DS-16 Rev B — OpenSCAD solid model (inches)
+// WALTER DS-16 Rev B fab B.4 — OpenSCAD solid model (inches)
 // Authoritative numbers: walter_ds16.py → parameters.scad
 //   X = across drum (drive +X)   Y = feed depth (infeed −Y)   Z = up
 // Set explode > 0 for an exploded preview. F5 preview / F6 render.
+//
+// B.4 mechanics: vertical captured ways, stretcher stations that miss the
+// table envelope, both Acme screws on the drum centerline.
 
 include <parameters.scad>;
 
@@ -11,33 +14,33 @@ explode = 0; // 0 assembled · try 5 for exploded
 module side_panel() {
   difference() {
     color("#c4a574") cube([side_t, side_d, side_h]);
-    // way rebate (inner face is +X on left panel)
-    translate([side_t - way_rebate, way_end_inset, way_z])
-      cube([way_rebate + 0.05, side_d - 2 * way_end_inset, way_stock]);
-    // stretcher housings (Y from infeed, Z = rail bottom, ¾″ tall)
-    for (z = [6, 12, 20])
-      translate([side_t - stretcher_housing, stretcher_dado_y0, z])
-        cube([stretcher_housing + 0.05, stretcher_h, side_t]);
+    // vertical way rebate, centered on drum CL
+    translate([side_t - way_rebate, way_y0, way_z0])
+      cube([way_rebate + 0.05, way_width, way_len]);
+    // stretcher housings — rails stand on edge (ply in Y, 4″ in Z)
+    for (i = [0:2])
+      translate([side_t - stretcher_housing, stretcher_y[i], stretcher_z[i]])
+        cube([stretcher_housing + 0.05, side_t, stretcher_h]);
     translate([-0.1, drum_y, drum_z]) rotate([0, 90, 0])
       cylinder(h=side_t + 0.2, d=shaft_od + 0.08);
   }
 }
 
-module stretcher(z) {
+module stretcher_at(i) {
   color("#8a7355")
-    translate([side_t - stretcher_housing, stretcher_dado_y0, z])
-      cube([stretcher_len, stretcher_h, side_t]);
+    translate([side_t - stretcher_housing, stretcher_y[i], stretcher_z[i]])
+      cube([stretcher_len, side_t, stretcher_h]);
 }
 
 module way_left() {
   color("#d9dcde")
-    translate([side_t - way_rebate, way_end_inset, way_z])
-      cube([way_stock, side_d - 2 * way_end_inset, way_stock]);
+    translate([side_t - way_rebate, way_y0, way_z0])
+      cube([way_stock, way_width, way_len]);
 }
 module way_right() {
   color("#d9dcde")
-    translate([side_t + clear - way_project, way_end_inset, way_z])
-      cube([way_stock, side_d - 2 * way_end_inset, way_stock]);
+    translate([side_t + clear - way_project, way_y0, way_z0])
+      cube([way_stock, way_width, way_len]);
 }
 
 module table() {
@@ -47,8 +50,24 @@ module table() {
   }
 }
 
-module acme(x, y) {
-  color("#8a9098") translate([x, y, 2]) cylinder(h=16, d=0.5);
+module shoe(x_sign) {
+  // hangs under the table, wraps the vertical tongue
+  x = (x_sign < 0)
+    ? side_t - way_rebate + way_project - shoe_t
+    : side_t + clear - way_project;
+  color("#cfd3d5")
+    translate([x, way_y0, table_z - 1.25])
+      cube([shoe_t, way_width, shoe_h]);
+}
+
+module acme(x) {
+  color("#8a9098") translate([x, acme_y, 2]) cylinder(h=16, d=0.5);
+}
+
+module thrust(x) {
+  color("#8a7355")
+    translate([x - 1.5, acme_y - 1.5, 0.75])
+      cube([3, 3, thrust_h]);
 }
 
 module drum_stack() {
@@ -113,14 +132,16 @@ translate([explode, 0, 0]) {
   way_right();
 }
 
-stretcher(6);
-stretcher(12);
-stretcher(20);
+for (i = [0:2]) stretcher_at(i);
 
 translate([0, 0, -explode * 0.7]) {
   table();
-  acme(acme_x0, acme_y0);
-  acme(acme_x1, acme_y1);
+  shoe(-1);
+  shoe(+1);
+  acme(acme_x0);
+  acme(acme_x1);
+  thrust(acme_x0);
+  thrust(acme_x1);
 }
 
 translate([0, 0, explode * 0.9]) {

@@ -4,7 +4,8 @@ Modern dedicated **drum thickness sander** — ShopNotes No. 86 lineage via Ron 
 
 - **Rev A:** solid sliding table (no conveyor)
 - **Rev B:** dual-end geometry, UHMW ways, hold-downs, paper-on A/B spec ±0.003″
-- **Fab B.1:** part/joint IDs, housed stretchers, way rebate so the 16″ table actually fits the 16.5″ span, JSON/CSV SSOT
+- **Fab B.3:** WOODWRIGHT PLANFORGE master build guide
+- **Fab B.4:** vertical captured ways, stretcher stations that miss the table, both Acme screws on the drum centerline, P-017 shoes / P-018 thrust / P-019 home dog
 
 ## Live paths
 
@@ -28,12 +29,12 @@ On this branch a Netlify deploy of the **repo** opens WALTER at `/` (not the old
 | Capacity | 15.5″ wide · 1/16″–3″ thick |
 | Quality | \|A−B\| ≤ 0.003″ paper-on · TIR ≤ 0.002″ |
 | Drum | ⌀5″ × 15.75″ @ ~1035 RPM |
-| Lift | Dual ½-10 Acme, chain-coupled, left clutch + home dog |
-| Table | Torsion box in UHMW ways + phenolic/MIC-6 |
+| Lift | Dual ½-10 Acme on drum CL, chain-coupled, left clutch + home dog |
+| Table | Torsion box, vertical captured UHMW ways, phenolic/MIC-6 |
 | Hold-downs | Infeed/outfeed rollers 0.030″ below drum |
 | Oscillator | Optional ⅛″ @ ~80 cpm (not drum RPM) |
-| Ways | UHMW let into a 0.52″ rebate, projecting 0.23″ (table fits) |
-| Stretchers | P-003 housed ¼″ · finished 17″ |
+| Ways | Vertical UHMW, 0.52″ rebate, projecting 0.23″, shoes wrap the tongue |
+| Stretchers | P-003 housed ¼″ · stand on edge · IN-LO / OUT-LO / OUT-HI |
 | Ply note | Keep 16.5″ (419 mm) inner span; 18 mm Euro BB is fine |
 
 SSOT: `cad/walter_ds16.py`. Change a parameter, regenerate. Do not duplicate 16.5 / 18.5 / 14 in drawings.
@@ -43,6 +44,9 @@ SSOT: `cad/walter_ds16.py`. Change a parameter, regenerate. Do not duplicate 16.
 ```bash
 python3 scripts/gen_drum_sander_plans.py
 python3 scripts/gen_drum_sander_iso.py
+python3 scripts/gen_walter_part_sheets.py
+python3 scripts/gen_walter_guidebook.py
+python3 scripts/qa_walter_package.py
 python3 scripts/pack_drum_sander.py
 ```
 

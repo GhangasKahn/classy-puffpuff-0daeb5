@@ -31,7 +31,9 @@ from walter_ds16 import GEOM as G  # noqa: E402
 from walter_ds16 import PROJECT, RELEASE_STATE  # noqa: E402
 from walter_ds16 import SPEC as S  # noqa: E402
 from walter_ds16 import (  # noqa: E402
+    LAYOUT_PROTOCOL,
     build_steps,
+    calculations,
     calibration_steps,
     datums,
     decisions,
@@ -43,6 +45,7 @@ from walter_ds16 import (  # noqa: E402
     quality_targets,
     revisions,
     shop_drawings,
+    stretcher_records,
     validate,
 )
 
@@ -213,22 +216,21 @@ def machine_meshes(shows: list[str], highlight: list[str] | None = None, explode
         out.append(box(col("sides", GREEN), -dx, S.base_thick, 0, t, H - S.base_thick, D))
         out.append(box(col("sides", GREEN), Wbox - t + dx, S.base_thick, 0, t, H - S.base_thick, D))
     if want("stretch"):
-        for z in S.stretcher_z:
+        for rec in stretcher_records():
             out.append(
                 box(
                     col("stretch", TAN),
                     t - S.stretcher_housing,
-                    z,
-                    S.stretcher_dado_y0 - e * 11.0,
+                    rec["z0"],
+                    rec["y0"] - e * 11.0,
                     G.stretcher_length,
-                    S.ply_actual,
                     S.stretcher_height,
+                    rec["y1"] - rec["y0"],
                 )
             )
     if want("ways"):
-        wl = D - 2 * S.way_end_inset
-        out.append(box(col("ways", UHMW), t - G.way_rebate, S.way_z, S.way_end_inset, S.way_stock, S.way_stock, wl))
-        out.append(box(col("ways", UHMW), Wbox - t - G.way_project, S.way_z, S.way_end_inset, S.way_stock, S.way_stock, wl))
+        out.append(box(col("ways", UHMW), t - G.way_rebate, G.way_z0, G.way_y0, S.way_stock, G.way_len, G.way_width))
+        out.append(box(col("ways", UHMW), Wbox - t - G.way_project, G.way_z0, G.way_y0, S.way_stock, G.way_len, G.way_width))
     if want("table"):
         tw, td, tt = G.table_width, G.table_depth, G.table_thick
         tx = t + (S.clear_between_sides - tw) / 2
@@ -237,8 +239,9 @@ def machine_meshes(shows: list[str], highlight: list[str] | None = None, explode
         out.append(box(col("table", PHEN), tx, ty + tt - 0.25, 0, tw, 0.25, td))
     if want("elev"):
         for x in (G.acme_x_left, G.acme_x_right):
-            out.append(box(col("elev", STEEL), x - 0.25, S.base_thick - e * 4.0, G.acme_y_infeed - 0.25, 0.5, 12.0, 0.5))
-            out.append(box(col("elev", BRONZE), x - 0.6, G.table_z_display - 1.0, G.acme_y_infeed - 0.6, 1.2, 1.0, 1.2))
+            out.append(box(col("elev", STEEL), x - 0.25, S.base_thick - e * 4.0, G.acme_y - 0.25, 0.5, 12.0, 0.5))
+            out.append(box(col("elev", BRONZE), x - 0.6, G.table_z_display - 1.0, G.acme_y - 0.6, 1.2, 1.0, 1.2))
+            out.append(box(col("elev", TAN), x - 1.5, S.base_thick, G.acme_y - 1.5, G.thrust_l, G.thrust_h, G.thrust_w))
     if want("drum"):
         dy = G.bearing_cl_z + e * 9.0
         out.append(cyl_x(col("drum", MDF), Wbox / 2, dy, G.bearing_cl_y, G.drum_length, S.drum_od / 2, 22))
@@ -412,9 +415,10 @@ def sheet_g002() -> None:
         ["drum_od", f'⌀{inch(S.drum_od)}"', "VERIFIED", "Sets surface speed"],
         ["disc_thick × count", f'{S.disc_thick:g}" × {S.disc_count_core + S.disc_count_ends}', "VERIFIED", "Gives drum length"],
         ["bearing_cl_z", f'{inch(S.bearing_cl_z)}"', "VERIFIED layout", "From floor datum"],
-        ["way_z", f'{inch(S.way_z)}"', "VERIFIED layout", "Way bottom from floor"],
+        ["bearing_cl_y", f'{inch(G.bearing_cl_y)}"', "DERIVED", "side_depth / 2 — drum CL, Acme Y, way CL"],
+        ["way_z0 / way_z1", f'{inch(G.way_z0)}" – {inch(G.way_z1)}"', "DERIVED", "Vertical way covers table travel"],
         ["flange_bolt_square", f'{S.flange_bolt_square:g}"', "ASSUMED", "Transfer the bearing you buy"],
-        ["slide_clearance", f'{S.slide_clearance:.3f}"', "DERIVED", "Per side, table in ways"],
+        ["slide_clearance", f'{S.slide_clearance:.3f}"', "DERIVED", "Per side, table to tongue"],
         ["stretcher_housing", f'{S.stretcher_housing:g}"', "DERIVED", "Dado depth each end"],
     ]
     y = table_block(
@@ -455,6 +459,15 @@ def sheet_g002() -> None:
         sh.text(146, yy, f'{d["on"]} · {d["what"]}', 12, INK, mono=False)
         sh.text(470, yy, d["use"][:52], 12, DIM, mono=False)
         yy += 20
+    yy += 10
+    sh.text(36, yy, LAYOUT_PROTOCOL["declaration"], 12, ACC, bold=True, mono=False)
+    yy += 18
+    for row in _wrap("Face/edge: " + LAYOUT_PROTOCOL["face_edge"], 88):
+        sh.text(36, yy, row, 11, DIM, mono=False)
+        yy += 14
+    for row in _wrap("Centerline: " + LAYOUT_PROTOCOL["centerline"], 88):
+        sh.text(36, yy, row, 11, DIM, mono=False)
+        yy += 14
 
     sh.text(980, 160, "WHY THE GEOMETRY IS WHAT IT IS", 13, ACC, bold=True)
     yy = 184
@@ -468,11 +481,8 @@ def sheet_g002() -> None:
             sh.text(1046, yy, row, 11, DIM, mono=False)
             yy += 14
         yy += 8
-        if yy > 1010:
+        if yy > 1070:
             break
-
-    sh.text(980, 1040, "Change a parameter, regenerate, and every sheet, CSV, and", 12, DIM, mono=False)
-    sh.text(980, 1056, "the 3D model follow. Never edit a number on a drawing.", 12, DIM, mono=False)
     sh.save("G002_design_basis.svg")
 
 
@@ -501,44 +511,10 @@ def sheet_g003() -> None:
         row_h=24,
     )
 
-    sh.text(36, y + 20, "CALCULATION REGISTER", 13, ACC, bold=True)
+    sh.text(36, y + 20, "CALCULATION REGISTER  ([D] derived · [E] estimated bound)", 13, ACC, bold=True)
     calc = [
-        [
-            "C-01",
-            "Will the table fit between the ways?",
-            f'clear {inch(S.clear_between_sides)}" − table {inch(G.table_width)}" = {inch(S.clear_between_sides - G.table_width)}" total',
-            f'{G.way_project:.3f}" project + {S.slide_clearance:.3f}"/side — PASS',
-        ],
-        [
-            "C-02",
-            "Drum surface speed",
-            f"π × {S.drum_od:g}/12 × {S.drum_rpm:g}",
-            f"{G.surface_fpm:g} sfpm — in the sanding band",
-        ],
-        [
-            "C-03",
-            "Does the lift cover the thickness range?",
-            f'{S.max_stock_thickness:g}" − {S.min_stock_thickness:g}" = {S.max_stock_thickness - S.min_stock_thickness:g}" needed',
-            f'{S.elev_travel:g}" travel available — PASS',
-        ],
-        [
-            "C-04",
-            "Fine adjustment resolution",
-            f"1 / {S.acme_tpi:g} TPI",
-            f'{G.acme_per_turn:.4f}"/turn — finer than the {S.parallel_tol:.3f}" spec',
-        ],
-        [
-            "C-05",
-            "Does the drum clear the side panels?",
-            f'drum {inch(G.drum_length)}" in {inch(S.clear_between_sides)}" span',
-            f'{G.drum_end_gap:.3f}" per end — PASS',
-        ],
-        [
-            "C-06",
-            "Is the housing shallow enough for the ply?",
-            f'2 × {S.stretcher_housing:g}" + 0.25" vs {S.ply_actual:g}"',
-            "PASS — validated on every regeneration",
-        ],
+        [c["id"], c["name"], c["expr"], f'{c["result"]}  [{c["evidence"]}]']
+        for c in calculations()
     ]
     y2 = table_block(
         sh,
@@ -557,6 +533,8 @@ def sheet_g003() -> None:
         "Way rebate does not cut through the side panel.",
         "Drum shorter than the inner span; drum length still the 21-disc pack.",
         "Lift travel covers the full thickness range.",
+        "Stretchers do not intersect the table envelope, drum, or motor (validate_mechanics).",
+        "Vertical ways cover table travel; both Acme screws sit on the drum centerline.",
         "Every part and hardware ID named in a build step exists in the registry.",
         "Every fabricated part is used by at least one build step.",
         "Every QC gate referenced by a step exists in the inspection plan.",
@@ -956,10 +934,356 @@ def sheet_q101() -> None:
 
     # No separate targets block here: every acceptance figure is already in the
     # inspection plan above. Restating it would be a second place to disagree.
-    sh.text(900, yy + 18, f"Acceptance figures are the QC rows above. {len(quality_targets())} of them", 12, DIM, mono=False)
-    sh.text(900, yy + 34, "are measured on the machine, not taken from the drawing.", 12, DIM, mono=False)
+    sh.text(900, min(yy + 16, 1074), f"Acceptance figures are the QC rows above. {len(quality_targets())} of them are measured on the machine.", 12, DIM, mono=False)
 
     sh.save("Q101_commissioning.svg")
+
+
+def _joint_sheet(
+    code: str,
+    filename: str,
+    title: str,
+    subtitle: str,
+    geometry: list[str],
+    sequence: list[str],
+    accept: list[str],
+    movement: list[str],
+    meshes: list[Mesh] | None = None,
+) -> None:
+    sh = Sheet(code, title, subtitle)
+    guide_titleblock(sh, right="Joinery", note=code)
+    release_banner(sh)
+    if meshes:
+        assembly_frame(sh, 36, 150, 720, 420, "Joint geometry", meshes)
+        col_x = 780
+    else:
+        col_x = 36
+    blocks = [
+        (col_x if meshes else 36, 150 if not meshes else 150, "GEOMETRY", geometry),
+        (col_x if meshes else 860, 150 if not meshes else 590, "CUT SEQUENCE", sequence),
+        (36 if meshes else 36, 600 if meshes else 620, "ACCEPTANCE", accept),
+        (860 if meshes else 860, 600 if meshes else 620, "MOVEMENT / CONSTRAINT", movement),
+    ]
+    if meshes:
+        blocks = [
+            (780, 150, "GEOMETRY", geometry),
+            (780, 400, "CUT SEQUENCE", sequence),
+            (36, 600, "ACCEPTANCE", accept),
+            (860, 600, "MOVEMENT / CONSTRAINT", movement),
+        ]
+    else:
+        blocks = [
+            (36, 160, "GEOMETRY", geometry),
+            (860, 160, "CUT SEQUENCE", sequence),
+            (36, 620, "ACCEPTANCE", accept),
+            (860, 620, "MOVEMENT / CONSTRAINT", movement),
+        ]
+    for x, y, head, lines in blocks:
+        sh.text(x, y, head, 13, ACC, bold=True)
+        yy = y + 22
+        for line in lines:
+            for i, row in enumerate(_wrap(line, 58)):
+                sh.text(x, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
+                yy += 16
+            yy += 4
+            if yy > 1074:
+                break
+    sh.save(filename)
+
+
+def sheet_j001() -> None:
+    meshes = machine_meshes(["sides", "stretch", "base"], ["stretch"])
+    recs = stretcher_records()
+    geo = [
+        f"Housed dado {S.stretcher_housing:g}″ deep × {S.ply_actual:g}″ wide × {S.stretcher_height:g}″ tall. Rails stand on edge.",
+        *[f"{r['id']}: Y {r['y0']:g}–{r['y1']:g}″ · Z {r['z0']:g}–{r['z1']:g}″" for r in recs],
+        f"Stretcher finished length {G.stretcher_length:g}″ (housing {S.stretcher_housing:g}″ each end).",
+        f"Min Z gap to table envelope {G.min_stretcher_table_clear:.3f}″ (CALC-004). Do not invent a fourth rail at Z=12.",
+    ]
+    _joint_sheet(
+        "J-001",
+        "J001_stretcher.svg",
+        "Housed stretcher — racking triangle",
+        "P-003 ×3 into P-001L/R  ·  glue + #8 × 2″ through-screws",
+        geo,
+        [
+            "Rip all three to 4″ on one fence (S-004). Crosscut to housed length on one stop (S-003).",
+            "Dado inner faces only, after the pair is split. Test width on an offcut of the same ply.",
+            "Dry-fit, measure inner span 16.50″, glue, pull diagonals, then drill pilots through the side.",
+        ],
+        [
+            "Housing snug — no daylight. Inner span 16.50″ at top, middle, and bottom.",
+            "Diagonals equal within 1/32″ (QC-03). No rail occupies table Z 11.5–15.94″ (QC-13).",
+        ],
+        [
+            "Plywood — no seasonal lock. Joint is FIXED. Ways, not these rails, locate the table.",
+            "Load path: feed force → sides → this triangle. A missing OUT-HI rail lets the box parallelogram.",
+        ],
+        meshes,
+    )
+
+
+def sheet_j002() -> None:
+    meshes = machine_meshes(["sides", "ways", "table"], ["ways"])
+    _joint_sheet(
+        "J-002",
+        "J002_way.svg",
+        "Vertical way rebate",
+        f"P-007 into P-001  ·  {G.way_rebate:.3f}″ deep × {S.way_width:g}″ × {G.way_len:g}″",
+        [
+            f"Vertical strip centered on drum CL. Y {G.way_y0:g}–{G.way_y1:g}″. Z {G.way_z0:g}–{G.way_z1:g}″.",
+            f"Rebate {G.way_rebate:.3f}″ so the way projects {G.way_project:.3f}″. Without it a 16″ table will not enter a 16.5″ span.",
+            "This is not a horizontal shelf. The table does not sit on the way; shoes wrap it and the Acme lifts in Z.",
+        ],
+        [
+            "Router + edge guide on the inner face after the pair is split (S-007).",
+            "Depth-cut on an offcut first. Bond P-007, optional #8 flush from outside, paste wax only.",
+        ],
+        [
+            f"Projection {G.way_project:.3f}″ ±0.010″. Ways plumb to the base (QC-04).",
+            f"Way covers table travel from {G.table_z_at_max_stock:g}″ to {G.table_z_at_min_stock + G.table_thick:.2f}″.",
+        ],
+        [
+            "Way FIXED to the side. Table shoes SLIDE in Z, CAPTURED in X and Y (J-012).",
+            "No oil. Paste wax. Oil migrates into the birch and into the finish on the work.",
+        ],
+        meshes,
+    )
+
+
+def sheet_j006() -> None:
+    meshes = machine_meshes(["sides", "shaft", "drum"], ["shaft"])
+    _joint_sheet(
+        "J-006",
+        "J006_drive_bearing.svg",
+        "Drive flange — FIXED",
+        "H-001 to P-001L  ·  this is DATUM-E",
+        [
+            f"4-bolt flange, ¾″ bore, sealed. Bolt square on the drawing is {S.flange_bolt_square:g}″ ASSUMED.",
+            f"Bearing CL Y {G.bearing_cl_y:g}″ from infeed, Z {G.bearing_cl_z:g}″ from bottom. Stack-drill with the idler panel.",
+            "Torque the flange bolts. This end of the shaft cannot float.",
+        ],
+        [
+            "Transfer the purchased flange onto the stacked pair before drilling. Do not drill from the drawing BCD.",
+            "Install after the box is glued. Shaft through, then lock H-001.",
+        ],
+        [
+            "Flange face seats fully. Shaft turns by hand with no rumble. This side does not slide axially.",
+        ],
+        [
+            "FIXED. Axial growth is taken at J-007. Locking both flanges bananas the shaft.",
+        ],
+        meshes,
+    )
+
+
+def sheet_j007() -> None:
+    meshes = machine_meshes(["sides", "shaft", "drum"], ["shaft"])
+    _joint_sheet(
+        "J-007",
+        "J007_idler_float.svg",
+        "Idler flange — FLOATING axial",
+        f"H-002 on a {S.idler_float_pad:g}″ UHMW pad  ·  P-001R",
+        [
+            f"{S.idler_float_pad:g}″ UHMW pad under the flange. Bolts snug, not torqued.",
+            "Do not elongate the flange holes in Y or Z. Face-plane slots let the drum axis wander.",
+            "Shaft growth is through the bearing, not through the plywood.",
+        ],
+        [
+            "Stack-drill the bolt pattern with the drive panel so the holes match.",
+            "After the shaft is in, set the pad, snug the bolts, confirm axial float with a feeler.",
+        ],
+        [
+            "Measurable axial float at the idler end (QC-11). Drum coasts; it does not ring or bind.",
+        ],
+        [
+            "FLOATING axially. CONSTRAINED in Y and Z by the un-slotted bolt holes. Over-constraint is the banana.",
+        ],
+        meshes,
+    )
+
+
+def sheet_j011() -> None:
+    meshes = machine_meshes(["table", "elev", "ways", "base"], ["elev", "ways"])
+    _joint_sheet(
+        "J-011",
+        "J011_lift.svg",
+        "Lift, thrust, capture, home",
+        "P-016 nuts · P-017 shoes · P-018 thrust · P-019 dog  ·  both screws on drum CL",
+        [
+            f"Both ½-10 Acme screws at Y {G.acme_y:g}″ (drum CL), X {G.acme_x_left:.2f}″ and {G.acme_x_right:.2f}″.",
+            f"Lead {G.acme_per_turn:.3f}″/rev. 30 turns = 3″ (CALC-003). Cutting force goes through the nuts.",
+            f"P-017 groove {G.shoe_groove_depth:.3f}″ × {G.shoe_groove_width:.3f}″ wraps the {G.way_project:.3f}″ tongue (CALC-005).",
+            "P-018 thrust blocks on the base take the pull-out load. P-019 is the last known parallel.",
+        ],
+        [
+            "Bolt P-018 to the base on drum CL. Thrust washer + e-clip under each screw.",
+            "Bolt P-016 under the table, same Y as the screws — not at the infeed and outfeed ends.",
+            "Groove and bolt P-017 under the table edges. Chain-couple. Set P-019 after paper-on |A−B|.",
+        ],
+        [
+            "Table rises without yaw through full travel (QC-14). Shoes stay wrapped (QC-12).",
+            f"|A−B| ≤ {S.parallel_tol:.3f}″ paper-on. Home dog recovers that number after taper work.",
+        ],
+        [
+            "Nuts LOCATIONAL on the table. Screws rotate, table translates in Z.",
+            "Shoes CAPTURE X and Y, SLIDE in Z. Left clutch FLOATS for taper, LOCKS against the dog.",
+        ],
+        meshes,
+    )
+
+
+def sheet_m101() -> None:
+    sh = Sheet("M-101", "Kinematics — three planes", "Table lift · drum axis · feed  ·  no conveyor")
+    guide_titleblock(sh, right="Mechanism", note=LAYOUT_PROTOCOL["mode"])
+    release_banner(sh)
+    meshes = machine_meshes(
+        ["base", "sides", "stretch", "ways", "table", "elev", "drum", "shaft", "rollers"],
+        ["elev", "ways", "drum"],
+    )
+    assembly_frame(sh, 36, 150, 900, 520, "Force through the nuts, capture in the shoes, cut on the drum CL", meshes)
+    sh.text(960, 160, "THREE PLANES", 13, ACC, bold=True)
+    planes = [
+        (
+            "1. TABLE PLANE",
+            f"Torsion box + wear face. Flat ≤ {S.table_flat_tol:.3f}″. Lifts in Z on dual Acme. "
+            "Shoes wrap vertical ways so it cannot rack in X or yaw in Y. Operator feeds the work; "
+            "the table is not a conveyor and is not a Y-slide in use.",
+        ),
+        (
+            "2. DRUM AXIS",
+            f"Y {G.bearing_cl_y:g}″, Z {G.bearing_cl_z:g}″. Pack-bore, true, wrap, re-clock. "
+            "Drive FIXED (J-006), idler FLOATING axial (J-007). TIR ≤ {S.drum_tir:.3f}″ then paper-on |A−B| ≤ {S.parallel_tol:.3f}″.",
+        ),
+        (
+            "3. FEED",
+            f"Hold-down rollers {S.roller_setbelow:.3f}″ below the drum, paper on. Work is pushed by hand. "
+            "Min length ~12″ or the sled. No wide conveyor — that is the ShopNotes failure mode this machine deleted.",
+        ),
+    ]
+    yy = 184
+    for head, body in planes:
+        sh.text(960, yy, head, 12, ACC, bold=True)
+        yy += 18
+        for row in _wrap(body, 56):
+            sh.text(960, yy, row, 12, NOTE, mono=False)
+            yy += 15
+        yy += 10
+    sh.text(960, yy, "LIFT MATH", 13, ACC, bold=True)
+    yy += 20
+    for c in calculations()[:5]:
+        sh.text(960, yy, f'{c["id"]}  {c["result"]}', 12, INK, mono=False)
+        yy += 18
+    sh.text(36, 700, LAYOUT_PROTOCOL["declaration"], 13, ACC, bold=True, mono=False)
+    yy = 724
+    notes = [
+        "Do not put Acme screws at the infeed and outfeed. That was a drawing error: dual-end means left/right X, both at drum CL Y.",
+        "Do not use the stretchers as a table shelf. A rail at Z=12 collides with a 3″-open table.",
+        "Optional Y-slide for setup only, then locked. In use the table moves in Z.",
+    ]
+    for n in notes:
+        for i, row in enumerate(_wrap(n, 130)):
+            sh.text(36, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
+            yy += 16
+        yy += 4
+    sh.save("M101_kinematics.svg")
+
+
+def sheet_f101() -> None:
+    sh = Sheet("F-101", "Fabrication register and stock rules", "F-201 is the ST-01…ST-14 sequence — do not duplicate it here")
+    guide_titleblock(sh, right="Fabrication")
+    release_banner(sh)
+    rows = []
+    for p in parts():
+        if p["make_or_buy"] not in ("MAKE", "BUY-CUT"):
+            continue
+        rows.append([p["part_id"], str(p["qty"]), p["part_name"][:28], p["finished_size"][:22], p["material"][:22]])
+    table_block(
+        sh, 36, 150, 1608, [("ID", 0), ("QTY", 70), ("PART", 130), ("FINISHED", 520), ("MATERIAL", 900)],
+        rows[:22], row_h=20, title="MAKE / BUY-CUT REGISTER (first page — remainder on D-11)",
+    )
+    sh.text(36, 640, "STOCK PREPARATION", 13, ACC, bold=True)
+    rules = [
+        "Acclimate plywood on edge ≥ 48 h. Measure ply_actual in six places (ST-01). Keep the 16.5″ inner span.",
+        "Grain: face grain vertical on P-001. Stretcher grain along X. Table skins across the drum.",
+        "Reject: voids at dado lines, banana sheets, MDF that has been wet. Drum discs must be flat enough to pack.",
+        "Finish: paste wax on UHMW only. No oil on ways, wear face, or table. Phenolic is the inspection plane — keep a spare.",
+        "Solo handling: sides are 30″ × 22″ × ¾″ — manageable. The glued box needs two people or a dead-man to square.",
+        "3D-print prototype: not required. Irreversible joints are the housed dados and the pack-bored drum; test dados on offcuts.",
+    ]
+    yy = 664
+    for r in rules:
+        for i, row in enumerate(_wrap(r, 140)):
+            sh.text(36, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
+            yy += 16
+        yy += 3
+    sh.text(36, 1048, "F-201 routing = ST-01 through ST-14 in this book. Do not keep a second sequence.", 12, DIM, mono=False)
+    sh.save("F101_routing.svg")
+
+
+def sheet_s101() -> None:
+    sh = Sheet("S-101", "Shop-machine load path", "Not a building-code sheet  ·  [A] assumed  ·  [P] professional")
+    guide_titleblock(sh, right="Structural", note="shop machine, not a structure")
+    release_banner(sh)
+    meshes = machine_meshes(["base", "sides", "stretch", "ways", "table", "elev", "drum"], ["stretch", "elev"])
+    assembly_frame(sh, 36, 150, 800, 480, "Down through the nuts, out through the triangle, into the base", meshes)
+    sh.text(860, 160, "LOAD PATH", 13, ACC, bold=True)
+    path = [
+        "Cut force: drum → workpiece → table wear face → torsion box → P-016 nuts → Acme screws in tension → P-018 thrust on the base.",
+        "Feed force: workpiece → hold-downs / table → P-017 shoes → vertical ways → sides → IN-LO / OUT-LO / OUT-HI triangle.",
+        "Drum mass and KE: bearings → sides. Drive side FIXED. Idler FLOATING so the shaft is not a column in bending.",
+        f"CALC-006 table sag bound under 50 lbf: see G-003. CALC-007 drum KE is estimated ~{calculations()[6]['result']}.",
+        "Base sits on a bench or stand [A]. No foundation design is released. If you bolt this to a floor, that connection is [P].",
+        "Side panels are ¾″ Baltic birch, not posts. Do not treat housing depth as a timber mortise. J-001 is a plywood dado.",
+    ]
+    yy = 184
+    for p in path:
+        for i, row in enumerate(_wrap(p, 62)):
+            sh.text(860, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
+            yy += 16
+        yy += 6
+        if yy > 1070:
+            break
+    sh.text(36, 660, "LIMITATIONS", 13, FLAG, bold=True)
+    yy = 684
+    for line in [
+        "This is a woodshop machine, not a building. Interaction ratios and seismic coefficients do not apply.",
+        "Motor mass on P-012 is gravity-hung then locked. Do not treat the pivot as a live hinge in service.",
+        "Do not exceed ½ HP / 1725 RPM as drawn. A larger motor is a different machine and a different KE.",
+        "Electrical, switch, and grounding: [P] qualified person. Not released.",
+    ]:
+        for i, row in enumerate(_wrap(line, 130)):
+            sh.text(36, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
+            yy += 16
+        yy += 4
+    sh.save("S101_load_path.svg")
+
+
+def sheet_q102() -> None:
+    sh = Sheet("Q-102", "Zero-gap checklist results", "Planforge completeness gate  ·  fail any item → revise")
+    guide_titleblock(sh, right="Quality")
+    release_banner(sh)
+    items = [
+        ("Completeness", "PASS", "P-001…P-019 in the register with finished size. H-001…H-026 specified. Consumables listed."),
+        ("Joinery details", "PASS", "J-001, J-002, J-006, J-007, J-011 have geometry, cut sequence, acceptance, movement."),
+        ("Layout declared", "PASS", LAYOUT_PROTOCOL["declaration"]),
+        ("Structural / base", "HOLD", "S-101 load path shown. Bench/stand connection is [A]; floor bolting is [P] and not released."),
+        ("Hardware", "PASS", "Bearings, pulleys, Acme, chain, rollers specified. Flange BCD remains ASSUMED until transfer."),
+        ("Tolerances / QC", "PASS", "QC-01…QC-14 with numerical acceptance. Q-101 is the sign-off sheet."),
+        ("Fabrication sequence", "PASS", "ST-01…ST-14 is F-201. Solo-handling noted on F-101. Dado test on offcuts."),
+        ("Self-containment", "HOLD", "Package is FABRICATION REVIEW · R3. Electrical and flange BCD still block RELEASED FOR FABRICATION."),
+        ("Japanese timber joinery", "N/A", "This machine is Baltic birch box + housed dados. Kigumi is not applied to plywood sides."),
+        ("3D-print prototype", "N/A", "No irreversible organic joint. Test dados and the pack-bore on scrap."),
+    ]
+    y = table_block(
+        sh, 36, 160, 1608,
+        [("GATE", 0), ("RESULT", 220), ("NOTE", 360)],
+        [[a, b, c] for a, b, c in items],
+        row_h=36,
+    )
+    sh.text(36, y + 24, "This sheet does not make the package RELEASED FOR FABRICATION. It records that the drawing set is internally complete under the stated holds.", 13, NOTE, mono=False)
+    sh.text(36, y + 48, f"validate() and validate_mechanics() run on every regeneration. Current fabrication rev {S.fabrication_rev}.", 12, DIM, mono=False)
+    sh.save("Q102_zero_gap.svg")
 
 
 HTML_HEAD = """<!doctype html>
@@ -1126,6 +1450,7 @@ def write_guide_html() -> None:
   <ol>
     <li><a href="#basis"><b>G-001</b> Design basis and safety</a></li>
     <li><a href="#explode"><b>E-101</b> Exploded assembly</a></li>
+    <li><a href="#mech"><b>M/J/F/S</b> Kinematics, joinery, fabrication, load path</a></li>
     {''.join(f'<li><a href="#{st["id"].lower()}"><b>{st["id"]}</b> {_h(st["title"])}</a></li>' for st in steps)}
     <li><a href="#commission"><b>Q-101</b> Commissioning</a></li>
     <li><a href="#parts"><b>P/A/H</b> Part and assembly drawings</a></li>
@@ -1170,6 +1495,27 @@ def write_guide_html() -> None:
         + figure([("E101_exploded.svg", "Exploded assembly")])
         + "</article>"
     )
+    out.append("</div></section>")
+
+    out.append('<section class="chap" id="mech"><div class="wrap">')
+    out.append('<p class="k">Chapter 00</p><h2>Kinematics, joinery, fabrication, load path</h2>')
+    for code, f, title, note in (
+        ("M-101", "M101_kinematics.svg", "Three planes: table lift, drum axis, feed", "Both Acme screws on the drum centerline. Vertical captured ways. No conveyor."),
+        ("J-001", "J001_stretcher.svg", "Housed stretcher triangle", "IN-LO / OUT-LO / OUT-HI. Rails stand on edge. They miss the table."),
+        ("J-002", "J002_way.svg", "Vertical way rebate", "The table does not sit on a shelf. Shoes wrap a tongue and the Acme lifts in Z."),
+        ("J-006", "J006_drive_bearing.svg", "Drive flange FIXED", "DATUM-E. Transfer the purchased bearing before you drill."),
+        ("J-007", "J007_idler_float.svg", "Idler flange FLOATING axial", "A pad, not YZ slots. Locking both flanges bananas the shaft."),
+        ("J-011", "J011_lift.svg", "Lift, thrust, capture, home dog", "Force through the nuts. Shoes capture X/Y. Dog is last parallel."),
+        ("F-101", "F101_routing.svg", "Part register and stock rules", "F-201 is ST-01…ST-14. Do not keep a second sequence."),
+        ("S-101", "S101_load_path.svg", "Shop-machine load path", "Not a building-code sheet. Electrical remains [P]."),
+        ("Q-102", "Q102_zero_gap.svg", "Zero-gap checklist", "Internal completeness under FABRICATION REVIEW · R3 holds."),
+    ):
+        out.append(
+            f'<article class="sheet"><div class="hd"><span class="code">{code}</span>'
+            f"<h3>{_h(title)}</h3><p class=\"goal\">{_h(note)}</p></div>"
+            + figure([(f, title)])
+            + "</article>"
+        )
     out.append("</div></section>")
 
     # Chapters: steps grouped by chapter label
@@ -1307,11 +1653,20 @@ def main() -> None:
     sheet_g003()
     sheet_g004()
     sheet_e101()
+    sheet_m101()
+    sheet_j001()
+    sheet_j002()
+    sheet_j006()
+    sheet_j007()
+    sheet_j011()
+    sheet_f101()
+    sheet_s101()
     for st in build_steps():
         sheet_step(st)
     sheet_q101()
+    sheet_q102()
     write_guide_html()
-    print("done →", OUT, f"({6 + len(build_steps())} guide sheets + guide book)")
+    print("done →", OUT, f"({15 + len(build_steps())} guide sheets + guide book)")
 
 
 if __name__ == "__main__":

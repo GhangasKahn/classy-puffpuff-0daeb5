@@ -2,7 +2,7 @@ qc,check,spec,class,gate
 QC-01,Ply thickness,"Measure ply_actual (default 0.75""). Keep inner span 16.5″.",T1,M0
 QC-02,Paired sides,P-001L/R identical hole pattern after stack-drill,T2,M4
 QC-03,Box diagonals,Base diagonals equal; no rack,T2,M5
-QC-04,Way coplanar,Winding sticks / indicator on both UHMW — no twist,T3,M5
+QC-04,Way plumb + capture,Both vertical ways plumb and coplanar in X; shoes wrap without bind through full travel,T3,M5
 QC-05,Table flatness,≤ 0.004″ on both diagonals of P-006,T3,M7
 QC-06,Drum TIR paper off,≤ 0.002″ mid-span,T4,M7
 QC-07,Drum ∥ table paper on,|A−B| ≤ 0.003″ over 15.5″,T4,M7
@@ -10,4 +10,6 @@ QC-08,Hold-down set,"Rollers 0.030″ below drum OD, paper on",T2,M7
 QC-09,Pulley coplanar,Straightedge across both pulley faces,T2,M5
 QC-10,Thickness scatter,≤ 0.003″ on four corners of witness board,T4,M7
 QC-11,Idler float,Shaft can grow axially; no banana preload,T2,M3
-QC-12,Way/table fit,Table slides; project 0.230″; clearance 0.020″/side,T2,M4
+QC-12,Way/table capture,Shoes wrap tongue; project 0.230″; X play 0.010″; table moves in Z only,T2,M4
+QC-13,Stretcher clearance,No rail in the table envelope; min Z gap 6.062″ (CALC-004),T2,M5
+QC-14,Acme on drum CL,Both screws at Y 11″; |left−right| travel match through 3″,T3,M7

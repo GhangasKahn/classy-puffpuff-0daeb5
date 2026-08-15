@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-017</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Table way shoe</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Groove 0.240″ deep × 2.516″ wide captures the 0.230″ × 2.5″ tongue. Table moves in Z only.</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 2  ·  MIRROR PAIR</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>UHMW-PE or hardwood + UHMW liner  ·  4" × 2.5" × 1.25"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 2  ·  Groove the outboard face to wrap the vertical tongue; bolt under the table edge</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED from way_project / way_width + clearance</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>TABLE SHOE — make two, mirror pair  (wraps the vertical tongue)</text>
+<rect x='80.0' y='160.0' width='192.0' height='120.0' fill='#d5d9de' stroke='#1a1a1a' stroke-width='2.0'/>
+<line x1='80.0' y1='280.0' x2='80.0' y2='314.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='272.0' y1='280.0' x2='272.0' y2='314.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='308.0' x2='272.0' y2='308.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,308.0 88.0,304.8 88.0,311.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='272.0,308.0 264.0,304.8 264.0,311.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='154.8' y='291.0' width='42.4' height='18.0' fill='#ffffff'/>
+<text x='176.0' y='303.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>4.00"</text>
+<line x1='80.0' y1='160.0' x2='42.0' y2='160.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='280.0' x2='42.0' y2='280.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='48.0' y1='160.0' x2='48.0' y2='280.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='48.0,160.0 44.8,168.0 51.2,168.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='48.0,280.0 44.8,272.0 51.2,272.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='38.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 224.0)'>2.5"</text>
+<text x='288.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 1.25"</text>
+<rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1264.8,388.0 1477.3,265.3 1477.3,188.7 1264.8,311.3' fill='#96999d'/>
+<polygon points='1132.0,311.3 1264.8,388.0 1264.8,311.3 1132.0,234.7' fill='#b2b6ba'/>
+<polygon points='1264.8,311.3 1477.3,188.7 1344.5,112.0 1132.0,234.7' fill='#96999d'/>
+</g>
+<text x='1130.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric</text>
+<rect x='1120.0' y='420.0' width='500.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1136.0' y='444.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PART DATA</text>
+<text x='1136.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Stock</text>
+<text x='1260.0' y='470.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW offcut or 5/4 hardwood, 2½" × 4"</text>
+<text x='1136.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Joinery</text>
+<text x='1260.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-012 captured wrap on P-007; screws into </text>
+<text x='1136.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref face</text>
+<text x='1260.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref edge</text>
+<text x='1260.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Grain</text>
+<text x='1260.0' y='558.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
+<text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED from way_project / way_width + clearance</text>
+<text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Groove the outboard face 0.24" deep × 2.516" wide.</text>
+<text x='80.0' y='968.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Tongue is 0.23" × 2.5". X play 0.01", Y play 0.016"</text>
+<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (CALC-005).</text>
+<text x='80.0' y='1004.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bolt under the table edge, centered on drum CL. Table moves in</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Z only (J-012).</text>
+<text x='80.0' y='1040.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Hardwood with a UHMW liner is acceptable if you cannot get a</text>
+<text x='80.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  thick UHMW offcut.</text>
+</svg>

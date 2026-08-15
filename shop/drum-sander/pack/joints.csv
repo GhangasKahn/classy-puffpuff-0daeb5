@@ -1,6 +1,6 @@
 joint_id,joint_type,part_a,part_b,fit_class,notes
-J-001,housed dado + screw,P-001L / P-001R,P-003,GLUE,"Racking stiffness. Ways, not stretchers, locate the table."
-J-002,rebate + bond,P-001L / P-001R,P-007,GLUE,Without the rebate a ¾″ way would steal 1.5″ and the 16″ table would not fit.
+J-001,housed dado + screw,P-001L / P-001R,P-003,GLUE,"Racking triangle. Ways, not stretchers, locate the table. Stations miss the table envelope (CALC-004)."
+J-002,rebate + bond,P-001L / P-001R,P-007,GLUE,Vertical captured way. Without the rebate a ¾″ way would steal 1.5″ and the 16″ table would not fit.
 J-003,glue torsion box,P-004,P-005,GLUE,Continuous glue. Flatten before J-004.
 J-004,bonded wear face,P-004,P-006,GLUE,Replaceable metrology surface.
 J-005,pack-bore + keyed stack,P-008 / P-009,P-010,LOCATIONAL / GLUE,Bore as a pack. 1 mm relief every 4 MDF discs. Balance ends.
@@ -9,4 +9,7 @@ J-007,"flange bearing, floating axial",P-001R,H-002 / P-010,SLIDING (axial only)
 J-008,pivoting T-nut cradle,P-012,H-016 / P-001L,SNUG then LOCKED,"Gravity tension, then lock so the belt cannot pump."
 J-009,spring yoke pivot,P-014,H-009 / H-011 / H-012,"CLEARANCE pivot, SPRING down","Set rollers 0.030″ below drum OD, paper on."
 J-010,screw base to sides,P-002,P-001L / P-001R,GLUE + SCREW,
-J-011,bronze nut to table,P-016,P-004 / H-007,LOCATIONAL,Both nuts; chain-coupled rotation.
+J-011,bronze nut to table,P-016,P-004 / H-007,LOCATIONAL,Both nuts on the drum-CL screws; chain-coupled rotation. Cutting force goes through the nuts.
+J-012,captured shoe wrap,P-017,P-007 / P-004,SLIDING (Z only),"Shoe hangs under the table edge and wraps the 0.230″ tongue. X play 0.010″, Y play 0.016″ (CALC-005)."
+J-013,thrust block on base,P-018,P-002 / H-007,LOCATIONAL,Thrust washer + e-clip under the screw. Sanding load tries to pull the screw out of the base.
+J-014,home dog stop,P-019,P-002 / H-008,ADJUSTABLE then LOCKED,Set after paper-on |A−B|. Left clutch hits this stop to recover parallel.
