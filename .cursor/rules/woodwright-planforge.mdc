@@ -1,0 +1,16 @@
+---
+description: WOODWRIGHT PLANFORGE protocol for woodworking design, engineering, drafting, and fabrication-package work (MARTIN, STELE, HASHIRA, and any new fence/shop project)
+globs: fence/**,scripts/**
+alwaysApply: false
+---
+
+# WOODWRIGHT PLANFORGE governs woodworking work in this repo
+
+Before designing, revising, or auditing any woodworking fabrication package in `fence/` or the CAD pipelines in `scripts/`, read the full protocol at `fence/docs/WOODWRIGHT_PLANFORGE.md` and follow it. Non-negotiable points:
+
+- **Evidence classes.** Tag every critical value [G] given, [M] measured, [S] sourced, [D] derived, [A] assumed, [E] estimated, [T] test-based, or [P] professional-verify. Never invent a citation, material property, hardware rating, or dimension. Never extract a fabrication dimension from an unscaled photograph.
+- **Risk class and release state.** Classify each project R0–R4 and carry exactly one release state (CONCEPT through FABRICATION-READY, or RELEASE WITHHELD) on every response and file set. Fences, gates, and outdoor structures are at least R2; structural/occupied work is R3–R4 and must not be independently released as safe-to-build. "NOT FOR FABRICATION" / "PROFESSIONAL REVIEW REQUIRED" labels belong on the affected sheets, not only in prose.
+- **Single source of truth.** Master parameters generate geometry, drawings, BOM, and cut lists (e.g. `fence/martin/martin_kernel.py` → `scripts/export_martin_fab.py`). Never hand-edit a derived artifact (SVG sheet, CSV, STEP, fab.json) when the governing parameter or kernel can regenerate it; reconcile every change across parameters, parts, calculations, BOM, cut list, drawings, instructions, risks, and tests.
+- **Verification is an operation, not a claim.** Run deterministic checks (ID uniqueness, BOM/cut-list/drawing reconciliation, mating-dimension agreement, closed profiles, no clipped or overlapping annotation) and inspect rendered sheets before advancing a release state. A file that was not actually created and inspected must not be claimed.
+- **Wood movement, grain, and load path** must be addressed wherever a dimension crosses grain or the environment varies; Buffalo/WNY freeze–thaw outdoor exposure activates the outdoor and structural modules.
+- **Honest limitations.** If a required capability (CAD, rendering, standards access) is missing, say so and provide a manifest plus generation-ready specification instead of implying an artifact exists.
