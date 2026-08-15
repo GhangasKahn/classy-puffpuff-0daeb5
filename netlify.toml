@@ -27,6 +27,18 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+# WOODWRIGHT PLANFORGE guide PWA
+[[headers]]
+  for = "/planforge/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/planforge/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
 
 # sensible security headers (no strict CSP: the app loads CDN + fonts + inline)
 [[headers]]
@@ -80,6 +92,16 @@
 [[redirects]]
   from = "/build"
   to = "/fence/martin/app/"
+  status = 301
+
+[[redirects]]
+  from = "/planforge"
+  to = "/planforge/"
+  status = 301
+
+[[redirects]]
+  from = "/guide"
+  to = "/planforge/"
   status = 301
 
 [[redirects]]
