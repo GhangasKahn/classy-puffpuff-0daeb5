@@ -305,6 +305,8 @@
 
   function setTheme(next) {
     document.documentElement.setAttribute("data-theme", next);
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute("content", next === "hiru" ? "#efe6d6" : "#100e0c");
     try {
       localStorage.setItem("shinobi-theme", next);
     } catch (e) {}

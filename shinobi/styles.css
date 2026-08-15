@@ -8,8 +8,8 @@
   --recess: #0b0a09;
   --elev: #1f1b17;
   --ink: #f3ece1;
-  --muted: #b6aa98;
-  --faint: #7d7366;
+  --muted: #c4b7a4;
+  --faint: #9a8d7d;
   --line: rgba(215, 195, 154, 0.18);
   --line-strong: rgba(215, 195, 154, 0.38);
   --indigo: #6f8eaa;
@@ -40,8 +40,8 @@
   --recess: #ddd2be;
   --elev: #f7f1e6;
   --ink: #1c1712;
-  --muted: #4e463c;
-  --faint: #73685b;
+  --muted: #3f3830;
+  --faint: #5a5248;
   --line: rgba(28, 23, 18, 0.16);
   --line-strong: rgba(28, 23, 18, 0.32);
   --indigo: #3a5872;
@@ -100,6 +100,7 @@ a:hover { color: var(--ridge); }
   text-decoration: none;
   transform: translateY(-160%);
 }
+.skip.skip-main { left: auto; right: var(--gutter); }
 .skip:focus { transform: none; }
 
 .wrap {
@@ -682,6 +683,7 @@ legend {
   padding: 0.7rem 0.55rem;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
+  overflow-wrap: anywhere;
 }
 .ledger-table th {
   font-size: 0.72rem;
@@ -822,10 +824,9 @@ textarea { min-height: 7.5rem; resize: vertical; }
 
 .live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
-@media (max-width: 430px) {
-  body { font-size: 1rem; }
-  .hero { padding-top: 4.6rem; }
-  .specimen dl { font-size: 0.9rem; }
+@media (max-width: 360px) {
+  .hero h1 { font-size: 2.7rem; letter-spacing: 0.05em; }
+  .gates { grid-template-columns: 1fr 1fr; }
 }
 
 @media print {
