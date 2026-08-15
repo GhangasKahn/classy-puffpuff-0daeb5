@@ -6,7 +6,7 @@
   "METADATA_QUALITY": "GOOD \u2014 Fabrication properties on FreeCAD; JSON/CSV registry",
   "ASSEMBLY_STRUCTURE": "GOOD \u2014 A000 / A001 ladder+planters / A010 / A020 / A030",
   "JOINERY_STRUCTURE": "GOOD \u2014 joint register with fit class; nuki vs cassette groove rule",
-  "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA generated from kernel; elevation paints motifs",
+  "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA + Planforge G/A/J/E/F/S/Q + LEGO manual; elevation paints motifs",
   "BOM_READINESS": "GOOD \u2014 BOM + nest from parts; planter mass from wind calc",
   "CUT_LIST_READINESS": "GOOD \u2014 rough, finished, nest CSV",
   "EXPORT_READINESS": "GOOD \u2014 FCStd/STEP/STL/JSON/CSV/SVG/DXF",

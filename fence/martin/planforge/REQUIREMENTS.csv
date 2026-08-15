@@ -1,0 +1,15 @@
+ID,PRI,STATEMENT,VERIFY,STATUS,EVIDENCE
+FUN-001,MUST,Freestanding 143″ run sits on the driveway slab; 100% dog containment,QC-08 aperture + QC-15 ballast + gate bottom 0.375″,PROPOSED,G
+FUN-002,MUST,Gate flush to the house at P0; no planter at the gate,layout posts[0] + F-005 only P1–P2 / P2–P3,PROPOSED,G
+FUN-003,MUST,Winter knock-down without buried hardware,AS-12 rehearsal; never glue kusabi,PROPOSED,G
+ENV-001,MUST,"Buffalo 4-season: paint weather system, PT splash, end-grain sealer",H-005 schedule + K-001 PT,PROPOSED,G
+DIM-001,MUST,"Envelope 143″ L × 65″ H; primary units inch; datums x=0 latch face, z=0 sill top",TBM overall_length on driveway,OPEN,G/TBM
+LOAD-001,MUST,Planning wind FS 1.5 via live planters; not PE-stamped,ballast.ratio ≥ 1.0 after planting,PROPOSED,D
+MAT-001,MUST,Wood + lighting + a gate latch. No nails/screws in timber structure.,BOM MAKE vs BUY; McMaster limited to pads/light/optional hasp/oak rod,PROPOSED,G
+JNT-001,MUST,"Through-nuki + kusabi on K-001, R-001, R-002 only; cassettes groove in",J-401 + three mortises per post,PROPOSED,D
+JNT-002,MUST,Oak pivots ⌀1.25″ at P1 (sill + soffit); Latch B into P0,J-404; W-003 from 96825K84,PROPOSED,G
+AESTH-001,MUST,"Darwin Martin Tree of Life light-screen — eave, belts, piers, patterned cassettes. Not a ranch fence.",GA-110 motifs; Q-002 three trees; no Z-brace on garden face,PROPOSED,G
+AESTH-002,SHOULD,φ sizes cassette pair 8.085 / 13.081; do not rip 2×10 to force φ,layout light_minor/major; stock 9.25″ belts,PROPOSED,D
+SAFE-001,MUST,Risk R2 outdoor fence. Release FABRICATION-READY WITH CONDITIONS. Not a PE stamp.,G-001 banner; Buffalo Green Code TBM,OPEN,P
+DOC-001,MUST,WOODWRIGHT PLANFORGE guidebook + LEGO manual + fab drawings + McMaster schedule,/fence/martin/planforge/ + /manual/ + /fab/,PROPOSED,G
+EXCL-001,EXCLUDED,"Post holes, cement, stone/gravel pads, planter at P0, structural screws in timber, Z-brace garden face",BOM contains none of these,VERIFIED,G

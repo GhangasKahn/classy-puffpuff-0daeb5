@@ -24,7 +24,7 @@
 <text x='40.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-14  [T2]  Gate vs cap clearance ≥ 0.50″; gate bottom ≤ 0.375″ (dog)  tol min 0.38 cap / max 0.50 bottom</text>
 <text x='40.0' y='378.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-15  [T1]  Planters planted + optional in-box stone; air gap from posts; drainage slots  tol —</text>
 <text x='40.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-16  [T0]  No concrete, no post holes, no gravel/stone PAD; stone only inside planters  tol binary</text>
-<text x='40.0' y='422.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-17  [T1]  Cap soffit light dado + IP65 tape; driver not at house wall  tol —</text>
+<text x='40.0' y='422.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-17  [T1]  Cap soffit light dado + IP67 24V tape (8836N52); driver 8836N24 in P3 planter, not at house wall  tol —</text>
 <text x='40.0' y='454.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>GEOMETRY GATE (kernel)</text>
 <text x='40.0' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        gate/cap clearance  —  0.5" ≥ 0.50" spec</text>
 <text x='40.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        nuki cheek  —  2.0" each side of 1.50″ rail in 5.50″ post</text>

@@ -318,7 +318,12 @@
       })
     );
     $("#miscList").innerHTML = D.misc
-      .map((m) => `<li><strong>${m.item}</strong> — ${m.qty}</li>`)
+      .map((m) => {
+        const name = m.href
+          ? `<a href="${m.href}" rel="noopener" target="_blank">${m.item}</a>`
+          : m.item;
+        return `<li><strong>${name}</strong> — ${m.qty}</li>`;
+      })
       .join("");
     $("#toolsList").innerHTML = D.tools.map((t) => `<li>${t}</li>`).join("");
   }

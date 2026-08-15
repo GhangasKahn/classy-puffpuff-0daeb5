@@ -6,11 +6,12 @@ A complete, self-contained website:
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, `export_martin_fab.py`, `fab_system.py`, plan generators)
-- `fence/martin/martin_kernel.py` — MARTIN **single source of truth** (Rev C). `scripts/export_martin_fab.py` writes BOM, cut lists, shop drawings, JSON, OpenSCAD, QA.
+- `fence/martin/martin_kernel.py` — MARTIN **single source of truth** (Rev F). `scripts/export_martin_fab.py` writes BOM, cut lists, shop drawings, JSON, OpenSCAD, QA. `scripts/gen_martin_planforge.py` writes the WOODWRIGHT PLANFORGE guidebook.
 - `fence/martin/fab/` — MARTIN fabrication package at `/fence/martin/fab/` (shortcut `/martin/fab`)
+- `fence/martin/planforge/` — WOODWRIGHT PLANFORGE v1.0 master guidebook + McMaster-Carr schedule (`/martin/planforge`)
 - `fence/fab/` — STELE parametric fabrication model (BOM, cut lists, shop drawings) at `/fab`
 - `fence/martin/app/` — interactive **MARTIN Build** PWA at `/martin/app` or `/build`
-- `netlify.toml` — headers + redirects (`/martin`, `/martin/app`, `/martin/fab`, `/build`, `/stele`, `/report`, `/fab`)
+- `netlify.toml` — headers + redirects (`/martin`, `/martin/app`, `/martin/fab`, `/martin/planforge`, `/build`, `/stele`, `/report`, `/fab`)
 
 ## What this is — and isn't
 This is the complete **front-end** product: a marketing site plus an installable, offline-capable

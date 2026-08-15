@@ -177,22 +177,38 @@ def main_build():
         feature_objs.append(add_shape(doc, f"F006_Brace_{pst['mark']}", br, parts_by_id["F-006"], a_base))
         timber.append(br)
 
-    # Water table + belts (full nuki_len) and per-bay recessed cassettes
+    # Water table + belts (full nuki_len). Cassettes are motif muntins — not ranch slabs.
     for s in ly["slats"]:
         if s["id"].startswith("Q-"):
-            rec = v("board_t")
-            for bi, (la, rb) in enumerate(((1, 2), (2, 3))):
-                x0 = ly["posts"][la]["cx"] + fx / 2.0
-                ww = ly["bay_clear"]
-                panel = box_in(ww, rec, s["h"], x0, -rec / 2.0 - 0.35, s["z0"])
-                tag = "TreeOfLife" if s["id"] == "Q-002" else "NestedRects"
-                feature_objs.append(add_shape(doc, s["id"].replace("-", "") + f"_{tag}_B{bi}", panel, parts_by_id[s["id"]], a_frame))
-                timber.append(panel)
             continue
         band = box_in(ly["nuki_len"], rt, s["h"], ly["nuki_x0"], -rt / 2.0, s["z0"])
         tag = "WaterTable" if s["id"] == "K-001" else "Belt"
         feature_objs.append(add_shape(doc, s["id"].replace("-", "") + "_" + tag, band, parts_by_id[s["id"]], a_frame))
         timber.append(band)
+
+    rec = v("board_t")
+
+    def motif_compound(m, y_face):
+        solids = []
+        for r in m.get("rects") or []:
+            if r["w"] < 0.22 or r["h"] < 0.22:
+                continue
+            solids.append(box_in(r["w"], rec, r["h"], r["x"], y_face, r["z"]))
+        if not solids:
+            return None
+        return Part.makeCompound(solids)
+
+    for m in ly["motifs"]:
+        if m.get("bay") == "gate":
+            continue
+        comp = motif_compound(m, -rec / 2.0 - 0.35)
+        if comp is None:
+            continue
+        pid = m["part"]
+        tag = "TreeOfLife" if m.get("kind") == "tree-of-life" else "NestedRects"
+        nm = pid.replace("-", "") + f"_{tag}_B{m['bay']}"
+        feature_objs.append(add_shape(doc, nm, comp, parts_by_id[pid], a_frame))
+        timber.append(comp)
 
     cap = box_in(ly["cap_len"], v("cap_w"), v("cap_t"),
                  ly["cap_x0"], -v("cap_w") / 2.0, ly["overall_height"] - v("cap_t"))
@@ -254,28 +270,18 @@ def main_build():
     # G-008 shop brace is driveway-face only — omit from garden-facing CAD solids
 
     rec = v("board_t")
-    for i, s in enumerate(ly["slats"]):
-        if not s["id"].startswith("Q-"):
-            continue
-        z0b = max(s["z0"], z0)
-        z1b = min(s["z1"], z0 + gh)
-        if z1b - z0b < 0.4:
-            continue
-        g = box_in(ly["gate_inner"], rec, z1b - z0b, x0 + stile, y0 + t * 0.2, z0b)
-        feature_objs.append(add_shape(doc, f"G009_Cassette_{s['id'].replace('-', '')}", g, parts_by_id["G-009"], a_gate))
-        timber.append(g)
-    # Tree of Life muntins on the gate (trunks / pots / frames — not every jewel)
+    # Gate lights: motif muntins only — no solid ranch panel, no Z-brace on garden face
     for m in ly["motifs"]:
-        if m.get("bay") != "gate" or m.get("kind") != "tree-of-life":
+        if m.get("bay") != "gate":
             continue
-        for j, r in enumerate(m.get("rects") or []):
-            if r.get("role") not in ("trunk", "pot", "frame"):
-                continue
-            if r["w"] < 0.3 or r["h"] < 0.3:
-                continue
-            mun = box_in(r["w"], rec, r["h"], r["x"], y0 + t * 0.35, r["z"])
-            feature_objs.append(add_shape(doc, f"G009_Muntin_{j}", mun, parts_by_id["G-009"], a_gate))
-            timber.append(mun)
+        comp = motif_compound(m, y0 + t * 0.2)
+        if comp is None:
+            continue
+        tag = "TreeOfLife" if m.get("kind") == "tree-of-life" else "NestedRects"
+        feature_objs.append(add_shape(
+            doc, f"G009_{tag}_{m['part'].replace('-', '')}", comp, parts_by_id["G-009"], a_gate
+        ))
+        timber.append(comp)
 
     bar = box_in(v("latch_bar_l"), v("latch_bar_t"), v("latch_bar_w"),
                  x0 - v("latch_bar_l") + 2.0, -v("latch_bar_t") / 2.0,

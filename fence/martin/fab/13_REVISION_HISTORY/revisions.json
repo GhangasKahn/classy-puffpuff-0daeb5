@@ -28,5 +28,10 @@
     "REV": "F",
     "DATE": "2026-08-14",
     "NOTE": "Tree of Life light-screen: cantilevered 2\u00d712 eave + fascia, projecting belts, Roman-brick piers, recessed muntin cassettes (nested-rects / three trees / nested-rects), solid 2\u00d712 water table, Tree of Life gate. Not a ranch fence."
+  },
+  {
+    "REV": "F.1",
+    "DATE": "2026-08-15",
+    "NOTE": "WOODWRIGHT PLANFORGE v1.0 guidebook; McMaster-Carr sourced buy list; CAD muntins from kernel motifs; 24V IP67 lighting SKUs."
   }
 ]

@@ -23,7 +23,7 @@ See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 **Ballast:** two live planters, soil 1155.0 lb + in-box stone 366.7 lb = 1521.7 lb vs required 1311.1 lb (planning FS 1.5). Concrete **0**. Gravel pad **0**.
 
 ## K. Assembly order
-- **AS-01** (STOCK) Procure nested lumber + PT for kick/planters + oak + rubber pads + IP65 tape
+- **AS-01** (STOCK) Procure nested lumber + PT + oak rods 96825K84/K75 + pads 60015K58 + IP67 tape 8836N52/24
 - **AS-02** (SITE) TBM 143″ opening on the driveway. Gate at the house. Do not dig. Do not pour.
 - **AS-03** (BASE) Mill F-001..F-003 ladder; half-lap; dry-fit on slab pads; build two F-005 troughs (not at house)
 - **AS-04** (MILL) Posts L-001..004 to S-014; 3.50″ tenons; through-nuki + housed dados
@@ -59,6 +59,7 @@ See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 - S-605 Board nesting / yield
 - QA-701 Inspection plan
 - L-801 Part labels
+- WPF-G001 WOODWRIGHT PLANFORGE guidebook (G/A/J/E/F/S/Q + McMaster)
 
 ## O. Unresolved
 - U-01 Outrigger packing only if garden sill leaves the slab (default 0 — photos show driveway run) [VERIFIED/TBM] param `drop_off`

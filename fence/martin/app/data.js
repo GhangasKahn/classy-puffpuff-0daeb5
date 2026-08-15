@@ -53,11 +53,15 @@ window.MARTIN_DATA = {
     { qty: 2, nom: "1×4 oak", len: "4′", use: "Pegs / latch / oak pivots", bf: 2.7 },
   ],
   misc: [
-    { item: "Rubber furniture pads (driveway sill)", qty: "8" },
+    { item: "McMaster 60015K58 rubber pads (driveway sill)", qty: "8", href: "https://www.mcmaster.com/60015K58/" },
+    { item: "McMaster 96825K84 oak rod ⌀1¼″ × 36″ (pivots)", qty: "1", href: "https://www.mcmaster.com/96825K84/" },
+    { item: "McMaster 96825K75 oak rod ⌀⅜″ × 36″ (pegs)", qty: "1", href: "https://www.mcmaster.com/96825K75/" },
+    { item: "McMaster 8836N52 16′ IP67 2700K tape (eave soffit)", qty: "1", href: "https://www.mcmaster.com/8836N52/" },
+    { item: "McMaster 8836N24 96W IP67 24V driver (P3 planter)", qty: "1", href: "https://www.mcmaster.com/8836N24/" },
+    { item: "McMaster 8836N75 tape-to-wire connector", qty: "2", href: "https://www.mcmaster.com/8836N75/" },
     { item: "Live planter mix + optional in-box drainage stone (2 troughs)", qty: "see ballast" },
-    { item: "12V IP65 LED tape + driver (eave soffit)", qty: "1 kit" },
     { item: "Exterior primer + owner gray paint", qty: "1 kit" },
-    { item: "Optional stainless pintles + padlock hasp", qty: "1 set" },
+    { item: "Optional McMaster 1304A42 stainless hasp", qty: "1", href: "https://www.mcmaster.com/1304A42/" },
   ],
   joinery: [
     { id: "nuki", jp: "貫", name: "Nuki", where: "K-001 + R-001 + R-002 through posts", lock: "Hardwood kusabi wedges", tip: "Through-mortise only the water table and two belts. Three mortises keep the post web." },
@@ -80,7 +84,7 @@ window.MARTIN_DATA = {
     { id: "a9", phase: "gate", title: "Build the Tree of Life gate", body: "Drawbored hozo joints. Garden face is Darwin Martin — shop brace stays on the driveway face. Oak pivots W-003: bottom in sill, top in eave." },
     { id: "a10", phase: "gate", title: "Install latch", body: "Latch B default: oak bar into mortise in P0 at the R-002 belt. Confirm swing arc. No epoxy into the house. No planter at P0." },
     { id: "a11", phase: "finish", title: "Paint for Buffalo", body: "Ease arrises, end-grain sealer, PT dry then prime, two owner-gray coats, extra on planter interiors. Mask joinery faces." },
-    { id: "a12", phase: "finish", title: "Set, plant, light", body: "Drop posts into F-003, re-insert belts/cassettes/wedges, hang gate, plant troughs + optional in-box stone, install IP65 tape (driver in P3 planter)." },
+    { id: "a12", phase: "finish", title: "Set, plant, light", body: "Drop posts into F-003, re-insert belts/cassettes/wedges, hang gate, plant troughs + optional in-box stone, install McMaster 8836N52 IP67 tape (driver 8836N24 in P3 planter)." },
   ],
   winter: [
     "Open gate · remove latch peg / padlock",
@@ -110,6 +114,8 @@ window.MARTIN_DATA = {
     { src: "../plans/M6_cutlist.svg", title: "M-6 Cut list", kind: "plan" },
   ],
   downloads: [
+    { href: "../planforge/", label: "WOODWRIGHT PLANFORGE", note: "Master guidebook + McMaster" },
+    { href: "../planforge/MCMASTER_SCHEDULE.csv", label: "McMaster CSV", note: "Linkable SKUs" },
     { href: "../manual/", label: "Build manual", note: "24 steps, LEGO style" },
     { href: "../fab/", label: "Fabrication package", note: "BOM, drawings, QA, JSON" },
     { href: "../fab/00_SOURCE/martin_project.json", label: "martin_project.json", note: "Machine-readable source" },

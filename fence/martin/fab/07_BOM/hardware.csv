@@ -1,8 +1,8 @@
-HARDWARE_ID,DESCRIPTION,STANDARD,SIZE,QTY,MATERIAL,MAKE_OR_BUY
-H-001,"Rubber / composite furniture pad, 4″ sq × ½″, under driveway sill",furniture / anti-vibration,4″ × 4″ × 0.50″,8,rubber,BUY
-H-002,Optional oak latch strike block — Latch B (mortise in L-001) is default; no epoxy into concrete,site,1.50″ × 3.50″ × 6.00″,1,white oak,MAKE
-H-003,"Optional stainless lift-off pintle hinge set, 2 leaves",manufacturer,to suit 1.50″ gate + 3.50″ post,1,stainless steel,BUY
-H-004,Optional keyed padlock hasp for latch bar,manufacturer,to suit G-010,1,stainless or galvanized,BUY
-H-005,"Exterior primer + owner gray enamel, 2 finish coats (ease, seal, PT dry first)",exterior grade,kit,1,coating,BUY
-H-006,12V IP65 LED tape + driver in cap soffit dado,low-voltage outdoor,16′ tape + 60W driver,1,LED + wood cover slat,BUY
-H-007,"Pea gravel / lava in F-005 troughs — 4″ drainage layer, in-box only",landscape stone,see ballast.stone_cuft,3.67 cu ft,stone,BUY
+HARDWARE_ID,DESCRIPTION,STANDARD,SIZE,QTY,MATERIAL,MAKE_OR_BUY,MCMASTER_PN,MCMASTER_URL,ROLE,EVIDENCE
+H-001,Segmented rubber vibration-damping pad under driveway sill,McMaster 60015K58,4″ × 4″ × 0.75″,8,"rubber, Durometer 50A",BUY,60015K58,https://www.mcmaster.com/60015K58/,REQUIRED,S
+H-002,Optional oak latch strike block — Latch B (mortise in L-001) is default; no epoxy into concrete,site MAKE,1.50″ × 3.50″ × 6.00″,1,white oak,MAKE,,,OPTIONAL,A
+H-003,Optional stainless lift-off pintle set — BACKUP only. Primary hinge is mill oak W-003.,manufacturer — no McMaster pintle selected,to suit 1.50″ gate + 3.50″ post,1,stainless steel,BUY,,,OPTIONAL,A
+H-004,Optional 304 SS screw-on padlockable hasp for latch bar G-010,McMaster 1304A42,"3¼″ Style E, No. 8 screws",1,"304 stainless steel, dull",BUY,1304A42,https://www.mcmaster.com/1304A42/,OPTIONAL,S
+H-005,"Exterior primer + owner gray enamel, 2 finish coats (ease, seal, PT dry first)","exterior grade — paint store, not McMaster",kit,1,coating,BUY,,,REQUIRED,A
+H-006,24V IP67 LED tape kit in cap soffit dado (driver in P3 planter),McMaster tape-light family 8836N,16′ tape + 96 W wet-location driver,1,LED + wood cover slat,BUY,8836N52 + 8836N24,https://www.mcmaster.com/products/tape-lights/,REQUIRED,S
+H-007,"Pea gravel / lava in F-005 troughs — 4″ drainage layer, in-box only",landscape stone — not McMaster,see ballast.stone_cuft,3.67 cu ft,stone,BUY,,,OPTIONAL,A

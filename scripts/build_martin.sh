@@ -37,4 +37,7 @@ python3 "$ROOT/scripts/gen_martin_plans.py"
 echo "==> Build manual (LEGO-style steps, from kernel)"
 python3 "$ROOT/scripts/gen_martin_manual.py"
 
+echo "==> WOODWRIGHT PLANFORGE guidebook + McMaster schedule"
+python3 "$ROOT/scripts/gen_martin_planforge.py"
+
 echo "Done."

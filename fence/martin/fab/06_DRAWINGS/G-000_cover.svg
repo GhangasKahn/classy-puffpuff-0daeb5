@@ -43,6 +43,7 @@
 <text x='40.0' y='762.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>S-605    Board nesting / yield</text>
 <text x='40.0' y='780.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QA-701   Inspection plan</text>
 <text x='40.0' y='798.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>L-801    Part labels</text>
+<text x='40.0' y='816.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>WPF-G001  WOODWRIGHT PLANFORGE guidebook (G/A/J/E/F/S/Q + McMaster)</text>
 <text x='900.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>UNRESOLVED (TBM)</text>
 <text x='900.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-01  Outrigger packing only if garden sill leaves the slab (default 0 — photos show driveway run)  [VERIFIED/TBM]</text>
 <text x='900.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>U-02  Latch: default B (mortise in L-001). House wall strike is opt-in, no epoxy.  [ASSUMED]</text>

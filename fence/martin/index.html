@@ -135,6 +135,7 @@ body::before{
     <a class="brand" href="#top"><i aria-hidden="true"></i> Martin</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="app/">Build app</a>
+      <a href="planforge/">Planforge</a>
       <a href="fab/">Fab</a>
       <a href="#brief">Brief</a>
       <a href="#system">System</a>
@@ -157,6 +158,7 @@ body::before{
       <p class="lead hero-copy reveal">A freestanding Wright light-screen across the driveway — Darwin Martin Tree of Life, cantilevered eave, Japanese joinery, live planters as ballast, a gate flush to the house — built to lift out for Buffalo winter. If you don’t build it, it never exists.</p>
       <div class="cta-row reveal">
         <a class="btn" href="app/">Launch build app <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="planforge/">Master guidebook</a>
         <a class="btn ghost" href="manual/">Build manual</a>
         <a class="btn ghost" href="fab/">Fabrication package</a>
         <a class="btn ghost" href="#plans">Blueprints</a>
@@ -276,7 +278,7 @@ body::before{
           <tr class="total"><td>Timber net / buy</td><td>kernel nest · 15% waste</td><td></td><td>see M-6</td></tr>
           <tr><td>Planters</td><td>live soil + optional in-box stone</td><td>2 troughs</td><td>~1522 lb planning mass</td></tr>
           <tr><td>Rubber pads</td><td>4″ furniture pads</td><td>8</td><td>under driveway sill</td></tr>
-          <tr><td>Lighting</td><td>12V IP65 tape + driver</td><td>1</td><td>cap soffit; driver in P3 planter</td></tr>
+          <tr><td>Lighting</td><td>McMaster 8836N52 24V IP67 tape + 8836N24 driver</td><td>1 kit</td><td>cap soffit; driver in P3 planter</td></tr>
           <tr><td>Paint</td><td>Ease, seal, PT dry, prime, gray ×2</td><td>—</td><td>extra coat in planter interiors</td></tr>
         </tbody>
       </table>
@@ -293,7 +295,7 @@ body::before{
       <div class="phases">
         <div class="phase reveal"><div class="when">Phase 1</div><div><h3>Site — no digging</h3><p>Measure the 143″ opening on the driveway, house siding to existing fence. Place rubber pads. Do not excavate. Do not pour. Gate goes against the house.</p></div></div>
         <div class="phase reveal"><div class="when">Phase 2</div><div><h3>Timber ladder</h3><p>Half-lap two 4×6 dodai sills to four cross-ties. Peg. Sit on the slab. Build two garden-side planters for the privacy bays — none at the gate. Posts tenon 3.50″ into the ties.</p></div></div>
-        <div class="phase reveal"><div class="when">Phase 3</div><div><h3>Light-screen</h3><p>Through-nuki water table + two belts. Mill Tree of Life and nested-rect cassettes. Roman-brick pier wrap. 2×12 eave with kama-tsugi over P2, fascia, soffit dado for IP65 tape.</p></div></div>
+        <div class="phase reveal"><div class="when">Phase 3</div><div><h3>Light-screen</h3><p>Through-nuki water table + two belts. Mill Tree of Life and nested-rect cassettes. Roman-brick pier wrap. 2×12 eave with kama-tsugi over P2, fascia, soffit dado for IP67 tape.</p></div></div>
         <div class="phase reveal"><div class="when">Phase 4</div><div><h3>Gate &amp; latch</h3><p>Tree of Life portal — matching lights, not a Z-brace on the garden face. Oak pivots at P1 (weight into the sill). Sliding oak latch into P0. Confirm swing. Do not epoxy into the house.</p></div></div>
         <div class="phase reveal"><div class="when">Phase 5</div><div><h3>Paint &amp; plant</h3><p>Ease 1/16″, end-grain sealer, PT dry then prime, two owner-gray coats, extra on planter interiors. Mask locking faces. Drop posts, re-insert bands, hang gate, plant troughs, light the cap.</p>
           <ul>
@@ -309,7 +311,9 @@ body::before{
 # or stepwise:
 freecadcmd fence/martin/cad/martin_fence.py
 python3 scripts/export_martin_fab.py
-python3 scripts/gen_martin_plans.py</pre>
+python3 scripts/gen_martin_plans.py
+python3 scripts/gen_martin_manual.py
+python3 scripts/gen_martin_planforge.py</pre>
       </div>
       <p class="note">Planning design for DIY construction — not a stamped PE document. Confirm Buffalo Green Code fence height / front-yard rules. This build does not excavate. Upload site photos (drop-off, gray swatch) and we will lock final packing height.</p>
     </div>

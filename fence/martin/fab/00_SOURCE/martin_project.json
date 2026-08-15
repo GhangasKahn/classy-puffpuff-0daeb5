@@ -8,8 +8,8 @@
     "MATERIAL_SYSTEM": "dimensional lumber + live planters (optional drainage stone in boxes only)",
     "TOLERANCE_CLASS": "T1 general woodworking; T2 nuki / hozo / drawbore / muntin cassettes",
     "AUTHOR": "MARTIN fabrication model",
-    "MODEL_VERSION": "6.0.0",
-    "DATE": "2026-08-14",
+    "MODEL_VERSION": "6.1.0",
+    "DATE": "2026-08-15",
     "CAD": [
       "FreeCAD 1.1",
       "OpenSCAD"
@@ -23,7 +23,7 @@
     "METADATA_QUALITY": "GOOD \u2014 Fabrication properties on FreeCAD; JSON/CSV registry",
     "ASSEMBLY_STRUCTURE": "GOOD \u2014 A000 / A001 ladder+planters / A010 / A020 / A030",
     "JOINERY_STRUCTURE": "GOOD \u2014 joint register with fit class; nuki vs cassette groove rule",
-    "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA generated from kernel; elevation paints motifs",
+    "DRAWING_READINESS": "GOOD \u2014 G/GA/EX/P/J/T/S/QA + Planforge G/A/J/E/F/S/Q + LEGO manual; elevation paints motifs",
     "BOM_READINESS": "GOOD \u2014 BOM + nest from parts; planter mass from wind calc",
     "CUT_LIST_READINESS": "GOOD \u2014 rough, finished, nest CSV",
     "EXPORT_READINESS": "GOOD \u2014 FCStd/STEP/STL/JSON/CSV/SVG/DXF",
@@ -423,10 +423,10 @@
       "note": "planning factor of safety on overturning"
     },
     "furniture_pad_t": {
-      "value_in": 0.5,
-      "mm": 12.7,
-      "src": "ASSUMED",
-      "note": "wood or rubber pads under driveway sill \u2014 protect pavement"
+      "value_in": 0.75,
+      "mm": 19.05,
+      "src": "SOURCED",
+      "note": "McMaster 60015K58 4\u00d74\u00d7\u00be\u2033 segmented rubber pad [S]"
     },
     "brace_z": {
       "value_in": 18.0,
@@ -437,8 +437,8 @@
     "light_dado_w": {
       "value_in": 0.5,
       "mm": 12.7,
-      "src": "ASSUMED",
-      "note": "cap soffit channel for 12V IP65 tape"
+      "src": "SOURCED",
+      "note": "cap soffit channel for McMaster 8836N52 24V IP67 tape (\u00bd\u2033 / 13 mm wide)"
     },
     "light_dado_d": {
       "value_in": 0.375,
@@ -4073,11 +4073,11 @@
       "ASSEMBLY": "A-001 BASE",
       "QUANTITY": 8,
       "MATERIAL": "rubber / composite",
-      "PURCHASE": "4\u2033 furniture / anti-vibration pads",
-      "ROUGH_THICKNESS": 0.5,
+      "PURCHASE": "McMaster 60015K58 \u2014 4\u2033 \u00d7 4\u2033 \u00d7 \u00be\u2033 segmented rubber pad",
+      "ROUGH_THICKNESS": 0.75,
       "ROUGH_WIDTH": 4.0,
       "ROUGH_LENGTH": 4.0,
-      "FINISHED_THICKNESS": 0.5,
+      "FINISHED_THICKNESS": 0.75,
       "FINISHED_WIDTH": 4.0,
       "FINISHED_LENGTH": 4.0
     },
@@ -4205,18 +4205,18 @@
       "REVISION": "F",
       "PROCESS": "",
       "JOINERY": "",
-      "NOTES": "Sits in C-001 soffit dado. Driver in a dry niche of the P3 planter \u2014 not at the house. Allowed metal: lighting only.",
+      "NOTES": "Sits in C-001 soffit dado. Driver in a dry niche of the P3 planter \u2014 not at the house. Allowed metal: lighting only. 120 V feed is electrician work.",
       "HANDED": "IDENTICAL",
       "FIT": "",
       "TOLERANCE_CLASS": "T1",
       "MOVEMENT": "FIXED",
       "PART_ID": "H-006",
-      "PART_NAME": "12V IP65 LED tape + driver (cap soffit)",
+      "PART_NAME": "24V IP67 LED tape + driver (cap soffit)",
       "PART_CATEGORY": "H",
       "ASSEMBLY": "A-040 FINISH",
       "QUANTITY": 1,
       "MATERIAL": "low-voltage LED",
-      "PURCHASE": "outdoor tape 16\u2032 + 60W driver + wood cover slat",
+      "PURCHASE": "McMaster 8836N52 16\u2032 IP67 tape + 8836N24 96W driver + wood cover slat",
       "ROUGH_THICKNESS": 0,
       "ROUGH_WIDTH": 0,
       "ROUGH_LENGTH": 0,
@@ -4762,68 +4762,440 @@
   "hardware": [
     {
       "HARDWARE_ID": "H-001",
-      "DESCRIPTION": "Rubber / composite furniture pad, 4\u2033 sq \u00d7 \u00bd\u2033, under driveway sill",
-      "STANDARD": "furniture / anti-vibration",
-      "SIZE": "4\u2033 \u00d7 4\u2033 \u00d7 0.50\u2033",
+      "DESCRIPTION": "Segmented rubber vibration-damping pad under driveway sill",
+      "STANDARD": "McMaster 60015K58",
+      "SIZE": "4\u2033 \u00d7 4\u2033 \u00d7 0.75\u2033",
       "QTY": 8,
-      "MATERIAL": "rubber",
-      "MAKE_OR_BUY": "BUY"
+      "MATERIAL": "rubber, Durometer 50A",
+      "MAKE_OR_BUY": "BUY",
+      "MCMASTER_PN": "60015K58",
+      "MCMASTER_URL": "https://www.mcmaster.com/60015K58/",
+      "ROLE": "REQUIRED",
+      "EVIDENCE": "S"
     },
     {
       "HARDWARE_ID": "H-002",
       "DESCRIPTION": "Optional oak latch strike block \u2014 Latch B (mortise in L-001) is default; no epoxy into concrete",
-      "STANDARD": "site",
+      "STANDARD": "site MAKE",
       "SIZE": "1.50\u2033 \u00d7 3.50\u2033 \u00d7 6.00\u2033",
       "QTY": 1,
       "MATERIAL": "white oak",
-      "MAKE_OR_BUY": "MAKE"
+      "MAKE_OR_BUY": "MAKE",
+      "MCMASTER_PN": "",
+      "MCMASTER_URL": "",
+      "ROLE": "OPTIONAL",
+      "EVIDENCE": "A"
     },
     {
       "HARDWARE_ID": "H-003",
-      "DESCRIPTION": "Optional stainless lift-off pintle hinge set, 2 leaves",
-      "STANDARD": "manufacturer",
+      "DESCRIPTION": "Optional stainless lift-off pintle set \u2014 BACKUP only. Primary hinge is mill oak W-003.",
+      "STANDARD": "manufacturer \u2014 no McMaster pintle selected",
       "SIZE": "to suit 1.50\u2033 gate + 3.50\u2033 post",
       "QTY": 1,
       "MATERIAL": "stainless steel",
-      "MAKE_OR_BUY": "BUY"
+      "MAKE_OR_BUY": "BUY",
+      "MCMASTER_PN": "",
+      "MCMASTER_URL": "",
+      "ROLE": "OPTIONAL",
+      "EVIDENCE": "A"
     },
     {
       "HARDWARE_ID": "H-004",
-      "DESCRIPTION": "Optional keyed padlock hasp for latch bar",
-      "STANDARD": "manufacturer",
-      "SIZE": "to suit G-010",
+      "DESCRIPTION": "Optional 304 SS screw-on padlockable hasp for latch bar G-010",
+      "STANDARD": "McMaster 1304A42",
+      "SIZE": "3\u00bc\u2033 Style E, No. 8 screws",
       "QTY": 1,
-      "MATERIAL": "stainless or galvanized",
-      "MAKE_OR_BUY": "BUY"
+      "MATERIAL": "304 stainless steel, dull",
+      "MAKE_OR_BUY": "BUY",
+      "MCMASTER_PN": "1304A42",
+      "MCMASTER_URL": "https://www.mcmaster.com/1304A42/",
+      "ROLE": "OPTIONAL",
+      "EVIDENCE": "S"
     },
     {
       "HARDWARE_ID": "H-005",
       "DESCRIPTION": "Exterior primer + owner gray enamel, 2 finish coats (ease, seal, PT dry first)",
-      "STANDARD": "exterior grade",
+      "STANDARD": "exterior grade \u2014 paint store, not McMaster",
       "SIZE": "kit",
       "QTY": 1,
       "MATERIAL": "coating",
-      "MAKE_OR_BUY": "BUY"
+      "MAKE_OR_BUY": "BUY",
+      "MCMASTER_PN": "",
+      "MCMASTER_URL": "",
+      "ROLE": "REQUIRED",
+      "EVIDENCE": "A"
     },
     {
       "HARDWARE_ID": "H-006",
-      "DESCRIPTION": "12V IP65 LED tape + driver in cap soffit dado",
-      "STANDARD": "low-voltage outdoor",
-      "SIZE": "16\u2032 tape + 60W driver",
+      "DESCRIPTION": "24V IP67 LED tape kit in cap soffit dado (driver in P3 planter)",
+      "STANDARD": "McMaster tape-light family 8836N",
+      "SIZE": "16\u2032 tape + 96 W wet-location driver",
       "QTY": 1,
       "MATERIAL": "LED + wood cover slat",
-      "MAKE_OR_BUY": "BUY"
+      "MAKE_OR_BUY": "BUY",
+      "MCMASTER_PN": "8836N52 + 8836N24",
+      "MCMASTER_URL": "https://www.mcmaster.com/products/tape-lights/",
+      "ROLE": "REQUIRED",
+      "EVIDENCE": "S"
     },
     {
       "HARDWARE_ID": "H-007",
       "DESCRIPTION": "Pea gravel / lava in F-005 troughs \u2014 4\u2033 drainage layer, in-box only",
-      "STANDARD": "landscape stone",
+      "STANDARD": "landscape stone \u2014 not McMaster",
       "SIZE": "see ballast.stone_cuft",
       "QTY": "3.67 cu ft",
       "MATERIAL": "stone",
-      "MAKE_OR_BUY": "BUY"
+      "MAKE_OR_BUY": "BUY",
+      "MCMASTER_PN": "",
+      "MCMASTER_URL": "",
+      "ROLE": "OPTIONAL",
+      "EVIDENCE": "A"
     }
   ],
+  "mcmaster": [
+    {
+      "LINE": "MC-001",
+      "HARDWARE_ID": "H-001",
+      "ROLE": "REQUIRED",
+      "PN": "60015K58",
+      "URL": "https://www.mcmaster.com/60015K58/",
+      "DESCRIPTION": "Vibration-damping pad, 4\u2033 \u00d7 4\u2033 \u00d7 \u00be\u2033, segmented, Durometer 50A, black",
+      "QTY": 8,
+      "UNIT": "each",
+      "WHERE": "Under F-001 driveway sill \u2014 protect pavement, no fasteners into slab",
+      "FAMILY": "https://www.mcmaster.com/products/vibration-damping-pads/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "Same 4\u2033 square rubber pad \u2265 \u00bd\u2033 thick, outdoor-capable, no metal studs"
+    },
+    {
+      "LINE": "MC-002",
+      "HARDWARE_ID": "W-003",
+      "ROLE": "REQUIRED",
+      "PN": "96825K84",
+      "URL": "https://www.mcmaster.com/96825K84/",
+      "DESCRIPTION": "Red oak rod, \u23001\u00bc\u2033 \u00d7 36\u2033, dia. tol. \u00b10.010\u2033 \u2014 mill two oak pivots",
+      "QTY": 1,
+      "UNIT": "each",
+      "WHERE": "W-003: bottom socket in sill at P1, top in C-001 soffit. Cut two pins from this rod.",
+      "FAMILY": "https://www.mcmaster.com/products/wood-dowel-rods/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "Mill from white-oak 5/4 if rod stock is out; keep \u23001.25\u2033 locational fit"
+    },
+    {
+      "LINE": "MC-003",
+      "HARDWARE_ID": "W-002",
+      "ROLE": "REQUIRED",
+      "PN": "96825K75",
+      "URL": "https://www.mcmaster.com/96825K75/",
+      "DESCRIPTION": "Red oak rod, \u2300\u215c\u2033 \u00d7 36\u2033 \u2014 drawbore pegs (prefer riven if available)",
+      "QTY": 1,
+      "UNIT": "each",
+      "WHERE": "W-002 pegs for gate hozo + kama-tsugi. Never glue locking faces.",
+      "FAMILY": "https://www.mcmaster.com/products/wood-dowel-rods/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "Riven oak \u215c\u2033 pegs from 1\u00d74 oak on the lumber buy"
+    },
+    {
+      "LINE": "MC-004",
+      "HARDWARE_ID": "H-006A",
+      "ROLE": "REQUIRED",
+      "PN": "8836N52",
+      "URL": "https://www.mcmaster.com/8836N52/",
+      "DESCRIPTION": "IP67 wet-location LED tape, 16 ft, warm 2700 K, 24 V DC, 480 lm/ft, \u00bd\u2033 wide",
+      "QTY": 1,
+      "UNIT": "each",
+      "WHERE": "C-001 soffit dado, garden edge. Cut only at marked 1\u2033 intervals. Cover with wood slat.",
+      "FAMILY": "https://www.mcmaster.com/products/tape-lights/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "Same family 8836N55 (3000 K) or 8836N62 (4000 K) 16 ft IP67"
+    },
+    {
+      "LINE": "MC-005",
+      "HARDWARE_ID": "H-006B",
+      "ROLE": "REQUIRED",
+      "PN": "8836N24",
+      "URL": "https://www.mcmaster.com/8836N24/",
+      "DESCRIPTION": "24 V DC wet-location driver, 96 W, for 11\u201316 ft of 8836N tape, IP67 enclosure",
+      "QTY": 1,
+      "UNIT": "each",
+      "WHERE": "Dry niche in P3 planter F-005 \u2014 never at the house. Qualified electrician for 120 V feed.",
+      "FAMILY": "https://www.mcmaster.com/products/tape-lights/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "8836N25 (60 W) only if tape is shortened under 10 ft"
+    },
+    {
+      "LINE": "MC-006",
+      "HARDWARE_ID": "H-006C",
+      "ROLE": "REQUIRED",
+      "PN": "8836N75",
+      "URL": "https://www.mcmaster.com/8836N75/",
+      "DESCRIPTION": "Tape-to-wire connector, 6\u2033 leads, for fixed white 8836N tape (not wet-rated \u2014 keep inside dado)",
+      "QTY": 2,
+      "UNIT": "each",
+      "WHERE": "Soffit dado, under wood cover. Do not expose to rain.",
+      "FAMILY": "https://www.mcmaster.com/products/tape-lights/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "Solder + adhesive-lined heat-shrink inside the dado; still cover with wood"
+    },
+    {
+      "LINE": "MC-007",
+      "HARDWARE_ID": "H-006D",
+      "ROLE": "OPTIONAL",
+      "PN": "8836N17",
+      "URL": "https://www.mcmaster.com/8836N17/",
+      "DESCRIPTION": "Low aluminum tape channel, 6.6 ft, frosted lens \u2014 lighting accessory, not structure",
+      "QTY": 2,
+      "UNIT": "each",
+      "WHERE": "Optional liner in C-001 soffit dado if the wood cover slat is omitted",
+      "FAMILY": "https://www.mcmaster.com/products/tape-lights/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "Skip; default is a wood cover slat (allowed metal is lighting only)"
+    },
+    {
+      "LINE": "MC-008",
+      "HARDWARE_ID": "H-004",
+      "ROLE": "OPTIONAL",
+      "PN": "1304A42",
+      "URL": "https://www.mcmaster.com/1304A42/",
+      "DESCRIPTION": "304 SS dull screw-on padlockable hasp, Style E, 3\u00bc\u2033, No. 8 fasteners",
+      "QTY": 1,
+      "UNIT": "each",
+      "WHERE": "Optional lock on G-010. Fasteners into oak latch parts only \u2014 not into nuki/posts as structure.",
+      "FAMILY": "https://www.mcmaster.com/products/straight-bar-hasps/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "1304A28 (6\u2033 Style D) if a longer throw is needed"
+    },
+    {
+      "LINE": "MC-009",
+      "HARDWARE_ID": "W-002-ALT",
+      "ROLE": "OPTIONAL",
+      "PN": "96825K24",
+      "URL": "https://www.mcmaster.com/96825K24/",
+      "DESCRIPTION": "Red oak rod, \u23001\u00bc\u2033 \u00d7 48\u2033 \u2014 longer pivot blank if 36\u2033 rod is short after waste",
+      "QTY": 1,
+      "UNIT": "each",
+      "WHERE": "Buy instead of MC-002 if shop wants extra length for test coupons",
+      "FAMILY": "https://www.mcmaster.com/products/wood-dowel-rods/",
+      "EVIDENCE": "S",
+      "SUBSTITUTE": "MC-002 96825K84"
+    }
+  ],
+  "requirements": [
+    {
+      "ID": "FUN-001",
+      "PRI": "MUST",
+      "STATEMENT": "Freestanding 143\u2033 run sits on the driveway slab; 100% dog containment",
+      "VERIFY": "QC-08 aperture + QC-15 ballast + gate bottom 0.375\u2033",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "FUN-002",
+      "PRI": "MUST",
+      "STATEMENT": "Gate flush to the house at P0; no planter at the gate",
+      "VERIFY": "layout posts[0] + F-005 only P1\u2013P2 / P2\u2013P3",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "FUN-003",
+      "PRI": "MUST",
+      "STATEMENT": "Winter knock-down without buried hardware",
+      "VERIFY": "AS-12 rehearsal; never glue kusabi",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "ENV-001",
+      "PRI": "MUST",
+      "STATEMENT": "Buffalo 4-season: paint weather system, PT splash, end-grain sealer",
+      "VERIFY": "H-005 schedule + K-001 PT",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "DIM-001",
+      "PRI": "MUST",
+      "STATEMENT": "Envelope 143\u2033 L \u00d7 65\u2033 H; primary units inch; datums x=0 latch face, z=0 sill top",
+      "VERIFY": "TBM overall_length on driveway",
+      "STATUS": "OPEN",
+      "EVIDENCE": "G/TBM"
+    },
+    {
+      "ID": "LOAD-001",
+      "PRI": "MUST",
+      "STATEMENT": "Planning wind FS 1.5 via live planters; not PE-stamped",
+      "VERIFY": "ballast.ratio \u2265 1.0 after planting",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "D"
+    },
+    {
+      "ID": "MAT-001",
+      "PRI": "MUST",
+      "STATEMENT": "Wood + lighting + a gate latch. No nails/screws in timber structure.",
+      "VERIFY": "BOM MAKE vs BUY; McMaster limited to pads/light/optional hasp/oak rod",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "JNT-001",
+      "PRI": "MUST",
+      "STATEMENT": "Through-nuki + kusabi on K-001, R-001, R-002 only; cassettes groove in",
+      "VERIFY": "J-401 + three mortises per post",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "D"
+    },
+    {
+      "ID": "JNT-002",
+      "PRI": "MUST",
+      "STATEMENT": "Oak pivots \u23001.25\u2033 at P1 (sill + soffit); Latch B into P0",
+      "VERIFY": "J-404; W-003 from 96825K84",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "AESTH-001",
+      "PRI": "MUST",
+      "STATEMENT": "Darwin Martin Tree of Life light-screen \u2014 eave, belts, piers, patterned cassettes. Not a ranch fence.",
+      "VERIFY": "GA-110 motifs; Q-002 three trees; no Z-brace on garden face",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "AESTH-002",
+      "PRI": "SHOULD",
+      "STATEMENT": "\u03c6 sizes cassette pair 8.085 / 13.081; do not rip 2\u00d710 to force \u03c6",
+      "VERIFY": "layout light_minor/major; stock 9.25\u2033 belts",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "D"
+    },
+    {
+      "ID": "SAFE-001",
+      "PRI": "MUST",
+      "STATEMENT": "Risk R2 outdoor fence. Release FABRICATION-READY WITH CONDITIONS. Not a PE stamp.",
+      "VERIFY": "G-001 banner; Buffalo Green Code TBM",
+      "STATUS": "OPEN",
+      "EVIDENCE": "P"
+    },
+    {
+      "ID": "DOC-001",
+      "PRI": "MUST",
+      "STATEMENT": "WOODWRIGHT PLANFORGE guidebook + LEGO manual + fab drawings + McMaster schedule",
+      "VERIFY": "/fence/martin/planforge/ + /manual/ + /fab/",
+      "STATUS": "PROPOSED",
+      "EVIDENCE": "G"
+    },
+    {
+      "ID": "EXCL-001",
+      "PRI": "EXCLUDED",
+      "STATEMENT": "Post holes, cement, stone/gravel pads, planter at P0, structural screws in timber, Z-brace garden face",
+      "VERIFY": "BOM contains none of these",
+      "STATUS": "VERIFIED",
+      "EVIDENCE": "G"
+    }
+  ],
+  "evidence": [
+    {
+      "ID": "EV-001",
+      "DESC": "Owner envelope 143\u2033 \u00d7 65\u2033",
+      "CLASS": "G",
+      "RELIABILITY": "high pending TBM",
+      "VERIFY": "remeasure driveway house-siding to existing fence"
+    },
+    {
+      "ID": "EV-002",
+      "DESC": "Photos: run crosses driveway; gate at house",
+      "CLASS": "G",
+      "RELIABILITY": "high",
+      "VERIFY": "site walk"
+    },
+    {
+      "ID": "EV-003",
+      "DESC": "Darwin Martin House Tree of Life as aesthetic thesis (owner visited)",
+      "CLASS": "G",
+      "RELIABILITY": "intent",
+      "VERIFY": "GA-110 vs ranch-slat anti-pattern"
+    },
+    {
+      "ID": "EV-004",
+      "DESC": "McMaster 60015K58 pad geometry",
+      "CLASS": "S",
+      "RELIABILITY": "catalog 2026-08-15",
+      "VERIFY": "open https://www.mcmaster.com/60015K58/ before order"
+    },
+    {
+      "ID": "EV-005",
+      "DESC": "McMaster 8836N52/8836N24 tape + driver (24 V IP67)",
+      "CLASS": "S",
+      "RELIABILITY": "catalog 2026-08-15",
+      "VERIFY": "open product pages; electrician for 120 V"
+    },
+    {
+      "ID": "EV-006",
+      "DESC": "McMaster 96825K84 / 96825K75 oak rods",
+      "CLASS": "S",
+      "RELIABILITY": "catalog 2026-08-15",
+      "VERIFY": "measure rod OD before boring sockets"
+    },
+    {
+      "ID": "EV-007",
+      "DESC": "Wind ballast planning FS 1.5",
+      "CLASS": "D",
+      "RELIABILITY": "planning only",
+      "VERIFY": "licensed PE if required by Buffalo; QC-15 after planting"
+    },
+    {
+      "ID": "EV-008",
+      "DESC": "Buffalo Green Code fence height / front yard",
+      "CLASS": "P",
+      "RELIABILITY": "unverified",
+      "VERIFY": "city before build; 65\u2033 designed under 6\u2032"
+    },
+    {
+      "ID": "EV-009",
+      "DESC": "Owner gray hex",
+      "CLASS": "TBM",
+      "RELIABILITY": "open",
+      "VERIFY": "swatch before paint"
+    },
+    {
+      "ID": "EV-010",
+      "DESC": "USDA FPL Wood Handbook moisture/movement (general)",
+      "CLASS": "S",
+      "RELIABILITY": "handbook",
+      "VERIFY": "acclimate stock; do not glue cross-grain nuki"
+    }
+  ],
+  "planforge": {
+    "PROTOCOL": "WOODWRIGHT PLANFORGE v1.0",
+    "PROJECT_CODE": "WPF-MARTIN-143-F",
+    "RELEASE_STATE": "FABRICATION-READY WITH CONDITIONS",
+    "RISK_CLASS": "R2",
+    "RISK_TRIGGERS": [
+      "outdoor installation",
+      "wind on ~64 sf face",
+      "driveway occupancy / vehicle adjacency",
+      "pet containment",
+      "seasonal knock-down"
+    ],
+    "LAYOUT_SYSTEM": "Face/edge datums controlling: latch-side outer face x=0, sill top z=0, post centerline y=0. Post centerlines P0\u2013P3 are DERIVED stations, not independent datums.",
+    "UNITS": "inch controlling; millimetre at CAD export only",
+    "PROFESSIONAL_REVIEW": "Licensed NY design professional if the AHJ treats this as a fence requiring permit engineering. This package is not PE-stamped.",
+    "NOT_FOR": [
+      "PE stamp / code approval",
+      "life-safety structure",
+      "buried foundation",
+      "licensed reproduction of Wright art glass"
+    ],
+    "CONDITIONS": [
+      "TBM overall_length 143\u2033 on the driveway",
+      "Buffalo Green Code height / front-yard confirmation",
+      "Plant F-005 before wind season (QC-15 ballast ratio \u2265 1)",
+      "120 V feed to H-006B by a qualified electrician",
+      "3D-print T-501 kusabi + T-502 tenon + pivot socket before milling oak/4\u00d76",
+      "Owner gray swatch before finish coats"
+    ]
+  },
   "assemblies": {
     "A-000 MASTER": [
       "A-001 BASE",
@@ -5379,7 +5751,7 @@
     },
     {
       "QC": "QC-17",
-      "CHECK": "Cap soffit light dado + IP65 tape; driver not at house wall",
+      "CHECK": "Cap soffit light dado + IP67 24V tape (8836N52); driver 8836N24 in P3 planter, not at house wall",
       "CLASS": "T1",
       "TOL": "\u2014"
     }
@@ -6108,7 +6480,7 @@
     {
       "phase": "STOCK",
       "id": "AS-01",
-      "title": "Procure nested lumber + PT for kick/planters + oak + rubber pads + IP65 tape",
+      "title": "Procure nested lumber + PT + oak rods 96825K84/K75 + pads 60015K58 + IP67 tape 8836N52/24",
       "deps": [],
       "parts": "buy_counts"
     },
@@ -6325,6 +6697,11 @@
       "DWG": "L-801",
       "TITLE": "Part labels",
       "FILE": "L-801_labels.svg"
+    },
+    {
+      "DWG": "WPF-G001",
+      "TITLE": "WOODWRIGHT PLANFORGE guidebook (G/A/J/E/F/S/Q + McMaster)",
+      "FILE": "../planforge/index.html"
     }
   ],
   "unresolved": [
@@ -6423,6 +6800,11 @@
       "REV": "F",
       "DATE": "2026-08-14",
       "NOTE": "Tree of Life light-screen: cantilevered 2\u00d712 eave + fascia, projecting belts, Roman-brick piers, recessed muntin cassettes (nested-rects / three trees / nested-rects), solid 2\u00d712 water table, Tree of Life gate. Not a ranch fence."
+    },
+    {
+      "REV": "F.1",
+      "DATE": "2026-08-15",
+      "NOTE": "WOODWRIGHT PLANFORGE v1.0 guidebook; McMaster-Carr sourced buy list; CAD muntins from kernel motifs; 24V IP67 lighting SKUs."
     }
   ],
   "tolerance_classes": {

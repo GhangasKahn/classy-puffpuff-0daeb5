@@ -15,4 +15,4 @@ QC-13,Ladder sills sit on driveway; two planters garden-side of privacy bays onl
 QC-14,Gate vs cap clearance ≥ 0.50″; gate bottom ≤ 0.375″ (dog),T2,min 0.38 cap / max 0.50 bottom
 QC-15,Planters planted + optional in-box stone; air gap from posts; drainage slots,T1,—
 QC-16,"No concrete, no post holes, no gravel/stone PAD; stone only inside planters",T0,binary
-QC-17,Cap soffit light dado + IP65 tape; driver not at house wall,T1,—
+QC-17,"Cap soffit light dado + IP67 24V tape (8836N52); driver 8836N24 in P3 planter, not at house wall",T1,—

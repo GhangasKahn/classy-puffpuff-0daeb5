@@ -7,8 +7,10 @@ module A010_posts() {
     }
 }
 module A020_rails() {
+    // nuki belts + water table only — cassettes are FreeCAD muntins, not ranch slabs
     for (i=[0:len(slat_z0)-1])
-        translate([nuki_x0, -rail_t/2, slat_z0[i]]) R_slat(slat_h[i]);
+        if (slat_nuki[i])
+            translate([nuki_x0, -rail_t/2, slat_z0[i]]) R_slat(slat_h[i]);
 }
 module A001_base() {
     translate([-6*25.4, -base_spread_cl/2 - 3.5*25.4/2, -sill_h]) F_sill();

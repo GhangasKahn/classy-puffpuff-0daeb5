@@ -88,6 +88,16 @@
   status = 301
 
 [[redirects]]
+  from = "/martin/planforge"
+  to = "/fence/martin/planforge/"
+  status = 301
+
+[[redirects]]
+  from = "/planforge"
+  to = "/fence/martin/planforge/"
+  status = 301
+
+[[redirects]]
   from = "/stele"
   to = "/fence/stele/"
   status = 301

@@ -858,7 +858,7 @@ figcaption b{color:var(--sage-hi);margin-right:8px}
 <p class="sub">__NSTEPS__ steps · 6 bags · generated from the fabrication kernel. Print at 100% on A3 (~71% on Letter). Numbered parts callouts on every step; orange arrows are this step's move. No glue, no nails, no concrete.</p>
 </header>
 <nav>
-<a href="../">← Design</a><a href="../app/">Build app</a><a href="../fab/">Fab package</a>
+<a href="../">← Design</a><a href="../app/">Build app</a><a href="../planforge/">Planforge</a><a href="../fab/">Fab package</a>
 <a href="#p0">Cover</a><a href="#p1">Parts</a><a href="#p2">Bag 1</a><a href="#p6">Bag 2</a><a href="#p9">Bag 3</a><a href="#p17">Bag 4</a><a href="#p19">Bag 5</a><a href="#p23">Bag 6</a>
 </nav>
 <main>

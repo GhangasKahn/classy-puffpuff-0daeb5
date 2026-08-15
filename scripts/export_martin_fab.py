@@ -196,6 +196,7 @@ def write_scad(proj):
     p.append("rail_cls = [%s];\n" % ", ".join(f"{round(inch_mm(c), 2)}" for c in ly["rail_cls"]))
     p.append("slat_z0 = [%s];\n" % ", ".join(f"{round(inch_mm(s['z0']), 2)}" for s in ly["slats"]))
     p.append("slat_h = [%s];\n" % ", ".join(f"{round(inch_mm(s['h']), 2)}" for s in ly["slats"]))
+    p.append("slat_nuki = [%s];\n" % ", ".join("1" if s["nuki"] else "0" for s in ly["slats"]))
     write(os.path.join(SCAD, "parameters.scad"), "".join(p))
 
     write(
@@ -248,8 +249,10 @@ module A010_posts() {
     }
 }
 module A020_rails() {
+    // nuki belts + water table only — cassettes are FreeCAD muntins, not ranch slabs
     for (i=[0:len(slat_z0)-1])
-        translate([nuki_x0, -rail_t/2, slat_z0[i]]) R_slat(slat_h[i]);
+        if (slat_nuki[i])
+            translate([nuki_x0, -rail_t/2, slat_z0[i]]) R_slat(slat_h[i]);
 }
 module A001_base() {
     translate([-6*25.4, -base_spread_cl/2 - 3.5*25.4/2, -sill_h]) F_sill();
@@ -639,7 +642,10 @@ def schedules(proj):
         ["PART_ID", "PART_NAME", "QUANTITY", "FINISHED_THICKNESS", "FINISHED_WIDTH", "FINISHED_LENGTH", "JOINERY", "TOLERANCE_CLASS"],
     )
     csv_write(os.path.join(FAB, "07_BOM", "hardware.csv"), proj["hardware"],
-              ["HARDWARE_ID", "DESCRIPTION", "STANDARD", "SIZE", "QTY", "MATERIAL", "MAKE_OR_BUY"])
+              ["HARDWARE_ID", "DESCRIPTION", "STANDARD", "SIZE", "QTY", "MATERIAL", "MAKE_OR_BUY",
+               "MCMASTER_PN", "MCMASTER_URL", "ROLE", "EVIDENCE"])
+    csv_write(os.path.join(FAB, "07_BOM", "mcmaster.csv"), proj["mcmaster"],
+              ["LINE", "HARDWARE_ID", "ROLE", "PN", "URL", "DESCRIPTION", "QTY", "UNIT", "WHERE", "FAMILY", "EVIDENCE", "SUBSTITUTE"])
     csv_write(os.path.join(cut_dir, "nest.csv"), proj["nest"]["boards"],
               ["BOARD_ID", "PURCHASE", "LENGTH", "PARTS", "USED", "REMAINDER", "YIELD_PCT", "BF"])
     csv_write(os.path.join(jdir, "joints.csv"), proj["joints"],
@@ -737,15 +743,19 @@ def build_manual(proj):
     write(os.path.join(FAB, "11_BUILD_MANUAL", "BUILD_MANUAL.md"), "\n".join(lines) + "\n")
 
 
+def _drawing_row(d):
+    f = d.get("FILE", "")
+    if str(f).endswith(".html"):
+        return f"<tr><td><a href='{f}'>{d['DWG']}</a></td><td>{d['TITLE']}</td></tr>"
+    if str(f).endswith(".svg") and d["DWG"].startswith(("G", "GA", "EX", "P", "J", "S-601")):
+        return f"<tr><td><a href='06_DRAWINGS/{f}'>{d['DWG']}</a></td><td>{d['TITLE']}</td></tr>"
+    return f"<tr><td>{d['DWG']}</td><td>{d['TITLE']} — see CSV/JSON</td></tr>"
+
+
 def fab_index(proj):
     nest = proj["nest"]
     ly = proj["layout"]
-    cards = "".join(
-        f"<tr><td><a href='06_DRAWINGS/{d['FILE']}'>{d['DWG']}</a></td><td>{d['TITLE']}</td></tr>"
-        if d["FILE"].endswith(".svg") and d["DWG"].startswith(("G", "GA", "EX", "P", "J", "S-601"))
-        else f"<tr><td>{d['DWG']}</td><td>{d['TITLE']} — see CSV/JSON</td></tr>"
-        for d in proj["drawing_index"]
-    )
+    cards = "".join(_drawing_row(d) for d in proj["drawing_index"])
     html = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -759,7 +769,7 @@ h1{{font-size:42px;margin:8px 0 12px}}
 .grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:18px 0}}
 .grid a{{display:block;padding:12px;background:#fff;border:1px solid #c5c8c2;text-decoration:none;color:inherit}}
 </style></head><body>
-<p class="k">REV {PROJECT['REVISION']} · KERNEL 6.0 · INCHES</p>
+<p class="k">REV {PROJECT['REVISION']} · KERNEL {PROJECT['MODEL_VERSION']} · INCHES · PLANFORGE v1.0</p>
 <h1>MARTIN fabrication package</h1>
 <p>Single source of truth: <code>martin_kernel.py</code>. Geometry, BOM, cut lists, joinery, and drawings are generated — not hand-copied.</p>
 <p><b>bay_clear</b> {ly['bay_clear']}\" · <b>nuki_len</b> {ly['nuki_len']}\" · <b>post blank</b> {ly['post_blank_l']}\" · <b>gate_h</b> {ly['gate_h']}\" · nest <b>{nest['net_bf']} bf</b> net / <b>{nest['procurement_bf']} bf</b> buy · ballast ratio <b>{proj['ballast']['ratio']}</b></p>
@@ -771,6 +781,9 @@ h1{{font-size:42px;margin:8px 0 12px}}
 <a href="09_JOINERY/joints.csv">Joints</a>
 <a href="11_BUILD_MANUAL/BUILD_MANUAL.md">Build manual (text)</a>
 <a href="../manual/">Build manual (step-by-step)</a>
+<a href="../planforge/">WOODWRIGHT PLANFORGE guidebook</a>
+<a href="../planforge/MCMASTER_SCHEDULE.csv">McMaster-Carr schedule</a>
+<a href="07_BOM/mcmaster.csv">McMaster CSV (fab)</a>
 <a href="12_QA/QA-701_inspection.svg">QA-701</a>
 <a href="10_TEMPLATES/T-501_kusabi.svg">T-501 1:1</a>
 <a href="../app/">Build app</a>
