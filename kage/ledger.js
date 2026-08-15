@@ -313,6 +313,20 @@
     });
   }
 
+  function syncStill() {
+    var on = document.documentElement.classList.contains("still");
+    document.querySelectorAll("#still-btn, [data-still-mirror]").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.textContent = on ? "Motion off" : "Still the tray";
+    });
+  }
+
+  function toggleStill() {
+    document.documentElement.classList.toggle("still");
+    try { localStorage.setItem("kage-still", document.documentElement.classList.contains("still") ? "1" : "0"); } catch (err) {}
+    syncStill();
+  }
+
   function bind() {
     document.querySelectorAll(".mission").forEach(function (btn) {
       btn.addEventListener("click", function () { applyMission(btn.getAttribute("data-mission")); });
@@ -330,11 +344,9 @@
       $("drawer").classList.toggle("open", state.menu);
       $("menu-btn").setAttribute("aria-expanded", state.menu ? "true" : "false");
     });
-    $("still-btn").addEventListener("click", function () {
-      var on = document.documentElement.classList.toggle("still");
-      try { localStorage.setItem("kage-still", on ? "1" : "0"); } catch (err) {}
-      $("still-btn").setAttribute("aria-pressed", on ? "true" : "false");
-      $("still-btn").textContent = on ? "Motion off" : "Still the tray";
+    $("still-btn").addEventListener("click", toggleStill);
+    document.querySelectorAll("[data-still-mirror]").forEach(function (btn) {
+      btn.addEventListener("click", toggleStill);
     });
     document.querySelectorAll("#drawer a").forEach(function (a) {
       a.addEventListener("click", function () {
@@ -347,10 +359,9 @@
     try {
       if (localStorage.getItem("kage-still") === "1" || reduce) {
         document.documentElement.classList.add("still");
-        $("still-btn").setAttribute("aria-pressed", "true");
-        $("still-btn").textContent = "Motion off";
       }
     } catch (err) {}
+    syncStill();
   }
 
   function reveal() {

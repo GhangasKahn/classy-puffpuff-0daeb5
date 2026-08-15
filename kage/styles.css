@@ -60,7 +60,7 @@ body {
 }
 
 img { max-width: 100%; height: auto; display: block; }
-button, input, select, textarea { font: inherit; color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; border-radius: 0; }
 a { color: var(--indigo); }
 a:hover { color: var(--urushi); }
 
@@ -195,6 +195,7 @@ a:hover { color: var(--urushi); }
   border-color: var(--indigo);
 }
 .solid-btn:hover { background: var(--indigo-2); color: var(--elev); }
+.solid-btn:focus-visible { outline-color: var(--ink); }
 
 .ghost-btn {
   background: transparent;
@@ -217,12 +218,16 @@ a:hover { color: var(--urushi); }
   border-top: 1px solid var(--line);
   padding: 0.6rem var(--gutter) 1rem;
 }
-.drawer a {
+.drawer a,
+.drawer-still {
   display: block;
+  width: 100%;
+  text-align: left;
   padding: 0.7rem 0;
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid var(--line);
+  min-height: 44px;
 }
 
 /* ---- hero ---- */
@@ -452,8 +457,7 @@ a:hover { color: var(--urushi); }
 .mission small { color: var(--faint); }
 
 .scale {
-  border-top: 1px solid var(--line);
-  padding-top: 1rem;
+  padding-bottom: 0.4rem;
 }
 .scale-readout {
   display: flex;
@@ -724,6 +728,7 @@ html.still .has-js .rise.in {
 @media (max-width: 860px) {
   .nav { display: none; }
   .mast-actions .solid-btn { display: none; }
+  #still-btn { display: none; }
   .menu-btn { display: inline-flex; }
   .drawer.open { display: block; }
   .contradictions, .steps, .missions {

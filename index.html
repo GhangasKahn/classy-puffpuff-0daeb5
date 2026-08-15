@@ -56,6 +56,7 @@
       <a href="#limits">Limits</a>
       <a href="#ikejime">Ikejime</a>
       <a href="#write">Write the note</a>
+      <button class="text-btn drawer-still" type="button" data-still-mirror>Still the tray</button>
     </div>
   </header>
 
@@ -209,14 +210,6 @@
 
       <div class="ledger-shell rise" style="margin-top:1.6rem">
         <div>
-          <p class="eyebrow">Missions</p>
-          <div class="missions">
-            <button class="mission" type="button" data-mission="kumiko" aria-pressed="true"><b>Kumiko pocket</b><small>17.52 g target</small></button>
-            <button class="mission" type="button" data-mission="river" aria-pressed="false"><b>Backcountry river</b><small>24.06 g target</small></button>
-            <button class="mission" type="button" data-mission="trail" aria-pressed="false"><b>Trailcraft</b><small>27.20 g target</small></button>
-            <button class="mission" type="button" data-mission="niagara" aria-pressed="false"><b>Niagara salmon</b><small>30.66 g target</small></button>
-            <button class="mission" type="button" data-mission="studio" aria-pressed="false" style="grid-column:1/-1"><b>Complete studio</b><small>58.36 g target · every module</small></button>
-          </div>
           <div class="scale">
             <div class="scale-readout">
               <div class="grams"><span id="grams">17.52</span> <small>g</small></div>
@@ -230,10 +223,18 @@
             <p class="live" id="ledger-live" aria-live="polite">17.52 grams selected.</p>
             <p class="note" id="ledger-note">Shop-first. One marking geometry. No river kit.</p>
           </div>
+          <p class="eyebrow" style="margin-top:1.2rem">Missions</p>
+          <div class="missions">
+            <button class="mission" type="button" data-mission="kumiko" aria-pressed="true"><b>Kumiko pocket</b><small>17.52 g target</small></button>
+            <button class="mission" type="button" data-mission="river" aria-pressed="false"><b>Backcountry river</b><small>24.06 g target</small></button>
+            <button class="mission" type="button" data-mission="trail" aria-pressed="false"><b>Trailcraft</b><small>27.20 g target</small></button>
+            <button class="mission" type="button" data-mission="niagara" aria-pressed="false"><b>Niagara salmon</b><small>30.66 g target</small></button>
+            <button class="mission" type="button" data-mission="studio" aria-pressed="false" style="grid-column:1/-1"><b>Complete studio</b><small>58.36 g target · every module</small></button>
+          </div>
         </div>
         <div>
           <p class="eyebrow">Modules</p>
-          <p class="note">Uncheck anything the job does not need. Wires require the cassette. The chassis is not optional if a blade is going in the pack.</p>
+          <p class="note">Uncheck anything the job does not need. Spinal wires include their nested cassette share. The chassis is not optional if a blade is going in the pack.</p>
           <div class="modules" id="module-list"></div>
         </div>
       </div>
