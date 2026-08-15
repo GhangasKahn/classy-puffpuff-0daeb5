@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SHINOBI KAGE">
+  <rect width="64" height="64" fill="#f3ead8"/>
+  <path d="M8 44 L32 12 L56 44" fill="none" stroke="#1c1712" stroke-width="2.2"/>
+  <path d="M18 44 L32 22 L46 44" fill="none" stroke="#2c3a6b" stroke-width="1.4"/>
+  <path d="M12 48 H52" stroke="#8a2a1a" stroke-width="1"/>
+</svg>

@@ -15,6 +15,11 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+[[headers]]
+  for = "/kage/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # MARTIN build app PWA
 [[headers]]
   for = "/fence/martin/app/service-worker.js"
@@ -42,6 +47,16 @@
   from = "/app"
   to = "/app/"
   status = 301
+
+[[redirects]]
+  from = "/bedrock"
+  to = "/bedrock/"
+  status = 301
+
+[[redirects]]
+  from = "/kage"
+  to = "/"
+  status = 302
 
 # /aegis now serves the cinematic landing page (committed build in /aegis/),
 # whose CTAs funnel into the instrument app at /aegis-air-mvp/.
