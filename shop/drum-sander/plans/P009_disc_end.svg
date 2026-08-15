@@ -10,7 +10,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Baltic birch plywood  ·  5.125" × 5.125" × 0.75"</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 2  ·  bandsaw oversize, pack-bore, then true on the sled</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.2 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED</text>
 <circle cx='420.0' cy='520.0' r='179.4' fill='#5f8f62' stroke='#1a1a1a' stroke-width='2.0'/>
 <circle cx='420.0' cy='520.0' r='26.2' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
@@ -50,13 +50,13 @@
 <polygon points='1014.7,200.9 1012.0,227.0 1043.5,208.8 1046.2,182.7' fill='#436545'/>
 </g>
 <text x='1010.0' y='138.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric disc</text>
-<text x='80.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
-<text x='80.0' y='1000.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bandsaw ~0.125" over finish OD. Pack-bore the whole stack in</text>
-<text x='80.0' y='1016.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  P-015 (S-009).</text>
-<text x='80.0' y='1036.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• 1 mm relief every 4 MDF discs so the pack can take a deep true</text>
-<text x='80.0' y='1052.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  without burning.</text>
-<text x='80.0' y='1072.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ⅛″ piano-wire keys (H-018) keep discs from spinning on the</text>
-<text x='80.0' y='1088.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  shaft.</text>
-<text x='80.0' y='1108.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Birch ends. Static-balance these two. They take the flange</text>
-<text x='80.0' y='1124.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  load.</text>
+<text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bandsaw ~0.125" over finish OD. Pack-bore the whole stack in</text>
+<text x='80.0' y='964.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  P-015 (S-009).</text>
+<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• 1 mm relief every 4 MDF discs so the pack can take a deep true</text>
+<text x='80.0' y='1000.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  without burning.</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ⅛″ piano-wire keys (H-018) keep discs from spinning on the</text>
+<text x='80.0' y='1036.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  shaft.</text>
+<text x='80.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Birch ends. Static-balance these two. They take the flange</text>
+<text x='80.0' y='1072.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  load.</text>
 </svg>

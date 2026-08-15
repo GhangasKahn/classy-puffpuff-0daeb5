@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-01</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Buy, acclimate, and measure the plywood</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Know your real ply thickness before a single dado is cut.</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>STEP 1 / 14</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>01 Stock</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 1 of 14  ·  01 Stock</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<circle cx='44.0' cy='112.0' r='9.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='44.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#ffffff' text-anchor='middle' font-weight='600'>1</text>
+<circle cx='70.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='70.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>2</text>
+<circle cx='96.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='96.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>3</text>
+<circle cx='122.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='122.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>4</text>
+<circle cx='148.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='148.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>5</text>
+<circle cx='174.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='174.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>6</text>
+<circle cx='200.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='200.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>7</text>
+<circle cx='226.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='226.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>8</text>
+<circle cx='252.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='252.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>9</text>
+<circle cx='278.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='278.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>10</text>
+<circle cx='304.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='304.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>11</text>
+<circle cx='330.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='330.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>12</text>
+<circle cx='356.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='356.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>13</text>
+<circle cx='382.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='382.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>14</text>
+<text x='420.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>01 Stock</text>
+<rect x='36.0' y='150.0' width='820.0' height='560.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='446.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#3d4a38' text-anchor='middle' font-weight='600'>STOCK PREPARATION — NO ASSEMBLY YET</text>
+<text x='446.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='middle'>Measure and label. The machine starts at ST-03.</text>
+<text x='36.0' y='748.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>DO THIS</text>
+<circle cx='46.0' cy='769.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='773.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>1</text>
+<text x='68.0' y='774.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Stand the sheets on edge in the shop for at least 48 hours. Euro BB arrives at 18</text>
+<text x='68.0' y='792.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>mm, not ¾″.</text>
+<circle cx='46.0' cy='813.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='817.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>2</text>
+<text x='68.0' y='818.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Caliper the ply in six places. Record the number as ply_actual (model default</text>
+<text x='68.0' y='836.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>0.75″).</text>
+<circle cx='46.0' cy='857.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='861.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>3</text>
+<text x='68.0' y='862.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>If it is not 0.75″, edit ply_actual in cad/walter_ds16.py and regenerate every</text>
+<text x='68.0' y='880.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>sheet. Do not shave the 16.5″ inner span to make the old numbers work.</text>
+<rect x='900.0' y='150.0' width='720.0' height='30.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='912.0' y='171.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>PARTS TRAY — fetch these before you start</text>
+<rect x='900.0' y='180.0' width='720.0' height='37.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='912.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>—</text>
+<text x='992.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>No parts. This is a measure and plan step.</text>
+<text x='912.0' y='231.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>TOOLS: Calipers · Moisture meter (optional) · Flat floor</text>
+<text x='912.0' y='247.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d5a4c' text-anchor='start'>OPEN THESE SHEETS: D-10 · IDX</text>
+<rect x='900.0' y='269.0' width='720.0' height='30.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='912.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>BEFORE YOU MOVE ON   (QC-01)</text>
+<text x='912.0' y='321.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>Measured ply thickness recorded. Inner span stays 16.5″ (419</text>
+<text x='912.0' y='339.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>mm).</text>
+<text x='912.0' y='363.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>HOLD POINT: Nothing is cut yet. This is the cheapest place to</text>
+<text x='912.0' y='380.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d5a4c' text-anchor='start'>catch the 18 mm surprise.</text>
+<text x='912.0' y='403.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Still correctable after this step: Everything.</text>
+</svg>

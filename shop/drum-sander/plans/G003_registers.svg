@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>G-003</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Evidence, calculations, and revisions</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Audit trail</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>What is measured, derived, assumed, or still to verify</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<text x='36.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>EVIDENCE CLASSES USED IN THIS PACKAGE</text>
+<text x='36.0' y='184.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CLASS</text>
+<text x='186.0' y='184.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>MEANING</text>
+<text x='596.0' y='184.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>WHERE IT APPEARS</text>
+<line x1='36.0' y1='190.0' x2='956.0' y2='190.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='36.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>VERIFIED</text>
+<text x='186.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Stated design intent or a dimension fixed by the spec</text>
+<text x='596.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Capacity, drum OD, inner span</text>
+<text x='36.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
+<text x='186.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Computed from parameters by a shown equation</text>
+<text x='596.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>way_project, stretcher_length, drum_length</text>
+<text x='36.0' y='256.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>USER_MEASURE</text>
+<text x='186.0' y='256.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>You must measure it in your shop and regenerate</text>
+<text x='596.0' y='256.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ply_actual</text>
+<text x='36.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ASSUMED</text>
+<text x='186.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Placeholder until the real component is in hand</text>
+<text x='596.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>flange bolt square, nut block size</text>
+<text x='36.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ESTIMATED</text>
+<text x='186.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Sized from practice, trim on first fit</text>
+<text x='596.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hood blank, rib quantity</text>
+<text x='36.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>TEST-BASED</text>
+<text x='186.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Established by a measurement on the built machine</text>
+<text x='596.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>TIR, |A−B|, witness scatter</text>
+<text x='36.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PROFESSIONAL</text>
+<text x='186.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Requires a qualified person before use</text>
+<text x='596.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Motor circuit, switch, grounding</text>
+<text x='36.0' y='396.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>CALCULATION REGISTER</text>
+<text x='36.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>ID</text>
+<text x='96.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>QUESTION</text>
+<text x='516.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>SUBSTITUTION</text>
+<text x='1036.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>RESULT</text>
+<line x1='36.0' y1='426.0' x2='1636.0' y2='426.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='36.0' y='444.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>C-01</text>
+<text x='96.0' y='444.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Will the table fit between the ways?</text>
+<text x='516.0' y='444.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>clear 16.5" − table 16.00" = 0.5" total</text>
+<text x='1036.0' y='444.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.230" project + 0.020"/side — PASS</text>
+<text x='36.0' y='468.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>C-02</text>
+<text x='96.0' y='468.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum surface speed</text>
+<text x='516.0' y='468.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>π × 5/12 × 1035</text>
+<text x='1036.0' y='468.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1355 sfpm — in the sanding band</text>
+<text x='36.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>C-03</text>
+<text x='96.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Does the lift cover the thickness range?</text>
+<text x='516.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3" − 0.0625" = 2.9375" needed</text>
+<text x='1036.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3.25" travel available — PASS</text>
+<text x='36.0' y='516.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>C-04</text>
+<text x='96.0' y='516.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Fine adjustment resolution</text>
+<text x='516.0' y='516.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1 / 10 TPI</text>
+<text x='1036.0' y='516.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.1000"/turn — finer than the 0.003" spec</text>
+<text x='36.0' y='540.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>C-05</text>
+<text x='96.0' y='540.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Does the drum clear the side panels?</text>
+<text x='516.0' y='540.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>drum 15.75" in 16.5" span</text>
+<text x='1036.0' y='540.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.375" per end — PASS</text>
+<text x='36.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>C-06</text>
+<text x='96.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Is the housing shallow enough for the ply?</text>
+<text x='516.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2 × 0.25" + 0.25" vs 0.75"</text>
+<text x='1036.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS — validated on every regeneration</text>
+<text x='36.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>AUTOMATED CHECKS RUN ON EVERY REGENERATION</text>
+<text x='36.0' y='632.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Table narrower than the inner span, and way projection greater than zero.</text>
+<text x='36.0' y='649.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Way rebate does not cut through the side panel.</text>
+<text x='36.0' y='666.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Drum shorter than the inner span; drum length still the 21-disc pack.</text>
+<text x='36.0' y='683.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Lift travel covers the full thickness range.</text>
+<text x='36.0' y='700.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Every part and hardware ID named in a build step exists in the registry.</text>
+<text x='36.0' y='717.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Every fabricated part is used by at least one build step.</text>
+<text x='36.0' y='734.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>✓ Every QC gate referenced by a step exists in the inspection plan.</text>
+<text x='36.0' y='761.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ALL CHECKS PASS</text>
+<text x='980.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>REVISION HISTORY</text>
+<text x='980.0' y='632.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>A</text>
+<text x='1046.0' y='632.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Solid sliding table, no conveyor, adjustable idler,</text>
+<text x='1046.0' y='647.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>precision shaft</text>
+<text x='980.0' y='668.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>B</text>
+<text x='1046.0' y='668.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Dual-end lift, UHMW ways, hold-downs, floating bearing,</text>
+<text x='1046.0' y='683.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>paper-on A/B ±0.003″</text>
+<text x='980.0' y='704.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>B.1</text>
+<text x='1046.0' y='704.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Fabrication model: part/joint IDs, housed stretchers,</text>
+<text x='1046.0' y='719.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>way rebate so table fits, derived geometry, JSON/CSV</text>
+<text x='1046.0' y='734.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>SSOT</text>
+<text x='980.0' y='755.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>B.2</text>
+<text x='1046.0' y='755.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Individual Wandel-style part/assembly/hardware sheets;</text>
+<text x='1046.0' y='770.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>named hole patterns; idler axial pad (not YZ slots)</text>
+<text x='980.0' y='791.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>B.3</text>
+<text x='1046.0' y='791.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Master build guide book: G-001…G-004 design basis, E-101</text>
+<text x='1046.0' y='806.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>ballooned explosion, ST-01…ST-14 step sheets with parts</text>
+<text x='1046.0' y='821.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>trays, Q-101 commissioning</text>
+</svg>

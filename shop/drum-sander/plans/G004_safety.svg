@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>G-004</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Safety, risk, and what is not released</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>RISK R3</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Read before the first powered run</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<text x='36.0' y='162.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>WHY THIS IS AN R3 MACHINE</text>
+<text x='36.0' y='186.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>▲ Powered spindle: 5″ drum at ~1035 RPM with stored</text>
+<text x='36.0' y='203.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>   rotational energy</text>
+<text x='36.0' y='225.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>▲ Mains-voltage motor, switch, and cord require qualified</text>
+<text x='36.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>   electrical work</text>
+<text x='36.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>▲ Ingoing nip between drum and feed rollers; workpiece</text>
+<text x='36.0' y='281.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>   ejection path</text>
+<text x='36.0' y='303.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>▲ Abrasive dust generation, worst when truing the MDF core</text>
+<text x='36.0' y='335.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#a8342a' text-anchor='start' font-weight='600'>NOT RELEASED BY THIS PACKAGE</text>
+<text x='36.0' y='359.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>✕ Electrical installation and any code-dependent wiring</text>
+<text x='36.0' y='381.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>✕ Any use as a metal-working or thickness-planing machine</text>
+<text x='36.0' y='403.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>✕ Stock shorter than ~12″ without the sled</text>
+<text x='36.0' y='437.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>STANDING RULES</text>
+<text x='36.0' y='461.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Hood on is the primary guard. Open it only stopped and</text>
+<text x='36.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  unplugged.</text>
+<text x='36.0' y='498.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Hands never under the drum or between the hold-down</text>
+<text x='36.0' y='515.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  rollers.</text>
+<text x='36.0' y='535.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Minimum stock ~12″ long, or carry it on the sled.</text>
+<text x='36.0' y='555.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Light passes. If the motor bogs, back off — do not push</text>
+<text x='36.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  harder.</text>
+<text x='36.0' y='592.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Respirator, eye, and hearing protection. MDF truing is the</text>
+<text x='36.0' y='609.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  worst of it.</text>
+<text x='36.0' y='629.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Dust extraction running before the drum spins.</text>
+<text x='36.0' y='649.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Unplug before any adjustment behind the hood.</text>
+<text x='740.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>FAILURE MODES DESIGNED AGAINST</text>
+<text x='740.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>FAILURE MODE</text>
+<text x='950.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CAUSE</text>
+<text x='1170.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>EFFECT</text>
+<text x='1330.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>DESIGNED MITIGATION</text>
+<text x='1590.0' y='192.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>SEV</text>
+<line x1='740.0' y1='198.0' x2='1620.0' y2='198.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='740.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Table rack under feed</text>
+<text x='950.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Butt stretchers / proud ways</text>
+<text x='1170.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Tapered cut, bind</text>
+<text x='1330.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>J-001 housing + J-002 rebate ways</text>
+<text x='1590.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>H</text>
+<text x='740.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Banana shaft</text>
+<text x='950.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Both flanges locked</text>
+<text x='1170.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>TIR and bearing death</text>
+<text x='1330.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>J-007 axial float</text>
+<text x='1590.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>H</text>
+<text x='740.0' y='294.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Snipe</text>
+<text x='950.0' y='294.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Hold-down springs too stiff / missing</text>
+<text x='1170.0' y='294.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>End thickness scatter</text>
+<text x='1330.0' y='294.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Light H-011; 0.030″ set</text>
+<text x='1590.0' y='294.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>M</text>
+<text x='740.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Helical tracks</text>
+<text x='950.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Spiral wrap, no osc</text>
+<text x='1170.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Visible stripes</text>
+<text x='1330.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Optional H-025; or 90° finish pass</text>
+<text x='1590.0' y='328.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>L</text>
+<text x='740.0' y='362.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Lost parallel after wrap</text>
+<text x='950.0' y='362.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Paper thickness not uniform</text>
+<text x='1170.0' y='362.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>|A−B| opens</text>
+<text x='1330.0' y='362.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Re-clock paper-on; home dog</text>
+<text x='1590.0' y='362.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>H</text>
+<text x='740.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Drum dish</text>
+<text x='950.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Narrow truing block</text>
+<text x='1170.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Center thin</text>
+<text x='1330.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-013 full-width sled</text>
+<text x='1590.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>M</text>
+<text x='740.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>FIRST POWERED RUN — IN THIS ORDER</text>
+<text x='740.0' y='504.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>1. Hood fitted. Dust hose connected. No stock on the table.</text>
+<text x='740.0' y='525.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>2. Table lowered well clear of the drum.</text>
+<text x='740.0' y='546.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>3. Spin the drum by hand one full turn. Listen for contact.</text>
+<text x='740.0' y='567.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>4. Stand clear of both drum ends, hand on the switch, and</text>
+<text x='740.0' y='584.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>   start it.</text>
+<text x='740.0' y='605.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>5. Let it come up to speed. Listen for imbalance or rubbing.</text>
+<text x='740.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>   Shut down.</text>
+<text x='740.0' y='643.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>6. Only then true the drum, wrap paper, and clock A/B</text>
+<text x='740.0' y='660.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>   (ST-14).</text>
+<text x='740.0' y='695.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PPE AT EVERY STEP</text>
+<text x='740.0' y='719.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Eyes · ears · respirator · no gloves near the drum · no loose sleeves.</text>
+</svg>

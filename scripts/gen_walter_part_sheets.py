@@ -561,7 +561,7 @@ def sheet_rect(
         sh.text(1260, yy, v, 12, INK, mono=False)
         yy += 22
 
-    sh.notes(80, 1000, notes)
+    sh.notes(80, 928, notes)
     sh.save(filename)
 
 
@@ -734,7 +734,7 @@ def sheet_disc(pid: str, filename: str, color: str, extra_notes: list[str]) -> N
         f"1 mm relief every {S.spacer_every_n} MDF discs so the pack can take a deep true without burning.",
         "⅛″ piano-wire keys (H-018) keep discs from spinning on the shaft.",
     ] + extra_notes
-    sh.notes(80, 980, notes)
+    sh.notes(80, 928, notes)
     sh.save(filename)
 
 

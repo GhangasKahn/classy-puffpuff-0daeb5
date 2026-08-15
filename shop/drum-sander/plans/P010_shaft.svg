@@ -10,7 +10,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Precision-ground CRS or TG&amp;P, ¾″, 0.0005″ TIR</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Precision-ground shaft  ·  incoming TIR ≤ 0.0005″</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.2 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · VERIFIED</text>
 <rect x='80.0' y='280.0' width='378.0' height='36.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.8' rx='4'/>
 <rect x='80.0' y='280.0' width='980.0' height='36.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.8' rx='6'/>

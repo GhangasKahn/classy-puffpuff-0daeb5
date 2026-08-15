@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-02</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Rough-cut the panels oversize</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Flat, labelled, manageable blanks out of full sheets.</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>STEP 2 / 14</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>02 Breakdown</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 2 of 14  ·  02 Breakdown</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<circle cx='44.0' cy='112.0' r='9.0' fill='#d8d8d4' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='44.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>1</text>
+<circle cx='70.0' cy='112.0' r='9.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='70.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#ffffff' text-anchor='middle' font-weight='600'>2</text>
+<circle cx='96.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='96.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>3</text>
+<circle cx='122.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='122.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>4</text>
+<circle cx='148.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='148.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>5</text>
+<circle cx='174.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='174.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>6</text>
+<circle cx='200.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='200.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>7</text>
+<circle cx='226.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='226.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>8</text>
+<circle cx='252.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='252.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>9</text>
+<circle cx='278.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='278.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>10</text>
+<circle cx='304.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='304.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>11</text>
+<circle cx='330.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='330.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>12</text>
+<circle cx='356.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='356.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>13</text>
+<circle cx='382.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='382.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>14</text>
+<text x='420.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>02 Breakdown</text>
+<rect x='36.0' y='150.0' width='820.0' height='560.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='446.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#3d4a38' text-anchor='middle' font-weight='600'>STOCK PREPARATION — NO ASSEMBLY YET</text>
+<text x='446.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='middle'>Measure and label. The machine starts at ST-03.</text>
+<text x='36.0' y='748.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>DO THIS</text>
+<circle cx='46.0' cy='769.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='773.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>1</text>
+<text x='68.0' y='774.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Cut every panel about ⅛″ over width and ¼″ over length. Final size comes off one</text>
+<text x='68.0' y='792.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>stop later.</text>
+<circle cx='46.0' cy='813.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='817.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>2</text>
+<text x='68.0' y='818.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Write the part ID on each blank in pencil the moment it leaves the sheet.</text>
+<circle cx='46.0' cy='839.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='843.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>3</text>
+<text x='68.0' y='844.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Keep the two side blanks as a matched pair — they get drilled together in ST-04.</text>
+<rect x='900.0' y='150.0' width='720.0' height='30.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='912.0' y='171.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>PARTS TRAY — fetch these before you start</text>
+<rect x='900.0' y='180.0' width='720.0' height='105.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='912.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-001L</text>
+<text x='992.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Side panel, drive (left)</text>
+<text x='1352.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x1</text>
+<text x='1400.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>30" × 22" × 0.75"</text>
+<text x='912.0' y='219.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-001R</text>
+<text x='992.0' y='219.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Side panel, idler (right)</text>
+<text x='1352.0' y='219.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x1</text>
+<text x='1400.0' y='219.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>30" × 22" × 0.75"</text>
+<text x='912.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-002</text>
+<text x='992.0' y='236.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Base deck</text>
+<text x='1352.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x1</text>
+<text x='1400.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>18" × 22" × 0.75"</text>
+<text x='912.0' y='253.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-003</text>
+<text x='992.0' y='253.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Stretcher</text>
+<text x='1352.0' y='253.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x3</text>
+<text x='1400.0' y='253.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>17" × 4" × 0.75"</text>
+<text x='912.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-004</text>
+<text x='992.0' y='270.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table torsion-box skin</text>
+<text x='1352.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x2</text>
+<text x='1400.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>16" × 22" × 0.75"</text>
+<text x='912.0' y='299.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>TOOLS: Track saw or table saw · Straightedge · Sawhorses</text>
+<text x='912.0' y='315.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d5a4c' text-anchor='start'>OPEN THESE SHEETS: D-6 · D-10</text>
+<rect x='900.0' y='337.0' width='720.0' height='30.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='912.0' y='358.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>BEFORE YOU MOVE ON</text>
+<text x='912.0' y='389.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>All blanks labelled, oversize, and stacked flat.</text>
+<text x='912.0' y='413.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Still correctable after this step: Sizes — everything is still</text>
+<text x='912.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>oversize.</text>
+<rect x='900.0' y='453.0' width='720.0' height='62.0' fill='#f6e7e4' stroke='#a8342a' stroke-width='1.4'/>
+<text x='914.0' y='473.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>⚠ Full sheets are heavy and awkward. Support the offcut so it</text>
+<text x='914.0' y='491.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>   cannot drop onto the blade or onto you.</text>
+</svg>

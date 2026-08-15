@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>E-101</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Exploded assembly with item balloons</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Explosion 1 axis</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Balloon numbers resolve to the BOM on this sheet</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.3 · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<rect x='36.0' y='150.0' width='1020.0' height='800.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='567.0,924.9 755.7,815.9 525.0,682.7 336.3,791.7' fill='#436545'/>
+<polygon points='622.0,542.0 852.7,675.2 852.7,321.0 622.0,187.8' fill='#4f7752'/>
+<polygon points='525.2,498.0 735.0,619.1 735.0,610.0 525.2,488.9' fill='#b2b6ba'/>
+<polygon points='735.0,610.0 742.8,605.4 533.1,484.4 525.2,488.9' fill='#96999d'/>
+<polygon points='336.3,800.8 567.0,934.0 567.0,924.9 336.3,791.7' fill='#4f7752'/>
+<polygon points='680.7,777.5 686.0,774.5 686.0,629.2 680.7,632.2' fill='#8b8d90'/>
+<polygon points='675.5,774.5 680.7,777.5 680.7,632.2 675.5,629.2' fill='#a5a7ab'/>
+<polygon points='567.0,934.0 755.7,825.0 755.7,815.9 567.0,924.9' fill='#436545'/>
+<polygon points='577.5,767.5 745.2,670.6 514.5,537.4 346.8,634.3' fill='#436545'/>
+<polygon points='577.5,764.5 745.2,667.6 514.5,534.4 346.8,631.3' fill='#61656b'/>
+<polygon points='852.7,675.2 860.6,670.6 860.6,316.5 852.7,321.0' fill='#436545'/>
+<polygon points='623.0,407.0 628.7,420.1 638.1,414.7 632.4,401.6' fill='#8b8d90'/>
+<polygon points='628.7,420.1 637.2,431.6 646.6,426.1 638.1,414.7' fill='#8b8d90'/>
+<polygon points='621.0,394.3 623.0,407.0 632.4,401.6 630.4,388.8' fill='#8b8d90'/>
+<polygon points='637.2,431.6 647.2,439.7 656.6,434.2 646.6,426.1' fill='#8b8d90'/>
+<polygon points='623.0,383.8 621.0,394.3 630.4,388.8 632.4,378.4' fill='#8b8d90'/>
+<polygon points='647.2,439.7 657.2,443.2 666.7,437.7 656.6,434.2' fill='#8b8d90'/>
+<polygon points='680.7,632.2 686.0,629.2 680.7,626.1 675.5,629.2' fill='#8b8d90'/>
+<polygon points='628.7,377.3 623.0,383.8 632.4,378.4 638.1,371.8' fill='#9b9da0'/>
+<polygon points='657.2,443.2 665.7,441.5 675.2,436.1 666.7,437.7' fill='#8b8d90'/>
+<polygon points='656.6,373.7 646.6,370.2 638.1,371.8 632.4,378.4 630.4,388.8 632.4,401.6 638.1,414.7 646.6,426.1 656.6,434.2 666.7,437.7 675.2,436.1 680.8,429.5 682.8,419.1 680.8,406.4 675.2,393.2 666.7,381.8' fill='#a5a7ab'/>
+<polygon points='852.7,321.0 860.6,316.5 629.9,183.3 622.0,187.8' fill='#436545'/>
+<polygon points='590.8,371.1 587.6,370.2 585.2,371.6 584.3,374.9 585.2,379.2 587.6,383.3 590.8,386.2 594.1,387.1 596.5,385.7 597.4,382.5 596.5,378.2 594.1,374.0' fill='#242629'/>
+<polygon points='735.0,619.1 742.8,614.5 742.8,605.4 735.0,610.0' fill='#96999d'/>
+<polygon points='346.8,649.5 577.5,782.6 577.5,767.5 346.8,634.3' fill='#4f7752'/>
+<polygon points='346.8,634.3 577.5,767.5 577.5,764.5 346.8,631.3' fill='#73787f'/>
+<polygon points='680.7,572.9 693.3,565.6 680.7,558.3 668.2,565.6' fill='#8a5429'/>
+<polygon points='680.7,585.0 693.3,577.7 693.3,565.6 680.7,572.9' fill='#8a5429'/>
+<polygon points='668.2,577.7 680.7,585.0 680.7,572.9 668.2,565.6' fill='#a46430'/>
+<polygon points='558.1,848.3 563.3,845.3 563.3,700.0 558.1,703.0' fill='#8b8d90'/>
+<polygon points='552.8,845.3 558.1,848.3 558.1,703.0 552.8,700.0' fill='#a5a7ab'/>
+<polygon points='664.0,322.5 662.3,322.0 660.9,322.5 660.1,323.8 660.1,325.9 660.9,328.1 662.3,330.2 664.0,331.6 665.7,332.1 667.0,331.7 667.8,330.3 667.8,328.3 667.0,326.0 665.7,324.0' fill='#a5a7ab'/>
+<polygon points='577.5,782.6 745.2,685.8 745.2,670.6 577.5,767.5' fill='#436545'/>
+<polygon points='577.5,767.5 745.2,670.6 745.2,667.6 577.5,764.5' fill='#61656b'/>
+<polygon points='420.0,474.5 422.4,478.7 587.6,383.3 585.2,379.2' fill='#1f2023'/>
+<polygon points='419.1,470.2 420.0,474.5 585.2,379.2 584.3,374.9' fill='#1f2023'/>
+<polygon points='422.4,478.7 425.7,481.6 590.8,386.2 587.6,383.3' fill='#1f2023'/>
+<polygon points='666.3,414.7 663.1,413.8 660.7,415.2 659.8,418.5 660.7,422.8 663.1,426.9 666.3,429.8 669.6,430.7 672.0,429.3 672.9,426.0 672.0,421.8 669.6,417.6' fill='#242629'/>
+<polygon points='420.0,467.0 419.1,470.2 584.3,374.9 585.2,371.6' fill='#1f2023'/>
+<polygon points='425.7,481.6 428.9,482.5 594.1,387.1 590.8,386.2' fill='#1f2023'/>
+<polygon points='349.2,599.6 558.9,720.7 558.9,711.6 349.2,590.5' fill='#b2b6ba'/>
+<polygon points='558.9,711.6 566.8,707.1 357.0,586.0 349.2,590.5' fill='#96999d'/>
+<polygon points='618.1,353.6 647.5,370.5 647.5,336.6 618.1,319.6' fill='#a5a7ab'/>
+<polygon points='428.9,482.5 431.3,481.1 596.5,385.7 594.1,387.1' fill='#1f2023'/>
+<polygon points='628.6,317.2 621.2,314.2 614.4,313.8 608.8,316.2 604.7,321.2 602.6,328.2 602.6,336.8 604.7,346.3 608.8,355.9 614.4,364.8 621.2,372.3 628.6,377.8 636.0,380.8 642.8,381.1 648.4,378.8 652.4,373.8 654.5,366.8 654.5,358.2 652.4,348.7 648.4,339.1 642.8,330.2 636.0,322.7' fill='#a4977d'/>
+<polygon points='647.5,370.5 654.8,366.3 654.8,332.4 647.5,336.6' fill='#8b8d90'/>
+<polygon points='647.5,336.6 654.8,332.4 625.4,315.4 618.1,319.6' fill='#8b8d90'/>
+<polygon points='425.9,467.8 599.0,367.9 590.6,363.1 417.5,463.0' fill='#a2936c'/>
+<polygon points='425.9,472.7 599.0,372.8 599.0,367.9 425.9,467.8' fill='#a2936c'/>
+<polygon points='558.1,703.0 563.3,700.0 558.1,697.0 552.8,700.0' fill='#8b8d90'/>
+<polygon points='443.6,451.2 449.2,460.1 614.4,364.8 608.8,355.9' fill='#8a7f6a'/>
+<polygon points='439.6,441.7 443.6,451.2 608.8,355.9 604.7,346.3' fill='#8a7f6a'/>
+<polygon points='449.2,460.1 456.0,467.6 621.2,372.3 614.4,364.8' fill='#8a7f6a'/>
+<polygon points='437.5,432.2 439.6,441.7 604.7,346.3 602.6,336.8' fill='#8a7f6a'/>
+<polygon points='456.0,467.6 463.4,473.1 628.6,377.8 621.2,372.3' fill='#8a7f6a'/>
+<polygon points='666.6,819.0 844.9,716.0 802.9,691.8 624.6,794.8' fill='#a2936c'/>
+<polygon points='437.5,423.6 437.5,432.2 602.6,336.8 602.6,328.2' fill='#8a7f6a'/>
+<polygon points='463.4,473.1 470.8,476.2 636.0,380.8 628.6,377.8' fill='#8a7f6a'/>
+<polygon points='439.6,416.5 437.5,423.6 602.6,328.2 604.7,321.2' fill='#8c816b'/>
+<polygon points='495.5,518.1 497.9,522.3 663.1,426.9 660.7,422.8' fill='#1f2023'/>
+<polygon points='494.6,513.8 495.5,518.1 660.7,422.8 659.8,418.5' fill='#1f2023'/>
+<polygon points='497.9,522.3 501.2,525.2 666.3,429.8 663.1,426.9' fill='#1f2023'/>
+<polygon points='470.8,476.2 477.6,476.5 642.8,381.1 636.0,380.8' fill='#8a7f6a'/>
+<polygon points='495.5,510.6 494.6,513.8 659.8,418.5 660.7,415.2' fill='#1f2023'/>
+<polygon points='501.2,525.2 504.4,526.1 669.6,430.7 666.3,429.8' fill='#1f2023'/>
+<polygon points='666.6,828.1 844.9,725.1 844.9,716.0 666.6,819.0' fill='#a2936c'/>
+<polygon points='504.4,526.1 506.8,524.7 672.0,429.3 669.6,430.7' fill='#1f2023'/>
+<polygon points='443.6,411.6 439.6,416.5 604.7,321.2 608.8,316.2' fill='#998c75'/>
+<polygon points='558.1,643.7 570.6,636.4 558.1,629.2 545.5,636.4' fill='#8a5429'/>
+<polygon points='558.1,655.8 570.6,648.5 570.6,636.4 558.1,643.7' fill='#8a5429'/>
+<polygon points='545.5,648.5 558.1,655.8 558.1,643.7 545.5,636.4' fill='#a46430'/>
+<polygon points='425.0,464.3 426.3,466.4 662.3,330.2 660.9,328.1' fill='#8b8d90'/>
+<polygon points='424.2,462.1 425.0,464.3 660.9,328.1 660.1,325.9' fill='#8b8d90'/>
+<polygon points='426.3,466.4 428.0,467.8 664.0,331.6 662.3,330.2' fill='#8b8d90'/>
+<polygon points='424.2,460.1 424.2,462.1 660.1,325.9 660.1,323.8' fill='#8b8d90'/>
+<polygon points='428.0,467.8 429.7,468.4 665.7,332.1 664.0,331.6' fill='#8b8d90'/>
+<polygon points='477.6,476.5 483.2,474.1 648.4,378.8 642.8,381.1' fill='#8a7f6a'/>
+<polygon points='425.0,458.7 424.2,460.1 660.1,323.8 660.9,322.5' fill='#949699'/>
+<polygon points='429.7,468.4 431.1,467.9 667.0,331.7 665.7,332.1' fill='#8b8d90'/>
+<polygon points='501.4,511.4 674.5,411.5 666.1,406.7 493.0,506.6' fill='#a2936c'/>
+<polygon points='501.4,516.3 674.5,416.4 674.5,411.5 501.4,511.4' fill='#a2936c'/>
+<polygon points='417.5,467.8 425.9,472.7 425.9,467.8 417.5,463.0' fill='#c0ae81'/>
+<polygon points='558.9,720.7 566.8,716.2 566.8,707.1 558.9,711.6' fill='#96999d'/>
+<polygon points='666.6,746.3 844.9,643.4 802.9,619.2 624.6,722.1' fill='#a2936c'/>
+<polygon points='606.3,772.0 679.7,814.4 679.7,741.8 606.3,699.4' fill='#242629'/>
+<polygon points='679.7,741.8 742.6,705.5 669.2,663.1 606.3,699.4' fill='#1f2023'/>
+<polygon points='679.7,814.4 742.6,778.1 742.6,705.5 679.7,741.8' fill='#1f2023'/>
+<polygon points='666.6,755.4 844.9,652.5 844.9,643.4 666.6,746.3' fill='#a2936c'/>
+<polygon points='624.6,803.8 666.6,828.1 666.6,819.0 624.6,794.8' fill='#c0ae81'/>
+<polygon points='231.4,767.5 462.1,900.7 462.1,546.5 231.4,413.3' fill='#4f7752'/>
+<polygon points='428.0,278.6 590.6,184.8 575.9,176.3 413.3,270.2' fill='#436545'/>
+<polygon points='428.0,282.9 590.6,189.0 590.6,184.8 428.0,278.6' fill='#436545'/>
+<polygon points='493.0,511.4 501.4,516.3 501.4,511.4 493.0,506.6' fill='#c0ae81'/>
+<polygon points='437.2,458.0 466.6,474.9 466.6,441.0 437.2,424.1' fill='#a5a7ab'/>
+<polygon points='466.6,474.9 473.9,470.7 473.9,436.8 466.6,441.0' fill='#8b8d90'/>
+<polygon points='466.6,441.0 473.9,436.8 444.5,419.8 437.2,424.1' fill='#8b8d90'/>
+<polygon points='442.7,271.4 605.2,177.5 590.6,169.0 428.0,262.9' fill='#436545'/>
+<polygon points='442.7,275.6 605.2,181.8 605.2,177.5 442.7,271.4' fill='#436545'/>
+<polygon points='666.6,649.5 844.9,546.5 802.9,522.3 624.6,625.2' fill='#a2936c'/>
+<polygon points='624.6,731.2 666.6,755.4 666.6,746.3 624.6,722.1' fill='#c0ae81'/>
+<polygon points='457.4,268.3 619.9,174.5 605.2,166.0 442.7,259.8' fill='#436545'/>
+<polygon points='666.6,658.5 844.9,555.6 844.9,546.5 666.6,649.5' fill='#a2936c'/>
+<polygon points='457.4,272.6 619.9,178.7 619.9,174.5 457.4,268.3' fill='#436545'/>
+<polygon points='472.1,272.6 634.6,178.7 619.9,170.3 457.4,264.1' fill='#436545'/>
+<polygon points='472.1,276.8 634.6,183.0 634.6,178.7 472.1,272.6' fill='#436545'/>
+<polygon points='413.3,274.4 428.0,282.9 428.0,278.6 413.3,270.2' fill='#4f7752'/>
+<polygon points='486.8,285.3 649.3,191.4 634.6,183.0 472.1,276.8' fill='#436545'/>
+<polygon points='501.4,305.3 664.0,211.4 649.3,203.0 486.8,296.8' fill='#436545'/>
+<polygon points='486.8,289.5 649.3,195.7 649.3,191.4 486.8,285.3' fill='#436545'/>
+<polygon points='516.1,329.5 678.7,235.6 664.0,227.2 501.4,321.0' fill='#436545'/>
+<polygon points='501.4,309.5 664.0,215.7 664.0,211.4 501.4,305.3' fill='#436545'/>
+<polygon points='516.1,333.7 678.7,239.9 678.7,235.6 516.1,329.5' fill='#436545'/>
+<polygon points='462.1,900.7 470.0,896.2 470.0,542.0 462.1,546.5' fill='#436545'/>
+<polygon points='428.0,267.1 442.7,275.6 442.7,271.4 428.0,262.9' fill='#4f7752'/>
+<polygon points='624.6,634.3 666.6,658.5 666.6,649.5 624.6,625.2' fill='#c0ae81'/>
+<polygon points='442.7,264.1 457.4,272.6 457.4,268.3 442.7,259.8' fill='#4f7752'/>
+<polygon points='462.1,546.5 470.0,542.0 239.3,408.8 231.4,413.3' fill='#436545'/>
+<polygon points='457.4,268.3 472.1,276.8 472.1,272.6 457.4,264.1' fill='#4f7752'/>
+<polygon points='472.1,281.0 486.8,289.5 486.8,285.3 472.1,276.8' fill='#4f7752'/>
+<polygon points='486.8,301.0 501.4,309.5 501.4,305.3 486.8,296.8' fill='#4f7752'/>
+<polygon points='501.4,325.2 516.1,333.7 516.1,329.5 501.4,321.0' fill='#4f7752'/>
+</g>
+<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Exploded — parts held in assembly orientation, separation exaggerated</text>
+<line x1='546.0' y1='542.0' x2='546.0' y2='450.0' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='542.0' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='450.0' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='455.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>1</text>
+<line x1='546.0' y1='808.4' x2='546.0' y2='900.4' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='808.4' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='900.4' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='905.4' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>2</text>
+<line x1='734.8' y1='675.2' x2='811.4' y2='726.0' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='734.8' cy='675.2' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='811.4' cy='726.0' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='811.4' y='731.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>3</text>
+<line x1='546.0' y1='602.5' x2='546.0' y2='694.5' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='602.5' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='694.5' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='699.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>4</text>
+<line x1='546.0' y1='395.2' x2='546.0' y2='303.2' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='395.2' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='303.2' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='308.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>5</text>
+<line x1='546.0' y1='395.2' x2='546.0' y2='383.2' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='395.2' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='383.2' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='388.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>6</text>
+<line x1='674.5' y1='592.3' x2='761.8' y2='621.1' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='674.5' cy='592.3' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='761.8' cy='621.1' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='761.8' y='626.1' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>7</text>
+<line x1='546.0' y1='658.5' x2='546.0' y2='750.5' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='658.5' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='750.5' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='755.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>8</text>
+<line x1='619.4' y1='703.3' x2='659.1' y2='786.3' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='619.4' cy='703.3' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='659.1' cy='786.3' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='659.1' y='791.3' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>9</text>
+<line x1='546.0' y1='444.6' x2='546.0' y2='512.6' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='444.6' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='512.6' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='517.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>10</text>
+<line x1='546.0' y1='249.9' x2='546.0' y2='180.0' stroke='#1a1a1a' stroke-width='0.9'/>
+<circle cx='546.0' cy='249.9' r='2.6' fill='#1a1a1a' stroke='#1a1a1a' stroke-width='0.5'/>
+<circle cx='546.0' cy='180.0' r='15.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='546.0' y='185.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='middle' font-weight='600'>11</text>
+<text x='1090.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>BOM — BALLOON ORDER</text>
+<text x='1090.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>#</text>
+<text x='1124.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>ID</text>
+<text x='1220.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>PART</text>
+<text x='1390.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>QTY</text>
+<text x='1440.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>FINISHED</text>
+<line x1='1090.0' y1='202.0' x2='1620.0' y2='202.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1090.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='1124.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-001L/R</text>
+<text x='1220.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Side panels</text>
+<text x='1390.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'></text>
+<text x='1440.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'></text>
+<text x='1090.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='1124.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-002</text>
+<text x='1220.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Base deck</text>
+<text x='1390.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='1440.0' y='248.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>18" × 22" × 0.75"</text>
+<text x='1090.0' y='274.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>3</text>
+<text x='1124.0' y='274.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-003</text>
+<text x='1220.0' y='274.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Stretchers ×3</text>
+<text x='1390.0' y='274.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>3</text>
+<text x='1440.0' y='274.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>17" × 4" × 0.75"</text>
+<text x='1090.0' y='300.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4</text>
+<text x='1124.0' y='300.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-007</text>
+<text x='1220.0' y='300.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>UHMW ways ×2</text>
+<text x='1390.0' y='300.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='1440.0' y='300.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>22" × 0.75" × 0.75"</text>
+<text x='1090.0' y='326.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>5</text>
+<text x='1124.0' y='326.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-008</text>
+<text x='1220.0' y='326.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Drum discs</text>
+<text x='1390.0' y='326.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>19</text>
+<text x='1440.0' y='326.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>5.125" × 5.125" × 0.75"</text>
+<text x='1090.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>6</text>
+<text x='1124.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-010</text>
+<text x='1220.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Shaft + bearings</text>
+<text x='1390.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='1440.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>22.5" × 0.75" × 0.75"</text>
+<text x='1090.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>7</text>
+<text x='1124.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-012</text>
+<text x='1220.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Motor, cradle, pulleys</text>
+<text x='1390.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='1440.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>12" × 8" × 0.75"</text>
+<text x='1090.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>8</text>
+<text x='1124.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-004</text>
+<text x='1220.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Table box + wear face</text>
+<text x='1390.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='1440.0' y='404.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>16" × 22" × 0.75"</text>
+<text x='1090.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>9</text>
+<text x='1124.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-016</text>
+<text x='1220.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Acme lift + nut blocks</text>
+<text x='1390.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='1440.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2.5" × 2" × 1.5"</text>
+<text x='1090.0' y='456.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>10</text>
+<text x='1124.0' y='456.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-014</text>
+<text x='1220.0' y='456.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Hold-down yokes</text>
+<text x='1390.0' y='456.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='1440.0' y='456.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>18" × 3" × 0.75"</text>
+<text x='1090.0' y='482.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>11</text>
+<text x='1124.0' y='482.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-011</text>
+<text x='1220.0' y='482.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Dust hood</text>
+<text x='1390.0' y='482.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='1440.0' y='482.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>18" × 12" × 0.25"</text>
+<text x='1090.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>HARDWARE STACK ORDER</text>
+<text x='1090.0' y='544.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Flange bearing: bolt → washer → panel → flange → nylock.</text>
+<text x='1090.0' y='560.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Drive side torqued, idler side snug.</text>
+<text x='1090.0' y='582.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Roller yoke: shoulder bolt → yoke → spring → washer →</text>
+<text x='1090.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  star knob.</text>
+<text x='1090.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Acme: screw → bronze nut in block → block bolted up into</text>
+<text x='1090.0' y='636.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the table underside.</text>
+<text x='1090.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Stretcher: screw from OUTSIDE the panel into the housed</text>
+<text x='1090.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  rail end.</text>
+<text x='1090.0' y='704.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ASSEMBLY ORDER</text>
+<text x='1090.0' y='728.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-02</text>
+<text x='1152.0' y='728.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-001L, P-001R, P-002, P-003, P-004</text>
+<text x='1090.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-03</text>
+<text x='1152.0' y='744.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-001L, P-001R</text>
+<text x='1090.0' y='760.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-04</text>
+<text x='1152.0' y='760.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-001L, P-001R</text>
+<text x='1090.0' y='776.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-05</text>
+<text x='1152.0' y='776.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-001L, P-001R</text>
+<text x='1090.0' y='792.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-06</text>
+<text x='1152.0' y='792.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-001L, P-001R, P-002, P-003</text>
+<text x='1090.0' y='808.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-07</text>
+<text x='1152.0' y='808.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-007</text>
+<text x='1090.0' y='824.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-08</text>
+<text x='1152.0' y='824.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-008, P-009, P-015</text>
+<text x='1090.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-09</text>
+<text x='1152.0' y='840.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-010</text>
+<text x='1090.0' y='856.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-10</text>
+<text x='1152.0' y='856.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-012</text>
+<text x='1090.0' y='872.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-11</text>
+<text x='1152.0' y='872.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-004, P-005, P-006</text>
+<text x='1090.0' y='888.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-12</text>
+<text x='1152.0' y='888.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-016</text>
+<text x='1090.0' y='904.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-13</text>
+<text x='1152.0' y='904.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-011, P-014</text>
+<text x='1090.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-14</text>
+<text x='1152.0' y='920.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-013</text>
+<text x='1090.0' y='950.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Full sequence on the ST sheets. This page is the map.</text>
+</svg>
