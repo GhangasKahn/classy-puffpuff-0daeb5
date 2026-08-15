@@ -814,3 +814,23 @@ html[data-motion="off"] .blade-mod { transition: none; }
 @media (min-width: 800px) {
   .pack-grid { grid-template-columns: 1fr 1fr; }
 }
+
+.cad-shell {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 960px) {
+  .cad-shell { grid-template-columns: 1fr 16rem; }
+}
+.cad-stage {
+  background: #161816;
+  border: 1px solid #3a3c3a;
+  min-height: 320px;
+}
+.cad-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+}
+.cad-side { display: grid; gap: 0.8rem; align-content: start; }

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "01-frame",
+    "file": "cad/stl/01-frame.stl",
+    "triangles": 196,
+    "bounds_mm": [
+      104.53,
+      16.2,
+      4.6
+    ]
+  },
+  {
+    "id": "02-mizu",
+    "file": "cad/stl/02-mizu.stl",
+    "triangles": 24,
+    "bounds_mm": [
+      110.0,
+      15.2,
+      1.78
+    ]
+  },
+  {
+    "id": "03-kumiko",
+    "file": "cad/stl/03-kumiko.stl",
+    "triangles": 24,
+    "bounds_mm": [
+      70.0,
+      12.4,
+      2.2
+    ]
+  },
+  {
+    "id": "04-nata",
+    "file": "cad/stl/04-nata.stl",
+    "triangles": 24,
+    "bounds_mm": [
+      88.0,
+      17.8,
+      2.4
+    ]
+  },
+  {
+    "id": "05-saya",
+    "file": "cad/stl/05-saya.stl",
+    "triangles": 48,
+    "bounds_mm": [
+      92.0,
+      20.0,
+      9.2
+    ]
+  },
+  {
+    "id": "06-spike",
+    "file": "cad/stl/06-spike.stl",
+    "triangles": 280,
+    "bounds_mm": [
+      37.8,
+      8.4,
+      8.4
+    ]
+  },
+  {
+    "id": "07-togi",
+    "file": "cad/stl/07-togi.stl",
+    "triangles": 12,
+    "bounds_mm": [
+      52.0,
+      18.0,
+      2.8
+    ]
+  },
+  {
+    "id": "08-tweezer",
+    "file": "cad/stl/08-tweezer.stl",
+    "triangles": 36,
+    "bounds_mm": [
+      46.0,
+      6.4,
+      1.32
+    ]
+  },
+  {
+    "id": "09-cassette",
+    "file": "cad/stl/09-cassette.stl",
+    "triangles": 12,
+    "bounds_mm": [
+      64.0,
+      16.0,
+      8.2
+    ]
+  },
+  {
+    "id": "10-s50",
+    "file": "cad/stl/10-s50.stl",
+    "triangles": 6400,
+    "bounds_mm": [
+      13.17,
+      13.16,
+      7.55
+    ]
+  },
+  {
+    "id": "11-l80",
+    "file": "cad/stl/11-l80.stl",
+    "triangles": 7680,
+    "bounds_mm": [
+      17.94,
+      17.94,
+      9.3
+    ]
+  },
+  {
+    "id": "12-locator",
+    "file": "cad/stl/12-locator.stl",
+    "triangles": 12,
+    "bounds_mm": [
+      22.0,
+      8.0,
+      0.7
+    ]
+  },
+  {
+    "id": "13-wedge",
+    "file": "cad/stl/13-wedge.stl",
+    "triangles": 24,
+    "bounds_mm": [
+      14.1,
+      8.0,
+      3.1
+    ]
+  },
+  {
+    "id": "14-chest",
+    "file": "cad/stl/14-chest.stl",
+    "triangles": 60,
+    "bounds_mm": [
+      168.0,
+      78.0,
+      22.0
+    ]
+  }
+]

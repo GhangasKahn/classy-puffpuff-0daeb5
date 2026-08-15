@@ -19,6 +19,7 @@
   <meta name="twitter:image" content="https://polite-swan-ae1631.netlify.app/assets/og.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Shippori+Mincho:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/site.css" />
   <link rel="preload" as="image" href="./assets/kit-box-open.webp" imagesrcset="./assets/kit-box-open-sm.webp 900w, ./assets/kit-box-open.webp 1800w" imagesizes="100vw" />
@@ -47,6 +48,7 @@
         <li><a href="#open">Open</a></li>
         <li><a href="#kit">Kit</a></li>
         <li><a href="#metal">Metal</a></li>
+        <li><a href="#cad">CAD</a></li>
         <li><a href="#grind">Grind</a></li>
         <li><a href="#hold">Hold</a></li>
         <li><a href="#joinery">Layout</a></li>
@@ -68,6 +70,7 @@
       <li><a data-nav href="#open">Open</a></li>
       <li><a data-nav href="#kit">Kit</a></li>
       <li><a data-nav href="#metal">Metal</a></li>
+      <li><a data-nav href="#cad">CAD</a></li>
       <li><a data-nav href="#grind">Grind</a></li>
       <li><a data-nav href="#hold">Hold</a></li>
       <li><a data-nav href="#joinery">Layout</a></li>
@@ -211,6 +214,27 @@
           </figure>
         </div>
         <p class="fine" style="margin-top:1rem">Concept macros. They describe finish and geometry, not a finished production lot.</p>
+      </div>
+    </section>
+
+    <section class="act" id="cad">
+      <div class="wrap">
+        <p class="kicker">CAD bench · proposed geometry</p>
+        <h2>Every part, as a model you can turn.</h2>
+        <p class="lede">Each piece was built from the same millimetre ledger, then exported as STL. In the viewer, every textured face wears the TOGI plate’s hammered map — one finish, not a new material for each object.</p>
+        <p class="fine">Drag to orbit. Scroll or pinch to zoom. Download the STL for the seated part, or take the OpenSCAD source and the parameter file. This is proposed CAD for conversation, not a released manufacturing package.</p>
+        <div class="cad-shell" style="margin-top:1.4rem">
+          <div>
+            <div class="cad-stage" id="cad-stage"></div>
+            <p class="fine" id="cad-status" role="status">Loading the frame…</p>
+          </div>
+          <div class="cad-side">
+            <div class="tag-row" id="cad-parts" aria-label="CAD parts"></div>
+            <a class="btn" id="cad-download" href="./cad/stl/01-frame.stl" download>Download 01-frame.stl</a>
+            <a class="btn ghost" href="./cad/SHINOBI.scad" download>OpenSCAD source</a>
+            <a class="btn ghost" href="./cad/parameters.json" download>parameters.json</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -500,6 +524,7 @@
         <ul>
           <li><a href="#kit">Inventory</a></li>
           <li><a href="#metal">Metal</a></li>
+          <li><a href="#cad">CAD bench</a></li>
           <li><a href="#grind">Grind</a></li>
           <li><a href="#seat">Ledger</a></li>
           <li><a href="#brief">Studio brief</a></li>
@@ -520,5 +545,14 @@
   </footer>
 
   <script src="./js/site.js" defer></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="./js/viewer.js"></script>
 </body>
 </html>

@@ -1,0 +1,44 @@
+{
+  "units": "mm",
+  "note": "Proposed engineering targets for conversation and CAD. Not a released manufacturing package.",
+  "frame": {
+    "length": 94,
+    "height": 16.2,
+    "ridge": 4.6,
+    "rail": 1.7,
+    "web": 3.6,
+    "pommel_hole": 4.4
+  },
+  "mizu": {
+    "blade": 82,
+    "tang": 28,
+    "heel_height": 15.2,
+    "tip_height": 6.2,
+    "heel_thick": 1.55,
+    "tip_thick": 0.6
+  },
+  "kumiko": {
+    "blade": 42,
+    "tang": 28,
+    "height": 12.4,
+    "thick": 2.0,
+    "bevel_deg": 15
+  },
+  "nata": {
+    "blade": 60,
+    "tang": 28,
+    "height": 17.8,
+    "thick": 2.4,
+    "bevel_deg": 24
+  },
+  "saya": { "length": 92, "width": 20, "height": 9.2, "wall": 1.8 },
+  "spike": { "point": 34, "tang": 18, "root": 3.4, "tip": 0.35 },
+  "togi": { "length": 52, "width": 18, "thick": 2.8, "hole": 3.2 },
+  "tweezer": { "length": 46, "width": 6.4, "thick": 1.1 },
+  "cassette": { "length": 64, "width": 16, "height": 8.2 },
+  "s50": { "diameter": 0.8, "length": 500 },
+  "l80": { "diameter": 1.2, "length": 800 },
+  "locator": { "length": 22, "width": 8, "thick": 0.7 },
+  "wedge": { "length": 14, "width": 8, "thick": 3.1 },
+  "chest": { "length": 168, "width": 78, "height": 22, "wall": 4 }
+}
