@@ -39,6 +39,11 @@
     Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
 
 [[redirects]]
+  from = "/shinobi"
+  to = "/shinobi/"
+  status = 301
+
+[[redirects]]
   from = "/app"
   to = "/app/"
   status = 301

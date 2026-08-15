@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0a">
+  <meta name="description" content="The manufacturer-facing SHINOBI//82 KAGE prototype study brief: design intent, target architecture, open questions, tests, and source notes.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SHINOBI//82 KAGE — Prototype study brief">
+  <meta property="og:description" content="A qualified engineering brief for evaluating a four-sample modular knife study.">
+  <title>SHINOBI//82 KAGE — Prototype study brief</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .brief-header{position:sticky;top:0;z-index:20;display:flex;min-height:4.5rem;align-items:center;justify-content:space-between;gap:1rem;padding:0 var(--gutter);border-bottom:1px solid var(--line);background:rgba(9,10,10,.94);backdrop-filter:blur(14px)}
+    .brief-actions{display:flex;align-items:center;gap:1rem}
+    .brief-actions a,.brief-actions button{display:inline-flex;min-height:2.75rem;align-items:center;padding:0 .9rem;border:1px solid var(--line-bright);background:transparent;color:var(--paper);cursor:pointer;font-family:var(--narrow);font-size:.61rem;font-weight:800;letter-spacing:.1em;text-decoration:none;text-transform:uppercase}
+    .brief-actions button{background:var(--paper);color:var(--ink)}
+    .brief-main{max-width:1100px;margin:0 auto;padding:clamp(7rem,12vw,11rem) var(--gutter)}
+    .brief-cover{position:relative;min-height:65svh;padding-bottom:5rem;border-bottom:1px solid var(--line-bright)}
+    .brief-cover .eyebrow{margin-bottom:2rem}
+    .brief-cover h1{max-width:9ch;margin:0;font-family:var(--narrow);font-size:clamp(4.5rem,12vw,9.5rem);font-stretch:condensed;font-weight:750;letter-spacing:-.065em;line-height:.78;text-transform:uppercase}
+    .brief-cover h1 em{display:block;color:var(--indigo-light);font-family:var(--serif);font-size:.72em;font-weight:400;letter-spacing:-.045em;text-transform:none}
+    .brief-cover>p:not(.eyebrow){max-width:52ch;margin:2.5rem 0 0;color:var(--paper-soft);font-family:var(--serif);font-size:1.2rem}
+    .brief-meta{display:grid;margin-top:4rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);grid-template-columns:repeat(3,1fr)}
+    .brief-meta div{padding:1rem 0}
+    .brief-meta div+div{padding-left:1rem;border-left:1px solid var(--line)}
+    .brief-meta span,.brief-meta b{display:block}
+    .brief-meta span{color:var(--muted);font-family:var(--narrow);font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+    .brief-meta b{margin-top:.35rem;font-family:var(--narrow);font-size:.75rem;letter-spacing:.04em}
+    .brief-section{display:grid;padding:5.5rem 0;border-bottom:1px solid var(--line);grid-template-columns:12rem 1fr;gap:clamp(2rem,7vw,7rem)}
+    .brief-section>header span{color:var(--indigo-light);font-family:var(--serif);font-size:.75rem}
+    .brief-section>header h2{margin:.7rem 0 0;font-family:var(--narrow);font-size:1rem;font-stretch:condensed;letter-spacing:.08em;line-height:1.1;text-transform:uppercase}
+    .brief-content h3{margin:0 0 1rem;font-family:var(--narrow);font-size:clamp(2.2rem,5vw,4.6rem);font-stretch:condensed;letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
+    .brief-content>p{max-width:65ch;color:var(--paper-soft);font-family:var(--serif);font-size:1.05rem}
+    .brief-content ul,.brief-content ol{margin:2rem 0 0;padding:0;list-style:none}
+    .brief-content li{display:grid;padding:1rem 0;border-top:1px solid var(--line);grid-template-columns:minmax(9rem,.55fr) 1fr;gap:1.5rem;color:var(--paper-soft)}
+    .brief-content li strong{color:var(--paper);font-family:var(--narrow);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase}
+    .brief-content li span{font-family:var(--serif)}
+    .target-table{width:100%;margin-top:2rem;border-collapse:collapse}
+    .target-table th,.target-table td{padding:.9rem .5rem;border-top:1px solid var(--line);font-size:.78rem;text-align:left;vertical-align:top}
+    .target-table th{width:33%;color:var(--muted);font-family:var(--narrow);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase}
+    .target-table td{color:var(--paper-soft)}
+    .question-list{counter-reset:question}
+    .question-list li{grid-template-columns:2rem 1fr;counter-increment:question}
+    .question-list li::before{color:var(--indigo-light);content:counter(question,decimal-leading-zero);font-family:var(--serif);font-size:.75rem}
+    .source-list li{display:block}
+    .source-list a{color:var(--paper);font-weight:700}
+    .brief-close{padding:6rem 0 0;text-align:center}
+    .brief-close h2{margin:0;font-family:var(--narrow);font-size:clamp(3.5rem,8vw,7.5rem);font-stretch:condensed;letter-spacing:-.05em;line-height:.85;text-transform:uppercase}
+    .brief-close h2 em{display:block;color:var(--indigo-light);font-family:var(--serif);font-weight:400;text-transform:none}
+    .brief-close p{max-width:48ch;margin:2rem auto;color:var(--paper-soft);font-family:var(--serif)}
+    .brief-close .actions{justify-content:center;margin-left:0}
+    @media(max-width:700px){.brief-actions a{display:none}.brief-section{grid-template-columns:1fr;gap:1.5rem}.brief-meta{grid-template-columns:1fr}.brief-meta div+div{padding-left:0;border-top:1px solid var(--line);border-left:0}.brief-content li{grid-template-columns:1fr;gap:.35rem}.question-list li{grid-template-columns:2rem 1fr}}
+    @media print{
+      @page{margin:14mm 16mm;size:A4}
+      :root{--ink:#fff;--ink-soft:#fff;--paper:#111;--paper-soft:#333;--muted:#666;--line:#bbb;--line-bright:#777;--indigo-light:#334ea5}
+      .brief-header{display:none}
+      .brief-main{max-width:none;padding:0}
+      .brief-cover{min-height:245mm;padding-top:25mm;break-after:page}
+      .brief-section{padding:12mm 0;break-inside:avoid;grid-template-columns:35mm 1fr;gap:10mm}
+      .brief-content h3{font-size:25pt}
+      .brief-close{break-before:page}
+      .brief-close .actions{display:none}
+      a{color:inherit;text-decoration:none}
+      a[href^="http"]::after{content:" — " attr(href);font-size:7pt;word-break:break-all}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#brief">Skip to the brief</a>
+  <header class="brief-header">
+    <a class="wordmark" href="index.html" aria-label="Return to the SHINOBI KAGE concept site"><span>SHINOBI</span><i>//</i><span>82 KAGE</span></a>
+    <div class="brief-actions">
+      <a href="index.html">Concept site</a>
+      <button type="button" onclick="window.print()">Print / save PDF</button>
+    </div>
+  </header>
+
+  <main class="brief-main" id="brief">
+    <section class="brief-cover" aria-labelledby="brief-title">
+      <p class="eyebrow">Prototype study <span>Rev 0.3 / August 15, 2026</span></p>
+      <h1 id="brief-title">SHINOBI//82 <em>KAGE</em></h1>
+      <p>A manufacturer-facing brief for deciding whether a modular ultralight fish, field, and joinery system merits four engineering samples.</p>
+      <div class="brief-meta">
+        <div><span>Status</span><b>Independent development concept</b></div>
+        <div><span>Decision sought</span><b>Feasibility before quotation</b></div>
+        <div><span>Commercial state</span><b>Not announced · not for sale</b></div>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>01</span><h2>Design intent</h2></header>
+      <div class="brief-content">
+        <h3>One structure. No universal-edge fiction.</h3>
+        <p>Reduce carried duplication by sharing the handle, retention architecture, edge-care substrate, and protective carry system. Preserve cutting integrity by separating the three blade geometries that the intended work genuinely requires.</p>
+        <ul>
+          <li><strong>MIZU–82</strong><span>Controlled skin release, fish and food work, light field utility, and EDC.</span></li>
+          <li><strong>KUMIKO–42</strong><span>Dead-flat registration for layout, paring, chamfering, and kumiko fitting.</span></li>
+          <li><strong>NATA–60</strong><span>Supported single-bevel geometry for whittling, notching, and controlled trail cuts.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>02</span><h2>System targets</h2></header>
+      <div class="brief-content">
+        <h3>Targets to challenge—not specifications to trust.</h3>
+        <p>Every figure below is provisional. CAD mass properties, maker review, measured samples, and destructive tests take precedence.</p>
+        <table class="target-table">
+          <tbody>
+            <tr><th scope="row">Shared handle</th><td>Ti–6Al–4V open frame with inspectable load paths, radiused apertures, wet orientation, and no trapped cavity.</td></tr>
+            <tr><th scope="row">MIZU geometry</th><td>82 mm target blade; 25° inclusive target; shallow 60:40 profile; near-flat reverse face.</td></tr>
+            <tr><th scope="row">KUMIKO geometry</th><td>42 mm target blade; 15° target single flat bevel; dead-flat back; fully mirrored hand versions.</td></tr>
+            <tr><th scope="row">NATA geometry</th><td>60 mm target blade; 24° target single bevel; supported heel; flat reverse reference.</td></tr>
+            <tr><th scope="row">Edge steel study</th><td>MagnaMax candidate for MIZU; MagnaCut or maker-selected alternatives where toughness, fabrication, or availability warrants.</td></tr>
+            <tr><th scope="row">Carry system</th><td>Vented wood saya intended to convert into a broader power grip; exact throat and retention system unresolved.</td></tr>
+            <tr><th scope="row">Material ambition</th><td>No polymer in the proposed production object or packaging, contingent on sanitation, retention, durability, and shipping tests.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>03</span><h2>Mass model</h2></header>
+      <div class="brief-content">
+        <h3>A gram ledger, pending a scale.</h3>
+        <table class="target-table">
+          <tbody>
+            <tr><th scope="row">Kumiko pocket</th><td>17.52 g / 0.618 oz modeled target</td></tr>
+            <tr><th scope="row">Backcountry river</th><td>24.06 g / 0.849 oz modeled target</td></tr>
+            <tr><th scope="row">Trailcraft</th><td>27.20 g / 0.959 oz modeled target</td></tr>
+            <tr><th scope="row">Niagara salmon</th><td>30.66 g / 1.081 oz modeled target</td></tr>
+            <tr><th scope="row">Complete studio system</th><td>58.36 g / 2.059 oz modeled target</td></tr>
+          </tbody>
+        </table>
+        <p>The model does not yet establish manufacturable wall thickness, lock life, finished density, adhesive-free inlay retention, or humidity effects in the saya.</p>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>04</span><h2>Non-negotiable limits</h2></header>
+      <div class="brief-content">
+        <h3>Small and exact is not indestructible.</h3>
+        <ul>
+          <li><strong>No heavy impact</strong><span>No batoning, pelvis splitting, antler work, heavy bone chopping, or uncontrolled free-swing chopping.</span></li>
+          <li><strong>No levering</strong><span>No prying, joint twisting, screwdriver use, or lateral abuse of the point.</span></li>
+          <li><strong>No false flexibility claim</strong><span>An 82 mm semi-flex profile does not replace a dedicated long salmon fillet knife.</span></li>
+          <li><strong>No knife-point ikejime</strong><span>The brain spike remains a separate capped tool study. Species location and humane technique require independent instruction.</span></li>
+          <li><strong>No universal shinkeijime wire</strong><span>Wire length and diameter must follow fish size, anatomy, and practiced technique.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>05</span><h2>Four-sample study</h2></header>
+      <div class="brief-content">
+        <h3>Test the architecture before discussing inventory.</h3>
+        <ol>
+          <li><strong>Sample set</strong><span>Two dominant-hand and two fully mirrored engineering samples; exact module mix set after maker review.</span></li>
+          <li><strong>Dimensional inspection</strong><span>Mass, back flatness, bevel angle, behind-edge thickness, warp, lock engagement, retention, and hand clearance.</span></li>
+          <li><strong>Material inspection</strong><span>Batch coupon, recorded heat treatment, individual hardness, edge-rail inspection, finish thickness, and corrosion baseline.</span></li>
+          <li><strong>Use testing</strong><span>Wet-glove retention, cleanup, salt exposure, fish and food work, edge stability, wood registration, carving, drop, and flex.</span></li>
+          <li><strong>Failure record</strong><span>Photograph and retain failures. Revise geometry before discussing a 25, 50, or 100-unit pilot.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>06</span><h2>Questions for the maker</h2></header>
+      <div class="brief-content">
+        <h3>What should change before a quote?</h3>
+        <ol class="question-list">
+          <li>Which part of the proposed module-lock and tang architecture is least credible at this mass?</li>
+          <li>Which edge-steel and titanium-lamination combinations fit current shop capability without an unjustified process leap?</li>
+          <li>What minimum wall, web, shoulder, and internal-radius dimensions would you require before analysis?</li>
+          <li>Can the KUMIKO module retain a truly flat back after heat treatment, lamination, finishing, and repeated sharpening?</li>
+          <li>What sanitation or corrosion path has this study overlooked?</li>
+          <li>Would four samples answer the important questions, and what test coupons or fixtures should accompany them?</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <header><span>07</span><h2>Evidence notes</h2></header>
+      <div class="brief-content">
+        <h3>Precedent is not proof of this design.</h3>
+        <ul class="source-list">
+          <li><strong>Zen-Wu Toolworks</strong><span><a href="https://zenwutoolworks.com/products/plane-blade-with-chipbreaker" target="_blank" rel="noopener noreferrer">Official metallic plane-blade page</a> — describes MagnaCut laminated into a titanium-alloy body. Checked August 15, 2026.</span></li>
+          <li><strong>Zen-Wu Toolworks</strong><span><a href="https://zenwutoolworks.com/products/wooden-plane-blades-with-chipbreaker" target="_blank" rel="noopener noreferrer">Official wooden plane-blade page</a> — describes a steel edge dovetail-laminated into titanium alloy. Checked August 15, 2026.</span></li>
+          <li><strong>Niagara Specialty Metals</strong><span><a href="https://nsm-ny.com/magnamax-pm-stainless-knife-steel-data-sheet/" target="_blank" rel="noopener noreferrer">MagnaMax data sheet</a> — material and heat-treatment reference; not knife-level performance proof. Checked August 15, 2026.</span></li>
+          <li><strong>Cold Steel</strong><span><a href="https://www.coldsteel.com/bird-game/" target="_blank" rel="noopener noreferrer">Bird &amp; Game product page</a> — official 3.5-inch / 1.4 oz benchmark. Checked August 15, 2026.</span></li>
+          <li><strong>Belmont</strong><span><a href="https://belmont-online.shop/en/products/shinkeijime-80" target="_blank" rel="noopener noreferrer">Official 80 cm shinkeijime range</a> — lists 0.8, 1.0, 1.2, and 1.5 mm options. Checked August 15, 2026.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="brief-close">
+      <p class="eyebrow">Decision requested</p>
+      <h2>Is the architecture worth <em>four honest samples?</em></h2>
+      <p>If the answer is “not yet,” identify the first geometry, process, or sanitation assumption that must change. That answer is more valuable than premature pricing.</p>
+      <div class="actions">
+        <a class="button button-primary" href="mailto:luke@zenwutoolworks.com?subject=SHINOBI%2F%2F82%20KAGE%20prototype%20study&amp;body=Luke%2C%0A%0AI%E2%80%99d%20like%20to%20discuss%20whether%20the%20SHINOBI%2F%2F82%20KAGE%20concept%20is%20a%20credible%20fit%20for%20a%20four-sample%20engineering%20study.%20All%20dimensions%2C%20materials%2C%20and%20weights%20in%20the%20brief%20are%20development%20targets.%0A%0AWhich%20part%20of%20the%20architecture%20would%20you%20change%20before%20quoting%20samples%3F">Open the prototype email</a>
+        <button class="text-link" type="button" onclick="window.print()">Print or save this brief</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

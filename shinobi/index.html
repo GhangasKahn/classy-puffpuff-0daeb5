@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0a">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="SHINOBI//82 KAGE is a development study for a modular, ultralight field and joinery knife system. Inspect the proposed edge architecture, materials, modeled mass, and prototype gates.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SHINOBI//82 KAGE — One handle. Three honest edges.">
+  <meta property="og:description" content="A manufacturer-facing development study for a modular field, fish, and joinery knife system.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SHINOBI//82 KAGE">
+  <meta name="twitter:description" content="One handle. Three honest edges. A development study, not a product announcement.">
+  <title>SHINOBI//82 KAGE — Modular ultralight edge study</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.replace('no-js','js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the concept</a>
+
+  <header class="site-header" data-header>
+    <a class="wordmark" href="#top" aria-label="SHINOBI KAGE, return to top">
+      <span>SHINOBI</span><i>//</i><span>82 KAGE</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu>
+      <span>Index</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 16h18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="#premise">Premise</a>
+      <a href="#edge-index">Edge index</a>
+      <a href="#mass">Mass model</a>
+      <a href="#proof">Evidence</a>
+      <a class="nav-action" href="brief.html">Prototype brief <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Manufacturer study <span>Rev 0.3</span></p>
+        <h1 id="hero-title">
+          <span>One handle.</span>
+          <span>Three honest <em>edges.</em></span>
+        </h1>
+        <p class="hero-deck">A proposed modular cutting system for fish, field, and fine joinery—built around the refusal to make one geometry pretend it can do everything.</p>
+        <div class="actions">
+          <a class="button button-primary" href="#edge-index">Inspect the edge architecture</a>
+          <a class="text-link" href="brief.html">Open the prototype brief <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="hero-instrument" aria-label="Concept drawing of the SHINOBI KAGE handle with the MIZU 82 blade module">
+        <div class="instrument-meta instrument-meta-top" aria-hidden="true">
+          <span>DEVELOPMENT TARGET</span><span>176 MM OAL</span>
+        </div>
+        <svg class="knife-hero" viewBox="0 0 1200 310" role="img" aria-labelledby="knife-title knife-desc">
+          <title id="knife-title">SHINOBI KAGE concept profile</title>
+          <desc id="knife-desc">A narrow low-point blade joins an open titanium handle with two elongated structural apertures.</desc>
+          <defs>
+            <linearGradient id="blade-light" x1="0" y1="0" x2="0.8" y2="1">
+              <stop offset="0" stop-color="#f5f2e9"/>
+              <stop offset=".34" stop-color="#9b9fa2"/>
+              <stop offset=".52" stop-color="#f4f0e6"/>
+              <stop offset="1" stop-color="#555a5d"/>
+            </linearGradient>
+            <linearGradient id="ti-light" x1="0" x2="1">
+              <stop offset="0" stop-color="#292b2b"/>
+              <stop offset=".48" stop-color="#111212"/>
+              <stop offset=".7" stop-color="#363938"/>
+              <stop offset="1" stop-color="#141515"/>
+            </linearGradient>
+            <filter id="soft-shadow" x="-20%" y="-60%" width="140%" height="220%">
+              <feGaussianBlur stdDeviation="13"/>
+            </filter>
+          </defs>
+          <ellipse cx="592" cy="222" rx="493" ry="25" fill="#000" opacity=".76" filter="url(#soft-shadow)"/>
+          <g class="hero-knife-body">
+            <path class="hero-blade" d="M96 185 L138 145 L487 118 L552 129 L548 176 L145 195 Z" fill="url(#blade-light)" stroke="#e7e1d5" stroke-width="1"/>
+            <path d="M96 185 L145 195 L548 176" fill="none" stroke="#fbfbf7" stroke-width="2"/>
+            <path d="M138 145 L487 118 L552 129" fill="none" stroke="#686d70" stroke-width="1"/>
+            <path class="edge-line" d="M96 185 L145 195 L548 176" fill="none" stroke="#d5e4ff" stroke-width="2"/>
+            <path class="hero-handle" d="M535 127 C572 122 594 111 635 113 L1064 126 Q1104 131 1121 158 L1115 181 Q1095 204 1054 205 L636 195 Q592 194 552 177 Z" fill="url(#ti-light)" stroke="#555a59" stroke-width="2"/>
+            <path d="M628 131 C693 127 760 128 820 135 L790 175 C727 177 676 173 622 166 Z" fill="#090a0a" stroke="#3a3d3c"/>
+            <path d="M842 137 C916 137 986 143 1040 151 L1017 181 C953 183 892 179 828 172 Z" fill="#090a0a" stroke="#3a3d3c"/>
+            <path d="M560 151 L1094 165" stroke="#4d58a3" stroke-width="2" opacity=".9"/>
+            <path d="M609 120 L1076 134" stroke="#727775" stroke-width="1" opacity=".5"/>
+            <circle cx="1082" cy="164" r="14" fill="#090a0a" stroke="#666b68"/>
+            <path d="M497 120 L528 179" stroke="#4657a7" stroke-width="3"/>
+          </g>
+          <g fill="#9da09d" font-family="Arial, sans-serif" font-size="11" letter-spacing="2">
+            <text x="111" y="122">LOW SHŌBU PROFILE</text>
+            <text x="914" y="105">OPEN LOAD PATH</text>
+          </g>
+          <path d="M177 128v-18h-14" fill="none" stroke="#6b6f6d"/>
+          <path d="M979 113V94h-14" fill="none" stroke="#6b6f6d"/>
+        </svg>
+        <div class="instrument-meta instrument-meta-bottom">
+          <span>CONCEPT / NOT FOR SALE</span>
+          <span>Targets require CAD, samples, and destructive testing</span>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#premise"><span>Enter the cut study</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <aside class="status-band" aria-label="Project status">
+      <strong>Proposal status</strong>
+      <span>Independent development concept</span>
+      <span>No affiliation or production approval implied</span>
+      <span>All masses and dimensions are targets</span>
+    </aside>
+
+    <section class="premise section" id="premise" aria-labelledby="premise-title">
+      <div class="chapter-mark" aria-hidden="true">01 / THE REFUSAL</div>
+      <div class="premise-lead">
+        <p class="eyebrow">The governing decision</p>
+        <h2 id="premise-title">The gram is not the enemy. <em>The compromise is.</em></h2>
+      </div>
+      <div class="premise-body">
+        <p>A fine fish edge wants a narrow, low-friction profile. A marking knife wants a dead-flat reference face. Controlled trail carving asks for more support behind the apex. Calling one blade “universal” does not resolve those opposing demands.</p>
+        <p>KAGE proposes a shared titanium handle and lock, then gives each cut its own inspectable geometry. Carry only the module the day requires.</p>
+      </div>
+
+      <div class="cut-conflict" aria-label="Comparison of the three cutting requirements">
+        <article>
+          <span class="cut-number">I</span>
+          <h3>Release</h3>
+          <p>Low drag through skin, flesh, and food.</p>
+          <b>MIZU / shallow 60:40</b>
+        </article>
+        <article>
+          <span class="cut-number">II</span>
+          <h3>Register</h3>
+          <p>A true back against square, fiber, and kumiko.</p>
+          <b>KUMIKO / single flat</b>
+        </article>
+        <article>
+          <span class="cut-number">III</span>
+          <h3>Support</h3>
+          <p>A stronger heel for notching and controlled cuts.</p>
+          <b>NATA / reinforced single bevel</b>
+        </article>
+      </div>
+    </section>
+
+    <section class="edge-index section" id="edge-index" aria-labelledby="edge-title">
+      <div class="chapter-mark" aria-hidden="true">02 / EDGE INDEX</div>
+      <header class="section-heading">
+        <div>
+          <p class="eyebrow">Signature interaction</p>
+          <h2 id="edge-title">Choose the cut.<br>The geometry answers.</h2>
+        </div>
+        <p>Use the edge index to inspect the proposed blade profiles. Every configuration is a development target; none is represented as a tested product.</p>
+      </header>
+
+      <div class="edge-selector" data-edge-selector>
+        <div class="edge-tabs" role="tablist" aria-label="Blade module">
+          <button type="button" role="tab" aria-selected="true" aria-controls="edge-panel" id="tab-mizu" tabindex="0" data-edge="mizu">
+            <span>01</span><strong>MIZU–82</strong><small>Fish · food · EDC</small>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="edge-panel" id="tab-kumiko" tabindex="-1" data-edge="kumiko">
+            <span>02</span><strong>KUMIKO–42</strong><small>Marking · fitting · paring</small>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="edge-panel" id="tab-nata" tabindex="-1" data-edge="nata">
+            <span>03</span><strong>NATA–60</strong><small>Whittling · notching · trail</small>
+          </button>
+        </div>
+
+        <div class="edge-stage" id="edge-panel" role="tabpanel" aria-labelledby="tab-mizu" tabindex="0">
+          <div class="stage-visual">
+            <p class="stage-label" data-edge-label>MIZU–82 / water line</p>
+            <svg viewBox="0 0 1000 280" role="img" aria-labelledby="module-title module-desc">
+              <title id="module-title">Selected blade profile</title>
+              <desc id="module-desc" data-edge-desc>A low-point 82 millimeter fish and field blade.</desc>
+              <g class="module-grid" aria-hidden="true">
+                <path d="M0 40H1000M0 100H1000M0 160H1000M0 220H1000"/>
+                <path d="M100 0V280M250 0V280M400 0V280M550 0V280M700 0V280M850 0V280"/>
+              </g>
+              <path class="module-shadow" d="M56 175 L112 125 L690 98 L820 122 L813 184 L124 199 Z" data-module-shadow/>
+              <path class="module-blade" d="M56 175 L112 125 L690 98 L820 122 L813 184 L124 199 Z" data-module-blade/>
+              <path class="module-edge" d="M56 175 L124 199 L813 184" data-module-edge/>
+              <path class="module-spine" d="M112 125 L690 98 L820 122" data-module-spine/>
+              <path d="M820 122V184" class="module-joint"/>
+              <g class="dimension-line" aria-hidden="true">
+                <path d="M56 238V215M813 238V202M56 229H813"/>
+                <path d="m56 229 11-5v10zm757 0-11-5v10z" fill="currentColor" stroke="none"/>
+                <text x="434" y="254" text-anchor="middle" data-edge-length>82 MM BLADE TARGET</text>
+              </g>
+            </svg>
+            <div class="grind-key" aria-label="Proposed grind cross-section">
+              <span>GRIND SECTION</span>
+              <svg viewBox="0 0 170 80" role="img" aria-label="Shallow asymmetric grind cross-section" data-grind>
+                <path d="M18 23 L135 31 L151 41 L133 48 L18 57 Z"/>
+                <path d="M18 57 L133 48 L151 41" class="grind-edge"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="edge-data" aria-live="polite">
+            <p class="edge-status"><i aria-hidden="true"></i><span data-status>Primary field module</span></p>
+            <h3 data-edge-name>MIZU–82</h3>
+            <p class="edge-intent" data-edge-intent>A narrow, low-point profile for controlled draw cuts, skin release, food work, and general carry.</p>
+            <dl class="spec-list">
+              <div><dt>Geometry target</dt><dd data-geometry>25° inclusive, 60:40 shallow hamaguri</dd></div>
+              <div><dt>Steel candidate</dt><dd data-steel>MagnaMax, pending supply and heat-treatment trials</dd></div>
+              <div><dt>Reference behavior</dt><dd data-reference>Near-flat reverse face to limit steering</dd></div>
+              <div><dt>Deliberate limit</dt><dd data-limit>Not for bone chopping, prying, or full-length salmon filleting</dd></div>
+            </dl>
+            <p class="qualification" data-qualification>Final edge angles, distal flex, hardness, and sanitation geometry must be set by physical testing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mass-section section" id="mass" aria-labelledby="mass-title">
+      <div class="chapter-mark" aria-hidden="true">03 / CARRY ONLY THE CUT</div>
+      <div class="mass-layout">
+        <div class="mass-copy">
+          <p class="eyebrow">Working mass model</p>
+          <h2 id="mass-title">Every gram must name its job.</h2>
+          <p>These totals come from the current component model, not weighed prototypes. Select a mission to see the proposed carry ceiling and why each item is present.</p>
+          <div class="mission-tabs" aria-label="Select a proposed loadout">
+            <button type="button" class="is-active" aria-pressed="true" data-loadout="kumiko">Kumiko pocket</button>
+            <button type="button" aria-pressed="false" data-loadout="river">Backcountry river</button>
+            <button type="button" aria-pressed="false" data-loadout="trail">Trailcraft</button>
+            <button type="button" aria-pressed="false" data-loadout="salmon">Niagara salmon</button>
+            <button type="button" aria-pressed="false" data-loadout="studio">Studio system</button>
+          </div>
+        </div>
+
+        <div class="mass-readout" aria-live="polite">
+          <div class="mass-number">
+            <span data-mass>17.52</span><small>g</small>
+          </div>
+          <div class="mass-scale" aria-hidden="true">
+            <i data-mass-bar style="--mass-percent:29.2%"></i>
+            <span>0</span><span>60 g model range</span>
+          </div>
+          <p class="mass-imperial" data-mass-imperial>0.618 oz modeled target</p>
+          <h3 data-loadout-name>Kumiko pocket</h3>
+          <ul class="loadout-list" data-loadout-list>
+            <li><span>KAGE open-frame handle</span><small>shared structure</small></li>
+            <li><span>KUMIKO–42 module</span><small>flat-back joinery edge</small></li>
+            <li><span>Blade cover</span><small>edge protection</small></li>
+          </ul>
+          <p class="mass-note">A modeled total is a design constraint, not a verified product weight. CAD mass properties and physical scales are prototype gates.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="materials section" aria-labelledby="materials-title">
+      <div class="chapter-mark" aria-hidden="true">04 / MATERIAL DISCIPLINE</div>
+      <header class="section-heading">
+        <div>
+          <p class="eyebrow">Proposed material ledger</p>
+          <h2 id="materials-title">Nothing hidden.<br>Nothing ornamental without work.</h2>
+        </div>
+        <p>The zero-plastic ambition applies to the proposed production system. It remains subject to sanitation, durability, sheath-retention, and packaging tests.</p>
+      </header>
+
+      <div class="material-ledger">
+        <article>
+          <span class="material-index">01</span>
+          <div><h3>Ti–6Al–4V</h3><p>Open handle, lock elements, and sharpening substrate.</p></div>
+          <b>STRUCTURE / LOW MASS / CORROSION RESISTANCE</b>
+        </article>
+        <article>
+          <span class="material-index">02</span>
+          <div><h3>Candidate edge steels</h3><p>MagnaMax for the high-wear MIZU study; MagnaCut or a maker-approved steel for tougher modules.</p></div>
+          <b>SELECTION PENDING COUPON TESTS</b>
+        </article>
+        <article>
+          <span class="material-index">03</span>
+          <div><h3>Kiri or honoki</h3><p>Vented saya body with a mechanically serviceable throat.</p></div>
+          <b>DRYING / EDGE ISOLATION / REPAIRABILITY</b>
+        </article>
+        <article>
+          <span class="material-index">04</span>
+          <div><h3>Nitinol</h3><p>Optional, removable shinkeijime wire sized to the target fish—not presented as one universal diameter.</p></div>
+          <b>MISSION MODULE / FIELD SERVICE</b>
+        </article>
+        <article>
+          <span class="material-index">05</span>
+          <div><h3>Washi, silk, wool</h3><p>Packaging and protective wrap only; no foam staging or permanent display waste.</p></div>
+          <b>PACKAGING STUDY / NOT YET SOURCED</b>
+        </article>
+      </div>
+    </section>
+
+    <section class="proof section" id="proof" aria-labelledby="proof-title">
+      <div class="chapter-mark" aria-hidden="true">05 / EVIDENCE BEFORE LEGEND</div>
+      <div class="proof-layout">
+        <div class="proof-sticky">
+          <p class="eyebrow">What is known / what is not</p>
+          <h2 id="proof-title">A proposal earns confidence by exposing its unknowns.</h2>
+          <p>This study uses real manufacturing and material precedents where available. It does not convert those precedents into claims about an unbuilt knife.</p>
+        </div>
+
+        <div class="proof-stream">
+          <article>
+            <p class="proof-type">Verified precedent <span>External source</span></p>
+            <h3>Titanium-laminated cutting tools exist in Zen-Wu’s current vocabulary.</h3>
+            <p>Zen-Wu’s official plane-blade listings describe cutting steels laminated into titanium alloy bodies. That supports a manufacturing conversation; it does not prove this lock, mass, edge rail, or sanitation design.</p>
+            <a href="https://zenwutoolworks.com/products/plane-blade-with-chipbreaker" target="_blank" rel="noopener noreferrer">Inspect Zen-Wu’s official plane-blade description <span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <p class="proof-type">Material evidence <span>External source</span></p>
+            <h3>MagnaMax is a candidate, not a conclusion.</h3>
+            <p>Niagara Specialty Metals describes MagnaMax as a high-wear powder-metallurgy stainless steel and publishes heat-treatment guidance. Thin-edge stability, batch hardness, corrosion after finishing, and maker access still require direct testing.</p>
+            <a href="https://nsm-ny.com/magnamax-pm-stainless-knife-steel-data-sheet/" target="_blank" rel="noopener noreferrer">Read the manufacturer data sheet <span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <p class="proof-type">Market benchmark <span>External source</span></p>
+            <h3>The lightweight reference is measurable.</h3>
+            <p>Cold Steel lists the 3.5-inch Bird &amp; Game at 1.4 oz. KAGE’s proposed loadouts are compared only as modeled mass—not as proven superiority in cutting, ergonomics, or durability.</p>
+            <a href="https://www.coldsteel.com/bird-game/" target="_blank" rel="noopener noreferrer">View the official benchmark <span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <p class="proof-type">Component precedent <span>External source</span></p>
+            <h3>Wire diameter must follow the fish.</h3>
+            <p>Belmont’s official 80 cm shinkeijime line is offered in 0.8, 1.0, 1.2, and 1.5 mm diameters. That supports a modular wire study; suitability for a species and technique remains the user’s responsibility.</p>
+            <a href="https://belmont-online.shop/en/products/shinkeijime-80" target="_blank" rel="noopener noreferrer">Inspect Belmont’s size range <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gates section" aria-labelledby="gates-title">
+      <div class="chapter-mark" aria-hidden="true">06 / MAKE THE UNKNOWN MEASURABLE</div>
+      <p class="eyebrow">Prototype gates</p>
+      <h2 id="gates-title">The next object is not inventory.<br>It is evidence.</h2>
+      <ol class="gate-list">
+        <li>
+          <span>01</span>
+          <div><h3>Geometry lock</h3><p>Resolve tang capture, hand clearance, edge zones, drainage, and left/right-handed module architecture in CAD.</p></div>
+          <b>OUTPUT: CONTROLLED DRAWINGS</b>
+        </li>
+        <li>
+          <span>02</span>
+          <div><h3>Four engineering samples</h3><p>Two dominant-hand and two mirrored samples. Record actual mass, flatness, hardness, lock wear, and sheath retention.</p></div>
+          <b>OUTPUT: MEASURED BASELINE</b>
+        </li>
+        <li>
+          <span>03</span>
+          <div><h3>Abuse the assumptions</h3><p>Wet-glove control, fish residue cleanup, salt exposure, edge stability, wood registration, drop, flex, and accidental light bone contact.</p></div>
+          <b>OUTPUT: FAILURE LOG</b>
+        </li>
+        <li>
+          <span>04</span>
+          <div><h3>Quote only what survived</h3><p>Revise before discussing 25, 50, or 100-unit production. No preorder, scarcity, or launch claim precedes sample acceptance.</p></div>
+          <b>OUTPUT: PILOT DECISION</b>
+        </li>
+      </ol>
+    </section>
+
+    <section class="resolution section" aria-labelledby="resolution-title">
+      <div class="resolution-mark" aria-hidden="true">KAGE / 影</div>
+      <p class="eyebrow">Prepared for a manufacturing conversation</p>
+      <h2 id="resolution-title">Build the evidence.<br><em>Then earn the legend.</em></h2>
+      <p>The brief turns this visual study into a direct set of questions: what can be made, what must change, what must be tested, and what a responsible pilot would require.</p>
+      <div class="actions">
+        <a class="button button-primary" href="brief.html">Review the prototype brief</a>
+        <a class="text-link" href="mailto:luke@zenwutoolworks.com?subject=SHINOBI%2F%2F82%20KAGE%20prototype%20study&amp;body=Luke%2C%0A%0AI%E2%80%99d%20like%20to%20discuss%20whether%20the%20SHINOBI%2F%2F82%20KAGE%20concept%20is%20a%20credible%20fit%20for%20a%20four-sample%20engineering%20study.%20The%20site%20and%20brief%20treat%20all%20dimensions%2C%20materials%2C%20and%20weights%20as%20development%20targets.%0A%0AThe%20first%20question%3A%20which%20part%20of%20the%20proposed%20architecture%20would%20you%20change%20before%20quoting%20samples%3F">Open a prototype email <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="cta-note">The email link opens a pre-addressed draft. Nothing is sent until you choose to send it.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="#top"><span>SHINOBI</span><i>//</i><span>82 KAGE</span></a>
+    <p>Independent development concept. Not a Zen-Wu product announcement, offer for sale, or claim of tested performance.</p>
+    <div>
+      <a href="brief.html">Prototype brief</a>
+      <a href="#proof">Source notes</a>
+      <button type="button" data-motion-toggle aria-pressed="false">Reduce motion</button>
+    </div>
+    <small>Source links checked August 15, 2026. Product names belong to their respective owners.</small>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
