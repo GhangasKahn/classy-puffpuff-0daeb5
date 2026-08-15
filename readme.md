@@ -3,6 +3,7 @@
 A complete, self-contained website:
 
 - `index.html` — the public **landing page** (the marketing front door)
+- `shinobi/` — **SHINOBI//82 KAGE**, a proposed Zen-Wu field-and-bench knife specification (not for sale) at `/shinobi/`
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, `export_martin_fab.py`, `fab_system.py`, plan generators)
