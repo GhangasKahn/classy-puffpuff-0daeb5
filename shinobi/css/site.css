@@ -828,15 +828,110 @@ html[data-motion="off"] .blade-mod { transition: none; }
 @media (min-width: 960px) {
   .cad-shell { grid-template-columns: 1fr 17rem; }
 }
-.cad-stage {
-  background: #161816;
-  border: 1px solid #3a3c3a;
-  min-height: 320px;
+.cad-side { display: grid; gap: 0.8rem; align-content: start; }
+
+.hero-cad {
+  border-bottom: 1px solid var(--line);
 }
-.cad-stage canvas {
+.hero-copy {
+  padding: clamp(1.6rem, 4vw, 3rem) 0 clamp(2.4rem, 6vw, 4.5rem);
+}
+.studio {
+  position: relative;
+  background: #eee4d4;
+  border: 1px solid var(--line);
+  min-height: 20rem;
+  overflow: hidden;
+}
+.studio-hero {
+  min-height: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+.studio-hero .studio-poster {
+  position: relative;
+  height: auto;
+  object-fit: contain;
+}
+.studio-seat { min-height: 22rem; }
+.grind-still {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #eee4d4;
+}
+.studio canvas {
   display: block;
   width: 100%;
   height: auto;
   touch-action: none;
+  position: relative;
+  z-index: 1;
 }
-.cad-side { display: grid; gap: 0.8rem; align-content: start; }
+.studio-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.studio:has(canvas) .studio-poster {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.solid-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem;
+  margin: 1.4rem 0 0;
+}
+@media (min-width: 700px) {
+  .solid-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1100px) {
+  .solid-grid { grid-template-columns: repeat(7, 1fr); }
+}
+.solid-grid button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: #eee4d4;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+.solid-grid button img {
+  width: 100%;
+  aspect-ratio: 7 / 5;
+  object-fit: cover;
+  display: block;
+}
+.solid-grid button span {
+  display: block;
+  padding: 0.45rem 0.5rem 0.55rem;
+  font-family: var(--data);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.solid-grid button[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.inspect-dim {
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.grind-board-light {
+  background: #eee4d4;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.grind-board-light .grind-read dt { color: var(--indigo); }
+.grind-board-light .grind-read dd.job { color: var(--ink-2); }

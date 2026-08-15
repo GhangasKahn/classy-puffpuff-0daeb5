@@ -143,9 +143,12 @@
     }
 
     const blade = bladeId();
-    $$(".blade-mod").forEach((node) => {
-      node.dataset.seated = node.dataset.blade === blade ? "true" : "false";
-    });
+    window.dispatchEvent(new CustomEvent("shinobi:seat", {
+      detail: { blade, seated: [...state.seated] }
+    }));
+    window.dispatchEvent(new CustomEvent("shinobi:grind", {
+      detail: { blade }
+    }));
 
     const handMark = $("#hand-mark");
     if (handMark) {
@@ -477,7 +480,6 @@
   initNav();
   initLedger();
   initGrind();
-  initInventory();
   initForm();
   initYear();
 })();

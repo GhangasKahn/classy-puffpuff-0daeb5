@@ -3,32 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>SHINOBI//82 KAGE — a proposed field instrument</title>
-  <meta name="description" content="SHINOBI//82 KAGE is a proposed ultralight shop-and-river knife system: numbered kit, engineered grind zones, dedicated ikejime spike, and a steel-and-strop plate. Not an announced Zen-Wu product." />
-  <meta name="theme-color" content="#1a1612" />
-  <link rel="canonical" href="https://polite-swan-ae1631.netlify.app/" />
+  <title>SHINOBI//82 KAGE — CAD for Zen-Wu review</title>
+  <meta name="description" content="Proposed shop-and-river kit shown as CadQuery solids: STEP AP214 masters, 1:1 DXF profiles, and a studio you can orbit. Not an announced Zen-Wu product." />
+  <meta name="theme-color" content="#eee4d4" />
+  <link rel="canonical" href="https://astounding-mochi-0e5bc0.netlify.app/" />
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="./assets/og.jpg" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="SHINOBI//82 KAGE — a proposed field instrument" />
-  <meta property="og:description" content="A numbered kit: pale wood you can find, charcoal metal you can hold, grind angles you can inspect. Proposed Zen-Wu conversation. Not for sale here." />
-  <meta property="og:image" content="https://polite-swan-ae1631.netlify.app/assets/og.jpg" />
+  <meta property="og:title" content="SHINOBI//82 KAGE — CAD for Zen-Wu review" />
+  <meta property="og:description" content="The page is the engineering solids. Download the STEP zip for Luke. Proposed collaboration. Not for sale here." />
+  <meta property="og:image" content="https://astounding-mochi-0e5bc0.netlify.app/assets/og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SHINOBI//82 KAGE — a proposed field instrument" />
-  <meta name="twitter:description" content="A numbered kit: pale wood you can find, charcoal metal you can hold, grind angles you can inspect." />
-  <meta name="twitter:image" content="https://polite-swan-ae1631.netlify.app/assets/og.jpg" />
+  <meta name="twitter:title" content="SHINOBI//82 KAGE — CAD for Zen-Wu review" />
+  <meta name="twitter:description" content="CadQuery solids on washi. STEP is the master. STL is for looking." />
+  <meta name="twitter:image" content="https://astounding-mochi-0e5bc0.netlify.app/assets/og.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Shippori+Mincho:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/site.css" />
-  <link rel="preload" as="image" href="./assets/kit-box-open.webp" imagesrcset="./assets/kit-box-open-sm.webp 900w, ./assets/kit-box-open.webp 1800w" imagesizes="100vw" />
+  <link rel="preload" as="image" href="./assets/studio/00-kit.webp" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "SHINOBI//82 KAGE — a proposed field instrument",
-    "description": "A proposed ultralight modular knife system for woodworkers and backcountry anglers. Not an announced product and not offered for sale on this page."
+    "name": "SHINOBI//82 KAGE — CAD for Zen-Wu review",
+    "description": "Proposed ultralight modular knife system shown as production-intent CAD solids. Not an announced product and not offered for sale on this page."
   }
   </script>
 </head>
@@ -40,18 +40,14 @@
       <img src="./assets/mark.svg" width="28" height="28" alt="" />
       <span>
         <span class="brand-name">SHINOBI</span>
-        <span class="brand-sub">82 KAGE · proposed</span>
+        <span class="brand-sub">82 KAGE · CAD</span>
       </span>
     </a>
     <nav class="nav-desktop" aria-label="Chapters">
       <ul>
         <li><a href="#open">Open</a></li>
-        <li><a href="#kit">Kit</a></li>
-        <li><a href="#metal">Metal</a></li>
-        <li><a href="#cad">CAD</a></li>
+        <li><a href="#kit">Solids</a></li>
         <li><a href="#grind">Grind</a></li>
-        <li><a href="#hold">Hold</a></li>
-        <li><a href="#joinery">Layout</a></li>
         <li><a href="#seat">Seat</a></li>
         <li><a href="#proof">Proof</a></li>
         <li><a href="#brief">Brief</a></li>
@@ -68,12 +64,8 @@
     <button class="icon-btn" id="nav-close" type="button">Close</button>
     <ul>
       <li><a data-nav href="#open">Open</a></li>
-      <li><a data-nav href="#kit">Kit</a></li>
-      <li><a data-nav href="#metal">Metal</a></li>
-      <li><a data-nav href="#cad">CAD</a></li>
+      <li><a data-nav href="#kit">Solids</a></li>
       <li><a data-nav href="#grind">Grind</a></li>
-      <li><a data-nav href="#hold">Hold</a></li>
-      <li><a data-nav href="#joinery">Layout</a></li>
       <li><a data-nav href="#seat">Seat</a></li>
       <li><a data-nav href="#proof">Proof</a></li>
       <li><a data-nav href="#brief">Brief</a></li>
@@ -81,166 +73,59 @@
   </dialog>
 
   <main id="main">
-    <figure class="cover">
-      <img
-        src="./assets/kit-box-open.webp"
-        srcset="./assets/kit-box-open-sm.webp 900w, ./assets/kit-box-open.webp 1800w"
-        sizes="100vw"
-        width="1800"
-        height="1012"
-        alt="Concept unboxing: a mitered light-wood box on washi holding a charcoal skeletonized knife and a pale wooden saya, with numbered linen-tagged accessories beside it."
-        fetchpriority="high"
-      />
-      <figcaption>Concept still of the studio chest. Pale wood is the thing you can find. Charcoal metal is the thing you hold. Not factory photography.</figcaption>
-    </figure>
-
-    <section class="act hero" id="open">
-      <div class="wrap">
-        <p class="kicker">Proposed instrument · not for sale here</p>
-        <h1 class="display">Numbered. Seated. Accounted for.</h1>
-        <p class="lede">SHINOBI//82 KAGE is a shop-and-river kit whose every piece has a job: a grind that can be named, a spike that is not the knife, a plate that restores the edge, a cord that keeps the hand, a saya that does not vanish in grass.</p>
-        <div class="hero-meta">
-          <span>Woodworkers</span>
-          <span>Backcountry anglers</span>
-          <span>Zen-Wu conversation</span>
-        </div>
+    <section class="hero-cad" id="open">
+      <div class="studio studio-hero" id="hero-stage">
+        <img class="studio-poster" src="./assets/studio/00-kit.webp" width="1800" height="1100" alt="Exploded SHINOBI kit rendered from the CadQuery solids on a washi ground: frame, MIZU-82, saya, TOGI plate, spike, tweezer, and kusabi wedge." fetchpriority="high" />
+      </div>
+      <div class="hero-copy wrap">
+        <p class="kicker">Proposed instrument · the solids are the page</p>
+        <h1 class="display">The kit, as CadQuery built it.</h1>
+        <p class="lede">Every object on this page is a production-intent B-rep: STEP AP214 for Luke, DXF at 1:1 mm for EDM talk, STL only so you can turn the same geometry. The earlier stills were finish studies. This is the engineering.</p>
         <div class="hero-actions">
-          <a class="btn" href="#kit">Read the inventory</a>
-          <a class="btn ghost" href="#brief">Compose a studio brief</a>
+          <a class="btn" href="./cad/SHINOBI82-KAGE-Zen-Wu-review.zip" download>Download the Zen-Wu review zip</a>
+          <a class="btn ghost" href="#kit">Inspect a solid</a>
         </div>
-        <p class="fine collab-note">This page proposes a collaboration with Zen-Wu Toolworks. It is not an announced Zen-Wu product, not a quote, and not a claim that Luke Lyu or the Wuhan workshop has accepted the work.</p>
+        <p class="fine collab-note">Collaboration proposed with Zen-Wu Toolworks. Not an announced product, not a quote, not a claim that Luke Lyu has accepted the work. Drag the studio. The hammered map is the TOGI plate.</p>
       </div>
     </section>
 
     <section class="act" id="kit">
       <div class="wrap">
-        <p class="kicker">01 · Inventory</p>
-        <h2>The box is a ledger you can open.</h2>
-        <p class="lede">Linen tags carry a number and a tactile dot pattern so the kit can be read in low light and by touch. Nothing in the wet system is plastic. Washi and silk stay in the studio chest.</p>
-        <div class="tag-row" role="tablist" aria-label="Kit inventory">
-          <button class="tag-btn" type="button" role="tab" data-item="01" aria-selected="true" aria-controls="item-01">01 Blade</button>
-          <button class="tag-btn" type="button" role="tab" data-item="02" aria-selected="false" aria-controls="item-02">02 Saya</button>
-          <button class="tag-btn" type="button" role="tab" data-item="03" aria-selected="false" aria-controls="item-03">03 Spike</button>
-          <button class="tag-btn" type="button" role="tab" data-item="04" aria-selected="false" aria-controls="item-04">04 Wires</button>
-          <button class="tag-btn" type="button" role="tab" data-item="05" aria-selected="false" aria-controls="item-05">05 TOGI</button>
-          <button class="tag-btn" type="button" role="tab" data-item="06" aria-selected="false" aria-controls="item-06">06 Tweezer</button>
-          <button class="tag-btn" type="button" role="tab" data-item="07" aria-selected="false" aria-controls="item-07">07 Tether</button>
+        <p class="kicker">01 · Solids</p>
+        <h2>Pick a part. Orbit the STEP.</h2>
+        <p class="lede">Washi ground. Charcoal titanium. Brushed edge steel. The TOGI hammered map sits on every metal face — the same finish language as the plate, not a new material for each object.</p>
+        <div class="solid-grid" aria-label="CAD parts">
+          <button type="button" data-inspect="01-frame" aria-pressed="true"><img src="./assets/studio/01-frame.webp" srcset="./assets/studio/01-frame-sm.webp 900w, ./assets/studio/01-frame.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>01 Frame</span></button>
+          <button type="button" data-inspect="02-mizu" aria-pressed="false"><img src="./assets/studio/02-mizu.webp" srcset="./assets/studio/02-mizu-sm.webp 900w, ./assets/studio/02-mizu.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>02 MIZU-82</span></button>
+          <button type="button" data-inspect="03-kumiko" aria-pressed="false"><img src="./assets/studio/03-kumiko.webp" srcset="./assets/studio/03-kumiko-sm.webp 900w, ./assets/studio/03-kumiko.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>03 KUMIKO-42</span></button>
+          <button type="button" data-inspect="04-nata" aria-pressed="false"><img src="./assets/studio/04-nata.webp" srcset="./assets/studio/04-nata-sm.webp 900w, ./assets/studio/04-nata.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>04 NATA-60</span></button>
+          <button type="button" data-inspect="05-saya" aria-pressed="false"><img src="./assets/studio/05-saya.webp" srcset="./assets/studio/05-saya-sm.webp 900w, ./assets/studio/05-saya.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>05 Saya</span></button>
+          <button type="button" data-inspect="06-spike" aria-pressed="false"><img src="./assets/studio/06-spike.webp" srcset="./assets/studio/06-spike-sm.webp 900w, ./assets/studio/06-spike.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>06 KAGE-HARI</span></button>
+          <button type="button" data-inspect="07-togi" aria-pressed="false"><img src="./assets/studio/07-togi.webp" srcset="./assets/studio/07-togi-sm.webp 900w, ./assets/studio/07-togi.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>07 TOGI</span></button>
+          <button type="button" data-inspect="08-tweezer" aria-pressed="false"><img src="./assets/studio/08-tweezer.webp" srcset="./assets/studio/08-tweezer-sm.webp 900w, ./assets/studio/08-tweezer.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>08 Tweezer</span></button>
+          <button type="button" data-inspect="09-cassette" aria-pressed="false"><img src="./assets/studio/09-cassette.webp" srcset="./assets/studio/09-cassette-sm.webp 900w, ./assets/studio/09-cassette.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>09 Cassette</span></button>
+          <button type="button" data-inspect="10-s50" aria-pressed="false"><img src="./assets/studio/10-s50.webp" srcset="./assets/studio/10-s50-sm.webp 900w, ./assets/studio/10-s50.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>10 S-50</span></button>
+          <button type="button" data-inspect="11-l80" aria-pressed="false"><img src="./assets/studio/11-l80.webp" srcset="./assets/studio/11-l80-sm.webp 900w, ./assets/studio/11-l80.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>11 L-80</span></button>
+          <button type="button" data-inspect="12-locator" aria-pressed="false"><img src="./assets/studio/12-locator.webp" srcset="./assets/studio/12-locator-sm.webp 900w, ./assets/studio/12-locator.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>12 Locator</span></button>
+          <button type="button" data-inspect="13-wedge" aria-pressed="false"><img src="./assets/studio/13-wedge.webp" srcset="./assets/studio/13-wedge-sm.webp 900w, ./assets/studio/13-wedge.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>13 Kusabi</span></button>
+          <button type="button" data-inspect="14-chest" aria-pressed="false"><img src="./assets/studio/14-chest.webp" srcset="./assets/studio/14-chest-sm.webp 900w, ./assets/studio/14-chest.webp 1400w" sizes="(max-width:700px) 50vw, 16vw" width="1400" height="1000" alt="" /><span>14 Chest</span></button>
         </div>
 
-        <article id="item-01" data-item-panel="01">
-          <div class="split">
-            <div>
-              <h3>01 — Kusabi frame and one seated blade</h3>
-              <p>The handle is a load-path skeleton, not decorative perforation: dorsal compression rail, ventral tension rail, radiused webs. Diamond knurl lives only on the contact rails — thumb, index, palm — so wet traction does not become a fish-scale trap. The triangular pommel takes the tether. One blade seats at a time.</p>
-            </div>
-            <figure class="figure square">
-              <img src="./assets/kit-knife-saya.webp" srcset="./assets/kit-knife-saya-sm.webp 900w, ./assets/kit-knife-saya.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1350" alt="Charcoal skeletonized knife and pale wooden saya in a mitered wood box." loading="lazy" />
-              <figcaption>Concept: blade and saya in wooden cradles, not foam.</figcaption>
-            </figure>
-          </div>
-        </article>
-        <article id="item-02" data-item-panel="02" hidden>
-          <div class="split">
-            <div>
-              <h3>02 — Kiri / honoki saya</h3>
-              <p>The sheath is the locator. Charcoal DLC disappears in wet grass; pale wood does not. A linen tab tucks into the mouth and unfolds as a finger of contrast. The end cord is a pull, not ornament. Open drainage. No Kydex, no magnet, no rattle against the edge.</p>
-            </div>
-            <figure class="figure square">
-              <img src="./assets/kit-locator.webp" srcset="./assets/kit-locator-sm.webp 900w, ./assets/kit-locator.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1350" alt="Pale wooden sheath lying in riverside grass, visible against green and brown." loading="lazy" />
-              <figcaption>The saya is designed to be seen. The knife stays sheathed and dark.</figcaption>
-            </figure>
-          </div>
-        </article>
-        <article id="item-03" data-item-panel="03" hidden>
-          <div class="split">
-            <div>
-              <h3>03 — KAGE-HARI miniature steel spike</h3>
-              <p>Ikejime is not a knife trick. A dedicated 34 mm hardened spike, capped, locks across the saya as a T-handle using the TOGI plate as the wet grip. The knife tip is reserved for tracing. Species have different brain locations; confirm with a current ikijime reference. Large salmon or thick-skulled catfish may need a full-size spike. This page is not a slaughter manual.</p>
-            </div>
-            <figure class="figure square">
-              <img src="./assets/metal-spike-tip.webp" srcset="./assets/metal-spike-tip-sm.webp 640w, ./assets/metal-spike-tip.webp 1200w" sizes="(max-width: 860px) 100vw, 46vw" width="1200" height="1200" alt="Macro of a needle-sharp miniature steel spike tip with a faceted grind." loading="lazy" />
-              <figcaption>Concept macro of the spike point — not the knife kissaki.</figcaption>
-            </figure>
-          </div>
-        </article>
-        <article id="item-04" data-item-panel="04" hidden>
-          <h3>04 — SHINKEI wires</h3>
-          <p>S-50: 0.8 × 500 mm for backcountry trout and most bass. L-80: 1.2 × 800 mm for adult Niagara salmon. Optional XL 1.5 × 800 mm is a studio spare, not a pack default. Rounded polished tips follow the canal. One compromised diameter is refused. Japanese makers such as Belmont already produce shape-memory wires in these sizes; that is precedent, not a partnership claim.</p>
-        </article>
-        <article id="item-05" data-item-panel="05" hidden>
-          <div class="split">
-            <div>
-              <h3>05 — TOGI plate: steel and strop</h3>
-              <p>One rectangular plate, two working faces: 600-grit diamond for damage, 1200-grit for daily maintenance, and a replaceable 1 μm diamond film strop on the reverse. The hammered face is wet traction when the plate becomes the T-handle for the spike. Fixed angle indexes: 12°, 14°, 15°, 17°, 24°. The ura of a KUMIKO module is never lifted. Zen-Wu already sells diamond plates and publishes a grit table.</p>
-            </div>
-            <figure class="figure square">
-              <img src="./assets/metal-strop.webp" srcset="./assets/metal-strop-sm.webp 640w, ./assets/metal-strop.webp 1200w" sizes="(max-width: 860px) 100vw, 46vw" width="1200" height="1200" alt="Rectangular textured strop plate sliding into a charcoal metal housing." loading="lazy" />
-              <figcaption>Concept: hammered traction face, not a logo panel.</figcaption>
-            </figure>
-          </div>
-        </article>
-        <article id="item-06" data-item-panel="06" hidden>
-          <h3>06 — Pinbone tweezer</h3>
-          <p>Beta-titanium, 0.55 g target, nests in the saya. Built for pinbones and fine membrane, not for ikejime. If you can feel a pinbone with MIZU, this is what removes it without opening a second tool pouch.</p>
-        </article>
-        <article id="item-07" data-item-panel="07" hidden>
-          <h3>07 — SK99 tether</h3>
-          <p>The hand opens. The knife does not leave. A short Dyneema SK99 loop through a radiused pommel hole — high tenacity, it floats, it melts near 140°C, and a sharp aperture will cut it, so the hole is radiused and the fiber never crosses the edge. Black braid, not costume paracord. Not a wrap. Not in the food-contact stack.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="act act-dark" id="metal">
-      <div class="wrap">
-        <p class="kicker">02 · Instrument language</p>
-        <h2>Charcoal you can grip. Steel you can inspect.</h2>
-        <p>The object’s own finish is monochrome: DLC or equivalent charcoal on the titanium frame, brushed rail on the cutting steel, diamond knurl only where a wet finger needs it. This is not tactical ornament. It is traction, rinse, and a point that does one job.</p>
-        <div class="metal-grid" style="margin-top:1.6rem">
-          <figure>
-            <img src="./assets/metal-knurl.webp" srcset="./assets/metal-knurl-sm.webp 640w, ./assets/metal-knurl.webp 1200w" sizes="(max-width: 700px) 50vw, 28vw" width="1200" height="1200" alt="Macro of a skeletonized DLC handle with diamond knurl meeting a brushed steel rail." loading="lazy" />
-            <figcaption>Knurl on contact rails only</figcaption>
-          </figure>
-          <figure>
-            <img src="./assets/metal-spike-tip.webp" srcset="./assets/metal-spike-tip-sm.webp 640w, ./assets/metal-spike-tip.webp 1200w" sizes="(max-width: 700px) 50vw, 28vw" width="1200" height="1200" alt="Macro of the ikejime spike tip." loading="lazy" />
-            <figcaption>KAGE-HARI point</figcaption>
-          </figure>
-          <figure>
-            <img src="./assets/metal-pommel.webp" srcset="./assets/metal-pommel-sm.webp 640w, ./assets/metal-pommel.webp 1200w" sizes="(max-width: 700px) 50vw, 28vw" width="1200" height="1200" alt="Skeletonized pommel with black high-modulus tether." loading="lazy" />
-            <figcaption>Pommel and tether</figcaption>
-          </figure>
-          <figure>
-            <img src="./assets/metal-strop.webp" srcset="./assets/metal-strop-sm.webp 640w, ./assets/metal-strop.webp 1200w" sizes="(max-width: 700px) 50vw, 28vw" width="1200" height="1200" alt="Hammered strop plate in a charcoal housing." loading="lazy" />
-            <figcaption>TOGI housing</figcaption>
-          </figure>
-        </div>
-        <p class="fine" style="margin-top:1rem">Concept macros. They describe finish and geometry, not a finished production lot.</p>
-      </div>
-    </section>
-
-    <section class="act" id="cad">
-      <div class="wrap">
-        <p class="kicker">CAD bench · production-intent B-rep</p>
-        <h2>What you send Luke is STEP, not this viewer.</h2>
-        <p class="lede">The first meshes on this bench were massing studies — boxy STL with a dozen faces. They were for looking, not for a shop. The files here now are CadQuery solids: STEP AP214 as the master, DXF profiles at 1:1 mm for EDM talk, STL only so you can orbit the same geometry.</p>
-        <p>Download the zip. Attach it to the studio brief. Luke can open <code>step/01-frame.step</code> in the same class of CAD Zen-Wu already uses. The viewer below is a tessellation of those solids, with the TOGI hammered map on every textured face. It is not the manufacturing file.</p>
-        <p class="fine">Proposed geometry. Not a released revision. No heat-treat ticket, no FEA, no weighed sample. The kusabi contract is in the transmittal: one tang, 28.00 × 10.00 × 2.00 mm, shared by every blade.</p>
-        <div class="cad-package">
-          <a class="btn" href="./cad/SHINOBI82-KAGE-Zen-Wu-review.zip" download>Download the Zen-Wu review zip</a>
-          <a class="btn ghost" href="./cad/TRANSMITTAL.txt" download>Transmittal</a>
-          <a class="btn ghost" href="./cad/BOM.csv" download>BOM.csv</a>
-          <a class="btn ghost" href="./cad/step/00-kit-layout.step" download>Kit layout STEP</a>
-        </div>
-        <div class="cad-shell" style="margin-top:1.4rem">
+        <div class="cad-shell" style="margin-top:1.6rem">
           <div>
-            <div class="cad-stage" id="cad-stage"></div>
-            <p class="fine" id="cad-status" role="status">Loading the frame…</p>
+            <div class="studio" id="inspect-stage"></div>
+            <p class="fine" id="inspect-status" role="status">Loading the frame…</p>
           </div>
           <div class="cad-side">
-            <div class="tag-row" id="cad-parts" aria-label="CAD parts"></div>
+            <p class="kicker">Seated solid</p>
+            <p class="inspect-dim mono" id="inspect-dim">94 × 16.2 × 4.6</p>
+            <p id="inspect-job">Ti-6Al-4V monocoque. Rinse slots, kusabi pocket, Ø4.40 eye.</p>
             <a class="btn" id="cad-step" href="./cad/step/01-frame.step" download>Download 01-frame.step</a>
             <a class="btn ghost" id="cad-download" href="./cad/stl/01-frame.stl" download>Download 01-frame.stl</a>
+            <a class="btn ghost" href="./cad/TRANSMITTAL.txt" download>Transmittal</a>
+            <a class="btn ghost" href="./cad/BOM.csv" download>BOM.csv</a>
             <a class="btn ghost" href="./cad/parameters.json" download>parameters.json</a>
-            <a class="btn ghost" href="./cad/SHINOBI.scad" download>OpenSCAD notes</a>
+            <p class="fine">Master is STEP. STL is the tessellation you are orbiting. Kusabi contract: tang 28.00 × 10.00 × 2.00 mm, slot +0.12 / +0.10 / +0.20.</p>
           </div>
         </div>
       </div>
@@ -248,21 +133,16 @@
 
     <section class="act" id="grind">
       <div class="wrap">
-        <p class="kicker">03 · Geometry</p>
-        <h2>Three zones. Named angles. No mystery grind.</h2>
-        <p>Seat a blade in the ledger below, then inspect the zone. Angles are proposed working targets for conversation and CAD — not hardness tickets and not a promise that a first sample will hit them.</p>
+        <p class="kicker">02 · Geometry</p>
+        <h2>The blade you seated, as a solid.</h2>
+        <p>Angles are proposed working targets for conversation and CAD — not hardness tickets. The mesh is the same STEP as the zip.</p>
         <div class="choice-row" style="margin:1rem 0">
           <button class="icon-btn" type="button" data-zone="heel" aria-pressed="false">Heel</button>
           <button class="icon-btn" type="button" data-zone="belly" aria-pressed="true">Belly</button>
           <button class="icon-btn" type="button" data-zone="tip" aria-pressed="false">Tip</button>
         </div>
-        <div class="grind-board">
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="120" height="100" fill="#111412"/>
-            <polygon id="grind-wedge" points="22 18, 92 48, 22 78" fill="#c5c2b8"/>
-            <line x1="18" y1="48" x2="96" y2="48" stroke="#3d6178" stroke-width="1"/>
-            <text x="8" y="14" fill="#9a9186" font-size="6" font-family="IBM Plex Mono, monospace">CROSS-SECTION · DEMONSTRATION</text>
-          </svg>
+        <div class="grind-board grind-board-light">
+          <img class="grind-still" id="grind-still" src="./assets/studio/02-mizu.webp" width="1400" height="1000" alt="MIZU-82 solid, rendered from the CadQuery mesh" />
           <dl class="grind-read">
             <dt>Module</dt>
             <dd id="grind-name">MIZU-82</dd>
@@ -276,81 +156,20 @@
             <dd class="job" id="grind-job">Skin release and pinbone tracing.</dd>
           </dl>
         </div>
-        <p class="fine" style="margin-top:0.8rem">Finish target on MIZU: 800–1000 grit diamond with a 1 μm deburr. A full mirror can slide on fish skin. KUMIKO stays a single 15° flat bevel on a dead-flat back. NATA stays 24° and refuses batoning.</p>
-      </div>
-    </section>
-
-    <section class="act" id="hold">
-      <div class="wrap split">
-        <div>
-          <p class="kicker">04 · Hold and find</p>
-          <h2>Do not drop it. Do not lose it.</h2>
-          <p>Two different failures. The tether solves the first: if the fingers open over water or a bench, the pommel loop keeps the instrument. The saya solves the second: a charcoal knife in grass is a lost knife; a pale wood sheath with a linen tab is a mark you can walk back to.</p>
-          <p>Knurl is only on the rails you hold. The lattice stays open so blood, sap, and river water rinse through. No cord wrap. No hidden cavity. No scale screws to loosen in fish slime.</p>
-        </div>
-        <figure class="figure square">
-          <img src="./assets/kit-handle-macro.webp" srcset="./assets/kit-handle-macro-sm.webp 900w, ./assets/kit-handle-macro.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1350" alt="Macro of the open titanium lattice handle and triangular pommel." loading="lazy" />
-          <figcaption>Concept handle: load paths first, apertures second.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="act" id="joinery">
-      <div class="wrap split reverse">
-        <figure class="figure">
-          <img src="./assets/kit-joinery.webp" srcset="./assets/kit-joinery-sm.webp 900w, ./assets/kit-joinery.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1012" alt="A slender dark knife registered against a square on pale hardwood, scribing a joinery line." loading="lazy" />
-          <figcaption>KUMIKO-42 is the module that must register. MIZU is not asked to fake this job.</figcaption>
-        </figure>
-        <div>
-          <p class="kicker">05 · Layout</p>
-          <h2>A marking land that stays a land.</h2>
-          <p>Joinery is why the kit is modular. KUMIKO-42 inherits Zen-Wu’s published travel-knife idea: flat back, flat bevel, useful for scribing, chamfering, and fitting kumiko. The back is urade-fuyo in spirit — no hollow to rock against a square. Right and left are mirrored tools, not opposite sharpening.</p>
-        </div>
+        <p class="fine" style="margin-top:0.8rem">MIZU finish target: 800–1000 diamond, 1 μm deburr. KUMIKO stays a 15° flat on a dead-flat ura. NATA stays 24° and refuses batoning.</p>
       </div>
     </section>
 
     <section class="act" id="seat">
       <div class="wrap">
-        <p class="kicker">06 · Seat</p>
-        <h2>Seat the kusabi. Read the ledger.</h2>
-        <p class="lede">One frame. One blade. Accessories you can name. Masses are a geometric model, not weighed prototypes.</p>
-        <p class="fine">What this does: choose a hand, seat one blade, add only what you will carry. The gram total and the task list update together.</p>
+        <p class="kicker">03 · Seat</p>
+        <h2>Seat the kusabi. The studio follows.</h2>
+        <p class="lede">One frame. One blade. Accessories you can name. The row below is the same solids as the zip, laid out from the loadout. Masses are a geometric model, not weighings.</p>
 
-        <div class="ledger-shell" style="margin-top:2rem">
-          <div>
-            <div class="instrument" aria-hidden="true">
-              <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg">
-                <rect width="640" height="280" fill="#161816"/>
-                <g fill="none" stroke="#3a3c3a" stroke-width="0.6">
-                  <path d="M20 40 H620 M20 240 H620"/>
-                  <path d="M40 20 V260 M600 20 V260"/>
-                </g>
-                <g class="blade-mod" data-blade="mizu" data-seated="true">
-                  <path d="M78 118 C 140 108, 210 112, 268 124 L 286 128 C 300 130, 318 126, 332 118 L 338 122 C 318 136, 292 140, 268 136 L 210 128 C 150 122, 110 128, 84 136 Z" fill="#c5c2b8"/>
-                  <path d="M78 118 L 84 136 L 72 138 L 70 122 Z" fill="#2f4a5c"/>
-                </g>
-                <g class="blade-mod" data-blade="kumiko" data-seated="false">
-                  <path d="M92 126 L 250 126 L 268 132 L 250 138 L 92 138 Z" fill="#b9b3a6"/>
-                  <path d="M92 126 L 92 138 L 80 138 L 80 126 Z" fill="#2f4a5c"/>
-                </g>
-                <g class="blade-mod" data-blade="nata" data-seated="false">
-                  <path d="M86 112 L 240 108 L 262 128 L 240 148 L 86 144 Z" fill="#9a958c"/>
-                  <path d="M86 112 L 86 144 L 72 144 L 72 112 Z" fill="#2f4a5c"/>
-                </g>
-                <path d="M332 118 L 560 128 L 568 148 L 338 152 C 320 152, 304 144, 292 136 Z" fill="#2a2c2a"/>
-                <ellipse cx="500" cy="138" rx="42" ry="9" fill="#161816"/>
-                <ellipse cx="430" cy="138" rx="28" ry="8" fill="#161816"/>
-                <path d="M332 128 L 348 128" stroke="#3d6178" stroke-width="2"/>
-                <text x="40" y="32" fill="#9a9186" font-size="11" font-family="IBM Plex Mono, monospace">KUSABI FRAME · ONE BLADE SEATED</text>
-              </svg>
-              <div class="instrument-caption">
-                <span id="hand-mark">Right-hand default</span>
-                <span>Demonstration of seating, not a live product interface</span>
-              </div>
-            </div>
-            <p class="sr-only" id="ledger-live" aria-live="polite"></p>
-          </div>
+        <div class="studio studio-seat" id="seat-stage" style="margin-top:1.4rem"></div>
+        <p class="sr-only" id="ledger-live" aria-live="polite"></p>
 
+        <div class="ledger-shell" style="margin-top:1.6rem">
           <div class="controls">
             <fieldset>
               <legend>Handed geometry</legend>
@@ -397,36 +216,30 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="mass-readout" style="margin-top:1.4rem">
           <div>
-            <div class="lbl">Modeled mass</div>
-            <div class="num mono"><span id="mass-g">0.00</span> g</div>
-          </div>
-          <div>
-            <div class="lbl">Ounces</div>
-            <div class="num mono"><span id="mass-oz">0.000</span> <span class="unit">oz</span></div>
-          </div>
-          <div>
-            <div class="lbl">Line items</div>
-            <div class="num mono" id="mass-count">0</div>
-          </div>
-        </div>
-
-        <div class="split" style="margin-top:1.6rem">
-          <div>
-            <h3>Line items</h3>
+            <div class="mass-readout">
+              <div>
+                <div class="lbl">Modeled mass</div>
+                <div class="num mono"><span id="mass-g">0.00</span> g</div>
+              </div>
+              <div>
+                <div class="lbl">Ounces</div>
+                <div class="num mono"><span id="mass-oz">0.000</span> <span class="unit">oz</span></div>
+              </div>
+              <div>
+                <div class="lbl">Line items</div>
+                <div class="num mono" id="mass-count">0</div>
+              </div>
+            </div>
+            <p class="fine" id="hand-mark" style="margin-top:0.8rem">Right-hand default</p>
+            <h3 style="margin-top:1.2rem">Line items</h3>
             <table class="ledger-table">
               <thead>
                 <tr><th>Module</th><th>Target</th></tr>
               </thead>
               <tbody id="ledger-body"></tbody>
             </table>
-            <p class="fine" style="margin-top:0.8rem">Geometric mass model for conversation and CAD. Not laboratory weighings.</p>
-          </div>
-          <div>
-            <h3>What this loadout will and will not do</h3>
+            <h3 style="margin-top:1.4rem">What this loadout will and will not do</h3>
             <div class="matrix" id="task-matrix"></div>
           </div>
         </div>
@@ -435,7 +248,7 @@
 
     <section class="act" id="proof">
       <div class="wrap">
-        <p class="kicker">07 · Proof</p>
+        <p class="kicker">04 · Proof</p>
         <h2>What is already true, and what is still a drawing.</h2>
         <div class="split">
           <div>
@@ -458,18 +271,8 @@
             <p class="cite">Cold Steel publishes the Bird &amp; Game at 3.5 in / 1.4 oz, AUS-8A, polymer. It is the mass benchmark — and the construction this kit refuses.
               <span class="source"><a href="https://www.coldsteel.com/bird-game/" rel="noopener noreferrer">coldsteel.com/bird-game</a></span>
             </p>
-            <p>No testimonials. No weighed samples. No accepted purchase order. Graphene remains declined as a specified coating.</p>
+            <p>No testimonials. No weighed samples. No accepted purchase order. Graphene remains declined as a specified coating. The page no longer leads with generated photographs of a different massing.</p>
           </div>
-        </div>
-        <div class="pack-grid" style="margin-top:2rem">
-          <figure class="figure">
-            <img src="./assets/kit-box-closed.webp" srcset="./assets/kit-box-closed-sm.webp 900w, ./assets/kit-box-closed.webp 1800w" sizes="(max-width: 800px) 100vw, 46vw" width="1800" height="1350" alt="Closed mitered light-wood box tied with a dark cord on washi." loading="lazy" />
-            <figcaption>Studio packaging: kiri, washi, cord. Not the wet system.</figcaption>
-          </figure>
-          <figure class="figure">
-            <img src="./assets/kit-ikejime-strop.webp" srcset="./assets/kit-ikejime-strop-sm.webp 900w, ./assets/kit-ikejime-strop.webp 1800w" sizes="(max-width: 800px) 100vw, 46vw" width="1800" height="1012" alt="Coiled ikejime wires, rectangular plate, spike, tweezers, and a Dyneema loop on washi." loading="lazy" />
-            <figcaption>Accessory still. Numbers on this page are the record.</figcaption>
-          </figure>
         </div>
       </div>
     </section>
@@ -477,7 +280,7 @@
     <section class="act" id="brief">
       <div class="wrap split">
         <div>
-          <p class="kicker">08 · Invitation</p>
+          <p class="kicker">05 · Invitation</p>
           <h2>Compose a studio brief.</h2>
           <p class="lede">The brief is built on this device from the loadout you seated. This site has no inbox. It will not display a false “message sent.”</p>
           <p>If the intended reader is Luke at Zen-Wu, start from <a href="https://zenwutoolworks.com/" rel="noopener noreferrer">zenwutoolworks.com</a>. Type a recipient yourself. Attach <a href="./cad/SHINOBI82-KAGE-Zen-Wu-review.zip" download>the review zip</a> — STEP solids, DXF profiles, transmittal, BOM. Do not send the website STL as if it were the master.</p>
@@ -525,17 +328,16 @@
     <div class="wrap footer-grid">
       <div>
         <h2>SHINOBI//82 KAGE</h2>
-        <p>A proposed numbered kit for shop and river. Pale wood to find it. Charcoal metal to hold it. Angles you can inspect.</p>
+        <p>A proposed numbered kit. The page is the CadQuery solids. Pale wood to find it. Charcoal metal to hold it. STEP to send.</p>
       </div>
       <div>
         <h2>On this page</h2>
         <ul>
-          <li><a href="#kit">Inventory</a></li>
-          <li><a href="#metal">Metal</a></li>
-          <li><a href="#cad">CAD bench</a></li>
+          <li><a href="#kit">Solids</a></li>
           <li><a href="#grind">Grind</a></li>
           <li><a href="#seat">Ledger</a></li>
           <li><a href="#brief">Studio brief</a></li>
+          <li><a href="./cad/SHINOBI82-KAGE-Zen-Wu-review.zip" download>Review zip</a></li>
         </ul>
       </div>
       <div>
@@ -548,7 +350,7 @@
       </div>
     </div>
     <div class="wrap legal">
-      <p>© <span id="year">2026</span> SHINOBI concept page. Concept photographs are generated studies, not factory photography. MagnaCut, MagnaMax, Dyneema, and Zen-Wu are marks of their owners. No award is claimed. Ikejime and game processing are the visitor’s legal and ethical responsibility.</p>
+      <p>© <span id="year">2026</span> SHINOBI concept page. Studio images are renders of the proposed CAD, not factory photography. MagnaCut, MagnaMax, Dyneema, and Zen-Wu are marks of their owners. No award is claimed. Ikejime and game processing are the visitor’s legal and ethical responsibility.</p>
     </div>
   </footer>
 
@@ -561,6 +363,6 @@
     }
   }
   </script>
-  <script type="module" src="./js/viewer.js"></script>
+  <script type="module" src="./js/studio.js"></script>
 </body>
 </html>
