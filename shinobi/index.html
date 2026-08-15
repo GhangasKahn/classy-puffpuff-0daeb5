@@ -65,7 +65,7 @@
   </header>
 
   <dialog class="nav-dialog" id="nav-dialog" aria-labelledby="nav-dialog-title">
-    <h2 id="nav-dialog-title">Chapters</h2>
+    <p class="kicker" id="nav-dialog-title">Chapters</p>
     <button class="icon-btn" id="nav-close" type="button">Close</button>
     <ul>
       <li><a data-nav href="#open">Open</a></li>
@@ -234,8 +234,12 @@
             <div class="num mono"><span id="mass-g">0.00</span> g</div>
           </div>
           <div>
-            <div class="lbl">Ounces · line items</div>
-            <div class="num mono"><span id="mass-oz">0.000</span> <span style="font-size:0.4em;letter-spacing:0.12em">oz / </span><span id="mass-count">0</span></div>
+            <div class="lbl">Ounces</div>
+            <div class="num mono"><span id="mass-oz">0.000</span> <span class="unit">oz</span></div>
+          </div>
+          <div>
+            <div class="lbl">Line items</div>
+            <div class="num mono" id="mass-count">0</div>
           </div>
         </div>
 

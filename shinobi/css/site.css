@@ -136,7 +136,8 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
   padding: 0.7rem var(--space);
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(10px);
@@ -149,6 +150,7 @@ p:last-child { margin-bottom: 0; }
   gap: 0.7rem;
   text-decoration: none;
   color: var(--ink);
+  min-width: 0;
 }
 .brand img { width: 28px; height: 28px; }
 .brand-name {
@@ -256,7 +258,7 @@ p:last-child { margin-bottom: 0; }
 .act-dark .kicker { color: #9eb4c2; }
 .act-dark h2, .act-dark h3 { color: #f3ebe0; }
 .act-dark p, .act-dark .lede { color: #cfc4b2; }
-.act-dark .fine { color: #9a9186; }
+.act-dark .fine { color: #c4b8a8; }
 .act-dark .line { background: #3a3c3a; }
 
 .line {
@@ -427,11 +429,16 @@ legend {
 
 .mass-readout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr 0.8fr;
   gap: 0.7rem;
   padding: 1rem;
   background: var(--ink);
   color: var(--bg);
+}
+.mass-readout .unit {
+  font-size: 0.35em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .mass-readout .num {
   font-family: var(--disp);
@@ -681,7 +688,19 @@ html[data-motion="off"] .blade-mod { transition: none; }
   html:not([data-motion="on"]) .blade-mod { transition: none; }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 700px) {
   .mass-readout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
   .hero-actions .btn { width: 100%; }
+  .brand-sub { display: none; }
+  .site-header { padding: 0.55rem 0.85rem; }
+  .header-tools { gap: 0.35rem; margin-left: auto; }
+  .motion-btn,
+  .nav-open {
+    padding: 0 0.5rem;
+    letter-spacing: 0.06em;
+    font-size: 0.62rem;
+  }
 }
