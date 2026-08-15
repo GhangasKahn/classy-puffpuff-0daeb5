@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>SHINOBI//82 KAGE — a sub-ounce field-knife system · development dossier</title>
+<meta name="description" content="SHINOBI//82 KAGE: a proposed sub-ounce titanium field-knife system — one wedge-locked handle, three Japanese blade geometries, zero plastic. A development dossier for collaboration with Zen-Wu Toolworks. Every figure is an engineering target." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="SHINOBI//82 KAGE — development dossier" />
+<meta property="og:description" content="A proposed sub-ounce titanium field-knife system: one Kusabi-Lock handle, three blade geometries, zero plastic. Engineering targets, honest limits, and a pilot path." />
+<meta name="theme-color" content="#16140f" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316140f'/%3E%3Cpath d='M5 27 27 5' stroke='%238fb0d8' stroke-width='2.5'/%3E%3Cpath d='M5 20 20 5' stroke='%23f3eee2' stroke-width='1.2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="kage.css" />
+<script src="kage.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#dossier">Skip to the dossier</a>
+
+<header class="topbar">
+  <a class="topbar__mark" href="#top" aria-label="SHINOBI//82 KAGE — back to top">
+    <span class="topbar__kanji" lang="ja" aria-hidden="true">影</span>
+    <span class="topbar__name">SHINOBI//82 <strong>KAGE</strong></span>
+  </a>
+  <nav class="topbar__nav" aria-label="Dossier chapters">
+    <button class="topbar__toggle" id="nav-toggle" aria-expanded="false" aria-controls="chapter-index">
+      <span aria-hidden="true">☰</span> Index
+    </button>
+    <ul class="topbar__index" id="chapter-index">
+      <li><a href="#ch-1"><span class="idx" aria-hidden="true">01</span> Compromise</a></li>
+      <li><a href="#ch-2"><span class="idx" aria-hidden="true">02</span> Budget</a></li>
+      <li><a href="#ch-3"><span class="idx" aria-hidden="true">03</span> Geometry</a></li>
+      <li><a href="#ch-4"><span class="idx" aria-hidden="true">04</span> Modules</a></li>
+      <li><a href="#ch-5"><span class="idx" aria-hidden="true">05</span> Materials</a></li>
+      <li><a href="#ch-6"><span class="idx" aria-hidden="true">06</span> Water</a></li>
+      <li><a href="#ch-7"><span class="idx" aria-hidden="true">07</span> Edge</a></li>
+      <li><a href="#ch-8"><span class="idx" aria-hidden="true">08</span> Evidence</a></li>
+      <li><a href="#ch-9"><span class="idx" aria-hidden="true">09</span> Proposal</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="dossier">
+
+<!-- ============================== ACT I · ARRIVAL (dark) ============================== -->
+<section class="act-dark hero" id="top" aria-labelledby="hero-title">
+  <p class="kicker kicker--light reveal">Development dossier · Rev A · Proposed collaboration</p>
+  <h1 id="hero-title" class="hero__title reveal">
+    <span class="hero__series">SHINOBI//82</span>
+    <span class="hero__name">KAGE<span class="hero__namekanji" lang="ja"> · 影</span></span>
+  </h1>
+  <p class="hero__statement reveal">Cuts like a fillet knife.<br />Marks like a chisel.<br />Carries like a pencil.</p>
+  <p class="hero__sub reveal">
+    A sub-ounce titanium field system built around one wedge-locked handle and three Japanese blade
+    geometries — for the angler who packs in grams, the hunter who works in seams, and the woodworker
+    who trusts a reference face. Proposed for development with
+    <a href="https://zenwutoolworks.com/" rel="noopener external">Zen-Wu Toolworks</a>.
+    Nothing on this page is for sale. Every number is an engineering target.
+  </p>
+  <div class="hero__actions reveal">
+    <a class="btn btn--primary" href="#ch-1">Read the dossier</a>
+    <a class="btn btn--ghost" href="#ch-9">Go straight to the pilot proposal</a>
+  </div>
+
+  <figure class="hero__schematic reveal" aria-labelledby="hero-fig-caption">
+    <svg class="draw" viewBox="0 0 1180 300" role="img" aria-label="Side-profile engineering schematic of the SHINOBI//82 KAGE knife: a skeletonized titanium handle with two structural apertures and a lanyard hole, a wedge-lock seam at the bolster, and an 82 millimetre blade with a straight heel, shallow belly and low dropped point. Dimension lines mark 82 millimetres of blade, 94 millimetres of usable handle and 176 millimetres overall.">
+      <g class="sch-ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <!-- handle outline -->
+        <path class="sch-line" d="M634 114 C 450 110, 200 116, 118 124 C 84 128, 70 140, 70 155 C 70 170, 84 182, 118 186 C 200 194, 450 200, 634 199" />
+        <!-- machi / heel junction -->
+        <path class="sch-line" d="M634 114 L634 199" />
+        <!-- skeleton apertures -->
+        <rect class="sch-line" x="182" y="139" width="146" height="32" rx="16" />
+        <rect class="sch-line" x="368" y="137" width="150" height="34" rx="17" />
+        <!-- lanyard aperture -->
+        <circle class="sch-line" cx="122" cy="155" r="9" />
+        <!-- kusabi wedge seam -->
+        <path class="sch-line sch-line--seam" d="M598 115 L622 198" />
+        <path class="sch-line sch-line--seam" d="M584 116 L608 199" />
+        <!-- blade spine -->
+        <path class="sch-line" d="M634 117 C 780 120, 900 124, 962 130 C 1030 138, 1090 150, 1126 164" />
+        <!-- blade edge: straight heel, shallow belly, low point -->
+        <path class="sch-line" d="M634 208 L760 206 C 860 202, 960 196, 1020 190 C 1064 185, 1104 174, 1126 164" />
+        <!-- lamination seam (indigo) -->
+        <path class="sch-line sch-line--indigo" d="M636 166 L762 164 C 866 160, 964 156, 1022 151 C 1060 148, 1092 152, 1112 160" />
+      </g>
+      <g class="sch-dim" fill="none">
+        <!-- blade dimension -->
+        <path d="M634 88 L1126 88" /><path d="M634 82 L634 96" /><path d="M1126 82 L1126 96" />
+        <!-- handle dimension -->
+        <path d="M70 88 L634 88" /><path d="M70 82 L70 96" />
+        <!-- overall dimension -->
+        <path d="M70 252 L1126 252" /><path d="M70 246 L70 258" /><path d="M1126 246 L1126 258" />
+      </g>
+      <g class="sch-label">
+        <text x="880" y="76">82 mm blade</text>
+        <text x="352" y="76">94 mm usable handle</text>
+        <text x="598" y="278">176 mm overall · 18.4 g target, knife alone</text>
+        <text x="560" y="228" class="sch-label--indigo">kusabi-lock seam</text>
+        <text x="900" y="184" class="sch-label--indigo">dovetail lamination · steel rail into titanium</text>
+      </g>
+    </svg>
+    <figcaption id="hero-fig-caption">
+      Concept schematic, Rev A — a design drawing, not a manufacturing drawing, and not a photograph
+      of an existing product.
+    </figcaption>
+  </figure>
+
+  <aside class="hero__status reveal" aria-label="Project status">
+    <p><strong>Status:</strong> concept dossier. Zen-Wu Toolworks has not approved, announced or priced
+    this design. Weights, hardness and geometry are targets pending CAD and physical prototypes.</p>
+  </aside>
+</section>
+
+<!-- ============================== ACT II · RECOGNITION (paper) ============================== -->
+<section class="act-paper chapter" id="ch-1" aria-labelledby="ch1-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">01</span> The compromise</p>
+    <h2 id="ch1-title">Every ultralight knife pays for its weight somewhere you can’t see.</h2>
+  </div>
+  <div class="chapter__body measure">
+    <p>
+      Below one ounce, the industry has a single recipe: thicken the geometry so it survives abuse,
+      mold the sheath from plastic, pick the steel by price, and leave the edge to fend for itself
+      after day three. The scale reads light. The work reads heavy. Fish skin tears instead of
+      releasing. Layout lines wander off the knife’s belly. The edge that left home shaving arrives
+      in camp scraping.
+    </p>
+    <p>
+      The alternative is worse arithmetic: carry three tools. A fillet knife for the water, a
+      whittler for the fire, a marking knife for the bench — and a sharpener that stays home because
+      it outweighs any of them.
+    </p>
+  </div>
+
+  <aside class="bench" aria-labelledby="bench-title">
+    <h3 id="bench-title" class="bench__title">The honest benchmark</h3>
+    <p>
+      <a href="https://www.coldsteel.com/bird-game/" rel="noopener external">Cold Steel’s Bird &amp; Game</a>
+      publishes the mass class this dossier must beat: a 3.5-inch AUS-8A blade in 2.5&nbsp;mm stock,
+      polymer grip, 1.4&nbsp;oz. It is a genuinely good knife, and it is named here with respect.
+      KAGE does not try to undercut it on price or copy its geometry — it spends the same ounce
+      differently: on titanium, powder-metallurgy steel, and an edge that gets maintained in the field.
+    </p>
+  </aside>
+
+  <p class="pull measure">
+    You don’t need a lighter compromise. You need a system that refuses to compromise where it
+    counts — and tells you plainly where it does.
+  </p>
+</section>
+
+<!-- ============================== CH 02 · REFRAME + MECHANISM ============================== -->
+<section class="act-paper chapter" id="ch-2" aria-labelledby="ch2-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">02</span> The reframe</p>
+    <h2 id="ch2-title">Treat weight as a budget, and geometry becomes the currency.</h2>
+  </div>
+  <div class="chapter__body measure">
+    <p>
+      KAGE starts from a number — the grams you are willing to carry — and buys capability with
+      geometry instead of bulk. Thin stock, hard steel and a maintained apex do more work per gram
+      than thick stock ever can; it is the same reason serious Japanese kitchen blades are ground
+      thin and kept hard rather than made heavy. The system spends its budget in three places:
+    </p>
+    <ol class="mech-list">
+      <li>
+        <strong>One handle, not three.</strong> A Grade&nbsp;5 titanium (Ti-6Al-4V) open frame with
+        mechanically fitted kurogaki inlays. The frame is the only handle you carry; the blades share it.
+      </li>
+      <li>
+        <strong>Three blades, not one apology.</strong> Water, wood and fire each get a geometry
+        ground for the job, instead of one blade pretending to do all three.
+      </li>
+      <li>
+        <strong>A sheath that earns its grams.</strong> The saya protects the edge, indexes the
+        sharpening angles, and converts to a power grip for heavy work. Nothing rides along for looks.
+      </li>
+    </ol>
+
+    <h3>The Kusabi-Lock <span lang="ja" aria-hidden="true">楔</span></h3>
+    <p>
+      <em>Kusabi</em> is the Japanese wedge — the oldest fastener that gets tighter under load.
+      The design intent: each blade module seats on machined registration lands in the frame’s mouth,
+      and a hand-set titanium wedge pre-loads the joint into compression. No threads in the cutting
+      load path. No tool required in the field. Nothing small enough to lose in the grass.
+      <strong>The final lock mechanism is a prototype-gate deliverable</strong> — it must pass torsion,
+      rinse-through and wet-glove testing before the design is frozen.
+    </p>
+  </div>
+
+  <figure class="diagram" aria-labelledby="diagram-caption">
+    <svg viewBox="0 0 900 250" role="img" aria-label="Exploded line diagram of the Kusabi-Lock: a blade module with a stepped tang, an arrow showing it seating into the titanium frame mouth on registration lands, and a small titanium wedge above the joint with an arrow showing it pressing down to pre-load the assembly.">
+      <g class="sch-ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <!-- blade module (left) -->
+        <path class="sch-line" d="M60 108 L235 108 L235 92 L300 92 L300 156 L235 156 L235 140 L60 140
+          C 40 138, 30 130, 30 124 C 30 118, 40 110, 60 108 Z" />
+        <text class="sch-label" x="120" y="180">blade module · stepped tang</text>
+        <!-- seat arrow -->
+        <path class="sch-dim" d="M320 124 L392 124" /><path class="sch-dim" d="M382 116 L392 124 L382 132" />
+        <!-- frame mouth (right) -->
+        <path class="sch-line" d="M412 70 L640 70 C 760 74, 840 96, 862 124 C 840 152, 760 174, 640 178 L412 178 L412 148 L470 148 L470 100 L412 100 Z" />
+        <path class="sch-line" d="M470 100 L470 148" />
+        <path class="sch-line sch-line--indigo" d="M412 100 L470 100 M412 148 L470 148" />
+        <text class="sch-label" x="600" y="210">titanium frame · registration lands</text>
+        <!-- wedge -->
+        <path class="sch-line" d="M430 22 L466 22 L458 48 L438 48 Z" />
+        <path class="sch-dim" d="M448 54 L448 88" /><path class="sch-dim" d="M441 79 L448 88 L455 79" />
+        <text class="sch-label" x="530" y="36">kusabi wedge · hand-set, compressive</text>
+      </g>
+    </svg>
+    <figcaption id="diagram-caption">Design intent for the Kusabi-Lock joint. Subject to prototype validation.</figcaption>
+  </figure>
+
+  <div class="chapter__body measure">
+    <p>
+      The flagship blade-and-handle target is <strong>18.4&nbsp;g</strong> — under half the published
+      benchmark knife — while carrying a steel that, in
+      <a href="https://knifesteelnerds.com/2026/01/19/magnamax-is-here-the-next-evolution-in-knife-steel/" rel="noopener external">published CATRA testing</a>,
+      matches the edge retention of K390 and Vanadis&nbsp;8, and a sheath that keeps that edge honest.
+      How the geometry earns this is the next chapter.
+    </p>
+  </div>
+</section>
+
+<!-- ============================== CH 03 · SIGNATURE INTERACTION ============================== -->
+<section class="act-paper chapter" id="ch-3" aria-labelledby="ch3-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">03</span> The geometry</p>
+    <h2 id="ch3-title">The cutting is decided in cross-section. Cut the blade anywhere and read it.</h2>
+  </div>
+  <div class="chapter__body measure">
+    <p>
+      <strong>What this does:</strong> the station slider cuts the MIZU-82 blade at any millimetre
+      between the heel (0&nbsp;mm) and the tip (82&nbsp;mm) and draws that station’s section — spine
+      thickness, working angles, and the behind-edge measurement that decides whether fish skin
+      releases or tears. Move the slider with a finger, a mouse, or the arrow keys; the three zone
+      buttons jump straight to each working region. Nothing here is animated for show — the drawing
+      is the data.
+    </p>
+  </div>
+
+  <div class="section-room" id="section-room">
+    <div class="section-room__controls">
+      <div class="field">
+        <label for="station">Cutting station <span class="field__hint">0 mm = heel · 82 mm = tip</span></label>
+        <input type="range" id="station" min="0" max="82" step="1" value="10"
+               aria-describedby="station-help" aria-valuetext="10 millimetres from heel, heel zone" />
+        <p class="visually-hidden" id="station-help">Moves the section cut along the blade. Arrow keys adjust by one millimetre.</p>
+      </div>
+      <div class="zone-jumps" role="group" aria-label="Jump to a blade zone">
+        <button type="button" class="chipbtn" data-station="10">Heel · 0–21 mm</button>
+        <button type="button" class="chipbtn" data-station="40">Belly · 21–70 mm</button>
+        <button type="button" class="chipbtn" data-station="76">Kissaki · 70–82 mm</button>
+      </div>
+      <fieldset class="handed">
+        <legend>Grind handedness</legend>
+        <label><input type="radio" name="handed" value="right" checked /> Right-hand</label>
+        <label><input type="radio" name="handed" value="left" /> Left-hand</label>
+        <p class="handed__note" id="handed-note">
+          A kataba grind is handed: the left-hand version is a full mirror — blade, ura and
+          lamination — not the same blade sharpened from the other side.
+        </p>
+      </fieldset>
+    </div>
+
+    <div class="section-room__stage">
+      <figure class="section-room__profile">
+        <svg id="profile-svg" viewBox="0 0 560 150" role="img" aria-label="Blade profile of the MIZU-82 with a movable vertical cutting-plane line marking the selected station.">
+          <g class="sch-ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="sch-line" d="M30 30 C 150 32, 300 36, 350 40 C 430 47, 490 66, 522 88" />
+            <path class="sch-line" d="M30 121 L156 119 C 260 116, 360 111, 420 105 C 462 100, 500 93, 522 88" />
+            <path class="sch-line" d="M30 30 L30 121" />
+            <path class="sch-line sch-line--indigo" d="M32 80 L158 78 C 262 75, 362 70, 422 66 C 452 64, 486 74, 508 84" />
+          </g>
+          <g id="plane-marker">
+            <path id="plane-line" class="plane" d="M90 12 L90 138" />
+            <text id="plane-flag" class="sch-label sch-label--indigo" x="90" y="10" text-anchor="middle">10 mm</text>
+          </g>
+        </svg>
+        <figcaption>MIZU-82 profile. The indigo hairline is the dovetail lamination seam.</figcaption>
+      </figure>
+
+      <figure class="section-room__cut">
+        <svg id="section-svg" viewBox="0 0 260 270" role="img" aria-label="Cross-section of the blade at the selected station: an asymmetric wedge with a convex hamaguri face on the presentation side, a near-flat ura face, hatched section fill, the indigo lamination boundary, and labels for spine thickness and the working angles of each face." aria-describedby="readout">
+          <defs>
+            <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="7" class="hatch-line" />
+            </pattern>
+            <clipPath id="section-clip"><path id="section-clip-path" d="M120.6 26 L139.4 26 Q162.4 105 124 214 Q123.6 120 120.6 26 Z" /></clipPath>
+          </defs>
+          <path id="section-shape" d="M120.6 26 L139.4 26 Q162.4 105 124 214 Q123.6 120 120.6 26 Z" fill="url(#hatch)" class="section-outline" />
+          <line id="lam-line" x1="90" y1="120" x2="180" y2="120" class="lam" clip-path="url(#section-clip)" />
+          <g class="sch-dim">
+            <path id="spine-dim" d="M120.6 18 L139.4 18" />
+          </g>
+          <g class="sch-label">
+            <text id="spine-label" x="130" y="12" text-anchor="middle">1.45 mm spine</text>
+            <text id="omote-label" x="176" y="200" text-anchor="start">omote 15°</text>
+            <text id="ura-label" x="112" y="228" text-anchor="end">ura 17°</text>
+            <text id="lam-label" class="sch-label--indigo" x="184" y="116" text-anchor="start">lamination</text>
+          </g>
+        </svg>
+        <figcaption>Section at the cutting station, hatched per drafting convention. Not to scale with the profile.</figcaption>
+      </figure>
+
+      <div class="section-room__readout" id="readout">
+        <h3 class="readout__zone" id="ro-zone">Heel zone · 0–21 mm</h3>
+        <dl class="readout__data">
+          <div><dt>Station</dt><dd id="ro-station">10 mm from heel</dd></div>
+          <div><dt>Working edge</dt><dd id="ro-angles">15° omote / 17° ura — reinforced</dd></div>
+          <div><dt>Behind edge</dt><dd id="ro-be">0.16 mm</dd></div>
+          <div><dt>Spine</dt><dd id="ro-spine">1.45 mm (interpolated)</dd></div>
+          <div><dt>Job</dt><dd id="ro-job">Tendons, joint separation, cartilage, and dead-accurate joinery marking.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="footnote">
+      Spine values between the stated stations (1.55&nbsp;mm heel → 1.15&nbsp;mm mid → 0.60&nbsp;mm
+      near tip) are linear interpolations of the target taper. Section height is drawn from the
+      profile model and is illustrative. All values are engineering targets.
+      <noscript><strong>This view needs JavaScript; the complete geometry is in the table below.</strong></noscript>
+    </p>
+  </div>
+
+  <h3 class="table-title">The locked targets — SHINOBI//82 KAGE flagship</h3>
+  <div class="table-scroll" role="region" aria-label="Flagship specification table, scrollable" tabindex="0">
+    <table>
+      <caption class="visually-hidden">SHINOBI//82 KAGE flagship production targets</caption>
+      <thead><tr><th scope="col">Element</th><th scope="col">Production target</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Overall length</th><td>176 mm</td></tr>
+        <tr><th scope="row">Blade length</th><td>82 mm</td></tr>
+        <tr><th scope="row">Usable handle</th><td>94 mm</td></tr>
+        <tr><th scope="row">Blade height</th><td>15.2 mm heel, tapering continuously</td></tr>
+        <tr><th scope="row">Spine</th><td>1.55 mm heel → 1.15 mm mid → 0.60 mm near tip</td></tr>
+        <tr><th scope="row">Knife weight</th><td>18.4 g target</td></tr>
+        <tr><th scope="row">Steel</th><td>MagnaMax (development candidate)</td></tr>
+        <tr><th scope="row">Hardness</th><td>62.5–63.0 HRC, verified per blade</td></tr>
+        <tr><th scope="row">Blade form</th><td>Low-point shōbu / kogatana and boning hybrid</td></tr>
+        <tr><th scope="row">Grind</th><td>Right-hand 60/40 asymmetric hamaguri; fully mirrored left-hand version</td></tr>
+        <tr><th scope="row">Main apex</th><td>12° presentation side / 14° reverse side</td></tr>
+        <tr><th scope="row">Reinforced heel</th><td>15° / 17° over the final 20–22 mm</td></tr>
+        <tr><th scope="row">Behind-edge thickness</th><td>0.10–0.13 mm main edge; 0.16 mm heel</td></tr>
+        <tr><th scope="row">Edge finish</th><td>800–1000 grit diamond, deburred at 1 μm</td></tr>
+        <tr><th scope="row">Tip flex target</th><td>2.5–3.5 mm under a 10 N lateral test load</td></tr>
+        <tr><th scope="row">Balance point</th><td>6–9 mm behind the choil</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote measure">
+    Why 800–1000 grit and not a mirror: a full polish looks impressive and then skates across wet
+    fish skin. A controlled diamond finish with a clean 1&nbsp;μm deburr keeps push-cut sharpness
+    <em>and</em> microscopic bite.
+  </p>
+</section>
+
+<!-- ============================== CH 04 · MODULES ============================== -->
+<section class="act-paper chapter" id="ch-4" aria-labelledby="ch4-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">04</span> The modules</p>
+    <h2 id="ch4-title">Water, wood and fire each get their own geometry.</h2>
+    <p class="chapter__lede measure">
+      One blade honest enough to admit its limits beats one blade that lies about them. Each module
+      shares the same frame, the same lock, the same sheath — and refuses the jobs it wasn’t ground for.
+    </p>
+  </div>
+
+  <article class="module" aria-labelledby="mod-mizu">
+    <div class="module__text">
+      <h3 id="mod-mizu"><span class="module__kanji" lang="ja" aria-hidden="true">水</span> MIZU-82 — the field blade</h3>
+      <p>
+        82&nbsp;mm nominal edge. The flagship geometry from chapter&nbsp;03: asymmetric hamaguri
+        grind at roughly 25° inclusive, near-flat ura with the shallowest possible relief, straight
+        reinforced heel, semi-flex distal third, low dropped point. Steel:
+        <strong>MagnaMax, as a development candidate</strong> — released for sale May&nbsp;2026, with
+        <a href="https://knifesteelnerds.com/2026/04/30/how-to-heat-treat-magnamax-steel/" rel="noopener external">published heat-treatment data</a>
+        and edge retention in the K390 / Vanadis&nbsp;8 class at MagnaCut-grade corrosion resistance.
+        Heat treatment must be validated on coupons before the window is frozen.
+      </p>
+      <dl class="forlist">
+        <dt>Ground for</dt>
+        <dd>Panfish to salmon, birds, caping, deer and elk seam work, pinbone tracing, camp food, everyday carry.</dd>
+        <dt>Not for</dt>
+        <dd>Long one-pass salmon fillets — a dedicated 7–9&nbsp;inch fillet blade will always win that single job.</dd>
+      </dl>
+    </div>
+    <figure class="module__fig">
+      <svg viewBox="0 0 620 150" role="img" aria-label="Profile schematic of the MIZU-82 blade module: an 82 millimetre blade with straight heel, shallow belly and low dropped point, plus a short stepped tang for the wedge lock.">
+        <g class="sch-ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="sch-line" d="M96 34 C 210 36, 350 40, 400 44 C 478 51, 540 68, 576 90" />
+          <path class="sch-line" d="M96 123 L222 121 C 320 118, 420 113, 474 107 C 516 102, 554 95, 576 90" />
+          <path class="sch-line" d="M96 34 L96 123" />
+          <path class="sch-line" d="M96 46 L40 46 L40 62 L20 62 L20 96 L40 96 L40 112 L96 112" />
+          <path class="sch-line sch-line--indigo" d="M98 82 L224 80 C 322 77, 420 72, 476 68 C 508 66, 540 76, 562 86" />
+        </g>
+        <g class="sch-label"><text x="330" y="145">MIZU-82 · 25° inclusive working edge · MagnaMax candidate</text></g>
+      </svg>
+      <figcaption class="visually-hidden">MIZU-82 module schematic</figcaption>
+    </figure>
+  </article>
+
+  <article class="module module--flip" aria-labelledby="mod-kumiko">
+    <div class="module__text">
+      <h3 id="mod-kumiko"><span class="module__kanji" lang="ja" aria-hidden="true">組子</span> KUMIKO-42 — the bench blade</h3>
+      <p>
+        42&nbsp;mm nominal edge, kiridashi form. A dead-flat lapped back and a single 15° flat bevel —
+        the back <em>is</em> the tool: a reference plane that registers against a square and rides
+        wood fiber without steering. Ground in fully mirrored right- and left-hand versions, because a
+        single bevel is handed by definition. This is the geometry Zen-Wu already builds at production
+        grade in its <a href="https://zenwutoolworks.com/products/shirabiki" rel="noopener external">shirabiki marking knife</a>.
+      </p>
+      <dl class="forlist">
+        <dt>Ground for</dt>
+        <dd>Scribing against a straightedge, dovetail layout, kumiko fitting, chamfering, end-grain paring.</dd>
+        <dt>Not for</dt>
+        <dd>Prying glue lines or opening paint cans. The flat back stays flat, or it stops being a reference.</dd>
+      </dl>
+    </div>
+    <figure class="module__fig">
+      <svg viewBox="0 0 620 150" role="img" aria-label="Profile schematic of the KUMIKO-42 blade module: a short kiridashi-style blade with a straight spine and a skewed straight edge meeting at a fine point, plus the shared stepped tang.">
+        <g class="sch-ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="sch-line" d="M240 40 L470 40 L492 96 L240 118 Z" />
+          <path class="sch-line" d="M240 52 L184 52 L184 68 L164 68 L164 102 L184 102 L184 118 L240 118" />
+          <path class="sch-line sch-line--faint" d="M300 108 L474 88" />
+          <path class="sch-line sch-line--indigo" d="M242 96 L488 92" />
+        </g>
+        <g class="sch-label"><text x="330" y="145">KUMIKO-42 · dead-flat back · single 15° flat bevel · mirrored R/L</text></g>
+      </svg>
+      <figcaption class="visually-hidden">KUMIKO-42 module schematic</figcaption>
+    </figure>
+  </article>
+
+  <article class="module" aria-labelledby="mod-nata">
+    <div class="module__text">
+      <h3 id="mod-nata"><span class="module__kanji" lang="ja" aria-hidden="true">鉈</span> NATA-60 — the camp blade</h3>
+      <p>
+        60&nbsp;mm nominal edge. <a href="https://knifesteelnerds.com/2021/03/25/cpm-magnacut/" rel="noopener external">MagnaCut</a>
+        at a 24° single bevel over a flat back — a straightforward grind chosen for repeatable,
+        chisel-registered cuts: whittling, notching, chamfering by feel, controlled chopping strokes
+        with the wrist, never with a baton. The flat back gives the same repeatability at the campfire
+        that KUMIKO-42 gives at the bench.
+      </p>
+      <dl class="forlist">
+        <dt>Ground for</dt>
+        <dd>Feather sticks, notching, tent stakes, food prep, fitting work on the trail, a ferro rod from the dedicated square tang corner.</dd>
+        <dt>Not for</dt>
+        <dd>Batoning, prying, or bone. It says so out loud, in this dossier and in the box.</dd>
+      </dl>
+    </div>
+    <figure class="module__fig">
+      <svg viewBox="0 0 620 150" role="img" aria-label="Profile schematic of the NATA-60 blade module: a taller, near-straight-edged blade with a gently dropping spine nose and a visible single-bevel shoulder line, plus the shared stepped tang.">
+        <g class="sch-ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="sch-line" d="M180 30 L440 30 C 480 32, 516 48, 532 74 C 538 86, 540 100, 536 106 L180 122" />
+          <path class="sch-line" d="M180 30 L180 122" />
+          <path class="sch-line" d="M180 44 L124 44 L124 60 L104 60 L104 94 L124 94 L124 110 L180 110" />
+          <path class="sch-line sch-line--faint" d="M186 100 L520 90" />
+          <path class="sch-line sch-line--indigo" d="M182 84 L500 76" />
+        </g>
+        <g class="sch-label"><text x="330" y="145">NATA-60 · MagnaCut · 24° single bevel · flat back</text></g>
+      </svg>
+      <figcaption class="visually-hidden">NATA-60 module schematic</figcaption>
+    </figure>
+  </article>
+
+  <h3 class="table-title">Where each geometry stands</h3>
+  <div class="table-scroll" role="region" aria-label="Application matrix, scrollable" tabindex="0">
+    <table class="matrix">
+      <caption class="visually-hidden">Application matrix: tasks, the module ground for them, and an honest standing</caption>
+      <thead><tr><th scope="col">The work</th><th scope="col">The module</th><th scope="col">Standing</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Joinery marking, dovetail layout, kumiko fitting</th><td>KUMIKO-42</td><td><span class="chip chip--exc">Excellent</span></td></tr>
+        <tr><th scope="row">Chamfering, paring, whittling</th><td>KUMIKO-42 / NATA-60</td><td><span class="chip chip--exc">Excellent</span></td></tr>
+        <tr><th scope="row">Feather sticks, notching, controlled chisel-style chopping</th><td>NATA-60</td><td><span class="chip chip--exc">Excellent</span></td></tr>
+        <tr><th scope="row">Trout, panfish, birds</th><td>MIZU-82</td><td><span class="chip chip--exc">Excellent</span></td></tr>
+        <tr><th scope="row">Caping, deer field dressing</th><td>MIZU-82</td><td><span class="chip chip--exc">Excellent</span></td></tr>
+        <tr><th scope="row">Salmon breakdown, catfish</th><td>MIZU-82 + saya power grip</td><td><span class="chip chip--cap">Very capable</span></td></tr>
+        <tr><th scope="row">Elk seam deboning</th><td>MIZU-82 + saya power grip</td><td><span class="chip chip--cap">Very capable</span></td></tr>
+        <tr><th scope="row">Long one-pass salmon fillets</th><td>MIZU-82</td><td><span class="chip chip--com">Compromise</span></td></tr>
+        <tr><th scope="row">Ikejime and shinkei work</th><td>Spike + wires, never the blade tip</td><td><span class="chip chip--cap">Purpose-built</span></td></tr>
+        <tr><th scope="row">Batoning, prying, chopping bone, pelvis splitting</th><td>No module</td><td><span class="chip chip--pro">Prohibited</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================== CH 05 · MATERIALS ============================== -->
+<section class="act-paper chapter" id="ch-5" aria-labelledby="ch5-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">05</span> The materials</p>
+    <h2 id="ch5-title">Zero plastic, written as a bill of materials.</h2>
+    <p class="chapter__lede measure">
+      Luxury in a field tool is not ornament. It is the refusal of filler — nothing in the carried
+      system that exists because it was cheap to mold.
+    </p>
+  </div>
+
+  <div class="table-scroll" role="region" aria-label="Material ledger, scrollable" tabindex="0">
+    <table>
+      <caption class="visually-hidden">Material ledger: each component, its material, and the typical material it replaces</caption>
+      <thead><tr><th scope="col">Component</th><th scope="col">Material</th><th scope="col">Replaces the usual</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Handle frame, wedge, collet, sharpening substrate</th><td>Ti-6Al-4V (Grade 5 titanium)</td><td>Molded polymer, G10, FRN</td></tr>
+        <tr><th scope="row">Handle inlays</th><td>Kurogaki (black persimmon), mechanical fit — no adhesive</td><td>Resin-stabilized wood, epoxy</td></tr>
+        <tr><th scope="row">Saya (sheath)</th><td>Kiri / honoki, vented, natural urushi exterior</td><td>Kydex, Boltaron</td></tr>
+        <tr><th scope="row">Blade modules</th><td>MagnaMax (candidate), MagnaCut, proposed ZW-V1</td><td>Budget stainless</td></tr>
+        <tr><th scope="row">Spinal wires</th><td>Nitinol shape-memory alloy</td><td>Plastic-gripped wire tools</td></tr>
+        <tr><th scope="row">Abrasives</th><td>Nickel-electroplated monocrystalline diamond</td><td>Bonded stones that stay home</td></tr>
+        <tr><th scope="row">Retention</th><td>Dyneema tether, adjustable pinky loop</td><td>Heavy finger rings, cord wrap</td></tr>
+        <tr><th scope="row">Packaging only</th><td>Washi, silk, wool</td><td>Foam, poly bags</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="bench" aria-label="Excluded materials">
+    <p>
+      <strong>Excluded from the carried system, by rule:</strong> Kydex, G10, FRN, carbon-fiber
+      composite, silicone, TPU, foam, and resin-stabilized wood. No cord wrap, no exposed adhesive,
+      no cavity that can trap fish residue — every opening rinses through.
+    </p>
+  </aside>
+
+  <p class="measure">
+    The case the system arrives in is packaging, not payload: washi over board, a silk blade wrap,
+    a wool rest. It is made to be beautiful once and then left at home without guilt.
+    The dovetail-lamination construction itself — a hard steel rail set into a titanium body —
+    is not speculative: Zen-Wu ships it today across its
+    <a href="https://zenwutoolworks.com/collections/knives" rel="noopener external">production knives</a>,
+    at roughly the weight of a pencil.
+  </p>
+</section>
+
+<!-- ============================== CH 06 · WATER WORK ============================== -->
+<section class="act-paper chapter" id="ch-6" aria-labelledby="ch6-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">06</span> Ikejime &amp; shinkei</p>
+    <h2 id="ch6-title">A quick, deliberate kill — then the geometry can keep its promise.</h2>
+  </div>
+  <div class="chapter__body measure">
+    <p>
+      Ikejime (<span lang="ja">活け締め</span>) dispatches a fish instantly with a spike to the brain,
+      before stress chemistry can reach the muscle. It is both the humane practice and the reason
+      the fillet later behaves the way this dossier promises. The technique and species-specific
+      spike placement are taught well by the
+      <a href="https://ikejimefederation.com/a-beginners-guide-to-traditional-ike-jime/" rel="noopener external">Ike Jime Federation</a>;
+      placement varies by species, and this dossier does not pretend otherwise.
+    </p>
+    <p>
+      <strong>The blade tip is never the spike.</strong> Driving a 0.10&nbsp;mm apex through a skull
+      is how precision edges die. A proper spike is
+      <a href="https://ikejimefederation.com/what-makes-a-good-brain-spike/" rel="noopener external">sharp, strong, easy to grip and sized to the fish</a> —
+      so the KAGE TAG carries a dedicated, capped 34&nbsp;mm hardened spike, and the sheath’s
+      cross-slot turns the tag into a T-handle when it is time to use it.
+    </p>
+
+    <h3>KAGE SHINKEI//DUO — the spinal-wire module</h3>
+    <ul class="speclist">
+      <li><strong>S-50</strong> — 0.8 mm × 500 mm nitinol wire, for backcountry trout and most bass.</li>
+      <li><strong>L-80</strong> — 1.2 mm × 800 mm, for adult Niagara-run salmon.</li>
+      <li><strong>XL (optional)</strong> — 1.5 mm × 800 mm, for unusually large Chinook.</li>
+      <li><strong>64 mm vented cassette</strong> — nested channels, drain-through, no sealed cavity.</li>
+      <li><strong>Dual-bore collet</strong> — the diamond sharpening tag doubles as the wet-grip wire handle.</li>
+      <li><strong>Pinbone tweezer</strong> — 0.55 g beta-titanium, nested in the sheath.</li>
+    </ul>
+    <p>
+      The sizing is not guesswork: Japanese shape-memory shinkei wires are commercial products in
+      exactly these diameters and lengths —
+      <a href="https://belmont-online.shop/en/products/shinkeijime-80" rel="noopener external">Belmont lists Φ0.8–1.5 mm at up to 80 cm</a> —
+      with plastic grips. KAGE’s contribution is deleting the plastic: the tag you already carry
+      becomes the handle.
+    </p>
+    <p class="footnote">
+      For very large or thick-skulled fish, use a full-size purpose-built spike and stunning tool.
+      A one-ounce kit does not change that, and this dossier will not claim it does.
+    </p>
+  </div>
+</section>
+
+<!-- ============================== CH 07 · EDGE MAINTENANCE ============================== -->
+<section class="act-paper chapter" id="ch-7" aria-labelledby="ch7-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">07</span> The maintenance</p>
+    <h2 id="ch7-title">The sheath is the sharpener. The angles are machined in, not remembered.</h2>
+  </div>
+  <div class="chapter__body measure">
+    <p>
+      Field sharpening fails for one reason: freehand angles drift. So the saya carries the discipline
+      instead of your wrist — reference facets machined at 12°, 14°, 15° and 17°, matching every
+      working angle in chapter&nbsp;03. The KAGE TAG rides in the sheath: 600-grit diamond on one
+      face for damage, 1200-grit on the other for maintenance, a replaceable 1&nbsp;μm diamond film
+      beneath for the final polish. Dry use; rinse with water after fish.
+    </p>
+    <ol class="mech-list">
+      <li><strong>Index the tag</strong> against the facet that matches the zone you are restoring.</li>
+      <li><strong>Work the omote</strong> — light strokes, edge-trailing, until a uniform burr rises.</li>
+      <li><strong>Deburr on the film</strong> at 1 μm, alternating faces, pressure of a pencil line.</li>
+      <li><strong>Respect the ura.</strong> The reference face meets only the dead-flat plate, only flat.
+        Lift it once and the geometry starts lying to your square.</li>
+    </ol>
+    <p class="footnote">
+      Each step tells you it worked: the burr you can feel, the film that stops whispering, the ura
+      that sits dead on the plate. If a stroke goes wrong, the next facet-indexed stroke corrects it —
+      nothing here requires talent, only patience.
+    </p>
+  </div>
+</section>
+
+<!-- ============================== CH 08 · EVIDENCE ============================== -->
+<section class="act-paper chapter" id="ch-8" aria-labelledby="ch8-title">
+  <div class="chapter__head">
+    <p class="kicker"><span class="idx" aria-hidden="true">08</span> The evidence</p>
+    <h2 id="ch8-title">What is known. What is being tested. What will never be claimed.</h2>
+  </div>
+
+  <div class="ledger">
+    <section class="ledger__col" aria-labelledby="ledger-known">
+      <h3 id="ledger-known">Demonstrated today</h3>
+      <ul>
+        <li>Pencil-weight titanium tools with dovetail-laminated MagnaCut edges are in production at
+          <a href="https://zenwutoolworks.com/" rel="noopener external">Zen-Wu Toolworks</a> — the exact
+          construction language this dossier asks for.</li>
+        <li>MagnaCut’s toughness, corrosion resistance and heat treatment are
+          <a href="https://knifesteelnerds.com/2021/03/25/cpm-magnacut/" rel="noopener external">published, tested metallurgy</a>.</li>
+        <li>MagnaMax matches K390 / Vanadis 8 edge retention with MagnaCut-class corrosion resistance in
+          <a href="https://knifesteelnerds.com/2026/01/19/magnamax-is-here-the-next-evolution-in-knife-steel/" rel="noopener external">published CATRA testing</a>,
+          and has been on open sale since May 2026.</li>
+        <li>Mission-sized shape-memory shinkei wires (Φ0.8–1.5 mm, to 80 cm) are
+          <a href="https://belmont-online.shop/en/products/shinkeijime-80" rel="noopener external">proven commercial products</a>.</li>
+        <li>The sub-1.5 oz fixed-blade class is buildable at scale —
+          <a href="https://www.coldsteel.com/bird-game/" rel="noopener external">Cold Steel ships 1.4 oz today</a>.</li>
+      </ul>
+    </section>
+
+    <section class="ledger__col" aria-labelledby="ledger-testing">
+      <h3 id="ledger-testing">Targets under test</h3>
+      <ul>
+        <li>Every gram figure on this page, until prototypes are weighed on a scale.</li>
+        <li>The 62.5–63.0 HRC window, verified per blade with retained coupons.</li>
+        <li>Tip flex of 2.5–3.5 mm under a 10 N lateral load.</li>
+        <li>Behind-edge targets of 0.10–0.16 mm across the zones.</li>
+        <li>Reference-face flatness and land coplanarity within 0.02–0.03 mm.</li>
+        <li>The Kusabi-Lock joint under torsion, grit, and wet-glove abuse.</li>
+        <li>Saltwater exposure, sanitation rinse-through, and wood-scribing accuracy —
+            the prototype acceptance gates.</li>
+      </ul>
+    </section>
+
+    <section class="ledger__col" aria-labelledby="ledger-never">
+      <h3 id="ledger-never">Never claimed</h3>
+      <ul>
+        <li>No batoning, prying, pelvis splitting, chopping antler or heavy bone, or using the point
+          as a screwdriver. A saw or axe handles heavy wood.</li>
+        <li>No pretense that an 82 mm blade equals a dedicated 7–9 inch salmon fillet knife on that one job.</li>
+        <li>No price, no availability, no “limited stock.” Quotes do not exist yet.</li>
+        <li>No Zen-Wu endorsement. This is a proposal <em>to</em> Zen-Wu, and it says so everywhere.</li>
+        <li>No testimonials, no awards, no review scores. There is no product to review.</li>
+      </ul>
+    </section>
+  </div>
+</section>
+
+<!-- ============================== ACT V · RESOLUTION (dark) ============================== -->
+<section class="act-dark chapter chapter--dark" id="ch-9" aria-labelledby="ch9-title">
+  <div class="chapter__head">
+    <p class="kicker kicker--light"><span class="idx" aria-hidden="true">09</span> The proposal</p>
+    <h2 id="ch9-title">Choose the grams you carry. Then let fifty knives decide the rest.</h2>
+  </div>
+
+  <h3 class="table-title table-title--light">Loadouts — computed targets</h3>
+  <div class="loadouts">
+    <div class="table-scroll" role="region" aria-label="Loadout weight table, scrollable" tabindex="0">
+      <table class="loadout-table">
+        <caption class="visually-hidden">Five loadout configurations with computed target weights</caption>
+        <thead><tr><th scope="col">Loadout</th><th scope="col">Mission</th><th scope="col">Target weight</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Kumiko pocket</th><td>Bench and pocket — layout, kumiko, chamfer</td><td class="num">17.52 g · 0.618 oz</td></tr>
+          <tr><th scope="row">Backcountry river</th><td>Trout water — fish work plus the S-50 wire</td><td class="num">24.06 g · 0.849 oz</td></tr>
+          <tr><th scope="row">Trailcraft</th><td>Camp craft — whittling, notching, food</td><td class="num">27.20 g · 0.959 oz</td></tr>
+          <tr><th scope="row">Niagara salmon</th><td>Big water — salmon plus the L-80 wire</td><td class="num">30.66 g · 1.081 oz</td></tr>
+          <tr><th scope="row">Complete studio</th><td>Everything, bench to river</td><td class="num">58.36 g · 2.059 oz</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bars" role="img" aria-label="Bar comparison of loadout weights: Kumiko pocket 17.52 grams, Backcountry river 24.06 grams, Trailcraft 27.20 grams, Niagara salmon 30.66 grams, Complete studio 58.36 grams, against the 39.7 gram bare-knife benchmark.">
+      <div class="bar"><span class="bar__label">Kumiko pocket</span><span class="bar__track"><span class="bar__fill" style="width:30%"></span></span><span class="bar__num">17.52 g</span></div>
+      <div class="bar"><span class="bar__label">Backcountry river</span><span class="bar__track"><span class="bar__fill" style="width:41.2%"></span></span><span class="bar__num">24.06 g</span></div>
+      <div class="bar"><span class="bar__label">Trailcraft</span><span class="bar__track"><span class="bar__fill" style="width:46.6%"></span></span><span class="bar__num">27.20 g</span></div>
+      <div class="bar"><span class="bar__label">Niagara salmon</span><span class="bar__track"><span class="bar__fill" style="width:52.5%"></span></span><span class="bar__num">30.66 g</span></div>
+      <div class="bar"><span class="bar__label">Complete studio</span><span class="bar__track"><span class="bar__fill" style="width:100%"></span></span><span class="bar__num">58.36 g</span></div>
+      <div class="bar bar--bench"><span class="bar__label">Benchmark, bare knife</span><span class="bar__track"><span class="bar__fill" style="width:68%"></span></span><span class="bar__num">39.7 g</span></div>
+    </div>
+    <p class="footnote footnote--light">
+      Loadout figures are geometric mass-model computations, pending physical weighing. The benchmark
+      row is the published 1.4 oz bare-knife weight of the Cold Steel Bird &amp; Game — knife only,
+      while every KAGE row above it is a <em>complete carried system</em> including sheath, sharpening
+      and mission modules.
+    </p>
+  </div>
+
+  <div class="proposal">
+    <h3>The pilot path</h3>
+    <ol class="mech-list mech-list--light">
+      <li><strong>Four engineering samples</strong> — two right-hand, two left-hand — built to the Rev A targets.</li>
+      <li><strong>The acceptance gates</strong> — bench, wet-field, corrosion, sharpening and sanitation
+        testing against chapter&nbsp;08. Failures revise the drawing, not the marketing.</li>
+      <li><strong>A 50-unit pilot</strong> — provisionally 40 right-hand, 10 left-hand — contingent on
+        prototype acceptance.</li>
+      <li><strong>Quotes before commitments</strong> — pricing compared at 25, 50 and 100 units before
+        anything is binding.</li>
+    </ol>
+
+    <div class="decisions">
+      <h3>Two decisions close this dossier</h3>
+      <p>
+        The dominant hand of the first user, and the pilot quantity the collaboration can honestly
+        commit to. Everything else is drawn, budgeted, and waiting for steel.
+      </p>
+      <div class="decisions__actions">
+        <button type="button" class="btn btn--primary" id="copy-brief">Copy the decision brief</button>
+        <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
+      </div>
+      <details class="brief">
+        <summary>View the brief text</summary>
+        <pre id="brief-text">SHINOBI//82 KAGE — decision brief (Rev A)
+
+1) Handedness. The kataba grind is handed. Confirm the first user's
+   dominant hand. The left-hand version is a full mirror — blade, ura
+   and lamination — not opposite sharpening.
+
+2) Pilot quantity. Confirm the honest commitment: prototypes only,
+   25, 50, or 100 units. Recommended path: four engineering samples
+   (2 RH / 2 LH), then a 50-unit pilot (provisionally 40 RH / 10 LH),
+   contingent on quotation and prototype acceptance.
+
+All figures are engineering targets pending CAD and physical
+prototypes. Proposed collaboration with Zen-Wu Toolworks — not an
+approved or announced product.</pre>
+      </details>
+      <p class="footnote footnote--light">
+        This page collects nothing, sells nothing, and has no forms. The conversation continues where
+        it started — in the existing thread with the maker. Copy the brief and reply there.
+      </p>
+    </div>
+
+    <figure class="seal" aria-labelledby="seal-caption">
+      <svg viewBox="0 0 96 96" role="img" aria-label="A round vermilion seal stamp reading shisaku, meaning prototype.">
+        <circle cx="48" cy="48" r="44" fill="none" stroke="#b4432f" stroke-width="3.5" />
+        <text x="48" y="42" lang="ja" text-anchor="middle" fill="#b4432f" font-size="30" font-weight="700">試</text>
+        <text x="48" y="76" lang="ja" text-anchor="middle" fill="#b4432f" font-size="30" font-weight="700">作</text>
+      </svg>
+      <figcaption id="seal-caption"><span lang="ja">試作</span> shisaku — prototype stage. Stamped on every page of this dossier in spirit.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<footer class="footer" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="visually-hidden">About this dossier</h2>
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <p class="footer__mark"><span lang="ja" aria-hidden="true">影</span> SHINOBI//82 KAGE</p>
+      <p>
+        A development dossier for a proposed collaboration with
+        <a href="https://zenwutoolworks.com/" rel="noopener external">Zen-Wu Toolworks</a>.
+        Not an approved, announced or priced product. All specifications are engineering targets
+        pending CAD and physical prototypes.
+      </p>
+    </div>
+    <nav class="footer__nav" aria-label="Dossier chapters, footer">
+      <h3>Chapters</h3>
+      <ul>
+        <li><a href="#ch-1">01 The compromise</a></li>
+        <li><a href="#ch-2">02 The gram budget</a></li>
+        <li><a href="#ch-3">03 The geometry</a></li>
+        <li><a href="#ch-4">04 The modules</a></li>
+        <li><a href="#ch-5">05 The materials</a></li>
+        <li><a href="#ch-6">06 Ikejime &amp; shinkei</a></li>
+        <li><a href="#ch-7">07 The maintenance</a></li>
+        <li><a href="#ch-8">08 The evidence</a></li>
+        <li><a href="#ch-9">09 The proposal</a></li>
+      </ul>
+    </nav>
+    <div class="footer__sources">
+      <h3>Sources cited</h3>
+      <ul>
+        <li><a href="https://zenwutoolworks.com/" rel="noopener external">Zen-Wu Toolworks</a> — construction precedent</li>
+        <li><a href="https://www.coldsteel.com/bird-game/" rel="noopener external">Cold Steel Bird &amp; Game</a> — mass benchmark</li>
+        <li><a href="https://knifesteelnerds.com/2021/03/25/cpm-magnacut/" rel="noopener external">Knife Steel Nerds — MagnaCut</a></li>
+        <li><a href="https://knifesteelnerds.com/2026/01/19/magnamax-is-here-the-next-evolution-in-knife-steel/" rel="noopener external">Knife Steel Nerds — MagnaMax</a></li>
+        <li><a href="https://knifesteelnerds.com/2026/04/30/how-to-heat-treat-magnamax-steel/" rel="noopener external">Knife Steel Nerds — MagnaMax heat treatment</a></li>
+        <li><a href="https://ikejimefederation.com/a-beginners-guide-to-traditional-ike-jime/" rel="noopener external">Ike Jime Federation — method guide</a></li>
+        <li><a href="https://ikejimefederation.com/what-makes-a-good-brain-spike/" rel="noopener external">Ike Jime Federation — brain spikes</a></li>
+        <li><a href="https://belmont-online.shop/en/products/shinkeijime-80" rel="noopener external">Belmont — shinkei wires</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__legal">
+    <p>
+      Static page: no cookies, no trackers, no analytics, no forms, nothing collected.
+      Built to WCAG&nbsp;2.2&nbsp;AA intent — keyboard operable, reduced-motion aware, screen-reader labeled.
+      External links open the cited source; none are sponsored.
+      Product names and published figures belong to their makers and are cited as evidence, not endorsement.
+    </p>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

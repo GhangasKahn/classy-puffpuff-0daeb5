@@ -5,6 +5,7 @@ A complete, self-contained website:
 - `index.html` — the public **landing page** (the marketing front door)
 - `app/` — the **BEDROCK application**, an installable PWA (the terminal you actually use)
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
+- `kage/` — **SHINOBI//82 KAGE** development dossier at `/kage` (shortcut `/shinobi`): a proposed sub-ounce titanium field-knife system for collaboration with Zen-Wu Toolworks — interactive blade cross-section explorer, honest evidence ledgers, loadout targets, and the pilot proposal. Static HTML/CSS/JS, no build step.
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, `export_martin_fab.py`, `fab_system.py`, plan generators)
 - `fence/martin/martin_kernel.py` — MARTIN **single source of truth** (Rev C). `scripts/export_martin_fab.py` writes BOM, cut lists, shop drawings, JSON, OpenSCAD, QA.
 - `fence/martin/fab/` — MARTIN fabrication package at `/fence/martin/fab/` (shortcut `/martin/fab`)

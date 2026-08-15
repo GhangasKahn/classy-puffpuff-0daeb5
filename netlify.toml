@@ -61,6 +61,17 @@
   to = "/aegis-command/"
   status = 301
 
+# ---- SHINOBI//82 KAGE development dossier ----
+[[redirects]]
+  from = "/kage"
+  to = "/kage/"
+  status = 301
+
+[[redirects]]
+  from = "/shinobi"
+  to = "/kage/"
+  status = 301
+
 # ---- fence design suite (MARTIN / HASHIRA / STELE / report) ----
 [[redirects]]
   from = "/fence"
