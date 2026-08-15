@@ -10,6 +10,9 @@ Lineage:
              joinery/ops/QA registries. Machine geometry (capacity, drum,
              16.5″ inner span) is unchanged.
   → Fab B.2: Wandel-style individual part / assembly / hardware sheets.
+  → Fab B.3: WOODWRIGHT PLANFORGE master build guide — design-basis sheets,
+             ballooned exploded view, step-by-step assembly (LEGO-style parts
+             trays), commissioning checklist, printable guide book.
 
 Units: inches internally. Convert only at export.
 Evidence: VERIFIED (spec), DERIVED (equation), ASSUMED (layout), ESTIMATED.
@@ -34,16 +37,44 @@ PROJECT = {
     "project_id": "WALTER-DS16",
     "project_name": "WALTER DS-16 dedicated drum thickness sander",
     "revision": "B",
-    "fabrication_rev": "B.2",
+    "fabrication_rev": "B.3",
     "units": "inch",
     "unit_policy": "Internal inches. Millimetres are interface-only.",
     "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on A/B",
     "material_system": "Baltic birch + MDF drum + UHMW ways + phenolic wear",
     "tolerance_class": "T2 joinery, T4 drum/table metrology",
     "author": "WALTER fabrication model",
-    "model_version": "B.2",
+    "model_version": "B.3",
     "cad_platform": "Python SSOT + OpenSCAD solids + SVG shop drawings",
     "lineage": "ShopNotes 86 → Ron Walters → Rev A solid table → Rev B geometry",
+}
+
+# Release state for the whole package. A powered machine with a 5" drum at
+# ~1035 RPM is R3: the geometry and joinery are resolved and internally
+# reconciled, but two things are deliberately NOT released here — mains
+# electrical work (qualified person + local code) and the flange bolt circle
+# (ASSUMED until the purchased bearing is transferred to the panel).
+RELEASE_STATE = {
+    "state": "FABRICATION REVIEW",
+    "risk_class": "R3",
+    "risk_triggers": [
+        "Powered spindle: 5\u2033 drum at ~1035 RPM with stored rotational energy",
+        "Mains-voltage motor, switch, and cord require qualified electrical work",
+        "Ingoing nip between drum and feed rollers; workpiece ejection path",
+        "Abrasive dust generation, worst when truing the MDF core",
+    ],
+    "conditions": [
+        "Transfer the purchased 4-bolt flange to the panel before drilling. The bolt square on the drawings is ASSUMED.",
+        "Measure ply_actual and regenerate. Keep the 16.5\u2033 inner span; do not shrink it to suit 18 mm stock.",
+        "Motor circuit, switch, grounding, and cord: qualified electrician and local code. Not released by this package.",
+        "Commission with the hood on and no stock, standing clear of the drum ends.",
+        "Confirm TIR, |A\u2212B|, and witness-board scatter before the machine is used on real work.",
+    ],
+    "not_released": [
+        "Electrical installation and any code-dependent wiring",
+        "Any use as a metal-working or thickness-planing machine",
+        "Stock shorter than ~12\u2033 without the sled",
+    ],
 }
 
 
@@ -52,7 +83,7 @@ class Spec:
     """Controlling inputs. Dependent sizes live in Geom, not here."""
 
     revision: str = "B"
-    fabrication_rev: str = "B.2"
+    fabrication_rev: str = "B.3"
 
     # Capacity — VERIFIED design intent
     capacity_width: float = 15.5
@@ -468,6 +499,46 @@ def validate(s: Spec = SPEC, g: Geom = GEOM) -> list[str]:
     travel_need = s.max_stock_thickness - s.min_stock_thickness
     if travel_need > s.elev_travel:
         errors.append("Need more Acme travel")
+    errors.extend(validate_steps())
+    return errors
+
+
+def validate_steps() -> list[str]:
+    """Every ID named in a build step must exist, and every part must be used.
+
+    This is the check that stops the guide book from telling a builder to fetch
+    a part number that no drawing defines, or from silently orphaning a part.
+    """
+    errors: list[str] = []
+    part_ids = {p["part_id"] for p in parts()}
+    hw_ids = {h["hardware_id"] for h in hardware()}
+    qc_ids = {q["qc"] for q in inspection()}
+    viz_ids = {
+        "sides", "base", "stretch", "ways", "table", "elev",
+        "drum", "shaft", "motor", "rollers", "hood",
+    }
+    used: set[str] = set()
+    for st in build_steps():
+        w = st["id"]
+        for pid in st["parts"]:
+            if pid not in part_ids:
+                errors.append(f"{w}: unknown part {pid}")
+        for hid in st["hardware"]:
+            if hid not in hw_ids:
+                errors.append(f"{w}: unknown hardware {hid}")
+        for qc in (st.get("qc") or "").replace("\u00b7", " ").split():
+            if qc.startswith("QC-") and qc not in qc_ids:
+                errors.append(f"{w}: unknown QC gate {qc}")
+        for g in list(st["shows"]) + list(st["adds"]):
+            if g not in viz_ids:
+                errors.append(f"{w}: unknown viz group {g}")
+        for g in st["adds"]:
+            if g not in st["shows"]:
+                errors.append(f"{w}: adds {g} but does not show it")
+        used.update(st["parts"])
+    orphan = sorted(part_ids - used)
+    if orphan:
+        errors.append("Parts never used in a build step: " + ", ".join(orphan))
     return errors
 
 
@@ -922,6 +993,8 @@ def decisions() -> list[dict[str, str]]:
         {"id": "D-022", "decision": "Persistent part IDs P/H/J/A; Python is SSOT", "reason": "Drawings, BOM, viewer, and OpenSCAD were duplicating 16.5 / 14 / 18.5", "rev": "B.1"},
         {"id": "D-023", "decision": "Wandel-style individual part, assembly, and hardware sheets", "reason": "Overview D-sheets are not enough to fabricate P-001 from; each make part needs its own isometric + hole chart + callouts", "rev": "B.2", "affected": "plans/P*.svg, A*.svg, H01, IDX"},
         {"id": "D-024", "decision": "Idler float is an axial pad, not YZ slots in the side panel", "reason": "Face-plane slots let the drum axis wander; shaft growth is through the bearing", "rev": "B.2", "affected": "J-007, H-002, P-001R"},
+        {"id": "D-025", "decision": "Master build guide: release state on every sheet, ballooned explosion, numbered step sheets with parts trays", "reason": "A builder should follow numbered steps with per-step parts and QC gates, not reverse-engineer the order from overview sheets", "rev": "B.3", "affected": "G-001…G-004, E-101, ST-01…ST-14, Q-101"},
+        {"id": "D-026", "decision": "Package release state is FABRICATION REVIEW, risk class R3", "reason": "Mains electrical work needs a qualified person, and the flange bolt circle is ASSUMED until the purchased bearing is transferred", "rev": "B.3", "affected": "G-001, G-004, ST-04, ST-10"},
     ]
 
 
@@ -931,6 +1004,7 @@ def revisions() -> list[dict[str, str]]:
         {"rev": "B", "note": "Dual-end lift, UHMW ways, hold-downs, floating bearing, paper-on A/B ±0.003″"},
         {"rev": "B.1", "note": "Fabrication model: part/joint IDs, housed stretchers, way rebate so table fits, derived geometry, JSON/CSV SSOT"},
         {"rev": "B.2", "note": "Individual Wandel-style part/assembly/hardware sheets; named hole patterns; idler axial pad (not YZ slots)"},
+        {"rev": "B.3", "note": "Master build guide book: G-001…G-004 design basis, E-101 ballooned explosion, ST-01…ST-14 step sheets with parts trays, Q-101 commissioning"},
     ]
 
 
@@ -1132,6 +1206,345 @@ def assembly_phases() -> list[dict[str, str]]:
     ]
 
 
+def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
+    """Numbered build steps for the master guide book.
+
+    Each step is one sitting: what to put on the bench (parts tray), what to
+    do, what must be true before the glue cures (QC gate), and what is still
+    correctable afterwards. `shows` names the viz groups drawn in that step's
+    illustration; `adds` is the subset that is new work, drawn in colour while
+    everything already built is ghosted grey.
+    """
+    steps: list[dict[str, Any]] = [
+        {
+            "step": 1,
+            "chapter": "01 Stock",
+            "title": "Buy, acclimate, and measure the plywood",
+            "goal": "Know your real ply thickness before a single dado is cut.",
+            "parts": [],
+            "hardware": [],
+            "tools": ["Calipers", "Moisture meter (optional)", "Flat floor"],
+            "sheets": ["D-10", "IDX"],
+            "actions": [
+                "Stand the sheets on edge in the shop for at least 48 hours. Euro BB arrives at 18 mm, not ¾″.",
+                f"Caliper the ply in six places. Record the number as ply_actual (model default {s.ply_actual:g}″).",
+                f"If it is not {s.ply_actual:g}″, edit ply_actual in cad/walter_ds16.py and regenerate every sheet. Do not shave the {s.clear_between_sides:g}″ inner span to make the old numbers work.",
+            ],
+            "qc": "QC-01",
+            "gate": f"Measured ply thickness recorded. Inner span stays {s.clear_between_sides:g}″ (419 mm).",
+            "hold": "Nothing is cut yet. This is the cheapest place to catch the 18 mm surprise.",
+            "warn": "",
+            "shows": [],
+            "adds": [],
+            "correctable": "Everything.",
+        },
+        {
+            "step": 2,
+            "chapter": "02 Breakdown",
+            "title": "Rough-cut the panels oversize",
+            "goal": "Flat, labelled, manageable blanks out of full sheets.",
+            "parts": ["P-001L", "P-001R", "P-002", "P-003", "P-004"],
+            "hardware": [],
+            "tools": ["Track saw or table saw", "Straightedge", "Sawhorses"],
+            "sheets": ["D-6", "D-10"],
+            "actions": [
+                "Cut every panel about ⅛″ over width and ¼″ over length. Final size comes off one stop later.",
+                "Write the part ID on each blank in pencil the moment it leaves the sheet.",
+                "Keep the two side blanks as a matched pair — they get drilled together in ST-04.",
+            ],
+            "qc": "",
+            "gate": "All blanks labelled, oversize, and stacked flat.",
+            "hold": "",
+            "warn": "Full sheets are heavy and awkward. Support the offcut so it cannot drop onto the blade or onto you.",
+            "shows": [],
+            "adds": [],
+            "correctable": "Sizes — everything is still oversize.",
+        },
+        {
+            "step": 3,
+            "chapter": "03 Sides",
+            "title": "Cut both sides to final size on one stop",
+            "goal": "Two panels that ARE the same size, not two panels that measure the same.",
+            "parts": ["P-001L", "P-001R"],
+            "hardware": [],
+            "tools": ["Table saw + stop block", "Framing square"],
+            "sheets": ["P-001L", "P-001R", "D-12"],
+            "actions": [
+                f"Set the stop for {s.side_height:g}″ and cut both panels (S-001). Do not move the stop between cuts.",
+                f"Reset for {s.side_depth:g}″ depth and cut both (S-002).",
+                "Mark the INNER face and the INFEED edge on each panel. Those two marks are Datum C and Datum B for the rest of the build.",
+            ],
+            "qc": "QC-02",
+            "gate": "Panels identical within a pencil line; inner face and infeed edge marked on both.",
+            "hold": "",
+            "warn": "",
+            "shows": ["sides"],
+            "adds": ["sides"],
+            "correctable": "Nothing about panel size after this — the drum and table depend on it.",
+        },
+        {
+            "step": 4,
+            "chapter": "03 Sides",
+            "title": "Stack-drill the pair: bearing, flange, pilots",
+            "goal": "One hole pattern, drilled once, so the drum axis cannot be crooked.",
+            "parts": ["P-001L", "P-001R"],
+            "hardware": ["H-001", "H-002"],
+            "tools": ["Drill press", "Forstner bits", "Clamps", "Awl"],
+            "sheets": ["P-001L", "P-001R"],
+            "actions": [
+                "Clamp the panels face-to-face, inner faces together, infeed edges flush.",
+                f"Lay out the bearing centreline at Y {g.bearing_cl_y:g}″ from the infeed edge and Z {g.bearing_cl_z:g}″ up from the bottom.",
+                f"Set the actual flange on the panel and transfer its bolt holes. The drawing shows {s.flange_bolt_square:g}″ square as a placeholder — your bearing decides.",
+                f"Drill the ⌀{s.ply_shaft_clear_dia:g}″ shaft clearance and the four bolt holes through both panels at once (S-008).",
+                f"Drive side only: pilot the motor pivot at Y {s.motor_pivot_y:g}″ / Z {s.motor_pivot_z:g}″ and the indicator pad at Y {s.indicator_pad_y:g}″ / Z {s.indicator_pad_z:g}″.",
+            ],
+            "qc": "QC-02",
+            "gate": "Panels separated; hole patterns line up when the panels are flipped face-to-face.",
+            "hold": "Stop here until the flange is in your hand. Do not drill this pattern from the drawing alone.",
+            "warn": "Clamp hard. A panel that shifts mid-drill gives you two different machines.",
+            "shows": ["sides"],
+            "adds": ["sides"],
+            "correctable": "Almost nothing. This pattern is the datum for the whole machine.",
+        },
+        {
+            "step": 5,
+            "chapter": "03 Sides",
+            "title": "Dado the stretcher housings and way rebates",
+            "goal": "Inner-face joinery, mirrored — the one operation where the panels are NOT identical.",
+            "parts": ["P-001L", "P-001R"],
+            "hardware": [],
+            "tools": ["Dado stack or router + edge guide", "Test offcut"],
+            "sheets": ["P-001L", "P-001R", "D-12"],
+            "actions": [
+                "Split the pair. From here the panels are mirror images — work only on the marked inner faces.",
+                f"Cut three stretcher housings {s.stretcher_housing:g}″ deep × {s.ply_actual:g}″ wide, Y {s.stretcher_dado_y0:g}″ to {s.stretcher_dado_y0 + s.stretcher_height:g}″, at Z {', '.join(f'{z:g}' for z in s.stretcher_z)}″ (J-001, S-006).",
+                f"Rout the way rebate {g.way_rebate:.3f}″ deep × {s.way_stock:g}″ wide at Z {s.way_z:g}″, stopping {s.way_end_inset:g}″ shy of each end (J-002, S-007).",
+                "Test the dado width on an offcut of the same ply first. A sloppy housing is a racking frame.",
+            ],
+            "qc": "QC-12",
+            "gate": f"Rebate {g.way_rebate:.3f}″ deep ±0.010″; a scrap of way stock sits {g.way_project:.3f}″ proud of the inner face.",
+            "hold": "",
+            "warn": "Do not dado the panels while they are still stacked. You will get two left-hand sides.",
+            "shows": ["sides", "ways"],
+            "adds": ["ways"],
+            "correctable": "A rebate can go deeper, never shallower.",
+        },
+        {
+            "step": 6,
+            "chapter": "04 Frame",
+            "title": "Glue the box: stretchers, base, diagonals",
+            "goal": "A square, stiff carcase that will not rack when a board is pushed through it.",
+            "parts": ["P-001L", "P-001R", "P-002", "P-003"],
+            "hardware": ["H-014", "H-015", "H-023"],
+            "tools": ["Long clamps", "Framing square", "Tape measure", "Glue brush"],
+            "sheets": ["A-01", "P-003", "P-002"],
+            "actions": [
+                f"Dry-fit all three stretchers ({g.stretcher_length:g}″, housed {s.stretcher_housing:g}″ each end) into the dados. Check the inner span reads {s.clear_between_sides:g}″.",
+                "Glue and clamp. Measure both diagonals and pull them equal before the glue grabs.",
+                "Drill and drive #8 × 2″ screws from outside into each stretcher end.",
+                "Screw the base deck on, then measure the diagonals again.",
+            ],
+            "qc": "QC-03",
+            "gate": f"Diagonals equal within 1/32″. Inner span {s.clear_between_sides:g}″ at top, middle, and bottom.",
+            "hold": "Let the glue cure before hanging anything heavy on the box.",
+            "warn": "",
+            "shows": ["sides", "base", "stretch"],
+            "adds": ["base", "stretch"],
+            "correctable": "Squareness — for about ten minutes.",
+        },
+        {
+            "step": 7,
+            "chapter": "04 Frame",
+            "title": "Bond the UHMW ways and wax them",
+            "goal": "Two coplanar rails for the table to ride on. These, not the stretchers, locate the table.",
+            "parts": ["P-007"],
+            "hardware": ["H-023", "H-024"],
+            "tools": ["Winding sticks or straightedge", "Dial indicator", "Clamps"],
+            "sheets": ["P-007", "A-01"],
+            "actions": [
+                f"Cut two UHMW bars to {s.side_depth:g}″ and set them into the rebates. They should project {g.way_project:.3f}″.",
+                "Bond and clamp. Optional: #8 flush screws from the outer face.",
+                "Check both ways for twist with winding sticks or an indicator riding a flat bar.",
+                "Paste wax only. Never oil — oil migrates into the wood and into your finish.",
+            ],
+            "qc": "QC-04",
+            "gate": f"No twist between the two ways. Projection {g.way_project:.3f}″ ±0.010″ along the full length.",
+            "hold": "",
+            "warn": "",
+            "shows": ["sides", "base", "stretch", "ways"],
+            "adds": ["ways"],
+            "correctable": "UHMW can be planed down; it cannot be built back up.",
+        },
+        {
+            "step": 8,
+            "chapter": "05 Drum",
+            "title": "Pack-bore the discs and laminate the drum",
+            "goal": "One stiff cylinder blank on one true axis.",
+            "parts": ["P-008", "P-009", "P-015"],
+            "hardware": ["H-018", "H-023"],
+            "tools": ["Bandsaw", "Drill press + reamer", "Clamps", "Scale"],
+            "sheets": ["P-008", "P-009", "P-015", "A-02"],
+            "actions": [
+                f"Bandsaw {s.disc_count_core} MDF discs and {s.disc_count_ends} birch ends at ⌀{g.drum_oversize_od:g}″ — oversize on purpose.",
+                f"Stack the whole pack in the P-015 jig and ream ⌀{s.shaft_od:g}″ straight through (J-005, S-009). Never bore discs one at a time.",
+                f"Glue the stack with a {s.spacer_mm:g} mm relief every {s.spacer_every_n} MDF discs. Birch ends outboard.",
+                "Weigh the two end discs against each other and balance them before assembly.",
+            ],
+            "qc": "",
+            "gate": f"Bore accepts the shaft with light friction. Stack length {g.drum_length:g}″.",
+            "hold": "Full cure before the drum ever spins. A delaminated disc at 1035 RPM is a projectile.",
+            "warn": "MDF dust is the worst dust in the shop. Respirator and extraction on.",
+            "shows": ["drum", "shaft"],
+            "adds": ["drum"],
+            "correctable": "Outside diameter — that is what truing is for.",
+        },
+        {
+            "step": 9,
+            "chapter": "05 Drum",
+            "title": "Hang the shaft: drive FIXED, idler FLOATING",
+            "goal": "One bearing defines the axis; the other lets the shaft grow.",
+            "parts": ["P-010"],
+            "hardware": ["H-001", "H-002", "H-017"],
+            "tools": ["Wrenches", "Dial indicator", "Feeler gauges"],
+            "sheets": ["P-010", "A-02", "P-001R"],
+            "actions": [
+                f"Slide the {s.shaft_length:g}″ shaft through the drum and both panels.",
+                "Bolt H-001 to the drive side and torque it. That flange is now the drum-axis datum (J-006).",
+                f"Set H-002 on the {s.idler_float_pad:g}″ pad on the idler side. Snug only — the shaft must still be able to slide axially (J-007).",
+                "Spin the drum by hand through several turns. It should coast, not bind and not ring.",
+            ],
+            "qc": "QC-11",
+            "gate": "Shaft turns freely; measurable axial float at the idler end.",
+            "hold": "",
+            "warn": "Locking both flanges bends the shaft and kills both bearings. Do not do it because it feels tighter.",
+            "shows": ["sides", "base", "stretch", "ways", "drum", "shaft"],
+            "adds": ["shaft"],
+            "correctable": "Bearing position, while the bolts are still loose.",
+        },
+        {
+            "step": 10,
+            "chapter": "06 Drive",
+            "title": "Mount the motor, align the pulleys, lock the cradle",
+            "goal": "Belt tension by gravity, then locked so it cannot pump.",
+            "parts": ["P-012"],
+            "hardware": ["H-003", "H-004", "H-005", "H-006", "H-016"],
+            "tools": ["Straightedge", "Wrenches", "Level"],
+            "sheets": ["P-012", "A-04"],
+            "actions": [
+                f"Pivot P-012 on the drive-side hole and hang the {s.motor_hp:g} HP motor on it.",
+                f"Fit the {s.pulley_motor_od:g}″ motor pulley and the {s.pulley_drum_od:g}″ drum pulley. Lay a straightedge across both faces and shim until they are coplanar.",
+                "Let the cradle hang to tension the belt, measure the centre distance, then buy the belt to that number.",
+                "Lock the cradle. A cradle that still swings will pump the belt and chirp.",
+            ],
+            "qc": "QC-09",
+            "gate": "Pulley faces coplanar; belt tracks centred when the drum is turned by hand.",
+            "hold": "Do not connect power yet.",
+            "warn": "Mains wiring, switch, and grounding belong to a qualified electrician and your local code. This package does not release electrical work.",
+            "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor"],
+            "adds": ["motor"],
+            "correctable": "Belt length, before you buy it.",
+        },
+        {
+            "step": 11,
+            "chapter": "07 Table",
+            "title": "Build the torsion-box table and bond the wear face",
+            "goal": "A flat plate that stays flat. This is the surface you measure against forever.",
+            "parts": ["P-004", "P-005", "P-006"],
+            "hardware": ["H-023"],
+            "tools": ["Clamps and cauls", "Straightedge", "Feeler gauges", "Flat bench"],
+            "sheets": ["P-004", "P-005", "P-006", "A-03"],
+            "actions": [
+                f"Glue the rib grid at {s.table_rib_oc:g}″ o.c. between the two skins. Full glue, clamped on a flat reference.",
+                "Check the box flat in both directions and on both diagonals. Flatten it before going further.",
+                "Bond the phenolic or tooling-plate wear face on top (J-004).",
+                f"Confirm the finished plan size is {g.table_width:g}″ × {g.table_depth:g}″ so it enters the ways.",
+            ],
+            "qc": "QC-05",
+            "gate": f"Wear face flat within {s.table_flat_tol:.3f}″ on both diagonals.",
+            "hold": "Cure fully. Every later measurement trusts this plane.",
+            "warn": "",
+            "shows": ["table"],
+            "adds": ["table"],
+            "correctable": "Flatness, while the box is still open.",
+        },
+        {
+            "step": 12,
+            "chapter": "07 Table",
+            "title": "Fit the dual Acme lift and chain-couple it",
+            "goal": "Both ends of the table rise together, with a home position to return to.",
+            "parts": ["P-016"],
+            "hardware": ["H-007", "H-008", "H-013"],
+            "tools": ["Wrenches", "Drill", "Tape measure"],
+            "sheets": ["P-016", "A-03"],
+            "actions": [
+                "Bolt a bronze nut block under each end of the table.",
+                f"Fit both ½-10 Acme screws. One turn is {g.acme_per_turn:.4f}″ — that is your fine adjustment.",
+                "Chain-couple the two screws so they turn together. Fit the left clutch and the home dog.",
+                f"Run the table through the full {s.elev_travel:g}″ of travel. It must rise without twist or bind.",
+            ],
+            "qc": "QC-12",
+            "gate": "Table rises and falls freely through full travel; both ends move the same amount.",
+            "hold": "",
+            "warn": "",
+            "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor", "table", "elev"],
+            "adds": ["table", "elev"],
+            "correctable": "Nut block position, before the holes are final.",
+        },
+        {
+            "step": 13,
+            "chapter": "08 Hood & hold-downs",
+            "title": "Kerf-bend the hood and set the roller yokes",
+            "goal": "The guard that is also the dust hood, plus the rollers that kill snipe.",
+            "parts": ["P-011", "P-014"],
+            "hardware": ["H-009", "H-010", "H-011", "H-012", "H-013", "H-019"],
+            "tools": ["Table saw (kerfing)", "Feeler gauges", "Drill"],
+            "sheets": ["P-011", "P-014", "A-05"],
+            "actions": [
+                "Kerf-bend the hood blank around the drum arc, glue the form, fill the kerfs, and fit the 4″ port.",
+                "Hang both roller yokes on shoulder-bolt pivots with light compression springs.",
+                f"Set each roller {s.roller_setbelow:.3f}″ below the drum OD with paper on, using feeler gauges.",
+                "Check the hood clears the drum, the rollers, and the oscillator stroke if you fitted one.",
+            ],
+            "qc": "QC-08",
+            "gate": f"Both rollers {s.roller_setbelow:.3f}″ below drum OD, paper on. Hood seats without touching the drum.",
+            "hold": "",
+            "warn": "Hood ON is the primary guard. Open it only with the machine stopped and unplugged.",
+            "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor", "table", "elev", "rollers", "hood"],
+            "adds": ["rollers", "hood"],
+            "correctable": "Spring rate and roller height, any time.",
+        },
+        {
+            "step": 14,
+            "chapter": "09 Commissioning",
+            "title": "True, wrap, re-clock, and cut a witness board",
+            "goal": "Turn an assembled machine into a calibrated one.",
+            "parts": ["P-013"],
+            "hardware": ["H-021", "H-022"],
+            "tools": ["Dial indicator + mag base", "Calipers", "Test panel", "Respirator"],
+            "sheets": ["Q-101", "P-013", "A-02"],
+            "actions": [
+                f"Paper off: true the drum with the full-width sled until TIR ≤ {s.drum_tir:.3f}″ mid-span (S-010).",
+                "Wrap Velcro, then spiral the paper. Paper thickness is not uniform, so parallel changes here.",
+                f"Paper on: indicate the drum at the drive end (A) and the idler end (B). Bring |A−B| ≤ {s.parallel_tol:.3f}″, then set the home dog (S-011).",
+                f"Sand a witness board at 80 grit, one pass. Caliper four corners. Scatter must be ≤ {s.parallel_tol:.3f}″.",
+                f"Then work the pass schedule: {s.pass_rough:.3f}″ rough, {s.pass_medium:.3f}″ medium, {s.pass_finish:.3f}″ finish.",
+            ],
+            "qc": "QC-06 · QC-07 · QC-10",
+            "gate": f"TIR ≤ {s.drum_tir:.3f}″ paper-off · |A−B| ≤ {s.parallel_tol:.3f}″ paper-on · witness scatter ≤ {s.parallel_tol:.3f}″.",
+            "hold": "First powered run: hood on, no stock, stand clear of the drum ends, hand on the switch.",
+            "warn": "Do not sand stock shorter than about 12″ without the sled. Hands never under the drum or the hold-downs.",
+            "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor", "table", "elev", "rollers", "hood"],
+            "adds": [],
+            "correctable": "Everything that matters — which is why you re-clock after every paper change.",
+        },
+    ]
+    total = len(steps)
+    for st in steps:
+        st["id"] = f"ST-{st['step']:02d}"
+        st["of"] = total
+    return steps
+
+
 def calibration_steps() -> list[dict[str, str]]:
     s = SPEC
     return [
@@ -1189,6 +1602,9 @@ def summary() -> dict[str, Any]:
         "lumberyard": lumberyard(),
         "fasteners": fastener_schedule(),
         "nesting": nest_sheets(),
+        "drawings": shop_drawings(),
+        "build_steps": build_steps(),
+        "release_state": RELEASE_STATE,
         "drawings": shop_drawings(),
         "assembly": assembly_phases(),
         "calibration": calibration_steps(),
@@ -1295,6 +1711,12 @@ def geometry_js(s: Spec = SPEC, g: Geom = GEOM) -> str:
 def shop_drawings() -> list[dict[str, str]]:
     """Every printable sheet. kind drives the phone viewer rails."""
     rows: list[dict[str, str]] = [
+        {"code": "G-001", "file": "G001_cover.svg", "title": "G-001 Cover & release", "kind": "guide", "group": "guide"},
+        {"code": "G-002", "file": "G002_design_basis.svg", "title": "G-002 Design basis", "kind": "guide", "group": "guide"},
+        {"code": "G-003", "file": "G003_registers.svg", "title": "G-003 Evidence & calcs", "kind": "guide", "group": "guide"},
+        {"code": "G-004", "file": "G004_safety.svg", "title": "G-004 Safety & risk", "kind": "guide", "group": "guide"},
+        {"code": "E-101", "file": "E101_exploded.svg", "title": "E-101 Exploded + BOM", "kind": "guide", "group": "guide"},
+        {"code": "Q-101", "file": "Q101_commissioning.svg", "title": "Q-101 Commissioning", "kind": "guide", "group": "guide"},
         {"code": "IDX", "file": "IDX_drawings.svg", "title": "Drawing index", "kind": "plan", "group": "index"},
         {"code": "D-1", "file": "D1_general.svg", "title": "D-1 General", "kind": "plan", "group": "overview"},
         {"code": "D-2", "file": "D2_frame.svg", "title": "D-2 Frame", "kind": "plan", "group": "overview"},
@@ -1331,6 +1753,16 @@ def shop_drawings() -> list[dict[str, str]]:
         {"code": "A-04", "file": "A04_drive.svg", "title": "A-04 Drive assembly", "kind": "assembly", "group": "assembly"},
         {"code": "A-05", "file": "A05_holddowns.svg", "title": "A-05 Hold-downs", "kind": "assembly", "group": "assembly"},
         {"code": "H-01", "file": "H01_hardware.svg", "title": "H-01 Hardware", "kind": "hardware", "group": "hardware"},
+        *(
+            {
+                "code": st["id"],
+                "file": f"ST{st['step']:02d}_step.svg",
+                "title": f"{st['id']} {st['title']}",
+                "kind": "step",
+                "group": "step",
+            }
+            for st in build_steps()
+        ),
         {"src_kind": "render", "code": "ISO-A", "file": "iso_assembled.svg", "title": "Iso assembled", "kind": "render", "group": "render", "dir": "renders"},
         {"src_kind": "render", "code": "ISO-E", "file": "iso_exploded.svg", "title": "Iso exploded", "kind": "render", "group": "render", "dir": "renders"},
         {"src_kind": "render", "code": "ORTHO-F", "file": "ortho_front.svg", "title": "Front solid", "kind": "render", "group": "render", "dir": "renders"},
@@ -1375,6 +1807,8 @@ def viewer_data() -> dict[str, Any]:
         ],
         "hardware": hardware_bom(),
         "assembly": assembly_phases(),
+        "steps": build_steps(),
+        "release": RELEASE_STATE,
         "phases": [
             {"id": "frame", "label": "01 Frame"},
             {"id": "drum", "label": "02 Drum"},
