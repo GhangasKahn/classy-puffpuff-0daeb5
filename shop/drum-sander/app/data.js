@@ -3,9 +3,9 @@ window.WALTER_DATA = {
   "meta": {
     "name": "WALTER",
     "code": "DS-16",
-    "subtitle": "Dedicated drum thickness sander \u00b7 15.5\u2033 \u00b7 geometry Rev B \u00b7 fab B.2",
+    "subtitle": "Dedicated drum thickness sander \u00b7 15.5\u2033 \u00b7 geometry Rev B \u00b7 fab B.3",
     "revision": "B",
-    "fabricationRev": "B.2",
+    "fabricationRev": "B.3",
     "capacity": 15.5,
     "drumOd": 5.0,
     "drumRpm": 1035.0,
@@ -419,6 +419,665 @@ window.WALTER_DATA = {
       "body": "80 / 120 / 180. Caliper four corners. If scatter > 0.003\u2033, re-clock. Finish at 0.001\u2033."
     }
   ],
+  "steps": [
+    {
+      "step": 1,
+      "chapter": "01 Stock",
+      "title": "Buy, acclimate, and measure the plywood",
+      "goal": "Know your real ply thickness before a single dado is cut.",
+      "parts": [],
+      "hardware": [],
+      "tools": [
+        "Calipers",
+        "Moisture meter (optional)",
+        "Flat floor"
+      ],
+      "sheets": [
+        "D-10",
+        "IDX"
+      ],
+      "actions": [
+        "Stand the sheets on edge in the shop for at least 48 hours. Euro BB arrives at 18 mm, not \u00be\u2033.",
+        "Caliper the ply in six places. Record the number as ply_actual (model default 0.75\u2033).",
+        "If it is not 0.75\u2033, edit ply_actual in cad/walter_ds16.py and regenerate every sheet. Do not shave the 16.5\u2033 inner span to make the old numbers work."
+      ],
+      "qc": "QC-01",
+      "gate": "Measured ply thickness recorded. Inner span stays 16.5\u2033 (419 mm).",
+      "hold": "Nothing is cut yet. This is the cheapest place to catch the 18 mm surprise.",
+      "warn": "",
+      "shows": [],
+      "adds": [],
+      "correctable": "Everything.",
+      "id": "ST-01",
+      "of": 14
+    },
+    {
+      "step": 2,
+      "chapter": "02 Breakdown",
+      "title": "Rough-cut the panels oversize",
+      "goal": "Flat, labelled, manageable blanks out of full sheets.",
+      "parts": [
+        "P-001L",
+        "P-001R",
+        "P-002",
+        "P-003",
+        "P-004"
+      ],
+      "hardware": [],
+      "tools": [
+        "Track saw or table saw",
+        "Straightedge",
+        "Sawhorses"
+      ],
+      "sheets": [
+        "D-6",
+        "D-10"
+      ],
+      "actions": [
+        "Cut every panel about \u215b\u2033 over width and \u00bc\u2033 over length. Final size comes off one stop later.",
+        "Write the part ID on each blank in pencil the moment it leaves the sheet.",
+        "Keep the two side blanks as a matched pair \u2014 they get drilled together in ST-04."
+      ],
+      "qc": "",
+      "gate": "All blanks labelled, oversize, and stacked flat.",
+      "hold": "",
+      "warn": "Full sheets are heavy and awkward. Support the offcut so it cannot drop onto the blade or onto you.",
+      "shows": [],
+      "adds": [],
+      "correctable": "Sizes \u2014 everything is still oversize.",
+      "id": "ST-02",
+      "of": 14
+    },
+    {
+      "step": 3,
+      "chapter": "03 Sides",
+      "title": "Cut both sides to final size on one stop",
+      "goal": "Two panels that ARE the same size, not two panels that measure the same.",
+      "parts": [
+        "P-001L",
+        "P-001R"
+      ],
+      "hardware": [],
+      "tools": [
+        "Table saw + stop block",
+        "Framing square"
+      ],
+      "sheets": [
+        "P-001L",
+        "P-001R",
+        "D-12"
+      ],
+      "actions": [
+        "Set the stop for 30\u2033 and cut both panels (S-001). Do not move the stop between cuts.",
+        "Reset for 22\u2033 depth and cut both (S-002).",
+        "Mark the INNER face and the INFEED edge on each panel. Those two marks are Datum C and Datum B for the rest of the build."
+      ],
+      "qc": "QC-02",
+      "gate": "Panels identical within a pencil line; inner face and infeed edge marked on both.",
+      "hold": "",
+      "warn": "",
+      "shows": [
+        "sides"
+      ],
+      "adds": [
+        "sides"
+      ],
+      "correctable": "Nothing about panel size after this \u2014 the drum and table depend on it.",
+      "id": "ST-03",
+      "of": 14
+    },
+    {
+      "step": 4,
+      "chapter": "03 Sides",
+      "title": "Stack-drill the pair: bearing, flange, pilots",
+      "goal": "One hole pattern, drilled once, so the drum axis cannot be crooked.",
+      "parts": [
+        "P-001L",
+        "P-001R"
+      ],
+      "hardware": [
+        "H-001",
+        "H-002"
+      ],
+      "tools": [
+        "Drill press",
+        "Forstner bits",
+        "Clamps",
+        "Awl"
+      ],
+      "sheets": [
+        "P-001L",
+        "P-001R"
+      ],
+      "actions": [
+        "Clamp the panels face-to-face, inner faces together, infeed edges flush.",
+        "Lay out the bearing centreline at Y 11\u2033 from the infeed edge and Z 18.5\u2033 up from the bottom.",
+        "Set the actual flange on the panel and transfer its bolt holes. The drawing shows 2.05\u2033 square as a placeholder \u2014 your bearing decides.",
+        "Drill the \u23001.125\u2033 shaft clearance and the four bolt holes through both panels at once (S-008).",
+        "Drive side only: pilot the motor pivot at Y 4\u2033 / Z 6\u2033 and the indicator pad at Y 8\u2033 / Z 16\u2033."
+      ],
+      "qc": "QC-02",
+      "gate": "Panels separated; hole patterns line up when the panels are flipped face-to-face.",
+      "hold": "Stop here until the flange is in your hand. Do not drill this pattern from the drawing alone.",
+      "warn": "Clamp hard. A panel that shifts mid-drill gives you two different machines.",
+      "shows": [
+        "sides"
+      ],
+      "adds": [
+        "sides"
+      ],
+      "correctable": "Almost nothing. This pattern is the datum for the whole machine.",
+      "id": "ST-04",
+      "of": 14
+    },
+    {
+      "step": 5,
+      "chapter": "03 Sides",
+      "title": "Dado the stretcher housings and way rebates",
+      "goal": "Inner-face joinery, mirrored \u2014 the one operation where the panels are NOT identical.",
+      "parts": [
+        "P-001L",
+        "P-001R"
+      ],
+      "hardware": [],
+      "tools": [
+        "Dado stack or router + edge guide",
+        "Test offcut"
+      ],
+      "sheets": [
+        "P-001L",
+        "P-001R",
+        "D-12"
+      ],
+      "actions": [
+        "Split the pair. From here the panels are mirror images \u2014 work only on the marked inner faces.",
+        "Cut three stretcher housings 0.25\u2033 deep \u00d7 0.75\u2033 wide, Y 2\u2033 to 6\u2033, at Z 6, 12, 20\u2033 (J-001, S-006).",
+        "Rout the way rebate 0.520\u2033 deep \u00d7 0.75\u2033 wide at Z 10\u2033, stopping 1\u2033 shy of each end (J-002, S-007).",
+        "Test the dado width on an offcut of the same ply first. A sloppy housing is a racking frame."
+      ],
+      "qc": "QC-12",
+      "gate": "Rebate 0.520\u2033 deep \u00b10.010\u2033; a scrap of way stock sits 0.230\u2033 proud of the inner face.",
+      "hold": "",
+      "warn": "Do not dado the panels while they are still stacked. You will get two left-hand sides.",
+      "shows": [
+        "sides",
+        "ways"
+      ],
+      "adds": [
+        "ways"
+      ],
+      "correctable": "A rebate can go deeper, never shallower.",
+      "id": "ST-05",
+      "of": 14
+    },
+    {
+      "step": 6,
+      "chapter": "04 Frame",
+      "title": "Glue the box: stretchers, base, diagonals",
+      "goal": "A square, stiff carcase that will not rack when a board is pushed through it.",
+      "parts": [
+        "P-001L",
+        "P-001R",
+        "P-002",
+        "P-003"
+      ],
+      "hardware": [
+        "H-014",
+        "H-015",
+        "H-023"
+      ],
+      "tools": [
+        "Long clamps",
+        "Framing square",
+        "Tape measure",
+        "Glue brush"
+      ],
+      "sheets": [
+        "A-01",
+        "P-003",
+        "P-002"
+      ],
+      "actions": [
+        "Dry-fit all three stretchers (17\u2033, housed 0.25\u2033 each end) into the dados. Check the inner span reads 16.5\u2033.",
+        "Glue and clamp. Measure both diagonals and pull them equal before the glue grabs.",
+        "Drill and drive #8 \u00d7 2\u2033 screws from outside into each stretcher end.",
+        "Screw the base deck on, then measure the diagonals again."
+      ],
+      "qc": "QC-03",
+      "gate": "Diagonals equal within 1/32\u2033. Inner span 16.5\u2033 at top, middle, and bottom.",
+      "hold": "Let the glue cure before hanging anything heavy on the box.",
+      "warn": "",
+      "shows": [
+        "sides",
+        "base",
+        "stretch"
+      ],
+      "adds": [
+        "base",
+        "stretch"
+      ],
+      "correctable": "Squareness \u2014 for about ten minutes.",
+      "id": "ST-06",
+      "of": 14
+    },
+    {
+      "step": 7,
+      "chapter": "04 Frame",
+      "title": "Bond the UHMW ways and wax them",
+      "goal": "Two coplanar rails for the table to ride on. These, not the stretchers, locate the table.",
+      "parts": [
+        "P-007"
+      ],
+      "hardware": [
+        "H-023",
+        "H-024"
+      ],
+      "tools": [
+        "Winding sticks or straightedge",
+        "Dial indicator",
+        "Clamps"
+      ],
+      "sheets": [
+        "P-007",
+        "A-01"
+      ],
+      "actions": [
+        "Cut two UHMW bars to 22\u2033 and set them into the rebates. They should project 0.230\u2033.",
+        "Bond and clamp. Optional: #8 flush screws from the outer face.",
+        "Check both ways for twist with winding sticks or an indicator riding a flat bar.",
+        "Paste wax only. Never oil \u2014 oil migrates into the wood and into your finish."
+      ],
+      "qc": "QC-04",
+      "gate": "No twist between the two ways. Projection 0.230\u2033 \u00b10.010\u2033 along the full length.",
+      "hold": "",
+      "warn": "",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways"
+      ],
+      "adds": [
+        "ways"
+      ],
+      "correctable": "UHMW can be planed down; it cannot be built back up.",
+      "id": "ST-07",
+      "of": 14
+    },
+    {
+      "step": 8,
+      "chapter": "05 Drum",
+      "title": "Pack-bore the discs and laminate the drum",
+      "goal": "One stiff cylinder blank on one true axis.",
+      "parts": [
+        "P-008",
+        "P-009",
+        "P-015"
+      ],
+      "hardware": [
+        "H-018",
+        "H-023"
+      ],
+      "tools": [
+        "Bandsaw",
+        "Drill press + reamer",
+        "Clamps",
+        "Scale"
+      ],
+      "sheets": [
+        "P-008",
+        "P-009",
+        "P-015",
+        "A-02"
+      ],
+      "actions": [
+        "Bandsaw 19 MDF discs and 2 birch ends at \u23005.125\u2033 \u2014 oversize on purpose.",
+        "Stack the whole pack in the P-015 jig and ream \u23000.75\u2033 straight through (J-005, S-009). Never bore discs one at a time.",
+        "Glue the stack with a 1 mm relief every 4 MDF discs. Birch ends outboard.",
+        "Weigh the two end discs against each other and balance them before assembly."
+      ],
+      "qc": "",
+      "gate": "Bore accepts the shaft with light friction. Stack length 15.75\u2033.",
+      "hold": "Full cure before the drum ever spins. A delaminated disc at 1035 RPM is a projectile.",
+      "warn": "MDF dust is the worst dust in the shop. Respirator and extraction on.",
+      "shows": [
+        "drum",
+        "shaft"
+      ],
+      "adds": [
+        "drum"
+      ],
+      "correctable": "Outside diameter \u2014 that is what truing is for.",
+      "id": "ST-08",
+      "of": 14
+    },
+    {
+      "step": 9,
+      "chapter": "05 Drum",
+      "title": "Hang the shaft: drive FIXED, idler FLOATING",
+      "goal": "One bearing defines the axis; the other lets the shaft grow.",
+      "parts": [
+        "P-010"
+      ],
+      "hardware": [
+        "H-001",
+        "H-002",
+        "H-017"
+      ],
+      "tools": [
+        "Wrenches",
+        "Dial indicator",
+        "Feeler gauges"
+      ],
+      "sheets": [
+        "P-010",
+        "A-02",
+        "P-001R"
+      ],
+      "actions": [
+        "Slide the 22.5\u2033 shaft through the drum and both panels.",
+        "Bolt H-001 to the drive side and torque it. That flange is now the drum-axis datum (J-006).",
+        "Set H-002 on the 0.25\u2033 pad on the idler side. Snug only \u2014 the shaft must still be able to slide axially (J-007).",
+        "Spin the drum by hand through several turns. It should coast, not bind and not ring."
+      ],
+      "qc": "QC-11",
+      "gate": "Shaft turns freely; measurable axial float at the idler end.",
+      "hold": "",
+      "warn": "Locking both flanges bends the shaft and kills both bearings. Do not do it because it feels tighter.",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways",
+        "drum",
+        "shaft"
+      ],
+      "adds": [
+        "shaft"
+      ],
+      "correctable": "Bearing position, while the bolts are still loose.",
+      "id": "ST-09",
+      "of": 14
+    },
+    {
+      "step": 10,
+      "chapter": "06 Drive",
+      "title": "Mount the motor, align the pulleys, lock the cradle",
+      "goal": "Belt tension by gravity, then locked so it cannot pump.",
+      "parts": [
+        "P-012"
+      ],
+      "hardware": [
+        "H-003",
+        "H-004",
+        "H-005",
+        "H-006",
+        "H-016"
+      ],
+      "tools": [
+        "Straightedge",
+        "Wrenches",
+        "Level"
+      ],
+      "sheets": [
+        "P-012",
+        "A-04"
+      ],
+      "actions": [
+        "Pivot P-012 on the drive-side hole and hang the 0.5 HP motor on it.",
+        "Fit the 3\u2033 motor pulley and the 5\u2033 drum pulley. Lay a straightedge across both faces and shim until they are coplanar.",
+        "Let the cradle hang to tension the belt, measure the centre distance, then buy the belt to that number.",
+        "Lock the cradle. A cradle that still swings will pump the belt and chirp."
+      ],
+      "qc": "QC-09",
+      "gate": "Pulley faces coplanar; belt tracks centred when the drum is turned by hand.",
+      "hold": "Do not connect power yet.",
+      "warn": "Mains wiring, switch, and grounding belong to a qualified electrician and your local code. This package does not release electrical work.",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways",
+        "drum",
+        "shaft",
+        "motor"
+      ],
+      "adds": [
+        "motor"
+      ],
+      "correctable": "Belt length, before you buy it.",
+      "id": "ST-10",
+      "of": 14
+    },
+    {
+      "step": 11,
+      "chapter": "07 Table",
+      "title": "Build the torsion-box table and bond the wear face",
+      "goal": "A flat plate that stays flat. This is the surface you measure against forever.",
+      "parts": [
+        "P-004",
+        "P-005",
+        "P-006"
+      ],
+      "hardware": [
+        "H-023"
+      ],
+      "tools": [
+        "Clamps and cauls",
+        "Straightedge",
+        "Feeler gauges",
+        "Flat bench"
+      ],
+      "sheets": [
+        "P-004",
+        "P-005",
+        "P-006",
+        "A-03"
+      ],
+      "actions": [
+        "Glue the rib grid at 4\u2033 o.c. between the two skins. Full glue, clamped on a flat reference.",
+        "Check the box flat in both directions and on both diagonals. Flatten it before going further.",
+        "Bond the phenolic or tooling-plate wear face on top (J-004).",
+        "Confirm the finished plan size is 16\u2033 \u00d7 22\u2033 so it enters the ways."
+      ],
+      "qc": "QC-05",
+      "gate": "Wear face flat within 0.004\u2033 on both diagonals.",
+      "hold": "Cure fully. Every later measurement trusts this plane.",
+      "warn": "",
+      "shows": [
+        "table"
+      ],
+      "adds": [
+        "table"
+      ],
+      "correctable": "Flatness, while the box is still open.",
+      "id": "ST-11",
+      "of": 14
+    },
+    {
+      "step": 12,
+      "chapter": "07 Table",
+      "title": "Fit the dual Acme lift and chain-couple it",
+      "goal": "Both ends of the table rise together, with a home position to return to.",
+      "parts": [
+        "P-016"
+      ],
+      "hardware": [
+        "H-007",
+        "H-008",
+        "H-013"
+      ],
+      "tools": [
+        "Wrenches",
+        "Drill",
+        "Tape measure"
+      ],
+      "sheets": [
+        "P-016",
+        "A-03"
+      ],
+      "actions": [
+        "Bolt a bronze nut block under each end of the table.",
+        "Fit both \u00bd-10 Acme screws. One turn is 0.1000\u2033 \u2014 that is your fine adjustment.",
+        "Chain-couple the two screws so they turn together. Fit the left clutch and the home dog.",
+        "Run the table through the full 3.25\u2033 of travel. It must rise without twist or bind."
+      ],
+      "qc": "QC-12",
+      "gate": "Table rises and falls freely through full travel; both ends move the same amount.",
+      "hold": "",
+      "warn": "",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways",
+        "drum",
+        "shaft",
+        "motor",
+        "table",
+        "elev"
+      ],
+      "adds": [
+        "table",
+        "elev"
+      ],
+      "correctable": "Nut block position, before the holes are final.",
+      "id": "ST-12",
+      "of": 14
+    },
+    {
+      "step": 13,
+      "chapter": "08 Hood & hold-downs",
+      "title": "Kerf-bend the hood and set the roller yokes",
+      "goal": "The guard that is also the dust hood, plus the rollers that kill snipe.",
+      "parts": [
+        "P-011",
+        "P-014"
+      ],
+      "hardware": [
+        "H-009",
+        "H-010",
+        "H-011",
+        "H-012",
+        "H-013",
+        "H-019"
+      ],
+      "tools": [
+        "Table saw (kerfing)",
+        "Feeler gauges",
+        "Drill"
+      ],
+      "sheets": [
+        "P-011",
+        "P-014",
+        "A-05"
+      ],
+      "actions": [
+        "Kerf-bend the hood blank around the drum arc, glue the form, fill the kerfs, and fit the 4\u2033 port.",
+        "Hang both roller yokes on shoulder-bolt pivots with light compression springs.",
+        "Set each roller 0.030\u2033 below the drum OD with paper on, using feeler gauges.",
+        "Check the hood clears the drum, the rollers, and the oscillator stroke if you fitted one."
+      ],
+      "qc": "QC-08",
+      "gate": "Both rollers 0.030\u2033 below drum OD, paper on. Hood seats without touching the drum.",
+      "hold": "",
+      "warn": "Hood ON is the primary guard. Open it only with the machine stopped and unplugged.",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways",
+        "drum",
+        "shaft",
+        "motor",
+        "table",
+        "elev",
+        "rollers",
+        "hood"
+      ],
+      "adds": [
+        "rollers",
+        "hood"
+      ],
+      "correctable": "Spring rate and roller height, any time.",
+      "id": "ST-13",
+      "of": 14
+    },
+    {
+      "step": 14,
+      "chapter": "09 Commissioning",
+      "title": "True, wrap, re-clock, and cut a witness board",
+      "goal": "Turn an assembled machine into a calibrated one.",
+      "parts": [
+        "P-013"
+      ],
+      "hardware": [
+        "H-021",
+        "H-022"
+      ],
+      "tools": [
+        "Dial indicator + mag base",
+        "Calipers",
+        "Test panel",
+        "Respirator"
+      ],
+      "sheets": [
+        "Q-101",
+        "P-013",
+        "A-02"
+      ],
+      "actions": [
+        "Paper off: true the drum with the full-width sled until TIR \u2264 0.002\u2033 mid-span (S-010).",
+        "Wrap Velcro, then spiral the paper. Paper thickness is not uniform, so parallel changes here.",
+        "Paper on: indicate the drum at the drive end (A) and the idler end (B). Bring |A\u2212B| \u2264 0.003\u2033, then set the home dog (S-011).",
+        "Sand a witness board at 80 grit, one pass. Caliper four corners. Scatter must be \u2264 0.003\u2033.",
+        "Then work the pass schedule: 0.008\u2033 rough, 0.004\u2033 medium, 0.001\u2033 finish."
+      ],
+      "qc": "QC-06 \u00b7 QC-07 \u00b7 QC-10",
+      "gate": "TIR \u2264 0.002\u2033 paper-off \u00b7 |A\u2212B| \u2264 0.003\u2033 paper-on \u00b7 witness scatter \u2264 0.003\u2033.",
+      "hold": "First powered run: hood on, no stock, stand clear of the drum ends, hand on the switch.",
+      "warn": "Do not sand stock shorter than about 12\u2033 without the sled. Hands never under the drum or the hold-downs.",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways",
+        "drum",
+        "shaft",
+        "motor",
+        "table",
+        "elev",
+        "rollers",
+        "hood"
+      ],
+      "adds": [],
+      "correctable": "Everything that matters \u2014 which is why you re-clock after every paper change.",
+      "id": "ST-14",
+      "of": 14
+    }
+  ],
+  "release": {
+    "state": "FABRICATION REVIEW",
+    "risk_class": "R3",
+    "risk_triggers": [
+      "Powered spindle: 5\u2033 drum at ~1035 RPM with stored rotational energy",
+      "Mains-voltage motor, switch, and cord require qualified electrical work",
+      "Ingoing nip between drum and feed rollers; workpiece ejection path",
+      "Abrasive dust generation, worst when truing the MDF core"
+    ],
+    "conditions": [
+      "Transfer the purchased 4-bolt flange to the panel before drilling. The bolt square on the drawings is ASSUMED.",
+      "Measure ply_actual and regenerate. Keep the 16.5\u2033 inner span; do not shrink it to suit 18 mm stock.",
+      "Motor circuit, switch, grounding, and cord: qualified electrician and local code. Not released by this package.",
+      "Commission with the hood on and no stock, standing clear of the drum ends.",
+      "Confirm TIR, |A\u2212B|, and witness-board scatter before the machine is used on real work."
+    ],
+    "not_released": [
+      "Electrical installation and any code-dependent wiring",
+      "Any use as a metal-working or thickness-planing machine",
+      "Stock shorter than ~12\u2033 without the sled"
+    ]
+  },
   "phases": [
     {
       "id": "frame",
@@ -558,6 +1217,48 @@ window.WALTER_DATA = {
     "Eye, hearing, respirator when truing MDF."
   ],
   "gallery": [
+    {
+      "src": "../plans/G001_cover.svg",
+      "title": "G-001 Cover & release",
+      "kind": "guide",
+      "group": "guide",
+      "code": "G-001"
+    },
+    {
+      "src": "../plans/G002_design_basis.svg",
+      "title": "G-002 Design basis",
+      "kind": "guide",
+      "group": "guide",
+      "code": "G-002"
+    },
+    {
+      "src": "../plans/G003_registers.svg",
+      "title": "G-003 Evidence & calcs",
+      "kind": "guide",
+      "group": "guide",
+      "code": "G-003"
+    },
+    {
+      "src": "../plans/G004_safety.svg",
+      "title": "G-004 Safety & risk",
+      "kind": "guide",
+      "group": "guide",
+      "code": "G-004"
+    },
+    {
+      "src": "../plans/E101_exploded.svg",
+      "title": "E-101 Exploded + BOM",
+      "kind": "guide",
+      "group": "guide",
+      "code": "E-101"
+    },
+    {
+      "src": "../plans/Q101_commissioning.svg",
+      "title": "Q-101 Commissioning",
+      "kind": "guide",
+      "group": "guide",
+      "code": "Q-101"
+    },
     {
       "src": "../plans/IDX_drawings.svg",
       "title": "Drawing index",
@@ -811,6 +1512,104 @@ window.WALTER_DATA = {
       "code": "H-01"
     },
     {
+      "src": "../plans/ST01_step.svg",
+      "title": "ST-01 Buy, acclimate, and measure the plywood",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-01"
+    },
+    {
+      "src": "../plans/ST02_step.svg",
+      "title": "ST-02 Rough-cut the panels oversize",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-02"
+    },
+    {
+      "src": "../plans/ST03_step.svg",
+      "title": "ST-03 Cut both sides to final size on one stop",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-03"
+    },
+    {
+      "src": "../plans/ST04_step.svg",
+      "title": "ST-04 Stack-drill the pair: bearing, flange, pilots",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-04"
+    },
+    {
+      "src": "../plans/ST05_step.svg",
+      "title": "ST-05 Dado the stretcher housings and way rebates",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-05"
+    },
+    {
+      "src": "../plans/ST06_step.svg",
+      "title": "ST-06 Glue the box: stretchers, base, diagonals",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-06"
+    },
+    {
+      "src": "../plans/ST07_step.svg",
+      "title": "ST-07 Bond the UHMW ways and wax them",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-07"
+    },
+    {
+      "src": "../plans/ST08_step.svg",
+      "title": "ST-08 Pack-bore the discs and laminate the drum",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-08"
+    },
+    {
+      "src": "../plans/ST09_step.svg",
+      "title": "ST-09 Hang the shaft: drive FIXED, idler FLOATING",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-09"
+    },
+    {
+      "src": "../plans/ST10_step.svg",
+      "title": "ST-10 Mount the motor, align the pulleys, lock the cradle",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-10"
+    },
+    {
+      "src": "../plans/ST11_step.svg",
+      "title": "ST-11 Build the torsion-box table and bond the wear face",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-11"
+    },
+    {
+      "src": "../plans/ST12_step.svg",
+      "title": "ST-12 Fit the dual Acme lift and chain-couple it",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-12"
+    },
+    {
+      "src": "../plans/ST13_step.svg",
+      "title": "ST-13 Kerf-bend the hood and set the roller yokes",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-13"
+    },
+    {
+      "src": "../plans/ST14_step.svg",
+      "title": "ST-14 True, wrap, re-clock, and cut a witness board",
+      "kind": "step",
+      "group": "step",
+      "code": "ST-14"
+    },
+    {
       "src": "../renders/iso_assembled.svg",
       "title": "Iso assembled",
       "kind": "render",
@@ -938,6 +1737,12 @@ window.WALTER_DATA = {
       "note": "Plans, BOM, CAD \u2014 Save to Files",
       "download": "WALTER-DS16-RevB.zip",
       "share": true,
+      "primary": true
+    },
+    {
+      "href": "../guide/",
+      "label": "Master build guide",
+      "note": "The whole book, in order \u00b7 Print \u2192 PDF",
       "primary": true
     },
     {

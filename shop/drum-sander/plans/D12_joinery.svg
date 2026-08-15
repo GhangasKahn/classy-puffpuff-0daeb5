@@ -91,12 +91,12 @@
 <text x='840.0' y='644.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>QC-12</text>
 <text x='910.0' y='644.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Way/table fit: Table slides; project 0.230″; clearance 0.020″/side</text>
 <text x='40.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DECISIONS B.1</text>
-<text x='40.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-022</text>
-<text x='110.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Persistent part IDs P/H/J/A; Python is SSOT  —  Drawings, BOM, viewer, and OpenSCAD were duplicating 16.5 / 14 / 18.5</text>
-<text x='40.0' y='946.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-023</text>
-<text x='110.0' y='946.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Wandel-style individual part, assembly, and hardware sheets  —  Overview D-sheets are not enough to fabricate P-001 from; each make pa</text>
-<text x='40.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-024</text>
-<text x='110.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Idler float is an axial pad, not YZ slots in the side panel  —  Face-plane slots let the drum axis wander; shaft growth is through the</text>
+<text x='40.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-024</text>
+<text x='110.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Idler float is an axial pad, not YZ slots in the side panel  —  Face-plane slots let the drum axis wander; shaft growth is through the</text>
+<text x='40.0' y='946.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-025</text>
+<text x='110.0' y='946.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Master build guide: release state on every sheet, ballooned explosion, numbered step sheets with parts trays  —  A builder should follow numbered steps with per-step parts and QC gate</text>
+<text x='40.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>D-026</text>
+<text x='110.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Package release state is FABRICATION REVIEW, risk class R3  —  Mains electrical work needs a qualified person, and the flange bolt ci</text>
 <text x='40.0' y='1000.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>FMEA (shop, not certified structural analysis)</text>
 <text x='40.0' y='1024.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Table rack under feed: J-001 housing + J-002 rebate ways</text>
 <text x='40.0' y='1040.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Banana shaft: J-007 axial float</text>

@@ -1842,6 +1842,7 @@ def viewer_data() -> dict[str, Any]:
         "fasteners": [{"qty": r["qty"], "item": r["item"], "use": r["use"]} for r in fastener_schedule()[:8]],
         "downloads": [
             {"href": "../pack/WALTER-DS16-RevB.zip", "label": "Shop pack (ZIP)", "note": "Plans, BOM, CAD — Save to Files", "download": "WALTER-DS16-RevB.zip", "share": True, "primary": True},
+            {"href": "../guide/", "label": "Master build guide", "note": "The whole book, in order · Print → PDF", "primary": True},
             {"href": "../pocket/", "label": "Pocket field card", "note": "Phone shop floor · Add to Home Screen"},
             {"href": "../pack/BOM.csv", "label": "BOM.csv", "note": "Make + buy with part IDs", "download": "WALTER-DS16-BOM.csv"},
             {"href": "../pack/parts.csv", "label": "parts.csv", "note": "Fabrication register", "download": "WALTER-DS16-parts.csv"},

@@ -1,5 +1,5 @@
 // AUTO-GENERATED from walter_ds16.py — do not edit
-// WALTER DS-16 Rev B fab B.2 · inches
+// WALTER DS-16 Rev B fab B.3 · inches
 side_t = 0.75;
 side_h = 30.0;
 side_d = 22.0;

@@ -72,7 +72,8 @@ from gen_walter_part_sheets import (  # noqa: E402
     iso_group,
 )
 
-OUT = os.path.join(ROOT, "shop", "drum-sander", "plans")
+SHOP_ROOT = os.path.join(ROOT, "shop", "drum-sander")
+OUT = os.path.join(SHOP_ROOT, "plans")
 os.makedirs(OUT, exist_ok=True)
 
 MUTE = "#d8d8d4"  # already-built geometry, LEGO-style ghosting
@@ -961,6 +962,342 @@ def sheet_q101() -> None:
     sh.save("Q101_commissioning.svg")
 
 
+HTML_HEAD = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#14181c"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="WALTER guide"/>
+<title>WALTER DS-16 — Master Build Guide</title>
+<link rel="apple-touch-icon" href="../app/apple-touch-icon.png"/>
+<link rel="icon" href="../app/icon.svg" type="image/svg+xml"/>
+<style>
+:root{
+  --ink:#14181c;--ink2:#1b2126;--paper:#f3f1ec;--dim:#a8afb3;--dim2:#7d858a;
+  --sage:#8fad78;--sage-dk:#3d5a4c;--wood:#c4a574;--flag:#c4564a;
+  --line:rgba(243,241,236,.14);--disp:Georgia,'Times New Roman',serif;
+  --mono:ui-monospace,'IBM Plex Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font:16px/1.55 system-ui,-apple-system,sans-serif}
+img{display:block;max-width:100%}
+a{color:var(--sage)}
+.wrap{width:min(1100px,calc(100% - 32px));margin:0 auto}
+.k{font:600 11px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--sage)}
+header.top{position:sticky;top:0;z-index:20;background:rgba(20,24,28,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:12px 0}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font:600 15px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--paper)}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;min-height:40px;padding:10px 14px;border-radius:8px;
+  border:1px solid var(--line);background:#222a30;color:var(--paper);text-decoration:none;
+  font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.btn.primary{background:var(--sage-dk);border-color:#5a6a4a}
+.hero{padding:44px 0 28px;border-bottom:1px solid var(--line)}
+.hero h1{font:600 clamp(40px,9vw,86px)/.95 var(--disp);margin:10px 0 12px}
+.hero p.lead{color:var(--dim);font-size:clamp(16px,2vw,20px);max-width:56ch}
+.state{display:inline-flex;align-items:center;gap:10px;margin:14px 0 4px;padding:9px 14px;border-radius:6px;
+  background:var(--flag);color:#fff;font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.conds{margin:18px 0 0;padding:16px 18px;border-left:3px solid var(--flag);background:rgba(196,86,74,.1)}
+.conds li{list-style:none;color:var(--paper);font-size:15px;margin:8px 0;padding-left:22px;position:relative}
+.conds li::before{content:"\\2610";position:absolute;left:0;color:var(--flag);font-size:16px}
+.specs{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:26px 0 0}
+.spec{background:var(--ink2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.spec span{display:block;font:600 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim2)}
+.spec strong{display:block;font:600 19px/1.2 var(--disp);margin-top:6px}
+nav.toc{padding:30px 0;border-bottom:1px solid var(--line)}
+nav.toc ol{list-style:none;display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:14px}
+nav.toc a{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;
+  text-decoration:none;color:var(--paper);font-size:14px;background:var(--ink2)}
+nav.toc a b{color:var(--sage);font:600 12px/1.4 var(--mono);min-width:52px}
+section.chap{padding:34px 0 10px}
+section.chap>.wrap>h2{font:600 clamp(24px,4vw,38px)/1.1 var(--disp);margin:6px 0 18px}
+article.sheet{margin:0 0 34px;background:var(--ink2);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+article.sheet>.hd{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;gap:14px;
+  align-items:baseline;flex-wrap:wrap}
+article.sheet>.hd .code{font:600 15px/1 var(--mono);color:var(--sage);letter-spacing:.08em}
+article.sheet>.hd h3{font:600 22px/1.2 var(--disp)}
+article.sheet>.hd .goal{color:var(--dim);font-size:14px;flex-basis:100%}
+article.sheet .fig{background:#fff;border-bottom:1px solid var(--line)}
+article.sheet .fig a{display:block}
+article.sheet .body{padding:18px}
+.cols{display:grid;gap:20px;grid-template-columns:1.15fr .85fr}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+h4.mini{font:600 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim2);margin:0 0 10px}
+ol.acts{list-style:none;counter-reset:a}
+ol.acts li{counter-increment:a;position:relative;padding-left:34px;margin:0 0 12px;font-size:15px}
+ol.acts li::before{content:counter(a);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;
+  background:var(--sage-dk);color:#fff;font:600 12px/22px var(--mono);text-align:center}
+table.tray{width:100%;border-collapse:collapse;font-size:14px}
+table.tray th,table.tray td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tray th{font:600 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim2)}
+table.tray td.id{font:600 12px/1.4 var(--mono);color:var(--sage);white-space:nowrap}
+table.tray td.id.hw{color:var(--wood)}
+table.tray td.q{text-align:right;color:var(--dim);white-space:nowrap}
+.gate{margin:16px 0 0;padding:13px 15px;border-left:3px solid var(--sage);background:rgba(143,173,120,.1)}
+.gate b{display:block;font:600 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:7px}
+.hold{margin:10px 0 0;color:var(--dim);font-size:14px}
+.warn{margin:14px 0 0;padding:13px 15px;border-left:3px solid var(--flag);background:rgba(196,86,74,.12);font-size:14px}
+.meta{margin:12px 0 0;color:var(--dim2);font-size:13px}
+.meta code{font:600 12px/1.5 var(--mono);color:var(--dim)}
+footer.foot{padding:40px 0 70px;border-top:1px solid var(--line);color:var(--dim2);font-size:13px}
+.pips{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 4px}
+.pips i{width:9px;height:9px;border-radius:50%;background:#2c343a;display:block}
+.pips i.done{background:var(--dim2)}
+.pips i.now{background:var(--sage);box-shadow:0 0 0 3px rgba(143,173,120,.25)}
+@media print{
+  :root{--paper:#111;--dim:#444;--dim2:#666;--line:#ccc}
+  body{background:#fff;color:#111}
+  header.top,nav.toc,.tools,.btn{display:none!important}
+  article.sheet{break-inside:avoid;page-break-inside:avoid;border:1px solid #bbb;background:#fff;margin-bottom:18px}
+  article.sheet .fig{border-color:#bbb}
+  section.chap{page-break-before:always;padding-top:0}
+  .hero{page-break-after:always}
+  .spec,.gate,.warn,.conds{background:#f4f4f2!important}
+  a{color:#111;text-decoration:none}
+}
+</style>
+</head>
+<body>
+"""
+
+
+def _h(t: str) -> str:
+    return (
+        t.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
+def write_guide_html() -> None:
+    """The book: every sheet in reading order with its text inline.
+
+    Print to PDF from a browser and the @media print rules break it into pages,
+    one sheet per page, which is why there is no separate PDF build step.
+    """
+    steps = build_steps()
+    by_part = {p["part_id"]: p for p in parts()}
+    by_hw = {h["hardware_id"]: h for h in hardware()}
+    st_state = RELEASE_STATE
+    out: list[str] = [HTML_HEAD]
+
+    out.append(
+        f"""<header class="top"><div class="wrap">
+  <a class="brand" href="../">Walter · DS-16 guide</a>
+  <div class="tools">
+    <a class="btn" href="#toc">Contents</a>
+    <a class="btn" href="../view/">3D viewer</a>
+    <a class="btn" href="../app/">Checklist</a>
+    <button class="btn" type="button" onclick="window.print()">Print / PDF</button>
+    <a class="btn primary" href="../pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Shop pack</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="k">Master build guide · fab {S.fabrication_rev}</p>
+  <h1>WALTER DS-16</h1>
+  <p class="lead">A dedicated drum thickness sander, drawn so a competent
+  woodworker can build it from these pages. {len(steps)} numbered steps, one
+  drawing per part, and the measurements that decide whether it works.</p>
+  <div class="state">{_h(st_state["state"])} · Risk {_h(st_state["risk_class"])}</div>
+  <ul class="conds">
+    <li><b>Release conditions — all of these before the machine does real work.</b></li>
+    {''.join(f'<li>{_h(c)}</li>' for c in st_state['conditions'])}
+  </ul>
+  <div class="specs">
+    <div class="spec"><span>Capacity</span><strong>{S.capacity_width:g}″ wide</strong></div>
+    <div class="spec"><span>Thickness</span><strong>{S.min_stock_thickness:g}″–{S.max_stock_thickness:g}″</strong></div>
+    <div class="spec"><span>Drum</span><strong>⌀{S.drum_od:g}″ × {G.drum_length:g}″</strong></div>
+    <div class="spec"><span>Drum speed</span><strong>~{S.drum_rpm:g} RPM</strong></div>
+    <div class="spec"><span>Motor</span><strong>{S.motor_hp:g} HP · {S.motor_rpm:g}</strong></div>
+    <div class="spec"><span>Parallel spec</span><strong>|A−B| ≤ {S.parallel_tol:.3f}″</strong></div>
+    <div class="spec"><span>Drum TIR</span><strong>≤ {S.drum_tir:.3f}″</strong></div>
+    <div class="spec"><span>Inner span</span><strong>{S.clear_between_sides:g}″ / 419 mm</strong></div>
+  </div>
+</div></section>
+
+<nav class="toc" id="toc"><div class="wrap">
+  <p class="k">Contents</p>
+  <ol>
+    <li><a href="#basis"><b>G-001</b> Design basis and safety</a></li>
+    <li><a href="#explode"><b>E-101</b> Exploded assembly</a></li>
+    {''.join(f'<li><a href="#{st["id"].lower()}"><b>{st["id"]}</b> {_h(st["title"])}</a></li>' for st in steps)}
+    <li><a href="#commission"><b>Q-101</b> Commissioning</a></li>
+    <li><a href="#parts"><b>P/A/H</b> Part and assembly drawings</a></li>
+  </ol>
+</div></nav>
+"""
+    )
+
+    def figure(files: list[tuple[str, str]]) -> str:
+        bits = []
+        for f, alt in files:
+            bits.append(
+                f'<div class="fig"><a href="../plans/{f}" target="_blank" rel="noopener">'
+                f'<img src="../plans/{f}" alt="{_h(alt)}" loading="lazy"/></a></div>'
+            )
+        return "".join(bits)
+
+    # Chapter: design basis
+    out.append('<section class="chap" id="basis"><div class="wrap">')
+    out.append('<p class="k">Chapter 00</p><h2>Design basis, evidence, and safety</h2>')
+    for code, f, title, note in (
+        ("G-001", "G001_cover.svg", "Cover, release state, and sheet index", "Where every sheet lives and what must be true before you cut."),
+        ("G-002", "G002_design_basis.svg", "Parameters, equations, and datums", "Change a parameter here and every sheet regenerates. Never edit a number on a drawing."),
+        ("G-003", "G003_registers.svg", "Evidence classes and calculations", "What is measured, derived, assumed, or still to verify."),
+        ("G-004", "G004_safety.svg", "Safety, risk class, and failure modes", "Read before the first powered run."),
+    ):
+        out.append(
+            f'<article class="sheet"><div class="hd"><span class="code">{code}</span>'
+            f"<h3>{_h(title)}</h3><p class=\"goal\">{_h(note)}</p></div>"
+            + figure([(f, title)])
+            + "</article>"
+        )
+    out.append("</div></section>")
+
+    # Chapter: exploded
+    out.append('<section class="chap" id="explode"><div class="wrap">')
+    out.append('<p class="k">Chapter 00</p><h2>How it goes together</h2>')
+    out.append(
+        '<article class="sheet"><div class="hd"><span class="code">E-101</span>'
+        "<h3>Exploded assembly with item balloons</h3>"
+        '<p class="goal">Balloon numbers resolve to the BOM on the sheet. Every leader points at real geometry.</p></div>'
+        + figure([("E101_exploded.svg", "Exploded assembly")])
+        + "</article>"
+    )
+    out.append("</div></section>")
+
+    # Chapters: steps grouped by chapter label
+    last_chapter = None
+    for st in steps:
+        if st["chapter"] != last_chapter:
+            if last_chapter is not None:
+                out.append("</div></section>")
+            num = st["chapter"].split()[0]
+            name = st["chapter"][len(num) :].strip()
+            out.append(f'<section class="chap"><div class="wrap">')
+            out.append(f'<p class="k">Chapter {num}</p><h2>{_h(name.title())}</h2>')
+            last_chapter = st["chapter"]
+
+        pips = "".join(
+            f'<i class="{"now" if i == st["step"] else ("done" if i < st["step"] else "")}"></i>'
+            for i in range(1, st["of"] + 1)
+        )
+        tray_rows = []
+        for pid in st["parts"]:
+            p = by_part.get(pid, {})
+            size = p.get("finished_size") or p.get("purchase_size") or ""
+            tray_rows.append(
+                f'<tr><td class="id">{pid}</td><td>{_h(p.get("part_name", ""))}'
+                f'<br/><span style="color:var(--dim2);font-size:12px">{_h(size)}</span></td>'
+                f'<td class="q">×{p.get("qty", "")}</td></tr>'
+            )
+        for hid in st["hardware"]:
+            h = by_hw.get(hid, {})
+            tray_rows.append(
+                f'<tr><td class="id hw">{hid}</td><td>{_h(h.get("description", ""))}</td>'
+                f'<td class="q">×{h.get("qty", "")}</td></tr>'
+            )
+        if not tray_rows:
+            tray_rows.append('<tr><td colspan="3" style="color:var(--dim)">No parts — this is a measure and plan step.</td></tr>')
+
+        out.append(
+            f'<article class="sheet" id="{st["id"].lower()}">'
+            f'<div class="hd"><span class="code">{st["id"]}</span><h3>{_h(st["title"])}</h3>'
+            f'<p class="goal">{_h(st["goal"])} <span style="color:var(--dim2)">· step {st["step"]} of {st["of"]}</span></p>'
+            f'<div class="pips" style="flex-basis:100%">{pips}</div></div>'
+            + figure([(f'ST{st["step"]:02d}_step.svg', f'{st["id"]} {st["title"]}')])
+            + '<div class="body"><div class="cols"><div>'
+            + '<h4 class="mini">Do this</h4><ol class="acts">'
+            + "".join(f"<li>{_h(a)}</li>" for a in st["actions"])
+            + "</ol>"
+            + f'<div class="gate"><b>Before you move on{" · " + _h(st["qc"]) if st["qc"] else ""}</b>{_h(st["gate"])}</div>'
+            + (f'<p class="hold"><b>Hold point.</b> {_h(st["hold"])}</p>' if st["hold"] else "")
+            + (f'<div class="warn">⚠ {_h(st["warn"])}</div>' if st["warn"] else "")
+            + "</div><div>"
+            + '<h4 class="mini">Parts tray</h4><table class="tray">'
+            + "<thead><tr><th>ID</th><th>Item</th><th>Qty</th></tr></thead><tbody>"
+            + "".join(tray_rows)
+            + "</tbody></table>"
+            + f'<p class="meta"><b>Tools.</b> {_h(" · ".join(st["tools"]))}</p>'
+            + f'<p class="meta"><b>Open these sheets.</b> <code>{_h(" · ".join(st["sheets"]))}</code></p>'
+            + f'<p class="meta"><b>Still correctable.</b> {_h(st["correctable"])}</p>'
+            + "</div></div></div></article>"
+        )
+    out.append("</div></section>")
+
+    # Commissioning
+    out.append('<section class="chap" id="commission"><div class="wrap">')
+    out.append('<p class="k">Chapter 10</p><h2>Commissioning and acceptance</h2>')
+    out.append(
+        '<article class="sheet"><div class="hd"><span class="code">Q-101</span>'
+        "<h3>Inspection plan, calibration, and the numbers you record</h3>"
+        '<p class="goal">Print this one and sign it. An uncalibrated drum sander makes tapered boards very efficiently.</p></div>'
+        + figure([("Q101_commissioning.svg", "Commissioning")])
+        + '<div class="body"><div class="cols"><div><h4 class="mini">Calibration sequence</h4><ol class="acts">'
+        + "".join(f'<li><b>{_h(c["title"])}.</b> {_h(c["body"])}</li>' for c in calibration_steps())
+        + "</ol></div><div><h4 class=\"mini\">Pass schedule</h4><table class=\"tray\">"
+        + "<thead><tr><th>Grit</th><th>Use</th><th>Depth</th></tr></thead><tbody>"
+        + "".join(
+            f'<tr><td class="id">{_h(p["grit"])}</td><td>{_h(p["use"])}</td><td class="q">{_h(p["depth"])}</td></tr>'
+            for p in pass_schedule()
+        )
+        + "</tbody></table></div></div></div></article>"
+    )
+    out.append("</div></section>")
+
+    # Part and assembly drawings
+    out.append('<section class="chap" id="parts"><div class="wrap">')
+    out.append('<p class="k">Reference</p><h2>Part, assembly, and hardware drawings</h2>')
+    out.append(
+        '<p style="color:var(--dim);max-width:60ch;margin-bottom:20px">One sheet per part, '
+        "with datums, a hole chart, and the reason behind any note. These are the drawings you cut from.</p>"
+    )
+    for d in shop_drawings():
+        if d["group"] not in ("part", "assembly", "hardware"):
+            continue
+        p = next((q for q in parts() if q["sheet"] == d["file"]), None)
+        sub = ""
+        if p:
+            sub = f'{p["material"]} · {p["finished_size"] or p["purchase_size"]} · qty {p["qty"]}'
+        out.append(
+            f'<article class="sheet"><div class="hd"><span class="code">{d["code"]}</span>'
+            f'<h3>{_h(d["title"].replace(d["code"], "").strip())}</h3>'
+            + (f'<p class="goal">{_h(sub)}</p>' if sub else "")
+            + "</div>"
+            + figure([(d["file"], d["title"])])
+            + "</article>"
+        )
+    out.append("</div></section>")
+
+    out.append(
+        f"""<footer class="foot"><div class="wrap">
+  <p>{_h(PROJECT["project_name"])} · geometry Rev {S.revision} · fabrication {S.fabrication_rev} ·
+  generated from <code>cad/walter_ds16.py</code>. Inches controlling, millimetres reference.</p>
+  <p style="margin-top:10px">Lineage: {_h(PROJECT["lineage"])}.
+  <a href="https://woodgears.ca/reader/walters/drum_sander.html" target="_blank" rel="noopener">Ron Walters</a> ·
+  ShopNotes No. 86.</p>
+  <p style="margin-top:10px">Release state {_h(st_state["state"])}. Not an engineer-stamped or code-approved design.
+  Electrical work belongs to a qualified person.</p>
+</div></footer>
+</body>
+</html>
+"""
+    )
+
+    dest = os.path.join(SHOP_ROOT, "guide")
+    os.makedirs(dest, exist_ok=True)
+    path = os.path.join(dest, "index.html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(out))
+    print("wrote", path)
+
+
 def main() -> None:
     errs = validate()
     if errs:
@@ -973,7 +1310,8 @@ def main() -> None:
     for st in build_steps():
         sheet_step(st)
     sheet_q101()
-    print("done →", OUT, f"({6 + len(build_steps())} guide sheets)")
+    write_guide_html()
+    print("done →", OUT, f"({6 + len(build_steps())} guide sheets + guide book)")
 
 
 if __name__ == "__main__":

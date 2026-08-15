@@ -129,9 +129,15 @@ function card(g) {
   </button>`;
 }
 const plans = D.gallery.filter((g) => g.kind === "plan");
+const guideSheets = D.gallery.filter((g) => g.kind === "guide");
+const stepSheets = D.gallery.filter((g) => g.kind === "step");
 const partSheets = D.gallery.filter((g) => g.kind === "part");
 const assemblySheets = D.gallery.filter((g) => g.kind === "assembly" || g.kind === "hardware");
 const renders = D.gallery.filter((g) => g.kind === "render");
+const guideRail = $("#guideRail");
+if (guideRail) guideRail.innerHTML = guideSheets.map(card).join("");
+const stepRail = $("#stepRail");
+if (stepRail) stepRail.innerHTML = stepSheets.map(card).join("");
 const partRail = $("#partRail");
 if (partRail) partRail.innerHTML = partSheets.map(card).join("");
 const assemblyRail = $("#assemblyRail");

@@ -73,3 +73,13 @@
   from = "/walter/model"
   to = "/model/"
   status = 301
+
+[[redirects]]
+  from = "/walter/guide"
+  to = "/guide/"
+  status = 301
+
+[[redirects]]
+  from = "/guide"
+  to = "/guide/"
+  status = 301

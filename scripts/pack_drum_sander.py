@@ -259,6 +259,7 @@ def pack_zip() -> Path:
     add(PACK / "spec.json", "spec.json")
     add(PACK / "fabrication.json", "fabrication.json")
     add(POCKET / "index.html", "pocket.html")
+    add(SHOP / "guide" / "index.html", "guide/index.html")
     add(SHOP / "view" / "index.html", "view/index.html")
     add(SHOP / "view" / "view.css", "view/view.css")
     add(SHOP / "view" / "view.js", "view/view.js")
@@ -394,6 +395,10 @@ def main() -> None:
                 "Keep 16.5\" (419 mm) clear between inner faces (18 mm BB is fine).",
                 "Way rebate so the 16\" table fits; stretchers housed 1/4\" (P-003 = 17\").",
                 "",
+                "START HERE: guide/index.html \u2014 the master build guide, 14 steps in order.",
+                "  (open it in a browser; Print \u2192 PDF gives you the book)",
+                "",
+                "plans/ G-001…G-004 design basis · E-101 exploded · ST-01…ST-14 steps · Q-101 commissioning",
                 "plans/ IDX + P-001L…P-016 individual sheets + A-01…A-05 + H-01 hardware",
                 "plans/ D-1…D-12 overviews   renders/ isometric solids",
                 "cad/ Python SSOT + OpenSCAD",
