@@ -1476,7 +1476,7 @@ html.user-reduced-motion *::after {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   body {
     background:
       linear-gradient(90deg, transparent calc(100% - 1px), rgba(255, 255, 255, .025) 1px) 0 0 / 25vw 100%,
