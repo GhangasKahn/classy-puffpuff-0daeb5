@@ -7,6 +7,7 @@ A complete, self-contained website:
 - `fence/` — the **fence design suite**: MARTIN (143×65 removable Prairie + Japanese joinery for Buffalo), HASHIRA (joinery guide), STELE (masonry + timber), and the engineering report at `/fence/report/`
 - `scripts/` — CAD pipelines (`build_martin.sh`, `build_stele.sh`, `render_hashira_cad.sh`, `export_martin_fab.py`, `fab_system.py`, plan generators)
 - `fence/martin/martin_kernel.py` — MARTIN **single source of truth** (Rev C). `scripts/export_martin_fab.py` writes BOM, cut lists, shop drawings, JSON, OpenSCAD, QA.
+- `fence/docs/WOODWRIGHT_PLANFORGE.md` — **WOODWRIGHT PLANFORGE v1.0**, the master protocol (evidence classes, risk/release gates, drawing and artifact contract, eval harness) governing all fence/woodworking design work
 - `fence/martin/fab/` — MARTIN fabrication package at `/fence/martin/fab/` (shortcut `/martin/fab`)
 - `fence/fab/` — STELE parametric fabrication model (BOM, cut lists, shop drawings) at `/fab`
 - `fence/martin/app/` — interactive **MARTIN Build** PWA at `/martin/app` or `/build`
