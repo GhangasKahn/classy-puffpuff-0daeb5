@@ -192,8 +192,8 @@ export function sgp4Look(satrec, observer, date) {
 
 export function findPasses(satrec, observer, hours = 36) {
   const step = 30 * 1000;
-  const start = Date.now();
-  const end = start + hours * 3600 * 1000;
+  const start = Date.now() - 2 * 3600 * 1000;
+  const end = Date.now() + hours * 3600 * 1000;
   const passes = [];
   let cur = null;
   let prev = null;

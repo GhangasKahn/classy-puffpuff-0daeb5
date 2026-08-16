@@ -331,9 +331,11 @@ export function paintPasses(state) {
   }
   const upcoming = passes.filter((p) => p.los > Date.now());
   const n = upcoming[0] || passes[0];
-  const imminent = n.aos - Date.now() < 10 * 60 * 1000 && n.aos > Date.now() - 60 * 1000;
-  $("next-pass").classList.toggle("is-imminent", imminent);
-  nextWhen.textContent = imminent ? "IMMINENT" : fmtTime(n.aos);
+  const now = Date.now();
+  const inView = n.aos <= now && n.los > now;
+  const imminent = !inView && n.aos - now < 10 * 60 * 1000 && n.aos > now;
+  $("next-pass").classList.toggle("is-imminent", imminent || inView);
+  nextWhen.textContent = inView ? "IN VIEW" : imminent ? "IMMINENT" : fmtTime(n.aos);
   nextMeta.textContent = `${n.eye} · max el ${n.maxEl.toFixed(0)}°`;
   body.innerHTML = "";
   upcoming.slice(0, 12).forEach((p) => {
@@ -341,7 +343,7 @@ export function paintPasses(state) {
     const tr = document.createElement("tr");
     const eyeClass = p.eye === "NAKED-EYE" ? "eye-naked" : p.eye === "DAY" ? "eye-day" : "eye-ecl";
     tr.innerHTML = `
-      <td>${fmtTime(p.aos)}</td>
+      <td>${p.aos <= Date.now() && p.los > Date.now() ? "in view" : fmtTime(p.aos)}</td>
       <td>${fmtTime(p.maxT)}</td>
       <td>${fmtTime(p.los)}</td>
       <td>${p.maxEl.toFixed(0)}°</td>
@@ -476,7 +478,15 @@ export async function loadKp(state) {
 
 export async function loadStarship(state) {
   try {
-    const rows = await fetchJson("https://celestrak.org/NORAD/elements/gp.php?NAME=STARSHIP&FORMAT=json");
+    const res = await fetch("https://celestrak.org/NORAD/elements/gp.php?NAME=STARSHIP&FORMAT=json");
+    if (res.status === 404) {
+      state.starship = null;
+      state.starshipError = null;
+      paintStarship(state);
+      return;
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const rows = await res.json();
     state.starship = Array.isArray(rows) && rows.length ? rows[0] : null;
     state.starshipError = null;
     paintStarship(state);
