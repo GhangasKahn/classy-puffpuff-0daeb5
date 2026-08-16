@@ -60,6 +60,7 @@ export function initMotion(state) {
   const loop = (t) => {
     raf = requestAnimationFrame(loop);
     if (reduced()) return;
+    if (document.hidden) return;
     if (!state.plotVisible) return;
     state.sweep = (t / 40) % 360;
     if (typeof state.drawPlot === "function") state.drawPlot();

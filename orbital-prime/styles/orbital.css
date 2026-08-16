@@ -124,19 +124,22 @@ a:hover { color: var(--phosphor); }
 
 /* ---- mast ---- */
 .mast {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
   padding: 12px var(--gutter);
   border-bottom: 1px solid var(--hairline);
   background: var(--void);
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 8;
 }
-
-.mast-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.mast-brand { grid-column: 1; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.depth { grid-column: 2; }
+.loc-rail {
+  grid-column: 1 / -1;
+  padding: 0;
+}
 
 .mast-mark {
   width: 10px;
@@ -184,7 +187,7 @@ a:hover { color: var(--phosphor); }
 
 .depth-toast {
   position: fixed;
-  top: 56px;
+  top: 12px;
   right: var(--gutter);
   z-index: 9;
   background: var(--ink);
@@ -197,10 +200,6 @@ a:hover { color: var(--phosphor); }
 }
 
 /* ---- location ---- */
-.loc-rail {
-  padding: 8px var(--gutter) 0;
-}
-
 .loc-status {
   font-family: var(--mono);
   font-size: 11px;
@@ -301,7 +300,22 @@ a:hover { color: var(--phosphor); }
 .plate {
   background: var(--ink);
   border: 1px solid var(--hairline);
-  padding: 16px;
+  padding: 16px 16px 16px 28px;
+  position: relative;
+}
+.plate::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 16px;
+  bottom: 16px;
+  width: 8px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--hairline) 0 1px,
+    transparent 1px 8px
+  );
+  pointer-events: none;
 }
 
 .plate-head {
@@ -412,6 +426,13 @@ a:hover { color: var(--phosphor); }
   margin-top: 8px;
 }
 .num.sm { font-size: 22px; }
+.num.is-settle {
+  animation: settle var(--dur-md) var(--ease-settle);
+}
+@keyframes settle {
+  from { opacity: 0.35; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
 
 .plot-frame,
 .track-frame,
@@ -425,7 +446,31 @@ a:hover { color: var(--phosphor); }
 
 .plot-frame { aspect-ratio: 1 / 1; min-height: 280px; }
 .track-frame { aspect-ratio: 2.2 / 1; min-height: 140px; }
-.radar-well { min-height: 180px; }
+.radar-well { min-height: 180px; position: relative; }
+.radar-cross {
+  display: none;
+  position: absolute;
+  inset: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 1px solid var(--paper);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.radar-well.has-tile .radar-cross { display: block; }
+.radar-well.has-tile .radar-cross::before,
+.radar-well.has-tile .radar-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--paper);
+}
+.radar-well.has-tile .radar-cross::before {
+  left: 50%; top: -6px; width: 1px; height: 24px; transform: translateX(-50%);
+}
+.radar-well.has-tile .radar-cross::after {
+  top: 50%; left: -6px; height: 1px; width: 24px; transform: translateY(-50%);
+}
 .ar-well { min-height: 220px; aspect-ratio: 3 / 4; overflow: hidden; }
 
 .plot-frame canvas,
@@ -480,6 +525,17 @@ a:hover { color: var(--phosphor); }
 .hour-list li[data-class="perfect"] b { color: var(--perfect); }
 .hour-list li[data-class="marginal"] b { color: var(--marginal); }
 .hour-list li[data-class="obstructed"] b { color: var(--obstructed); }
+.hour-list li[data-pass="1"] {
+  outline: 1px solid var(--phosphor);
+  outline-offset: -1px;
+}
+.hour-list li[data-pass="1"]::after {
+  content: "PASS";
+  display: block;
+  margin-top: 4px;
+  color: var(--phosphor);
+  letter-spacing: 0.08em;
+}
 
 .table-wrap { overflow-x: auto; margin-top: 12px; }
 table {
@@ -588,6 +644,7 @@ body[data-depth="3"] .d4 { display: none !important; }
   .surface.is-pending { opacity: 1; transform: none; }
   .hero-plate { transform: none !important; }
   .depth-toast { transition: none; }
+  .num.is-settle { animation: none; }
 }
 
 /* ---- 900+ expansion ---- */
@@ -603,10 +660,16 @@ body[data-depth="3"] .d4 { display: none !important; }
   .plate { padding: 24px; max-width: 1200px; }
 
   .loc-rail {
-    position: relative;
-    max-width: calc(var(--max) + 64px);
-    margin: 0 auto;
+    grid-column: 2;
+    padding: 0 8px;
   }
+  .mast {
+    grid-template-columns: auto 1fr auto;
+  }
+  .mast-brand { grid-column: 1; }
+  .depth { grid-column: 3; }
+  .loc-status { margin-bottom: 4px; }
+  .loc-row { justify-content: flex-end; }
 
   .cluster-grid {
     display: grid;
@@ -634,6 +697,7 @@ body[data-depth="3"] .d4 { display: none !important; }
   .surface .readout,
   .surface .note,
   .surface .btn,
+  .surface .table-wrap,
   .surface .ar-well { grid-column: 2; }
 
   .num { font-size: 56px; }

@@ -236,14 +236,31 @@ export function findPasses(satrec, observer, hours = 36) {
   return passes;
 }
 
-export function groundTrack(satrec, minutes = 93) {
+export function groundTrack(satrec, observer, minutes = 93) {
   const pts = [];
   const now = Date.now();
+  const obs = observer || BUFFALO;
   for (let i = 0; i <= minutes; i += 1) {
-    const look = sgp4Look(satrec, BUFFALO, new Date(now + i * 60 * 1000));
+    const look = sgp4Look(satrec, obs, new Date(now + i * 60 * 1000));
     if (look) pts.push({ lat: look.lat, lon: ((look.lon + 180) % 360 + 360) % 360 - 180 });
   }
   return pts;
+}
+
+export function waitForSatellite(ms = 4000) {
+  if (typeof window !== "undefined" && window.satellite) return Promise.resolve(window.satellite);
+  return new Promise((resolve, reject) => {
+    const t0 = Date.now();
+    const id = setInterval(() => {
+      if (typeof window !== "undefined" && window.satellite) {
+        clearInterval(id);
+        resolve(window.satellite);
+      } else if (Date.now() - t0 > ms) {
+        clearInterval(id);
+        reject(new Error("satellite.js not loaded"));
+      }
+    }, 40);
+  });
 }
 
 export function tileXY(lat, lon, z) {

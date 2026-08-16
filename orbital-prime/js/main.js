@@ -56,9 +56,19 @@ state.onLocation = () => {
 };
 
 refreshAll();
-setInterval(() => loadIss(state).then(() => { state.drawPlot(); state.drawTrack(); }), 5000);
-setInterval(() => { loadWeather(state); loadRadar(state); }, 10 * 60 * 1000);
-setInterval(() => loadKp(state), 5 * 60 * 1000);
+setInterval(() => {
+  if (document.hidden) return;
+  loadIss(state).then(() => { state.drawPlot(); state.drawTrack(); });
+}, 5000);
+setInterval(() => {
+  if (document.hidden) return;
+  loadWeather(state);
+  loadRadar(state);
+}, 10 * 60 * 1000);
+setInterval(() => {
+  if (document.hidden) return;
+  loadKp(state);
+}, 5 * 60 * 1000);
 setInterval(() => { $clock(); }, 1000);
 
 function $clock() {

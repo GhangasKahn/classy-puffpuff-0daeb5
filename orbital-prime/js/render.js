@@ -1,7 +1,7 @@
 import {
   cardinal, classifyWx, eyeLabel, faceCopy, fetchJson, fetchText, findPasses,
   fmtClock, fmtTime, groundTrack, lookAngles, parseTle, sgp4Look, sunAltitude,
-  tileXY
+  tileXY, waitForSatellite
 } from "./astro.js";
 
 const $ = (id) => document.getElementById(id);
@@ -11,13 +11,26 @@ function sizeCanvas(canvas) {
   const w = Math.max(1, parent.clientWidth);
   const h = Math.max(1, parent.clientHeight);
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = Math.round(w * dpr);
-  canvas.height = Math.round(h * dpr);
-  canvas.style.width = w + "px";
-  canvas.style.height = h + "px";
+  const bw = Math.round(w * dpr);
+  const bh = Math.round(h * dpr);
+  if (canvas.width !== bw || canvas.height !== bh) {
+    canvas.width = bw;
+    canvas.height = bh;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+  }
   const ctx = canvas.getContext("2d");
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   return { ctx, w, h };
+}
+
+function setNum(el, text) {
+  if (!el) return;
+  if (el.textContent === text) return;
+  el.textContent = text;
+  el.classList.remove("is-settle");
+  void el.offsetWidth;
+  el.classList.add("is-settle");
 }
 
 export function bindDepth(state) {
@@ -104,11 +117,16 @@ export function drawSkyPlot(state) {
 
   ctx.strokeStyle = "#2e3026";
   ctx.lineWidth = 1;
-  for (const el of [0, 30, 60]) {
+  for (const el of [30, 60]) {
     ctx.beginPath();
     ctx.arc(cx, cy, R * (1 - el / 90), 0, Math.PI * 2);
     ctx.stroke();
   }
+  ctx.strokeStyle = "#9a9486";
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.strokeStyle = "#2e3026";
   ctx.beginPath();
   ctx.moveTo(cx, cy - R);
   ctx.lineTo(cx, cy + R);
@@ -121,16 +139,20 @@ export function drawSkyPlot(state) {
   ctx.textAlign = "center";
   ctx.fillText("N", cx, cy - R - 8);
   ctx.fillText("S", cx, cy + R + 16);
-  ctx.fillText("E", cx + R + 12, cy + 4);
-  ctx.fillText("W", cx - R - 12, cy + 4);
+  ctx.fillText("E", cx + R + 14, cy + 4);
+  ctx.fillText("W", cx - R - 14, cy + 4);
+  ctx.fillText("30", cx + 4, cy - R * (1 - 30 / 90) + 3);
+  ctx.fillText("60", cx + 4, cy - R * (1 - 60 / 90) + 3);
 
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sweep = reduced ? 0 : (state.sweep || 0);
-  ctx.strokeStyle = "#2e3026";
+  ctx.strokeStyle = "#d4c48a";
+  ctx.globalAlpha = 0.45;
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(cx + R * Math.sin(sweep * Math.PI / 180), cy - R * Math.cos(sweep * Math.PI / 180));
   ctx.stroke();
+  ctx.globalAlpha = 1;
 
   const look = state.look;
   if (look && look.el > -5) {
@@ -138,9 +160,16 @@ export function drawSkyPlot(state) {
     const a = look.az * Math.PI / 180;
     const x = cx + r * Math.sin(a);
     const y = cy - r * Math.cos(a);
+    ctx.strokeStyle = "#ff6a00";
+    ctx.beginPath();
+    ctx.moveTo(x - 7, y);
+    ctx.lineTo(x + 7, y);
+    ctx.moveTo(x, y - 7);
+    ctx.lineTo(x, y + 7);
+    ctx.stroke();
     ctx.fillStyle = "#ff6a00";
     ctx.beginPath();
-    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fill();
   }
 }
@@ -158,10 +187,18 @@ export function drawCompass(state) {
   ctx.beginPath();
   ctx.arc(cx, cy, R, 0, Math.PI * 2);
   ctx.stroke();
+  for (let deg = 0; deg < 360; deg += 30) {
+    const a = deg * Math.PI / 180;
+    const inner = deg % 90 === 0 ? R - 10 : R - 5;
+    ctx.beginPath();
+    ctx.moveTo(cx + inner * Math.sin(a), cy - inner * Math.cos(a));
+    ctx.lineTo(cx + R * Math.sin(a), cy - R * Math.cos(a));
+    ctx.stroke();
+  }
   ctx.fillStyle = "#6e6a5e";
   ctx.font = "11px IBM Plex Mono, monospace";
   ctx.textAlign = "center";
-  ctx.fillText("N", cx, cy - R + 14);
+  ctx.fillText("N", cx, cy - R + 18);
 
   const target = state.look?.az ?? 0;
   state.easeCompass?.(target);
@@ -209,6 +246,13 @@ export function drawTrack(state) {
     ctx.lineTo(w * i / 6, h);
     ctx.stroke();
   }
+  ctx.fillStyle = "#6e6a5e";
+  ctx.font = "10px IBM Plex Mono, monospace";
+  ctx.textAlign = "left";
+  ctx.fillText("90N", 4, 12);
+  ctx.fillText("90S", 4, h - 6);
+  ctx.textAlign = "center";
+  ctx.fillText("0", w / 2, h - 6);
   const proj = (lat, lon) => [(lon + 180) / 360 * w, (90 - lat) / 180 * h];
   const pts = state.track || [];
   if (pts.length > 1) {
@@ -271,10 +315,10 @@ export function paintLock(state) {
   }
   const label = eyeLabel({ el: look.el, eclipsed, sunAlt });
   state.look = { ...look, mag, label, eclipsed };
-  $("az").textContent = look.az.toFixed(1) + "°";
-  $("el").textContent = look.el.toFixed(1) + "°";
-  $("range").textContent = look.range.toFixed(0) + " km";
-  $("mag").textContent = mag == null ? "—" : mag.toFixed(1) + " EST";
+  setNum($("az"), look.az.toFixed(1) + "°");
+  setNum($("el"), look.el.toFixed(1) + "°");
+  setNum($("range"), look.range.toFixed(0) + " km");
+  setNum($("mag"), mag == null ? "—" : mag.toFixed(1) + " EST");
   $("face").textContent = faceCopy({ az: look.az, el: look.el, range: look.range, label });
 }
 
@@ -300,6 +344,10 @@ export function paintWeather(state) {
       const g = classifyWx(hours.cloud_cover[i], hours.precipitation[i], hours.visibility?.[i]);
       const li = document.createElement("li");
       li.dataset.class = g.cls;
+      const t0 = Date.parse(t);
+      if (Number.isFinite(t0) && (state.passes || []).some((p) => p.maxT >= t0 && p.maxT < t0 + 36e5)) {
+        li.dataset.pass = "1";
+      }
       const hh = t.slice(11, 16);
       li.innerHTML = `<span>${hh}</span><b>${g.cls.slice(0, 4).toUpperCase()}</b>`;
       list.appendChild(li);
@@ -309,13 +357,34 @@ export function paintWeather(state) {
   }
 }
 
+function fillPassTable(tbody, upcoming, hourly) {
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  upcoming.forEach((p) => {
+    const wx = wxAt(hourly, p.maxT);
+    const tr = document.createElement("tr");
+    const eyeClass = p.eye === "NAKED-EYE" ? "eye-naked" : p.eye === "DAY" ? "eye-day" : "eye-ecl";
+    tr.innerHTML = `
+      <td>${p.aos <= Date.now() && p.los > Date.now() ? "in view" : fmtTime(p.aos)}</td>
+      <td>${fmtTime(p.maxT)}</td>
+      <td>${fmtTime(p.los)}</td>
+      <td>${p.maxEl.toFixed(0)}°</td>
+      <td class="${eyeClass}">${p.eye}</td>
+      <td>${wx.cls.toUpperCase()}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
 export function paintPasses(state) {
   const body = $("pass-body");
+  const manifest = $("manifest-body");
   const nextWhen = $("next-when");
   const nextMeta = $("next-meta");
   const note = $("manifest-note");
   if (state.tleError) {
-    body.innerHTML = `<tr><td colspan="6">TLE failed: ${state.tleError}</td></tr>`;
+    const msg = `<tr><td colspan="6">TLE failed: ${state.tleError}</td></tr>`;
+    body.innerHTML = msg;
+    if (manifest) manifest.innerHTML = msg;
     nextWhen.textContent = "—";
     nextMeta.textContent = "Celestrak GP blocked or empty. ISS live lock still uses Where The ISS At.";
     note.textContent = state.tleError;
@@ -323,7 +392,9 @@ export function paintPasses(state) {
   }
   const passes = state.passes || [];
   if (!passes.length) {
-    body.innerHTML = `<tr><td colspan="6">No 10° passes in the next 36 hours from this location.</td></tr>`;
+    const msg = `<tr><td colspan="6">No 10° passes in the next 36 hours from this location.</td></tr>`;
+    body.innerHTML = msg;
+    if (manifest) manifest.innerHTML = msg;
     nextWhen.textContent = "None in 36 h";
     nextMeta.textContent = "SGP4 run complete.";
     note.textContent = "No 10° passes in the next 36 hours.";
@@ -337,35 +408,32 @@ export function paintPasses(state) {
   $("next-pass").classList.toggle("is-imminent", imminent || inView);
   nextWhen.textContent = inView ? "IN VIEW" : imminent ? "IMMINENT" : fmtTime(n.aos);
   nextMeta.textContent = `${n.eye} · max el ${n.maxEl.toFixed(0)}°`;
-  body.innerHTML = "";
-  upcoming.slice(0, 12).forEach((p) => {
-    const wx = wxAt(state.wx?.hourly, p.maxT);
-    const tr = document.createElement("tr");
-    const eyeClass = p.eye === "NAKED-EYE" ? "eye-naked" : p.eye === "DAY" ? "eye-day" : "eye-ecl";
-    tr.innerHTML = `
-      <td>${p.aos <= Date.now() && p.los > Date.now() ? "in view" : fmtTime(p.aos)}</td>
-      <td>${fmtTime(p.maxT)}</td>
-      <td>${fmtTime(p.los)}</td>
-      <td>${p.maxEl.toFixed(0)}°</td>
-      <td class="${eyeClass}">${p.eye}</td>
-      <td>${wx.cls.toUpperCase()}</td>`;
-    body.appendChild(tr);
-  });
+  fillPassTable(body, upcoming.slice(0, 12), state.wx?.hourly);
+  fillPassTable(manifest, upcoming.slice(0, 12), state.wx?.hourly);
   note.textContent = `${upcoming.length} passes from Celestrak GP + SGP4. Weather class from Open-Meteo hourly at max-el hour.`;
 }
 
 export function paintRadar(state) {
   const img = $("radar-img");
   const empty = $("radar-empty");
+  const cap = $("radar-cap");
+  const well = $("radar-well");
   if (state.radarError || !state.radarUrl) {
     img.hidden = true;
     empty.hidden = false;
     empty.textContent = state.radarError || "RainViewer returned no frames.";
+    well.classList.remove("has-tile");
+    if (cap) cap.textContent = "Radar unread";
     return;
   }
   empty.hidden = true;
   img.hidden = false;
   img.src = state.radarUrl;
+  well.classList.add("has-tile");
+  if (cap) {
+    const when = state.radarTime ? new Date(state.radarTime * 1000).toISOString().slice(11, 16) + " Z" : "—";
+    cap.textContent = `RainViewer · ${when} · observer at tile center`;
+  }
 }
 
 export function paintKp(state) {
@@ -392,10 +460,23 @@ export function paintStarship(state) {
   }
   el.textContent = `Catalog hit: ${state.starship.OBJECT_NAME} · NORAD ${state.starship.NORAD_CAT_ID}.`;
   ro.hidden = false;
+  let lookHtml = "";
+  try {
+    const sat = window.satellite;
+    if (sat?.json2satrec && state.obs) {
+      const rec = sat.json2satrec(state.starship);
+      const look = sgp4Look(rec, state.obs, new Date());
+      if (look) {
+        lookHtml = `
+    <div><dt>Look az</dt><dd>${look.az.toFixed(1)}°</dd></div>
+    <div><dt>Look el</dt><dd>${look.el.toFixed(1)}°</dd></div>`;
+      }
+    }
+  } catch { /* catalog fields only */ }
   ro.innerHTML = `
     <div><dt>Epoch</dt><dd>${state.starship.EPOCH}</dd></div>
     <div><dt>Inclination</dt><dd>${state.starship.INCLINATION}°</dd></div>
-    <div><dt>Mean motion</dt><dd>${state.starship.MEAN_MOTION}</dd></div>`;
+    <div><dt>Mean motion</dt><dd>${state.starship.MEAN_MOTION}</dd></div>${lookHtml}`;
 }
 
 export async function loadIss(state) {
@@ -411,14 +492,15 @@ export async function loadIss(state) {
 
 export async function loadTle(state) {
   try {
+    await waitForSatellite();
     const text = await fetchText("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle");
     const tle = parseTle(text);
-    if (!window.satellite) throw new Error("satellite.js not loaded");
     state.satrec = window.satellite.twoline2satrec(tle.l1, tle.l2);
     state.tleError = null;
     state.passes = findPasses(state.satrec, state.obs);
-    state.track = groundTrack(state.satrec);
+    state.track = groundTrack(state.satrec, state.obs);
     paintPasses(state);
+    if (state.wx) paintWeather(state);
     state.drawTrack?.();
   } catch (e) {
     state.tleError = `Celestrak GP CORS or network: ${e.message}`;
@@ -454,6 +536,7 @@ export async function loadRadar(state) {
     const last = frames[frames.length - 1];
     const { x, y, z } = tileXY(state.obs.lat, state.obs.lon, 6);
     state.radarUrl = `${maps.host}${last.path}/256/${z}/${x}/${y}/2/1_1.png`;
+    state.radarTime = last.time;
     state.radarError = null;
     paintRadar(state);
   } catch (e) {
@@ -514,6 +597,7 @@ export function bindAr(state) {
   const msg = $("ar-msg");
   const video = $("ar-video");
   const hud = $("ar-hud");
+  let raf = 0;
   $("btn-ar").addEventListener("click", async () => {
     const proto = location.protocol;
     if (proto === "file:" || proto === "content:") {
@@ -536,45 +620,65 @@ export function bindAr(state) {
       await video.play();
       msg.textContent = "HUD live. FACE line is still authoritative if compass variance is large.";
       state.arOn = true;
+      if (!raf) raf = requestAnimationFrame(drawHud);
     } catch (e) {
       msg.textContent = `Camera denied or failed (${e.message}). HUD-only: use FACE.`;
     }
   });
 
+  const project = (look, heading, w, h) => {
+    const daz = ((look.az - heading + 540) % 360) - 180;
+    return {
+      x: Math.max(12, Math.min(w - 12, w / 2 + (daz / 30) * (w / 2))),
+      y: Math.max(12, Math.min(h - 12, h * 0.75 - (look.el / 90) * (h * 0.55)))
+    };
+  };
+
   const drawHud = () => {
-    requestAnimationFrame(drawHud);
-    if (!state.arOn || !hud) return;
+    if (!state.arOn || !hud) {
+      raf = 0;
+      return;
+    }
+    raf = requestAnimationFrame(drawHud);
     const parent = hud.parentElement;
     const w = parent.clientWidth, h = parent.clientHeight;
     const dpr = Math.min(devicePixelRatio || 1, 2);
-    hud.width = w * dpr;
-    hud.height = h * dpr;
-    hud.style.width = w + "px";
-    hud.style.height = h + "px";
+    if (hud.width !== w * dpr || hud.height !== h * dpr) {
+      hud.width = w * dpr;
+      hud.height = h * dpr;
+      hud.style.width = w + "px";
+      hud.style.height = h + "px";
+    }
     const ctx = hud.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
     const look = state.look;
     if (!look) return;
     const heading = state.heading ?? look.az;
-    const daz = ((look.az - heading + 540) % 360) - 180;
-    const x = w / 2 + (daz / 30) * (w / 2);
-    const y = h * 0.75 - (look.el / 90) * (h * 0.55);
+    if (state.satrec && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      ctx.strokeStyle = "#e6e1d4";
+      ctx.globalAlpha = 0.7;
+      ctx.beginPath();
+      for (let i = 0; i <= 8; i++) {
+        const s = sgp4Look(state.satrec, state.obs, new Date(Date.now() + i * 30 * 1000));
+        if (!s) continue;
+        const p = project(s, heading, w, h);
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+    const p = project(look, heading, w, h);
     ctx.strokeStyle = "#ff6a00";
     ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(Math.max(12, Math.min(w - 12, x)), Math.max(12, Math.min(h - 12, y)), 14, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.strokeStyle = "#e6e1d4";
-    ctx.beginPath();
-    ctx.moveTo(w / 2, h * 0.75);
-    ctx.lineTo(Math.max(12, Math.min(w - 12, x)), Math.max(12, Math.min(h - 12, y)));
+    ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fillStyle = "#e6e1d4";
     ctx.font = "12px IBM Plex Mono, monospace";
-    ctx.fillText(`EL ${look.el.toFixed(0)}°  ΔAZ ${daz.toFixed(0)}°`, 12, 20);
+    ctx.fillText(`EL ${look.el.toFixed(0)}°  ΔAZ ${(((look.az - heading + 540) % 360) - 180).toFixed(0)}°`, 12, 20);
   };
-  drawHud();
 }
 
 export function bindResize(state) {

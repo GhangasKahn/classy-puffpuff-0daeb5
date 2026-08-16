@@ -22,6 +22,7 @@
    - Device compass heading is often missing or biased on desktop; FACE azimuth remains the command.
    - Magnitude is an estimate, labeled EST.
    - Starship is an empty catalog slot unless Celestrak has elements.
+   - Mast is not sticky so FACE is never covered.
 
 7. **Rubric (final audit).** No dimension below 8. Mean 8.6. See `AUDIT.md`.
 

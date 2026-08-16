@@ -12,6 +12,10 @@
   <meta property="og:type" content="website" />
   <title>Orbital Prime — Night Sky Instrument</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://api.wheretheiss.at" crossorigin />
+  <link rel="dns-prefetch" href="https://celestrak.org" />
+  <link rel="dns-prefetch" href="https://api.open-meteo.com" />
+  <link rel="dns-prefetch" href="https://api.rainviewer.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
@@ -36,6 +40,20 @@
       <span class="mast-mark" aria-hidden="true"></span>
       <a class="mast-name" href="#top">Orbital Prime</a>
     </div>
+    <div class="loc-rail">
+      <form id="loc-form" class="loc-form" autocomplete="off">
+        <p class="loc-status" id="loc-status">Buffalo preset · 42.8864°N 78.8784°W</p>
+        <div class="loc-row">
+          <label class="sr-only" for="lat">Latitude</label>
+          <input id="lat" name="lat" inputmode="decimal" value="42.8864" required />
+          <label class="sr-only" for="lon">Longitude</label>
+          <input id="lon" name="lon" inputmode="decimal" value="-78.8784" required />
+          <button type="submit" class="btn">Set</button>
+          <button type="button" class="btn" id="btn-gps">GPS</button>
+          <button type="button" class="btn" id="btn-buf">Buffalo</button>
+        </div>
+      </form>
+    </div>
     <div class="depth" role="radiogroup" aria-label="Density">
       <span class="depth-label">Depth</span>
       <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="1">1</button>
@@ -46,21 +64,6 @@
   </header>
 
   <div id="depth-toast" class="depth-toast" role="status" aria-live="polite" hidden>Depth 2 — Measure</div>
-
-  <div class="loc-rail">
-    <form id="loc-form" class="loc-form" autocomplete="off">
-      <p class="loc-status" id="loc-status">Buffalo preset · 42.8864°N 78.8784°W</p>
-      <div class="loc-row">
-        <label class="sr-only" for="lat">Latitude</label>
-        <input id="lat" name="lat" inputmode="decimal" value="42.8864" required />
-        <label class="sr-only" for="lon">Longitude</label>
-        <input id="lon" name="lon" inputmode="decimal" value="-78.8784" required />
-        <button type="submit" class="btn">Set</button>
-        <button type="button" class="btn" id="btn-gps">GPS</button>
-        <button type="button" class="btn" id="btn-buf">Buffalo</button>
-      </div>
-    </form>
-  </div>
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
@@ -82,19 +85,18 @@
 
         <div class="cluster-grid">
           <div class="command">
-        <div class="command-rail">
-            <div class="gate" id="gate" data-class="unknown" data-motion="M08">
-              <span class="stamp">Gate</span>
-              <strong id="gate-word">LOADING</strong>
-              <p id="gate-why" class="note">Weather not yet read.</p>
+            <div class="command-rail">
+              <div class="gate" id="gate" data-class="unknown" data-motion="M08">
+                <span class="stamp">Gate</span>
+                <strong id="gate-word">LOADING</strong>
+                <p id="gate-why" class="note">Weather not yet read.</p>
+              </div>
+              <div class="next" id="next-pass" data-motion="M09">
+                <span class="stamp">Next</span>
+                <strong id="next-when">—</strong>
+                <p id="next-meta" class="note">Passes require TLE.</p>
+              </div>
             </div>
-
-            <div class="next" id="next-pass" data-motion="M09">
-              <span class="stamp">Next</span>
-              <strong id="next-when">—</strong>
-              <p id="next-meta" class="note">Passes require TLE.</p>
-            </div>
-        </div>
 
             <p class="face" id="face" data-motion="M12" aria-live="polite">
               FACE — waiting for ISS lock.
@@ -178,7 +180,9 @@
           <div class="radar-well" id="radar-well">
             <p class="note" id="radar-empty">Radar not yet read.</p>
             <img id="radar-img" alt="Latest RainViewer radar tile at observer location" hidden />
+            <span class="radar-cross" aria-hidden="true"></span>
           </div>
+          <p class="stamp plot-cap" id="radar-cap">Radar unread</p>
         </div>
 
         <div class="track d4">
@@ -229,6 +233,23 @@
       <p class="stamp">Manifest</p>
       <h2 id="manifest-title" class="sec-title">The same passes, written out</h2>
       <p class="prose">The cluster list is the working set. This plate is the same 36-hour SGP4 run with sources named. Nothing is added.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>AOS</th>
+              <th>Max</th>
+              <th>LOS</th>
+              <th>El</th>
+              <th>Eye</th>
+              <th>Wx</th>
+            </tr>
+          </thead>
+          <tbody id="manifest-body">
+            <tr><td colspan="6">Waiting for TLE…</td></tr>
+          </tbody>
+        </table>
+      </div>
       <p class="note" id="manifest-note">Waiting for TLE…</p>
     </section>
 
