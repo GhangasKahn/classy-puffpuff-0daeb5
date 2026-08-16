@@ -1,10 +1,10 @@
 import {
-  cardinal, classifyWx, eyeLabel, faceCopy, findPasses,
+  cardinal, classifyWx, eyeLabel, faceCopy, findPassesAsync,
   fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
-} from "./astro.js?v=4";
-import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=4";
-import { issResidual, scorePass, wxSlice } from "./score.js?v=4";
+} from "./astro.js?v=5";
+import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=5";
+import { issResidual, scorePass, wxSlice } from "./score.js?v=5";
 
 const $ = (id) => document.getElementById(id);
 
@@ -499,6 +499,10 @@ export function paintLock(state) {
   setNum($("mag"), look.mag == null ? "—" : look.mag.toFixed(1) + " EST");
   $("face").textContent = faceCopy({ az: look.az, el: look.el, range: look.range, label: look.label });
   paintResidual(state);
+  state.unit?.setLook({ az: look.az, el: look.el });
+  const nowLock = look.el >= 10;
+  if (nowLock && !state._wasLock) state.audio?.playLockAcquire();
+  state._wasLock = nowLock;
 }
 
 function paintResidual(state) {
@@ -786,7 +790,16 @@ export async function loadTle(state) {
     state.satrec = window.satellite.twoline2satrec(row.l1, row.l2);
     state.tleError = null;
     state.tleAt = Date.now();
-    state.passes = findPasses(state.satrec, state.obs);
+    const gen = ++state.passGen;
+    const body = $("pass-body");
+    if (body && !state.passes?.length) {
+      body.innerHTML = `<tr><td colspan="7">Computing intersections…</td></tr>`;
+    }
+    const passes = await findPassesAsync(state.satrec, state.obs, 36, {
+      shouldAbort: () => state.passGen !== gen
+    });
+    if (passes == null) return;
+    state.passes = passes;
     state.track = groundTrack(state.satrec, state.obs);
     paintPasses(state);
     if (state.wx) paintWeather(state);

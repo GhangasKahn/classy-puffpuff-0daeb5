@@ -20,9 +20,6 @@
   <link rel="dns-prefetch" href="https://celestrak.org" />
   <link rel="dns-prefetch" href="https://api.open-meteo.com" />
   <link rel="dns-prefetch" href="https://api.rainviewer.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/orbital.css" />
   <script type="application/ld+json">
   {
@@ -38,18 +35,6 @@
 </head>
 <body data-depth="2">
   <div class="grain" aria-hidden="true"></div>
-
-  <div class="te-disc" aria-hidden="true">
-    <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="96" fill="#f2ede4" stroke="#111" stroke-width="2"/>
-      <circle cx="100" cy="100" r="72" fill="none" stroke="#111" stroke-width="2"/>
-      <path d="M100 100 L100 28 A72 72 0 0 1 172 100 Z" fill="#ff5a00"/>
-      <circle cx="100" cy="100" r="28" fill="#f2ede4" stroke="#111" stroke-width="2"/>
-      <circle cx="100" cy="100" r="6" fill="#111"/>
-      <path d="M100 4 L104 28 L96 28 Z" fill="#111"/>
-      <text x="100" y="108" text-anchor="middle" font-family="Archivo Black, sans-serif" font-size="11" fill="#111">OP-01</text>
-    </svg>
-  </div>
 
   <a class="skip" href="#cluster">Skip to instrument</a>
 
@@ -81,6 +66,11 @@
           <span id="clock">—</span>
         </div>
       </div>
+      <figure class="unit-stage" id="unit-stage">
+        <canvas id="unit-gl" width="720" height="720" aria-label="OP-01 hardware unit. Encoder follows live azimuth. Pointer tilt is camera only."></canvas>
+        <canvas id="unit-2d" width="720" height="720" hidden aria-hidden="true"></canvas>
+        <figcaption class="unit-cap">OP-01 · encoder tracks live AZ · tilt is view only</figcaption>
+      </figure>
     </section>
 
     <nav class="dock" aria-label="Modules">
@@ -267,6 +257,7 @@
         <p>Magnitude estimate: −1.8 + 5 log₁₀(range / 1000 km) + phase term.</p>
         <p>Pass score is a logistic prior on live features (elevation, estimated magnitude, cloud, precipitation, visibility, night/illumination, Kp). Coefficients are documented in <code>js/score.js</code>. It is not a trained black box and not a guarantee.</p>
         <p>Anyone can use this instrument. Location is a URL: <code>?lat=&amp;lon=&amp;sat=</code>. No account. GPS is optional. Celestrak <code>GROUP=stations</code> is the catalog (ISS, Tiangong, and other stations — not Starlink).</p>
+        <p>The hero object is the OP-01 unit. The encoder disc is live azimuth. The orange sector is elevation. Pointer motion tilts the camera, not the numbers. If WebGL is missing, a 2D drawing of the same unit is the fallback. This is not a globe.</p>
       </div>
     </section>
 
@@ -348,6 +339,6 @@
   <span id="audio-icon" hidden></span>
 
   <script src="vendor/satellite.min.js" defer></script>
-  <script type="module" src="js/main.js?v=4"></script>
+  <script type="module" src="js/main.js?v=5"></script>
 </body>
 </html>

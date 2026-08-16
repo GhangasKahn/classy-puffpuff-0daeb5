@@ -1,12 +1,13 @@
-import { BUFFALO } from "./astro.js?v=4";
-import { ClickEngine } from "./audio.js?v=4";
-import { initMotion, listMotionListeners } from "./motion.js?v=4";
+import { BUFFALO } from "./astro.js?v=5";
+import { ClickEngine } from "./audio.js?v=5";
+import { initUnit } from "./gl/unit.js?v=5";
+import { initMotion, listMotionListeners } from "./motion.js?v=5";
 import {
   bindAr, bindAlert, bindDepth, bindHeading, bindIcs, bindLocation, bindResize,
   bindShare, bindSpeak, bindTarget, drawCompass, drawGauges, drawSkyPlot, drawTrack,
   loadIss, loadKp, loadRadar, loadStarship, loadTle, loadWeather, markIssAge,
   paintCountdown, paintLock, writeShare
-} from "./render.js?v=4";
+} from "./render.js?v=5";
 
 const state = {
   obs: { ...BUFFALO },
@@ -24,7 +25,9 @@ const state = {
   compassNeedle: 0,
   arOn: false,
   alertsOn: false,
-  audio: new ClickEngine()
+  passGen: 0,
+  audio: new ClickEngine(),
+  unit: null
 };
 
 const audioBtn = document.getElementById("btn-audio");
@@ -84,6 +87,13 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localho
 }
 
 initMotion(state);
+
+const unitStage = document.getElementById("unit-stage");
+const unitGl = document.getElementById("unit-gl");
+const unit2d = document.getElementById("unit-2d");
+if (unitStage && unitGl && unit2d) {
+  state.unit = initUnit({ glCanvas: unitGl, fallbackCanvas: unit2d, stage: unitStage });
+}
 
 state.drawPlot = () => {
   drawSkyPlot(state);

@@ -44,7 +44,7 @@ No cyan. No glow. No radius. No glass.
 - Body: Inter / Helvetica. Industrial captions, sentence case notes.
 - Data: Space Mono. Numerals, T-minus, tables.
 
-Hero wordmark is huge. FACE is a spoken command in display size that still wraps at 390. Module numbers (`01`–`12`) are mono orange.
+Module numbers (`01`–`12`) are mono ink on yellow chips (AA). Orange is a fill on the unit disc, scrub, and quotation graphics — not running text.
 
 Quotation marks are graphics. Strikethrough is a graphic (`software` struck, hardware remains). `™` is allowed on the SKU.
 
@@ -55,7 +55,7 @@ Quotation marks are graphics. Strikethrough is a graphic (`software` struck, har
 - Numbered modules, Swiss / catalog grid.
 - Sticky dock: `01 LOCK / 02 PASS / 03 NOTES / 04 FINDER` — digits, not emoji.
 - SKU mast: `OP-01`. Depth 1–4 as hardware keys.
-- One rotating orange disc (TE knob). No shader behind the page.
+- One OP-01 hardware unit in the hero: WebGL cream-plastic encoder, or a 2D drawing of the same object if WebGL is missing. Encoder rotation is **live azimuth**. Orange sector is **elevation**. Pointer tilt is **camera only** and must never write telemetry. No 3D Earth. No shader behind the page.
 
 **390px:** no horizontal scroll. FACE readable. T-minus wraps. Dock four equal columns.
 
@@ -63,4 +63,5 @@ Quotation marks are graphics. Strikethrough is a graphic (`software` struck, har
 
 - Cream paper, black ink, orange signal, yellow hazard. Immediately TE / Off-White, not NASA, not HUD.
 - Live ISS lock, FACE, gauges, sky plot, weather gate, SGP4 table still work.
-- No WebGL background. No scanlines. No cyan.
+- Hero unit is a product object driven by lock, not a globe and not a HUD background.
+- No scanlines. No cyan.

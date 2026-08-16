@@ -252,6 +252,63 @@ export function findPasses(satrec, observer, hours = 36) {
   return passes;
 }
 
+function yieldToMain() {
+  if (typeof scheduler !== "undefined" && typeof scheduler.yield === "function") {
+    return scheduler.yield();
+  }
+  return new Promise((r) => setTimeout(r, 0));
+}
+
+export async function findPassesAsync(satrec, observer, hours = 36, opts = {}) {
+  const step = 30 * 1000;
+  const start = Date.now() - 2 * 3600 * 1000;
+  const end = Date.now() + hours * 3600 * 1000;
+  const chunk = opts.chunk || 480;
+  const passes = [];
+  let cur = null;
+  let prev = null;
+  let n = 0;
+  for (let t = start; t <= end; t += step) {
+    if (opts.shouldAbort?.()) return null;
+    const look = sgp4Look(satrec, observer, new Date(t));
+    if (!look) continue;
+    const above = look.el >= 10;
+    if (above && !cur) {
+      cur = {
+        aos: t,
+        maxEl: look.el,
+        maxT: t,
+        samples: [look],
+        eclipsed: look.eclipsed,
+        sunAlt: look.sunAlt,
+        mag: look.mag
+      };
+    } else if (above && cur) {
+      if (look.el > cur.maxEl) {
+        cur.maxEl = look.el;
+        cur.maxT = t;
+        cur.mag = look.mag;
+        cur.eclipsed = look.eclipsed;
+        cur.sunAlt = look.sunAlt;
+      }
+      cur.samples.push(look);
+    } else if (!above && cur) {
+      cur.los = prev ? prev.t : t;
+      cur.eye = eyeLabel({ el: cur.maxEl, eclipsed: cur.eclipsed, sunAlt: cur.sunAlt });
+      passes.push(cur);
+      cur = null;
+    }
+    prev = { t, ...look };
+    if (++n % chunk === 0) await yieldToMain();
+  }
+  if (cur) {
+    cur.los = end;
+    cur.eye = eyeLabel({ el: cur.maxEl, eclipsed: cur.eclipsed, sunAlt: cur.sunAlt });
+    passes.push(cur);
+  }
+  return passes;
+}
+
 export function groundTrack(satrec, observer, minutes = 93) {
   const pts = [];
   const now = Date.now();

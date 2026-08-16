@@ -4,6 +4,8 @@
   "type": "module",
   "description": "OP-01 field instrument. Public telemetry only.",
   "scripts": {
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs",
+    "test:live": "node --test test/live.test.mjs",
+    "test:all": "node --test test/*.test.mjs"
   }
 }

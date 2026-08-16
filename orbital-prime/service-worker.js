@@ -1,7 +1,7 @@
 /* Orbital Prime SW — offline app shell only.
    Live telemetry is NEVER cached. */
 
-const CACHE = "orbital-prime-v4";
+const CACHE = "orbital-prime-v5";
 
 const SHELL = [
   "./",
@@ -14,7 +14,14 @@ const SHELL = [
   "js/audio.js",
   "js/feeds.js",
   "js/score.js",
+  "js/gl/unit.js",
   "vendor/satellite.min.js",
+  "fonts/archivo-black-latin-400.woff2",
+  "fonts/inter-latin-400.woff2",
+  "fonts/inter-latin-600.woff2",
+  "fonts/inter-latin-700.woff2",
+  "fonts/space-mono-latin-400.woff2",
+  "fonts/space-mono-latin-700.woff2",
   "favicon.svg",
   "manifest.webmanifest"
 ];
@@ -53,7 +60,7 @@ self.addEventListener("fetch", (e) => {
     caches.match(e.request).then((hit) => {
       const fetched = fetch(e.request)
         .then((res) => {
-          if (res.ok && (url.origin === location.origin || url.hostname === "cdn.jsdelivr.net" || url.hostname.endsWith("gstatic.com") || url.hostname.endsWith("googleapis.com"))) {
+          if (res.ok && url.origin === location.origin) {
             const clone = res.clone();
             caches.open(CACHE).then((c) => c.put(e.request, clone));
           }

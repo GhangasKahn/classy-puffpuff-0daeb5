@@ -183,3 +183,24 @@ This is a gap list, not a promise of calendar time:
 A **usable public ISS/station observer** on a PR preview, with live connectors and an industrial catalog look.
 
 It is **not** finished as an igloo.inc-class interactive studio piece. Claiming otherwise was a lie. This file is the correction.
+
+---
+
+## 11. Kitchen-sink pass (same day, after this file)
+
+Work that **did** ship after §0–10, checked against the tree — still not igloo:
+
+| Gap from §9 | Status after this pass |
+|---|---|
+| Instrument-as-object 3D (not 3D Earth) | **Shipped.** `js/gl/unit.js` raymarches a cream-plastic encoder. Live AZ rotates the disc. Live EL sizes the orange sector. Pointer tilt is camera only. 2D canvas fallback of the same object. |
+| Motion tokens + dead classes | **Shipped.** `--ease-settle` / `--dur-*` and `.is-pending` / `.is-in` / `.is-settle` are in `styles/orbital.css`. |
+| Contrast of orange-as-text | **Mitigated.** Module numbers are ink on yellow. Imminent T-minus is ink on yellow. Orange remains fill (unit sector, scrub, quotation graphics). Quotation marks are decorative. |
+| focus-visible + self-hosted fonts | **Shipped.** WOFF2 under `fonts/`. Google Fonts links removed. |
+| Pass search hitch | **Mitigated.** `findPassesAsync` yields every 480 steps. Still main-thread SGP4, not a worker. |
+| CI | **Shipped.** `.github/workflows/orbital-prime.yml` runs deterministic tests; live HTTP is `continue-on-error`. No Chromatic / Lighthouse gate. |
+| Merged to `main` | **Still false.** |
+| Fitted ML | **Still false.** `score.js` is a hand prior. |
+| Houdini / Blender / GSAP / Svelte / Figma | **Still absent.** A compact raymarcher is not a studio pipeline. |
+
+Do not read this section as “igloo-complete.” It is the list of closable holes that were closed, and the studio holes that were not.
+

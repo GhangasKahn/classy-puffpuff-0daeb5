@@ -20,8 +20,9 @@ GPS is optional. Buffalo is the default preset.
 
 | Layer | What |
 |---|---|
-| Client | Vanilla HTML / CSS / ES modules. No bundler. PWA shell. |
-| Propagator | `vendor/satellite.min.js` (satellite.js 5) SGP4 in the browser |
+| Client | Vanilla HTML / CSS / ES modules. No bundler. PWA shell. Self-hosted fonts. |
+| Unit | `js/gl/unit.js` — WebGL raymarched OP-01 encoder driven by live AZ/EL, 2D fallback. Not a globe. |
+| Propagator | `vendor/satellite.min.js` (satellite.js 5) SGP4 in the browser (`findPassesAsync` yields) |
 | Edge | Netlify Functions `op-feed` (allowlisted CORS proxy + short TTL) and `op-health` |
 | Score | Logistic prior on live features (`js/score.js`) — not a chatbot, not synthetic history |
 
@@ -49,13 +50,16 @@ Proxy functions only exist on Netlify. Locally the client talks to the public or
 ## Tests
 
 ```bash
-node --test orbital-prime/test/*.test.mjs
+cd orbital-prime
+node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs
+# optional, hits public APIs:
+node --test test/live.test.mjs
 ```
 
 Live tests hit the real connectors. A failure means an upstream is down, not that the app should fake data.
 
 ## Scope
 
-Allowed: live lock, FACE, SGP4 passes, stations catalog, weather gate, radar, Kp, sky plot, ground track, depth 1–4, AR HUD, share URL, calendar of the next computed pass, spoken FACE, optional local notifications.
+Allowed: live lock, FACE, SGP4 passes, stations catalog, weather gate, radar, Kp, sky plot, ground track, depth 1–4, AR HUD, share URL, calendar of the next computed pass, spoken FACE, optional local notifications, hero OP-01 unit (WebGL or 2D).
 
 Forbidden: Starlink trains, accounts, secret APIs, 3D Earth hero, fake live counts, marketing pages.

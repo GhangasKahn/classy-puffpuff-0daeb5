@@ -46,7 +46,9 @@ Forbidden: `top/left` animation, blur, filter, box-shadow pulses, width/height t
 | M11 | ISS sample | ground-track pip | Measurement: sub-satellite point | Snap; no trail tween |
 | M12 | look-angle update | FACE line | Orientation: the spoken command | Instant text; no fade |
 
-If any of these were removed, orientation or measurement would suffer. No thirteenth moment.
+If any of these were removed, orientation or measurement would suffer. No thirteenth **CSS** moment.
+
+The hero OP-01 unit is **measurement**, same class as M04/M06: WebGL or 2D canvas redraw from live AZ/EL. Pointer-tilt is camera only. It is not a thirteenth CSS animation and must not idle-spin.
 
 ## F. Signature interaction storyboard
 

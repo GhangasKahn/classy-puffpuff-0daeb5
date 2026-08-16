@@ -12,7 +12,7 @@ export function initMotion(state) {
   const toast = document.getElementById("depth-toast");
   const plot = document.getElementById("sky-plot");
 
-  document.querySelectorAll(".surface").forEach((el) => {
+  document.querySelectorAll(".surface, .mod").forEach((el) => {
     el.classList.add("is-pending");
   });
 
@@ -24,7 +24,7 @@ export function initMotion(state) {
       io.unobserve(e.target);
     }
   }, { threshold: 0.08 });
-  document.querySelectorAll(".surface").forEach((el) => io.observe(el));
+  document.querySelectorAll(".surface, .mod").forEach((el) => io.observe(el));
 
   state.plotVisible = true;
   const plotIo = new IntersectionObserver((entries) => {
@@ -84,7 +84,7 @@ export function initMotion(state) {
 export function listMotionListeners() {
   return [
     { kind: "scroll", id: "M01", el: ".hero-plate" },
-    { kind: "IntersectionObserver", id: "M02", el: ".surface" },
+    { kind: "IntersectionObserver", id: "M02", el: ".surface, .mod" },
     { kind: "requestAnimationFrame", id: "M03", el: "#sky-plot sweep" },
     { kind: "canvas", id: "M04", el: "lock pip" },
     { kind: "canvas", id: "M05", el: "#compass" },
@@ -94,6 +94,7 @@ export function listMotionListeners() {
     { kind: "class", id: "M09", el: "#next-pass" },
     { kind: "canvas", id: "M10", el: "#ar-hud" },
     { kind: "canvas", id: "M11", el: "#ground-track" },
-    { kind: "text", id: "M12", el: "#face" }
+    { kind: "text", id: "M12", el: "#face" },
+    { kind: "webgl|canvas", id: "unit", el: "#unit-gl", note: "measurement AZ/EL; pointer tilt is camera only" }
   ];
 }
