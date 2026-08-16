@@ -1,8 +1,10 @@
 import {
-  cardinal, classifyWx, eyeLabel, faceCopy, fetchJson, fetchText, findPasses,
-  fmtClock, fmtTime, groundTrack, lookAngles, parseTle, sgp4Look, sunAltitude,
+  cardinal, classifyWx, eyeLabel, faceCopy, findPasses,
+  fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
 } from "./astro.js";
+import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js";
+import { issResidual, scorePass, wxSlice } from "./score.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -54,6 +56,21 @@ export function bindDepth(state) {
   apply(Number(document.body.dataset.depth || 2));
 }
 
+export function fmtHemisphere(obs) {
+  const ns = obs.lat >= 0 ? "N" : "S";
+  const ew = obs.lon >= 0 ? "E" : "W";
+  return `${Math.abs(obs.lat).toFixed(4)}°${ns} ${Math.abs(obs.lon).toFixed(4)}°${ew}`;
+}
+
+export function writeShare(state) {
+  if (!state?.obs || typeof history === "undefined") return;
+  const u = new URL(location.href);
+  u.searchParams.set("lat", state.obs.lat.toFixed(4));
+  u.searchParams.set("lon", state.obs.lon.toFixed(4));
+  u.searchParams.set("sat", state.targetId || "25544");
+  history.replaceState(null, "", u);
+}
+
 export function bindLocation(state) {
   const form = $("loc-form");
   const status = $("loc-status");
@@ -61,13 +78,26 @@ export function bindLocation(state) {
     state.obs = obs;
     $("lat").value = obs.lat.toFixed(4);
     $("lon").value = obs.lon.toFixed(4);
-    status.textContent = `${how} · ${obs.lat.toFixed(4)}°N ${Math.abs(obs.lon).toFixed(4)}°W`;
+    status.textContent = `${how} · ${fmtHemisphere(obs)}`;
     localStorage.setItem("op-loc", JSON.stringify(obs));
+    writeShare(state);
     if (notify) state.onLocation?.();
   };
-  const saved = localStorage.getItem("op-loc");
-  if (saved) {
-    try { setObs(JSON.parse(saved), "Saved Position", false); } catch { /* keep Buffalo */ }
+  const q = new URLSearchParams(location.search);
+  const qLat = Number(q.get("lat"));
+  const qLon = Number(q.get("lon"));
+  const qSat = q.get("sat");
+  if (qSat && /^\d{1,8}$/.test(qSat)) {
+    state.targetId = qSat;
+    localStorage.setItem("op-sat", qSat);
+  }
+  if (Number.isFinite(qLat) && Number.isFinite(qLon) && Math.abs(qLat) <= 90 && Math.abs(qLon) <= 180) {
+    setObs({ lat: qLat, lon: qLon, altKm: 0.18 }, "Shared link", false);
+  } else {
+    const saved = localStorage.getItem("op-loc");
+    if (saved) {
+      try { setObs(JSON.parse(saved), "Saved position", false); } catch { /* keep Buffalo */ }
+    }
   }
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -426,34 +456,64 @@ function wxAt(hourly, ms) {
 
 export function paintLock(state) {
   $("clock").textContent = fmtClock(Date.now());
-  const iss = state.iss;
-  if (!iss) return;
-  $("iss-lat").textContent = iss.latitude.toFixed(4) + "°";
-  $("iss-lon").textContent = iss.longitude.toFixed(4) + "°";
-  $("iss-alt").textContent = iss.altitude.toFixed(1) + " KM";
-  $("iss-vel").textContent = iss.velocity.toFixed(0) + " KM/H";
-  $("iss-vis").textContent = (iss.visibility || "").toUpperCase();
-  $("iss-ts").textContent = new Date(iss.timestamp * 1000).toISOString();
+  const liveIss = state.targetId === "25544" && state.iss;
+  const sgp4 = state.satrec ? sgp4Look(state.satrec, state.obs, new Date()) : null;
 
-  const look = lookAngles(state.obs, { lat: iss.latitude, lon: iss.longitude, altKm: iss.altitude });
-  const sunAlt = sunAltitude(state.obs.lat, state.obs.lon, new Date());
-  let eclipsed = iss.visibility === "eclipsed";
-  let mag = null;
-  if (state.satrec) {
-    const s = sgp4Look(state.satrec, state.obs, new Date());
-    if (s) {
-      eclipsed = s.eclipsed;
-      mag = s.mag;
+  if (liveIss) {
+    const iss = state.iss;
+    $("iss-lat").textContent = iss.latitude.toFixed(4) + "°";
+    $("iss-lon").textContent = iss.longitude.toFixed(4) + "°";
+    $("iss-alt").textContent = iss.altitude.toFixed(1) + " KM";
+    $("iss-vel").textContent = iss.velocity.toFixed(0) + " KM/H";
+    $("iss-vis").textContent = (iss.visibility || "").toUpperCase();
+    $("iss-ts").textContent = new Date(iss.timestamp * 1000).toISOString();
+
+    const look = lookAngles(state.obs, { lat: iss.latitude, lon: iss.longitude, altKm: iss.altitude });
+    const sunAlt = sunAltitude(state.obs.lat, state.obs.lon, new Date());
+    let eclipsed = iss.visibility === "eclipsed";
+    let mag = sgp4?.mag ?? null;
+    if (sgp4) eclipsed = sgp4.eclipsed;
+    const label = eyeLabel({ el: look.el, eclipsed, sunAlt });
+    state.look = { ...look, mag, label, eclipsed, source: "LIVE" };
+    state.residual = issResidual(iss, sgp4);
+  } else if (sgp4) {
+    const label = eyeLabel({ el: sgp4.el, eclipsed: sgp4.eclipsed, sunAlt: sgp4.sunAlt });
+    state.look = { az: sgp4.az, el: sgp4.el, range: sgp4.range, mag: sgp4.mag, label, eclipsed: sgp4.eclipsed, source: "SGP4" };
+    state.residual = null;
+    if ($("iss-lat")) {
+      $("iss-lat").textContent = sgp4.lat.toFixed(4) + "°";
+      $("iss-lon").textContent = sgp4.lon.toFixed(4) + "°";
+      $("iss-alt").textContent = sgp4.altKm.toFixed(1) + " KM";
+      $("iss-vel").textContent = "SGP4";
+      $("iss-vis").textContent = sgp4.eclipsed ? "ECLIPSED" : "LIT";
+      $("iss-ts").textContent = new Date().toISOString();
     }
+  } else {
+    return;
   }
-  const label = eyeLabel({ el: look.el, eclipsed, sunAlt });
-  state.look = { ...look, mag, label, eclipsed };
-  
+
+  const look = state.look;
   setNum($("az"), look.az.toFixed(1) + "°");
   setNum($("el"), look.el.toFixed(1) + "°");
   setNum($("range"), look.range.toFixed(0) + " KM");
-  setNum($("mag"), mag == null ? "—" : mag.toFixed(1) + " EST");
-  $("face").textContent = faceCopy({ az: look.az, el: look.el, range: look.range, label });
+  setNum($("mag"), look.mag == null ? "—" : look.mag.toFixed(1) + " EST");
+  $("face").textContent = faceCopy({ az: look.az, el: look.el, range: look.range, label: look.label });
+  paintResidual(state);
+}
+
+function paintResidual(state) {
+  const el = $("residual");
+  const src = $("lock-src");
+  if (src) src.textContent = state.look?.source === "LIVE" ? "Where The ISS At" : "SGP4";
+  if (!el) return;
+  const r = state.residual;
+  if (!r) {
+    el.textContent = state.look?.source === "SGP4" ? "No live GPS for this object. SGP4 only." : "—";
+    el.dataset.grade = "";
+    return;
+  }
+  el.textContent = `SGP4 residual ${r.km.toFixed(1)} km · ${r.grade}`;
+  el.dataset.grade = r.grade.toLowerCase();
 }
 
 export function paintWeather(state) {
@@ -493,20 +553,25 @@ export function paintWeather(state) {
   }
 }
 
-function fillPassTable(tbody, upcoming, hourly) {
+function fillPassTable(tbody, upcoming, hourly, kp) {
   if (!tbody) return;
   tbody.innerHTML = "";
   upcoming.forEach((p) => {
     const wx = wxAt(hourly, p.maxT);
+    const slice = wxSlice(hourly, p.maxT);
+    const sc = scorePass(p, slice, kp);
+    p.score = sc;
     const tr = document.createElement("tr");
     const eyeClass = p.eye === "NAKED-EYE" ? "eye-naked" : p.eye === "DAY" ? "eye-day" : "eye-ecl";
+    if (sc.pct >= 70) tr.dataset.best = "1";
     tr.innerHTML = `
       <td>${p.aos <= Date.now() && p.los > Date.now() ? "IN VIEW NOW" : fmtTime(p.aos)}</td>
       <td>${fmtTime(p.maxT)}</td>
       <td>${fmtTime(p.los)}</td>
       <td>${p.maxEl.toFixed(0)}°</td>
       <td class="${eyeClass}">${p.eye}</td>
-      <td>${wx.cls.toUpperCase()}</td>`;
+      <td>${wx.cls.toUpperCase()}</td>
+      <td>${String(sc.pct).padStart(2, "0")}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -517,41 +582,57 @@ export function paintPasses(state) {
   const nextWhen = $("next-when");
   const nextMeta = $("next-meta");
   const note = $("manifest-note");
-  
+  const bestEl = $("best-window");
+
   if (state.tleError) {
-    const msg = `<tr><td colspan="6">TLE Sync Error: ${state.tleError}</td></tr>`;
+    const msg = `<tr><td colspan="7">TLE sync error: ${state.tleError}</td></tr>`;
     body.innerHTML = msg;
     if (manifest) manifest.innerHTML = msg;
     nextWhen.textContent = "OFFLINE";
-    nextMeta.textContent = "Direct ISS position still live via WhereTheISS.";
+    nextMeta.textContent = state.targetId === "25544"
+      ? "Direct ISS position may still be live."
+      : "SGP4 catalog unread.";
     note.textContent = state.tleError;
+    if (bestEl) bestEl.textContent = "—";
     return;
   }
-  
+
   const passes = state.passes || [];
   if (!passes.length) {
-    const msg = `<tr><td colspan="6">Zero 10° elevation passes in the next 36 hours for this position.</td></tr>`;
+    const msg = `<tr><td colspan="7">Zero 10° elevation passes in the next 36 hours for this position.</td></tr>`;
     body.innerHTML = msg;
     if (manifest) manifest.innerHTML = msg;
     nextWhen.textContent = "NONE (36H)";
     nextMeta.textContent = "SGP4 search complete.";
-    note.textContent = "No passes &gt;10° elevation in 36h.";
+    note.textContent = "No passes >10° elevation in 36h.";
+    if (bestEl) bestEl.textContent = "None in 36h.";
     return;
   }
-  
+
   const upcoming = passes.filter((p) => p.los > Date.now());
+  upcoming.forEach((p) => {
+    p.score = scorePass(p, wxSlice(state.wx?.hourly, p.maxT), state.kp);
+  });
   const n = upcoming[0] || passes[0];
+  const best = [...upcoming].sort((a, b) => (b.score?.p || 0) - (a.score?.p || 0))[0] || n;
   const now = Date.now();
   const inView = n.aos <= now && n.los > now;
   const imminent = !inView && n.aos - now < 10 * 60 * 1000 && n.aos > now;
-  
+
   $("next-pass").classList.toggle("is-imminent", imminent || inView);
   nextWhen.textContent = inView ? "IN VIEW NOW" : imminent ? "IMMINENT" : fmtTime(n.aos);
-  nextMeta.textContent = `${n.eye} · PEAK EL ${n.maxEl.toFixed(0)}°`;
-  
-  fillPassTable(body, upcoming.slice(0, 12), state.wx?.hourly);
-  fillPassTable(manifest, upcoming.slice(0, 12), state.wx?.hourly);
-  note.textContent = `${upcoming.length} passes computed via Celestrak NORAD GP + SGP4.`;
+  nextMeta.textContent = `${n.eye} · peak ${n.maxEl.toFixed(0)}° · score ${n.score?.pct ?? "—"}`;
+  if (bestEl) {
+    bestEl.textContent = best === n
+      ? `Best window is the next one (${best.score?.pct ?? "—"}).`
+      : `Best in 36h: ${fmtTime(best.aos)} · score ${best.score?.pct} · ${best.eye} · ${best.maxEl.toFixed(0)}°.`;
+  }
+
+  fillPassTable(body, upcoming.slice(0, 12), state.wx?.hourly, state.kp);
+  fillPassTable(manifest, upcoming.slice(0, 12), state.wx?.hourly, state.kp);
+  note.textContent = `${upcoming.length} passes · Celestrak GP + SGP4 · scores are a logistic prior on live weather, not a forecast guarantee.`;
+
+  maybeAlert(state, n, imminent, inView);
 }
 
 /* T-minus band: giant thin countdown to the next pass window,
@@ -659,37 +740,62 @@ export function paintStarship(state) {
 }
 
 export async function loadIss(state) {
-  try {
-    state.iss = await fetchJson("https://api.wheretheiss.at/v1/satellites/25544");
+  if (state.targetId && state.targetId !== "25544") {
     state.issError = null;
     paintLock(state);
+    paintFeed(state, "iss", "idle");
+    return;
+  }
+  try {
+    const got = await getIss();
+    state.iss = got.data;
+    state.issError = null;
+    state.issAt = Date.now();
+    paintLock(state);
+    paintFeed(state, "iss", "live", state.issAt);
     state.audio?.playLockTick();
   } catch (e) {
     state.issError = e.message;
-    $("face").textContent = `FACE — ISS telemetry link offline (${e.message}).`;
+    paintFeed(state, "iss", "down");
+    if (state.satrec) paintLock(state);
+    else $("face").textContent = `FACE — ISS telemetry link offline (${e.message}).`;
   }
 }
 
 export async function loadTle(state) {
   try {
     await waitForSatellite();
-    let text;
+    let catalog = [];
     try {
-      text = await fetchText("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle", 6000);
+      const stations = await getStations();
+      catalog = parseAllTles(stations.data);
+      paintFeed(state, "tle", "live");
     } catch {
-      // Direct secondary fallback to celestrak mirror
-      text = await fetchText("https://celestrak.com/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle", 6000);
+      const one = await getTle(state.targetId || "25544");
+      catalog = parseAllTles(one.data);
+      paintFeed(state, "tle", "live");
     }
-    const tle = parseTle(text);
-    state.satrec = window.satellite.twoline2satrec(tle.l1, tle.l2);
+    state.catalog = catalog;
+    fillSatSelect(state);
+    const id = state.targetId || "25544";
+    const row = catalog.find((s) => s.norad === id) || catalog.find((s) => s.norad === "25544") || catalog[0];
+    if (!row) throw new Error("target not in TLE set");
+    state.targetId = row.norad;
+    state.targetName = row.name;
+    state.satrec = window.satellite.twoline2satrec(row.l1, row.l2);
     state.tleError = null;
+    state.tleAt = Date.now();
     state.passes = findPasses(state.satrec, state.obs);
     state.track = groundTrack(state.satrec, state.obs);
     paintPasses(state);
     if (state.wx) paintWeather(state);
+    paintLock(state);
     state.drawTrack?.();
+    const note = $("mod-02-note");
+    if (note) note.textContent = `${row.name} ${row.norad}`;
   } catch (e) {
-    state.tleError = `Celestrak GP link: ${e.message}`;
+    state.tleError = `Celestrak GP: ${e.message}`;
+    paintFeed(state, "tle", "down");
     paintPasses(state);
   }
 }
@@ -697,26 +803,28 @@ export async function loadTle(state) {
 export async function loadWeather(state) {
   try {
     const { lat, lon } = state.obs;
-    state.wx = await fetchJson(
-      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=cloud_cover,precipitation,visibility&hourly=cloud_cover,precipitation,visibility&forecast_days=2&timezone=auto`
-    );
+    const got = await getWeather(lat, lon);
+    state.wx = got.data;
     state.wxError = null;
     paintWeather(state);
     paintPasses(state);
+    paintFeed(state, "wx", "live");
   } catch (e) {
     state.wxError = e.message;
     paintWeather(state);
+    paintFeed(state, "wx", "down");
   }
 }
 
 export async function loadRadar(state) {
   try {
-    const maps = await fetchJson("https://api.rainviewer.com/public/weather-maps.json");
+    const maps = (await getRadarIndex()).data;
     const frames = maps?.radar?.past || [];
     if (!frames.length) {
       state.radarUrl = null;
       state.radarError = "RainViewer past frames empty.";
       paintRadar(state);
+      paintFeed(state, "radar", "down");
       return;
     }
     const last = frames[frames.length - 1];
@@ -725,37 +833,42 @@ export async function loadRadar(state) {
     state.radarTime = last.time;
     state.radarError = null;
     paintRadar(state);
+    paintFeed(state, "radar", "live");
   } catch (e) {
     state.radarError = e.message;
     state.radarUrl = null;
     paintRadar(state);
+    paintFeed(state, "radar", "down");
   }
 }
 
 export async function loadKp(state) {
   try {
-    const rows = await fetchJson("https://services.swpc.noaa.gov/json/planetary_k_index_1m.json");
+    const rows = (await getKp()).data;
     const last = rows[rows.length - 1];
     state.kp = last?.kp_index ?? last?.estimated_kp ?? null;
     state.kpError = null;
     paintKp(state);
+    paintFeed(state, "kp", "live");
   } catch (e) {
     state.kpError = e.message;
     paintKp(state);
+    paintFeed(state, "kp", "down");
   }
 }
 
 export async function loadStarship(state) {
+  const el = $("starship-status");
+  const ro = $("starship-readout");
   try {
-    const res = await fetch("https://celestrak.org/NORAD/elements/gp.php?NAME=STARSHIP&FORMAT=json");
-    if (res.status === 404) {
+    const got = await getStarship();
+    if (got.status === 404 || got.data == null) {
       state.starship = null;
       state.starshipError = null;
       paintStarship(state);
       return;
     }
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows = await res.json();
+    const rows = got.data;
     state.starship = Array.isArray(rows) && rows.length ? rows[0] : null;
     state.starshipError = null;
     paintStarship(state);
@@ -763,6 +876,139 @@ export async function loadStarship(state) {
     state.starshipError = e.message;
     paintStarship(state);
   }
+}
+
+function fillSatSelect(state) {
+  const sel = $("sat-select");
+  if (!sel || !state.catalog?.length) return;
+  const cur = state.targetId || "25544";
+  sel.innerHTML = state.catalog.map((s) => {
+    const selAttr = s.norad === cur ? " selected" : "";
+    return `<option value="${s.norad}"${selAttr}>${s.name} · ${s.norad}</option>`;
+  }).join("");
+}
+
+export function paintFeed(state, id, status, at) {
+  const li = document.querySelector(`[data-feed="${id}"]`);
+  if (!li) return;
+  li.dataset.status = status;
+  const label = li.querySelector(".feed-st");
+  if (label) label.textContent = status;
+  if (at) li.dataset.at = String(at);
+}
+
+export function markIssAge(state) {
+  if (!state.issAt || state.targetId !== "25544") return;
+  const age = Date.now() - state.issAt;
+  if (age > 20_000) paintFeed(state, "iss", "stale", state.issAt);
+}
+
+function maybeAlert(state, n, imminent, inView) {
+  if (!state.alertsOn) return;
+  if (!imminent && !inView) return;
+  if ((n.score?.pct ?? 0) < 55) return;
+  if (state._alerted === n.aos) return;
+  state._alerted = n.aos;
+  try {
+    if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+      new Notification("OP-01 pass", {
+        body: `${n.eye} · score ${n.score.pct} · peak ${n.maxEl.toFixed(0)}°`,
+        tag: "op-01-pass"
+      });
+    }
+  } catch { /* ignore */ }
+}
+
+export function bindTarget(state) {
+  const sel = $("sat-select");
+  if (!sel) return;
+  const saved = localStorage.getItem("op-sat");
+  if (saved) state.targetId = saved;
+  sel.addEventListener("change", () => {
+    state.targetId = sel.value;
+    localStorage.setItem("op-sat", sel.value);
+    writeShare(state);
+    const mid = $("mast-target");
+    if (mid) mid.textContent = `${sel.selectedOptions[0]?.textContent || sel.value} · public ephemeris · no account`;
+    loadTle(state);
+    loadIss(state);
+  });
+}
+
+export function bindSpeak(state) {
+  $("btn-speak")?.addEventListener("click", () => {
+    const t = $("face")?.textContent;
+    if (!t || !window.speechSynthesis) return;
+    const u = new SpeechSynthesisUtterance(t);
+    u.rate = 0.95;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+    state.audio?.playModeClick();
+  });
+}
+
+export function bindAlert(state) {
+  const btn = $("btn-alert");
+  if (!btn) return;
+  btn.addEventListener("click", async () => {
+    if (!("Notification" in window)) {
+      btn.textContent = "No alerts";
+      return;
+    }
+    const perm = await Notification.requestPermission();
+    state.alertsOn = perm === "granted";
+    btn.setAttribute("aria-pressed", state.alertsOn ? "true" : "false");
+    btn.textContent = state.alertsOn ? "Alerts on" : "Alerts";
+  });
+}
+
+export function bindShare(state) {
+  $("btn-share")?.addEventListener("click", async () => {
+    writeShare(state);
+    const url = location.href;
+    try {
+      await navigator.clipboard.writeText(url);
+      const btn = $("btn-share");
+      if (btn) {
+        btn.textContent = "Copied";
+        setTimeout(() => { btn.textContent = "Copy link"; }, 1400);
+      }
+    } catch {
+      window.prompt("Copy this observer link", url);
+    }
+  });
+}
+
+function icsStamp(ms) {
+  return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+}
+
+export function bindIcs(state) {
+  $("btn-ics")?.addEventListener("click", () => {
+    const n = (state.passes || []).filter((p) => p.los > Date.now())[0];
+    if (!n) return;
+    const name = (state.targetName || "ISS").replace(/[,;]/g, " ");
+    const body = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//OP-01 Orbital Prime//EN",
+      "BEGIN:VEVENT",
+      `UID:op01-${state.targetId || "25544"}-${n.aos}@orbital-prime`,
+      `DTSTAMP:${icsStamp(Date.now())}`,
+      `DTSTART:${icsStamp(n.aos)}`,
+      `DTEND:${icsStamp(n.los)}`,
+      `SUMMARY:${name} pass · ${n.eye} · score ${n.score?.pct ?? "—"}`,
+      `DESCRIPTION:Peak elevation ${n.maxEl.toFixed(0)}°. FACE from OP-01. Public SGP4. Not a guarantee.`,
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n");
+    const blob = new Blob([body], { type: "text/calendar" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `op01-pass-${n.aos}.ics`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
 }
 
 export function bindHeading(state) {

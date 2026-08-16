@@ -55,7 +55,7 @@
 
   <header class="mast">
     <div class="sku">OP-01<small>orbital prime ™</small></div>
-    <p class="mast-mid">ISS 25544 · public ephemeris · no account</p>
+    <p class="mast-mid" id="mast-target">ISS 25544 · public ephemeris · no account</p>
     <div class="mast-right">
       <button type="button" class="hard-btn" id="btn-audio" aria-pressed="false">Audio</button>
       <div class="depth-bar" role="radiogroup" aria-label="Information depth">
@@ -101,18 +101,36 @@
           <div class="loc-fields">
             <label class="field"><span>Latitude</span><input id="lat" name="lat" inputmode="decimal" value="42.8864" required /></label>
             <label class="field"><span>Longitude</span><input id="lon" name="lon" inputmode="decimal" value="-78.8784" required /></label>
+            <label class="field"><span>Target</span>
+              <select id="sat-select">
+                <option value="25544">ISS (ZARYA) · 25544</option>
+              </select>
+            </label>
           </div>
           <div class="loc-acts">
             <button type="submit" class="ghost">Set</button>
             <button type="button" class="ghost" id="btn-gps">GPS</button>
             <button type="button" class="hard-btn" id="btn-buf">Buffalo</button>
+            <button type="button" class="ghost" id="btn-share">Copy link</button>
+            <button type="button" class="ghost" id="btn-ics">Calendar</button>
+            <button type="button" class="ghost" id="btn-speak">Speak</button>
+            <button type="button" class="ghost" id="btn-alert" aria-pressed="false">Alerts</button>
             <p class="loc-status" id="loc-status">Buffalo preset · 42.8864°N 78.8784°W</p>
           </div>
         </form>
 
+        <ul class="feeds" id="feeds" aria-label="Live connector status">
+          <li data-feed="iss"><span>ISS</span><b class="feed-st">—</b></li>
+          <li data-feed="tle"><span>TLE</span><b class="feed-st">—</b></li>
+          <li data-feed="wx"><span>WX</span><b class="feed-st">—</b></li>
+          <li data-feed="radar"><span>RADAR</span><b class="feed-st">—</b></li>
+          <li data-feed="kp"><span>Kp</span><b class="feed-st">—</b></li>
+        </ul>
+
         <div id="next-pass" class="next-block" data-motion="M09">
           <p class="when" id="next-when">Computing</p>
           <p class="when-meta" id="next-meta">Waiting for SGP4.</p>
+          <p class="when-meta" id="best-window">Best window —</p>
           <p class="tminus" id="tminus" aria-label="Countdown to next pass">T−--:--:--</p>
           <div class="scrub" aria-hidden="true"><i id="scrub-fill" class="scrub-fill"></i></div>
           <div class="scrub-ends">
@@ -129,7 +147,7 @@
         <header class="mod-head">
           <span class="mod-n">02</span>
           <h2 id="mod-02" class="mod-title">Lock</h2>
-          <span class="mod-note">ISS 25544</span>
+          <span class="mod-note" id="mod-02-note">ISS 25544</span>
         </header>
 
         <dl class="read-grid">
@@ -138,6 +156,7 @@
           <div class="read"><dt>Range</dt><dd id="range" data-motion="M06">—</dd></div>
           <div class="read"><dt>Magnitude</dt><dd id="mag" data-motion="M06">—</dd></div>
         </dl>
+        <p class="lock-meta"><span id="lock-src">—</span> · <span id="residual">—</span></p>
 
         <div class="gauges gauge-row">
           <div class="gauge-wrap">
@@ -192,10 +211,11 @@
                 <th>El</th>
                 <th>Class</th>
                 <th>Gate</th>
+                <th>Score</th>
               </tr>
             </thead>
             <tbody id="pass-body">
-              <tr><td colspan="6">Computing intersections…</td></tr>
+              <tr><td colspan="7">Computing intersections…</td></tr>
             </tbody>
           </table>
         </div>
@@ -245,6 +265,8 @@
         <p>Look angles from geodetic observer and sub-satellite point on WGS-84. Topocentric east, north, up from ECEF. Azimuth via atan2(E, N). Elevation via atan2(U, √(E²+N²)). Range is the vector length.</p>
         <p>Passes run in the browser with satellite.js SGP4 against Celestrak GP. Thirty-second steps, 36 hours. Naked-eye needs elevation ≥ 10°, sun below −6°, and the station outside Earth’s shadow.</p>
         <p>Magnitude estimate: −1.8 + 5 log₁₀(range / 1000 km) + phase term.</p>
+        <p>Pass score is a logistic prior on live features (elevation, estimated magnitude, cloud, precipitation, visibility, night/illumination, Kp). Coefficients are documented in <code>js/score.js</code>. It is not a trained black box and not a guarantee.</p>
+        <p>Anyone can use this instrument. Location is a URL: <code>?lat=&amp;lon=&amp;sat=</code>. No account. GPS is optional. Celestrak <code>GROUP=stations</code> is the catalog (ISS, Tiangong, and other stations — not Starlink).</p>
       </div>
     </section>
 
@@ -292,10 +314,11 @@
               <th>El</th>
               <th>Class</th>
               <th>Gate</th>
+              <th>Score</th>
             </tr>
           </thead>
           <tbody id="manifest-body">
-            <tr><td colspan="6">Waiting for TLE…</td></tr>
+            <tr><td colspan="7">Waiting for TLE…</td></tr>
           </tbody>
         </table>
       </div>
@@ -319,12 +342,12 @@
 
   <footer class="colophon">
     <p><strong>OP-01</strong> · Orbital Prime. Client-side. No accounts. No tracking.</p>
-    <p class="note">Where The ISS At · Celestrak GP · Open-Meteo · RainViewer · NOAA SWPC</p>
+    <p class="note">Where The ISS At · Celestrak GP stations · Open-Meteo · RainViewer · NOAA SWPC · satellite.js SGP4</p>
   </footer>
 
   <span id="audio-icon" hidden></span>
 
-  <script src="https://cdn.jsdelivr.net/npm/satellite.js@5.0.0/dist/satellite.min.js" defer></script>
+  <script src="vendor/satellite.min.js" defer></script>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

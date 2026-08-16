@@ -20,16 +20,17 @@ P10 No feature creep. Scope lock is absolute.
 
 ## Scope lock
 
-Allowed: ISS live position + look angles; SGP4 passes + naked-eye filter; weather gate + hourly PERFECT/MARGINAL/OBSTRUCTED; RainViewer radar; cluster HMI; sky plot + ground track; depth 1–4; hero parallax + section reveal; AR HUD + trajectory when possible; physics formulas already defined.
+Allowed: ISS live position + look angles; SGP4 passes + naked-eye filter; Celestrak `GROUP=stations` catalog (not Starlink); weather gate + hourly PERFECT/MARGINAL/OBSTRUCTED; RainViewer radar; cluster HMI; sky plot + ground track; depth 1–4; hero parallax + section reveal; AR HUD + trajectory when possible; physics formulas already defined; shareable `?lat&lon&sat`; calendar of a computed pass; spoken FACE; optional local notifications; documented logistic visibility score on live features; allowlisted Netlify feed proxy (no secrets).
 
 Forbidden: new satellite programs beyond existing catalog toggles; Starlink trains; accounts/social/chat; new APIs requiring secrets; blog/shop/waitlist; 3D Earth WebGL hero; community or fake live counts; extra marketing pages; scroll-jacking; native app rewrite; any nice-to-have not listed.
 
 ## Connectors only
 
 - ISS: api.wheretheiss.at/v1/satellites/25544
-- TLE: celestrak.org GP API + satellite.js SGP4
+- TLE: celestrak.org GP API (CATNR, GROUP=stations, NAME=STARSHIP) + satellite.js SGP4
 - Weather: api.open-meteo.com
 - Radar: api.rainviewer.com/public/weather-maps.json + tiles
 - Kp: services.swpc.noaa.gov planetary K-index JSON
+- Edge: Netlify `op-feed` / `op-health` (allowlisted, no secrets)
 
 If blocked, state the blocker and use a design-only resolution. Do not add features.

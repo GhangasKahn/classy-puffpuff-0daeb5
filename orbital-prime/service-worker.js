@@ -1,8 +1,7 @@
 /* Orbital Prime SW — offline app shell only.
-   Live telemetry (ISS, TLE, weather, radar, Kp) is NEVER cached:
-   a field instrument must not serve stale data as if it were live. */
+   Live telemetry is NEVER cached. */
 
-const CACHE = "orbital-prime-v3";
+const CACHE = "orbital-prime-v4";
 
 const SHELL = [
   "./",
@@ -13,6 +12,9 @@ const SHELL = [
   "js/motion.js",
   "js/astro.js",
   "js/audio.js",
+  "js/feeds.js",
+  "js/score.js",
+  "vendor/satellite.min.js",
   "favicon.svg",
   "manifest.webmanifest"
 ];
@@ -44,9 +46,9 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET") return;
-  if (LIVE_HOSTS.includes(url.hostname)) return; // live data: network only, no SW interference
+  if (LIVE_HOSTS.includes(url.hostname)) return;
+  if (url.pathname.includes("/api/") || url.pathname.includes("/.netlify/functions/")) return;
 
-  // App shell + static CDN (fonts, satellite.js): cache-first with background refresh
   e.respondWith(
     caches.match(e.request).then((hit) => {
       const fetched = fetch(e.request)

@@ -150,15 +150,31 @@ export async function fetchText(url, timeout = 12000) {
 }
 
 export function parseTle(text) {
-  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-  if (lines.length < 2) throw new Error("TLE empty");
-  let l1 = lines.find((l) => l.startsWith("1 "));
-  let l2 = lines.find((l) => l.startsWith("2 "));
-  if (!l1 || !l2) {
-    if (lines.length >= 3) { l1 = lines[1]; l2 = lines[2]; }
-    else throw new Error("TLE malformed");
+  const all = parseAllTles(text);
+  if (!all.length) throw new Error("TLE empty");
+  const iss = all.find((s) => s.norad === "25544") || all[0];
+  return { name: iss.name, l1: iss.l1, l2: iss.l2 };
+}
+
+export function parseAllTles(text) {
+  const lines = (text || "").split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const out = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].startsWith("1 ") && lines[i + 1]?.startsWith("2 ")) {
+      const prev = lines[i - 1];
+      const named = prev && !prev.startsWith("1 ") && !prev.startsWith("2 ");
+      const norad = lines[i].slice(2, 7).trim();
+      out.push({
+        name: named ? prev.replace(/^0 /, "") : `NORAD ${norad}`,
+        l1: lines[i],
+        l2: lines[i + 1],
+        norad
+      });
+      i += 1;
+    }
   }
-  return { name: lines[0].startsWith("1 ") ? "ISS" : lines[0], l1, l2 };
+  if (!out.length) throw new Error("TLE malformed");
+  return out;
 }
 
 export function sgp4Look(satrec, observer, date) {

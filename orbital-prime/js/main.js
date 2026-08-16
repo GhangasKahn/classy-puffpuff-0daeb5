@@ -2,15 +2,19 @@ import { BUFFALO } from "./astro.js";
 import { ClickEngine } from "./audio.js";
 import { initMotion, listMotionListeners } from "./motion.js";
 import {
-  bindAr, bindDepth, bindHeading, bindLocation, bindResize, drawCompass,
-  drawGauges, drawSkyPlot, drawTrack, loadIss, loadKp, loadRadar,
-  loadStarship, loadTle, loadWeather, paintCountdown, paintLock
+  bindAr, bindAlert, bindDepth, bindHeading, bindIcs, bindLocation, bindResize,
+  bindShare, bindSpeak, bindTarget, drawCompass, drawGauges, drawSkyPlot, drawTrack,
+  loadIss, loadKp, loadRadar, loadStarship, loadTle, loadWeather, markIssAge,
+  paintCountdown, paintLock, writeShare
 } from "./render.js";
 
 const state = {
   obs: { ...BUFFALO },
+  targetId: "25544",
+  targetName: "ISS (ZARYA)",
   iss: null,
   satrec: null,
+  catalog: [],
   passes: [],
   track: [],
   wx: null,
@@ -19,6 +23,7 @@ const state = {
   sweep: 0,
   compassNeedle: 0,
   arOn: false,
+  alertsOn: false,
   audio: new ClickEngine()
 };
 
@@ -89,6 +94,11 @@ state.drawTrack = () => drawTrack(state);
 
 bindDepth(state);
 bindLocation(state);
+bindTarget(state);
+bindSpeak(state);
+bindAlert(state);
+bindShare(state);
+bindIcs(state);
 bindHeading(state);
 bindAr(state);
 bindResize(state);
@@ -107,10 +117,11 @@ async function refreshAll() {
 }
 
 state.onLocation = () => {
+  writeShare(state);
   loadTle(state);
   loadWeather(state);
   loadRadar(state);
-  if (state.iss) paintLock(state);
+  if (state.iss || state.satrec) paintLock(state);
   state.drawPlot();
   state.drawTrack();
   state.audio?.playModeClick();
@@ -121,6 +132,7 @@ refreshAll();
 setInterval(() => {
   if (document.hidden) return;
   loadIss(state).then(() => {
+    markIssAge(state);
     state.drawPlot();
     state.drawTrack();
   });

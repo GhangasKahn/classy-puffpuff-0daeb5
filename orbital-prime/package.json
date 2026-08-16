@@ -1,0 +1,9 @@
+{
+  "name": "orbital-prime",
+  "private": true,
+  "type": "module",
+  "description": "OP-01 field instrument. Public telemetry only.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}
