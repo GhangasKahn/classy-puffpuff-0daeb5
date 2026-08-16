@@ -15,6 +15,7 @@ const DIRECT = {
 };
 
 function useProxy() {
+  if (typeof location === "undefined") return false;
   const { hostname, pathname } = location;
   return pathname.startsWith("/orbital-prime") || hostname.includes("netlify.app");
 }

@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { parseAllTles } from "../js/astro.js";
+import { observe } from "../js/observe.js";
 
 const UA = { headers: { "User-Agent": "orbital-prime-op01-tests" } };
 
@@ -77,5 +78,21 @@ describe("live connectors — real payloads, no fixtures", () => {
     const last = rows[rows.length - 1];
     const kp = last.kp_index ?? last.estimated_kp;
     assert.equal(typeof kp, "number");
+  });
+
+  it("observe() returns live ISS look or SGP4 without inventing passes", async () => {
+    const out = await observe({ lat: 42.8864, lon: -78.8784, sat: "25544", hours: 12 });
+    assert.equal(out.ok, true);
+    assert.ok(out.look, "look missing");
+    assert.equal(typeof out.look.az, "number");
+    assert.equal(typeof out.face, "string");
+    assert.match(out.face, /^FACE /);
+    assert.ok(out.sources.tle || out.errors.tle);
+    if (Array.isArray(out.passes)) {
+      for (const p of out.passes) {
+        assert.equal(p.scoreIsPrior, true);
+        assert.ok(p.maxEl >= 10);
+      }
+    }
   });
 });

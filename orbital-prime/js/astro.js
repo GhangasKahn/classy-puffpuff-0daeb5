@@ -177,8 +177,13 @@ export function parseAllTles(text) {
   return out;
 }
 
+export function getSatellite() {
+  if (typeof globalThis !== "undefined" && globalThis.satellite) return globalThis.satellite;
+  return null;
+}
+
 export function sgp4Look(satrec, observer, date) {
-  const sat = window.satellite;
+  const sat = getSatellite();
   if (!sat) return null;
   const pv = sat.propagate(satrec, date);
   if (!pv.position) return null;
@@ -321,13 +326,15 @@ export function groundTrack(satrec, observer, minutes = 93) {
 }
 
 export function waitForSatellite(ms = 4000) {
-  if (typeof window !== "undefined" && window.satellite) return Promise.resolve(window.satellite);
+  const hit = getSatellite();
+  if (hit) return Promise.resolve(hit);
   return new Promise((resolve, reject) => {
     const t0 = Date.now();
     const id = setInterval(() => {
-      if (typeof window !== "undefined" && window.satellite) {
+      const sat = getSatellite();
+      if (sat) {
         clearInterval(id);
-        resolve(window.satellite);
+        resolve(sat);
       } else if (Date.now() - t0 > ms) {
         clearInterval(id);
         reject(new Error("satellite.js not loaded"));

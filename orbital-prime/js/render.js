@@ -1,10 +1,10 @@
 import {
-  cardinal, classifyWx, eyeLabel, faceCopy, findPassesAsync,
+  cardinal, classifyWx, eyeLabel, faceCopy, findPassesAsync, getSatellite,
   fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, parseShareQuery, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
-} from "./astro.js?v=6";
-import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=6";
-import { issResidual, scorePass, wxSlice } from "./score.js?v=6";
+} from "./astro.js?v=7";
+import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=7";
+import { issResidual, scorePass, wxSlice } from "./score.js?v=7";
 
 const $ = (id) => document.getElementById(id);
 
@@ -723,7 +723,7 @@ export function paintStarship(state) {
   ro.hidden = false;
   let lookHtml = "";
   try {
-    const sat = window.satellite;
+    const sat = getSatellite();
     if (sat?.json2satrec && state.obs) {
       const rec = sat.json2satrec(state.starship);
       const look = sgp4Look(rec, state.obs, new Date());
@@ -784,7 +784,7 @@ export async function loadTle(state) {
     if (!row) throw new Error("target not in TLE set");
     state.targetId = row.norad;
     state.targetName = row.name;
-    state.satrec = window.satellite.twoline2satrec(row.l1, row.l2);
+    state.satrec = getSatellite().twoline2satrec(row.l1, row.l2);
     state.tleError = null;
     state.tleAt = Date.now();
     const gen = ++state.passGen;

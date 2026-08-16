@@ -13,9 +13,14 @@
   <meta property="og:title" content="OP-01 / ORBITAL PRIME" />
   <meta property="og:description" content="The instrument between you and the sky. ISS lock, FACE bearing, SGP4 passes. Public telemetry only." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="og.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <title>OP-01 — Orbital Prime</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preload" href="fonts/archivo-black-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/space-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://api.wheretheiss.at" crossorigin />
   <link rel="dns-prefetch" href="https://celestrak.org" />
   <link rel="dns-prefetch" href="https://api.open-meteo.com" />
@@ -333,12 +338,12 @@
 
   <footer class="colophon">
     <p><strong>OP-01</strong> · Orbital Prime. Client-side. No accounts. No tracking.</p>
-    <p class="note">Where The ISS At · Celestrak GP stations · Open-Meteo · RainViewer · NOAA SWPC · satellite.js SGP4</p>
+    <p class="note">Where The ISS At · Celestrak GP stations · Open-Meteo · RainViewer · NOAA SWPC · satellite.js SGP4 · headless: <code>node js/actor-main.js</code></p>
   </footer>
 
   <span id="audio-icon" hidden></span>
 
   <script src="vendor/satellite.min.js" defer></script>
-  <script type="module" src="js/main.js?v=6"></script>
+  <script type="module" src="js/main.js?v=7"></script>
 </body>
 </html>

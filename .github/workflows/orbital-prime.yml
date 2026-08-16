@@ -21,7 +21,7 @@ jobs:
           node-version: "20"
       - name: Run deterministic tests
         working-directory: orbital-prime
-        run: node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs
+        run: node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs
 
   live:
     name: live connectors

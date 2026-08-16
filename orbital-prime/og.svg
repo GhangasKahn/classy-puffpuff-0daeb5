@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="OP-01 Orbital Prime  the instrument between you and the sky">
+  <rect width="1200" height="630" fill="#f2ede4"/>
+  <rect x="36" y="36" width="1128" height="558" fill="none" stroke="#111111" stroke-width="8"/>
+  <rect x="36" y="36" width="24" height="558" fill="#ffe600"/>
+  <text x="96" y="140" font-family="Impact, 'Arial Black', sans-serif" font-size="42" fill="#111111">OP-01</text>
+  <text x="96" y="280" font-family="Impact, 'Arial Black', sans-serif" font-size="96" fill="#111111">ORBITAL</text>
+  <text x="96" y="372" font-family="Impact, 'Arial Black', sans-serif" font-size="96" fill="#111111">PRIME</text>
+  <text x="96" y="450" font-family="Georgia, serif" font-size="28" fill="#111111">The instrument between you and the sky.</text>
+  <circle cx="980" cy="250" r="110" fill="#f2ede4" stroke="#111111" stroke-width="6"/>
+  <path d="M980 250 L980 140 A110 110 0 0 1 1090 250 Z" fill="#ff5a00"/>
+  <circle cx="980" cy="250" r="36" fill="#f2ede4" stroke="#111111" stroke-width="6"/>
+  <circle cx="980" cy="250" r="10" fill="#111111"/>
+  <text x="96" y="540" font-family="ui-monospace, monospace" font-size="20" fill="#111111">ISS LOCK · FACE · SGP4 · PUBLIC TELEMETRY ONLY</text>
+</svg>

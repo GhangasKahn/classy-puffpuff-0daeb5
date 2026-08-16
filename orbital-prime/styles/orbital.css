@@ -950,3 +950,19 @@ body[data-depth="3"] .d4 { display: none; }
   .hourly { margin-top: 8px; }
   .mod-note { display: none; }
 }
+
+@media print {
+  .grain,
+  .dock,
+  .skip,
+  .unit-stage,
+  .depth-bar,
+  #btn-audio,
+  #btn-ar,
+  .ar-stage,
+  .hard-btn,
+  .ghost { display: none !important; }
+  body { background: #fff; }
+  .mast, .mod, .surface, .colophon { border-color: #000; }
+  a { text-decoration: none; }
+}

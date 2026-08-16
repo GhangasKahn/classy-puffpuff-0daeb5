@@ -24,6 +24,7 @@ GPS is optional. Buffalo is the default preset.
 | Unit | `js/gl/unit.js` — WebGL raymarched OP-01 encoder driven by live AZ/EL, 2D fallback. Not a globe. |
 | Propagator | `vendor/satellite.min.js` (satellite.js 5) SGP4 in the browser (`findPassesAsync` yields) |
 | Edge | Netlify Functions `op-feed` (allowlisted CORS proxy + short TTL) and `op-health` |
+| Headless | `node js/actor-main.js` — same observe pipeline. Apify Actor `orbital-prime-observe` when pushed |
 | Score | Logistic prior on live features (`js/score.js`) — not a chatbot, not synthetic history |
 
 ## Live connectors (public, no secrets)
@@ -47,11 +48,18 @@ Open `http://127.0.0.1:8765/`. Modules will not load from `file://`.
 
 Proxy functions only exist on Netlify. Locally the client talks to the public origins directly.
 
+Headless (same connectors, JSON out):
+
+```bash
+cd orbital-prime
+node js/actor-main.js --lat=42.8864 --lon=-78.8784 --sat=25544
+```
+
 ## Tests
 
 ```bash
 cd orbital-prime
-node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs
+node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs
 # optional, hits public APIs:
 node --test test/live.test.mjs
 ```
