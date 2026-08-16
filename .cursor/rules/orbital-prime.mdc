@@ -1,0 +1,35 @@
+---
+description: Orbital Prime constitution and scope lock. Apply when editing orbital-prime/** or the night-sky instrument.
+globs:
+  - "orbital-prime/**"
+alwaysApply: false
+---
+
+# Orbital Prime — Constitution
+
+P1 Truth before persuasion. No invented proof, launches, users, or awards.
+P2 Concept before components. No section without a job: orient, measure, or decide.
+P3 One governing idea: “The instrument between you and the sky.”
+P4 One signature interaction: ISS lock → gauges + radar + FACE bearing (+ AR path when available).
+P5 One motion personality: precise, mechanical, weighted. Most UI does not move.
+P6 Orange #FF6A00 is signal only (≤10% of surface). Not decoration.
+P7 No generic AI residue: no gradient orbs, purple chrome, particle starfields, three equal cards, fake glass, empty parallax.
+P8 Mobile is primary (390px authored first). Desktop is expansion, not the source.
+P9 Accessibility and performance are design requirements, not cleanup.
+P10 No feature creep. Scope lock is absolute.
+
+## Scope lock
+
+Allowed: ISS live position + look angles; SGP4 passes + naked-eye filter; weather gate + hourly PERFECT/MARGINAL/OBSTRUCTED; RainViewer radar; cluster HMI; sky plot + ground track; depth 1–4; hero parallax + section reveal; AR HUD + trajectory when possible; physics formulas already defined.
+
+Forbidden: new satellite programs beyond existing catalog toggles; Starlink trains; accounts/social/chat; new APIs requiring secrets; blog/shop/waitlist; 3D Earth WebGL hero; community or fake live counts; extra marketing pages; scroll-jacking; native app rewrite; any nice-to-have not listed.
+
+## Connectors only
+
+- ISS: api.wheretheiss.at/v1/satellites/25544
+- TLE: celestrak.org GP API + satellite.js SGP4
+- Weather: api.open-meteo.com
+- Radar: api.rainviewer.com/public/weather-maps.json + tiles
+- Kp: services.swpc.noaa.gov planetary K-index JSON
+
+If blocked, state the blocker and use a design-only resolution. Do not add features.

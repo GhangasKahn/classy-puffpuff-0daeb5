@@ -36,7 +36,7 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
     # geolocation allowed on same origin for the Aegis Air "use my location" feature
-    Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
+    Permissions-Policy = "geolocation=(self), microphone=(), camera=(self)"
 
 [[redirects]]
   from = "/app"
@@ -45,6 +45,16 @@
 
 # /aegis now serves the cinematic landing page (committed build in /aegis/),
 # whose CTAs funnel into the instrument app at /aegis-air-mvp/.
+
+[[redirects]]
+  from = "/orbital"
+  to = "/orbital-prime/"
+  status = 301
+
+[[redirects]]
+  from = "/orbital-prime"
+  to = "/orbital-prime/"
+  status = 301
 
 [[redirects]]
   from = "/aegis-air-mvp"

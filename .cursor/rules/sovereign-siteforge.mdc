@@ -1,0 +1,74 @@
+---
+description: SOVEREIGN SITEFORGE v3.0 — polymorphic, cinematic, award-grade website architecture. Activates for brand sites, landing pages, and digital experiences that must feel commissioned, not templated.
+globs:
+  - "**/*.{html,css,js,jsx,tsx,vue,svelte,astro}"
+  - "**/app/**"
+  - "**/pages/**"
+  - "**/components/**"
+alwaysApply: false
+---
+
+# SOVEREIGN SITEFORGE v3.0
+
+## Prime Directive
+
+Do not merely assemble a website.
+
+Create a brand-specific digital experience whose strategy, copy, visual language, spatial composition, interaction model, motion physics, content architecture, and conversion path emerge from the user’s actual identity, audience, offer, evidence, objectives, and emotional intention.
+
+The result must feel commissioned from a world-class studio — not generated from a reusable landing-page template.
+
+Every decision must have a reason. Every section must advance the narrative. Every animation must communicate, orient, demonstrate, or reward. Every claim must be supported. Every interaction must work. Every visual treatment must belong to this brand and no other.
+
+Award-level ambition is required. Award claims are prohibited.
+
+## Core Laws
+
+1. **Truth before persuasion** — Never invent testimonials, logos, stats, awards, case studies, pricing, scarcity, or capabilities.
+2. **Concept before components** — Strategic thesis, psychological state, transformation, visual metaphor, signature interaction, and proof structure before any navbar/hero/feature grid.
+3. **Brand before trends** — Glassmorphism, grain, bento, neon, parallax only when they express this brand.
+4. **Function before spectacle** — Motion must never block understanding, navigation, conversion, keyboard, or screen readers.
+5. **One governing idea** — One memorable concept from the actual brand.
+6. **Restraint creates authority** — One signature interaction, one signature visual motif, one motion language.
+7. **Performance is part of art direction.**
+8. **Accessibility is part of authorship.**
+9. **No generic AI residue** — No gradient-orb heroes, purple-on-black defaults, floating particles without meaning, three identical feature cards, fake dashboards, or vague “unlock/elevate/seamless” copy.
+
+## Activation sequence
+
+1. Preserve existing architecture when editing an existing project.
+2. Intake only if critical info is missing (max 3 questions together).
+3. Build Brand Genome (strategic, emotional, character, archetypal).
+4. Construct Persuasion Spine + original copy system.
+5. One governing creative concept.
+6. Emotional arc (five acts) + IA.
+7. Full production implementation (real content, real interactions, reduced-motion).
+8. Anti-template audit + verification ledgers.
+9. Concise completion handoff only.
+
+## Absolute prohibitions
+
+- Plan/moodboard/wireframe only when a site was requested
+- Fake social proof, urgency, scarcity, results
+- Dark patterns / confirmshaming
+- Same section architecture for every brand
+- Sacrificing a11y or performance for novelty
+- Claiming an award is earned or guaranteed
+
+## Completion handoff (required)
+
+1. Completed website  
+2. Governing creative concept  
+3. Primary conversion strategy  
+4. Signature interaction  
+5. Proof actually used  
+6. Major a11y and performance protections  
+7. Unresolved dependencies  
+8. Material assumptions  
+
+Read full protocol in skill references when available:
+- references/core-protocol.md
+- references/design-and-motion.md
+- references/verification-and-handoff.md
+
+Do not decorate a template. Do not manufacture persuasion. Find the brand’s governing truth, give it visual and verbal form, and engineer the complete experience around it.
