@@ -1,6 +1,6 @@
 import {
   cardinal, classifyWx, eyeLabel, faceCopy, findPassesAsync,
-  fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, sgp4Look, sunAltitude,
+  fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, parseShareQuery, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
 } from "./astro.js?v=5";
 import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=5";
@@ -83,16 +83,13 @@ export function bindLocation(state) {
     writeShare(state);
     if (notify) state.onLocation?.();
   };
-  const q = new URLSearchParams(location.search);
-  const qLat = Number(q.get("lat"));
-  const qLon = Number(q.get("lon"));
-  const qSat = q.get("sat");
-  if (qSat && /^\d{1,8}$/.test(qSat)) {
-    state.targetId = qSat;
-    localStorage.setItem("op-sat", qSat);
+  const share = parseShareQuery(location.search);
+  if (share?.sat) {
+    state.targetId = share.sat;
+    localStorage.setItem("op-sat", share.sat);
   }
-  if (Number.isFinite(qLat) && Number.isFinite(qLon) && Math.abs(qLat) <= 90 && Math.abs(qLon) <= 180) {
-    setObs({ lat: qLat, lon: qLon, altKm: 0.18 }, "Shared link", false);
+  if (share) {
+    setObs({ lat: share.lat, lon: share.lon, altKm: 0.18 }, "Shared link", false);
   } else {
     const saved = localStorage.getItem("op-loc");
     if (saved) {

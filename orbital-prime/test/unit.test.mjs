@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { encoderAngles, isLocked } from "../js/gl/unit.js";
-import { findPassesAsync } from "../js/astro.js";
+import { findPassesAsync, parseShareQuery } from "../js/astro.js";
 
 describe("encoderAngles", () => {
   it("wraps negative azimuth into 0..360", () => {
@@ -34,5 +34,25 @@ describe("findPassesAsync", () => {
       shouldAbort: () => true
     });
     assert.equal(out, null);
+  });
+});
+
+describe("parseShareQuery", () => {
+  it("does not treat a bare URL as the Gulf of Guinea", () => {
+    assert.equal(parseShareQuery(""), null);
+    assert.equal(parseShareQuery("/"), null);
+    assert.equal(parseShareQuery("?sat=25544"), null);
+  });
+
+  it("accepts explicit 0,0 when both params are present", () => {
+    const s = parseShareQuery("?lat=0&lon=0&sat=25544");
+    assert.equal(s.lat, 0);
+    assert.equal(s.lon, 0);
+    assert.equal(s.sat, "25544");
+  });
+
+  it("rejects out-of-range coordinates", () => {
+    assert.equal(parseShareQuery("?lat=91&lon=0"), null);
+    assert.equal(parseShareQuery("?lat=0&lon=181"), null);
   });
 });

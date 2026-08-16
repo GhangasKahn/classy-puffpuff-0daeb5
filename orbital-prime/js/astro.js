@@ -356,3 +356,18 @@ export function fmtTime(ms, tz) {
 export function fmtClock(ms) {
   return new Date(ms).toISOString().replace("T", " ").slice(0, 19) + " Z";
 }
+
+export function parseShareQuery(search) {
+  const raw = String(search || "");
+  const q = new URLSearchParams(raw.startsWith("?") ? raw.slice(1) : raw);
+  if (!q.has("lat") || !q.has("lon")) return null;
+  const lat = Number(q.get("lat"));
+  const lon = Number(q.get("lon"));
+  if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return null;
+  const sat = q.get("sat");
+  return {
+    lat,
+    lon,
+    sat: sat && /^\d{1,8}$/.test(sat) ? sat : null
+  };
+}
