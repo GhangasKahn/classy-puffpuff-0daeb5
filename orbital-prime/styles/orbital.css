@@ -654,6 +654,54 @@ a:hover { color: var(--plasma-cyan); }
   to { opacity: 1; }
 }
 
+/* T-MINUS BAND: AMG central numeral + player-style pass scrubber */
+.tminus-band {
+  background: var(--steel);
+  border: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline-hi);
+  padding: 12px 14px 10px;
+  margin-bottom: 14px;
+}
+.tminus {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: clamp(28px, 8.5vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(255, 85, 0, 0.35);
+}
+.scrub {
+  position: relative;
+  height: 3px;
+  background: var(--hairline);
+  margin-top: 10px;
+  overflow: hidden;
+}
+.scrub i {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background: var(--grad-amber-flame);
+  box-shadow: 0 0 10px rgba(255, 85, 0, 0.9);
+  transition: width 1s linear;
+}
+.scrub-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
 /* PRIMARY FACE SPOKEN COMMAND LINE */
 .face-box {
   background: linear-gradient(135deg, rgba(255, 85, 0, 0.1) 0%, rgba(0, 229, 255, 0.05) 100%);
@@ -843,15 +891,37 @@ a:hover { color: var(--plasma-cyan); }
 }
 .hour-list li {
   flex: 0 0 auto;
-  min-width: 68px;
+  min-width: 78px;
   background: var(--steel);
   border: 1px solid var(--hairline);
-  padding: 6px 8px;
+  padding: 6px 8px 6px 24px;
   font-family: var(--mono);
   font-size: 11px;
   color: var(--dim);
   text-align: center;
+  position: relative;
 }
+/* Numbered color tab (music-app card index pattern) */
+.hour-list li::before {
+  content: attr(data-idx);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--void);
+  background: var(--dim);
+}
+.hour-list li[data-class="perfect"]::before { background: var(--perfect); }
+.hour-list li[data-class="marginal"]::before { background: var(--marginal); }
+.hour-list li[data-class="obstructed"]::before { background: var(--obstructed); }
 .hour-list li b { display: block; color: var(--paper); font-weight: 700; margin-top: 4px; }
 .hour-list li[data-class="perfect"] b { color: var(--perfect); }
 .hour-list li[data-class="marginal"] b { color: var(--marginal); }

@@ -4,7 +4,7 @@ import { SingularityField, CyberAudioEngine } from "./singularity.js";
 import {
   bindAr, bindDepth, bindHeading, bindLocation, bindResize, drawCompass,
   drawGauges, drawSkyPlot, drawTrack, loadIss, loadKp, loadRadar,
-  loadStarship, loadTle, loadWeather, paintLock
+  loadStarship, loadTle, loadWeather, paintCountdown, paintLock
 } from "./render.js";
 
 const state = {
@@ -161,7 +161,10 @@ setInterval(() => {
   loadKp(state);
 }, 5 * 60 * 1000);
 
-setInterval(() => { $clock(); }, 1000);
+setInterval(() => {
+  $clock();
+  paintCountdown(state);
+}, 1000);
 
 function $clock() {
   const el = document.getElementById("clock");

@@ -125,15 +125,44 @@ export function drawSkyPlot(state) {
     ctx.stroke();
   }
 
-  // Outer Horizon Ring (Vivid Cyan Glow)
-  ctx.strokeStyle = "#00e5ff";
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = "rgba(0, 229, 255, 0.6)";
-  ctx.shadowBlur = 8;
-  ctx.beginPath();
-  ctx.arc(cx, cy, R, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.shadowBlur = 0;
+  // Luminous dual-tone horizon ring (Honda AI direction):
+  // amber flows into violet-blue around the circle, layered strokes for bloom.
+  const RING_SEGS = 72;
+  const AMBER = [255, 150, 50];
+  const VIOLET = [110, 130, 255];
+  for (let pass = 0; pass < 2; pass++) {
+    for (let i = 0; i < RING_SEGS; i++) {
+      const a0 = (i / RING_SEGS) * Math.PI * 2 - Math.PI / 2;
+      const a1 = ((i + 0.85) / RING_SEGS) * Math.PI * 2 - Math.PI / 2;
+      const mix = (Math.cos(a0 + Math.PI / 4) + 1) / 2; // amber sits top-right
+      const r = Math.round(AMBER[0] + (VIOLET[0] - AMBER[0]) * mix);
+      const g = Math.round(AMBER[1] + (VIOLET[1] - AMBER[1]) * mix);
+      const b = Math.round(AMBER[2] + (VIOLET[2] - AMBER[2]) * mix);
+      ctx.strokeStyle = pass === 0 ? `rgba(${r}, ${g}, ${b}, 0.2)` : `rgba(${r}, ${g}, ${b}, 0.95)`;
+      ctx.lineWidth = pass === 0 ? 6 : 1.8;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, a0, a1);
+      ctx.stroke();
+    }
+  }
+
+  // Rise markers: luminous particles on the horizon where upcoming passes begin (real AOS azimuths)
+  (state.passes || []).filter((p) => p.los > Date.now()).slice(0, 5).forEach((p) => {
+    const az0 = p.samples?.[0]?.az;
+    if (az0 == null) return;
+    const a = az0 * Math.PI / 180;
+    const x = cx + R * Math.sin(a);
+    const y = cy - R * Math.cos(a);
+    const col = p.eye === "NAKED-EYE" ? "0, 255, 170" : p.eye === "DAY" ? "255, 170, 0" : "255, 51, 68";
+    ctx.fillStyle = `rgba(${col}, 0.25)`;
+    ctx.beginPath();
+    ctx.arc(x, y, 7, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+    ctx.fill();
+  });
 
   // Crosshairs
   ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
@@ -208,7 +237,13 @@ export function drawSkyPlot(state) {
   }
 }
 
-/* AMG-cluster style arc gauge: 270° sweep, tick ring, eased needle, digital core */
+/* AMG-cluster segmented gauge: discrete ember tick segments with layered
+   bloom (no shadowBlur in the loop — two-pass strokes keep 60fps on mobile),
+   thin digital core numeral. The lit edge IS the needle, like the real cluster. */
+function hexRgb(hex) {
+  return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
+}
+
 function drawArcGauge(canvas, cfg) {
   const parent = canvas.parentElement;
   const w = Math.max(1, parent.clientWidth);
@@ -229,71 +264,62 @@ function drawArcGauge(canvas, cfg) {
   const START = Math.PI * 0.75;           // 135° — bottom left
   const SWEEP = Math.PI * 1.5;            // 270° clockwise
   const frac = Math.max(0, Math.min(1, (cfg.value - cfg.min) / (cfg.max - cfg.min)));
-  const needleAngle = START + SWEEP * frac;
 
-  // Track
-  ctx.strokeStyle = "rgba(34, 45, 61, 0.9)";
-  ctx.lineWidth = Math.max(3, w * 0.045);
-  ctx.lineCap = "butt";
-  ctx.beginPath();
-  ctx.arc(cx, cy, R, START, START + SWEEP);
-  ctx.stroke();
+  const SEGS = 44;
+  const litCount = Math.round(frac * SEGS);
+  const c0 = hexRgb(cfg.color0 || "#00e5ff");
+  const c1 = hexRgb(cfg.color1 || "#ff5500");
 
-  // Progress arc with plasma gradient
-  const grad = ctx.createLinearGradient(0, w, w, 0);
-  grad.addColorStop(0, cfg.color0 || "#00e5ff");
-  grad.addColorStop(1, cfg.color1 || "#ff5500");
-  ctx.strokeStyle = grad;
-  ctx.shadowColor = cfg.color1 || "#ff5500";
-  ctx.shadowBlur = 10;
-  ctx.beginPath();
-  ctx.arc(cx, cy, R, START, needleAngle);
-  ctx.stroke();
-  ctx.shadowBlur = 0;
-
-  // Tick ring: minor every 1/24 sweep, major every 1/6
-  for (let i = 0; i <= 24; i++) {
-    const a = START + SWEEP * (i / 24);
-    const major = i % 4 === 0;
-    const r0 = R - (major ? w * 0.075 : w * 0.045);
-    ctx.strokeStyle = major ? "rgba(240, 244, 248, 0.75)" : "rgba(140, 156, 179, 0.35)";
-    ctx.lineWidth = major ? 1.6 : 1;
-    ctx.beginPath();
-    ctx.moveTo(cx + r0 * Math.cos(a), cy + r0 * Math.sin(a));
-    ctx.lineTo(cx + (R - w * 0.028) * Math.cos(a), cy + (R - w * 0.028) * Math.sin(a));
-    ctx.stroke();
+  ctx.lineCap = "round";
+  // pass 0: wide low-alpha bloom under lit segments; pass 1: crisp segments
+  for (let pass = 0; pass < 2; pass++) {
+    for (let i = 0; i < SEGS; i++) {
+      const f = i / (SEGS - 1);
+      const lit = i < litCount;
+      if (pass === 0 && !lit) continue;
+      const a = START + SWEEP * f;
+      const major = i % 4 === 0;
+      const rIn = R - w * (major ? 0.115 : 0.085);
+      const r = Math.round(c0[0] + (c1[0] - c0[0]) * f);
+      const g = Math.round(c0[1] + (c1[1] - c0[1]) * f);
+      const b = Math.round(c0[2] + (c1[2] - c0[2]) * f);
+      if (pass === 0) {
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.25)`;
+        ctx.lineWidth = Math.max(5, w * 0.045);
+      } else {
+        ctx.strokeStyle = lit ? `rgb(${r}, ${g}, ${b})` : "rgba(40, 52, 70, 0.9)";
+        ctx.lineWidth = Math.max(2, w * 0.016);
+      }
+      ctx.beginPath();
+      ctx.moveTo(cx + rIn * Math.cos(a), cy + rIn * Math.sin(a));
+      ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+      ctx.stroke();
+    }
   }
 
-  // Major tick numerals
-  ctx.fillStyle = "rgba(140, 156, 179, 0.8)";
-  ctx.font = `${Math.max(8, w * 0.058)}px Space Mono, monospace`;
+  // White-hot edge segment — the "needle"
+  if (litCount > 0) {
+    const a = START + SWEEP * ((litCount - 1) / (SEGS - 1));
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = Math.max(2.2, w * 0.018);
+    ctx.shadowColor = cfg.color1 || "#ff5500";
+    ctx.shadowBlur = 14;
+    ctx.beginPath();
+    ctx.moveTo(cx + (R - w * 0.125) * Math.cos(a), cy + (R - w * 0.125) * Math.sin(a));
+    ctx.lineTo(cx + (R + w * 0.008) * Math.cos(a), cy + (R + w * 0.008) * Math.sin(a));
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  // Thin digital core (AMG "58" treatment)
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  for (let i = 0; i <= 6; i++) {
-    const a = START + SWEEP * (i / 6);
-    const val = cfg.min + (cfg.max - cfg.min) * (i / 6);
-    const r0 = R - w * 0.13;
-    ctx.fillText(String(Math.round(val)), cx + r0 * Math.cos(a), cy + r0 * Math.sin(a));
-  }
-
-  // Needle
-  ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = cfg.color1 || "#ff5500";
-  ctx.shadowBlur = 12;
-  ctx.beginPath();
-  ctx.moveTo(cx + (R - w * 0.16) * Math.cos(needleAngle), cy + (R - w * 0.16) * Math.sin(needleAngle));
-  ctx.lineTo(cx + (R + w * 0.01) * Math.cos(needleAngle), cy + (R + w * 0.01) * Math.sin(needleAngle));
-  ctx.stroke();
-  ctx.shadowBlur = 0;
-
-  // Digital core
   ctx.fillStyle = "#f0f4f8";
-  ctx.font = `700 ${Math.max(15, w * 0.17)}px Space Mono, monospace`;
-  ctx.fillText(cfg.text, cx, cy - w * 0.01);
+  ctx.font = `300 ${Math.max(17, w * 0.21)}px "Space Mono", monospace`;
+  ctx.fillText(cfg.text, cx, cy - w * 0.02);
   ctx.fillStyle = "rgba(140, 156, 179, 0.9)";
-  ctx.font = `${Math.max(8, w * 0.06)}px Space Mono, monospace`;
-  ctx.fillText(cfg.unit, cx, cy + w * 0.12);
+  ctx.font = `${Math.max(8, w * 0.058)}px "Space Mono", monospace`;
+  ctx.fillText(cfg.unit, cx, cy + w * 0.115);
 }
 
 export function drawGauges(state) {
@@ -532,6 +558,7 @@ export function paintWeather(state) {
       const g = classifyWx(hours.cloud_cover[i], hours.precipitation[i], hours.visibility?.[i]);
       const li = document.createElement("li");
       li.dataset.class = g.cls;
+      li.dataset.idx = String(i + 1).padStart(3, "0");
       const t0 = Date.parse(t);
       if (Number.isFinite(t0) && (state.passes || []).some((p) => p.maxT >= t0 && p.maxT < t0 + 36e5)) {
         li.dataset.pass = "1";
@@ -604,6 +631,42 @@ export function paintPasses(state) {
   fillPassTable(body, upcoming.slice(0, 12), state.wx?.hourly);
   fillPassTable(manifest, upcoming.slice(0, 12), state.wx?.hourly);
   note.textContent = `${upcoming.length} passes computed via Celestrak NORAD GP + SGP4.`;
+}
+
+/* T-minus band: giant thin countdown to the next pass window,
+   with an AOS→LOS scrubber that fills while the station is overhead. */
+export function paintCountdown(state) {
+  const elT = $("tminus");
+  if (!elT) return;
+  const fill = $("scrub-fill");
+  const la = $("scrub-a");
+  const ll = $("scrub-l");
+  const fmt = (ms) => {
+    const s = Math.max(0, Math.floor(ms / 1000));
+    const hh = String(Math.floor(s / 3600)).padStart(2, "0");
+    const mm = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
+    const ss = String(s % 60).padStart(2, "0");
+    return `${hh}:${mm}:${ss}`;
+  };
+  const upcoming = (state.passes || []).filter((p) => p.los > Date.now());
+  if (!upcoming.length) {
+    elT.textContent = "T\u2212 --:--:--";
+    if (fill) fill.style.width = "0%";
+    if (la) la.textContent = "AOS \u2014";
+    if (ll) ll.textContent = "LOS \u2014";
+    return;
+  }
+  const n = upcoming[0];
+  const now = Date.now();
+  if (la) la.textContent = "AOS " + new Date(n.aos).toISOString().slice(11, 16) + "Z";
+  if (ll) ll.textContent = "LOS " + new Date(n.los).toISOString().slice(11, 16) + "Z";
+  if (n.aos <= now) {
+    elT.textContent = "T\u2212" + fmt(n.los - now);
+    if (fill) fill.style.width = Math.min(100, ((now - n.aos) / (n.los - n.aos)) * 100).toFixed(1) + "%";
+  } else {
+    elT.textContent = "T\u2212" + fmt(n.aos - now);
+    if (fill) fill.style.width = "0%";
+  }
 }
 
 export function paintRadar(state) {
