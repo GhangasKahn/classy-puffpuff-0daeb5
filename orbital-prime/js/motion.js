@@ -1,10 +1,10 @@
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const DEPTH_COPY = {
-  1: "Depth 1 — Signal",
-  2: "Depth 2 — Measure",
-  3: "Depth 3 — Decide",
-  4: "Depth 4 — Full"
+  1: "DEPTH 1 // SIGNAL ONLY",
+  2: "DEPTH 2 // TACTICAL MEASURE",
+  3: "DEPTH 3 // DECISION MATRIX",
+  4: "DEPTH 4 // FULL RELATIVISTIC ASTRODYNAMICS"
 };
 
 export function initMotion(state) {
@@ -23,7 +23,7 @@ export function initMotion(state) {
       e.target.classList.add("is-in");
       io.unobserve(e.target);
     }
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08 });
   document.querySelectorAll(".surface").forEach((el) => io.observe(el));
 
   state.plotVisible = true;
@@ -40,7 +40,7 @@ export function initMotion(state) {
     requestAnimationFrame(() => {
       ticking = false;
       const y = window.scrollY || 0;
-      hero.style.transform = `translate3d(0, ${Math.min(y * 0.12, 48)}px, 0)`;
+      hero.style.transform = `translate3d(0, ${Math.min(y * 0.1, 40)}px, 0)`;
     });
   };
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -50,19 +50,28 @@ export function initMotion(state) {
   state.showDepthToast = (n) => {
     if (!toast) return;
     toast.hidden = false;
-    toast.textContent = DEPTH_COPY[n] || `Depth ${n}`;
+    toast.textContent = DEPTH_COPY[n] || `DEPTH ${n}`;
+    state.audio?.playModeClick();
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.hidden = true; }, reduced() ? 0 : 1600);
+    toastTimer = setTimeout(() => { toast.hidden = true; }, reduced() ? 0 : 1800);
   };
 
   state.sweep = 0;
   let raf = 0;
   const loop = (t) => {
     raf = requestAnimationFrame(loop);
+    
+    // Always render background singularity fluid unless hidden
+    if (!document.hidden && state.singularity) {
+      state.singularity.render();
+    }
+
     if (reduced()) return;
     if (document.hidden) return;
     if (!state.plotVisible) return;
-    state.sweep = (t / 40) % 360;
+    
+    // Smooth radar sweep
+    state.sweep = (t / 32) % 360;
     if (typeof state.drawPlot === "function") state.drawPlot();
   };
   raf = requestAnimationFrame(loop);
@@ -76,7 +85,7 @@ export function initMotion(state) {
     }
     const cur = state.compassNeedle;
     let d = ((target - cur + 540) % 360) - 180;
-    state.compassNeedle = (cur + d * 0.18 + 360) % 360;
+    state.compassNeedle = (cur + d * 0.22 + 360) % 360;
   };
 }
 
@@ -84,7 +93,7 @@ export function listMotionListeners() {
   return [
     { kind: "scroll", id: "M01", el: ".hero-plate" },
     { kind: "IntersectionObserver", id: "M02", el: ".surface" },
-    { kind: "requestAnimationFrame", id: "M03", el: "#sky-plot sweep" },
+    { kind: "requestAnimationFrame", id: "M03", el: "#sky-plot sweep + #singularity-canvas" },
     { kind: "canvas", id: "M04", el: "lock pip" },
     { kind: "canvas", id: "M05", el: "#compass" },
     { kind: "text", id: "M06", el: "#az #el #range #mag" },

@@ -1,5 +1,6 @@
 import { BUFFALO } from "./astro.js";
 import { initMotion, listMotionListeners } from "./motion.js";
+import { SingularityField, CyberAudioEngine } from "./singularity.js";
 import {
   bindAr, bindDepth, bindHeading, bindLocation, bindResize, drawCompass,
   drawSkyPlot, drawTrack, loadIss, loadKp, loadRadar, loadStarship, loadTle,
@@ -17,10 +18,61 @@ const state = {
   heading: null,
   sweep: 0,
   compassNeedle: 0,
-  arOn: false
+  arOn: false,
+  singularity: null,
+  audio: new CyberAudioEngine()
 };
 
+// Initialize interactive background Singularity / Relativistic Plasma Engine
+const singularityCanvas = document.getElementById("singularity-canvas");
+if (singularityCanvas) {
+  state.singularity = new SingularityField(singularityCanvas);
+}
+
+// Audio Engine Toggle
+const audioBtn = document.getElementById("btn-audio");
+if (audioBtn) {
+  audioBtn.addEventListener("click", () => {
+    state.audio.muted = !state.audio.muted;
+    audioBtn.classList.toggle("active", !state.audio.muted);
+    const icon = document.getElementById("audio-icon");
+    if (icon) icon.textContent = state.audio.muted ? "🔇" : "🔊";
+    if (!state.audio.muted) state.audio.playModeClick();
+  });
+}
+
+// Pulse Plasma button
+const pulseBtn = document.getElementById("btn-pulse-warp");
+if (pulseBtn) {
+  pulseBtn.addEventListener("click", () => {
+    state.singularity?.pulse();
+    state.audio?.playLockTick();
+  });
+}
+
+// Mobile Bottom Quick-Dock Navigation
+document.querySelectorAll(".dock-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    document.querySelectorAll(".dock-item").forEach((d) => d.classList.remove("active"));
+    item.classList.add("active");
+    state.audio?.playModeClick();
+    const target = item.dataset.target;
+    if (target === "#physics" || target === "#ar") {
+      // Auto upgrade depth if navigating to deep sections
+      document.body.dataset.depth = "4";
+      document.querySelectorAll(".depth-btn").forEach((b) => {
+        b.setAttribute("aria-checked", b.dataset.depth === "4" ? "true" : "false");
+      });
+    }
+    const targetEl = document.querySelector(target);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+
 initMotion(state);
+
 state.drawPlot = () => {
   drawSkyPlot(state);
   drawCompass(state);
@@ -53,27 +105,39 @@ state.onLocation = () => {
   if (state.iss) paintLock(state);
   state.drawPlot();
   state.drawTrack();
+  state.audio?.playModeClick();
 };
 
 refreshAll();
+
+// Live Telemetry Loops
 setInterval(() => {
   if (document.hidden) return;
-  loadIss(state).then(() => { state.drawPlot(); state.drawTrack(); });
-}, 5000);
+  loadIss(state).then(() => {
+    state.drawPlot();
+    state.drawTrack();
+    if (state.look) {
+      state.singularity?.setLook(state.look.az, state.look.el);
+    }
+  });
+}, 4000);
+
 setInterval(() => {
   if (document.hidden) return;
   loadWeather(state);
   loadRadar(state);
 }, 10 * 60 * 1000);
+
 setInterval(() => {
   if (document.hidden) return;
   loadKp(state);
 }, 5 * 60 * 1000);
+
 setInterval(() => { $clock(); }, 1000);
 
 function $clock() {
   const el = document.getElementById("clock");
-  if (el) el.textContent = new Date().toISOString().replace("T", " ").slice(0, 19) + " Z";
+  if (el) el.textContent = new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC";
 }
 
-console.info("Orbital Prime motion map", listMotionListeners());
+console.info("ORBITAL PRIME // BRUTALIST MOTION MAP", listMotionListeners());

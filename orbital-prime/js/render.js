@@ -61,13 +61,13 @@ export function bindLocation(state) {
     state.obs = obs;
     $("lat").value = obs.lat.toFixed(4);
     $("lon").value = obs.lon.toFixed(4);
-    status.textContent = `${how} · ${obs.lat.toFixed(4)}° ${obs.lon.toFixed(4)}°`;
+    status.textContent = `${how} · ${obs.lat.toFixed(4)}°N ${Math.abs(obs.lon).toFixed(4)}°W`;
     localStorage.setItem("op-loc", JSON.stringify(obs));
     if (notify) state.onLocation?.();
   };
   const saved = localStorage.getItem("op-loc");
   if (saved) {
-    try { setObs(JSON.parse(saved), "Saved", false); } catch { /* keep Buffalo */ }
+    try { setObs(JSON.parse(saved), "Saved Position", false); } catch { /* keep Buffalo */ }
   }
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -77,30 +77,31 @@ export function bindLocation(state) {
       status.textContent = "Coordinates out of range. Latitude ±90, longitude ±180.";
       return;
     }
-    setObs({ lat, lon, altKm: 0.18 }, "Manual");
+    setObs({ lat, lon, altKm: 0.18 }, "Manual Fix");
   });
   $("btn-buf").addEventListener("click", () => {
     setObs({ lat: 42.8864, lon: -78.8784, altKm: 0.18 }, "Buffalo preset");
   });
   $("btn-gps").addEventListener("click", () => {
     if (!navigator.geolocation) {
-      status.textContent = "Geolocation is not in this browser. Enter coordinates or use Buffalo.";
+      status.textContent = "Geolocation unsupported in browser. Using manual coordinates.";
       return;
     }
-    status.textContent = "Requesting GPS…";
+    status.textContent = "Acquiring GPS fix…";
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setObs({
           lat: pos.coords.latitude,
           lon: pos.coords.longitude,
           altKm: (pos.coords.altitude || 180) / 1000
-        }, "GPS");
+        }, "GPS Fix");
+        state.audio?.playPassAlert();
       },
       (err) => {
         const fileish = location.protocol === "file:" || location.protocol === "content:";
         status.textContent = fileish
-          ? "Local files block GPS. Serve over HTTPS or enter coordinates. Buffalo remains set."
-          : `GPS failed (${err.message}). Buffalo remains set.`;
+          ? "Local file protocol blocks GPS. Buffalo preset active."
+          : `GPS fix failed (${err.message}). Buffalo active.`;
       },
       { enableHighAccuracy: true, timeout: 8000 }
     );
@@ -113,20 +114,30 @@ export function drawSkyPlot(state) {
   if (!canvas || (wrap && getComputedStyle(wrap).display === "none")) return;
   const { ctx, w, h } = sizeCanvas(canvas);
   ctx.clearRect(0, 0, w, h);
-  const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.42;
+  const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.43;
 
-  ctx.strokeStyle = "#2e3026";
+  // Background Grid Rings
+  ctx.strokeStyle = "rgba(0, 229, 255, 0.15)";
   ctx.lineWidth = 1;
   for (const el of [30, 60]) {
     ctx.beginPath();
     ctx.arc(cx, cy, R * (1 - el / 90), 0, Math.PI * 2);
     ctx.stroke();
   }
-  ctx.strokeStyle = "#9a9486";
+
+  // Outer Horizon Ring (Vivid Cyan Glow)
+  ctx.strokeStyle = "#00e5ff";
+  ctx.lineWidth = 1.5;
+  ctx.shadowColor = "rgba(0, 229, 255, 0.6)";
+  ctx.shadowBlur = 8;
   ctx.beginPath();
   ctx.arc(cx, cy, R, 0, Math.PI * 2);
   ctx.stroke();
-  ctx.strokeStyle = "#2e3026";
+  ctx.shadowBlur = 0;
+
+  // Crosshairs
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+  ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(cx, cy - R);
   ctx.lineTo(cx, cy + R);
@@ -134,43 +145,66 @@ export function drawSkyPlot(state) {
   ctx.lineTo(cx + R, cy);
   ctx.stroke();
 
-  ctx.fillStyle = "#6e6a5e";
-  ctx.font = "11px IBM Plex Mono, monospace";
+  // Cardinal Labels
+  ctx.fillStyle = "#00e5ff";
+  ctx.font = "bold 11px Space Mono, monospace";
   ctx.textAlign = "center";
-  ctx.fillText("N", cx, cy - R - 8);
-  ctx.fillText("S", cx, cy + R + 16);
+  ctx.fillText("N (000°)", cx, cy - R - 8);
+  ctx.fillText("S (180°)", cx, cy + R + 18);
   ctx.fillText("E", cx + R + 14, cy + 4);
   ctx.fillText("W", cx - R - 14, cy + 4);
-  ctx.fillText("30", cx + 4, cy - R * (1 - 30 / 90) + 3);
-  ctx.fillText("60", cx + 4, cy - R * (1 - 60 / 90) + 3);
+  
+  ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+  ctx.font = "9px Space Mono, monospace";
+  ctx.fillText("30°", cx + 6, cy - R * (1 - 30 / 90) + 3);
+  ctx.fillText("60°", cx + 6, cy - R * (1 - 60 / 90) + 3);
 
+  // Vivid Amber Sweep Radar Line
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sweep = reduced ? 0 : (state.sweep || 0);
-  ctx.strokeStyle = "#d4c48a";
-  ctx.globalAlpha = 0.45;
+  const sweepRad = sweep * Math.PI / 180;
+  
+  // Sweep beam gradient
+  const sweepGrad = ctx.createLinearGradient(cx, cy, cx + R * Math.sin(sweepRad), cy - R * Math.cos(sweepRad));
+  sweepGrad.addColorStop(0, "rgba(255, 170, 0, 0.9)");
+  sweepGrad.addColorStop(1, "rgba(255, 85, 0, 0.1)");
+  
+  ctx.strokeStyle = sweepGrad;
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(cx, cy);
-  ctx.lineTo(cx + R * Math.sin(sweep * Math.PI / 180), cy - R * Math.cos(sweep * Math.PI / 180));
+  ctx.lineTo(cx + R * Math.sin(sweepRad), cy - R * Math.cos(sweepRad));
   ctx.stroke();
-  ctx.globalAlpha = 1;
 
+  // Target Satellite Pip (Brutalist Diamond Reticle with Pulsing Core)
   const look = state.look;
   if (look && look.el > -5) {
     const r = R * Math.max(0, (90 - look.el) / 90);
     const a = look.az * Math.PI / 180;
     const x = cx + r * Math.sin(a);
     const y = cy - r * Math.cos(a);
-    ctx.strokeStyle = "#ff6a00";
+
+    // Outer Target Reticle
+    ctx.strokeStyle = "#ff5500";
+    ctx.lineWidth = 1.5;
+    ctx.shadowColor = "#ff5500";
+    ctx.shadowBlur = 12;
+    ctx.strokeRect(x - 6, y - 6, 12, 12);
+    
+    // Cross marks
     ctx.beginPath();
-    ctx.moveTo(x - 7, y);
-    ctx.lineTo(x + 7, y);
-    ctx.moveTo(x, y - 7);
-    ctx.lineTo(x, y + 7);
+    ctx.moveTo(x - 10, y);
+    ctx.lineTo(x + 10, y);
+    ctx.moveTo(x, y - 10);
+    ctx.lineTo(x, y + 10);
     ctx.stroke();
-    ctx.fillStyle = "#ff6a00";
+
+    // Hot Center Core
+    ctx.fillStyle = "#ffffff";
     ctx.beginPath();
     ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fill();
+    ctx.shadowBlur = 0;
   }
 }
 
@@ -182,46 +216,60 @@ export function drawCompass(state) {
   const ctx = canvas.getContext("2d");
   const w = canvas.width, h = canvas.height;
   ctx.clearRect(0, 0, w, h);
-  const cx = w / 2, cy = h / 2, R = 68;
-  ctx.strokeStyle = "#2e3026";
+  const cx = w / 2, cy = h / 2, R = 64;
+
+  // Outer Ring
+  ctx.strokeStyle = "rgba(0, 229, 255, 0.3)";
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
   ctx.arc(cx, cy, R, 0, Math.PI * 2);
   ctx.stroke();
-  for (let deg = 0; deg < 360; deg += 30) {
+
+  // Dial Ticks
+  for (let deg = 0; deg < 360; deg += 15) {
     const a = deg * Math.PI / 180;
-    const inner = deg % 90 === 0 ? R - 10 : R - 5;
+    const inner = deg % 90 === 0 ? R - 10 : deg % 45 === 0 ? R - 7 : R - 4;
+    ctx.strokeStyle = deg % 90 === 0 ? "#00e5ff" : "rgba(255, 255, 255, 0.25)";
     ctx.beginPath();
     ctx.moveTo(cx + inner * Math.sin(a), cy - inner * Math.cos(a));
     ctx.lineTo(cx + R * Math.sin(a), cy - R * Math.cos(a));
     ctx.stroke();
   }
-  ctx.fillStyle = "#6e6a5e";
-  ctx.font = "11px IBM Plex Mono, monospace";
+
+  ctx.fillStyle = "#00e5ff";
+  ctx.font = "bold 11px Space Mono, monospace";
   ctx.textAlign = "center";
   ctx.fillText("N", cx, cy - R + 18);
 
+  // Target Azimuth Vector Needle
   const target = state.look?.az ?? 0;
   state.easeCompass?.(target);
   const a = (state.compassNeedle || target) * Math.PI / 180;
-  ctx.strokeStyle = "#d4c48a";
-  ctx.lineWidth = 2;
+  
+  ctx.strokeStyle = "#ff5500";
+  ctx.lineWidth = 2.5;
+  ctx.shadowColor = "#ff5500";
+  ctx.shadowBlur = 10;
   ctx.beginPath();
   ctx.moveTo(cx, cy);
-  ctx.lineTo(cx + (R - 8) * Math.sin(a), cy - (R - 8) * Math.cos(a));
+  ctx.lineTo(cx + (R - 6) * Math.sin(a), cy - (R - 6) * Math.cos(a));
   ctx.stroke();
+  ctx.shadowBlur = 0;
 
+  // Device Physical Orientation Bearing
   if (state.heading != null) {
     const hdg = state.heading * Math.PI / 180;
-    ctx.strokeStyle = "#9a9486";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#00e5ff";
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + (R - 18) * Math.sin(hdg), cy - (R - 18) * Math.cos(hdg));
+    ctx.lineTo(cx + (R - 16) * Math.sin(hdg), cy - (R - 16) * Math.cos(hdg));
     ctx.stroke();
   }
+
   $("compass-read").textContent = state.heading != null
-    ? `Heading ${state.heading.toFixed(0)}° · FACE ${cardinal(target)}`
-    : `FACE ${cardinal(target)} · device heading unavailable`;
+    ? `HEADING ${state.heading.toFixed(0)}° // TARGET ${cardinal(target)}`
+    : `TARGET BEARING ${cardinal(target)} (${target.toFixed(0)}°)`;
 }
 
 export function drawTrack(state) {
@@ -230,9 +278,12 @@ export function drawTrack(state) {
   const wrap = canvas.closest(".d4");
   if (wrap && getComputedStyle(wrap).display === "none") return;
   const { ctx, w, h } = sizeCanvas(canvas);
-  ctx.fillStyle = "#1c1e16";
+  
+  ctx.fillStyle = "#07090e";
   ctx.fillRect(0, 0, w, h);
-  ctx.strokeStyle = "#2e3026";
+  
+  // Latitude / Longitude Grid
+  ctx.strokeStyle = "rgba(34, 45, 61, 0.8)";
   ctx.lineWidth = 1;
   for (let i = 1; i < 4; i++) {
     ctx.beginPath();
@@ -246,17 +297,24 @@ export function drawTrack(state) {
     ctx.lineTo(w * i / 6, h);
     ctx.stroke();
   }
-  ctx.fillStyle = "#6e6a5e";
-  ctx.font = "10px IBM Plex Mono, monospace";
+
+  ctx.fillStyle = "#4e5e73";
+  ctx.font = "9px Space Mono, monospace";
   ctx.textAlign = "left";
-  ctx.fillText("90N", 4, 12);
-  ctx.fillText("90S", 4, h - 6);
+  ctx.fillText("+90°", 4, 12);
+  ctx.fillText("-90°", 4, h - 6);
   ctx.textAlign = "center";
-  ctx.fillText("0", w / 2, h - 6);
+  ctx.fillText("0° (EQUATOR)", w / 2, h / 2 - 4);
+
   const proj = (lat, lon) => [(lon + 180) / 360 * w, (90 - lat) / 180 * h];
   const pts = state.track || [];
+  
+  // SGP4 Ground Track Sine Trajectory
   if (pts.length > 1) {
-    ctx.strokeStyle = "#d4c48a";
+    ctx.strokeStyle = "#00e5ff";
+    ctx.lineWidth = 2;
+    ctx.shadowColor = "#00e5ff";
+    ctx.shadowBlur = 8;
     ctx.beginPath();
     pts.forEach((p, i) => {
       const [x, y] = proj(p.lat, p.lon);
@@ -265,20 +323,27 @@ export function drawTrack(state) {
       else ctx.moveTo(x, y);
     });
     ctx.stroke();
+    ctx.shadowBlur = 0;
   }
+
+  // ISS Sub-Satellite Point
   if (state.iss) {
     const [x, y] = proj(state.iss.latitude, state.iss.longitude);
-    ctx.fillStyle = "#ff6a00";
-    ctx.beginPath();
-    ctx.arc(x, y, 4, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  if (state.obs) {
-    const [x, y] = proj(state.obs.lat, state.obs.lon);
-    ctx.strokeStyle = "#e6e1d4";
+    ctx.fillStyle = "#ff5500";
+    ctx.shadowColor = "#ff5500";
+    ctx.shadowBlur = 12;
     ctx.beginPath();
     ctx.arc(x, y, 5, 0, Math.PI * 2);
-    ctx.stroke();
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  // Observer Location Marker
+  if (state.obs) {
+    const [x, y] = proj(state.obs.lat, state.obs.lon);
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(x - 4, y - 4, 8, 8);
   }
 }
 
@@ -297,9 +362,9 @@ export function paintLock(state) {
   if (!iss) return;
   $("iss-lat").textContent = iss.latitude.toFixed(4) + "°";
   $("iss-lon").textContent = iss.longitude.toFixed(4) + "°";
-  $("iss-alt").textContent = iss.altitude.toFixed(1) + " km";
-  $("iss-vel").textContent = iss.velocity.toFixed(0) + " km/h";
-  $("iss-vis").textContent = iss.visibility;
+  $("iss-alt").textContent = iss.altitude.toFixed(1) + " KM";
+  $("iss-vel").textContent = iss.velocity.toFixed(0) + " KM/H";
+  $("iss-vis").textContent = (iss.visibility || "").toUpperCase();
   $("iss-ts").textContent = new Date(iss.timestamp * 1000).toISOString();
 
   const look = lookAngles(state.obs, { lat: iss.latitude, lon: iss.longitude, altKm: iss.altitude });
@@ -315,9 +380,10 @@ export function paintLock(state) {
   }
   const label = eyeLabel({ el: look.el, eclipsed, sunAlt });
   state.look = { ...look, mag, label, eclipsed };
+  
   setNum($("az"), look.az.toFixed(1) + "°");
   setNum($("el"), look.el.toFixed(1) + "°");
-  setNum($("range"), look.range.toFixed(0) + " km");
+  setNum($("range"), look.range.toFixed(0) + " KM");
   setNum($("mag"), mag == null ? "—" : mag.toFixed(1) + " EST");
   $("face").textContent = faceCopy({ az: look.az, el: look.el, range: look.range, label });
 }
@@ -325,8 +391,8 @@ export function paintLock(state) {
 export function paintWeather(state) {
   const wx = state.wx;
   if (!wx) {
-    $("gate-word").textContent = "UNREAD";
-    $("gate-why").textContent = state.wxError || "Weather not yet read.";
+    $("gate-word").textContent = "SCANNING";
+    $("gate-why").textContent = state.wxError || "Awaiting atmospheric data.";
     $("gate").dataset.class = "unknown";
     return;
   }
@@ -335,6 +401,7 @@ export function paintWeather(state) {
   $("gate").dataset.class = gate.cls;
   $("gate-word").textContent = gate.cls.toUpperCase();
   $("gate-why").textContent = gate.why;
+  
   const hours = wx.hourly;
   const list = $("hourly-list");
   list.innerHTML = "";
@@ -365,7 +432,7 @@ function fillPassTable(tbody, upcoming, hourly) {
     const tr = document.createElement("tr");
     const eyeClass = p.eye === "NAKED-EYE" ? "eye-naked" : p.eye === "DAY" ? "eye-day" : "eye-ecl";
     tr.innerHTML = `
-      <td>${p.aos <= Date.now() && p.los > Date.now() ? "in view" : fmtTime(p.aos)}</td>
+      <td>${p.aos <= Date.now() && p.los > Date.now() ? "IN VIEW NOW" : fmtTime(p.aos)}</td>
       <td>${fmtTime(p.maxT)}</td>
       <td>${fmtTime(p.los)}</td>
       <td>${p.maxEl.toFixed(0)}°</td>
@@ -381,36 +448,41 @@ export function paintPasses(state) {
   const nextWhen = $("next-when");
   const nextMeta = $("next-meta");
   const note = $("manifest-note");
+  
   if (state.tleError) {
-    const msg = `<tr><td colspan="6">TLE failed: ${state.tleError}</td></tr>`;
+    const msg = `<tr><td colspan="6">TLE Sync Error: ${state.tleError}</td></tr>`;
     body.innerHTML = msg;
     if (manifest) manifest.innerHTML = msg;
-    nextWhen.textContent = "—";
-    nextMeta.textContent = "Celestrak GP blocked or empty. ISS live lock still uses Where The ISS At.";
+    nextWhen.textContent = "OFFLINE";
+    nextMeta.textContent = "Direct ISS position still live via WhereTheISS.";
     note.textContent = state.tleError;
     return;
   }
+  
   const passes = state.passes || [];
   if (!passes.length) {
-    const msg = `<tr><td colspan="6">No 10° passes in the next 36 hours from this location.</td></tr>`;
+    const msg = `<tr><td colspan="6">Zero 10° elevation passes in the next 36 hours for this position.</td></tr>`;
     body.innerHTML = msg;
     if (manifest) manifest.innerHTML = msg;
-    nextWhen.textContent = "None in 36 h";
-    nextMeta.textContent = "SGP4 run complete.";
-    note.textContent = "No 10° passes in the next 36 hours.";
+    nextWhen.textContent = "NONE (36H)";
+    nextMeta.textContent = "SGP4 search complete.";
+    note.textContent = "No passes &gt;10° elevation in 36h.";
     return;
   }
+  
   const upcoming = passes.filter((p) => p.los > Date.now());
   const n = upcoming[0] || passes[0];
   const now = Date.now();
   const inView = n.aos <= now && n.los > now;
   const imminent = !inView && n.aos - now < 10 * 60 * 1000 && n.aos > now;
+  
   $("next-pass").classList.toggle("is-imminent", imminent || inView);
-  nextWhen.textContent = inView ? "IN VIEW" : imminent ? "IMMINENT" : fmtTime(n.aos);
-  nextMeta.textContent = `${n.eye} · max el ${n.maxEl.toFixed(0)}°`;
+  nextWhen.textContent = inView ? "IN VIEW NOW" : imminent ? "IMMINENT" : fmtTime(n.aos);
+  nextMeta.textContent = `${n.eye} · PEAK EL ${n.maxEl.toFixed(0)}°`;
+  
   fillPassTable(body, upcoming.slice(0, 12), state.wx?.hourly);
   fillPassTable(manifest, upcoming.slice(0, 12), state.wx?.hourly);
-  note.textContent = `${upcoming.length} passes from Celestrak GP + SGP4. Weather class from Open-Meteo hourly at max-el hour.`;
+  note.textContent = `${upcoming.length} passes computed via Celestrak NORAD GP + SGP4.`;
 }
 
 export function paintRadar(state) {
@@ -418,28 +490,30 @@ export function paintRadar(state) {
   const empty = $("radar-empty");
   const cap = $("radar-cap");
   const well = $("radar-well");
+  
   if (state.radarError || !state.radarUrl) {
     img.hidden = true;
     empty.hidden = false;
-    empty.textContent = state.radarError || "RainViewer returned no frames.";
+    empty.textContent = state.radarError || "RainViewer radar tiles unavailable.";
     well.classList.remove("has-tile");
-    if (cap) cap.textContent = "Radar unread";
+    if (cap) cap.textContent = "Radar Offline";
     return;
   }
+  
   empty.hidden = true;
   img.hidden = false;
   img.src = state.radarUrl;
   well.classList.add("has-tile");
   if (cap) {
-    const when = state.radarTime ? new Date(state.radarTime * 1000).toISOString().slice(11, 16) + " Z" : "—";
-    cap.textContent = `RainViewer · ${when} · observer at tile center`;
+    const when = state.radarTime ? new Date(state.radarTime * 1000).toISOString().slice(11, 16) + " UTC" : "—";
+    cap.textContent = `RainViewer Doppler Array · ${when} · Observer Center Reticle`;
   }
 }
 
 export function paintKp(state) {
   if (state.kp == null) {
     $("kp").textContent = "—";
-    $("kp-src").textContent = state.kpError || "SWPC unread.";
+    $("kp-src").textContent = state.kpError || "SWPC offline.";
     return;
   }
   $("kp").textContent = String(state.kp);
@@ -450,11 +524,11 @@ export function paintStarship(state) {
   const el = $("starship-status");
   const ro = $("starship-readout");
   if (state.starshipError) {
-    el.textContent = `Catalog query failed: ${state.starshipError}`;
+    el.textContent = `Catalog query: ${state.starshipError}`;
     return;
   }
   if (!state.starship) {
-    el.textContent = "No Starship elements in the current Celestrak GP catalog. Slot empty. No substitute constellation.";
+    el.textContent = "No Starship elements currently in Celestrak GP repository. Slot empty. Zero artificial constellation bloat.";
     ro.hidden = true;
     return;
   }
@@ -468,15 +542,15 @@ export function paintStarship(state) {
       const look = sgp4Look(rec, state.obs, new Date());
       if (look) {
         lookHtml = `
-    <div><dt>Look az</dt><dd>${look.az.toFixed(1)}°</dd></div>
-    <div><dt>Look el</dt><dd>${look.el.toFixed(1)}°</dd></div>`;
+    <div><dt>Look AZ</dt><dd>${look.az.toFixed(1)}°</dd></div>
+    <div><dt>Look EL</dt><dd>${look.el.toFixed(1)}°</dd></div>`;
       }
     }
-  } catch { /* catalog fields only */ }
+  } catch {}
   ro.innerHTML = `
     <div><dt>Epoch</dt><dd>${state.starship.EPOCH}</dd></div>
     <div><dt>Inclination</dt><dd>${state.starship.INCLINATION}°</dd></div>
-    <div><dt>Mean motion</dt><dd>${state.starship.MEAN_MOTION}</dd></div>${lookHtml}`;
+    <div><dt>Mean Motion</dt><dd>${state.starship.MEAN_MOTION}</dd></div>${lookHtml}`;
 }
 
 export async function loadIss(state) {
@@ -484,16 +558,23 @@ export async function loadIss(state) {
     state.iss = await fetchJson("https://api.wheretheiss.at/v1/satellites/25544");
     state.issError = null;
     paintLock(state);
+    state.audio?.playLockTick();
   } catch (e) {
     state.issError = e.message;
-    $("face").textContent = `FACE — ISS feed failed (${e.message}).`;
+    $("face").textContent = `FACE — ISS telemetry link offline (${e.message}).`;
   }
 }
 
 export async function loadTle(state) {
   try {
     await waitForSatellite();
-    const text = await fetchText("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle");
+    let text;
+    try {
+      text = await fetchText("https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle", 6000);
+    } catch {
+      // Direct secondary fallback to celestrak mirror
+      text = await fetchText("https://celestrak.com/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle", 6000);
+    }
     const tle = parseTle(text);
     state.satrec = window.satellite.twoline2satrec(tle.l1, tle.l2);
     state.tleError = null;
@@ -503,7 +584,7 @@ export async function loadTle(state) {
     if (state.wx) paintWeather(state);
     state.drawTrack?.();
   } catch (e) {
-    state.tleError = `Celestrak GP CORS or network: ${e.message}`;
+    state.tleError = `Celestrak GP link: ${e.message}`;
     paintPasses(state);
   }
 }
@@ -598,18 +679,20 @@ export function bindAr(state) {
   const video = $("ar-video");
   const hud = $("ar-hud");
   let raf = 0;
+  
   $("btn-ar").addEventListener("click", async () => {
+    state.audio?.playModeClick();
     const proto = location.protocol;
     if (proto === "file:" || proto === "content:") {
-      msg.textContent = "Camera is not available on content:// or file://. FACE remains the source of truth. Serve over HTTPS.";
+      msg.textContent = "Camera stream requires HTTPS. FACE bearing remains authoritative.";
       return;
     }
     if (!navigator.mediaDevices?.getUserMedia) {
-      msg.textContent = "This browser has no camera API. FACE remains the source of truth.";
+      msg.textContent = "Camera API unavailable in this environment. FACE line authoritative.";
       return;
     }
     if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
-      try { await DeviceOrientationEvent.requestPermission(); } catch { /* still try camera */ }
+      try { await DeviceOrientationEvent.requestPermission(); } catch {}
     }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -618,19 +701,20 @@ export function bindAr(state) {
       });
       video.srcObject = stream;
       await video.play();
-      msg.textContent = "HUD live. FACE line is still authoritative if compass variance is large.";
+      msg.textContent = "OPTICAL HUD ENGAGED // HARDWARE SENSOR SYNC ACTIVE";
       state.arOn = true;
+      state.audio?.playPassAlert();
       if (!raf) raf = requestAnimationFrame(drawHud);
     } catch (e) {
-      msg.textContent = `Camera denied or failed (${e.message}). HUD-only: use FACE.`;
+      msg.textContent = `Camera permission denied (${e.message}). Reverting to HUD readout.`;
     }
   });
 
   const project = (look, heading, w, h) => {
     const daz = ((look.az - heading + 540) % 360) - 180;
     return {
-      x: Math.max(12, Math.min(w - 12, w / 2 + (daz / 30) * (w / 2))),
-      y: Math.max(12, Math.min(h - 12, h * 0.75 - (look.el / 90) * (h * 0.55)))
+      x: Math.max(14, Math.min(w - 14, w / 2 + (daz / 30) * (w / 2))),
+      y: Math.max(14, Math.min(h - 14, h * 0.75 - (look.el / 90) * (h * 0.55)))
     };
   };
 
@@ -652,12 +736,17 @@ export function bindAr(state) {
     const ctx = hud.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
+    
     const look = state.look;
     if (!look) return;
     const heading = state.heading ?? look.az;
+    
+    // Trajectory Polyline
     if (state.satrec && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      ctx.strokeStyle = "#e6e1d4";
-      ctx.globalAlpha = 0.7;
+      ctx.strokeStyle = "#00e5ff";
+      ctx.lineWidth = 2;
+      ctx.shadowColor = "#00e5ff";
+      ctx.shadowBlur = 8;
       ctx.beginPath();
       for (let i = 0; i <= 8; i++) {
         const s = sgp4Look(state.satrec, state.obs, new Date(Date.now() + i * 30 * 1000));
@@ -667,17 +756,22 @@ export function bindAr(state) {
         else ctx.lineTo(p.x, p.y);
       }
       ctx.stroke();
-      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
     }
+    
+    // Target Reticle
     const p = project(look, heading, w, h);
-    ctx.strokeStyle = "#ff6a00";
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "#ff5500";
+    ctx.lineWidth = 2;
+    ctx.shadowColor = "#ff5500";
+    ctx.shadowBlur = 12;
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, 16, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.fillStyle = "#e6e1d4";
-    ctx.font = "12px IBM Plex Mono, monospace";
-    ctx.fillText(`EL ${look.el.toFixed(0)}°  ΔAZ ${(((look.az - heading + 540) % 360) - 180).toFixed(0)}°`, 12, 20);
+    
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 12px Space Mono, monospace";
+    ctx.fillText(`EL ${look.el.toFixed(0)}°  ΔAZ ${(((look.az - heading + 540) % 360) - 180).toFixed(0)}°`, 12, 22);
   };
 }
 

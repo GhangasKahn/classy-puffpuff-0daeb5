@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#070806" />
-  <meta name="description" content="Orbital Prime — a field instrument for ISS look angles, naked-eye passes, and weather-gated go/no-go. No accounts. Public data only." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#020305" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Orbital Prime — a raw brutalist field instrument for ISS look angles, naked-eye passes, relativistic physics, and weather-gated go/no-go. Public telemetry only." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="/orbital-prime/" />
-  <meta property="og:title" content="Orbital Prime" />
-  <meta property="og:description" content="The instrument between you and the sky. ISS lock, FACE bearing, weather gate." />
+  <meta property="og:title" content="ORBITAL PRIME // SINGULARITY HMI" />
+  <meta property="og:description" content="Raw brutalist mission instrument between you and the sky. Real-time ISS telemetry, SGP4 orbital passes, and relativistic event-horizon visualizer." />
   <meta property="og:type" content="website" />
-  <title>Orbital Prime — Night Sky Instrument</title>
+  <title>ORBITAL PRIME — Raw Brutalist Space Instrument</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://api.wheretheiss.at" crossorigin />
   <link rel="dns-prefetch" href="https://celestrak.org" />
@@ -18,257 +20,305 @@
   <link rel="dns-prefetch" href="https://api.rainviewer.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/orbital.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Orbital Prime",
-    "applicationCategory": "EducationalApplication",
+    "applicationCategory": "AstronomyApplication",
     "operatingSystem": "Any",
-    "description": "Field instrument for ISS look angles, SGP4 naked-eye passes, and weather-gated observation decisions. Public data only.",
+    "description": "Brutalist space instrument for ISS look angles, SGP4 naked-eye passes, and weather-gated observation decisions. Public telemetry only.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
 </head>
 <body data-depth="2">
-  <a class="skip" href="#cluster">Skip to Night Sky cluster</a>
+  <!-- Interactive Singularity / Relativistic Accretion Fluid Background Canvas -->
+  <div id="hero-canvas-wrap" aria-hidden="true">
+    <canvas id="singularity-canvas"></canvas>
+  </div>
 
+  <a class="skip" href="#cluster">Skip to Telemetry Cluster</a>
+
+  <!-- Top Brutalist App Header -->
   <header class="mast">
     <div class="mast-brand">
       <span class="mast-mark" aria-hidden="true"></span>
       <a class="mast-name" href="#top">Orbital Prime</a>
+      <span class="mast-tag">v3.0 RAW</span>
     </div>
+
     <div class="loc-rail">
       <form id="loc-form" class="loc-form" autocomplete="off">
-        <p class="loc-status" id="loc-status">Buffalo preset · 42.8864°N 78.8784°W</p>
+        <div class="loc-status">
+          <span id="loc-status">Buffalo preset · 42.8864°N 78.8784°W</span>
+          <button type="button" class="audio-toggle" id="btn-audio" title="Toggle audio synthesizer">
+            <span id="audio-icon">🔊</span> AUDIO
+          </button>
+        </div>
         <div class="loc-row">
           <label class="sr-only" for="lat">Latitude</label>
           <input id="lat" name="lat" inputmode="decimal" value="42.8864" required />
           <label class="sr-only" for="lon">Longitude</label>
           <input id="lon" name="lon" inputmode="decimal" value="-78.8784" required />
-          <button type="submit" class="btn">Set</button>
-          <button type="button" class="btn" id="btn-gps">GPS</button>
+          <button type="submit" class="btn primary">Set Coordinates</button>
+          <button type="button" class="btn" id="btn-gps">GPS Fix</button>
           <button type="button" class="btn" id="btn-buf">Buffalo</button>
         </div>
       </form>
     </div>
-    <div class="depth" role="radiogroup" aria-label="Density">
-      <span class="depth-label">Depth</span>
-      <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="1">1</button>
-      <button type="button" class="depth-btn" role="radio" aria-checked="true" data-depth="2">2</button>
-      <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="3">3</button>
-      <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="4">4</button>
+
+    <!-- Depth Matrix Selector -->
+    <div class="depth" role="radiogroup" aria-label="Telemetry Density Matrix">
+      <span class="depth-label">DEPTH</span>
+      <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="1" title="Depth 1: Signal Only">1</button>
+      <button type="button" class="depth-btn" role="radio" aria-checked="true" data-depth="2" title="Depth 2: Measure Mode">2</button>
+      <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="3" title="Depth 3: Decide Engine">3</button>
+      <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="4" title="Depth 4: Full Relativistic Matrix">4</button>
     </div>
   </header>
 
   <div id="depth-toast" class="depth-toast" role="status" aria-live="polite" hidden>Depth 2 — Measure</div>
 
   <main id="top">
+    <!-- Hero Technical Instrument Display -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-plate" data-motion="M01">
-        <p class="stamp">Night Sky · ISS 25544</p>
-        <h1 id="hero-title" class="hero-title">Orbital <br />Prime</h1>
+        <div class="hero-badge">● LIVE ORBITAL RECON // ISS 25544</div>
+        <h1 id="hero-title" class="hero-title">Orbital<br />Prime</h1>
         <div class="horizon" aria-hidden="true"><i></i></div>
-        <p class="hero-lede">The instrument between you and the sky. Lock the station. Face the bearing. Decide go or no-go.</p>
-        <a class="jump" href="#cluster">Open the cluster</a>
+        <p class="hero-lede">The raw computational instrument between you and the cosmos. Lock satellite telemetry, compute vectors, and witness celestial mechanics in real time.</p>
+        <div class="hero-actions">
+          <a class="jump" href="#cluster">▸ ENGAGE CLUSTER TELEMETRY</a>
+          <button type="button" class="btn" id="btn-pulse-warp">WARP PLASMA</button>
+        </div>
       </div>
     </section>
 
+    <!-- Core Night Sky Mission Cluster -->
     <section id="cluster" class="cluster" aria-labelledby="cluster-title">
       <div class="plate">
         <header class="plate-head">
-          <h2 id="cluster-title" class="stamp">Night Sky cluster</h2>
-          <p class="stamp dim" id="clock">—</p>
+          <h2 id="cluster-title" class="stamp orange">Mission Cluster // Target ISS (ZARYA)</h2>
+          <p class="stamp dim" id="clock">UTC TIMESTAMP —</p>
         </header>
 
         <div class="cluster-grid">
+          <!-- Command Column: Gate, Next Pass, Spoken FACE Bearing -->
           <div class="command">
             <div class="command-rail">
               <div class="gate" id="gate" data-class="unknown" data-motion="M08">
-                <span class="stamp">Gate</span>
-                <strong id="gate-word">LOADING</strong>
-                <p id="gate-why" class="note">Weather not yet read.</p>
+                <span class="stamp">Observation Gate</span>
+                <strong id="gate-word">SCANNING</strong>
+                <p id="gate-why" class="note">Sampling atmospheric vectors…</p>
               </div>
+
               <div class="next" id="next-pass" data-motion="M09">
-                <span class="stamp">Next</span>
-                <strong id="next-when">—</strong>
-                <p id="next-meta" class="note">Passes require TLE.</p>
+                <span class="stamp">Next Window</span>
+                <strong id="next-when">COMPUTING…</strong>
+                <p id="next-meta" class="note">Awaiting SGP4 orbital propagation.</p>
               </div>
             </div>
 
-            <p class="face" id="face" data-motion="M12" aria-live="polite">
-              FACE — waiting for ISS lock.
-            </p>
+            <div class="face-box">
+              <p class="face" id="face" data-motion="M12" aria-live="polite">
+                FACE — Synchronizing orbital tracking telemetry…
+              </p>
+            </div>
 
             <div class="gauges d2">
               <div class="well dual">
                 <div>
-                  <span class="stamp">Azimuth</span>
+                  <span class="stamp">Azimuth (AZ)</span>
                   <span class="num" id="az" data-motion="M06">—</span>
                 </div>
                 <div>
-                  <span class="stamp">Elevation</span>
+                  <span class="stamp">Elevation (EL)</span>
                   <span class="num" id="el" data-motion="M06">—</span>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Central Sky Plot Radar Screen -->
           <div class="plot-wrap d2">
             <div class="plot-frame">
-              <canvas id="sky-plot" aria-label="Sky plot, zenith center, horizon ring"></canvas>
+              <canvas id="sky-plot" aria-label="Alt-Azimuth Sky Plot with Horizon Ring and Zenith Center"></canvas>
             </div>
-            <p class="stamp plot-cap">Sky plot · alt-az · zenith center</p>
+            <p class="stamp plot-cap">Alt-Azimuth Local Sky Dome · Zenith Center · Real-Time Sweep</p>
           </div>
 
+          <!-- Secondary Instrument Telemetry Well -->
           <div class="secondary">
             <div class="gauges d2">
               <div class="well dual">
                 <div>
-                  <span class="stamp">Range</span>
+                  <span class="stamp">Slant Range</span>
                   <span class="num sm" id="range" data-motion="M06">—</span>
                 </div>
                 <div>
-                  <span class="stamp">Mag est.</span>
+                  <span class="stamp">Visual Mag (EST)</span>
                   <span class="num sm" id="mag" data-motion="M06">—</span>
                 </div>
               </div>
             </div>
+
             <div class="compass-wrap d3">
-              <canvas id="compass" width="160" height="160" aria-label="Compass needle toward FACE azimuth"></canvas>
-              <p class="stamp" id="compass-read">Heading —</p>
+              <canvas id="compass" width="160" height="160" aria-label="Target Vector Compass Needle"></canvas>
+              <p class="stamp" id="compass-read">Target Bearing —</p>
             </div>
+
             <div class="kp d4">
-              <span class="stamp">Kp</span>
+              <span class="stamp">NOAA Planetary Kp Index</span>
               <span class="num sm" id="kp">—</span>
-              <p class="note" id="kp-src">SWPC planetary K-index</p>
+              <p class="note" id="kp-src">Real-time geomagnetic activity feed</p>
             </div>
           </div>
         </div>
 
+        <!-- Hourly Atmospheric Forecast Strip (Depth 3+) -->
         <div class="hourly d3" id="hourly">
-          <h3 class="stamp">Hourly cross-check</h3>
+          <h3 class="stamp">Atmospheric Window Cross-Check (12H)</h3>
           <ol id="hourly-list" class="hour-list"></ol>
-          <p class="note" id="hourly-empty">Hourly weather not yet read.</p>
+          <p class="note" id="hourly-empty">Awaiting Open-Meteo atmospheric telemetry…</p>
         </div>
 
+        <!-- Pass Schedule Matrix (Depth 3+) -->
         <div class="passes d3">
-          <h3 class="stamp">Pass list · 36 h</h3>
+          <h3 class="stamp">Upcoming 36-Hour SGP4 Pass Matrix</h3>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>AOS</th>
-                  <th>Max</th>
-                  <th>LOS</th>
-                  <th>El</th>
-                  <th>Eye</th>
-                  <th>Wx</th>
+                  <th>AOS (Rise)</th>
+                  <th>Culmination</th>
+                  <th>LOS (Set)</th>
+                  <th>Peak El</th>
+                  <th>Visual Class</th>
+                  <th>Cloud Gate</th>
                 </tr>
               </thead>
               <tbody id="pass-body">
-                <tr><td colspan="6">Waiting for TLE…</td></tr>
+                <tr><td colspan="6">Computing SGP4 orbital intersections…</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
+        <!-- RainViewer Radar Screen (Depth 3+) -->
         <div class="radar d3">
-          <h3 class="stamp">RainViewer radar</h3>
+          <h3 class="stamp">RainViewer Precipitation Radar Array</h3>
           <div class="radar-well" id="radar-well">
-            <p class="note" id="radar-empty">Radar not yet read.</p>
-            <img id="radar-img" alt="Latest RainViewer radar tile at observer location" hidden />
+            <p class="note" id="radar-empty">Awaiting RainViewer satellite composites…</p>
+            <img id="radar-img" alt="Latest RainViewer radar tile centered at observer coordinates" hidden />
             <span class="radar-cross" aria-hidden="true"></span>
           </div>
-          <p class="stamp plot-cap" id="radar-cap">Radar unread</p>
+          <p class="stamp plot-cap" id="radar-cap">Radar Scanning</p>
         </div>
 
+        <!-- Ground Track Orbital Projection (Depth 4) -->
         <div class="track d4">
-          <h3 class="stamp">Ground track</h3>
+          <h3 class="stamp">Single-Orbit Ground Track Projection (WGS-84)</h3>
           <div class="track-frame">
-            <canvas id="ground-track" aria-label="ISS ground track, one orbit"></canvas>
+            <canvas id="ground-track" aria-label="ISS Sub-satellite Ground Track Projection"></canvas>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Deep Technical Surfaces (Depth 4) -->
     <section id="physics" class="surface d4" aria-labelledby="physics-title" data-motion="M02">
-      <p class="stamp">Physics</p>
-      <h2 id="physics-title" class="sec-title">What the plate actually computes</h2>
+      <p class="stamp orange">Relativistic Mechanics</p>
+      <h2 id="physics-title" class="sec-title">Astrodynamics & Coordinate Transforms</h2>
       <div class="prose">
-        <p>Look angles from observer and ISS geodetic positions, WGS-84 ellipsoid. East / north / up from the ECEF difference vector. Azimuth is <span class="data">atan2(E, N)</span>, elevation <span class="data">atan2(U, √(E²+N²))</span>, range the vector magnitude.</p>
-        <p>Passes from Celestrak GP TLE + satellite.js SGP4, sampled every 30 s for 36 h. AOS / LOS at 10° elevation. Naked-eye requires elevation ≥ 10°, observer sun altitude &lt; −6°, and the station outside Earth’s cylindrical umbra.</p>
-        <p>Magnitude is an estimate: <span class="data">−1.8 + 5 log₁₀(range / 1000 km)</span> plus a phase term from the sun–station–observer angle. Labeled EST. Not a photometric measurement.</p>
-        <p>Fist rule on FACE: one fist at arm’s length ≈ 10°. Field orientation, not a survey.</p>
+        <p>Look angles are computed in real time from geodetic observer and sub-satellite coordinates on the WGS-84 reference ellipsoid. Topocentric East, North, Up (ENU) frame vectors are extracted from Earth-Centered Earth-Fixed (ECEF) deltas. Azimuth is derived via <span class="data">atan2(E, N)</span>, elevation via <span class="data">atan2(U, √(E²+N²))</span>, and Euclidean range from vector norm.</p>
+        <p>Pass predictions execute client-side through <span class="data">satellite.js</span> SGP4 propagation against Celestrak General Perturbations TLE sets, evaluated at 30-second steps over 36 hours. Naked-eye passes require topocentric elevation ≥ 10°, solar depression angle &lt; −6° (nautical twilight or darker), and an illuminated satellite state outside Earth's umbral shadow cylinder.</p>
+        <p>Photometric visual magnitude estimation follows: <span class="data">−1.8 + 5 log₁₀(Range / 1000 km) + Φ(phase)</span> accounting for station-sun-observer scattering angles.</p>
       </div>
     </section>
 
     <section id="starship" class="surface d4" aria-labelledby="starship-title" data-motion="M02">
-      <p class="stamp">Starship</p>
-      <h2 id="starship-title" class="sec-title">Catalog slot — not a new program</h2>
+      <p class="stamp">Catalog Slot // SGP4 Engine</p>
+      <h2 id="starship-title" class="sec-title">Starship Flight Telemetry Slot</h2>
       <div class="prose">
-        <p id="starship-status">Querying Celestrak GP for NAME=STARSHIP…</p>
-        <p>If elements exist, the same SGP4 path can compute look angles. If the catalog is empty, that is the state — no invented launch, no substitute constellation.</p>
+        <p id="starship-status">Querying Celestrak GP repository for NAME=STARSHIP…</p>
+        <p>When orbital test ephemerides are published by NORAD/Celestrak, the SGP4 engine automatically computes local topocentric intercepts without proprietary third-party proxies.</p>
         <dl class="readout" id="starship-readout" hidden></dl>
       </div>
     </section>
 
     <section id="live" class="surface d4" aria-labelledby="live-title" data-motion="M02">
-      <p class="stamp">Live</p>
-      <h2 id="live-title" class="sec-title">ISS 25544 as reported</h2>
+      <p class="stamp">Raw Telemetry Stream</p>
+      <h2 id="live-title" class="sec-title">ISS 25544 Ephemeris Ingest</h2>
       <dl class="readout">
-        <div><dt>Latitude</dt><dd id="iss-lat">—</dd></div>
-        <div><dt>Longitude</dt><dd id="iss-lon">—</dd></div>
-        <div><dt>Altitude</dt><dd id="iss-alt">—</dd></div>
-        <div><dt>Velocity</dt><dd id="iss-vel">—</dd></div>
-        <div><dt>Visibility field</dt><dd id="iss-vis">—</dd></div>
-        <div><dt>Timestamp</dt><dd id="iss-ts">—</dd></div>
+        <div><dt>Sub-Satellite Latitude</dt><dd id="iss-lat">—</dd></div>
+        <div><dt>Sub-Satellite Longitude</dt><dd id="iss-lon">—</dd></div>
+        <div><dt>Orbital Altitude</dt><dd id="iss-alt">—</dd></div>
+        <div><dt>Orbital Velocity</dt><dd id="iss-vel">—</dd></div>
+        <div><dt>Illumination State</dt><dd id="iss-vis">—</dd></div>
+        <div><dt>Ephemeris Epoch</dt><dd id="iss-ts">—</dd></div>
       </dl>
-      <p class="note">Source: api.wheretheiss.at/v1/satellites/25544. Visibility is their field, not ours.</p>
+      <p class="note">Ingested via api.wheretheiss.at/v1/satellites/25544 (Direct CORS stream).</p>
     </section>
 
     <section id="manifest" class="surface d4" aria-labelledby="manifest-title" data-motion="M02">
-      <p class="stamp">Manifest</p>
-      <h2 id="manifest-title" class="sec-title">The same passes, written out</h2>
-      <p class="prose">The cluster list is the working set. This plate is the same 36-hour SGP4 run with sources named. Nothing is added.</p>
+      <p class="stamp">Audit Trail</p>
+      <h2 id="manifest-title" class="sec-title">Verifiable Pass Manifest</h2>
+      <p class="prose">Complete local propagation record. All timestamps match the cluster mission deck.</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>AOS</th>
-              <th>Max</th>
-              <th>LOS</th>
-              <th>El</th>
-              <th>Eye</th>
-              <th>Wx</th>
+              <th>AOS (Rise)</th>
+              <th>Culmination</th>
+              <th>LOS (Set)</th>
+              <th>Peak El</th>
+              <th>Visual Class</th>
+              <th>Cloud Gate</th>
             </tr>
           </thead>
           <tbody id="manifest-body">
-            <tr><td colspan="6">Waiting for TLE…</td></tr>
+            <tr><td colspan="6">Awaiting TLE propagation…</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note" id="manifest-note">Waiting for TLE…</p>
+      <p class="note" id="manifest-note">Awaiting SGP4 calculation…</p>
     </section>
 
     <section id="ar" class="surface d4" aria-labelledby="ar-title" data-motion="M02">
-      <p class="stamp">AR HUD</p>
-      <h2 id="ar-title" class="sec-title">Glass when the camera is honest</h2>
-      <p class="prose">HTTPS + a rear camera can carry the FACE bearing onto the sky. <code>content://</code> and <code>file://</code> cannot. The FACE line remains the source of truth either way.</p>
-      <p class="note" id="ar-msg">Camera idle. Start only if you want the HUD.</p>
-      <button type="button" class="btn" id="btn-ar">Start camera HUD</button>
-      <div class="ar-well">
+      <p class="stamp orange">Augmented Reality HUD</p>
+      <h2 id="ar-title" class="sec-title">Optical Sky Target Finder</h2>
+      <p class="prose">Engage camera stream with hardware gyroscope vector projection overlay. Displays real-time trajectory vector on the physical sky dome.</p>
+      <p class="note" id="ar-msg">Camera standby. Press to initialize optical HUD overlay.</p>
+      <button type="button" class="btn primary" id="btn-ar">Initialize Optical HUD</button>
+      <div class="ar-well" style="margin-top: 14px;">
         <video id="ar-video" playsinline muted></video>
         <canvas id="ar-hud" aria-hidden="true"></canvas>
       </div>
     </section>
   </main>
 
+  <!-- Mobile Bottom Quick-Dock for Native App Feel -->
+  <nav class="bottom-dock" aria-label="Mobile Navigation Dock">
+    <button type="button" class="dock-item active" data-target="#top">
+      <i>⚡</i><span>MISSION</span>
+    </button>
+    <button type="button" class="dock-item" data-target="#cluster">
+      <i>🎯</i><span>RADAR</span>
+    </button>
+    <button type="button" class="dock-item" data-target="#physics">
+      <i>🪐</i><span>PHYSICS</span>
+    </button>
+    <button type="button" class="dock-item" data-target="#ar">
+      <i>👓</i><span>AR HUD</span>
+    </button>
+  </nav>
+
   <footer class="colophon">
-    <p>Orbital Prime is a field instrument, not a social product. Public connectors only. No accounts. No invented counts.</p>
-    <p class="note">Sources: Where The ISS At · Celestrak GP · Open-Meteo · RainViewer · NOAA SWPC K-index. Motion inventory: 12.</p>
+    <p><strong>ORBITAL PRIME // SOVEREIGN MISSION SUITE</strong>. Pure client-side relativistic space observation console. No tracking, zero accounts, zero commercial telemetry.</p>
+    <p class="note">Open Ephemerides: NASA / WhereTheISS / Celestrak NORAD GP / Open-Meteo / RainViewer / NOAA SWPC.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/satellite.js@5.0.0/dist/satellite.min.js" defer></script>
