@@ -208,6 +208,127 @@ export function drawSkyPlot(state) {
   }
 }
 
+/* AMG-cluster style arc gauge: 270° sweep, tick ring, eased needle, digital core */
+function drawArcGauge(canvas, cfg) {
+  const parent = canvas.parentElement;
+  const w = Math.max(1, parent.clientWidth);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const bw = Math.round(w * dpr);
+  if (canvas.width !== bw || canvas.height !== bw) {
+    canvas.width = bw;
+    canvas.height = bw;
+    canvas.style.width = w + "px";
+    canvas.style.height = w + "px";
+  }
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, w);
+
+  const cx = w / 2, cy = w / 2;
+  const R = w * 0.42;
+  const START = Math.PI * 0.75;           // 135° — bottom left
+  const SWEEP = Math.PI * 1.5;            // 270° clockwise
+  const frac = Math.max(0, Math.min(1, (cfg.value - cfg.min) / (cfg.max - cfg.min)));
+  const needleAngle = START + SWEEP * frac;
+
+  // Track
+  ctx.strokeStyle = "rgba(34, 45, 61, 0.9)";
+  ctx.lineWidth = Math.max(3, w * 0.045);
+  ctx.lineCap = "butt";
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, START, START + SWEEP);
+  ctx.stroke();
+
+  // Progress arc with plasma gradient
+  const grad = ctx.createLinearGradient(0, w, w, 0);
+  grad.addColorStop(0, cfg.color0 || "#00e5ff");
+  grad.addColorStop(1, cfg.color1 || "#ff5500");
+  ctx.strokeStyle = grad;
+  ctx.shadowColor = cfg.color1 || "#ff5500";
+  ctx.shadowBlur = 10;
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, START, needleAngle);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Tick ring: minor every 1/24 sweep, major every 1/6
+  for (let i = 0; i <= 24; i++) {
+    const a = START + SWEEP * (i / 24);
+    const major = i % 4 === 0;
+    const r0 = R - (major ? w * 0.075 : w * 0.045);
+    ctx.strokeStyle = major ? "rgba(240, 244, 248, 0.75)" : "rgba(140, 156, 179, 0.35)";
+    ctx.lineWidth = major ? 1.6 : 1;
+    ctx.beginPath();
+    ctx.moveTo(cx + r0 * Math.cos(a), cy + r0 * Math.sin(a));
+    ctx.lineTo(cx + (R - w * 0.028) * Math.cos(a), cy + (R - w * 0.028) * Math.sin(a));
+    ctx.stroke();
+  }
+
+  // Major tick numerals
+  ctx.fillStyle = "rgba(140, 156, 179, 0.8)";
+  ctx.font = `${Math.max(8, w * 0.058)}px Space Mono, monospace`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i <= 6; i++) {
+    const a = START + SWEEP * (i / 6);
+    const val = cfg.min + (cfg.max - cfg.min) * (i / 6);
+    const r0 = R - w * 0.13;
+    ctx.fillText(String(Math.round(val)), cx + r0 * Math.cos(a), cy + r0 * Math.sin(a));
+  }
+
+  // Needle
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 2;
+  ctx.shadowColor = cfg.color1 || "#ff5500";
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  ctx.moveTo(cx + (R - w * 0.16) * Math.cos(needleAngle), cy + (R - w * 0.16) * Math.sin(needleAngle));
+  ctx.lineTo(cx + (R + w * 0.01) * Math.cos(needleAngle), cy + (R + w * 0.01) * Math.sin(needleAngle));
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Digital core
+  ctx.fillStyle = "#f0f4f8";
+  ctx.font = `700 ${Math.max(15, w * 0.17)}px Space Mono, monospace`;
+  ctx.fillText(cfg.text, cx, cy - w * 0.01);
+  ctx.fillStyle = "rgba(140, 156, 179, 0.9)";
+  ctx.font = `${Math.max(8, w * 0.06)}px Space Mono, monospace`;
+  ctx.fillText(cfg.unit, cx, cy + w * 0.12);
+}
+
+export function drawGauges(state) {
+  const azCanvas = $("gauge-az");
+  const elCanvas = $("gauge-el");
+  if (!azCanvas || !elCanvas) return;
+  const row = azCanvas.closest(".gauge-row");
+  if (row && getComputedStyle(row).display === "none") return;
+
+  const look = state.look;
+  const targetAz = look?.az ?? 0;
+  const targetEl = look?.el ?? -90;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reducedMotion || state.gAz == null) {
+    state.gAz = targetAz;
+    state.gEl = targetEl;
+  } else {
+    let dAz = ((targetAz - state.gAz + 540) % 360) - 180;
+    state.gAz = (state.gAz + dAz * 0.14 + 360) % 360;
+    state.gEl += (targetEl - state.gEl) * 0.14;
+  }
+
+  drawArcGauge(azCanvas, {
+    value: state.gAz, min: 0, max: 360,
+    text: look ? state.gAz.toFixed(0) + "°" : "—",
+    unit: "AZIMUTH", color0: "#00e5ff", color1: "#0066ff"
+  });
+  drawArcGauge(elCanvas, {
+    value: state.gEl, min: -90, max: 90,
+    text: look ? state.gEl.toFixed(0) + "°" : "—",
+    unit: "ELEVATION", color0: "#ffaa00", color1: "#ff5500"
+  });
+}
+
 export function drawCompass(state) {
   const canvas = $("compass");
   if (!canvas) return;
@@ -780,8 +901,9 @@ export function bindResize(state) {
     state.drawPlot?.();
     state.drawTrack?.();
     drawCompass(state);
+    drawGauges(state);
   });
-  ["sky-plot", "ground-track"].forEach((id) => {
+  ["sky-plot", "ground-track", "gauge-az"].forEach((id) => {
     const el = $(id)?.parentElement;
     if (el) ro.observe(el);
   });

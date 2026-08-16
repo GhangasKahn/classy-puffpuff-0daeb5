@@ -15,6 +15,18 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+# Orbital Prime PWA
+[[headers]]
+  for = "/orbital-prime/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/orbital-prime/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
 # MARTIN build app PWA
 [[headers]]
   for = "/fence/martin/app/service-worker.js"

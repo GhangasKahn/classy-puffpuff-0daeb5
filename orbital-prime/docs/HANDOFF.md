@@ -1,6 +1,6 @@
 # Orbital Prime — handoff
 
-1. **Runnable project.** `/orbital-prime/` (also `/orbital`). Serve the folder; ES modules will not load from `file://`.
+1. **Runnable project.** `/orbital-prime/` (also `/orbital`). Serve the folder; ES modules will not load from `file://`. Installable as a PWA over HTTPS — the service worker caches the app shell only and never caches live telemetry (stale data must never present as live).
 
 2. **Governing concept.** The instrument between you and the sky.
 

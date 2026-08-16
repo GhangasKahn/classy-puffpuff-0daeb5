@@ -3,8 +3,8 @@ import { initMotion, listMotionListeners } from "./motion.js";
 import { SingularityField, CyberAudioEngine } from "./singularity.js";
 import {
   bindAr, bindDepth, bindHeading, bindLocation, bindResize, drawCompass,
-  drawSkyPlot, drawTrack, loadIss, loadKp, loadRadar, loadStarship, loadTle,
-  loadWeather, paintLock
+  drawGauges, drawSkyPlot, drawTrack, loadIss, loadKp, loadRadar,
+  loadStarship, loadTle, loadWeather, paintLock
 } from "./render.js";
 
 const state = {
@@ -71,11 +71,39 @@ document.querySelectorAll(".dock-item").forEach((item) => {
   });
 });
 
+// Scroll-synced dock highlighting (music-app pattern: the dock always knows where you are)
+const dockSections = [
+  [document.querySelector(".hero"), "#top"],
+  [document.getElementById("cluster"), "#cluster"],
+  [document.getElementById("physics"), "#physics"],
+  [document.getElementById("ar"), "#ar"]
+].filter(([el]) => el);
+
+const dockIo = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    const hit = dockSections.find(([el]) => el === e.target);
+    if (!hit) continue;
+    document.querySelectorAll(".dock-item").forEach((d) => {
+      d.classList.toggle("active", d.dataset.target === hit[1]);
+    });
+  }
+}, { rootMargin: "-35% 0px -55% 0px" });
+dockSections.forEach(([el]) => dockIo.observe(el));
+
+// PWA: offline shell + installability (HTTPS / localhost only)
+if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localhost", "127.0.0.1"].includes(location.hostname))) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js").catch(() => {});
+  });
+}
+
 initMotion(state);
 
 state.drawPlot = () => {
   drawSkyPlot(state);
   drawCompass(state);
+  drawGauges(state);
 };
 state.drawTrack = () => drawTrack(state);
 

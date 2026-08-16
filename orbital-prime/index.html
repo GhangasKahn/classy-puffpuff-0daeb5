@@ -14,6 +14,7 @@
   <meta property="og:type" content="website" />
   <title>ORBITAL PRIME — Raw Brutalist Space Instrument</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="preconnect" href="https://api.wheretheiss.at" crossorigin />
   <link rel="dns-prefetch" href="https://celestrak.org" />
   <link rel="dns-prefetch" href="https://api.open-meteo.com" />
@@ -128,16 +129,20 @@
               </p>
             </div>
 
-            <div class="gauges d2">
-              <div class="well dual">
-                <div>
-                  <span class="stamp">Azimuth (AZ)</span>
-                  <span class="num" id="az" data-motion="M06">—</span>
+            <div class="gauge-row d2">
+              <div class="gauge-cell">
+                <div class="gauge-frame">
+                  <canvas id="gauge-az" aria-hidden="true"></canvas>
                 </div>
-                <div>
-                  <span class="stamp">Elevation (EL)</span>
-                  <span class="num" id="el" data-motion="M06">—</span>
+                <span class="stamp">Azimuth (AZ)</span>
+                <span class="sr-only" id="az" data-motion="M06">—</span>
+              </div>
+              <div class="gauge-cell">
+                <div class="gauge-frame">
+                  <canvas id="gauge-el" aria-hidden="true"></canvas>
                 </div>
+                <span class="stamp">Elevation (EL)</span>
+                <span class="sr-only" id="el" data-motion="M06">—</span>
               </div>
             </div>
           </div>
