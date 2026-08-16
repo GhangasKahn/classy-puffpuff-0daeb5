@@ -1,13 +1,13 @@
-import { BUFFALO } from "./astro.js?v=7";
-import { ClickEngine } from "./audio.js?v=7";
-import { initUnit } from "./gl/unit.js?v=7";
-import { initMotion, listMotionListeners } from "./motion.js?v=7";
+import { BUFFALO } from "./astro.js?v=8";
+import { ClickEngine } from "./audio.js?v=8";
+import { initUnit } from "./gl/unit.js?v=8";
+import { initMotion, listMotionListeners } from "./motion.js?v=8";
 import {
   bindAr, bindAlert, bindDepth, bindHeading, bindIcs, bindLocation, bindResize,
   bindShare, bindSpeak, bindTarget, drawCompass, drawGauges, drawSkyPlot, drawTrack,
   loadIss, loadKp, loadRadar, loadStarship, loadTle, loadWeather, markIssAge,
   paintCountdown, paintLock, writeShare
-} from "./render.js?v=7";
+} from "./render.js?v=8";
 
 const state = {
   obs: { ...BUFFALO },
@@ -82,7 +82,8 @@ dockSections.forEach(([el]) => dockIo.observe(el));
 
 if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localhost", "127.0.0.1"].includes(location.hostname))) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    const sw = new URL("service-worker.js", document.baseURI);
+    navigator.serviceWorker.register(sw.href, { scope: new URL("./", document.baseURI).href }).catch(() => {});
   });
 }
 

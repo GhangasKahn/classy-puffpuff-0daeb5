@@ -2,9 +2,9 @@ import {
   cardinal, classifyWx, eyeLabel, faceCopy, findPassesAsync, getSatellite,
   fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, parseShareQuery, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
-} from "./astro.js?v=7";
-import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=7";
-import { issResidual, scorePass, wxSlice } from "./score.js?v=7";
+} from "./astro.js?v=8";
+import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=8";
+import { issResidual, scorePass, wxSlice } from "./score.js?v=8";
 
 const $ = (id) => document.getElementById(id);
 
@@ -158,7 +158,7 @@ export function drawSkyPlot(state) {
   ctx.stroke();
 
   (state.passes || []).filter((p) => p.los > Date.now()).slice(0, 5).forEach((p) => {
-    const az0 = p.samples?.[0]?.az;
+    const az0 = p.aosAz ?? p.samples?.[0]?.az;
     if (az0 == null) return;
     const a = az0 * Math.PI / 180;
     const x = cx + R * Math.sin(a);
@@ -763,6 +763,45 @@ export async function loadIss(state) {
   }
 }
 
+function runPassWorker(row, obs, hours) {
+  return new Promise((resolve, reject) => {
+    const w = new Worker(new URL("./pass-worker.js", import.meta.url), { type: "module" });
+    const t = setTimeout(() => {
+      w.terminate();
+      reject(new Error("pass worker timeout"));
+    }, 45000);
+    w.onmessage = (e) => {
+      clearTimeout(t);
+      w.terminate();
+      if (e.data?.ok) resolve(e.data.passes);
+      else reject(new Error(e.data?.error || "pass worker failed"));
+    };
+    w.onerror = () => {
+      clearTimeout(t);
+      w.terminate();
+      reject(new Error("pass worker crashed"));
+    };
+    w.postMessage({ l1: row.l1, l2: row.l2, obs, hours });
+  });
+}
+
+async function searchPasses(state, hours = 36) {
+  const gen = state.passGen;
+  const abort = () => state.passGen !== gen;
+  const obs = { lat: state.obs.lat, lon: state.obs.lon, altKm: state.obs.altKm || 0.18 };
+  const row = (state.catalog || []).find((s) => s.norad === state.targetId);
+  if (typeof Worker !== "undefined" && row) {
+    try {
+      const passes = await runPassWorker(row, obs, hours);
+      if (abort()) return null;
+      return passes;
+    } catch {
+      /* fall through to yielding main-thread search */
+    }
+  }
+  return findPassesAsync(state.satrec, obs, hours, { shouldAbort: abort });
+}
+
 export async function loadTle(state) {
   try {
     await waitForSatellite();
@@ -787,14 +826,12 @@ export async function loadTle(state) {
     state.satrec = getSatellite().twoline2satrec(row.l1, row.l2);
     state.tleError = null;
     state.tleAt = Date.now();
-    const gen = ++state.passGen;
+    ++state.passGen;
     const body = $("pass-body");
     if (body && !state.passes?.length) {
       body.innerHTML = `<tr><td colspan="7">Computing intersections…</td></tr>`;
     }
-    const passes = await findPassesAsync(state.satrec, state.obs, 36, {
-      shouldAbort: () => state.passGen !== gen
-    });
+    const passes = await searchPasses(state, 36);
     if (passes == null) return;
     state.passes = passes;
     state.track = groundTrack(state.satrec, state.obs);

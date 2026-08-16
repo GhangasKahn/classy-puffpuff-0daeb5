@@ -54,7 +54,8 @@ describe("hardware unit wiring", () => {
     assert.match(html, /id="unit-gl"/);
     assert.match(html, /id="unit-2d"/);
     assert.match(sw, /js\/gl\/unit\.js/);
-    assert.match(sw, /orbital-prime-v7/);
+    assert.match(sw, /orbital-prime-v8/);
+    assert.match(sw, /js\/pass-worker\.js/);
     assert.match(html, /og\.svg/);
     assert.match(css, /@media print/);
   });

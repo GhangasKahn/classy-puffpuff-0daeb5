@@ -59,7 +59,7 @@ node js/actor-main.js --lat=42.8864 --lon=-78.8784 --sat=25544
 
 ```bash
 cd orbital-prime
-node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs
+node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs test/deploy-surface.test.mjs
 # optional, hits public APIs:
 node --test test/live.test.mjs
 ```

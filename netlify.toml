@@ -45,6 +45,16 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+[[headers]]
+  for = "/orbital-prime/"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/orbital-prime/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
 # MARTIN build app PWA
 [[headers]]
   for = "/fence/martin/app/service-worker.js"

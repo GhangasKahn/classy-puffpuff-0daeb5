@@ -4,7 +4,7 @@
   "type": "module",
   "description": "OP-01 field instrument. Public telemetry only.",
   "scripts": {
-    "test": "node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs",
+    "test": "node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs test/deploy-surface.test.mjs",
     "test:live": "node --test test/live.test.mjs",
     "test:observe": "node js/actor-main.js --lat=42.8864 --lon=-78.8784 --sat=25544",
     "test:all": "node --test test/*.test.mjs",

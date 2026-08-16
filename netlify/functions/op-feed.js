@@ -83,7 +83,14 @@ async function pull(url, timeout = 8000) {
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,OPTIONS" } };
+    return {
+      statusCode: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      }
+    };
   }
   if (event.httpMethod !== "GET") return json(405, { error: "GET only" });
 
@@ -123,3 +130,5 @@ exports.handler = async (event) => {
   }
   return text(200, got.body, { upstream: spec.url, cache: "public, max-age=60" });
 };
+
+exports.resolve = resolve;
