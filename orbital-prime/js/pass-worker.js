@@ -1,14 +1,33 @@
 /* SGP4 pass search off the UI thread.
-   Same findPasses as astro.js. Slims samples so postMessage stays small. */
+   satellite.js is a UMD build — do not import it as an ES module.
+   Fetch + Function boots it onto globalThis the same way the page script tag does. */
 
-import "../vendor/satellite.min.js";
-import { findPasses } from "./astro.js";
+import { findPasses, getSatellite } from "./astro.js";
+import { bootSatelliteUmd } from "./sat-boot.js";
 
-self.onmessage = (e) => {
+let satBoot = null;
+
+function ensureSat() {
+  if (getSatellite()?.twoline2satrec) return Promise.resolve(getSatellite());
+  if (!satBoot) {
+    satBoot = fetch(new URL("../vendor/satellite.min.js", import.meta.url))
+      .then((r) => {
+        if (!r.ok) throw new Error("satellite.js HTTP " + r.status);
+        return r.text();
+      })
+      .then(bootSatelliteUmd)
+      .catch((err) => {
+        satBoot = null;
+        throw err;
+      });
+  }
+  return satBoot;
+}
+
+self.onmessage = async (e) => {
   const { l1, l2, obs, hours } = e.data || {};
   try {
-    const sat = globalThis.satellite;
-    if (!sat?.twoline2satrec) throw new Error("satellite.js missing in worker");
+    const sat = await ensureSat();
     if (!l1 || !l2 || !obs) throw new Error("TLE or observer missing");
     const satrec = sat.twoline2satrec(l1, l2);
     const passes = findPasses(satrec, obs, hours || 36).map((p) => ({

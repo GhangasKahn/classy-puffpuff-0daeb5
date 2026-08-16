@@ -1,7 +1,9 @@
 /* Orbital Prime SW — offline app shell only.
-   Live telemetry is NEVER cached. */
+   Live telemetry is NEVER cached.
+   HTML/CSS/JS are network-first so a production deploy is not trapped
+   behind cache-first shells. Fonts and icons stay cache-first. */
 
-const CACHE = "orbital-prime-v8";
+const CACHE = "orbital-prime-v9";
 
 const SHELL = [
   "./",
@@ -16,6 +18,7 @@ const SHELL = [
   "js/score.js",
   "js/gl/unit.js",
   "js/pass-worker.js",
+  "js/sat-boot.js",
   "vendor/satellite.min.js",
   "fonts/archivo-black-latin-400.woff2",
   "fonts/inter-latin-400.woff2",
@@ -38,6 +41,22 @@ const LIVE_HOSTS = [
   "services.swpc.noaa.gov"
 ];
 
+function isLive(url) {
+  return LIVE_HOSTS.includes(url.hostname)
+    || url.pathname.includes("/api/")
+    || url.pathname.includes("/.netlify/functions/");
+}
+
+function isVolatile(request, url) {
+  if (request.mode === "navigate") return true;
+  const p = url.pathname;
+  return p.endsWith(".html")
+    || p.endsWith("/")
+    || p.endsWith(".css")
+    || p.endsWith(".js")
+    || p.endsWith(".webmanifest");
+}
+
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())
@@ -55,8 +74,22 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET") return;
-  if (LIVE_HOSTS.includes(url.hostname)) return;
-  if (url.pathname.includes("/api/") || url.pathname.includes("/.netlify/functions/")) return;
+  if (isLive(url)) return;
+
+  if (url.origin === location.origin && isVolatile(e.request, url)) {
+    e.respondWith(
+      fetch(e.request)
+        .then((res) => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE).then((c) => c.put(e.request, clone));
+          }
+          return res;
+        })
+        .catch(() => caches.match(e.request).then((hit) => hit || Promise.reject()))
+    );
+    return;
+  }
 
   e.respondWith(
     caches.match(e.request).then((hit) => {

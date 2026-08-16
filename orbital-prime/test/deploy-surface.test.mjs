@@ -63,6 +63,18 @@ describe("Netlify publish surface", () => {
   });
 });
 
+describe("service worker deploy strategy", () => {
+  const sw = readFileSync(join(here, "../service-worker.js"), "utf8");
+
+  it("is network-first for navigations and scripts so deploys reach returning visitors", () => {
+    assert.match(sw, /orbital-prime-v9/);
+    assert.match(sw, /request\.mode === "navigate"/);
+    assert.match(sw, /function isVolatile/);
+    assert.match(sw, /LIVE_HOSTS/);
+    assert.match(sw, /\/\.netlify\/functions\//);
+  });
+});
+
 describe("HTML id contract", () => {
   it("keeps every id the instrument JS paints", () => {
     for (const id of REQUIRED_IDS) {

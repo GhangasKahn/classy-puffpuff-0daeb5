@@ -430,9 +430,16 @@ select:focus-visible {
   text-transform: uppercase;
   color: var(--mute);
 }
-#residual[data-grade="lock"] { color: var(--ok); }
-#residual[data-grade="drift"] { color: var(--warn); }
-#residual[data-grade="stale"] { color: var(--bad); }
+#residual[data-grade="lock"],
+#residual[data-grade="drift"],
+#residual[data-grade="stale"] {
+  color: var(--ink);
+  display: inline-block;
+  padding: 0 6px;
+}
+#residual[data-grade="lock"] { background: var(--yellow); }
+#residual[data-grade="drift"] { background: var(--paper-2); }
+#residual[data-grade="stale"] { background: #e8d4d0; }
 
 .feeds {
   display: grid;
@@ -451,17 +458,18 @@ select:focus-visible {
 }
 .feeds li:last-child { border-right: 0; }
 .feeds .feed-st {
-  display: block;
+  display: inline-block;
   margin-top: 4px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0;
-  color: var(--mute);
+  color: var(--ink);
+  padding: 1px 5px;
 }
-.feeds li[data-status="live"] .feed-st { color: var(--ok); }
-.feeds li[data-status="stale"] .feed-st { color: var(--warn); }
-.feeds li[data-status="down"] .feed-st { color: var(--bad); }
-.feeds li[data-status="idle"] .feed-st { color: var(--mute); }
+.feeds li[data-status="live"] .feed-st { background: var(--yellow); }
+.feeds li[data-status="stale"] .feed-st { background: var(--paper-2); }
+.feeds li[data-status="down"] .feed-st { background: #e8d4d0; }
+.feeds li[data-status="idle"] .feed-st { color: var(--mute); background: transparent; padding: 0; }
 
 .sheet tr[data-best="1"] td { background: var(--yellow); }
 
@@ -817,10 +825,10 @@ select:focus-visible {
   font-size: 11px;
 }
 #hourly-list li:nth-child(6n) { border-right: 0; }
-#hourly-list li b { display: block; font-size: 13px; margin-top: 4px; }
-#hourly-list li[data-class="perfect"] b { color: var(--ok); }
-#hourly-list li[data-class="marginal"] b { color: var(--warn); }
-#hourly-list li[data-class="obstructed"] b { color: var(--bad); }
+#hourly-list li b { display: block; font-size: 13px; margin-top: 4px; color: var(--ink); }
+#hourly-list li[data-class="perfect"] { background: var(--yellow); }
+#hourly-list li[data-class="marginal"] { background: var(--paper-2); }
+#hourly-list li[data-class="obstructed"] { background: #e8d4d0; }
 #hourly-list li[data-pass="1"] { background: var(--yellow); }
 
 #gate[data-class="perfect"] .gate-word { color: var(--ok); }
