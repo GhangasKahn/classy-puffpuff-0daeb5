@@ -5,13 +5,13 @@
 <line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
 <line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
 <text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-09</text>
-<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Hang the shaft: drive FIXED, idler FLOATING</text>
-<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>One bearing defines the axis; the other lets the shaft grow.</text>
-<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>STEP 9 / 14</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Turn the two end plugs — one setup, two operations</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Bore and OD concentric, because that error becomes drum TIR directly.</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>STEP 9 / 18</text>
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>05 Drum</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
-<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 9 of 14  ·  05 Drum</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 9 of 18  ·  05 Drum</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <circle cx='44.0' cy='112.0' r='9.0' fill='#d8d8d4' stroke='#1a1a1a' stroke-width='1.1'/>
 <text x='44.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>1</text>
@@ -41,103 +41,68 @@
 <text x='356.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>13</text>
 <circle cx='382.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
 <text x='382.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>14</text>
-<text x='420.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>05 Drum</text>
+<circle cx='408.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='408.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>15</text>
+<circle cx='434.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='434.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>16</text>
+<circle cx='460.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='460.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>17</text>
+<circle cx='486.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='486.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>18</text>
+<text x='524.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>05 Drum</text>
 <rect x='36.0' y='150.0' width='820.0' height='560.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
-<polygon points='276.8,569.9 432.3,480.2 432.3,437.9 276.8,527.7' fill='#989895'/>
-<polygon points='276.8,527.7 432.3,437.9 425.4,434.0 270.0,523.7' fill='#989895'/>
-<polygon points='464.3,686.1 628.9,591.0 427.7,474.9 263.1,569.9' fill='#989895'/>
-<polygon points='270.0,566.0 276.8,569.9 276.8,527.7 270.0,523.7' fill='#b5b5b1'/>
-<polygon points='507.9,423.3 530.8,436.5 530.8,379.1 507.9,365.9' fill='#b5b5b1'/>
-<polygon points='530.8,436.5 537.6,432.5 537.6,375.1 530.8,379.1' fill='#989895'/>
-<polygon points='420.9,478.8 622.0,595.0 622.0,286.1 420.9,170.0' fill='#b5b5b1'/>
-<polygon points='548.9,329.7 547.4,329.2 546.2,329.6 545.5,330.8 545.5,332.6 546.2,334.6 547.4,336.3 548.9,337.6 550.4,338.1 551.6,337.7 552.2,336.5 552.2,334.7 551.6,332.7 550.4,330.9' fill='#a5a7ab'/>
-<polygon points='530.8,379.1 537.6,375.1 514.8,361.9 507.9,365.9' fill='#989895'/>
-<polygon points='263.1,577.8 464.3,694.0 464.3,686.1 263.1,569.9' fill='#b5b5b1'/>
-<polygon points='508.9,356.7 534.5,371.5 534.5,342.0 508.9,327.2' fill='#a5a7ab'/>
-<polygon points='518.0,325.1 511.6,322.4 505.7,322.1 500.7,324.2 497.2,328.5 495.4,334.6 495.4,342.2 497.2,350.4 500.7,358.8 505.7,366.5 511.6,373.1 518.0,377.9 524.5,380.5 530.4,380.8 535.3,378.7 538.8,374.4 540.6,368.3 540.6,360.8 538.8,352.5 535.3,344.1 530.4,336.4 524.5,329.8' fill='#b5b5b1'/>
-<polygon points='534.5,371.5 540.9,367.8 540.9,338.3 534.5,342.0' fill='#8b8d90'/>
-<polygon points='534.5,342.0 540.9,338.3 515.3,323.5 508.9,327.2' fill='#8b8d90'/>
-<polygon points='464.3,694.0 628.9,599.0 628.9,591.0 464.3,686.1' fill='#989895'/>
-<polygon points='466.6,679.5 622.0,589.7 622.0,547.5 466.6,637.2' fill='#989895'/>
-<polygon points='276.8,348.2 432.3,258.4 432.3,216.2 276.8,305.9' fill='#989895'/>
-<polygon points='356.7,441.9 361.6,449.7 505.7,366.5 500.7,358.8' fill='#989895'/>
-<polygon points='353.2,433.6 356.7,441.9 500.7,358.8 497.2,350.4' fill='#989895'/>
-<polygon points='361.6,449.7 367.5,456.2 511.6,373.1 505.7,366.5' fill='#989895'/>
-<polygon points='466.6,637.2 622.0,547.5 615.2,543.5 459.7,633.3' fill='#989895'/>
-<polygon points='351.4,425.3 353.2,433.6 497.2,350.4 495.4,342.2' fill='#989895'/>
-<polygon points='276.8,305.9 432.3,216.2 425.4,212.2 270.0,302.0' fill='#989895'/>
-<polygon points='367.5,456.2 374.0,461.0 518.0,377.9 511.6,373.1' fill='#989895'/>
-<polygon points='351.4,417.8 351.4,425.3 495.4,342.2 495.4,334.6' fill='#989895'/>
-<polygon points='374.0,461.0 380.4,463.7 524.5,380.5 518.0,377.9' fill='#989895'/>
-<polygon points='353.2,411.6 351.4,417.8 495.4,334.6 497.2,328.5' fill='#9a9a97'/>
-<polygon points='380.4,463.7 386.3,464.0 530.4,380.8 524.5,380.5' fill='#989895'/>
-<polygon points='622.0,595.0 628.9,591.0 628.9,282.2 622.0,286.1' fill='#989895'/>
-<polygon points='356.7,407.4 353.2,411.6 497.2,328.5 500.7,324.2' fill='#a9a9a5'/>
-<polygon points='340.4,453.4 341.6,455.1 547.4,336.3 546.2,334.6' fill='#8b8d90'/>
-<polygon points='339.8,451.4 340.4,453.4 546.2,334.6 545.5,332.6' fill='#8b8d90'/>
-<polygon points='341.6,455.1 343.1,456.4 548.9,337.6 547.4,336.3' fill='#8b8d90'/>
-<polygon points='339.8,449.6 339.8,451.4 545.5,332.6 545.5,330.8' fill='#8b8d90'/>
-<polygon points='343.1,456.4 344.6,456.9 550.4,338.1 548.9,337.6' fill='#8b8d90'/>
-<polygon points='386.3,464.0 391.3,461.9 535.3,378.7 530.4,380.8' fill='#989895'/>
-<polygon points='340.4,448.4 339.8,449.6 545.5,330.8 546.2,329.6' fill='#949699'/>
-<polygon points='344.6,456.9 345.8,456.5 551.6,337.7 550.4,338.1' fill='#8b8d90'/>
-<polygon points='622.0,286.1 628.9,282.2 427.7,166.0 420.9,170.0' fill='#989895'/>
-<polygon points='459.7,675.5 466.6,679.5 466.6,637.2 459.7,633.3' fill='#b5b5b1'/>
-<polygon points='270.0,344.2 276.8,348.2 276.8,305.9 270.0,302.0' fill='#b5b5b1'/>
-<polygon points='354.4,511.9 377.2,525.1 377.2,467.7 354.4,454.5' fill='#b5b5b1'/>
-<polygon points='377.2,525.1 384.1,521.2 384.1,463.8 377.2,467.7' fill='#989895'/>
-<polygon points='263.1,569.9 464.3,686.1 464.3,377.2 263.1,261.0' fill='#b5b5b1'/>
-<polygon points='377.2,467.7 384.1,463.8 361.2,450.6 354.4,454.5' fill='#989895'/>
-<polygon points='351.1,447.8 376.7,462.6 376.7,433.0 351.1,418.3' fill='#a5a7ab'/>
-<polygon points='376.7,462.6 383.1,458.9 383.1,429.3 376.7,433.0' fill='#8b8d90'/>
-<polygon points='376.7,433.0 383.1,429.3 357.5,414.6 351.1,418.3' fill='#8b8d90'/>
-<polygon points='464.3,686.1 471.1,682.1 471.1,373.2 464.3,377.2' fill='#989895'/>
-<polygon points='464.3,377.2 471.1,373.2 270.0,257.1 263.1,261.0' fill='#989895'/>
+<polygon points='714.1,177.0 690.1,167.1 668.1,166.0 649.8,173.7 636.7,189.7 629.8,212.6 629.8,240.6 636.7,271.4 649.8,302.4 668.1,331.3 690.1,355.7 714.1,373.5 738.0,383.4 760.1,384.5 778.4,376.7 791.5,360.7 798.3,337.8 798.3,309.9 791.5,279.1 778.4,248.0 760.1,219.1 738.0,194.8' fill='#a4977d'/>
+<polygon points='113.6,612.0 131.9,640.9 668.1,331.3 649.8,302.4' fill='#8a7f6a'/>
+<polygon points='100.5,580.9 113.6,612.0 649.8,302.4 636.7,271.4' fill='#8a7f6a'/>
+<polygon points='131.9,640.9 154.0,665.2 690.1,355.7 668.1,331.3' fill='#8a7f6a'/>
+<polygon points='93.7,550.1 100.5,580.9 636.7,271.4 629.8,240.6' fill='#8a7f6a'/>
+<polygon points='154.0,665.2 177.9,683.0 714.1,373.5 690.1,355.7' fill='#8a7f6a'/>
+<polygon points='93.7,522.2 93.7,550.1 629.8,240.6 629.8,212.6' fill='#8a7f6a'/>
+<polygon points='177.9,683.0 201.9,692.9 738.0,383.4 714.1,373.5' fill='#8a7f6a'/>
+<polygon points='100.5,499.3 93.7,522.2 629.8,212.6 636.7,189.7' fill='#8c816b'/>
+<polygon points='201.9,692.9 223.9,694.0 760.1,384.5 738.0,383.4' fill='#8a7f6a'/>
+<polygon points='113.6,483.3 100.5,499.3 636.7,189.7 649.8,173.7' fill='#998c75'/>
+<polygon points='223.9,694.0 242.2,686.3 778.4,376.7 760.1,384.5' fill='#8a7f6a'/>
 </g>
-<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Grey = already built · colour = this step</text>
+<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>This step</text>
 <text x='36.0' y='748.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>DO THIS</text>
 <circle cx='46.0' cy='769.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
 <text x='46.0' y='773.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>1</text>
-<text x='68.0' y='774.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Slide the 22.5″ shaft through the drum and both panels.</text>
-<circle cx='46.0' cy='795.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='46.0' y='799.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>2</text>
-<text x='68.0' y='800.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Bolt H-001 to the drive side and torque it. That flange is now the drum-axis datum</text>
-<text x='68.0' y='818.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>(J-006).</text>
-<circle cx='46.0' cy='839.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='46.0' y='843.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>3</text>
-<text x='68.0' y='844.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Set H-002 on the 0.25″ pad on the idler side. Snug only — the shaft must still be</text>
-<text x='68.0' y='862.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>able to slide axially (J-007).</text>
+<text x='68.0' y='774.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Face and turn the OD to a light bond fit in the shell ID (4.5″ nominal — measure</text>
+<text x='68.0' y='792.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>YOUR tube).</text>
+<circle cx='46.0' cy='813.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='817.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>2</text>
+<text x='68.0' y='818.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>WITHOUT unchucking, bore 1.25″ for the shaft. One setup is the whole trick: it makes</text>
+<text x='68.0' y='836.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>bore and OD concentric.</text>
+<circle cx='46.0' cy='857.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='46.0' y='861.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>3</text>
+<text x='68.0' y='862.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Part off at 1.5″ thick. Repeat for the second plug.</text>
 <circle cx='46.0' cy='883.0' r='11.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.0'/>
 <text x='46.0' y='887.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#ffffff' text-anchor='middle' font-weight='600'>4</text>
-<text x='68.0' y='888.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Spin the drum by hand through several turns. It should coast, not bind and not ring.</text>
+<text x='68.0' y='888.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>Deburr both, then check the bore on the actual shaft — light push fit, no rock.</text>
 <rect x='900.0' y='150.0' width='720.0' height='30.0' fill='#3d5a4c' stroke='#1a1a1a' stroke-width='1.2'/>
 <text x='912.0' y='171.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>PARTS TRAY — fetch these before you start</text>
-<rect x='900.0' y='180.0' width='720.0' height='139.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='912.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-010</text>
-<text x='992.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum shaft</text>
-<text x='1352.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x1</text>
-<text x='1400.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>22.5" × 0.75" × 0.75"</text>
-<text x='912.0' y='219.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#c4783a' text-anchor='start' font-weight='600'>H-001</text>
-<text x='992.0' y='219.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4-bolt flange bearing, ¾″ bore,</text>
-<text x='992.0' y='236.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>sealed, FIXED (drive)</text>
+<rect x='900.0' y='180.0' width='720.0' height='71.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='912.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-021</text>
+<text x='992.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum end plug</text>
+<text x='1352.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x2</text>
+<text x='1400.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start'>4.5" × 4.5" × 1.5"</text>
+<text x='912.0' y='219.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#c4783a' text-anchor='start' font-weight='600'>H-028</text>
+<text x='992.0' y='219.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Aluminium round bar 4½″ dia — drum</text>
+<text x='992.0' y='236.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>end plug stock</text>
 <text x='1352.0' y='219.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x1</text>
-<text x='912.0' y='253.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#c4783a' text-anchor='start' font-weight='600'>H-002</text>
-<text x='992.0' y='253.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4-bolt flange bearing, ¾″ bore,</text>
-<text x='992.0' y='270.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>sealed, FLOATING (idler)</text>
-<text x='1352.0' y='253.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x1</text>
-<text x='912.0' y='287.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#c4783a' text-anchor='start' font-weight='600'>H-017</text>
-<text x='992.0' y='287.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5/16-18 × 1″ hex + nylock + washer</text>
-<text x='992.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>(flange bearings)</text>
-<text x='1352.0' y='287.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>x8</text>
-<text x='912.0' y='333.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>TOOLS: Wrenches · Dial indicator · Feeler gauges</text>
-<text x='912.0' y='349.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d5a4c' text-anchor='start'>OPEN THESE SHEETS: P-010 · A-02 · P-001R</text>
-<rect x='900.0' y='371.0' width='720.0' height='30.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='1.2'/>
-<text x='912.0' y='392.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>BEFORE YOU MOVE ON   (QC-11)</text>
-<text x='912.0' y='423.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>Shaft turns freely; measurable axial float at the idler end.</text>
-<text x='912.0' y='447.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Still correctable after this step: Bearing position, while the</text>
-<text x='912.0' y='464.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>bolts are still loose.</text>
-<rect x='900.0' y='487.0' width='720.0' height='62.0' fill='#f6e7e4' stroke='#a8342a' stroke-width='1.4'/>
-<text x='914.0' y='507.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>⚠ Locking both flanges bends the shaft and kills both</text>
-<text x='914.0' y='525.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>   bearings. Do not do it because it feels tighter.</text>
+<text x='912.0' y='265.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>TOOLS: Metal lathe (or a machinist friend) · Boring bar · Calipers · Bore</text>
+<text x='912.0' y='281.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d4a38' text-anchor='start'>gauge</text>
+<text x='912.0' y='297.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#3d5a4c' text-anchor='start'>OPEN THESE SHEETS: P-021 · J-106 · A-02</text>
+<rect x='900.0' y='319.0' width='720.0' height='30.0' fill='#5f8f62' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='912.0' y='340.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#ffffff' text-anchor='start' font-weight='600'>BEFORE YOU MOVE ON   (QC-06)</text>
+<text x='912.0' y='371.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>Bore-to-OD runout under 0.001″ on each plug, checked in the</text>
+<text x='912.0' y='389.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>lathe before parting off.</text>
+<text x='912.0' y='413.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Still correctable after this step: Nothing after parting off.</text>
+<text x='912.0' y='430.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Make a spare plug from the same bar.</text>
+<rect x='900.0' y='453.0' width='720.0' height='80.0' fill='#f6e7e4' stroke='#a8342a' stroke-width='1.4'/>
+<text x='914.0' y='473.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>⚠ If you re-chuck between the OD and the bore you will add</text>
+<text x='914.0' y='491.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>   eccentricity that no amount of truing removes, because the</text>
+<text x='914.0' y='509.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>   drum will run true only at one angular position.</text>
 </svg>

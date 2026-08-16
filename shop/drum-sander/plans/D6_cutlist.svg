@@ -66,9 +66,9 @@
 <text x='720.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum disc, end — BB ends resist crushing a</text>
 <text x='40.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-010</text>
 <text x='110.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
-<text x='160.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>22.5" × 0.75" × 0.75"</text>
+<text x='160.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>24" × 1.25" × 1.25"</text>
 <text x='520.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Precision-ground C</text>
-<text x='720.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum shaft — Precision-ground CRS or TG&amp;P,</text>
+<text x='720.0' y='308.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum shaft — Precision-ground rotary shaft</text>
 <text x='40.0' y='326.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-011</text>
 <text x='110.0' y='326.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
 <text x='160.0' y='326.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>18" × 12" × 0.25"</text>
@@ -94,47 +94,72 @@
 <text x='160.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>12" × 12" × 0.75"</text>
 <text x='520.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>MDF</text>
 <text x='720.0' y='398.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Disc pack-bore jig</text>
-<text x='40.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-016</text>
-<text x='110.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
-<text x='160.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2.5" × 2" × 1.5"</text>
-<text x='520.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Hardwood or alumin</text>
-<text x='720.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Acme bronze nut block</text>
-<text x='40.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-017</text>
+<text x='40.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-020</text>
+<text x='110.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='160.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>15.75" × 5" × 0.25"</text>
+<text x='520.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>6061-T6 aluminium </text>
+<text x='720.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum shell, aluminium tube — Wall is the s</text>
+<text x='40.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-021</text>
 <text x='110.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
-<text x='160.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>4" × 2.5" × 1.25"</text>
-<text x='520.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>UHMW-PE or hardwoo</text>
-<text x='720.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Table way shoe — Groove 0.240″ deep × 2.51</text>
-<text x='40.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-018</text>
-<text x='110.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
-<text x='160.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>3" × 3" × 1.5"</text>
-<text x='520.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Baltic birch plywo</text>
-<text x='720.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Acme thrust block — Takes axial load from </text>
-<text x='40.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-019</text>
+<text x='160.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>4.5" × 4.5" × 1.5"</text>
+<text x='520.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>6061-T6 aluminium</text>
+<text x='720.0' y='434.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Drum end plug — Concentricity of bore to O</text>
+<text x='40.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-022</text>
+<text x='110.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='160.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>22" × 2.5" × 0.75"</text>
+<text x='520.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>UHMW-PE</text>
+<text x='720.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Way gib, tapered — Replaces the Rev B 0.02</text>
+<text x='40.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-023</text>
 <text x='110.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
-<text x='160.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2" × 1" × 0.5"</text>
-<text x='520.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Aluminum bar or ha</text>
-<text x='720.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Parallel home dog — Last known |A−B| home.</text>
-<text x='40.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>HARDWARE (hold-down / oscillator detail on D-8)</text>
-<text x='40.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)</text>
-<text x='40.0' y='546.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='546.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>4-bolt flange bearing, ¾″ bore, sealed, FLOATING (idler)</text>
-<text x='40.0' y='566.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='566.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>3″ motor 4L pulley</text>
-<text x='40.0' y='586.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='586.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>5″ drum 4L pulley</text>
-<text x='40.0' y='606.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='606.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>4L / A-section V-belt (size to center distance)</text>
-<text x='40.0' y='626.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='626.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>0.5 HP 1725 RPM TEFC motor, 115 V</text>
-<text x='40.0' y='646.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>2</text>
-<text x='110.0' y='646.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>½″-10 Acme rod × 12″ + bronze nut + flange</text>
-<text x='40.0' y='666.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='666.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>#25 chain + ½″-bore sprockets + master link + left clutch/dog</text>
-<text x='40.0' y='686.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>2</text>
-<text x='110.0' y='686.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Rubber roller ⌀1.25" × ~15.75"</text>
-<text x='40.0' y='706.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
-<text x='110.0' y='706.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Dial indicator 0.001″ + mag base</text>
+<text x='160.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>8" × 4" × 0.375"</text>
+<text x='520.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>6061 aluminium pla</text>
+<text x='720.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Idler bearing micro-adjust plate — Pivot-t</text>
+<text x='40.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-024</text>
+<text x='110.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='160.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2" × 1.25" × 0.75"</text>
+<text x='520.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Steel or aluminium</text>
+<text x='720.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Jack screw block — A ragged thread reads a</text>
+<text x='40.0' y='506.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-016</text>
+<text x='110.0' y='506.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='160.0' y='506.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2.5" × 2" × 1.5"</text>
+<text x='520.0' y='506.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Hardwood or alumin</text>
+<text x='720.0' y='506.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Acme bronze nut block</text>
+<text x='40.0' y='524.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-017</text>
+<text x='110.0' y='524.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='160.0' y='524.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>4" × 2.5" × 1.25"</text>
+<text x='520.0' y='524.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>UHMW-PE or hardwoo</text>
+<text x='720.0' y='524.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Table way shoe — Groove 0.240″ deep × 2.51</text>
+<text x='40.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-018</text>
+<text x='110.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2</text>
+<text x='160.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>3" × 3" × 1.5"</text>
+<text x='520.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Baltic birch plywo</text>
+<text x='720.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Acme thrust block — Takes axial load from </text>
+<text x='40.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-019</text>
+<text x='110.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>1</text>
+<text x='160.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>2" × 1" × 0.5"</text>
+<text x='520.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Aluminum bar or ha</text>
+<text x='720.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='start'>Parallel home dog — Last known |A−B| home.</text>
+<text x='40.0' y='590.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>HARDWARE (hold-down / oscillator detail on D-8)</text>
+<text x='40.0' y='616.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='616.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Mounted ball bearing, 1¼″ bore, self-aligning, FIXED (drive)</text>
+<text x='40.0' y='636.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='636.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Mounted ball bearing, 1¼″ bore, self-aligning, FLOATING (idler)</text>
+<text x='40.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>3.5″ motor 4L pulley</text>
+<text x='40.0' y='676.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='676.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>5″ drum 4L pulley</text>
+<text x='40.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='696.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>4L / A-section V-belt (size to center distance)</text>
+<text x='40.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>1 HP 1725 RPM TEFC motor, 115 V</text>
+<text x='40.0' y='736.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>2</text>
+<text x='110.0' y='736.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>½″-10 Acme rod × 12″ + bronze nut + flange</text>
+<text x='40.0' y='756.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='756.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>#25 chain + ½″-bore sprockets + master link + left clutch/dog</text>
+<text x='40.0' y='776.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>2</text>
+<text x='110.0' y='776.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Rubber roller ⌀1.25" × ~15.75"</text>
+<text x='40.0' y='796.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1</text>
+<text x='110.0' y='796.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Dial indicator 0.001″ + mag base</text>
 <text x='1100.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>BUILD SEQUENCE</text>
 <text x='1100.0' y='108.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>A1  Template &amp; stack-drill sides</text>
 <text x='1100.0' y='134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>A2  Dados, vertical way rebates, box +</text>

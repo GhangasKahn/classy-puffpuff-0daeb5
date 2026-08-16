@@ -11,7 +11,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Phenolic sheet or MIC-6 / cast tooling plate  ·  16" × 22" × 0.5"</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 1  ·  Bond to flattened box; check diagonals</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · VERIFIED size; thickness is BUY option ½″ or ⅜″</text>
 <text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>WEAR FACE — this is the inspection plane (DATUM-D)</text>
 <rect x='80.0' y='160.0' width='523.6' height='720.0' fill='#8a9098' stroke='#1a1a1a' stroke-width='2.0'/>
@@ -53,7 +53,7 @@
 <text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
 <text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Buy ½″ phenolic or ⅜″ MIC-6. Bond to a flattened torsion box</text>
 <text x='80.0' y='964.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (J-004). Keep a spare.</text>
-<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• QC-05: flatness ≤ 0.004″ on both diagonals before you ever</text>
+<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• QC-05: flatness ≤ 0.003″ on both diagonals before you ever</text>
 <text x='80.0' y='1000.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  wrap paper.</text>
 <text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Do not oil. Paste wax only if a board wants to stick.</text>
 </svg>

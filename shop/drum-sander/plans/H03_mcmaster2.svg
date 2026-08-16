@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-03</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>McMaster procurement MC-14…MC-25</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>UNVERIFIED PNs</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Part numbers are CONFIRM AT ORDER  ·  search links are live</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<text x='36.0' y='150.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>McMaster-Carr catalogue numbers were not machine-verified. Each line is a controlling spec + substitution rule + search URL. Fill the PN from the product page.</text>
+<text x='36.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ORDER LINES — open the link, confirm the spec, write the PN on this sheet</text>
+<text x='36.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>ID</text>
+<text x='116.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>DESCRIPTION</text>
+<text x='556.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>QTY</text>
+<text x='756.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>PN</text>
+<text x='1016.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CRIT</text>
+<text x='1136.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>SEARCH q=</text>
+<line x1='36.0' y1='204.0' x2='1644.0' y2='204.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='36.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-14</text>
+<text x='116.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>UHMW bar, 3/4" x 2-1/2" — vertical w</text>
+<text x='556.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 pc x 4 ft</text>
+<text x='756.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>UHMW polyethylene bar 3/4 x </text>
+<text x='36.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-15</text>
+<text x='116.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Canvas or linen phenolic sheet, 1/2"</text>
+<text x='556.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 pc 16" x 22"</text>
+<text x='756.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>canvas phenolic sheet 1/2 in</text>
+<text x='36.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-16</text>
+<text x='116.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>V-belt sheave, 5" OD, 1.25" bore — d</text>
+<text x='556.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 ea</text>
+<text x='756.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>v-belt pulley 5 inch 1.25 in</text>
+<text x='36.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-17</text>
+<text x='116.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>V-belt sheave, 3.5" OD — motor</text>
+<text x='556.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 ea</text>
+<text x='756.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>v-belt pulley 3.5 inch A sec</text>
+<text x='36.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-18</text>
+<text x='116.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>V-belt, A/4L section</text>
+<text x='556.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 ea (size after t</text>
+<text x='756.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4L v-belt</text>
+<text x='36.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-19</text>
+<text x='116.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Compression spring, ~3/4" OD — hold-</text>
+<text x='556.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4 ea</text>
+<text x='756.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>compression spring 3/4 od 2 </text>
+<text x='36.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-20</text>
+<text x='116.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Shoulder screw, 5/16" — roller yoke </text>
+<text x='556.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4 ea</text>
+<text x='756.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>shoulder screw 5/16 x 1-1/2</text>
+<text x='36.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-21</text>
+<text x='116.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4" dust hose, cuff and blast gate</text>
+<text x='556.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 set</text>
+<text x='756.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4 inch dust collection hose </text>
+<text x='36.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-22</text>
+<text x='116.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Structural epoxy adhesive for alumin</text>
+<text x='556.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 kit</text>
+<text x='756.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>two part structural epoxy ad</text>
+<text x='36.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-23</text>
+<text x='116.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Hook-and-loop PSA strip + abrasive r</text>
+<text x='556.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 roll hook, 1 set</text>
+<text x='756.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>consumab</text>
+<text x='1136.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>hook and loop sanding drum w</text>
+<text x='36.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-24</text>
+<text x='116.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Hex bolts, nylock nuts and backing w</text>
+<text x='556.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>12 sets, 1/4-20 x </text>
+<text x='756.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1/4-20 hex bolt 3 inch nyloc</text>
+<text x='36.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-25</text>
+<text x='116.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Adjustable handle / star knob, 3/8-1</text>
+<text x='556.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>6 ea</text>
+<text x='756.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>adjustable handle 3/8-16 sta</text>
+<text x='36.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SUBSTITUTION AND MATING (truncated — full text is in cad/ds16_procurement.py)</text>
+<text x='36.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-14: mates P-007 way, P-022 gib, P-001L/R · Acetal or cast nylon acceptable; both move more with humidity than UHM ·</text>
+<text x='36.0' y='534.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=UHMW+polyethylene+bar+3%2F4+x+2-1%2F2</text>
+<text x='36.0' y='552.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-15: mates P-006 wear face, P-004 skins · 3/8" MIC-6 cast aluminum plate is a better metrology surface and an ac ·</text>
+<text x='36.0' y='566.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=canvas+phenolic+sheet+1%2F2+inch+thick</text>
+<text x='36.0' y='584.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-16: mates P-010 shaft, MC-18 belt · Any A/4L sheave of the same pitch diameter and bore. Changing diameter ·</text>
+<text x='36.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=v-belt+pulley+5+inch+1.25+inch+bore+A+section</text>
+<text x='36.0' y='616.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-17: mates Motor shaft, MC-18 belt · Match pitch diameter and the measured motor bore. ·</text>
+<text x='36.0' y='630.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=v-belt+pulley+3.5+inch+A+section+5%2F8+bore</text>
+<text x='36.0' y='648.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-18: mates MC-16, MC-17 · Link belt is an acceptable and quieter substitute. · https://www.mcmaster.com/?q=4L+v-belt</text>
+<text x='36.0' y='666.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-19: mates P-014 yoke, H-009 roller · Any spring that lets a 1/16" board pass without visible bow. ·</text>
+<text x='36.0' y='680.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=compression+spring+3%2F4+od+2+inch+free+length+light</text>
+<text x='36.0' y='698.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-20: mates P-014 yoke · Ground dowel plus retaining collar. · https://www.mcmaster.com/?q=shoulder+screw+5%2F16+x+1-1%2F2</text>
+<text x='36.0' y='716.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-21: mates P-011 hood · Any 4" fitting. A shop vacuum will NOT meet the CFM requirement and wi ·</text>
+<text x='36.0' y='730.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=4+inch+dust+collection+hose+blast+gate+cuff</text>
+<text x='36.0' y='748.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-22: mates P-020 shell, P-021 plugs · Any structural metal-bonding epoxy with published shear strength and c ·</text>
+<text x='36.0' y='762.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=two+part+structural+epoxy+adhesive+metal+bonding</text>
+<text x='36.0' y='780.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-23: mates P-020 shell · Any loop-backed abrasive of consistent thickness. ·</text>
+<text x='36.0' y='794.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=hook+and+loop+sanding+drum+wrap+abrasive+roll+3+inch</text>
+<text x='36.0' y='812.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-24: mates P-001L/R, P-003 stretchers · 3/8" bolts acceptable; screws alone are excluded by the user joinery s ·</text>
+<text x='36.0' y='826.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=1%2F4-20+hex+bolt+3+inch+nylock+nut+fender+washer</text>
+<text x='36.0' y='844.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-25: mates P-014 yoke, way lock · Any 3/8-16 knob with a comfortable grip. · https://www.mcmaster.com/?q=adjustable+handle+3%2F8-16+star+knob</text>
+</svg>

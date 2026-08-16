@@ -10,7 +10,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Confirm flange BCD · mixed inch/metric ok if consistent</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Illustrated buy-list  ·  qty is for one machine</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · Internal inches. Millimetres are interface-only.</text>
 <circle cx='140.0' cy='170.0' r='36.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.4'/>
 <circle cx='140.0' cy='170.0' r='10.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
@@ -37,8 +37,9 @@
 <rect x='950.0' y='410.0' width='10.0' height='36.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.0'/>
 <polygon points='945.0,410.0 965.0,410.0 955.0,400.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='0.8'/>
 <text x='170.0' y='130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-001 / H-002</text>
-<text x='170.0' y='150.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>4-bolt flange bearings, ¾″ bore, sealed. Need 2.</text>
-<text x='170.0' y='166.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Drive FIXED, idler on axial pad.</text>
+<text x='170.0' y='150.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Mounted ball bearings, 1¼″ bore, self-aligning.</text>
+<text x='170.0' y='166.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Need 2. Drive FIXED, idler FLOATING. Required C</text>
+<text x='170.0' y='182.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>on H-02.</text>
 <text x='170.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-007</text>
 <text x='170.0' y='290.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>½-10 Acme × 12″ + bronze nut + flange. Need 2.</text>
 <text x='170.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-013</text>
@@ -53,9 +54,9 @@
 <text x='170.0' y='800.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-009</text>
 <text x='170.0' y='820.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Rubber rollers ⌀1.25" × ~15.75". Need 2.</text>
 <text x='1020.0' y='130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-003 / H-004</text>
-<text x='1020.0' y='150.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>3.00" motor and 5.00" drum 4L pulleys.</text>
+<text x='1020.0' y='150.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>3.5" motor and 5.00" drum 4L pulleys.</text>
 <text x='1020.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-006</text>
-<text x='1020.0' y='290.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>0.5 HP 1725 RPM TEFC, 115 V. Code the wiring.</text>
+<text x='1020.0' y='290.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>1 HP 1725 RPM TEFC, 115 V. Code the wiring.</text>
 <text x='1020.0' y='390.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-017</text>
 <text x='1020.0' y='410.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>5/16-18 × 1″ hex + nylock + washer. Need 8.</text>
 <text x='1020.0' y='426.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Confirm flange hole.</text>

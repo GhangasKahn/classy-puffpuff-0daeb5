@@ -3,13 +3,19 @@ QC-01,Ply thickness,"Measure ply_actual (default 0.75""). Keep inner span 16.5�
 QC-02,Paired sides,P-001L/R identical hole pattern after stack-drill,T2,M4
 QC-03,Box diagonals,Base diagonals equal; no rack,T2,M5
 QC-04,Way plumb + capture,Both vertical ways plumb and coplanar in X; shoes wrap without bind through full travel,T3,M5
-QC-05,Table flatness,≤ 0.004″ on both diagonals of P-006,T3,M7
+QC-05,Table flatness,≤ 0.003″ on both diagonals of P-006,T3,M7
 QC-06,Drum TIR paper off,≤ 0.002″ mid-span,T4,M7
-QC-07,Drum ∥ table paper on,|A−B| ≤ 0.003″ over 15.5″,T4,M7
+QC-07,Drum ∥ table paper on (alias of QC-15),"Use QC-15 ALN-01. |A−B| ≤ 0.003″ over 15.5″, no load.",T4,M7
 QC-08,Hold-down set,"Rollers 0.030″ below drum OD, paper on",T2,M7
 QC-09,Pulley coplanar,Straightedge across both pulley faces,T2,M5
-QC-10,Thickness scatter,≤ 0.003″ on four corners of witness board,T4,M7
+QC-10,Thickness scatter (alias of QC-16),Use QC-16 TV-01. Witness-board spread ≤ 0.005″.,T4,M7
 QC-11,Idler float,Shaft can grow axially; no banana preload,T2,M3
 QC-12,Way/table capture,Shoes wrap tongue; project 0.230″; X play 0.010″; table moves in Z only,T2,M4
 QC-13,Stretcher clearance,No rail in the table envelope; min Z gap 6.062″ (CALC-004),T2,M5
 QC-14,Acme on drum CL,Both screws at Y 11″; |left−right| travel match through 3″,T3,M7
+QC-15,"ALN-01 alignment, NO LOAD","Indicator at station A (drive) and B (idler), drum stopped, paper on, no workpiece: |A−B| ≤ 0.003″ over 15.5″. Set with the P-023 jack.",T4,M7
+QC-16,TV-01 delivered thickness variation,"Witness board 15.5″ wide, finish pass: caliper 4 corners + centre, spread ≤ 0.005″. This is the user-facing number, NOT the same as QC-15.",T4,M8
+QC-17,Gib running clearance,Set gib to 0.0015″: table slides by hand through full travel with no perceptible rock at either end. Record the feeler used.,T3,M5
+QC-18,Drum residual unbalance,Knife-edge test: drum comes to rest in a random position over 5 releases. Allowance U ≤ 0.39 oz·in (CALC-C13).,T3,M6
+QC-19,Frame bolt re-torque,Re-check all H-034 through-bolts after the first hour of running. Wood relaxes; a loose frame reads as taper.,T2,M9
+QC-20,Collector delivers CFM,Measured or vendor-curve airflow ≥ 349 CFM at the machine (CALC-C15). A shop vacuum will not meet this.,T2,M8

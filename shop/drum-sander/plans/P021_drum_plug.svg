@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-021</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Drum end plug</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 2</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>6061-T6 aluminium</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>ONE LATHE SETUP  ·  bore and OD concentric  ·  make 2</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED from ALN-01 TIR budget</text>
+<circle cx='342.5' cy='422.5' r='202.5' fill='#9aa8b0' stroke='#1a1a1a' stroke-width='2.0'/>
+<circle cx='342.5' cy='422.5' r='56.2' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='140.0' y1='625.0' x2='140.0' y2='663.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='545.0' y1='625.0' x2='545.0' y2='663.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='140.0' y1='657.0' x2='545.0' y2='657.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='140.0,657.0 148.0,653.8 148.0,660.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='545.0,657.0 537.0,653.8 537.0,660.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='223.0' y='640.0' width='239.0' height='18.0' fill='#ffffff'/>
+<text x='342.5' y='652.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>OD ⌀4.5"  (measure YOUR tube ID)</text>
+<text x='342.5' y='414.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>bore ⌀1.25"</text>
+<text x='120.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>END VIEW — turn OD, then bore, then part off. Do not re-chuck.</text>
+<rect x='720.0' y='240.0' width='135.0' height='405.0' fill='#9aa8b0' stroke='#1a1a1a' stroke-width='1.8'/>
+<rect x='720.0' y='386.2' width='135.0' height='112.5' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='720.0' y1='645.0' x2='720.0' y2='679.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='855.0' y1='645.0' x2='855.0' y2='679.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='720.0' y1='673.0' x2='855.0' y2='673.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='720.0,673.0 728.0,669.8 728.0,676.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='855.0,673.0 847.0,669.8 847.0,676.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='762.7' y='656.0' width='49.7' height='18.0' fill='#ffffff'/>
+<text x='787.5' y='668.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>T 1.5"</text>
+<text x='720.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>SIDE VIEW</text>
+<rect x='80.0' y='620.0' width='520.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='206.1,888.0 230.3,887.7 288.4,854.2 264.1,854.5' fill='#6c767c'/>
+<polygon points='179.1,877.4 206.1,888.0 264.1,854.5 237.2,843.8' fill='#6c767c'/>
+<polygon points='152.2,856.9 179.1,877.4 237.2,843.8 210.3,823.4' fill='#6c767c'/>
+<polygon points='237.2,642.6 210.3,632.0 186.0,632.3 166.7,643.4 154.4,664.3 150.1,692.9 154.4,726.5 166.7,761.7 186.0,795.1 210.3,823.4 237.2,843.8 264.1,854.5 288.4,854.2 307.7,843.1 320.1,822.2 324.4,793.5 320.1,760.0 307.7,724.8 288.4,691.4 264.1,663.1' fill='#818c93'/>
+<polygon points='127.9,828.6 152.2,856.9 210.3,823.4 186.0,795.1' fill='#6c767c'/>
+<polygon points='108.6,795.2 127.9,828.6 186.0,795.1 166.7,761.7' fill='#6c767c'/>
+<polygon points='96.3,760.0 108.6,795.2 166.7,761.7 154.4,726.5' fill='#6c767c'/>
+<polygon points='92.0,726.5 96.3,760.0 154.4,726.5 150.1,692.9' fill='#6c767c'/>
+<polygon points='108.6,676.9 96.3,697.8 154.4,664.3 166.7,643.4' fill='#757f85'/>
+<polygon points='96.3,697.8 92.0,726.5 150.1,692.9 154.4,664.3' fill='#6c767c'/>
+</g>
+<text x='90.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric plug</text>
+<text x='640.0' y='620.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='640.0' y='640.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Concentricity of bore to OD becomes drum TIR directly. One</text>
+<text x='640.0' y='656.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  setup, two operations.</text>
+<text x='640.0' y='676.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Light push fit on the 1.25" shaft — no rock. Clamp collars</text>
+<text x='640.0' y='692.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  H-029 locate axially (J-106).</text>
+<text x='640.0' y='712.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Cross-pin through the shell wall in two places 90° apart after</text>
+<text x='640.0' y='728.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the epoxy cures. Pins carry torque.</text>
+<text x='640.0' y='748.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Make a spare from the same bar. 3D-print is not a substitute</text>
+<text x='640.0' y='764.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  for this part.</text>
+</svg>

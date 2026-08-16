@@ -1,6 +1,6 @@
 const D = window.WALTER_DATA;
-const PACK = "../pack/WALTER-DS16-RevB.zip";
-const PACK_NAME = "WALTER-DS16-RevB.zip";
+const PACK = "../pack/WALTER-DS16-RevC.zip";
+const PACK_NAME = "WALTER-DS16-RevC.zip";
 
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];

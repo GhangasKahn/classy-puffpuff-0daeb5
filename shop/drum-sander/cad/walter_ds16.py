@@ -27,11 +27,47 @@ PARAMETER → GEOMETRY → METADATA → DRAWINGS → BOM → CUT LIST → BUILD 
 from __future__ import annotations
 
 import json
+import os
+import sys
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from ds16_mechanics import (  # noqa: E402
+    MECH,
+    alignment_budget,
+    bearing_requirement,
+    drum_mass,
+    drum_rpm as mech_drum_rpm,
+    drum_crown,
+    drum_crown_revb,
+    drive_options,
+    dust_requirement,
+    mech_calculations,
+    mech_decisions,
+    micro_adjust,
+    module_masses,
+    surface_fpm as mech_surface_fpm,
+    thickness_variation_budget,
+    unbalance_allowance,
+)
+from ds16_procurement import procurement, procurement_summary  # noqa: E402
+
 IN_TO_MM = 25.4
 PI = 3.14159265
+
+# Rev C requirements pulled from the mechanics register so the hardware schedule
+# cannot drift away from the calculation that justifies it.
+MECH_C_REQUIRED = bearing_requirement(
+    (drum_mass(MECH)["total"] + MECH.force_reference) / 2.0, mech_drum_rpm(MECH), MECH
+)["c_required"]
+SPEC_HANDWHEEL_DIV = MECH.handwheel_divisions
+MECH_ADJ_AT_WORK = micro_adjust(MECH)["per_rev_at_work"]
+AXIS_I_SHELL = __import__("ds16_mechanics").AXIS.i_shell
+MECH_UNBALANCE_OZIN = unbalance_allowance(mech_drum_rpm(MECH), 1.0)["u_oz_in"]
+MECH_CFM = dust_requirement(MECH)["required_cfm"]
+MECH_DRUM_MASS = drum_mass(MECH)["total"]
 
 # ---------------------------------------------------------------------------
 # 0. Project
@@ -40,44 +76,48 @@ PI = 3.14159265
 PROJECT = {
     "project_id": "WALTER-DS16",
     "project_name": "WALTER DS-16 dedicated drum thickness sander",
-    "revision": "B",
-    "fabrication_rev": "B.4",
+    "revision": "C",
+    "fabrication_rev": "C.1",
     "units": "inch",
     "unit_policy": "Internal inches. Millimetres are interface-only.",
-    "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on A/B",
-    "material_system": "Baltic birch + MDF drum + UHMW ways + phenolic wear",
+    "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on ALN-01 / TV-01",
+    "material_system": "Baltic birch + 6061 drum shell + UHMW ways + phenolic wear",
     "tolerance_class": "T2 joinery, T4 drum/table metrology",
     "author": "WALTER fabrication model",
-    "model_version": "B.4",
+    "model_version": "C.1",
     "cad_platform": "Python SSOT + OpenSCAD solids + SVG shop drawings",
-    "lineage": "ShopNotes 86 → Ron Walters → Rev A solid table → Rev B geometry",
+    "lineage": "ShopNotes 86 → Ron Walters → Rev A solid table → Rev B geometry → Rev C precision axis",
 }
 
 # Release state for the whole package. A powered machine with a 5" drum at
-# ~1035 RPM is R3: the geometry and joinery are resolved and internally
-# reconciled, but two things are deliberately NOT released here — mains
-# electrical work (qualified person + local code) and the flange bolt circle
-# (ASSUMED until the purchased bearing is transferred to the panel).
+# ~1208 RPM is R3: the geometry and joinery are resolved and internally
+# reconciled, but several things are deliberately NOT released here — mains
+# electrical work, the flange bolt circle (ASSUMED until transferred), and
+# the purchased bearing's actual dynamic capacity C (read off vendor data).
 RELEASE_STATE = {
     "state": "FABRICATION REVIEW",
     "risk_class": "R3",
     "risk_triggers": [
-        "Powered spindle: 5\u2033 drum at ~1035 RPM with stored rotational energy",
+        "Powered spindle: 5\u2033 drum at ~1208 RPM with stored rotational energy",
         "Mains-voltage motor, switch, and cord require qualified electrical work",
         "Ingoing nip between drum and feed rollers; workpiece ejection path",
-        "Abrasive dust generation, worst when truing the MDF core",
+        "Abrasive dust generation, worst when truing the drum OD",
     ],
     "conditions": [
-        "Transfer the purchased 4-bolt flange to the panel before drilling. The bolt square on the drawings is ASSUMED.",
+        "Transfer the purchased flange to the panel before drilling. The bolt square on the drawings is ASSUMED.",
         "Measure ply_actual and regenerate. Keep the 16.5\u2033 inner span; do not shrink it to suit 18 mm stock.",
+        "Confirm the purchased bearing's basic dynamic capacity C on the vendor page (CALC-C11). Bore alone is not a specification.",
         "Motor circuit, switch, grounding, and cord: qualified electrician and local code. Not released by this package.",
         "Commission with the hood on and no stock, standing clear of the drum ends.",
-        "Confirm TIR, |A\u2212B|, and witness-board scatter before the machine is used on real work.",
+        "Pass ALN-01 (no-load |A\u2212B|) then TV-01 (witness-board scatter) before the machine is used on real work.",
+        "3D-print P-023 at 1:1 before cutting metal.",
+        "Collector must deliver the CALC-C15 airflow at the machine; a shop vacuum will not.",
     ],
     "not_released": [
         "Electrical installation and any code-dependent wiring",
         "Any use as a metal-working or thickness-planing machine",
         "Stock shorter than ~12\u2033 without the sled",
+        "McMaster-Carr catalogue part numbers (CONFIRM AT ORDER \u2014 see H-02 / H-03)",
     ],
 }
 
@@ -107,8 +147,8 @@ LAYOUT_PROTOCOL = {
 class Spec:
     """Controlling inputs. Dependent sizes live in Geom, not here."""
 
-    revision: str = "B"
-    fabrication_rev: str = "B.4"
+    revision: str = "C"
+    fabrication_rev: str = "C.1"
 
     # Capacity — VERIFIED design intent
     capacity_width: float = 15.5
@@ -117,10 +157,15 @@ class Spec:
     min_stock_length: float = 12.0
     table_margin_each: float = 0.25  # table wider than work, each side
 
-    # Quality — VERIFIED Rev B spec
-    parallel_tol: float = 0.003
-    table_flat_tol: float = 0.004
-    drum_tir: float = 0.002
+    # Quality — Rev C SPLITS the single Rev B number into two measurable specs.
+    # Rev B quoted 0.003″ for both a no-load alignment check and the delivered
+    # thickness variation of a board. Those are different quantities with
+    # different error budgets (CALC-C06); no machine can make them equal.
+    aln_spec: float = 0.003    # ALN-01 no-load |A−B| alignment, indicator
+    tv_spec: float = 0.005     # TV-01 delivered thickness variation, witness board
+    parallel_tol: float = 0.003  # retained alias = ALN-01
+    table_flat_tol: float = 0.003  # over the 15.5″ contact line, not the diagonal
+    drum_tir: float = 0.0015
     paper_on_delta: float = 0.002
     pass_rough: float = 0.008
     pass_medium: float = 0.004
@@ -137,23 +182,38 @@ class Spec:
     sandpaper_width: float = 3.0
     disc_bandsaw_oversize: float = 0.125
 
-    # Shaft — VERIFIED
-    shaft_od: float = 0.75
-    shaft_length: float = 22.5
-    shaft_spec: str = "Precision-ground CRS or TG&P, ¾″, 0.0005″ TIR"
+    # Shaft — Rev C: ¾″ FAILED the accuracy spec (CALC-C01). See D-041.
+    shaft_od: float = 1.25
+    shaft_length: float = 24.0
+    shaft_spec: str = "Precision-ground rotary shaft, 1¼″, straightness ≤ 0.001″/ft"
     key_wire_od: float = 0.125
-    bearing_drive: str = '4-bolt flange, ¾″ bore, sealed — FIXED'
-    bearing_idler: str = '4-bolt flange, ¾″ bore, sealed — FLOATING (axial)'
+    bearing_drive: str = 'Mounted ball bearing, 1¼″ bore, self-aligning — FIXED'
+    bearing_idler: str = 'Mounted ball bearing, 1¼″ bore, self-aligning — FLOATING (axial)'
     bearing_count: int = 2
     idler_float_slot: float = 0.25  # axial slot, ASSUMED shopable
 
-    # Drive — VERIFIED
-    motor_hp: float = 0.5
+    # Rev C structural drum shell — replaces the MDF disc stack as baseline.
+    # The disc stack survives as documented Option B (D-047).
+    shell_od: float = 5.0
+    shell_wall: float = 0.25
+    plug_inset: float = 0.25
+    plug_thick: float = 1.5
+    bearing_offset: float = 0.35  # ball CL outboard of the side face — MEASURE
+    drum_option: str = "A"  # A = aluminium shell (baseline) · B = MDF disc stack
+
+    # Precision adjustment — Rev C
+    gib_clearance: float = 0.0015
+    jack_thread_tpi: float = 28.0
+    jack_arm_l1: float = 6.0
+    jack_arm_l2: float = 1.25
+
+    # Drive — Rev C re-sheave for surface speed (D-046)
+    motor_hp: float = 1.0
     motor_rpm: float = 1725.0
-    pulley_motor_od: float = 3.0
+    pulley_motor_od: float = 3.5
     pulley_drum_od: float = 5.0
     belt: str = "4L / A-section V-belt (size to center distance)"
-    drum_rpm: float = 1035.0
+    drum_rpm: float = 1207.5
 
     # Frame — inner span is the constraint, even with 18 mm Euro BB
     ply_nominal: float = 0.75
@@ -232,9 +292,9 @@ class Spec:
     display_gap_under_drum: float = 0.50  # viz opening, not min capacity
 
     # Hole / cut patterns on P-001 (ASSUMED until flange BCD is USER_CONFIRM)
-    flange_bolt_square: float = 2.05  # 4-bolt square CTC, typical ¾″ 4-bolt flange
-    flange_bolt_clr: float = 0.344  # 11/32″ for 5/16-18
-    ply_shaft_clear_dia: float = 1.125  # shaft must not rub the plywood
+    flange_bolt_square: float = 3.00  # 1¼″-bore flange CTC — MEASURE YOURS
+    flange_bolt_clr: float = 0.406  # 13/32″ for ⅜-16
+    ply_shaft_clear_dia: float = 1.625  # shaft must not rub the plywood
     motor_pivot_dia: float = 0.266  # F / 17/64 for ¼-20
     indicator_pad_y: float = 8.0  # drive side only, from infeed
     indicator_pad_z: float = 16.0
@@ -256,10 +316,12 @@ class Spec:
         "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
         "Torsion-box table + phenolic / tooling-plate wear face",
         "Spring hold-down rollers infeed + outfeed — kills snipe and chatter",
-        "Full-width truing sled; re-clock after paper wrap to ±0.003″",
+        "Full-width truing sled; re-clock after paper wrap (ALN-01)",
         "Dial-indicator pad on drive side; 0.001″ pass schedule",
         "Optional ⅛″ slow oscillation (gear motor) to erase spiral tracks",
-        "Pack-bore disc jig + static balance of end discs",
+        "Structural 6061 drum shell + turned plugs (Option B disc stack documented)",
+        "Tapered UHMW gib + ¼-28 idler jack for ALN-01",
+        "Frame housed dados through-bolted (H-034) — glue is not primary structure",
     )
 
 
@@ -804,6 +866,63 @@ def calculations(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "evidence": "E",
             "ok": True,
         },
+    ] + [
+        # Rev C mechanics register (CALC-C01…C18) computed in ds16_mechanics.py.
+        # Mapped onto the same row shape so one table renders both generations.
+        {
+            "id": c["id"],
+            "name": c["question"],
+            "expr": c["equation"],
+            "result": c["result"],
+            "value": 0.0,
+            "evidence": c["evidence"][:1],
+            "ok": not c["verdict"].startswith("FAIL"),
+            "criterion": c["criterion"],
+            "margin": c["margin"],
+            "verdict": c["verdict"],
+            "inputs": c["inputs"],
+            "method": c["method"],
+            # CALC-C01 is a RESOLVED finding about Rev B, not an open defect. It is
+            # kept in the register because deleting the evidence would hide why the
+            # drum axis was redesigned.
+            "historical": c["id"] == "CALC-C01",
+        }
+        for c in mech_calculations(MECH)
+    ]
+
+
+def accuracy_budgets() -> dict[str, Any]:
+    """The two Rev C specifications, as auditable tables."""
+    return {
+        "ALN-01": alignment_budget(MECH),
+        "TV-01-revC": thickness_variation_budget(MECH, "C"),
+        "TV-01-revB": thickness_variation_budget(MECH, "B"),
+    }
+
+
+def superseded_by_rev_c() -> list[dict[str, str]]:
+    """Every Rev B artefact that Rev C changes. Revision control, not a footnote.
+
+    PLANFORGE forbids patching only the visible drawing. Anything listed here is
+    regenerated from this file; nothing needs hand-editing. The list exists so a
+    reviewer can see the blast radius of D-041 at a glance.
+    """
+    return [
+        {"artefact": "P-010 shaft", "was": '¾″ × 22.5″', "now": '1¼″ × 24″', "driver": "D-041 / CALC-C01"},
+        {"artefact": "P-008 / P-009 discs", "was": "baseline drum", "now": "Option B alternative only", "driver": "D-047"},
+        {"artefact": "P-015 pack-bore jig", "was": "baseline", "now": "Option B only", "driver": "D-047"},
+        {"artefact": "P-020 / P-021", "was": "did not exist", "now": "baseline drum shell + plugs", "driver": "D-041"},
+        {"artefact": "P-022 gib", "was": "did not exist", "now": "sets way clearance", "driver": "D-042"},
+        {"artefact": "P-023 / P-024", "was": "did not exist", "now": "parallelism micro-adjust", "driver": "D-043"},
+        {"artefact": "H-001 / H-002 bearings", "was": '¾″ bore, unspecified rating', "now": f'1¼″ bore, C ≥ {MECH_C_REQUIRED:.0f} lbf, self-aligning', "driver": "D-045 / CALC-C11"},
+        {"artefact": "H-003 motor sheave", "was": '3″', "now": '3½″', "driver": "D-046 / CALC-C12"},
+        {"artefact": "Motor", "was": "½ HP", "now": "1 HP", "driver": "D-046"},
+        {"artefact": "ply_shaft_clear_dia", "was": '1.125″', "now": '1.625″', "driver": "D-041 shaft size"},
+        {"artefact": "flange_bolt_square", "was": '2.05″ [A]', "now": '3.00″ [A] — MEASURE YOURS', "driver": "D-041"},
+        {"artefact": "Spec 0.003″", "was": "one number for two quantities", "now": "ALN-01 0.003″ and TV-01 0.005″", "driver": "D-040 / CALC-C06"},
+        {"artefact": "QC-07 / QC-10", "was": "conflated parallel and scatter", "now": "QC-15 ALN-01 and QC-16 TV-01", "driver": "D-040"},
+        {"artefact": "Frame joinery", "was": "screws", "now": "housed dado + through-bolts", "driver": "D-048"},
+        {"artefact": "Build steps", "was": "14 steps", "now": f"{len(build_steps())} steps", "driver": "Rev C drum + gib + micro-adjust"},
     ]
 
 
@@ -1017,7 +1136,7 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             category="disc", assembly="A-DRUM", make="MAKE",
             material="MDF", t=s.disc_thick, w=g.drum_oversize_od, l=g.drum_oversize_od,
             purchase='¾" MDF, bandsaw ⌀5⅛″',
-            process="Bandsaw oversize, pack-bore ⌀¾″, true on sled to ⌀5″",
+            process=f"Bandsaw oversize, pack-bore ⌀{s.shaft_od:g}″ (Option B only), true on sled to ⌀5″",
             joinery="J-005 pack-bore + piano-wire keys; 1 mm relief every 4",
             handed="IDENTICAL", viz="drum", sheet="P008_disc_core.svg",
         ),
@@ -1035,9 +1154,9 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             category="shaft", assembly="A-DRUM", make="BUY-CUT",
             material="Precision-ground CRS / TG&P",
             t=s.shaft_od, w=s.shaft_od, l=s.shaft_length,
-            purchase='¾" TG&P × 24", cut to 22.5"',
-            process="Cut to length; ⅛″ key slots; TIR ≤ 0.0005″ incoming",
-            joinery="J-005 discs; J-006 fixed drive flange; J-007 floating idler",
+            purchase=f'{s.shaft_od:g}" TG&P × {s.shaft_length:g}" (MC-02)',
+            process="Cut square, chamfer 0.030 × 45°, deburr. Do not centre-punch the bearing seats.",
+            joinery="J-106 plugs; J-006 fixed drive flange; J-007 floating idler",
             handed="IDENTICAL", viz="shaft", sheet="P010_shaft.svg",
             notes=s.shaft_spec, evidence="VERIFIED",
         ),
@@ -1079,8 +1198,79 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "P-015", "Disc pack-bore jig", 1,
             category="jig", assembly="A-JIG", make="MAKE",
             material="MDF", t=t, w=s.bore_jig, l=s.bore_jig,
-            process="Fence + clamp wall; drill/ream ⌀¾″ through the pack",
+            process=f"Fence + clamp wall; drill/ream ⌀{s.shaft_od:g}″ through the pack (Option B)",
             joinery="none", handed="IDENTICAL", viz="drum", sheet="P015_pack_bore.svg",
+        ),
+        _part(
+            "P-020", "Drum shell, aluminium tube", 1,
+            category="drum", assembly="A-DRUM", make="MAKE",
+            material=f"6061-T6 aluminium tube {s.shell_od:g}″ OD × {s.shell_wall:g}″ wall",
+            t=s.shell_wall, w=s.shell_od, l=g.drum_length,
+            purchase=f'{s.shell_od:g}" OD × {s.shell_wall:g}" wall × 18" (H-027 / MC-01)',
+            grain="n/a — isotropic", ref_face="OD after final truing",
+            ref_end="Drive end",
+            process="Cut 1/8″ long, face both ends square, bond+pin to P-021, "
+                    "then true the OD with the shaft in its own bearings",
+            joinery="J-106 shell → plug → shaft",
+            handed="IDENTICAL", viz="drum", sheet="P020_drum_shell.svg",
+            notes=f"Wall is the stiffness requirement: I = {AXIS_I_SHELL:.2f} in⁴. "
+                  f"This part is why Rev C holds the accuracy spec (CALC-C02).",
+            evidence="DERIVED from CALC-C02",
+        ),
+        _part(
+            "P-021", "Drum end plug", 2,
+            category="drum", assembly="A-DRUM", make="MAKE",
+            material="6061-T6 aluminium",
+            t=s.plug_thick, w=s.shell_od - 2 * s.shell_wall, l=s.shell_od - 2 * s.shell_wall,
+            purchase='4½" dia bar × 4" (H-028 / MC-04)',
+            ref_face="OD (bonds to shell ID)", ref_end="Outboard face",
+            process=f"Turn OD to a light bond fit in the shell ID and bore "
+                    f"{s.shaft_od:g}″ ON THE SAME SETUP so bore and OD are concentric",
+            joinery="J-106; cross-pinned to shell, clamp-collared to shaft",
+            handed="IDENTICAL", viz="drum", sheet="P021_drum_plug.svg",
+            notes="Concentricity of bore to OD becomes drum TIR directly. One setup, "
+                  "two operations. Lightening holes optional.",
+            evidence="DERIVED from ALN-01 TIR budget",
+        ),
+        _part(
+            "P-022", "Way gib, tapered", 1,
+            category="way", assembly="A-FRAME", make="MAKE",
+            material="UHMW-PE",
+            t=s.way_stock, w=s.way_width, l=s.side_depth,
+            purchase='¾" × 2½" UHMW bar (H-014 stock / MC-14)',
+            ref_face="Tapered face bears on the shoe",
+            process="Taper 1:40 on a taper jig; three ¼-20 brass-tip adjusters",
+            joinery="J-105 adjustable gib",
+            handed="IDLER SIDE ONLY", viz="ways", sheet="P022_gib.svg",
+            notes=f"Replaces the Rev B {0.020:.3f}″ sliding clearance with "
+                  f"{s.gib_clearance:.4f}″ set clearance. Largest single term removed "
+                  f"from the thickness budget (D-042).",
+            evidence="DERIVED from CALC-C05",
+        ),
+        _part(
+            "P-023", "Idler bearing micro-adjust plate", 1,
+            category="precision", assembly="A-DRUM", make="MAKE",
+            material="6061 aluminium plate or steel plate, ⅜″",
+            t=0.375, w=4.0, l=8.0,
+            ref_face="Bearing mounting face", ref_edge="Pivot axis",
+            process="Drill the bearing pattern FROM THE BEARING, ream the pivot, "
+                    "then tap nothing — the jack bears on a pad",
+            joinery="J-105 pivot + jack; H-032 pin; H-030 jack screw",
+            handed="IDLER SIDE ONLY", viz="shaft", sheet="P023_idler_plate.svg",
+            notes=f"Pivot-to-jack {s.jack_arm_l1:g}″, pivot-to-bearing {s.jack_arm_l2:g}″ → "
+                  f"{MECH_ADJ_AT_WORK * 1000:.2f} mil at the work per screw turn. "
+                  f"3D-print at 1:1 before cutting metal (user standard).",
+            evidence="DERIVED from CALC-C07",
+        ),
+        _part(
+            "P-024", "Jack screw block", 1,
+            category="precision", assembly="A-DRUM", make="MAKE",
+            material="Steel or aluminium bar",
+            t=0.75, w=1.25, l=2.0,
+            process=f"Tap ¼-{s.jack_thread_tpi:g} through; chase the thread clean",
+            joinery="J-105", handed="IDLER SIDE ONLY", viz="shaft",
+            sheet="P024_jack_block.svg",
+            notes="A ragged thread reads as backlash in the parallelism adjustment.",
         ),
         _part(
             "P-016", "Acme bronze nut block", 2,
@@ -1133,8 +1323,8 @@ def parts(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
 
 def hardware(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
     return [
-        {"hardware_id": "H-001", "description": '4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)', "standard": "2-bolt/4-bolt flange", "size": '¾" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "notes": "Lock to P-001L. No axial float."},
-        {"hardware_id": "H-002", "description": '4-bolt flange bearing, ¾″ bore, sealed, FLOATING (idler)', "standard": "4-bolt flange", "size": '¾" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "notes": f"Axial float on a {s.idler_float_pad:g}″ UHMW pad (J-007). Do not elongate flange holes in the plywood face."},
+        {"hardware_id": "H-001", "description": 'Mounted ball bearing, 1¼″ bore, self-aligning, FIXED (drive)', "standard": "2-bolt/4-bolt flange or pillow block", "size": '1¼" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-03", "notes": f"Lock to P-001L. No axial float. REQUIRED C ≥ {MECH_C_REQUIRED:.0f} lbf (CALC-C11); self-align ≥ 0.011° (CALC-C08). Confirm both on the vendor page."},
+        {"hardware_id": "H-002", "description": 'Mounted ball bearing, 1¼″ bore, self-aligning, FLOATING (idler)', "standard": "2-bolt/4-bolt flange or pillow block", "size": '1¼" bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-03", "notes": f"Mounts on P-023 micro-adjust plate. Axial float on a {s.idler_float_pad:g}″ UHMW pad (J-007). Never lock both bearings."},
         {"hardware_id": "H-003", "description": f'{s.pulley_motor_od:g}″ motor 4L pulley', "size": f'{s.pulley_motor_od:g}"', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRIVE"},
         {"hardware_id": "H-004", "description": f'{s.pulley_drum_od:g}″ drum 4L pulley', "size": f'{s.pulley_drum_od:g}"', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRIVE"},
         {"hardware_id": "H-005", "description": s.belt, "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRIVE", "notes": "Size to measured center distance after cradle lock."},
@@ -1159,6 +1349,15 @@ def hardware(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"hardware_id": "H-024", "description": "Paste wax (UHMW dry lube — no oil)", "qty": 1, "make_or_buy": "BUY", "assembly": "A-FRAME"},
         {"hardware_id": "H-025", "description": "Optional 60–90 RPM gearmotor + scotch yoke oscillator", "qty": 1, "make_or_buy": "BUY", "assembly": "A-OSC", "notes": "Optional. Not drum RPM."},
         {"hardware_id": "H-026", "description": "½″ thrust washer + e-clip (Acme lower end)", "qty": 2, "make_or_buy": "BUY", "assembly": "A-TABLE", "notes": "Under P-018. Sanding load tries to pull the screw up."},
+        {"hardware_id": "H-027", "description": f'Aluminium round tube {s.shell_od:g}″ OD × {s.shell_wall:g}″ wall — drum shell stock', "size": f'{s.shell_od:g}" OD × {s.shell_wall:g}" wall × 18"', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-01", "notes": "Wall is a stiffness requirement (CALC-C02), not cosmetic. Becomes P-020."},
+        {"hardware_id": "H-028", "description": 'Aluminium round bar 4½″ dia — drum end plug stock', "size": '4½" dia × 4"', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-04", "notes": "Becomes P-021 ×2. Turn OD and bore on one setup — concentricity here becomes drum TIR."},
+        {"hardware_id": "H-029", "description": f'Clamping shaft collar, {s.shaft_od:g}″ bore', "qty": 4, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-05", "notes": "Clamp type only. Set-screw collars mar the ground shaft."},
+        {"hardware_id": "H-030", "description": '¼-28 socket head cap screw — parallelism jack', "size": '¼-28 × 1½"', "qty": 2, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-06", "notes": "Fine thread is the requirement (CALC-C07). ¼-20 degrades resolution ~40%."},
+        {"hardware_id": "H-031", "description": '¼-20 brass-tip set screw — gib adjusters', "qty": 6, "make_or_buy": "BUY", "assembly": "A-FRAME", "mcmaster": "MC-07", "notes": "Brass tip loads the gib without embedding. Bare steel brinells it and the setting drifts."},
+        {"hardware_id": "H-032", "description": '⅜″ × 2″ hardened dowel pin — idler plate pivot', "qty": 2, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-08", "notes": "Pivot must not wear oval or the parallelism setting walks."},
+        {"hardware_id": "H-033", "description": 'Two-part structural epoxy for aluminium', "qty": 1, "make_or_buy": "BUY", "assembly": "A-DRUM", "mcmaster": "MC-22", "notes": "Read the data sheet for open time and cure. Cross-pin as well — never adhesive alone on a rotating part."},
+        {"hardware_id": "H-034", "description": '¼-20 × 3″ hex bolt + nylock + backing washers — frame through-bolts', "qty": 12, "make_or_buy": "BUY", "assembly": "A-FRAME", "mcmaster": "MC-24", "notes": "D-048: screws alone are excluded by the user joinery standard. Re-check torque after the first hour (QC-19)."},
+        {"hardware_id": "H-035", "description": 'Graduated handwheel, ½″ bore', "qty": 1, "make_or_buy": "BUY", "assembly": "A-TABLE", "mcmaster": "MC-13", "notes": f"{SPEC_HANDWHEEL_DIV} divisions → 0.0025″ per division (CALC-C10)."},
     ]
 
 
@@ -1277,6 +1476,43 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "notes": "Both nuts on the drum-CL screws; chain-coupled rotation. Cutting force goes through the nuts.",
         },
         {
+            "joint_id": "J-105",
+            "joint_type": "adjustable tapered gib + pivot plate",
+            "part_a": "P-022 gib / P-023 idler plate",
+            "part_b": "P-001R side / P-017 shoe",
+            "qty": 1,
+            "location": "Idler side only. Gib behind the shoe; plate pinned at the drum CL.",
+            "taper": "1:40",
+            "fit_class": "ADJUSTABLE SLIDING",
+            "target_clearance": SPEC.gib_clearance,
+            "adjusters": "3 × ¼-20 brass-tip (H-031)",
+            "jack": f"¼-{SPEC.jack_thread_tpi:g} at L1 {SPEC.jack_arm_l1:g}″ / L2 {SPEC.jack_arm_l2:g}″",
+            "resolution_at_work": MECH_ADJ_AT_WORK,
+            "assembly_direction": "Taper wedges down: tightening closes clearance",
+            "inspection": "QC-17 gib clearance; QC-15 ALN-01 after the jack is set",
+            "notes": "Two adjustments that must not be confused: the GIB sets running "
+                     "clearance (fit), the JACK sets drum parallelism (alignment). "
+                     "Set the gib first and leave it alone while clocking ALN-01.",
+        },
+        {
+            "joint_id": "J-106",
+            "joint_type": "bonded + cross-pinned shell to plug to shaft",
+            "part_a": "P-020 shell",
+            "part_b": "P-021 plugs / P-010 shaft",
+            "qty": 2,
+            "location": f"Each end, plug seated {SPEC.plug_inset:g}″ inboard of the shell end",
+            "bore": SPEC.shaft_od,
+            "fit_class": "BONDED + PINNED (shell↔plug); CLAMPED (plug↔shaft)",
+            "adhesive": "H-033 two-part structural epoxy for aluminium",
+            "pins": "2 per plug, 90° apart, through the shell wall",
+            "constraint": "Plugs axially located by H-029 clamp collars",
+            "assembly_direction": "Plugs in from each end; shaft last, through both",
+            "inspection": "QC-06 TIR after truing; QC-18 unbalance",
+            "notes": "The pins carry torque; the epoxy seals and shares load. Never "
+                     "adhesive alone on a rotating part. Bore and OD of the plug must "
+                     "be cut in ONE lathe setup or the drum runs true at only one angle.",
+        },
+        {
             "joint_id": "J-012",
             "joint_type": "captured shoe wrap",
             "part_a": "P-017",
@@ -1316,8 +1552,8 @@ def joints(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
 def assemblies() -> list[dict[str, Any]]:
     return [
         {"assembly_id": "A-MASTER", "name": "WALTER DS-16", "children": ["A-FRAME", "A-DRUM", "A-DRIVE", "A-TABLE", "A-HOOD", "A-JIG"]},
-        {"assembly_id": "A-FRAME", "name": "Box + ways", "parts": ["P-001L", "P-001R", "P-002", "P-003", "P-007", "P-018"], "stage": "glue-up"},
-        {"assembly_id": "A-DRUM", "name": "Drum + shaft + bearings", "parts": ["P-008", "P-009", "P-010", "H-001", "H-002"]},
+        {"assembly_id": "A-FRAME", "name": "Box + ways", "parts": ["P-001L", "P-001R", "P-002", "P-003", "P-007", "P-018", "P-022"], "stage": "glue-up"},
+        {"assembly_id": "A-DRUM", "name": "Drum + shaft + bearings", "parts": ["P-020", "P-021", "P-010", "P-023", "P-024", "H-001", "H-002", "H-029"], "alt_parts": ["P-008", "P-009", "P-015"], "note": "Option A shell baseline; Option B disc stack alternative (D-047)"},
         {"assembly_id": "A-DRIVE", "name": "Motor + pulleys", "parts": ["P-012", "H-003", "H-004", "H-005", "H-006"]},
         {"assembly_id": "A-TABLE", "name": "Table + lift + hold-downs", "parts": ["P-004", "P-005", "P-006", "P-014", "P-016", "P-017", "P-019", "H-007", "H-008", "H-009"]},
         {"assembly_id": "A-HOOD", "name": "Dust hood", "parts": ["P-011", "H-019"]},
@@ -1339,7 +1575,11 @@ def operations(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"op": "S-008", "title": "Stack-drill bearing CL", "tool": "Drill press, sides clamped face-to-face", "setting": f'Y {g.bearing_cl_y:g}" from infeed · Z {g.bearing_cl_z:g}" from bottom', "parts": ["P-001L+R"], "rule": "One stack. Then split for inner-face dados."},
         {"op": "S-009", "title": "Pack-bore discs", "tool": "P-015 jig + drill/ream", "setting": f'⌀{s.shaft_od:g}"', "parts": ["P-008", "P-009"]},
         {"op": "S-010", "title": "True drum", "tool": "P-013 sled on ways", "setting": f'TIR ≤ {s.drum_tir:.3f}"', "parts": ["A-DRUM"]},
-        {"op": "S-011", "title": "A/B clock", "tool": "H-021 indicator", "setting": f'|A−B| ≤ {s.parallel_tol:.3f}" paper on', "parts": ["A-TABLE", "A-DRUM"]},
+        {"op": "S-011", "title": "ALN-01 clock", "tool": "H-021 indicator + P-023 jack", "setting": f'|A−B| ≤ {s.aln_spec:.3f}" paper on, no load', "parts": ["A-TABLE", "A-DRUM"], "rule": "Set the gib FIRST and leave it. Then clock with the jack only."},
+        {"op": "S-012", "title": "Turn plug OD + bore", "tool": "Metal lathe", "setting": f'OD to shell ID · bore ⌀{s.shaft_od:g}"', "parts": ["P-021"], "rule": "ONE SETUP — do not re-chuck between OD and bore."},
+        {"op": "S-013", "title": "Taper the gib", "tool": "Taper jig", "setting": "1:40", "parts": ["P-022"]},
+        {"op": "S-014", "title": "Set gib clearance", "tool": "Brass-tip adjusters + feelers", "setting": f'{s.gib_clearance:.4f}"', "parts": ["P-022"], "rule": "No rock, no bind, through FULL travel."},
+        {"op": "S-015", "title": "TV-01 witness board", "tool": "Calipers", "setting": f'spread ≤ {s.tv_spec:.3f}" across {s.capacity_width:g}"', "parts": ["A-MASTER"], "rule": "Finish pass only. Different number from ALN-01."},
     ]
 
 
@@ -1351,14 +1591,20 @@ def inspection(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         {"qc": "QC-04", "check": "Way plumb + capture", "spec": "Both vertical ways plumb and coplanar in X; shoes wrap without bind through full travel", "class": "T3", "gate": "M5"},
         {"qc": "QC-05", "check": "Table flatness", "spec": f"≤ {s.table_flat_tol:.3f}″ on both diagonals of P-006", "class": "T3", "gate": "M7"},
         {"qc": "QC-06", "check": "Drum TIR paper off", "spec": f"≤ {s.drum_tir:.3f}″ mid-span", "class": "T4", "gate": "M7"},
-        {"qc": "QC-07", "check": "Drum ∥ table paper on", "spec": f"|A−B| ≤ {s.parallel_tol:.3f}″ over {s.capacity_width:g}″", "class": "T4", "gate": "M7"},
+        {"qc": "QC-07", "check": "Drum ∥ table paper on (alias of QC-15)", "spec": f"Use QC-15 ALN-01. |A−B| ≤ {s.aln_spec:.3f}″ over {s.capacity_width:g}″, no load.", "class": "T4", "gate": "M7"},
         {"qc": "QC-08", "check": "Hold-down set", "spec": f"Rollers {s.roller_setbelow:.3f}″ below drum OD, paper on", "class": "T2", "gate": "M7"},
         {"qc": "QC-09", "check": "Pulley coplanar", "spec": "Straightedge across both pulley faces", "class": "T2", "gate": "M5"},
-        {"qc": "QC-10", "check": "Thickness scatter", "spec": f"≤ {s.parallel_tol:.3f}″ on four corners of witness board", "class": "T4", "gate": "M7"},
+        {"qc": "QC-10", "check": "Thickness scatter (alias of QC-16)", "spec": f"Use QC-16 TV-01. Witness-board spread ≤ {s.tv_spec:.3f}″.", "class": "T4", "gate": "M7"},
         {"qc": "QC-11", "check": "Idler float", "spec": "Shaft can grow axially; no banana preload", "class": "T2", "gate": "M3"},
         {"qc": "QC-12", "check": "Way/table capture", "spec": f"Shoes wrap tongue; project {g.way_project:.3f}″; X play {g.shoe_groove_depth - g.way_project:.3f}″; table moves in Z only", "class": "T2", "gate": "M4"},
         {"qc": "QC-13", "check": "Stretcher clearance", "spec": f"No rail in the table envelope; min Z gap {g.min_stretcher_table_clear:.3f}″ (CALC-004)", "class": "T2", "gate": "M5"},
         {"qc": "QC-14", "check": "Acme on drum CL", "spec": f"Both screws at Y {g.acme_y:g}″; |left−right| travel match through 3″", "class": "T3", "gate": "M7"},
+        {"qc": "QC-15", "check": "ALN-01 alignment, NO LOAD", "spec": f"Indicator at station A (drive) and B (idler), drum stopped, paper on, no workpiece: |A−B| ≤ {s.aln_spec:.3f}″ over {s.capacity_width:g}″. Set with the P-023 jack.", "class": "T4", "gate": "M7"},
+        {"qc": "QC-16", "check": "TV-01 delivered thickness variation", "spec": f"Witness board {s.capacity_width:g}″ wide, finish pass: caliper 4 corners + centre, spread ≤ {s.tv_spec:.3f}″. This is the user-facing number, NOT the same as QC-15.", "class": "T4", "gate": "M8"},
+        {"qc": "QC-17", "check": "Gib running clearance", "spec": f"Set gib to {s.gib_clearance:.4f}″: table slides by hand through full travel with no perceptible rock at either end. Record the feeler used.", "class": "T3", "gate": "M5"},
+        {"qc": "QC-18", "check": "Drum residual unbalance", "spec": f"Knife-edge test: drum comes to rest in a random position over 5 releases. Allowance U ≤ {MECH_UNBALANCE_OZIN:.2f} oz·in (CALC-C13).", "class": "T3", "gate": "M6"},
+        {"qc": "QC-19", "check": "Frame bolt re-torque", "spec": "Re-check all H-034 through-bolts after the first hour of running. Wood relaxes; a loose frame reads as taper.", "class": "T2", "gate": "M9"},
+        {"qc": "QC-20", "check": "Collector delivers CFM", "spec": f"Measured or vendor-curve airflow ≥ {MECH_CFM:.0f} CFM at the machine (CALC-C15). A shop vacuum will not meet this.", "class": "T2", "gate": "M8"},
     ]
 
 
@@ -1378,7 +1624,7 @@ def decisions() -> list[dict[str, str]]:
         {"id": "D-028", "decision": "Three stretcher stations IN-LO / OUT-LO / OUT-HI, rails on edge", "reason": "A stretcher at Z=12 occupied the same volume as a 3″-open table. Triangle in the YZ plane fights racking without crossing the table.", "rev": "B.4", "affected": "P-001, P-003, J-001"},
         {"id": "D-029", "decision": "Both Acme screws on the drum centerline (left/right X, one Y)", "reason": "Infeed/outfeed Y put the nuts off the cutting-force line and the 3D model only drew two screws at one Y anyway. Force through the nuts; chain couples them.", "rev": "B.4", "affected": "P-016, P-018, P-019, H-007, H-008"},
         {"id": "D-030", "decision": "Layout protocol is HYBRID: face/edge on panels, centerline on drum/Acme/ways", "reason": "Planforge centerline protocol. Mixing a face measurement with a CL measurement without converting is how the drum axis drifts.", "rev": "B.4", "affected": "G-002, A-01, M-101"},
-    ]
+    ] + mech_decisions()
 
 
 def revisions() -> list[dict[str, str]]:
@@ -1389,6 +1635,7 @@ def revisions() -> list[dict[str, str]]:
         {"rev": "B.2", "note": "Individual Wandel-style part/assembly/hardware sheets; named hole patterns; idler axial pad (not YZ slots)"},
         {"rev": "B.3", "note": "Master build guide book: G-001…G-004 design basis, E-101 ballooned explosion, ST-01…ST-14 step sheets with parts trays, Q-101 commissioning"},
         {"rev": "B.4", "note": "Mechanics: vertical captured ways, stretcher stations clear of the table, both Acme screws on the drum CL, P-017 shoes / P-018 thrust / P-019 home dog, Planforge J/M/F/S sheets, validate_mechanics()"},
+        {"rev": "C", "note": "Precision rebuild. Rev B's ¾″ shaft failed its own accuracy spec at 4.25 lbf (CALC-C01), and one 0.003″ figure was being used for two different quantities. Rev C: 1¼″ shaft + structural aluminium shell (21× stiffer), adjustable gib, parallelism micro-adjust plate, bearings specified by required dynamic capacity, spec split into ALN-01 and TV-01, frame through-bolted, 18-step build with an Option B drum, McMaster procurement register."},
     ]
 
 
@@ -1399,6 +1646,7 @@ def datums(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, str]]:
         {"id": "DATUM-C", "on": "P-001L/R", "what": "Inner face", "use": "X local; dados and way rebate"},
         {"id": "DATUM-D", "on": "P-006", "what": "Wear-face top", "use": "Table plane; A/B indicator reference"},
         {"id": "DATUM-E", "on": "P-010", "what": "Drum axis", "use": "Fixed by H-001; TIR and parallel"},
+        {"id": "DATUM-F", "on": "P-023", "what": "Idler pivot pin axis", "use": "Rotation centre for the parallelism micro-adjust. ALN-01 is set about this line."},
     ]
 
 
@@ -1411,11 +1659,11 @@ def quality_targets() -> list[dict[str, str]]:
     return [
         {"check": "Table flatness", "tool": "Straightedge + feelers on wear face", "spec": f"≤ {s.table_flat_tol:.3f}″ on both diagonals", "qc": "QC-05"},
         {"check": "Drum TIR (paper off)", "tool": "Dial indicator on drum OD, mid-span", "spec": f"≤ {s.drum_tir:.3f}″ TIR", "qc": "QC-06"},
-        {"check": "Drum ∥ table (paper on)", "tool": "Indicator at A (drive) and B (idler)", "spec": f"|A−B| ≤ {s.parallel_tol:.3f}″ over {s.capacity_width}″", "qc": "QC-07"},
+        {"check": "ALN-01 no-load alignment", "tool": "Indicator at A (drive) and B (idler), paper on, no workpiece", "spec": f"|A−B| ≤ {s.aln_spec:.3f}″ over {s.capacity_width}″ (QC-15)", "qc": "QC-15"},
         {"check": "Way plumb + capture", "tool": "Square + indicator on both UHMW; table through travel", "spec": "Plumb; shoes wrap; no twist", "qc": "QC-04"},
         {"check": "Pulley coplanar", "tool": "Straightedge across both pulley faces", "spec": "Faces flush; belt tracks center", "qc": "QC-09"},
         {"check": "Hold-down set", "tool": "Feeler under roller vs drum (paper on)", "spec": f"Rollers {s.roller_setbelow:.3f}″ below drum OD", "qc": "QC-08"},
-        {"check": "Thickness scatter", "tool": "Caliper 4 corners of test panel", "spec": f"≤ {s.parallel_tol:.3f}″ after finish pass", "qc": "QC-10"},
+        {"check": "TV-01 delivered thickness variation", "tool": "Caliper 4 corners + centre of witness board", "spec": f"≤ {s.tv_spec:.3f}″ after finish pass (QC-16)", "qc": "QC-16"},
     ]
 
 
@@ -1567,10 +1815,10 @@ def assembly_phases() -> list[dict[str, str]]:
          "body": f"Clamp P-001L/R face-to-face. Drill bearing CL at Y {GEOM.bearing_cl_y:g}″ / Z {GEOM.bearing_cl_z:g}″, Acme holes, indicator pad as one stack (S-008)."},
         {"id": "a2", "phase": "frame", "title": "Dados, vertical way rebates, box + UHMW",
          "body": f"Split the pair. Dado J-001 stations IN-LO/OUT-LO/OUT-HI and rebate vertical J-002 ({GEOM.way_rebate:.3f}″) on inner faces only. Glue P-003, square diagonals, bond P-007."},
-        {"id": "a3", "phase": "drum", "title": "Pack-bore discs & laminate drum",
-         "body": "Bandsaw P-008/P-009 oversize. Stack in P-015; ream ⌀¾″ as a pack (J-005). Key, 1 mm MDF relief, static-balance P-009."},
-        {"id": "a4", "phase": "drum", "title": "Fixed drive bearing, floating idler",
-         "body": "H-001 locked on P-001L (J-006). H-002 on a UHMW axial pad on P-001R (J-007). Do not slot the plywood in Y or Z."},
+        {"id": "a3", "phase": "drum", "title": "Option A shell (baseline) or Option B discs",
+         "body": f"Option A: turn P-021 plugs in one setup, bond+pin into P-020 (J-106). Option B: bandsaw P-008/P-009, pack-bore ⌀{SPEC.shaft_od:g}″ in P-015 (J-005). True in the machine's own bearings."},
+        {"id": "a4", "phase": "drum", "title": "Fixed drive bearing, floating idler on micro-adjust plate",
+         "body": "H-001 locked on P-001L (J-006). H-002 on P-023 jack plate (J-105 / J-007). Transfer the purchased flange BCD. Do not lock both bearings."},
         {"id": "a5", "phase": "drive", "title": "Motor cradle, coplanar pulleys, lock",
          "body": "Straightedge across H-003/H-004. Gravity tension, lock P-012 (J-008)."},
         {"id": "a6", "phase": "table", "title": "Torsion-box table + wear face + shoes",
@@ -1719,13 +1967,13 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "title": "Glue the box: stretchers, base, diagonals",
             "goal": "A square, stiff carcase that will not rack when a board is pushed through it.",
             "parts": ["P-001L", "P-001R", "P-002", "P-003"],
-            "hardware": ["H-014", "H-015", "H-023"],
-            "tools": ["Long clamps", "Framing square", "Tape measure", "Glue brush"],
+            "hardware": ["H-014", "H-015", "H-023", "H-034"],
+            "tools": ["Long clamps", "Framing square", "Tape measure", "Glue brush", "Drill"],
             "sheets": ["A-01", "P-003", "P-002"],
             "actions": [
                 f"Dry-fit all three stretchers ({g.stretcher_length:g}″, housed {s.stretcher_housing:g}″ each end) into IN-LO, OUT-LO, OUT-HI. Check the inner span reads {s.clear_between_sides:g}″. Confirm no rail sits in the table's Z range ({g.table_z_at_max_stock:g}–{g.table_z_at_min_stock + g.table_thick:.2f}″).",
                 "Glue and clamp. Measure both diagonals and pull them equal before the glue grabs.",
-                "Drill and drive #8 × 2″ screws from outside into each stretcher end.",
+                "With the joint clamped, drill through the side into each stretcher end and fit H-034 ¼-20 through-bolts with backing washers and nylocks (D-048). Glue is not primary structure on this machine.",
                 "Screw the base deck on, then measure the diagonals again.",
             ],
             "qc": "QC-03",
@@ -1761,49 +2009,144 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
         },
         {
             "step": 8,
+            "chapter": "04 Frame",
+            "title": "Make the tapered gib and tap the adjuster stations",
+            "goal": "Have the gib ready before the table exists. Running clearance is set later, after the shoes are on.",
+            "parts": ["P-022"],
+            "hardware": ["H-031"],
+            "tools": ["Taper jig", "Hand plane or belt sander", "Tap ¼-20"],
+            "sheets": ["P-022", "J-105"],
+            "actions": [
+                f"Taper one face of P-022 at 1:40 over its {s.side_depth:g}″ length. Mark the thick end so it cannot go in backwards.",
+                f"Drill and tap three ¼-20 stations in the idler-side panel for the H-031 brass-tip adjusters (S-013).",
+                "Dry-fit the gib in the rebate behind where the idler shoe will sit. Taper wedges DOWN: tightening a screw will close the clearance.",
+                "Do not set the running clearance yet — there is no table to rock against. That happens in the table chapter after the shoes are on.",
+            ],
+            "qc": "",
+            "gate": "Gib tapered, thick end marked, three adjuster stations tapped, dry-fit confirmed.",
+            "hold": "",
+            "warn": "A gib installed thick-end-up opens when you tighten. Mark the thick end before it leaves the taper jig.",
+            "shows": ["sides", "base", "stretch", "ways"],
+            "adds": ["ways"],
+            "correctable": "Taper and length — the gib is still a loose part.",
+        },
+        {
+            "step": 9,
             "chapter": "05 Drum",
-            "title": "Pack-bore the discs and laminate the drum",
-            "goal": "One stiff cylinder blank on one true axis.",
+            "title": "Turn the two end plugs — one setup, two operations",
+            "goal": "Bore and OD concentric, because that error becomes drum TIR directly.",
+            "parts": ["P-021"],
+            "hardware": ["H-028"],
+            "tools": ["Metal lathe (or a machinist friend)", "Boring bar", "Calipers", "Bore gauge"],
+            "sheets": ["P-021", "J-106", "A-02"],
+            "actions": [
+                f"Face and turn the OD to a light bond fit in the shell ID ({s.shell_od - 2 * s.shell_wall:g}″ nominal — measure YOUR tube).",
+                f"WITHOUT unchucking, bore {s.shaft_od:g}″ for the shaft. One setup is the whole trick: it makes bore and OD concentric.",
+                f"Part off at {s.plug_thick:g}″ thick. Repeat for the second plug.",
+                "Deburr both, then check the bore on the actual shaft — light push fit, no rock.",
+            ],
+            "qc": "QC-06",
+            "gate": "Bore-to-OD runout under 0.001″ on each plug, checked in the lathe before parting off.",
+            "hold": "",
+            "warn": "If you re-chuck between the OD and the bore you will add eccentricity that no amount of truing removes, because the drum will run true only at one angular position.",
+            "shows": ["drum"],
+            "adds": ["drum"],
+            "correctable": "Nothing after parting off. Make a spare plug from the same bar.",
+        },
+        {
+            "step": 10,
+            "chapter": "05 Drum",
+            "title": "Bond and cross-pin the shell to the plugs",
+            "goal": "A structural drum, not a stack of discs.",
+            "parts": ["P-020", "P-021"],
+            "hardware": ["H-027", "H-033", "H-018"],
+            "tools": ["Solvent + abrasive pad", "Drill press", "Clamps", "Square"],
+            "sheets": ["P-020", "P-021", "J-106", "A-02"],
+            "actions": [
+                f"Cut the shell to {g.drum_length:g}″ and face both ends square.",
+                "Abrade and solvent-clean the shell ID and both plug ODs. Contamination is the usual cause of a failed metal bond.",
+                f"Mix H-033 structural epoxy, coat both faces, and seat each plug {s.plug_inset:g}″ inboard of the shell end. Check square to the shell axis.",
+                "After cure, cross-drill and pin each plug through the shell wall in two places 90° apart. The pins carry torque; the epoxy seals and shares load.",
+            ],
+            "qc": "",
+            "gate": "Both plugs seated at the specified inset, square, fully cured, and pinned.",
+            "hold": f"FULL CURE per the adhesive data sheet before the drum turns under power. This is a {MECH_DRUM_MASS:.0f} lb rotating assembly.",
+            "warn": "Never rely on adhesive alone on a rotating part. The cross-pins are not optional.",
+            "shows": ["drum"],
+            "adds": ["drum"],
+            "correctable": "The OD — that is what truing is for. Not the plug position.",
+        },
+        {
+            "step": 11,
+            "chapter": "05 Drum",
+            "title": "OPTION B — laminated disc drum for a shop with no lathe",
+            "goal": "A buildable drum without turned metal, with its accuracy penalty stated.",
+            "alt_of": "ST-09 + ST-10",
             "parts": ["P-008", "P-009", "P-015"],
             "hardware": ["H-018", "H-023"],
             "tools": ["Bandsaw", "Drill press + reamer", "Clamps", "Scale"],
             "sheets": ["P-008", "P-009", "P-015", "A-02"],
             "actions": [
+                f"Choose this path ONLY if you cannot get the plugs turned. It replaces steps ST-09 and ST-10.",
                 f"Bandsaw {s.disc_count_core} MDF discs and {s.disc_count_ends} birch ends at ⌀{g.drum_oversize_od:g}″ — oversize on purpose.",
                 f"Stack the whole pack in the P-015 jig and ream ⌀{s.shaft_od:g}″ straight through (J-005, S-009). Never bore discs one at a time.",
-                f"Glue the stack with a {s.spacer_mm:g} mm relief every {s.spacer_every_n} MDF discs. Birch ends outboard.",
+                f"Glue the stack with a {s.spacer_mm:g} mm relief every {s.spacer_every_n} MDF discs. Birch ends outboard for flange crush.",
                 "Weigh the two end discs against each other and balance them before assembly.",
             ],
-            "qc": "",
+            "qc": "QC-06 · QC-18",
             "gate": f"Bore accepts the shaft with light friction. Stack length {g.drum_length:g}″.",
-            "hold": "Full cure before the drum ever spins. A delaminated disc at 1035 RPM is a projectile.",
-            "warn": "MDF dust is the worst dust in the shop. Respirator and extraction on.",
+            "hold": "Full cure before the drum ever spins. A delaminated disc at speed is a projectile.",
+            "warn": f"ACCEPT THE PENALTY KNOWINGLY: a disc stack is not structural in bending, so the drum crowns under load and MDF moves with humidity, so TIR drifts between seasons. Expect to re-true more often and to hold a looser TV-01 than {s.tv_spec:.3f}″.",
             "shows": ["drum", "shaft"],
             "adds": ["drum"],
             "correctable": "Outside diameter — that is what truing is for.",
         },
         {
-            "step": 9,
+            "step": 12,
             "chapter": "05 Drum",
-            "title": "Hang the shaft: drive FIXED, idler FLOATING",
-            "goal": "One bearing defines the axis; the other lets the shaft grow.",
-            "parts": ["P-010"],
-            "hardware": ["H-001", "H-002", "H-017"],
-            "tools": ["Wrenches", "Dial indicator", "Feeler gauges"],
-            "sheets": ["P-010", "A-02", "P-001R"],
+            "title": "Hang the shaft: drive FIXED, idler on the micro-adjust plate",
+            "goal": "One bearing defines the axis; the other adjusts parallelism and lets the shaft grow.",
+            "parts": ["P-010", "P-023", "P-024"],
+            "hardware": ["H-001", "H-002", "H-029", "H-030", "H-032"],
+            "tools": ["Wrenches", "Dial indicator", "Feeler gauges", "Reamer"],
+            "sheets": ["P-010", "P-023", "P-024", "J-105", "J-106", "A-02"],
             "actions": [
-                f"Slide the {s.shaft_length:g}″ shaft through the drum and both panels.",
-                "Bolt H-001 to the drive side and torque it. That flange is now the drum-axis datum (J-006).",
-                f"Set H-002 on the {s.idler_float_pad:g}″ pad on the idler side. Snug only — the shaft must still be able to slide axially (J-007).",
+                "Transfer the bearing bolt pattern FROM THE BEARING YOU BOUGHT onto P-001L and P-023. Do not drill from the drawing — that pattern is an assumption.",
+                f"Slide the {s.shaft_length:g}″ shaft through the drum and both panels, then set the H-029 clamp collars against the plugs.",
+                "Bolt H-001 to the drive side and torque it. That bearing is now DATUM-E, the drum-axis datum (J-006).",
+                f"Pin P-023 to the idler side with H-032, mount H-002 on it, and set the H-030 jack screw against P-024. Snug the bearing only — the shaft must still slide axially (J-007).",
                 "Spin the drum by hand through several turns. It should coast, not bind and not ring.",
             ],
             "qc": "QC-11",
-            "gate": "Shaft turns freely; measurable axial float at the idler end.",
+            "gate": "Shaft turns freely; measurable axial float at the idler end; jack screw makes contact with a witness mark.",
             "hold": "",
-            "warn": "Locking both flanges bends the shaft and kills both bearings. Do not do it because it feels tighter.",
+            "warn": "Locking both bearings bends the shaft and kills both of them. Do not do it because it feels tighter.",
             "shows": ["sides", "base", "stretch", "ways", "drum", "shaft"],
             "adds": ["shaft"],
             "correctable": "Bearing position, while the bolts are still loose.",
+        },
+        {
+            "step": 12,
+            "chapter": "05 Drum",
+            "title": "True the drum in its own bearings, then balance it",
+            "goal": "A cylinder that is round about the axis it will actually run on.",
+            "parts": ["P-013", "P-020"],
+            "hardware": ["H-021"],
+            "tools": ["Truing sled P-013", "Dial indicator", "Knife edges or two level rails"],
+            "sheets": ["P-013", "A-02", "Q-101"],
+            "actions": [
+                "True the OD with the drum running in its OWN bearings, using the full-width P-013 sled. Truing it in a lathe and then moving it re-introduces the error.",
+                f"Work down until the indicator reads ≤ {s.drum_tir:.4f}″ TIR at mid-span, paper off (QC-06).",
+                f"Lift the drum onto knife edges and release it from five different angular positions. It must stop somewhere different each time. Allowance U ≤ {MECH_UNBALANCE_OZIN:.2f} oz·in (CALC-C13).",
+                "If it always settles the same way, add tape to the light side until it does not, then make that correction permanent.",
+            ],
+            "qc": "QC-06",
+            "gate": f"TIR ≤ {s.drum_tir:.4f}″ paper off, and the knife-edge test passes over five releases.",
+            "hold": "Do not fit the abrasive until both checks pass. Paper hides TIR; it does not fix it.",
+            "warn": "Extraction and a respirator for truing. Eye protection — you are cutting metal or MDF at speed.",
+            "shows": ["sides", "base", "stretch", "ways", "drum", "shaft"],
+            "adds": ["drum"],
+            "correctable": "Balance, any time. TIR only by truing again.",
         },
         {
             "step": 10,
@@ -1857,19 +2200,20 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "chapter": "07 Table",
             "title": "Fit the dual Acme lift on the drum centerline",
             "goal": "Both nuts sit under the cut. The table rises in Z without racking in X or Y.",
-            "parts": ["P-016", "P-018", "P-019"],
-            "hardware": ["H-007", "H-008", "H-013", "H-026"],
+            "parts": ["P-016", "P-018", "P-019", "P-022"],
+            "hardware": ["H-007", "H-008", "H-013", "H-026", "H-031", "H-024", "H-035"],
             "tools": ["Wrenches", "Drill", "Tape measure", "Square"],
-            "sheets": ["P-016", "P-018", "P-019", "A-03", "M-101"],
+            "sheets": ["P-016", "P-018", "P-019", "P-022", "A-03", "M-101", "J-105"],
             "actions": [
                 f"Screw both P-018 thrust blocks to the base at Y {g.acme_y:g}″ (drum CL), X left and right. Fit thrust washers and e-clips (J-013).",
                 "Bolt a bronze nut block under the table, each nut on the same Y as its screw — not at the infeed and outfeed ends.",
                 f"Fit both ½-10 Acme screws. One turn is {g.acme_per_turn:.4f}″. Thirty turns is 3″ (CALC-003).",
                 "Chain-couple the two screws. Fit the left clutch and P-019 home dog (J-014).",
                 f"Run the table through the full {s.elev_travel:g}″ of travel. Shoes must stay wrapped; the table must not yaw.",
+                f"Now set the P-022 gib: slide it behind the idler shoe, taper down, and run the H-031 adjusters up in equal steps until the table slides by hand with no rock. Target {s.gib_clearance:.4f}″ (QC-17, S-014). Wax. Never oil.",
             ],
-            "qc": "QC-12 · QC-14",
-            "gate": "Table rises and falls freely through full travel; both ends move the same amount; shoes stay captured.",
+            "qc": "QC-12 · QC-14 · QC-17",
+            "gate": f"Table rises and falls freely through full travel; both ends move the same amount; shoes stay captured; gib clearance {s.gib_clearance:.4f}″ with no rock.",
             "hold": "",
             "warn": "",
             "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor", "table", "elev"],
@@ -1907,16 +2251,16 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "parts": ["P-013"],
             "hardware": ["H-021", "H-022"],
             "tools": ["Dial indicator + mag base", "Calipers", "Test panel", "Respirator"],
-            "sheets": ["Q-101", "P-013", "A-02"],
+            "sheets": ["Q-101", "Q-103", "P-013", "A-02"],
             "actions": [
                 f"Paper off: true the drum with the full-width sled until TIR ≤ {s.drum_tir:.3f}″ mid-span (S-010).",
                 "Wrap Velcro, then spiral the paper. Paper thickness is not uniform, so parallel changes here.",
-                f"Paper on: indicate the drum at the drive end (A) and the idler end (B). Bring |A−B| ≤ {s.parallel_tol:.3f}″, then set the home dog (S-011).",
-                f"Sand a witness board at 80 grit, one pass. Caliper four corners. Scatter must be ≤ {s.parallel_tol:.3f}″.",
-                f"Then work the pass schedule: {s.pass_rough:.3f}″ rough, {s.pass_medium:.3f}″ medium, {s.pass_finish:.3f}″ finish.",
+                f"ALN-01: paper on, drum stopped, no workpiece. Indicate the drum at station A (drive) and station B (idler). Bring |A−B| ≤ {s.aln_spec:.3f}″ using the P-023 jack screw — {MECH_ADJ_AT_WORK * 1000:.2f} mil at the work per full turn, so work in small fractions of a turn. Set the home dog (S-011).",
+                f"TV-01: sand a witness board {s.capacity_width:g}″ wide at the finish pass. Caliper four corners and the centre. Spread must be ≤ {s.tv_spec:.3f}″. This is a different and larger number than ALN-01 — see CALC-C06.",
+                f"Then work the pass schedule: {s.pass_rough:.3f}″ rough, {s.pass_medium:.3f}″ medium, {s.pass_finish:.3f}″ finish. Always approach the setting by RAISING the table, then lock the ways.",
             ],
-            "qc": "QC-06 · QC-07 · QC-10",
-            "gate": f"TIR ≤ {s.drum_tir:.3f}″ paper-off · |A−B| ≤ {s.parallel_tol:.3f}″ paper-on · witness scatter ≤ {s.parallel_tol:.3f}″.",
+            "qc": "QC-06 · QC-15 · QC-16 · QC-20",
+            "gate": f"TIR ≤ {s.drum_tir:.4f}″ paper-off · ALN-01 |A−B| ≤ {s.aln_spec:.3f}″ paper-on · TV-01 witness spread ≤ {s.tv_spec:.3f}″.",
             "hold": "First powered run: hood on, no stock, stand clear of the drum ends, hand on the switch.",
             "warn": "Do not sand stock shorter than about 12″ without the sled. Hands never under the drum or the hold-downs.",
             "shows": ["sides", "base", "stretch", "ways", "drum", "shaft", "motor", "table", "elev", "rollers", "hood"],
@@ -1924,9 +2268,12 @@ def build_steps(s: Spec = SPEC, g: Geom = GEOM) -> list[dict[str, Any]]:
             "correctable": "Everything that matters — which is why you re-clock after every paper change.",
         },
     ]
+    # Renumber programmatically so inserting a step can never leave two steps
+    # sharing a number, or a sheet name pointing at the wrong step.
     total = len(steps)
-    for st in steps:
-        st["id"] = f"ST-{st['step']:02d}"
+    for n, st in enumerate(steps, start=1):
+        st["step"] = n
+        st["id"] = f"ST-{n:02d}"
         st["of"] = total
     return steps
 
@@ -1991,6 +2338,10 @@ def summary() -> dict[str, Any]:
         "drawings": shop_drawings(),
         "build_steps": build_steps(),
         "calculations": calculations(),
+        "procurement": procurement(),
+        "procurement_summary": procurement_summary(),
+        "accuracy_budgets": accuracy_budgets(),
+        "superseded": superseded_by_rev_c(),
         "layout_protocol": LAYOUT_PROTOCOL,
         "drawings": shop_drawings(),
         "assembly": assembly_phases(),
@@ -2122,6 +2473,15 @@ def shop_drawings() -> list[dict[str, str]]:
         {"code": "G-002", "file": "G002_design_basis.svg", "title": "G-002 Design basis", "kind": "guide", "group": "guide"},
         {"code": "G-003", "file": "G003_registers.svg", "title": "G-003 Evidence & calcs", "kind": "guide", "group": "guide"},
         {"code": "G-004", "file": "G004_safety.svg", "title": "G-004 Safety & risk", "kind": "guide", "group": "guide"},
+        {"code": "G-005", "file": "G005_revision_c.svg", "title": "G-005 Rev C supersession", "kind": "guide", "group": "guide"},
+        {"code": "M-106", "file": "M106_accuracy.svg", "title": "M-106 Accuracy budget", "kind": "guide", "group": "guide"},
+        {"code": "M-107", "file": "M107_drum_axis.svg", "title": "M-107 Drum axis stiffness", "kind": "guide", "group": "guide"},
+        {"code": "M-108", "file": "M108_adjust.svg", "title": "M-108 Micro-adjust & lift", "kind": "guide", "group": "guide"},
+        {"code": "J-105", "file": "J105_gib.svg", "title": "J-105 Gib & pivot plate", "kind": "guide", "group": "guide"},
+        {"code": "J-106", "file": "J106_shell_plug.svg", "title": "J-106 Shell→plug→shaft", "kind": "guide", "group": "guide"},
+        {"code": "Q-103", "file": "Q103_acceptance.svg", "title": "Q-103 ALN-01 / TV-01 tests", "kind": "guide", "group": "guide"},
+        {"code": "H-02", "file": "H02_mcmaster.svg", "title": "H-02 McMaster procurement", "kind": "hardware", "group": "hardware"},
+        {"code": "H-03", "file": "H03_mcmaster2.svg", "title": "H-03 McMaster procurement (2)", "kind": "hardware", "group": "hardware"},
         {"code": "E-101", "file": "E101_exploded.svg", "title": "E-101 Exploded + BOM", "kind": "guide", "group": "guide"},
         {"code": "M-101", "file": "M101_kinematics.svg", "title": "M-101 Kinematics", "kind": "guide", "group": "guide"},
         {"code": "J-001", "file": "J001_stretcher.svg", "title": "J-001 Housed stretcher", "kind": "guide", "group": "guide"},
@@ -2166,6 +2526,11 @@ def shop_drawings() -> list[dict[str, str]]:
         {"code": "P-017", "file": "P017_table_shoe.svg", "title": "P-017 Table shoe", "kind": "part", "group": "part"},
         {"code": "P-018", "file": "P018_thrust_block.svg", "title": "P-018 Thrust block", "kind": "part", "group": "part"},
         {"code": "P-019", "file": "P019_home_dog.svg", "title": "P-019 Home dog", "kind": "part", "group": "part"},
+        {"code": "P-020", "file": "P020_drum_shell.svg", "title": "P-020 Drum shell", "kind": "part", "group": "part"},
+        {"code": "P-021", "file": "P021_drum_plug.svg", "title": "P-021 Drum end plug", "kind": "part", "group": "part"},
+        {"code": "P-022", "file": "P022_gib.svg", "title": "P-022 Way gib", "kind": "part", "group": "part"},
+        {"code": "P-023", "file": "P023_idler_plate.svg", "title": "P-023 Idler adjust plate", "kind": "part", "group": "part"},
+        {"code": "P-024", "file": "P024_jack_block.svg", "title": "P-024 Jack screw block", "kind": "part", "group": "part"},
         {"code": "A-01", "file": "A01_frame.svg", "title": "A-01 Frame assembly", "kind": "assembly", "group": "assembly"},
         {"code": "A-02", "file": "A02_drum.svg", "title": "A-02 Drum assembly", "kind": "assembly", "group": "assembly"},
         {"code": "A-03", "file": "A03_table.svg", "title": "A-03 Table assembly", "kind": "assembly", "group": "assembly"},
@@ -2212,8 +2577,8 @@ def viewer_data() -> dict[str, Any]:
             {"id": "sides", "fabIds": ["P-001L", "P-001R"], "group": "frame", "label": "Side panels P-001L/R", "detail": f"{s.ply_actual:g}″ BB · stack-drill then inner-face dado/rebate", "color": "#c4a574", "sheet": "P001L_side_drive.svg"},
             {"id": "ways", "fabIds": ["P-007", "P-017"], "group": "frame", "label": "Vertical ways + shoes", "detail": f"P-007 rebate {g.way_rebate:.3f}″ · P-017 wrap · J-002/J-012", "color": "#d9dcde", "sheet": "P007_uhmw_way.svg"},
             {"id": "base", "fabIds": ["P-002", "P-003", "P-018"], "group": "frame", "label": "Base + stretchers + thrust", "detail": f"P-003 housed {g.stretcher_length:g}″ · IN-LO/OUT-LO/OUT-HI · J-001", "color": "#a89070", "sheet": "A01_frame.svg"},
-            {"id": "drum", "fabIds": ["P-008", "P-009"], "group": "drum", "label": "Sanding drum", "detail": f"⌀{s.drum_od:g}″ × {g.drum_length:g}″ · pack-bored · P-008/P-009", "color": "#b8a990", "sheet": "A02_drum.svg"},
-            {"id": "shaft", "fabIds": ["P-010", "H-001", "H-002"], "group": "drum", "label": "Shaft + bearings", "detail": "P-010 · J-006 fixed · J-007 float", "color": "#8a9098", "sheet": "P010_shaft.svg"},
+            {"id": "drum", "fabIds": ["P-020", "P-021", "P-008", "P-009"], "group": "drum", "label": "Sanding drum", "detail": f"⌀{s.drum_od:g}″ × {g.drum_length:g}″ · Option A shell P-020/P-021 · Option B discs P-008/P-009", "color": "#b8a990", "sheet": "A02_drum.svg"},
+            {"id": "shaft", "fabIds": ["P-010", "P-023", "P-024", "H-001", "H-002"], "group": "drum", "label": "Shaft + bearings", "detail": f"P-010 ⌀{s.shaft_od:g}″ · J-006 fixed · J-007 float · P-023 jack", "color": "#8a9098", "sheet": "P010_shaft.svg"},
             {"id": "table", "fabIds": ["P-004", "P-005", "P-006"], "group": "table", "label": "Torsion-box table", "detail": "P-004/P-005/P-006 · J-003/J-004", "color": "#cfd3d5", "sheet": "A03_table.svg"},
             {"id": "elev", "fabIds": ["P-016", "P-018", "P-019", "H-007", "H-008"], "group": "table", "label": "Dual Acme lift", "detail": f"Both screws at Y {g.acme_y:g}″ · left clutch · P-019 dog", "color": "#6e7578", "sheet": "P016_nut_block.svg"},
             {"id": "rollers", "fabIds": ["P-014", "H-009"], "group": "table", "label": "Hold-down rollers", "detail": f"P-014 · {s.roller_setbelow:.3f}″ below drum", "color": "#5a6068", "sheet": "A05_holddowns.svg"},
@@ -2260,7 +2625,7 @@ def viewer_data() -> dict[str, Any]:
         "lumberyard": [{"where": r["where"], "item": r["item"], "qty": r["qty"], "use": r["use"]} for r in lumberyard()],
         "fasteners": [{"qty": r["qty"], "item": r["item"], "use": r["use"]} for r in fastener_schedule()[:8]],
         "downloads": [
-            {"href": "../pack/WALTER-DS16-RevB.zip", "label": "Shop pack (ZIP)", "note": "Plans, BOM, CAD — Save to Files", "download": "WALTER-DS16-RevB.zip", "share": True, "primary": True},
+            {"href": "../pack/WALTER-DS16-RevC.zip", "label": "Shop pack (ZIP)", "note": "Plans, BOM, CAD — Save to Files", "download": "WALTER-DS16-RevC.zip", "share": True, "primary": True},
             {"href": "../guide/", "label": "Master build guide", "note": "The whole book, in order · Print → PDF", "primary": True},
             {"href": "../pocket/", "label": "Pocket field card", "note": "Phone shop floor · Add to Home Screen"},
             {"href": "../pack/BOM.csv", "label": "BOM.csv", "note": "Make + buy with part IDs", "download": "WALTER-DS16-BOM.csv"},
@@ -2275,6 +2640,7 @@ def viewer_data() -> dict[str, Any]:
             {"href": "../plans/IDX_drawings.svg", "label": "IDX SVG", "note": "Drawing index", "download": "IDX_drawings.svg"},
             {"href": "../plans/P001L_side_drive.svg", "label": "P-001L SVG", "note": "Drive side panel", "download": "P001L_side_drive.svg"},
             {"href": "../plans/H01_hardware.svg", "label": "H-01 SVG", "note": "Illustrated hardware", "download": "H01_hardware.svg"},
+            {"href": "../plans/H02_mcmaster.svg", "label": "H-02 SVG", "note": "McMaster procurement", "download": "H02_mcmaster.svg"},
             {"href": "../plans/D11_register.svg", "label": "D-11 SVG", "note": "Part register", "download": "D11_register.svg"},
             {"href": "../plans/D12_joinery.svg", "label": "D-12 SVG", "note": "Joinery & QA", "download": "D12_joinery.svg"},
             {"href": "../", "label": "Design page", "note": "Overview"},
@@ -2289,6 +2655,7 @@ def viewer_data() -> dict[str, Any]:
             "Table saw / track saw",
             "Dado stack or router (J-001, J-002)",
             "Drill press + pack-bore jig P-015",
+            "Metal lathe for P-021 plugs (or a machinist). Option B skips the lathe.",
             "Dial indicator 0.001″ + mag base",
             "Feelers / winding sticks / calipers",
             "Clamps · squares",

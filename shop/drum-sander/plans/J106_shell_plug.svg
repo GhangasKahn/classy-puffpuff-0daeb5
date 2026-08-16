@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-106</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Shell → plug → shaft</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Joinery</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>J-106</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Bonded + cross-pinned  ·  never adhesive alone on a rotating part</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<rect x='36.0' y='150.0' width='720.0' height='420.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='696.2,168.6 689.4,166.5 684.0,168.4 680.9,173.9 680.9,181.9 684.0,190.9 689.4,199.0 696.2,204.7 703.0,206.9 708.4,205.0 711.4,199.5 711.4,191.5 708.4,182.5 703.0,174.3' fill='#a5a7ab'/>
+<polygon points='593.0,174.1 575.4,166.8 559.2,166.0 545.7,171.7 536.1,183.4 531.1,200.3 531.1,220.8 536.1,243.4 545.7,266.3 559.2,287.5 575.4,305.4 593.0,318.5 610.6,325.7 626.8,326.5 640.3,320.8 649.9,309.1 654.9,292.3 654.9,271.7 649.9,249.1 640.3,226.3 626.8,205.0 610.6,187.2' fill='#818c93'/>
+<polygon points='151.7,493.7 165.2,515.0 559.2,287.5 545.7,266.3' fill='#6c767c'/>
+<polygon points='142.1,470.9 151.7,493.7 545.7,266.3 536.1,243.4' fill='#6c767c'/>
+<polygon points='165.2,515.0 181.4,532.8 575.4,305.4 559.2,287.5' fill='#6c767c'/>
+<polygon points='137.1,448.3 142.1,470.9 536.1,243.4 531.1,220.8' fill='#6c767c'/>
+<polygon points='181.4,532.8 199.0,545.9 593.0,318.5 575.4,305.4' fill='#6c767c'/>
+<polygon points='137.1,427.7 137.1,448.3 531.1,220.8 531.1,200.3' fill='#6c767c'/>
+<polygon points='199.0,545.9 216.6,553.2 610.6,325.7 593.0,318.5' fill='#6c767c'/>
+<polygon points='142.1,410.9 137.1,427.7 531.1,200.3 536.1,183.4' fill='#6e787e'/>
+<polygon points='216.6,553.2 232.8,554.0 626.8,326.5 610.6,325.7' fill='#6c767c'/>
+<polygon points='83.6,537.5 89.0,545.7 689.4,199.0 684.0,190.9' fill='#8b8d90'/>
+<polygon points='80.6,528.5 83.6,537.5 684.0,190.9 680.9,181.9' fill='#8b8d90'/>
+<polygon points='151.7,399.2 142.1,410.9 536.1,183.4 545.7,171.7' fill='#788389'/>
+<polygon points='89.0,545.7 95.8,551.4 696.2,204.7 689.4,199.0' fill='#8b8d90'/>
+<polygon points='80.6,520.5 80.6,528.5 680.9,181.9 680.9,173.9' fill='#8b8d90'/>
+<polygon points='95.8,551.4 102.6,553.5 703.0,206.9 696.2,204.7' fill='#8b8d90'/>
+<polygon points='83.6,515.0 80.6,520.5 680.9,173.9 684.0,168.4' fill='#949699'/>
+<polygon points='232.8,554.0 246.3,548.3 640.3,320.8 626.8,326.5' fill='#6c767c'/>
+<polygon points='102.6,553.5 108.0,551.6 708.4,205.0 703.0,206.9' fill='#8b8d90'/>
+</g>
+<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Joint geometry</text>
+<text x='780.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GEOMETRY</text>
+<text x='780.0' y='172.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• P-021 OD turned to a light bond fit in the shell ID</text>
+<text x='780.0' y='188.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (nominal 4.5″ — measure YOUR tube).</text>
+<text x='780.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bore ⌀1.25″ on the SAME lathe setup as the OD.</text>
+<text x='780.0' y='224.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Concentricity here is drum TIR.</text>
+<text x='780.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Plug seated 0.25″ inboard of each shell end. Thickness</text>
+<text x='780.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  1.5″.</text>
+<text x='780.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• H-029 clamp collars locate the plugs on the shaft.</text>
+<text x='780.0' y='296.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Set-screw collars are excluded.</text>
+<text x='780.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>CUT SEQUENCE</text>
+<text x='780.0' y='422.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Turn both plugs (ST-09). Make a spare.</text>
+<text x='780.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Face the shell square (ST-10). Abrade and solvent-clean</text>
+<text x='780.0' y='458.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  both faces.</text>
+<text x='780.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• H-033 structural epoxy, seat, square, full cure. Then</text>
+<text x='780.0' y='494.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  cross-drill and pin two places 90° apart per plug.</text>
+<text x='780.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Slide the shaft through both plugs and the panels together</text>
+<text x='780.0' y='530.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (ST-12). Do not hammer.</text>
+<text x='36.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ACCEPTANCE</text>
+<text x='36.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bore-to-OD runout under 0.001″ on each plug before parting</text>
+<text x='36.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  off.</text>
+<text x='36.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• After truing in its own bearings: TIR ≤ 0.0015″ paper-off</text>
+<text x='36.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (QC-06). Knife-edge unbalance test (QC-18).</text>
+<text x='860.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MOVEMENT / CONSTRAINT</text>
+<text x='860.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Pins carry torque. Epoxy seals and shares load. Adhesive</text>
+<text x='860.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  alone is forbidden on a rotating part.</text>
+<text x='860.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Option B disc stack (J-005) is the no-lathe alternative.</text>
+<text x='860.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  It is not this joint and it does not take bending.</text>
+<text x='860.0' y='694.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Aluminium and steel grow differently. The idler bearing</text>
+<text x='860.0' y='710.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  must FLOAT axially (J-007) so the shaft is not a column.</text>
+</svg>

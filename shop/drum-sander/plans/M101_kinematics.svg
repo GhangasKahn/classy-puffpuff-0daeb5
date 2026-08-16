@@ -10,7 +10,7 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>HYBRID</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Table lift · drum axis · feed  ·  no conveyor</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
 <text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
@@ -28,10 +28,10 @@
 <polygon points='531.2,520.5 535.4,523.0 535.4,405.9 531.2,403.4' fill='#a5a7ab'/>
 <polygon points='522.1,336.9 519.5,336.2 517.6,337.3 516.9,340.0 517.6,343.4 519.5,346.8 522.1,349.1 524.8,349.8 526.7,348.7 527.4,346.1 526.7,342.6 524.8,339.3' fill='#b5b5b1'/>
 <polygon points='543.2,403.8 564.4,416.0 564.4,362.9 543.2,350.7' fill='#b2b6ba'/>
+<polygon points='587.4,311.2 585.1,310.5 583.3,311.1 582.3,312.9 582.3,315.7 583.3,318.7 585.1,321.5 587.4,323.4 589.7,324.1 591.6,323.5 592.6,321.6 592.6,318.9 591.6,315.9 589.7,313.1' fill='#b5b5b1'/>
 <polygon points='564.4,416.0 570.7,412.3 570.7,359.3 564.4,362.9' fill='#96999d'/>
 <polygon points='535.4,405.9 539.7,403.4 535.4,401.0 531.2,403.4' fill='#8b8d90'/>
 <polygon points='462.8,455.1 648.7,562.5 648.7,277.0 462.8,169.7' fill='#b5b5b1'/>
-<polygon points='581.1,317.3 579.7,316.8 578.6,317.2 578.0,318.3 578.0,320.0 578.6,321.8 579.7,323.4 581.1,324.6 582.5,325.0 583.6,324.7 584.2,323.5 584.2,321.9 583.6,320.1 582.5,318.4' fill='#b5b5b1'/>
 <polygon points='564.4,362.9 570.7,359.3 549.6,347.1 543.2,350.7' fill='#96999d'/>
 <polygon points='436.6,577.6 461.9,563.0 436.6,548.3 411.2,563.0' fill='#a2936c'/>
 <polygon points='535.4,397.1 545.6,391.2 535.4,385.4 525.3,391.2' fill='#8a5429'/>
@@ -72,16 +72,16 @@
 <polygon points='419.4,438.7 425.4,441.1 558.5,364.3 552.6,361.8' fill='#8a7f6a'/>
 <polygon points='400.2,393.0 398.5,398.7 531.6,321.9 533.3,316.2' fill='#8c816b'/>
 <polygon points='425.4,441.1 430.9,441.4 564.0,364.5 558.5,364.3' fill='#8a7f6a'/>
+<polygon points='380.4,435.8 382.3,438.6 585.1,321.5 583.3,318.7' fill='#989895'/>
+<polygon points='379.4,432.8 380.4,435.8 583.3,318.7 582.3,315.7' fill='#989895'/>
 <polygon points='648.7,562.5 655.0,558.8 655.0,273.4 648.7,277.0' fill='#989895'/>
 <polygon points='403.5,389.1 400.2,393.0 533.3,316.2 536.6,312.2' fill='#998c75'/>
-<polygon points='388.4,431.6 389.5,433.2 579.7,323.4 578.6,321.8' fill='#989895'/>
-<polygon points='387.8,429.8 388.4,431.6 578.6,321.8 578.0,320.0' fill='#989895'/>
-<polygon points='389.5,433.2 390.9,434.4 581.1,324.6 579.7,323.4' fill='#989895'/>
-<polygon points='387.8,428.1 387.8,429.8 578.0,320.0 578.0,318.3' fill='#989895'/>
-<polygon points='390.9,434.4 392.3,434.8 582.5,325.0 581.1,324.6' fill='#989895'/>
+<polygon points='382.3,438.6 384.6,440.5 587.4,323.4 585.1,321.5' fill='#989895'/>
+<polygon points='379.4,430.1 379.4,432.8 582.3,315.7 582.3,312.9' fill='#989895'/>
+<polygon points='384.6,440.5 386.9,441.2 589.7,324.1 587.4,323.4' fill='#989895'/>
+<polygon points='380.4,428.2 379.4,430.1 582.3,312.9 583.3,311.1' fill='#a2a29f'/>
 <polygon points='430.9,441.4 435.4,439.5 568.5,362.6 564.0,364.5' fill='#8a7f6a'/>
-<polygon points='388.4,427.0 387.8,428.1 578.0,318.3 578.6,317.2' fill='#a2a29f'/>
-<polygon points='392.3,434.8 393.4,434.5 583.6,324.7 582.5,325.0' fill='#989895'/>
+<polygon points='386.9,441.2 388.7,440.6 591.6,323.5 589.7,324.1' fill='#989895'/>
 <polygon points='436.6,462.9 440.8,460.5 436.6,458.1 432.3,460.5' fill='#8b8d90'/>
 <polygon points='445.3,455.4 447.2,458.8 580.4,381.9 578.4,378.6' fill='#989895'/>
 <polygon points='447.2,458.8 449.9,461.1 583.0,384.3 580.4,381.9' fill='#989895'/>
@@ -115,7 +115,7 @@
 <text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Force through the nuts, capture in the shoes, cut on the drum CL</text>
 <text x='960.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>THREE PLANES</text>
 <text x='960.0' y='184.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>1. TABLE PLANE</text>
-<text x='960.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Torsion box + wear face. Flat ≤ 0.004″. Lifts in Z on</text>
+<text x='960.0' y='202.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>Torsion box + wear face. Flat ≤ 0.003″. Lifts in Z on</text>
 <text x='960.0' y='217.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>dual Acme. Shoes wrap vertical ways so it cannot rack in</text>
 <text x='960.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>X or yaw in Y. Operator feeds the work; the table is not</text>
 <text x='960.0' y='247.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>a conveyor and is not a Y-slide in use.</text>
@@ -130,8 +130,8 @@
 <text x='960.0' y='408.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>conveyor — that is the ShopNotes failure mode this</text>
 <text x='960.0' y='423.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>machine deleted.</text>
 <text x='960.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>LIFT MATH</text>
-<text x='960.0' y='468.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-001  1035 RPM</text>
-<text x='960.0' y='486.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-002  1355 sfpm</text>
+<text x='960.0' y='468.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-001  1207.5 RPM</text>
+<text x='960.0' y='486.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-002  1581 sfpm</text>
 <text x='960.0' y='504.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-003  0.100″/rev · 30 turns for 3″</text>
 <text x='960.0' y='522.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-004  6.062″ minimum clearance</text>
 <text x='960.0' y='540.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-005  X play 0.010″ · Y play 0.016″</text>

@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>M-106</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Accuracy budget — ALN-01 vs TV-01</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>CALC-C04 · C05 · C06</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Two specifications. They cannot be equal.</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<text x='36.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ALN-01 — NO-LOAD ALIGNMENT  |A−B|  (indicator, paper on, no workpiece)</text>
+<text x='36.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>TERM</text>
+<text x='556.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>mil</text>
+<text x='656.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>EV</text>
+<line x1='36.0' y1='184.0' x2='796.0' y2='184.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='36.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum TIR, paper-on</text>
+<text x='556.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1.50</text>
+<text x='656.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>T</text>
+<text x='36.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Micro-adjust setting resolution at work</text>
+<text x='556.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.26</text>
+<text x='656.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>D</text>
+<text x='36.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Indicator + stand repeatability</text>
+<text x='556.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.50</text>
+<text x='656.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>A</text>
+<text x='36.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum straightness over 15.5 in</text>
+<text x='556.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.50</text>
+<text x='656.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>T</text>
+<text x='36.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>WORST CASE</text>
+<text x='556.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.76</text>
+<text x='656.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'></text>
+<text x='36.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>RSS</text>
+<text x='556.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1.68</text>
+<text x='656.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'></text>
+<text x='36.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>SPEC</text>
+<text x='556.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3.0</text>
+<text x='656.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'></text>
+<text x='860.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>TV-01 — DELIVERED THICKNESS VARIATION  (witness board, under cut)</text>
+<text x='860.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>TERM</text>
+<text x='1260.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>B mil</text>
+<text x='1380.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>C mil</text>
+<text x='1500.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>EV</text>
+<line x1='860.0' y1='184.0' x2='1620.0' y2='184.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='860.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Alignment residual after setup</text>
+<text x='1260.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3.00</text>
+<text x='1380.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3.00</text>
+<text x='1500.0' y='200.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>T</text>
+<text x='860.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Load-induced drum crown @20 lbf</text>
+<text x='1260.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4.70</text>
+<text x='1380.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.22</text>
+<text x='1500.0' y='222.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>D</text>
+<text x='860.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Way/gib X play, preloaded</text>
+<text x='1260.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>20.00</text>
+<text x='1380.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1.50</text>
+<text x='1500.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>D</text>
+<text x='860.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table flatness over contact line</text>
+<text x='1260.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4.00</text>
+<text x='1380.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.00</text>
+<text x='1500.0' y='266.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>T</text>
+<text x='860.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Lift backlash, compression + loc</text>
+<text x='1260.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.00</text>
+<text x='1380.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.00</text>
+<text x='1500.0' y='288.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>D</text>
+<text x='860.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Abrasive thickness variation</text>
+<text x='1260.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.00</text>
+<text x='1380.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.00</text>
+<text x='1500.0' y='310.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>A</text>
+<text x='860.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Feed and handling</text>
+<text x='1260.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1.00</text>
+<text x='1380.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1.00</text>
+<text x='1500.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>A</text>
+<text x='860.0' y='354.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>WORST CASE</text>
+<text x='1260.0' y='354.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>39.7</text>
+<text x='1380.0' y='354.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>9.7</text>
+<text x='1500.0' y='354.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'></text>
+<text x='860.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>RSS</text>
+<text x='1260.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>21.8</text>
+<text x='1380.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4.5</text>
+<text x='1500.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'></text>
+<text x='860.0' y='398.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>SPEC</text>
+<text x='1260.0' y='398.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3.0 (wrong)</text>
+<text x='1380.0' y='398.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.0</text>
+<text x='1500.0' y='398.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'></text>
+<text x='36.0' y='620.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>HOW TO READ THIS</text>
+<text x='36.0' y='644.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>• Rev B used one number (0.003″) for both columns. CALC-C06: they differ. ALN-01 spec 0.003″. TV-01 spec 0.005″.</text>
+<text x='36.0' y='668.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>• Rev B TV RSS ≈ 21.8 mil against a 3 mil claim → FAIL. Rev C TV RSS ≈ 4.5 mil against 5 mil → PASS on RSS.</text>
+<text x='36.0' y='692.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>• The largest Rev B TV term was 20 mil of way play. The gib (D-042 / P-022) removes it. The next largest was drum crown — that is M-107.</text>
+<text x='36.0' y='716.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>• ALN-01 is a setup measurement. TV-01 is what the board feels. Pass ALN-01 first; then cut the witness board.</text>
+</svg>

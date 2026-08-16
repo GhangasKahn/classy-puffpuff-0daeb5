@@ -6,11 +6,11 @@
 <line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
 <text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>IDX</text>
 <text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Drawing index</text>
-<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>fab B.4</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>fab C.1</text>
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>Python SSOT  cad/walter_ds16.py</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Print A3 landscape  ·  part sheets are the fabrication drawings</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · Internal inches. Millimetres are interface-only.</text>
 <text x='48.0' y='110.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='14' fill='#2a2a2a' text-anchor='start'>Use the P-sheets to cut and drill. D-1…D-12 are overviews. A-sheets are assembly. H-01 is the buy list.</text>
 <text x='48.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>OVERVIEW</text>
@@ -117,6 +117,21 @@
 <text x='848.0' y='578.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-019</text>
 <text x='958.0' y='578.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>P-019 Home dog</text>
 <text x='1268.0' y='578.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P019_home_dog.svg</text>
+<text x='848.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-020</text>
+<text x='958.0' y='598.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>P-020 Drum shell</text>
+<text x='1268.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P020_drum_shell.svg</text>
+<text x='848.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-021</text>
+<text x='958.0' y='618.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>P-021 Drum end plug</text>
+<text x='1268.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P021_drum_plug.svg</text>
+<text x='848.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-022</text>
+<text x='958.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>P-022 Way gib</text>
+<text x='1268.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P022_gib.svg</text>
+<text x='848.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-023</text>
+<text x='958.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>P-023 Idler adjust plate</text>
+<text x='1268.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P023_idler_plate.svg</text>
+<text x='848.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-024</text>
+<text x='958.0' y='678.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>P-024 Jack screw block</text>
+<text x='1268.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P024_jack_block.svg</text>
 <text x='48.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>ASSEMBLY</text>
 <text x='48.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CODE</text>
 <text x='158.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>SHEET</text>
@@ -140,11 +155,17 @@
 <text x='848.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CODE</text>
 <text x='958.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>SHEET</text>
 <text x='1268.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>FILE</text>
-<text x='848.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>IDX</text>
-<text x='958.0' y='618.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>Drawing index</text>
-<text x='1268.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>IDX_drawings.svg</text>
-<text x='848.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-01</text>
-<text x='958.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>H-01 Hardware</text>
-<text x='1268.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>H01_hardware.svg</text>
+<text x='848.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-02</text>
+<text x='958.0' y='618.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>H-02 McMaster procurement</text>
+<text x='1268.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>H02_mcmaster.svg</text>
+<text x='848.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-03</text>
+<text x='958.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>H-03 McMaster procurement (2)</text>
+<text x='1268.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>H03_mcmaster2.svg</text>
+<text x='848.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>IDX</text>
+<text x='958.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>Drawing index</text>
+<text x='1268.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>IDX_drawings.svg</text>
+<text x='848.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-01</text>
+<text x='958.0' y='678.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#1a1a1a' text-anchor='start'>H-01 Hardware</text>
+<text x='1268.0' y='678.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>H01_hardware.svg</text>
 <text x='48.0' y='1040.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Color: green = plywood structure · tan = solid wood / jigs · silver = hardware · pale = UHMW. Flange bolt circle is ASSUMED until you transfer the part you bought.</text>
 </svg>

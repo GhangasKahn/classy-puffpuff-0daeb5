@@ -7,11 +7,11 @@
 <text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-02</text>
 <text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Rough-cut the panels oversize</text>
 <text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Flat, labelled, manageable blanks out of full sheets.</text>
-<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>STEP 2 / 14</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>STEP 2 / 18</text>
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>02 Breakdown</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
-<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 2 of 14  ·  02 Breakdown</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Step 2 of 18  ·  02 Breakdown</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <circle cx='44.0' cy='112.0' r='9.0' fill='#d8d8d4' stroke='#1a1a1a' stroke-width='1.1'/>
 <text x='44.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>1</text>
@@ -41,7 +41,15 @@
 <text x='356.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>13</text>
 <circle cx='382.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
 <text x='382.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>14</text>
-<text x='420.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>02 Breakdown</text>
+<circle cx='408.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='408.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>15</text>
+<circle cx='434.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='434.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>16</text>
+<circle cx='460.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='460.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>17</text>
+<circle cx='486.0' cy='112.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='486.0' y='116.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='middle'>18</text>
+<text x='524.0' y='117.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>02 Breakdown</text>
 <rect x='36.0' y='150.0' width='820.0' height='560.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <text x='446.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#3d4a38' text-anchor='middle' font-weight='600'>STOCK PREPARATION — NO ASSEMBLY YET</text>
 <text x='446.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='middle'>Measure and label. The machine starts at ST-03.</text>

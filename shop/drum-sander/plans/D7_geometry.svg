@@ -12,7 +12,7 @@
 <rect x='60.0' y='110.0' width='420.0' height='200.0' fill='#c5c8c2' stroke='#1a1f24' stroke-width='1.5'/>
 <text x='270.0' y='145.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='middle' font-weight='600'>1  TABLE PLANE</text>
 <text x='80.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Torsion box + wear face</text>
-<text x='80.0' y='204.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Flatness ≤ 0.004" on both diagonals</text>
+<text x='80.0' y='204.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Flatness ≤ 0.003" on both diagonals</text>
 <text x='80.0' y='228.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>UHMW ways: no twist, no rack</text>
 <text x='80.0' y='252.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Wear face is the metrology surface</text>
 <rect x='510.0' y='110.0' width='420.0' height='200.0' fill='#b8a990' stroke='#1a1f24' stroke-width='1.5'/>
@@ -39,19 +39,19 @@
 <text x='340.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='middle' font-weight='600'>|A − B|  ≤  0.003"</text>
 <text x='700.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>QUALITY TARGETS</text>
 <text x='700.0' y='384.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Table flatness</text>
-<text x='980.0' y='384.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.004″ on both diagonals</text>
+<text x='980.0' y='384.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.003″ on both diagonals</text>
 <text x='700.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Drum TIR (paper off)</text>
 <text x='980.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.002″ TIR</text>
-<text x='700.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Drum ∥ table (paper on)</text>
-<text x='980.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>|A−B| ≤ 0.003″ over 15.5″</text>
+<text x='700.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>ALN-01 no-load alignment</text>
+<text x='980.0' y='432.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>|A−B| ≤ 0.003″ over 15.5″ (QC-15)</text>
 <text x='700.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Way plumb + capture</text>
 <text x='980.0' y='456.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Plumb; shoes wrap; no twist</text>
 <text x='700.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Pulley coplanar</text>
 <text x='980.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Faces flush; belt tracks center</text>
 <text x='700.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Hold-down set</text>
 <text x='980.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Rollers 0.030″ below drum OD</text>
-<text x='700.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>Thickness scatter</text>
-<text x='980.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.003″ after finish pass</text>
+<text x='700.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start' font-weight='600'>TV-01 delivered thickness variation</text>
+<text x='980.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>≤ 0.005″ after finish pass (QC-16)</text>
 <text x='40.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>CALIBRATION SEQUENCE (unplugged)</text>
 <text x='40.0' y='672.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='start' font-weight='600'>C1</text>
 <text x='90.0' y='672.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Disconnect power — Unplug. Hood off. Paper off for TIR; paper on for A/B parallel.</text>

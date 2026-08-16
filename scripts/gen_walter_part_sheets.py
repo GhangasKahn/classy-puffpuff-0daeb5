@@ -20,6 +20,8 @@ sys.path.insert(0, os.path.join(ROOT, "shop", "drum-sander", "cad"))
 from walter_ds16 import GEOM as G  # noqa: E402
 from walter_ds16 import SPEC as S  # noqa: E402
 from walter_ds16 import (  # noqa: E402
+    AXIS_I_SHELL,
+    MECH_ADJ_AT_WORK,
     PROJECT,
     fmt_in,
     hardware,
@@ -42,6 +44,7 @@ GREEN = "#5f8f62"  # plywood structure (Wandel)
 TAN = "#e6d09a"  # solid wood / moving parts
 UHMW = "#d5d9de"
 STEEL = "#c5c8cc"
+ALUM = "#9aa8b0"
 BRONZE = "#c4783a"
 MDF = "#c4b496"
 PHEN = "#8a9098"
@@ -296,7 +299,7 @@ class Sheet:
             self.text(1180, 70, material, 12, DIM, "end", mono=False)
         self.text(36, Hpx - 52, "WALTER DS-16", 16, ACC, bold=True, mono=False)
         self.text(200, Hpx - 54, self.scale_note, 12, DIM)
-        self.text(W - 36, Hpx - 54, f"Rev {S.revision} geometry · fab {S.fabrication_rev} · inches", 12, DIM, "end")
+        self.text(W - 36, Hpx - 54, f"Rev {S.revision} geometry · fab {S.fabrication_rev} · FABRICATION REVIEW · inches", 12, DIM, "end")
         self.text(W - 36, Hpx - 34, "Confirm flange BCD before drilling · " + (evidence or PROJECT["unit_policy"]), 11, DIM, "end")
 
     def iso_frame(self, x, y, w, h, caption: str, meshes: list[Mesh]):
@@ -815,7 +818,7 @@ def sheet_p010() -> None:
     # draw at a readable scale: length compressed in the 2D bar, true dim called
     bar_w = 980
     sh.rect(ox, oy, bar_w, 36, fill=STEEL, stroke=INK, sw=1.8, rx=6)
-    sh.dim_h(ox, ox + bar_w, oy + 36, f'{inch(S.shaft_length)}" finished  (buy 24", cut to 22.5")', offset=28)
+    sh.dim_h(ox, ox + bar_w, oy + 36, f'{inch(S.shaft_length)}" finished  (buy {inch(S.shaft_length)} TG&P, MC-02)', offset=28)
     sh.dim_v(oy, oy + 36, ox, f'⌀{inch(S.shaft_od)}"', offset=-36)
     sh.leader(ox + 80, oy, ox + 80, oy - 48, "Drive end — H-001 FIXED (J-006)", 12)
     sh.leader(ox + bar_w - 80, oy + 36, ox + bar_w - 40, oy + 90, "Idler end — H-002 FLOATING pad (J-007)", 12)
@@ -948,11 +951,11 @@ def sheet_p015() -> None:
     sheet_rect(
         "P-015",
         "P015_pack_bore.svg",
-        "PACK-BORE JIG — fence and clamp wall, ream ⌀¾″ through the stack",
+        f"PACK-BORE JIG — fence and clamp wall, ream ⌀{inch(S.shaft_od)}″ through the stack (Option B)",
         MDF,
         [
-            "Bore P-008 and P-009 as one pack (S-009). A disc bored alone will not run true.",
-            "Ream, don't hog. The shaft is the locational fit (J-005).",
+            f"Option B only. Bore P-008 and P-009 as one pack (S-009) to ⌀{inch(S.shaft_od)}″. A disc bored alone will not run true.",
+            "Ream, don't hog. The shaft is the locational fit (J-005). Baseline drum is P-020/P-021 (J-106).",
         ],
         extras=extras,
         iso_meshes=meshes,
@@ -985,6 +988,162 @@ def sheet_p016() -> None:
         ],
         extras=extras,
         iso_meshes=meshes,
+        l_dim=L,
+        w_dim=Ww,
+        t_dim=T,
+    )
+
+
+def sheet_p020() -> None:
+    p = part_by_id("P-020")
+    sh = Sheet("P-020", p["part_name"], "Option A baseline drum  ·  wall is a stiffness requirement (CALC-C02)")
+    sh.titleblock(qty="MAKE 1", material=p["material"], evidence="DERIVED from CALC-C02")
+    od, wall, length = S.shell_od, S.shell_wall, G.drum_length
+    idia = od - 2 * wall
+    sc = 42
+    ox, oy = 80, 180
+    sh.text(ox, 120, "LONGITUDINAL SECTION  ·  ID and OD both shown", 14, ACC, bold=True)
+    sh.rect(ox, oy, length * sc, od * sc, fill=ALUM, stroke=INK, sw=1.8)
+    sh.rect(ox, oy + wall * sc, length * sc, idia * sc, fill=PAPER, stroke=INK, sw=1.4)
+    sh.dim_h(ox, ox + length * sc, oy + od * sc, f'{inch(length)}" finished  (cut ⅛″ long, then face square)', offset=28)
+    sh.dim_v(oy, oy + od * sc, ox, f'OD ⌀{inch(od)}"', offset=-40)
+    sh.dim_v(oy + wall * sc, oy + (wall + idia) * sc, ox + length * sc, f'ID ⌀{inch(idia)}"', offset=36)
+    sh.leader(ox + 40, oy + wall * sc / 2, ox + 120, oy - 28, f'wall {inch(wall, 3)}"  ·  I_shell = {AXIS_I_SHELL:.2f} in⁴', 12)
+    sh.leader(ox + 30, oy + od * sc / 2, ox + 40, oy + od * sc + 80, f"P-021 plug seats {inch(S.plug_inset, 2)}\" inboard (J-106)", 12)
+    sh.iso_frame(80, 520, 700, 300, "Isometric shell", [cyl_x(ALUM, 0, 0, 0, length, od / 2, 24)])
+    sh.notes(
+        820,
+        160,
+        [
+            "This part is why Rev C holds the accuracy spec. Do not substitute decorative thin-wall tube (MC-01).",
+            f"Cut from 18″ stock. Face both ends square. Finished length {inch(length)}″ matches the 21-disc pack so Option B remains a drop-in.",
+            "Bond and cross-pin to P-021 (J-106). Never adhesive alone on a rotating part.",
+            "True the OD in the machine's own bearings (ST-13). Truing in a lathe and then moving the drum re-introduces TIR.",
+            "Option B (P-008/P-009 stack) is the documented no-lathe alternative with an explicit accuracy penalty (D-047).",
+        ],
+    )
+    sh.save("P020_drum_shell.svg")
+
+
+def sheet_p021() -> None:
+    p = part_by_id("P-021")
+    sh = Sheet("P-021", p["part_name"], "ONE LATHE SETUP  ·  bore and OD concentric  ·  make 2")
+    sh.titleblock(qty="MAKE 2", material=p["material"], evidence="DERIVED from ALN-01 TIR budget")
+    od_plug = S.shell_od - 2 * S.shell_wall
+    sc = 90
+    ox, oy = 120, 200
+    r = (od_plug / 2) * sc
+    cx, cy = ox + r + 20, oy + r + 20
+    sh.circle(cx, cy, r, fill=ALUM, stroke=INK, sw=2.0)
+    sh.circle(cx, cy, (S.shaft_od / 2) * sc, fill=PAPER, stroke=INK, sw=1.6)
+    sh.dim_h(cx - r, cx + r, cy + r, f'OD ⌀{inch(od_plug, 3)}"  (measure YOUR tube ID)', offset=32)
+    sh.text(cx, cy - 8, f'bore ⌀{inch(S.shaft_od)}"', 13, DIM, "middle")
+    sh.text(ox, 120, "END VIEW — turn OD, then bore, then part off. Do not re-chuck.", 14, ACC, bold=True)
+    ox2, oy2 = 720, 240
+    sh.rect(ox2, oy2, S.plug_thick * sc, od_plug * sc, fill=ALUM, stroke=INK, sw=1.8)
+    sh.rect(ox2, oy2 + ((od_plug - S.shaft_od) / 2) * sc, S.plug_thick * sc, S.shaft_od * sc, fill=PAPER, stroke=INK, sw=1.4)
+    sh.dim_h(ox2, ox2 + S.plug_thick * sc, oy2 + od_plug * sc, f'T {inch(S.plug_thick)}"', offset=28)
+    sh.text(ox2, oy2 - 16, "SIDE VIEW", 12, DIM, bold=True)
+    sh.iso_frame(80, 620, 520, 280, "Isometric plug", [cyl_x(ALUM, 0, 0, 0, S.plug_thick, od_plug / 2, 20)])
+    sh.notes(
+        640,
+        620,
+        [
+            "Concentricity of bore to OD becomes drum TIR directly. One setup, two operations.",
+            f"Light push fit on the {inch(S.shaft_od)}\" shaft — no rock. Clamp collars H-029 locate axially (J-106).",
+            "Cross-pin through the shell wall in two places 90° apart after the epoxy cures. Pins carry torque.",
+            "Make a spare from the same bar. 3D-print is not a substitute for this part.",
+        ],
+    )
+    sh.save("P021_drum_plug.svg")
+
+
+def sheet_p022() -> None:
+    L, Ww, T = S.side_depth, S.way_width, S.way_stock
+    drop = L / 40.0
+
+    def extras(sh, ox, oy, sc, LL, WW):
+        sh.poly(
+            [(ox, oy), (ox + LL * sc, oy + drop * sc), (ox + LL * sc, oy + WW * sc), (ox, oy + WW * sc)],
+            fill=UHMW,
+            stroke=INK,
+            sw=1.6,
+        )
+        sh.text(ox + 12, oy + 18, "THICK END — wedges DOWN", 11, ACC, bold=True)
+        sh.text(ox + LL * sc - 12, oy + drop * sc + 16, "THIN", 11, DIM, "end", bold=True)
+        for i, frac in enumerate((0.2, 0.5, 0.8)):
+            sh.circle(ox + frac * LL * sc, oy + WW * sc / 2, 5, fill=PAPER, stroke=INK, sw=1.2)
+            sh.text(ox + frac * LL * sc + 8, oy + WW * sc / 2 - 8, f"¼-20 #{i + 1}", 10, DIM)
+
+    sheet_rect(
+        "P-022",
+        "P022_gib.svg",
+        "TAPERED GIB 1:40 — idler side only. Mark the thick end before it leaves the jig.",
+        UHMW,
+        [
+            f"Taper 1:40 over {inch(L)}\" → {inch(drop, 3)}\" drop.",
+            f"Target running clearance {S.gib_clearance:.4f}″ after the shoes are on (ST-16, QC-17). This kills the 0.020″ Rev B way-play term.",
+            "Brass-tip ¼-20 adjusters only (H-031 / MC-07). Bare steel brinells the UHMW and the setting drifts.",
+            "Set the gib FIRST and leave it. Parallelism is the P-023 jack, not this part (J-105).",
+        ],
+        extras=extras,
+        iso_meshes=[box(UHMW, 0, 0, 0, L, T, Ww)],
+        l_dim=L,
+        w_dim=Ww,
+        t_dim=T,
+    )
+
+
+def sheet_p023() -> None:
+    L, Ww, T = 8.0, 4.0, 0.375
+    holes = [
+        (1.0, Ww / 2, 0.375, "PIVOT ⅜″ ream"),
+        (1.0 + S.jack_arm_l2, Ww / 2, S.ply_shaft_clear_dia, "SHAFT CLR"),
+        (1.0 + S.jack_arm_l1, Ww / 2, 0.266, "JACK PAD"),
+    ]
+
+    def extras(sh, ox, oy, sc, LL, WW):
+        bx = ox + (1.0 + S.jack_arm_l2) * sc
+        by = oy + WW * sc / 2
+        half = (S.flange_bolt_square / 2) * sc
+        for dx, dy in ((-half, -half), (half, -half), (half, half), (-half, half)):
+            sh.circle(bx + dx, by + dy, 4, fill=PAPER, stroke=INK, sw=1.1)
+        sh.text(bx, by + half + 18, f'flange square {inch(S.flange_bolt_square)}" ASSUMED — MEASURE YOURS', 11, DIM, "middle")
+
+    sheet_rect(
+        "P-023",
+        "P023_idler_plate.svg",
+        "IDLER MICRO-ADJUST PLATE — 3D-print at 1:1 before cutting metal",
+        ALUM,
+        [
+            f"Pivot-to-bearing L2 = {inch(S.jack_arm_l2)}\". Pivot-to-jack L1 = {inch(S.jack_arm_l1)}\". Reduction L2/L1.",
+            f"¼-28 jack (H-030) → {MECH_ADJ_AT_WORK * 1000:.2f} mil at the work per full turn (CALC-C07).",
+            "Ream the pivot for H-032. Transfer the purchased flange BCD — do not drill from the square on this sheet.",
+            "Print this sheet at 1:1 and tape it to the stock before you drill (user joinery standard).",
+        ],
+        holes=holes,
+        extras=extras,
+        iso_meshes=[box(ALUM, 0, 0, 0, L, T, Ww)],
+        l_dim=L,
+        w_dim=Ww,
+        t_dim=T,
+    )
+
+
+def sheet_p024() -> None:
+    L, Ww, T = 2.0, 1.25, 0.75
+    sheet_rect(
+        "P-024",
+        "P024_jack_block.svg",
+        "JACK SCREW BLOCK — tap through, chase the thread clean",
+        STEEL,
+        [
+            f"Tap ¼-{S.jack_thread_tpi:g} through. A ragged thread reads as backlash in ALN-01.",
+            "Bolt to P-001R so the H-030 screw bears on a pad, not on plywood.",
+            "Brass or nylon tip under the screw point so it does not dig in and lose calibration.",
+        ],
+        holes=[(L / 2, Ww / 2, 0.201, f"TAP ¼-{S.jack_thread_tpi:g}")],
+        iso_meshes=[box(STEEL, 0, 0, 0, L, T, Ww)],
         l_dim=L,
         w_dim=Ww,
         t_dim=T,
@@ -1044,21 +1203,22 @@ def sheet_a01() -> None:
 
 
 def sheet_a02() -> None:
-    sh = Sheet("A-02", "Drum assembly", "P-008 ×19 · P-009 ×2 · P-010 · H-001 fixed · H-002 float")
-    sh.titleblock(qty="A-DRUM", material="MDF core + BB ends + TG&P shaft")
-    meshes = [cyl_x(MDF, 0, 0, 0, G.drum_length, S.drum_od / 2, 24)]
+    sh = Sheet("A-02", "Drum assembly", "Option A: P-020 + P-021×2 + P-010  ·  Option B: P-008×19 + P-009×2")
+    sh.titleblock(qty="A-DRUM", material="6061 shell baseline · MDF disc stack is Option B")
+    meshes = [cyl_x(ALUM, 0, 0, 0, G.drum_length, S.drum_od / 2, 24)]
     meshes.append(cyl_x(STEEL, 0, 0, 0, S.shaft_length, S.shaft_od / 2, 14))
     meshes.append(box(STEEL, -G.drum_length / 2 - 1.2, -1.4, -1.4, 0.7, 2.8, 2.8))
     meshes.append(box(STEEL, G.drum_length / 2 + 0.5, -1.4, -1.4, 0.7, 2.8, 2.8))
-    sh.iso_frame(40, 100, 980, 560, f'⌀{inch(S.drum_od)}" × {inch(G.drum_length)}"  ·  ~{S.drum_rpm:g} RPM', meshes)
+    sh.iso_frame(40, 100, 980, 560, f'⌀{inch(S.drum_od)}" × {inch(G.drum_length)}"  ·  ~{S.drum_rpm:g} RPM  ·  1¼″ shaft', meshes)
     sh.notes(
         1060,
         140,
         [
-            "Pack-bore every disc in P-015. BB ends (P-009) take flange crush — static-balance them.",
+            "OPTION A (baseline): turn P-021 plugs in one lathe setup, bond+pin into P-020 (J-106). Wall is stiffness, not cosmetics (CALC-C02).",
+            "OPTION B (no lathe): pack-bore P-008/P-009 in P-015. Accept the accuracy penalty (D-047) — the stack is not structural in bending.",
             "Drive bearing H-001 locked to P-001L (J-006). This is DATUM-E.",
-            "Idler H-002 on the axial pad (J-007). Snug bolts. If the shaft rings when you rap it, you over-constrained it.",
-            f"True on P-013 to TIR ≤ {S.drum_tir:.3f}″ paper-off, then Velcro wrap, then re-clock |A−B| ≤ {S.parallel_tol:.3f}″ paper-on.",
+            "Idler H-002 on P-023 micro-adjust plate (J-105 / J-007). Snug bolts. Axial float required.",
+            f"True on P-013 in the machine's own bearings to TIR ≤ {S.drum_tir:.4f}″ paper-off, then wrap, then ALN-01 |A−B| ≤ {S.aln_spec:.3f}″ paper-on.",
             "Spiral wrap, 3″ paper on 4″ hook. Optional ⅛″ slow osc erases tracks — that motor is not drum RPM.",
         ],
         "DRUM BUILD",
@@ -1142,7 +1302,7 @@ def sheet_h01() -> None:
     sh = Sheet("H-01", "Hardware", "Illustrated buy-list  ·  qty is for one machine")
     sh.titleblock(qty="BUY", material="Confirm flange BCD · mixed inch/metric ok if consistent")
     items = [
-        (80, 110, "H-001 / H-002", "4-bolt flange bearings, ¾″ bore, sealed. Need 2. Drive FIXED, idler on axial pad."),
+        (80, 110, "H-001 / H-002", "Mounted ball bearings, 1¼″ bore, self-aligning. Need 2. Drive FIXED, idler FLOATING. Required C on H-02."),
         (80, 250, "H-007", "½-10 Acme × 12″ + bronze nut + flange. Need 2."),
         (80, 370, "H-013", "Star knobs ⅜-16 + 1½″ studs. Need 6. Way locks and yokes."),
         (80, 500, "H-014 / H-015", "#8 × 1¼″ (need 100) and #8 × 2″ (need 50) coarse cabinet screws."),
@@ -1258,6 +1418,11 @@ def main() -> None:
     sheet_p017()
     sheet_p018()
     sheet_p019()
+    sheet_p020()
+    sheet_p021()
+    sheet_p022()
+    sheet_p023()
+    sheet_p024()
     sheet_a01()
     sheet_a02()
     sheet_a03()

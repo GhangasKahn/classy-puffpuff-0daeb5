@@ -239,8 +239,8 @@
   }
 
   /* Gallery + phone save */
-  const PACK_ZIP = "../pack/WALTER-DS16-RevB.zip";
-  const PACK_NAME = "WALTER-DS16-RevB.zip";
+  const PACK_ZIP = "../pack/WALTER-DS16-RevC.zip";
+  const PACK_NAME = "WALTER-DS16-RevC.zip";
 
   async function saveToPhone(url, filename, mime) {
     try {
@@ -319,7 +319,7 @@
       b.addEventListener("click", () =>
         saveToPhone(
           b.dataset.shareFile,
-          b.dataset.shareName || "WALTER-DS16-RevB.zip",
+          b.dataset.shareName || "WALTER-DS16-RevC.zip",
           "application/zip"
         )
       )

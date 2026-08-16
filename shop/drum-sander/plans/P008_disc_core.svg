@@ -10,10 +10,10 @@
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>MDF  ·  5.125" × 5.125" × 0.75"</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 19  ·  bandsaw oversize, pack-bore, then true on the sled</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED</text>
 <circle cx='420.0' cy='520.0' r='179.4' fill='#c4b496' stroke='#1a1a1a' stroke-width='2.0'/>
-<circle cx='420.0' cy='520.0' r='26.2' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='420.0' cy='520.0' r='43.8' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
 <line x1='420.0' y1='340.6' x2='420.0' y2='699.4' stroke='#3d4a38' stroke-width='0.8' stroke-dasharray='4 4'/>
 <line x1='240.6' y1='520.0' x2='599.4' y2='520.0' stroke='#3d4a38' stroke-width='0.8' stroke-dasharray='4 4'/>
 <line x1='240.6' y1='699.4' x2='240.6' y2='741.4' stroke='#3d4a38' stroke-width='0.9'/>
@@ -23,13 +23,13 @@
 <polygon points='599.4,735.4 591.4,732.2 591.4,738.6' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
 <rect x='366.0' y='718.4' width='107.9' height='18.0' fill='#ffffff'/>
 <text x='420.0' y='730.4' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>⌀5.12" bandsaw</text>
-<line x1='393.8' y1='520.0' x2='393.8' y2='466.0' stroke='#3d4a38' stroke-width='0.9'/>
-<line x1='446.2' y1='520.0' x2='446.2' y2='466.0' stroke='#3d4a38' stroke-width='0.9'/>
-<line x1='393.8' y1='472.0' x2='446.2' y2='472.0' stroke='#3d4a38' stroke-width='1.15'/>
-<polygon points='393.8,472.0 401.8,468.8 401.8,475.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
-<polygon points='446.2,472.0 438.2,468.8 438.2,475.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<line x1='376.2' y1='520.0' x2='376.2' y2='466.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='463.8' y1='520.0' x2='463.8' y2='466.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='376.2' y1='472.0' x2='463.8' y2='472.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='376.2,472.0 384.2,468.8 384.2,475.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='463.8,472.0 455.8,468.8 455.8,475.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
 <rect x='377.0' y='472.0' width='86.1' height='18.0' fill='#ffffff'/>
-<text x='420.0' y='484.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>⌀0.75" bore</text>
+<text x='420.0' y='484.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>⌀1.25" bore</text>
 <text x='420.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>TRUE ON P-013 TO ⌀5.00″  ·  DO NOT DISH THE MIDDLE</text>
 <rect x='1000.0' y='120.0' width='520.0' height='320.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>

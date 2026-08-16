@@ -8,125 +8,151 @@
 <text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Fabrication register and stock rules</text>
 <text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Fabrication</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
-<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>F-201 is the ST-01…ST-14 sequence — do not duplicate it here</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>F-201 is the ST-01…ST-18 sequence — do not duplicate it here</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
 <text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
 <text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
-<text x='36.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MAKE / BUY-CUT REGISTER (first page — remainder on D-11)</text>
+<text x='36.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MAKE / BUY-CUT REGISTER</text>
 <text x='36.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>ID</text>
 <text x='106.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>QTY</text>
 <text x='166.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>PART</text>
 <text x='556.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>FINISHED</text>
 <text x='936.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>MATERIAL</text>
 <line x1='36.0' y1='178.0' x2='1644.0' y2='178.0' stroke='#1a1a1a' stroke-width='1.0'/>
-<text x='36.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L</text>
-<text x='106.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Side panel, drive (left)</text>
-<text x='556.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>30" × 22" × 0.75"</text>
-<text x='936.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001R</text>
-<text x='106.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Side panel, idler (right)</text>
-<text x='556.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>30" × 22" × 0.75"</text>
-<text x='936.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-002</text>
-<text x='106.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Base deck</text>
-<text x='556.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18" × 22" × 0.75"</text>
-<text x='936.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='252.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-003</text>
-<text x='106.0' y='252.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3</text>
-<text x='166.0' y='252.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Stretcher</text>
-<text x='556.0' y='252.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>17" × 4" × 0.75"</text>
-<text x='936.0' y='252.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='272.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-004</text>
-<text x='106.0' y='272.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='272.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table torsion-box skin</text>
-<text x='556.0' y='272.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16" × 22" × 0.75"</text>
-<text x='936.0' y='272.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='292.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-005</text>
-<text x='106.0' y='292.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>8</text>
-<text x='166.0' y='292.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Torsion-box ribs</text>
-<text x='556.0' y='292.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>15.5" × 1.25" × 0.5"</text>
-<text x='936.0' y='292.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch or MDF</text>
-<text x='36.0' y='312.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-006</text>
-<text x='106.0' y='312.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='312.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table wear face</text>
-<text x='556.0' y='312.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16" × 22" × 0.5"</text>
-<text x='936.0' y='312.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Phenolic sheet or MIC-</text>
-<text x='36.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-007</text>
-<text x='106.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW way</text>
-<text x='556.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.438" × 2.5" × 0.75"</text>
-<text x='936.0' y='332.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW-PE</text>
-<text x='36.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-008</text>
-<text x='106.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>19</text>
-<text x='166.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum disc, core</text>
+<text x='36.0' y='190.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001L</text>
+<text x='106.0' y='190.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='190.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Side panel, drive (left)</text>
+<text x='556.0' y='190.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>30" × 22" × 0.75"</text>
+<text x='936.0' y='190.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001R</text>
+<text x='106.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Side panel, idler (right)</text>
+<text x='556.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>30" × 22" × 0.75"</text>
+<text x='936.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-002</text>
+<text x='106.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Base deck</text>
+<text x='556.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18" × 22" × 0.75"</text>
+<text x='936.0' y='226.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-003</text>
+<text x='106.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3</text>
+<text x='166.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Stretcher</text>
+<text x='556.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>17" × 4" × 0.75"</text>
+<text x='936.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='262.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-004</text>
+<text x='106.0' y='262.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='262.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table torsion-box skin</text>
+<text x='556.0' y='262.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16" × 22" × 0.75"</text>
+<text x='936.0' y='262.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-005</text>
+<text x='106.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>8</text>
+<text x='166.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Torsion-box ribs</text>
+<text x='556.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>15.5" × 1.25" × 0.5"</text>
+<text x='936.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch or MDF</text>
+<text x='36.0' y='298.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-006</text>
+<text x='106.0' y='298.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='298.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table wear face</text>
+<text x='556.0' y='298.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16" × 22" × 0.5"</text>
+<text x='936.0' y='298.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Phenolic sheet or MIC-</text>
+<text x='36.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-007</text>
+<text x='106.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW way</text>
+<text x='556.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.438" × 2.5" × 0.75"</text>
+<text x='936.0' y='316.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW-PE</text>
+<text x='36.0' y='334.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-008</text>
+<text x='106.0' y='334.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>19</text>
+<text x='166.0' y='334.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum disc, core</text>
+<text x='556.0' y='334.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.125" × 5.125" × 0.75</text>
+<text x='936.0' y='334.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>MDF</text>
+<text x='36.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-009</text>
+<text x='106.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum disc, end</text>
 <text x='556.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.125" × 5.125" × 0.75</text>
-<text x='936.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>MDF</text>
-<text x='36.0' y='372.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-009</text>
-<text x='106.0' y='372.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='372.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum disc, end</text>
-<text x='556.0' y='372.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>5.125" × 5.125" × 0.75</text>
-<text x='936.0' y='372.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='392.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-010</text>
-<text x='106.0' y='392.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='392.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum shaft</text>
-<text x='556.0' y='392.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>22.5" × 0.75" × 0.75"</text>
-<text x='936.0' y='392.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Precision-ground CRS /</text>
-<text x='36.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-011</text>
-<text x='106.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Dust hood blank</text>
-<text x='556.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18" × 12" × 0.25"</text>
-<text x='936.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Birch or pine plywood</text>
-<text x='36.0' y='432.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-012</text>
-<text x='106.0' y='432.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='432.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Motor pivot cradle</text>
-<text x='556.0' y='432.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>12" × 8" × 0.75"</text>
-<text x='936.0' y='432.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
-<text x='36.0' y='452.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-013</text>
-<text x='106.0' y='452.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='452.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Full-width truing sled</text>
-<text x='556.0' y='452.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16" × 8" × 0.75"</text>
-<text x='936.0' y='452.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>MDF or Baltic birch</text>
-<text x='36.0' y='472.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-014</text>
-<text x='106.0' y='472.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='472.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hold-down roller yoke</text>
-<text x='556.0' y='472.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18" × 3" × 0.75"</text>
-<text x='936.0' y='472.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hardwood or 1½″ alumin</text>
-<text x='36.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-015</text>
-<text x='106.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Disc pack-bore jig</text>
-<text x='556.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>12" × 12" × 0.75"</text>
-<text x='936.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>MDF</text>
-<text x='36.0' y='512.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-016</text>
-<text x='106.0' y='512.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='512.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Acme bronze nut block</text>
-<text x='556.0' y='512.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.5" × 2" × 1.5"</text>
-<text x='936.0' y='512.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hardwood or aluminum +</text>
-<text x='36.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-017</text>
-<text x='106.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table way shoe</text>
-<text x='556.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4" × 2.5" × 1.25"</text>
-<text x='936.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW-PE or hardwood + </text>
-<text x='36.0' y='552.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-018</text>
-<text x='106.0' y='552.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
-<text x='166.0' y='552.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Acme thrust block</text>
-<text x='556.0' y='552.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3" × 3" × 1.5"</text>
-<text x='936.0' y='552.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood o</text>
-<text x='36.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-019</text>
-<text x='106.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='166.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Parallel home dog</text>
-<text x='556.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2" × 1" × 0.5"</text>
-<text x='936.0' y='572.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Aluminum bar or hardwo</text>
+<text x='936.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='370.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-010</text>
+<text x='106.0' y='370.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='370.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum shaft</text>
+<text x='556.0' y='370.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>24" × 1.25" × 1.25"</text>
+<text x='936.0' y='370.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Precision-ground CRS /</text>
+<text x='36.0' y='388.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-011</text>
+<text x='106.0' y='388.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='388.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Dust hood blank</text>
+<text x='556.0' y='388.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18" × 12" × 0.25"</text>
+<text x='936.0' y='388.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Birch or pine plywood</text>
+<text x='36.0' y='406.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-012</text>
+<text x='106.0' y='406.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='406.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Motor pivot cradle</text>
+<text x='556.0' y='406.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>12" × 8" × 0.75"</text>
+<text x='936.0' y='406.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood</text>
+<text x='36.0' y='424.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-013</text>
+<text x='106.0' y='424.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='424.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Full-width truing sled</text>
+<text x='556.0' y='424.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>16" × 8" × 0.75"</text>
+<text x='936.0' y='424.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>MDF or Baltic birch</text>
+<text x='36.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-014</text>
+<text x='106.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hold-down roller yoke</text>
+<text x='556.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>18" × 3" × 0.75"</text>
+<text x='936.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hardwood or 1½″ alumin</text>
+<text x='36.0' y='460.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-015</text>
+<text x='106.0' y='460.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='460.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Disc pack-bore jig</text>
+<text x='556.0' y='460.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>12" × 12" × 0.75"</text>
+<text x='936.0' y='460.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>MDF</text>
+<text x='36.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-020</text>
+<text x='106.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum shell, aluminium tube</text>
+<text x='556.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>15.75" × 5" × 0.25"</text>
+<text x='936.0' y='478.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>6061-T6 aluminium tube</text>
+<text x='36.0' y='496.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-021</text>
+<text x='106.0' y='496.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='496.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Drum end plug</text>
+<text x='556.0' y='496.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4.5" × 4.5" × 1.5"</text>
+<text x='936.0' y='496.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>6061-T6 aluminium</text>
+<text x='36.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-022</text>
+<text x='106.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Way gib, tapered</text>
+<text x='556.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>22" × 2.5" × 0.75"</text>
+<text x='936.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW-PE</text>
+<text x='36.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-023</text>
+<text x='106.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Idler bearing micro-adjust p</text>
+<text x='556.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>8" × 4" × 0.375"</text>
+<text x='936.0' y='532.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>6061 aluminium plate o</text>
+<text x='36.0' y='550.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-024</text>
+<text x='106.0' y='550.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='550.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Jack screw block</text>
+<text x='556.0' y='550.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2" × 1.25" × 0.75"</text>
+<text x='936.0' y='550.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Steel or aluminium bar</text>
+<text x='36.0' y='568.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-016</text>
+<text x='106.0' y='568.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='568.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Acme bronze nut block</text>
+<text x='556.0' y='568.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2.5" × 2" × 1.5"</text>
+<text x='936.0' y='568.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hardwood or aluminum +</text>
+<text x='36.0' y='586.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-017</text>
+<text x='106.0' y='586.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='586.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Table way shoe</text>
+<text x='556.0' y='586.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4" × 2.5" × 1.25"</text>
+<text x='936.0' y='586.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>UHMW-PE or hardwood + </text>
+<text x='36.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-018</text>
+<text x='106.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2</text>
+<text x='166.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Acme thrust block</text>
+<text x='556.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3" × 3" × 1.5"</text>
+<text x='936.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Baltic birch plywood o</text>
+<text x='36.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-019</text>
+<text x='106.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>1</text>
+<text x='166.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Parallel home dog</text>
+<text x='556.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>2" × 1" × 0.5"</text>
+<text x='936.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Aluminum bar or hardwo</text>
 <text x='36.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>STOCK PREPARATION</text>
 <text x='36.0' y='664.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Acclimate plywood on edge ≥ 48 h. Measure ply_actual in six places (ST-01). Keep the 16.5″ inner span.</text>
 <text x='36.0' y='683.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Grain: face grain vertical on P-001. Stretcher grain along X. Table skins across the drum.</text>
 <text x='36.0' y='702.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Reject: voids at dado lines, banana sheets, MDF that has been wet. Drum discs must be flat enough to pack.</text>
 <text x='36.0' y='721.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Finish: paste wax on UHMW only. No oil on ways, wear face, or table. Phenolic is the inspection plane — keep a spare.</text>
 <text x='36.0' y='740.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Solo handling: sides are 30″ × 22″ × ¾″ — manageable. The glued box needs two people or a dead-man to square.</text>
-<text x='36.0' y='759.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• 3D-print prototype: not required. Irreversible joints are the housed dados and the pack-bored drum; test dados on offcuts.</text>
-<text x='36.0' y='1048.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>F-201 routing = ST-01 through ST-14 in this book. Do not keep a second sequence.</text>
+<text x='36.0' y='759.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• 3D-print prototype: P-023 idler plate at 1:1 before cutting metal. Irreversible joints are the housed dados, the shell/plug bond, and Option</text>
+<text x='36.0' y='775.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  B pack-bore; test dados on offcuts.</text>
+<text x='36.0' y='1048.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>F-201 routing = ST-01 through ST-18 in this book. Do not keep a second sequence.</text>
 </svg>

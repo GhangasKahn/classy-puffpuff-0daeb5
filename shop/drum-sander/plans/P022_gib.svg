@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-022</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Way gib, tapered</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Replaces the Rev B 0.020″ sliding clearance with 0.0015″ set clearance. Largest single term removed from the thickness budget (D-042).</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 1  ·  IDLER SIDE ONLY</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>UHMW-PE  ·  22" × 2.5" × 0.75"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 1  ·  Taper 1:40 on a taper jig; three ¼-20 brass-tip adjusters</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED from CALC-C05</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>TAPERED GIB 1:40 — idler side only. Mark the thick end before it leaves the jig.</text>
+<rect x='80.0' y='160.0' width='980.0' height='111.4' fill='#d5d9de' stroke='#1a1a1a' stroke-width='2.0'/>
+<line x1='80.0' y1='271.4' x2='80.0' y2='305.4' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='1060.0' y1='271.4' x2='1060.0' y2='305.4' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='299.4' x2='1060.0' y2='299.4' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,299.4 88.0,296.2 88.0,302.6' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='1060.0,299.4 1052.0,296.2 1052.0,302.6' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='545.2' y='282.4' width='49.7' height='18.0' fill='#ffffff'/>
+<text x='570.0' y='294.4' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>22.00"</text>
+<line x1='80.0' y1='160.0' x2='42.0' y2='160.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='271.4' x2='42.0' y2='271.4' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='48.0' y1='160.0' x2='48.0' y2='271.4' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='48.0,160.0 44.8,168.0 51.2,168.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='48.0,271.4 44.8,263.4 51.2,263.4' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='38.0' y='219.7' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 219.7)'>2.5"</text>
+<text x='1076.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 0.75"</text>
+<polygon points='80.0,160.0 1060.0,184.5 1060.0,271.4 80.0,271.4' fill='#d5d9de' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='92.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>THICK END — wedges DOWN</text>
+<text x='1048.0' y='200.5' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end' font-weight='600'>THIN</text>
+<circle cx='276.0' cy='215.7' r='5.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='284.0' y='207.7' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>¼-20 #1</text>
+<circle cx='570.0' cy='215.7' r='5.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='578.0' y='207.7' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>¼-20 #2</text>
+<circle cx='864.0' cy='215.7' r='5.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='872.0' y='207.7' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>¼-20 #3</text>
+<rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1132.0,361.5 1178.0,388.0 1178.0,372.1 1132.0,345.5' fill='#b2b6ba'/>
+<polygon points='1178.0,388.0 1582.5,154.5 1582.5,138.5 1178.0,372.1' fill='#96999d'/>
+<polygon points='1178.0,372.1 1582.5,138.5 1536.5,112.0 1132.0,345.5' fill='#96999d'/>
+</g>
+<text x='1130.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric</text>
+<rect x='1120.0' y='420.0' width='500.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1136.0' y='444.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PART DATA</text>
+<text x='1136.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Stock</text>
+<text x='1260.0' y='470.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>¾" × 2½" UHMW bar (H-014 stock / MC-14)</text>
+<text x='1136.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Joinery</text>
+<text x='1260.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-105 adjustable gib</text>
+<text x='1136.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref face</text>
+<text x='1260.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Tapered face bears on the shoe</text>
+<text x='1136.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref edge</text>
+<text x='1260.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Grain</text>
+<text x='1260.0' y='558.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
+<text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED from CALC-C05</text>
+<text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Taper 1:40 over 22.00" → 0.55" drop.</text>
+<text x='80.0' y='968.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Target running clearance 0.0015″ after the shoes are on</text>
+<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (ST-16, QC-17). This kills the 0.020″ Rev B way-play term.</text>
+<text x='80.0' y='1004.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Brass-tip ¼-20 adjusters only (H-031 / MC-07). Bare steel</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  brinells the UHMW and the setting drifts.</text>
+<text x='80.0' y='1040.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Set the gib FIRST and leave it. Parallelism is the P-023 jack,</text>
+<text x='80.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  not this part (J-105).</text>
+</svg>

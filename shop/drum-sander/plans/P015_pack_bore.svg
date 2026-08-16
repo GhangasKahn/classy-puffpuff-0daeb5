@@ -10,10 +10,10 @@
 <text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 1  ·  IDENTICAL</text>
 <text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>MDF  ·  12" × 12" × 0.75"</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
-<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 1  ·  Fence + clamp wall; drill/ream ⌀¾″ through the pack</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 1  ·  Fence + clamp wall; drill/ream ⌀1.25″ through the pack (Option B)</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED</text>
-<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>PACK-BORE JIG — fence and clamp wall, ream ⌀¾″ through the stack</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>PACK-BORE JIG — fence and clamp wall, ream ⌀1.25″ through the stack (Option B)</text>
 <rect x='80.0' y='160.0' width='576.0' height='576.0' fill='#c4b496' stroke='#1a1a1a' stroke-width='2.0'/>
 <line x1='80.0' y1='736.0' x2='80.0' y2='770.0' stroke='#3d4a38' stroke-width='0.9'/>
 <line x1='656.0' y1='736.0' x2='656.0' y2='770.0' stroke='#3d4a38' stroke-width='0.9'/>
@@ -30,7 +30,7 @@
 <text x='38.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 452.0)'>12.00"</text>
 <text x='672.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 0.75"</text>
 <rect x='100.0' y='696.0' width='536.0' height='24.0' fill='#e6d09a' stroke='#1a1a1a' stroke-width='1.2'/>
-<circle cx='368.0' cy='448.0' r='18.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='368.0' cy='448.0' r='30.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.6'/>
 <text x='368.0' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>FENCE + CLAMP WALL  ·  BORE THE PACK AS ONE</text>
 <rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
 <g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
@@ -54,7 +54,8 @@
 <text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
 <text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED</text>
 <text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
-<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Bore P-008 and P-009 as one pack (S-009). A disc bored alone</text>
-<text x='80.0' y='964.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  will not run true.</text>
+<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Option B only. Bore P-008 and P-009 as one pack (S-009) to</text>
+<text x='80.0' y='964.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  ⌀1.25″. A disc bored alone will not run true.</text>
 <text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Ream, don't hog. The shaft is the locational fit (J-005).</text>
+<text x='80.0' y='1000.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Baseline drum is P-020/P-021 (J-106).</text>
 </svg>

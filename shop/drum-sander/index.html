@@ -118,7 +118,7 @@ body::before{
     <a href="view/">Viewer</a>
     <a href="app/">Build app</a>
     <a href="pocket/">Pocket</a>
-    <a href="pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Save pack</a>
+    <a href="pack/WALTER-DS16-RevC.zip" download="WALTER-DS16-RevC.zip">Save pack</a>
     <a href="/fence/">Fence suite</a>
   </nav>
 </header>
@@ -132,7 +132,7 @@ body::before{
       <div class="cta-row">
         <a class="btn solid" href="guide/">Open the build guide</a>
         <a class="btn" href="view/">3D viewer</a>
-        <a class="btn" href="pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Save shop pack</a>
+        <a class="btn" href="pack/WALTER-DS16-RevC.zip" download="WALTER-DS16-RevC.zip">Save shop pack</a>
         <button class="btn" type="button" id="sharePackBtn">Share to Files</button>
         <a class="btn" href="pocket/">Pocket card</a>
         <a class="btn" href="app/">Build checklist</a>
@@ -302,7 +302,7 @@ body::before{
     <a class="plan" href="plans/D12_joinery.svg" target="_blank" rel="noopener"><img src="plans/D12_joinery.svg" alt="D-12"/><span>D-12 Joinery &amp; QA</span></a>
   </div>
   <div class="cta-row">
-    <a class="btn solid" href="pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Download all (ZIP)</a>
+    <a class="btn solid" href="pack/WALTER-DS16-RevC.zip" download="WALTER-DS16-RevC.zip">Download all (ZIP)</a>
     <a class="btn" href="pocket/">Pocket card</a>
     <a class="btn" href="app/">Launch build app</a>
     <a class="btn" href="model/">3D model</a>
@@ -322,21 +322,21 @@ if (el) createWalterModel(el, { autoRotate: true });
 </script>
 <script>
 (function () {
-  const zip = new URL("pack/WALTER-DS16-RevB.zip", location.href).href;
+  const zip = new URL("pack/WALTER-DS16-RevC.zip", location.href).href;
   const btn = document.getElementById("sharePackBtn");
   if (!btn) return;
   btn.addEventListener("click", async function () {
     try {
       const res = await fetch(zip);
       const blob = await res.blob();
-      const file = new File([blob], "WALTER-DS16-RevB.zip", { type: "application/zip" });
+      const file = new File([blob], "WALTER-DS16-RevC.zip", { type: "application/zip" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({ files: [file], title: "WALTER DS-16 shop pack" });
         return;
       }
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "WALTER-DS16-RevB.zip";
+      a.download = "WALTER-DS16-RevC.zip";
       a.click();
     } catch (e) {
       if (e && e.name === "AbortError") return;

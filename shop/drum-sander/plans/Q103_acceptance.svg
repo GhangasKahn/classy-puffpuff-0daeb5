@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>Q-103</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>ALN-01 / TV-01 / gib / unbalance / CFM procedures</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Acceptance procedures</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>How to run the Rev C acceptance tests</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<text x='36.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ALN-01  —  NO-LOAD ALIGNMENT  (QC-15)</text>
+<text x='36.0' y='172.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Hood on. Paper on. No workpiece. Drum stopped. Indicator on a mag base, stem perpendicular to the table.</text>
+<text x='36.0' y='192.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Zero at station A (drive, DATUM-E). Move to station B (idler) without changing height. Record A and B.</text>
+<text x='36.0' y='212.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• If |A−B| &gt; 0.003″, turn the P-023 jack in small fractions of a turn (6.17 mil at the work per rev). Do not touch the gib.</text>
+<text x='36.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Recheck A, then B. Set the home dog when it passes. This is a setup number, not thickness variation.</text>
+<text x='36.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>TV-01  —  DELIVERED THICKNESS  (QC-16)</text>
+<text x='36.0' y='282.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Witness board 15.5″ wide, maple or equivalent, one finish pass. Caliper four corners and the centre.</text>
+<text x='36.0' y='302.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Spread must be ≤ 0.005″. This is a different and larger number than ALN-01. See CALC-C06 / M-106.</text>
+<text x='36.0' y='322.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• A ridge at the paper overlap is an idler-high/low clue — go back to ALN-01, do not grind the table.</text>
+<text x='36.0' y='350.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GIB  (QC-17)</text>
+<text x='36.0' y='372.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• After shoes are on, set P-022 so the table slides full travel by hand with no rock. Target 0.0015″.</text>
+<text x='36.0' y='392.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Record the feeler that just fails to enter. Re-check after the first week — UHMW moves.</text>
+<text x='36.0' y='420.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>UNBALANCE  (QC-18)  AND  CFM  (QC-20)</text>
+<text x='36.0' y='442.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Knife edges: five releases, random rest position. Allowance U ≤ see CALC-C13. Tape the light side, then make it permanent.</text>
+<text x='36.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Collector airflow at the machine ≥ 349 CFM (CALC-C15). A shop vacuum will not meet this. Hood ON is the guard.</text>
+</svg>

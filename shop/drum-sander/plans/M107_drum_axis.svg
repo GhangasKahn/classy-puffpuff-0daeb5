@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>M-107</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Drum axis stiffness</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>CALC-C01 · C02 · C03</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Series model: shell plug-to-plug, then shaft bearing-to-bearing</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<rect x='80.0' y='180.0' width='900.0' height='220.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='140.0' y1='320.0' x2='920.0' y2='320.0' stroke='#1a1a1a' stroke-width='2.0'/>
+<circle cx='160.0' cy='320.0' r='10.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.2'/>
+<circle cx='900.0' cy='320.0' r='10.0' fill='#c5c8cc' stroke='#1a1a1a' stroke-width='1.2'/>
+<rect x='280.0' y='250.0' width='500.0' height='40.0' fill='#9aa8b0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='160.0' y1='320.0' x2='160.0' y2='360.0' stroke='#3d4a38' stroke-width='1.2'/>
+<line x1='900.0' y1='320.0' x2='900.0' y2='360.0' stroke='#3d4a38' stroke-width='1.2'/>
+<line x1='160.0' y1='360.0' x2='900.0' y2='360.0' stroke='#3d4a38' stroke-width='1.2'/>
+<text x='530.0' y='378.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='middle'>bearing span 18.70"</text>
+<text x='160.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>DRIVE FIXED</text>
+<text x='900.0' y='210.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d5a4c' text-anchor='middle' font-weight='600'>IDLER FLOAT</text>
+<text x='530.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1a1a' text-anchor='middle' font-weight='600'>6061 shell ⌀5" × 0.25" wall</text>
+<text x='80.0' y='430.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>STIFFNESS REGISTER</text>
+<text x='80.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CALC</text>
+<text x='500.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>RESULT</text>
+<text x='860.0' y='452.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>NOTE</text>
+<line x1='80.0' y1='458.0' x2='1600.0' y2='458.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='80.0' y='480.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-C01 Rev B ¾″ shaft @ 20 lbf</text>
+<text x='500.0' y='480.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4.70 mil crown</text>
+<text x='860.0' y='480.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>FAIL — 4.25 lbf uses the 1 mil allowance</text>
+<text x='80.0' y='508.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-C02 Rev C series model @ 20 lbf</text>
+<text x='500.0' y='508.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>0.223 mil crown</text>
+<text x='860.0' y='508.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>shaft share 96%</text>
+<text x='80.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>CALC-C03 allowable force for 1 mil</text>
+<text x='500.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>89.6 lbf</text>
+<text x='860.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>4× the 20 lbf reference</text>
+<text x='80.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>I_shell / I_shaft</text>
+<text x='500.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>10.55 / 0.1198 in⁴</text>
+<text x='860.0' y='564.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Wall is a stiffness requirement</text>
+<text x='80.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='660.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• The Rev B shaft is a simply-supported beam with the sanding</text>
+<text x='80.0' y='676.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  load on the bare ¾″ section. It is not a bonded composite with</text>
+<text x='80.0' y='692.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the MDF discs — those do not take bending.</text>
+<text x='80.0' y='712.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Rev C puts a structural tube between the plugs. The shaft</text>
+<text x='80.0' y='728.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  still carries the overhangs to the bearings. Series, not</text>
+<text x='80.0' y='744.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  parallel.</text>
+<text x='80.0' y='764.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Force_reference 20 lbf is ESTIMATED. Report the allowable</text>
+<text x='80.0' y='780.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  force so a builder can work backwards from a test.</text>
+<text x='80.0' y='800.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Critical speed and unbalance: see CALC-C13 / CALC-C16 in the</text>
+<text x='80.0' y='816.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  JSON dump. Operating ~20 Hz; conservative first mode well</text>
+<text x='80.0' y='832.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  above.</text>
+</svg>

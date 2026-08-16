@@ -54,7 +54,7 @@
 <text x='1060.0' y='211.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1a1f24' text-anchor='middle'>½" RIBS @ 4" O.C. — FULL GLUE</text>
 <rect x='920.0' y='220.0' width='280.0' height='36.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.5'/>
 <text x='1060.0' y='243.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>¾" SKIN B</text>
-<text x='920.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>16.0" W × 22.0" D · flatness ≤ 0.004" diag.</text>
+<text x='920.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start'>16.0" W × 22.0" D · flatness ≤ 0.003" diag.</text>
 <text x='900.0' y='330.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DUAL-END LIFT (Rev B)</text>
 <text x='920.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='start' font-weight='600'>Screws</text>
 <text x='1040.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>Two ½″-10 Acme × 12″ + bronze nuts</text>

@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>H-02</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>McMaster procurement MC-01…MC-13</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>UNVERIFIED PNs</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Part numbers are CONFIRM AT ORDER  ·  search links are live</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<text x='36.0' y='150.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#a8342a' text-anchor='start'>McMaster-Carr catalogue numbers were not machine-verified. Each line is a controlling spec + substitution rule + search URL. Fill the PN from the product page.</text>
+<text x='36.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ORDER LINES — open the link, confirm the spec, write the PN on this sheet</text>
+<text x='36.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>ID</text>
+<text x='116.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>DESCRIPTION</text>
+<text x='556.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>QTY</text>
+<text x='756.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>PN</text>
+<text x='1016.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>CRIT</text>
+<text x='1136.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>SEARCH q=</text>
+<line x1='36.0' y1='204.0' x2='1644.0' y2='204.0' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='36.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-01</text>
+<text x='116.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Aluminum round tube, 5" OD x 0.25" w</text>
+<text x='556.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 pc x 18" (finish</text>
+<text x='756.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='220.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>6061 aluminum round tube 5" </text>
+<text x='36.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-02</text>
+<text x='116.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Precision-ground rotary shaft, 1.25"</text>
+<text x='556.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 pc x 24"</text>
+<text x='756.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='242.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>precision ground rotary shaf</text>
+<text x='36.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-03</text>
+<text x='116.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Mounted ball bearing, 1.25" bore, se</text>
+<text x='556.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2 ea (1 fixed driv</text>
+<text x='756.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='264.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>mounted ball bearing flange </text>
+<text x='36.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-04</text>
+<text x='116.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Aluminum round bar, 4-1/2" dia — dru</text>
+<text x='556.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 pc x 4" (yields </text>
+<text x='756.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='286.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>6061 aluminum round bar 4-1/</text>
+<text x='36.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-05</text>
+<text x='116.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Clamping shaft collar, 1.25" bore</text>
+<text x='556.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>4 ea</text>
+<text x='756.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='308.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>clamping shaft collar 1.25 i</text>
+<text x='36.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-06</text>
+<text x='116.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Socket head cap screw, 1/4-28 — para</text>
+<text x='556.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2 ea (1 live + 1 s</text>
+<text x='756.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='330.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1/4-28 socket head cap screw</text>
+<text x='36.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-07</text>
+<text x='116.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Brass-tip set screw, 1/4-20 — gib ad</text>
+<text x='556.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>6 ea</text>
+<text x='756.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>brass tipped set screw 1/4-2</text>
+<text x='36.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-08</text>
+<text x='116.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Hardened dowel pin, 3/8" x 2" — idle</text>
+<text x='556.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2 ea</text>
+<text x='756.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='374.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>hardened precision dowel pin</text>
+<text x='36.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-09</text>
+<text x='116.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Dial indicator, 1" travel, 0.001" gr</text>
+<text x='556.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 ea</text>
+<text x='756.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='396.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>dial indicator 1 inch travel</text>
+<text x='36.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-10</text>
+<text x='116.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Acme lead screw, 1/2"-10, single lea</text>
+<text x='556.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2 pc x 12"</text>
+<text x='756.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='418.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1/2-10 acme threaded rod lea</text>
+<text x='36.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-11</text>
+<text x='116.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Bronze Acme nut, 1/2"-10</text>
+<text x='556.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>2 ea</text>
+<text x='756.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='440.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>bronze acme nut 1/2-10</text>
+<text x='36.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-12</text>
+<text x='116.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Roller chain #25 + sprockets, 1/2" b</text>
+<text x='556.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 x 3 ft chain, 2 </text>
+<text x='756.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>safety</text>
+<text x='1136.0' y='462.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>roller chain 25 sprocket 1/2</text>
+<text x='36.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>MC-13</text>
+<text x='116.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Handwheel with graduated dial, 1/2" </text>
+<text x='556.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1 ea</text>
+<text x='756.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>CONFIRM AT ORDER</text>
+<text x='1016.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>fit</text>
+<text x='1136.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>handwheel graduated dial 1/2</text>
+<text x='36.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SUBSTITUTION AND MATING (truncated — full text is in cad/ds16_procurement.py)</text>
+<text x='36.0' y='542.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-01: mates P-020 shell, P-021 end plugs · Any 6061 or 6063 tube with OD 5.000 -0.000/+0.030 and wall &gt;= 0.180 in ·</text>
+<text x='36.0' y='556.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=6061+aluminum+round+tube+5%22+OD+0.25%22+wall</text>
+<text x='36.0' y='574.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-02: mates P-010 shaft, H-001/H-002 bearings, P-021 · 1045 TG&amp;P or 1566 ground shafting, 1.25" -0.001/-0.000. Hot-rolled bar ·</text>
+<text x='36.0' y='588.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=precision+ground+rotary+shaft+1.25+inch+diameter</text>
+<text x='36.0' y='606.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-03: mates P-001L (fixed), P-023 idler adjust plate · Any 2- or 4-bolt flange or pillow block meeting the bore, the C requir ·</text>
+<text x='36.0' y='620.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=mounted+ball+bearing+flange+1.25+inch+bore+self-aligning</text>
+<text x='36.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-04: mates P-021 plug, P-020 shell, P-010 shaft · Phenolic or hard maple acceptable for Option B only; aluminum preferre ·</text>
+<text x='36.0' y='652.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=6061+aluminum+round+bar+4-1%2F2+inch+diameter</text>
+<text x='36.0' y='670.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-05: mates P-010 shaft, P-021 plugs, H-001 bearing · Any clamp-style collar of the correct bore. Set-screw collars are excl ·</text>
+<text x='36.0' y='684.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=clamping+shaft+collar+1.25+inch+bore+two+piece</text>
+<text x='36.0' y='702.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-06: mates P-023 idler adjust plate, P-024 jack blo · M6x0.75 acceptable if the lead is recomputed and the sheet is revised. ·</text>
+<text x='36.0' y='716.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=1%2F4-28+socket+head+cap+screw+alloy+steel+1-1%2F2+long</text>
+<text x='36.0' y='734.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-07: mates P-022 gib, P-001R side · Any tipped set screw. A bare steel set screw is excluded: it brinells ·</text>
+<text x='36.0' y='748.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=brass+tipped+set+screw+1%2F4-20</text>
+<text x='36.0' y='766.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-08: mates P-023 idler adjust plate, P-001R side · Ground shoulder bolt of the same diameter is acceptable. ·</text>
+<text x='36.0' y='780.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=hardened+precision+dowel+pin+3%2F8+x+2</text>
+<text x='36.0' y='798.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-09: mates Q-101 acceptance, indicator pad on P-001 · 0.0005" indicator or a digital caliper in wooden blocks. A tape measur ·</text>
+<text x='36.0' y='812.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=dial+indicator+1+inch+travel+0.001+graduation+magnetic+base</text>
+<text x='36.0' y='830.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-10: mates P-016 nut block, P-018 thrust block, H-0 · 1/2-10 2-start acme is NOT interchangeable: it doubles the lead and ha ·</text>
+<text x='36.0' y='844.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=1%2F2-10+acme+threaded+rod+lead+screw</text>
+<text x='36.0' y='862.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-11: mates P-016 nut block, MC-10 screw · Any nut matching the screw lead and axial load. Verify the thread is t ·</text>
+<text x='36.0' y='876.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=bronze+acme+nut+1%2F2-10</text>
+<text x='36.0' y='894.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-12: mates MC-10 screws, H-008 · Timing belt and matched pulleys are acceptable and quieter. Tooth coun ·</text>
+<text x='36.0' y='908.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=roller+chain+25+sprocket+1%2F2+inch+bore</text>
+<text x='36.0' y='926.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>MC-13: mates MC-10 screw · Plain handwheel plus a shop-made paper dial is acceptable if graduatio ·</text>
+<text x='36.0' y='940.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#2a2a2a' text-anchor='start'>https://www.mcmaster.com/?q=handwheel+graduated+dial+1%2F2+inch+bore+4+inch</text>
+</svg>

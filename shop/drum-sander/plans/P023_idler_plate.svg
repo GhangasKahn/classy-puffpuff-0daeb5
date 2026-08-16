@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>P-023</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Idler bearing micro-adjust plate</text>
+<text x='200.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#3d4a38' text-anchor='start'>Pivot-to-jack 6″, pivot-to-bearing 1.25″ → 6.17 mil at the work per screw turn. 3D-print at 1:1 before cutting metal (user standard).</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>MAKE 1  ·  IDLER SIDE ONLY</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>6061 aluminium plate or steel plate, ⅜″  ·  8" × 4" × 0.375"</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Qty 1  ·  Drill the bearing pattern FROM THE BEARING, ream the pivot, then tap nothing — the jack bears on a pad</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · DERIVED from CALC-C07</text>
+<text x='80.0' y='110.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#3d5a4c' text-anchor='start' font-weight='600'>IDLER MICRO-ADJUST PLATE — 3D-print at 1:1 before cutting metal</text>
+<rect x='80.0' y='160.0' width='384.0' height='192.0' fill='#9aa8b0' stroke='#1a1a1a' stroke-width='2.0'/>
+<line x1='80.0' y1='352.0' x2='80.0' y2='386.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='464.0' y1='352.0' x2='464.0' y2='386.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='380.0' x2='464.0' y2='380.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='80.0,380.0 88.0,376.8 88.0,383.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='464.0,380.0 456.0,376.8 456.0,383.2' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<rect x='250.8' y='363.0' width='42.4' height='18.0' fill='#ffffff'/>
+<text x='272.0' y='375.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='middle'>8.00"</text>
+<line x1='80.0' y1='160.0' x2='42.0' y2='160.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='80.0' y1='352.0' x2='42.0' y2='352.0' stroke='#3d4a38' stroke-width='0.9'/>
+<line x1='48.0' y1='160.0' x2='48.0' y2='352.0' stroke='#3d4a38' stroke-width='1.15'/>
+<polygon points='48.0,160.0 44.8,168.0 51.2,168.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<polygon points='48.0,352.0 44.8,344.0 51.2,344.0' fill='#3d4a38' stroke='#3d4a38' stroke-width='0.4'/>
+<text x='38.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='end' transform='rotate(-90 38.0 260.0)'>4.00"</text>
+<text x='480.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d4a38' text-anchor='start'>T 0.38"</text>
+<circle cx='128.0' cy='256.0' r='9.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='136.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>PIVOT ⅜″ ream</text>
+<circle cx='188.0' cy='256.0' r='39.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='196.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>SHAFT CLR</text>
+<circle cx='416.0' cy='256.0' r='6.4' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.2'/>
+<text x='424.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='10' fill='#3d4a38' text-anchor='start'>JACK PAD</text>
+<circle cx='116.0' cy='184.0' r='4.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<circle cx='260.0' cy='184.0' r='4.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<circle cx='260.0' cy='328.0' r='4.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<circle cx='116.0' cy='328.0' r='4.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='1.1'/>
+<text x='188.0' y='346.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='middle'>flange square 3.00" ASSUMED — MEASURE YOURS</text>
+<rect x='1120.0' y='100.0' width='500.0' height='300.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.1' stroke-linejoin='round'>
+<polygon points='1282.0,388.0 1581.9,214.8 1581.9,198.6 1282.0,371.8' fill='#6c767c'/>
+<polygon points='1132.0,301.4 1282.0,388.0 1282.0,371.8 1132.0,285.2' fill='#818c93'/>
+<polygon points='1282.0,371.8 1581.9,198.6 1432.0,112.0 1132.0,285.2' fill='#6c767c'/>
+</g>
+<text x='1130.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Isometric</text>
+<rect x='1120.0' y='420.0' width='500.0' height='280.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<text x='1136.0' y='444.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>PART DATA</text>
+<text x='1136.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Stock</text>
+<text x='1260.0' y='470.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>8.5" × 4.125" × 0.375"</text>
+<text x='1136.0' y='492.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Joinery</text>
+<text x='1260.0' y='492.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-105 pivot + jack; H-032 pin; H-030 jack </text>
+<text x='1136.0' y='514.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref face</text>
+<text x='1260.0' y='514.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Bearing mounting face</text>
+<text x='1136.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Ref edge</text>
+<text x='1260.0' y='536.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Pivot axis</text>
+<text x='1136.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Grain</text>
+<text x='1260.0' y='558.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>—</text>
+<text x='1136.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start' font-weight='600'>Evidence</text>
+<text x='1260.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>DERIVED from CALC-C07</text>
+<text x='80.0' y='928.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>SHOP NOTES</text>
+<text x='80.0' y='948.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Pivot-to-bearing L2 = 1.25". Pivot-to-jack L1 = 6.00".</text>
+<text x='80.0' y='964.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Reduction L2/L1.</text>
+<text x='80.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ¼-28 jack (H-030) → 6.17 mil at the work per full turn</text>
+<text x='80.0' y='1000.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  (CALC-C07).</text>
+<text x='80.0' y='1020.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Ream the pivot for H-032. Transfer the purchased flange BCD —</text>
+<text x='80.0' y='1036.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  do not drill from the square on this sheet.</text>
+<text x='80.0' y='1056.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Print this sheet at 1:1 and tape it to the stock before you</text>
+<text x='80.0' y='1072.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  drill (user joinery standard).</text>
+</svg>

@@ -10,6 +10,8 @@ J-008,pivoting T-nut cradle,P-012,H-016 / P-001L,SNUG then LOCKED,"Gravity tensi
 J-009,spring yoke pivot,P-014,H-009 / H-011 / H-012,"CLEARANCE pivot, SPRING down","Set rollers 0.030″ below drum OD, paper on."
 J-010,screw base to sides,P-002,P-001L / P-001R,GLUE + SCREW,
 J-011,bronze nut to table,P-016,P-004 / H-007,LOCATIONAL,Both nuts on the drum-CL screws; chain-coupled rotation. Cutting force goes through the nuts.
+J-105,adjustable tapered gib + pivot plate,P-022 gib / P-023 idler plate,P-001R side / P-017 shoe,ADJUSTABLE SLIDING,"Two adjustments that must not be confused: the GIB sets running clearance (fit), the JACK sets drum parallelism (alignment). Set the gib first and leave it alone while clocking ALN-01."
+J-106,bonded + cross-pinned shell to plug to shaft,P-020 shell,P-021 plugs / P-010 shaft,BONDED + PINNED (shell↔plug); CLAMPED (plug↔shaft),The pins carry torque; the epoxy seals and shares load. Never adhesive alone on a rotating part. Bore and OD of the plug must be cut in ONE lathe setup or the drum runs true at only one angle.
 J-012,captured shoe wrap,P-017,P-007 / P-004,SLIDING (Z only),"Shoe hangs under the table edge and wraps the 0.230″ tongue. X play 0.010″, Y play 0.016″ (CALC-005)."
 J-013,thrust block on base,P-018,P-002 / H-007,LOCATIONAL,Thrust washer + e-clip under the screw. Sanding load tries to pull the screw out of the base.
 J-014,home dog stop,P-019,P-002 / H-008,ADJUSTABLE then LOCKED,Set after paper-on |A−B|. Left clutch hits this stop to recover parallel.

@@ -32,6 +32,10 @@ from walter_ds16 import PROJECT, RELEASE_STATE  # noqa: E402
 from walter_ds16 import SPEC as S  # noqa: E402
 from walter_ds16 import (  # noqa: E402
     LAYOUT_PROTOCOL,
+    MECH_ADJ_AT_WORK,
+    MECH_C_REQUIRED,
+    MECH_CFM,
+    accuracy_budgets,
     build_steps,
     calculations,
     calibration_steps,
@@ -42,15 +46,18 @@ from walter_ds16 import (  # noqa: E402
     inspection,
     parts,
     pass_schedule,
+    procurement,
     quality_targets,
     revisions,
     shop_drawings,
     stretcher_records,
+    superseded_by_rev_c,
     validate,
 )
 
 from gen_walter_part_sheets import (  # noqa: E402
     ACC,
+    ALUM,
     BRONZE,
     DIM,
     GREEN,
@@ -414,6 +421,9 @@ def sheet_g002() -> None:
         ["ply_actual", f'{S.ply_actual:g}"', "USER_MEASURE", "Measure before cutting (ST-01)"],
         ["drum_od", f'⌀{inch(S.drum_od)}"', "VERIFIED", "Sets surface speed"],
         ["disc_thick × count", f'{S.disc_thick:g}" × {S.disc_count_core + S.disc_count_ends}', "VERIFIED", "Gives drum length"],
+        ["shaft_od × length", f'{inch(S.shaft_od)}" × {inch(S.shaft_length)}"', "DERIVED", "CALC-C01 failed ¾″; this is D-041"],
+        ["shell_od × wall", f'{inch(S.shell_od)}" × {inch(S.shell_wall)}"', "DERIVED", "I_shell is the stiffness requirement"],
+        ["aln_spec / tv_spec", f'{S.aln_spec:.3f}" / {S.tv_spec:.3f}"', "DERIVED", "Two specs. They cannot be equal (D-040)"],
         ["bearing_cl_z", f'{inch(S.bearing_cl_z)}"', "VERIFIED layout", "From floor datum"],
         ["bearing_cl_y", f'{inch(G.bearing_cl_y)}"', "DERIVED", "side_depth / 2 — drum CL, Acme Y, way CL"],
         ["way_z0 / way_z1", f'{inch(G.way_z0)}" – {inch(G.way_z1)}"', "DERIVED", "Vertical way covers table travel"],
@@ -515,6 +525,7 @@ def sheet_g003() -> None:
     calc = [
         [c["id"], c["name"], c["expr"], f'{c["result"]}  [{c["evidence"]}]']
         for c in calculations()
+        if not str(c["id"]).startswith("CALC-C")
     ]
     y2 = table_block(
         sh,
@@ -525,9 +536,10 @@ def sheet_g003() -> None:
         calc,
         row_h=24,
     )
+    sh.text(36, y2 + 6, "Rev C mechanics register CALC-C01…C18 lives on M-106 / M-107 / M-108. CALC-C01 is historical (Rev B FAIL) — it is why the axis was redesigned.", 12, DIM, mono=False)
 
-    sh.text(36, y2 + 20, "AUTOMATED CHECKS RUN ON EVERY REGENERATION", 13, ACC, bold=True)
-    yy = y2 + 44
+    sh.text(36, y2 + 28, "AUTOMATED CHECKS RUN ON EVERY REGENERATION", 13, ACC, bold=True)
+    yy = y2 + 52
     checks = [
         "Table narrower than the inner span, and way projection greater than zero.",
         "Way rebate does not cut through the side panel.",
@@ -617,7 +629,7 @@ def sheet_g004() -> None:
         "Spin the drum by hand one full turn. Listen for contact.",
         "Stand clear of both drum ends, hand on the switch, and start it.",
         "Let it come up to speed. Listen for imbalance or rubbing. Shut down.",
-        "Only then true the drum, wrap paper, and clock A/B (ST-14).",
+        "Only then true the drum, wrap paper, and clock ALN-01 then TV-01 (ST-18).",
     ]
     for i, f in enumerate(first, 1):
         for j, row in enumerate(_wrap(f, 58)):
@@ -878,63 +890,53 @@ def sheet_q101() -> None:
     guide_titleblock(sh, right="Record the numbers")
     release_banner(sh)
 
-    rows = [[q["qc"], q["check"], q["spec"][:58], q["class"], q["gate"], "☐"] for q in inspection()]
-    y = table_block(
-        sh,
-        36,
-        166,
-        1580,
-        [("QC", 0), ("CHECK", 70), ("SPECIFICATION", 250), ("CLASS", 900), ("GATE", 980), ("PASS", 1070)],
-        rows,
-        row_h=26,
-        size=11,
-        title="INSPECTION PLAN — every gate must be signed",
+    qcs = list(inspection())
+    mid = (len(qcs) + 1) // 2
+    left = [[q["qc"], q["check"][:28], q["spec"][:42], "☐"] for q in qcs[:mid]]
+    right = [[q["qc"], q["check"][:28], q["spec"][:42], "☐"] for q in qcs[mid:]]
+    table_block(
+        sh, 36, 150, 800,
+        [("QC", 0), ("CHECK", 70), ("SPEC", 280), ("PASS", 720)],
+        left, row_h=22, size=11, title="INSPECTION PLAN — left column",
     )
+    table_block(
+        sh, 860, 150, 760,
+        [("QC", 0), ("CHECK", 70), ("SPEC", 280), ("PASS", 680)],
+        right, row_h=22, size=11, title="INSPECTION PLAN — right column",
+    )
+    sh.text(36, 620, "Detailed ALN-01 / TV-01 / gib / unbalance / CFM procedures are on Q-103. QC-07 aliases QC-15; QC-10 aliases QC-16.", 12, DIM, mono=False)
 
-    sh.text(36, y + 24, "CALIBRATION SEQUENCE", 13, ACC, bold=True)
-    yy = y + 48
+    sh.text(36, 652, "CALIBRATION SEQUENCE", 13, ACC, bold=True)
+    yy = 676
     for i, c in enumerate(calibration_steps(), 1):
         sh.text(36, yy, f'{i}. {c["title"]}', 12, ACC, bold=True)
-        yy += 17
-        for row in _wrap(c["body"], 74):
-            sh.text(56, yy, row, 11, NOTE, mono=False)
+        for row in _wrap(c["body"], 70):
             yy += 15
-        yy += 6
+            sh.text(56, yy, row, 11, NOTE, mono=False)
+        yy += 18
 
-    sh.text(900, y + 24, "RECORD YOUR MEASUREMENTS", 13, ACC, bold=True)
-    yy = y + 48
+    sh.text(860, 652, "RECORD YOUR MEASUREMENTS", 13, ACC, bold=True)
+    yy = 676
     fields = [
-        ("Measured ply thickness", 'in'),
-        ("Inner span, top / mid / bottom", 'in'),
-        ("Table flatness, both diagonals", 'in'),
-        ("Drum TIR, paper off", 'in'),
-        ("A reading (drive), paper on", 'in'),
-        ("B reading (idler), paper on", 'in'),
-        ("|A − B|", 'in'),
-        ("Witness board, four corners", 'in'),
-        ("Roller set below drum", 'in'),
-        ("Date commissioned", ''),
-        ("Built and checked by", ''),
+        ("Measured ply thickness", "in"),
+        ("Inner span, top / mid / bottom", "in"),
+        ("Table flatness over contact line", "in"),
+        ("Drum TIR, paper off", "in"),
+        ("A reading (drive), paper on, no load", "in"),
+        ("B reading (idler), paper on, no load", "in"),
+        ("ALN-01 |A − B|", "in"),
+        ("TV-01 witness spread", "in"),
+        ("Gib feeler that just fails", "in"),
+        ("Collector CFM at the machine", "CFM"),
+        ("Date commissioned", ""),
+        ("Built and checked by", ""),
     ]
     for label, unit in fields:
-        sh.text(900, yy, label, 12, NOTE, mono=False)
-        sh.line(1330, yy + 4, 1560, yy + 4, 1.0, INK)
+        sh.text(860, yy, label, 12, NOTE, mono=False)
+        sh.line(1240, yy + 4, 1540, yy + 4, 1.0, INK)
         if unit:
-            sh.text(1570, yy, unit, 11, DIM)
-        yy += 30
-
-    yy += 10
-    sh.text(900, yy, "PASS SCHEDULE — after acceptance", 13, ACC, bold=True)
-    yy += 24
-    for p in pass_schedule():
-        sh.text(900, yy, f'{p["grit"]} grit', 12, ACC, bold=True)
-        sh.text(990, yy, f'{p["depth"]} per pass', 12, INK, mono=False)
-        sh.text(1150, yy, p["use"][:40], 12, DIM, mono=False)
-        yy += 20
-
-    # No separate targets block here: every acceptance figure is already in the
-    # inspection plan above. Restating it would be a second place to disagree.
-    sh.text(900, min(yy + 16, 1074), f"Acceptance figures are the QC rows above. {len(quality_targets())} of them are measured on the machine.", 12, DIM, mono=False)
+            sh.text(1550, yy, unit, 11, DIM)
+        yy += 28
 
     sh.save("Q101_commissioning.svg")
 
@@ -1190,7 +1192,7 @@ def sheet_m101() -> None:
 
 
 def sheet_f101() -> None:
-    sh = Sheet("F-101", "Fabrication register and stock rules", "F-201 is the ST-01…ST-14 sequence — do not duplicate it here")
+    sh = Sheet("F-101", "Fabrication register and stock rules", f"F-201 is the ST-01…ST-{len(build_steps()):02d} sequence — do not duplicate it here")
     guide_titleblock(sh, right="Fabrication")
     release_banner(sh)
     rows = []
@@ -1200,7 +1202,7 @@ def sheet_f101() -> None:
         rows.append([p["part_id"], str(p["qty"]), p["part_name"][:28], p["finished_size"][:22], p["material"][:22]])
     table_block(
         sh, 36, 150, 1608, [("ID", 0), ("QTY", 70), ("PART", 130), ("FINISHED", 520), ("MATERIAL", 900)],
-        rows[:22], row_h=20, title="MAKE / BUY-CUT REGISTER (first page — remainder on D-11)",
+        rows[:26], row_h=18, title="MAKE / BUY-CUT REGISTER",
     )
     sh.text(36, 640, "STOCK PREPARATION", 13, ACC, bold=True)
     rules = [
@@ -1209,7 +1211,7 @@ def sheet_f101() -> None:
         "Reject: voids at dado lines, banana sheets, MDF that has been wet. Drum discs must be flat enough to pack.",
         "Finish: paste wax on UHMW only. No oil on ways, wear face, or table. Phenolic is the inspection plane — keep a spare.",
         "Solo handling: sides are 30″ × 22″ × ¾″ — manageable. The glued box needs two people or a dead-man to square.",
-        "3D-print prototype: not required. Irreversible joints are the housed dados and the pack-bored drum; test dados on offcuts.",
+        "3D-print prototype: P-023 idler plate at 1:1 before cutting metal. Irreversible joints are the housed dados, the shell/plug bond, and Option B pack-bore; test dados on offcuts.",
     ]
     yy = 664
     for r in rules:
@@ -1217,7 +1219,7 @@ def sheet_f101() -> None:
             sh.text(36, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
             yy += 16
         yy += 3
-    sh.text(36, 1048, "F-201 routing = ST-01 through ST-14 in this book. Do not keep a second sequence.", 12, DIM, mono=False)
+    sh.text(36, 1048, f"F-201 routing = ST-01 through ST-{len(build_steps()):02d} in this book. Do not keep a second sequence.", 12, DIM, mono=False)
     sh.save("F101_routing.svg")
 
 
@@ -1249,7 +1251,7 @@ def sheet_s101() -> None:
     for line in [
         "This is a woodshop machine, not a building. Interaction ratios and seismic coefficients do not apply.",
         "Motor mass on P-012 is gravity-hung then locked. Do not treat the pivot as a live hinge in service.",
-        "Do not exceed ½ HP / 1725 RPM as drawn. A larger motor is a different machine and a different KE.",
+        "Do not exceed 1 HP / 1725 RPM as drawn. A larger motor is a different machine and a different KE.",
         "Electrical, switch, and grounding: [P] qualified person. Not released.",
     ]:
         for i, row in enumerate(_wrap(line, 130)):
@@ -1264,16 +1266,16 @@ def sheet_q102() -> None:
     guide_titleblock(sh, right="Quality")
     release_banner(sh)
     items = [
-        ("Completeness", "PASS", "P-001…P-019 in the register with finished size. H-001…H-026 specified. Consumables listed."),
-        ("Joinery details", "PASS", "J-001, J-002, J-006, J-007, J-011 have geometry, cut sequence, acceptance, movement."),
+        ("Completeness", "PASS", f"P-001…P-024 in the register with finished size. H-001…H-035 specified. MC-01…MC-25 on H-02/H-03. Consumables listed."),
+        ("Joinery details", "PASS", "J-001, J-002, J-006, J-007, J-011, J-105, J-106 have geometry, cut sequence, acceptance, movement."),
         ("Layout declared", "PASS", LAYOUT_PROTOCOL["declaration"]),
         ("Structural / base", "HOLD", "S-101 load path shown. Bench/stand connection is [A]; floor bolting is [P] and not released."),
-        ("Hardware", "PASS", "Bearings, pulleys, Acme, chain, rollers specified. Flange BCD remains ASSUMED until transfer."),
-        ("Tolerances / QC", "PASS", "QC-01…QC-14 with numerical acceptance. Q-101 is the sign-off sheet."),
-        ("Fabrication sequence", "PASS", "ST-01…ST-14 is F-201. Solo-handling noted on F-101. Dado test on offcuts."),
-        ("Self-containment", "HOLD", "Package is FABRICATION REVIEW · R3. Electrical and flange BCD still block RELEASED FOR FABRICATION."),
+        ("Hardware", "HOLD", "Bearings specified by required C. Flange BCD remains ASSUMED. McMaster PNs are CONFIRM AT ORDER."),
+        ("Tolerances / QC", "PASS", "QC-01…QC-20 with numerical acceptance. ALN-01 and TV-01 are separate. Q-101/Q-103 are the sign-off sheets."),
+        ("Fabrication sequence", "PASS", f"ST-01…ST-{len(build_steps()):02d} is F-201. Solo-handling noted on F-101. Dado test on offcuts. 3D-print P-023."),
+        ("Self-containment", "HOLD", "Package is FABRICATION REVIEW · R3. Electrical, flange BCD, and bearing C still block RELEASED FOR FABRICATION."),
         ("Japanese timber joinery", "N/A", "This machine is Baltic birch box + housed dados. Kigumi is not applied to plywood sides."),
-        ("3D-print prototype", "N/A", "No irreversible organic joint. Test dados and the pack-bore on scrap."),
+        ("3D-print prototype", "PASS", "P-023 idler plate printed 1:1 before metal. Shell/plug bond is irreversible — make a spare plug."),
     ]
     y = table_block(
         sh, 36, 160, 1608,
@@ -1284,6 +1286,307 @@ def sheet_q102() -> None:
     sh.text(36, y + 24, "This sheet does not make the package RELEASED FOR FABRICATION. It records that the drawing set is internally complete under the stated holds.", 13, NOTE, mono=False)
     sh.text(36, y + 48, f"validate() and validate_mechanics() run on every regeneration. Current fabrication rev {S.fabrication_rev}.", 12, DIM, mono=False)
     sh.save("Q102_zero_gap.svg")
+
+
+def sheet_g005() -> None:
+    sh = Sheet("G-005", "Rev C supersession", "What changed, why, and which artefact to throw away")
+    guide_titleblock(sh, right="NOT FOR FABRICATION OF REV B PARTS")
+    release_banner(sh)
+    sh.rect(36, 148, 1608, 40, fill=FLAG, stroke=INK, sw=1.2)
+    sh.text(52, 176, "PROFESSIONAL REVIEW  ·  REV B ¾″ SHAFT DRAWINGS ARE SUPERSEDED  ·  DO NOT CUT P-010 FROM A REV B SHEET", 14, PAPER, bold=True)
+    rows = [[r["artefact"][:28], r["was"][:32], r["now"][:42], r["driver"]] for r in superseded_by_rev_c()]
+    table_block(
+        sh, 36, 210, 1608,
+        [("ARTEFACT", 0), ("REV B WAS", 280), ("REV C IS", 680), ("DRIVER", 1180)],
+        rows, row_h=26, title="BLAST RADIUS OF D-041 — regenerate, do not patch a drawing by hand",
+    )
+    sh.text(36, 720, "WHY THIS PAGE EXISTS", 13, ACC, bold=True)
+    yy = 744
+    for line in [
+        "PLANFORGE forbids patching only the visible drawing. Everything listed here is regenerated from cad/walter_ds16.py.",
+        "CALC-C01 is a RESOLVED finding about Rev B, not an open defect. It is kept because deleting it would hide why the axis was redesigned.",
+        "Machine envelope is unchanged: 15.5″ capacity, 16.5″ inner span, no conveyor, vertical captured ways, stretcher triangle.",
+        "Option B (MDF disc stack) is documented so a shop without a lathe can still build. It is not the accuracy baseline.",
+    ]:
+        for i, row in enumerate(_wrap(line, 140)):
+            sh.text(36, yy, ("• " if i == 0 else "  ") + row, 13, NOTE, mono=False)
+            yy += 18
+        yy += 6
+    sh.save("G005_revision_c.svg")
+
+
+def sheet_m106() -> None:
+    from ds16_mechanics import alignment_budget, thickness_variation_budget, MECH
+    sh = Sheet("M-106", "Accuracy budget — ALN-01 vs TV-01", "Two specifications. They cannot be equal.")
+    guide_titleblock(sh, right="CALC-C04 · C05 · C06")
+    release_banner(sh)
+    aln = alignment_budget(MECH)
+    tv_c = thickness_variation_budget(MECH, "C")
+    tv_b = thickness_variation_budget(MECH, "B")
+    sh.text(36, 158, "ALN-01 — NO-LOAD ALIGNMENT  |A−B|  (indicator, paper on, no workpiece)", 13, ACC, bold=True)
+    table_block(
+        sh, 36, 178, 760,
+        [("TERM", 0), ("mil", 520), ("EV", 620)],
+        [[r["term"][:42], f'{r["value"] * 1000:.2f}', r["evidence"]] for r in aln["rows"]]
+        + [["WORST CASE", f'{aln["worst_case"] * 1000:.2f}', ""], ["RSS", f'{aln["rss"] * 1000:.2f}', ""], ["SPEC", f'{aln["spec"] * 1000:.1f}', ""]],
+        row_h=22,
+    )
+    sh.text(860, 158, "TV-01 — DELIVERED THICKNESS VARIATION  (witness board, under cut)", 13, ACC, bold=True)
+    table_block(
+        sh, 860, 178, 760,
+        [("TERM", 0), ("B mil", 400), ("C mil", 520), ("EV", 640)],
+        [
+            [c["term"][:32], f'{b["value"] * 1000:.2f}', f'{c["value"] * 1000:.2f}', c["evidence"]]
+            for b, c in zip(tv_b["rows"], tv_c["rows"])
+        ]
+        + [
+            ["WORST CASE", f'{tv_b["worst_case"] * 1000:.1f}', f'{tv_c["worst_case"] * 1000:.1f}', ""],
+            ["RSS", f'{tv_b["rss"] * 1000:.1f}', f'{tv_c["rss"] * 1000:.1f}', ""],
+            ["SPEC", "3.0 (wrong)", f'{tv_c["spec"] * 1000:.1f}', ""],
+        ],
+        row_h=22,
+    )
+    sh.text(36, 620, "HOW TO READ THIS", 13, ACC, bold=True)
+    yy = 644
+    for line in [
+        f"Rev B used one number (0.003″) for both columns. CALC-C06: they differ. ALN-01 spec {S.aln_spec:.3f}″. TV-01 spec {S.tv_spec:.3f}″.",
+        f"Rev B TV RSS ≈ {tv_b['rss'] * 1000:.1f} mil against a 3 mil claim → FAIL. Rev C TV RSS ≈ {tv_c['rss'] * 1000:.1f} mil against 5 mil → PASS on RSS.",
+        "The largest Rev B TV term was 20 mil of way play. The gib (D-042 / P-022) removes it. The next largest was drum crown — that is M-107.",
+        "ALN-01 is a setup measurement. TV-01 is what the board feels. Pass ALN-01 first; then cut the witness board.",
+    ]:
+        for i, row in enumerate(_wrap(line, 140)):
+            sh.text(36, yy, ("• " if i == 0 else "  ") + row, 13, NOTE, mono=False)
+            yy += 18
+        yy += 6
+    sh.save("M106_accuracy.svg")
+
+
+def sheet_m107() -> None:
+    from ds16_mechanics import drum_crown, drum_crown_revb, MECH, AXIS, allowable_force
+    sh = Sheet("M-107", "Drum axis stiffness", "Series model: shell plug-to-plug, then shaft bearing-to-bearing")
+    guide_titleblock(sh, right="CALC-C01 · C02 · C03")
+    release_banner(sh)
+    crown = drum_crown(MECH.force_reference, MECH, AXIS)
+    crown_b = drum_crown_revb(MECH.force_reference, MECH)
+    f_allow = allowable_force(MECH, AXIS)
+    # simple beam diagram
+    sh.rect(80, 180, 900, 220, fill=LIGHT, stroke=INK, sw=1.0)
+    sh.line(140, 320, 920, 320, 2.0, INK)
+    sh.circle(160, 320, 10, fill=STEEL, stroke=INK, sw=1.2)
+    sh.circle(900, 320, 10, fill=STEEL, stroke=INK, sw=1.2)
+    sh.rect(280, 250, 500, 40, fill=ALUM, stroke=INK, sw=1.4)
+    sh.line(160, 320, 160, 360, 1.2, DIM)
+    sh.line(900, 320, 900, 360, 1.2, DIM)
+    sh.line(160, 360, 900, 360, 1.2, DIM)
+    sh.text(530, 378, f'bearing span {AXIS.bearing_span:.2f}"', 12, DIM, "middle")
+    sh.text(160, 210, "DRIVE FIXED", 12, ACC, "middle", bold=True)
+    sh.text(900, 210, "IDLER FLOAT", 12, ACC, "middle", bold=True)
+    sh.text(530, 200, f'6061 shell ⌀{S.shell_od:g}" × {S.shell_wall:g}" wall', 13, INK, "middle", bold=True)
+    rows = [
+        ["CALC-C01 Rev B ¾″ shaft @ 20 lbf", f"{crown_b * 1000:.2f} mil crown", "FAIL — 4.25 lbf uses the 1 mil allowance"],
+        ["CALC-C02 Rev C series model @ 20 lbf", f"{crown['total'] * 1000:.3f} mil crown", f"shaft share {crown['share_shaft'] * 100:.0f}%"],
+        ["CALC-C03 allowable force for 1 mil", f"{f_allow:.1f} lbf", f"{f_allow / 20.0:.0f}× the 20 lbf reference"],
+        ["I_shell / I_shaft", f"{AXIS.i_shell:.2f} / {AXIS.i_shaft:.4f} in⁴", "Wall is a stiffness requirement"],
+    ]
+    table_block(sh, 80, 430, 1520, [("CALC", 0), ("RESULT", 420), ("NOTE", 780)], rows, row_h=28, title="STIFFNESS REGISTER")
+    sh.notes(
+        80,
+        640,
+        [
+            "The Rev B shaft is a simply-supported beam with the sanding load on the bare ¾″ section. It is not a bonded composite with the MDF discs — those do not take bending.",
+            "Rev C puts a structural tube between the plugs. The shaft still carries the overhangs to the bearings. Series, not parallel.",
+            "Force_reference 20 lbf is ESTIMATED. Report the allowable force so a builder can work backwards from a test.",
+            "Critical speed and unbalance: see CALC-C13 / CALC-C16 in the JSON dump. Operating ~20 Hz; conservative first mode well above.",
+        ],
+    )
+    sh.save("M107_drum_axis.svg")
+
+
+def sheet_m108() -> None:
+    from ds16_mechanics import micro_adjust, lift_screw, MECH, AXIS, module_masses
+    sh = Sheet("M-108", "Micro-adjust and lift", "Jack geometry, Acme self-lock, handwheel resolution")
+    guide_titleblock(sh, right="CALC-C07 · C09 · C10")
+    release_banner(sh)
+    adj = micro_adjust(MECH, AXIS)
+    lift = lift_screw(module_masses(MECH)[2]["mass_lb"] + 8.0 + 20.0, MECH)
+    # jack diagram
+    sh.rect(80, 160, 720, 360, fill=LIGHT, stroke=INK, sw=1.0)
+    sh.circle(200, 420, 8, fill=INK, stroke=INK, sw=1.0)
+    sh.text(200, 448, "PIVOT", 12, ACC, "middle", bold=True)
+    sh.circle(200 + 80, 300, 18, fill=STEEL, stroke=INK, sw=1.2)
+    sh.text(280, 270, "BEARING  L2", 12, DIM, "middle")
+    sh.rect(560, 250, 24, 80, fill=STEEL, stroke=INK, sw=1.2)
+    sh.text(572, 220, "JACK  L1", 12, DIM, "middle")
+    sh.line(200, 420, 280, 300, 1.6, INK)
+    sh.line(200, 420, 572, 290, 1.6, INK)
+    sh.text(100, 186, "IDLER PLATE  (P-023)", 13, ACC, bold=True)
+    rows = [
+        ["Jack thread", f'¼-{S.jack_thread_tpi:g}', f'lead {adj["lead"]:.5f}"'],
+        ["L1 pivot→jack / L2 pivot→bearing", f'{S.jack_arm_l1:g}" / {S.jack_arm_l2:g}"', f'ratio {adj["ratio"]:.3f}'],
+        ["At the work, per revolution", f'{adj["per_rev_at_work"] * 1000:.2f} mil', "CALC-C07"],
+        ["At the work, per 15°", f'{adj["at_work_15deg"] * 1000:.2f} mil', "use small fractions of a turn"],
+        ["Acme ½-10 travel / rev", f'{lift["travel_per_rev"]:.3f}"', f'{int(MECH.handwheel_divisions)} div handwheel'],
+        ["Handwheel per division", f'{lift["resolution_per_division"] * 1000:.2f} mil', "CALC-C10"],
+        ["Acme self-locking?", "YES" if lift["self_locking"] else "NO", f'threshold μ {lift["selflock_threshold_mu"]:.3f}'],
+        ["Approach the setting", "RAISE, then lock ways", "D-044 — backlash is then out of the budget"],
+    ]
+    table_block(sh, 840, 160, 780, [("ITEM", 0), ("VALUE", 280), ("NOTE", 460)], rows, row_h=26, title="RESOLUTION")
+    sh.notes(
+        80,
+        560,
+        [
+            "Two adjustments that must not be confused: the GIB (P-022) sets running clearance. The JACK (P-023/P-024) sets drum parallelism. Set the gib first and leave it while clocking ALN-01.",
+            "¼-20 is excluded for the jack: resolution degrades ~40%. Recompute if you substitute M6×0.75.",
+            f"Required self-align of the insert ≥ {adj['required_selfalign_deg']:.3f}° so the bearing does not fight the jack (CALC-C08).",
+        ],
+    )
+    sh.save("M108_adjust.svg")
+
+
+def sheet_j105() -> None:
+    meshes = machine_meshes(["sides", "ways", "table", "shaft"], ["shaft", "ways"])
+    _joint_sheet(
+        "J-105",
+        "J105_gib.svg",
+        "Adjustable gib and idler pivot plate",
+        "P-022 1:40 gib  ·  P-023 plate  ·  P-024 jack block  ·  idler side only",
+        [
+            f"Gib taper 1:40, thick end down. Target running clearance {S.gib_clearance:.4f}″ (QC-17).",
+            f"Plate: pivot ⅜″ pin (H-032), jack ¼-28 at L1 {S.jack_arm_l1:g}″, bearing at L2 {S.jack_arm_l2:g}″.",
+            "Transfer the purchased flange BCD onto P-023. The square on the drawing is ASSUMED.",
+            "3D-print P-023 at 1:1 before cutting metal (user joinery standard).",
+        ],
+        [
+            "Taper the gib on a jig (S-013). Mark the thick end immediately.",
+            "Tap three ¼-20 stations in P-001R. Dry-fit the gib before the table exists (ST-08).",
+            "After shoes are on (ST-16), slide the gib in and set QC-17. Then clock ALN-01 with the jack only.",
+        ],
+        [
+            "Table slides full travel with no rock and no bind. Record the feeler that just fails to enter.",
+            f"ALN-01 |A−B| ≤ {S.aln_spec:.3f}″ after the jack is set. Do not chase the gib while clocking.",
+        ],
+        [
+            "Gib: SLIDING, adjustable. Seasonal UHMW swell is taken up by the screws — re-check QC-17 after the first week.",
+            "Plate: ROTATES about the pin. Drive bearing stays FIXED. Never lock both flanges.",
+            "Water/movement: UHMW grows more than birch. That is why the clearance is set, not designed as a press.",
+        ],
+        meshes,
+    )
+
+
+def sheet_j106() -> None:
+    meshes = [cyl_x(ALUM, 0, 0, 0, G.drum_length, S.drum_od / 2, 22), cyl_x(STEEL, 0, 0, 0, S.shaft_length, S.shaft_od / 2, 14)]
+    _joint_sheet(
+        "J-106",
+        "J106_shell_plug.svg",
+        "Shell → plug → shaft",
+        "Bonded + cross-pinned  ·  never adhesive alone on a rotating part",
+        [
+            f"P-021 OD turned to a light bond fit in the shell ID (nominal {S.shell_od - 2 * S.shell_wall:g}″ — measure YOUR tube).",
+            f"Bore ⌀{S.shaft_od:g}″ on the SAME lathe setup as the OD. Concentricity here is drum TIR.",
+            f"Plug seated {S.plug_inset:g}″ inboard of each shell end. Thickness {S.plug_thick:g}″.",
+            "H-029 clamp collars locate the plugs on the shaft. Set-screw collars are excluded.",
+        ],
+        [
+            "Turn both plugs (ST-09). Make a spare.",
+            "Face the shell square (ST-10). Abrade and solvent-clean both faces.",
+            "H-033 structural epoxy, seat, square, full cure. Then cross-drill and pin two places 90° apart per plug.",
+            "Slide the shaft through both plugs and the panels together (ST-12). Do not hammer.",
+        ],
+        [
+            "Bore-to-OD runout under 0.001″ on each plug before parting off.",
+            f"After truing in its own bearings: TIR ≤ {S.drum_tir:.4f}″ paper-off (QC-06). Knife-edge unbalance test (QC-18).",
+        ],
+        [
+            "Pins carry torque. Epoxy seals and shares load. Adhesive alone is forbidden on a rotating part.",
+            "Option B disc stack (J-005) is the no-lathe alternative. It is not this joint and it does not take bending.",
+            "Aluminium and steel grow differently. The idler bearing must FLOAT axially (J-007) so the shaft is not a column.",
+        ],
+        meshes,
+    )
+
+
+def sheet_q103() -> None:
+    sh = Sheet("Q-103", "ALN-01 / TV-01 / gib / unbalance / CFM procedures", "How to run the Rev C acceptance tests")
+    guide_titleblock(sh, right="Acceptance procedures")
+    release_banner(sh)
+    blocks = [
+        ("ALN-01  —  NO-LOAD ALIGNMENT  (QC-15)", [
+            "Hood on. Paper on. No workpiece. Drum stopped. Indicator on a mag base, stem perpendicular to the table.",
+            "Zero at station A (drive, DATUM-E). Move to station B (idler) without changing height. Record A and B.",
+            f"If |A−B| > {S.aln_spec:.3f}″, turn the P-023 jack in small fractions of a turn ({MECH_ADJ_AT_WORK * 1000:.2f} mil at the work per rev). Do not touch the gib.",
+            "Recheck A, then B. Set the home dog when it passes. This is a setup number, not thickness variation.",
+        ]),
+        ("TV-01  —  DELIVERED THICKNESS  (QC-16)", [
+            f"Witness board {S.capacity_width:g}″ wide, maple or equivalent, one finish pass. Caliper four corners and the centre.",
+            f"Spread must be ≤ {S.tv_spec:.3f}″. This is a different and larger number than ALN-01. See CALC-C06 / M-106.",
+            "A ridge at the paper overlap is an idler-high/low clue — go back to ALN-01, do not grind the table.",
+        ]),
+        ("GIB  (QC-17)", [
+            f"After shoes are on, set P-022 so the table slides full travel by hand with no rock. Target {S.gib_clearance:.4f}″.",
+            "Record the feeler that just fails to enter. Re-check after the first week — UHMW moves.",
+        ]),
+        ("UNBALANCE  (QC-18)  AND  CFM  (QC-20)", [
+            f"Knife edges: five releases, random rest position. Allowance U ≤ see CALC-C13. Tape the light side, then make it permanent.",
+            f"Collector airflow at the machine ≥ {MECH_CFM:.0f} CFM (CALC-C15). A shop vacuum will not meet this. Hood ON is the guard.",
+        ]),
+    ]
+    yy = 150
+    for title, lines in blocks:
+        sh.text(36, yy, title, 13, ACC, bold=True)
+        yy += 22
+        for line in lines:
+            for i, row in enumerate(_wrap(line, 140)):
+                sh.text(36, yy, ("• " if i == 0 else "  ") + row, 12, NOTE, mono=False)
+                yy += 16
+            yy += 4
+        yy += 8
+    sh.save("Q103_acceptance.svg")
+
+
+def _mcmaster_sheet(code: str, filename: str, title: str, rows: list[dict]) -> None:
+    sh = Sheet(code, title, "Part numbers are CONFIRM AT ORDER  ·  search links are live")
+    guide_titleblock(sh, right="UNVERIFIED PNs")
+    release_banner(sh)
+    sh.text(36, 150, "McMaster-Carr catalogue numbers were not machine-verified. Each line is a controlling spec + substitution rule + search URL. Fill the PN from the product page.", 12, FLAG, mono=False)
+    table_rows = []
+    for r in rows:
+        table_rows.append([
+            r["item_id"],
+            r["description"][:36],
+            str(r["qty"])[:18],
+            r["part_number"],
+            r["criticality"][:8],
+            r["search_query"][:28],
+        ])
+    table_block(
+        sh, 36, 176, 1608,
+        [("ID", 0), ("DESCRIPTION", 80), ("QTY", 520), ("PN", 720), ("CRIT", 980), ("SEARCH q=", 1100)],
+        table_rows, row_h=22, size=11, title="ORDER LINES — open the link, confirm the spec, write the PN on this sheet",
+    )
+    yy = 176 + 22 + 22 * len(table_rows) + 36
+    sh.text(36, min(yy, 900), "SUBSTITUTION AND MATING (truncated — full text is in cad/ds16_procurement.py)", 13, ACC, bold=True)
+    yy = min(yy, 900) + 22
+    for r in rows:
+        if yy > 1070:
+            sh.text(36, yy, "… remainder in ds16_procurement.py / pack/mcmaster.csv", 12, DIM, mono=False)
+            break
+        line = f'{r["item_id"]}: mates {r["mating_parts"][:40]} · {r["substitution_rule"][:70]} · {r["link"]}'
+        for i, row in enumerate(_wrap(line, 145)):
+            sh.text(36, yy, row, 11, NOTE, mono=False)
+            yy += 14
+        yy += 4
+    sh.save(filename)
+
+
+def sheet_h02() -> None:
+    rows = procurement()
+    _mcmaster_sheet("H-02", "H02_mcmaster.svg", "McMaster procurement MC-01…MC-13", rows[:13])
+
+
+def sheet_h03() -> None:
+    rows = procurement()
+    _mcmaster_sheet("H-03", "H03_mcmaster2.svg", "McMaster procurement MC-14…MC-25", rows[13:])
 
 
 HTML_HEAD = """<!doctype html>
@@ -1418,7 +1721,7 @@ def write_guide_html() -> None:
     <a class="btn" href="../view/">3D viewer</a>
     <a class="btn" href="../app/">Checklist</a>
     <button class="btn" type="button" onclick="window.print()">Print / PDF</button>
-    <a class="btn primary" href="../pack/WALTER-DS16-RevB.zip" download="WALTER-DS16-RevB.zip">Shop pack</a>
+    <a class="btn primary" href="../pack/WALTER-DS16-RevC.zip" download="WALTER-DS16-RevC.zip">Shop pack</a>
   </div>
 </div></header>
 
@@ -1472,10 +1775,11 @@ def write_guide_html() -> None:
     out.append('<section class="chap" id="basis"><div class="wrap">')
     out.append('<p class="k">Chapter 00</p><h2>Design basis, evidence, and safety</h2>')
     for code, f, title, note in (
-        ("G-001", "G001_cover.svg", "Cover, release state, and sheet index", "Where every sheet lives and what must be true before you cut."),
+        ["G-001", "G001_cover.svg", "Cover, release state, and sheet index", "Where every sheet lives and what must be true before you cut."],
         ("G-002", "G002_design_basis.svg", "Parameters, equations, and datums", "Change a parameter here and every sheet regenerates. Never edit a number on a drawing."),
         ("G-003", "G003_registers.svg", "Evidence classes and calculations", "What is measured, derived, assumed, or still to verify."),
         ("G-004", "G004_safety.svg", "Safety, risk class, and failure modes", "Read before the first powered run."),
+        ("G-005", "G005_revision_c.svg", "Rev C supersession", "What Rev B artefacts to throw away. CALC-C01 is why the axis changed."),
     ):
         out.append(
             f'<article class="sheet"><div class="hd"><span class="code">{code}</span>'
@@ -1501,14 +1805,22 @@ def write_guide_html() -> None:
     out.append('<p class="k">Chapter 00</p><h2>Kinematics, joinery, fabrication, load path</h2>')
     for code, f, title, note in (
         ("M-101", "M101_kinematics.svg", "Three planes: table lift, drum axis, feed", "Both Acme screws on the drum centerline. Vertical captured ways. No conveyor."),
+        ("M-106", "M106_accuracy.svg", "ALN-01 vs TV-01 error budgets", "Two specifications. They cannot be equal."),
+        ("M-107", "M107_drum_axis.svg", "Drum axis stiffness", "Series model. CALC-C01 is the Rev B FAIL that forced the rebuild."),
+        ("M-108", "M108_adjust.svg", "Micro-adjust and lift", "Jack geometry, Acme self-lock, handwheel resolution."),
         ("J-001", "J001_stretcher.svg", "Housed stretcher triangle", "IN-LO / OUT-LO / OUT-HI. Rails stand on edge. They miss the table."),
         ("J-002", "J002_way.svg", "Vertical way rebate", "The table does not sit on a shelf. Shoes wrap a tongue and the Acme lifts in Z."),
         ("J-006", "J006_drive_bearing.svg", "Drive flange FIXED", "DATUM-E. Transfer the purchased bearing before you drill."),
         ("J-007", "J007_idler_float.svg", "Idler flange FLOATING axial", "A pad, not YZ slots. Locking both flanges bananas the shaft."),
         ("J-011", "J011_lift.svg", "Lift, thrust, capture, home dog", "Force through the nuts. Shoes capture X/Y. Dog is last parallel."),
-        ("F-101", "F101_routing.svg", "Part register and stock rules", "F-201 is ST-01…ST-14. Do not keep a second sequence."),
+        ("J-105", "J105_gib.svg", "Gib and pivot plate", "Two adjustments: gib is fit, jack is alignment. 3D-print P-023."),
+        ("J-106", "J106_shell_plug.svg", "Shell → plug → shaft", "One lathe setup. Pins carry torque. Never adhesive alone."),
+        ("F-101", "F101_routing.svg", "Part register and stock rules", f"F-201 is ST-01…ST-{len(build_steps()):02d}. Do not keep a second sequence."),
         ("S-101", "S101_load_path.svg", "Shop-machine load path", "Not a building-code sheet. Electrical remains [P]."),
+        ("H-02", "H02_mcmaster.svg", "McMaster procurement MC-01…MC-13", "CONFIRM AT ORDER. Search links, not invented part numbers."),
+        ("H-03", "H03_mcmaster2.svg", "McMaster procurement MC-14…MC-25", "Substitution rules and mating parts."),
         ("Q-102", "Q102_zero_gap.svg", "Zero-gap checklist", "Internal completeness under FABRICATION REVIEW · R3 holds."),
+        ("Q-103", "Q103_acceptance.svg", "ALN-01 / TV-01 procedures", "How to run the Rev C acceptance tests."),
     ):
         out.append(
             f'<article class="sheet"><div class="hd"><span class="code">{code}</span>'
@@ -1652,19 +1964,28 @@ def main() -> None:
     sheet_g002()
     sheet_g003()
     sheet_g004()
+    sheet_g005()
     sheet_e101()
     sheet_m101()
+    sheet_m106()
+    sheet_m107()
+    sheet_m108()
     sheet_j001()
     sheet_j002()
     sheet_j006()
     sheet_j007()
     sheet_j011()
+    sheet_j105()
+    sheet_j106()
     sheet_f101()
     sheet_s101()
     for st in build_steps():
         sheet_step(st)
     sheet_q101()
     sheet_q102()
+    sheet_q103()
+    sheet_h02()
+    sheet_h03()
     write_guide_html()
     print("done →", OUT, f"({15 + len(build_steps())} guide sheets + guide book)")
 

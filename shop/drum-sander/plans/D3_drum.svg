@@ -9,7 +9,7 @@
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>DS-16 · Dedicated drum thickness sander</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>ShopNotes 86 → Walters → Rev B geometry · fab B.2 (individual part sheets)</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DRUM ASSEMBLY — exploded stack</text>
-<text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>19 core discs + 2 BB ends · ⌀5.0" × 15.75" · precision ⌀0.75" shaft 22.5" long</text>
+<text x='40.0' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>19 core discs + 2 BB ends · ⌀5.0" × 15.75" · precision ⌀1.25" shaft 24.0" long</text>
 <line x1='80.0' y1='400.0' x2='1500.0' y2='400.0' stroke='#8a9098' stroke-width='3'/>
 <text x='80.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#8a9098' text-anchor='start' font-weight='600'>SHAFT →</text>
 <rect x='200.0' y='280.0' width='40.0' height='240.0' fill='#c4a574' stroke='#1a1f24' stroke-width='1.5'/>
@@ -46,6 +46,6 @@
 <text x='40.0' y='800.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  True OD on the full-width sled that rides the ways (TIR ≤ 0.002″). THEN wrap paper. THEN re-clock A/B.</text>
 <text x='40.0' y='828.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>•  Wrap 4.0" hook Velcro; spiral 3.0" loop paper. Paper thickness is not uniform — expect A/B to move.</text>
 <text x='40.0' y='860.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>DRIVE MATH</text>
-<text x='40.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>RPM_drum = 1725 × (3/5) ≈ 1035 RPM   ·   Surface ≈ π × 5/12 × 1035 ≈ 1,350 sfpm</text>
+<text x='40.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1f24' text-anchor='start'>RPM_drum = 1725 × (3.5/5) ≈ 1207.5 RPM   ·   Surface ≈ π × 5/12 × 1207.5 ≈ 1,350 sfpm</text>
 <text x='40.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='start'>Walters ran ~1100 RPM with a ~4.75″ drum pulley. Either ratio is fine; keep belt aligned and locked.</text>
 </svg>

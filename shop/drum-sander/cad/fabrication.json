@@ -2,29 +2,31 @@
   "project": {
     "project_id": "WALTER-DS16",
     "project_name": "WALTER DS-16 dedicated drum thickness sander",
-    "revision": "B",
-    "fabrication_rev": "B.4",
+    "revision": "C",
+    "fabrication_rev": "C.1",
     "units": "inch",
     "unit_policy": "Internal inches. Millimetres are interface-only.",
-    "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on A/B",
-    "material_system": "Baltic birch + MDF drum + UHMW ways + phenolic wear",
+    "design_standard": "Shop woodworking T1 / joinery T2 / metrology T4 on ALN-01 / TV-01",
+    "material_system": "Baltic birch + 6061 drum shell + UHMW ways + phenolic wear",
     "tolerance_class": "T2 joinery, T4 drum/table metrology",
     "author": "WALTER fabrication model",
-    "model_version": "B.4",
+    "model_version": "C.1",
     "cad_platform": "Python SSOT + OpenSCAD solids + SVG shop drawings",
-    "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry"
+    "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry \u2192 Rev C precision axis"
   },
   "parameters": {
-    "revision": "B",
-    "fabrication_rev": "B.4",
+    "revision": "C",
+    "fabrication_rev": "C.1",
     "capacity_width": 15.5,
     "min_stock_thickness": 0.0625,
     "max_stock_thickness": 3.0,
     "min_stock_length": 12.0,
     "table_margin_each": 0.25,
+    "aln_spec": 0.003,
+    "tv_spec": 0.005,
     "parallel_tol": 0.003,
-    "table_flat_tol": 0.004,
-    "drum_tir": 0.002,
+    "table_flat_tol": 0.003,
+    "drum_tir": 0.0015,
     "paper_on_delta": 0.002,
     "pass_rough": 0.008,
     "pass_medium": 0.004,
@@ -38,20 +40,30 @@
     "velcro_width": 4.0,
     "sandpaper_width": 3.0,
     "disc_bandsaw_oversize": 0.125,
-    "shaft_od": 0.75,
-    "shaft_length": 22.5,
-    "shaft_spec": "Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
+    "shaft_od": 1.25,
+    "shaft_length": 24.0,
+    "shaft_spec": "Precision-ground rotary shaft, 1\u00bc\u2033, straightness \u2264 0.001\u2033/ft",
     "key_wire_od": 0.125,
-    "bearing_drive": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FIXED",
-    "bearing_idler": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FLOATING (axial)",
+    "bearing_drive": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning \u2014 FIXED",
+    "bearing_idler": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning \u2014 FLOATING (axial)",
     "bearing_count": 2,
     "idler_float_slot": 0.25,
-    "motor_hp": 0.5,
+    "shell_od": 5.0,
+    "shell_wall": 0.25,
+    "plug_inset": 0.25,
+    "plug_thick": 1.5,
+    "bearing_offset": 0.35,
+    "drum_option": "A",
+    "gib_clearance": 0.0015,
+    "jack_thread_tpi": 28.0,
+    "jack_arm_l1": 6.0,
+    "jack_arm_l2": 1.25,
+    "motor_hp": 1.0,
     "motor_rpm": 1725.0,
-    "pulley_motor_od": 3.0,
+    "pulley_motor_od": 3.5,
     "pulley_drum_od": 5.0,
     "belt": "4L / A-section V-belt (size to center distance)",
-    "drum_rpm": 1035.0,
+    "drum_rpm": 1207.5,
     "ply_nominal": 0.75,
     "ply_actual": 0.75,
     "side_height": 30.0,
@@ -105,9 +117,9 @@
     "motor_pivot_y": 4.0,
     "motor_pivot_z": 6.0,
     "display_gap_under_drum": 0.5,
-    "flange_bolt_square": 2.05,
-    "flange_bolt_clr": 0.344,
-    "ply_shaft_clear_dia": 1.125,
+    "flange_bolt_square": 3.0,
+    "flange_bolt_clr": 0.406,
+    "ply_shaft_clear_dia": 1.625,
     "motor_pivot_dia": 0.266,
     "indicator_pad_y": 8.0,
     "indicator_pad_z": 16.0,
@@ -126,10 +138,12 @@
       "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
       "Torsion-box table + phenolic / tooling-plate wear face",
       "Spring hold-down rollers infeed + outfeed \u2014 kills snipe and chatter",
-      "Full-width truing sled; re-clock after paper wrap to \u00b10.003\u2033",
+      "Full-width truing sled; re-clock after paper wrap (ALN-01)",
       "Dial-indicator pad on drive side; 0.001\u2033 pass schedule",
       "Optional \u215b\u2033 slow oscillation (gear motor) to erase spiral tracks",
-      "Pack-bore disc jig + static balance of end discs"
+      "Structural 6061 drum shell + turned plugs (Option B disc stack documented)",
+      "Tapered UHMW gib + \u00bc-28 idler jack for ALN-01",
+      "Frame housed dados through-bolted (H-034) \u2014 glue is not primary structure"
     ],
     "stretcher_stations": [
       [
@@ -219,7 +233,7 @@
     "min_stretcher_table_clear": 6.062,
     "roller_len": 15.75,
     "roller_z": 16.155,
-    "surface_fpm": 1355.0,
+    "surface_fpm": 1581.0,
     "drum_end_gap": 0.375,
     "base_width": 18.0,
     "base_depth": 22.0,
@@ -284,6 +298,12 @@
       "on": "P-010",
       "what": "Drum axis",
       "use": "Fixed by H-001; TIR and parallel"
+    },
+    {
+      "id": "DATUM-F",
+      "on": "P-023",
+      "what": "Idler pivot pin axis",
+      "use": "Rotation centre for the parallelism micro-adjust. ALN-01 is set about this line."
     }
   ],
   "parts": [
@@ -317,7 +337,7 @@
       "sheet": "P001L_side_drive.svg",
       "notes": "Stack-drill with P-001R as a pair, then split for inner-face work.",
       "evidence": "VERIFIED overall; dados B.1",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-001R",
@@ -349,7 +369,7 @@
       "sheet": "P001R_side_idler.svg",
       "notes": "Identical hole pattern to L after stack-drill. Ways and dados on inner face only.",
       "evidence": "VERIFIED overall; dados B.1",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-002",
@@ -381,7 +401,7 @@
       "sheet": "P002_base.svg",
       "notes": "Width follows ply_actual so 18 mm BB still keeps 16.5\u2033 clear.",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-003",
@@ -413,7 +433,7 @@
       "sheet": "P003_stretcher.svg",
       "notes": "Stand on edge (4\u2033 is Z). Stations IN-LO / OUT-LO / OUT-HI miss the table. Ways locate the table.",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-004",
@@ -445,7 +465,7 @@
       "sheet": "P004_table_skin.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-005",
@@ -477,7 +497,7 @@
       "sheet": "P005_table_ribs.svg",
       "notes": "Qty is typical for 4\u2033 o.c. in 22\u2033 depth; cut from offcuts.",
       "evidence": "ESTIMATED qty from spacing",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-006",
@@ -509,7 +529,7 @@
       "sheet": "P006_wear_face.svg",
       "notes": "This is the inspection plane. Keep a spare.",
       "evidence": "VERIFIED size; thickness is BUY option \u00bd\u2033 or \u215c\u2033",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-007",
@@ -541,7 +561,7 @@
       "sheet": "P007_uhmw_way.svg",
       "notes": "Vertical strip, 5.438\u2033 Z \u00d7 2.5\u2033 Y, centered on drum CL. Projects 0.230\u2033. Rebate 0.520\u2033.",
       "evidence": "DERIVED project/rebate so 16\u2033 table fits in 16.5\u2033 span; length follows table travel",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-008",
@@ -566,14 +586,14 @@
       "reference_face": "",
       "reference_edge": "",
       "reference_end": "",
-      "process": "Bandsaw oversize, pack-bore \u2300\u00be\u2033, true on sled to \u23005\u2033",
+      "process": "Bandsaw oversize, pack-bore \u23001.25\u2033 (Option B only), true on sled to \u23005\u2033",
       "joinery": "J-005 pack-bore + piano-wire keys; 1 mm relief every 4",
       "handed": "IDENTICAL",
       "viz_id": "drum",
       "sheet": "P008_disc_core.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-009",
@@ -605,7 +625,7 @@
       "sheet": "P009_disc_end.svg",
       "notes": "BB ends resist crushing at the flanges.",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-010",
@@ -616,28 +636,28 @@
       "make_or_buy": "BUY-CUT",
       "material": "Precision-ground CRS / TG&P",
       "species": "",
-      "finished_t": 0.75,
-      "finished_w": 0.75,
-      "finished_l": 22.5,
-      "rough_t": 0.75,
-      "rough_w": 0.875,
-      "rough_l": 23.0,
-      "finished_size": "22.5\" \u00d7 0.75\" \u00d7 0.75\"",
-      "finished_size_mm": "572 \u00d7 19 \u00d7 19 mm",
-      "rough_size": "23\" \u00d7 0.875\" \u00d7 0.75\"",
-      "purchase_size": "\u00be\" TG&P \u00d7 24\", cut to 22.5\"",
+      "finished_t": 1.25,
+      "finished_w": 1.25,
+      "finished_l": 24.0,
+      "rough_t": 1.25,
+      "rough_w": 1.375,
+      "rough_l": 24.5,
+      "finished_size": "24\" \u00d7 1.25\" \u00d7 1.25\"",
+      "finished_size_mm": "610 \u00d7 32 \u00d7 32 mm",
+      "rough_size": "24.5\" \u00d7 1.375\" \u00d7 1.25\"",
+      "purchase_size": "1.25\" TG&P \u00d7 24\" (MC-02)",
       "grain_direction": "",
       "reference_face": "",
       "reference_edge": "",
       "reference_end": "",
-      "process": "Cut to length; \u215b\u2033 key slots; TIR \u2264 0.0005\u2033 incoming",
-      "joinery": "J-005 discs; J-006 fixed drive flange; J-007 floating idler",
+      "process": "Cut square, chamfer 0.030 \u00d7 45\u00b0, deburr. Do not centre-punch the bearing seats.",
+      "joinery": "J-106 plugs; J-006 fixed drive flange; J-007 floating idler",
       "handed": "IDENTICAL",
       "viz_id": "shaft",
       "sheet": "P010_shaft.svg",
-      "notes": "Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
+      "notes": "Precision-ground rotary shaft, 1\u00bc\u2033, straightness \u2264 0.001\u2033/ft",
       "evidence": "VERIFIED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-011",
@@ -669,7 +689,7 @@
       "sheet": "P011_hood.svg",
       "notes": "Kerf-bent \u00bc\u2033 pine/birch ply, sawdust-glue filled",
       "evidence": "ESTIMATED blank; trim to drum arc",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-012",
@@ -701,7 +721,7 @@
       "sheet": "P012_motor_cradle.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-013",
@@ -733,7 +753,7 @@
       "sheet": "P013_truing_sled.svg",
       "notes": "As wide as the drum so you cannot dish the middle.",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-014",
@@ -765,7 +785,7 @@
       "sheet": "P014_roller_yoke.svg",
       "notes": "Board feet net 0.56; buy with 30% waste.",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-015",
@@ -790,14 +810,174 @@
       "reference_face": "",
       "reference_edge": "",
       "reference_end": "",
-      "process": "Fence + clamp wall; drill/ream \u2300\u00be\u2033 through the pack",
+      "process": "Fence + clamp wall; drill/ream \u23001.25\u2033 through the pack (Option B)",
       "joinery": "none",
       "handed": "IDENTICAL",
       "viz_id": "drum",
       "sheet": "P015_pack_bore.svg",
       "notes": "",
       "evidence": "DERIVED",
-      "revision": "B.4"
+      "revision": "C.1"
+    },
+    {
+      "part_id": "P-020",
+      "part_name": "Drum shell, aluminium tube",
+      "part_category": "drum",
+      "assembly": "A-DRUM",
+      "qty": 1,
+      "make_or_buy": "MAKE",
+      "material": "6061-T6 aluminium tube 5\u2033 OD \u00d7 0.25\u2033 wall",
+      "species": "",
+      "finished_t": 0.25,
+      "finished_w": 5.0,
+      "finished_l": 15.75,
+      "rough_t": 0.25,
+      "rough_w": 5.125,
+      "rough_l": 16.25,
+      "finished_size": "15.75\" \u00d7 5\" \u00d7 0.25\"",
+      "finished_size_mm": "400 \u00d7 127 \u00d7 6 mm",
+      "rough_size": "16.25\" \u00d7 5.125\" \u00d7 0.25\"",
+      "purchase_size": "5\" OD \u00d7 0.25\" wall \u00d7 18\" (H-027 / MC-01)",
+      "grain_direction": "n/a \u2014 isotropic",
+      "reference_face": "OD after final truing",
+      "reference_edge": "",
+      "reference_end": "Drive end",
+      "process": "Cut 1/8\u2033 long, face both ends square, bond+pin to P-021, then true the OD with the shaft in its own bearings",
+      "joinery": "J-106 shell \u2192 plug \u2192 shaft",
+      "handed": "IDENTICAL",
+      "viz_id": "drum",
+      "sheet": "P020_drum_shell.svg",
+      "notes": "Wall is the stiffness requirement: I = 10.55 in\u2074. This part is why Rev C holds the accuracy spec (CALC-C02).",
+      "evidence": "DERIVED from CALC-C02",
+      "revision": "C.1"
+    },
+    {
+      "part_id": "P-021",
+      "part_name": "Drum end plug",
+      "part_category": "drum",
+      "assembly": "A-DRUM",
+      "qty": 2,
+      "make_or_buy": "MAKE",
+      "material": "6061-T6 aluminium",
+      "species": "",
+      "finished_t": 1.5,
+      "finished_w": 4.5,
+      "finished_l": 4.5,
+      "rough_t": 1.5,
+      "rough_w": 4.625,
+      "rough_l": 5.0,
+      "finished_size": "4.5\" \u00d7 4.5\" \u00d7 1.5\"",
+      "finished_size_mm": "114 \u00d7 114 \u00d7 38 mm",
+      "rough_size": "5\" \u00d7 4.625\" \u00d7 1.5\"",
+      "purchase_size": "4\u00bd\" dia bar \u00d7 4\" (H-028 / MC-04)",
+      "grain_direction": "",
+      "reference_face": "OD (bonds to shell ID)",
+      "reference_edge": "",
+      "reference_end": "Outboard face",
+      "process": "Turn OD to a light bond fit in the shell ID and bore 1.25\u2033 ON THE SAME SETUP so bore and OD are concentric",
+      "joinery": "J-106; cross-pinned to shell, clamp-collared to shaft",
+      "handed": "IDENTICAL",
+      "viz_id": "drum",
+      "sheet": "P021_drum_plug.svg",
+      "notes": "Concentricity of bore to OD becomes drum TIR directly. One setup, two operations. Lightening holes optional.",
+      "evidence": "DERIVED from ALN-01 TIR budget",
+      "revision": "C.1"
+    },
+    {
+      "part_id": "P-022",
+      "part_name": "Way gib, tapered",
+      "part_category": "way",
+      "assembly": "A-FRAME",
+      "qty": 1,
+      "make_or_buy": "MAKE",
+      "material": "UHMW-PE",
+      "species": "",
+      "finished_t": 0.75,
+      "finished_w": 2.5,
+      "finished_l": 22.0,
+      "rough_t": 0.75,
+      "rough_w": 2.625,
+      "rough_l": 22.5,
+      "finished_size": "22\" \u00d7 2.5\" \u00d7 0.75\"",
+      "finished_size_mm": "559 \u00d7 64 \u00d7 19 mm",
+      "rough_size": "22.5\" \u00d7 2.625\" \u00d7 0.75\"",
+      "purchase_size": "\u00be\" \u00d7 2\u00bd\" UHMW bar (H-014 stock / MC-14)",
+      "grain_direction": "",
+      "reference_face": "Tapered face bears on the shoe",
+      "reference_edge": "",
+      "reference_end": "",
+      "process": "Taper 1:40 on a taper jig; three \u00bc-20 brass-tip adjusters",
+      "joinery": "J-105 adjustable gib",
+      "handed": "IDLER SIDE ONLY",
+      "viz_id": "ways",
+      "sheet": "P022_gib.svg",
+      "notes": "Replaces the Rev B 0.020\u2033 sliding clearance with 0.0015\u2033 set clearance. Largest single term removed from the thickness budget (D-042).",
+      "evidence": "DERIVED from CALC-C05",
+      "revision": "C.1"
+    },
+    {
+      "part_id": "P-023",
+      "part_name": "Idler bearing micro-adjust plate",
+      "part_category": "precision",
+      "assembly": "A-DRUM",
+      "qty": 1,
+      "make_or_buy": "MAKE",
+      "material": "6061 aluminium plate or steel plate, \u215c\u2033",
+      "species": "",
+      "finished_t": 0.375,
+      "finished_w": 4.0,
+      "finished_l": 8.0,
+      "rough_t": 0.375,
+      "rough_w": 4.125,
+      "rough_l": 8.5,
+      "finished_size": "8\" \u00d7 4\" \u00d7 0.375\"",
+      "finished_size_mm": "203 \u00d7 102 \u00d7 10 mm",
+      "rough_size": "8.5\" \u00d7 4.125\" \u00d7 0.375\"",
+      "purchase_size": "",
+      "grain_direction": "",
+      "reference_face": "Bearing mounting face",
+      "reference_edge": "Pivot axis",
+      "reference_end": "",
+      "process": "Drill the bearing pattern FROM THE BEARING, ream the pivot, then tap nothing \u2014 the jack bears on a pad",
+      "joinery": "J-105 pivot + jack; H-032 pin; H-030 jack screw",
+      "handed": "IDLER SIDE ONLY",
+      "viz_id": "shaft",
+      "sheet": "P023_idler_plate.svg",
+      "notes": "Pivot-to-jack 6\u2033, pivot-to-bearing 1.25\u2033 \u2192 6.17 mil at the work per screw turn. 3D-print at 1:1 before cutting metal (user standard).",
+      "evidence": "DERIVED from CALC-C07",
+      "revision": "C.1"
+    },
+    {
+      "part_id": "P-024",
+      "part_name": "Jack screw block",
+      "part_category": "precision",
+      "assembly": "A-DRUM",
+      "qty": 1,
+      "make_or_buy": "MAKE",
+      "material": "Steel or aluminium bar",
+      "species": "",
+      "finished_t": 0.75,
+      "finished_w": 1.25,
+      "finished_l": 2.0,
+      "rough_t": 0.75,
+      "rough_w": 1.375,
+      "rough_l": 2.5,
+      "finished_size": "2\" \u00d7 1.25\" \u00d7 0.75\"",
+      "finished_size_mm": "51 \u00d7 32 \u00d7 19 mm",
+      "rough_size": "2.5\" \u00d7 1.375\" \u00d7 0.75\"",
+      "purchase_size": "",
+      "grain_direction": "",
+      "reference_face": "",
+      "reference_edge": "",
+      "reference_end": "",
+      "process": "Tap \u00bc-28 through; chase the thread clean",
+      "joinery": "J-105",
+      "handed": "IDLER SIDE ONLY",
+      "viz_id": "shaft",
+      "sheet": "P024_jack_block.svg",
+      "notes": "A ragged thread reads as backlash in the parallelism adjustment.",
+      "evidence": "DERIVED",
+      "revision": "C.1"
     },
     {
       "part_id": "P-016",
@@ -829,7 +1009,7 @@
       "sheet": "P016_nut_block.svg",
       "notes": "",
       "evidence": "ASSUMED block size; nut is BUY",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-017",
@@ -861,7 +1041,7 @@
       "sheet": "P017_table_shoe.svg",
       "notes": "Groove 0.240\u2033 deep \u00d7 2.516\u2033 wide captures the 0.230\u2033 \u00d7 2.5\u2033 tongue. Table moves in Z only.",
       "evidence": "DERIVED from way_project / way_width + clearance",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-018",
@@ -893,7 +1073,7 @@
       "sheet": "P018_thrust_block.svg",
       "notes": "Takes axial load from the screw. Both blocks at Y = bearing_cl_y, left and right X.",
       "evidence": "ASSUMED block size; hole follows Acme OD",
-      "revision": "B.4"
+      "revision": "C.1"
     },
     {
       "part_id": "P-019",
@@ -925,7 +1105,7 @@
       "sheet": "P019_home_dog.svg",
       "notes": "Last known |A\u2212B| home. Uncouple left for taper; recouple against this stop.",
       "evidence": "ASSUMED size; function is the stop, not the block",
-      "revision": "B.4"
+      "revision": "C.1"
     }
   ],
   "joints": [
@@ -988,7 +1168,7 @@
       "part_a": "P-008 / P-009",
       "part_b": "P-010",
       "qty": 1,
-      "bore": 0.75,
+      "bore": 1.25,
       "key": 0.125,
       "fit_class": "LOCATIONAL / GLUE",
       "notes": "Bore as a pack. 1 mm relief every 4 MDF discs. Balance ends."
@@ -1043,6 +1223,39 @@
       "notes": "Both nuts on the drum-CL screws; chain-coupled rotation. Cutting force goes through the nuts."
     },
     {
+      "joint_id": "J-105",
+      "joint_type": "adjustable tapered gib + pivot plate",
+      "part_a": "P-022 gib / P-023 idler plate",
+      "part_b": "P-001R side / P-017 shoe",
+      "qty": 1,
+      "location": "Idler side only. Gib behind the shoe; plate pinned at the drum CL.",
+      "taper": "1:40",
+      "fit_class": "ADJUSTABLE SLIDING",
+      "target_clearance": 0.0015,
+      "adjusters": "3 \u00d7 \u00bc-20 brass-tip (H-031)",
+      "jack": "\u00bc-28 at L1 6\u2033 / L2 1.25\u2033",
+      "resolution_at_work": 0.006167239623121976,
+      "assembly_direction": "Taper wedges down: tightening closes clearance",
+      "inspection": "QC-17 gib clearance; QC-15 ALN-01 after the jack is set",
+      "notes": "Two adjustments that must not be confused: the GIB sets running clearance (fit), the JACK sets drum parallelism (alignment). Set the gib first and leave it alone while clocking ALN-01."
+    },
+    {
+      "joint_id": "J-106",
+      "joint_type": "bonded + cross-pinned shell to plug to shaft",
+      "part_a": "P-020 shell",
+      "part_b": "P-021 plugs / P-010 shaft",
+      "qty": 2,
+      "location": "Each end, plug seated 0.25\u2033 inboard of the shell end",
+      "bore": 1.25,
+      "fit_class": "BONDED + PINNED (shell\u2194plug); CLAMPED (plug\u2194shaft)",
+      "adhesive": "H-033 two-part structural epoxy for aluminium",
+      "pins": "2 per plug, 90\u00b0 apart, through the shell wall",
+      "constraint": "Plugs axially located by H-029 clamp collars",
+      "assembly_direction": "Plugs in from each end; shaft last, through both",
+      "inspection": "QC-06 TIR after truing; QC-18 unbalance",
+      "notes": "The pins carry torque; the epoxy seals and shares load. Never adhesive alone on a rotating part. Bore and OD of the plug must be cut in ONE lathe setup or the drum runs true at only one angle."
+    },
+    {
       "joint_id": "J-012",
       "joint_type": "captured shoe wrap",
       "part_a": "P-017",
@@ -1077,28 +1290,30 @@
   "hardware": [
     {
       "hardware_id": "H-001",
-      "description": "4-bolt flange bearing, \u00be\u2033 bore, sealed, FIXED (drive)",
-      "standard": "2-bolt/4-bolt flange",
-      "size": "\u00be\" bore",
+      "description": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning, FIXED (drive)",
+      "standard": "2-bolt/4-bolt flange or pillow block",
+      "size": "1\u00bc\" bore",
       "qty": 1,
       "make_or_buy": "BUY",
       "assembly": "A-DRUM",
-      "notes": "Lock to P-001L. No axial float."
+      "mcmaster": "MC-03",
+      "notes": "Lock to P-001L. No axial float. REQUIRED C \u2265 137 lbf (CALC-C11); self-align \u2265 0.011\u00b0 (CALC-C08). Confirm both on the vendor page."
     },
     {
       "hardware_id": "H-002",
-      "description": "4-bolt flange bearing, \u00be\u2033 bore, sealed, FLOATING (idler)",
-      "standard": "4-bolt flange",
-      "size": "\u00be\" bore",
+      "description": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning, FLOATING (idler)",
+      "standard": "2-bolt/4-bolt flange or pillow block",
+      "size": "1\u00bc\" bore",
       "qty": 1,
       "make_or_buy": "BUY",
       "assembly": "A-DRUM",
-      "notes": "Axial float on a 0.25\u2033 UHMW pad (J-007). Do not elongate flange holes in the plywood face."
+      "mcmaster": "MC-03",
+      "notes": "Mounts on P-023 micro-adjust plate. Axial float on a 0.25\u2033 UHMW pad (J-007). Never lock both bearings."
     },
     {
       "hardware_id": "H-003",
-      "description": "3\u2033 motor 4L pulley",
-      "size": "3\"",
+      "description": "3.5\u2033 motor 4L pulley",
+      "size": "3.5\"",
       "qty": 1,
       "make_or_buy": "BUY",
       "assembly": "A-DRIVE"
@@ -1121,7 +1336,7 @@
     },
     {
       "hardware_id": "H-006",
-      "description": "0.5 HP 1725 RPM TEFC motor, 115 V",
+      "description": "1 HP 1725 RPM TEFC motor, 115 V",
       "qty": 1,
       "make_or_buy": "BUY",
       "assembly": "A-DRIVE",
@@ -1277,6 +1492,90 @@
       "make_or_buy": "BUY",
       "assembly": "A-TABLE",
       "notes": "Under P-018. Sanding load tries to pull the screw up."
+    },
+    {
+      "hardware_id": "H-027",
+      "description": "Aluminium round tube 5\u2033 OD \u00d7 0.25\u2033 wall \u2014 drum shell stock",
+      "size": "5\" OD \u00d7 0.25\" wall \u00d7 18\"",
+      "qty": 1,
+      "make_or_buy": "BUY",
+      "assembly": "A-DRUM",
+      "mcmaster": "MC-01",
+      "notes": "Wall is a stiffness requirement (CALC-C02), not cosmetic. Becomes P-020."
+    },
+    {
+      "hardware_id": "H-028",
+      "description": "Aluminium round bar 4\u00bd\u2033 dia \u2014 drum end plug stock",
+      "size": "4\u00bd\" dia \u00d7 4\"",
+      "qty": 1,
+      "make_or_buy": "BUY",
+      "assembly": "A-DRUM",
+      "mcmaster": "MC-04",
+      "notes": "Becomes P-021 \u00d72. Turn OD and bore on one setup \u2014 concentricity here becomes drum TIR."
+    },
+    {
+      "hardware_id": "H-029",
+      "description": "Clamping shaft collar, 1.25\u2033 bore",
+      "qty": 4,
+      "make_or_buy": "BUY",
+      "assembly": "A-DRUM",
+      "mcmaster": "MC-05",
+      "notes": "Clamp type only. Set-screw collars mar the ground shaft."
+    },
+    {
+      "hardware_id": "H-030",
+      "description": "\u00bc-28 socket head cap screw \u2014 parallelism jack",
+      "size": "\u00bc-28 \u00d7 1\u00bd\"",
+      "qty": 2,
+      "make_or_buy": "BUY",
+      "assembly": "A-DRUM",
+      "mcmaster": "MC-06",
+      "notes": "Fine thread is the requirement (CALC-C07). \u00bc-20 degrades resolution ~40%."
+    },
+    {
+      "hardware_id": "H-031",
+      "description": "\u00bc-20 brass-tip set screw \u2014 gib adjusters",
+      "qty": 6,
+      "make_or_buy": "BUY",
+      "assembly": "A-FRAME",
+      "mcmaster": "MC-07",
+      "notes": "Brass tip loads the gib without embedding. Bare steel brinells it and the setting drifts."
+    },
+    {
+      "hardware_id": "H-032",
+      "description": "\u215c\u2033 \u00d7 2\u2033 hardened dowel pin \u2014 idler plate pivot",
+      "qty": 2,
+      "make_or_buy": "BUY",
+      "assembly": "A-DRUM",
+      "mcmaster": "MC-08",
+      "notes": "Pivot must not wear oval or the parallelism setting walks."
+    },
+    {
+      "hardware_id": "H-033",
+      "description": "Two-part structural epoxy for aluminium",
+      "qty": 1,
+      "make_or_buy": "BUY",
+      "assembly": "A-DRUM",
+      "mcmaster": "MC-22",
+      "notes": "Read the data sheet for open time and cure. Cross-pin as well \u2014 never adhesive alone on a rotating part."
+    },
+    {
+      "hardware_id": "H-034",
+      "description": "\u00bc-20 \u00d7 3\u2033 hex bolt + nylock + backing washers \u2014 frame through-bolts",
+      "qty": 12,
+      "make_or_buy": "BUY",
+      "assembly": "A-FRAME",
+      "mcmaster": "MC-24",
+      "notes": "D-048: screws alone are excluded by the user joinery standard. Re-check torque after the first hour (QC-19)."
+    },
+    {
+      "hardware_id": "H-035",
+      "description": "Graduated handwheel, \u00bd\u2033 bore",
+      "qty": 1,
+      "make_or_buy": "BUY",
+      "assembly": "A-TABLE",
+      "mcmaster": "MC-13",
+      "notes": "40 divisions \u2192 0.0025\u2033 per division (CALC-C10)."
     }
   ],
   "assemblies": [
@@ -1301,7 +1600,8 @@
         "P-002",
         "P-003",
         "P-007",
-        "P-018"
+        "P-018",
+        "P-022"
       ],
       "stage": "glue-up"
     },
@@ -1309,12 +1609,21 @@
       "assembly_id": "A-DRUM",
       "name": "Drum + shaft + bearings",
       "parts": [
+        "P-020",
+        "P-021",
+        "P-010",
+        "P-023",
+        "P-024",
+        "H-001",
+        "H-002",
+        "H-029"
+      ],
+      "alt_parts": [
         "P-008",
         "P-009",
-        "P-010",
-        "H-001",
-        "H-002"
-      ]
+        "P-015"
+      ],
+      "note": "Option A shell baseline; Option B disc stack alternative (D-047)"
     },
     {
       "assembly_id": "A-DRIVE",
@@ -1461,7 +1770,7 @@
       "op": "S-009",
       "title": "Pack-bore discs",
       "tool": "P-015 jig + drill/ream",
-      "setting": "\u23000.75\"",
+      "setting": "\u23001.25\"",
       "parts": [
         "P-008",
         "P-009"
@@ -1478,13 +1787,53 @@
     },
     {
       "op": "S-011",
-      "title": "A/B clock",
-      "tool": "H-021 indicator",
-      "setting": "|A\u2212B| \u2264 0.003\" paper on",
+      "title": "ALN-01 clock",
+      "tool": "H-021 indicator + P-023 jack",
+      "setting": "|A\u2212B| \u2264 0.003\" paper on, no load",
       "parts": [
         "A-TABLE",
         "A-DRUM"
+      ],
+      "rule": "Set the gib FIRST and leave it. Then clock with the jack only."
+    },
+    {
+      "op": "S-012",
+      "title": "Turn plug OD + bore",
+      "tool": "Metal lathe",
+      "setting": "OD to shell ID \u00b7 bore \u23001.25\"",
+      "parts": [
+        "P-021"
+      ],
+      "rule": "ONE SETUP \u2014 do not re-chuck between OD and bore."
+    },
+    {
+      "op": "S-013",
+      "title": "Taper the gib",
+      "tool": "Taper jig",
+      "setting": "1:40",
+      "parts": [
+        "P-022"
       ]
+    },
+    {
+      "op": "S-014",
+      "title": "Set gib clearance",
+      "tool": "Brass-tip adjusters + feelers",
+      "setting": "0.0015\"",
+      "parts": [
+        "P-022"
+      ],
+      "rule": "No rock, no bind, through FULL travel."
+    },
+    {
+      "op": "S-015",
+      "title": "TV-01 witness board",
+      "tool": "Calipers",
+      "setting": "spread \u2264 0.005\" across 15.5\"",
+      "parts": [
+        "A-MASTER"
+      ],
+      "rule": "Finish pass only. Different number from ALN-01."
     }
   ],
   "inspection": [
@@ -1519,7 +1868,7 @@
     {
       "qc": "QC-05",
       "check": "Table flatness",
-      "spec": "\u2264 0.004\u2033 on both diagonals of P-006",
+      "spec": "\u2264 0.003\u2033 on both diagonals of P-006",
       "class": "T3",
       "gate": "M7"
     },
@@ -1532,8 +1881,8 @@
     },
     {
       "qc": "QC-07",
-      "check": "Drum \u2225 table paper on",
-      "spec": "|A\u2212B| \u2264 0.003\u2033 over 15.5\u2033",
+      "check": "Drum \u2225 table paper on (alias of QC-15)",
+      "spec": "Use QC-15 ALN-01. |A\u2212B| \u2264 0.003\u2033 over 15.5\u2033, no load.",
       "class": "T4",
       "gate": "M7"
     },
@@ -1553,8 +1902,8 @@
     },
     {
       "qc": "QC-10",
-      "check": "Thickness scatter",
-      "spec": "\u2264 0.003\u2033 on four corners of witness board",
+      "check": "Thickness scatter (alias of QC-16)",
+      "spec": "Use QC-16 TV-01. Witness-board spread \u2264 0.005\u2033.",
       "class": "T4",
       "gate": "M7"
     },
@@ -1585,6 +1934,48 @@
       "spec": "Both screws at Y 11\u2033; |left\u2212right| travel match through 3\u2033",
       "class": "T3",
       "gate": "M7"
+    },
+    {
+      "qc": "QC-15",
+      "check": "ALN-01 alignment, NO LOAD",
+      "spec": "Indicator at station A (drive) and B (idler), drum stopped, paper on, no workpiece: |A\u2212B| \u2264 0.003\u2033 over 15.5\u2033. Set with the P-023 jack.",
+      "class": "T4",
+      "gate": "M7"
+    },
+    {
+      "qc": "QC-16",
+      "check": "TV-01 delivered thickness variation",
+      "spec": "Witness board 15.5\u2033 wide, finish pass: caliper 4 corners + centre, spread \u2264 0.005\u2033. This is the user-facing number, NOT the same as QC-15.",
+      "class": "T4",
+      "gate": "M8"
+    },
+    {
+      "qc": "QC-17",
+      "check": "Gib running clearance",
+      "spec": "Set gib to 0.0015\u2033: table slides by hand through full travel with no perceptible rock at either end. Record the feeler used.",
+      "class": "T3",
+      "gate": "M5"
+    },
+    {
+      "qc": "QC-18",
+      "check": "Drum residual unbalance",
+      "spec": "Knife-edge test: drum comes to rest in a random position over 5 releases. Allowance U \u2264 0.39 oz\u00b7in (CALC-C13).",
+      "class": "T3",
+      "gate": "M6"
+    },
+    {
+      "qc": "QC-19",
+      "check": "Frame bolt re-torque",
+      "spec": "Re-check all H-034 through-bolts after the first hour of running. Wood relaxes; a loose frame reads as taper.",
+      "class": "T2",
+      "gate": "M9"
+    },
+    {
+      "qc": "QC-20",
+      "check": "Collector delivers CFM",
+      "spec": "Measured or vendor-curve airflow \u2265 349 CFM at the machine (CALC-C15). A shop vacuum will not meet this.",
+      "class": "T2",
+      "gate": "M8"
     }
   ],
   "decisions": [
@@ -1680,6 +2071,69 @@
       "reason": "Planforge centerline protocol. Mixing a face measurement with a CL measurement without converting is how the drum axis drifts.",
       "rev": "B.4",
       "affected": "G-002, A-01, M-101"
+    },
+    {
+      "id": "D-040",
+      "decision": "Split the single 0.003 in spec into ALN-01 (no-load alignment) and TV-01 (delivered thickness variation, 0.005 in)",
+      "reason": "Rev B quoted one number for two different measurable quantities. The error budgets differ by a factor of two and no machine can make them equal.",
+      "evidence": "CALC-C04, CALC-C05, CALC-C06",
+      "rev": "C"
+    },
+    {
+      "id": "D-041",
+      "decision": "Drum axis rebuilt: 1.25 in shaft, structural 5 in x 0.25 in 6061 shell, plugs 0.25 in inboard, bearings 0.35 in off the side face",
+      "reason": "The 3/4 in shaft spent the whole accuracy allowance at 4.25 lbf. Rev C crowns 0.22 mil at 20 lbf, 21x stiffer.",
+      "evidence": "CALC-C01, CALC-C02, CALC-C03",
+      "rev": "C"
+    },
+    {
+      "id": "D-042",
+      "decision": "Adjustable tapered gib on the idler way replaces the 0.020 in sliding clearance; target 0.0015 in running clearance",
+      "reason": "Way play was the largest single term in the Rev B thickness budget.",
+      "evidence": "CALC-C05",
+      "rev": "C"
+    },
+    {
+      "id": "D-043",
+      "decision": "Idler bearing on a pivot plate with a 1/4-28 jack screw, 6.00 in / 1.25 in arm reduction",
+      "reason": "Parallelism must be settable finer than the spec. Resolution is 0.26 mil per 15 deg at the work.",
+      "evidence": "CALC-C07",
+      "rev": "C"
+    },
+    {
+      "id": "D-044",
+      "decision": "Lift screws carry the table in compression; always approach the setting from below and lock the ways before cutting",
+      "reason": "Removes screw backlash from the budget without an anti-backlash nut. Screws are self-locking, so the table cannot drift down.",
+      "evidence": "CALC-C09",
+      "rev": "C"
+    },
+    {
+      "id": "D-045",
+      "decision": "Bearings specified by required dynamic capacity C, not by bore alone",
+      "reason": "Rev B named a bearing by appearance. Rev C states the requirement so any vendor's data can be checked against it.",
+      "evidence": "CALC-C11",
+      "rev": "C"
+    },
+    {
+      "id": "D-046",
+      "decision": "Re-sheave to 3.5 in / 5 in -> 1208 rpm, 1581 sfpm",
+      "reason": "Rev B ran 1355 sfpm, low for finish work. The option table lets the builder trade finish against unbalance sensitivity.",
+      "evidence": "CALC-C12, CALC-C13",
+      "rev": "C"
+    },
+    {
+      "id": "D-047",
+      "decision": "Keep the MDF disc-stack drum as documented Option B",
+      "reason": "A shop without lathe access cannot make the shell and plugs. Option B is honest about its accuracy penalty rather than hidden.",
+      "evidence": "CALC-C01",
+      "rev": "C"
+    },
+    {
+      "id": "D-048",
+      "decision": "Housed dado plus through-bolts with backing washers for the frame, not screws alone",
+      "reason": "User standard: never rely on glue alone for primary structure, and a machine frame must be re-tightenable and knock-down.",
+      "evidence": "joinery-and-tolerance-standards.md hierarchy item 4",
+      "rev": "C"
     }
   ],
   "revisions": [
@@ -1706,6 +2160,10 @@
     {
       "rev": "B.4",
       "note": "Mechanics: vertical captured ways, stretcher stations clear of the table, both Acme screws on the drum CL, P-017 shoes / P-018 thrust / P-019 home dog, Planforge J/M/F/S sheets, validate_mechanics()"
+    },
+    {
+      "rev": "C",
+      "note": "Precision rebuild. Rev B's \u00be\u2033 shaft failed its own accuracy spec at 4.25 lbf (CALC-C01), and one 0.003\u2033 figure was being used for two different quantities. Rev C: 1\u00bc\u2033 shaft + structural aluminium shell (21\u00d7 stiffer), adjustable gib, parallelism micro-adjust plate, bearings specified by required dynamic capacity, spec split into ALN-01 and TV-01, frame through-bolted, 18-step build with an Option B drum, McMaster procurement register."
     }
   ],
   "fmea": [
@@ -1756,7 +2214,7 @@
     {
       "check": "Table flatness",
       "tool": "Straightedge + feelers on wear face",
-      "spec": "\u2264 0.004\u2033 on both diagonals",
+      "spec": "\u2264 0.003\u2033 on both diagonals",
       "qc": "QC-05"
     },
     {
@@ -1766,10 +2224,10 @@
       "qc": "QC-06"
     },
     {
-      "check": "Drum \u2225 table (paper on)",
-      "tool": "Indicator at A (drive) and B (idler)",
-      "spec": "|A\u2212B| \u2264 0.003\u2033 over 15.5\u2033",
-      "qc": "QC-07"
+      "check": "ALN-01 no-load alignment",
+      "tool": "Indicator at A (drive) and B (idler), paper on, no workpiece",
+      "spec": "|A\u2212B| \u2264 0.003\u2033 over 15.5\u2033 (QC-15)",
+      "qc": "QC-15"
     },
     {
       "check": "Way plumb + capture",
@@ -1790,10 +2248,10 @@
       "qc": "QC-08"
     },
     {
-      "check": "Thickness scatter",
-      "tool": "Caliper 4 corners of test panel",
-      "spec": "\u2264 0.003\u2033 after finish pass",
-      "qc": "QC-10"
+      "check": "TV-01 delivered thickness variation",
+      "tool": "Caliper 4 corners + centre of witness board",
+      "spec": "\u2264 0.005\u2033 after finish pass (QC-16)",
+      "qc": "QC-16"
     }
   ],
   "passes": [
@@ -1922,11 +2380,11 @@
     {
       "part_id": "P-010",
       "qty": 1,
-      "size": "22.5\" \u00d7 0.75\" \u00d7 0.75\"",
-      "size_mm": "572 \u00d7 19 \u00d7 19 mm",
+      "size": "24\" \u00d7 1.25\" \u00d7 1.25\"",
+      "size_mm": "610 \u00d7 32 \u00d7 32 mm",
       "stock": "Precision-ground CRS / TG&P",
-      "use": "Drum shaft \u2014 Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
-      "rough": "23\" \u00d7 0.875\" \u00d7 0.75\"",
+      "use": "Drum shaft \u2014 Precision-ground rotary shaft, 1\u00bc\u2033, straightness",
+      "rough": "24.5\" \u00d7 1.375\" \u00d7 1.25\"",
       "handed": "IDENTICAL"
     },
     {
@@ -1978,6 +2436,56 @@
       "use": "Disc pack-bore jig",
       "rough": "12.5\" \u00d7 12.125\" \u00d7 0.75\"",
       "handed": "IDENTICAL"
+    },
+    {
+      "part_id": "P-020",
+      "qty": 1,
+      "size": "15.75\" \u00d7 5\" \u00d7 0.25\"",
+      "size_mm": "400 \u00d7 127 \u00d7 6 mm",
+      "stock": "6061-T6 aluminium tube 5\u2033 OD \u00d7 0.25\u2033 wall",
+      "use": "Drum shell, aluminium tube \u2014 Wall is the stiffness requirement: I = 10.55 in\u2074",
+      "rough": "16.25\" \u00d7 5.125\" \u00d7 0.25\"",
+      "handed": "IDENTICAL"
+    },
+    {
+      "part_id": "P-021",
+      "qty": 2,
+      "size": "4.5\" \u00d7 4.5\" \u00d7 1.5\"",
+      "size_mm": "114 \u00d7 114 \u00d7 38 mm",
+      "stock": "6061-T6 aluminium",
+      "use": "Drum end plug \u2014 Concentricity of bore to OD becomes drum TIR dir",
+      "rough": "5\" \u00d7 4.625\" \u00d7 1.5\"",
+      "handed": "IDENTICAL"
+    },
+    {
+      "part_id": "P-022",
+      "qty": 1,
+      "size": "22\" \u00d7 2.5\" \u00d7 0.75\"",
+      "size_mm": "559 \u00d7 64 \u00d7 19 mm",
+      "stock": "UHMW-PE",
+      "use": "Way gib, tapered \u2014 Replaces the Rev B 0.020\u2033 sliding clearance with",
+      "rough": "22.5\" \u00d7 2.625\" \u00d7 0.75\"",
+      "handed": "IDLER SIDE ONLY"
+    },
+    {
+      "part_id": "P-023",
+      "qty": 1,
+      "size": "8\" \u00d7 4\" \u00d7 0.375\"",
+      "size_mm": "203 \u00d7 102 \u00d7 10 mm",
+      "stock": "6061 aluminium plate or steel plate, \u215c\u2033",
+      "use": "Idler bearing micro-adjust plate \u2014 Pivot-to-jack 6\u2033, pivot-to-bearing 1.25\u2033 \u2192 6.17 ",
+      "rough": "8.5\" \u00d7 4.125\" \u00d7 0.375\"",
+      "handed": "IDLER SIDE ONLY"
+    },
+    {
+      "part_id": "P-024",
+      "qty": 1,
+      "size": "2\" \u00d7 1.25\" \u00d7 0.75\"",
+      "size_mm": "51 \u00d7 32 \u00d7 19 mm",
+      "stock": "Steel or aluminium bar",
+      "use": "Jack screw block \u2014 A ragged thread reads as backlash in the paralle",
+      "rough": "2.5\" \u00d7 1.375\" \u00d7 0.75\"",
+      "handed": "IDLER SIDE ONLY"
     },
     {
       "part_id": "P-016",
@@ -2153,9 +2661,9 @@
     },
     {
       "aisle": "Specialty",
-      "item": "4-bolt flange bearing, \u00be\u2033 bore, sealed, FIXED (drive)",
+      "item": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning, FIXED (drive)",
       "qty": "1",
-      "use": "Lock to P-001L. No axial float."
+      "use": "Lock to P-001L. No axial float. REQUIRED C \u2265 137 lbf (CALC-C11); self-align \u2265 0.011\u00b0 (CALC-C08). Confirm both on the vendor page."
     },
     {
       "aisle": "Specialty",
@@ -2540,6 +3048,69 @@
       "group": "guide"
     },
     {
+      "code": "G-005",
+      "file": "G005_revision_c.svg",
+      "title": "G-005 Rev C supersession",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "M-106",
+      "file": "M106_accuracy.svg",
+      "title": "M-106 Accuracy budget",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "M-107",
+      "file": "M107_drum_axis.svg",
+      "title": "M-107 Drum axis stiffness",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "M-108",
+      "file": "M108_adjust.svg",
+      "title": "M-108 Micro-adjust & lift",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "J-105",
+      "file": "J105_gib.svg",
+      "title": "J-105 Gib & pivot plate",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "J-106",
+      "file": "J106_shell_plug.svg",
+      "title": "J-106 Shell\u2192plug\u2192shaft",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "Q-103",
+      "file": "Q103_acceptance.svg",
+      "title": "Q-103 ALN-01 / TV-01 tests",
+      "kind": "guide",
+      "group": "guide"
+    },
+    {
+      "code": "H-02",
+      "file": "H02_mcmaster.svg",
+      "title": "H-02 McMaster procurement",
+      "kind": "hardware",
+      "group": "hardware"
+    },
+    {
+      "code": "H-03",
+      "file": "H03_mcmaster2.svg",
+      "title": "H-03 McMaster procurement (2)",
+      "kind": "hardware",
+      "group": "hardware"
+    },
+    {
       "code": "E-101",
       "file": "E101_exploded.svg",
       "title": "E-101 Exploded + BOM",
@@ -2848,6 +3419,41 @@
       "group": "part"
     },
     {
+      "code": "P-020",
+      "file": "P020_drum_shell.svg",
+      "title": "P-020 Drum shell",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-021",
+      "file": "P021_drum_plug.svg",
+      "title": "P-021 Drum end plug",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-022",
+      "file": "P022_gib.svg",
+      "title": "P-022 Way gib",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-023",
+      "file": "P023_idler_plate.svg",
+      "title": "P-023 Idler adjust plate",
+      "kind": "part",
+      "group": "part"
+    },
+    {
+      "code": "P-024",
+      "file": "P024_jack_block.svg",
+      "title": "P-024 Jack screw block",
+      "kind": "part",
+      "group": "part"
+    },
+    {
       "code": "A-01",
       "file": "A01_frame.svg",
       "title": "A-01 Frame assembly",
@@ -2941,49 +3547,77 @@
     {
       "code": "ST-08",
       "file": "ST08_step.svg",
-      "title": "ST-08 Pack-bore the discs and laminate the drum",
+      "title": "ST-08 Make the tapered gib and tap the adjuster stations",
       "kind": "step",
       "group": "step"
     },
     {
       "code": "ST-09",
       "file": "ST09_step.svg",
-      "title": "ST-09 Hang the shaft: drive FIXED, idler FLOATING",
+      "title": "ST-09 Turn the two end plugs \u2014 one setup, two operations",
       "kind": "step",
       "group": "step"
     },
     {
       "code": "ST-10",
       "file": "ST10_step.svg",
-      "title": "ST-10 Mount the motor, align the pulleys, lock the cradle",
+      "title": "ST-10 Bond and cross-pin the shell to the plugs",
       "kind": "step",
       "group": "step"
     },
     {
       "code": "ST-11",
       "file": "ST11_step.svg",
-      "title": "ST-11 Build the torsion-box table and bond the wear face",
+      "title": "ST-11 OPTION B \u2014 laminated disc drum for a shop with no lathe",
       "kind": "step",
       "group": "step"
     },
     {
       "code": "ST-12",
       "file": "ST12_step.svg",
-      "title": "ST-12 Fit the dual Acme lift on the drum centerline",
+      "title": "ST-12 Hang the shaft: drive FIXED, idler on the micro-adjust plate",
       "kind": "step",
       "group": "step"
     },
     {
       "code": "ST-13",
       "file": "ST13_step.svg",
-      "title": "ST-13 Kerf-bend the hood and set the roller yokes",
+      "title": "ST-13 True the drum in its own bearings, then balance it",
       "kind": "step",
       "group": "step"
     },
     {
       "code": "ST-14",
       "file": "ST14_step.svg",
-      "title": "ST-14 True, wrap, re-clock, and cut a witness board",
+      "title": "ST-14 Mount the motor, align the pulleys, lock the cradle",
+      "kind": "step",
+      "group": "step"
+    },
+    {
+      "code": "ST-15",
+      "file": "ST15_step.svg",
+      "title": "ST-15 Build the torsion-box table and bond the wear face",
+      "kind": "step",
+      "group": "step"
+    },
+    {
+      "code": "ST-16",
+      "file": "ST16_step.svg",
+      "title": "ST-16 Fit the dual Acme lift on the drum centerline",
+      "kind": "step",
+      "group": "step"
+    },
+    {
+      "code": "ST-17",
+      "file": "ST17_step.svg",
+      "title": "ST-17 Kerf-bend the hood and set the roller yokes",
+      "kind": "step",
+      "group": "step"
+    },
+    {
+      "code": "ST-18",
+      "file": "ST18_step.svg",
+      "title": "ST-18 True, wrap, re-clock, and cut a witness board",
       "kind": "step",
       "group": "step"
     },
@@ -3054,7 +3688,7 @@
       "adds": [],
       "correctable": "Everything.",
       "id": "ST-01",
-      "of": 14
+      "of": 18
     },
     {
       "step": 2,
@@ -3091,7 +3725,7 @@
       "adds": [],
       "correctable": "Sizes \u2014 everything is still oversize.",
       "id": "ST-02",
-      "of": 14
+      "of": 18
     },
     {
       "step": 3,
@@ -3129,7 +3763,7 @@
       ],
       "correctable": "Nothing about panel size after this \u2014 the drum and table depend on it.",
       "id": "ST-03",
-      "of": 14
+      "of": 18
     },
     {
       "step": 4,
@@ -3157,8 +3791,8 @@
       "actions": [
         "Clamp the panels face-to-face, inner faces together, infeed edges flush.",
         "Lay out the bearing centreline at Y 11\u2033 from the infeed edge and Z 18.5\u2033 up from the bottom.",
-        "Set the actual flange on the panel and transfer its bolt holes. The drawing shows 2.05\u2033 square as a placeholder \u2014 your bearing decides.",
-        "Drill the \u23001.125\u2033 shaft clearance and the four bolt holes through both panels at once (S-008).",
+        "Set the actual flange on the panel and transfer its bolt holes. The drawing shows 3\u2033 square as a placeholder \u2014 your bearing decides.",
+        "Drill the \u23001.625\u2033 shaft clearance and the four bolt holes through both panels at once (S-008).",
         "Drive side only: pilot the motor pivot at Y 4\u2033 / Z 6\u2033 and the indicator pad at Y 8\u2033 / Z 16\u2033."
       ],
       "qc": "QC-02",
@@ -3173,7 +3807,7 @@
       ],
       "correctable": "Almost nothing. This pattern is the datum for the whole machine.",
       "id": "ST-04",
-      "of": 14
+      "of": 18
     },
     {
       "step": 5,
@@ -3213,7 +3847,7 @@
       ],
       "correctable": "A rebate can go deeper, never shallower.",
       "id": "ST-05",
-      "of": 14
+      "of": 18
     },
     {
       "step": 6,
@@ -3229,13 +3863,15 @@
       "hardware": [
         "H-014",
         "H-015",
-        "H-023"
+        "H-023",
+        "H-034"
       ],
       "tools": [
         "Long clamps",
         "Framing square",
         "Tape measure",
-        "Glue brush"
+        "Glue brush",
+        "Drill"
       ],
       "sheets": [
         "A-01",
@@ -3245,7 +3881,7 @@
       "actions": [
         "Dry-fit all three stretchers (17\u2033, housed 0.25\u2033 each end) into IN-LO, OUT-LO, OUT-HI. Check the inner span reads 16.5\u2033. Confirm no rail sits in the table's Z range (11.5\u201315.94\u2033).",
         "Glue and clamp. Measure both diagonals and pull them equal before the glue grabs.",
-        "Drill and drive #8 \u00d7 2\u2033 screws from outside into each stretcher end.",
+        "With the joint clamped, drill through the side into each stretcher end and fit H-034 \u00bc-20 through-bolts with backing washers and nylocks (D-048). Glue is not primary structure on this machine.",
         "Screw the base deck on, then measure the diagonals again."
       ],
       "qc": "QC-03",
@@ -3263,7 +3899,7 @@
       ],
       "correctable": "Squareness \u2014 for about ten minutes.",
       "id": "ST-06",
-      "of": 14
+      "of": 18
     },
     {
       "step": 7,
@@ -3308,13 +3944,145 @@
       ],
       "correctable": "UHMW can be planed down; it cannot be built back up.",
       "id": "ST-07",
-      "of": 14
+      "of": 18
     },
     {
       "step": 8,
+      "chapter": "04 Frame",
+      "title": "Make the tapered gib and tap the adjuster stations",
+      "goal": "Have the gib ready before the table exists. Running clearance is set later, after the shoes are on.",
+      "parts": [
+        "P-022"
+      ],
+      "hardware": [
+        "H-031"
+      ],
+      "tools": [
+        "Taper jig",
+        "Hand plane or belt sander",
+        "Tap \u00bc-20"
+      ],
+      "sheets": [
+        "P-022",
+        "J-105"
+      ],
+      "actions": [
+        "Taper one face of P-022 at 1:40 over its 22\u2033 length. Mark the thick end so it cannot go in backwards.",
+        "Drill and tap three \u00bc-20 stations in the idler-side panel for the H-031 brass-tip adjusters (S-013).",
+        "Dry-fit the gib in the rebate behind where the idler shoe will sit. Taper wedges DOWN: tightening a screw will close the clearance.",
+        "Do not set the running clearance yet \u2014 there is no table to rock against. That happens in the table chapter after the shoes are on."
+      ],
+      "qc": "",
+      "gate": "Gib tapered, thick end marked, three adjuster stations tapped, dry-fit confirmed.",
+      "hold": "",
+      "warn": "A gib installed thick-end-up opens when you tighten. Mark the thick end before it leaves the taper jig.",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways"
+      ],
+      "adds": [
+        "ways"
+      ],
+      "correctable": "Taper and length \u2014 the gib is still a loose part.",
+      "id": "ST-08",
+      "of": 18
+    },
+    {
+      "step": 9,
       "chapter": "05 Drum",
-      "title": "Pack-bore the discs and laminate the drum",
-      "goal": "One stiff cylinder blank on one true axis.",
+      "title": "Turn the two end plugs \u2014 one setup, two operations",
+      "goal": "Bore and OD concentric, because that error becomes drum TIR directly.",
+      "parts": [
+        "P-021"
+      ],
+      "hardware": [
+        "H-028"
+      ],
+      "tools": [
+        "Metal lathe (or a machinist friend)",
+        "Boring bar",
+        "Calipers",
+        "Bore gauge"
+      ],
+      "sheets": [
+        "P-021",
+        "J-106",
+        "A-02"
+      ],
+      "actions": [
+        "Face and turn the OD to a light bond fit in the shell ID (4.5\u2033 nominal \u2014 measure YOUR tube).",
+        "WITHOUT unchucking, bore 1.25\u2033 for the shaft. One setup is the whole trick: it makes bore and OD concentric.",
+        "Part off at 1.5\u2033 thick. Repeat for the second plug.",
+        "Deburr both, then check the bore on the actual shaft \u2014 light push fit, no rock."
+      ],
+      "qc": "QC-06",
+      "gate": "Bore-to-OD runout under 0.001\u2033 on each plug, checked in the lathe before parting off.",
+      "hold": "",
+      "warn": "If you re-chuck between the OD and the bore you will add eccentricity that no amount of truing removes, because the drum will run true only at one angular position.",
+      "shows": [
+        "drum"
+      ],
+      "adds": [
+        "drum"
+      ],
+      "correctable": "Nothing after parting off. Make a spare plug from the same bar.",
+      "id": "ST-09",
+      "of": 18
+    },
+    {
+      "step": 10,
+      "chapter": "05 Drum",
+      "title": "Bond and cross-pin the shell to the plugs",
+      "goal": "A structural drum, not a stack of discs.",
+      "parts": [
+        "P-020",
+        "P-021"
+      ],
+      "hardware": [
+        "H-027",
+        "H-033",
+        "H-018"
+      ],
+      "tools": [
+        "Solvent + abrasive pad",
+        "Drill press",
+        "Clamps",
+        "Square"
+      ],
+      "sheets": [
+        "P-020",
+        "P-021",
+        "J-106",
+        "A-02"
+      ],
+      "actions": [
+        "Cut the shell to 15.75\u2033 and face both ends square.",
+        "Abrade and solvent-clean the shell ID and both plug ODs. Contamination is the usual cause of a failed metal bond.",
+        "Mix H-033 structural epoxy, coat both faces, and seat each plug 0.25\u2033 inboard of the shell end. Check square to the shell axis.",
+        "After cure, cross-drill and pin each plug through the shell wall in two places 90\u00b0 apart. The pins carry torque; the epoxy seals and shares load."
+      ],
+      "qc": "",
+      "gate": "Both plugs seated at the specified inset, square, fully cured, and pinned.",
+      "hold": "FULL CURE per the adhesive data sheet before the drum turns under power. This is a 18 lb rotating assembly.",
+      "warn": "Never rely on adhesive alone on a rotating part. The cross-pins are not optional.",
+      "shows": [
+        "drum"
+      ],
+      "adds": [
+        "drum"
+      ],
+      "correctable": "The OD \u2014 that is what truing is for. Not the plug position.",
+      "id": "ST-10",
+      "of": 18
+    },
+    {
+      "step": 11,
+      "chapter": "05 Drum",
+      "title": "OPTION B \u2014 laminated disc drum for a shop with no lathe",
+      "goal": "A buildable drum without turned metal, with its accuracy penalty stated.",
+      "alt_of": "ST-09 + ST-10",
       "parts": [
         "P-008",
         "P-009",
@@ -3337,15 +4105,16 @@
         "A-02"
       ],
       "actions": [
+        "Choose this path ONLY if you cannot get the plugs turned. It replaces steps ST-09 and ST-10.",
         "Bandsaw 19 MDF discs and 2 birch ends at \u23005.125\u2033 \u2014 oversize on purpose.",
-        "Stack the whole pack in the P-015 jig and ream \u23000.75\u2033 straight through (J-005, S-009). Never bore discs one at a time.",
-        "Glue the stack with a 1 mm relief every 4 MDF discs. Birch ends outboard.",
+        "Stack the whole pack in the P-015 jig and ream \u23001.25\u2033 straight through (J-005, S-009). Never bore discs one at a time.",
+        "Glue the stack with a 1 mm relief every 4 MDF discs. Birch ends outboard for flange crush.",
         "Weigh the two end discs against each other and balance them before assembly."
       ],
-      "qc": "",
+      "qc": "QC-06 \u00b7 QC-18",
       "gate": "Bore accepts the shaft with light friction. Stack length 15.75\u2033.",
-      "hold": "Full cure before the drum ever spins. A delaminated disc at 1035 RPM is a projectile.",
-      "warn": "MDF dust is the worst dust in the shop. Respirator and extraction on.",
+      "hold": "Full cure before the drum ever spins. A delaminated disc at speed is a projectile.",
+      "warn": "ACCEPT THE PENALTY KNOWINGLY: a disc stack is not structural in bending, so the drum crowns under load and MDF moves with humidity, so TIR drifts between seasons. Expect to re-true more often and to hold a looser TV-01 than 0.005\u2033.",
       "shows": [
         "drum",
         "shaft"
@@ -3354,42 +4123,51 @@
         "drum"
       ],
       "correctable": "Outside diameter \u2014 that is what truing is for.",
-      "id": "ST-08",
-      "of": 14
+      "id": "ST-11",
+      "of": 18
     },
     {
-      "step": 9,
+      "step": 12,
       "chapter": "05 Drum",
-      "title": "Hang the shaft: drive FIXED, idler FLOATING",
-      "goal": "One bearing defines the axis; the other lets the shaft grow.",
+      "title": "Hang the shaft: drive FIXED, idler on the micro-adjust plate",
+      "goal": "One bearing defines the axis; the other adjusts parallelism and lets the shaft grow.",
       "parts": [
-        "P-010"
+        "P-010",
+        "P-023",
+        "P-024"
       ],
       "hardware": [
         "H-001",
         "H-002",
-        "H-017"
+        "H-029",
+        "H-030",
+        "H-032"
       ],
       "tools": [
         "Wrenches",
         "Dial indicator",
-        "Feeler gauges"
+        "Feeler gauges",
+        "Reamer"
       ],
       "sheets": [
         "P-010",
-        "A-02",
-        "P-001R"
+        "P-023",
+        "P-024",
+        "J-105",
+        "J-106",
+        "A-02"
       ],
       "actions": [
-        "Slide the 22.5\u2033 shaft through the drum and both panels.",
-        "Bolt H-001 to the drive side and torque it. That flange is now the drum-axis datum (J-006).",
-        "Set H-002 on the 0.25\u2033 pad on the idler side. Snug only \u2014 the shaft must still be able to slide axially (J-007).",
+        "Transfer the bearing bolt pattern FROM THE BEARING YOU BOUGHT onto P-001L and P-023. Do not drill from the drawing \u2014 that pattern is an assumption.",
+        "Slide the 24\u2033 shaft through the drum and both panels, then set the H-029 clamp collars against the plugs.",
+        "Bolt H-001 to the drive side and torque it. That bearing is now DATUM-E, the drum-axis datum (J-006).",
+        "Pin P-023 to the idler side with H-032, mount H-002 on it, and set the H-030 jack screw against P-024. Snug the bearing only \u2014 the shaft must still slide axially (J-007).",
         "Spin the drum by hand through several turns. It should coast, not bind and not ring."
       ],
       "qc": "QC-11",
-      "gate": "Shaft turns freely; measurable axial float at the idler end.",
+      "gate": "Shaft turns freely; measurable axial float at the idler end; jack screw makes contact with a witness mark.",
       "hold": "",
-      "warn": "Locking both flanges bends the shaft and kills both bearings. Do not do it because it feels tighter.",
+      "warn": "Locking both bearings bends the shaft and kills both of them. Do not do it because it feels tighter.",
       "shows": [
         "sides",
         "base",
@@ -3402,11 +4180,58 @@
         "shaft"
       ],
       "correctable": "Bearing position, while the bolts are still loose.",
-      "id": "ST-09",
-      "of": 14
+      "id": "ST-12",
+      "of": 18
     },
     {
-      "step": 10,
+      "step": 13,
+      "chapter": "05 Drum",
+      "title": "True the drum in its own bearings, then balance it",
+      "goal": "A cylinder that is round about the axis it will actually run on.",
+      "parts": [
+        "P-013",
+        "P-020"
+      ],
+      "hardware": [
+        "H-021"
+      ],
+      "tools": [
+        "Truing sled P-013",
+        "Dial indicator",
+        "Knife edges or two level rails"
+      ],
+      "sheets": [
+        "P-013",
+        "A-02",
+        "Q-101"
+      ],
+      "actions": [
+        "True the OD with the drum running in its OWN bearings, using the full-width P-013 sled. Truing it in a lathe and then moving it re-introduces the error.",
+        "Work down until the indicator reads \u2264 0.0015\u2033 TIR at mid-span, paper off (QC-06).",
+        "Lift the drum onto knife edges and release it from five different angular positions. It must stop somewhere different each time. Allowance U \u2264 0.39 oz\u00b7in (CALC-C13).",
+        "If it always settles the same way, add tape to the light side until it does not, then make that correction permanent."
+      ],
+      "qc": "QC-06",
+      "gate": "TIR \u2264 0.0015\u2033 paper off, and the knife-edge test passes over five releases.",
+      "hold": "Do not fit the abrasive until both checks pass. Paper hides TIR; it does not fix it.",
+      "warn": "Extraction and a respirator for truing. Eye protection \u2014 you are cutting metal or MDF at speed.",
+      "shows": [
+        "sides",
+        "base",
+        "stretch",
+        "ways",
+        "drum",
+        "shaft"
+      ],
+      "adds": [
+        "drum"
+      ],
+      "correctable": "Balance, any time. TIR only by truing again.",
+      "id": "ST-13",
+      "of": 18
+    },
+    {
+      "step": 14,
       "chapter": "06 Drive",
       "title": "Mount the motor, align the pulleys, lock the cradle",
       "goal": "Belt tension by gravity, then locked so it cannot pump.",
@@ -3430,8 +4255,8 @@
         "A-04"
       ],
       "actions": [
-        "Pivot P-012 on the drive-side hole and hang the 0.5 HP motor on it.",
-        "Fit the 3\u2033 motor pulley and the 5\u2033 drum pulley. Lay a straightedge across both faces and shim until they are coplanar.",
+        "Pivot P-012 on the drive-side hole and hang the 1 HP motor on it.",
+        "Fit the 3.5\u2033 motor pulley and the 5\u2033 drum pulley. Lay a straightedge across both faces and shim until they are coplanar.",
         "Let the cradle hang to tension the belt, measure the centre distance, then buy the belt to that number.",
         "Lock the cradle. A cradle that still swings will pump the belt and chirp."
       ],
@@ -3452,11 +4277,11 @@
         "motor"
       ],
       "correctable": "Belt length, before you buy it.",
-      "id": "ST-10",
-      "of": 14
+      "id": "ST-14",
+      "of": 18
     },
     {
-      "step": 11,
+      "step": 15,
       "chapter": "07 Table",
       "title": "Build the torsion-box table and bond the wear face",
       "goal": "A flat plate that stays flat. This is the surface you measure against forever.",
@@ -3490,7 +4315,7 @@
         "Confirm the finished plan size is 16\u2033 \u00d7 22\u2033 so the wear face still carries 15.5\u2033 of work."
       ],
       "qc": "QC-05",
-      "gate": "Wear face flat within 0.004\u2033 on both diagonals.",
+      "gate": "Wear face flat within 0.003\u2033 on both diagonals.",
       "hold": "Cure fully. Every later measurement trusts this plane.",
       "warn": "",
       "shows": [
@@ -3500,24 +4325,28 @@
         "table"
       ],
       "correctable": "Flatness, while the box is still open.",
-      "id": "ST-11",
-      "of": 14
+      "id": "ST-15",
+      "of": 18
     },
     {
-      "step": 12,
+      "step": 16,
       "chapter": "07 Table",
       "title": "Fit the dual Acme lift on the drum centerline",
       "goal": "Both nuts sit under the cut. The table rises in Z without racking in X or Y.",
       "parts": [
         "P-016",
         "P-018",
-        "P-019"
+        "P-019",
+        "P-022"
       ],
       "hardware": [
         "H-007",
         "H-008",
         "H-013",
-        "H-026"
+        "H-026",
+        "H-031",
+        "H-024",
+        "H-035"
       ],
       "tools": [
         "Wrenches",
@@ -3529,18 +4358,21 @@
         "P-016",
         "P-018",
         "P-019",
+        "P-022",
         "A-03",
-        "M-101"
+        "M-101",
+        "J-105"
       ],
       "actions": [
         "Screw both P-018 thrust blocks to the base at Y 11\u2033 (drum CL), X left and right. Fit thrust washers and e-clips (J-013).",
         "Bolt a bronze nut block under the table, each nut on the same Y as its screw \u2014 not at the infeed and outfeed ends.",
         "Fit both \u00bd-10 Acme screws. One turn is 0.1000\u2033. Thirty turns is 3\u2033 (CALC-003).",
         "Chain-couple the two screws. Fit the left clutch and P-019 home dog (J-014).",
-        "Run the table through the full 3.25\u2033 of travel. Shoes must stay wrapped; the table must not yaw."
+        "Run the table through the full 3.25\u2033 of travel. Shoes must stay wrapped; the table must not yaw.",
+        "Now set the P-022 gib: slide it behind the idler shoe, taper down, and run the H-031 adjusters up in equal steps until the table slides by hand with no rock. Target 0.0015\u2033 (QC-17, S-014). Wax. Never oil."
       ],
-      "qc": "QC-12 \u00b7 QC-14",
-      "gate": "Table rises and falls freely through full travel; both ends move the same amount; shoes stay captured.",
+      "qc": "QC-12 \u00b7 QC-14 \u00b7 QC-17",
+      "gate": "Table rises and falls freely through full travel; both ends move the same amount; shoes stay captured; gib clearance 0.0015\u2033 with no rock.",
       "hold": "",
       "warn": "",
       "shows": [
@@ -3559,11 +4391,11 @@
         "elev"
       ],
       "correctable": "Nut block position, before the holes are final.",
-      "id": "ST-12",
-      "of": 14
+      "id": "ST-16",
+      "of": 18
     },
     {
-      "step": 13,
+      "step": 17,
       "chapter": "08 Hood & hold-downs",
       "title": "Kerf-bend the hood and set the roller yokes",
       "goal": "The guard that is also the dust hood, plus the rollers that kill snipe.",
@@ -3617,11 +4449,11 @@
         "hood"
       ],
       "correctable": "Spring rate and roller height, any time.",
-      "id": "ST-13",
-      "of": 14
+      "id": "ST-17",
+      "of": 18
     },
     {
-      "step": 14,
+      "step": 18,
       "chapter": "09 Commissioning",
       "title": "True, wrap, re-clock, and cut a witness board",
       "goal": "Turn an assembled machine into a calibrated one.",
@@ -3640,18 +4472,19 @@
       ],
       "sheets": [
         "Q-101",
+        "Q-103",
         "P-013",
         "A-02"
       ],
       "actions": [
         "Paper off: true the drum with the full-width sled until TIR \u2264 0.002\u2033 mid-span (S-010).",
         "Wrap Velcro, then spiral the paper. Paper thickness is not uniform, so parallel changes here.",
-        "Paper on: indicate the drum at the drive end (A) and the idler end (B). Bring |A\u2212B| \u2264 0.003\u2033, then set the home dog (S-011).",
-        "Sand a witness board at 80 grit, one pass. Caliper four corners. Scatter must be \u2264 0.003\u2033.",
-        "Then work the pass schedule: 0.008\u2033 rough, 0.004\u2033 medium, 0.001\u2033 finish."
+        "ALN-01: paper on, drum stopped, no workpiece. Indicate the drum at station A (drive) and station B (idler). Bring |A\u2212B| \u2264 0.003\u2033 using the P-023 jack screw \u2014 6.17 mil at the work per full turn, so work in small fractions of a turn. Set the home dog (S-011).",
+        "TV-01: sand a witness board 15.5\u2033 wide at the finish pass. Caliper four corners and the centre. Spread must be \u2264 0.005\u2033. This is a different and larger number than ALN-01 \u2014 see CALC-C06.",
+        "Then work the pass schedule: 0.008\u2033 rough, 0.004\u2033 medium, 0.001\u2033 finish. Always approach the setting by RAISING the table, then lock the ways."
       ],
-      "qc": "QC-06 \u00b7 QC-07 \u00b7 QC-10",
-      "gate": "TIR \u2264 0.002\u2033 paper-off \u00b7 |A\u2212B| \u2264 0.003\u2033 paper-on \u00b7 witness scatter \u2264 0.003\u2033.",
+      "qc": "QC-06 \u00b7 QC-15 \u00b7 QC-16 \u00b7 QC-20",
+      "gate": "TIR \u2264 0.0015\u2033 paper-off \u00b7 ALN-01 |A\u2212B| \u2264 0.003\u2033 paper-on \u00b7 TV-01 witness spread \u2264 0.005\u2033.",
       "hold": "First powered run: hood on, no stock, stand clear of the drum ends, hand on the switch.",
       "warn": "Do not sand stock shorter than about 12\u2033 without the sled. Hands never under the drum or the hold-downs.",
       "shows": [
@@ -3669,26 +4502,26 @@
       ],
       "adds": [],
       "correctable": "Everything that matters \u2014 which is why you re-clock after every paper change.",
-      "id": "ST-14",
-      "of": 14
+      "id": "ST-18",
+      "of": 18
     }
   ],
   "calculations": [
     {
       "id": "CALC-001",
       "name": "Belt ratio \u2192 drum RPM",
-      "expr": "1725 \u00d7 3 / 5",
-      "result": "1035 RPM",
-      "value": 1035.0,
+      "expr": "1725 \u00d7 3.5 / 5",
+      "result": "1207.5 RPM",
+      "value": 1207.5,
       "evidence": "D",
       "ok": true
     },
     {
       "id": "CALC-002",
       "name": "Drum surface speed",
-      "expr": "\u03c0 \u00d7 5 / 12 \u00d7 1035",
-      "result": "1355 sfpm",
-      "value": 1355.0,
+      "expr": "\u03c0 \u00d7 5 / 12 \u00d7 1207.5",
+      "result": "1581 sfpm",
+      "value": 1581.0,
       "evidence": "D",
       "ok": true
     },
@@ -3723,7 +4556,7 @@
       "id": "CALC-006",
       "name": "Table sag bound (50 lbf mid-span)",
       "expr": "P L\u00b3 / 48 E I \u00b7 L=16\u2033 E=1.5e+06 I\u224818.6 in\u2074",
-      "result": "0.0002\u2033 estimated \u00b7 spec flat \u2264 0.004\u2033",
+      "result": "0.0002\u2033 estimated \u00b7 spec flat \u2264 0.003\u2033",
       "value": 0.00015292712066905615,
       "evidence": "E",
       "ok": true
@@ -3731,11 +4564,977 @@
     {
       "id": "CALC-007",
       "name": "Drum rotational energy",
-      "expr": "\u00bd I \u03c9\u00b2 \u00b7 m\u224810.1 lb \u00b7 1035 RPM",
-      "result": "40 ft\u00b7lbf estimated",
-      "value": 40.00275004698131,
+      "expr": "\u00bd I \u03c9\u00b2 \u00b7 m\u224810.1 lb \u00b7 1207.5 RPM",
+      "result": "54 ft\u00b7lbf estimated",
+      "value": 54.44818756394678,
       "evidence": "E",
       "ok": true
+    },
+    {
+      "id": "CALC-C01",
+      "name": "Does the Rev B 3/4 in shaft hold the accuracy spec?",
+      "expr": "double integration of M(x)/EI, v(0)=v(L)=0",
+      "result": "4.70 mil crown at 20 lbf",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": false,
+      "criterion": "<= 1 mil",
+      "margin": "allowable force only 4.25 lbf",
+      "verdict": "FAIL \u2014 governs Rev C redesign",
+      "inputs": "d=0.75 in, I=0.01553 in^4, E=2.9e+07 psi, span=19.100 in, W=20 lbf [E]",
+      "method": "Simply supported beam, load patch over drum, numeric M/EI",
+      "historical": true
+    },
+    {
+      "id": "CALC-C02",
+      "name": "Rev C load-induced drum crown",
+      "expr": "d = P a (3L^2-4a^2)/(24EI) + 5 w Ls^4/(384 E I)",
+      "result": "0.223 mil at 20 lbf (shaft 96% of it)",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "<= 1 mil",
+      "margin": "21x stiffer than Rev B",
+      "verdict": "PASS",
+      "inputs": "shaft 1.25 in (I=0.1198), shell 5x0.25 (I=10.551), span=18.700, a=1.725",
+      "method": "Series model: shell plug-to-plug, then shaft bearing-to-bearing",
+      "historical": false
+    },
+    {
+      "id": "CALC-C03",
+      "name": "What sanding force may the drum axis carry?",
+      "expr": "F_allow = F_ref * allowance / d_ref",
+      "result": "89.6 lbf",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "must exceed realistic hand-feed force",
+      "margin": "4.5x the 20 lbf reference",
+      "verdict": "PASS \u2014 no longer structure-limited",
+      "inputs": "allowance 0.0010 in",
+      "method": "Linear scaling of CALC-C02 to the allowance",
+      "historical": false
+    },
+    {
+      "id": "CALC-C04",
+      "name": "Alignment budget, no load (ALN)",
+      "expr": "sum and sqrt(sum of squares)",
+      "result": "worst 2.76 mil, RSS 1.68 mil",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "|A-B| <= 3 mil",
+      "margin": "RSS uses 56% of spec",
+      "verdict": "PASS",
+      "inputs": "Drum TIR, paper-on 1.50 mil; Micro-adjust setting resolution at work 0.26 mil; Indicator + stand repeatability 0.50 mil; Drum straightness over 15.5 in 0.50 mil",
+      "method": "Worst-case sum and RSS of setup terms",
+      "historical": false
+    },
+    {
+      "id": "CALC-C05",
+      "name": "Delivered thickness variation, Rev B vs Rev C (TV)",
+      "expr": "sum and RSS",
+      "result": "Rev B RSS 21.8 mil -> Rev C RSS 4.5 mil",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "TV <= 5 mil",
+      "margin": "4.8x improvement",
+      "verdict": "PASS on RSS",
+      "inputs": "see G-003 budget tables",
+      "method": "Error budget under cut load across 15.5 in",
+      "historical": false
+    },
+    {
+      "id": "CALC-C06",
+      "name": "Is 0.003 in a legitimate single specification?",
+      "expr": "n/a \u2014 specification audit",
+      "result": "Two different quantities; TV cannot equal ALN",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "one spec per measurable quantity",
+      "margin": "n/a",
+      "verdict": "Rev B spec DEFECT \u2014 split into ALN-01 and TV-01",
+      "inputs": "ALN RSS 1.68 mil vs TV RSS 4.51 mil",
+      "method": "Compare the two budgets that Rev B collapsed into one number",
+      "historical": false
+    },
+    {
+      "id": "CALC-C07",
+      "name": "Parallelism micro-adjust resolution",
+      "expr": "rise = lead x L2/L1; at work x capacity/span",
+      "result": "6.17 mil/rev at the work; 0.257 mil per 15 deg",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "resolution <= 1/5 of 3 mil",
+      "margin": "12x finer than spec",
+      "verdict": "PASS",
+      "inputs": "1/4-28 lead 0.03571 in, L1=6, L2=1.25",
+      "method": "Fine-thread jack on a pivot plate, reduction L2/L1",
+      "historical": false
+    },
+    {
+      "id": "CALC-C08",
+      "name": "Required bearing self-aligning capability",
+      "expr": "atan(spec / width)",
+      "result": "0.0111 deg",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "within the insert's static misalignment rating",
+      "margin": "trivial for any spherical-seat insert",
+      "verdict": "PASS \u2014 confirm rating [P]",
+      "inputs": "0.003 in over 15.5 in",
+      "method": "Angle subtended by the alignment spec",
+      "historical": false
+    },
+    {
+      "id": "CALC-C09",
+      "name": "Lift screw torque and back-drive behaviour",
+      "expr": "T = F dm/2 (L + pi mu dm sec a)/(pi dm - mu L sec a)",
+      "result": "1.20 lbf-in per screw to raise",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "self-locking requires mu >= 0.0707",
+      "margin": "mu 0.15 vs 0.0707",
+      "verdict": "PASS \u2014 self-locking, will not back-drive",
+      "inputs": "dm=0.450 in, lead=0.100 in, mu=0.15 [A], load 23.4 lbf/screw",
+      "method": "Power-screw statics, Acme form",
+      "historical": false
+    },
+    {
+      "id": "CALC-C10",
+      "name": "Lift resolution at the handwheel",
+      "expr": "lead / divisions",
+      "result": "2.50 mil per division",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "<= finish pass 1 mil is not required; must be readable",
+      "margin": "one division is a legible finish increment",
+      "verdict": "PASS",
+      "inputs": "lead 0.100 in, 40 divisions",
+      "method": "Lead divided by graduations",
+      "historical": false
+    },
+    {
+      "id": "CALC-C11",
+      "name": "Required bearing dynamic capacity",
+      "expr": "C = P (L10 x 60 n / 1e6)^(1/3)",
+      "result": "C >= 137 lbf",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "vendor C must exceed this",
+      "margin": "specify by requirement, not by appearance",
+      "verdict": "REQUIREMENT \u2014 confirm C [P]",
+      "inputs": "P=19.2 lbf, n=1208 rpm, L10=5000 h",
+      "method": "ISO-form L10 life inverted for C",
+      "historical": false
+    },
+    {
+      "id": "CALC-C12",
+      "name": "Drum speed and surface speed at the selected sheaves",
+      "expr": "n = n_m d_m/d_d ; sfpm = pi D n / 12",
+      "result": "1208 rpm, 1581 sfpm",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "1200-2000 sfpm band for wood [A]",
+      "margin": "belt pull 20.9 lbf at 1 hp",
+      "verdict": "PASS \u2014 see M-102 for the full option table",
+      "inputs": "1725 rpm, 3.5 in / 5 in",
+      "method": "Ratio and circumference",
+      "historical": false
+    },
+    {
+      "id": "CALC-C13",
+      "name": "Allowable residual drum unbalance",
+      "expr": "U = F g / omega^2",
+      "result": "U <= 0.39 oz-in",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "1 lbf rotating force at the bearings",
+      "margin": "~4.4 g of tape at r=2.5 in is the whole allowance",
+      "verdict": "Balance by knife-edge test, record [T]",
+      "inputs": "1208 rpm, force limit 1.0 lbf",
+      "method": "Rotating force from static unbalance",
+      "historical": false
+    },
+    {
+      "id": "CALC-C14",
+      "name": "First bending critical speed",
+      "expr": "f1 = (pi/2L^2) sqrt(EI/m')",
+      "result": "f1 >= 166 Hz vs 20.1 Hz operating",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "f1 >= 2x operating",
+      "margin": "8x",
+      "verdict": "PASS \u2014 conservative lower bound",
+      "inputs": "EI=3.48e+06 lb-in^2, m=18.4 lb, L=18.700 in",
+      "method": "Uniform simply supported beam, shaft EI with full drum mass",
+      "historical": false
+    },
+    {
+      "id": "CALC-C15",
+      "name": "Dust extraction requirement",
+      "expr": "CFM = A V",
+      "result": "349 CFM; hood face 609 fpm",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "collector must deliver this AT THE MACHINE",
+      "margin": "a shop vac will not do this",
+      "verdict": "REQUIREMENT on the collector",
+      "inputs": "4 in duct, 4000 fpm [A]",
+      "method": "Duct area x transport velocity; hood face velocity",
+      "historical": false
+    },
+    {
+      "id": "CALC-C16",
+      "name": "Way bearing stress on the UHMW",
+      "expr": "sigma = P / A",
+      "result": "2.3 psi",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "<= 500 psi long-term [A]",
+      "margin": "214x",
+      "verdict": "PASS \u2014 the way is precision-limited, not stress-limited",
+      "inputs": "20.0 in^2 total",
+      "method": "Projected contact area",
+      "historical": false
+    },
+    {
+      "id": "CALC-C17",
+      "name": "Tipping stability against feed force",
+      "expr": "F_tip = W (d/2) / h",
+      "result": "77 lbf to tip vs 8 lbf feed",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": ">= 3x margin",
+      "margin": "10x",
+      "verdict": "PASS \u2014 still bolt or cleat the stand",
+      "inputs": "105 lb, footprint 22 in, CG 15 in [E]",
+      "method": "Restoring vs overturning moment about the base edge",
+      "historical": false
+    },
+    {
+      "id": "CALC-C18",
+      "name": "Solo handling of every module",
+      "expr": "m = V rho",
+      "result": "Side 12 lb; Base 7 lb; Table 19 lb; Drum 18 lb; Frame 38 lb",
+      "value": 0.0,
+      "evidence": "D",
+      "ok": true,
+      "criterion": "each module <= 50 lb",
+      "margin": "assembled machine must be built in place",
+      "verdict": "PASS per module; assembled total exceeds the limit by design",
+      "inputs": "limit 50 lbf [A]",
+      "method": "Volume x density per module vs lift limit",
+      "historical": false
+    }
+  ],
+  "procurement": [
+    {
+      "item_id": "MC-01",
+      "description": "Aluminum round tube, 5\" OD x 0.25\" wall \u2014 drum shell",
+      "qty": "1 pc x 18\" (finish 15.75\")",
+      "controlling_spec": "6061-T6, 5\" OD, 0.25\" wall (ID 4.5\"). Wall is a stiffness requirement, not cosmetic: I = 10.55 in^4.",
+      "mating_parts": "P-020 shell, P-021 end plugs",
+      "hole_or_prep": "Cut 1/8 long, face both ends square in a lathe or on a sled. Bore/turn OD true AFTER assembly to the shaft.",
+      "installation": "Bond + pin to P-021 plugs. See J-106.",
+      "substitution_rule": "Any 6061 or 6063 tube with OD 5.000 -0.000/+0.030 and wall >= 0.180 in. Do NOT substitute thin-wall decorative tube: wall drives the stiffness in CALC-C02.",
+      "design_basis": "CALC-C02 series-model drum crown",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=6061+aluminum+round+tube+5%22+OD+0.25%22+wall",
+      "search_query": "6061 aluminum round tube 5\" OD 0.25\" wall",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-02",
+      "description": "Precision-ground rotary shaft, 1.25\" dia \u2014 drum shaft",
+      "qty": "1 pc x 24\"",
+      "controlling_spec": "1.25\" dia, ground and polished, straightness <= 0.001\"/ft, surface finish suitable for a set-screw insert.",
+      "mating_parts": "P-010 shaft, H-001/H-002 bearings, P-021 plugs, H-004 sheave",
+      "hole_or_prep": "Cut to length, chamfer both ends 0.030 x 45 deg, deburr. Do not centre-punch the bearing seats.",
+      "installation": "Slide through the drum and both panels together \u2014 see ST-12.",
+      "substitution_rule": "1045 TG&P or 1566 ground shafting, 1.25\" -0.001/-0.000. Hot-rolled bar is NOT acceptable: TIR would consume the whole alignment budget.",
+      "design_basis": "CALC-C01/C02 shaft stiffness sweep",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=precision+ground+rotary+shaft+1.25+inch+diameter",
+      "search_query": "precision ground rotary shaft 1.25 inch diameter",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-03",
+      "description": "Mounted ball bearing, 1.25\" bore, self-aligning insert",
+      "qty": "2 ea (1 fixed drive + 1 floating idler)",
+      "controlling_spec": "1.25\" bore, spherical-seat (self-aligning) insert, set-screw or eccentric-collar locking, sealed. REQUIRED basic dynamic capacity C >= 137 lbf for 5000 h at 1208 rpm. Static misalignment capability >= 0.011 deg.",
+      "mating_parts": "P-001L (fixed), P-023 idler adjust plate (floating), P-010 shaft",
+      "hole_or_prep": "Bolt pattern: MEASURE the flange you receive and transfer to P-001L / P-023. Do not drill from the drawing \u2014 flange bolt circle is [A].",
+      "installation": "Drive end LOCKED. Idler end axially FREE. Never lock both \u2014 see J-007.",
+      "substitution_rule": "Any 2- or 4-bolt flange or pillow block meeting the bore, the C requirement and the self-aligning requirement. Confirm C on the vendor page; a bearing chosen by bore alone is not specified.",
+      "design_basis": "CALC-C11 required C; CALC-C08 misalignment",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=mounted+ball+bearing+flange+1.25+inch+bore+self-aligning",
+      "search_query": "mounted ball bearing flange 1.25 inch bore self-aligning",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-04",
+      "description": "Aluminum round bar, 4-1/2\" dia \u2014 drum end plugs",
+      "qty": "1 pc x 4\" (yields 2 plugs 1.5\" thick)",
+      "controlling_spec": "6061-T6 round bar, >= 4.5\" dia. Turn to a light press/bond fit in the shell ID and bore 1.25\" H7-equivalent for the shaft.",
+      "mating_parts": "P-021 plug, P-020 shell, P-010 shaft",
+      "hole_or_prep": "Bore 1.25\" on the same setup as the OD turn so bore and OD are concentric. Concentricity here becomes drum TIR.",
+      "installation": "Bond into shell, cross-pin, then clamp to shaft \u2014 see J-106.",
+      "substitution_rule": "Phenolic or hard maple acceptable for Option B only; aluminum preferred because it holds the bore under humidity change.",
+      "design_basis": "ALN-01 drum TIR budget",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=6061+aluminum+round+bar+4-1%2F2+inch+diameter",
+      "search_query": "6061 aluminum round bar 4-1/2 inch diameter",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-05",
+      "description": "Clamping shaft collar, 1.25\" bore",
+      "qty": "4 ea",
+      "controlling_spec": "Two-piece or single-piece clamping collar, 1.25\" bore, steel or aluminum. Used to locate the plugs axially and to set the fixed-bearing shoulder. Clamp type only \u2014 set-screw collars mar the ground shaft.",
+      "mating_parts": "P-010 shaft, P-021 plugs, H-001 bearing",
+      "hole_or_prep": "None. Do not drill the shaft.",
+      "installation": "Tighten opposite-corner sequence to the collar maker's torque.",
+      "substitution_rule": "Any clamp-style collar of the correct bore. Set-screw collars are excluded by interface, not by preference.",
+      "design_basis": "J-106 axial location",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=clamping+shaft+collar+1.25+inch+bore+two+piece",
+      "search_query": "clamping shaft collar 1.25 inch bore two piece",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-06",
+      "description": "Socket head cap screw, 1/4-28 \u2014 parallelism micro-adjust jack",
+      "qty": "2 ea (1 live + 1 spare)",
+      "controlling_spec": "1/4-28 x 1-1/2\" alloy socket head cap screw. Fine thread is the requirement: lead 0.03571\" gives 0.26 mil at the work per 15 deg of knob.",
+      "mating_parts": "P-023 idler adjust plate, P-024 jack block",
+      "hole_or_prep": "Tap P-024 1/4-28 through. Chase the thread clean; a ragged thread shows up as backlash in the adjustment.",
+      "installation": "Brass or nylon tip pad under the screw point so it does not dig into the plate and lose calibration.",
+      "substitution_rule": "M6x0.75 acceptable if the lead is recomputed and the sheet is revised. Do NOT use 1/4-20: resolution degrades ~40%.",
+      "design_basis": "CALC-C07 micro-adjust resolution",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=1%2F4-28+socket+head+cap+screw+alloy+steel+1-1%2F2+long",
+      "search_query": "1/4-28 socket head cap screw alloy steel 1-1/2 long",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-07",
+      "description": "Brass-tip set screw, 1/4-20 \u2014 gib adjusters",
+      "qty": "6 ea",
+      "controlling_spec": "1/4-20 brass-tipped or nylon-tipped set screw. Brass tip loads the gib without embedding in it.",
+      "mating_parts": "P-022 gib, P-001R side",
+      "hole_or_prep": "Tap 3 stations per way, 1/4-20.",
+      "installation": "Set gib for 1.5 mil running clearance: table slides by hand with no perceptible rock. Q-102 records it.",
+      "substitution_rule": "Any tipped set screw. A bare steel set screw is excluded: it brinells the gib and the setting drifts.",
+      "design_basis": "CALC-C05 way play term; D-032",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=brass+tipped+set+screw+1%2F4-20",
+      "search_query": "brass tipped set screw 1/4-20",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-08",
+      "description": "Hardened dowel pin, 3/8\" x 2\" \u2014 idler plate pivot",
+      "qty": "2 ea",
+      "controlling_spec": "3/8\" x 2\" hardened, ground dowel pin. The pivot must not wear oval or the parallelism setting walks.",
+      "mating_parts": "P-023 idler adjust plate, P-001R side",
+      "hole_or_prep": "Ream 3/8\" for a light press in the plate, slip fit in the side.",
+      "installation": "Press into the plate, retain with a collar or E-clip.",
+      "substitution_rule": "Ground shoulder bolt of the same diameter is acceptable.",
+      "design_basis": "D-033 pivot-plate architecture",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=hardened+precision+dowel+pin+3%2F8+x+2",
+      "search_query": "hardened precision dowel pin 3/8 x 2",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-09",
+      "description": "Dial indicator, 1\" travel, 0.001\" graduations + magnetic base",
+      "qty": "1 ea",
+      "controlling_spec": "Travel >= 1\", resolution 0.001\", lug or stem back. Magnetic base with a fine adjust. This is the instrument that proves ALN-01 and TV-01.",
+      "mating_parts": "Q-101 acceptance, indicator pad on P-001L",
+      "hole_or_prep": "1/4-20 tapped pad already on P-001L.",
+      "installation": "Read at station A (drive) and station B (idler), paper on, spindle perpendicular to the table.",
+      "substitution_rule": "0.0005\" indicator or a digital caliper in wooden blocks. A tape measure cannot verify this specification.",
+      "design_basis": "ALN-01, TV-01 verification method",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=dial+indicator+1+inch+travel+0.001+graduation+magnetic+base",
+      "search_query": "dial indicator 1 inch travel 0.001 graduation magnetic base",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-10",
+      "description": "Acme lead screw, 1/2\"-10, single lead",
+      "qty": "2 pc x 12\"",
+      "controlling_spec": "1/2-10 single-lead Acme, steel. Lead 0.100\"/rev gives 2.50 mil per handwheel division.",
+      "mating_parts": "P-016 nut block, P-018 thrust block, H-008 chain",
+      "hole_or_prep": "Cut square, chase the end thread, chamfer.",
+      "installation": "Loaded in COMPRESSION under the table. Always approach the final setting by raising \u2014 see D-034.",
+      "substitution_rule": "1/2-10 2-start acme is NOT interchangeable: it doubles the lead and halves the resolution. Revise the sheet if used.",
+      "design_basis": "CALC-C09, CALC-C10",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=1%2F2-10+acme+threaded+rod+lead+screw",
+      "search_query": "1/2-10 acme threaded rod lead screw",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-11",
+      "description": "Bronze Acme nut, 1/2\"-10",
+      "qty": "2 ea",
+      "controlling_spec": "Bronze or acetal Acme nut to match MC-10 lead. Flanged preferred so it can be bolted to P-016.",
+      "mating_parts": "P-016 nut block, MC-10 screw",
+      "hole_or_prep": "Bore P-016 for a press fit; do not rely on adhesive alone.",
+      "installation": "Both nuts installed before the chain is fitted so the table cannot cock.",
+      "substitution_rule": "Any nut matching the screw lead and axial load. Verify the thread is the same hand and lead as MC-10.",
+      "design_basis": "CALC-C09",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=bronze+acme+nut+1%2F2-10",
+      "search_query": "bronze acme nut 1/2-10",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-12",
+      "description": "Roller chain #25 + sprockets, 1/2\" bore",
+      "qty": "1 x 3 ft chain, 2 sprockets, 1 connecting link",
+      "controlling_spec": "#25 roller chain, two matched sprockets 1/2\" bore with set screw. Equal tooth count is mandatory \u2014 unequal sprockets tilt the table.",
+      "mating_parts": "MC-10 screws, H-008",
+      "hole_or_prep": "Key or set-screw flat on each screw end.",
+      "installation": "Fit with both screws at the SAME height, verified by indicator before the chain is closed.",
+      "substitution_rule": "Timing belt and matched pulleys are acceptable and quieter. Tooth counts must be equal.",
+      "design_basis": "D-003 coupled dual-screw lift",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=roller+chain+25+sprocket+1%2F2+inch+bore",
+      "search_query": "roller chain 25 sprocket 1/2 inch bore",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-13",
+      "description": "Handwheel with graduated dial, 1/2\" bore",
+      "qty": "1 ea",
+      "controlling_spec": "Handwheel >= 4\" dia, 1/2\" bore, with a graduated or markable rim. 40 divisions -> 2.50 mil per division.",
+      "mating_parts": "MC-10 screw",
+      "hole_or_prep": "Set screw flat on the screw end.",
+      "installation": "Index the dial to zero at the home dog (P-019).",
+      "substitution_rule": "Plain handwheel plus a shop-made paper dial is acceptable if graduation count is recorded on Q-102.",
+      "design_basis": "CALC-C10",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=handwheel+graduated+dial+1%2F2+inch+bore+4+inch",
+      "search_query": "handwheel graduated dial 1/2 inch bore 4 inch",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-14",
+      "description": "UHMW bar, 3/4\" x 2-1/2\" \u2014 vertical ways and gib",
+      "qty": "1 pc x 4 ft",
+      "controlling_spec": "UHMW-PE bar 3/4\" x 2-1/2\". Two ways plus gib stock plus spare. Dry bearing: wax only, never oil.",
+      "mating_parts": "P-007 way, P-022 gib, P-001L/R",
+      "hole_or_prep": "Machine the gib taper 1:40 on the table saw with a taper jig.",
+      "installation": "Way stress is only 2.3 psi, so the way is precision-limited, not load-limited. Set the fit, not the tightness.",
+      "substitution_rule": "Acetal or cast nylon acceptable; both move more with humidity than UHMW. PTFE is too soft for the gib.",
+      "design_basis": "CALC-C16 way stress; D-032 gib",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=UHMW+polyethylene+bar+3%2F4+x+2-1%2F2",
+      "search_query": "UHMW polyethylene bar 3/4 x 2-1/2",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-15",
+      "description": "Canvas or linen phenolic sheet, 1/2\" \u2014 table wear face",
+      "qty": "1 pc 16\" x 22\"",
+      "controlling_spec": "1/2\" canvas-base phenolic. This is DATUM-D, the metrology surface. Flatness after bonding must be <= 3 mil over the 15.5\" contact line.",
+      "mating_parts": "P-006 wear face, P-004 skins",
+      "hole_or_prep": "Scuff the bond face; keep the show face clean of adhesive.",
+      "installation": "Bond to a FLATTENED torsion box. Check with a straightedge and feelers before it cures \u2014 Q-101.",
+      "substitution_rule": "3/8\" MIC-6 cast aluminum plate is a better metrology surface and an acceptable substitute. Ordinary rolled plate is not: it is not flat enough.",
+      "design_basis": "TV-01 table flatness term",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=canvas+phenolic+sheet+1%2F2+inch+thick",
+      "search_query": "canvas phenolic sheet 1/2 inch thick",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-16",
+      "description": "V-belt sheave, 5\" OD, 1.25\" bore \u2014 drum",
+      "qty": "1 ea",
+      "controlling_spec": "5\" pitch dia, A/4L section, 1.25\" bore, keyed or set-screw. With the 3.5\" motor sheave this gives 1208 rpm.",
+      "mating_parts": "P-010 shaft, MC-18 belt",
+      "hole_or_prep": "None; do not drill the ground shaft.",
+      "installation": "Coplanar with the motor sheave \u2014 straightedge across both faces, QC-09.",
+      "substitution_rule": "Any A/4L sheave of the same pitch diameter and bore. Changing diameter changes surface speed \u2014 recompute CALC-C12.",
+      "design_basis": "CALC-C12",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=v-belt+pulley+5+inch+1.25+inch+bore+A+section",
+      "search_query": "v-belt pulley 5 inch 1.25 inch bore A section",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-17",
+      "description": "V-belt sheave, 3.5\" OD \u2014 motor",
+      "qty": "1 ea",
+      "controlling_spec": "3.5\" pitch dia, A/4L section, bore to match the motor shaft (MEASURE it \u2014 5/8\" is common but not universal).",
+      "mating_parts": "Motor shaft, MC-18 belt",
+      "hole_or_prep": "Measure the motor shaft before ordering. [M] required.",
+      "installation": "Set flush and coplanar; lock the set screw on the shaft flat.",
+      "substitution_rule": "Match pitch diameter and the measured motor bore.",
+      "design_basis": "CALC-C12",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=v-belt+pulley+3.5+inch+A+section+5%2F8+bore",
+      "search_query": "v-belt pulley 3.5 inch A section 5/8 bore",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-18",
+      "description": "V-belt, A/4L section",
+      "qty": "1 ea (size after the cradle is locked)",
+      "controlling_spec": "A/4L section. Length is measured, not predicted: lock the motor cradle, then measure the centre distance and compute pitch length.",
+      "mating_parts": "MC-16, MC-17",
+      "hole_or_prep": "None.",
+      "installation": "Tension by cradle weight, then lock so the belt cannot pump.",
+      "substitution_rule": "Link belt is an acceptable and quieter substitute.",
+      "design_basis": "M-102 belt length equation",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=4L+v-belt",
+      "search_query": "4L v-belt",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-19",
+      "description": "Compression spring, ~3/4\" OD \u2014 hold-down rollers",
+      "qty": "4 ea",
+      "controlling_spec": "Light compression spring, ~3/4\" OD, free length ~2\". Light is the requirement: a stiff spring bows thin stock and you sand a banana.",
+      "mating_parts": "P-014 yoke, H-009 roller",
+      "hole_or_prep": "Spring pockets bored in P-014.",
+      "installation": "Set rollers 30 mil below drum OD, paper on \u2014 QC-08.",
+      "substitution_rule": "Any spring that lets a 1/16\" board pass without visible bow.",
+      "design_basis": "QC-08",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=compression+spring+3%2F4+od+2+inch+free+length+light",
+      "search_query": "compression spring 3/4 od 2 inch free length light",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-20",
+      "description": "Shoulder screw, 5/16\" \u2014 roller yoke pivots",
+      "qty": "4 ea",
+      "controlling_spec": "5/16\" shoulder screw x 1-1/2\". Shoulder gives a true pivot; a threaded bolt in a wood bearing wallows.",
+      "mating_parts": "P-014 yoke",
+      "hole_or_prep": "Ream the pivot for the shoulder, tap for the thread.",
+      "installation": "Snug, then back off 1/8 turn so the yoke swings free.",
+      "substitution_rule": "Ground dowel plus retaining collar.",
+      "design_basis": "J-009",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=shoulder+screw+5%2F16+x+1-1%2F2",
+      "search_query": "shoulder screw 5/16 x 1-1/2",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-21",
+      "description": "4\" dust hose, cuff and blast gate",
+      "qty": "1 set",
+      "controlling_spec": "4\" ID flex hose, one cuff, one blast gate. The collector must deliver 349 CFM AT THE MACHINE \u2014 hood face velocity 609 fpm.",
+      "mating_parts": "P-011 hood",
+      "hole_or_prep": "4\" port let into the hood.",
+      "installation": "Shortest possible run, minimum elbows.",
+      "substitution_rule": "Any 4\" fitting. A shop vacuum will NOT meet the CFM requirement and will clog \u2014 this is a capacity requirement, not a connector preference.",
+      "design_basis": "CALC-C15",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=4+inch+dust+collection+hose+blast+gate+cuff",
+      "search_query": "4 inch dust collection hose blast gate cuff",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-22",
+      "description": "Structural epoxy adhesive for aluminum",
+      "qty": "1 kit",
+      "controlling_spec": "Two-part structural epoxy rated for metal-to-metal bonding, with a published open time long enough to seat the plugs.",
+      "mating_parts": "P-020 shell, P-021 plugs",
+      "hole_or_prep": "Abrade and solvent-clean both bond faces. Bond area and cure per the maker's data sheet \u2014 read it, do not assume.",
+      "installation": "Cross-pin the joint as well: the pins carry torque, the epoxy seals and shares load. Never adhesive alone on a rotating part.",
+      "substitution_rule": "Any structural metal-bonding epoxy with published shear strength and cure schedule. Do not use general-purpose 5-minute epoxy.",
+      "design_basis": "J-106; user standard: never glue alone for primary structure",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=two+part+structural+epoxy+adhesive+metal+bonding",
+      "search_query": "two part structural epoxy adhesive metal bonding",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-23",
+      "description": "Hook-and-loop PSA strip + abrasive rolls",
+      "qty": "1 roll hook, 1 set 80/120/180/220",
+      "controlling_spec": "4\" hook strip with pressure-sensitive adhesive; 3\" loop-backed abrasive. Abrasive thickness variation is 2 mil of the TV-01 budget \u2014 buy one brand and stay with it.",
+      "mating_parts": "P-020 shell",
+      "hole_or_prep": "Degrease the shell OD before applying PSA.",
+      "installation": "Spiral wrap, no overlap, no gap. Re-clock ALN-01 after every grit change.",
+      "substitution_rule": "Any loop-backed abrasive of consistent thickness.",
+      "design_basis": "TV-01 abrasive term",
+      "criticality": "consumable",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=hook+and+loop+sanding+drum+wrap+abrasive+roll+3+inch",
+      "search_query": "hook and loop sanding drum wrap abrasive roll 3 inch",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-24",
+      "description": "Hex bolts, nylock nuts and backing washers \u2014 frame through-bolts",
+      "qty": "12 sets, 1/4-20 x 3 in",
+      "controlling_spec": "1/4-20 hex bolt with a large-OD backing washer under both head and nut. Through-bolted frame is re-tightenable and knock-down.",
+      "mating_parts": "P-001L/R, P-003 stretchers",
+      "hole_or_prep": "Clamp the joint, then drill through both parts so the holes cannot disagree.",
+      "installation": "Snug in an opposite-corner pattern, check diagonals, then final tighten. Re-check after the first hour of running \u2014 QC-13.",
+      "substitution_rule": "3/8\" bolts acceptable; screws alone are excluded by the user joinery standard.",
+      "design_basis": "D-038; joinery-and-tolerance-standards.md",
+      "criticality": "safety",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=1%2F4-20+hex+bolt+3+inch+nylock+nut+fender+washer",
+      "search_query": "1/4-20 hex bolt 3 inch nylock nut fender washer",
+      "alt_supplier": "",
+      "evidence": "D"
+    },
+    {
+      "item_id": "MC-25",
+      "description": "Adjustable handle / star knob, 3/8-16",
+      "qty": "6 ea",
+      "controlling_spec": "3/8-16 male adjustable handle or star knob. Way locks and yoke locks.",
+      "mating_parts": "P-014 yoke, way lock",
+      "hole_or_prep": "Tapped inserts or T-nuts.",
+      "installation": "Lock the ways BEFORE cutting \u2014 this removes the last of the lift compliance.",
+      "substitution_rule": "Any 3/8-16 knob with a comfortable grip.",
+      "design_basis": "D-034",
+      "criticality": "fit",
+      "supplier": "McMaster-Carr",
+      "part_number": "CONFIRM AT ORDER",
+      "part_number_evidence": "A",
+      "link": "https://www.mcmaster.com/?q=adjustable+handle+3%2F8-16+star+knob",
+      "search_query": "adjustable handle 3/8-16 star knob",
+      "alt_supplier": "",
+      "evidence": "D"
+    }
+  ],
+  "procurement_summary": {
+    "lines": 25,
+    "safety_critical": 9,
+    "unverified_part_numbers": 25,
+    "verification_note": "McMaster part numbers are UNVERIFIED [A]. Automated verification was attempted twice on 2026-08-15 and blocked by the site's JavaScript requirement. Every line carries the controlling specification, a substitution rule, and a live McMaster search link instead."
+  },
+  "accuracy_budgets": {
+    "ALN-01": {
+      "rows": [
+        {
+          "term": "Drum TIR, paper-on",
+          "value": 0.0015,
+          "evidence": "T"
+        },
+        {
+          "term": "Micro-adjust setting resolution at work",
+          "value": 0.00025696831763008233,
+          "evidence": "D"
+        },
+        {
+          "term": "Indicator + stand repeatability",
+          "value": 0.0005,
+          "evidence": "A"
+        },
+        {
+          "term": "Drum straightness over 15.5 in",
+          "value": 0.0005,
+          "evidence": "T"
+        }
+      ],
+      "worst_case": 0.0027569683176300822,
+      "rss": 0.001678103905086224,
+      "spec": 0.003,
+      "pass_worst": true,
+      "pass_rss": true
+    },
+    "TV-01-revC": {
+      "rows": [
+        {
+          "term": "Alignment residual after setup",
+          "value": 0.003,
+          "evidence": "T"
+        },
+        {
+          "term": "Load-induced drum crown @20 lbf",
+          "value": 0.0002232495996520451,
+          "evidence": "D"
+        },
+        {
+          "term": "Way/gib X play, preloaded",
+          "value": 0.0015,
+          "evidence": "D"
+        },
+        {
+          "term": "Table flatness over contact line",
+          "value": 0.002,
+          "evidence": "T"
+        },
+        {
+          "term": "Lift backlash, compression + lock",
+          "value": 0.0,
+          "evidence": "D"
+        },
+        {
+          "term": "Abrasive thickness variation",
+          "value": 0.002,
+          "evidence": "A"
+        },
+        {
+          "term": "Feed and handling",
+          "value": 0.001,
+          "evidence": "A"
+        }
+      ],
+      "worst_case": 0.009723249599652045,
+      "rss": 0.004505534417108008,
+      "spec": 0.005,
+      "pass_worst": false,
+      "pass_rss": true,
+      "rev": "C"
+    },
+    "TV-01-revB": {
+      "rows": [
+        {
+          "term": "Alignment residual after setup",
+          "value": 0.003,
+          "evidence": "A"
+        },
+        {
+          "term": "Load-induced drum crown @20 lbf",
+          "value": 0.0047046909004036476,
+          "evidence": "D"
+        },
+        {
+          "term": "Way/shoe X play, table rock",
+          "value": 0.02,
+          "evidence": "G"
+        },
+        {
+          "term": "Table flatness over contact line",
+          "value": 0.004,
+          "evidence": "G"
+        },
+        {
+          "term": "Lift backlash, unspecified",
+          "value": 0.005,
+          "evidence": "E"
+        },
+        {
+          "term": "Abrasive thickness variation",
+          "value": 0.002,
+          "evidence": "A"
+        },
+        {
+          "term": "Feed and handling",
+          "value": 0.001,
+          "evidence": "A"
+        }
+      ],
+      "worst_case": 0.03970469090040365,
+      "rss": 0.02184339983767044,
+      "spec": 0.005,
+      "pass_worst": false,
+      "pass_rss": false,
+      "rev": "B"
+    }
+  },
+  "superseded": [
+    {
+      "artefact": "P-010 shaft",
+      "was": "\u00be\u2033 \u00d7 22.5\u2033",
+      "now": "1\u00bc\u2033 \u00d7 24\u2033",
+      "driver": "D-041 / CALC-C01"
+    },
+    {
+      "artefact": "P-008 / P-009 discs",
+      "was": "baseline drum",
+      "now": "Option B alternative only",
+      "driver": "D-047"
+    },
+    {
+      "artefact": "P-015 pack-bore jig",
+      "was": "baseline",
+      "now": "Option B only",
+      "driver": "D-047"
+    },
+    {
+      "artefact": "P-020 / P-021",
+      "was": "did not exist",
+      "now": "baseline drum shell + plugs",
+      "driver": "D-041"
+    },
+    {
+      "artefact": "P-022 gib",
+      "was": "did not exist",
+      "now": "sets way clearance",
+      "driver": "D-042"
+    },
+    {
+      "artefact": "P-023 / P-024",
+      "was": "did not exist",
+      "now": "parallelism micro-adjust",
+      "driver": "D-043"
+    },
+    {
+      "artefact": "H-001 / H-002 bearings",
+      "was": "\u00be\u2033 bore, unspecified rating",
+      "now": "1\u00bc\u2033 bore, C \u2265 137 lbf, self-aligning",
+      "driver": "D-045 / CALC-C11"
+    },
+    {
+      "artefact": "H-003 motor sheave",
+      "was": "3\u2033",
+      "now": "3\u00bd\u2033",
+      "driver": "D-046 / CALC-C12"
+    },
+    {
+      "artefact": "Motor",
+      "was": "\u00bd HP",
+      "now": "1 HP",
+      "driver": "D-046"
+    },
+    {
+      "artefact": "ply_shaft_clear_dia",
+      "was": "1.125\u2033",
+      "now": "1.625\u2033",
+      "driver": "D-041 shaft size"
+    },
+    {
+      "artefact": "flange_bolt_square",
+      "was": "2.05\u2033 [A]",
+      "now": "3.00\u2033 [A] \u2014 MEASURE YOURS",
+      "driver": "D-041"
+    },
+    {
+      "artefact": "Spec 0.003\u2033",
+      "was": "one number for two quantities",
+      "now": "ALN-01 0.003\u2033 and TV-01 0.005\u2033",
+      "driver": "D-040 / CALC-C06"
+    },
+    {
+      "artefact": "QC-07 / QC-10",
+      "was": "conflated parallel and scatter",
+      "now": "QC-15 ALN-01 and QC-16 TV-01",
+      "driver": "D-040"
+    },
+    {
+      "artefact": "Frame joinery",
+      "was": "screws",
+      "now": "housed dado + through-bolts",
+      "driver": "D-048"
+    },
+    {
+      "artefact": "Build steps",
+      "was": "14 steps",
+      "now": "18 steps",
+      "driver": "Rev C drum + gib + micro-adjust"
     }
   ],
   "layout_protocol": {
@@ -3760,14 +5559,14 @@
     {
       "id": "a3",
       "phase": "drum",
-      "title": "Pack-bore discs & laminate drum",
-      "body": "Bandsaw P-008/P-009 oversize. Stack in P-015; ream \u2300\u00be\u2033 as a pack (J-005). Key, 1 mm MDF relief, static-balance P-009."
+      "title": "Option A shell (baseline) or Option B discs",
+      "body": "Option A: turn P-021 plugs in one setup, bond+pin into P-020 (J-106). Option B: bandsaw P-008/P-009, pack-bore \u23001.25\u2033 in P-015 (J-005). True in the machine's own bearings."
     },
     {
       "id": "a4",
       "phase": "drum",
-      "title": "Fixed drive bearing, floating idler",
-      "body": "H-001 locked on P-001L (J-006). H-002 on a UHMW axial pad on P-001R (J-007). Do not slot the plywood in Y or Z."
+      "title": "Fixed drive bearing, floating idler on micro-adjust plate",
+      "body": "H-001 locked on P-001L (J-006). H-002 on P-023 jack plate (J-105 / J-007). Transfer the purchased flange BCD. Do not lock both bearings."
     },
     {
       "id": "a5",
@@ -3779,7 +5578,7 @@
       "id": "a6",
       "phase": "table",
       "title": "Torsion-box table + wear face + shoes",
-      "body": "P-004 + P-005 @ 4\u2033 o.c., glue. Flatten. Bond P-006. Fit P-017 shoes. Diagonals \u2264 0.004\u2033."
+      "body": "P-004 + P-005 @ 4\u2033 o.c., glue. Flatten. Bond P-006. Fit P-017 shoes. Diagonals \u2264 0.003\u2033."
     },
     {
       "id": "a7",
@@ -3861,24 +5660,26 @@
     }
   ],
   "name": "WALTER DS-16 dedicated drum thickness sander",
-  "revision": "B",
-  "fabrication_rev": "B.4",
-  "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry",
+  "revision": "C",
+  "fabrication_rev": "C.1",
+  "lineage": "ShopNotes 86 \u2192 Ron Walters \u2192 Rev A solid table \u2192 Rev B geometry \u2192 Rev C precision axis",
   "capacity": "15.5\" wide \u00b7 0.0625\"\u20133.0\" thick",
-  "drum_rpm": 1035.0,
-  "surface_fpm": 1355.0,
+  "drum_rpm": 1207.5,
+  "surface_fpm": 1581.0,
   "parallel_tol": 0.003,
   "spec": {
-    "revision": "B",
-    "fabrication_rev": "B.4",
+    "revision": "C",
+    "fabrication_rev": "C.1",
     "capacity_width": 15.5,
     "min_stock_thickness": 0.0625,
     "max_stock_thickness": 3.0,
     "min_stock_length": 12.0,
     "table_margin_each": 0.25,
+    "aln_spec": 0.003,
+    "tv_spec": 0.005,
     "parallel_tol": 0.003,
-    "table_flat_tol": 0.004,
-    "drum_tir": 0.002,
+    "table_flat_tol": 0.003,
+    "drum_tir": 0.0015,
     "paper_on_delta": 0.002,
     "pass_rough": 0.008,
     "pass_medium": 0.004,
@@ -3892,20 +5693,30 @@
     "velcro_width": 4.0,
     "sandpaper_width": 3.0,
     "disc_bandsaw_oversize": 0.125,
-    "shaft_od": 0.75,
-    "shaft_length": 22.5,
-    "shaft_spec": "Precision-ground CRS or TG&P, \u00be\u2033, 0.0005\u2033 TIR",
+    "shaft_od": 1.25,
+    "shaft_length": 24.0,
+    "shaft_spec": "Precision-ground rotary shaft, 1\u00bc\u2033, straightness \u2264 0.001\u2033/ft",
     "key_wire_od": 0.125,
-    "bearing_drive": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FIXED",
-    "bearing_idler": "4-bolt flange, \u00be\u2033 bore, sealed \u2014 FLOATING (axial)",
+    "bearing_drive": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning \u2014 FIXED",
+    "bearing_idler": "Mounted ball bearing, 1\u00bc\u2033 bore, self-aligning \u2014 FLOATING (axial)",
     "bearing_count": 2,
     "idler_float_slot": 0.25,
-    "motor_hp": 0.5,
+    "shell_od": 5.0,
+    "shell_wall": 0.25,
+    "plug_inset": 0.25,
+    "plug_thick": 1.5,
+    "bearing_offset": 0.35,
+    "drum_option": "A",
+    "gib_clearance": 0.0015,
+    "jack_thread_tpi": 28.0,
+    "jack_arm_l1": 6.0,
+    "jack_arm_l2": 1.25,
+    "motor_hp": 1.0,
     "motor_rpm": 1725.0,
-    "pulley_motor_od": 3.0,
+    "pulley_motor_od": 3.5,
     "pulley_drum_od": 5.0,
     "belt": "4L / A-section V-belt (size to center distance)",
-    "drum_rpm": 1035.0,
+    "drum_rpm": 1207.5,
     "ply_nominal": 0.75,
     "ply_actual": 0.75,
     "side_height": 30.0,
@@ -3959,9 +5770,9 @@
     "motor_pivot_y": 4.0,
     "motor_pivot_z": 6.0,
     "display_gap_under_drum": 0.5,
-    "flange_bolt_square": 2.05,
-    "flange_bolt_clr": 0.344,
-    "ply_shaft_clear_dia": 1.125,
+    "flange_bolt_square": 3.0,
+    "flange_bolt_clr": 0.406,
+    "ply_shaft_clear_dia": 1.625,
     "motor_pivot_dia": 0.266,
     "indicator_pad_y": 8.0,
     "indicator_pad_z": 16.0,
@@ -3980,10 +5791,12 @@
       "Stack-drill side panels as a pair; floating idler bearing (axial pad, not YZ slots)",
       "Torsion-box table + phenolic / tooling-plate wear face",
       "Spring hold-down rollers infeed + outfeed \u2014 kills snipe and chatter",
-      "Full-width truing sled; re-clock after paper wrap to \u00b10.003\u2033",
+      "Full-width truing sled; re-clock after paper wrap (ALN-01)",
       "Dial-indicator pad on drive side; 0.001\u2033 pass schedule",
       "Optional \u215b\u2033 slow oscillation (gear motor) to erase spiral tracks",
-      "Pack-bore disc jig + static balance of end discs"
+      "Structural 6061 drum shell + turned plugs (Option B disc stack documented)",
+      "Tapered UHMW gib + \u00bc-28 idler jack for ALN-01",
+      "Frame housed dados through-bolted (H-034) \u2014 glue is not primary structure"
     ],
     "stretcher_stations": [
       [

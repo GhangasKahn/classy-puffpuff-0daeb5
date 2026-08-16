@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#ffffff' stroke='#1a1a1a' stroke-width='2.4'/>
+<rect x='20.0' y='20.0' width='1640.0' height='1148.0' fill='none' stroke='#1a1a1a' stroke-width='1.0'/>
+<line x1='20.0' y1='78.0' x2='1660.0' y2='78.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<line x1='20.0' y1='1110.0' x2='1660.0' y2='1110.0' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='36.0' y='52.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='28' fill='#3d5a4c' text-anchor='start' font-weight='600'>J-105</text>
+<text x='200.0' y='48.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='22' fill='#1a1a1a' text-anchor='start' font-weight='600'>Adjustable gib and idler pivot plate</text>
+<text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Joinery</text>
+<text x='1180.0' y='70.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='end'>J-105</text>
+<text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
+<text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>P-022 1:40 gib  ·  P-023 plate  ·  P-024 jack block  ·  idler side only</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
+<text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
+<rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
+<text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
+<text x='450.0' y='119.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#a8342a' text-anchor='start' font-weight='600'>NOT FOR UNSUPERVISED ELECTRICAL WORK · VERIFY FLANGE BCD</text>
+<rect x='36.0' y='150.0' width='720.0' height='420.0' fill='#eef1ea' stroke='#1a1a1a' stroke-width='1.0'/>
+<g stroke='#1a1a1a' stroke-width='1.0' stroke-linejoin='round'>
+<polygon points='442.2,358.0 459.2,367.8 459.2,325.0 442.2,315.1' fill='#b2b6ba'/>
+<polygon points='477.9,283.2 476.0,282.6 474.5,283.1 473.7,284.6 473.7,286.8 474.5,289.3 476.0,291.5 477.9,293.0 479.7,293.6 481.2,293.1 482.0,291.6 482.0,289.4 481.2,287.0 479.7,284.7' fill='#a5a7ab'/>
+<polygon points='459.2,367.8 464.4,364.8 464.4,322.0 459.2,325.0' fill='#96999d'/>
+<polygon points='377.2,399.4 527.3,486.1 527.3,255.6 377.2,169.0' fill='#b5b5b1'/>
+<polygon points='459.2,325.0 464.4,322.0 447.3,312.2 442.2,315.1' fill='#96999d'/>
+<polygon points='442.9,308.3 462.0,319.3 462.0,297.3 442.9,286.2' fill='#a5a7ab'/>
+<polygon points='462.0,319.3 466.8,316.6 466.8,294.5 462.0,297.3' fill='#8b8d90'/>
+<polygon points='462.0,297.3 466.8,294.5 447.7,283.5 442.9,286.2' fill='#8b8d90'/>
+<polygon points='416.5,435.8 525.6,372.8 375.5,286.1 266.4,349.2' fill='#989895'/>
+<polygon points='416.5,433.9 525.6,370.8 375.5,284.2 266.4,347.2' fill='#989895'/>
+<polygon points='310.8,383.8 312.3,386.0 476.0,291.5 474.5,289.3' fill='#8b8d90'/>
+<polygon points='310.0,381.3 310.8,383.8 474.5,289.3 473.7,286.8' fill='#8b8d90'/>
+<polygon points='527.3,486.1 532.5,483.1 532.5,252.7 527.3,255.6' fill='#989895'/>
+<polygon points='312.3,386.0 314.1,387.6 477.9,293.0 476.0,291.5' fill='#8b8d90'/>
+<polygon points='310.0,379.2 310.0,381.3 473.7,286.8 473.7,284.6' fill='#8b8d90'/>
+<polygon points='314.1,387.6 316.0,388.2 479.7,293.6 477.9,293.0' fill='#8b8d90'/>
+<polygon points='310.8,377.7 310.0,379.2 473.7,284.6 474.5,283.1' fill='#949699'/>
+<polygon points='316.0,388.2 317.5,387.6 481.2,293.1 479.7,293.6' fill='#8b8d90'/>
+<polygon points='527.3,255.6 532.5,252.7 382.4,166.0 377.2,169.0' fill='#989895'/>
+<polygon points='327.6,424.1 344.7,433.9 344.7,391.1 327.6,381.2' fill='#b2b6ba'/>
+<polygon points='266.4,359.0 416.5,445.7 416.5,435.8 266.4,349.2' fill='#b5b5b1'/>
+<polygon points='344.7,433.9 349.8,431.0 349.8,388.1 344.7,391.1' fill='#96999d'/>
+<polygon points='266.4,349.2 416.5,435.8 416.5,433.9 266.4,347.2' fill='#b5b5b1'/>
+<polygon points='259.5,467.3 409.6,554.0 409.6,323.6 259.5,236.9' fill='#b5b5b1'/>
+<polygon points='344.7,391.1 349.8,388.1 332.8,378.3 327.6,381.2' fill='#96999d'/>
+<polygon points='416.5,445.7 525.6,382.6 525.6,372.8 416.5,435.8' fill='#989895'/>
+<polygon points='416.5,435.8 525.6,372.8 525.6,370.8 416.5,433.9' fill='#989895'/>
+<polygon points='325.2,376.2 344.3,387.3 344.3,365.2 325.2,354.2' fill='#a5a7ab'/>
+<polygon points='344.3,387.3 349.1,384.5 349.1,362.5 344.3,365.2' fill='#8b8d90'/>
+<polygon points='344.3,365.2 349.1,362.5 330.0,351.4 325.2,354.2' fill='#8b8d90'/>
+<polygon points='409.6,554.0 414.8,551.0 414.8,320.6 409.6,323.6' fill='#989895'/>
+<polygon points='409.6,323.6 414.8,320.6 264.7,233.9 259.5,236.9' fill='#989895'/>
+</g>
+<text x='46.0' y='168.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='start' font-weight='600'>Joint geometry</text>
+<text x='780.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>GEOMETRY</text>
+<text x='780.0' y='172.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Gib taper 1:40, thick end down. Target running clearance</text>
+<text x='780.0' y='188.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  0.0015″ (QC-17).</text>
+<text x='780.0' y='208.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Plate: pivot ⅜″ pin (H-032), jack ¼-28 at L1 6″, bearing</text>
+<text x='780.0' y='224.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  at L2 1.25″.</text>
+<text x='780.0' y='244.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Transfer the purchased flange BCD onto P-023. The square</text>
+<text x='780.0' y='260.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  on the drawing is ASSUMED.</text>
+<text x='780.0' y='280.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• 3D-print P-023 at 1:1 before cutting metal (user joinery</text>
+<text x='780.0' y='296.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  standard).</text>
+<text x='780.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>CUT SEQUENCE</text>
+<text x='780.0' y='422.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Taper the gib on a jig (S-013). Mark the thick end</text>
+<text x='780.0' y='438.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  immediately.</text>
+<text x='780.0' y='458.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Tap three ¼-20 stations in P-001R. Dry-fit the gib before</text>
+<text x='780.0' y='474.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the table exists (ST-08).</text>
+<text x='780.0' y='494.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• After shoes are on (ST-16), slide the gib in and set</text>
+<text x='780.0' y='510.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  QC-17. Then clock ALN-01 with the jack only.</text>
+<text x='36.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>ACCEPTANCE</text>
+<text x='36.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Table slides full travel with no rock and no bind. Record</text>
+<text x='36.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the feeler that just fails to enter.</text>
+<text x='36.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• ALN-01 |A−B| ≤ 0.003″ after the jack is set. Do not chase</text>
+<text x='36.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the gib while clocking.</text>
+<text x='860.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='start' font-weight='600'>MOVEMENT / CONSTRAINT</text>
+<text x='860.0' y='622.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Gib: SLIDING, adjustable. Seasonal UHMW swell is taken up</text>
+<text x='860.0' y='638.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  by the screws — re-check QC-17 after the first week.</text>
+<text x='860.0' y='658.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Plate: ROTATES about the pin. Drive bearing stays FIXED.</text>
+<text x='860.0' y='674.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  Never lock both flanges.</text>
+<text x='860.0' y='694.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>• Water/movement: UHMW grows more than birch. That is why</text>
+<text x='860.0' y='710.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#2a2a2a' text-anchor='start'>  the clearance is set, not designed as a press.</text>
+</svg>

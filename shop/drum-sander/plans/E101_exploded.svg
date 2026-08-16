@@ -9,7 +9,7 @@
 <text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Explosion 1 axis</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Balloon numbers resolve to the BOM on this sheet</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
 <text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
@@ -57,7 +57,7 @@
 <polygon points='345.5,649.5 576.1,782.6 576.1,767.5 345.5,634.3' fill='#4f7752'/>
 <polygon points='345.5,634.3 576.1,767.5 576.1,764.5 345.5,631.3' fill='#73787f'/>
 <polygon points='483.3,660.7 488.6,657.6 483.3,654.6 478.1,657.6' fill='#8b8d90'/>
-<polygon points='662.7,322.5 661.0,322.0 659.6,322.5 658.8,323.8 658.8,325.9 659.6,328.1 661.0,330.2 662.7,331.6 664.4,332.1 665.7,331.7 666.5,330.3 666.5,328.3 665.7,326.0 664.4,324.0' fill='#a5a7ab'/>
+<polygon points='670.5,315.0 667.7,314.1 665.4,314.8 664.1,317.1 664.1,320.5 665.4,324.3 667.7,327.7 670.5,330.1 673.4,331.0 675.6,330.2 676.9,327.9 676.9,324.5 675.6,320.8 673.4,317.3' fill='#a5a7ab'/>
 <polygon points='576.1,782.6 743.9,685.8 743.9,670.6 576.1,767.5' fill='#436545'/>
 <polygon points='576.1,767.5 743.9,670.6 743.9,667.6 576.1,764.5' fill='#61656b'/>
 <polygon points='418.7,474.5 421.1,478.7 586.2,383.3 583.8,379.2' fill='#1f2023'/>
@@ -97,16 +97,16 @@
 <polygon points='499.9,525.2 503.1,526.1 668.3,430.7 665.0,429.8' fill='#1f2023'/>
 <polygon points='683.6,850.8 861.9,747.8 854.0,743.3 675.8,846.2' fill='#a2936c'/>
 <polygon points='466.0,470.9 644.3,367.9 636.4,363.4 458.2,466.3' fill='#a2936c'/>
+<polygon points='413.7,469.6 416.0,473.0 667.7,327.7 665.4,324.3' fill='#8b8d90'/>
+<polygon points='412.5,465.8 413.7,469.6 665.4,324.3 664.1,320.5' fill='#8b8d90'/>
 <polygon points='503.1,526.1 505.5,524.7 670.7,429.3 668.3,430.7' fill='#1f2023'/>
 <polygon points='442.3,411.6 438.3,416.5 603.4,321.2 607.5,316.2' fill='#998c75'/>
-<polygon points='423.6,464.3 425.0,466.4 661.0,330.2 659.6,328.1' fill='#8b8d90'/>
-<polygon points='422.9,462.1 423.6,464.3 659.6,328.1 658.8,325.9' fill='#8b8d90'/>
-<polygon points='425.0,466.4 426.7,467.8 662.7,331.6 661.0,330.2' fill='#8b8d90'/>
-<polygon points='422.9,460.1 422.9,462.1 658.8,325.9 658.8,323.8' fill='#8b8d90'/>
-<polygon points='426.7,467.8 428.4,468.4 664.4,332.1 662.7,331.6' fill='#8b8d90'/>
+<polygon points='416.0,473.0 418.9,475.4 670.5,330.1 667.7,327.7' fill='#8b8d90'/>
+<polygon points='412.5,462.5 412.5,465.8 664.1,320.5 664.1,317.1' fill='#8b8d90'/>
+<polygon points='418.9,475.4 421.7,476.3 673.4,331.0 670.5,330.1' fill='#8b8d90'/>
+<polygon points='413.7,460.1 412.5,462.5 664.1,317.1 665.4,314.8' fill='#949699'/>
 <polygon points='476.3,476.5 481.9,474.1 647.1,378.8 641.4,381.1' fill='#8a7f6a'/>
-<polygon points='423.6,458.7 422.9,460.1 658.8,323.8 659.6,322.5' fill='#949699'/>
-<polygon points='428.4,468.4 429.8,467.9 665.7,331.7 664.4,332.1' fill='#8b8d90'/>
+<polygon points='421.7,476.3 424.0,475.5 675.6,330.2 673.4,331.0' fill='#8b8d90'/>
 <polygon points='500.1,511.4 673.1,411.5 664.8,406.7 491.7,506.6' fill='#a2936c'/>
 <polygon points='500.1,516.3 673.1,416.4 673.1,411.5 500.1,511.4' fill='#a2936c'/>
 <polygon points='416.2,467.8 424.6,472.7 424.6,467.8 416.2,463.0' fill='#c0ae81'/>
@@ -225,7 +225,7 @@
 <text x='1124.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-010</text>
 <text x='1220.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Shaft + bearings</text>
 <text x='1390.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>1</text>
-<text x='1440.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>22.5" × 0.75" × 0.75"</text>
+<text x='1440.0' y='352.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>24" × 1.25" × 1.25"</text>
 <text x='1090.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>7</text>
 <text x='1124.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-012</text>
 <text x='1220.0' y='378.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>Motor, cradle, pulleys</text>
@@ -274,18 +274,26 @@
 <text x='1090.0' y='808.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-07</text>
 <text x='1152.0' y='808.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-007</text>
 <text x='1090.0' y='824.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-08</text>
-<text x='1152.0' y='824.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-008, P-009, P-015</text>
+<text x='1152.0' y='824.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-022</text>
 <text x='1090.0' y='840.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-09</text>
-<text x='1152.0' y='840.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-010</text>
+<text x='1152.0' y='840.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-021</text>
 <text x='1090.0' y='856.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-10</text>
-<text x='1152.0' y='856.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-012</text>
+<text x='1152.0' y='856.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-020, P-021</text>
 <text x='1090.0' y='872.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-11</text>
-<text x='1152.0' y='872.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-004, P-005, P-006, P-017</text>
+<text x='1152.0' y='872.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-008, P-009, P-015</text>
 <text x='1090.0' y='888.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-12</text>
-<text x='1152.0' y='888.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-016, P-018, P-019</text>
+<text x='1152.0' y='888.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-010, P-023, P-024</text>
 <text x='1090.0' y='904.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-13</text>
-<text x='1152.0' y='904.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-011, P-014</text>
+<text x='1152.0' y='904.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-013, P-020</text>
 <text x='1090.0' y='920.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-14</text>
-<text x='1152.0' y='920.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-013</text>
-<text x='1090.0' y='950.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Full sequence on the ST sheets. This page is the map.</text>
+<text x='1152.0' y='920.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-012</text>
+<text x='1090.0' y='936.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-15</text>
+<text x='1152.0' y='936.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-004, P-005, P-006, P-017</text>
+<text x='1090.0' y='952.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-16</text>
+<text x='1152.0' y='952.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-016, P-018, P-019, P-022</text>
+<text x='1090.0' y='968.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-17</text>
+<text x='1152.0' y='968.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-011, P-014</text>
+<text x='1090.0' y='984.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d5a4c' text-anchor='start' font-weight='600'>ST-18</text>
+<text x='1152.0' y='984.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='11' fill='#1a1a1a' text-anchor='start'>P-013</text>
+<text x='1090.0' y='1014.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>Full sequence on the ST sheets. This page is the map.</text>
 </svg>

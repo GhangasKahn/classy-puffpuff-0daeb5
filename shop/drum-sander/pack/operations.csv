@@ -7,6 +7,10 @@ S-005,Stop: table skins,Fence + stop,"16"" × 22""",P-004 ×2,
 S-006,Dado: stretcher housing,Dado / router,"depth 0.25"" · width 0.75"" · height 4""","P-001L, P-001R",
 S-007,Rebate: vertical way,Router + edge guide,"depth 0.520"" · width 2.5"" · Z 11–16.438""","P-001L, P-001R",
 S-008,Stack-drill bearing CL,"Drill press, sides clamped face-to-face","Y 11"" from infeed · Z 18.5"" from bottom",P-001L+R,One stack. Then split for inner-face dados.
-S-009,Pack-bore discs,P-015 jig + drill/ream,"⌀0.75""","P-008, P-009",
+S-009,Pack-bore discs,P-015 jig + drill/ream,"⌀1.25""","P-008, P-009",
 S-010,True drum,P-013 sled on ways,"TIR ≤ 0.002""",A-DRUM,
-S-011,A/B clock,H-021 indicator,"|A−B| ≤ 0.003"" paper on","A-TABLE, A-DRUM",
+S-011,ALN-01 clock,H-021 indicator + P-023 jack,"|A−B| ≤ 0.003"" paper on, no load","A-TABLE, A-DRUM",Set the gib FIRST and leave it. Then clock with the jack only.
+S-012,Turn plug OD + bore,Metal lathe,"OD to shell ID · bore ⌀1.25""",P-021,ONE SETUP — do not re-chuck between OD and bore.
+S-013,Taper the gib,Taper jig,1:40,P-022,
+S-014,Set gib clearance,Brass-tip adjusters + feelers,"0.0015""",P-022,"No rock, no bind, through FULL travel."
+S-015,TV-01 witness board,Calipers,"spread ≤ 0.005"" across 15.5""",A-MASTER,Finish pass only. Different number from ALN-01.

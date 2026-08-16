@@ -9,7 +9,7 @@
 <text x='1180.0' y='48.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1a1a1a' text-anchor='end' font-weight='600'>Quality</text>
 <text x='36.0' y='1136.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='16' fill='#3d5a4c' text-anchor='start' font-weight='600'>WALTER DS-16</text>
 <text x='200.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='start'>Planforge completeness gate  ·  fail any item → revise</text>
-<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev B geometry · fab B.4 · inches</text>
+<text x='1644.0' y='1134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#3d4a38' text-anchor='end'>Rev C geometry · fab C.1 · FABRICATION REVIEW · inches</text>
 <text x='1644.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#3d4a38' text-anchor='end'>Confirm flange BCD before drilling · FABRICATION REVIEW</text>
 <rect x='36.0' y='96.0' width='400.0' height='34.0' fill='#a8342a' stroke='#1a1a1a' stroke-width='1.2' rx='4'/>
 <text x='52.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#ffffff' text-anchor='start' font-weight='600'>FABRICATION REVIEW  ·  RISK R3</text>
@@ -20,10 +20,10 @@
 <line x1='36.0' y1='166.0' x2='1644.0' y2='166.0' stroke='#1a1a1a' stroke-width='1.0'/>
 <text x='36.0' y='196.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Completeness</text>
 <text x='256.0' y='196.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
-<text x='396.0' y='196.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001…P-019 in the register with finished size. H-001…H-026 specified. Consumables listed.</text>
+<text x='396.0' y='196.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-001…P-024 in the register with finished size. H-001…H-035 specified. MC-01…MC-25 on H-02/H-03. Consumables listed.</text>
 <text x='36.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Joinery details</text>
 <text x='256.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
-<text x='396.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-001, J-002, J-006, J-007, J-011 have geometry, cut sequence, acceptance, movement.</text>
+<text x='396.0' y='232.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>J-001, J-002, J-006, J-007, J-011, J-105, J-106 have geometry, cut sequence, acceptance, movement.</text>
 <text x='36.0' y='268.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Layout declared</text>
 <text x='256.0' y='268.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
 <text x='396.0' y='268.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Primary layout system: HYBRID. Panel joinery is face/edge. Drum, lift, and ways are centerline from DATUM-B / DATUM-A.</text>
@@ -31,23 +31,23 @@
 <text x='256.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>HOLD</text>
 <text x='396.0' y='304.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>S-101 load path shown. Bench/stand connection is [A]; floor bolting is [P] and not released.</text>
 <text x='36.0' y='340.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Hardware</text>
-<text x='256.0' y='340.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
-<text x='396.0' y='340.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Bearings, pulleys, Acme, chain, rollers specified. Flange BCD remains ASSUMED until transfer.</text>
+<text x='256.0' y='340.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>HOLD</text>
+<text x='396.0' y='340.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Bearings specified by required C. Flange BCD remains ASSUMED. McMaster PNs are CONFIRM AT ORDER.</text>
 <text x='36.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Tolerances / QC</text>
 <text x='256.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
-<text x='396.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>QC-01…QC-14 with numerical acceptance. Q-101 is the sign-off sheet.</text>
+<text x='396.0' y='376.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>QC-01…QC-20 with numerical acceptance. ALN-01 and TV-01 are separate. Q-101/Q-103 are the sign-off sheets.</text>
 <text x='36.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Fabrication sequence</text>
 <text x='256.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
-<text x='396.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ST-01…ST-14 is F-201. Solo-handling noted on F-101. Dado test on offcuts.</text>
+<text x='396.0' y='412.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>ST-01…ST-18 is F-201. Solo-handling noted on F-101. Dado test on offcuts. 3D-print P-023.</text>
 <text x='36.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Self-containment</text>
 <text x='256.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>HOLD</text>
-<text x='396.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Package is FABRICATION REVIEW · R3. Electrical and flange BCD still block RELEASED FOR FABRICATION.</text>
+<text x='396.0' y='448.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Package is FABRICATION REVIEW · R3. Electrical, flange BCD, and bearing C still block RELEASED FOR FABRICATION.</text>
 <text x='36.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>Japanese timber joinery</text>
 <text x='256.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>N/A</text>
 <text x='396.0' y='484.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>This machine is Baltic birch box + housed dados. Kigumi is not applied to plywood sides.</text>
 <text x='36.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>3D-print prototype</text>
-<text x='256.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>N/A</text>
-<text x='396.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>No irreversible organic joint. Test dados and the pack-bore on scrap.</text>
+<text x='256.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>PASS</text>
+<text x='396.0' y='520.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#1a1a1a' text-anchor='start'>P-023 idler plate printed 1:1 before metal. Shell/plug bond is irreversible — make a spare plug.</text>
 <text x='36.0' y='580.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='13' fill='#2a2a2a' text-anchor='start'>This sheet does not make the package RELEASED FOR FABRICATION. It records that the drawing set is internally complete under the stated holds.</text>
-<text x='36.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>validate() and validate_mechanics() run on every regeneration. Current fabrication rev B.4.</text>
+<text x='36.0' y='604.0' font-family='Libre Franklin, Helvetica, Arial, sans-serif' font-size='12' fill='#3d4a38' text-anchor='start'>validate() and validate_mechanics() run on every regeneration. Current fabrication rev C.1.</text>
 </svg>

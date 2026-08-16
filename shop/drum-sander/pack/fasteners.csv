@@ -11,7 +11,7 @@ Wire,1,⅛″ piano wire,Disc keys.
 Wax,1,Paste wax (UHMW dry lube — no oil),H-024
 Dust,1,4″ dust adapter + blast gate,H-019
 Electrical,1,Switch box + 14/3 SJ cord + plug,Code.
-Specialty,1,"4-bolt flange bearing, ¾″ bore, sealed, FIXED (drive)",Lock to P-001L. No axial float.
+Specialty,1,"Mounted ball bearing, 1¼″ bore, self-aligning, FIXED (drive)",Lock to P-001L. No axial float. REQUIRED C ≥ 137 lbf (CALC-C11); self-align ≥ 0.011° (CALC-C08). Confirm both on the vendor page.
 Specialty,2,"4-bolt flange bearing ¾″ bore, sealed",H-001 FIXED · H-002 FLOATING
 Specialty,1,¾″ TG&P / precision-ground shaft × 24″,P-010 drum shaft (cut to 22.5″)
 Specialty,2,½-10 Acme rod 12″ + bronze nut + flange,H-007 dual table lift
