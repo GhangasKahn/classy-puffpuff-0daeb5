@@ -1,10 +1,10 @@
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const DEPTH_COPY = {
-  1: "DEPTH 1 // SIGNAL ONLY",
-  2: "DEPTH 2 // TACTICAL MEASURE",
-  3: "DEPTH 3 // DECISION MATRIX",
-  4: "DEPTH 4 // FULL RELATIVISTIC ASTRODYNAMICS"
+  1: "01  signal",
+  2: "02  measure",
+  3: "03  decide",
+  4: "04  full sheet"
 };
 
 export function initMotion(state) {
@@ -40,7 +40,7 @@ export function initMotion(state) {
     requestAnimationFrame(() => {
       ticking = false;
       const y = window.scrollY || 0;
-      hero.style.transform = `translate3d(0, ${Math.min(y * 0.1, 40)}px, 0)`;
+      hero.style.transform = `translate3d(0, ${Math.min(y * 0.08, 28)}px, 0)`;
     });
   };
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -53,25 +53,17 @@ export function initMotion(state) {
     toast.textContent = DEPTH_COPY[n] || `DEPTH ${n}`;
     state.audio?.playModeClick();
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.hidden = true; }, reduced() ? 0 : 1800);
+    toastTimer = setTimeout(() => { toast.hidden = true; }, reduced() ? 0 : 1600);
   };
 
   state.sweep = 0;
   let raf = 0;
   const loop = (t) => {
     raf = requestAnimationFrame(loop);
-    
-    // Always render background singularity fluid unless hidden
-    if (!document.hidden && state.singularity) {
-      state.singularity.render();
-    }
-
     if (reduced()) return;
     if (document.hidden) return;
     if (!state.plotVisible) return;
-    
-    // Smooth radar sweep
-    state.sweep = (t / 32) % 360;
+    state.sweep = (t / 48) % 360;
     if (typeof state.drawPlot === "function") state.drawPlot();
   };
   raf = requestAnimationFrame(loop);
@@ -93,7 +85,7 @@ export function listMotionListeners() {
   return [
     { kind: "scroll", id: "M01", el: ".hero-plate" },
     { kind: "IntersectionObserver", id: "M02", el: ".surface" },
-    { kind: "requestAnimationFrame", id: "M03", el: "#sky-plot sweep + #singularity-canvas" },
+    { kind: "requestAnimationFrame", id: "M03", el: "#sky-plot sweep" },
     { kind: "canvas", id: "M04", el: "lock pip" },
     { kind: "canvas", id: "M05", el: "#compass" },
     { kind: "text", id: "M06", el: "#az #el #range #mag" },

@@ -114,10 +114,9 @@ export function drawSkyPlot(state) {
   if (!canvas || (wrap && getComputedStyle(wrap).display === "none")) return;
   const { ctx, w, h } = sizeCanvas(canvas);
   ctx.clearRect(0, 0, w, h);
-  const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.43;
+  const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.42;
 
-  // Background Grid Rings
-  ctx.strokeStyle = "rgba(0, 229, 255, 0.15)";
+  ctx.strokeStyle = "rgba(17, 17, 17, 0.22)";
   ctx.lineWidth = 1;
   for (const el of [30, 60]) {
     ctx.beginPath();
@@ -125,47 +124,25 @@ export function drawSkyPlot(state) {
     ctx.stroke();
   }
 
-  // Luminous dual-tone horizon ring (Honda AI direction):
-  // amber flows into violet-blue around the circle, layered strokes for bloom.
-  const RING_SEGS = 72;
-  const AMBER = [255, 150, 50];
-  const VIOLET = [110, 130, 255];
-  for (let pass = 0; pass < 2; pass++) {
-    for (let i = 0; i < RING_SEGS; i++) {
-      const a0 = (i / RING_SEGS) * Math.PI * 2 - Math.PI / 2;
-      const a1 = ((i + 0.85) / RING_SEGS) * Math.PI * 2 - Math.PI / 2;
-      const mix = (Math.cos(a0 + Math.PI / 4) + 1) / 2; // amber sits top-right
-      const r = Math.round(AMBER[0] + (VIOLET[0] - AMBER[0]) * mix);
-      const g = Math.round(AMBER[1] + (VIOLET[1] - AMBER[1]) * mix);
-      const b = Math.round(AMBER[2] + (VIOLET[2] - AMBER[2]) * mix);
-      ctx.strokeStyle = pass === 0 ? `rgba(${r}, ${g}, ${b}, 0.2)` : `rgba(${r}, ${g}, ${b}, 0.95)`;
-      ctx.lineWidth = pass === 0 ? 6 : 1.8;
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, a0, a1);
-      ctx.stroke();
-    }
-  }
+  ctx.strokeStyle = "#111111";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.stroke();
 
-  // Rise markers: luminous particles on the horizon where upcoming passes begin (real AOS azimuths)
   (state.passes || []).filter((p) => p.los > Date.now()).slice(0, 5).forEach((p) => {
     const az0 = p.samples?.[0]?.az;
     if (az0 == null) return;
     const a = az0 * Math.PI / 180;
     const x = cx + R * Math.sin(a);
     const y = cy - R * Math.cos(a);
-    const col = p.eye === "NAKED-EYE" ? "0, 255, 170" : p.eye === "DAY" ? "255, 170, 0" : "255, 51, 68";
-    ctx.fillStyle = `rgba(${col}, 0.25)`;
+    ctx.fillStyle = p.eye === "NAKED-EYE" ? "#ffe600" : "#111111";
     ctx.beginPath();
-    ctx.arc(x, y, 7, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fill();
   });
 
-  // Crosshairs
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+  ctx.strokeStyle = "rgba(17, 17, 17, 0.28)";
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(cx, cy - R);
@@ -174,66 +151,40 @@ export function drawSkyPlot(state) {
   ctx.lineTo(cx + R, cy);
   ctx.stroke();
 
-  // Cardinal Labels
-  ctx.fillStyle = "#00e5ff";
-  ctx.font = "bold 11px Space Mono, monospace";
+  ctx.fillStyle = "#111111";
+  ctx.font = "700 11px 'Space Mono', monospace";
   ctx.textAlign = "center";
-  ctx.fillText("N (000°)", cx, cy - R - 8);
-  ctx.fillText("S (180°)", cx, cy + R + 18);
-  ctx.fillText("E", cx + R + 14, cy + 4);
-  ctx.fillText("W", cx - R - 14, cy + 4);
-  
-  ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-  ctx.font = "9px Space Mono, monospace";
-  ctx.fillText("30°", cx + 6, cy - R * (1 - 30 / 90) + 3);
-  ctx.fillText("60°", cx + 6, cy - R * (1 - 60 / 90) + 3);
+  ctx.fillText("N", cx, cy - R - 8);
+  ctx.fillText("S", cx, cy + R + 16);
+  ctx.fillText("E", cx + R + 12, cy + 4);
+  ctx.fillText("W", cx - R - 12, cy + 4);
 
-  // Vivid Amber Sweep Radar Line
+  ctx.fillStyle = "#6b6458";
+  ctx.font = "9px 'Space Mono', monospace";
+  ctx.fillText("30", cx + 8, cy - R * (1 - 30 / 90) + 3);
+  ctx.fillText("60", cx + 8, cy - R * (1 - 60 / 90) + 3);
+
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sweep = reduced ? 0 : (state.sweep || 0);
   const sweepRad = sweep * Math.PI / 180;
-  
-  // Sweep beam gradient
-  const sweepGrad = ctx.createLinearGradient(cx, cy, cx + R * Math.sin(sweepRad), cy - R * Math.cos(sweepRad));
-  sweepGrad.addColorStop(0, "rgba(255, 170, 0, 0.9)");
-  sweepGrad.addColorStop(1, "rgba(255, 85, 0, 0.1)");
-  
-  ctx.strokeStyle = sweepGrad;
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = "#ff5a00";
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(cx + R * Math.sin(sweepRad), cy - R * Math.cos(sweepRad));
   ctx.stroke();
 
-  // Target Satellite Pip (Brutalist Diamond Reticle with Pulsing Core)
   const look = state.look;
   if (look && look.el > -5) {
     const r = R * Math.max(0, (90 - look.el) / 90);
     const a = look.az * Math.PI / 180;
     const x = cx + r * Math.sin(a);
     const y = cy - r * Math.cos(a);
-
-    // Outer Target Reticle
-    ctx.strokeStyle = "#ff5500";
-    ctx.lineWidth = 1.5;
-    ctx.shadowColor = "#ff5500";
-    ctx.shadowBlur = 12;
-    ctx.strokeRect(x - 6, y - 6, 12, 12);
-    
-    // Cross marks
-    ctx.beginPath();
-    ctx.moveTo(x - 10, y);
-    ctx.lineTo(x + 10, y);
-    ctx.moveTo(x, y - 10);
-    ctx.lineTo(x, y + 10);
-    ctx.stroke();
-
-    // Hot Center Core
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "#111111";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x - 5, y - 5, 10, 10);
+    ctx.fillStyle = "#ff5a00";
+    ctx.fillRect(x - 2, y - 2, 4, 4);
   }
 }
 
@@ -265,61 +216,47 @@ function drawArcGauge(canvas, cfg) {
   const SWEEP = Math.PI * 1.5;            // 270° clockwise
   const frac = Math.max(0, Math.min(1, (cfg.value - cfg.min) / (cfg.max - cfg.min)));
 
-  const SEGS = 44;
+  const SEGS = 36;
   const litCount = Math.round(frac * SEGS);
-  const c0 = hexRgb(cfg.color0 || "#00e5ff");
-  const c1 = hexRgb(cfg.color1 || "#ff5500");
+  const c0 = hexRgb(cfg.color0 || "#111111");
+  const c1 = hexRgb(cfg.color1 || "#ff5a00");
 
-  ctx.lineCap = "round";
-  // pass 0: wide low-alpha bloom under lit segments; pass 1: crisp segments
-  for (let pass = 0; pass < 2; pass++) {
-    for (let i = 0; i < SEGS; i++) {
-      const f = i / (SEGS - 1);
-      const lit = i < litCount;
-      if (pass === 0 && !lit) continue;
-      const a = START + SWEEP * f;
-      const major = i % 4 === 0;
-      const rIn = R - w * (major ? 0.115 : 0.085);
-      const r = Math.round(c0[0] + (c1[0] - c0[0]) * f);
-      const g = Math.round(c0[1] + (c1[1] - c0[1]) * f);
-      const b = Math.round(c0[2] + (c1[2] - c0[2]) * f);
-      if (pass === 0) {
-        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.25)`;
-        ctx.lineWidth = Math.max(5, w * 0.045);
-      } else {
-        ctx.strokeStyle = lit ? `rgb(${r}, ${g}, ${b})` : "rgba(40, 52, 70, 0.9)";
-        ctx.lineWidth = Math.max(2, w * 0.016);
-      }
-      ctx.beginPath();
-      ctx.moveTo(cx + rIn * Math.cos(a), cy + rIn * Math.sin(a));
-      ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
-      ctx.stroke();
-    }
+  ctx.lineCap = "butt";
+  for (let i = 0; i < SEGS; i++) {
+    const f = i / (SEGS - 1);
+    const lit = i < litCount;
+    const a = START + SWEEP * f;
+    const major = i % 4 === 0;
+    const rIn = R - w * (major ? 0.12 : 0.08);
+    const r = Math.round(c0[0] + (c1[0] - c0[0]) * f);
+    const g = Math.round(c0[1] + (c1[1] - c0[1]) * f);
+    const b = Math.round(c0[2] + (c1[2] - c0[2]) * f);
+    ctx.strokeStyle = lit ? `rgb(${r}, ${g}, ${b})` : "rgba(17, 17, 17, 0.18)";
+    ctx.lineWidth = Math.max(2, w * 0.018);
+    ctx.beginPath();
+    ctx.moveTo(cx + rIn * Math.cos(a), cy + rIn * Math.sin(a));
+    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+    ctx.stroke();
   }
 
-  // White-hot edge segment — the "needle"
   if (litCount > 0) {
     const a = START + SWEEP * ((litCount - 1) / (SEGS - 1));
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = Math.max(2.2, w * 0.018);
-    ctx.shadowColor = cfg.color1 || "#ff5500";
-    ctx.shadowBlur = 14;
+    ctx.strokeStyle = "#ff5a00";
+    ctx.lineWidth = Math.max(2.4, w * 0.02);
     ctx.beginPath();
-    ctx.moveTo(cx + (R - w * 0.125) * Math.cos(a), cy + (R - w * 0.125) * Math.sin(a));
-    ctx.lineTo(cx + (R + w * 0.008) * Math.cos(a), cy + (R + w * 0.008) * Math.sin(a));
+    ctx.moveTo(cx + (R - w * 0.14) * Math.cos(a), cy + (R - w * 0.14) * Math.sin(a));
+    ctx.lineTo(cx + (R + w * 0.006) * Math.cos(a), cy + (R + w * 0.006) * Math.sin(a));
     ctx.stroke();
-    ctx.shadowBlur = 0;
   }
 
-  // Thin digital core (AMG "58" treatment)
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillStyle = "#f0f4f8";
-  ctx.font = `300 ${Math.max(17, w * 0.21)}px "Space Mono", monospace`;
+  ctx.fillStyle = "#111111";
+  ctx.font = `700 ${Math.max(16, w * 0.18)}px "Space Mono", monospace`;
   ctx.fillText(cfg.text, cx, cy - w * 0.02);
-  ctx.fillStyle = "rgba(140, 156, 179, 0.9)";
-  ctx.font = `${Math.max(8, w * 0.058)}px "Space Mono", monospace`;
-  ctx.fillText(cfg.unit, cx, cy + w * 0.115);
+  ctx.fillStyle = "#6b6458";
+  ctx.font = `700 ${Math.max(8, w * 0.055)}px "Inter", sans-serif`;
+  ctx.fillText(cfg.unit, cx, cy + w * 0.12);
 }
 
 export function drawGauges(state) {
@@ -346,12 +283,12 @@ export function drawGauges(state) {
   drawArcGauge(azCanvas, {
     value: state.gAz, min: 0, max: 360,
     text: look ? state.gAz.toFixed(0) + "°" : "—",
-    unit: "AZIMUTH", color0: "#00e5ff", color1: "#0066ff"
+    unit: "AZIMUTH", color0: "#111111", color1: "#ff5a00"
   });
   drawArcGauge(elCanvas, {
     value: state.gEl, min: -90, max: 90,
     text: look ? state.gEl.toFixed(0) + "°" : "—",
-    unit: "ELEVATION", color0: "#ffaa00", color1: "#ff5500"
+    unit: "ELEVATION", color0: "#111111", color1: "#ff5a00"
   });
 }
 
@@ -365,49 +302,43 @@ export function drawCompass(state) {
   ctx.clearRect(0, 0, w, h);
   const cx = w / 2, cy = h / 2, R = 64;
 
-  // Outer Ring
-  ctx.strokeStyle = "rgba(0, 229, 255, 0.3)";
-  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = "#111111";
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.arc(cx, cy, R, 0, Math.PI * 2);
   ctx.stroke();
 
-  // Dial Ticks
   for (let deg = 0; deg < 360; deg += 15) {
     const a = deg * Math.PI / 180;
     const inner = deg % 90 === 0 ? R - 10 : deg % 45 === 0 ? R - 7 : R - 4;
-    ctx.strokeStyle = deg % 90 === 0 ? "#00e5ff" : "rgba(255, 255, 255, 0.25)";
+    ctx.strokeStyle = "#111111";
+    ctx.lineWidth = deg % 90 === 0 ? 2 : 1;
     ctx.beginPath();
     ctx.moveTo(cx + inner * Math.sin(a), cy - inner * Math.cos(a));
     ctx.lineTo(cx + R * Math.sin(a), cy - R * Math.cos(a));
     ctx.stroke();
   }
 
-  ctx.fillStyle = "#00e5ff";
-  ctx.font = "bold 11px Space Mono, monospace";
+  ctx.fillStyle = "#111111";
+  ctx.font = "700 11px 'Space Mono', monospace";
   ctx.textAlign = "center";
   ctx.fillText("N", cx, cy - R + 18);
 
-  // Target Azimuth Vector Needle
   const target = state.look?.az ?? 0;
   state.easeCompass?.(target);
   const a = (state.compassNeedle || target) * Math.PI / 180;
-  
-  ctx.strokeStyle = "#ff5500";
+
+  ctx.strokeStyle = "#ff5a00";
   ctx.lineWidth = 2.5;
-  ctx.shadowColor = "#ff5500";
-  ctx.shadowBlur = 10;
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(cx + (R - 6) * Math.sin(a), cy - (R - 6) * Math.cos(a));
   ctx.stroke();
-  ctx.shadowBlur = 0;
 
-  // Device Physical Orientation Bearing
   if (state.heading != null) {
     const hdg = state.heading * Math.PI / 180;
-    ctx.strokeStyle = "#00e5ff";
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "#ffe600";
+    ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.lineTo(cx + (R - 16) * Math.sin(hdg), cy - (R - 16) * Math.cos(hdg));
@@ -415,8 +346,8 @@ export function drawCompass(state) {
   }
 
   $("compass-read").textContent = state.heading != null
-    ? `HEADING ${state.heading.toFixed(0)}° // TARGET ${cardinal(target)}`
-    : `TARGET BEARING ${cardinal(target)} (${target.toFixed(0)}°)`;
+    ? `HEADING ${state.heading.toFixed(0)}° · TARGET ${cardinal(target)}`
+    : `TARGET ${cardinal(target)} (${target.toFixed(0)}°)`;
 }
 
 export function drawTrack(state) {
@@ -426,11 +357,10 @@ export function drawTrack(state) {
   if (wrap && getComputedStyle(wrap).display === "none") return;
   const { ctx, w, h } = sizeCanvas(canvas);
   
-  ctx.fillStyle = "#07090e";
+  ctx.fillStyle = "#e8e2d6";
   ctx.fillRect(0, 0, w, h);
-  
-  // Latitude / Longitude Grid
-  ctx.strokeStyle = "rgba(34, 45, 61, 0.8)";
+
+  ctx.strokeStyle = "rgba(17, 17, 17, 0.18)";
   ctx.lineWidth = 1;
   for (let i = 1; i < 4; i++) {
     ctx.beginPath();
@@ -445,23 +375,20 @@ export function drawTrack(state) {
     ctx.stroke();
   }
 
-  ctx.fillStyle = "#4e5e73";
-  ctx.font = "9px Space Mono, monospace";
+  ctx.fillStyle = "#6b6458";
+  ctx.font = "9px 'Space Mono', monospace";
   ctx.textAlign = "left";
-  ctx.fillText("+90°", 4, 12);
-  ctx.fillText("-90°", 4, h - 6);
+  ctx.fillText("+90", 4, 12);
+  ctx.fillText("-90", 4, h - 6);
   ctx.textAlign = "center";
-  ctx.fillText("0° (EQUATOR)", w / 2, h / 2 - 4);
+  ctx.fillText("0", w / 2, h / 2 - 4);
 
   const proj = (lat, lon) => [(lon + 180) / 360 * w, (90 - lat) / 180 * h];
   const pts = state.track || [];
-  
-  // SGP4 Ground Track Sine Trajectory
+
   if (pts.length > 1) {
-    ctx.strokeStyle = "#00e5ff";
-    ctx.lineWidth = 2;
-    ctx.shadowColor = "#00e5ff";
-    ctx.shadowBlur = 8;
+    ctx.strokeStyle = "#111111";
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
     pts.forEach((p, i) => {
       const [x, y] = proj(p.lat, p.lon);
@@ -470,26 +397,20 @@ export function drawTrack(state) {
       else ctx.moveTo(x, y);
     });
     ctx.stroke();
-    ctx.shadowBlur = 0;
   }
 
-  // ISS Sub-Satellite Point
   if (state.iss) {
     const [x, y] = proj(state.iss.latitude, state.iss.longitude);
-    ctx.fillStyle = "#ff5500";
-    ctx.shadowColor = "#ff5500";
-    ctx.shadowBlur = 12;
+    ctx.fillStyle = "#ff5a00";
     ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
     ctx.fill();
-    ctx.shadowBlur = 0;
   }
 
-  // Observer Location Marker
   if (state.obs) {
     const [x, y] = proj(state.obs.lat, state.obs.lon);
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "#111111";
+    ctx.lineWidth = 2;
     ctx.strokeRect(x - 4, y - 4, 8, 8);
   }
 }
@@ -690,7 +611,7 @@ export function paintRadar(state) {
   well.classList.add("has-tile");
   if (cap) {
     const when = state.radarTime ? new Date(state.radarTime * 1000).toISOString().slice(11, 16) + " UTC" : "—";
-    cap.textContent = `RainViewer Doppler Array · ${when} · Observer Center Reticle`;
+    cap.textContent = `RainViewer · ${when} · observer center`;
   }
 }
 
@@ -885,7 +806,7 @@ export function bindAr(state) {
       });
       video.srcObject = stream;
       await video.play();
-      msg.textContent = "OPTICAL HUD ENGAGED // HARDWARE SENSOR SYNC ACTIVE";
+      msg.textContent = "Camera on. FACE still authoritative.";
       state.arOn = true;
       state.audio?.playPassAlert();
       if (!raf) raf = requestAnimationFrame(drawHud);
@@ -925,12 +846,9 @@ export function bindAr(state) {
     if (!look) return;
     const heading = state.heading ?? look.az;
     
-    // Trajectory Polyline
     if (state.satrec && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      ctx.strokeStyle = "#00e5ff";
+      ctx.strokeStyle = "#ffe600";
       ctx.lineWidth = 2;
-      ctx.shadowColor = "#00e5ff";
-      ctx.shadowBlur = 8;
       ctx.beginPath();
       for (let i = 0; i <= 8; i++) {
         const s = sgp4Look(state.satrec, state.obs, new Date(Date.now() + i * 30 * 1000));
@@ -940,21 +858,17 @@ export function bindAr(state) {
         else ctx.lineTo(p.x, p.y);
       }
       ctx.stroke();
-      ctx.shadowBlur = 0;
     }
-    
-    // Target Reticle
+
     const p = project(look, heading, w, h);
-    ctx.strokeStyle = "#ff5500";
+    ctx.strokeStyle = "#ff5a00";
     ctx.lineWidth = 2;
-    ctx.shadowColor = "#ff5500";
-    ctx.shadowBlur = 12;
     ctx.beginPath();
     ctx.arc(p.x, p.y, 16, 0, Math.PI * 2);
     ctx.stroke();
-    
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 12px Space Mono, monospace";
+
+    ctx.fillStyle = "#ffe600";
+    ctx.font = "700 12px 'Space Mono', monospace";
     ctx.fillText(`EL ${look.el.toFixed(0)}°  ΔAZ ${(((look.az - heading + 540) % 360) - 180).toFixed(0)}°`, 12, 22);
   };
 }

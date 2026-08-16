@@ -2,7 +2,7 @@
    Live telemetry (ISS, TLE, weather, radar, Kp) is NEVER cached:
    a field instrument must not serve stale data as if it were live. */
 
-const CACHE = "orbital-prime-v2";
+const CACHE = "orbital-prime-v3";
 
 const SHELL = [
   "./",
@@ -12,7 +12,7 @@ const SHELL = [
   "js/render.js",
   "js/motion.js",
   "js/astro.js",
-  "js/singularity.js",
+  "js/audio.js",
   "favicon.svg",
   "manifest.webmanifest"
 ];

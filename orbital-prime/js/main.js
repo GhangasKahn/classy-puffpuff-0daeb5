@@ -1,6 +1,6 @@
 import { BUFFALO } from "./astro.js";
+import { ClickEngine } from "./audio.js";
 import { initMotion, listMotionListeners } from "./motion.js";
-import { SingularityField, CyberAudioEngine } from "./singularity.js";
 import {
   bindAr, bindDepth, bindHeading, bindLocation, bindResize, drawCompass,
   drawGauges, drawSkyPlot, drawTrack, loadIss, loadKp, loadRadar,
@@ -19,38 +19,21 @@ const state = {
   sweep: 0,
   compassNeedle: 0,
   arOn: false,
-  singularity: null,
-  audio: new CyberAudioEngine()
+  audio: new ClickEngine()
 };
 
-// Initialize interactive background Singularity / Relativistic Plasma Engine
-const singularityCanvas = document.getElementById("singularity-canvas");
-if (singularityCanvas) {
-  state.singularity = new SingularityField(singularityCanvas);
-}
-
-// Audio Engine Toggle
 const audioBtn = document.getElementById("btn-audio");
 if (audioBtn) {
+  audioBtn.setAttribute("aria-pressed", "false");
   audioBtn.addEventListener("click", () => {
     state.audio.muted = !state.audio.muted;
     audioBtn.classList.toggle("active", !state.audio.muted);
-    const icon = document.getElementById("audio-icon");
-    if (icon) icon.textContent = state.audio.muted ? "🔇" : "🔊";
+    audioBtn.setAttribute("aria-pressed", state.audio.muted ? "false" : "true");
+    audioBtn.textContent = state.audio.muted ? "Audio" : "Audio on";
     if (!state.audio.muted) state.audio.playModeClick();
   });
 }
 
-// Pulse Plasma button
-const pulseBtn = document.getElementById("btn-pulse-warp");
-if (pulseBtn) {
-  pulseBtn.addEventListener("click", () => {
-    state.singularity?.pulse();
-    state.audio?.playLockTick();
-  });
-}
-
-// Mobile Bottom Quick-Dock Navigation
 document.querySelectorAll(".dock-item").forEach((item) => {
   item.addEventListener("click", () => {
     document.querySelectorAll(".dock-item").forEach((d) => d.classList.remove("active"));
@@ -58,7 +41,6 @@ document.querySelectorAll(".dock-item").forEach((item) => {
     state.audio?.playModeClick();
     const target = item.dataset.target;
     if (target === "#physics" || target === "#ar") {
-      // Auto upgrade depth if navigating to deep sections
       document.body.dataset.depth = "4";
       document.querySelectorAll(".depth-btn").forEach((b) => {
         b.setAttribute("aria-checked", b.dataset.depth === "4" ? "true" : "false");
@@ -71,7 +53,6 @@ document.querySelectorAll(".dock-item").forEach((item) => {
   });
 });
 
-// Scroll-synced dock highlighting (music-app pattern: the dock always knows where you are)
 const dockSections = [
   [document.querySelector(".hero"), "#top"],
   [document.getElementById("cluster"), "#cluster"],
@@ -91,7 +72,6 @@ const dockIo = new IntersectionObserver((entries) => {
 }, { rootMargin: "-35% 0px -55% 0px" });
 dockSections.forEach(([el]) => dockIo.observe(el));
 
-// PWA: offline shell + installability (HTTPS / localhost only)
 if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localhost", "127.0.0.1"].includes(location.hostname))) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("service-worker.js").catch(() => {});
@@ -138,15 +118,11 @@ state.onLocation = () => {
 
 refreshAll();
 
-// Live Telemetry Loops
 setInterval(() => {
   if (document.hidden) return;
   loadIss(state).then(() => {
     state.drawPlot();
     state.drawTrack();
-    if (state.look) {
-      state.singularity?.setLook(state.look.az, state.look.el);
-    }
   });
 }, 4000);
 
@@ -171,4 +147,4 @@ function $clock() {
   if (el) el.textContent = new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC";
 }
 
-console.info("ORBITAL PRIME // BRUTALIST MOTION MAP", listMotionListeners());
+console.info("OP-01 motion", listMotionListeners());
