@@ -2,9 +2,9 @@ import {
   cardinal, classifyWx, eyeLabel, faceCopy, findPasses,
   fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
-} from "./astro.js";
-import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js";
-import { issResidual, scorePass, wxSlice } from "./score.js";
+} from "./astro.js?v=4";
+import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=4";
+import { issResidual, scorePass, wxSlice } from "./score.js?v=4";
 
 const $ = (id) => document.getElementById(id);
 
@@ -777,6 +777,7 @@ export async function loadTle(state) {
     }
     state.catalog = catalog;
     fillSatSelect(state);
+    writeShare(state);
     const id = state.targetId || "25544";
     const row = catalog.find((s) => s.norad === id) || catalog.find((s) => s.norad === "25544") || catalog[0];
     if (!row) throw new Error("target not in TLE set");

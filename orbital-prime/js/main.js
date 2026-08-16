@@ -1,12 +1,12 @@
-import { BUFFALO } from "./astro.js";
-import { ClickEngine } from "./audio.js";
-import { initMotion, listMotionListeners } from "./motion.js";
+import { BUFFALO } from "./astro.js?v=4";
+import { ClickEngine } from "./audio.js?v=4";
+import { initMotion, listMotionListeners } from "./motion.js?v=4";
 import {
   bindAr, bindAlert, bindDepth, bindHeading, bindIcs, bindLocation, bindResize,
   bindShare, bindSpeak, bindTarget, drawCompass, drawGauges, drawSkyPlot, drawTrack,
   loadIss, loadKp, loadRadar, loadStarship, loadTle, loadWeather, markIssAge,
   paintCountdown, paintLock, writeShare
-} from "./render.js";
+} from "./render.js?v=4";
 
 const state = {
   obs: { ...BUFFALO },

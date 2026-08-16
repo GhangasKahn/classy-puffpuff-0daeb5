@@ -4,16 +4,22 @@ import { parseAllTles } from "../js/astro.js";
 
 const UA = { headers: { "User-Agent": "orbital-prime-op01-tests" } };
 
-async function getJson(url, timeout = 12000) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeout);
-  try {
-    const res = await fetch(url, { ...UA, signal: ctrl.signal });
-    assert.ok(res.ok, `${url} HTTP ${res.status}`);
-    return res.json();
-  } finally {
-    clearTimeout(t);
+async function getJson(url, timeout = 15000) {
+  let last;
+  for (let i = 0; i < 2; i++) {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), timeout);
+    try {
+      const res = await fetch(url, { ...UA, signal: ctrl.signal });
+      assert.ok(res.ok, `${url} HTTP ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      last = e;
+    } finally {
+      clearTimeout(t);
+    }
   }
+  throw last;
 }
 
 async function getText(url, timeout = 12000) {
