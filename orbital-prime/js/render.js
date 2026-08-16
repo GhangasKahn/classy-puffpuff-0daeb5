@@ -2,9 +2,9 @@ import {
   cardinal, classifyWx, eyeLabel, faceCopy, findPassesAsync,
   fmtClock, fmtTime, groundTrack, lookAngles, parseAllTles, parseShareQuery, sgp4Look, sunAltitude,
   tileXY, waitForSatellite
-} from "./astro.js?v=5";
-import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=5";
-import { issResidual, scorePass, wxSlice } from "./score.js?v=5";
+} from "./astro.js?v=6";
+import { getIss, getKp, getRadarIndex, getStations, getStarship, getTle, getWeather } from "./feeds.js?v=6";
+import { issResidual, scorePass, wxSlice } from "./score.js?v=6";
 
 const $ = (id) => document.getElementById(id);
 

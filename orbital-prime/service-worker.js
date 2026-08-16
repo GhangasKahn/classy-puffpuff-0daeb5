@@ -1,7 +1,7 @@
 /* Orbital Prime SW — offline app shell only.
    Live telemetry is NEVER cached. */
 
-const CACHE = "orbital-prime-v5";
+const CACHE = "orbital-prime-v6";
 
 const SHELL = [
   "./",

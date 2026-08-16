@@ -54,29 +54,32 @@ mat2 rot(float a) {
 
 vec2 map(vec3 p) {
   float az = uAz * 0.01745329251;
-  float body = sdRoundBox(p - vec3(0.0, -0.22, 0.0), vec3(0.92, 0.20, 0.58), 0.028);
+  p.xz = rot(0.42) * p.xz;
+  float body = sdRoundBox(p - vec3(0.0, -0.30, 0.0), vec3(0.96, 0.28, 0.62), 0.032);
   vec2 d = vec2(body, 1.0);
 
-  float stripe = sdRoundBox(p - vec3(0.0, -0.05, 0.585), vec3(0.90, 0.028, 0.018), 0.0);
+  float stripe = sdRoundBox(p - vec3(0.0, -0.08, 0.635), vec3(0.94, 0.036, 0.02), 0.0);
   if (stripe < d.x) d = vec2(stripe, 5.0);
 
   vec3 pd = p;
   pd.xz = rot(-az) * pd.xz;
-  float disc = sdCyl(pd - vec3(0.0, 0.12, 0.0), 0.052, 0.46);
+  float bezel = sdCyl(pd - vec3(0.0, 0.02, 0.0), 0.018, 0.50);
+  if (bezel < d.x) d = vec2(bezel, 3.0);
+  float disc = sdCyl(pd - vec3(0.0, 0.08, 0.0), 0.055, 0.45);
   if (disc < d.x) d = vec2(disc, 2.0);
 
-  float hub = sdCyl(pd - vec3(0.0, 0.20, 0.0), 0.065, 0.11);
+  float hub = sdCyl(pd - vec3(0.0, 0.16, 0.0), 0.06, 0.11);
   if (hub < d.x) d = vec2(hub, 3.0);
-  float pin = sdCyl(pd - vec3(0.0, 0.29, 0.0), 0.035, 0.028);
+  float pin = sdCyl(pd - vec3(0.0, 0.25, 0.0), 0.035, 0.028);
   if (pin < d.x) d = vec2(pin, 3.0);
 
-  float led = length(p - vec3(0.74, 0.02, 0.42)) - 0.042;
+  float led = length(p - vec3(0.78, -0.04, 0.46)) - 0.045;
   if (led < d.x) d = vec2(led, 4.0);
 
-  float scr = sdRoundBox(p - vec3(-0.38, -0.18, 0.575), vec3(0.36, 0.09, 0.016), 0.008);
+  float scr = sdRoundBox(p - vec3(-0.32, -0.28, 0.62), vec3(0.38, 0.11, 0.018), 0.008);
   if (scr < d.x) d = vec2(scr, 6.0);
 
-  float fl = p.y + 0.46;
+  float fl = p.y + 0.60;
   if (fl < d.x) d = vec2(fl, 7.0);
   return d;
 }
@@ -138,15 +141,15 @@ vec3 albedo(vec3 p, float id) {
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
   vec3 ro = vec3(
-    0.0 + uPtr.x * 0.85,
-    1.15 + uPtr.y * 0.35,
-    2.15
+    -1.28 + uPtr.x * 0.55,
+    0.78 + uPtr.y * 0.28,
+    1.78
   );
-  vec3 ta = vec3(0.0, -0.05, 0.0);
+  vec3 ta = vec3(0.02, -0.14, 0.04);
   vec3 ww = normalize(ta - ro);
   vec3 uu = normalize(cross(ww, vec3(0.0, 1.0, 0.0)));
   vec3 vv = cross(uu, ww);
-  vec3 rd = normalize(uv.x * uu + uv.y * vv + 1.55 * ww);
+  vec3 rd = normalize(uv.x * uu + uv.y * vv + 1.72 * ww);
 
   float t = 0.0;
   vec2 h = vec2(1.0);
