@@ -2,6 +2,8 @@
 
 Household operating system for three adults in Erie County, NY.
 
+**This is not the orange BEDROCK website.** Hearth is this folder. It runs on a computer in the house, not on Netlify. A public sign for it is `/hearth/` on the site. The GitHub map is in the root `README.md`.
+
 Not a recipe blog. It is the shopper, cook, and budgeter: weekly ads, store-split lists, protein math, and a Grok agent harness you message in the app.
 
 ## Privacy

@@ -1,4 +1,4 @@
-# BEDROCK — Netlify configuration
+# Household hub — Netlify configuration
 [build]
   publish = "."
   command = ""
@@ -41,6 +41,16 @@
 [[redirects]]
   from = "/app"
   to = "/app/"
+  status = 301
+
+[[redirects]]
+  from = "/hearth"
+  to = "/hearth/"
+  status = 301
+
+[[redirects]]
+  from = "/bedrock"
+  to = "/bedrock/"
   status = 301
 
 # /aegis now serves the cinematic landing page (committed build in /aegis/),
