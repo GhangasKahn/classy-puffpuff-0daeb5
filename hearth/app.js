@@ -6,7 +6,7 @@
   const CAP = 110;
   const CHICKEN_SALE_MAX = 1.29;
   const PLACEHOLDER_KG = 70;
-  const STORE = "hearth-os-v1";
+  const STORE = "hearth-os-v2";
   const SYMPTOM = ["flu", "vomit", "headache", "cancer", "diarrhea", "nausea", "migraine", "constipat", "diagnosis", "stomach"];
   const PUBLIC_ACK = "Kitchen extras added to the list.";
   const LAW = "House law forbids that ingredient.";
@@ -32,22 +32,32 @@
     { key: "broth", name: "Chicken broth", store: "aldi", unit: "32 oz", price: 1.29, protein: 5, kcal: 80 },
     { key: "ginger", name: "Fresh ginger", store: "walmart", unit: "lb", price: 3.48, protein: 2, kcal: 80 },
     { key: "quinoa", name: "Quinoa", store: "wegmans", unit: "1 lb", price: 4.99, protein: 24, kcal: 680 },
+    { key: "lamb", name: "Lamb stew meat", store: "wegmans", unit: "lb", price: 5.99, protein: 25, kcal: 250 },
+    { key: "flour", name: "Bread flour", store: "aldi", unit: "10 lb bag", price: 4.79, protein: 120, kcal: 16300 },
+    { key: "chickpeas_dry", name: "Dry chickpeas", store: "aldi", unit: "lb", price: 1.29, protein: 19, kcal: 364 },
+    { key: "lentils", name: "Brown lentils", store: "aldi", unit: "lb", price: 1.39, protein: 25, kcal: 353 },
+    { key: "olive_oil", name: "Olive oil", store: "aldi", unit: "17 oz", price: 4.49, protein: 0, kcal: 3600 },
+    { key: "cucumbers", name: "Cucumbers", store: "aldi", unit: "lb", price: 0.79, protein: 1, kcal: 15 },
+    { key: "tomatoes", name: "Tomatoes", store: "aldi", unit: "lb", price: 1.49, protein: 1, kcal: 18 },
+    { key: "garlic", name: "Garlic", store: "aldi", unit: "head", price: 0.79, protein: 2, kcal: 40 },
+    { key: "lemons", name: "Lemons", store: "aldi", unit: "2 lb bag", price: 2.89, protein: 2, kcal: 50 },
   ];
 
   const WEEK_QTY = {
-    chicken_quarters: 12, jasmine_rice: 2, potatoes: 3, eggs: 3, cabbage: 2, onions: 1,
-    carrots: 1, butter: 2, milk: 2, beans_canned: 8, oats: 1, yogurt: 2, frozen_veg: 4,
-    oil: 1, bananas: 2, apples: 1, broth: 1,
+    chicken_quarters: 8, lamb: 3, jasmine_rice: 2, potatoes: 3, eggs: 3, cabbage: 2, onions: 1,
+    carrots: 1, butter: 1, milk: 2, beans_canned: 4, oats: 1, yogurt: 2, olive_oil: 1,
+    flour: 1, chickpeas_dry: 2, lentils: 2, cucumbers: 3, tomatoes: 3, garlic: 2, lemons: 1,
+    bananas: 2, apples: 1, broth: 1,
   };
 
   const MENU = [
-    [["Oatmeal and eggs", "Cook oats in milk. Cook eggs until firm."], ["Jasmine rice, beans, and cabbage", "Warm rice and beans. Steam cabbage."], ["Roast chicken, potatoes, jasmine rice", "Roast chicken. Roast potatoes. Steam rice."]],
-    [["Eggs and potatoes", "Cook eggs until firm. Pan potatoes."], ["Chicken and jasmine rice", "Reheat chicken with rice."], ["Chicken, cabbage, potatoes", "Simmer chicken. Boil potatoes. Steam cabbage."]],
-    [["Yogurt, oats, and banana", "Stir oats into yogurt. Slice banana."], ["Bean and potato plate", "Warm beans. Boil potatoes."], ["Chicken quarters, jasmine rice, carrots", "Roast chicken. Steam rice. Cook carrots."]],
-    [["Eggs, oats, and apples", "Cook eggs until firm. Cook oats. Slice apple."], ["Rice and leftover chicken", "Reheat fully. Serve with jasmine rice."], ["Chicken, potatoes, frozen vegetables", "Roast chicken. Roast potatoes. Heat vegetables."]],
-    [["Potatoes and eggs", "Pan potatoes. Cook eggs until firm."], ["Jasmine rice and beans", "Warm rice and beans with onion."], ["Chicken, cabbage, jasmine rice", "Roast chicken. Steam cabbage and rice."]],
-    [["Oatmeal, milk, and banana", "Cook oats in milk. Slice banana."], ["Chicken potato bowl", "Reheat chicken. Boil potatoes."], ["Roast chicken, potatoes, carrots", "Roast chicken and potatoes. Cook carrots."]],
-    [["Eggs and yogurt", "Cook eggs until firm. Plain yogurt on the side."], ["Jasmine rice, beans, cabbage", "Warm rice and beans. Steam cabbage."], ["Chicken, jasmine rice, potatoes", "Roast chicken. Steam rice. Roast potatoes."]],
+    [["Yogurt, eggs, and oats", "Warm oats in milk. Cook eggs until firm. Plain yogurt on the side. Save a spoon of yogurt to set the next pot."], ["Lentils, jasmine rice, cabbage", "Simmer lentils with onion and garlic. Steam rice. Warm cabbage with olive oil and lemon."], ["Lamb stew, potatoes, jasmine rice", "Brown lamb. Stew with onion, garlic, carrot, and potato until the meat shreds. Steam rice. Mix bread dough tonight; cold ferment in the fridge 24–48 hours. Bake until dark. Use game only if you already have it."]],
+    [["Eggs, potatoes, yogurt", "Pan potatoes. Cook eggs until firm. Yogurt on the side."], ["Leftover lamb, rice, cucumber", "Reheat lamb until steaming. Jasmine rice. Slice cucumber, tomato, onion, lemon."], ["Roast chicken, potatoes, cabbage", "Roast chicken until fully done. Roast potatoes. Steam cabbage. Shape cold-ferment dough into pita. Bake hot until puffed and browned."]],
+    [["Yogurt, oats, apple", "Cook oats in milk. Slice apple. Yogurt."], ["Chickpeas in homemade pita", "Warm soaked-and-cooked chickpeas with garlic, lemon, olive oil. Stuff pita. Cucumber on the side. Jasmine rice if you need more plate."], ["Chicken, jasmine rice, carrots", "Roast or stew chicken until fully done. Steam rice. Cook carrots. Yogurt on the plate."]],
+    [["Eggs, leftover pita, yogurt", "Cook eggs until firm. Toast leftover pita. Yogurt."], ["Lentil and potato soup, rice", "Simmer lentils and potato with onion and garlic. Jasmine rice on the side."], ["Long-ferment pizza, chicken, tomato", "Stretch cold-ferment dough. Olive oil, tomato, onion, leftover chicken. Hottest oven you have. Bake until the crust is dark. Not boxed pizza dough."]],
+    [["Potatoes, eggs, yogurt", "Pan potatoes. Cook eggs until firm. Yogurt."], ["Jasmine rice, chickpeas, cabbage", "Warm rice and chickpeas with onion and lemon. Steam cabbage."], ["Lamb, jasmine rice, potatoes", "Stew or roast lamb until fully done. Steam rice. Roast potatoes. Cucumber and tomato salad."]],
+    [["Oats, milk, yogurt", "Cook oats in milk. Yogurt. Banana if you have it."], ["Chicken, pita, cucumber", "Reheat chicken until steaming. Pita. Cucumber, tomato, lemon."], ["Chicken, cabbage, potatoes, rice", "Roast chicken until fully done. Potatoes and jasmine rice. Steam cabbage. Bake a sourdough loaf from the cold ferment. Set a new yogurt pot from milk and last yogurt."]],
+    [["Eggs and yogurt", "Cook eggs until firm. Plain yogurt."], ["Rice, lentils, leftover bread", "Warm jasmine rice and lentils. Slice yesterday's loaf."], ["Roast chicken, potatoes, jasmine rice", "Roast chicken until fully done. Roast potatoes. Steam rice. Mix next week's dough; cold ferment. Game stays off the list unless it is already in the house."]],
   ];
 
   const QUIET_MAP = [
@@ -532,7 +542,7 @@
       days[m.dayIndex] = days[m.dayIndex] || { name: m.dayName, meals: [] };
       days[m.dayIndex].meals.push(m);
     });
-    let html = `<p class="eyebrow">Week of ${escapeHtml(db.weekStart)}</p><h1>Cook sheet</h1><p class="muted">Jasmine rice and potatoes. Numbers on Shop are estimates. This is not medical advice.</p>`;
+    let html = `<p class="eyebrow">Week of ${escapeHtml(db.weekStart)}</p><h1>Cook sheet</h1><p class="muted">Homemade yogurt, pita, and long cold-ferment bread. Lamb and chicken. Jasmine rice and potatoes stay. Game only if it is already in the house. Numbers on Shop are estimates. This is not medical advice.</p>`;
     Object.keys(days).forEach((k) => {
       const day = days[k];
       html += `<section class="day"><h2>${escapeHtml(day.name)}</h2>`;

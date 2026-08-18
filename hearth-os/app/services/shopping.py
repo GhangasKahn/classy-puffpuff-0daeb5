@@ -12,21 +12,31 @@ from app.services.ads import ResolvedPrice, resolve_catalog_item
 from app.services.food_law import STAPLE_RICE_KEY
 
 # Seed SKUs for a 7-day sheet feeding three adults. Prices are seeds, not live ads.
+# Seed SKUs for a 7-day sheet feeding three adults. Prices are seeds, not live ads.
+# Mountain table + Mediterranean, homemade bread. Jasmine rice and potatoes stay.
+# Game meat is not auto-bought (no invented store price). Use it if you already have it.
 WEEK_QTY: dict[str, float] = {
-    "chicken_quarters": 12.0,
+    "chicken_quarters": 8.0,
+    "lamb": 3.0,
     "jasmine_rice": 2.0,
     "potatoes": 3.0,
     "eggs": 3.0,
     "cabbage": 2.0,
     "onions": 1.0,
     "carrots": 1.0,
-    "butter": 2.0,
+    "butter": 1.0,
     "milk": 2.0,
-    "beans_canned": 8.0,
+    "beans_canned": 4.0,
     "oats": 1.0,
     "yogurt": 2.0,
-    "frozen_veg": 4.0,
-    "oil": 1.0,
+    "olive_oil": 1.0,
+    "flour": 1.0,
+    "chickpeas_dry": 2.0,
+    "lentils": 2.0,
+    "cucumbers": 3.0,
+    "tomatoes": 3.0,
+    "garlic": 2.0,
+    "lemons": 1.0,
     "bananas": 2.0,
     "apples": 1.0,
     "broth": 1.0,

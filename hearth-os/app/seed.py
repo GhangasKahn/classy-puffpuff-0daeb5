@@ -202,6 +202,96 @@ SEED_CATALOG: list[dict] = [
         "kcal": 680.0,
         "staple": False,
     },
+    {
+        "key": "lamb",
+        "name": "Lamb stew meat",
+        "default_store": "wegmans",
+        "unit": "lb",
+        "typical_price": 5.99,
+        "protein_g": 25.0,
+        "kcal": 250.0,
+        "staple": True,
+    },
+    {
+        "key": "flour",
+        "name": "Bread flour",
+        "default_store": "aldi",
+        "unit": "10 lb bag",
+        "typical_price": 4.79,
+        "protein_g": 120.0,
+        "kcal": 16300.0,
+        "staple": True,
+    },
+    {
+        "key": "chickpeas_dry",
+        "name": "Dry chickpeas",
+        "default_store": "aldi",
+        "unit": "lb",
+        "typical_price": 1.29,
+        "protein_g": 19.0,
+        "kcal": 364.0,
+        "staple": True,
+    },
+    {
+        "key": "lentils",
+        "name": "Brown lentils",
+        "default_store": "aldi",
+        "unit": "lb",
+        "typical_price": 1.39,
+        "protein_g": 25.0,
+        "kcal": 353.0,
+        "staple": True,
+    },
+    {
+        "key": "olive_oil",
+        "name": "Olive oil",
+        "default_store": "aldi",
+        "unit": "17 oz",
+        "typical_price": 4.49,
+        "protein_g": 0.0,
+        "kcal": 3600.0,
+        "staple": True,
+    },
+    {
+        "key": "cucumbers",
+        "name": "Cucumbers",
+        "default_store": "aldi",
+        "unit": "lb",
+        "typical_price": 0.79,
+        "protein_g": 1.0,
+        "kcal": 15.0,
+        "staple": True,
+    },
+    {
+        "key": "tomatoes",
+        "name": "Tomatoes",
+        "default_store": "aldi",
+        "unit": "lb",
+        "typical_price": 1.49,
+        "protein_g": 1.0,
+        "kcal": 18.0,
+        "staple": True,
+    },
+    {
+        "key": "garlic",
+        "name": "Garlic",
+        "default_store": "aldi",
+        "unit": "head",
+        "typical_price": 0.79,
+        "protein_g": 2.0,
+        "kcal": 40.0,
+        "staple": True,
+    },
+    {
+        "key": "lemons",
+        "name": "Lemons",
+        "default_store": "aldi",
+        "unit": "2 lb bag",
+        "typical_price": 2.89,
+        "protein_g": 2.0,
+        "kcal": 50.0,
+        "staple": True,
+    },
 ]
 
 
@@ -244,8 +334,20 @@ def seed_if_empty(session: Session) -> Household:
         session.flush()
         people = session.query(Person).filter(Person.household_id == household.id).all()
         persist_week(session, household, people, date.today())
+    ensure_catalog(session, household)
     people = session.query(Person).filter(Person.household_id == household.id).all()
     ensure_aliases(session, people)
     session.commit()
     session.refresh(household)
     return household
+
+
+def ensure_catalog(session: Session, household: Household) -> None:
+    existing = {
+        row.key
+        for row in session.query(CatalogItem).filter(CatalogItem.household_id == household.id)
+    }
+    for item in SEED_CATALOG:
+        if item["key"] not in existing:
+            session.add(CatalogItem(household_id=household.id, **item))
+    session.flush()

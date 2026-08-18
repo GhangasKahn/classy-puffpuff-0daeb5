@@ -11,42 +11,43 @@ from app.services.shopping import house_has_cancer_track, house_has_soft_food
 
 DAY_NAMES = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
-# Food titles only. No disease names. Jasmine rice + potatoes every day.
+# Food titles only. No disease names. Jasmine rice + potatoes stay.
+# Homemade pita, sourdough, yogurt. Long cold ferment. No organ meats. No Kerrygold.
 WEEK_MENU: list[tuple[tuple[str, str], tuple[str, str], tuple[str, str]]] = [
     (
-        ("Oatmeal and eggs", "Cook oats in milk. Cook eggs until firm."),
-        ("Jasmine rice, beans, and cabbage", "Warm rice and beans. Steam cabbage."),
-        ("Roast chicken, potatoes, jasmine rice", "Roast chicken. Roast potatoes. Steam rice."),
+        ("Yogurt, eggs, and oats", "Warm oats in milk. Cook eggs until firm. Plain yogurt on the side. Save a spoon of yogurt to set the next pot."),
+        ("Lentils, jasmine rice, cabbage", "Simmer lentils with onion and garlic. Steam rice. Warm cabbage with olive oil and lemon."),
+        ("Lamb stew, potatoes, jasmine rice", "Brown lamb. Stew with onion, garlic, carrot, and potato until the meat shreds. Steam rice. Mix bread dough tonight; cold ferment in the fridge 24–48 hours. Bake until dark. Use game only if you already have it."),
     ),
     (
-        ("Eggs and potatoes", "Cook eggs until firm. Pan potatoes."),
-        ("Chicken and jasmine rice", "Reheat chicken with rice."),
-        ("Chicken, cabbage, potatoes", "Simmer chicken. Boil potatoes. Steam cabbage."),
+        ("Eggs, potatoes, yogurt", "Pan potatoes. Cook eggs until firm. Yogurt on the side."),
+        ("Leftover lamb, rice, cucumber", "Reheat lamb until steaming. Jasmine rice. Slice cucumber, tomato, onion, lemon."),
+        ("Roast chicken, potatoes, cabbage", "Roast chicken until fully done. Roast potatoes. Steam cabbage. Shape cold-ferment dough into pita. Bake hot until puffed and browned."),
     ),
     (
-        ("Yogurt, oats, and banana", "Stir oats into yogurt. Slice banana."),
-        ("Bean and potato plate", "Warm beans. Boil potatoes."),
-        ("Chicken quarters, jasmine rice, carrots", "Roast chicken. Steam rice. Cook carrots."),
+        ("Yogurt, oats, apple", "Cook oats in milk. Slice apple. Yogurt."),
+        ("Chickpeas in homemade pita", "Warm soaked-and-cooked chickpeas with garlic, lemon, olive oil. Stuff pita. Cucumber on the side. Jasmine rice if you need more plate."),
+        ("Chicken, jasmine rice, carrots", "Roast or stew chicken until fully done. Steam rice. Cook carrots. Yogurt on the plate."),
     ),
     (
-        ("Eggs, oats, and apples", "Cook eggs until firm. Cook oats. Slice apple."),
-        ("Rice and leftover chicken", "Reheat fully. Serve with jasmine rice."),
-        ("Chicken, potatoes, frozen vegetables", "Roast chicken. Roast potatoes. Heat vegetables."),
+        ("Eggs, leftover pita, yogurt", "Cook eggs until firm. Toast leftover pita. Yogurt."),
+        ("Lentil and potato soup, rice", "Simmer lentils and potato with onion and garlic. Jasmine rice on the side."),
+        ("Long-ferment pizza, chicken, tomato", "Stretch cold-ferment dough. Olive oil, tomato, onion, leftover chicken. Hottest oven you have. Bake until the crust is dark. Not boxed pizza dough."),
     ),
     (
-        ("Potatoes and eggs", "Pan potatoes. Cook eggs until firm."),
-        ("Jasmine rice and beans", "Warm rice and beans with onion."),
-        ("Chicken, cabbage, jasmine rice", "Roast chicken. Steam cabbage and rice."),
+        ("Potatoes, eggs, yogurt", "Pan potatoes. Cook eggs until firm. Yogurt."),
+        ("Jasmine rice, chickpeas, cabbage", "Warm rice and chickpeas with onion and lemon. Steam cabbage."),
+        ("Lamb, jasmine rice, potatoes", "Stew or roast lamb until fully done. Steam rice. Roast potatoes. Cucumber and tomato salad."),
     ),
     (
-        ("Oatmeal, milk, and banana", "Cook oats in milk. Slice banana."),
-        ("Chicken potato bowl", "Reheat chicken. Boil potatoes."),
-        ("Roast chicken, potatoes, carrots", "Roast chicken and potatoes. Cook carrots."),
+        ("Oats, milk, yogurt", "Cook oats in milk. Yogurt. Banana if you have it."),
+        ("Chicken, pita, cucumber", "Reheat chicken until steaming. Pita. Cucumber, tomato, lemon."),
+        ("Chicken, cabbage, potatoes, rice", "Roast chicken until fully done. Potatoes and jasmine rice. Steam cabbage. Bake a sourdough loaf from the cold ferment. Set a new yogurt pot from milk and last yogurt."),
     ),
     (
-        ("Eggs and yogurt", "Cook eggs until firm. Plain yogurt on the side."),
-        ("Jasmine rice, beans, cabbage", "Warm rice and beans. Steam cabbage."),
-        ("Chicken, jasmine rice, potatoes", "Roast chicken. Steam rice. Roast potatoes."),
+        ("Eggs and yogurt", "Cook eggs until firm. Plain yogurt."),
+        ("Rice, lentils, leftover bread", "Warm jasmine rice and lentils. Slice yesterday's loaf."),
+        ("Roast chicken, potatoes, jasmine rice", "Roast chicken until fully done. Roast potatoes. Steam rice. Mix next week's dough; cold ferment. Game stays off the list unless it is already in the house."),
     ),
 ]
 

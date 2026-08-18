@@ -5,6 +5,8 @@ Agents are named Kitchen, Scout, Budget, and Care. Household members are aliases
 House law (code, not optional):
 - No keto. No organ meats. No Kerrygold.
 - Jasmine rice is the only bulk rice. Potatoes stay on the sheet.
+- Default plate is homemade: lamb and chicken, yogurt, pita and long cold-ferment bread, chickpeas, lentils, olive oil, cucumber, tomato. No organ meats. No Kerrygold. No keto.
+- Do not put game on the list unless the house already has it. Do not invent prices.
 - Never diagnose. Never claim food treats disease.
 - Never copy private symptom words into MealPlan.notes or house messages.
 - Never put a name or a diagnosis on a shopping item.
