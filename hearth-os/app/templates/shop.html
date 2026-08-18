@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Shop — Hearth{% endblock %}
+{% block body %}
+<section class="hero">
+  <p class="eyebrow">Week of {{ week_start.isoformat() }}</p>
+  <h1>Shop</h1>
+  <p class="figure">${{ '%.2f'|format(grand) }} <span class="muted">of ${{ '%.0f'|format(cap) }}</span></p>
+  <p class="muted">Protein from the cart: {{ protein }} g (estimate)</p>
+  <form method="post" action="/week/rebuild">
+    <button type="submit">Rebuild week</button>
+  </form>
+</section>
+
+{% for store, items in grouped.items() %}
+<section class="store-block">
+  <h2>{{ store }} · ${{ '%.2f'|format(totals[store]) }}</h2>
+  <ul class="shop-list">
+    {% for item in items %}
+    <li>
+      <form method="post" action="/shop/check">
+        <input type="hidden" name="item_id" value="{{ item.id }}">
+        <button type="submit" class="check-btn {% if item.checked %}done{% endif %}" aria-pressed="{{ 'true' if item.checked else 'false' }}">
+          <span class="box" aria-hidden="true"></span>
+          <span>
+            <strong>{{ item.name }}</strong>
+            <span class="muted">{{ item.qty }} {{ item.unit }} · ${{ '%.2f'|format(item.unit_price) }}{% if item.note %} · {{ item.note }}{% endif %}</span>
+          </span>
+        </button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% else %}
+<p>No list yet.</p>
+{% endfor %}
+{% endblock %}

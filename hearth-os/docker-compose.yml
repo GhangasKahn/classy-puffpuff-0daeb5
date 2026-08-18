@@ -1,0 +1,21 @@
+services:
+  hearth:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: sqlite:////app/data/hearth.db
+    volumes:
+      - ./data:/app/data
+    ports:
+      # LAN / Tailscale only. Comment this and bind the tailnet IP if you prefer.
+      - "127.0.0.1:8080:8080"
+      # tailnet example (do not publish 0.0.0.0 to the open internet):
+      # - "100.x.y.z:8080:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

@@ -1,0 +1,16 @@
+{
+  "name": "Hearth OS",
+  "short_name": "Hearth",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#161310",
+  "theme_color": "#161310",
+  "icons": [
+    {
+      "src": "/static/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
