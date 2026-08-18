@@ -2,70 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#161310">
-  <title>Hearth OS — kitchen</title>
-  <style>
-    :root { --bg:#161310; --ink:#f3e6d4; --muted:#b9a48a; --brass:#e0a35a; --line:#3a322b; --card:#1e1a16; }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Palatino, "Palatino Linotype", Georgia, serif;
-      font-size: 20px;
-      line-height: 1.45;
-      padding: 1.25rem 1rem 4rem;
-    }
-    main { max-width: 36rem; margin: 0 auto; }
-    h1, h2 { font-weight: 500; }
-    h1 { font-size: 2.1rem; margin: 0 0 0.75rem; }
-    h2 { font-size: 1.3rem; margin: 1.75rem 0 0.5rem; color: var(--brass); }
-    p, li { color: var(--muted); }
-    p { margin: 0 0 1rem; }
-    .lead { color: var(--ink); }
-    a { color: var(--brass); }
-    a:focus { outline: 3px solid var(--brass); outline-offset: 3px; }
-    .back { display: inline-flex; align-items: center; min-height: 48px; margin-bottom: 1rem; }
-    code, pre {
-      font-family: ui-monospace, Menlo, monospace;
-      font-size: 0.85rem;
-      color: var(--ink);
-    }
-    pre {
-      background: var(--card);
-      border: 1px solid var(--line);
-      padding: 1rem;
-      overflow-x: auto;
-      white-space: pre-wrap;
-    }
-    .warn { border: 1px solid var(--brass); padding: 0.85rem 1rem; margin: 0 0 1.5rem; color: var(--ink); }
-  </style>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hearth">
+  <meta name="format-detection" content="telephone=no">
+  <title>Hearth</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main>
-    <a class="back" href="/">← All household projects</a>
-    <h1>Hearth OS</h1>
-    <p class="lead">This is the kitchen for three adults in Erie County, NY. Shopper, cook sheet, budget split, and two rooms (House and Private).</p>
-    <p class="warn">This web page is only a sign on the door. The real kitchen program is not here. It cannot live on this public Netlify site — that would put private notes on the internet.</p>
+  <div id="login" class="login">
+    <p class="eyebrow">Erie County kitchen</p>
+    <h1>Hearth</h1>
+    <p class="lede">This phone keeps the list. Nothing is sent to a server.</p>
+    <p id="login-error" class="error" hidden></p>
+    <label for="person">Who is holding the phone</label>
+    <select id="person"></select>
+    <label for="pin">PIN</label>
+    <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12">
+    <button type="button" id="open-btn" class="solid">Open kitchen</button>
+    <p class="hint">First open PIN is 4829. Change it after you get in. Android: browser menu → Add to Home screen. iPhone: Share → Add to Home Screen.</p>
+  </div>
 
-    <h2>What you saw earlier</h2>
-    <p>The phone opened a page that said “Discipline is the edge.” That is <a href="/bedrock/">BEDROCK</a>, a money app stored in the same GitHub box. It is not Hearth.</p>
-
-    <h2>Where the real app is</h2>
-    <p>On GitHub, the kitchen is the folder named <code>hearth-os</code>. It is a program for a computer in the house (PIN login, then the cook sheet and rooms).</p>
-    <p>Someone who can run a program on a computer should do this once:</p>
-    <pre>cd hearth-os
-cp .env.example .env
-# change HOUSEHOLD_PIN and SECRET_KEY
-python3 -m pip install -r requirements.txt
-python3 -m uvicorn app.main:app --host 127.0.0.1 --port 8080</pre>
-    <p>Then on that same computer, open <code>http://127.0.0.1:8080</code>. Default PIN is <code>4829</code>. Change it.</p>
-    <p>Do not put Hearth on the open internet. Use the house Wi‑Fi or Tailscale.</p>
-
-    <h2>GitHub</h2>
-    <p>Code and the pull request: <a href="https://github.com/GhangasKahn/classy-puffpuff-0daeb5/pull/12">github.com/GhangasKahn/classy-puffpuff-0daeb5/pull/12</a></p>
-    <p>Ignore other pull requests on that page. They are leftover experiments, not the kitchen.</p>
-  </main>
+  <div id="app" hidden>
+    <header class="top">
+      <p id="who" class="who">Hearth</p>
+      <button type="button" id="mic-top" class="icon-btn" aria-label="Talk">Talk</button>
+      <button type="button" id="lock-btn" class="text-btn">Lock</button>
+    </header>
+    <main id="view" class="view"></main>
+    <p id="toast" class="toast" hidden></p>
+    <nav class="tabs" aria-label="Kitchen">
+      <button type="button" data-tab="home">Home</button>
+      <button type="button" data-tab="rooms">Rooms</button>
+      <button type="button" data-tab="shop">Shop</button>
+      <button type="button" data-tab="cook">Cook</button>
+      <button type="button" data-tab="money">Money</button>
+    </nav>
+  </div>
+  <script src="app.js" defer></script>
 </body>
 </html>

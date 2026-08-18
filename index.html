@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#161310">
   <title>Household projects</title>
   <style>
@@ -15,7 +15,7 @@
       font-family: Palatino, "Palatino Linotype", Georgia, serif;
       font-size: 20px;
       line-height: 1.45;
-      padding: 1.25rem 1rem 4rem;
+      padding: calc(1.25rem + env(safe-area-inset-top)) 1rem 4rem;
     }
     main { max-width: 36rem; margin: 0 auto; }
     h1 { font-weight: 500; font-size: 2.1rem; margin: 0 0 0.75rem; }
@@ -35,27 +35,25 @@
     .primary { border-color: var(--brass); }
     .eyebrow { color: var(--brass); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 0.5rem; }
     a:focus { outline: 3px solid var(--brass); outline-offset: 3px; }
-    .warn { border: 1px solid var(--brass); padding: 0.85rem 1rem; margin: 0 0 1.5rem; color: var(--ink); }
   </style>
 </head>
 <body>
   <main>
-    <p class="eyebrow">This GitHub box</p>
-    <h1>You opened the wrong page before. This is the front door.</h1>
-    <p class="lead">Several projects got dumped in one folder. The orange page that said “Discipline is the edge” is an old money app. It is not the kitchen.</p>
-    <p class="warn">Hearth OS (the kitchen) does not run on this public website on purpose. Private notes about who is sick should stay in the house.</p>
+    <p class="eyebrow">This phone</p>
+    <h1>Hearth is the kitchen. Tap it.</h1>
+    <p class="lead">The list, meals, and private notes stay on this phone. They are not uploaded.</p>
 
     <a class="card primary" href="/hearth/">
-      <strong>Hearth OS — kitchen</strong>
-      Shopping list, week of meals, private notes. Tap here.
+      <strong>Open Hearth</strong>
+      PIN login, rooms, shop, cook sheet. Add to Home Screen after it opens. First PIN is 4829.
     </a>
     <a class="card" href="/bedrock/">
       <strong>BEDROCK — money</strong>
-      The orange “Dojo of Capital” page you saw by mistake.
+      The orange “Dojo of Capital” page. Not the kitchen.
     </a>
     <a class="card" href="/app/">
       <strong>BEDROCK terminal</strong>
-      The money app itself, if you already use it.
+      The money app itself.
     </a>
     <a class="card" href="/fence/martin/">
       <strong>Fence (MARTIN)</strong>
@@ -64,10 +62,6 @@
     <a class="card" href="/aegis-air-mvp/">
       <strong>Aegis Air</strong>
       Wildfire / air tool.
-    </a>
-    <a class="card" href="/shop/drum-sander/app/">
-      <strong>Shop drum sander</strong>
-      May be empty on this version of the site.
     </a>
   </main>
 </body>

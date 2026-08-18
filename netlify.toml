@@ -3,7 +3,16 @@
   publish = "."
   command = ""
 
-# service worker must never be cached stale, and must serve as JS
+[[headers]]
+  for = "/hearth/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/hearth/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
 [[headers]]
   for = "/app/service-worker.js"
   [headers.values]

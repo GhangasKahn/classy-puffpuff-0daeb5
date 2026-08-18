@@ -1,44 +1,31 @@
 # This GitHub box — start here
 
-You do not need to “know GitHub.” This page is the map.
+**Hearth is a phone kitchen.** Open it, add it to your Home Screen, use it like an app.
 
-This one repository accidentally holds **several different projects**. That is why a phone link kept opening the orange money site (**BEDROCK — Discipline is the edge**) instead of the kitchen.
+## The link to use on the phone
 
-## What you probably want
+After the preview rebuilds:
 
-**Hearth OS** is the household kitchen (shopping, meals, private notes).
+1. Open https://deploy-preview-12--dazzling-quokka-659d1b.netlify.app/hearth/
+2. Pick who is holding the phone (Oak, Maple, or Birch).
+3. PIN on first open: **4829**. Change it under Money.
+4. **Android (Chrome):** menu ⋮ → Add to Home screen.  
+   **iPhone (Safari):** Share → Add to Home Screen.
 
-- The kitchen **code** is in the folder [`hearth-os/`](hearth-os/).
-- It is **not** a public website. That is on purpose. Private notes should not sit on the internet.
-- It runs on a computer in the house: see [`hearth-os/README.md`](hearth-os/README.md).
-- After the latest update, the public Netlify page is a **front door**, not BEDROCK.
+Talk: tap **Talk**, allow the microphone, say “build this week” or, in Private, that dinner will not stay down. The shop list only shows food names.
 
-Kitchen pull request (the “submit this work” page):
+Notes stay **on that phone**. They are not sent to a server.
 
-https://github.com/GhangasKahn/classy-puffpuff-0daeb5/pull/12
+## Other leftover projects in this same box
 
-On the website after it rebuilds:
-
-- Front door: `/`
-- Kitchen explanation: `/hearth/`
-- Old orange money page: `/bedrock/`
-- Money app: `/app/`
-
-## Other folders (leave them)
-
-| Folder | What it is |
+| Path | What it is |
 |---|---|
-| `hearth-os/` | Kitchen program (Python). This is Hearth. |
-| `app/` | BEDROCK money terminal in the browser |
-| `bedrock/` | Old BEDROCK marketing page |
-| `fence/` | Fence plans (MARTIN / HASHIRA / STELE) |
-| `aegis/`, `aegis-air-mvp/`, `aegis-command/` | Air / wildfire tools |
-| `hearth/` | Short public explanation of Hearth (not the running app) |
+| `/hearth/` | **The kitchen.** Use this. |
+| `/bedrock/` | Old orange money marketing page |
+| `/app/` | BEDROCK money terminal |
+| `/fence/martin/` | Fence plans |
+| `/aegis-air-mvp/` | Air / wildfire tool |
 
-## Ignore most pull requests
+Kitchen pull request: https://github.com/GhangasKahn/classy-puffpuff-0daeb5/pull/12
 
-GitHub “Pull requests” is a list of unfinished experiments from earlier chats. **Use pull request #12 for the kitchen.** You can ignore the rest unless you asked for fence, drum sander, or Aegis work.
-
-## If a link looks wrong
-
-If you see **“DISCIPLINE IS THE EDGE”**, you are in BEDROCK. Go back to `/` or `/hearth/`.
+The `hearth-os/` folder is the same kitchen as a computer program (FastAPI). You do not need it if you are using the phone link.

@@ -1,0 +1,231 @@
+:root {
+  --bg: #161310;
+  --ink: #f3e6d4;
+  --muted: #b9a48a;
+  --brass: #e0a35a;
+  --line: #3a322b;
+  --card: #1e1a16;
+  --error: #d7a07a;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --tab-h: 64px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.4;
+  min-height: 100dvh;
+}
+
+body {
+  padding: 0;
+  overscroll-behavior: none;
+}
+
+h1, h2, h3 { font-weight: 500; margin: 0 0 0.45rem; }
+p { margin: 0 0 0.75rem; }
+.muted, .hint, .lede { color: var(--muted); }
+.eyebrow {
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  margin-bottom: 0.35rem;
+}
+.figure { font-size: 2rem; margin: 0.2rem 0 0.5rem; }
+
+button, .icon-btn, .text-btn, .solid, .check-btn, select, input, textarea {
+  font: inherit;
+  font-size: 16px;
+}
+
+button, .solid, .check-btn, .tabs button, .icon-btn, .text-btn {
+  touch-action: manipulation;
+  min-height: 48px;
+  min-width: 48px;
+  border: 0;
+  cursor: pointer;
+}
+
+.solid, .tabs button[aria-current="true"] {
+  background: var(--brass);
+  color: var(--bg);
+}
+
+.solid, button.solid { padding: 0.7rem 1rem; width: 100%; }
+
+.text-btn, .icon-btn {
+  background: transparent;
+  color: var(--brass);
+  border: 1px solid var(--brass);
+  padding: 0 0.8rem;
+}
+
+.icon-btn.live { background: var(--brass); color: var(--bg); }
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  min-height: 48px;
+  padding: 0.55rem 0.75rem;
+  margin: 0.3rem 0 0.85rem;
+  border-radius: 0;
+}
+
+label { display: block; color: var(--muted); }
+a { color: var(--brass); }
+
+:focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 3px;
+}
+
+.login {
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: calc(1.25rem + var(--safe-t)) 1.1rem 2rem;
+}
+
+.hint { font-size: 0.95rem; }
+
+.error {
+  color: var(--error);
+  border: 1px solid var(--error);
+  padding: 0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+#app {
+  min-height: 100dvh;
+  padding-bottom: calc(var(--tab-h) + var(--safe-b));
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: calc(0.45rem + var(--safe-t)) 0.75rem 0.45rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.who { flex: 1; margin: 0; color: var(--brass); font-size: 1.05rem; }
+
+.view {
+  padding: 1rem 1rem 1.5rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.card, .bubble, .day {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 0.9rem;
+  margin: 0 0 0.75rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.row button { flex: 1 1 auto; }
+
+.pills { display: flex; gap: 0.5rem; margin: 0.75rem 0; }
+.pills button { flex: 1; background: transparent; color: var(--brass); border: 1px solid var(--brass); }
+.pills button[aria-current="true"] { background: var(--brass); color: var(--bg); }
+
+.shop-list, .thread { list-style: none; padding: 0; margin: 0; }
+.check-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  margin-bottom: 0.5rem;
+  padding: 0.55rem 0.7rem;
+}
+.check-btn .box {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--brass);
+  flex: 0 0 auto;
+}
+.check-btn.done .box { background: var(--brass); }
+.check-btn.done strong { text-decoration: line-through; }
+
+.composer { margin-top: 0.75rem; }
+.composer .row { align-items: stretch; }
+.composer textarea { margin: 0; min-height: 72px; flex: 1 1 100%; }
+
+.slot { color: var(--brass); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; margin: 0; }
+
+.tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  padding-bottom: var(--safe-b);
+}
+.tabs button {
+  background: transparent;
+  color: var(--muted);
+  min-height: var(--tab-h);
+  padding: 0.3rem 0.15rem;
+  font-size: 0.82rem;
+}
+.tabs button[aria-current="true"] { color: var(--bg); }
+
+.toast {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: calc(var(--tab-h) + var(--safe-b) + 0.6rem);
+  z-index: 7;
+  background: var(--brass);
+  color: var(--bg);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+
+.flags label.check {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 48px;
+  color: var(--ink);
+}
+.flags input[type="checkbox"] {
+  width: 28px;
+  min-height: 28px;
+  margin: 0;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
