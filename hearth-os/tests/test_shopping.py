@@ -4,7 +4,7 @@ from app.models import CatalogItem, Household, Person, ShoppingItem
 from app.services.ads import upsert_ad
 from app.services.food_law import STAPLE_RICE_KEY
 from app.services.meals import monday_on_or_before
-from app.services.shopping import WEEK_QTY, build_shopping_plan
+from app.services.shopping import WEEK_QTY, build_shopping_plan, weekly_spend
 from app.services.week import persist_week
 
 
@@ -73,6 +73,7 @@ def test_store_split_and_cap(db_session):
     plan = persist_week(db_session, household, people, date(2026, 8, 18), date(2026, 8, 17))
     stores = {item.store for item in plan.items}
     assert "aldi" in stores
-    total = round(sum(i.qty * i.unit_price for i in plan.items), 2)
+    assert "gfs" in stores
+    total = weekly_spend(plan.items)
     assert total <= household.weekly_cap or total < 130
     assert total > 40

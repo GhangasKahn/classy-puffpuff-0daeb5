@@ -16,7 +16,7 @@
   <article>
     <h2>This week</h2>
     <p class="figure">${{ '%.2f'|format(total) }} <span class="muted">of ${{ '%.0f'|format(cap) }}</span></p>
-    <p class="muted">Stores: {{ stores|join(", ") or "—" }}</p>
+    <p class="muted">Stores: {{ stores|join(", ") or "—" }}{% if haul %} · GFS haul ${{ '%.2f'|format(haul) }} (not in the week cap){% endif %}{% if farm %} · farm share ${{ '%.2f'|format(farm) }}/wk already paid{% endif %}{% if share and share != 'none' %} · freezer: {{ share }}{% endif %}</p>
     <form method="post" action="/week/rebuild">
       <button type="submit">Rebuild week</button>
     </form>

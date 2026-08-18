@@ -33,7 +33,7 @@ from app.services.rooms import (
     read_private,
 )
 from app.services.scout import fetch_tops_ad_text, parse_optional_date
-from app.services.week import persist_week
+from app.services.shopping import farm_week_estimate, haul_spend, weekly_spend
 
 router = APIRouter()
 templates = Jinja2Templates(directory=str(Path(__file__).resolve().parent.parent / "templates"))
@@ -131,7 +131,9 @@ def home(request: Request):
         if plan is None:
             plan = persist_week(session, household, people, date.today(), week_start)
         tonight = tonight_dinner(list(plan.meals), date.today(), week_start)
-        total = round(sum(i.qty * i.unit_price for i in plan.items), 2)
+        total = weekly_spend(plan.items)
+        haul = haul_spend(plan.items)
+        farm = farm_week_estimate(household)
         need = person_need(
             weight_kg=person.weight_kg,
             cancer_track=person.cancer_track,
@@ -152,7 +154,10 @@ def home(request: Request):
                     "total": total,
                     "cap": household.weekly_cap,
                     "need": need,
-                    "stores": sorted({i.store for i in plan.items}),
+                    "stores": sorted({i.store for i in plan.items if i.source != "gfs_bulk"}),
+                    "haul": haul,
+                    "farm": farm,
+                    "share": household.freezer_share or "none",
                 },
             ),
         )
@@ -267,12 +272,12 @@ def shop(request: Request):
         )
         grouped: dict[str, list[ShoppingItem]] = {}
         totals: dict[str, float] = {}
-        grand = 0.0
         if plan:
             for item in plan.items:
                 grouped.setdefault(item.store, []).append(item)
                 totals[item.store] = totals.get(item.store, 0.0) + item.qty * item.unit_price
-                grand += item.qty * item.unit_price
+        grand = weekly_spend(plan.items) if plan else 0.0
+        haul = haul_spend(plan.items) if plan else 0.0
         protein = 0.0
         if plan:
             catalog = {
@@ -293,6 +298,7 @@ def shop(request: Request):
                     "grouped": grouped,
                     "totals": {k: round(v, 2) for k, v in totals.items()},
                     "grand": round(grand, 2),
+                    "haul": haul,
                     "cap": household.weekly_cap,
                     "protein": round(protein, 1),
                     "week_start": week_start,
@@ -393,9 +399,40 @@ def money_get(request: Request):
             _ctx(
                 request,
                 person,
-                {"catalog": catalog, "receipts": receipts, "notice": None},
+                {"catalog": catalog, "receipts": receipts, "household": household, "notice": None},
             ),
         )
+    finally:
+        session.close()
+
+
+@router.post("/money/share")
+def money_share(
+    request: Request,
+    freezer_share: str = Form("none"),
+    freezer_lb: str = Form("0"),
+    share_cost: str = Form("0"),
+    share_weeks: str = Form("12"),
+    bulk_weeks: str = Form("4"),
+):
+    session = _db()
+    try:
+        person = current_person(request, session)
+        if person is None:
+            return RedirectResponse("/login", status_code=303)
+        household = session.get(Household, person.household_id)
+        allowed = {"none", "lamb_half", "beef_half", "elk"}
+        household.freezer_share = freezer_share if freezer_share in allowed else "none"
+        try:
+            household.freezer_lb = float(freezer_lb or 0)
+            household.share_cost = float(share_cost or 0)
+            household.share_weeks = max(1, int(float(share_weeks or 12)))
+            household.bulk_weeks = max(1, int(float(bulk_weeks or 4)))
+        except ValueError:
+            pass
+        people = session.query(Person).filter(Person.household_id == household.id).all()
+        persist_week(session, household, people, date.today())
+        return RedirectResponse("/money", status_code=303)
     finally:
         session.close()
 

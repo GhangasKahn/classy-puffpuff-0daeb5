@@ -64,6 +64,21 @@ def reset_engine() -> None:
     SessionLocal = None
 
 
+def migrate_schema() -> None:
+    engine = get_engine()
+    with engine.begin() as conn:
+        cols = {row[1] for row in conn.execute(text("PRAGMA table_info(households)"))}
+        for name, spec in (
+            ("freezer_share", "VARCHAR(40) DEFAULT 'none'"),
+            ("freezer_lb", "FLOAT DEFAULT 0"),
+            ("share_cost", "FLOAT DEFAULT 0"),
+            ("share_weeks", "INTEGER DEFAULT 12"),
+            ("bulk_weeks", "INTEGER DEFAULT 4"),
+        ):
+            if name not in cols:
+                conn.execute(text(f"ALTER TABLE households ADD COLUMN {name} {spec}"))
+
+
 def db_writable() -> bool:
     """True only if a SQLite write+read round-trip succeeds."""
     try:

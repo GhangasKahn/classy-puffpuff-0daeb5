@@ -11,14 +11,10 @@ from app.models import CatalogItem, Household, MealPlan, Person, ShoppingItem
 from app.services.ads import ResolvedPrice, resolve_catalog_item
 from app.services.food_law import STAPLE_RICE_KEY
 
-# Seed SKUs for a 7-day sheet feeding three adults. Prices are seeds, not live ads.
-# Seed SKUs for a 7-day sheet feeding three adults. Prices are seeds, not live ads.
-# Mountain table + Mediterranean, homemade bread. Jasmine rice and potatoes stay.
-# Game meat is not auto-bought (no invented store price). Use it if you already have it.
+# Grocery this week (Aldi / Tops / Wegmans). Pantry bulk is a separate GFS haul.
 WEEK_QTY: dict[str, float] = {
     "chicken_quarters": 8.0,
     "lamb": 3.0,
-    "jasmine_rice": 2.0,
     "potatoes": 3.0,
     "eggs": 3.0,
     "cabbage": 2.0,
@@ -29,10 +25,6 @@ WEEK_QTY: dict[str, float] = {
     "beans_canned": 4.0,
     "oats": 1.0,
     "yogurt": 2.0,
-    "olive_oil": 1.0,
-    "flour": 1.0,
-    "chickpeas_dry": 2.0,
-    "lentils": 2.0,
     "cucumbers": 3.0,
     "tomatoes": 3.0,
     "garlic": 2.0,
@@ -42,7 +34,18 @@ WEEK_QTY: dict[str, float] = {
     "broth": 1.0,
 }
 
-# Quinoa is optional 1 lb, never the bulk rice, never auto-added as a staple.
+# Per-week need, multiplied by household.bulk_weeks, charged to GFS. Not in the $110 week cap.
+# Prices on oil are 0 until you type the Gordon's ticket. Rice/flour seeds are not GFS quotes.
+GFS_WEEKLY: dict[str, float] = {
+    "jasmine_rice": 2.0,
+    "flour": 1.0,
+    "chickpeas_dry": 2.0,
+    "lentils": 2.0,
+    "olive_oil": 0.25,
+    "avocado_oil": 0.25,
+}
+
+SHARE_DROPS_LAMB = frozenset({"lamb_half", "beef_half", "elk"})
 OPTIONAL_KEYS = frozenset({"quinoa"})
 
 
@@ -94,9 +97,70 @@ class ShoppingPlan:
         return round(sum(line.protein_g * line.qty for line in self.lines), 1)
 
 
+def weekly_spend(items: Iterable) -> float:
+    total = 0.0
+    for item in items:
+        source = getattr(item, "source", "week")
+        if source == "gfs_bulk":
+            continue
+        qty = getattr(item, "qty", 0)
+        price = getattr(item, "unit_price", getattr(item, "unit_price", 0))
+        if hasattr(item, "line_total"):
+            total += item.line_total
+        else:
+            total += qty * price
+    return round(total, 2)
+
+
+def haul_spend(items: Iterable) -> float:
+    total = 0.0
+    for item in items:
+        if getattr(item, "source", "") != "gfs_bulk":
+            continue
+        qty = getattr(item, "qty", 0)
+        price = getattr(item, "unit_price", 0)
+        if hasattr(item, "line_total"):
+            total += item.line_total
+        else:
+            total += qty * price
+    return round(total, 2)
+
+
+def farm_week_estimate(household: Household) -> float:
+    weeks = household.share_weeks or 0
+    if (household.freezer_share or "none") == "none" or weeks <= 0:
+        return 0.0
+    return round((household.share_cost or 0) / weeks, 2)
+
+
 def catalog_map(session: Session, household_id: int) -> dict[str, CatalogItem]:
     rows = session.query(CatalogItem).filter(CatalogItem.household_id == household_id).all()
     return {row.key: row for row in rows}
+
+
+def _append_line(session: Session, plan: ShoppingPlan, catalog: CatalogItem, amount: float, today: date, source: str) -> None:
+    resolved = resolve_catalog_item(session, catalog, today)
+    store = "gfs" if source == "gfs_bulk" else resolved.store
+    note = resolved.note or ""
+    if source == "gfs_bulk":
+        extra = "GFS haul · seed, not a Gordon's quote"
+        if resolved.price <= 0:
+            extra = "GFS haul · set the ticket price under Money"
+        note = f"{note} {extra}".strip()
+    plan.lines.append(
+        CartLine(
+            catalog_key=resolved.catalog_key,
+            name=resolved.name,
+            qty=amount,
+            unit=resolved.unit,
+            store=store,
+            unit_price=resolved.price,
+            source=source,
+            note=note,
+            protein_g=resolved.protein_g,
+            kcal=resolved.kcal,
+        )
+    )
 
 
 def build_shopping_plan(
@@ -109,8 +173,13 @@ def build_shopping_plan(
 ) -> ShoppingPlan:
     items = catalog_map(session, household.id)
     qty = dict(WEEK_QTY)
+    share = (household.freezer_share or "none").strip() or "none"
+    if share in SHARE_DROPS_LAMB:
+        qty.pop("lamb", None)
     if extra_qty:
         for key, amount in extra_qty.items():
+            if key in GFS_WEEKLY:
+                continue
             qty[key] = qty.get(key, 0.0) + amount
     for key in include_optional:
         if key in OPTIONAL_KEYS and key not in qty:
@@ -122,43 +191,22 @@ def build_shopping_plan(
         catalog = items.get(key)
         if catalog is None:
             continue
-        if key in {"white_rice", "brown_rice", "basmati"}:
+        if key in {"white_rice", "brown_rice", "basmati", "oil"}:
             continue
-        resolved = resolve_catalog_item(session, catalog, today)
-        if resolved.catalog_key == STAPLE_RICE_KEY:
+        _append_line(session, plan, catalog, amount, today, "week")
+
+    bulk_weeks = household.bulk_weeks or 4
+    for key, weekly in GFS_WEEKLY.items():
+        catalog = items.get(key)
+        if catalog is None:
+            continue
+        if key == STAPLE_RICE_KEY:
             rice_seen = True
-        plan.lines.append(
-            CartLine(
-                catalog_key=resolved.catalog_key,
-                name=resolved.name,
-                qty=amount,
-                unit=resolved.unit,
-                store=resolved.store,
-                unit_price=resolved.price,
-                source="week",
-                note=resolved.note,
-                protein_g=resolved.protein_g,
-                kcal=resolved.kcal,
-            )
-        )
+        _append_line(session, plan, catalog, weekly * bulk_weeks, today, "gfs_bulk")
     if not rice_seen:
         rice = items.get(STAPLE_RICE_KEY)
         if rice is not None:
-            resolved = resolve_catalog_item(session, rice, today)
-            plan.lines.insert(
-                0,
-                CartLine(
-                    catalog_key=resolved.catalog_key,
-                    name=resolved.name,
-                    qty=2.0,
-                    unit=resolved.unit,
-                    store=resolved.store,
-                    unit_price=resolved.price,
-                    source="week",
-                    protein_g=resolved.protein_g,
-                    kcal=resolved.kcal,
-                ),
-            )
+            _append_line(session, plan, rice, 2.0 * bulk_weeks, today, "gfs_bulk")
     return plan
 
 

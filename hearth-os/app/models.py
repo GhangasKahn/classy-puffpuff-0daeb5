@@ -15,6 +15,11 @@ class Household(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(80), default="House")
     weekly_cap: Mapped[float] = mapped_column(Float, default=110.0)
+    freezer_share: Mapped[str] = mapped_column(String(40), default="none")
+    freezer_lb: Mapped[float] = mapped_column(Float, default=0.0)
+    share_cost: Mapped[float] = mapped_column(Float, default=0.0)
+    share_weeks: Mapped[int] = mapped_column(Integer, default=12)
+    bulk_weeks: Mapped[int] = mapped_column(Integer, default=4)
 
     people: Mapped[list["Person"]] = relationship(back_populates="household")
 

@@ -6,6 +6,10 @@ import re
 BANNED_INGREDIENT_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"kerrygold", re.I), "kerrygold"),
     (re.compile(r"\bketo\b", re.I), "keto"),
+    (re.compile(r"vegetable\s+oil", re.I), "vegetable_oil"),
+    (re.compile(r"canola\s+oil", re.I), "vegetable_oil"),
+    (re.compile(r"soybean\s+oil", re.I), "vegetable_oil"),
+    (re.compile(r"\bcrisco\b", re.I), "vegetable_oil"),
     (re.compile(r"organ\s*meat", re.I), "organ"),
     (re.compile(r"\boffal\b", re.I), "organ"),
     (re.compile(r"\bsweetbread", re.I), "organ"),

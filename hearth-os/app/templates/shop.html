@@ -4,8 +4,8 @@
 <section class="hero">
   <p class="eyebrow">Week of {{ week_start.isoformat() }}</p>
   <h1>Shop</h1>
-  <p class="figure">${{ '%.2f'|format(grand) }} <span class="muted">of ${{ '%.0f'|format(cap) }}</span></p>
-  <p class="muted">Protein from the cart: {{ protein }} g (estimate)</p>
+  <p class="figure">${{ '%.2f'|format(grand) }} <span class="muted">of ${{ '%.0f'|format(cap) }} this week</span></p>
+  <p class="muted">GFS haul (every few weeks): ${{ '%.2f'|format(haul) }} — not in the week cap. Protein from the cart: {{ protein }} g (estimate)</p>
   <form method="post" action="/week/rebuild">
     <button type="submit">Rebuild week</button>
   </form>

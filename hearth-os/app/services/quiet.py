@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.models import CatalogItem, MealPlan, QuietNeed, ShoppingItem
 from app.services.ads import resolve_catalog_item
 from app.services.food_law import contains_symptom_word
-from app.services.shopping import CartLine, ShoppingPlan, merge_line
+from app.services.shopping import GFS_WEEKLY, CartLine, ShoppingPlan, merge_line
 
 # Keyword map only. No medications. No branded electrolyte drinks.
 KEYWORD_ADDS: list[tuple[tuple[str, ...], list[tuple[str, float]]]] = [
@@ -71,6 +71,8 @@ def apply_quiet_to_plan(
         for row in session.query(CatalogItem).filter(CatalogItem.household_id == household_id)
     }
     for add in adds:
+        if add.catalog_key in GFS_WEEKLY:
+            continue
         item = catalog.get(add.catalog_key)
         if item is None:
             continue

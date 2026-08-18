@@ -5,7 +5,7 @@ from datetime import date
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
-from app.db import Base, get_engine, get_session_factory
+from app.db import Base, get_engine, get_session_factory, migrate_schema
 from app.models import Ad, CatalogItem, Household, Person
 from app.services.rooms import ensure_aliases
 from app.services.week import persist_week
@@ -25,7 +25,7 @@ SEED_CATALOG: list[dict] = [
     {
         "key": "jasmine_rice",
         "name": "Jasmine rice",
-        "default_store": "aldi",
+        "default_store": "gfs",
         "unit": "5 lb bag",
         "typical_price": 3.49,
         "protein_g": 30.0,
@@ -144,13 +144,13 @@ SEED_CATALOG: list[dict] = [
     },
     {
         "key": "oil",
-        "name": "Vegetable oil",
+        "name": "Vegetable oil (do not buy)",
         "default_store": "aldi",
         "unit": "48 oz",
         "typical_price": 2.99,
         "protein_g": 0.0,
         "kcal": 3840.0,
-        "staple": True,
+        "staple": False,
     },
     {
         "key": "bananas",
@@ -215,7 +215,7 @@ SEED_CATALOG: list[dict] = [
     {
         "key": "flour",
         "name": "Bread flour",
-        "default_store": "aldi",
+        "default_store": "gfs",
         "unit": "10 lb bag",
         "typical_price": 4.79,
         "protein_g": 120.0,
@@ -225,7 +225,7 @@ SEED_CATALOG: list[dict] = [
     {
         "key": "chickpeas_dry",
         "name": "Dry chickpeas",
-        "default_store": "aldi",
+        "default_store": "gfs",
         "unit": "lb",
         "typical_price": 1.29,
         "protein_g": 19.0,
@@ -235,7 +235,7 @@ SEED_CATALOG: list[dict] = [
     {
         "key": "lentils",
         "name": "Brown lentils",
-        "default_store": "aldi",
+        "default_store": "gfs",
         "unit": "lb",
         "typical_price": 1.39,
         "protein_g": 25.0,
@@ -244,12 +244,22 @@ SEED_CATALOG: list[dict] = [
     },
     {
         "key": "olive_oil",
-        "name": "Olive oil",
-        "default_store": "aldi",
-        "unit": "17 oz",
-        "typical_price": 4.49,
+        "name": "Cold-pressed extra virgin olive oil",
+        "default_store": "gfs",
+        "unit": "3 L",
+        "typical_price": 0.0,
         "protein_g": 0.0,
         "kcal": 3600.0,
+        "staple": True,
+    },
+    {
+        "key": "avocado_oil",
+        "name": "Cold-pressed avocado oil",
+        "default_store": "gfs",
+        "unit": "1 L",
+        "typical_price": 0.0,
+        "protein_g": 0.0,
+        "kcal": 1800.0,
         "staple": True,
     },
     {
@@ -298,6 +308,7 @@ SEED_CATALOG: list[dict] = [
 def init_db() -> None:
     get_engine()
     Base.metadata.create_all(bind=get_engine())
+    migrate_schema()
     factory = get_session_factory()
     with factory() as session:
         seed_if_empty(session)
@@ -343,11 +354,19 @@ def seed_if_empty(session: Session) -> Household:
 
 
 def ensure_catalog(session: Session, household: Household) -> None:
-    existing = {
-        row.key
+    rows = {
+        row.key: row
         for row in session.query(CatalogItem).filter(CatalogItem.household_id == household.id)
     }
     for item in SEED_CATALOG:
-        if item["key"] not in existing:
+        row = rows.get(item["key"])
+        if row is None:
             session.add(CatalogItem(household_id=household.id, **item))
+            continue
+        row.name = item["name"]
+        row.default_store = item["default_store"]
+        row.unit = item["unit"]
+        row.staple = item["staple"]
+        if item["key"] in {"olive_oil", "avocado_oil", "oil"}:
+            row.typical_price = item["typical_price"]
     session.flush()

@@ -6,15 +6,24 @@
   const CAP = 110;
   const CHICKEN_SALE_MAX = 1.29;
   const PLACEHOLDER_KG = 70;
-  const STORE = "hearth-os-v2";
+  const STORE = "hearth-os-v3";
   const SYMPTOM = ["flu", "vomit", "headache", "cancer", "diarrhea", "nausea", "migraine", "constipat", "diagnosis", "stomach"];
   const PUBLIC_ACK = "Kitchen extras added to the list.";
   const LAW = "House law forbids that ingredient.";
   const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const SHARE_DROPS_LAMB = ["lamb_half", "beef_half", "elk"];
+  const STORE_LABELS = {
+    aldi: "Aldi",
+    tops: "Tops",
+    walmart: "Walmart",
+    wegmans: "Wegmans",
+    gfs: "Gordon Food Service",
+    farm: "Farm / ranch",
+  };
 
   const CATALOG = [
     { key: "chicken_quarters", name: "Chicken leg quarters", store: "aldi", unit: "lb", price: 1.49, protein: 17, kcal: 190 },
-    { key: "jasmine_rice", name: "Jasmine rice", store: "aldi", unit: "5 lb bag", price: 3.49, protein: 30, kcal: 7700 },
+    { key: "jasmine_rice", name: "Jasmine rice", store: "gfs", unit: "5 lb bag", price: 3.49, protein: 30, kcal: 7700 },
     { key: "potatoes", name: "Russet potatoes", store: "aldi", unit: "5 lb bag", price: 2.99, protein: 20, kcal: 1750 },
     { key: "eggs", name: "Large eggs", store: "aldi", unit: "dozen", price: 2.85, protein: 72, kcal: 840 },
     { key: "cabbage", name: "Green cabbage", store: "aldi", unit: "head", price: 1.49, protein: 8, kcal: 170 },
@@ -25,18 +34,17 @@
     { key: "beans_canned", name: "Canned beans", store: "aldi", unit: "can", price: 0.89, protein: 15, kcal: 350 },
     { key: "oats", name: "Rolled oats", store: "aldi", unit: "42 oz", price: 2.49, protein: 50, kcal: 1800 },
     { key: "yogurt", name: "Plain yogurt", store: "aldi", unit: "32 oz", price: 2.99, protein: 40, kcal: 560 },
-    { key: "frozen_veg", name: "Frozen mixed vegetables", store: "aldi", unit: "12 oz", price: 1.15, protein: 6, kcal: 150 },
-    { key: "oil", name: "Vegetable oil", store: "aldi", unit: "48 oz", price: 2.99, protein: 0, kcal: 3840 },
     { key: "bananas", name: "Bananas", store: "aldi", unit: "lb", price: 0.49, protein: 1, kcal: 89 },
     { key: "apples", name: "Apples", store: "aldi", unit: "lb", price: 1.29, protein: 0.5, kcal: 52 },
     { key: "broth", name: "Chicken broth", store: "aldi", unit: "32 oz", price: 1.29, protein: 5, kcal: 80 },
     { key: "ginger", name: "Fresh ginger", store: "walmart", unit: "lb", price: 3.48, protein: 2, kcal: 80 },
     { key: "quinoa", name: "Quinoa", store: "wegmans", unit: "1 lb", price: 4.99, protein: 24, kcal: 680 },
     { key: "lamb", name: "Lamb stew meat", store: "wegmans", unit: "lb", price: 5.99, protein: 25, kcal: 250 },
-    { key: "flour", name: "Bread flour", store: "aldi", unit: "10 lb bag", price: 4.79, protein: 120, kcal: 16300 },
-    { key: "chickpeas_dry", name: "Dry chickpeas", store: "aldi", unit: "lb", price: 1.29, protein: 19, kcal: 364 },
-    { key: "lentils", name: "Brown lentils", store: "aldi", unit: "lb", price: 1.39, protein: 25, kcal: 353 },
-    { key: "olive_oil", name: "Olive oil", store: "aldi", unit: "17 oz", price: 4.49, protein: 0, kcal: 3600 },
+    { key: "flour", name: "Bread flour", store: "gfs", unit: "10 lb bag", price: 4.79, protein: 120, kcal: 16300 },
+    { key: "chickpeas_dry", name: "Dry chickpeas", store: "gfs", unit: "lb", price: 1.29, protein: 19, kcal: 364 },
+    { key: "lentils", name: "Brown lentils", store: "gfs", unit: "lb", price: 1.39, protein: 25, kcal: 353 },
+    { key: "olive_oil", name: "Cold-pressed extra virgin olive oil", store: "gfs", unit: "3 L", price: 0, protein: 0, kcal: 3600 },
+    { key: "avocado_oil", name: "Cold-pressed avocado oil", store: "gfs", unit: "1 L", price: 0, protein: 0, kcal: 1800 },
     { key: "cucumbers", name: "Cucumbers", store: "aldi", unit: "lb", price: 0.79, protein: 1, kcal: 15 },
     { key: "tomatoes", name: "Tomatoes", store: "aldi", unit: "lb", price: 1.49, protein: 1, kcal: 18 },
     { key: "garlic", name: "Garlic", store: "aldi", unit: "head", price: 0.79, protein: 2, kcal: 40 },
@@ -44,17 +52,19 @@
   ];
 
   const WEEK_QTY = {
-    chicken_quarters: 8, lamb: 3, jasmine_rice: 2, potatoes: 3, eggs: 3, cabbage: 2, onions: 1,
-    carrots: 1, butter: 1, milk: 2, beans_canned: 4, oats: 1, yogurt: 2, olive_oil: 1,
-    flour: 1, chickpeas_dry: 2, lentils: 2, cucumbers: 3, tomatoes: 3, garlic: 2, lemons: 1,
-    bananas: 2, apples: 1, broth: 1,
+    chicken_quarters: 8, lamb: 3, potatoes: 3, eggs: 3, cabbage: 2, onions: 1,
+    carrots: 1, butter: 1, milk: 2, beans_canned: 4, oats: 1, yogurt: 2,
+    cucumbers: 3, tomatoes: 3, garlic: 2, lemons: 1, bananas: 2, apples: 1, broth: 1,
+  };
+  const GFS_WEEKLY = {
+    jasmine_rice: 2, flour: 1, chickpeas_dry: 2, lentils: 2, olive_oil: 0.25, avocado_oil: 0.25,
   };
 
   const MENU = [
-    [["Yogurt, eggs, and oats", "Warm oats in milk. Cook eggs until firm. Plain yogurt on the side. Save a spoon of yogurt to set the next pot."], ["Lentils, jasmine rice, cabbage", "Simmer lentils with onion and garlic. Steam rice. Warm cabbage with olive oil and lemon."], ["Lamb stew, potatoes, jasmine rice", "Brown lamb. Stew with onion, garlic, carrot, and potato until the meat shreds. Steam rice. Mix bread dough tonight; cold ferment in the fridge 24–48 hours. Bake until dark. Use game only if you already have it."]],
+    [["Yogurt, eggs, and oats", "Warm oats in milk. Cook eggs until firm. Plain yogurt on the side. Save a spoon of yogurt to set the next pot."], ["Lentils, jasmine rice, cabbage", "Simmer lentils with onion and garlic. Steam rice. Warm cabbage with cold-pressed olive oil or avocado oil and lemon."], ["Lamb stew, potatoes, jasmine rice", "Brown lamb. Stew with onion, garlic, carrot, and potato until the meat shreds. Steam rice. Mix bread dough tonight; cold ferment in the fridge 24–48 hours. Bake until dark. Use game only if you already have it."]],
     [["Eggs, potatoes, yogurt", "Pan potatoes. Cook eggs until firm. Yogurt on the side."], ["Leftover lamb, rice, cucumber", "Reheat lamb until steaming. Jasmine rice. Slice cucumber, tomato, onion, lemon."], ["Roast chicken, potatoes, cabbage", "Roast chicken until fully done. Roast potatoes. Steam cabbage. Shape cold-ferment dough into pita. Bake hot until puffed and browned."]],
-    [["Yogurt, oats, apple", "Cook oats in milk. Slice apple. Yogurt."], ["Chickpeas in homemade pita", "Warm soaked-and-cooked chickpeas with garlic, lemon, olive oil. Stuff pita. Cucumber on the side. Jasmine rice if you need more plate."], ["Chicken, jasmine rice, carrots", "Roast or stew chicken until fully done. Steam rice. Cook carrots. Yogurt on the plate."]],
-    [["Eggs, leftover pita, yogurt", "Cook eggs until firm. Toast leftover pita. Yogurt."], ["Lentil and potato soup, rice", "Simmer lentils and potato with onion and garlic. Jasmine rice on the side."], ["Long-ferment pizza, chicken, tomato", "Stretch cold-ferment dough. Olive oil, tomato, onion, leftover chicken. Hottest oven you have. Bake until the crust is dark. Not boxed pizza dough."]],
+    [["Yogurt, oats, apple", "Cook oats in milk. Slice apple. Yogurt."], ["Chickpeas in homemade pita", "Warm soaked-and-cooked chickpeas with garlic, lemon, cold-pressed olive oil or avocado oil. Stuff pita. Cucumber on the side. Jasmine rice if you need more plate."], ["Chicken, jasmine rice, carrots", "Roast or stew chicken until fully done. Steam rice. Cook carrots. Yogurt on the plate."]],
+    [["Eggs, leftover pita, yogurt", "Cook eggs until firm. Toast leftover pita. Yogurt."], ["Lentil and potato soup, rice", "Simmer lentils and potato with onion and garlic. Jasmine rice on the side."], ["Long-ferment pizza, chicken, tomato", "Stretch cold-ferment dough. Cold-pressed olive oil or avocado oil, tomato, onion, leftover chicken. Hottest oven you have. Bake until the crust is dark. Not boxed pizza dough."]],
     [["Potatoes, eggs, yogurt", "Pan potatoes. Cook eggs until firm. Yogurt."], ["Jasmine rice, chickpeas, cabbage", "Warm rice and chickpeas with onion and lemon. Steam cabbage."], ["Lamb, jasmine rice, potatoes", "Stew or roast lamb until fully done. Steam rice. Roast potatoes. Cucumber and tomato salad."]],
     [["Oats, milk, yogurt", "Cook oats in milk. Yogurt. Banana if you have it."], ["Chicken, pita, cucumber", "Reheat chicken until steaming. Pita. Cucumber, tomato, lemon."], ["Chicken, cabbage, potatoes, rice", "Roast chicken until fully done. Potatoes and jasmine rice. Steam cabbage. Bake a sourdough loaf from the cold ferment. Set a new yogurt pot from milk and last yogurt."]],
     [["Eggs and yogurt", "Cook eggs until firm. Plain yogurt."], ["Rice, lentils, leftover bread", "Warm jasmine rice and lentils. Slice yesterday's loaf."], ["Roast chicken, potatoes, jasmine rice", "Roast chicken until fully done. Roast potatoes. Steam rice. Mix next week's dough; cold ferment. Game stays off the list unless it is already in the house."]],
@@ -92,7 +102,10 @@
   }
   function isBanned(text) {
     const t = text || "";
-    return /kerrygold|\bketo\b|organ\s*meat|\boffal\b|sweetbread|\btripe\b|gizzard|\bliver\b|\bkidney\b|beef\s+heart|chicken\s+heart|heart\s+meat/i.test(t);
+    return /kerrygold|\bketo\b|vegetable\s+oil|canola\s+oil|soybean\s+oil|\bcrisco\b|organ\s*meat|\boffal\b|sweetbread|\btripe\b|gizzard|\bliver\b|\bkidney\b|beef\s+heart|chicken\s+heart|heart\s+meat/i.test(t);
+  }
+  function storeLabel(store) {
+    return STORE_LABELS[store] || store;
   }
   function inferQuiet(text) {
     const blob = (text || "").toLowerCase();
@@ -134,6 +147,11 @@
       receipts: [],
       currentPersonId: 1,
       speak: true,
+      freezerShare: "none",
+      freezerLb: 0,
+      shareCost: 0,
+      shareWeeks: 12,
+      bulkWeeks: 4,
     };
   }
 
@@ -144,7 +162,7 @@
     } catch {
       db = defaultState();
     }
-    if (!db.items.length) buildWeek();
+    if (!db.items.length || !db.items.some((i) => i.source === "gfs_bulk")) buildWeek();
   }
   function save() {
     localStorage.setItem(STORE, JSON.stringify(db));
@@ -180,6 +198,10 @@
     const parts = [];
     if (db.people.some((p) => p.energyFirst)) parts.push("Cook eggs and meat until fully done.");
     if (db.people.some((p) => p.softFood)) parts.push("Mash or simmer until soft. Shred meat.");
+    parts.push("Fat is cold-pressed olive oil or avocado oil only.");
+    if (SHARE_DROPS_LAMB.includes(db.freezerShare)) {
+      parts.push("Use the freezer share. Grocery lamb is off this week's list.");
+    }
     return parts.join(" ");
   }
 
@@ -199,17 +221,21 @@
       });
     });
     const qty = Object.assign({}, WEEK_QTY);
+    if (SHARE_DROPS_LAMB.includes(db.freezerShare)) delete qty.lamb;
     Object.keys(db.quiet).forEach((k) => {
+      if (GFS_WEEKLY[k] != null) return;
       qty[k] = (qty[k] || 0) + db.quiet[k];
     });
     const checked = {};
     (db.items || []).forEach((it) => {
       if (it.checked) checked[it.key] = true;
     });
-    db.items = Object.keys(qty).map((key) => {
+    const lines = [];
+    Object.keys(qty).forEach((key) => {
       const base = cat(key);
+      if (!base) return;
       const r = resolveItem(base);
-      return {
+      lines.push({
         key,
         name: r.name,
         qty: qty[key],
@@ -219,8 +245,31 @@
         note: r.note || "",
         protein: r.protein,
         checked: !!checked[key],
-      };
+        source: "week",
+      });
     });
+    const bulkWeeks = Math.max(1, Number(db.bulkWeeks) || 4);
+    Object.keys(GFS_WEEKLY).forEach((key) => {
+      const base = cat(key);
+      if (!base) return;
+      const r = resolveItem(base);
+      const note = r.price <= 0
+        ? "GFS haul · set the ticket price under Money"
+        : "GFS haul · seed, not a Gordon's quote";
+      lines.push({
+        key,
+        name: r.name,
+        qty: GFS_WEEKLY[key] * bulkWeeks,
+        unit: r.unit,
+        store: "gfs",
+        price: r.price,
+        note,
+        protein: r.protein,
+        checked: !!checked[key],
+        source: "gfs_bulk",
+      });
+    });
+    db.items = lines;
     save();
   }
 
@@ -247,8 +296,16 @@
     const upcoming = dinners.filter((m) => m.dayIndex >= Math.max(0, offset));
     return upcoming[0] || dinners[0];
   }
-  function cartTotal() {
-    return db.items.reduce((s, i) => s + i.qty * i.price, 0);
+  function groceryTotal() {
+    return db.items.filter((i) => i.source !== "gfs_bulk").reduce((s, i) => s + i.qty * i.price, 0);
+  }
+  function haulTotal() {
+    return db.items.filter((i) => i.source === "gfs_bulk").reduce((s, i) => s + i.qty * i.price, 0);
+  }
+  function farmWeek() {
+    const weeks = Number(db.shareWeeks) || 0;
+    if (!db.freezerShare || db.freezerShare === "none" || weeks <= 0) return 0;
+    return Math.round(((Number(db.shareCost) || 0) / weeks) * 100) / 100;
   }
   function proteinEst() {
     return db.items.reduce((s, i) => s + (i.protein || 0) * i.qty, 0);
@@ -379,8 +436,13 @@
     const p = person();
     const n = needOf(p);
     const dinner = tonight();
-    const total = cartTotal();
-    const stores = [...new Set(db.items.map((i) => i.store))].join(", ");
+    const total = groceryTotal();
+    const haul = haulTotal();
+    const farm = farmWeek();
+    const stores = [...new Set(db.items.filter((i) => i.source !== "gfs_bulk").map((i) => storeLabel(i.store)))].join(", ");
+    const haulBit = haul ? ` · GFS haul $${haul.toFixed(2)} (not in the week cap)` : "";
+    const farmBit = farm ? ` · farm share $${farm.toFixed(2)}/wk already paid` : "";
+    const shareBit = SHARE_DROPS_LAMB.includes(db.freezerShare) ? ` · freezer: ${db.freezerShare}` : "";
     $("view").innerHTML = `
       <p class="eyebrow">${escapeHtml(p.alias)}</p>
       <h1>Tonight</h1>
@@ -391,7 +453,7 @@
       <div class="card">
         <h2>This week</h2>
         <p class="figure">$${total.toFixed(2)} <span class="muted">of $${CAP}</span></p>
-        <p class="muted">Stores: ${escapeHtml(stores)}</p>
+        <p class="muted">Stores: ${escapeHtml(stores || "—")}${escapeHtml(haulBit)}${escapeHtml(farmBit)}${escapeHtml(shareBit)}</p>
         <button type="button" class="solid" id="rebuild">Rebuild week</button>
       </div>
       <div class="card flags">
@@ -507,14 +569,15 @@
 
   function renderShop() {
     const groups = groupedShop();
-    const total = cartTotal();
+    const total = groceryTotal();
+    const haul = haulTotal();
     let html = `<p class="eyebrow">Week of ${escapeHtml(db.weekStart)}</p><h1>Shop</h1>
-      <p class="figure">$${total.toFixed(2)} <span class="muted">of $${CAP}</span></p>
-      <p class="muted">Protein from the cart: ${proteinEst().toFixed(1)} g (estimate)</p>
+      <p class="figure">$${total.toFixed(2)} <span class="muted">of $${CAP} this week</span></p>
+      <p class="muted">GFS haul (every few weeks): $${haul.toFixed(2)} — not in the week cap. Protein from the cart: ${proteinEst().toFixed(1)} g (estimate)</p>
       <button type="button" class="solid" id="rebuild2">Rebuild week</button>`;
     Object.keys(groups).forEach((store) => {
       const sub = groups[store].reduce((s, i) => s + i.qty * i.price, 0);
-      html += `<section><h2>${escapeHtml(store)} · $${sub.toFixed(2)}</h2><ul class="shop-list">`;
+      html += `<section><h2>${escapeHtml(storeLabel(store))} · $${sub.toFixed(2)}</h2><ul class="shop-list">`;
       groups[store].forEach((item, idx) => {
         html += `<li><button type="button" class="check-btn ${item.checked ? "done" : ""}" data-key="${escapeHtml(item.key)}"><span class="box"></span><span><strong>${escapeHtml(item.name)}</strong><span class="muted"> ${item.qty} ${escapeHtml(item.unit)} · $${item.price.toFixed(2)}${item.note ? " · " + escapeHtml(item.note) : ""}</span></span></button></li>`;
       });
@@ -542,7 +605,7 @@
       days[m.dayIndex] = days[m.dayIndex] || { name: m.dayName, meals: [] };
       days[m.dayIndex].meals.push(m);
     });
-    let html = `<p class="eyebrow">Week of ${escapeHtml(db.weekStart)}</p><h1>Cook sheet</h1><p class="muted">Homemade yogurt, pita, and long cold-ferment bread. Lamb and chicken. Jasmine rice and potatoes stay. Game only if it is already in the house. Numbers on Shop are estimates. This is not medical advice.</p>`;
+    let html = `<p class="eyebrow">Week of ${escapeHtml(db.weekStart)}</p><h1>Cook sheet</h1><p class="muted">Homemade yogurt, pita, and long cold-ferment bread. Cold-pressed olive or avocado oil only. Lamb from the farm share if you have one. Jasmine rice and potatoes stay. Numbers on Shop are estimates. This is not medical advice.</p>`;
     Object.keys(days).forEach((k) => {
       const day = days[k];
       html += `<section class="day"><h2>${escapeHtml(day.name)}</h2>`;
@@ -555,15 +618,37 @@
   }
 
   function renderMoney() {
+    const share = db.freezerShare || "none";
     $("view").innerHTML = `
       <h1>Money</h1>
-      <p class="muted">Seed prices are the floor. Correct one price. This phone does not fetch a live circular.</p>
+      <p class="muted">Seed prices are the floor. Type the real GFS ticket and the farm share you paid. No live Gordon's or Elkusa feed.</p>
+      <div class="card">
+        <h2>Freezer share and GFS haul</h2>
+        <label for="share">Animal share</label>
+        <select id="share">
+          <option value="none" ${share === "none" ? "selected" : ""}>None — buy grocery lamb</option>
+          <option value="lamb_half" ${share === "lamb_half" ? "selected" : ""}>Half lamb (farm)</option>
+          <option value="beef_half" ${share === "beef_half" ? "selected" : ""}>Half beef (farm)</option>
+          <option value="elk" ${share === "elk" ? "selected" : ""}>Elk / farm share (you type the farm)</option>
+        </select>
+        <label for="freezer-lb">Pounds still in the freezer</label>
+        <input id="freezer-lb" type="number" inputmode="decimal" step="0.1" min="0" value="${db.freezerLb || 0}">
+        <label for="share-cost">What you paid for the share (optional)</label>
+        <input id="share-cost" type="number" inputmode="decimal" step="0.01" min="0" value="${db.shareCost || 0}">
+        <label for="share-weeks">Weeks that share should last</label>
+        <input id="share-weeks" type="number" min="1" value="${db.shareWeeks || 12}">
+        <label for="bulk-weeks">GFS haul every N weeks</label>
+        <input id="bulk-weeks" type="number" min="1" value="${db.bulkWeeks || 4}">
+        <button type="button" class="solid" id="save-share">Save share and haul</button>
+        <p class="muted">A share pulls grocery lamb off this week's list. The farm cost is split across those weeks as an estimate. It is not a price quote from a website.</p>
+      </div>
       <div class="card">
         <h2>Correct a price</h2>
         <label for="ckey">Item</label>
         <select id="ckey">${CATALOG.map((c) => `<option value="${c.key}">${escapeHtml(c.name)}</option>`).join("")}</select>
         <label for="cstore">Store</label>
         <select id="cstore">
+          <option value="gfs">GFS (Gordon Food Service)</option>
           <option value="tops">Tops</option><option value="aldi">Aldi</option>
           <option value="walmart">Walmart</option><option value="wegmans">Wegmans</option>
         </select>
@@ -595,6 +680,17 @@
       li.textContent = `${r.date} · ${r.store} · $${Number(r.amount).toFixed(2)}`;
       ul.appendChild(li);
     });
+    $("save-share").onclick = () => {
+      const next = $("share").value;
+      db.freezerShare = ["none", "lamb_half", "beef_half", "elk"].includes(next) ? next : "none";
+      db.freezerLb = Number($("freezer-lb").value || 0);
+      db.shareCost = Number($("share-cost").value || 0);
+      db.shareWeeks = Math.max(1, parseInt($("share-weeks").value || "12", 10));
+      db.bulkWeeks = Math.max(1, parseInt($("bulk-weeks").value || "4", 10));
+      buildWeek();
+      toast("Share and haul saved.");
+      render();
+    };
     $("save-ad").onclick = () => {
       const key = $("ckey").value;
       db.ads[key] = { store: $("cstore").value, price: Number($("cprice").value), saleEnds: $("cends").value || null };

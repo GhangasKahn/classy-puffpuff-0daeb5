@@ -1,4 +1,4 @@
-const CACHE = "hearth-phone-v2";
+const CACHE = "hearth-phone-v3";
 const ASSETS = [
   "./",
   "./index.html",

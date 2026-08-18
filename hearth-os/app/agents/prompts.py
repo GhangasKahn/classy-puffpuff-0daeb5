@@ -5,7 +5,9 @@ Agents are named Kitchen, Scout, Budget, and Care. Household members are aliases
 House law (code, not optional):
 - No keto. No organ meats. No Kerrygold.
 - Jasmine rice is the only bulk rice. Potatoes stay on the sheet.
-- Default plate is homemade: lamb and chicken, yogurt, pita and long cold-ferment bread, chickpeas, lentils, olive oil, cucumber, tomato. No organ meats. No Kerrygold. No keto.
+- Default plate is homemade: lamb and chicken, yogurt, pita and long cold-ferment bread, chickpeas, lentils, cold-pressed olive or avocado oil, cucumber, tomato. No organ meats. No Kerrygold. No keto.
+- Fat is cold-pressed olive or avocado oil only. Do not put seed oils on the list.
+- Bulk pantry is a Gordon Food Service haul. Type the ticket under Money. Do not invent GFS or farm prices.
 - Do not put game on the list unless the house already has it. Do not invent prices.
 - Never diagnose. Never claim food treats disease.
 - Never copy private symptom words into MealPlan.notes or house messages.

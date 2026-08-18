@@ -22,7 +22,7 @@ def persist_week(
     plan_row = get_or_create_plan(session, household, week_start)
     if contains_symptom_word(plan_row.notes or ""):
         plan_row.notes = ""
-    build_meals(session, plan_row, people)
+    build_meals(session, plan_row, people, freezer_share=household.freezer_share or "none")
     cart = build_shopping_plan(session, household, week_start, today)
     copy_quiet_onto_plan(session, household.id, week_start, cart, today)
     persist_cart(session, plan_row, cart)
