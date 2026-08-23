@@ -1,0 +1,15 @@
+{
+  "name": "BEDROCK Integrated Site",
+  "install": "cd aegis-landing && npm ci",
+  "terminals": [
+    {
+      "name": "site",
+      "command": "python3 -m http.server 8080"
+    },
+    {
+      "name": "aegis-landing-dev",
+      "command": "cd aegis-landing && npm run dev -- --host --port 5173"
+    }
+  ],
+  "ports": [8080, 5173]
+}
