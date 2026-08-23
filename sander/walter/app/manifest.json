@@ -1,0 +1,9 @@
+{
+  "name": "WALTER drum sander",
+  "short_name": "WALTER",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f3ead8",
+  "theme_color": "#b4532a",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

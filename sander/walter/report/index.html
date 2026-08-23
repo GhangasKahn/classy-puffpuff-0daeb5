@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="WALTER Rev B engineering report — 16-inch closed-frame drum thickness sander. Lineage, numbers, FMEA, datums D1–D4." />
+<title>WALTER Engineering Report — Rev B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../pages.css" />
+</head>
+<body>
+<header class="toc">
+  <div class="wrap">
+    <b>WALTER · Rev B</b>
+    <a href="#cover">Cover</a>
+    <a href="#lineage">Lineage</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#datums">Datums</a>
+    <a href="#fmea">FMEA</a>
+    <a href="#cad">CAD</a>
+    <a href="../">Plans</a>
+    <a href="../app/">App</a>
+  </div>
+</header>
+
+<article>
+  <header class="cover wrap" id="cover">
+    <p class="tag">Shop machine · original engineering · 23 August 2026</p>
+    <h1>WALTER</h1>
+    <p class="sub">A 16-inch closed-frame drum thickness sander designed from Ron Walters’ published failure modes — not redrawn from ShopNotes #86.</p>
+    <div class="meta">
+      <div><b>Capacity</b>16.00″ × 0.06–4.00″</div>
+      <div><b>Drum</b>5.00″ Ø @ 1089 RPM · 1427 SFM</div>
+      <div><b>Drive</b>1 HP TEFC 56C · 4L440</div>
+      <div><b>Feed</b>16×60 PVC · 0–16 FPM</div>
+      <div><b>Envelope</b>22 × 36 × 22″ benchtop</div>
+      <div><b>Source</b>walter_kernel.py</div>
+    </div>
+  </header>
+
+  <section class="wrap" id="lineage">
+    <h2><span class="no">01</span> Lineage</h2>
+    <p class="intro">ShopNotes issue 86 (2006) published a drum sander that sat on a table saw. Ron Walters built it, then rebuilt it, and published both the woodgears write-up and the YouTube walkthrough <span class="mono">W-5Sj6kBVic</span>. Those two documents are the same machine. This report is original engineering from the failure modes they made public.</p>
+    <p>ShopNotes #86 remains copyrighted. Do not scan it, do not redraw it, do not treat this package as a reprint. Heslop (crowned plywood rollers, short-stock kickback) and Hunt (open C-frame) informed options, not geometry.</p>
+    <table>
+      <thead><tr><th>Subsystem</th><th>Published machine</th><th>WALTER Rev B</th></tr></thead>
+      <tbody>
+        <tr><td>Power</td><td>Table-saw pulley, then ⅓ HP 1725</td><td>1 HP TEFC 56C, optional VFD</td></tr>
+        <tr><td>Frame</td><td>MDF, then single ¾″ birch</td><td>Doubled ¾″ Baltic birch + ¼″ steel plates</td></tr>
+        <tr><td>Drum</td><td>19× MDF + 2 birch on CRS + piano wire</td><td>21× birch, 0.5 mm gaps, 1144 keyed shaft</td></tr>
+        <tr><td>Paper</td><td>Permanent Velcro (new drum to replace)</td><td>Hook tape + end-bell retainer slots</td></tr>
+        <tr><td>Table</td><td>Threaded oak dowel in a 2×4</td><td>Dual ¾-6 Acme, HTD timed, UHMW ways</td></tr>
+        <tr><td>Platen</td><td>Formica (scored immediately)</td><td>HDPE / phenolic on a torsion box</td></tr>
+        <tr><td>Conveyor</td><td>Sanding belt on PVC — never tracked</td><td>PVC belt, 0.030″ crown, skew screws</td></tr>
+        <tr><td>Parallelism</td><td>Shim stock under a flange bearing</td><td>¼-20 jack screws, ±0.040″</td></tr>
+        <tr><td>Belt tension</td><td>Motor weight on a dowel (slack on start)</td><td>Hinge plate + turnbuckle + guard</td></tr>
+        <tr><td>Electrics</td><td>Switch on a motor</td><td>Magnetic starter, E-stop, 24 V feed</td></tr>
+      </tbody>
+    </table>
+    <p>What Walters kept, we kept: a dedicated motor, flange bearings, a wrap drum, and a dust hood that actually works. What failed three times — conveyor tracking — is the whole reason the rollers are aluminum with a 0.030″ barrel crown.</p>
+  </section>
+
+  <section class="wrap" id="numbers">
+    <h2><span class="no">02</span> Numbers that have to be true</h2>
+    <p class="intro">All shop language is inches. The kernel stores inches and converts to millimetres for STL/STEP. If a sheet fights the CAD, trust <span class="mono">walter_kernel.py</span>.</p>
+    <table>
+      <thead><tr><th>Quantity</th><th>Value</th><th>Derivation</th></tr></thead>
+      <tbody>
+        <tr><td>Drum speed</td><td>1089 RPM</td><td>1725 × 3.00 / 4.75</td></tr>
+        <tr><td>Surface speed</td><td>1427 SFM</td><td>π × 5.00 × 1089 / 12</td></tr>
+        <tr><td>Feed at 30 rpm roller</td><td>15.7 FPM</td><td>π × 2.00 / 12 × 30</td></tr>
+        <tr><td>Acme pitch</td><td>0.167″ / rev</td><td>1 / 6 TPI</td></tr>
+        <tr><td>Travel</td><td>4.50″</td><td>Dual ¾-6 × 12″ screws</td></tr>
+        <tr><td>Crown</td><td>0.030″ barrel</td><td>Both 2.00″ aluminum rollers</td></tr>
+        <tr><td>Idle jack</td><td>±0.040″</td><td>¼-20 under UCFL204</td></tr>
+        <tr><td>Dust</td><td>400 CFM at 4″</td><td>Hood + brush strip</td></tr>
+      </tbody>
+    </table>
+    <p>1427 SFM is the same neighborhood as a 16–32 SuperMax. Fast enough for 80-grit thicknessing, not so fast that 150-grit burns. Walters’ ⅓ HP survived whisper-thin hand-fed passes. A powered 16″ feed at 10 FPM in oak will stall that motor. Spec 1 HP; treat 1.5 HP as luxury.</p>
+    <div class="callout">
+      <p class="t">Rotation</p>
+      <p>Bottom of the drum moves toward infeed (against feed). Dust goes into the back hood. Reverse this and you throw grit at the operator and glaze the paper.</p>
+    </div>
+    <h3>Drum stack</h3>
+    <p>Twenty-one ¾″ Baltic birch discs, blanked Ø 5.125″, bored 0.748″, keyed 3/16″. 0.5 mm glue-line gap every fourth disc so seasonal movement does not split the stack the way MDF did. End bells are ⅛″ aluminum with retainer slots. True the OD to 5.000″ ±0.010 after glue. Square key, not piano wire — removable, kinder to 1144 Stressproof.</p>
+    <h3>Conveyor</h3>
+    <p>A sanding belt is designed to track on a crowned <em>drive</em> pulley with a slack idler. Walters used a 16×48 sanding belt as a conveyor on oval PVC. It never tracked. WALTER uses a 16×60 2-ply PVC conveyor belt on 2.00″ aluminum rollers with a 0.030″ barrel crown and idle-end skew screws. Track empty for 60 seconds, then with a 16″ board. Option B is an HDPE sliding table — skip the belt entirely if tracking still fights you.</p>
+  </section>
+
+  <section class="wrap" id="datums">
+    <h2><span class="no">03</span> Datums D1–D4</h2>
+    <p class="intro">The machine is only as true as four references. Square the box before glue. Drill both bearing plates from one story stick.</p>
+    <ol>
+      <li><strong>D1 — Base top face = Z0.</strong> Walls sit on it. Stretchers must not lift a wall. Check with winding sticks.</li>
+      <li><strong>D2 — Drum axis = Z 13.50″, Y 18.00″.</strong> Idle and drive plates share one story stick. Idle plate holes are slotted 0.90″ vertically for the jack.</li>
+      <li><strong>D3 — Idle jack at zero = plates coplanar.</strong> True the drum, then jack for parallelism against a 16″ test board. Do not chase taper with shims.</li>
+      <li><strong>D4 — Acme nuts clocked together</strong> before the HTD belt goes on. Paint a witness mark. Four independent screws will rack the platen into a wedge.</li>
+    </ol>
+    <div class="callout">
+      <p class="t">Inspection Q01–Q10</p>
+      <p>The fab package writes <span class="mono">fab/12_QA/inspection.csv</span>. Hold Q02 (drum OD), Q03 (parallelism), Q04 (belt tracking), and Q06 (E-stop, no auto-restart) before any oak.</p>
+    </div>
+  </section>
+
+  <section class="wrap" id="fmea">
+    <h2><span class="no">04</span> Failure modes</h2>
+    <p>Severity 1–10. Detection 1–10 (higher = easier to miss). These rows are the same list as <span class="mono">fab/12_QA/fmea.csv</span>.</p>
+    <table>
+      <thead><tr><th>ID</th><th>Item</th><th>Cause</th><th>Effect</th><th>Sev</th><th>Prevention</th></tr></thead>
+      <tbody>
+        <tr><td>F01</td><td>Conveyor walk</td><td>No crown / PVC oval / sanding belt</td><td>Belt shreds, can't feed</td><td>8</td><td>0.030″ crown, PVC belt, skew</td></tr>
+        <tr><td>F02</td><td>Drum crack</td><td>MDF, no expansion gaps</td><td>Out of round, vibration</td><td>7</td><td>Birch discs, 0.5 mm gaps every 4</td></tr>
+        <tr><td>F03</td><td>Table rack</td><td>Independent corner screws</td><td>Wedge-sanded panels</td><td>7</td><td>Dual Acme HTD-timed</td></tr>
+        <tr><td>F04</td><td>Belt slack on start</td><td>Gravity motor mount</td><td>Glazed belt, stall</td><td>6</td><td>Hinge plate + turnbuckle</td></tr>
+        <tr><td>F05</td><td>Restart after blink</td><td>Plain switch</td><td>Drum starts in hands</td><td>9</td><td>Magnetic starter / NOVR</td></tr>
+        <tr><td>F06</td><td>Kickback short stock</td><td>Part shorter than platen</td><td>Projectile</td><td>8</td><td>12″ min or carrier board</td></tr>
+        <tr><td>F07</td><td>Dust cloud</td><td>Hood off / shop-vac</td><td>Health, fire load</td><td>8</td><td>4″ @ 400 CFM, hood interlock</td></tr>
+        <tr><td>F08</td><td>Drum taper</td><td>No idle jack</td><td>Stripe / wedge</td><td>5</td><td>¼-20 jack ±0.040″</td></tr>
+        <tr><td>F09</td><td>Formica score</td><td>Abrasive harder than laminate</td><td>Platen not flat</td><td>4</td><td>HDPE / phenolic face</td></tr>
+        <tr><td>F10</td><td>Paper glued forever</td><td>Permanent Velcro</td><td>New drum to change wrap</td><td>3</td><td>Hook tape + end-bell slots</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="wrap" id="cad">
+    <h2><span class="no">05</span> CAD pipeline</h2>
+    <p class="intro">One parameter dict. Meshes, OpenSCAD, FreeCAD, plan sheets, and fab CSVs all read it.</p>
+    <p><span class="mono">sander/walter/cad/walter_kernel.py</span> emits boxes and cylinders in inches. <span class="mono">scripts/gen_walter_cad.py</span> tessellates binary STL (no FreeCAD required), Wavefront OBJ, isometric SVG renders, and <span class="mono">parameters.json</span> / <span class="mono">parameters.scad</span>. OpenSCAD <span class="mono">include</span>s the generated SCAD. FreeCAD <span class="mono">walter_sander.py</span> imports the same primitives and writes STEP/FCStd when <span class="mono">freecadcmd</span> exists.</p>
+    <p>Regenerate the whole package:</p>
+    <p class="mono">./scripts/build_walter.sh</p>
+    <p>
+      <a class="dl" href="../cad/walter_kernel.py">Kernel</a>
+      <a class="dl" href="../cad/parameters.json">parameters.json</a>
+      <a class="dl" href="../cad/exports/walter_assembly.stl">assembly.stl</a>
+      <a class="dl" href="../cad/exports/walter_exploded.stl">exploded.stl</a>
+      <a class="dl" href="../cad/walter_sander.scad">OpenSCAD</a>
+      <a class="dl" href="../fab/12_QA/fmea.csv">FMEA CSV</a>
+    </p>
+    <figure class="frame">
+      <img src="../renders/walter_iso_paper.svg" alt="Paper isometric of WALTER" />
+      <figcaption>Kernel isometric · 22 × 36 × 22″ · belt guard hidden so the drum reads</figcaption>
+    </figure>
+    <div class="callout">
+      <p class="t">Not a PE document</p>
+      <p>Shop-build design for experienced DIY construction. Shafting, guarding, and 115 V are your responsibility. W-12 is design intent, not an NEC drawing. Have an electrician size the starter heaters to motor FLA.</p>
+    </div>
+  </section>
+</article>
+
+<footer class="foot wrap">
+  <span>WALTER · 16″ drum thickness sander · Rev B</span>
+  <span><a href="../manual/">Manual</a> · <a href="../guide/">Guide</a> · <a href="../app/">App</a></span>
+</footer>
+</body>
+</html>

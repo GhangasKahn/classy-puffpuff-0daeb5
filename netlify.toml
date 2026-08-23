@@ -103,6 +103,37 @@
   to = "/sander/walter/"
   status = 301
 
+[[redirects]]
+  from = "/walter/app"
+  to = "/sander/walter/app/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/report"
+  to = "/sander/walter/report/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/manual"
+  to = "/sander/walter/manual/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/guide"
+  to = "/sander/walter/guide/"
+  status = 301
+
+[[headers]]
+  for = "/sander/walter/app/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/sander/walter/app/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
 # CAD downloads: force download with correct types
 [[headers]]
   for = "/fence/*/exports/*"

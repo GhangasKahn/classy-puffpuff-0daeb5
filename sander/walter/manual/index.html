@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="WALTER 12-step build manual — drum, frame, table, conveyor, drive, tune." />
+<title>WALTER Build Manual — 12 steps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../pages.css" />
+</head>
+<body>
+<header class="toc">
+  <div class="wrap">
+    <b>WALTER · Manual</b>
+    <a href="#cover">Cover</a>
+    <a href="#steps">Steps</a>
+    <a href="../app/">Checklist app</a>
+    <a href="../">Plans</a>
+  </div>
+</header>
+
+<article>
+  <header class="cover wrap" id="cover">
+    <p class="tag">Construction sequence · Rev B</p>
+    <h1>Build manual</h1>
+    <p class="sub">Twelve steps from disc blanks to the first poplar pass. Print the A3 sheets beside you. Mark progress in the build app if you want a checklist that survives a refresh.</p>
+    <div class="meta">
+      <div><b>Print</b>W-1 … W-14 at 100% on A3</div>
+      <div><b>Templates</b>W-10 + fab/10_TEMPLATES</div>
+      <div><b>QA</b>Q01–Q10 before oak</div>
+      <div><b>App</b>/walter/app/</div>
+    </div>
+  </header>
+
+  <section class="wrap" id="steps">
+    <h2><span class="no">00</span> Before you cut</h2>
+    <p class="intro">Read the <a href="../report/">engineering report</a> once. Buy plywood before hardware — voids in a 5×5 sheet become vibration in a 5″ drum. Verify every catalog number on W-14 before you click buy.</p>
+    <ul>
+      <li>Three ¾″ Baltic birch 5×5 (or 5×10) + one ¼″. Not MDF. Not construction plywood.</li>
+      <li>Hard maple for base rails and Acme nut blocks.</li>
+      <li>¾″ × 22″ 1144 Stressproof, keyed 3/16″ × 4″ both ends.</li>
+      <li>Dust collector that actually pulls 400 CFM at 4″. A shop-vac is not enough.</li>
+    </ul>
+    <figure class="frame">
+      <img src="../renders/walter_exploded.svg" alt="Exploded isometric" />
+      <figcaption>Exploded kernel · build frame → drum → table → conveyor → drive → hood</figcaption>
+    </figure>
+
+    <div class="step" id="a1">
+      <div class="n">01</div>
+      <div>
+        <h3>Cut and bore 21 discs</h3>
+        <p>Print template T-DISC at 100% (W-10). Check the 1.00″ scale bar. Bandsaw Ø 5.125″ blanks from ¾″ Baltic birch. Bore 0.748″ on the drill press with a fence so every hole shares a center. File a 3/16″ keyway. Number the discs 1–21.</p>
+        <p>Sheet: <a href="../plans/W3_drum.svg">W-3</a> · Template: <a href="../fab/10_TEMPLATES/T-DISC.svg">T-DISC</a></p>
+      </div>
+    </div>
+    <div class="step" id="a2">
+      <div class="n">02</div>
+      <div>
+        <h3>Glue the stack on the keyed shaft</h3>
+        <p>Dry-stack on the ¾″ shaft with the square key. 0.5 mm gaps every four discs (business-card feeler). End bells ⅛″ aluminum. Clamp as a column, not in a vise that bananas the shaft. After cure, turn the OD to 5.000″ ±0.010 between centers — or later, in the machine, on a carrier board.</p>
+      </div>
+    </div>
+    <div class="step" id="a3">
+      <div class="n">03</div>
+      <div>
+        <h3>Glue doubled walls</h3>
+        <p>Grain crossed, on a flat door. Idle and drive walls are ¾″ + ¾″. Use the ¼″ steel plates as drill jigs. Idle plate: slot the two bolt holes 0.90″ vertically. Drive plate: round holes, fixed. Datum D2 lives here.</p>
+        <p>Sheet: <a href="../plans/W2_frame.svg">W-2</a> · Template: <a href="../fab/10_TEMPLATES/T-PLATE.svg">T-PLATE</a></p>
+      </div>
+    </div>
+    <div class="step" id="a4">
+      <div class="n">04</div>
+      <div>
+        <h3>Square the box</h3>
+        <p>Stretchers, maple base rails, base panel. Datum D1 is the base top. Winding sticks on the bearing-plate faces. If a wall is in wind, the drum will sand a stripe on every board. This is the machine’s accuracy — glue does not forgive it later.</p>
+      </div>
+    </div>
+    <div class="step" id="a5">
+      <div class="n">05</div>
+      <div>
+        <h3>Torsion-box platen + ways</h3>
+        <p>¼″ skins over a ¾″ grid. UHMW in dados. Maple nut blocks, dual ¾-6 Acme, HTD 5 mm sync (or #25 chain). Clock the nuts (D4) before the belt. Digital caliper on the idle wall. Lock knobs. Confirm 4.50″ of parallel travel.</p>
+        <p>Sheet: <a href="../plans/W4_elevation.svg">W-4</a></p>
+      </div>
+    </div>
+    <div class="step" id="a6">
+      <div class="n">06</div>
+      <div>
+        <h3>Turn crowns and track the belt</h3>
+        <p>2.00″ aluminum tube × 16.25″, 0.030″ barrel crown on both rollers. Endless 16×60 2-ply PVC — not a sanding belt. Skew screws on the idle end. Track empty 60 s, then with a 16″ board. PWM feed last. Or skip this step and run Option B: HDPE sliding table.</p>
+        <p>Sheet: <a href="../plans/W5_conveyor.svg">W-5</a></p>
+      </div>
+    </div>
+    <div class="step" id="a7">
+      <div class="n">07</div>
+      <div>
+        <h3>Hinge plate, motor, belt, guard</h3>
+        <p>1 HP TEFC 56C on a ¼″ hinge plate. Turnbuckle tension — not motor weight on a dowel. 3.00″ / 4.75″ 4L pulleys, 4L440 link belt. Full ¼″ birch guard; no finger slot at the pinch. Magnetic starter + OL + mushroom E-stop. Optional hood interlock.</p>
+        <p>Sheets: <a href="../plans/W6_drive.svg">W-6</a> · <a href="../plans/W12_wiring.svg">W-12</a></p>
+      </div>
+    </div>
+    <div class="step" id="a8">
+      <div class="n">08</div>
+      <div>
+        <h3>Hood, 4″ port, brush strip</h3>
+        <p>¼″ birch inverted-U, foam weatherstrip to the walls, nylon brush at the infeed lip. 4″ port aimed at a collector that can pull 400 CFM. Collector on before any test cut.</p>
+        <p>Sheet: <a href="../plans/W7_dust_safety.svg">W-7</a></p>
+      </div>
+    </div>
+    <div class="step" id="a9">
+      <div class="n">09</div>
+      <div>
+        <h3>Wrap paper and true the drum</h3>
+        <p>4″ PSA hook tape, joints staggered. 3″ roll, ~17° spiral, start in the idle-end bell slot. Trace the first wrap for replacements. True on a carrier board until the whole face cuts. Number the grit on the idle bell.</p>
+        <p>Sheet: <a href="../plans/W13_wrap.svg">W-13</a></p>
+      </div>
+    </div>
+    <div class="step" id="a10">
+      <div class="n">10</div>
+      <div>
+        <h3>Jack parallelism</h3>
+        <p>Idle jack at zero (D3). 16″ test board should kiss both ends. Then ¼-20 jacks ±0.040″ if one end is proud. Do not chase this with shims under a flange bearing — that is what Walters had to do.</p>
+      </div>
+    </div>
+    <div class="step" id="a11">
+      <div class="n">11</div>
+      <div>
+        <h3>Inspection Q01–Q10</h3>
+        <p>Work <a href="../fab/12_QA/inspection.csv">inspection.csv</a>. E-stop blink test: kill power, restore power — the drum must not restart. Guard closed. Hood pulling. Acme witness marks aligned.</p>
+      </div>
+    </div>
+    <div class="step" id="a12">
+      <div class="n">12</div>
+      <div>
+        <h3>Post the startup card</h3>
+        <p>Collector → hood → lock → drum → feed. Never start with a board under the drum. First passes 0.010″ in poplar, then oak. If the motor note changes, you took too much. This is not a planer. Nothing shorter than 12″ unless it is stuck to a carrier.</p>
+        <p>Check the same twelve steps off in the <a href="../app/">build app</a>.</p>
+      </div>
+    </div>
+  </section>
+</article>
+
+<footer class="foot wrap">
+  <span>WALTER · build manual · Rev B</span>
+  <span><a href="../guide/">How to use the package</a></span>
+</footer>
+</body>
+</html>

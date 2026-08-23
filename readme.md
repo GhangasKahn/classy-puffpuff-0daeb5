@@ -60,9 +60,13 @@ Upload the `bedrock-deploy` folder directly. The landing is at root; the termina
 ## WALTER — 16″ drum thickness sander
 Shop-machine package at `/walter/` (source under `sander/walter/`). Original engineering from Ron Walters' published ShopNotes-derived machine (woodgears + YouTube W-5Sj6kBVic): dedicated 1 HP drive, crowned PVC conveyor, dual Acme elevation, idle-end drum jack. Not a reprint of copyrighted magazine drawings.
 
+Rev B package: parametric kernel (`sander/walter/cad/walter_kernel.py`), STL/OBJ + isometric SVGs, fourteen A3 sheets (W-1…W-14), fab CSVs, PWA build app, engineering report, 12-step manual, guidebook.
+
 ```
 ./scripts/build_walter.sh
-# plans only:
+# stepwise:
+python3 scripts/gen_walter_cad.py
 python3 scripts/gen_walter_plans.py
+python3 scripts/gen_walter_fab.py
 ```
 

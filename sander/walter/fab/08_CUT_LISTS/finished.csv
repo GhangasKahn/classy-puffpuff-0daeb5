@@ -1,0 +1,15 @@
+id,name,size,qty,stock,nest
+A,Base,"22.00 × 36.00 × ¾""",1,"¾"" BB",sheet 1
+B,Idle wall skins,"20.00 × 36.00 × ¾""",2,"¾"" BB",sheet 1–2
+C,Drive wall skins,"20.00 × 36.00 × ¾""",2,"¾"" BB",sheet 2–3
+D,Stretchers,"16.50 × 3.50 × ¾""",2,"¾"" BB",offcuts
+E,Base rails,"33.00 × 1.50 × 1.50""",2,hard maple,solid
+F,Platen skins,"16.25 × 25.00 × ¼""",2,"¼"" BB",¼ sheet
+G,Platen grid,"¾"" strips, ~8 bf",1,"¾"" BB",offcuts
+H,Table rails,"25.00 × 2.00 × ½""",2,maple,solid
+J,"Drum discs Ø 5.125""","¾"" × 21 discs",21,"¾"" BB",sheet 3
+K,Hood panels,"¼"" BB, ~4 ft²",1,"¼"" BB",¼ sheet
+L,Belt guard,"17 × 17 × ¼"" + edges",1,"¼"" BB",¼ sheet
+M,Nut blocks,"2.00 × 2.00 × 3.00""",2,maple,solid
+N,Stand sides (opt.),"32.00 × 32.00 × ¾""",2,"¾"" BB",sheet 4
+P,Stand shelf / back (opt.),"21 × 32 × ¾""",2,"¾"" BB",sheet 4

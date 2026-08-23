@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-10  ·  1:1 templates — disc, plate, key</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Print at 100% on Letter/A4 and check the 1.00" scale bar</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev B  ·  Shop build</text>
+<text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>SCALE CHECK  —  THIS BAR MUST MEASURE 1.00" ON PAPER</text>
+<rect x='40.0' y='80.0' width='101.6' height='18.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='153.6' y='94.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>1.00"</text>
+<text x='40.0' y='130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>DRUM DISC  J  —  Ø 5.125" BLANK  ·  BORE 0.748"  ·  3/16" KEYWAY</text>
+<circle cx='320.0' cy='430.0' r='260.3' fill='#c4b49a' stroke='#1c1914' stroke-width='2'/>
+<circle cx='320.0' cy='430.0' r='38.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='310.5' y='381.8' width='19.0' height='14.2' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='320.0' y='714.3' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='middle'>21 REQUIRED  ·  bandsaw oversize, sand to line after glue-up</text>
+<text x='720.0' y='130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>BEARING PLATE  —  ¼" STEEL  6.00 × 6.00</text>
+<rect x='760.0' y='180.0' width='609.6' height='609.6' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<circle cx='1064.8' cy='484.8' r='55.9' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<circle cx='876.8' cy='484.8' r='17.3' fill='#f4efe6' stroke='#1c1914' stroke-width='1.2'/>
+<circle cx='1252.8' cy='484.8' r='17.3' fill='#f4efe6' stroke='#1c1914' stroke-width='1.2'/>
+<text x='1064.8' y='811.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle'>IDLE PLATE: slot these two holes vertically 0.90"</text>
+<text x='1064.8' y='831.6' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='middle'>DRIVE PLATE: round holes, fixed</text>
+<rect x='40.0' y='780.0' width='1600.0' height='94.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='52.0' y='802.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>KEY  —  3/16" SQ × 4.00"  (two required, 1045 or 1144)</text>
+<text x='52.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not use piano wire. File a slight chamfer so it starts in the disc stack.</text>
+<text x='52.0' y='838.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Disc bore is 0.002" under shaft: freeze the shaft, warm the discs, or ream the last thou.</text>
+<text x='52.0' y='856.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>After the stack is glued, turn the OD to 5.000" between centers or in the machine.</text>
+</svg>

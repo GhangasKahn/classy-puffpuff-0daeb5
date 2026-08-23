@@ -7,7 +7,7 @@
 <text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-5  ·  Conveyor &amp; tracking</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>The subsystem that failed three times on the original</text>
 <text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
-<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev A  ·  Shop build</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev B  ·  Shop build</text>
 <text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>WHY THE ORIGINAL CONVEYOR WOULD NOT TRACK</text>
 <text x='40.0' y='82.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Walters used a 16×48 sanding belt on PVC pipe. He rebuilt it three times. Power feed was fine. Tracking was not.</text>
 <rect x='40.0' y='110.0' width='370.0' height='130.0' fill='#efe8dc' stroke='#8a3a2a' stroke-width='1.4'/>

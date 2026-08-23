@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='1140.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1098.0' x2='1656.0' y2='1098.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1130.0' font-family='Georgia, serif' font-size='28' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1126.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#1c1914' text-anchor='start' font-weight='600'>W-12  ·  Wiring ladder (not a permit drawing)</text>
+<text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>115 V 20 A dedicated  ·  extra-low-voltage feed  ·  have an electrician sign off</text>
+<text x='1640.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end'>16″ closed-frame drum thickness sander</text>
+<text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='end'>Original engineering  ·  Rev B  ·  Shop build</text>
+<text x='40.0' y='62.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>LADDER  —  MAGNETIC STARTER = NO-VOLT RELEASE</text>
+<rect x='40.0' y='100.0' width='1600.0' height='56.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='100.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>L1 / N</text>
+<text x='200.0' y='134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>NEMA 5-20 plug  ·  12 AWG SJ  ·  strain relief at the cabinet</text>
+<rect x='40.0' y='156.0' width='1600.0' height='56.0' fill='#f4efe6' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='156.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>E-STOP</text>
+<text x='200.0' y='190.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>40 mm NC mushroom, left-hand infeed corner, in series with starter coil</text>
+<rect x='40.0' y='212.0' width='1600.0' height='56.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='212.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='246.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>HOOD SW</text>
+<text x='200.0' y='246.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>Optional NC. Machine will not pick up with the hood off.</text>
+<rect x='40.0' y='268.0' width='1600.0' height='56.0' fill='#f4efe6' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='268.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>OL</text>
+<text x='200.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>Heater sized to motor FLA (typically ~13 A at 115 V 1 HP).</text>
+<rect x='40.0' y='324.0' width='1600.0' height='56.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='324.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='358.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>M1</text>
+<text x='200.0' y='358.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>Drum motor 1 HP TEFC. Never a light switch.</text>
+<rect x='40.0' y='380.0' width='1600.0' height='56.0' fill='#f4efe6' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='380.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='414.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>24 V</text>
+<text x='200.0' y='414.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>Meanwell-class PSU on the load side of M1 aux, fused 5 A.</text>
+<rect x='40.0' y='436.0' width='1600.0' height='56.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='436.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>PWM</text>
+<text x='200.0' y='470.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>0–16 FPM. Knob on the infeed cheek. Off is full CCW.</text>
+<rect x='40.0' y='492.0' width='1600.0' height='56.0' fill='#f4efe6' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='492.0' width='140.0' height='56.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>M2</text>
+<text x='200.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>Feed gearmotor. E-stop drops 24 V as well as 115 V.</text>
+<rect x='40.0' y='548.0' width='1600.0' height='56.0' fill='#efe8dc' stroke='#d4cbb8' stroke-width='1'/>
+<rect x='40.0' y='548.0' width='140.0' height='56.0' fill='#3d5a4c' stroke='#1c1914' stroke-width='1'/>
+<text x='110.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#f4efe6' text-anchor='middle' font-weight='600'>PE</text>
+<text x='200.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start'>Green ground to motor frames, plates, and the stand. Bond it.</text>
+<rect x='40.0' y='640.0' width='1600.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='52.0' y='662.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>STARTUP  —  POST THIS NEXT TO THE SWITCH</text>
+<text x='52.0' y='680.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1 Dust collector ON and pulling.   2 Hood latched.   3 Table locked.   4 Hands clear.</text>
+<text x='52.0' y='698.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>5 Drum ON — wait for speed.   6 Feed ON, slow.   7 Board in, light pass.</text>
+<text x='52.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Stall: feed OFF first, then drum. Never start the drum with a board already under it.</text>
+<text x='52.0' y='734.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>This sheet is a design intent, not an NEC drawing, not a UL listing, not a substitute for a license.</text>
+</svg>

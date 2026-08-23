@@ -1,77 +1,37 @@
 // WALTER — 16" closed-frame drum thickness sander
 // Parametric shop-build CAD. Units: millimetres.
-// Mirrors scripts/gen_walter_plans.py and walter_sander.py
+// Numbers come from parameters.scad (generated from walter_kernel.py).
 //
+//   python3 scripts/gen_walter_cad.py
 //   openscad -o walter_iso.png --imgsize=1600,1000 --autocenter --viewall walter_sander.scad
 //
 // Lineage: Ron Walters / ShopNotes #86 problems, redesigned.
 // This is an original engineering model — not a copy of copyrighted magazine drawings.
 
 $fn = 48;
-IN = 25.4;
-function inch(n) = n * IN;
+include <parameters.scad>
 
 show_hood    = true;
 show_belt    = true;
 show_motor   = true;
 show_guard   = true;
+show_stand   = false;
 cutaway      = false;   // hide drive-side wall to reveal drum
 
-// ---- parameters (inches in comments; mm in model) --------------------------
-base_x = inch(22.00);
-base_y = inch(36.00);
-base_t = inch(0.75);
-
-wall_t  = inch(1.50);
-inner_w = inch(16.50);
 idle_outer_x  = 0;
 idle_inner_x  = wall_t;
 drive_inner_x = wall_t + inner_w;
-drive_outer_x = drive_inner_x + wall_t;          // 19.50"
-wall_h  = inch(20.00);
-
-drum_od   = inch(5.00);
-drum_face = inch(16.00);
-drum_gap  = (inner_w - drum_face) / 2;           // 0.25" each side
-drum_x0   = idle_inner_x + drum_gap;
-drum_z    = inch(13.50);                         // axis height from base bottom
-drum_y    = inch(18.00);                         // axis, mid-machine
-
-shaft_d   = inch(0.75);
-shaft_len = inch(22.00);
-shaft_x0  = inch(-0.25);
-
-table_t      = inch(0.75);
-uhmw_t       = inch(0.125);
-opening_max  = inch(4.00);                       // preview at 1.5" opening
-opening      = inch(1.50);
-table_top_z  = drum_z - drum_od/2 - opening;
-platen_y0    = inch(5.50);
-platen_y1    = inch(30.50);
-platen_len   = platen_y1 - platen_y0;
-
-roller_od    = inch(2.00);
-roller_cd    = inch(26.86);
-roller_y_in  = inch(4.57);
-roller_y_out = roller_y_in + roller_cd;
-roller_shaft = inch(0.625);
-
-acme_d    = inch(0.75);
-acme_y    = [inch(10.0), inch(26.0)];
-acme_x    = (idle_inner_x + drive_inner_x) / 2;
-
-motor_od  = inch(6.50);
-motor_len = inch(8.00);
-motor_y   = inch(28.00);
-motor_z   = inch(4.60);
-motor_x   = drive_outer_x + inch(0.25);
-
-pulley_mot_d = inch(3.00);
-pulley_drm_d = inch(4.75);
-pulley_t     = inch(0.75);
-
-hood_t    = inch(0.25);
-port_d    = inch(4.00);
+drive_outer_x = drive_inner_x + wall_t;
+drum_gap      = (inner_w - drum_face) / 2;
+drum_x0       = idle_inner_x + drum_gap;
+opening       = opening_default;
+table_top_z   = drum_z - drum_od/2 - opening;
+platen_len    = platen_y1 - platen_y0;
+roller_y_out  = roller_y_in + roller_cd;
+acme_x        = (idle_inner_x + drive_inner_x) / 2;
+motor_x       = drive_outer_x + inch(0.25);
+pulley_mot_d  = pulley_mot;
+pulley_drm_d  = pulley_drm;
 
 c_ply    = [0.82, 0.72, 0.52];
 c_ply2   = [0.72, 0.62, 0.44];
@@ -266,6 +226,14 @@ module gearmotor() {
       cube([inch(3.0), inch(3.0), inch(3.0)]);
 }
 
+module stand() {
+  if (!show_stand) return;
+  ply_box(inch(0.5), inch(2.0), -stand_h, inch(0.75), base_y-inch(4), stand_h-inch(0.1), c_ply2);
+  ply_box(base_x-inch(1.25), inch(2.0), -stand_h, inch(0.75), base_y-inch(4), stand_h-inch(0.1), c_ply2);
+  ply_box(inch(0.5), inch(2.0), -stand_h+inch(8), base_x-inch(1.0), base_y-inch(4), inch(0.75));
+  ply_box(inch(0.5), base_y-inch(2.75), -stand_h, base_x-inch(1.0), inch(0.75), stand_h-inch(0.1), c_ply2);
+}
+
 frame();
 drum();
 table_and_conveyor();
@@ -273,3 +241,4 @@ motor_pack();
 hood();
 belt_guard();
 gearmotor();
+stand();

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='150mm' height='150mm' viewBox='-75 -75 150 150'>
+  <title>WALTER T-DISC  Ø5.125  1:1</title>
+  <circle r='65.087' fill='none' stroke='#1c1914' stroke-width='0.35'/>
+  <circle r='9.500' fill='none' stroke='#1c1914' stroke-width='0.35'/>
+  <rect x='-2.381' y='-12.500' width='4.762' height='6' fill='none' stroke='#b4532a' stroke-width='0.35'/>
+  <text x='0' y='62' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='3.2'>T-DISC  Ø5.125  BORE 0.748  1:1 mm</text>
+</svg>

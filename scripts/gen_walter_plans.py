@@ -1,62 +1,32 @@
 #!/usr/bin/env python3
 """Generate WALTER 16" drum-sander build-plan SVG sheets (A3 landscape).
 
-Dimensions mirror sander/walter/cad/walter_sander.scad and walter_sander.py.
+Dimensions come from sander/walter/cad/walter_kernel.py (single source of truth).
 Run:  python3 scripts/gen_walter_plans.py
 """
 
 from __future__ import annotations
 
-import math
 import os
+import sys
 
-OUT = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "..", "sander", "walter", "plans"
+ROOT = os.path.dirname(os.path.abspath(__file__))
+CAD = os.path.join(ROOT, "..", "sander", "walter", "cad")
+sys.path.insert(0, CAD)
+
+from walter_kernel import (  # noqa: E402
+    P,
+    drive_inner,
+    drive_outer,
+    drum_gap,
+    drum_rpm,
+    feed_fpm,
+    idle_inner,
+    sfm,
 )
+
+OUT = os.path.join(ROOT, "..", "sander", "walter", "plans")
 os.makedirs(OUT, exist_ok=True)
-
-# ---- parameters (inches) — must mirror CAD ---------------------------------
-P = dict(
-    base_x=22.00,
-    base_y=36.00,
-    base_t=0.75,
-    wall_t=1.50,
-    inner_w=16.50,
-    wall_h=20.00,
-    drum_od=5.00,
-    drum_face=16.00,
-    drum_z=13.50,
-    drum_y=18.00,
-    shaft_d=0.75,
-    shaft_len=22.00,
-    table_t=0.75,
-    uhmw_t=0.125,
-    opening_max=4.00,
-    roller_od=2.00,
-    roller_cd=26.86,
-    roller_y_in=4.57,
-    roller_shaft=0.625,
-    acme_d=0.75,
-    acme_tpi=6,
-    pulley_mot=3.00,
-    pulley_drm=4.75,
-    motor_hp=1.0,
-    motor_rpm=1725,
-    belt_w=16.00,
-    belt_len=60.00,
-    max_width=16.00,
-    min_thick=0.06,
-    max_thick=4.00,
-    port_d=4.00,
-)
-
-idle_inner = P["wall_t"]
-drive_inner = P["wall_t"] + P["inner_w"]
-drive_outer = drive_inner + P["wall_t"]  # 19.50
-drum_gap = (P["inner_w"] - P["drum_face"]) / 2.0
-drum_rpm = P["motor_rpm"] * P["pulley_mot"] / P["pulley_drm"]
-sfm = math.pi * P["drum_od"] * drum_rpm / 12.0
-feed_fpm = (math.pi * P["roller_od"] / 12.0) * 30.0  # 30 rpm roller ≈ 15.7 FPM
 
 # ---- sheet primitives --------------------------------------------------------
 W, Hpx = 1680, 1188  # A3 landscape @ ~4 px/mm
@@ -174,7 +144,7 @@ class Sheet:
         self.text(175, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "16″ closed-frame drum thickness sander", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Original engineering  ·  Rev A  ·  Shop build", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, "Original engineering  ·  Rev B  ·  Shop build", 13, DIM, "end")
 
     def save(self, filename):
         path = os.path.join(OUT, filename)
@@ -977,6 +947,8 @@ def main():
     sheet_w6()
     sheet_w7()
     sheet_w8()
+    from gen_walter_plans_extra import emit as emit_extra
+    emit_extra()
     print("WALTER plans done →", OUT)
 
 

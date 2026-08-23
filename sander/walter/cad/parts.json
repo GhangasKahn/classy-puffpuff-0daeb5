@@ -1,0 +1,356 @@
+{
+  "rev": "B",
+  "count": 68,
+  "groups": [
+    "conveyor",
+    "drum",
+    "frame",
+    "guard",
+    "hood",
+    "motor",
+    "steel",
+    "table"
+  ],
+  "parts": [
+    {
+      "name": "base",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "rail_idle",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "rail_drive",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "wall_idle",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "wall_drive",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "stretcher_in",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "stretcher_out",
+      "group": "frame",
+      "kind": "box"
+    },
+    {
+      "name": "plate_idle",
+      "group": "steel",
+      "kind": "box"
+    },
+    {
+      "name": "plate_drive",
+      "group": "steel",
+      "kind": "box"
+    },
+    {
+      "name": "disc_01",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_02",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_03",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_04",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_05",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_06",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_07",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_08",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_09",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_10",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_11",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_12",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_13",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_14",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_15",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_16",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_17",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_18",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_19",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_20",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "disc_21",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "abrasive",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "bell_idle",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "bell_drive",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "shaft",
+      "group": "drum",
+      "kind": "cyl"
+    },
+    {
+      "name": "pulley_drum",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "brg_idle",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "brg_drive",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "jack_0",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "jack_1",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "key",
+      "group": "steel",
+      "kind": "box"
+    },
+    {
+      "name": "platen",
+      "group": "table",
+      "kind": "box"
+    },
+    {
+      "name": "uhmw",
+      "group": "table",
+      "kind": "box"
+    },
+    {
+      "name": "way_idle",
+      "group": "table",
+      "kind": "box"
+    },
+    {
+      "name": "way_drive",
+      "group": "table",
+      "kind": "box"
+    },
+    {
+      "name": "roller_0",
+      "group": "conveyor",
+      "kind": "cyl"
+    },
+    {
+      "name": "roller_shaft_0",
+      "group": "conveyor",
+      "kind": "cyl"
+    },
+    {
+      "name": "roller_1",
+      "group": "conveyor",
+      "kind": "cyl"
+    },
+    {
+      "name": "roller_shaft_1",
+      "group": "conveyor",
+      "kind": "cyl"
+    },
+    {
+      "name": "belt_top",
+      "group": "conveyor",
+      "kind": "box"
+    },
+    {
+      "name": "belt_bot",
+      "group": "conveyor",
+      "kind": "box"
+    },
+    {
+      "name": "acme_0",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "lock_0",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "acme_1",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "lock_1",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "handwheel",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "dro",
+      "group": "table",
+      "kind": "box"
+    },
+    {
+      "name": "motor",
+      "group": "motor",
+      "kind": "cyl"
+    },
+    {
+      "name": "pulley_mot",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "hinge_plate",
+      "group": "steel",
+      "kind": "box"
+    },
+    {
+      "name": "turnbuckle",
+      "group": "steel",
+      "kind": "box"
+    },
+    {
+      "name": "guard",
+      "group": "guard",
+      "kind": "box"
+    },
+    {
+      "name": "hood_top",
+      "group": "hood",
+      "kind": "box"
+    },
+    {
+      "name": "hood_idle",
+      "group": "hood",
+      "kind": "box"
+    },
+    {
+      "name": "hood_drive",
+      "group": "hood",
+      "kind": "box"
+    },
+    {
+      "name": "hood_back",
+      "group": "hood",
+      "kind": "box"
+    },
+    {
+      "name": "port",
+      "group": "steel",
+      "kind": "cyl"
+    },
+    {
+      "name": "brush",
+      "group": "hood",
+      "kind": "box"
+    },
+    {
+      "name": "gearmotor",
+      "group": "motor",
+      "kind": "box"
+    }
+  ]
+}

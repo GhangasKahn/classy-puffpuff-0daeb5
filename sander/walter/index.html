@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="WALTER — a modern 16-inch closed-frame drum thickness sander. Original engineering from Ron Walters' published failure modes. FreeCAD, OpenSCAD, eight A3 build sheets." />
+<meta name="description" content="WALTER — a modern 16-inch closed-frame drum thickness sander. Original engineering from Ron Walters' published failure modes. Kernel CAD, fourteen A3 sheets, build app." />
 <title>WALTER — 16″ Drum Thickness Sander</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -153,10 +153,11 @@ body::before{
     <nav class="nav-links" aria-label="Sections">
       <a href="#brief">Brief</a>
       <a href="#lineage">Lineage</a>
-      <a href="#engineering">Engineering</a>
+      <a href="#model">CAD</a>
       <a href="#plans">Plans</a>
-      <a href="#materials">BOM</a>
-      <a href="#build">Build</a>
+      <a href="app/">App</a>
+      <a href="report/">Report</a>
+      <a href="manual/">Manual</a>
       <a href="../">Shop ↗</a>
     </nav>
   </div>
@@ -171,8 +172,9 @@ body::before{
       <p class="lead hero-copy reveal">A shop-built drum thickness sander that keeps Ron Walters' dedicated motor and flange bearings, and throws out the three things that actually failed: PVC conveyor rollers, a sanding belt used as a belt, and an oak-thread table.</p>
       <div class="cta-row reveal">
         <a class="btn" href="#plans">Blueprints <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="cad/walter_sander.scad">OpenSCAD</a>
-        <a class="btn ghost" href="cad/walter_sander.py">FreeCAD</a>
+        <a class="btn" href="app/">Build app</a>
+        <a class="btn ghost" href="cad/exports/walter_assembly.stl">STL</a>
+        <a class="btn ghost" href="report/">Report</a>
       </div>
     </div>
   </section>
@@ -275,17 +277,27 @@ body::before{
       <div class="sec-head reveal">
         <p class="num">04 — Parametric CAD</p>
         <h2 class="display">One parameter set. Model, STEP, and sheets stay in sync.</h2>
-        <p class="lead">OpenSCAD for preview. FreeCAD for STEP/STL. Plan generator in Python reads the same inches.</p>
+        <p class="lead">One kernel in inches. Python writes STL/OBJ and isometric SVGs with no FreeCAD. OpenSCAD includes the generated parameters. FreeCAD writes STEP when freecadcmd exists.</p>
       </div>
       <div class="gallery">
-        <figure class="shot wide reveal"><img src="renders/hero.svg" alt="Isometric" /><figcaption>Isometric — 22 × 36 × 22″ benchtop · drum over crowned conveyor</figcaption></figure>
-        <figure class="shot reveal"><img src="plans/W3_drum.svg" alt="Drum sheet" /><figcaption>W-3 — keyed shaft, birch stack, spiral wrap, retainer slots</figcaption></figure>
-        <figure class="shot reveal"><img src="plans/W5_conveyor.svg" alt="Conveyor sheet" /><figcaption>W-5 — crown, skew tracking, 16×60 PVC belt</figcaption></figure>
+        <figure class="shot wide reveal"><img src="renders/walter_iso.svg" alt="Isometric" /><figcaption>Isometric — 22 × 36 × 22″ benchtop · drum over crowned conveyor</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_exploded.svg" alt="Exploded" /><figcaption>Exploded — frame, drum, table, conveyor, motor, hood</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_cutaway.svg" alt="Cutaway" /><figcaption>Cutaway — drive wall hidden</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_infeed.svg" alt="Infeed" /><figcaption>Infeed elevation</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_drive.svg" alt="Drive" /><figcaption>Drive side</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_top.svg" alt="Plan" /><figcaption>Plan</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_stand.svg" alt="Stand" /><figcaption>Optional 32″ cabinet</figcaption></figure>
+        <figure class="shot reveal"><img src="renders/walter_iso_paper.svg" alt="Paper iso" /><figcaption>Print cover (paper isometric)</figcaption></figure>
       </div>
       <div class="dl-row reveal">
-        <a class="btn ghost" href="cad/walter_sander.scad" download>walter_sander.scad</a>
-        <a class="btn ghost" href="cad/walter_sander.py" download>walter_sander.py</a>
-        <a class="btn ghost" href="cad/exports/walter_assembly.step" download>STEP (if built)</a>
+        <a class="btn ghost" href="cad/walter_kernel.py" download>walter_kernel.py</a>
+        <a class="btn ghost" href="cad/parameters.json" download>parameters.json</a>
+        <a class="btn ghost" href="cad/parts.json" download>parts.json</a>
+        <a class="btn ghost" href="cad/walter_sander.scad" download>OpenSCAD</a>
+        <a class="btn ghost" href="cad/walter_sander.py" download>FreeCAD</a>
+        <a class="btn ghost" href="cad/exports/walter_assembly.stl" download>assembly.stl</a>
+        <a class="btn ghost" href="cad/exports/walter_exploded.stl" download>exploded.stl</a>
+        <a class="btn ghost" href="cad/exports/walter_assembly.obj" download>assembly.obj</a>
       </div>
     </div>
   </section>
@@ -294,8 +306,13 @@ body::before{
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="num">05 — Construction documents</p>
-        <h2 class="display">Eight blueprint sheets</h2>
-        <p class="lead">Print at 100% on A3 (or ~71% on Letter). Dimensions in inches. Generated from the same parameters as the 3D model.</p>
+        <h2 class="display">Fourteen blueprint sheets</h2>
+        <p class="lead">Print at 100% on A3 (or ~71% on Letter). Dimensions in inches. Generated from the same kernel as the 3D model. W-10 templates must print at true 1:1 — check the scale bar.</p>
+      </div>
+      <div class="trinity reveal" style="margin-bottom:36px">
+        <article class="civ"><span class="rule-name">Build app</span><h3><a href="app/">Checklist + explode</a></h3><p>PWA. Twelve steps, materials, subsystem locks, on-device drafts.</p></article>
+        <article class="civ"><span class="rule-name">Report · manual</span><h3><a href="report/">Engineering</a> · <a href="manual/">12 steps</a></h3><p>Datums D1–D4, FMEA, the sequence you actually glue in.</p></article>
+        <article class="civ"><span class="rule-name">Guidebook</span><h3><a href="guide/">How to use the package</a></h3><p>Print, CAD pipeline, what not to buy, what not to copy.</p></article>
       </div>
       <div class="sheets">
         <div class="sheet reveal"><img src="plans/W1_general.svg" alt="W-1" /><div class="bar"><b>W-1</b><span>General arrangement · elevations · spec</span><a href="plans/W1_general.svg" download>SVG</a></div></div>
@@ -306,6 +323,12 @@ body::before{
         <div class="sheet reveal"><img src="plans/W6_drive.svg" alt="W-6" /><div class="bar"><b>W-6</b><span>1 HP drive, hinge mount, electrics</span><a href="plans/W6_drive.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W7_dust_safety.svg" alt="W-7" /><div class="bar"><b>W-7</b><span>Dust hood, rotation, safe use</span><a href="plans/W7_dust_safety.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W8_bom.svg" alt="W-8" /><div class="bar"><b>W-8</b><span>Cut list, hardware BOM, sequence, budget</span><a href="plans/W8_bom.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W9_exploded.svg" alt="W-9" /><div class="bar"><b>W-9</b><span>Exploded groups · datums D1–D4</span><a href="plans/W9_exploded.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W10_templates.svg" alt="W-10" /><div class="bar"><b>W-10</b><span>1:1 disc, plate, key · check the scale bar</span><a href="plans/W10_templates.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W11_stand.svg" alt="W-11" /><div class="bar"><b>W-11</b><span>Optional 32″ cabinet / mobile base</span><a href="plans/W11_stand.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W12_wiring.svg" alt="W-12" /><div class="bar"><b>W-12</b><span>Wiring ladder · no-volt release · startup card</span><a href="plans/W12_wiring.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W13_wrap.svg" alt="W-13" /><div class="bar"><b>W-13</b><span>Abrasive wrap development · 15–20° spiral</span><a href="plans/W13_wrap.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W14_buylist.svg" alt="W-14" /><div class="bar"><b>W-14</b><span>Buy list · search terms · verify catalog numbers</span><a href="plans/W14_buylist.svg" download>SVG</a></div></div>
       </div>
     </div>
   </section>
@@ -315,7 +338,7 @@ body::before{
       <div class="sec-head reveal">
         <p class="num">06 — Materials</p>
         <h2 class="display">Baltic birch, Stressproof, and a real conveyor belt</h2>
-        <p class="lead">Do not substitute MDF for the drum or walls. Do not substitute a sanding belt for the conveyor. Full callouts are on sheet W-8.</p>
+        <p class="lead">Do not substitute MDF for the drum or walls. Do not substitute a sanding belt for the conveyor. Full callouts are on sheets W-8 and W-14.</p>
       </div>
       <table class="mat-table reveal">
         <thead><tr><th>Item</th><th>Spec</th><th>Qty</th></tr></thead>
@@ -332,9 +355,16 @@ body::before{
           <tr><td>Conveyor belt</td><td>16″ × 60″ 2-ply PVC, endless</td><td>1</td></tr>
           <tr><td>Drive belt</td><td>4L440 link · 3.00″ / 4.75″ 4L pulleys</td><td>1 set</td></tr>
           <tr><td>Electrics</td><td>Magnetic starter, OL, E-stop, 5-20 cord</td><td>1 set</td></tr>
-          <tr class="total"><td>Budget</td><td>See W-8</td><td>≈ $1,100–1,600</td></tr>
+          <tr class="total"><td>Budget</td><td>See W-8 / W-14 · verify catalog numbers</td><td>≈ $1,100–1,600</td></tr>
         </tbody>
       </table>
+      <div class="dl-row reveal">
+        <a class="btn ghost" href="fab/07_BOM/hardware.csv">hardware.csv</a>
+        <a class="btn ghost" href="fab/07_BOM/plywood.csv">plywood.csv</a>
+        <a class="btn ghost" href="fab/12_QA/fmea.csv">fmea.csv</a>
+        <a class="btn ghost" href="fab/10_TEMPLATES/T-DISC.svg">T-DISC 1:1</a>
+        <a class="btn ghost" href="guide/">How to use this</a>
+      </div>
     </div>
   </section>
 
@@ -362,10 +392,10 @@ body::before{
       <div class="fc-box reveal">
         <p class="kicker">Regenerate CAD + plans</p>
         <pre>./scripts/build_walter.sh
-# or stepwise:
+# kernel → STL/OBJ/SVG, W-1…W-14, fab CSVs
+python3 scripts/gen_walter_cad.py
 python3 scripts/gen_walter_plans.py
-openscad sander/walter/cad/walter_sander.scad
-freecadcmd sander/walter/cad/walter_sander.py</pre>
+python3 scripts/gen_walter_fab.py</pre>
       </div>
       <p class="note">Shop-build design for experienced DIY construction — not a stamped PE document, not a wiring diagram for permit, not a substitute for a licensed electrician. Shafting, guarding, and 115 V are your responsibility. If a number on a sheet fights the CAD, trust the CAD parameters.</p>
     </div>
@@ -374,8 +404,8 @@ freecadcmd sander/walter/cad/walter_sander.py</pre>
 
 <footer class="foot">
   <div class="wrap">
-    <span>WALTER · 16″ drum thickness sander · Rev A</span>
-    <span>OpenSCAD · FreeCAD · A3 sheets</span>
+    <span>WALTER · 16″ drum thickness sander · Rev B</span>
+    <span>Kernel CAD · 14 A3 sheets · build app</span>
   </div>
 </footer>
 <script>

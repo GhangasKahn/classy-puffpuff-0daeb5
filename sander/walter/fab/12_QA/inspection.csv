@@ -1,0 +1,11 @@
+id,check,tool
+Q01,Walls square and coplanar at bearing plates,framing square + winding sticks
+Q02,Drum OD 5.000 ±0.010 after turning,caliper
+Q03,"Drum parallel to platen, 16"" feeler both ends","feeler + 16"" straightedge"
+Q04,"Conveyor tracks empty 60 s, then with a 16"" board",eyeball + marks
+Q05,Acme screws timed — witness marks aligned,paint pen
+Q06,E-stop kills drum and feed; no auto-restart,blink test
+Q07,"Hood on, 4"" hose pulling, no leak at walls",tissue
+Q08,Guard closed; no finger path to belt pinch,visual
+Q09,"First passes 0.010"" in poplar, even cut",ear + caliper
+Q10,Idle jack at zero before trusting taper,jack screws
