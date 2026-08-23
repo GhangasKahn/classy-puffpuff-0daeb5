@@ -1,0 +1,8 @@
+node_modules
+.git
+fonts
+test
+docs
+*.png
+.playwright-mcp
+storage

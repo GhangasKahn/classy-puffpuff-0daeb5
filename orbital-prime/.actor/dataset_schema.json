@@ -1,0 +1,14 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "aos": { "type": "string", "format": "date-time", "description": "Acquisition of signal (ISO 8601)" },
+    "max": { "type": "string", "format": "date-time", "description": "Time of maximum elevation" },
+    "los": { "type": "string", "format": "date-time", "description": "Loss of signal" },
+    "maxEl": { "type": "number", "description": "Peak elevation, degrees" },
+    "mag": { "type": "number", "description": "Estimated magnitude (not photometry)" },
+    "eye": { "type": "string", "description": "NAKED-EYE | DAY | ECLIPSED | LOW" },
+    "gate": { "type": "string", "description": "Weather class at max: perfect | marginal | obstructed | unknown" },
+    "score": { "type": "integer", "description": "Logistic prior 0–100. Not a fitted model." },
+    "scoreIsPrior": { "type": "boolean", "description": "Always true. Do not call this ML." }
+  }
+}

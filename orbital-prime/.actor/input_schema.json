@@ -1,0 +1,50 @@
+{
+  "title": "OP-01 Observe input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "lat": {
+      "title": "Latitude",
+      "type": "number",
+      "description": "Observer geodetic latitude in degrees (WGS-84).",
+      "minimum": -90,
+      "maximum": 90,
+      "default": 42.8864,
+      "prefill": 42.8864
+    },
+    "lon": {
+      "title": "Longitude",
+      "type": "number",
+      "description": "Observer geodetic longitude in degrees (WGS-84).",
+      "minimum": -180,
+      "maximum": 180,
+      "default": -78.8784,
+      "prefill": -78.8784
+    },
+    "altKm": {
+      "title": "Altitude (km)",
+      "type": "number",
+      "description": "Observer height above WGS-84 ellipsoid, kilometres. Default 0.18 (Buffalo).",
+      "minimum": -1,
+      "maximum": 20,
+      "default": 0.18
+    },
+    "sat": {
+      "title": "NORAD catalog number",
+      "type": "string",
+      "description": "Station catalog number. Default 25544 (ISS). Celestrak GROUP=stations — not Starlink.",
+      "default": "25544",
+      "prefill": "25544",
+      "pattern": "^\\d{1,8}$"
+    },
+    "hours": {
+      "title": "Search horizon (hours)",
+      "type": "integer",
+      "description": "How far ahead to search for ≥10° elevation passes. 1–72.",
+      "minimum": 1,
+      "maximum": 72,
+      "default": 36
+    }
+  },
+  "required": ["lat", "lon"]
+}

@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "OP-01 Observe output",
+  "description": "One OUTPUT record (lock, FACE, gate, pass list) plus a dataset row per computed pass.",
+  "properties": {
+    "OUTPUT": {
+      "title": "Observe record",
+      "type": "object",
+      "description": "Full observe() result: look, FACE, gate, residual, passes, source URLs, errors."
+    }
+  }
+}

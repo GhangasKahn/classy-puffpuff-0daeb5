@@ -3,6 +3,20 @@
   publish = "."
   command = ""
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/orbital-prime/api/feed"
+  to = "/.netlify/functions/op-feed"
+  status = 200
+
+[[redirects]]
+  from = "/orbital-prime/api/health"
+  to = "/.netlify/functions/op-health"
+  status = 200
+
 # service worker must never be cached stale, and must serve as JS
 [[headers]]
   for = "/app/service-worker.js"
@@ -14,6 +28,32 @@
   for = "/app/manifest.json"
   [headers.values]
     Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/orbital-prime/api/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    Access-Control-Allow-Origin = "*"
+[[headers]]
+  for = "/orbital-prime/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/orbital-prime/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/orbital-prime/"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/orbital-prime/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
 
 # MARTIN build app PWA
 [[headers]]
@@ -36,7 +76,7 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
     # geolocation allowed on same origin for the Aegis Air "use my location" feature
-    Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
+    Permissions-Policy = "geolocation=(self), microphone=(), camera=(self)"
 
 [[redirects]]
   from = "/app"
@@ -45,6 +85,16 @@
 
 # /aegis now serves the cinematic landing page (committed build in /aegis/),
 # whose CTAs funnel into the instrument app at /aegis-air-mvp/.
+
+[[redirects]]
+  from = "/orbital"
+  to = "/orbital-prime/"
+  status = 301
+
+[[redirects]]
+  from = "/orbital-prime"
+  to = "/orbital-prime/"
+  status = 301
 
 [[redirects]]
   from = "/aegis-air-mvp"

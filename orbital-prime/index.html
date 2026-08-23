@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f2ede4" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="description" content="OP-01 Orbital Prime — a field instrument for ISS look angles, naked-eye passes, and weather-gated go/no-go. Public telemetry only." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="/orbital-prime/" />
+  <meta property="og:title" content="OP-01 / ORBITAL PRIME" />
+  <meta property="og:description" content="The instrument between you and the sky. ISS lock, FACE bearing, SGP4 passes. Public telemetry only." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/orbital-prime/og.svg" />
+  <link rel="apple-touch-icon" href="/orbital-prime/favicon.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>OP-01 — Orbital Prime</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preload" href="fonts/archivo-black-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/space-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://api.wheretheiss.at" crossorigin />
+  <link rel="dns-prefetch" href="https://celestrak.org" />
+  <link rel="dns-prefetch" href="https://api.open-meteo.com" />
+  <link rel="dns-prefetch" href="https://api.rainviewer.com" />
+  <link rel="stylesheet" href="styles/orbital.css?v=9" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Orbital Prime",
+    "applicationCategory": "AstronomyApplication",
+    "operatingSystem": "Any",
+    "description": "Field instrument for ISS look angles, SGP4 naked-eye passes, and weather-gated observation. Public telemetry only.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body data-depth="2">
+  <div class="grain" aria-hidden="true"></div>
+
+  <a class="skip" href="#cluster">Skip to instrument</a>
+
+  <header class="mast">
+    <div class="sku">OP-01<small>orbital prime ™</small></div>
+    <p class="mast-mid" id="mast-target">ISS 25544 · public ephemeris · no account</p>
+    <div class="mast-right">
+      <button type="button" class="hard-btn" id="btn-audio" aria-pressed="false">Audio</button>
+      <div class="depth-bar" role="radiogroup" aria-label="Information depth">
+        <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="1">1</button>
+        <button type="button" class="depth-btn" role="radio" aria-checked="true" data-depth="2">2</button>
+        <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="3">3</button>
+        <button type="button" class="depth-btn" role="radio" aria-checked="false" data-depth="4">4</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="depth-toast" class="toast" role="status" aria-live="polite" hidden>Depth 2</div>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-plate" data-motion="M01">
+        <p class="hero-kicker"><s>software</s> hardware catalog · unit 01</p>
+        <h1 id="hero-title" class="display">Orbital<br />Prime</h1>
+        <p class="lede"><span class="q" aria-hidden="true">&ldquo;</span> The instrument between you and the sky. <span class="q" aria-hidden="true">&rdquo;</span></p>
+        <div class="caption-row">
+          <span>for <strong>walking</strong></span>
+          <span>for <strong>looking up</strong></span>
+          <span id="clock">—</span>
+        </div>
+      </div>
+      <figure class="unit-stage" id="unit-stage">
+        <canvas id="unit-gl" width="720" height="720" aria-label="OP-01 hardware unit. Encoder follows live azimuth. Pointer tilt is camera only."></canvas>
+        <canvas id="unit-2d" width="720" height="720" hidden aria-hidden="true"></canvas>
+        <figcaption class="unit-cap">OP-01 · encoder tracks live AZ · tilt is view only</figcaption>
+      </figure>
+    </section>
+
+    <nav class="dock" aria-label="Modules">
+      <button type="button" class="dock-item active" data-target="#top"><span class="n">01</span><span class="l">Lock</span></button>
+      <button type="button" class="dock-item" data-target="#cluster"><span class="n">02</span><span class="l">Pass</span></button>
+      <button type="button" class="dock-item" data-target="#physics"><span class="n">03</span><span class="l">Notes</span></button>
+      <button type="button" class="dock-item" data-target="#ar"><span class="n">04</span><span class="l">Finder</span></button>
+    </nav>
+
+    <div class="cluster" id="cluster">
+      <article class="mod" aria-labelledby="mod-01">
+        <header class="mod-head">
+          <span class="mod-n">01</span>
+          <h2 id="mod-01" class="mod-title">Observer</h2>
+          <span class="mod-note">WGS-84</span>
+        </header>
+        <form id="loc-form" class="loc-strip" autocomplete="off">
+          <div class="loc-fields">
+            <label class="field"><span>Latitude</span><input id="lat" name="lat" inputmode="decimal" value="42.8864" required /></label>
+            <label class="field"><span>Longitude</span><input id="lon" name="lon" inputmode="decimal" value="-78.8784" required /></label>
+            <label class="field"><span>Target</span>
+              <select id="sat-select">
+                <option value="25544">ISS (ZARYA) · 25544</option>
+              </select>
+            </label>
+          </div>
+          <div class="loc-acts">
+            <button type="submit" class="ghost">Set</button>
+            <button type="button" class="ghost" id="btn-gps">GPS</button>
+            <button type="button" class="hard-btn" id="btn-buf">Buffalo</button>
+            <button type="button" class="ghost" id="btn-share">Copy link</button>
+            <button type="button" class="ghost" id="btn-ics">Calendar</button>
+            <button type="button" class="ghost" id="btn-speak">Speak</button>
+            <button type="button" class="ghost" id="btn-alert" aria-pressed="false">Alerts</button>
+            <p class="loc-status" id="loc-status">Buffalo preset · 42.8864°N 78.8784°W</p>
+          </div>
+        </form>
+
+        <ul class="feeds" id="feeds" aria-label="Live connector status">
+          <li data-feed="iss"><span>ISS</span><b class="feed-st">—</b></li>
+          <li data-feed="tle"><span>TLE</span><b class="feed-st">—</b></li>
+          <li data-feed="wx"><span>WX</span><b class="feed-st">—</b></li>
+          <li data-feed="radar"><span>RADAR</span><b class="feed-st">—</b></li>
+          <li data-feed="kp"><span>Kp</span><b class="feed-st">—</b></li>
+        </ul>
+
+        <div id="next-pass" class="next-block" data-motion="M09">
+          <p class="when" id="next-when">Computing</p>
+          <p class="when-meta" id="next-meta">Waiting for SGP4.</p>
+          <p class="when-meta" id="best-window">Best window —</p>
+          <p class="tminus" id="tminus" aria-label="Countdown to next pass">T−--:--:--</p>
+          <div class="scrub" aria-hidden="true"><i id="scrub-fill" class="scrub-fill"></i></div>
+          <div class="scrub-ends">
+            <span id="scrub-a">AOS —</span>
+            <span id="scrub-l">LOS —</span>
+          </div>
+        </div>
+
+        <p class="face-word" id="face" data-motion="M12" aria-live="polite">FACE — waiting for ISS lock.</p>
+        <p class="face-sub">Spoken bearing. Face that way. Look up.</p>
+      </article>
+
+      <article class="mod d2" aria-labelledby="mod-02">
+        <header class="mod-head">
+          <span class="mod-n">02</span>
+          <h2 id="mod-02" class="mod-title">Lock</h2>
+          <span class="mod-note" id="mod-02-note">ISS 25544</span>
+        </header>
+
+        <dl class="read-grid">
+          <div class="read"><dt>Azimuth</dt><dd id="az" data-motion="M06">—</dd></div>
+          <div class="read"><dt>Elevation</dt><dd id="el" data-motion="M06">—</dd></div>
+          <div class="read"><dt>Range</dt><dd id="range" data-motion="M06">—</dd></div>
+          <div class="read"><dt>Magnitude</dt><dd id="mag" data-motion="M06">—</dd></div>
+        </dl>
+        <p class="lock-meta"><span id="lock-src">—</span> · <span id="residual">—</span></p>
+
+        <div class="gauges gauge-row">
+          <div class="gauge-wrap">
+            <canvas id="gauge-az" aria-hidden="true"></canvas>
+            <p class="gauge-cap">Azimuth</p>
+          </div>
+          <div class="gauge-wrap">
+            <canvas id="gauge-el" aria-hidden="true"></canvas>
+            <p class="gauge-cap">Elevation</p>
+          </div>
+        </div>
+
+        <div class="plot-row">
+          <div class="plot-wrap">
+            <canvas id="sky-plot" aria-label="Alt-azimuth sky plot. Zenith at center, horizon at the ring."></canvas>
+            <p class="gauge-cap">Alt-az · zenith center · N up</p>
+          </div>
+          <div class="compass-wrap d3">
+            <canvas id="compass" width="160" height="160" aria-label="Target bearing compass"></canvas>
+            <p class="compass-read" id="compass-read">Target bearing —</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="mod" id="gate" data-class="unknown" data-motion="M08" aria-labelledby="mod-03">
+        <header class="mod-head">
+          <span class="mod-n">03</span>
+          <h2 id="mod-03" class="mod-title">Gate</h2>
+          <span class="mod-note">Open-Meteo</span>
+        </header>
+        <p class="gate-word" id="gate-word">Scanning</p>
+        <p class="gate-why" id="gate-why">Sampling cloud, rain, visibility.</p>
+        <div class="hourly d3" id="hourly">
+          <ol id="hourly-list"></ol>
+          <p class="radar-cap" id="hourly-empty">Waiting for hourly weather.</p>
+        </div>
+      </article>
+
+      <article class="mod d3" aria-labelledby="mod-04">
+        <header class="mod-head">
+          <span class="mod-n">04</span>
+          <h2 id="mod-04" class="mod-title">Passes</h2>
+          <span class="mod-note">36 h · ≥10°</span>
+        </header>
+        <div class="table-wrap">
+          <table class="sheet">
+            <thead>
+              <tr>
+                <th>AOS</th>
+                <th>Max</th>
+                <th>LOS</th>
+                <th>El</th>
+                <th>Class</th>
+                <th>Gate</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="pass-body">
+              <tr><td colspan="7">Computing intersections…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="mod d3" aria-labelledby="mod-05">
+        <header class="mod-head">
+          <span class="mod-n">05</span>
+          <h2 id="mod-05" class="mod-title">Radar</h2>
+          <span class="mod-note">RainViewer</span>
+        </header>
+        <div class="radar-frame" id="radar-well">
+          <p class="radar-empty" id="radar-empty">Waiting for radar tile.</p>
+          <img id="radar-img" alt="RainViewer radar tile centered on the observer" hidden />
+        </div>
+        <p class="radar-cap" id="radar-cap">Radar</p>
+      </article>
+
+      <article class="mod d4" aria-labelledby="mod-06">
+        <header class="mod-head">
+          <span class="mod-n">06</span>
+          <h2 id="mod-06" class="mod-title">Kp</h2>
+          <span class="mod-note">NOAA SWPC</span>
+        </header>
+        <p class="kp-num" id="kp">—</p>
+        <p class="radar-cap" id="kp-src">Planetary K-index</p>
+      </article>
+
+      <article class="mod d4 track" aria-labelledby="mod-07">
+        <header class="mod-head">
+          <span class="mod-n">07</span>
+          <h2 id="mod-07" class="mod-title">Ground track</h2>
+          <span class="mod-note">one orbit</span>
+        </header>
+        <div class="track-frame">
+          <canvas id="ground-track" aria-label="ISS sub-satellite ground track"></canvas>
+        </div>
+      </article>
+    </div>
+
+    <section id="physics" class="surface d4" aria-labelledby="physics-title" data-motion="M02">
+      <header class="mod-head">
+        <span class="mod-n">08</span>
+        <h2 id="physics-title" class="mod-title">Notes</h2>
+      </header>
+      <div class="prose">
+        <p>Look angles from geodetic observer and sub-satellite point on WGS-84. Topocentric east, north, up from ECEF. Azimuth via atan2(E, N). Elevation via atan2(U, √(E²+N²)). Range is the vector length.</p>
+        <p>Passes run in the browser with satellite.js SGP4 against Celestrak GP. Thirty-second steps, 36 hours. Naked-eye needs elevation ≥ 10°, sun below −6°, and the station outside Earth’s shadow.</p>
+        <p>Magnitude estimate: −1.8 + 5 log₁₀(range / 1000 km) + phase term.</p>
+        <p>Pass score is a logistic prior on live features (elevation, estimated magnitude, cloud, precipitation, visibility, night/illumination, Kp). Coefficients are documented in <code>js/score.js</code>. It is not a trained black box and not a guarantee.</p>
+        <p>Anyone can use this instrument. Location is a URL: <code>?lat=&amp;lon=&amp;sat=</code>. No account. GPS is optional. Celestrak <code>GROUP=stations</code> is the catalog (ISS, Tiangong, and other stations — not Starlink).</p>
+        <p>The hero object is the OP-01 unit. The encoder disc is live azimuth. The orange sector is elevation. Pointer motion tilts the camera, not the numbers. If WebGL is missing, a 2D drawing of the same unit is the fallback. This is not a globe.</p>
+      </div>
+    </section>
+
+    <section id="starship" class="surface d4" aria-labelledby="starship-title" data-motion="M02">
+      <header class="mod-head">
+        <span class="mod-n">09</span>
+        <h2 id="starship-title" class="mod-title">Catalog slot</h2>
+      </header>
+      <div class="prose">
+        <p id="starship-status">Querying Celestrak GP for NAME=STARSHIP…</p>
+        <p>If NORAD publishes elements, local intercepts compute here. Empty means empty.</p>
+        <dl class="readout" id="starship-readout" hidden></dl>
+      </div>
+    </section>
+
+    <section id="live" class="surface d4" aria-labelledby="live-title" data-motion="M02">
+      <header class="mod-head">
+        <span class="mod-n">10</span>
+        <h2 id="live-title" class="mod-title">Ephemeris</h2>
+      </header>
+      <dl class="readout">
+        <div><dt>Latitude</dt><dd id="iss-lat">—</dd></div>
+        <div><dt>Longitude</dt><dd id="iss-lon">—</dd></div>
+        <div><dt>Altitude</dt><dd id="iss-alt">—</dd></div>
+        <div><dt>Velocity</dt><dd id="iss-vel">—</dd></div>
+        <div><dt>Light</dt><dd id="iss-vis">—</dd></div>
+        <div><dt>Epoch</dt><dd id="iss-ts">—</dd></div>
+      </dl>
+      <p class="note">api.wheretheiss.at/v1/satellites/25544</p>
+    </section>
+
+    <section id="manifest" class="surface d4" aria-labelledby="manifest-title" data-motion="M02">
+      <header class="mod-head">
+        <span class="mod-n">11</span>
+        <h2 id="manifest-title" class="mod-title">Manifest</h2>
+      </header>
+      <p class="prose">Same numbers as the pass table. Kept as a paper trail.</p>
+      <div class="table-wrap">
+        <table class="sheet">
+          <thead>
+            <tr>
+              <th>AOS</th>
+              <th>Max</th>
+              <th>LOS</th>
+              <th>El</th>
+              <th>Class</th>
+              <th>Gate</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="manifest-body">
+            <tr><td colspan="7">Waiting for TLE…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" id="manifest-note">Waiting for SGP4.</p>
+    </section>
+
+    <section id="ar" class="surface d4" aria-labelledby="ar-title" data-motion="M02">
+      <header class="mod-head">
+        <span class="mod-n">12</span>
+        <h2 id="ar-title" class="mod-title">Finder</h2>
+      </header>
+      <p class="prose">Camera plus device heading. Overlay only. FACE remains the instruction if the camera is refused.</p>
+      <p class="ar-note" id="ar-msg">Camera off.</p>
+      <button type="button" class="hard-btn" id="btn-ar">Open camera</button>
+      <div class="ar-stage" style="margin-top: 14px;">
+        <video id="ar-video" playsinline muted></video>
+        <canvas id="ar-hud" aria-hidden="true"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <p><strong>OP-01</strong> · Orbital Prime. Client-side. No accounts. No tracking.</p>
+    <p class="note">Where The ISS At · Celestrak GP stations · Open-Meteo · RainViewer · NOAA SWPC · satellite.js SGP4 · headless: <code>node js/actor-main.js</code></p>
+  </footer>
+
+  <span id="audio-icon" hidden></span>
+
+  <script src="vendor/satellite.min.js" defer></script>
+  <script type="module" src="js/main.js?v=9"></script>
+</body>
+</html>

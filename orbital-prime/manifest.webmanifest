@@ -1,0 +1,25 @@
+{
+  "name": "Orbital Prime",
+  "short_name": "ORBITAL",
+  "description": "OP-01 field instrument: ISS lock, FACE bearing, SGP4 passes, weather gate. Public telemetry only.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f2ede4",
+  "theme_color": "#f2ede4",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

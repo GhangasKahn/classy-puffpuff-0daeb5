@@ -1,0 +1,37 @@
+name: orbital-prime
+
+on:
+  push:
+    paths:
+      - "orbital-prime/**"
+      - ".github/workflows/orbital-prime.yml"
+  pull_request:
+    paths:
+      - "orbital-prime/**"
+      - ".github/workflows/orbital-prime.yml"
+
+jobs:
+  unit:
+    name: unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run deterministic tests
+        working-directory: orbital-prime
+        run: node --test test/score.test.mjs test/unit.test.mjs test/css-tokens.test.mjs test/observe.test.mjs test/deploy-surface.test.mjs
+
+  live:
+    name: live connectors
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Hit public ephemeris and weather
+        working-directory: orbital-prime
+        run: node --test test/live.test.mjs
