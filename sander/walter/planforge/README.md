@@ -1,11 +1,12 @@
 # WALTER WOODWRIGHT PLANFORGE v1.0
 
-Release: **FABRICATION-READY WITH CONDITIONS** · Risk **R3** · Kernel 1.2.0 · Rev C
+Release: **FABRICATION-READY WITH CONDITIONS** · Risk **R3** · Kernel 1.2.1 · Rev C
 
 - [Guidebook](index.html) — G/A/J/E/P/M/F/H/Q
 - [Design basis](DESIGN_BASIS.md)
 - [Zero-gap checklist](ZERO_GAP.md)
-- [Changelog](CHANGELOG.md)
+- [Calculations](CALCULATIONS.md)
+- [Sheet index](SHEET_INDEX.csv)
 - [McMaster-Carr schedule](MCMASTER_SCHEDULE.csv)
 - [Requirements](REQUIREMENTS.csv)
 - [Dimension register](DIMENSION_REGISTER.csv)

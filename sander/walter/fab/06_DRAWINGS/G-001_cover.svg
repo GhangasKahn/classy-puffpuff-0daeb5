@@ -12,7 +12,7 @@
 <text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
 <text x='48.0' y='108.0' font-family='Georgia, serif' font-size='72' fill='#1c1914' text-anchor='start' font-weight='600'>WALTER</text>
 <text x='52.0' y='148.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#b4532a' text-anchor='start' font-weight='600'>16″ CLOSED-FRAME DRUM THICKNESS SANDER</text>
-<text x='52.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='start'>WOODWRIGHT PLANFORGE v1.0  ·  kernel 1.2.0  ·  WPF-WALTER-16-C</text>
+<text x='52.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='start'>WOODWRIGHT PLANFORGE v1.0  ·  kernel 1.2.1  ·  WPF-WALTER-16-C</text>
 <polygon points='1229.0,501.8 1238.7,507.4 1238.7,496.1 1229.0,490.5' fill='#6e5638' stroke='#3a3228' stroke-width='0.6' stroke-linejoin='round'/>
 <polygon points='1224.2,493.3 1233.9,487.7 1233.9,461.5 1224.2,467.2' fill='#8a6a42' stroke='#3a3228' stroke-width='0.6' stroke-linejoin='round'/>
 <polygon points='1230.6,478.4 1240.4,484.0 1240.4,340.0 1230.6,334.3' fill='#c4a574' stroke='#3a3228' stroke-width='0.6' stroke-linejoin='round'/>
@@ -457,30 +457,41 @@
 <text x='52.0' y='724.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>D2 Drum axis = Z 13.50″, Y 18.00″. Both bearing plates from one story stick.</text>
 <text x='52.0' y='744.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>D3 Idle jack at zero = plates coplanar. True the drum, then jack for parallelism.</text>
 <text x='52.0' y='764.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>D4 Acme nuts clocked together before the HTD belt. Paint a witness mark.</text>
-<text x='52.0' y='810.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>SHEET INDEX (this family)</text>
-<text x='52.0' y='836.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>G-001 Cover / release</text>
-<text x='52.0' y='854.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>G-002 Design basis</text>
-<text x='52.0' y='872.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>A-101 Iso (navigation only)</text>
-<text x='52.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>A-102 Orthographic GA</text>
-<text x='52.0' y='908.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>A-103 Section at D2</text>
-<text x='52.0' y='926.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>E-101 Exploded + balloons</text>
-<text x='52.0' y='944.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>P-201 Disc D-001</text>
-<text x='52.0' y='962.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>P-202 Wall F-002/003</text>
-<text x='52.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>P-203 Bearing plate ST-001/002</text>
-<text x='392.0' y='836.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>P-204 Platen T-001</text>
-<text x='392.0' y='854.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>J-201 Drum stack</text>
-<text x='392.0' y='872.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>J-202 Ways + Acme</text>
-<text x='392.0' y='890.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>J-203 Crown + belt</text>
-<text x='392.0' y='908.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>J-204 Wrap</text>
-<text x='392.0' y='926.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>M-101 Drive</text>
-<text x='392.0' y='944.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>M-102 Conveyor</text>
-<text x='392.0' y='962.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>F-101 Nest</text>
-<text x='392.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Q-101 Inspection</text>
-<rect x='900.0' y='780.0' width='460.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
-<text x='912.0' y='802.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>ALSO IN THIS PACKAGE</text>
-<text x='912.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>W-1…W-14 shop blueprints in /plans/</text>
-<text x='912.0' y='838.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>LEGO 22-step manual in /manual/</text>
-<text x='912.0' y='856.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Guidebook HTML in /planforge/</text>
-<text x='912.0' y='874.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Kernel STL/OBJ in /cad/exports/</text>
-<text x='912.0' y='892.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not scale A-101. Cut from P-sheets + T-DISC.</text>
+<text x='52.0' y='800.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>SHEET INDEX (this family)  ·  N/A recorded, not omitted by accident</text>
+<text x='52.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>G-001  ACTIVE  Cover, release, sheet index</text>
+<text x='52.0' y='836.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>G-002  ACTIVE  Units, requirements, derived speeds</text>
+<text x='52.0' y='852.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>G-003  ACTIVE  Evidence, revision, calculation register</text>
+<text x='52.0' y='868.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>G-004  ACTIVE  R3 hazards, FMEA, PPE, professional review</text>
+<text x='52.0' y='884.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>A-101  ACTIVE  Navigation isometric — do not scale</text>
+<text x='52.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>A-102  ACTIVE  Orthographic GA</text>
+<text x='52.0' y='916.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>A-103  ACTIVE  Section at D2</text>
+<text x='52.0' y='932.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>A-104  ACTIVE  Opening envelope, human interface, nips</text>
+<text x='52.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>A-105  N/A  No site/anchorage — benchtop machine; opti</text>
+<text x='52.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>E-101  ACTIVE  Exploded isometric + balloons</text>
+<text x='52.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>E-102  ACTIVE  Bag sequence and clamp/dependency</text>
+<text x='52.0' y='996.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>E-103  N/A  Hardware stack in MCMASTER_SCHEDULE.csv + </text>
+<text x='592.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-201  ACTIVE  D-001 disc</text>
+<text x='592.0' y='836.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-202  ACTIVE  F-002 / F-003 walls</text>
+<text x='592.0' y='852.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-203  ACTIVE  ST-001 / ST-002 plates</text>
+<text x='592.0' y='868.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-204  ACTIVE  T-001 platen</text>
+<text x='592.0' y='884.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-205  ACTIVE  F-001 base, stretchers, maple rails</text>
+<text x='592.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-206  ACTIVE  ST-004 shaft, ST-005 keys, ST-006 bells</text>
+<text x='592.0' y='916.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-207  ACTIVE  ST-003 motor hinge plate</text>
+<text x='592.0' y='932.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-208  ACTIVE  C-001 / C-002 crowned rollers</text>
+<text x='592.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-209  ACTIVE  HD-001 hood, M-003 guard</text>
+<text x='592.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-210  ACTIVE  N-001 optional cabinet</text>
+<text x='592.0' y='980.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>P-211  ACTIVE  T-002 UHMW, T-003/004 ways, T-005 nut bloc</text>
+<text x='592.0' y='996.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>J-201  ACTIVE  J-DRUM keyed stack</text>
+<text x='1132.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>J-202  ACTIVE  J-WAY / J-ACME / jack</text>
+<text x='1132.0' y='836.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>J-203  ACTIVE  J-CROWN belt tracking</text>
+<text x='1132.0' y='852.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>J-204  ACTIVE  J-WRAP abrasive</text>
+<text x='1132.0' y='868.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>M-101  ACTIVE  Hinge, 4L, guard</text>
+<text x='1132.0' y='884.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>M-102  ACTIVE  Feed kinematics</text>
+<text x='1132.0' y='900.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>M-105  ACTIVE  Electrical intent — PROFESSIONAL REVIEW RE</text>
+<text x='1132.0' y='916.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>S-101  N/A  Not a building / timber structure</text>
+<text x='1132.0' y='932.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>F-101  ACTIVE  Plywood nest</text>
+<text x='1132.0' y='948.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>F-102  ACTIVE  Operations routing OP-01…14</text>
+<text x='1132.0' y='964.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11' fill='#1c1914' text-anchor='start'>Q-101  ACTIVE  Q01–Q10 first-run</text>
+<rect x='48.0' y='1040.0' width='1580.0' height='40.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='1062.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>W-1…W-14 in /plans/  ·  LEGO /manual/  ·  guidebook /planforge/  ·  STL /cad/exports/  ·  cut from P-sheets + T-DISC, never A-101</text>
 </svg>

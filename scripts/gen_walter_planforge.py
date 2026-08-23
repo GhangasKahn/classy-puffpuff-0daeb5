@@ -10,7 +10,9 @@ Run: python3 scripts/gen_walter_planforge.py
 from __future__ import annotations
 
 import csv
+import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -111,6 +113,43 @@ This is a shop-built 16-inch closed-frame drum thickness sander. A competent cra
 - Inference: redesign those failure modes. Do not redraw copyrighted magazine art.
 """
     write(os.path.join(OUT, "DESIGN_BASIS.md"), design_basis)
+
+    calc = f"""# WALTER calculations — WOODWRIGHT PLANFORGE
+
+Controlling units: inches. These identities are [D] arithmetic from `walter_kernel.py`.
+They are not coupon tests and not a PE analysis.
+
+## CAL-001 Drum speed
+`drum_rpm = motor_rpm × pulley_mot / pulley_drm`
+= 1725 × 3.00 / 4.75 = **{der['drum_rpm']} r/min**
+
+## CAL-002 Surface speed
+`sfm = π × drum_od × drum_rpm / 12`
+= π × 5.00 × {der['drum_rpm']} / 12 = **{der['sfm']} ft/min**
+
+## CAL-003 Feed (at 30 r/min roller)
+`feed_fpm = π × roller_od / 12 × 30`
+= π × 2.00 / 12 × 30 = **{der['feed_fpm']} ft/min**
+PWM target band 0–16 FPM [G].
+
+## CAL-004 Elevation
+`pitch = 1 / acme_tpi = 1/6 = 0.1667 in/rev` on ¾-6 Acme.
+Travel 4.50 in [G].
+
+## CAL-005 Face gap
+`(inner_w − drum_face) / 2 = (16.50 − 16.00) / 2 = 0.25 in` each side.
+
+## Limitations
+Do not treat these as allowable loads, heat-build, or tracking guarantees.
+Q02 / Q04 / Q09 are the shop tests. Electrical FLA is [P] from the nameplate.
+"""
+    write(os.path.join(OUT, "CALCULATIONS.md"), calc)
+
+    csv_write(
+        os.path.join(OUT, "SHEET_INDEX.csv"),
+        proj["sheets"],
+        ["ID", "FILE", "STATUS", "PURPOSE"],
+    )
 
     zg = f"""# Zero-Gap Verification Checklist — WALTER Rev {REV}
 
@@ -371,7 +410,9 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
     <a href="../fab/06_DRAWINGS/A-101_isometric.svg">A-101 iso</a>
     <a href="../fab/06_DRAWINGS/A-102_ortho.svg">A-102 ortho</a>
     <a href="../fab/06_DRAWINGS/A-103_section.svg">A-103 section</a>
+    <a href="../fab/06_DRAWINGS/A-104_envelope.svg">A-104 envelope</a>
     <a href="../fab/06_DRAWINGS/E-101_exploded.svg">E-101 explode</a>
+    <a href="../fab/06_DRAWINGS/E-102_sequence.svg">E-102 bags</a>
     <a href="../plans/W1_general.svg">W-1 shop sheet</a>
     <a href="../cad/exports/walter_assembly.stl">assembly.stl</a>
   </div>
@@ -409,7 +450,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
 </section>
 
 <section id="p101">
-  <p class="k">P-201 … P-204 · Part drawings</p>
+  <p class="k">P-201 … P-211 · Part drawings</p>
   <h2>Part register</h2>
   {part_html}
   <div class="links">
@@ -417,7 +458,15 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
     <a href="../fab/06_DRAWINGS/P-202_wall.svg">P-202 Walls</a>
     <a href="../fab/06_DRAWINGS/P-203_plate.svg">P-203 Plates</a>
     <a href="../fab/06_DRAWINGS/P-204_platen.svg">P-204 Platen</a>
+    <a href="../fab/06_DRAWINGS/P-205_frame.svg">P-205 Frame</a>
+    <a href="../fab/06_DRAWINGS/P-206_shaft.svg">P-206 Shaft</a>
+    <a href="../fab/06_DRAWINGS/P-207_hinge.svg">P-207 Hinge</a>
+    <a href="../fab/06_DRAWINGS/P-208_rollers.svg">P-208 Rollers</a>
+    <a href="../fab/06_DRAWINGS/P-209_hood_guard.svg">P-209 Hood/guard</a>
+    <a href="../fab/06_DRAWINGS/P-210_stand.svg">P-210 Stand</a>
+    <a href="../fab/06_DRAWINGS/P-211_ways.svg">P-211 Ways</a>
     <a href="PART_REGISTER.csv">Part CSV</a>
+    <a href="SHEET_INDEX.csv">Sheet index</a>
   </div>
 </section>
 
@@ -428,6 +477,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
   <div class="links">
     <a href="../fab/06_DRAWINGS/M-101_drive.svg">M-101 Drive</a>
     <a href="../fab/06_DRAWINGS/M-102_conveyor.svg">M-102 Conveyor</a>
+    <a href="../fab/06_DRAWINGS/M-105_electrics.svg">M-105 Electrics [P]</a>
     <a href="../plans/W12_wiring.svg">W-12 Wiring intent</a>
   </div>
   <p class="warn">W-12 is not a permit drawing and not NEC. Magnetic starter / no-volt release is mandatory. A consumer light switch is not an E-stop.</p>
@@ -439,6 +489,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
   <p>Three ¾″ Baltic birch 5×5 sheets, one ¼″ sheet, maple for rails/ways/nuts. Do not substitute MDF. Grain-cross the wall skins. Leave a spare disc if the sheet allows.</p>
   <div class="links">
     <a href="../fab/06_DRAWINGS/F-101_nest.svg">F-101 Nest</a>
+    <a href="../fab/06_DRAWINGS/F-102_routing.svg">F-102 Routing</a>
     <a href="../fab/07_BOM/master_bom.csv">Master BOM</a>
     <a href="../fab/08_CUT_LISTS/finished.csv">Cut list</a>
     <a href="../fab/08_CUT_LISTS/operations.csv">Operations routing</a>
@@ -508,7 +559,8 @@ Release: **{pf['RELEASE_STATE']}** · Risk **{pf['RISK_CLASS']}** · Kernel {pf[
 - [Guidebook](index.html) — G/A/J/E/P/M/F/H/Q
 - [Design basis](DESIGN_BASIS.md)
 - [Zero-gap checklist](ZERO_GAP.md)
-- [Changelog](CHANGELOG.md)
+- [Calculations](CALCULATIONS.md)
+- [Sheet index](SHEET_INDEX.csv)
 - [McMaster-Carr schedule](MCMASTER_SCHEDULE.csv)
 - [Requirements](REQUIREMENTS.csv)
 - [Dimension register](DIMENSION_REGISTER.csv)
@@ -524,6 +576,13 @@ Print the guidebook from the browser at 100%. Controlling geometry is in `walter
     write(os.path.join(OUT, "README.md"), readme)
 
     changelog = f"""# CHANGELOG — WALTER Planforge
+
+## 1.2.1 / Rev {REV} — 2026-08-23
+
+- G-003/G-004, A-104, E-102, M-105, P-205…P-211, F-102 added; N/A sheets recorded on G-001.
+- App assembly checklist synced to 22 LEGO steps from `walter_project.steps()`.
+- `verify_walter.py` reconciles parts, sheets, banners, BOM, and derived speeds.
+- CALCULATIONS.md + SHEET_INDEX.csv.
 
 ## 1.2.0 / Rev {REV} — 2026-08-23
 
@@ -542,6 +601,48 @@ Print the guidebook from the browser at 100%. Controlling geometry is in `walter
 - Initial WALTER package.
 """
     write(os.path.join(OUT, "CHANGELOG.md"), changelog)
+
+    sync_app_assembly(proj)
+
+
+def sync_app_assembly(proj):
+    """Keep the PWA checklist identical to LEGO steps()."""
+    path = os.path.join(ROOT, "sander", "walter", "app", "data.js")
+    text = open(path, encoding="utf-8").read()
+    phase = {1: "drum", 2: "frame", 3: "table", 4: "conveyor", 5: "drive", 6: "tune"}
+    lines = ["  assembly: ["]
+    for st in proj["steps"]:
+        lines.append(
+            "    { id: %s, phase: %s, title: %s, body: %s },"
+            % (
+                json.dumps(f"s{st['n']:02d}"),
+                json.dumps(phase[st["bag"]]),
+                json.dumps(st["title"], ensure_ascii=False),
+                json.dumps(st["note"], ensure_ascii=False),
+            )
+        )
+    lines.append("  ],")
+    block = "\n".join(lines)
+    new, n = re.subn(r"  assembly: \[.*?\n  \],", lambda _m: block, text, count=1, flags=re.S)
+    if n != 1:
+        raise SystemExit(f"app assembly sync failed (replacements={n})")
+    # gallery: ensure new drawings are listed
+    extra = [
+        '    { src: "../fab/06_DRAWINGS/G-004_safety.svg", title: "G-004 Safety", kind: "plan" },',
+        '    { src: "../fab/06_DRAWINGS/A-104_envelope.svg", title: "A-104 Envelope", kind: "plan" },',
+        '    { src: "../fab/06_DRAWINGS/M-105_electrics.svg", title: "M-105 Electrics [P]", kind: "plan" },',
+        '    { src: "../fab/06_DRAWINGS/P-205_frame.svg", title: "P-205 Frame parts", kind: "plan" },',
+        '    { src: "../fab/06_DRAWINGS/E-102_sequence.svg", title: "E-102 Bags", kind: "plan" },',
+    ]
+    if "G-004_safety.svg" not in new:
+        new = new.replace(
+            '    { src: "../fab/06_DRAWINGS/G-001_cover.svg", title: "G-001 Cover", kind: "plan" },',
+            '    { src: "../fab/06_DRAWINGS/G-001_cover.svg", title: "G-001 Cover", kind: "plan" },\n'
+            + "\n".join(extra),
+        )
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(new)
+    print("synced", os.path.relpath(path, ROOT))
 
 
 if __name__ == "__main__":

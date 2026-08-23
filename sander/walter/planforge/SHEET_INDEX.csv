@@ -1,0 +1,35 @@
+ID,FILE,STATUS,PURPOSE
+G-001,G-001_cover.svg,ACTIVE,"Cover, release, sheet index"
+G-002,G-002_basis.svg,ACTIVE,"Units, requirements, derived speeds"
+G-003,G-003_evidence.svg,ACTIVE,"Evidence, revision, calculation register"
+G-004,G-004_safety.svg,ACTIVE,"R3 hazards, FMEA, PPE, professional review"
+A-101,A-101_isometric.svg,ACTIVE,Navigation isometric — do not scale
+A-102,A-102_ortho.svg,ACTIVE,Orthographic GA
+A-103,A-103_section.svg,ACTIVE,Section at D2
+A-104,A-104_envelope.svg,ACTIVE,"Opening envelope, human interface, nips"
+A-105,,N/A,No site/anchorage — benchtop machine; optional stand on P-210 / W-11
+E-101,E-101_exploded.svg,ACTIVE,Exploded isometric + balloons
+E-102,E-102_sequence.svg,ACTIVE,Bag sequence and clamp/dependency
+E-103,,N/A,Hardware stack in MCMASTER_SCHEDULE.csv + W-9
+P-201,P-201_disc.svg,ACTIVE,D-001 disc
+P-202,P-202_wall.svg,ACTIVE,F-002 / F-003 walls
+P-203,P-203_plate.svg,ACTIVE,ST-001 / ST-002 plates
+P-204,P-204_platen.svg,ACTIVE,T-001 platen
+P-205,P-205_frame.svg,ACTIVE,"F-001 base, stretchers, maple rails"
+P-206,P-206_shaft.svg,ACTIVE,"ST-004 shaft, ST-005 keys, ST-006 bells"
+P-207,P-207_hinge.svg,ACTIVE,ST-003 motor hinge plate
+P-208,P-208_rollers.svg,ACTIVE,C-001 / C-002 crowned rollers
+P-209,P-209_hood_guard.svg,ACTIVE,"HD-001 hood, M-003 guard"
+P-210,P-210_stand.svg,ACTIVE,N-001 optional cabinet
+P-211,P-211_ways.svg,ACTIVE,"T-002 UHMW, T-003/004 ways, T-005 nut blocks"
+J-201,J-201_drum.svg,ACTIVE,J-DRUM keyed stack
+J-202,J-202_ways.svg,ACTIVE,J-WAY / J-ACME / jack
+J-203,J-203_crown.svg,ACTIVE,J-CROWN belt tracking
+J-204,J-204_wrap.svg,ACTIVE,J-WRAP abrasive
+M-101,M-101_drive.svg,ACTIVE,"Hinge, 4L, guard"
+M-102,M-102_conveyor.svg,ACTIVE,Feed kinematics
+M-105,M-105_electrics.svg,ACTIVE,Electrical intent — PROFESSIONAL REVIEW REQUIRED
+S-101,,N/A,Not a building / timber structure
+F-101,F-101_nest.svg,ACTIVE,Plywood nest
+F-102,F-102_routing.svg,ACTIVE,Operations routing OP-01…14
+Q-101,Q-101_inspect.svg,ACTIVE,Q01–Q10 first-run

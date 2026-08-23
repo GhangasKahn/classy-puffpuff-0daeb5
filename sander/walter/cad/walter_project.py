@@ -25,7 +25,7 @@ PROJECT = dict(
     NAME="WALTER",
     TITLE="16-inch closed-frame drum thickness sander",
     REVISION=REV,
-    MODEL_VERSION="1.2.0",
+    MODEL_VERSION="1.2.1",
     PROTOCOL="WOODWRIGHT PLANFORGE v1.0",
     PROTOCOL_DATE="2026-08-03",
     UNITS="inch controlling; millimetre at CAD export only",
@@ -245,6 +245,46 @@ def evidence():
     ]
 
 
+def sheet_index():
+    """Planforge drawing family. STATUS ACTIVE must exist on disk after gen_walter_drawings."""
+    return [
+        dict(ID="G-001", FILE="G-001_cover.svg", STATUS="ACTIVE", PURPOSE="Cover, release, sheet index"),
+        dict(ID="G-002", FILE="G-002_basis.svg", STATUS="ACTIVE", PURPOSE="Units, requirements, derived speeds"),
+        dict(ID="G-003", FILE="G-003_evidence.svg", STATUS="ACTIVE", PURPOSE="Evidence, revision, calculation register"),
+        dict(ID="G-004", FILE="G-004_safety.svg", STATUS="ACTIVE", PURPOSE="R3 hazards, FMEA, PPE, professional review"),
+        dict(ID="A-101", FILE="A-101_isometric.svg", STATUS="ACTIVE", PURPOSE="Navigation isometric — do not scale"),
+        dict(ID="A-102", FILE="A-102_ortho.svg", STATUS="ACTIVE", PURPOSE="Orthographic GA"),
+        dict(ID="A-103", FILE="A-103_section.svg", STATUS="ACTIVE", PURPOSE="Section at D2"),
+        dict(ID="A-104", FILE="A-104_envelope.svg", STATUS="ACTIVE", PURPOSE="Opening envelope, human interface, nips"),
+        dict(ID="A-105", FILE="", STATUS="N/A", PURPOSE="No site/anchorage — benchtop machine; optional stand on P-210 / W-11"),
+        dict(ID="E-101", FILE="E-101_exploded.svg", STATUS="ACTIVE", PURPOSE="Exploded isometric + balloons"),
+        dict(ID="E-102", FILE="E-102_sequence.svg", STATUS="ACTIVE", PURPOSE="Bag sequence and clamp/dependency"),
+        dict(ID="E-103", FILE="", STATUS="N/A", PURPOSE="Hardware stack in MCMASTER_SCHEDULE.csv + W-9"),
+        dict(ID="P-201", FILE="P-201_disc.svg", STATUS="ACTIVE", PURPOSE="D-001 disc"),
+        dict(ID="P-202", FILE="P-202_wall.svg", STATUS="ACTIVE", PURPOSE="F-002 / F-003 walls"),
+        dict(ID="P-203", FILE="P-203_plate.svg", STATUS="ACTIVE", PURPOSE="ST-001 / ST-002 plates"),
+        dict(ID="P-204", FILE="P-204_platen.svg", STATUS="ACTIVE", PURPOSE="T-001 platen"),
+        dict(ID="P-205", FILE="P-205_frame.svg", STATUS="ACTIVE", PURPOSE="F-001 base, stretchers, maple rails"),
+        dict(ID="P-206", FILE="P-206_shaft.svg", STATUS="ACTIVE", PURPOSE="ST-004 shaft, ST-005 keys, ST-006 bells"),
+        dict(ID="P-207", FILE="P-207_hinge.svg", STATUS="ACTIVE", PURPOSE="ST-003 motor hinge plate"),
+        dict(ID="P-208", FILE="P-208_rollers.svg", STATUS="ACTIVE", PURPOSE="C-001 / C-002 crowned rollers"),
+        dict(ID="P-209", FILE="P-209_hood_guard.svg", STATUS="ACTIVE", PURPOSE="HD-001 hood, M-003 guard"),
+        dict(ID="P-210", FILE="P-210_stand.svg", STATUS="ACTIVE", PURPOSE="N-001 optional cabinet"),
+        dict(ID="P-211", FILE="P-211_ways.svg", STATUS="ACTIVE", PURPOSE="T-002 UHMW, T-003/004 ways, T-005 nut blocks"),
+        dict(ID="J-201", FILE="J-201_drum.svg", STATUS="ACTIVE", PURPOSE="J-DRUM keyed stack"),
+        dict(ID="J-202", FILE="J-202_ways.svg", STATUS="ACTIVE", PURPOSE="J-WAY / J-ACME / jack"),
+        dict(ID="J-203", FILE="J-203_crown.svg", STATUS="ACTIVE", PURPOSE="J-CROWN belt tracking"),
+        dict(ID="J-204", FILE="J-204_wrap.svg", STATUS="ACTIVE", PURPOSE="J-WRAP abrasive"),
+        dict(ID="M-101", FILE="M-101_drive.svg", STATUS="ACTIVE", PURPOSE="Hinge, 4L, guard"),
+        dict(ID="M-102", FILE="M-102_conveyor.svg", STATUS="ACTIVE", PURPOSE="Feed kinematics"),
+        dict(ID="M-105", FILE="M-105_electrics.svg", STATUS="ACTIVE", PURPOSE="Electrical intent — PROFESSIONAL REVIEW REQUIRED"),
+        dict(ID="S-101", FILE="", STATUS="N/A", PURPOSE="Not a building / timber structure"),
+        dict(ID="F-101", FILE="F-101_nest.svg", STATUS="ACTIVE", PURPOSE="Plywood nest"),
+        dict(ID="F-102", FILE="F-102_routing.svg", STATUS="ACTIVE", PURPOSE="Operations routing OP-01…14"),
+        dict(ID="Q-101", FILE="Q-101_inspect.svg", STATUS="ACTIVE", PURPOSE="Q01–Q10 first-run"),
+    ]
+
+
 def build_project():
     return dict(
         project=PROJECT,
@@ -259,5 +299,6 @@ def build_project():
         evidence=evidence(),
         fmea=FMEA,
         plywood=PLYWOOD,
+        sheets=sheet_index(),
         derived=dict(drum_rpm=round(drum_rpm, 2), sfm=round(sfm, 1), feed_fpm=round(feed_fpm, 2)),
     )

@@ -2,7 +2,7 @@
 
 **Release state:** FABRICATION-READY WITH CONDITIONS
 **Risk class:** R3
-**Project:** WPF-WALTER-16-C · kernel 1.2.0 · Rev C
+**Project:** WPF-WALTER-16-C · kernel 1.2.1 · Rev C
 **Units:** inch controlling; millimetre at CAD export only
 **Layout:** D1 base top Z0; D2 drum axis Z 13.50 Y 18.00; D3 idle jack zero; D4 Acme nuts clocked
 

@@ -317,8 +317,11 @@ body::before{
       </div>
       <div class="sheets">
         <div class="sheet reveal"><img src="fab/06_DRAWINGS/G-001_cover.svg" alt="G-001" /><div class="bar"><b>G-001</b><span>Cover · release · R3 conditions · sheet index</span><a href="fab/06_DRAWINGS/G-001_cover.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/G-004_safety.svg" alt="G-004" /><div class="bar"><b>G-004</b><span>R3 safety · FMEA · professional review</span><a href="fab/06_DRAWINGS/G-004_safety.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="fab/06_DRAWINGS/A-102_ortho.svg" alt="A-102" /><div class="bar"><b>A-102</b><span>Orthographic GA · do not scale the isometric</span><a href="fab/06_DRAWINGS/A-102_ortho.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/A-104_envelope.svg" alt="A-104" /><div class="bar"><b>A-104</b><span>Opening envelope · nips · operator</span><a href="fab/06_DRAWINGS/A-104_envelope.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="fab/06_DRAWINGS/E-101_exploded.svg" alt="E-101" /><div class="bar"><b>E-101</b><span>Exploded · balloons match the part register</span><a href="fab/06_DRAWINGS/E-101_exploded.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/M-105_electrics.svg" alt="M-105" /><div class="bar"><b>M-105</b><span>Electrical intent · PROFESSIONAL REVIEW REQUIRED</span><a href="fab/06_DRAWINGS/M-105_electrics.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="fab/06_DRAWINGS/J-201_drum.svg" alt="J-201" /><div class="bar"><b>J-201</b><span>Keyed disc stack · no glue in the keyway</span><a href="fab/06_DRAWINGS/J-201_drum.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W1_general.svg" alt="W-1" /><div class="bar"><b>W-1</b><span>Shop blueprint · general arrangement</span><a href="plans/W1_general.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W2_frame.svg" alt="W-2" /><div class="bar"><b>W-2</b><span>Frame, doubled walls, bearing plate, jack screws</span><a href="plans/W2_frame.svg" download>SVG</a></div></div>
@@ -405,7 +408,8 @@ python3 scripts/gen_walter_plans.py
 python3 scripts/gen_walter_fab.py
 python3 scripts/gen_walter_manual.py
 python3 scripts/gen_walter_drawings.py
-python3 scripts/gen_walter_planforge.py</pre>
+python3 scripts/gen_walter_planforge.py
+python3 scripts/verify_walter.py</pre>
       </div>
       <p class="note">Shop-build design for experienced DIY construction — not a stamped PE document, not a wiring diagram for permit, not a substitute for a licensed electrician. Shafting, guarding, and 115 V are your responsibility. If a number on a sheet fights the CAD, trust the CAD parameters.</p>
     </div>

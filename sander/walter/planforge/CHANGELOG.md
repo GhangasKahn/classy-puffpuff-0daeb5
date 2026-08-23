@@ -1,5 +1,12 @@
 # CHANGELOG — WALTER Planforge
 
+## 1.2.1 / Rev C — 2026-08-23
+
+- G-003/G-004, A-104, E-102, M-105, P-205…P-211, F-102 added; N/A sheets recorded on G-001.
+- App assembly checklist synced to 22 LEGO steps from `walter_project.steps()`.
+- `verify_walter.py` reconciles parts, sheets, banners, BOM, and derived speeds.
+- CALCULATIONS.md + SHEET_INDEX.csv.
+
 ## 1.2.0 / Rev C — 2026-08-23
 
 - WOODWRIGHT PLANFORGE v1.0 guidebook (this folder).

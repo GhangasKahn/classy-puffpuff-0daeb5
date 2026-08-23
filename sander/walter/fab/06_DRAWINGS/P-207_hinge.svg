@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>P-207  ·  Part ST-003 — motor hinge plate</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Scale 1:4  ·  24 px/in  ·  inches</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<rect x='80.0' y='140.0' width='240.0' height='192.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<line x1='80.0' y1='332.0' x2='80.0' y2='368.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='320.0' y1='332.0' x2='320.0' y2='368.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='80.0' y1='360.0' x2='320.0' y2='360.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='80.0,360.0 90.0,356.0 90.0,364.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='320.0,360.0 310.0,356.0 310.0,364.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='176.4' y='340.0' width='47.2' height='20.0' fill='#f4efe6'/>
+<text x='200.0' y='354.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>10.00</text>
+<line x1='80.0' y1='140.0' x2='44.0' y2='140.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='80.0' y1='332.0' x2='44.0' y2='332.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='52.0' y1='140.0' x2='52.0' y2='332.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='52.0,140.0 48.0,150.0 56.0,150.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='52.0,332.0 48.0,322.0 56.0,322.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<text x='40.0' y='241.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end' transform='rotate(-90 40.0 241.0)'>8.00</text>
+<circle cx='128.0' cy='236.0' r='7.2' fill='#f4efe6' stroke='#1c1914' stroke-width='1.4'/>
+<text x='200.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle' font-weight='600'>56C PATTERN — VERIFY MOTOR DRAWING [S]</text>
+<rect x='80.0' y='420.0' width='1100.0' height='76.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>A36 ¼″. Hinge on the drive-wall outboard face. Turnbuckle M-004 to the wall, not motor weight on a dowel.</text>
+<text x='92.0' y='460.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not drill the 56C pattern from a retailer photo. Open the motor dimension sheet or measure the face.</text>
+<text x='92.0' y='478.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Mating: M-001, ST-008/009, 4L440, M-003 guard must still close over the hinge.</text>
+</svg>

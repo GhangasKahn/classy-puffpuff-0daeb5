@@ -31,6 +31,9 @@ python3 "$ROOT/scripts/gen_walter_drawings.py"
 echo "==> WOODWRIGHT PLANFORGE guidebook"
 python3 "$ROOT/scripts/gen_walter_planforge.py"
 
+echo "==> Deterministic verify"
+python3 "$ROOT/scripts/verify_walter.py"
+
 if command -v "$FREECADCMD" >/dev/null 2>&1; then
   echo "==> FreeCAD (FCStd / STEP from kernel)"
   (cd "$CAD" && "$FREECADCMD" walter_sander.py 2>&1 | grep -E "WALTER|Capacity|Drum|Drive|Feed|Envelope|wrote" || true)

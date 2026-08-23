@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>M-105  ·  Electrical intent — PROFESSIONAL REVIEW REQUIRED</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  NOT NEC  ·  NOT A PERMIT DRAWING  ·  [P]</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<rect x='48.0' y='88.0' width='1584.0' height='44.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='64.0' y='118.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#f3e6dc' text-anchor='start' font-weight='600'>DO NOT ENERGIZE 115 V FROM THIS SHEET  ·  QUALIFIED ELECTRICIAN [P]  ·  W-12 IS DESIGN INTENT</text>
+<rect x='80.0' y='180.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='96.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>115 V 20 A</text>
+<text x='96.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Dedicated branch. Grounding. Strai</text>
+<text x='96.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>n relief.</text>
+<rect x='420.0' y='180.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='436.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>DISCONNECT</text>
+<text x='436.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Magnetic starter / DP contactor. N</text>
+<text x='436.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>ot a light switch.</text>
+<rect x='760.0' y='180.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='776.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>OL HEATERS</text>
+<text x='776.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Size to motor FLA on the nameplate</text>
+<text x='776.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>. Do not guess amps.</text>
+<rect x='1100.0' y='180.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='1116.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>E-STOP NC</text>
+<text x='1116.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>40 mm mushroom in the coil circuit</text>
+<text x='1116.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>. Q06: no auto-restart.</text>
+<rect x='80.0' y='380.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='96.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>DRUM M-001</text>
+<text x='96.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>1 HP TEFC 1725 56C. Guard closed b</text>
+<text x='96.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>efore RUN.</text>
+<rect x='420.0' y='380.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='436.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>24 V FEED</text>
+<text x='436.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Isolated PSU + PWM. Not taken from</text>
+<text x='436.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'> the 115 V coil.</text>
+<rect x='760.0' y='380.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='776.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>POWER-LOSS</text>
+<text x='776.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>NOVR: restore power must not resta</text>
+<text x='776.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>rt the drum.</text>
+<rect x='1100.0' y='380.0' width='300.0' height='140.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='1116.0' y='416.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#b4532a' text-anchor='start' font-weight='600'>FIRST RUN [T]</text>
+<text x='1116.0' y='450.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Collector → hood → lock → drum → f</text>
+<text x='1116.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>eed. No board under drum.</text>
+<rect x='80.0' y='580.0' width='1400.0' height='94.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='602.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>This is a state diagram for the builder and the electrician, not a wiring schedule for a permit.</text>
+<text x='92.0' y='620.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Typical 1 HP 115 V FLA is often ~13 A — that sentence is [E], not a heater catalog number. Read the nameplate.</text>
+<text x='92.0' y='638.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>AI / this HTML book is not a protective measure. Interlocks and NOVR are electromechanical.</text>
+<text x='92.0' y='656.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>See W-12. Q06 is a hold point. SAFE-001 remains OPEN until the electrician and blink test close it.</text>
+</svg>

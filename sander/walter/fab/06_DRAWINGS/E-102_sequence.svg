@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>E-102  ·  Assembly dependency / bags / clamps</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  bags 1–6  ·  see LEGO manual</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>DO NOT GLUE THE MACHINE IN ONE SHOT  ·  DRY-FIT EACH BAG</text>
+<rect x='48.0' y='130.0' width='500.0' height='200.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2' rx='8'/>
+<rect x='64.0' y='146.0' width='64.0' height='40.0' fill='#b4532a' stroke='#1c1914' stroke-width='1.5' rx='8'/>
+<text x='96.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f4efe6' text-anchor='middle' font-weight='600'>1</text>
+<text x='144.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start' font-weight='600'>1 DRUM</text>
+<text x='64.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Column clamp on the shaft. No glue in keyway. Tr</text>
+<text x='64.0' y='242.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>ue before bag 6 wrap.</text>
+<text x='64.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Manual: step pages for this bag.</text>
+<rect x='568.0' y='130.0' width='500.0' height='200.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2' rx='8'/>
+<rect x='584.0' y='146.0' width='64.0' height='40.0' fill='#b4532a' stroke='#1c1914' stroke-width='1.5' rx='8'/>
+<text x='616.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f4efe6' text-anchor='middle' font-weight='600'>2</text>
+<text x='664.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start' font-weight='600'>2 FRAME</text>
+<text x='584.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Walls on a door. Box on D1. Winding sticks on pl</text>
+<text x='584.0' y='242.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>ates. Jacks at D3 zero.</text>
+<text x='584.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Manual: step pages for this bag.</text>
+<rect x='1088.0' y='130.0' width='500.0' height='200.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2' rx='8'/>
+<rect x='1104.0' y='146.0' width='64.0' height='40.0' fill='#b4532a' stroke='#1c1914' stroke-width='1.5' rx='8'/>
+<text x='1136.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f4efe6' text-anchor='middle' font-weight='600'>3</text>
+<text x='1184.0' y='174.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start' font-weight='600'>3 TABLE</text>
+<text x='1104.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Platen flat first. Ways oiled. Clock Acme D4 bef</text>
+<text x='1104.0' y='242.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>ore HTD.</text>
+<text x='1104.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Manual: step pages for this bag.</text>
+<rect x='48.0' y='350.0' width='500.0' height='200.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2' rx='8'/>
+<rect x='64.0' y='366.0' width='64.0' height='40.0' fill='#b4532a' stroke='#1c1914' stroke-width='1.5' rx='8'/>
+<text x='96.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f4efe6' text-anchor='middle' font-weight='600'>4</text>
+<text x='144.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start' font-weight='600'>4 CONVEYOR</text>
+<text x='64.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Crowns first. Belt last. Track empty, then loade</text>
+<text x='64.0' y='462.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>d.</text>
+<text x='64.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Manual: step pages for this bag.</text>
+<rect x='568.0' y='350.0' width='500.0' height='200.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2' rx='8'/>
+<rect x='584.0' y='366.0' width='64.0' height='40.0' fill='#b4532a' stroke='#1c1914' stroke-width='1.5' rx='8'/>
+<text x='616.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f4efe6' text-anchor='middle' font-weight='600'>5</text>
+<text x='664.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start' font-weight='600'>5 DRIVE</text>
+<text x='584.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Hinge plate, then motor (two-hand lift), then 4L</text>
+<text x='584.0' y='462.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>, then FULL guard, then electrician.</text>
+<text x='584.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Manual: step pages for this bag.</text>
+<rect x='1088.0' y='350.0' width='500.0' height='200.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2' rx='8'/>
+<rect x='1104.0' y='366.0' width='64.0' height='40.0' fill='#b4532a' stroke='#1c1914' stroke-width='1.5' rx='8'/>
+<text x='1136.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='22' fill='#f4efe6' text-anchor='middle' font-weight='600'>6</text>
+<text x='1184.0' y='394.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1c1914' text-anchor='start' font-weight='600'>6 HOOD/TUNE</text>
+<text x='1104.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Hood + collector before spin. Wrap. Jack paralle</text>
+<text x='1104.0' y='462.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>l. Q01–Q10. Card. Poplar.</text>
+<text x='1104.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Manual: step pages for this bag.</text>
+<rect x='48.0' y='600.0' width='1500.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='622.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>CLAMP / CURE</text>
+<text x='60.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Bag 1: column clamps, overnight PVA. Bag 2: cauls on a door, then box clamps on D1.</text>
+<text x='60.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Bag 3: platen skins under even cauls. Ways mechanical. Do not glue UHMW across the whole face if you want to replace it.</text>
+<text x='60.0' y='676.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Hold points: keyway dry; drive plate not slotted; Acme clocked; 115 V not live; Q06 before Q09.</text>
+<text x='60.0' y='694.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>E-103 N/A as a drawing — fastener stacks live in MCMASTER_SCHEDULE.csv and W-9.</text>
+</svg>

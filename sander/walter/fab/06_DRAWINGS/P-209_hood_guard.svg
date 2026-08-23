@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>P-209  ·  Parts HD-001 / M-003 — hood and belt guard</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  inches  ·  guard is not optional</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>FINISHED SIZES FROM PART REGISTER</text>
+<text x='48.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>HD-001  1×  Dust hood inverted-U</text>
+<text x='62.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>~16.3 × 8.4 × 1.6  ·  ¼″ BB  ·  MAKE</text>
+<text x='48.0' y='162.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>HD-002  1×  4″ dust flange</text>
+<text x='62.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Ø4.00 port  ·  ABS / steel  ·  BUY</text>
+<text x='48.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>HD-003  1×  Nylon brush strip</text>
+<text x='62.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>16.00  ·  nylon  ·  BUY</text>
+<text x='48.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>M-003  1×  Drive belt guard, fully enclosed</text>
+<text x='62.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>~17 × 17 × 2.2  ·  ¼″ BB  ·  MAKE</text>
+<rect x='720.0' y='120.0' width='280.0' height='140.0' fill='#3d4a46' stroke='#1c1914' stroke-width='2'/>
+<circle cx='860.0' cy='190.0' r='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='860.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle' font-weight='600'>4″ PORT  ≥400 CFM</text>
+<rect x='1080.0' y='120.0' width='200.0' height='200.0' fill='#c4a574' stroke='#1c1914' stroke-width='2'/>
+<text x='1180.0' y='230.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='middle' font-weight='600'>M-003</text>
+<rect x='48.0' y='420.0' width='1200.0' height='76.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='442.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>Hood: ¼″ birch inverted-U, foam to the walls, nylon brush on the infeed lip. Collector on before any spin.</text>
+<text x='60.0' y='460.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Guard: fully enclosed ¼″ BB around the 4L run. No finger slot at the pinch. Q08.</text>
+<text x='60.0' y='478.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Approximate envelope on the register (~) is [A] until the motor/pulley stack is in hand — size the guard to the installed CD.</text>
+</svg>

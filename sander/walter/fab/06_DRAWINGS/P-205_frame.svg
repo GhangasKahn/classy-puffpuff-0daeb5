@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>P-205  ·  Parts F-001 / F-004…F-007 — base, stretchers, rails</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  inches from register</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='100.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>FINISHED SIZES FROM PART REGISTER</text>
+<text x='48.0' y='124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>F-001  1×  Base panel</text>
+<text x='62.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>22.00 × 36.00 × 0.75  ·  ¾″ Baltic birch  ·  MAKE</text>
+<text x='48.0' y='162.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>F-004  1×  Infeed stretcher</text>
+<text x='62.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>16.50 × 3.50 × 0.75  ·  ¾″ BB  ·  MAKE</text>
+<text x='48.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>F-005  1×  Outfeed stretcher</text>
+<text x='62.0' y='216.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>16.50 × 3.50 × 0.75  ·  ¾″ BB  ·  MAKE</text>
+<text x='48.0' y='238.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>F-006  1×  Base rail idle</text>
+<text x='62.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>33.00 × 1.50 × 1.50  ·  hard maple  ·  MAKE</text>
+<text x='48.0' y='276.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start' font-weight='600'>F-007  1×  Base rail drive</text>
+<text x='62.0' y='292.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>33.00 × 1.50 × 1.50  ·  hard maple  ·  MAKE</text>
+<rect x='720.0' y='140.0' width='360.0' height='220.0' fill='#c4a574' stroke='#1c1914' stroke-width='2'/>
+<line x1='720.0' y1='360.0' x2='720.0' y2='392.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='1080.0' y1='360.0' x2='1080.0' y2='392.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='720.0' y1='384.0' x2='1080.0' y2='384.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='720.0,384.0 730.0,380.0 730.0,388.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='1080.0,384.0 1070.0,380.0 1070.0,388.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='841.1' y='364.0' width='117.8' height='20.0' fill='#f4efe6'/>
+<text x='900.0' y='378.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>36.00 Y  F-001</text>
+<line x1='720.0' y1='140.0' x2='684.0' y2='140.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='720.0' y1='360.0' x2='684.0' y2='360.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='692.0' y1='140.0' x2='692.0' y2='360.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='692.0,140.0 688.0,150.0 696.0,150.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='692.0,360.0 688.0,350.0 696.0,350.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<text x='680.0' y='255.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end' transform='rotate(-90 680.0 255.0)'>22.00 X</text>
+<rect x='48.0' y='520.0' width='1100.0' height='76.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>F-001 sits on maple rails F-006/007. Walls sit on F-001 (datum D1). Stretchers F-004/005 at infeed and outfeed.</text>
+<text x='60.0' y='560.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Grain on F-001 along Y (depth). Stretchers grain along X. Rails grain along Y.</text>
+<text x='60.0' y='578.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not let a stretcher lift a wall off D1. Dry-fit diagonals before glue.</text>
+</svg>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>G-004  ·  Safety / FMEA / professional review</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  R3  ·  PPE is last layer</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<rect x='48.0' y='88.0' width='1584.0' height='36.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='64.0' y='112.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#f3e6dc' text-anchor='start' font-weight='600'>PROFESSIONAL REVIEW REQUIRED  ·  NOT OSHA CERTIFIED  ·  NOT UL  ·  NOT PE-STAMPED</text>
+<text x='48.0' y='150.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#8a3a2a' text-anchor='start'>Licensed/qualified electrician for 115 V. Competent machinery review of guards and first-run. This package is not PE-s</text>
+<text x='48.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  Powered abrasive drum ~1089 RPM / ~1.4 kSFM with stored rotational energy</text>
+<text x='48.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  Ingoing nip at drum-to-work and conveyor rollers</text>
+<text x='48.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  115 V motor circuit, magnetic starter, E-stop, 24 V feed — electrical [P]</text>
+<text x='48.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  Kickback / ejection of short stock</text>
+<text x='48.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  Combustible fine dust; hood and collector are part of the safeguard</text>
+<text x='48.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  Belt/pulley pinch outboard of the drive wall</text>
+<text x='48.0' y='300.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>•  Homemade machine — not UL listed, not OSHA-certified, not PE-stamped</text>
+<text x='48.0' y='340.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>FMEA (severity 1–10)  ·  catastrophic low-likelihood still flagged</text>
+<text x='48.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F01  SEV 8</text>
+<text x='170.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Conveyor walk: No crown / PVC oval / sanding belt → 0.030" crown, PVC belt, skew screws</text>
+<text x='48.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F02  SEV 7</text>
+<text x='170.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Drum crack: MDF, no expansion gaps → Birch discs, 0.5 mm gaps every 4</text>
+<text x='48.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F03  SEV 7</text>
+<text x='170.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Table rack: Independent corner screws → Dual Acme HTD-timed</text>
+<text x='48.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F04  SEV 6</text>
+<text x='170.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Belt slack on start: Gravity motor mount → Hinge plate + turnbuckle</text>
+<text x='48.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F05  SEV 9</text>
+<text x='170.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Restart after blink: Plain switch → Magnetic starter / NOVR</text>
+<text x='48.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F06  SEV 8</text>
+<text x='170.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Kickback short stock: Part shorter than platen → 12" min or carrier board</text>
+<text x='48.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F07  SEV 8</text>
+<text x='170.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Dust cloud: Hood off / shop-vac → 4" @ 400 CFM, hood interlock</text>
+<text x='48.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F08  SEV 5</text>
+<text x='170.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Drum taper: No idle jack → ¼-20 jack ±0.040"</text>
+<text x='48.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F09  SEV 4</text>
+<text x='170.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Formica score: Abrasive harder than laminate → HDPE / phenolic face</text>
+<text x='48.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>F10  SEV 3</text>
+<text x='170.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Paper glued forever: Permanent Velcro → Hook tape + end-bell slots</text>
+<rect x='48.0' y='600.0' width='1100.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='622.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>HIERARCHY OF CONTROLS ON THIS MACHINE</text>
+<text x='60.0' y='640.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Eliminate: no sanding-belt conveyor; no gravity motor mount; no light-switch-only disconnect.</text>
+<text x='60.0' y='658.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Engineer: enclosed guard, hood @ 4″ / 400 CFM, magnetic starter / NOVR, jack + timed Acme.</text>
+<text x='60.0' y='676.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Administrate: 12″ min stock or carrier; startup card; Q06 blink test.</text>
+<text x='60.0' y='694.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>PPE: eye/ear/dust — last layer, not a substitute for the guard or collector.</text>
+<text x='60.0' y='712.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>First-run: collector on, hood on, no workpiece, then 0.010″ poplar. Never stand in the infeed line.</text>
+</svg>

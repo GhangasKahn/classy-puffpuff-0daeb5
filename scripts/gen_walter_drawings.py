@@ -30,7 +30,7 @@ from walter_kernel import (  # noqa: E402
     sfm,
     table_top_z,
 )
-from walter_project import PROJECT, build_project  # noqa: E402
+from walter_project import PROJECT, build_project, sheet_index  # noqa: E402
 from gen_walter_manual import paint_machine  # noqa: E402
 
 OUT = os.path.join(ROOT, "sander", "walter", "fab", "06_DRAWINGS")
@@ -164,24 +164,14 @@ def sheet_g001():
     s.text(52, 680, "DATUMS", 14, ACC, bold=True)
     for i, d in enumerate(PROJECT["DATUMS"]):
         s.text(52, 704 + i * 20, d[:118], 12, INK)
-    s.text(52, 810, "SHEET INDEX (this family)", 14, ACC, bold=True)
-    idx = [
-        "G-001 Cover / release", "G-002 Design basis", "A-101 Iso (navigation only)", "A-102 Orthographic GA",
-        "A-103 Section at D2", "E-101 Exploded + balloons", "P-201 Disc D-001", "P-202 Wall F-002/003",
-        "P-203 Bearing plate ST-001/002", "P-204 Platen T-001", "J-201 Drum stack", "J-202 Ways + Acme",
-        "J-203 Crown + belt", "J-204 Wrap", "M-101 Drive", "M-102 Conveyor", "F-101 Nest", "Q-101 Inspection",
-    ]
+    s.text(52, 800, "SHEET INDEX (this family)  ·  N/A recorded, not omitted by accident", 14, ACC, bold=True)
+    idx = [f"{r['ID']}  {r['STATUS']}  {r['PURPOSE'][:42]}" for r in sheet_index()]
     for i, name in enumerate(idx):
-        col, row = i // 9, i % 9
-        s.text(52 + col * 340, 836 + row * 18, name, 12, INK)
-    s.note(900, 780, [
-        "ALSO IN THIS PACKAGE",
-        "W-1…W-14 shop blueprints in /plans/",
-        "LEGO 22-step manual in /manual/",
-        "Guidebook HTML in /planforge/",
-        "Kernel STL/OBJ in /cad/exports/",
-        "Do not scale A-101. Cut from P-sheets + T-DISC.",
-    ], width=460)
+        col, row = i // 12, i % 12
+        s.text(52 + col * 540, 820 + row * 16, name, 11, INK)
+    s.note(48, 1040, [
+        "W-1…W-14 in /plans/  ·  LEGO /manual/  ·  guidebook /planforge/  ·  STL /cad/exports/  ·  cut from P-sheets + T-DISC, never A-101",
+    ], width=1580)
     s.save("G-001_cover.svg", "Cover, release state, sheet index")
 
 
@@ -702,6 +692,293 @@ def sheet_q101():
     s.save("Q-101_inspect.svg", "Inspection Q01–Q10 and first-run")
 
 
+def _plist(s, pids, x, y):
+    parts = {p["PART_ID"]: p for p in PROJ["parts"]}
+    s.text(x, y, "FINISHED SIZES FROM PART REGISTER", 13, ACC, bold=True)
+    yy = y + 24
+    for pid in pids:
+        p = parts[pid]
+        s.text(x, yy, f"{pid}  {p['QTY']}×  {p['DESC'][:36]}", 13, INK, bold=True)
+        s.text(x + 14, yy + 16, f"{p['FINISHED']}  ·  {p['MAT']}  ·  {p['MAKE']}", 12, DIM)
+        yy += 38
+    return yy
+
+
+def sheet_g003():
+    s = Sheet("G-003", "Evidence / revision / calculation register", "NTS  ·  do not invent citations")
+    s.text(48, 96, "EVIDENCE CLASSES  G M S D A E T P", 16, ACC, bold=True)
+    y = 120
+    for e in PROJ["evidence"]:
+        s.text(48, y, f"{e['ID']}  [{e['CLASS']}]", 13, ACC, bold=True)
+        s.text(200, y, e["DESC"][:88], 12, INK)
+        y += 20
+    s.note(48, 360, [
+        "REVISION",
+        f"Kernel {PROJECT['MODEL_VERSION']}  ·  Rev {REV}  ·  {PROJECT['CODE']}",
+        "Change a master parameter in walter_kernel.py only, then regenerate.",
+        "Do not edit parameters.json, SVG dimensions, or BOM cells by hand.",
+        "ShopNotes #86 remains copyrighted. Hardware notes 6245K47 / 6191K37 are [S] public;",
+        "still verify the live catalog. All other PNs are [E] search hints.",
+    ], width=900)
+    s.note(48, 540, [
+        "CALCULATION REGISTER (see also CALCULATIONS.md)",
+        f"CAL-001 drum_rpm [D] = 1725 × 3.00 / 4.75 = {drum_rpm:.2f} r/min",
+        f"CAL-002 sfm [D] = π × 5.00 × rpm / 12 = {sfm:.1f} ft/min",
+        f"CAL-003 feed_fpm [D] = π × 2.00 / 12 × 30 = {feed_fpm:.2f} ft/min at 30 r/min roller",
+        "CAL-004 elevation [D] = 1/6 = 0.1667 in/rev on ¾-6 Acme",
+        "CAL-005 inner_w [G] = 16.50; drum_face [G] = 16.00; gap each side = 0.25",
+        "These are arithmetic identities, not tested surface-speed coupons. Tach optional.",
+    ], width=1100)
+    s.save("G-003_evidence.svg", "Evidence, revision, calculations")
+
+
+def sheet_g004():
+    s = Sheet("G-004", "Safety / FMEA / professional review", "NTS  ·  R3  ·  PPE is last layer")
+    s.rect(48, 88, 1584, 36, fill="#3a1814", stroke="none")
+    s.text(64, 112, "PROFESSIONAL REVIEW REQUIRED  ·  NOT OSHA CERTIFIED  ·  NOT UL  ·  NOT PE-STAMPED", 14, "#f3e6dc", bold=True)
+    s.text(48, 150, PROJECT["PROFESSIONAL_REVIEW"][:118], 13, WARN)
+    y = 180
+    for t in PROJECT["RISK_TRIGGERS"]:
+        s.text(48, y, f"•  {t[:110]}", 13, INK)
+        y += 20
+    s.text(48, 340, "FMEA (severity 1–10)  ·  catastrophic low-likelihood still flagged", 14, ACC, bold=True)
+    y = 368
+    for f in PROJ["fmea"]:
+        s.text(48, y, f"{f['id']}  SEV {f['sev']}", 12, ACC, bold=True)
+        s.text(170, y, f"{f['item']}: {f['cause'][:50]} → {f['prev'][:42]}", 12, INK)
+        y += 20
+    s.note(48, 600, [
+        "HIERARCHY OF CONTROLS ON THIS MACHINE",
+        "Eliminate: no sanding-belt conveyor; no gravity motor mount; no light-switch-only disconnect.",
+        "Engineer: enclosed guard, hood @ 4″ / 400 CFM, magnetic starter / NOVR, jack + timed Acme.",
+        "Administrate: 12″ min stock or carrier; startup card; Q06 blink test.",
+        "PPE: eye/ear/dust — last layer, not a substitute for the guard or collector.",
+        "First-run: collector on, hood on, no workpiece, then 0.010″ poplar. Never stand in the infeed line.",
+    ], width=1100)
+    s.save("G-004_safety.svg", "R3 safety, FMEA, professional review")
+
+
+def sheet_a104():
+    s = Sheet("A-104", "Opening envelope / nips / human interface", "NTS  ·  phantom = travel  ·  inches")
+    s.text(48, 96, "TABLE TRAVEL 0.06–4.00  ·  4.50 WAY TRAVEL  ·  OPERATOR AT INFEED (−Y)", 14, ACC, bold=True)
+    S = 14.0
+    ox, oz = 80, 620
+
+    def X(xin):
+        return ox + xin * S
+
+    def Z(zin):
+        return oz - zin * S
+
+    s.rect(X(0), Z(P["wall_h"]), P["base_x"] * S, P["wall_h"] * S, fill="#efe8dc", stroke=INK, sw=1.4)
+    s.circle(X(P["base_x"] / 2), Z(P["drum_z"]), (P["drum_od"] / 2) * S, fill=DRUM, stroke=INK, sw=2)
+    # opening min / max as phantom platens
+    zmin = table_top_z(P["opening_min"])
+    zmax = table_top_z(P["opening_max"])
+    s.rect(X(idle_inner), Z(zmin), P["inner_w"] * S, 8, fill="none", stroke=ACC, sw=1.6, dash="6 4")
+    s.rect(X(idle_inner), Z(zmax), P["inner_w"] * S, 8, fill="none", stroke=DIM, sw=1.6, dash="6 4")
+    s.text(X(P["base_x"] / 2), Z(zmin) - 10, "MIN 0.06  (phantom)", 12, ACC, "middle")
+    s.text(X(P["base_x"] / 2), Z(zmax) + 22, "MAX 4.00  (phantom)", 12, DIM, "middle")
+    s.note(720, 120, [
+        "HUMAN / NIP / EJECTION",
+        "Operator stands at infeed (Y = 0). Drum bottom rotates toward operator.",
+        "Nip 1: drum-to-work. Nip 2: conveyor rollers. Nip 3: 4L belt outboard — M-003 covers it.",
+        "Ejection: short stock back toward infeed. 12″ minimum or carrier (F06).",
+        "Reach: elevation handwheel at infeed-left. E-stop at drive-side, not behind the belt.",
+        "Opening default 1.50 [A] for drawings. DRO reads from a wall-mounted caliper.",
+        "A-105 N/A — no floor anchors. Optional N-001 stand is a cabinet, not a foundation.",
+    ], width=720)
+    s.save("A-104_envelope.svg", "Opening envelope, nips, operator")
+
+
+def sheet_e102():
+    s = Sheet("E-102", "Assembly dependency / bags / clamps", "NTS  ·  bags 1–6  ·  see LEGO manual")
+    s.text(48, 96, "DO NOT GLUE THE MACHINE IN ONE SHOT  ·  DRY-FIT EACH BAG", 14, ACC, bold=True)
+    bags = [
+        ("1 DRUM", "Column clamp on the shaft. No glue in keyway. True before bag 6 wrap."),
+        ("2 FRAME", "Walls on a door. Box on D1. Winding sticks on plates. Jacks at D3 zero."),
+        ("3 TABLE", "Platen flat first. Ways oiled. Clock Acme D4 before HTD."),
+        ("4 CONVEYOR", "Crowns first. Belt last. Track empty, then loaded."),
+        ("5 DRIVE", "Hinge plate, then motor (two-hand lift), then 4L, then FULL guard, then electrician."),
+        ("6 HOOD/TUNE", "Hood + collector before spin. Wrap. Jack parallel. Q01–Q10. Card. Poplar."),
+    ]
+    for i, (name, note) in enumerate(bags):
+        x = 48 + (i % 3) * 520
+        y = 130 + (i // 3) * 220
+        s.rect(x, y, 500, 200, fill="#efe8dc", stroke=INK, sw=2, rx=8)
+        s.rect(x + 16, y + 16, 64, 40, fill=ACC, stroke=INK, sw=1.5, rx=8)
+        s.text(x + 48, y + 44, str(i + 1), 22, PAPER, "middle", bold=True)
+        s.text(x + 96, y + 44, name, 16, INK, bold=True)
+        s.text(x + 16, y + 90, note[:48], 13, INK)
+        s.text(x + 16, y + 112, note[48:96] if len(note) > 48 else "", 13, DIM)
+        s.text(x + 16, y + 160, "Manual: step pages for this bag.", 12, DIM)
+    s.note(48, 600, [
+        "CLAMP / CURE",
+        "Bag 1: column clamps, overnight PVA. Bag 2: cauls on a door, then box clamps on D1.",
+        "Bag 3: platen skins under even cauls. Ways mechanical. Do not glue UHMW across the whole face if you want to replace it.",
+        "Hold points: keyway dry; drive plate not slotted; Acme clocked; 115 V not live; Q06 before Q09.",
+        "E-103 N/A as a drawing — fastener stacks live in MCMASTER_SCHEDULE.csv and W-9.",
+    ], width=1500)
+    s.save("E-102_sequence.svg", "Bag sequence and clamp plan")
+
+
+def sheet_p205():
+    s = Sheet("P-205", "Parts F-001 / F-004…F-007 — base, stretchers, rails", "NTS  ·  inches from register")
+    _plist(s, ["F-001", "F-004", "F-005", "F-006", "F-007"], 48, 100)
+    S = 10.0
+    ox, oy = 720, 140
+    s.rect(ox, oy, 36 * S, 22 * S, fill="#c4a574", stroke=INK, sw=2)
+    s.dim_h(ox, ox + 36 * S, oy + 22 * S, "36.00 Y  F-001", offset=24)
+    s.dim_v(oy, oy + 22 * S, ox, "22.00 X", offset=-28)
+    s.note(48, 520, [
+        "F-001 sits on maple rails F-006/007. Walls sit on F-001 (datum D1). Stretchers F-004/005 at infeed and outfeed.",
+        "Grain on F-001 along Y (depth). Stretchers grain along X. Rails grain along Y.",
+        "Do not let a stretcher lift a wall off D1. Dry-fit diagonals before glue.",
+    ], width=1100)
+    s.save("P-205_frame.svg", "Base, stretchers, maple rails")
+
+
+def sheet_p206():
+    s = Sheet("P-206", "Parts ST-004 / ST-005 / ST-006 — shaft, keys, bells", "Scale mixed  ·  inches")
+    _plist(s, ["ST-004", "ST-005", "ST-006"], 48, 100)
+    s.rect(48, 280, 880, 36, fill="#d0d4d6", stroke=INK, sw=2)
+    s.dim_h(48, 928, 316, "22.00  Ø 0.750  1144 STRESSPROOF", offset=28)
+    s.rect(120, 268, 160, 12, fill=ACC, stroke=INK, sw=1)
+    s.text(200, 262, "KEYWAY 3/16 × 4.00  TWO PLACES", 12, ACC, "middle", bold=True)
+    s.circle(1200, 320, 90, fill="#8a9298", stroke=INK, sw=2)
+    s.circle(1200, 320, 18, fill=PAPER, stroke=INK, sw=1.4)
+    s.text(1200, 430, "ST-006 Ø 5.04 × 0.125  SLOT", 13, ACC, "middle", bold=True)
+    s.note(48, 500, [
+        "Not CRS + piano wire. Removable square keys. Bells carry the wrap-retainer slots (J-204).",
+        "Turn the stack on this shaft. Do not run an unbalanced blank (Q02).",
+        "BUY/MAKE: a shop can mill keyways or buy a keyed ¾″ × 22 blank and cut to length.",
+    ], width=1100)
+    s.save("P-206_shaft.svg", "Shaft, keys, end bells")
+
+
+def sheet_p207():
+    s = Sheet("P-207", "Part ST-003 — motor hinge plate", "Scale 1:4  ·  24 px/in  ·  inches")
+    sc = 24.0
+    ox, oy = 80, 140
+    s.rect(ox, oy, 10 * sc, 8 * sc, fill=STEEL, stroke=INK, sw=2)
+    s.dim_h(ox, ox + 10 * sc, oy + 8 * sc, "10.00", offset=28)
+    s.dim_v(oy, oy + 8 * sc, ox, "8.00", offset=-28)
+    s.circle(ox + 2 * sc, oy + 4 * sc, 0.3 * sc, fill=PAPER, stroke=INK, sw=1.4)
+    s.text(ox + 5 * sc, oy + 4 * sc, "56C PATTERN — VERIFY MOTOR DRAWING [S]", 13, ACC, "middle", bold=True)
+    s.note(80, 420, [
+        "A36 ¼″. Hinge on the drive-wall outboard face. Turnbuckle M-004 to the wall, not motor weight on a dowel.",
+        "Do not drill the 56C pattern from a retailer photo. Open the motor dimension sheet or measure the face.",
+        "Mating: M-001, ST-008/009, 4L440, M-003 guard must still close over the hinge.",
+    ], width=1100)
+    s.save("P-207_hinge.svg", "Motor hinge plate ST-003")
+
+
+def sheet_p208():
+    s = Sheet("P-208", "Parts C-001 / C-002 — crowned aluminum rollers", "Scale enlarged crown  ·  inches")
+    _plist(s, ["C-001", "C-002", "C-003"], 48, 100)
+    ox, oy = 80, 280
+    s.poly([(ox, oy + 40), (ox + 280, oy), (ox + 560, oy + 40), (ox + 560, oy + 70), (ox + 280, oy + 30), (ox, oy + 70)], fill=STEEL, stroke=INK, sw=2)
+    s.dim_h(ox, ox + 560, oy + 70, "16.25 FACE  ·  2.00 OD  ·  CROWN 0.030 ±0.005", offset=36)
+    s.note(48, 480, [
+        "Turn the barrel on both rollers. Flat rollers will not self-center. PVC pipe is not a roller.",
+        "Shafts C-003 are ⅝″ × 22 BUY in UCFL201-10. Belt C-004 is BUY endless PVC — not a sanding belt.",
+        "See J-203 and M-102. Q04 empty 60 s then loaded.",
+    ], width=1100)
+    s.save("P-208_rollers.svg", "Crowned rollers C-001 / C-002")
+
+
+def sheet_p209():
+    s = Sheet("P-209", "Parts HD-001 / M-003 — hood and belt guard", "NTS  ·  inches  ·  guard is not optional")
+    _plist(s, ["HD-001", "HD-002", "HD-003", "M-003"], 48, 100)
+    s.rect(720, 120, 280, 140, fill="#3d4a46", stroke=INK, sw=2)
+    s.circle(860, 190, 36, fill=PAPER, stroke=INK, sw=2)
+    s.text(860, 280, "4″ PORT  ≥400 CFM", 13, ACC, "middle", bold=True)
+    s.rect(1080, 120, 200, 200, fill="#c4a574", stroke=INK, sw=2)
+    s.text(1180, 230, "M-003", 16, ACC, "middle", bold=True)
+    s.note(48, 420, [
+        "Hood: ¼″ birch inverted-U, foam to the walls, nylon brush on the infeed lip. Collector on before any spin.",
+        "Guard: fully enclosed ¼″ BB around the 4L run. No finger slot at the pinch. Q08.",
+        "Approximate envelope on the register (~) is [A] until the motor/pulley stack is in hand — size the guard to the installed CD.",
+    ], width=1200)
+    s.save("P-209_hood_guard.svg", "Hood HD-001 and guard M-003")
+
+
+def sheet_p210():
+    s = Sheet("P-210", "Part N-001 — optional 32″ cabinet stand", "Scale 1:12  ·  OPTIONAL  ·  inches")
+    S = 8.0
+    ox, oy = 80, 160
+    s.rect(ox, oy, 22 * S, 32 * S, fill="#c4a574", stroke=INK, sw=2)
+    s.dim_h(ox, ox + 22 * S, oy + 32 * S, "22.00", offset=24)
+    s.dim_v(oy, oy + 32 * S, ox, "32.00 AFF", offset=-28)
+    s.note(400, 160, [
+        "OPTIONAL. Benchtop machine does not require N-001.",
+        "If built: ¾″ BB sides 32 × 32, shelf, back, mobile base of your choice.",
+        "Platen height target ~36–40″ AFF for standing work [A].",
+        "Not a seismic anchorage. Not a foundation. A-105 remains N/A.",
+        "See shop sheet W-11.",
+    ], width=720)
+    s.save("P-210_stand.svg", "Optional cabinet N-001")
+
+
+def sheet_p211():
+    s = Sheet("P-211", "Parts T-002 / T-003 / T-004 / T-005 — UHMW, ways, nut blocks", "NTS  ·  inches")
+    _plist(s, ["T-002", "T-003", "T-004", "T-005", "T-006"], 48, 100)
+    s.note(48, 380, [
+        "T-002 is a replaceable wear face, same footprint as T-001, mechanical screws. Do not glue it forever.",
+        "Ways 0.50 × 2.00 × 25.00 maple + UHMW. Sliding 0.02–0.04 in wall dados. Oil. Never paint.",
+        "Nut blocks: bronze nut captured in maple, long grain to the screw. Clock D4 before HTD. T-006 4″ handwheel BUY.",
+        "See J-202.",
+    ], width=1200)
+    s.save("P-211_ways.svg", "UHMW face, ways, nut blocks")
+
+
+def sheet_m105():
+    s = Sheet("M-105", "Electrical intent — PROFESSIONAL REVIEW REQUIRED", "NTS  ·  NOT NEC  ·  NOT A PERMIT DRAWING  ·  [P]")
+    s.rect(48, 88, 1584, 44, fill="#3a1814", stroke="none")
+    s.text(64, 118, "DO NOT ENERGIZE 115 V FROM THIS SHEET  ·  QUALIFIED ELECTRICIAN [P]  ·  W-12 IS DESIGN INTENT", 14, "#f3e6dc", bold=True)
+    boxes = [
+        (80, 180, "115 V 20 A", "Dedicated branch. Grounding. Strain relief."),
+        (420, 180, "DISCONNECT", "Magnetic starter / DP contactor. Not a light switch."),
+        (760, 180, "OL HEATERS", "Size to motor FLA on the nameplate. Do not guess amps."),
+        (1100, 180, "E-STOP NC", "40 mm mushroom in the coil circuit. Q06: no auto-restart."),
+        (80, 380, "DRUM M-001", "1 HP TEFC 1725 56C. Guard closed before RUN."),
+        (420, 380, "24 V FEED", "Isolated PSU + PWM. Not taken from the 115 V coil."),
+        (760, 380, "POWER-LOSS", "NOVR: restore power must not restart the drum."),
+        (1100, 380, "FIRST RUN [T]", "Collector → hood → lock → drum → feed. No board under drum."),
+    ]
+    for x, y, t, n in boxes:
+        s.rect(x, y, 300, 140, fill="#efe8dc", stroke=INK, sw=2)
+        s.text(x + 16, y + 36, t, 15, ACC, bold=True)
+        s.text(x + 16, y + 70, n[:34], 12, INK)
+        s.text(x + 16, y + 92, n[34:68] if len(n) > 34 else "", 12, DIM)
+    s.note(80, 580, [
+        "This is a state diagram for the builder and the electrician, not a wiring schedule for a permit.",
+        "Typical 1 HP 115 V FLA is often ~13 A — that sentence is [E], not a heater catalog number. Read the nameplate.",
+        "AI / this HTML book is not a protective measure. Interlocks and NOVR are electromechanical.",
+        "See W-12. Q06 is a hold point. SAFE-001 remains OPEN until the electrician and blink test close it.",
+    ], width=1400)
+    s.save("M-105_electrics.svg", "Electrical intent — professional review")
+
+
+def sheet_f102():
+    s = Sheet("F-102", "Operations routing OP-01 … OP-14", "NTS  ·  hold points in copper")
+    s.text(48, 96, "PRESERVE DATUMS  ·  JOINERY WHILE PARTS ARE EASY TO HOLD  ·  TRUE DRUM BEFORE WRAP", 14, ACC, bold=True)
+    ops = [
+        "OP-01 D-001 bandsaw T-DISC", "OP-02 bore 0.748 + keyway", "OP-03 glue column — HOLD keyway dry",
+        "OP-04 true Ø 5.000 — HOLD unbalanced", "OP-05 glue walls grain-crossed", "OP-06 plates as jigs — HOLD idle slots only",
+        "OP-07 square box D1", "OP-08 platen + UHMW", "OP-09 clock Acme D4 — HOLD before HTD",
+        "OP-10 turn 0.030 crowns", "OP-11 PVC belt — HOLD not sanding belt", "OP-12 motor/guard — HOLD electrician",
+        "OP-13 hood + collector — HOLD before spin", "OP-14 Q01–Q10 + poplar — HOLD blink test",
+    ]
+    for i, op in enumerate(ops):
+        col, row = i // 7, i % 7
+        x, y = 48 + col * 780, 130 + row * 70
+        s.rect(x, y, 760, 58, fill="#efe8dc" if "HOLD" in op else PAPER, stroke=ACC if "HOLD" in op else INK, sw=1.6)
+        s.text(x + 16, y + 36, op, 14, INK, bold=True)
+    s.text(48, 650, "Full routing with tools, jigs, hazards: fab/08_CUT_LISTS/operations.csv", 13, DIM)
+    s.save("F-102_routing.svg", "Operations routing OP-01–14")
+
+
 def write_index():
     figs = []
     for fn, code, cap in SHEETS:
@@ -745,21 +1022,34 @@ figcaption b{{color:#d47248;margin-right:8px}}
 def main():
     sheet_g001()
     sheet_g002()
+    sheet_g003()
+    sheet_g004()
     sheet_a101()
     sheet_a102()
     sheet_a103()
+    sheet_a104()
     sheet_e101()
+    sheet_e102()
     sheet_p201()
     sheet_p202()
     sheet_p203()
     sheet_p204()
+    sheet_p205()
+    sheet_p206()
+    sheet_p207()
+    sheet_p208()
+    sheet_p209()
+    sheet_p210()
+    sheet_p211()
     sheet_j201()
     sheet_j202()
     sheet_j203()
     sheet_j204()
     sheet_m101()
     sheet_m102()
+    sheet_m105()
     sheet_f101()
+    sheet_f102()
     sheet_q101()
     write_index()
     print(f"WALTER PLANFORGE drawings Rev {REV}: {len(SHEETS)} sheets")

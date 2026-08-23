@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>G-003  ·  Evidence / revision / calculation register</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  do not invent citations</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>EVIDENCE CLASSES  G M S D A E T P</text>
+<text x='48.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-001  [G]</text>
+<text x='200.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Capacity 16″ × 0.06–4.00″, envelope 22×36×20″</text>
+<text x='48.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-002  [G]</text>
+<text x='200.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Ron Walters woodgears write-up + YouTube W-5Sj6kBVic (same machine)</text>
+<text x='48.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-003  [D]</text>
+<text x='200.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Drum RPM = 1725 × 3.00 / 4.75</text>
+<text x='48.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-004  [D]</text>
+<text x='200.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>SFM = π × 5.00 × rpm / 12</text>
+<text x='48.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-005  [S]</text>
+<text x='200.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>4L pulley 4.75 / 4L440 link (6245K47 / 6191K37)</text>
+<text x='48.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-006  [E]</text>
+<text x='200.0' y='220.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Other McMaster PNs in hardware.csv</text>
+<text x='48.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-007  [A/G]</text>
+<text x='200.0' y='240.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Crown 0.030″ barrel as tracking geometry</text>
+<text x='48.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-008  [P]</text>
+<text x='200.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>115 V starter / FLA / OL heaters</text>
+<text x='48.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-009  [S]</text>
+<text x='200.0' y='280.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>USDA FPL Wood Handbook moisture/movement (general birch)</text>
+<text x='48.0' y='300.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-010  [P/S]</text>
+<text x='200.0' y='300.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>OSHA 1910.212 / 1910.213 machine guarding (U.S.)</text>
+<rect x='48.0' y='360.0' width='900.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>REVISION</text>
+<text x='60.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Kernel 1.2.1  ·  Rev C  ·  WPF-WALTER-16-C</text>
+<text x='60.0' y='418.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Change a master parameter in walter_kernel.py only, then regenerate.</text>
+<text x='60.0' y='436.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not edit parameters.json, SVG dimensions, or BOM cells by hand.</text>
+<text x='60.0' y='454.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>ShopNotes #86 remains copyrighted. Hardware notes 6245K47 / 6191K37 are [S] public;</text>
+<text x='60.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>still verify the live catalog. All other PNs are [E] search hints.</text>
+<rect x='48.0' y='540.0' width='1100.0' height='148.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='562.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>CALCULATION REGISTER (see also CALCULATIONS.md)</text>
+<text x='60.0' y='580.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>CAL-001 drum_rpm [D] = 1725 × 3.00 / 4.75 = 1089.47 r/min</text>
+<text x='60.0' y='598.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>CAL-002 sfm [D] = π × 5.00 × rpm / 12 = 1426.1 ft/min</text>
+<text x='60.0' y='616.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>CAL-003 feed_fpm [D] = π × 2.00 / 12 × 30 = 15.71 ft/min at 30 r/min roller</text>
+<text x='60.0' y='634.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>CAL-004 elevation [D] = 1/6 = 0.1667 in/rev on ¾-6 Acme</text>
+<text x='60.0' y='652.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>CAL-005 inner_w [G] = 16.50; drum_face [G] = 16.00; gap each side = 0.25</text>
+<text x='60.0' y='670.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>These are arithmetic identities, not tested surface-speed coupons. Tach optional.</text>
+</svg>

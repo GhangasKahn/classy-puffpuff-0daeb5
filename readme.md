@@ -73,5 +73,6 @@ python3 scripts/gen_walter_fab.py
 python3 scripts/gen_walter_manual.py
 python3 scripts/gen_walter_drawings.py
 python3 scripts/gen_walter_planforge.py
+python3 scripts/verify_walter.py
 ```
 

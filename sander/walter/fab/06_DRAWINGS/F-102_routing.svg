@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>F-102  ·  Operations routing OP-01 … OP-14</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  hold points in copper</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>PRESERVE DATUMS  ·  JOINERY WHILE PARTS ARE EASY TO HOLD  ·  TRUE DRUM BEFORE WRAP</text>
+<rect x='48.0' y='130.0' width='760.0' height='58.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<text x='64.0' y='166.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-01 D-001 bandsaw T-DISC</text>
+<rect x='48.0' y='200.0' width='760.0' height='58.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<text x='64.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-02 bore 0.748 + keyway</text>
+<rect x='48.0' y='270.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='64.0' y='306.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-03 glue column — HOLD keyway dry</text>
+<rect x='48.0' y='340.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='64.0' y='376.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-04 true Ø 5.000 — HOLD unbalanced</text>
+<rect x='48.0' y='410.0' width='760.0' height='58.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<text x='64.0' y='446.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-05 glue walls grain-crossed</text>
+<rect x='48.0' y='480.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='64.0' y='516.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-06 plates as jigs — HOLD idle slots only</text>
+<rect x='48.0' y='550.0' width='760.0' height='58.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<text x='64.0' y='586.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-07 square box D1</text>
+<rect x='828.0' y='130.0' width='760.0' height='58.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<text x='844.0' y='166.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-08 platen + UHMW</text>
+<rect x='828.0' y='200.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='844.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-09 clock Acme D4 — HOLD before HTD</text>
+<rect x='828.0' y='270.0' width='760.0' height='58.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1.6'/>
+<text x='844.0' y='306.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-10 turn 0.030 crowns</text>
+<rect x='828.0' y='340.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='844.0' y='376.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-11 PVC belt — HOLD not sanding belt</text>
+<rect x='828.0' y='410.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='844.0' y='446.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-12 motor/guard — HOLD electrician</text>
+<rect x='828.0' y='480.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='844.0' y='516.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-13 hood + collector — HOLD before spin</text>
+<rect x='828.0' y='550.0' width='760.0' height='58.0' fill='#efe8dc' stroke='#b4532a' stroke-width='1.6'/>
+<text x='844.0' y='586.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='start' font-weight='600'>OP-14 Q01–Q10 + poplar — HOLD blink test</text>
+<text x='48.0' y='650.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#6b5340' text-anchor='start'>Full routing with tools, jigs, hazards: fab/08_CUT_LISTS/operations.csv</text>
+</svg>

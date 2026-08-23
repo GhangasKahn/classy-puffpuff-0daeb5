@@ -54,7 +54,7 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
   · WPF-WALTER-16-C
 </div>
 <header class="hero">
-  <p class="k">WOODWRIGHT PLANFORGE v1.0 · Kernel 1.2.0 · Rev C</p>
+  <p class="k">WOODWRIGHT PLANFORGE v1.0 · Kernel 1.2.1 · Rev C</p>
   <h1>WALTER</h1>
   <p class="lead">Master build-plans guidebook for a 16-inch closed-frame drum thickness sander. Traditional joinery discipline joined to parametric CAD, LEGO assembly, and honest release boundaries. If a competent builder still has to guess, the plan is not finished.</p>
   <div class="links">
@@ -139,7 +139,9 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
     <a href="../fab/06_DRAWINGS/A-101_isometric.svg">A-101 iso</a>
     <a href="../fab/06_DRAWINGS/A-102_ortho.svg">A-102 ortho</a>
     <a href="../fab/06_DRAWINGS/A-103_section.svg">A-103 section</a>
+    <a href="../fab/06_DRAWINGS/A-104_envelope.svg">A-104 envelope</a>
     <a href="../fab/06_DRAWINGS/E-101_exploded.svg">E-101 explode</a>
+    <a href="../fab/06_DRAWINGS/E-102_sequence.svg">E-102 bags</a>
     <a href="../plans/W1_general.svg">W-1 shop sheet</a>
     <a href="../cad/exports/walter_assembly.stl">assembly.stl</a>
   </div>
@@ -177,7 +179,7 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
 </section>
 
 <section id="p101">
-  <p class="k">P-201 … P-204 · Part drawings</p>
+  <p class="k">P-201 … P-211 · Part drawings</p>
   <h2>Part register</h2>
   <table><thead><tr><th>PART_ID</th><th>QTY</th><th>DESC</th><th>MAT</th><th>FINISHED</th><th>GRAIN</th><th>BAG</th><th>MAKE</th></tr></thead><tbody><tr><td>F-001</td><td>1</td><td>Base panel</td><td>¾″ Baltic birch</td><td>22.00 × 36.00 × 0.75</td><td>length = Y</td><td>2</td><td>MAKE</td></tr><tr><td>F-002</td><td>1</td><td>Idle wall, doubled skins grain-crossed</td><td>¾″ BB ×2</td><td>20.00 × 36.00 × 1.50</td><td>skins crossed</td><td>2</td><td>MAKE</td></tr><tr><td>F-003</td><td>1</td><td>Drive wall, doubled skins grain-crossed</td><td>¾″ BB ×2</td><td>20.00 × 36.00 × 1.50</td><td>skins crossed</td><td>2</td><td>MAKE</td></tr><tr><td>F-004</td><td>1</td><td>Infeed stretcher</td><td>¾″ BB</td><td>16.50 × 3.50 × 0.75</td><td>X</td><td>2</td><td>MAKE</td></tr><tr><td>F-005</td><td>1</td><td>Outfeed stretcher</td><td>¾″ BB</td><td>16.50 × 3.50 × 0.75</td><td>X</td><td>2</td><td>MAKE</td></tr><tr><td>F-006</td><td>1</td><td>Base rail idle</td><td>hard maple</td><td>33.00 × 1.50 × 1.50</td><td>Y</td><td>2</td><td>MAKE</td></tr><tr><td>F-007</td><td>1</td><td>Base rail drive</td><td>hard maple</td><td>33.00 × 1.50 × 1.50</td><td>Y</td><td>2</td><td>MAKE</td></tr><tr><td>ST-001</td><td>1</td><td>Idle bearing plate, slotted</td><td>A36 ¼″</td><td>6.00 × 6.00 × 0.25</td><td>n/a</td><td>2</td><td>MAKE</td></tr><tr><td>ST-002</td><td>1</td><td>Drive bearing plate, round holes</td><td>A36 ¼″</td><td>6.00 × 6.00 × 0.25</td><td>n/a</td><td>2</td><td>MAKE</td></tr><tr><td>ST-003</td><td>1</td><td>Motor hinge plate</td><td>A36 ¼″</td><td>8.00 × 10.00 × 0.25</td><td>n/a</td><td>5</td><td>MAKE</td></tr><tr><td>ST-004</td><td>1</td><td>Drum shaft keyed</td><td>1144 Stressproof</td><td>Ø0.75 × 22.00</td><td>n/a</td><td>1</td><td>BUY/MAKE</td></tr><tr><td>ST-005</td><td>2</td><td>Square key</td><td>1045 / 1144</td><td>0.1875 × 0.1875 × 4.00</td><td>n/a</td><td>1</td><td>MAKE</td></tr><tr><td>ST-006</td><td>2</td><td>End bell with retainer slot</td><td>Al ⅛″</td><td>Ø5.04 × 0.125</td><td>n/a</td><td>1</td><td>MAKE</td></tr><tr><td>ST-007</td><td>2</td><td>Acme screw ¾-6</td><td>Acme steel</td><td>Ø0.75 × 12.00</td><td>n/a</td><td>3</td><td>BUY</td></tr><tr><td>ST-008</td><td>1</td><td>Drum 4L pulley</td><td>cast iron</td><td>Ø4.75 × 0.75, ¾″ bore</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>ST-009</td><td>1</td><td>Motor 4L pulley</td><td>cast iron</td><td>Ø3.00 × 0.75, ¾″ bore</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>D-001</td><td>21</td><td>Drum disc blank</td><td>¾″ Baltic birch</td><td>Ø5.125 × 0.75, bore 0.748</td><td>face ply random ok</td><td>1</td><td>MAKE</td></tr><tr><td>T-001</td><td>1</td><td>Platen torsion box</td><td>¼″ skins + ¾″ grid</td><td>16.25 × 25.00 × 0.75</td><td>skins X</td><td>3</td><td>MAKE</td></tr><tr><td>T-002</td><td>1</td><td>UHMW / HDPE platen face</td><td>UHMW ⅛″</td><td>16.25 × 25.00 × 0.125</td><td>n/a</td><td>3</td><td>MAKE</td></tr><tr><td>T-003</td><td>1</td><td>Table way idle</td><td>maple + UHMW</td><td>25.00 × 0.50 × 2.00</td><td>Y</td><td>3</td><td>MAKE</td></tr><tr><td>T-004</td><td>1</td><td>Table way drive</td><td>maple + UHMW</td><td>25.00 × 0.50 × 2.00</td><td>Y</td><td>3</td><td>MAKE</td></tr><tr><td>T-005</td><td>2</td><td>Acme nut block</td><td>hard maple + bronze nut</td><td>2.00 × 2.00 × 3.00</td><td>long grain to screw</td><td>3</td><td>MAKE</td></tr><tr><td>T-006</td><td>1</td><td>Elevation handwheel</td><td>cast 4″ ¾″ bore</td><td>Ø4.00 × 0.45</td><td>n/a</td><td>3</td><td>BUY</td></tr><tr><td>C-001</td><td>1</td><td>Infeed roller, 0.030″ crown</td><td>Al tube 2.00 OD</td><td>Ø2.00 × 16.25</td><td>n/a</td><td>4</td><td>MAKE</td></tr><tr><td>C-002</td><td>1</td><td>Outfeed roller, 0.030″ crown</td><td>Al tube 2.00 OD</td><td>Ø2.00 × 16.25</td><td>n/a</td><td>4</td><td>MAKE</td></tr><tr><td>C-003</td><td>2</td><td>Roller shaft</td><td>precision ⅝″</td><td>Ø0.625 × 22</td><td>n/a</td><td>4</td><td>BUY</td></tr><tr><td>C-004</td><td>1</td><td>Conveyor belt 2-ply PVC endless</td><td>PVC conveyor</td><td>16.00 × 60.00</td><td>n/a</td><td>4</td><td>BUY</td></tr><tr><td>M-001</td><td>1</td><td>Drum motor TEFC 56C</td><td>1 HP 1725 115 V</td><td>~Ø6.5 × 8.0</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>M-002</td><td>1</td><td>Feed worm gearmotor 24 V</td><td>~30 RPM</td><td>~3 × 3 × 3</td><td>n/a</td><td>4</td><td>BUY</td></tr><tr><td>M-003</td><td>1</td><td>Drive belt guard, fully enclosed</td><td>¼″ BB</td><td>~17 × 17 × 2.2</td><td>face</td><td>5</td><td>MAKE</td></tr><tr><td>M-004</td><td>1</td><td>Turnbuckle tensioner</td><td>zinc ¼-20 class</td><td>~2.1 body</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>HD-001</td><td>1</td><td>Dust hood inverted-U</td><td>¼″ BB</td><td>~16.3 × 8.4 × 1.6</td><td>face</td><td>6</td><td>MAKE</td></tr><tr><td>HD-002</td><td>1</td><td>4″ dust flange</td><td>ABS / steel</td><td>Ø4.00 port</td><td>n/a</td><td>6</td><td>BUY</td></tr><tr><td>HD-003</td><td>1</td><td>Nylon brush strip</td><td>nylon</td><td>16.00</td><td>n/a</td><td>6</td><td>BUY</td></tr><tr><td>N-001</td><td>1</td><td>Optional 32″ cabinet stand</td><td>¾″ BB</td><td>22 × 32 × 32</td><td>vert. sides</td><td>6</td><td>MAKE</td></tr></tbody></table>
   <div class="links">
@@ -185,7 +187,15 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
     <a href="../fab/06_DRAWINGS/P-202_wall.svg">P-202 Walls</a>
     <a href="../fab/06_DRAWINGS/P-203_plate.svg">P-203 Plates</a>
     <a href="../fab/06_DRAWINGS/P-204_platen.svg">P-204 Platen</a>
+    <a href="../fab/06_DRAWINGS/P-205_frame.svg">P-205 Frame</a>
+    <a href="../fab/06_DRAWINGS/P-206_shaft.svg">P-206 Shaft</a>
+    <a href="../fab/06_DRAWINGS/P-207_hinge.svg">P-207 Hinge</a>
+    <a href="../fab/06_DRAWINGS/P-208_rollers.svg">P-208 Rollers</a>
+    <a href="../fab/06_DRAWINGS/P-209_hood_guard.svg">P-209 Hood/guard</a>
+    <a href="../fab/06_DRAWINGS/P-210_stand.svg">P-210 Stand</a>
+    <a href="../fab/06_DRAWINGS/P-211_ways.svg">P-211 Ways</a>
     <a href="PART_REGISTER.csv">Part CSV</a>
+    <a href="SHEET_INDEX.csv">Sheet index</a>
   </div>
 </section>
 
@@ -196,6 +206,7 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
   <div class="links">
     <a href="../fab/06_DRAWINGS/M-101_drive.svg">M-101 Drive</a>
     <a href="../fab/06_DRAWINGS/M-102_conveyor.svg">M-102 Conveyor</a>
+    <a href="../fab/06_DRAWINGS/M-105_electrics.svg">M-105 Electrics [P]</a>
     <a href="../plans/W12_wiring.svg">W-12 Wiring intent</a>
   </div>
   <p class="warn">W-12 is not a permit drawing and not NEC. Magnetic starter / no-volt release is mandatory. A consumer light switch is not an E-stop.</p>
@@ -207,6 +218,7 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
   <p>Three ¾″ Baltic birch 5×5 sheets, one ¼″ sheet, maple for rails/ways/nuts. Do not substitute MDF. Grain-cross the wall skins. Leave a spare disc if the sheet allows.</p>
   <div class="links">
     <a href="../fab/06_DRAWINGS/F-101_nest.svg">F-101 Nest</a>
+    <a href="../fab/06_DRAWINGS/F-102_routing.svg">F-102 Routing</a>
     <a href="../fab/07_BOM/master_bom.csv">Master BOM</a>
     <a href="../fab/08_CUT_LISTS/finished.csv">Cut list</a>
     <a href="../fab/08_CUT_LISTS/operations.csv">Operations routing</a>
@@ -261,7 +273,7 @@ footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid va
 </section>
 </main>
 <footer>
-  WALTER · WOODWRIGHT PLANFORGE v1.0 · WPF-WALTER-16-C · kernel 1.2.0 · Rev C ·
+  WALTER · WOODWRIGHT PLANFORGE v1.0 · WPF-WALTER-16-C · kernel 1.2.1 · Rev C ·
   generated from walter_kernel.py + walter_project.py · not a ShopNotes reprint
 </footer>
 </body>
