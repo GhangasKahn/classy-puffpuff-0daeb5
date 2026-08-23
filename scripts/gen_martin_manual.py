@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MARTIN Rev F — LEGO-style step-by-step build manual.
+"""MARTIN Rev F.2 — LEGO-style step-by-step build manual.
 
 Numbered steps, parts callout boxes, insertion arrows, progressive
 assembly drawings. Every page is generated from
@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.path.insert(0, os.path.join(ROOT, "fence", "martin"))
 
-from martin_kernel import build_project, v as kv  # noqa: E402
+from martin_kernel import PROJECT, build_project, v as kv  # noqa: E402
 from martin_elevation import (  # noqa: E402
     paint_front_elevation,
     paint_motif,
@@ -158,7 +158,7 @@ GZ0 = kv("gate_bottom_clear")
 
 # ---------------------------------------------------------------- page chrome
 def step_sheet(n, bag, title, note=""):
-    s = Sheet(f"BUILD MANUAL · STEP {n} OF {TOTAL_STEPS}", f"BAG {bag} · Rev F")
+    s = Sheet(f"BUILD MANUAL · STEP {n} OF {TOTAL_STEPS}", f"BAG {bag} · Rev {PROJECT['REVISION']}")
     s.rect(40, 46, 150, 118, fill=PAPER, stroke=INK, sw=4, rx=16)
     s.text(115, 136, str(n), 84, INK, "middle", bold=True)
     s.rect(206, 46, 128, 40, fill=ACC, stroke=INK, sw=2, rx=10)
@@ -361,7 +361,7 @@ def gate_bench(s, frame=True, cassettes=False):
 
 # ================================================================ pages
 def page_cover():
-    s = Sheet("BUILD MANUAL · COVER", "Rev F")
+    s = Sheet("BUILD MANUAL · COVER", f"Rev {PROJECT['REVISION']}")
     s.text(40, 96, "MARTIN", 64, INK, bold=True, mono=False)
     s.text(44, 132, "BUILD MANUAL — DARWIN MARTIN TREE OF LIFE FENCE", 20, ACC, bold=True)
     s.text(44, 160, f"143″ × 65″ · {TOTAL_STEPS} steps · 6 bags · no post holes · no cement · winter-removable", 14, DIM)
@@ -377,7 +377,7 @@ def page_cover():
     bags = [
         ("1", "FOUNDATION", "pads · sills · ties · troughs"),
         ("2", "PIERS", "4×6 posts drop in"),
-        ("3", "LIGHT-SCREEN", "water table · belts · Tree of Life"),
+        ("3", "LIGHT-SCREEN", "water table · 2×4 ribbons · Tree of Life"),
         ("4", "EAVE", "2×12 cantilever + fascia + light"),
         ("5", "GATE", "Tree of Life portal"),
         ("6", "FINISH", "paint · plant · done"),
@@ -576,9 +576,9 @@ def page_step9():
 
 def page_step10():
     def extra(s):
-        s.text(430, 1000, "R-001 slides through the piers and its underside groove captures the Q-001 top edge. Belt projects 3″ past each pier face — check both ends.", 13, INK)
-    s = _slide_step(10, "R-001", "Slide belt 1 through", "2×10 · locks Q-001 · projects past the piers", ["K-001", "Q-001", "R-001"], extra)
-    s.save("step-10.svg", "Step 10 — belt R-001")
+        s.text(430, 1000, "R-001 slides through the piers and its underside groove captures the Q-001 top edge. Ribbon projects 3″ past each pier face — check both ends.", 13, INK)
+    s = _slide_step(10, "R-001", "Slide Prairie ribbon 1 through", "2×4 · locks Q-001 · projects past the piers", ["K-001", "Q-001", "R-001"], extra)
+    s.save("step-10.svg", "Step 10 — ribbon R-001")
 
 
 def page_step11():
@@ -620,9 +620,9 @@ def page_step12():
         cl = LY["latch_cl"]
         s.line(XE(-4), YE(cl), XE(10), YE(cl), 2, HL, dash="6 4")
         s.text(XE(-4), YE(cl) - 8, f'LATCH CL {cl:.2f}″ AFF', 11, HL, bold=True)
-        s.text(430, 1000, "This belt carries the latch centerline into P0. Same slide as before — capture Q-002's top edge.", 13, INK)
-    s = _slide_step(12, "R-002", "Slide belt 2 through", "2×10 · latch centerline · locks the Tree of Life", ["K-001", "Q-001", "R-001", "Q-002", "R-002"], extra)
-    s.save("step-12.svg", "Step 12 — belt R-002")
+        s.text(430, 1000, "This ribbon carries the latch centerline into P0. Same slide as before — capture Q-002's top edge.", 13, INK)
+    s = _slide_step(12, "R-002", "Slide Prairie ribbon 2 through", "2×4 · latch centerline · locks the Tree of Life", ["K-001", "Q-001", "R-001", "Q-002", "R-002"], extra)
+    s.save("step-12.svg", "Step 12 — ribbon R-002")
 
 
 def page_step13():
@@ -634,7 +634,7 @@ def page_step13():
         cx = (LY["posts"][la]["cx"] + LY["posts"][rb]["cx"]) / 2
         s.arrow(XE(cx), YE(sl["z1"]) - 80, XE(cx), YE(sl["z1"]) - 16)
         hl_box(s, LY["posts"][la]["cx"] + FX / 2, sl["z0"], LY["bay_clear"], sl["h"])
-    s.text(430, 1000, "Top edge grooves into the eave soffit later. The φ pair is now visible: 8.085″ / 13.081″ / 8.085″ lights.", 13, INK)
+    s.text(430, 1000, f"Top edge grooves into the eave soffit later. The φ pair is now visible: {LY['light_minor']:g}″ / {LY['light_major']:g}″ / {LY['light_minor']:g}″ lights.", 13, INK)
     s.save("step-13.svg", "Step 13 — Q-003 cassettes")
 
 
@@ -832,7 +832,7 @@ def write_viewer():
     html = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>MARTIN Build Manual — Rev F · step by step</title>
+<title>MARTIN Build Manual — Rev __REV__ · step by step</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet"/>
 <style>
 :root{--ink:#1a1f24;--paper:#f3f1ec;--sage:#5a6a4a;--sage-hi:#8fad78;--dim:#9aa3a6}
@@ -853,7 +853,7 @@ figcaption b{color:var(--sage-hi);margin-right:8px}
 @media print{body{background:#fff}header,nav{display:none}img{border:none;page-break-after:always}}
 </style></head><body>
 <header>
-<p class="k">MARTIN · Rev F · step-by-step</p>
+<p class="k">MARTIN · Rev __REV__ · step-by-step</p>
 <h1>Build Manual</h1>
 <p class="sub">__NSTEPS__ steps · 6 bags · generated from the fabrication kernel. Print at 100% on A3 (~71% on Letter). Numbered parts callouts on every step; orange arrows are this step's move. No glue, no nails, no concrete.</p>
 </header>
@@ -866,7 +866,7 @@ __FIGS__
 </main>
 </body></html>
 """
-    html = html.replace("__NSTEPS__", str(TOTAL_STEPS)).replace("__FIGS__", figs)
+    html = html.replace("__NSTEPS__", str(TOTAL_STEPS)).replace("__FIGS__", figs).replace("__REV__", PROJECT["REVISION"])
     path = os.path.join(OUT, "index.html")
     with open(path, "w") as f:
         f.write(html)

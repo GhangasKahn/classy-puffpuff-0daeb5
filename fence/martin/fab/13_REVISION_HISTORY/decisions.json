@@ -7,8 +7,8 @@
   },
   {
     "ID": "D-002",
-    "Decision": "Darwin Martin Tree of Life light-screen: 2\u00d712 water table + two projecting 2\u00d710 belts + three recessed muntin cassettes (\u03c6 8.085 / 13.080 / 8.085).",
-    "Reason": "Stacked 2\u00d710/2\u00d76 boards read as a Home Depot ranch fence. Wright at a distance is eave + belts + piers + patterned lights. \u03c6 sizes the cassette pair, not ripped 2\u00d710.",
+    "Decision": "Darwin Martin Tree of Life light-screen: 2\u00d712 water table + two projecting 2\u00d74 Prairie ribbons + three recessed muntin cassettes (\u03c6 pair on the LIGHTS, ~11.26 / 18.22).",
+    "Reason": "Fat 2\u00d710 belts still read as a Home Depot ranch fence. Wright at a distance is eave + thin belt courses + brick piers + gold-square lights. \u03c6 sizes the cassette pair, not the ribbons.",
     "Parts": "K-001, Q-001/002/003, R-001/002, C-001, C-003"
   },
   {
@@ -61,7 +61,7 @@
   },
   {
     "ID": "D-011",
-    "Decision": "Solid 2\u00d712 PT water table + 1.50\u2033 max pattern apertures + 0.375\u2033 gate bottom clear.",
+    "Decision": "Solid 2\u00d712 PT water table + Q-001 0.75\u2033 dog grid + 0.375\u2033 gate bottom clear. Upper lights 1.15\u2033 max.",
     "Reason": "100% dog containment. Kick is the crawl stop. Pattern is a Wright light-screen, not a radiator of \u00be\u2033 gaps.",
     "Parts": "K-001, Q-001/002/003, G-009"
   },

@@ -1,13 +1,14 @@
 /* MARTIN Build App — offline shell */
-const CACHE = "martin-build-v9";
+const CACHE = "martin-build-v11";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./data.js",
+  "./layout.js",
   "./manifest.json",
-    "./fab.json",
+  "./fab.json",
 ];
 
 self.addEventListener("install", (event) => {

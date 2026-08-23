@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.path.insert(0, os.path.join(ROOT, "fence", "martin"))
 
 from martin_kernel import PROJECT, MM, build_project, inch_mm, layout, v  # noqa: E402
-from martin_elevation import paint_front_elevation, paint_motif, CASS, BELT, EARTH, EAVE, PIER  # noqa: E402
+from martin_elevation import paint_front_elevation, paint_motif, write_hero_svg, CASS, BELT, EARTH, EAVE, PIER  # noqa: E402
 
 FAB = os.path.join(ROOT, "fence", "martin", "fab")
 SCAD = os.path.join(ROOT, "fence", "martin", "cad", "scad")
@@ -117,7 +117,7 @@ class Sheet:
         self.text(40, Hpx - 56, "MARTIN", 26, ACC, bold=True, mono=False)
         self.text(170, Hpx - 58, f"{self.code}  ·  {self.title}", 16, INK, bold=True)
         self.text(40, Hpx - 34, self.note, 12, DIM)
-        self.text(W - 40, Hpx - 56, f"Rev {PROJECT['REVISION']}  ·  inches  ·  kernel 6.0", 13, DIM, "end")
+        self.text(W - 40, Hpx - 56, f"Rev {PROJECT['REVISION']}  ·  inches  ·  kernel {PROJECT['MODEL_VERSION']}", 13, DIM, "end")
         self.text(W - 40, Hpx - 34, "PARAMETRIC — do not scale. Datum: sill top / latch face x=0", 12, DIM, "end")
 
     def save(self, folder, filename):
@@ -310,7 +310,7 @@ def drawings(proj):
         return OY - zin * S
 
     # G-000
-    s = Sheet("G-000", "Cover / index", "Rev F Darwin Martin Tree of Life · Buffalo NY")
+    s = Sheet("G-000", "Cover / index", f"Rev {PROJECT['REVISION']} Darwin Martin Tree of Life · Buffalo NY")
     s.titleblock()
     s.text(40, 70, "MARTIN — DIGITAL MANUFACTURING DEFINITION", 22, ACC, bold=True, mono=False)
     s.text(40, 100, "Prairie removable fence  ·  143″ × 65″  ·  Darwin Martin Tree of Life + Japanese joinery  ·  wood + light + latch", 14, DIM)
@@ -318,8 +318,8 @@ def drawings(proj):
         "WHAT  Freestanding winter-removable Wright light-screen + Tree of Life gate against the house",
         "FROM  Dimensional lumber + live planters (stone in-box only) — NO concrete, NO post holes, NO pad",
         "SIZE  overall_length=143.000  overall_height=65.000  gate_clear=36.000 (ASSUMED)  drop_off=0 (slab)",
-        "FACE  2×12 eave + fascia, projecting 2×10 belts, Roman-brick piers, Tree of Life / nested-rect cassettes",
-        "DOG   Solid 2×12 PT water table; 1.50″ max muntin aperture; gate bottom 0.375″",
+        "FACE  2×12 eave + fascia, 2×4 Prairie ribbons, Roman-brick piers, gold Tree of Life / nested-rect cassettes",
+        "DOG   Solid 2×12 PT water table; Q-001 0.75″ dog grid; upper lights 1.15″ max; gate bottom 0.375″",
         "QTY   One run; part quantities in S-601",
         "CONNECT  nuki+kusabi (K-001, R-001, R-002), cassette grooves, hozo drawbore, oak pivots, sill laps",
         "MAKE  See routings + AS-01..12  ·  MEASURE from sill-shoulder datum",
@@ -362,7 +362,7 @@ def drawings(proj):
     s2.text(40, 100, "Insertion: posts −Z into F-003; nuki +X (K-001, R-001, R-002); cassettes groove in; gate +Z on oak pivots; no planter at P0.", 14)
     for i, p in enumerate(ly["posts"]):
         s2.text(40, 150 + i * 24, f"{p['id']}  {p['mark']}  cx={p['cx']:.3f}\"  {p['role']}", 14)
-    s2.text(40, 280, f"Rev F: Tree of Life light-screen. slat_top {ly['slat_top']}\" + cap 1.50\" = 65.000\". Cassette φ pair {ly['light_minor']}/{ly['light_major']}.", 14, ACC)
+    s2.text(40, 280, f"Rev {PROJECT['REVISION']}: Tree of Life light-screen. slat_top {ly['slat_top']}\" + cap 1.50\" = 65.000\". Cassette φ pair {ly['light_minor']}/{ly['light_major']}.", 14, ACC)
     s2.save(ddir, "GA-100_arrangement.svg")
 
     # GA-130 plan
@@ -421,21 +421,21 @@ def drawings(proj):
     s.dim_h(x0, x0 + 3.5 * sc, y0 - body, '3.500"', offset=-24)
     s.text(400, 80, "DATUM: tenon shoulder = sill top. Measure mortise CL AFF from this shoulder, not from tenon tip.", 14, ACC)
     s.text(400, 120, f'FINISHED LENGTH {ly["post_blank_l"]:.3f}"   SETUP S-014 — do not move stop.', 14)
-    s.text(400, 160, "THROUGH-nuki ONLY: K-001 (2×12), R-001/R-002 (2×10). Cassette grooves for Q-001/002/003.", 14)
+    s.text(400, 160, "THROUGH-nuki ONLY: K-001 (2×12), R-001/R-002 (2×4 ribbons). Cassette grooves for Q-001/002/003.", 14)
     s.text(400, 200, "Foot tenon 2.500 × 4.500  ·  shoulders 0.500 all around  ·  T2 ±0.031", 14)
     s.text(400, 240, "L-001: omit kusabi; Latch-B mortise; NO planter.  L-002: oak pivot sockets top+bottom.", 14)
     s.text(400, 280, "GRAIN: length vertical. FACE A = garden. END A = shoulder.", 14)
-    s.text(400, 320, "Rev F: blank is body + 3.50″ tenon into F-003. Three through-mortises — not seven.", 14, ACC)
+    s.text(400, 320, f"Rev {PROJECT['REVISION']}: blank is body + 3.50″ tenon into F-003. Three through-mortises — not seven.", 14, ACC)
     s.save(ddir, "P-301_post.svg")
 
     # P-302 rails / belts
-    s = Sheet("P-302", "Water table + Prairie belts", f'FINISHED {ly["nuki_len"]:.3f}"  ·  S-021  ·  project 3″ past piers')
+    s = Sheet("P-302", "Water table + Prairie ribbons", f'FINISHED {ly["nuki_len"]:.3f}"  ·  S-021  ·  2×4 ribbons project 3″ past piers')
     s.titleblock()
-    s.rect(80, 200, 1200, 90, fill=BELT)
-    s.dim_h(80, 1280, 290, f'{ly["nuki_len"]:.3f}" nuki_len  DERIVED')
-    s.text(80, 80, "Through-nuki + kusabi: K-001 (2×12 PT water table), R-001 and R-002 (2×10 belts).", 14)
-    s.text(80, 110, "Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Belts cantilever 3″ past pier faces.", 14)
-    s.text(80, 140, "Fit: SLIDING then INTERFERENCE via W-001. Do not through-mortise the Q cassettes.", 14)
+    s.rect(80, 200, 1200, 36, fill=BELT)
+    s.dim_h(80, 1280, 250, f'{ly["nuki_len"]:.3f}" nuki_len  DERIVED')
+    s.text(80, 80, "Through-nuki + kusabi: K-001 (2×12 PT water table), R-001 and R-002 (2×4 Prairie ribbons).", 14)
+    s.text(80, 110, "Stations: L-002, L-003, L-004. Withdraw toward P3 for winter. Ribbons cantilever 3″ past pier faces.", 14)
+    s.text(80, 140, "Fit: SLIDING then INTERFERENCE via W-001. Do not through-mortise the Q cassettes. Do not substitute 2×10.", 14)
     y = 360
     s.text(80, y, "LAYER SCHEDULE  (z0 → z1  AFF, sill top = 0)", 14, ACC, bold=True)
     y += 28
@@ -443,16 +443,16 @@ def drawings(proj):
         kind = "NUKI" if sl["nuki"] else "CASSETTE"
         s.text(80, y, f'{sl["id"]:6}  {sl["mark"]:5}  {sl["stock"]:12}  {sl["h"]:.3f}"  z {sl["z0"]:.3f}–{sl["z1"]:.3f}  CL {sl["cl"]:.3f}  {kind}  {sl["role"]}', 13)
         y += 22
-    s.text(80, y + 8, f'Cassette φ pair L2/L1 = {ly["band_ratio"]} ≈ φ={ly["phi"]}. Stack + eave = 65.000″. Max aperture 1.50″.', 14, ACC)
+    s.text(80, y + 8, f'Cassette φ pair L2/L1 = {ly["band_ratio"]} ≈ φ={ly["phi"]}. Stack + eave = 65.000″. Q-001 {v("pattern_gap_dog"):g}″ dog grid; upper {v("pattern_gap"):g}″.', 14, ACC)
     s.save(ddir, "P-302_rail.svg")
 
     # P-303 Tree of Life cassettes
-    s = Sheet("P-303", "Tree of Life + nested-rect cassettes", "Darwin Martin light-screen  ·  1.50″ max aperture")
+    s = Sheet("P-303", "Tree of Life + nested-rect cassettes", f'Darwin Martin light-screen  ·  Q-001 {v("pattern_gap_dog"):g}″ dog grid')
     s.titleblock()
     s.text(40, 80, f'Bay clear {ly["bay_clear"]:.3f}"  ·  two privacy bays  ·  gate against house (no planter at P0)', 14)
     s.text(40, 112, "Q-001 nested-rects (roots)  ·  Q-002 Tree of Life — three trees  ·  Q-003 nested-rects (foliage)", 14)
     s.text(40, 144, "Original wood muntin interpretation of Darwin Martin House art glass — not a licensed reproduction.", 14, ACC)
-    s.text(40, 176, "DOG SEAL: PT 2×12 water table K-001 at z=0; 1.50″ max muntin gap; gate bottom clear 0.375″.", 14, ACC)
+    s.text(40, 176, f'DOG SEAL: PT 2×12 water table K-001 at z=0; Q-001 {v("pattern_gap_dog"):g}″ grid; upper lights {v("pattern_gap"):g}″; gate bottom 0.375″.', 14, ACC)
     s.text(40, 208, "T-001 qty 36  1.50 × 1.50 × 7.00″  2×2 Roman-brick wrap on P1/P2/P3. Ornament — not structure.", 14)
     s.text(40, 250, "Cassettes recess behind the belt courses. Winter-withdraw toward P3. Do not caulk the lights.", 14, DIM)
     # paint one Tree of Life cassette at large scale
@@ -495,8 +495,8 @@ def drawings(proj):
     # Joinery sheets
     for code, title, lines, fn in [
         ("J-401", "Nuki + cassette groove", [
-            "THROUGH-nuki: K-001 (2×12 PT) and R-001/R-002 (2×10 belts). Mortise 1.50″ × band height through the post.",
-            "Cheeks: 2.00″ of 5.50″ post each side of 1.50″ belt — OK (QA).",
+            "THROUGH-nuki: K-001 (2×12 PT) and R-001/R-002 (2×4 Prairie ribbons). Mortise 1.50″ × 3.50″ through the post.",
+            "Cheeks: 2.00″ of 5.50″ post each side of 1.50″ ribbon — OK (QA).",
             "CASSETTES Q-001/002/003 groove into nuki edges. Do NOT through-mortise — keep the post web.",
             "Kusabi W-001 0.625 × 1.125 × 5.500 through cheek slot on nuki posts. NEVER glue.",
             "Assembly +X. Winter withdraw cassettes toward P3 after knocking wedges.",
@@ -524,6 +524,28 @@ def drawings(proj):
         s.titleblock()
         for i, line in enumerate(lines):
             s.text(40, 80 + i * 32, line, 15)
+        if code == "J-401":
+            # Plan view of 4×6 web + 2×4 ribbon nuki + kusabi (schematic, not to scale)
+            px, py = 120, 520
+            s.text(px, py - 24, "PLAN — 4×6 WEB + 2×4 RIBBON (NOT A 2×10)", 14, ACC, bold=True)
+            s.rect(px, py, 220, 140, fill="#d9dcde", stroke=INK, sw=2)  # post 3.5 × 5.5 schematic
+            s.rect(px - 160, py + 50, 540, 40, fill=BELT, stroke=INK, sw=2)  # 2×4 ribbon through
+            s.rect(px + 150, py + 20, 18, 100, fill=ACC, stroke=INK, sw=1.5)  # kusabi
+            s.text(px + 110, py + 175, "POST Y = 5.50″", 12, DIM, "middle")
+            s.text(px + 380, py + 42, "2×4 RIBBON 1.50 × 3.50", 12, DIM)
+            s.text(px + 175, py + 14, "KUSABI", 11, ACC, bold=True)
+            s.text(px, py + 210, "NEVER GLUE locking faces. Sliding fit, then wedge. Withdraw +X toward P3.", 13, INK)
+            s.text(px, py + 238, "Cassettes sit in 0.375″ grooves in the ribbon edges — they do not punch the post web.", 13, INK)
+        elif code == "J-404":
+            px, py = 80, 320
+            s.text(px, py, "OAK PIVOT STACK (W-003) — lift-off +Z", 14, ACC, bold=True)
+            s.rect(px, py + 30, 80, 24, fill="#8a6a3d", stroke=INK, sw=2)
+            s.rect(px + 28, py + 54, 24, 80, fill="#c4a574", stroke=INK, sw=2)
+            s.rect(px, py + 134, 80, 24, fill="#8a6a3d", stroke=INK, sw=2)
+            s.text(px + 100, py + 48, "C-001 soffit socket", 13, DIM)
+            s.text(px + 100, py + 100, "⌀1.25″ red oak pin  (McMaster 96825K84)", 13, INK)
+            s.text(px + 100, py + 150, "F-001 / threshold socket at P1", 13, DIM)
+            s.text(px, py + 190, "Do not hang the leaf on a pintle cantilever off P0. Compression into the driveway sill.", 13, INK)
         s.save(ddir, fn)
 
     # S-601 BOM sheet (human)
@@ -685,6 +707,40 @@ def json_exports(proj):
     write(os.path.join(FAB, "13_REVISION_HISTORY", "revisions.json"), json.dumps(proj["revisions"], indent=2))
     write(os.path.join(FAB, "13_REVISION_HISTORY", "decisions.json"), json.dumps(proj["decisions"], indent=2))
     write(os.path.join(FAB, "13_REVISION_HISTORY", "audit.json"), json.dumps(proj["audit"], indent=2))
+    write_app_layout(proj)
+    hero = os.path.join(ROOT, "fence", "martin", "renders", "hero_elevation.svg")
+    write_hero_svg(hero, proj["layout"], v, dark=True)
+    print("wrote", os.path.relpath(hero, ROOT))
+    write_hero_svg(os.path.join(ROOT, "fence", "martin", "plans", "hero_elevation.svg"), proj["layout"], v, dark=False)
+
+
+def write_app_layout(proj):
+    """Bake kernel layout into the Build app so viz never falls back to a ranch fence."""
+    ly = proj["layout"]
+    payload = {
+        "revision": PROJECT["REVISION"],
+        "model_version": PROJECT["MODEL_VERSION"],
+        "overall_length": ly["overall_length"],
+        "overall_height": ly["overall_height"],
+        "gate_clear": ly["gate_clear"],
+        "bay_clear": ly["bay_clear"],
+        "nuki_x0": ly["nuki_x0"],
+        "nuki_len": ly["nuki_len"],
+        "cap_x0": ly["cap_x0"],
+        "cap_len": ly["cap_len"],
+        "latch_cl": ly["latch_cl"],
+        "gate_leaf_w": ly["gate_leaf_w"],
+        "gate_h": ly["gate_h"],
+        "posts": ly["posts"],
+        "slats": ly["slats"],
+        "motifs": ly["motifs"],
+        "light_minor": ly["light_minor"],
+        "light_major": ly["light_major"],
+        "band_ratio": ly["band_ratio"],
+    }
+    js = "/* AUTO-GENERATED from martin_kernel.py — do not edit */\nwindow.MARTIN_LAYOUT = "
+    js += json.dumps(payload, separators=(",", ":")) + ";\n"
+    write(os.path.join(ROOT, "fence", "martin", "app", "layout.js"), js)
 
 
 def build_manual(proj):
@@ -786,7 +842,7 @@ h1{{font-size:42px;margin:8px 0 12px}}
 <a href="07_BOM/mcmaster.csv">McMaster CSV (fab)</a>
 <a href="12_QA/QA-701_inspection.svg">QA-701</a>
 <a href="10_TEMPLATES/T-501_kusabi.svg">T-501 1:1</a>
-<a href="../app/">Build app</a>
+<a href="14_PRINT/README.md">3D-print coupons</a>
 <a href="../../fab/">STELE fab</a>
 </div>
 <h2>Drawings</h2>
@@ -808,20 +864,75 @@ def main():
     # pointer in 01_MASTER_CAD
     write(
         os.path.join(FAB, "01_MASTER_CAD", "README.md"),
-        "FreeCAD: `../cad/martin_fence.py` (imports kernel).\n"
-        "OpenSCAD: `../cad/scad/main.scad`.\n"
-        "Copied here when present: `martin.FCStd`.\n",
+        "# Master CAD\n\n"
+        "Controlling geometry: `fence/martin/martin_kernel.py` (inches).\n"
+        "FreeCAD script: `fence/martin/cad/martin_fence.py` — run `freecadcmd martin_fence.py` to rebuild FCStd/STEP/STL for Rev F.2 (2×4 ribbons + motif solids).\n"
+        "OpenSCAD: `fence/martin/cad/scad/main.scad` (parameters.scad is regenerated from the kernel; `rail_h = 88.9` mm = 3.50″).\n\n"
+        "**Checked-in `martin.FCStd` / STEP / timber STL may lag the kernel if FreeCAD was not available in this environment.** Do not mill ribbon thickness from an unrecomputed solid. Use the kernel, P-302, and OpenSCAD parameters.\n",
     )
     write(
         os.path.join(FAB, "02_STEP", "README.md"),
-        "STEP assembly: `martin_assembly.step` (copied from `../cad/exports/`).\n",
+        "STEP assembly: `martin_assembly.step` (copied from `../cad/exports/` when present).\n\n"
+        "Recompute after kernel changes: `freecadcmd fence/martin/cad/martin_fence.py`.\n"
+        "Native unit in STEP is millimetre. Ribbon height must be 88.9 mm (2×4), not 234.95 mm (2×10).\n",
     )
     write(
         os.path.join(FAB, "03_STL", "README.md"),
-        "STL meshes copied from `../cad/exports/` (timber / ballast). No concrete/gravel/sleeve.\n",
+        "STL meshes copied from `../cad/exports/` (timber / ballast). No concrete/gravel/sleeve.\n"
+        "Preview only — not the fabrication source. Recompute with FreeCAD after Rev F.2.\n",
     )
+    write_print_stls()
     copy_cad_exports()
     print("FAB package complete. parts", len(proj["parts"]), "drawings", len(proj["drawing_index"]))
+
+
+def write_print_stls():
+    """1:1 PLA/PETG joint coupons — print before milling irreversible wood."""
+    out = os.path.join(FAB, "14_PRINT")
+    ensure(out)
+
+    def ascii_box(path, name, dx, dy, dz):
+        # millimetres, origin at corner
+        v = [
+            (0, 0, 0), (dx, 0, 0), (dx, dy, 0), (0, dy, 0),
+            (0, 0, dz), (dx, 0, dz), (dx, dy, dz), (0, dy, dz),
+        ]
+        faces = (
+            (0, 3, 2, 1, (0, 0, -1)),
+            (4, 5, 6, 7, (0, 0, 1)),
+            (0, 1, 5, 4, (0, -1, 0)),
+            (2, 3, 7, 6, (0, 1, 0)),
+            (0, 4, 7, 3, (-1, 0, 0)),
+            (1, 2, 6, 5, (1, 0, 0)),
+        )
+        lines = [f"solid {name}"]
+        for a, b, c, d, n in faces:
+            for tri in ((a, b, c), (a, c, d)):
+                lines.append(f"  facet normal {n[0]} {n[1]} {n[2]}")
+                lines.append("    outer loop")
+                for i in tri:
+                    x, y, z = v[i]
+                    lines.append(f"      vertex {x:.3f} {y:.3f} {z:.3f}")
+                lines.append("    endloop")
+                lines.append("  endfacet")
+        lines.append(f"endsolid {name}\n")
+        write(os.path.join(out, path), "\n".join(lines))
+
+    # inches → mm
+    ascii_box("T-501_kusabi.stl", "T501_kusabi", 0.625 * MM, 5.5 * MM, 1.125 * MM)
+    ascii_box("T-502_tenon.stl", "T502_tenon", 2.5 * MM, 4.5 * MM, 3.5 * MM)
+    ascii_box("W-003_pivot.stl", "W003_pivot", 1.25 * MM, 1.25 * MM, 4.0 * MM)
+    write(
+        os.path.join(out, "README.md"),
+        "# 3D-print joint coupons (1:1, PLA or PETG)\n\n"
+        "Print these **before** milling 4×6 / oak. Units in the STL are **millimetres**.\n\n"
+        "| File | Joint | Critical fit |\n"
+        "|---|---|---|\n"
+        "| `T-501_kusabi.stl` | W-001 kusabi blank ⅝″ × 1⅛″ × 5½″ | Taper on the bench after print; confirm reverse-drive in a scrap mortise |\n"
+        "| `T-502_tenon.stl` | Post foot tenon 2.50 × 4.50 × 3.50 | Must drop into F-003 and lift out |\n"
+        "| `W-003_pivot.stl` | Oak pivot ⌀1.25″ × 4″ | Locational in sill + soffit; lift-off +Z |\n\n"
+        "Do not treat these meshes as structural. They are fit gauges.\n",
+    )
 
 
 def copy_cad_exports():

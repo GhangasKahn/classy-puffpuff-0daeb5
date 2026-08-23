@@ -172,7 +172,7 @@ class Sheet:
         self.text(160, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "Buffalo NY · Prairie + Japanese joinery", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Sit-on-grade · No nails in timber · Rev F", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, f"Sit-on-grade · No nails in timber · Rev {PROJ['project']['REVISION']}", 13, DIM, "end")
 
     def save(self):
         path = os.path.join(OUT, f"{self.code}_{self.title.split()[0].lower()}.svg")
@@ -215,10 +215,10 @@ def Y(zin):
 
 
 def sheet_m1():
-    s = Sheet("M-1", "General arrangement", "Scale 1:16 approx · dimensions in inches · Rev F Tree of Life")
+    s = Sheet("M-1", "General arrangement", f"Scale 1:16 approx · dimensions in inches · Rev {PROJ['project']['REVISION']} Tree of Life")
     s.titleblock()
     s.text(40, 70, "FRONT ELEVATION — garden face", 16, ACC, bold=True)
-    s.text(40, 94, '143" overall · 65" high · Darwin Martin Tree of Life · cantilevered eave · projecting belts · live planters', 13, DIM)
+    s.text(40, 94, '143" overall · 65" high · Darwin Martin Tree of Life · cantilevered eave · 2×4 Prairie ribbons · live planters', 13, DIM)
 
     paint_front_elevation(s, LY, X, Y, S, kv, gate=True, labels=True, planters=True)
 
@@ -254,7 +254,7 @@ def sheet_m1():
     notes = [
         "DESIGN: Darwin Martin House Tree of Life — original wood muntins, not licensed glass.",
         "MACRO: deep eave + fascia shadow, belts that stick past the piers, Roman-brick piers, recessed lights.",
-        "LIGHTS: nested-rects / three trees / nested-rects. 1.50″ max aperture. Solid 2×12 water table (dog).",
+        "LIGHTS: ¾″ dog-grid nested gold squares / three trees / nested squares. Solid 2×12 water table.",
         "GATE: Tree of Life portal flush to the house. Oak pivots at P1. No Z-brace on the garden face.",
         "BALLAST: Live planters P1–P2 and P2–P3. Stone inside boxes only — not a pad.",
         "WINTER: Knock wedges → withdraw cassettes → lift gate off oak pivots → lift posts → empty troughs.",
@@ -346,11 +346,11 @@ def sheet_m2():
     s.text(980, 430, "WHY THIS IS NOT A RANCH FENCE", 16, ACC, bold=True)
     bullets = [
         "Deep 2×12 eave + 1×4 fascia — Wright plane, not a 2× lid.",
-        "Belts cantilever 3″ past the piers (rail_reveal).",
+        "2×4 Prairie ribbons cantilever 3″ past the piers (rail_reveal).",
         "Piers wrapped in Roman-brick 2×2 (Darwin Martin texture).",
         "Three recessed lights: nested squares / Tree of Life / nested squares.",
-        "Solid 2×12 PT water table — dog cannot crawl. Pattern max 1.50″.",
-        "φ sizes the cassette pair (8.085 / 13.080). Do not rip 2×10.",
+        f"Solid 2×12 PT water table — dog crawl stop. Q-001 max {kv('pattern_gap_dog'):g}″; upper lights {kv('pattern_gap'):g}″.",
+        f"φ sizes the cassette pair ({LY['light_minor']:g} / {LY['light_major']:g}). Do not substitute 2×10 ranch rails.",
         "Through-nuki only K-001 + R-001 + R-002. Cassettes withdraw for winter.",
         "Original wood interpretation of Darwin Martin Tree of Life — not licensed glass.",
     ]
@@ -365,17 +365,18 @@ def sheet_m3():
     s.titleblock()
 
     # Nuki detail
-    s.text(40, 70, "DETAIL 1 — NUKI THROUGH-BELT (2×10 IN 4×6)", 16, ACC, bold=True)
+    s.text(40, 70, "DETAIL 1 — NUKI THROUGH-RIBBON (2×4 IN 4×6)", 16, ACC, bold=True)
     sx, sy = 80, 420
     # post section
     s.rect(sx, sy - 120, 90, 240, fill="#d9dcde", stroke=INK, sw=2)  # post
-    s.rect(sx - 80, sy - 50, 250, 70, fill=GRAY, stroke=INK, sw=2)  # 2x10
+    nh = 28  # schematic 2×4 ribbon (thin Wright plane, not a 2×10 ranch rail)
+    s.rect(sx - 80, sy - nh / 2, 250, nh, fill=GRAY, stroke=INK, sw=2)
     s.poly([(sx + 70, sy - 10), (sx + 95, sy), (sx + 70, sy + 10)], fill=ACC, stroke=ACC)  # wedge
     s.text(sx + 45, sy + 150, "4×6 POST", 13, DIM, "middle")
-    s.text(sx + 170, sy - 65, "2×10 NUKI", 13, DIM)
+    s.text(sx + 170, sy - 28, "2×4 RIBBON NUKI", 13, DIM)
     s.text(sx + 110, sy + 5, "WEDGE", 12, ACC, bold=True)
-    s.text(sx - 10, 70 + 40, 'Mortise: 1.5" × 9.25" through · cheeks 2" each side of belt', 13, INK)
-    s.text(sx - 10, 70 + 62, 'Through-nuki only water table + two belts. Cassettes groove in — keep the post web.', 13, INK)
+    s.text(sx - 10, 70 + 40, f'Mortise: 1.50" × {kv("belt_h"):.2f}" through · cheeks 2.00" of 5.50" post each side of 1.50" rail', 13, INK)
+    s.text(sx - 10, 70 + 62, 'Through-nuki only water table + two 2×4 ribbons. Cassettes groove in — keep the post web.', 13, INK)
 
     # Foot tenon
     s.text(520, 70, "DETAIL 2 — FOOT TENON INTO CROSS-TIE", 16, ACC, bold=True)
@@ -406,7 +407,7 @@ def sheet_m3():
     s.rect(590, 678, 8, 28, fill=MUNTIN, stroke=INK, sw=0.6)
     s.rect(720, 678, 8, 28, fill=MUNTIN, stroke=INK, sw=0.6)
     s.rect(560, 724, 200, 40, fill=EARTH, stroke=INK, sw=2)
-    s.text(520, 590, '1.50" max muntin gap. Solid 2×12 water table at grade. Gauge must not pass.', 13, INK)
+    s.text(520, 590, f'Q-001 {kv("pattern_gap_dog"):g}" dog grid. Upper lights {kv("pattern_gap"):g}". Water table is the crawl stop.', 13, INK)
     s.text(520, 612, "Do not through-mortise cassettes — three nuki keep the post continuous.", 13, INK)
 
     s.text(40, 820, "JOINT VOCABULARY USED", 14, ACC, bold=True)
@@ -575,7 +576,7 @@ def sheet_m5():
         "  — NO epoxy, NO house receiver, NO planter at P0.",
         "SWING: Into garden (confirm site). Clear arc 36\".",
         "JOINERY: Drawbored mortise & tenon at every stile/rail (hozo).",
-        "DOG: Solid water-table rail + 1.50″ max muntin gap + 0.375″ bottom clear.",
+        f"DOG: Solid water-table rail + {kv('pattern_gap_dog'):g}″ Q-001 grid + 0.375″ bottom clear.",
     ]
     for i, t in enumerate(lines):
         s.text(620, 100 + i * 22, t, 13, INK)
@@ -593,21 +594,21 @@ def sheet_m6():
     fam_meta = {
         "4x6x8": ("4×6", "8'", "Posts + cross-ties nested"),
         "4x6x16": ("4×6", "16'", "Dodai sills F-001 / F-002"),
-        "2x10x10": ("2×10", "10'", "Projecting Prairie belts R-001 / R-002"),
+        "2x4x10": ("2×4", "10'", "Prairie ribbons R-001 / R-002"),
         "2x12x10": ("2×12 PT", "10'", "Water table K-001"),
         "2x12x12": ("2×12", "12'", "Eave C-001 + stub C-002"),
-        "1x4x8": ("1×4", "8'", "Tree of Life / nested-rect muntins"),
+        "1x4x8": ("1×4", "8'", "Tree of Life / nested-rect muntins + Q-010 stock"),
         "1x4x12": ("1×4", "12'", "Eave fascia C-003"),
-        "2x6x8": ("2×6", "8'", "Gate frame + planters + braces"),
+        "2x6x8": ("2×6", "8'", "Gate stiles + planters + braces"),
         "2x2x8": ("2×2", "8'", "Roman-brick T-001 pier wrap"),
-        "2x4x8": ("2×4", "8'", "Kusabi W-001 blanks"),
+        "2x4x8": ("2×4", "8'", "Kusabi + gate ribbon rails G-003..005"),
         "oak_1x4x4": ("1×4 oak", "4'", "Pegs / latch / oak pivots"),
     }
     bf_by = {}
     for b in NEST["boards"]:
         bf_by[b["PURCHASE"]] = bf_by.get(b["PURCHASE"], 0) + b["BF"]
     rows = [("Qty", "Nominal", "Length", "Use", "Board feet")]
-    fams = ("4x6x8", "4x6x16", "2x10x10", "2x12x10", "2x12x12", "1x4x8", "1x4x12", "2x6x8", "2x2x8", "2x4x8", "oak_1x4x4")
+    fams = ("4x6x8", "4x6x16", "2x4x10", "2x12x10", "2x12x12", "1x4x8", "1x4x12", "2x6x8", "2x2x8", "2x4x8", "oak_1x4x4")
     for fam in fams:
         nom, length, use = fam_meta[fam]
         rows.append((str(NEST["buy_counts"].get(fam, 0)), nom, length, use, f"{bf_by.get(fam, 0):.1f}"))
@@ -650,4 +651,7 @@ if __name__ == "__main__":
     sheet_m4()
     sheet_m5()
     sheet_m6()
+    from martin_elevation import write_hero_svg
+    write_hero_svg(os.path.join(OUT, "hero_elevation.svg"), LY, kv, dark=False)
+    write_hero_svg(os.path.join(ROOT, "fence", "martin", "renders", "hero_elevation.svg"), LY, kv, dark=True)
     print("MARTIN plans done →", OUT)

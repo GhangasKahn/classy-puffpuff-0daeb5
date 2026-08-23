@@ -1,16 +1,16 @@
-# Zero-Gap Verification Checklist — MARTIN Rev F.1
+# Zero-Gap Verification Checklist — MARTIN Rev F.2
 
 Protocol: WOODWRIGHT PLANFORGE v1.0. Fail any item → do not claim an unconditional fabrication release.
 
 | Item | Result | Evidence |
 |---|---|---|
 | All primary structural members in part register with finished sizes | PASS | `fab/07_BOM/bom.csv` L/F/K/R/C |
-| Secondary parts (cassettes, muntins, caps, pins, lights, pads) listed | PASS | Q-001..003, T-001, W-001..003, H-001, H-006 |
+| Secondary parts (cassettes, muntins, caps, pins, lights, pads) listed | PASS | Q-001..003, Q-010 muntin stock, T-001, W-001..003, H-001, H-006 |
 | Quantities match geometry | PASS | kernel `parts()` + nest |
 | Consumable fasteners specified or custom alternative | PASS | No structural screws. Oak pegs 96825K75. Optional hasp 1304A42. |
 | Every critical joint has a detail sheet | PASS | J-401 nuki/kusabi, J-402 foot tenon, J-403 kama-tsugi, J-404 hozo/pivot |
 | Geometry, cut sequence, acceptance, water/movement on joints | PASS | J sheets + `09_JOINERY/joints.csv` + QC-08..17 |
-| Layout system declared and consistent | PASS | Face/edge: x=0 latch face, z=0 sill top; post CLs derived |
+| Layout system declared and consistent | PASS | CENTERLINE for posts P0–P3; Datum A = sill top z=0; x=0 latch face |
 | Japanese / hand-tool sequences specified | PASS | nuki/kusabi, hozo drawbore, kama-tsugi; Bridge City / Zenwu / Japanese saws |
 | 3D-print prototype recommendation | PASS WITH CONDITION | Print T-501 kusabi, T-502 tenon, pivot socket 1:1 PLA before milling |
 | Load path shown or described | PASS | S-101 in guidebook; wind via planters + ladder spread |

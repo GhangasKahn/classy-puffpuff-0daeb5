@@ -6,16 +6,16 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>QA-701  ·  Inspection plan</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Do not ship a part that fails its class</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F.2  ·  inches  ·  kernel 6.2.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-01  [VERIFIED/TBM]  Confirm overall opening 143.000″ ± 0.25″ on site  tol T1</text>
 <text x='40.0' y='92.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-02  [VERIFIED]  Run sits on driveway slab; pack only if outriggers leave slab (drop_off default 0)  tol T1</text>
 <text x='40.0' y='114.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-03  [T0]  Stock moisture — PT for kick + planters dry before prime; SPF acclimate  tol —</text>
 <text x='40.0' y='136.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-04  [T2]  Four posts finished length 67.000" within ±1/32"  tol ±0.031</text>
 <text x='40.0' y='158.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-05  [T2]  K-001 + R-001 + R-002 identical nuki_len; cassettes = bay_clear  tol ±0.031</text>
-<text x='40.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-06  [T2]  Through-nuki only K-001/R-001/R-002; Q cassettes in grooves; 1.50″ max aperture  tol binary</text>
+<text x='40.0' y='180.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-06  [T2]  Through-nuki only K-001/R-001/R-002; Q cassettes in grooves; Q-001 0.75″ dog gauge, others 1.15″ max aperture  tol binary</text>
 <text x='40.0' y='202.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-07  [T2]  Foot tenon 2.500×4.500×3.500 enters F-003; lifts out for winter  tol +0.03/−0</text>
-<text x='40.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-08  [T1]  Dry-assemble: plumb / no racking; Tree of Life + nested-rect cassettes seat; 1.50″ gauge must not pass pattern  tol plumb 1/8″ in 65″</text>
+<text x='40.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-08  [T1]  Dry-assemble: plumb / no racking; Tree of Life + nested-rect cassettes seat; 0.75″ gauge must not pass Q-001; 1.15″ must not pass Q-002/Q-003  tol plumb 1/8″ in 65″</text>
 <text x='40.0' y='246.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-09  [T2]  Gate against house; oak pivots lift-off; latch into P0; no planter at P0  tol —</text>
 <text x='40.0' y='268.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-10  [T0]  No glue on kusabi or nuki locking faces  tol binary</text>
 <text x='40.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>QC-11  [T0]  Paint: ease arrises, end-grain sealer, PT dry then prime, 2 finish coats; mask joinery  tol —</text>
@@ -29,8 +29,8 @@
 <text x='40.0' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        gate/cap clearance  —  0.5" ≥ 0.50" spec</text>
 <text x='40.0' y='504.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        nuki cheek  —  2.0" each side of 1.50″ rail in 5.50″ post</text>
 <text x='40.0' y='526.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        foot tenon shoulders  —  0.5" × 0.5"</text>
-<text x='40.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        elevation stack  —  63.501" slats + 1.5" cap = 65.001"</text>
-<text x='40.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        Prairie cassette ratio ≈ φ  —  1.618 (L2/L1 lights; belts stay full 2×10)</text>
-<text x='40.0' y='592.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        unique PART_IDs  —  40</text>
+<text x='40.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        elevation stack  —  63.5" slats + 1.5" cap = 65.0"</text>
+<text x='40.0' y='570.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        Prairie cassette ratio ≈ φ  —  1.618 (L2/L1 lights; belts stay 2×4 ribbons)</text>
+<text x='40.0' y='592.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        unique PART_IDs  —  41</text>
 <text x='40.0' y='614.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1a1f24' text-anchor='start'>OK        planter ballast vs wind (planning)  —  1521.7 lb / 1311.1 lb  ratio 1.16</text>
 </svg>

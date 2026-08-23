@@ -6,47 +6,48 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='170.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#1a1f24' text-anchor='start' font-weight='600'>S-601  ·  Master BOM (excerpt)</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Full table: 07_BOM/bom.csv  ·  quantities from kernel</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F  ·  inches  ·  kernel 6.0</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#5a6a4a' text-anchor='end'>Rev F.2  ·  inches  ·  kernel 6.2.0</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>PARAMETRIC — do not scale. Datum: sill top / latch face x=0</text>
 <text x='40.0' y='70.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>ID         QTY  M/B   FINISHED T×W×L                     NAME</text>
 <text x='40.0' y='95.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>L-001     1  MAKE  3.50×5.50×67.00"   P0 latch post</text>
 <text x='40.0' y='111.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>L-002     1  MAKE  3.50×5.50×67.00"   P1 hinge post</text>
 <text x='40.0' y='127.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>L-003     1  MAKE  3.50×5.50×67.00"   P2 mid post / cap scarf</text>
 <text x='40.0' y='143.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>L-004     1  MAKE  3.50×5.50×67.00"   P3 end post</text>
-<text x='40.0' y='159.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>R-001     1  MAKE  1.50×9.25×109.50"   BELT1 projecting Prairie belt</text>
-<text x='40.0' y='175.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>R-002     1  MAKE  1.50×9.25×109.50"   BELT2 projecting Prairie belt / latch CL</text>
+<text x='40.0' y='159.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>R-001     1  MAKE  1.50×3.50×109.50"   BELT1 projecting Prairie ribbon</text>
+<text x='40.0' y='175.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>R-002     1  MAKE  1.50×3.50×109.50"   BELT2 projecting Prairie ribbon / latch CL</text>
 <text x='40.0' y='191.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>K-001     1  MAKE  1.50×11.25×109.50"   Water table nuki (earth line / dog seal)</text>
 <text x='40.0' y='207.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>C-001     1  MAKE  1.50×11.25×110.50"   Prairie eave (kama-tsugi pair)</text>
 <text x='40.0' y='223.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>C-002     1  MAKE  1.50×11.25×4.50"   Latch-post cap stub</text>
 <text x='40.0' y='239.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>C-003     1  MAKE  0.75×3.50×110.50"   Eave fascia (garden shadow)</text>
-<text x='40.0' y='255.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-001     2  MAKE  0.75×8.09×46.50"   L1 nested-rects light (roots)</text>
-<text x='40.0' y='271.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-002     2  MAKE  0.75×13.08×46.50"   L2 Tree of Life light (three trees)</text>
-<text x='40.0' y='287.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-003     2  MAKE  0.75×8.09×46.50"   L3 nested-rects light (foliage)</text>
-<text x='40.0' y='303.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>T-001    36  MAKE  1.50×1.50×7.00"   Tectonic block (Darwin Martin pier texture</text>
-<text x='40.0' y='319.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-001     1  MAKE  1.50×3.50×62.62"   Gate hinge stile</text>
-<text x='40.0' y='335.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-002     1  MAKE  1.50×3.50×62.62"   Gate latch stile</text>
-<text x='40.0' y='351.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-003     1  MAKE  1.50×5.50×30.50"   Gate rail aligned to BELT1</text>
-<text x='40.0' y='367.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-004     1  MAKE  1.50×5.50×30.50"   Gate rail aligned to BELT2 (latch)</text>
-<text x='40.0' y='383.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-005     1  MAKE  1.50×5.50×30.50"   Gate top belt rail</text>
-<text x='40.0' y='399.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-006     1  MAKE  1.50×3.50×30.50"   Gate bottom rail</text>
-<text x='40.0' y='415.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-007     1  MAKE  1.50×3.50×30.50"   Gate top rail</text>
-<text x='40.0' y='431.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-008     1  MAKE  1.50×3.50×59.61"   Gate diagonal brace</text>
-<text x='40.0' y='447.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-009     3  MAKE  0.75×13.08×28.00"   Gate Tree of Life / nested-rect cassettes</text>
-<text x='40.0' y='463.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-010     1  MAKE  1.50×3.50×18.00"   Sliding latch bar</text>
-<text x='40.0' y='479.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>W-001    12  MAKE  0.62×1.12×5.50"   Kusabi locking wedge</text>
-<text x='40.0' y='495.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>W-002    14  MAKE  0.38×0.38×2.25"   Drawbore / latch oak peg</text>
-<text x='40.0' y='511.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>W-003     2  MAKE  1.25×1.25×4.00"   Oak gate pivot pin</text>
-<text x='40.0' y='527.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-001     1  MAKE  3.50×5.50×155.00"   Driveway dodai sill</text>
-<text x='40.0' y='543.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-002     1  MAKE  3.50×5.50×155.00"   Garden dodai sill</text>
-<text x='40.0' y='559.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-003     4  MAKE  3.50×5.50×41.50"   Cross-tie / post shoe</text>
-<text x='40.0' y='575.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-004     0  MAKE  1.50×5.50×12.00"   Garden packing crib</text>
-<text x='40.0' y='591.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-005     2  MAKE  18.00×18.00×44.00"   Live planter trough (garden side)</text>
-<text x='40.0' y='607.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-006     4  MAKE  1.50×3.50×25.46"   Sujikai base brace</text>
-<text x='40.0' y='623.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-001     8  BUY   0.75×4.00×4.00"   Rubber furniture pad (driveway sill)</text>
-<text x='40.0' y='639.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-002     1  MAKE  1.50×3.50×6.00"   Optional oak latch strike (Latch A opt-in)</text>
-<text x='40.0' y='655.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-003     1  BUY   0.00×0.00×0.00"   Optional stainless pintle set</text>
-<text x='40.0' y='671.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-004     1  BUY   0.00×0.00×0.00"   Keyed padlock hasp (optional)</text>
-<text x='40.0' y='687.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-005     1  BUY   0.00×0.00×0.00"   Exterior primer + owner gray enamel</text>
-<text x='40.0' y='703.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-006     1  BUY   0.00×0.00×0.00"   24V IP67 LED tape + driver (cap soffit)</text>
-<text x='40.0' y='719.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-007     1  BUY   0.00×0.00×0.00"   Planter drainage stone (in-box only)</text>
+<text x='40.0' y='255.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-001     2  MAKE  0.75×11.26×46.50"   L1 nested-rects dog grid (¾″ max aperture)</text>
+<text x='40.0' y='271.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-002     2  MAKE  0.75×18.22×46.50"   L2 Tree of Life light (three trees, gold s</text>
+<text x='40.0' y='287.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-003     2  MAKE  0.75×11.26×46.50"   L3 nested-rects light (foliage / sumac)</text>
+<text x='40.0' y='303.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>Q-010     8  MAKE  0.75×0.75×96.00"   Muntin rip stock (kumiko came + gold squar</text>
+<text x='40.0' y='319.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>T-001    36  MAKE  1.50×1.50×7.00"   Tectonic block (Darwin Martin pier texture</text>
+<text x='40.0' y='335.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-001     1  MAKE  1.50×3.50×62.62"   Gate hinge stile</text>
+<text x='40.0' y='351.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-002     1  MAKE  1.50×3.50×62.62"   Gate latch stile</text>
+<text x='40.0' y='367.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-003     1  MAKE  1.50×3.50×30.50"   Gate rail aligned to BELT1</text>
+<text x='40.0' y='383.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-004     1  MAKE  1.50×3.50×30.50"   Gate rail aligned to BELT2 (latch)</text>
+<text x='40.0' y='399.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-005     1  MAKE  1.50×3.50×30.50"   Gate top belt rail</text>
+<text x='40.0' y='415.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-006     1  MAKE  1.50×3.50×30.50"   Gate bottom rail</text>
+<text x='40.0' y='431.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-007     1  MAKE  1.50×3.50×30.50"   Gate top rail</text>
+<text x='40.0' y='447.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-008     1  MAKE  1.50×3.50×59.61"   Gate driveway-face compression brace (hidd</text>
+<text x='40.0' y='463.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-009     3  MAKE  0.75×18.22×28.00"   Gate Tree of Life / nested-rect cassettes</text>
+<text x='40.0' y='479.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>G-010     1  MAKE  1.50×3.50×18.00"   Sliding latch bar</text>
+<text x='40.0' y='495.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>W-001    12  MAKE  0.62×1.12×5.50"   Kusabi locking wedge</text>
+<text x='40.0' y='511.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>W-002    14  MAKE  0.38×0.38×2.25"   Drawbore / latch oak peg</text>
+<text x='40.0' y='527.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>W-003     2  MAKE  1.25×1.25×4.00"   Oak gate pivot pin</text>
+<text x='40.0' y='543.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-001     1  MAKE  3.50×5.50×155.00"   Driveway dodai sill</text>
+<text x='40.0' y='559.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-002     1  MAKE  3.50×5.50×155.00"   Garden dodai sill</text>
+<text x='40.0' y='575.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-003     4  MAKE  3.50×5.50×41.50"   Cross-tie / post shoe</text>
+<text x='40.0' y='591.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-004     0  MAKE  1.50×5.50×12.00"   Garden packing crib</text>
+<text x='40.0' y='607.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-005     2  MAKE  18.00×18.00×44.00"   Live planter trough (garden side)</text>
+<text x='40.0' y='623.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>F-006     4  MAKE  1.50×3.50×25.46"   Sujikai base brace</text>
+<text x='40.0' y='639.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-001     8  BUY   0.75×4.00×4.00"   Rubber furniture pad (driveway sill)</text>
+<text x='40.0' y='655.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-002     1  MAKE  1.50×3.50×6.00"   Optional oak latch strike (Latch A opt-in)</text>
+<text x='40.0' y='671.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-003     1  BUY   0.00×0.00×0.00"   Optional stainless pintle set</text>
+<text x='40.0' y='687.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-004     1  BUY   0.00×0.00×0.00"   Keyed padlock hasp (optional)</text>
+<text x='40.0' y='703.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-005     1  BUY   0.00×0.00×0.00"   Exterior primer + owner gray enamel</text>
+<text x='40.0' y='719.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-006     1  BUY   0.00×0.00×0.00"   24V IP67 LED tape + driver (cap soffit)</text>
+<text x='40.0' y='735.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='start'>H-007     1  BUY   0.00×0.00×0.00"   Planter drainage stone (in-box only)</text>
 </svg>

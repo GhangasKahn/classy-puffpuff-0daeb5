@@ -1,0 +1,86 @@
+solid T501_kusabi
+  facet normal 0 0 -1
+    outer loop
+      vertex 0.000 0.000 0.000
+      vertex 0.000 139.700 0.000
+      vertex 15.875 139.700 0.000
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex 0.000 0.000 0.000
+      vertex 15.875 139.700 0.000
+      vertex 15.875 0.000 0.000
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 0.000 0.000 28.575
+      vertex 15.875 0.000 28.575
+      vertex 15.875 139.700 28.575
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 0.000 0.000 28.575
+      vertex 15.875 139.700 28.575
+      vertex 0.000 139.700 28.575
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex 0.000 0.000 0.000
+      vertex 15.875 0.000 0.000
+      vertex 15.875 0.000 28.575
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex 0.000 0.000 0.000
+      vertex 15.875 0.000 28.575
+      vertex 0.000 0.000 28.575
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 15.875 139.700 0.000
+      vertex 0.000 139.700 0.000
+      vertex 0.000 139.700 28.575
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 15.875 139.700 0.000
+      vertex 0.000 139.700 28.575
+      vertex 15.875 139.700 28.575
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex 0.000 0.000 0.000
+      vertex 0.000 0.000 28.575
+      vertex 0.000 139.700 28.575
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex 0.000 0.000 0.000
+      vertex 0.000 139.700 28.575
+      vertex 0.000 139.700 0.000
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 15.875 0.000 0.000
+      vertex 15.875 139.700 0.000
+      vertex 15.875 139.700 28.575
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 15.875 0.000 0.000
+      vertex 15.875 139.700 28.575
+      vertex 15.875 0.000 28.575
+    endloop
+  endfacet
+endsolid T501_kusabi

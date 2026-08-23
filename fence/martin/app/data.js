@@ -1,4 +1,4 @@
-/* MARTIN Build App — parametric design data (inches) · Rev F */
+/* MARTIN Build App — parametric design data (inches) · Rev F.2 */
 window.MARTIN_DATA = {
   meta: {
     name: "MARTIN",
@@ -8,11 +8,11 @@ window.MARTIN_DATA = {
     gateClear: 36,
     bayClear: 46.5,
     dropDefault: 0,
-    boardFeet: 363,
-    boardFeetNet: 316,
+    boardFeet: 362,
+    boardFeetNet: 315,
     paint: "Owner gray",
     climate: "Buffalo / Erie County NY",
-    revision: "F",
+    revision: "F.2",
   },
   posts: [
     { id: "P0", name: "Latch post", x: 1.75, role: "Gate latch / house side — no planter" },
@@ -22,18 +22,18 @@ window.MARTIN_DATA = {
   ],
   rails: [
     { id: "K-001", name: "Water table nuki", cl: 5.625, h: 11.25, stock: "2×12 PT", nuki: true },
-    { id: "Q-001", name: "Nested-rects light", cl: 16.17, h: 8.085, stock: "cassette", nuki: false },
-    { id: "R-001", name: "Prairie belt 1", cl: 25.46, h: 9.25, stock: "2×10", nuki: true },
-    { id: "Q-002", name: "Tree of Life", cl: 37.25, h: 13.081, stock: "cassette", nuki: false },
-    { id: "R-002", name: "Prairie belt 2 / latch", cl: 49.291, h: 9.25, stock: "2×10", nuki: true },
-    { id: "Q-003", name: "Nested-rects foliage", cl: 58.96, h: 8.085, stock: "cassette", nuki: false },
+    { id: "Q-001", name: "Dog-grid nested squares", cl: 16.694, h: 11.263, stock: "cassette", nuki: false },
+    { id: "R-001", name: "Prairie ribbon 1", cl: 25.763, h: 3.5, stock: "2×4", nuki: true },
+    { id: "Q-002", name: "Tree of Life", cl: 37.375, h: 18.224, stock: "cassette", nuki: false },
+    { id: "R-002", name: "Prairie ribbon 2 / latch", cl: 48.987, h: 3.5, stock: "2×4", nuki: true },
+    { id: "Q-003", name: "Nested-rects foliage", cl: 57.869, h: 11.263, stock: "cassette", nuki: false },
     { id: "CAP", name: "2×12 eave + fascia", cl: 65, h: 1.5, stock: "2×12", nuki: false },
   ],
   parts: [
     { id: "sills", group: "base", label: "Dodai sills (2)", detail: "4×6 on edge · sit on driveway slab · no pour", color: "#9a9890" },
     { id: "ties", group: "base", label: "Cross-ties (4)", detail: "Post shoes · 3.5″ tenon drop-in", color: "#b8b6b0" },
     { id: "posts", group: "frame", label: "4×6 piers (4)", detail: "3.5×5.5 · Roman-brick wrap on P1–P3", color: "#c4c2ba" },
-    { id: "rails", group: "frame", label: "Eave / belts / lights", detail: "2×12 eave · 2×10 belts · Tree of Life cassettes", color: "#5a5e58" },
+    { id: "rails", group: "frame", label: "Eave / ribbons / lights", detail: "2×12 eave · 2×4 Prairie ribbons · gold Tree of Life", color: "#4a4e48" },
     { id: "boards", group: "infill", label: "Planters + pier wrap", detail: "Live troughs · 2×2 Darwin Martin brick", color: "#6a6e66" },
     { id: "cap", group: "frame", label: "2×12 eave", detail: "Kama-tsugi at P2 · fascia shadow · soffit light", color: "#2a2e2c" },
     { id: "gate", group: "gate", label: "Tree of Life gate", detail: "Flush to house · oak pivots · no Z-brace face", color: "#e4e0d6" },
@@ -42,7 +42,7 @@ window.MARTIN_DATA = {
   lumber: [
     { qty: 6, nom: "4×6", len: "8′", use: "Posts L-001…004 + F-003 ties", bf: 96.0 },
     { qty: 2, nom: "4×6", len: "16′", use: "Dodai sills F-001 / F-002", bf: 64.0 },
-    { qty: 2, nom: "2×10", len: "10′", use: "Projecting belts R-001 / R-002", bf: 33.3 },
+    { qty: 2, nom: "2×4", len: "10′", use: "Prairie ribbons R-001 / R-002", bf: 13.3 },
     { qty: 1, nom: "2×12 PT", len: "10′", use: "Water table K-001", bf: 20.0 },
     { qty: 1, nom: "2×12", len: "12′", use: "Eave C-001 + stub C-002", bf: 24.0 },
     { qty: 4, nom: "1×4", len: "8′", use: "Tree of Life / nested-rect muntins", bf: 10.7 },
@@ -64,7 +64,7 @@ window.MARTIN_DATA = {
     { item: "Optional McMaster 1304A42 stainless hasp", qty: "1", href: "https://www.mcmaster.com/1304A42/" },
   ],
   joinery: [
-    { id: "nuki", jp: "貫", name: "Nuki", where: "K-001 + R-001 + R-002 through posts", lock: "Hardwood kusabi wedges", tip: "Through-mortise only the water table and two belts. Three mortises keep the post web." },
+    { id: "nuki", jp: "貫", name: "Nuki", where: "K-001 + R-001 + R-002 through posts", lock: "Hardwood kusabi wedges", tip: "Through-mortise only the water table and two 2×4 ribbons. Three mortises keep the post web." },
     { id: "cassette", jp: "組子", name: "Cassette groove", where: "Q-001 / Q-002 / Q-003", lock: "Drops into nuki-edge grooves", tip: "Tree of Life + nested squares. Recessed behind belts. Winter-withdraw toward P3." },
     { id: "kusabi", jp: "楔", name: "Kusabi wedge", where: "Cheek slots beside each nuki", lock: "Friction — reverse to release", tip: "⅝″ × 1⅛″ × 5.5″ hardwood. Never glue." },
     { id: "hozo", jp: "ほぞ", name: "Hozo (M&T)", where: "Gate stile / rail frame", lock: "Drawbored oak peg", tip: "⅛″ drawbore offset pulls joint closed." },
@@ -79,8 +79,8 @@ window.MARTIN_DATA = {
     { id: "a4", phase: "base", title: "Build two live planters", body: "F-005 troughs on the garden side of bays P1–P2 and P2–P3 only. No planter at the house/gate. Drainage slots; ½″ air gap from posts." },
     { id: "a5", phase: "timber", title: "Cut posts & shoulder tenons", body: "Four 4×6 blanks → 67.00″ (63.50″ body + 3.50″ tenon). Shoulder to 2.5×4.5. Dry-fit F-003." },
     { id: "a6", phase: "timber", title: "Cut nuki mortises, cassette grooves, wedge slots", body: "Through-mortise K-001 + R-001 + R-002 only. Groove Q cassettes into nuki edges. Cut kusabi cheek slots. Oak pivot sockets at P1." },
-    { id: "a7", phase: "timber", title: "Mill the Wright planes", body: "2×12 water table, two 2×10 belts to nuki_len 109.50″, 2×12 eave, 1×4 fascia. Ease 1/16″. Do not rip 2×10." },
-    { id: "a8", phase: "timber", title: "Mill Tree of Life cassettes", body: "Three recessed lights per bay: nested-rects / three trees / nested-rects. 1.50″ max aperture. Roman-brick 2×2 wrap on P1–P3." },
+    { id: "a7", phase: "timber", title: "Mill the Wright planes", body: "2×12 water table, two 2×4 Prairie ribbons to nuki_len 109.50″, 2×12 eave, 1×4 fascia. Ease 1/16″. Do not substitute 2×10 — fat belts read as a ranch fence." },
+    { id: "a8", phase: "timber", title: "Mill Tree of Life cassettes", body: "Three recessed lights per bay: ¾″ dog-grid nested squares / three gold trees / nested squares. Roman-brick 2×2 wrap on P1–P3." },
     { id: "a9", phase: "gate", title: "Build the Tree of Life gate", body: "Drawbored hozo joints. Garden face is Darwin Martin — shop brace stays on the driveway face. Oak pivots W-003: bottom in sill, top in eave." },
     { id: "a10", phase: "gate", title: "Install latch", body: "Latch B default: oak bar into mortise in P0 at the R-002 belt. Confirm swing arc. No epoxy into the house. No planter at P0." },
     { id: "a11", phase: "finish", title: "Paint for Buffalo", body: "Ease arrises, end-grain sealer, PT dry then prime, two owner-gray coats, extra on planter interiors. Mask joinery faces." },
@@ -103,9 +103,7 @@ window.MARTIN_DATA = {
     { id: "finish", label: "04 Finish" },
   ],
   gallery: [
-    { src: "../renders/martin_iso.png", title: "Isometric", kind: "render" },
-    { src: "../renders/martin_front.png", title: "Front elevation", kind: "render" },
-    { src: "../renders/martin_gate.png", title: "Gate", kind: "render" },
+    { src: "../renders/hero_elevation.svg", title: "Garden face — Tree of Life", kind: "plan" },
     { src: "../plans/M1_general.svg", title: "M-1 General", kind: "plan" },
     { src: "../plans/M2_elevation.svg", title: "M-2 Elevation", kind: "plan" },
     { src: "../plans/M3_joinery.svg", title: "M-3 Joinery", kind: "plan" },

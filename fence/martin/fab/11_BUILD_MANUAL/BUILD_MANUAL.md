@@ -1,4 +1,4 @@
-# MARTIN Build Manual — Rev F
+# MARTIN Build Manual — Rev F.2
 
 Source of truth: `fence/martin/martin_kernel.py` → `fab/00_SOURCE/martin_project.json`.
 
@@ -12,14 +12,14 @@ Gate/cap clearance **0.500″**. Post blank **67.000″**. Sit-on-grade — **no
 - gate_clear = 36.000 ASSUMED — gate at house, no planter at P0
 - bay_clear = 46.500 DERIVED `(L - 4*post_x - gate_clear)/2`
 - nuki_len = 109.500 DERIVED
-- slat_top = 63.501 + cap 1.50 = 65.000
-- cassette φ pair = 8.085 / 13.081 (L2/L1 = 1.618 ≈ φ)
+- slat_top = 63.500 + cap 1.50 = 65.000
+- cassette φ pair = 11.263 / 18.224 (L2/L1 = 1.618 ≈ φ)
 - drop_off = 0.000 (0 on slab; packing only if outriggers leave)
 
 ## C–I. Registers
 See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 
-**Nest buy:** `{'4x6x8': 6, '4x6x16': 2, '2x10x10': 2, '2x12x10': 1, '2x12x12': 1, '1x4x8': 4, '1x4x12': 1, '2x6x8': 6, '2x2x8': 3, '2x4x8': 1, 'oak_1x4x4': 2}`  net **316.02 bf**  procurement **363.42 bf** (waste_factor=0.15).
+**Nest buy:** `{'4x6x8': 6, '4x6x16': 2, '2x4x10': 2, '2x12x10': 1, '2x12x12': 1, '1x4x8': 12, '1x4x12': 1, '2x6x8': 5, '2x2x8': 3, '2x4x8': 2, 'oak_1x4x4': 2}`  net **314.71 bf**  procurement **361.92 bf** (waste_factor=0.15).
 **Ballast:** two live planters, soil 1155.0 lb + in-box stone 366.7 lb = 1521.7 lb vs required 1311.1 lb (planning FS 1.5). Concrete **0**. Gravel pad **0**.
 
 ## K. Assembly order
@@ -30,7 +30,7 @@ See `07_BOM/bom.csv`, `08_CUT_LISTS/*.csv`, `09_JOINERY/joints.csv`.
 - **AS-05** (MILL) Water table K-001 + belts R-001/002; mill Tree of Life + nested-rect cassettes Q-*
 - **AS-06** (MILL) Gate G-* hozo dry fit; brace; oak pivot sockets
 - **AS-07** (JOINERY) Kusabi W-001; pegs W-002; cap scarf C-001 + light dado
-- **AS-08** (DRY) Dry-assemble A-020: belts, cassettes, 1.50″ aperture gauge; QA QC-08
+- **AS-08** (DRY) Dry-assemble A-020: ribbons, cassettes, 0.75″ dog gauge on Q-001; QA QC-08
 - **AS-09** (DRY) Hang gate on oak pivots at P1; latch travel into P0
 - **AS-10** (FINISH) Ease, seal, PT dry, prime, two gray coats; extra on planter interiors; mask locking faces
 - **AS-11** (SET) Set ladder on pads; drop posts; bands; wedges; cap light; gate; plant troughs + optional in-box stone

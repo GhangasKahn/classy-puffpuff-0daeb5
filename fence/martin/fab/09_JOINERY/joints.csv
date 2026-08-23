@@ -2,15 +2,15 @@ JOINT_ID,JOINT_TYPE,PART_A,PART_B,LOCATION,FIT_CLASS,GLUE,ASSEMBLY_DIRECTION
 J-001,kick nuki 貫,L-002,K-001,"L-002 × K-001 @ z_cl=5.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
 J-002,kick nuki 貫,L-003,K-001,"L-003 × K-001 @ z_cl=5.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
 J-003,kick nuki 貫,L-004,K-001,"L-004 × K-001 @ z_cl=5.625""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-004,nuki 貫 + kusabi,L-002,R-001,"L-002 × R-001 @ z_cl=25.46""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-005,nuki 貫 + kusabi,L-003,R-001,"L-003 × R-001 @ z_cl=25.46""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-006,nuki 貫 + kusabi,L-004,R-001,"L-004 × R-001 @ z_cl=25.46""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-007,nuki 貫 + kusabi,L-002,R-002,"L-002 × R-002 @ z_cl=49.291""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-008,nuki 貫 + kusabi,L-003,R-002,"L-003 × R-002 @ z_cl=49.291""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-009,nuki 貫 + kusabi,L-004,R-002,"L-004 × R-002 @ z_cl=49.291""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
-J-010,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-001,"Q-001 @ z_cl=16.043""",SLIDING,NO — winter removable,+X from P3
-J-011,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-002,"Q-002 @ z_cl=37.376""",SLIDING,NO — winter removable,+X from P3
-J-012,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-003,"Q-003 @ z_cl=58.709""",SLIDING,NO — winter removable,+X from P3
+J-004,nuki 貫 + kusabi,L-002,R-001,"L-002 × R-001 @ z_cl=25.763""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-005,nuki 貫 + kusabi,L-003,R-001,"L-003 × R-001 @ z_cl=25.763""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-006,nuki 貫 + kusabi,L-004,R-001,"L-004 × R-001 @ z_cl=25.763""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-007,nuki 貫 + kusabi,L-002,R-002,"L-002 × R-002 @ z_cl=48.987""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-008,nuki 貫 + kusabi,L-003,R-002,"L-003 × R-002 @ z_cl=48.987""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-009,nuki 貫 + kusabi,L-004,R-002,"L-004 × R-002 @ z_cl=48.987""",SLIDING then INTERFERENCE via W-001,NO — winter removable,+X (withdraw toward P3 for winter)
+J-010,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-001,"Q-001 @ z_cl=17.631""",SLIDING,NO — winter removable,+X from P3
+J-011,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-002,"Q-002 @ z_cl=37.375""",SLIDING,NO — winter removable,+X from P3
+J-012,cassette groove / housed dado,L-002/003/004 + nuki edges,Q-003,"Q-003 @ z_cl=57.118""",SLIDING,NO — winter removable,+X from P3
 J-013,foot tenon into cross-tie shoe,L-001,F-003,"P0 cx=1.75"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
 J-014,foot tenon into cross-tie shoe,L-002,F-003,"P1 cx=41.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
 J-015,foot tenon into cross-tie shoe,L-003,F-003,"P2 cx=91.25"" into tie at y=0",CLEARANCE / GRAVITY drop-in — winter lift-out,NO,−Z drop-in
@@ -34,4 +34,4 @@ J-032,hozo ほぞ drawbored M&T,G-002,G-007,G-002 × G-007,DRAWBORED,optional hi
 J-033,half-lap brace,G-008,G-003 / G-007,compression diagonal,GLUE + geometry,NO — winter removable,in plane of leaf
 J-034,floating groove,R-001 / R-002 / C-001,T-001 / G-009,pier wrapping (T-001) / gate cassette grooves (G-009),CLEARANCE,NO,+X nuki / −Z tenon
 J-035,oak pivot / socket,L-002 / F-003 / C-001,G-001 / W-003,bottom in sill at P1; top in cap soffit — lift-off +Z,LOCATIONAL,NO — winter removable,+Z to remove
-J-036,sliding latch,G-010,H-002 or L-001,"z_cl=49.291"" (R-002 belt / latch CL)",SLIDING,NO — winter removable,+X nuki / −Z tenon
+J-036,sliding latch,G-010,H-002 or L-001,"z_cl=48.987"" (R-002 belt / latch CL)",SLIDING,NO — winter removable,+X nuki / −Z tenon

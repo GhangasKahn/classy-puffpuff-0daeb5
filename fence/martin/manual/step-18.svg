@@ -16,13 +16,13 @@
 <rect x='56.0' y='320.5' width='68.9' height='9.0' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='136.9' y='324.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
 <text x='56.0' y='356.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>G-002  latch stile</text>
-<rect x='56.0' y='376.4' width='33.6' height='13.2' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
+<rect x='56.0' y='378.5' width='33.6' height='9.0' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='101.6' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
 <text x='56.0' y='414.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>G-003  rail @ belt 1</text>
-<rect x='56.0' y='434.4' width='33.6' height='13.2' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
+<rect x='56.0' y='436.5' width='33.6' height='9.0' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='101.6' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
 <text x='56.0' y='472.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>G-004  rail @ belt 2</text>
-<rect x='56.0' y='492.4' width='33.6' height='13.2' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
+<rect x='56.0' y='494.5' width='33.6' height='9.0' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
 <text x='101.6' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#b3541e' text-anchor='start' font-weight='600'>1×</text>
 <text x='56.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='11.5' fill='#1a1f24' text-anchor='start'>G-005  top belt rail</text>
 <rect x='56.0' y='552.5' width='33.6' height='9.0' fill='#e4e0d6' stroke='#1a1f24' stroke-width='1.4'/>
@@ -37,11 +37,11 @@
 <rect x='700.0' y='437.7' width='297.5' height='532.3' fill='#f0ede4' stroke='#5a6a4a' stroke-width='1' stroke-dasharray='4 3'/>
 <rect x='700.0' y='437.7' width='29.8' height='532.3' fill='#c4c2ba' stroke='#1a1f24' stroke-width='1.6'/>
 <rect x='967.8' y='437.7' width='29.8' height='532.3' fill='#c4c2ba' stroke='#1a1f24' stroke-width='1.6'/>
-<rect x='729.8' y='940.2' width='238.0' height='29.8' fill='#5a5e58' stroke='#1a1f24' stroke-width='1.2'/>
-<rect x='729.8' y='437.7' width='238.0' height='29.8' fill='#5a5e58' stroke='#1a1f24' stroke-width='1.2'/>
-<rect x='729.8' y='733.4' width='238.0' height='46.8' fill='#5a5e58' stroke='#1a1f24' stroke-width='1.2'/>
-<rect x='729.8' y='530.8' width='238.0' height='46.8' fill='#5a5e58' stroke='#1a1f24' stroke-width='1.2'/>
-<rect x='729.8' y='450.8' width='238.0' height='46.8' fill='#5a5e58' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='729.8' y='940.2' width='238.0' height='29.8' fill='#4a4e48' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='729.8' y='437.7' width='238.0' height='29.8' fill='#4a4e48' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='729.8' y='730.8' width='238.0' height='46.8' fill='#4a4e48' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='729.8' y='533.4' width='238.0' height='46.8' fill='#4a4e48' stroke='#1a1f24' stroke-width='1.2'/>
+<rect x='729.8' y='464.3' width='238.0' height='46.8' fill='#4a4e48' stroke='#1a1f24' stroke-width='1.2'/>
 <text x='848.8' y='413.7' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#3d5a4c' text-anchor='middle' font-weight='600'>LEAF 35″ × 62.625″ — RAILS ALIGN TO THE SCREEN BELTS</text>
 <text x='848.8' y='1010.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1a1f24' text-anchor='middle'>Tenon = ⅓ of the 1.5″ stock. Drawbore ⅛″ toward the shoulder. Dry-fit before pegging.</text>
 <text x='848.8' y='1034.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='middle'>Shop brace G-008 (if you add one) goes on the DRIVEWAY face — the garden face stays pure.</text>
@@ -49,6 +49,6 @@
 <text x='40.0' y='1132.0' font-family='Georgia, serif' font-size='26' fill='#3d5a4c' text-anchor='start' font-weight='600'>MARTIN</text>
 <text x='172.0' y='1130.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1a1f24' text-anchor='start' font-weight='600'>BUILD MANUAL · STEP 18 OF 24</text>
 <text x='40.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='start'>Buffalo NY · Darwin Martin Tree of Life · no nails, no glue on locking faces, no concrete</text>
-<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>BAG 5 · Rev F</text>
+<text x='1640.0' y='1132.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#5a6a4a' text-anchor='end'>BAG 5 · Rev F.2</text>
 <text x='1640.0' y='1154.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#5a6a4a' text-anchor='end'>Generated from martin_kernel.py — do not scale</text>
 </svg>

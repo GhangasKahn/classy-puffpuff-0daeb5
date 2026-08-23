@@ -85,37 +85,40 @@
       .join("");
   }
 
-  /* ---------- Visualizer (SVG) — Rev F Tree of Life, not a ranch fence ---------- */
+  /* ---------- Visualizer (SVG) — Rev F.2 gold Tree of Life; never a ranch fence ---------- */
   function motifSvg(m, xOf, yOf, S) {
     const rects = (m.rects || [])
       .map((r) => {
-        const fill =
-          r.role === "leaf" || r.role === "jewel"
-            ? "#4a5a40"
-            : r.role === "trunk"
-              ? "#242820"
-              : r.role === "pot"
-                ? "#3d4540"
-                : "#2c322e";
-        return `<rect x="${xOf(r.x)}" y="${yOf(r.z + r.h)}" width="${r.w * S}" height="${r.h * S}" fill="${fill}" stroke="#1a1f24" stroke-width="0.5"/>`;
+        let fill = "#1c2018";
+        if (r.role === "leaf" || r.role === "jewel" || r.role === "pot") fill = "#c9a227";
+        else if (r.role === "trunk") fill = "#141610";
+        else if (r.role === "frame" || r.role === "ribbon" || r.role === "inner") fill = "#2a322c";
+        else if (r.role === "mullion") fill = "#1c2018";
+        return `<rect x="${xOf(r.x)}" y="${yOf(r.z + r.h)}" width="${r.w * S}" height="${r.h * S}" fill="${fill}" stroke="#1a1f24" stroke-width="0.4"/>`;
       })
       .join("");
     const lines = (m.lines || [])
       .map(
         (ln) =>
-          `<line x1="${xOf(ln.x1)}" y1="${yOf(ln.z1)}" x2="${xOf(ln.x2)}" y2="${yOf(ln.z2)}" stroke="#1a1f24" stroke-width="${Math.max(1.4, (ln.t || 0.75) * S * 0.5)}" stroke-linecap="square"/>`
+          `<line x1="${xOf(ln.x1)}" y1="${yOf(ln.z1)}" x2="${xOf(ln.x2)}" y2="${yOf(ln.z2)}" stroke="#1a1f24" stroke-width="${Math.max(1.6, (ln.t || 0.75) * S * 0.6)}" stroke-linecap="square"/>`
       )
       .join("");
     return rects + lines;
   }
 
+  function vizLayout() {
+    const baked = window.MARTIN_LAYOUT;
+    const fab = window.MARTIN_FAB && window.MARTIN_FAB.layout;
+    return baked || fab || null;
+  }
+
   function drawViz() {
     const stage = $("#vizStage");
     if (!stage) return;
-    const fab = window.MARTIN_FAB && window.MARTIN_FAB.layout;
-    const L = (fab && fab.overall_length) || D.meta.length;
-    const H = (fab && fab.overall_height) || D.meta.height;
-    const gate = (fab && fab.gate_clear) || D.meta.gateClear;
+    const ly = vizLayout();
+    const L = (ly && ly.overall_length) || D.meta.length;
+    const H = (ly && ly.overall_height) || D.meta.height;
+    const gate = (ly && ly.gate_clear) || D.meta.gateClear;
     const explode = state.explode;
     const lift = explode * 28;
     const spread = explode * 18;
@@ -131,15 +134,15 @@
     const xOf = (x) => padX + x * S + spread;
     const dim = (id) => (selected && selected !== id ? " dim" : selected === id ? " hot" : "");
 
-    const postsMeta = fab
-      ? fab.posts.map((p) => ({ id: p.mark, x: p.cx }))
+    const postsMeta = ly
+      ? ly.posts.map((p) => ({ id: p.mark, x: p.cx }))
       : D.posts;
-    const slats = fab ? fab.slats : D.rails.filter((r) => r.id !== "CAP");
-    const motifs = (fab && fab.motifs) || [];
-    const nukiX0 = fab ? fab.nuki_x0 : 36.5;
-    const nukiLen = fab ? fab.nuki_len : 109.5;
-    const capX0 = fab ? fab.cap_x0 : 36.0;
-    const capLen = fab ? fab.cap_len : 110.5;
+    const slats = ly ? ly.slats : D.rails.filter((r) => r.id !== "CAP");
+    const motifs = (ly && ly.motifs) || [];
+    const nukiX0 = ly ? ly.nuki_x0 : 36.5;
+    const nukiLen = ly ? ly.nuki_len : 109.5;
+    const capX0 = ly ? ly.cap_x0 : 36.0;
+    const capLen = ly ? ly.cap_len : 110.5;
     const fx = 3.5;
 
     const sills = `<rect class="fence-part${dim("sills")}" data-part="sills" x="${xOf(-6)}" y="${yOf(0)}" width="${(L + 12) * S}" height="${5.5 * S}" fill="#9a9890" stroke="#1a1f24"/>`;
@@ -156,7 +159,7 @@
       .filter((sl) => String(sl.id || "").startsWith("Q-") || sl.stock === "cassette")
       .forEach((sl) => {
         const z0 = sl.z0 != null ? sl.z0 : sl.cl - sl.h / 2;
-        cassettes += `<rect class="fence-part${dim("rails")}" data-part="rails" x="${xOf(nukiX0 + 0.4)}" y="${yOf(z0 + sl.h)}" width="${(nukiLen - 0.8) * S}" height="${sl.h * S}" fill="#d6d2c8" stroke="none"/>`;
+        cassettes += `<rect class="fence-part${dim("rails")}" data-part="rails" x="${xOf(nukiX0 + 0.4)}" y="${yOf(z0 + sl.h)}" width="${(nukiLen - 0.8) * S}" height="${sl.h * S}" fill="#ebe4cc" stroke="none"/>`;
       });
 
     const motifDraw = motifs
@@ -168,7 +171,7 @@
       .filter((sl) => sl.nuki || String(sl.id || "").startsWith("K-") || String(sl.id || "").startsWith("R-"))
       .map((sl, i) => {
         const z1 = sl.z1 != null ? sl.z1 : sl.cl + sl.h / 2;
-        const fill = String(sl.id || "").startsWith("K") ? "#3a3d38" : "#5a5e58";
+        const fill = String(sl.id || "").startsWith("K") ? "#3a3d38" : "#4a4e48";
         return `<rect class="fence-part${dim("rails")}" data-part="rails" x="${xOf(nukiX0)}" y="${yOf(z1) - i * lift * 0.03}" width="${nukiLen * S}" height="${sl.h * S}" fill="${fill}" stroke="#1a1f24" stroke-width="1"/>`;
       })
       .join("");
@@ -203,10 +206,10 @@
     </g>`;
 
     let planters = "";
-    if (fab) {
+    if (ly && ly.posts) {
       for (const pair of [[1, 2], [2, 3]]) {
-        const x0 = fab.posts[pair[0]].cx + fx / 2 + 0.4;
-        const x1 = fab.posts[pair[1]].cx - fx / 2 - 0.4;
+        const x0 = ly.posts[pair[0]].cx + fx / 2 + 0.4;
+        const x1 = ly.posts[pair[1]].cx - fx / 2 - 0.4;
         planters += `<rect class="fence-part${dim("boards")}" data-part="boards" x="${xOf(x0)}" y="${yOf(7.5)}" width="${(x1 - x0) * S}" height="${7.5 * S}" fill="#6a6e66" stroke="#1a1f24"/>`;
       }
     }
@@ -215,21 +218,25 @@
       .filter((m) => m.bay === "gate")
       .map((m) => motifSvg(m, xOf, yOf, S))
       .join("");
-    const latchCl = (fab && fab.latch_cl) || 36.5;
+    const latchCl = (ly && ly.latch_cl) || 36.5;
+    const gh = (ly && ly.gate_h) || H - 2.4;
+    const gw = (ly && ly.gate_leaf_w) || gate - 1;
     const gateLeaf = `<g class="fence-part${dim("gate")}" data-part="gate" transform="translate(${-spread * 0.6},${-lift * 0.25})">
-      <rect x="${xOf(fx + 0.5)}" y="${yOf(H - 2)}" width="${(gate - 1) * S}" height="${(H - 2.4) * S}" fill="#e4e0d6" stroke="#5a6a4a" stroke-width="2"/>
+      <rect x="${xOf(fx + 0.5)}" y="${yOf(0.375 + gh)}" width="${gw * S}" height="${gh * S}" fill="#ebe4cc" stroke="#5a6a4a" stroke-width="2"/>
       ${gateMotifs}
-      <text x="${xOf(fx + gate / 2)}" y="${yOf(4)}" text-anchor="middle" fill="#e4e0d6" font-size="11" font-family="IBM Plex Mono,monospace" font-weight="600">GATE</text>
+      <rect x="${xOf(fx + 0.5)}" y="${yOf(0.375 + gh)}" width="${3.5 * S}" height="${gh * S}" fill="#c4c2ba" stroke="#1a1f24"/>
+      <rect x="${xOf(fx + 0.5 + gw - 3.5)}" y="${yOf(0.375 + gh)}" width="${3.5 * S}" height="${gh * S}" fill="#c4c2ba" stroke="#1a1f24"/>
+      <text x="${xOf(fx + gate / 2)}" y="${yOf(2.2)}" text-anchor="middle" fill="#c9a227" font-size="11" font-family="IBM Plex Mono,monospace" font-weight="600">TREE OF LIFE</text>
     </g>`;
 
     const latch = `<rect class="fence-part${dim("latch")}" data-part="latch" x="${xOf(fx + 0.5) - 18 * S * (0.35 + explode * 0.4)}" y="${yOf(latchCl + 1.75)}" width="${18 * S * (0.35 + explode * 0.25)}" height="${3.5 * S}" fill="#aeb6ba" stroke="#1a1f24"/>`;
 
     stage.innerHTML = `<svg viewBox="0 0 ${W} ${VH}" role="img" aria-label="MARTIN Tree of Life fence">
       <defs>
-        <filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#8fad78"/></filter>
+        <filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#c9a227"/></filter>
       </defs>
       ${sills}${ties}${cassettes}${motifDraw}${belts}${posts}${planters}${cap}${gateLeaf}${latch}
-      <text x="${padX}" y="${VH - 10}" fill="#6e7578" font-size="11" font-family="IBM Plex Mono,monospace">143″ Tree of Life · explode ${Math.round(explode * 100)}%</text>
+      <text x="${padX}" y="${VH - 10}" fill="#c9a227" font-size="11" font-family="IBM Plex Mono,monospace">143″ Tree of Life · gold squares · 2×4 ribbons · explode ${Math.round(explode * 100)}%</text>
     </svg>`;
 
     stage.querySelectorAll("[data-part]").forEach((el) => {

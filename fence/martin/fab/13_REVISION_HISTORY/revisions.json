@@ -33,5 +33,10 @@
     "REV": "F.1",
     "DATE": "2026-08-15",
     "NOTE": "WOODWRIGHT PLANFORGE v1.0 guidebook; McMaster-Carr sourced buy list; CAD muntins from kernel motifs; 24V IP67 lighting SKUs."
+  },
+  {
+    "REV": "F.2",
+    "DATE": "2026-08-23",
+    "NOTE": "Thin 2\u00d74 Prairie ribbons (not 2\u00d710 ranch rails); denser gold-square Tree of Life + \u00be\u2033 dog grid on Q-001; viz self-contained from kernel; Planforge centerline; McMaster SKUs re-verified."
   }
 ]

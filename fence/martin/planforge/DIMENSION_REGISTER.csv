@@ -1,0 +1,109 @@
+ID,NOMINAL_IN,MM_REF,EVIDENCE,NOTE
+overall_length,143.0,3632.2,DERIVED,
+overall_height,65.0,1651.0,DERIVED,
+existing_board_t,0.75,19.05,VERIFIED,existing fence thickness
+post_x,3.5,88.9,DERIVED,
+post_y,5.5,139.7,DERIVED,
+rail_t,1.5,38.1,DERIVED,2× stock actual thickness (nuki + gate rails)
+rail_h,3.5,88.9,DERIVED,2×4 actual — Prairie ribbon nuki (NOT a 2×10 ranch rail)
+cap_t,1.5,38.1,DERIVED,"2×12 flat — Wright eave (thin and wide, not a lid)"
+cap_w,11.25,285.75,DERIVED,2×12 actual — cantilevers past 5.5″ pier ~2.9″ each side
+board_t,0.75,19.05,DERIVED,"1× muntin / cassette thickness, recessed behind nuki face"
+board_w,3.5,88.9,DERIVED,alias of belt_h — 2×4 Prairie ribbon
+belt_h,3.5,88.9,DERIVED,2×4 actual. Thin Wright plane past the piers. Fat 2×10 belts read as Home Depot.
+board_gap,0.75,19.05,ASSUMED,shadow reveal between belts and cassettes
+band_minor_h,11.263,286.08,DERIVED,upper/lower light cassette; φ pair with middle ~18.22; recomputed in layout()
+kick_h,11.25,285.75,DERIVED,2×12 PT water table — solid earth line; dog crawl stop
+muntin_t,0.75,19.05,DERIVED,"1×2 face — Wright came, in wood"
+pattern_gap,1.15,29.21,ASSUMED,max aperture in Tree of Life / upper nested lights
+pattern_gap_dog,0.75,19.05,ASSUMED,Q-001 lower cassette — ¾″ dog grid; water table is still the crawl stop
+fascia_h,3.5,88.9,DERIVED,1×4 hanging fascia under eave — shadow line
+stile_w,3.5,88.9,DERIVED,2×4 / ripped 2×6 face
+leaf_t,1.5,38.1,DERIVED,2× stock gate thickness
+rail_gate_h,3.5,88.9,DERIVED,"2×4 gate rail — aligns with Prairie ribbons, not a 2×6 barn rail"
+brace_w,3.5,88.9,DERIVED,
+post_tenon_x,2.5,63.5,ASSUMED,shoulder 0.5″ each side of 3.5
+post_tenon_y,4.5,114.3,ASSUMED,shoulder 0.5″ each side of 5.5
+post_tenon_h,3.5,88.9,ASSUMED,into 5.5″ cross-tie; leave ~2″ below mortise
+rail_reveal,3.0,76.2,ASSUMED,belt courses cantilever past piers like Wright planes
+cap_overhang,3.5,88.9,ASSUMED,eave past outer pier faces along the run
+groove_d,0.375,9.525,ASSUMED,board dado depth in rail edge
+groove_w,0.875,22.225,ASSUMED,board t + 1/8″ clearance
+board_end_clear,0.125,3.175,ASSUMED,float gap at rail
+kusabi_t,0.625,15.875,ASSUMED,
+kusabi_w,1.125,28.575,ASSUMED,
+kusabi_l,5.5,139.7,DERIVED,equals post_y — through cheek
+drawbore_offset,0.125,3.175,ASSUMED,T2 hozo
+peg_d,0.375,9.525,ASSUMED,oak peg
+nuki_fit,0.03,0.762,ASSUMED,"sliding/clearance on rail thickness, ~1/32″"
+gate_clear,36.0,914.4,DERIVED,
+gate_gap,0.5,12.7,ASSUMED,each side of leaf
+gate_bottom_clear,0.375,9.525,ASSUMED,dog seal — swing clearance above threshold
+gate_top_clear,0.5,12.7,ASSUMED,under cap
+latch_bar_l,18.0,457.2,ASSUMED,
+latch_bar_t,1.5,38.1,DERIVED,2× stock
+latch_bar_w,3.5,88.9,DERIVED,2×4 actual
+house_receiver_depth,4.0,101.6,ASSUMED,Latch A opt-in only — default is Latch B
+pivot_d,1.25,31.75,ASSUMED,oak pivot pin — structurally better than pintles on a freestanding P1
+pivot_l,4.0,101.6,ASSUMED,
+slat_housing_d,0.75,19.05,ASSUMED,housed dado in post; do NOT through-mortise all 7 bands (0.75″ web would fail)
+sill_overhang,6.0,152.4,ASSUMED,dodai past outer post faces
+sill_t,3.5,88.9,DERIVED,
+sill_h,5.5,139.7,DERIVED,
+base_spread_cl,36.0,914.4,DERIVED,
+tie_reveal,1.0,25.4,ASSUMED,cross-tie past outer sill faces
+drop_off,0.0,0.0,VERIFIED,run sits on driveway slab (photos). Packing only if outriggers leave the slab
+pack_w,5.5,139.7,DERIVED,packing crib if drop_off > 0
+pack_len,12.0,304.8,ASSUMED,crib length along sill at each tie
+planter_x,44.0,1117.6,DERIVED,"one trough per privacy bay, garden side — NOT at house/gate"
+planter_y,18.0,457.2,ASSUMED,"depth into yard; sized for wind mass, not φ (shrinking height would under-ballast)"
+planter_h,18.0,457.2,ASSUMED,deep Prairie trough — live plants + watering; φ not applied (would cut soil volume)
+planter_stone_h,4.0,101.6,ASSUMED,drainage / ballast stone IN the box only — not a pad
+planter_soil_pcf,90.0,2286.0,ASSUMED,wet potting mix planning density
+planter_stone_pcf,100.0,2540.0,ASSUMED,pea gravel in box
+n_planters,2.0,50.8,ASSUMED,bays P1–P2 and P2–P3 only; zero at P0/house
+wind_psf,15.0,381.0,ASSUMED,"planning pressure, not PE; Buffalo ~90 mph simplified"
+wind_fs,1.5,38.1,ASSUMED,planning factor of safety on overturning
+furniture_pad_t,0.75,19.05,SOURCED,McMaster 60015K58 4×4×¾″ segmented rubber pad [S]
+brace_z,18.0,457.2,ASSUMED,sujikai meets post above sill top
+light_dado_w,0.5,12.7,SOURCED,cap soffit channel for McMaster 8836N52 24V IP67 tape (½″ / 13 mm wide)
+light_dado_d,0.375,9.525,ASSUMED,
+block_l,7.0,177.8,ASSUMED,tectonic 2×2 block — Darwin Martin pier texture
+block_s,1.5,38.1,DERIVED,2×2 actual
+saw_kerf,0.125,3.175,ASSUMED,thin-kerf circular / table saw
+waste_factor,0.15,3.81,ASSUMED,joinery / defect / matching
+board_above_pad,1.5,38.1,ASSUMED,bottom course start AFF (sill top)
+bay_clear,46.5,1181.1,DERIVED,(overall_length - 4*post_x - gate_clear) / 2
+nuki_x0,36.5,927.1,DERIVED,
+nuki_x1,146.0,3708.4,DERIVED,
+nuki_len,109.5,2781.3,DERIVED,(P3_outer + rail_reveal) - (P1_outer - rail_reveal)
+cap_x0,36.0,914.4,DERIVED,
+cap_len,110.5,2806.7,DERIVED,
+cap_stub_len,4.5,114.3,DERIVED,
+post_body_h,63.5,1612.9,DERIVED,
+post_blank_l,67.0,1701.8,DERIVED,overall_height - cap_t + post_tenon_h
+slat_top,63.5,1612.9,DERIVED,
+latch_cl,48.987,1244.27,DERIVED,
+phi,1.61803,41.098,DERIVED,
+band_ratio,1.618,41.097,DERIVED,
+light_minor,11.263,286.08,DERIVED,
+light_major,18.224,462.89,DERIVED,
+n_bay,2,50.8,DERIVED,
+board_inset,0.0,0.0,DERIVED,
+used_bay,46.5,1181.1,DERIVED,
+gate_leaf_w,35.0,889.0,DERIVED,
+gate_h,62.625,1590.675,DERIVED,overall_height - cap_t - gate_bottom_clear - gate_top_clear
+gate_inner,28.0,711.2,DERIVED,
+n_gate_boards,3,76.2,DERIVED,
+sill_len,155.0,3937.0,DERIVED,overall_length + 2*sill_overhang
+base_width,39.5,1003.3,DERIVED,base_spread_cl + sill_t
+tie_len,41.5,1054.1,DERIVED,base_spread_cl + sill_t + 2*tie_reveal
+garden_sill_cy,18.0,457.2,DERIVED,
+drive_sill_cy,-18.0,-457.2,DERIVED,
+brace_len,25.456,646.582,DERIVED,
+pack_layers,0,0.0,DERIVED,
+pack_h,0.0,0.0,DERIVED,
+tenon_ratio_x,0.714,18.136,DERIVED,
+cheek_x,0.5,12.7,DERIVED,
+cheek_y,0.5,12.7,DERIVED,
+nuki_cheek_y,2.0,50.8,DERIVED,

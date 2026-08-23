@@ -93,6 +93,11 @@
   status = 301
 
 [[redirects]]
+  from = "/martin/manual"
+  to = "/fence/martin/manual/"
+  status = 301
+
+[[redirects]]
   from = "/planforge"
   to = "/fence/martin/planforge/"
   status = 301

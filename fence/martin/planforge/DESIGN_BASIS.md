@@ -2,9 +2,9 @@
 
 **Release state:** FABRICATION-READY WITH CONDITIONS
 **Risk class:** R2
-**Project:** WPF-MARTIN-143-F · kernel 6.1.0 · Rev F
+**Project:** WPF-MARTIN-143-F2 · kernel 6.2.0 · Rev F.2
 **Units:** inch controlling. Native CAD export is millimetre.
-**Layout system:** Face/edge datums controlling: latch-side outer face x=0, sill top z=0, post centerline y=0. Post centerlines P0–P3 are DERIVED stations, not independent datums.
+**Layout system:** CENTERLINE for posts. Post CLs P0–P3 are the governing stations; convert to faces with post_x/2. Vertical Datum A = driveway sill top (z=0). Horizontal origin: latch-side outer face x=0. Never mix face and centerline without conversion.
 
 ## Verdict
 This is a sit-on-grade Darwin Martin Tree of Life light-screen across a Buffalo driveway. It is a planning fabrication package a competent craftsperson can review, prototype, and — after the listed conditions — build. It is **not** a PE stamp, not a licensed Wright reproduction, and not a Home Depot ranch fence.
@@ -31,7 +31,7 @@ This is a sit-on-grade Darwin Martin Tree of Life light-screen across a Buffalo 
 - bay_clear = 46.5" [D] `(L - 4·post_x - gate_clear)/2`
 - nuki_len = 109.5" [D]
 - post_blank_l = 67.0" [D]
-- cassette φ pair = 8.085 / 13.081" [D]
+- cassette φ pair = 11.263 / 18.224" [D]
 - post CLs: P0@1.75", P1@41.25", P2@91.25", P3@141.25"
 
 ## Ballast (planning, not PE)

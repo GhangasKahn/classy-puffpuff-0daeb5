@@ -123,19 +123,19 @@ Provided {bal['provided_lb']} lb vs required {bal['required_lb']} lb (FS {bal['f
 """
     write(os.path.join(OUT, "DESIGN_BASIS.md"), design_basis)
 
-    zg = """# Zero-Gap Verification Checklist — MARTIN Rev F.1
+    zg = """# Zero-Gap Verification Checklist — MARTIN Rev F.2
 
 Protocol: WOODWRIGHT PLANFORGE v1.0. Fail any item → do not claim an unconditional fabrication release.
 
 | Item | Result | Evidence |
 |---|---|---|
 | All primary structural members in part register with finished sizes | PASS | `fab/07_BOM/bom.csv` L/F/K/R/C |
-| Secondary parts (cassettes, muntins, caps, pins, lights, pads) listed | PASS | Q-001..003, T-001, W-001..003, H-001, H-006 |
+| Secondary parts (cassettes, muntins, caps, pins, lights, pads) listed | PASS | Q-001..003, Q-010 muntin stock, T-001, W-001..003, H-001, H-006 |
 | Quantities match geometry | PASS | kernel `parts()` + nest |
 | Consumable fasteners specified or custom alternative | PASS | No structural screws. Oak pegs 96825K75. Optional hasp 1304A42. |
 | Every critical joint has a detail sheet | PASS | J-401 nuki/kusabi, J-402 foot tenon, J-403 kama-tsugi, J-404 hozo/pivot |
 | Geometry, cut sequence, acceptance, water/movement on joints | PASS | J sheets + `09_JOINERY/joints.csv` + QC-08..17 |
-| Layout system declared and consistent | PASS | Face/edge: x=0 latch face, z=0 sill top; post CLs derived |
+| Layout system declared and consistent | PASS | CENTERLINE for posts P0–P3; Datum A = sill top z=0; x=0 latch face |
 | Japanese / hand-tool sequences specified | PASS | nuki/kusabi, hozo drawbore, kama-tsugi; Bridge City / Zenwu / Japanese saws |
 | 3D-print prototype recommendation | PASS WITH CONDITION | Print T-501 kusabi, T-502 tenon, pivot socket 1:1 PLA before milling |
 | Load path shown or described | PASS | S-101 in guidebook; wind via planters + ladder spread |
@@ -166,6 +166,20 @@ Protocol: WOODWRIGHT PLANFORGE v1.0. Fail any item → do not claim an unconditi
         os.path.join(OUT, "REQUIREMENTS.csv"),
         proj["requirements"],
         ["ID", "PRI", "STATEMENT", "VERIFY", "STATUS", "EVIDENCE"],
+    )
+    dim_rows = []
+    for k, meta in proj["parameters"].items():
+        dim_rows.append({
+            "ID": k,
+            "NOMINAL_IN": meta.get("value_in", ""),
+            "MM_REF": meta.get("mm", ""),
+            "EVIDENCE": meta.get("src", ""),
+            "NOTE": meta.get("note", ""),
+        })
+    csv_write(
+        os.path.join(OUT, "DIMENSION_REGISTER.csv"),
+        dim_rows,
+        ["ID", "NOMINAL_IN", "MM_REF", "EVIDENCE", "NOTE"],
     )
 
     # ---- HTML book ----------------------------------------------------------
@@ -287,7 +301,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
   · {esc(pf['PROJECT_CODE'])}
 </div>
 <header class="hero">
-  <p class="k">WOODWRIGHT PLANFORGE v1.0 · Kernel {esc(PROJECT['MODEL_VERSION'])} · Rev {esc(PROJECT['REVISION'])}.1</p>
+  <p class="k">WOODWRIGHT PLANFORGE v1.0 · Kernel {esc(PROJECT['MODEL_VERSION'])} · Rev {esc(PROJECT['REVISION'])}</p>
   <h1>The Martin Line</h1>
   <p class="lead">Master build-plans guidebook: Darwin Martin Tree of Life light-screen, Japanese nuki/kusabi/kama-tsugi, sit-on-grade ladder across the driveway, LEGO assembly, sourced McMaster-Carr buy list. If you don’t build it, it never exists — but you still do not skip the conditions below.</p>
   <div class="links">
@@ -297,6 +311,9 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
     <a href="../plans/M1_general.svg">M-1 elevation</a>
     <a href="MCMASTER_SCHEDULE.csv">McMaster CSV</a>
     <a href="DESIGN_BASIS.md">Design basis</a>
+    <a href="REQUIREMENTS.csv">Requirements</a>
+    <a href="DIMENSION_REGISTER.csv">Dimension register</a>
+    <a href="CHANGELOG.md">Changelog</a>
     <a href="ZERO_GAP.md">Zero-gap</a>
   </div>
 </header>
@@ -325,7 +342,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
     <div class="card"><p class="k">Units</p><p>{esc(pf['UNITS'])}</p></div>
   </div>
   <h3>Design thesis</h3>
-  <p>Wright at a distance is eave + belt courses + brick piers + patterned lights — not five fat horizontal slats. The garden face is a Darwin Martin Tree of Life wood light-screen: 2×12 PT water table, nested-rect cassette, projecting 2×10 belt, three-tree cassette, belt at latch CL, nested-rect cassette, cantilevered 2×12 eave with 1×4 fascia. Gate flush to the house. Live planters ballast the two privacy bays only.</p>
+  <p>Wright at a distance is eave + thin belt courses + brick piers + gold-square lights — not five fat horizontal slats. The garden face is a Darwin Martin Tree of Life wood light-screen: 2×12 PT water table, ¾″ dog-grid cassette, projecting 2×4 ribbon, three-tree cassette, ribbon at latch CL, nested-rect cassette, cantilevered 2×12 eave with 1×4 fascia. Gate flush to the house. Live planters ballast the two privacy bays only.</p>
   <h3>Conditions — close these before cutting finish stock</h3>
   {cond}
   <p class="warn">Do not treat a rendering, this HTML book, or the Build app viz as a scaled fabrication drawing. Controlling numbers live in <code>martin_kernel.py</code> and the dimensioned SVG sheets.</p>
@@ -360,20 +377,23 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
   <p class="k">A-101 / A-102 · Architecture</p>
   <h2>General arrangement — garden face</h2>
   <p>143″ overall · 65″ high · posts {esc(posts)} · bay_clear {ly['bay_clear']}″ · nuki_len {ly['nuki_len']}″ · cassette φ {ly['light_minor']} / {ly['light_major']}″. Print M-1 at 100% on A3; do not scale this screenshot.</p>
+  <img class="elev" src="../renders/hero_elevation.svg" alt="Garden-face hero — gold Tree of Life, 2×4 ribbons, no ranch rails"/>
+  <p>Print M-1 at 100% on A3; do not scale this screenshot. Controlling numbers live in <code>martin_kernel.py</code>.</p>
   <img class="elev" src="../plans/M1_general.svg" alt="Sheet M-1 general arrangement — Tree of Life elevation"/>
   <div class="links">
     <a href="../fab/06_DRAWINGS/GA-110_elevation.svg">GA-110 datums</a>
     <a href="../fab/06_DRAWINGS/GA-130_plan.svg">GA-130 plan</a>
     <a href="../fab/06_DRAWINGS/EX-200_exploded.svg">EX-200 explode</a>
     <a href="../plans/M2_elevation.svg">M-2 bay</a>
-    <a href="../cad/exports/martin.FCStd">FreeCAD</a>
+    <a href="../fab/14_PRINT/README.md">3D-print coupons</a>
+    <a href="../renders/hero_elevation.svg">Hero elevation</a>
     <a href="../cad/exports/martin_assembly.step">STEP</a>
   </div>
   <h3>What you should see (anti Home Depot)</h3>
   <ul>
     <li>Solid 2×12 water table at grade — dog crawl stop, Wright earth line.</li>
-    <li>Two projecting 2×10 belts past Roman-brick piers — not a flush ranch face.</li>
-    <li>Three recessed lights: nested squares / three trees / nested squares.</li>
+    <li>Two projecting 2×4 Prairie ribbons past Roman-brick piers — not 2×10 ranch rails.</li>
+    <li>Three recessed lights: ¾″ gold-square dog grid / three trees / nested squares.</li>
     <li>Thin-wide 2×12 eave + hanging fascia + soffit light. Gate is the same language, no Z-brace on the garden face.</li>
   </ul>
 </section>
@@ -411,7 +431,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
     <a href="../app/#assembly">App checklist</a>
   </div>
   {seq_html}
-  <p><b>Solo handling:</b> mill and dry-fit as modules. Slide nuki belts with two people (109.5″ × 2×10). Lift posts one at a time out of F-003. Do not ask one person to carry the assembled 143″ frame.</p>
+  <p><b>Solo handling:</b> mill and dry-fit as modules. Slide nuki ribbons with two people (109.5″ × 2×4). Lift posts one at a time out of F-003. Do not ask one person to carry the assembled 143″ frame.</p>
   <p><b>Irreversible hold points:</b> (1) do not glue kusabi; (2) do not paint locking faces; (3) do not plant empty troughs after a wind warning without QC-15; (4) do not pour.</p>
 </section>
 
@@ -433,7 +453,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
     <li>Acclimate paint-grade SPF/SYP and PT kick/planters. Re-measure after rest.</li>
     <li>Grain: posts vertical; nuki length along the run; muntins as came (face grain to garden).</li>
     <li>Reject pith, loose knots, and short grain at tenon shoulders and nuki cheeks.</li>
-    <li>Do not rip 2×10 belts to force φ — 9.25 / 5.5 is already near φ; cassettes take the φ pair.</li>
+    <li>Do not substitute 2×10 for the Prairie ribbons — fat belts read as a ranch fence. φ sizes the cassette pair, not the nuki.</li>
     <li>Finish: ease 1/16″, end-grain sealer, PT dry then prime, two owner-gray coats, extra in planter interiors. Mask joinery.</li>
   </ul>
 </section>
@@ -441,7 +461,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
 <section id="h101">
   <p class="k">H-101 · McMaster-Carr itemized buy</p>
   <h2>Linkable products — lighting, pads, oak rods, optional hasp</h2>
-  <p>Opened on mcmaster.com 2026-08-15. Allowed metal is lighting + optional latch hardware. <b>No structural screws into timber.</b> Paint and landscape stone are not McMaster. Optional rows are grey.</p>
+  <p>Opened on mcmaster.com 2026-08-23. Allowed metal is lighting + optional latch hardware. <b>No structural screws into timber.</b> Paint and landscape stone are not McMaster. Optional rows are grey.</p>
   <table>
     <thead><tr><th>Line</th><th>ID</th><th>Role</th><th>McMaster PN</th><th>Description</th><th>Qty</th><th>Where</th></tr></thead>
     <tbody>{''.join(mc_rows)}</tbody>
@@ -474,7 +494,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
   <p class="k">Q-101 · Inspection, commissioning, zero-gap</p>
   <h2>Hold points</h2>
   <ul>
-    <li>QC-08 — 1.50″ max muntin aperture gauge through every Tree of Life / nested-rect opening.</li>
+    <li>QC-08 — 0.75″ gauge through Q-001; 1.15″ through Q-002 / Q-003.</li>
     <li>QC-10 — kusabi dry, labeled NEVER GLUE.</li>
     <li>QC-14 — gate clears eave 0.50″; bottom 0.375″.</li>
     <li>QC-15 — ballast ratio after planting ≥ 1.0.</li>
@@ -514,6 +534,8 @@ Release: **{pf['RELEASE_STATE']}** · Risk **{pf['RISK_CLASS']}** · Kernel {PRO
 - [Zero-gap checklist](ZERO_GAP.md)
 - [McMaster-Carr schedule](MCMASTER_SCHEDULE.csv)
 - [Requirements](REQUIREMENTS.csv)
+- [Dimension register](DIMENSION_REGISTER.csv)
+- [Changelog](CHANGELOG.md)
 - LEGO assembly: `/fence/martin/manual/`
 - Shop drawings: `/fence/martin/fab/`
 - CAD: `/fence/martin/cad/exports/`
@@ -521,6 +543,28 @@ Release: **{pf['RELEASE_STATE']}** · Risk **{pf['RISK_CLASS']}** · Kernel {PRO
 Print the guidebook from the browser at 100%. Controlling geometry is in `martin_kernel.py`, not in a screenshot.
 """
     write(os.path.join(OUT, "README.md"), readme)
+
+    changelog = f"""# MARTIN changelog
+
+## F.2 — 2026-08-23 — kernel {PROJECT['MODEL_VERSION']}
+- Thin 2×4 Prairie ribbons (R-001 / R-002). Fat 2×10 belts removed — they read as a ranch fence.
+- Darwin Martin gold-square Tree of Life on Q-002; nested-rect dog grid on Q-001 at 0.75″.
+- WOODWRIGHT PLANFORGE v1.0 guidebook (G/A/J/E/F/H/S/Q) + LEGO 24-step manual.
+- McMaster-Carr SKUs re-verified 2026-08-23 with catalog links.
+- Build-app viz baked from kernel (`layout.js`) so it cannot fall back to four ranch rails.
+- Release remains **FABRICATION-READY WITH CONDITIONS**. Not PE-stamped. Remeasure 143″.
+
+## F.1 — 2026-08-15
+- Planforge guidebook and first McMaster schedule.
+- CAD muntins from kernel motifs.
+
+## F — 2026-08-14
+- Tree of Life light-screen thesis. Sit-on-grade. No pour.
+
+## E — 2026-08-14
+- Stacked 2×10/2×6 bands (superseded — Home Depot face).
+"""
+    write(os.path.join(OUT, "CHANGELOG.md"), changelog)
 
 
 if __name__ == "__main__":

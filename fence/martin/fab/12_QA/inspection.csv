@@ -4,9 +4,9 @@ QC-02,Run sits on driveway slab; pack only if outriggers leave slab (drop_off de
 QC-03,Stock moisture — PT for kick + planters dry before prime; SPF acclimate,T0,—
 QC-04,"Four posts finished length 67.000"" within ±1/32""",T2,±0.031
 QC-05,K-001 + R-001 + R-002 identical nuki_len; cassettes = bay_clear,T2,±0.031
-QC-06,Through-nuki only K-001/R-001/R-002; Q cassettes in grooves; 1.50″ max aperture,T2,binary
+QC-06,"Through-nuki only K-001/R-001/R-002; Q cassettes in grooves; Q-001 0.75″ dog gauge, others 1.15″ max aperture",T2,binary
 QC-07,Foot tenon 2.500×4.500×3.500 enters F-003; lifts out for winter,T2,+0.03/−0
-QC-08,Dry-assemble: plumb / no racking; Tree of Life + nested-rect cassettes seat; 1.50″ gauge must not pass pattern,T1,plumb 1/8″ in 65″
+QC-08,Dry-assemble: plumb / no racking; Tree of Life + nested-rect cassettes seat; 0.75″ gauge must not pass Q-001; 1.15″ must not pass Q-002/Q-003,T1,plumb 1/8″ in 65″
 QC-09,Gate against house; oak pivots lift-off; latch into P0; no planter at P0,T2,—
 QC-10,No glue on kusabi or nuki locking faces,T0,binary
 QC-11,"Paint: ease arrises, end-grain sealer, PT dry then prime, 2 finish coats; mask joinery",T0,—
