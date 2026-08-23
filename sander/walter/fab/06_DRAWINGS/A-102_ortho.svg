@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>A-102  ·  Orthographic general arrangement</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Scale 1:8  ·  16 px/in  ·  3rd angle  ·  inches</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='80.0' y='88.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>FRONT — INFEED  (+Y)</text>
+<rect x='80.0' y='200.0' width='352.0' height='320.0' fill='#c4a574' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='80.0' y='508.0' width='352.0' height='12.0' fill='#8a6a42' stroke='#1c1914' stroke-width='1.4'/>
+<circle cx='256.0' cy='304.0' r='40.0' fill='#7a5a3a' stroke='#1c1914' stroke-width='1.6'/>
+<circle cx='256.0' cy='304.0' r='4.0' fill='#f4efe6' stroke='#1c1914' stroke-width='1'/>
+<rect x='104.0' y='368.0' width='264.0' height='3.2' fill='#2a2a2c' stroke='#1c1914' stroke-width='0.8'/>
+<circle cx='256.0' cy='384.0' r='16.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='80.0' y1='520.0' x2='80.0' y2='556.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='432.0' y1='520.0' x2='432.0' y2='556.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='80.0' y1='548.0' x2='432.0' y2='548.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='80.0,548.0 90.0,544.0 90.0,552.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='432.0,548.0 422.0,544.0 422.0,552.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='232.4' y='528.0' width='47.2' height='20.0' fill='#f4efe6'/>
+<text x='256.0' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>22.00</text>
+<line x1='80.0' y1='520.0' x2='44.0' y2='520.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='80.0' y1='200.0' x2='44.0' y2='200.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='52.0' y1='520.0' x2='52.0' y2='200.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='52.0,520.0 48.0,530.0 56.0,530.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='52.0,200.0 48.0,190.0 56.0,190.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<text x='40.0' y='365.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end' transform='rotate(-90 40.0 365.0)'>20.00</text>
+<line x1='432.0' y1='344.0' x2='476.0' y2='344.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='432.0' y1='264.0' x2='476.0' y2='264.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='468.0' y1='344.0' x2='468.0' y2='264.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='468.0,344.0 464.0,354.0 472.0,354.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='468.0,264.0 464.0,254.0 472.0,254.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<text x='480.0' y='309.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='start' transform='rotate(-90 480.0 309.0)'>5.00 Ø</text>
+<text x='560.0' y='88.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>TOP  (−Z)</text>
+<rect x='560.0' y='200.0' width='352.0' height='576.0' fill='#efe8dc' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='560.0' y='200.0' width='24.0' height='576.0' fill='#c4a574' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='848.0' y='200.0' width='24.0' height='576.0' fill='#b89660' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='588.0' y='448.0' width='256.0' height='80.0' fill='#7a5a3a' stroke='#1c1914' stroke-width='1.4'/>
+<circle cx='716.0' cy='273.1' r='8.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<circle cx='716.0' cy='702.9' r='8.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<line x1='912.0' y1='200.0' x2='948.0' y2='200.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='912.0' y1='776.0' x2='948.0' y2='776.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='940.0' y1='200.0' x2='940.0' y2='776.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='940.0,200.0 936.0,210.0 944.0,210.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='940.0,776.0 936.0,766.0 944.0,766.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<text x='952.0' y='493.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='start' transform='rotate(-90 952.0 493.0)'>36.00</text>
+<line x1='584.0' y1='200.0' x2='584.0' y2='170.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='848.0' y1='200.0' x2='848.0' y2='170.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='584.0' y1='178.0' x2='848.0' y2='178.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='584.0,178.0 594.0,174.0 594.0,182.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='848.0,178.0 838.0,174.0 838.0,182.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='668.9' y='158.0' width='94.2' height='20.0' fill='#f4efe6'/>
+<text x='716.0' y='172.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>16.50 INNER</text>
+<line x1='588.0' y1='539.2' x2='588.0' y2='565.2' stroke='#6b5340' stroke-width='1'/>
+<line x1='844.0' y1='539.2' x2='844.0' y2='565.2' stroke='#6b5340' stroke-width='1'/>
+<line x1='588.0' y1='557.2' x2='844.0' y2='557.2' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='588.0,557.2 598.0,553.2 598.0,561.2' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='844.0,557.2 834.0,553.2 834.0,561.2' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='672.8' y='537.2' width='86.4' height='20.0' fill='#f4efe6'/>
+<text x='716.0' y='551.2' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>16.00 FACE</text>
+<text x='1120.0' y='88.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>RIGHT — DRIVE  (+X)</text>
+<rect x='1120.0' y='200.0' width='489.6' height='320.0' fill='#b89660' stroke='#1c1914' stroke-width='1.6'/>
+<circle cx='1364.8' cy='304.0' r='38.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.6'/>
+<circle cx='1500.8' cy='446.4' r='24.0' fill='#161616' stroke='#1c1914' stroke-width='1.6'/>
+<line x1='1364.8' y1='266.0' x2='1500.8' y2='422.4' stroke='#2a2a2c' stroke-width='2.2'/>
+<line x1='1120.0' y1='520.0' x2='1120.0' y2='556.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='1609.6' y1='520.0' x2='1609.6' y2='556.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='1120.0' y1='548.0' x2='1609.6' y2='548.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='1120.0,548.0 1130.0,544.0 1130.0,552.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='1609.6,548.0 1599.6,544.0 1599.6,552.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='1341.2' y='528.0' width='47.2' height='20.0' fill='#f4efe6'/>
+<text x='1364.8' y='542.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>36.00</text>
+<rect x='80.0' y='780.0' width='620.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='802.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>DATUMS ON THIS SHEET</text>
+<text x='92.0' y='820.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>D1 base top = Z0. Walls sit on it.</text>
+<text x='92.0' y='838.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>D2 drum axis Z 13.50  Y 18.00 — story stick both plates.</text>
+<text x='92.0' y='856.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Section A-103 cuts at Y = 18.00 looking to infeed.</text>
+<text x='92.0' y='874.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Motor 56C on hinged plate outboard of drive wall. Guard omitted for clarity — see M-101.</text>
+</svg>

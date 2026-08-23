@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>M-102  ·  Conveyor kinematics and feed</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  inches / FPM</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>POWERED FEED  0–16 FPM  ·  24 V PWM  ·  CROWNED ROLLERS</text>
+<circle cx='200.0' cy='280.0' r='40.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<circle cx='720.0' cy='280.0' r='40.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<rect x='200.0' y='232.0' width='520.0' height='16.0' fill='#2a2a2c' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='200.0' y='312.0' width='520.0' height='16.0' fill='#2a2a2c' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='200.0' y1='360.0' x2='200.0' y2='376.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='720.0' y1='360.0' x2='720.0' y2='376.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='200.0' y1='368.0' x2='720.0' y2='368.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='200.0,368.0 210.0,364.0 210.0,372.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='720.0,368.0 710.0,364.0 710.0,372.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='405.0' y='348.0' width='109.9' height='20.0' fill='#f4efe6'/>
+<text x='460.0' y='362.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>26.86 CD  [D]</text>
+<text x='200.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle' font-weight='600'>INFEED</text>
+<text x='720.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle' font-weight='600'>OUTFEED + GEARMOTOR</text>
+<rect x='80.0' y='440.0' width='920.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='462.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>Feed at 30 rpm roller [D] = π × 2.00 / 12 × 30 = 15.71 FPM. PWM 0–16 FPM target.</text>
+<text x='92.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>24 V worm gearmotor on the outfeed shaft. Isolated from 115 V drum circuit.</text>
+<text x='92.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Belt 16.00 × 60.00 2-ply PVC endless — specify conveyor belting, not abrasive.</text>
+<text x='92.0' y='516.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Workpiece must be ≥12″ or on a carrier. Short stock is a projectile (F06).</text>
+<text x='92.0' y='534.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Rotation: drum bottom toward infeed (against feed); dust into the back hood.</text>
+</svg>

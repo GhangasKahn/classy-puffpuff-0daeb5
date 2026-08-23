@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>J-201  ·  Joint J-DRUM — keyed disc stack</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Scale ~1:2 on section  ·  inches</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>ASSEMBLED SECTION THROUGH SHAFT</text>
+<rect x='80.0' y='280.0' width='640.0' height='90.0' fill='#c4b49a' stroke='#1c1914' stroke-width='2'/>
+<line x1='80.0' y1='280.0' x2='80.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='160.0' y1='280.0' x2='160.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='240.0' y1='280.0' x2='240.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='320.0' y1='280.0' x2='320.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='316.0' y='280.0' width='8.0' height='90.0' fill='#f4efe6' stroke='#b4532a' stroke-width='1.2'/>
+<line x1='400.0' y1='280.0' x2='400.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='480.0' y1='280.0' x2='480.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='560.0' y1='280.0' x2='560.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='640.0' y1='280.0' x2='640.0' y2='370.0' stroke='#1c1914' stroke-width='1.2'/>
+<rect x='636.0' y='280.0' width='8.0' height='90.0' fill='#f4efe6' stroke='#b4532a' stroke-width='1.2'/>
+<rect x='60.0' y='312.0' width='700.0' height='26.0' fill='#d0d4d6' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='120.0' y='298.0' width='120.0' height='10.0' fill='#b4532a' stroke='#1c1914' stroke-width='1'/>
+<text x='180.0' y='294.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>KEY 3/16 × 4.00  ST-005</text>
+<text x='80.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>0.5 mm GAP EVERY 4 DISCS  ·  NO GLUE IN KEYWAY</text>
+<rect x='80.0' y='460.0' width='780.0' height='148.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='482.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>SEQUENCE</text>
+<text x='92.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1. Number discs 1–21. Dry-stack. Confirm 16.00 face after bells.</text>
+<text x='92.0' y='518.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>2. PVA on faces only. Clamp as a column. Wipe the keyway.</text>
+<text x='92.0' y='536.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>3. End bells ST-006, retainer slots at idle and drive.</text>
+<text x='92.0' y='554.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>4. True OD to 5.000 ±0.010 (Q02) between centers or in-machine on a carrier.</text>
+<text x='92.0' y='572.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>FAILURE: glue in the keyway locks the stack to the shaft forever.</text>
+<text x='92.0' y='590.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>FAILURE: no gaps + MDF = hairline cracks (Walters). Birch + 0.5 mm.</text>
+<rect x='900.0' y='120.0' width='480.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='912.0' y='142.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>FIT</text>
+<text x='912.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Bore 0.748 on Ø0.750 shaft = 0.002 under.</text>
+<text x='912.0' y='178.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Freeze shaft or warm discs, or ream one disc.</text>
+<text x='912.0' y='196.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Key is removable 1045/1144 — not piano wire.</text>
+<text x='912.0' y='214.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Inspection: Q02 + no rock on the key.</text>
+</svg>

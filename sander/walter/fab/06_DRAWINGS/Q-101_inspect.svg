@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>Q-101  ·  Inspection and commissioning Q01–Q10</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  hold points  ·  first-run [T]</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>DO NOT SKIP  ·  BLINK TEST BEFORE ANY BOARD</text>
+<rect x='80.0' y='130.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='146.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q01</text>
+<text x='210.0' y='146.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Walls square; plates coplanar (winding sticks)</text>
+<text x='210.0' y='166.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: square + sticks</text>
+<rect x='80.0' y='182.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q02</text>
+<text x='210.0' y='198.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Drum OD 5.000 ±0.010 after turning</text>
+<text x='210.0' y='218.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: caliper</text>
+<rect x='80.0' y='234.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q03</text>
+<text x='210.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Drum parallel to platen, 16″ feeler both ends</text>
+<text x='210.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: feeler + straightedge</text>
+<rect x='80.0' y='286.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q04</text>
+<text x='210.0' y='302.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Conveyor tracks empty 60 s, then loaded</text>
+<text x='210.0' y='322.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: marks + clock</text>
+<rect x='80.0' y='338.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='354.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q05</text>
+<text x='210.0' y='354.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Acme nuts clocked — witness marks aligned</text>
+<text x='210.0' y='374.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: paint pen</text>
+<rect x='80.0' y='390.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='406.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q06</text>
+<text x='210.0' y='406.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>E-stop kills drum + feed; no auto-restart</text>
+<text x='210.0' y='426.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: blink test</text>
+<rect x='80.0' y='442.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='458.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q07</text>
+<text x='210.0' y='458.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Hood on, 4″ pulling, no leak at walls</text>
+<text x='210.0' y='478.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: tissue</text>
+<rect x='80.0' y='494.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q08</text>
+<text x='210.0' y='510.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Guard closed; no finger path to belt pinch</text>
+<text x='210.0' y='530.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: visual</text>
+<rect x='80.0' y='546.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='562.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q09</text>
+<text x='210.0' y='562.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>First 0.010″ poplar even cut, then oak</text>
+<text x='210.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: ear + caliper</text>
+<rect x='80.0' y='598.0' width='36.0' height='36.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='140.0' y='614.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>Q10</text>
+<text x='210.0' y='614.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='15' fill='#1c1914' text-anchor='start'>Idle jack at D3 zero before trusting taper</text>
+<text x='210.0' y='634.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Tool: jacks</text>
+<rect x='1100.0' y='130.0' width='420.0' height='220.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='1112.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>FIRST-RUN ORDER [T]</text>
+<text x='1112.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>1. Collector on. Hood latched.</text>
+<text x='1112.0' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>2. Table locked. Ways oiled.</text>
+<text x='1112.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>3. No workpiece. Guard closed.</text>
+<text x='1112.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>4. Drum. Listen. Stop.</text>
+<text x='1112.0' y='242.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>5. Feed empty 60 s.</text>
+<text x='1112.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>6. Poplar 0.010″.</text>
+<text x='1112.0' y='278.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>NEVER start with a board under the drum.</text>
+<text x='1112.0' y='296.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>NEVER stand in the infeed ejection line.</text>
+<text x='1112.0' y='314.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>This is not a planer.</text>
+<text x='1112.0' y='332.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Electrician [P] before energizing 115 V.</text>
+</svg>

@@ -25,9 +25,9 @@
 
 <article>
   <header class="cover wrap" id="cover">
-    <p class="tag">Package guidebook · Rev B</p>
+    <p class="tag">Package map · Rev C · Planforge v1.0</p>
     <h1>How to use WALTER</h1>
-    <p class="sub">The landing page is the argument. The kernel is the truth. The sheets are what you hang on the wall. The app is the checklist. This page is the map.</p>
+    <p class="sub">The Planforge book is the master. The kernel is the truth. The LEGO pages are what you glue in. The W-sheets hang on the wall. The app is the checklist. This page is the map.</p>
     <div class="meta">
       <div><b>URL</b>/walter/ · /sander/walter/</div>
       <div><b>Regenerate</b>./scripts/build_walter.sh</div>
@@ -40,11 +40,14 @@
     <table>
       <thead><tr><th>Path</th><th>What it is</th></tr></thead>
       <tbody>
-        <tr><td class="mono">sander/walter/</td><td>Landing page — spec, lineage, gallery, all fourteen sheets</td></tr>
+        <tr><td class="mono">planforge/</td><td>WOODWRIGHT PLANFORGE v1.0 master guidebook — G/A/J/E/P/M/F/H/Q, CSVs, zero-gap</td></tr>
+        <tr><td class="mono">manual/</td><td>LEGO 22-step A3 build manual (six bags)</td></tr>
+        <tr><td class="mono">fab/06_DRAWINGS/</td><td>Planforge drawing family (G-001 … Q-101)</td></tr>
+        <tr><td class="mono">sander/walter/</td><td>Landing page — spec, lineage, gallery, sheets</td></tr>
         <tr><td class="mono">report/</td><td>Engineering report — numbers, datums D1–D4, FMEA</td></tr>
-        <tr><td class="mono">manual/</td><td>Twelve-step build sequence with sheet callouts</td></tr>
         <tr><td class="mono">app/</td><td>PWA: explode, checklist, materials, drafts, files</td></tr>
-        <tr><td class="mono">cad/walter_kernel.py</td><td>Single source of truth (inches)</td></tr>
+        <tr><td class="mono">cad/walter_kernel.py</td><td>Geometry (inches)</td></tr>
+        <tr><td class="mono">cad/walter_project.py</td><td>Part IDs, bags, requirements, joinery, dimensions</td></tr>
         <tr><td class="mono">cad/walter_sander.scad</td><td>OpenSCAD preview (includes parameters.scad)</td></tr>
         <tr><td class="mono">cad/walter_sander.py</td><td>FreeCAD STEP/FCStd when freecadcmd exists</td></tr>
         <tr><td class="mono">cad/exports/*.stl</td><td>Binary meshes per group + assembly / exploded / stand</td></tr>
@@ -53,7 +56,7 @@
         <tr><td class="mono">fab/</td><td>BOM CSVs, cut lists, 1:1 templates, FMEA, inspection</td></tr>
       </tbody>
     </table>
-    <p>Read order if you are new: landing → this guide → report → W-1 and W-14 → buy plywood → manual with the app open.</p>
+    <p>Read order if you are new: landing → <a href="../planforge/">Planforge</a> → print T-DISC → LEGO manual with the app open → W-1 and W-14 on the wall.</p>
   </section>
 
   <section class="wrap" id="print">
@@ -75,7 +78,7 @@
   <section class="wrap" id="cad">
     <h2><span class="no">03</span> CAD</h2>
     <p>You do not need FreeCAD or OpenSCAD to get a solid model. Python 3 writes STL and OBJ from the kernel. Open the assembly in any mesh viewer, slicer, or CAD that imports STL.</p>
-    <p class="mono">python3 scripts/gen_walter_cad.py<br />python3 scripts/gen_walter_plans.py<br />python3 scripts/gen_walter_fab.py</p>
+    <p class="mono">python3 scripts/gen_walter_cad.py<br />python3 scripts/gen_walter_plans.py<br />python3 scripts/gen_walter_fab.py<br />python3 scripts/gen_walter_manual.py<br />python3 scripts/gen_walter_drawings.py<br />python3 scripts/gen_walter_planforge.py</p>
     <p>Or one shot: <span class="mono">./scripts/build_walter.sh</span></p>
     <p>If you change a dimension, change it in <span class="mono">walter_kernel.py</span> only, then regenerate. Do not edit <span class="mono">parameters.scad</span> or <span class="mono">parameters.json</span> by hand.</p>
     <div class="callout">
@@ -90,17 +93,18 @@
     <p>Do not buy: MDF for drum or walls; a 16×48 sanding belt as a conveyor; PVC pipe rollers; pillow blocks on a single ¾″ wall with no plate; an open-drip motor in this dust; a light switch as the only disconnect; Formica for the platen.</p>
     <p>Electrics: 115 V 20 A dedicated, magnetic starter with no-volt release, mushroom E-stop in series with the coil. Have an electrician size the overload heaters to motor FLA. W-12 is not a UL listing.</p>
     <p>
+      <a class="dl" href="../planforge/">Planforge guidebook</a>
       <a class="dl" href="../plans/W14_buylist.svg">W-14 buy list</a>
       <a class="dl" href="../fab/07_BOM/hardware.csv">hardware.csv</a>
       <a class="dl" href="../app/">Build app</a>
-      <a class="dl" href="../manual/">Manual</a>
+      <a class="dl" href="../manual/">LEGO manual</a>
     </p>
   </section>
 </article>
 
 <footer class="foot wrap">
-  <span>WALTER · guidebook · Rev B</span>
-  <span><a href="../report/">Engineering report</a></span>
+  <span>WALTER · guidebook · Rev C</span>
+  <span><a href="../planforge/">Planforge</a> · <a href="../report/">Engineering report</a></span>
 </footer>
 </body>
 </html>

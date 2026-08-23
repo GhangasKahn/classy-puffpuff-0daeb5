@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>G-002  ·  Design basis / requirements / units</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  inches controlling</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='18' fill='#b4532a' text-anchor='start' font-weight='600'>UNITS, DATUMS, CALCULATIONS</text>
+<rect x='48.0' y='112.0' width='760.0' height='166.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='134.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>CONTROLLING UNITS</text>
+<text x='60.0' y='152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Inches in the shop. Millimetres only at CAD mesh export (×25.4).</text>
+<text x='60.0' y='170.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Fractional layout to 1/32″ unless a fit is tighter (bore, crown, OD).</text>
+<text x='60.0' y='188.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Reference temperature: shop ~68 °F. Acclimate Baltic birch before final mill.</text>
+<text x='60.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Drum RPM [D] = 1725 × 3.00 / 4.75 = 1089.47</text>
+<text x='60.0' y='224.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>SFM [D] = π × 5.00 × rpm / 12 = 1426.1</text>
+<text x='60.0' y='242.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Feed at 30 rpm roller [D] = π × 2.00 / 12 × 30 = 15.71 FPM</text>
+<text x='60.0' y='260.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Elevation [D] = 1/6 = 0.1667 in/rev on ¾-6 Acme.</text>
+<text x='48.0' y='340.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>REQUIREMENTS (MUST / SHOULD / EXCLUDED)</text>
+<text x='48.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>FUN-001</text>
+<text x='130.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Sand stock 16.00″ wide × 0.06–4.00″ thick in light passes</text>
+<text x='1300.0' y='368.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>FUN-002</text>
+<text x='130.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Powered feed 0–16 FPM that tracks a 16″ PVC conveyor</text>
+<text x='1300.0' y='388.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>FUN-003</text>
+<text x='130.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Dedicated 1 HP TEFC drive — not a table-saw parasite</text>
+<text x='1300.0' y='408.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>FUN-004</text>
+<text x='130.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>SHOULD     Optional 32″ cabinet stand, platen ~36–40″ AFF</text>
+<text x='1300.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>A</text>
+<text x='48.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>DIM-001</text>
+<text x='130.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Envelope 22 × 36 × 20″ benchtop; drum Ø 5.00 × 16.00 face</text>
+<text x='1300.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G/D</text>
+<text x='48.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>DIM-002</text>
+<text x='130.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Datums D1–D4 controlling; inches primary</text>
+<text x='1300.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>LOAD-001</text>
+<text x='130.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Drum ~1089 RPM / ~1427 SFM from 1725 × 3.00/4.75</text>
+<text x='1300.0' y='488.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>D</text>
+<text x='48.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>MAT-001</text>
+<text x='130.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Baltic birch drum and walls. No MDF. No Formica platen. No sanding-belt conveyor.</text>
+<text x='1300.0' y='508.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>JNT-001</text>
+<text x='130.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Keyed ¾″ shaft, 0.5 mm expansion gaps every 4 discs</text>
+<text x='1300.0' y='528.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>JNT-002</text>
+<text x='130.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Dual ¾-6 Acme HTD-timed; no independent corner screws</text>
+<text x='1300.0' y='548.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='568.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>SAFE-001</text>
+<text x='130.0' y='568.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Magnetic starter / no-volt release + mushroom E-stop; no auto-restart</text>
+<text x='1300.0' y='568.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>P</text>
+<text x='48.0' y='588.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>SAFE-002</text>
+<text x='130.0' y='588.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Fully enclosed drive guard; 4″ hood @ ≥400 CFM; 12″ min stock or carrier</text>
+<text x='1300.0' y='588.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>SAFE-003</text>
+<text x='130.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Risk R3 powered machine. Release FABRICATION-READY WITH CONDITIONS. Not PE-stamped.</text>
+<text x='1300.0' y='608.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>P</text>
+<text x='48.0' y='628.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>DOC-001</text>
+<text x='130.0' y='628.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       WOODWRIGHT PLANFORGE guidebook + LEGO manual + kernel CAD + W-1…W-14 + fab CSVs</text>
+<text x='1300.0' y='628.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='648.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>MAINT-001</text>
+<text x='130.0' y='648.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Replaceable wrap (hook tape + end-bell slots), replaceable UHMW face, accessible bearing</text>
+<text x='1300.0' y='648.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<text x='48.0' y='668.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>EXCL-001</text>
+<text x='130.0' y='668.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>EXCLUDED   MDF drum/walls; sanding belt as conveyor; PVC-pipe rollers; gravity motor on a dowel; Fo</text>
+<text x='1300.0' y='668.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G</text>
+<rect x='48.0' y='720.0' width='900.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='60.0' y='742.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EVIDENCE CLASSES</text>
+<text x='60.0' y='760.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>G given · M measured · S sourced · D derived · A assumed · E estimated · T test · P professional-verify</text>
+<text x='60.0' y='778.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>McMaster PNs except 6245K47 / 6191K37 are [E] search hints. Open the live page.</text>
+<text x='60.0' y='796.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>W-12 wiring is design intent, not NEC. Electrician [P].</text>
+<text x='60.0' y='814.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>ShopNotes #86 remains copyrighted. Do not scan or redraw it.</text>
+</svg>

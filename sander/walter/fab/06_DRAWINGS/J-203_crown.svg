@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>J-203  ·  Joint J-CROWN — barrel rollers and PVC belt</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Scale enlarged  ·  crown is 0.030″  ·  inches</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>BOTH ROLLERS  ·  0.030″ BARREL  ·  NOT A SANDING BELT</text>
+<polygon points='120.0,320.0 320.0,280.0 520.0,320.0 520.0,350.0 320.0,310.0 120.0,350.0' fill='#5c656c' stroke='#1c1914' stroke-width='2' stroke-linejoin='round'/>
+<line x1='120.0' y1='335.0' x2='520.0' y2='335.0' stroke='#6b5340' stroke-width='1' stroke-dasharray='5 4'/>
+<text x='320.0' y='264.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='middle' font-weight='600'>CROWN 0.030 ±0.005 AT MIDSPAN  [G]</text>
+<rect x='120.0' y='400.0' width='400.0' height='14.0' fill='#2a2a2c' stroke='#1c1914' stroke-width='1.4'/>
+<text x='320.0' y='440.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='middle' font-weight='600'>2-PLY PVC CONVEYOR  16.00 × 60.00 ENDLESS</text>
+<rect x='80.0' y='480.0' width='920.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='502.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>Walters used a 16×48 sanding belt on PVC pipe. It never tracked (three rebuilds).</text>
+<text x='92.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Turn a barrel on aluminum tube 2.00 OD × 16.25. Flat rollers do not self-center.</text>
+<text x='92.0' y='538.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Idle-end ¼-20 skew. Belt 1/32 above the UHMW. Track empty 60 s, then loaded (Q04).</text>
+<text x='92.0' y='556.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Option B if tracking fails: HDPE sliding table — see W-5. Do not return to a sanding belt.</text>
+<text x='92.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Roller CD 26.86 [D]. Shafts ⅝″ in UCFL201-10.</text>
+</svg>

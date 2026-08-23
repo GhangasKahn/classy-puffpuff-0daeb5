@@ -1,0 +1,27 @@
+LINE,HARDWARE_ID,ROLE,PN,URL,DESCRIPTION,QTY,UNIT,WHERE,FAMILY,EVIDENCE,SUBSTITUTE,NOTE
+MC-001,H-001,REQUIRED,VERIFY,,"Shaft ¾"" × 22"" 1144 Stressproof, keyed 3/16""",1,ea,1144 ground 0.75 rod 24,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-002,H-002,REQUIRED,6661K13,https://www.mcmaster.com/6661K13/,"Flange bearing UCFL204-12 (¾"")",2,ea,UCFL204-12,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-003,H-003,REQUIRED,6661K11,https://www.mcmaster.com/6661K11/,"Flange bearing UCFL201-10 (⅝"")",4,ea,UCFL201-10,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-004,H-004,REQUIRED,9056K44,https://www.mcmaster.com/9056K44/,"Aluminum tube 2.00"" OD × 16.25""",2,ea,aluminum round tube 2.000 OD,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-005,H-005,REQUIRED,1346K13,https://www.mcmaster.com/1346K13/,"Roller shaft ⅝"" × 22""",2,ea,0.625 precision shaft,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-006,H-006,REQUIRED,99030A460,https://www.mcmaster.com/99030A460/,"Acme screw ¾-6 × 12""",2,ea,acme 3/4-6 12,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-007,H-007,REQUIRED,6350K15,https://www.mcmaster.com/6350K15/,Acme nut ¾-6 bronze,2,ea,acme nut 3/4-6,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-008,H-008,REQUIRED,VERIFY,,HTD 5 mm 15 mm belt + 16T pulleys,1 set,ea,HTD 5mm 15mm,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-009,H-009,REQUIRED,6086K52,https://www.mcmaster.com/6086K52/,"Handwheel 4"" ¾"" bore",1,ea,handwheel 4 inch 3/4 bore,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-010,H-010,REQUIRED,6245K27,https://www.mcmaster.com/6245K27/,"4L pulley 3.00"" ¾"" bore",1,ea,4L pulley 3.0 3/4,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-011,H-011,REQUIRED,6245K47,https://www.mcmaster.com/6245K47/,"4L pulley 4.75"" ¾"" bore",1,ea,4L pulley 4.75 3/4,buy,S,"Match interface + rating, not the SKU string",Published in public ShopNotes #86 hardware notes — still verify live catalog
+MC-012,H-012,REQUIRED,6191K37,https://www.mcmaster.com/6191K37/,4L440 link belt,1,ea,4L440 link,buy,S,"Match interface + rating, not the SKU string",Published in public ShopNotes #86 hardware notes — still verify live catalog
+MC-013,H-013,REQUIRED,VERIFY,,"Conveyor belt 16"" × 60"" 2-ply PVC endless",1,ea,PVC conveyor 16 inch,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-014,H-014,REQUIRED,VERIFY,,Motor 1 HP TEFC 1725 RPM 115 V 56C,1,ea,1 HP TEFC 1725 56C,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-015,H-015,REQUIRED,VERIFY,,24 V DC worm gearmotor ~30 RPM,1,ea,24V worm 30 rpm,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-016,H-016,REQUIRED,VERIFY,,24 V 5 A PSU + PWM controller,1,ea,24V 5A PWM,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-017,H-017,REQUIRED,VERIFY,,Magnetic starter / DP contactor + OL,1,ea,NEMA 0 starter 115V,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-018,H-018,REQUIRED,VERIFY,,E-stop 40 mm mushroom NC,1,ea,estop 40mm,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-019,H-019,REQUIRED,8910K713,https://www.mcmaster.com/8910K713/,"Steel plate ¼"" × 6 × 6",2,ea,A36 1/4 plate,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-020,H-020,REQUIRED,8910K713,https://www.mcmaster.com/8910K713/,"Steel plate ¼"" × 8 × 10 (hinge)",1,ea,A36 1/4 plate,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-021,H-021,REQUIRED,8752K111,https://www.mcmaster.com/8752K111/,UHMW 1/8 × 24 × 48,1,ea,UHMW 1/8 sheet,buy,E,"Match interface + rating, not the SKU string",Search-hint PN. Open the live catalog; measure the part in hand.
+MC-022,H-022,REQUIRED,VERIFY,,"PSA hook tape 4"" × 5 yd",1,ea,hook tape 4 inch PSA,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-023,H-023,REQUIRED,VERIFY,,"Abrasive rolls 3"" × 25' 80/120/150",3,ea,Klingspor 3 inch roll,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-024,H-024,REQUIRED,VERIFY,,"4"" dust flange + hose",1,ea,4 inch dust port,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-025,H-025,REQUIRED,VERIFY,,"Nylon brush strip 16""",1,ea,brush strip 16,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.
+MC-026,H-026,REQUIRED,VERIFY,,#8 / 5/16 / ¼-20 fasteners + T-nuts,1 kit,ea,t-nut 1/4-20,buy,E,"Match interface + rating, not the SKU string",No PN. Buy by search term / rating.

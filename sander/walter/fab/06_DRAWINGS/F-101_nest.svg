@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>F-101  ·  Stock nest / rough breakdown</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS nest  ·  5×5 Baltic birch  ·  do not optimize past one spare disc</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>THREE ¾″ 5×5 SHEETS + ONE ¼″ SHEET  ·  GRAIN AND SPARES FIRST</text>
+<rect x='60.0' y='130.0' width='480.0' height='480.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='76.0' y='156.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>SHEET 1  BASE + WALL SKINS</text>
+<rect x='90.0' y='180.0' width='220.0' height='360.0' fill='#c4a574' stroke='#1c1914' stroke-width='1.4'/>
+<text x='200.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle'>F-001</text>
+<rect x='330.0' y='180.0' width='180.0' height='360.0' fill='#b89660' stroke='#1c1914' stroke-width='1.4'/>
+<text x='420.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle'>F-002a</text>
+<rect x='580.0' y='130.0' width='480.0' height='480.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='596.0' y='156.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>SHEET 2  WALL SKINS</text>
+<rect x='610.0' y='180.0' width='180.0' height='360.0' fill='#c4a574' stroke='#1c1914' stroke-width='1.4'/>
+<text x='700.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle'>F-002b</text>
+<rect x='810.0' y='180.0' width='180.0' height='360.0' fill='#b89660' stroke='#1c1914' stroke-width='1.4'/>
+<text x='900.0' y='360.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#1c1914' text-anchor='middle'>F-003a</text>
+<rect x='1100.0' y='130.0' width='480.0' height='480.0' fill='#efe8dc' stroke='#1c1914' stroke-width='2'/>
+<text x='1116.0' y='156.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>SHEET 3  21 DISCS + STRETCHERS</text>
+<circle cx='1170.0' cy='220.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1250.0' cy='220.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1330.0' cy='220.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1410.0' cy='220.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1490.0' cy='220.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1170.0' cy='292.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1250.0' cy='292.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1330.0' cy='292.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1410.0' cy='292.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1490.0' cy='292.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1170.0' cy='364.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1250.0' cy='364.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1330.0' cy='364.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1410.0' cy='364.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1490.0' cy='364.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1170.0' cy='436.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1250.0' cy='436.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1330.0' cy='436.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1410.0' cy='436.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1490.0' cy='436.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<circle cx='1170.0' cy='508.0' r='28.0' fill='#c4b49a' stroke='#1c1914' stroke-width='1'/>
+<text x='1340.0' y='590.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='middle'>D-001 ×21 + 1 spare if the sheet allows</text>
+<rect x='60.0' y='640.0' width='1500.0' height='94.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='72.0' y='662.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>¼″ sheet: platen skins T-001, hood HD-001, guard M-003. Maple: rails F-006/007, nut blocks T-005, ways.</text>
+<text x='72.0' y='680.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Kerf + trim: leave 1/8 on plywood lengths. Rest overnight after breaking down, then mill to finished.</text>
+<text x='72.0' y='698.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not nest a disc on a void. One machining error on D-001 is cheaper than a second 5×5 if you kept a spare.</text>
+<text x='72.0' y='716.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>N-001 stand is optional — sheet 4 if you build it. See W-11.</text>
+</svg>

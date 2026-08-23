@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>WALTER · WOODWRIGHT PLANFORGE v1.0 · Master Build Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1c1914;--paper:#f4efe6;--copper:#b4532a;--copper-hi:#d47248;--dim:#6b5340;--line:#d4cbb8;--warn:#8a3a2a;--banner:#3a1814}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Newsreader,Georgia,serif}
+code,.mono,table,nav,th,td,.k{font-family:"IBM Plex Mono",Menlo,monospace}
+a{color:var(--copper)}
+.banner{background:var(--banner);color:#f3e6dc;padding:10px 22px;font:600 12px/1.4 "IBM Plex Mono",monospace;letter-spacing:.04em}
+.banner b{color:#e8c4a8}
+header.hero{padding:36px 28px 12px;max-width:1100px}
+.k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:600}
+h1{font-size:clamp(36px,6vw,64px);margin:8px 0 6px;font-weight:600}
+.lead{max-width:70ch;color:var(--dim);font-size:18px}
+nav.toc{position:sticky;top:0;z-index:5;background:rgba(244,239,230,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;gap:10px;flex-wrap:wrap}
+nav.toc a{font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--dim);border:1px solid var(--line);padding:6px 8px}
+nav.toc a:hover{color:var(--ink);border-color:var(--ink)}
+main{max-width:1100px;padding:12px 28px 80px}
+section{padding:28px 0;border-top:1px solid var(--line)}
+h2{font-size:28px;margin:0 0 12px}
+h3{font-size:18px;margin:18px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);padding:14px;background:#fff}
+.card .k{margin-bottom:6px}
+table{border-collapse:collapse;width:100%;font-size:12px;margin:12px 0}
+th,td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+th{color:var(--copper);font-weight:600;letter-spacing:.06em;font-size:10px;text-transform:uppercase}
+tr.est td{color:var(--dim)}
+tr.src td{background:#f7efe6}
+a.sku{font-weight:600;letter-spacing:.04em}
+.elev{width:100%;border:1px solid var(--line);background:#fff}
+.seq{padding-left:22px}
+.seq i{color:var(--dim);font-style:normal;font-size:12px}
+.warn{color:var(--warn);font-weight:600}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.links a{display:inline-block;padding:8px 12px;border:1px solid var(--copper);text-decoration:none;font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+ul{padding-left:20px}
+footer{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid var(--line)}
+@media print{nav.toc,.banner{position:static} a.sku{color:#000}}
+</style>
+</head>
+<body>
+<div class="banner">
+  RELEASE: <b>FABRICATION-READY WITH CONDITIONS</b>
+  · RISK <b>R3</b>
+  · NOT A PE STAMP · NOT UL · NOT A SHOPNOTES REPRINT
+  · ELECTRICIAN [P] · FIRST-RUN [T]
+  · WPF-WALTER-16-C
+</div>
+<header class="hero">
+  <p class="k">WOODWRIGHT PLANFORGE v1.0 · Kernel 1.2.0 · Rev C</p>
+  <h1>WALTER</h1>
+  <p class="lead">Master build-plans guidebook for a 16-inch closed-frame drum thickness sander. Traditional joinery discipline joined to parametric CAD, LEGO assembly, and honest release boundaries. If a competent builder still has to guess, the plan is not finished.</p>
+  <div class="links">
+    <a href="../manual/">LEGO build manual</a>
+    <a href="../fab/06_DRAWINGS/">G/A/E/P/J drawings</a>
+    <a href="../fab/">Fab CSVs</a>
+    <a href="../app/">Build app</a>
+    <a href="../plans/W1_general.svg">W-1 shop blueprint</a>
+    <a href="MCMASTER_SCHEDULE.csv">McMaster CSV</a>
+    <a href="DESIGN_BASIS.md">Design basis</a>
+    <a href="ZERO_GAP.md">Zero-gap</a>
+  </div>
+</header>
+<nav class="toc" aria-label="Sheet families">
+  <a href="#g001">G-001 Cover</a>
+  <a href="#g002">G-002 Requirements</a>
+  <a href="#g003">G-003 Evidence</a>
+  <a href="#g004">G-004 Safety</a>
+  <a href="#a101">A Architecture</a>
+  <a href="#j101">J Joinery</a>
+  <a href="#e101">E Assembly</a>
+  <a href="#p101">P Parts</a>
+  <a href="#m101">M Mechanism</a>
+  <a href="#f101">F Fabrication</a>
+  <a href="#h101">H McMaster</a>
+  <a href="#q101">Q Quality</a>
+</nav>
+<main>
+
+<section id="g001">
+  <p class="k">G-001 · Governance / cover</p>
+  <h2>Release, datums, thesis</h2>
+  <div class="grid">
+    <div class="card"><p class="k">Release</p><p>FABRICATION-READY WITH CONDITIONS</p></div>
+    <div class="card"><p class="k">Risk</p><p>R3 powered abrasive machine</p></div>
+    <div class="card"><p class="k">Layout</p><p>D1 base top Z0; D2 drum axis Z 13.50 Y 18.00; D3 idle jack zero; D4 Acme nuts clocked</p></div>
+    <div class="card"><p class="k">Units</p><p>inch controlling; millimetre at CAD export only</p></div>
+  </div>
+  <h3>Design thesis</h3>
+  <p>Keep what Walters got right: a dedicated motor, flange bearings, a wrap drum, a hood that actually collects. Throw out what failed in public: a sanding belt used as a conveyor, PVC-pipe rollers, MDF discs, Formica platen, gravity belt slack, shim-stock parallelism, a light switch for 115 V. This package is original engineering from those notes — not a copy of copyrighted ShopNotes art.</p>
+  <h3>Conditions — close these before a first board</h3>
+  <ul><li>Qualified electrician sizes overload heaters to motor FLA and lands 115 V 20 A, grounding, and the magnetic starter [P]</li><li>First-run commissioning is staged: collector on, hood on, no workpiece, then poplar 0.010″ [T]</li><li>Verify every catalog number on the live McMaster / supplier page before purchase [S]</li><li>True the drum OD to 5.000 ±0.010 after glue; do not run an unbalanced blank [T]</li><li>Track the PVC conveyor empty 60 s then loaded before any oak [T]</li><li>E-stop blink test: restore power — drum must not auto-restart [T]</li><li>Do not treat W-sheets, the HTML guidebook, or the Build-app viz as a scaled fabrication drawing — kernel inches control</li><li>Not a permit drawing, not a UL listing, not a substitute for machine-guarding review</li></ul>
+  <p class="warn">Do not treat a rendering, this HTML book, or the Build-app viz as a scaled fabrication drawing. Controlling numbers live in <code>walter_kernel.py</code>, the dimension register, and the P-sheets. Do not scale A-101.</p>
+  <h3>Datums</h3>
+  <ul><li>D1 Base top face = Z0. Walls sit on it. Stretchers must not lift a wall.</li><li>D2 Drum axis = Z 13.50″, Y 18.00″. Both bearing plates from one story stick.</li><li>D3 Idle jack at zero = plates coplanar. True the drum, then jack for parallelism.</li><li>D4 Acme nuts clocked together before the HTD belt. Paint a witness mark.</li></ul>
+</section>
+
+<section id="g002">
+  <p class="k">G-002 · Requirements traceability</p>
+  <h2>MUST / SHOULD / EXCLUDED</h2>
+  <table><thead><tr><th>ID</th><th>PRI</th><th>STATEMENT</th><th>VERIFY</th><th>STATUS</th><th>EVIDENCE</th></tr></thead><tbody><tr><td>FUN-001</td><td>MUST</td><td>Sand stock 16.00″ wide × 0.06–4.00″ thick in light passes</td><td>Q09 first poplar 0.010″ even cut</td><td>PROPOSED</td><td>G</td></tr><tr><td>FUN-002</td><td>MUST</td><td>Powered feed 0–16 FPM that tracks a 16″ PVC conveyor</td><td>Q04 empty 60 s then loaded</td><td>PROPOSED</td><td>G</td></tr><tr><td>FUN-003</td><td>MUST</td><td>Dedicated 1 HP TEFC drive — not a table-saw parasite</td><td>M-001 nameplate + 3.00/4.75 pulleys</td><td>PROPOSED</td><td>G</td></tr><tr><td>FUN-004</td><td>SHOULD</td><td>Optional 32″ cabinet stand, platen ~36–40″ AFF</td><td>N-001 or omit</td><td>PROPOSED</td><td>A</td></tr><tr><td>DIM-001</td><td>MUST</td><td>Envelope 22 × 36 × 20″ benchtop; drum Ø 5.00 × 16.00 face</td><td>F-001 + D-001 after turning</td><td>PROPOSED</td><td>G/D</td></tr><tr><td>DIM-002</td><td>MUST</td><td>Datums D1–D4 controlling; inches primary</td><td>story stick + winding sticks</td><td>PROPOSED</td><td>G</td></tr><tr><td>LOAD-001</td><td>MUST</td><td>Drum ~1089 RPM / ~1427 SFM from 1725 × 3.00/4.75</td><td>tach or pulley ratio [D]</td><td>PROPOSED</td><td>D</td></tr><tr><td>MAT-001</td><td>MUST</td><td>Baltic birch drum and walls. No MDF. No Formica platen. No sanding-belt conveyor.</td><td>BOM contains none of the excluded items</td><td>PROPOSED</td><td>G</td></tr><tr><td>JNT-001</td><td>MUST</td><td>Keyed ¾″ shaft, 0.5 mm expansion gaps every 4 discs</td><td>dry-stack before glue</td><td>PROPOSED</td><td>G</td></tr><tr><td>JNT-002</td><td>MUST</td><td>Dual ¾-6 Acme HTD-timed; no independent corner screws</td><td>D4 witness marks</td><td>PROPOSED</td><td>G</td></tr><tr><td>SAFE-001</td><td>MUST</td><td>Magnetic starter / no-volt release + mushroom E-stop; no auto-restart</td><td>Q06 blink test</td><td>OPEN</td><td>P</td></tr><tr><td>SAFE-002</td><td>MUST</td><td>Fully enclosed drive guard; 4″ hood @ ≥400 CFM; 12″ min stock or carrier</td><td>Q07 Q08 + startup card</td><td>PROPOSED</td><td>G</td></tr><tr><td>SAFE-003</td><td>MUST</td><td>Risk R3 powered machine. Release FABRICATION-READY WITH CONDITIONS. Not PE-stamped.</td><td>G-001 banner on every affected sheet</td><td>PROPOSED</td><td>P</td></tr><tr><td>DOC-001</td><td>MUST</td><td>WOODWRIGHT PLANFORGE guidebook + LEGO manual + kernel CAD + W-1…W-14 + fab CSVs</td><td>/sander/walter/planforge/ + /manual/ + /cad/</td><td>PROPOSED</td><td>G</td></tr><tr><td>MAINT-001</td><td>MUST</td><td>Replaceable wrap (hook tape + end-bell slots), replaceable UHMW face, accessible bearings</td><td>W-13 wrap; T-002 screws</td><td>PROPOSED</td><td>G</td></tr><tr><td>EXCL-001</td><td>EXCLUDED</td><td>MDF drum/walls; sanding belt as conveyor; PVC-pipe rollers; gravity motor on a dowel; Formica platen; light-switch-only disconnect; ShopNotes #86 reprint</td><td>BOM + lineage note</td><td>VERIFIED</td><td>G</td></tr></tbody></table>
+  <p>Vague adjectives are not specs. “Strong” maps to dual Acme + closed birch frame + 1 HP, not a number pulled from a photograph. “Accurate” maps to Q02 Ø 5.000±0.010 and Q03 16″ feeler both ends.</p>
+</section>
+
+<section id="g003">
+  <p class="k">G-003 · Evidence / dimensions / revision</p>
+  <h2>What is known vs assumed</h2>
+  <p>Evidence classes: <b>G</b> given · <b>M</b> measured · <b>S</b> sourced · <b>D</b> derived · <b>A</b> assumed · <b>E</b> estimated · <b>T</b> test · <b>P</b> professional-verify.</p>
+  <table><thead><tr><th>ID</th><th>DESC</th><th>CLASS</th><th>RELIABILITY</th><th>VERIFY</th></tr></thead><tbody><tr><td>EV-001</td><td>Capacity 16″ × 0.06–4.00″, envelope 22×36×20″</td><td>G</td><td>high</td><td>kernel P dict</td></tr><tr><td>EV-002</td><td>Ron Walters woodgears write-up + YouTube W-5Sj6kBVic (same machine)</td><td>G</td><td>high as failure modes</td><td>open sources; do not scan ShopNotes #86</td></tr><tr><td>EV-003</td><td>Drum RPM = 1725 × 3.00 / 4.75</td><td>D</td><td>arithmetic</td><td>nameplates + pulley stamps</td></tr><tr><td>EV-004</td><td>SFM = π × 5.00 × rpm / 12</td><td>D</td><td>arithmetic</td><td>recalc</td></tr><tr><td>EV-005</td><td>4L pulley 4.75 / 4L440 link (6245K47 / 6191K37)</td><td>S</td><td>public hardware notes; catalog drifts</td><td>live McMaster page</td></tr><tr><td>EV-006</td><td>Other McMaster PNs in hardware.csv</td><td>E</td><td>search hints</td><td>open catalog; measure in hand</td></tr><tr><td>EV-007</td><td>Crown 0.030″ barrel as tracking geometry</td><td>A/G</td><td>craft practice + Walters failure</td><td>Q04 belt track</td></tr><tr><td>EV-008</td><td>115 V starter / FLA / OL heaters</td><td>P</td><td>unverified here</td><td>electrician + motor nameplate</td></tr><tr><td>EV-009</td><td>USDA FPL Wood Handbook moisture/movement (general birch)</td><td>S</td><td>handbook</td><td>acclimate BB; 0.5 mm gaps</td></tr><tr><td>EV-010</td><td>OSHA 1910.212 / 1910.213 machine guarding (U.S.)</td><td>P/S</td><td>adopted code varies</td><td>competent machinery review; this is not a compliance cert</td></tr></tbody></table>
+  <h3>Dimension register</h3>
+  <table><thead><tr><th>DIM_ID</th><th>NOMINAL</th><th>TOL</th><th>UNIT</th><th>DATUM</th><th>FEATURE</th><th>CLASS</th><th>SHEET</th></tr></thead><tbody><tr><td>DIM-ENV-X</td><td>22.00</td><td>±0.03</td><td>in</td><td>D1</td><td>Base width X</td><td>G</td><td>A-102 / W-1</td></tr><tr><td>DIM-ENV-Y</td><td>36.00</td><td>±0.03</td><td>in</td><td>D1</td><td>Base depth Y</td><td>G</td><td>A-102 / W-1</td></tr><tr><td>DIM-WALL-T</td><td>1.50</td><td>±0.02</td><td>in</td><td>D1</td><td>Doubled wall</td><td>D</td><td>P-202</td></tr><tr><td>DIM-INNER</td><td>16.50</td><td>±0.03</td><td>in</td><td>idle inner</td><td>Clear between walls</td><td>G</td><td>A-102</td></tr><tr><td>DIM-FACE</td><td>16.00</td><td>±0.02</td><td>in</td><td>D2</td><td>Drum face</td><td>G</td><td>P-201</td></tr><tr><td>DIM-OD</td><td>5.000</td><td>±0.010</td><td>in</td><td>shaft axis</td><td>Turned drum OD</td><td>T</td><td>J-201</td></tr><tr><td>DIM-AXIS-Z</td><td>13.50</td><td>±0.02</td><td>in</td><td>D1</td><td>Drum axis height</td><td>G</td><td>A-103</td></tr><tr><td>DIM-AXIS-Y</td><td>18.00</td><td>±0.02</td><td>in</td><td>infeed face</td><td>Drum axis Y</td><td>G</td><td>A-102</td></tr><tr><td>DIM-BORE</td><td>0.748</td><td>+0.000/−0.002</td><td>in</td><td>disc center</td><td>Disc bore</td><td>G</td><td>P-201 / T-DISC</td></tr><tr><td>DIM-CROWN</td><td>0.030</td><td>±0.005</td><td>in</td><td>roller CL</td><td>Barrel crown</td><td>G</td><td>J-203</td></tr><tr><td>DIM-CD</td><td>26.86</td><td>±0.05</td><td>in</td><td>infeed roller</td><td>Roller centers</td><td>D</td><td>A-102</td></tr><tr><td>DIM-ACME</td><td>0.1667</td><td>REF</td><td>in/rev</td><td>n/a</td><td>Elevation pitch</td><td>D</td><td>M-103</td></tr><tr><td>DIM-TRAVEL</td><td>4.50</td><td>±0.05</td><td>in</td><td>D1</td><td>Table travel</td><td>G</td><td>W-4</td></tr><tr><td>DIM-JACK</td><td>±0.040</td><td>range</td><td>in</td><td>D3</td><td>Idle jack</td><td>G</td><td>J-202</td></tr><tr><td>DIM-RPM</td><td>1089</td><td>REF</td><td>rpm</td><td>n/a</td><td>Drum speed</td><td>D</td><td>G-002</td></tr><tr><td>DIM-SFM</td><td>1426</td><td>REF</td><td>sfm</td><td>n/a</td><td>Surface speed</td><td>D</td><td>G-002</td></tr><tr><td>DIM-FEED</td><td>15.7</td><td>REF</td><td>fpm</td><td>n/a</td><td>Feed at 30 rpm roller</td><td>D</td><td>M-102</td></tr></tbody></table>
+  <p>Critical speeds [D]: drum 1089.47 RPM · 1426.1 SFM · feed 15.71 FPM at 30 rpm roller. Recalculate from nameplates if your pulleys differ.</p>
+</section>
+
+<section id="g004">
+  <p class="k">G-004 · Safety / FMEA / professional review</p>
+  <h2>Hazards in proportion to R3</h2>
+  <p>Licensed/qualified electrician for 115 V. Competent machinery review of guards and first-run. This package is not PE-stamped and is not FABRICATION-READY (unconditional).</p>
+  <h3>Risk triggers</h3>
+  <ul><li>Powered abrasive drum ~1089 RPM / ~1.4 kSFM with stored rotational energy</li><li>Ingoing nip at drum-to-work and conveyor rollers</li><li>115 V motor circuit, magnetic starter, E-stop, 24 V feed — electrical [P]</li><li>Kickback / ejection of short stock</li><li>Combustible fine dust; hood and collector are part of the safeguard</li><li>Belt/pulley pinch outboard of the drive wall</li><li>Homemade machine — not UL listed, not OSHA-certified, not PE-stamped</li></ul>
+  <p class="warn">PPE and a warning label are last layers. Point of operation, ingoing nips, belt pinch, dust, and unexpected restart are designed in M-101 / W-7 / W-12 and verified on Q-101. This package does not certify OSHA 1910.212 / 1910.213 compliance.</p>
+  <table><thead><tr><th>ID</th><th>MODE</th><th>CAUSE</th><th>EFFECT</th><th>SEV</th><th>DET</th><th>MIT</th></tr></thead><tbody><tr><td>F01</td><td>Conveyor walk</td><td>No crown / PVC oval / sanding belt</td><td>Belt shreds, can't feed</td><td>8</td><td>6</td><td>0.030&quot; crown, PVC belt, skew screws</td></tr><tr><td>F02</td><td>Drum crack</td><td>MDF, no expansion gaps</td><td>Out of round, vibration</td><td>7</td><td>5</td><td>Birch discs, 0.5 mm gaps every 4</td></tr><tr><td>F03</td><td>Table rack</td><td>Independent corner screws</td><td>Wedge-sanded panels</td><td>7</td><td>4</td><td>Dual Acme HTD-timed</td></tr><tr><td>F04</td><td>Belt slack on start</td><td>Gravity motor mount</td><td>Glazed belt, stall</td><td>6</td><td>7</td><td>Hinge plate + turnbuckle</td></tr><tr><td>F05</td><td>Restart after blink</td><td>Plain switch</td><td>Drum starts in hands</td><td>9</td><td>3</td><td>Magnetic starter / NOVR</td></tr><tr><td>F06</td><td>Kickback short stock</td><td>Part shorter than platen</td><td>Projectile</td><td>8</td><td>4</td><td>12&quot; min or carrier board</td></tr><tr><td>F07</td><td>Dust cloud</td><td>Hood off / shop-vac</td><td>Health, fire load</td><td>8</td><td>8</td><td>4&quot; @ 400 CFM, hood interlock</td></tr><tr><td>F08</td><td>Drum taper</td><td>No idle jack</td><td>Stripe / wedge</td><td>5</td><td>5</td><td>¼-20 jack ±0.040&quot;</td></tr><tr><td>F09</td><td>Formica score</td><td>Abrasive harder than laminate</td><td>Platen not flat</td><td>4</td><td>9</td><td>HDPE / phenolic face</td></tr><tr><td>F10</td><td>Paper glued forever</td><td>Permanent Velcro</td><td>New drum to change wrap</td><td>3</td><td>8</td><td>Hook tape + end-bell slots</td></tr></tbody></table>
+</section>
+
+<section id="a101">
+  <p class="k">A-101 / A-102 / A-103 · Architecture</p>
+  <h2>General arrangement</h2>
+  <p>22 × 36 × 20″ benchtop · 16″ face · Ø 5.00 drum · D2 at Z 13.50 / Y 18.00. Print A-102 at 100% on A3; do not scale the isometric.</p>
+  <img class="elev" src="../fab/06_DRAWINGS/A-102_ortho.svg" alt="A-102 orthographic general arrangement"/>
+  <div class="links">
+    <a href="../fab/06_DRAWINGS/G-001_cover.svg">G-001</a>
+    <a href="../fab/06_DRAWINGS/A-101_isometric.svg">A-101 iso</a>
+    <a href="../fab/06_DRAWINGS/A-102_ortho.svg">A-102 ortho</a>
+    <a href="../fab/06_DRAWINGS/A-103_section.svg">A-103 section</a>
+    <a href="../fab/06_DRAWINGS/E-101_exploded.svg">E-101 explode</a>
+    <a href="../plans/W1_general.svg">W-1 shop sheet</a>
+    <a href="../cad/exports/walter_assembly.stl">assembly.stl</a>
+  </div>
+</section>
+
+<section id="j101">
+  <p class="k">J-101 · Joinery map</p>
+  <h2>Joints that carry load, movement, or tracking</h2>
+  <p>Primary layout is D1/D2. Transfer the drum axis with one story stick onto both plates. Never glue the keyway. Never paint the ways. Never clock Acme nuts independently after the HTD belt is on.</p>
+  <table><thead><tr><th>JOINT_ID</th><th>TYPE</th><th>PART_A</th><th>PART_B</th><th>FUNCTION</th><th>FIT</th><th>DRAWING</th></tr></thead><tbody><tr><td>J-DRUM</td><td>Keyed disc stack</td><td>D-001 ×21</td><td>ST-004 + ST-005</td><td>Transmit torque; stay round</td><td>0.002 under shaft; freeze/warm or ream</td><td>J-201 / W-3</td></tr><tr><td>J-WALL</td><td>Crossed-grain laminate</td><td>F-002 skins</td><td>F-003 skins</td><td>Stiff closed frame</td><td>glue-flat on a door</td><td>P-202 / W-2</td></tr><tr><td>J-PLATE</td><td>Bolted steel to birch</td><td>ST-001/002</td><td>F-002/003</td><td>Bearing seats; idle jack travel</td><td>plate is the drill jig</td><td>P-203 / W-2</td></tr><tr><td>J-WAY</td><td>UHMW dado slide</td><td>T-003/004</td><td>F-002/003 dados</td><td>Parallel elevation</td><td>sliding</td><td>J-202 / W-4</td></tr><tr><td>J-ACME</td><td>Bronze nut in maple block</td><td>ST-007</td><td>T-005</td><td>Timed lift</td><td>clock nuts D4 before belt</td><td>J-202 / W-4</td></tr><tr><td>J-CROWN</td><td>Belt on crowned rollers</td><td>C-004</td><td>C-001/C-002</td><td>Track feed</td><td>1/32 above platen</td><td>J-203 / W-5</td></tr><tr><td>J-WRAP</td><td>Spiral abrasive on hook tape</td><td>3″ roll</td><td>D-001 stack + ST-006 slots</td><td>Cutting face, replaceable</td><td>no lumps</td><td>J-204 / W-13</td></tr><tr><td>J-HINGE</td><td>Hinged motor plate + turnbuckle</td><td>ST-003 + M-001</td><td>F-003</td><td>Belt tension without gravity slack</td><td>turnbuckle lock</td><td>M-101 / W-6</td></tr></tbody></table>
+  <div class="links">
+    <a href="../fab/06_DRAWINGS/J-201_drum.svg">J-201 Drum stack</a>
+    <a href="../fab/06_DRAWINGS/J-202_ways.svg">J-202 Ways + Acme</a>
+    <a href="../fab/06_DRAWINGS/J-203_crown.svg">J-203 Crown</a>
+    <a href="../fab/06_DRAWINGS/J-204_wrap.svg">J-204 Wrap</a>
+    <a href="../fab/10_TEMPLATES/T-DISC.svg">T-DISC 1:1</a>
+    <a href="../fab/10_TEMPLATES/T-PLATE.svg">T-PLATE 1:1</a>
+    <a href="JOINERY_SCHEDULE.csv">Joinery CSV</a>
+  </div>
+</section>
+
+<section id="e101">
+  <p class="k">E-101 · Exploded assembly (LEGO)</p>
+  <h2>Twenty-two steps, six bags</h2>
+  <p>The step-by-step manual is generated from the same part register. Orange arrows are this-step motion. Numbered balloons on E-101 match the BOM.</p>
+  <div class="grid"><div class='card'><p class='k'>BAG 1</p><p><b>DRUM</b></p><p>21 discs · keyed shaft · end bells · true the OD</p></div><div class='card'><p class='k'>BAG 2</p><p><b>FRAME</b></p><p>doubled walls · steel plates · square the box</p></div><div class='card'><p class='k'>BAG 3</p><p><b>TABLE</b></p><p>torsion platen · UHMW ways · dual Acme</p></div><div class='card'><p class='k'>BAG 4</p><p><b>CONVEYOR</b></p><p>crowned rollers · PVC belt · skew · PWM</p></div><div class='card'><p class='k'>BAG 5</p><p><b>DRIVE</b></p><p>1 HP · hinge · 4L440 · guard · starter</p></div><div class='card'><p class='k'>BAG 6</p><p><b>HOOD / TUNE</b></p><p>dust · wrap · jack · Q01–Q10 · startup card</p></div></div>
+  <div class="links">
+    <a href="../manual/">Open LEGO manual</a>
+    <a href="../fab/06_DRAWINGS/E-101_exploded.svg">E-101</a>
+    <a href="../app/#assembly">App checklist</a>
+  </div>
+  <ol class='seq'><li><b>Step 01</b> <i>Bag 1</i> — Bandsaw 21 disc blanks</li><li><b>Step 02</b> <i>Bag 1</i> — Bore 0.748″ and file the keyway</li><li><b>Step 03</b> <i>Bag 1</i> — Dry-stack on the keyed shaft</li><li><b>Step 04</b> <i>Bag 1</i> — Glue the column · fit end bells</li><li><b>Step 05</b> <i>Bag 1</i> — True the OD to 5.000″</li><li><b>Step 06</b> <i>Bag 2</i> — Glue doubled walls, grain crossed</li><li><b>Step 07</b> <i>Bag 2</i> — Steel plates as drill jigs</li><li><b>Step 08</b> <i>Bag 2</i> — Square the box on datum D1</li><li><b>Step 09</b> <i>Bag 2</i> — Idle jack screws at D3 zero</li><li><b>Step 10</b> <i>Bag 3</i> — Build the torsion-box platen</li><li><b>Step 11</b> <i>Bag 3</i> — UHMW face and dados for ways</li><li><b>Step 12</b> <i>Bag 3</i> — Clock Acme nuts · HTD · handwheel</li><li><b>Step 13</b> <i>Bag 4</i> — Turn 0.030″ crowns · mount rollers</li><li><b>Step 14</b> <i>Bag 4</i> — Endless PVC belt · skew · PWM</li><li><b>Step 15</b> <i>Bag 5</i> — Hinge plate, 1 HP, pulleys</li><li><b>Step 16</b> <i>Bag 5</i> — 4L440 · full guard · starter</li><li><b>Step 17</b> <i>Bag 6</i> — Hood, 4″ port, brush strip</li><li><b>Step 18</b> <i>Bag 6</i> — Hook tape and spiral wrap</li><li><b>Step 19</b> <i>Bag 6</i> — Jack parallelism on a 16″ board</li><li><b>Step 20</b> <i>Bag 6</i> — Inspection Q01–Q10</li><li><b>Step 21</b> <i>Bag 6</i> — Post the startup card</li><li><b>Step 22</b> <i>Bag 6</i> — First 0.010″ pass in poplar</li></ol>
+  <p><b>Solo handling:</b> mill discs and walls alone. The 1 HP 56C motor is a two-hand lift; set the hinge plate first. Do not ask one person to true an unguarded drum at speed — use a carrier and the hood.</p>
+  <p><b>Irreversible hold points:</b> (1) no glue in the keyway; (2) no paint on UHMW ways; (3) do not substitute a sanding belt for the conveyor; (4) do not energize 115 V before the electrician; (5) do not skip Q06.</p>
+</section>
+
+<section id="p101">
+  <p class="k">P-201 … P-204 · Part drawings</p>
+  <h2>Part register</h2>
+  <table><thead><tr><th>PART_ID</th><th>QTY</th><th>DESC</th><th>MAT</th><th>FINISHED</th><th>GRAIN</th><th>BAG</th><th>MAKE</th></tr></thead><tbody><tr><td>F-001</td><td>1</td><td>Base panel</td><td>¾″ Baltic birch</td><td>22.00 × 36.00 × 0.75</td><td>length = Y</td><td>2</td><td>MAKE</td></tr><tr><td>F-002</td><td>1</td><td>Idle wall, doubled skins grain-crossed</td><td>¾″ BB ×2</td><td>20.00 × 36.00 × 1.50</td><td>skins crossed</td><td>2</td><td>MAKE</td></tr><tr><td>F-003</td><td>1</td><td>Drive wall, doubled skins grain-crossed</td><td>¾″ BB ×2</td><td>20.00 × 36.00 × 1.50</td><td>skins crossed</td><td>2</td><td>MAKE</td></tr><tr><td>F-004</td><td>1</td><td>Infeed stretcher</td><td>¾″ BB</td><td>16.50 × 3.50 × 0.75</td><td>X</td><td>2</td><td>MAKE</td></tr><tr><td>F-005</td><td>1</td><td>Outfeed stretcher</td><td>¾″ BB</td><td>16.50 × 3.50 × 0.75</td><td>X</td><td>2</td><td>MAKE</td></tr><tr><td>F-006</td><td>1</td><td>Base rail idle</td><td>hard maple</td><td>33.00 × 1.50 × 1.50</td><td>Y</td><td>2</td><td>MAKE</td></tr><tr><td>F-007</td><td>1</td><td>Base rail drive</td><td>hard maple</td><td>33.00 × 1.50 × 1.50</td><td>Y</td><td>2</td><td>MAKE</td></tr><tr><td>ST-001</td><td>1</td><td>Idle bearing plate, slotted</td><td>A36 ¼″</td><td>6.00 × 6.00 × 0.25</td><td>n/a</td><td>2</td><td>MAKE</td></tr><tr><td>ST-002</td><td>1</td><td>Drive bearing plate, round holes</td><td>A36 ¼″</td><td>6.00 × 6.00 × 0.25</td><td>n/a</td><td>2</td><td>MAKE</td></tr><tr><td>ST-003</td><td>1</td><td>Motor hinge plate</td><td>A36 ¼″</td><td>8.00 × 10.00 × 0.25</td><td>n/a</td><td>5</td><td>MAKE</td></tr><tr><td>ST-004</td><td>1</td><td>Drum shaft keyed</td><td>1144 Stressproof</td><td>Ø0.75 × 22.00</td><td>n/a</td><td>1</td><td>BUY/MAKE</td></tr><tr><td>ST-005</td><td>2</td><td>Square key</td><td>1045 / 1144</td><td>0.1875 × 0.1875 × 4.00</td><td>n/a</td><td>1</td><td>MAKE</td></tr><tr><td>ST-006</td><td>2</td><td>End bell with retainer slot</td><td>Al ⅛″</td><td>Ø5.04 × 0.125</td><td>n/a</td><td>1</td><td>MAKE</td></tr><tr><td>ST-007</td><td>2</td><td>Acme screw ¾-6</td><td>Acme steel</td><td>Ø0.75 × 12.00</td><td>n/a</td><td>3</td><td>BUY</td></tr><tr><td>ST-008</td><td>1</td><td>Drum 4L pulley</td><td>cast iron</td><td>Ø4.75 × 0.75, ¾″ bore</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>ST-009</td><td>1</td><td>Motor 4L pulley</td><td>cast iron</td><td>Ø3.00 × 0.75, ¾″ bore</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>D-001</td><td>21</td><td>Drum disc blank</td><td>¾″ Baltic birch</td><td>Ø5.125 × 0.75, bore 0.748</td><td>face ply random ok</td><td>1</td><td>MAKE</td></tr><tr><td>T-001</td><td>1</td><td>Platen torsion box</td><td>¼″ skins + ¾″ grid</td><td>16.25 × 25.00 × 0.75</td><td>skins X</td><td>3</td><td>MAKE</td></tr><tr><td>T-002</td><td>1</td><td>UHMW / HDPE platen face</td><td>UHMW ⅛″</td><td>16.25 × 25.00 × 0.125</td><td>n/a</td><td>3</td><td>MAKE</td></tr><tr><td>T-003</td><td>1</td><td>Table way idle</td><td>maple + UHMW</td><td>25.00 × 0.50 × 2.00</td><td>Y</td><td>3</td><td>MAKE</td></tr><tr><td>T-004</td><td>1</td><td>Table way drive</td><td>maple + UHMW</td><td>25.00 × 0.50 × 2.00</td><td>Y</td><td>3</td><td>MAKE</td></tr><tr><td>T-005</td><td>2</td><td>Acme nut block</td><td>hard maple + bronze nut</td><td>2.00 × 2.00 × 3.00</td><td>long grain to screw</td><td>3</td><td>MAKE</td></tr><tr><td>T-006</td><td>1</td><td>Elevation handwheel</td><td>cast 4″ ¾″ bore</td><td>Ø4.00 × 0.45</td><td>n/a</td><td>3</td><td>BUY</td></tr><tr><td>C-001</td><td>1</td><td>Infeed roller, 0.030″ crown</td><td>Al tube 2.00 OD</td><td>Ø2.00 × 16.25</td><td>n/a</td><td>4</td><td>MAKE</td></tr><tr><td>C-002</td><td>1</td><td>Outfeed roller, 0.030″ crown</td><td>Al tube 2.00 OD</td><td>Ø2.00 × 16.25</td><td>n/a</td><td>4</td><td>MAKE</td></tr><tr><td>C-003</td><td>2</td><td>Roller shaft</td><td>precision ⅝″</td><td>Ø0.625 × 22</td><td>n/a</td><td>4</td><td>BUY</td></tr><tr><td>C-004</td><td>1</td><td>Conveyor belt 2-ply PVC endless</td><td>PVC conveyor</td><td>16.00 × 60.00</td><td>n/a</td><td>4</td><td>BUY</td></tr><tr><td>M-001</td><td>1</td><td>Drum motor TEFC 56C</td><td>1 HP 1725 115 V</td><td>~Ø6.5 × 8.0</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>M-002</td><td>1</td><td>Feed worm gearmotor 24 V</td><td>~30 RPM</td><td>~3 × 3 × 3</td><td>n/a</td><td>4</td><td>BUY</td></tr><tr><td>M-003</td><td>1</td><td>Drive belt guard, fully enclosed</td><td>¼″ BB</td><td>~17 × 17 × 2.2</td><td>face</td><td>5</td><td>MAKE</td></tr><tr><td>M-004</td><td>1</td><td>Turnbuckle tensioner</td><td>zinc ¼-20 class</td><td>~2.1 body</td><td>n/a</td><td>5</td><td>BUY</td></tr><tr><td>HD-001</td><td>1</td><td>Dust hood inverted-U</td><td>¼″ BB</td><td>~16.3 × 8.4 × 1.6</td><td>face</td><td>6</td><td>MAKE</td></tr><tr><td>HD-002</td><td>1</td><td>4″ dust flange</td><td>ABS / steel</td><td>Ø4.00 port</td><td>n/a</td><td>6</td><td>BUY</td></tr><tr><td>HD-003</td><td>1</td><td>Nylon brush strip</td><td>nylon</td><td>16.00</td><td>n/a</td><td>6</td><td>BUY</td></tr><tr><td>N-001</td><td>1</td><td>Optional 32″ cabinet stand</td><td>¾″ BB</td><td>22 × 32 × 32</td><td>vert. sides</td><td>6</td><td>MAKE</td></tr></tbody></table>
+  <div class="links">
+    <a href="../fab/06_DRAWINGS/P-201_disc.svg">P-201 Disc</a>
+    <a href="../fab/06_DRAWINGS/P-202_wall.svg">P-202 Walls</a>
+    <a href="../fab/06_DRAWINGS/P-203_plate.svg">P-203 Plates</a>
+    <a href="../fab/06_DRAWINGS/P-204_platen.svg">P-204 Platen</a>
+    <a href="PART_REGISTER.csv">Part CSV</a>
+  </div>
+</section>
+
+<section id="m101">
+  <p class="k">M-101 / M-102 · Mechanism</p>
+  <h2>Drive, feed, guards</h2>
+  <p>Drum 1089 RPM / 1426 SFM from 3.00/4.75 on 1725. Feed 15.7 FPM at 30 rpm roller, PWM 0–16 FPM. Hinge + turnbuckle, not motor weight on a dowel. Full belt guard. 24 V feed isolated from 115 V drum.</p>
+  <div class="links">
+    <a href="../fab/06_DRAWINGS/M-101_drive.svg">M-101 Drive</a>
+    <a href="../fab/06_DRAWINGS/M-102_conveyor.svg">M-102 Conveyor</a>
+    <a href="../plans/W12_wiring.svg">W-12 Wiring intent</a>
+  </div>
+  <p class="warn">W-12 is not a permit drawing and not NEC. Magnetic starter / no-volt release is mandatory. A consumer light switch is not an E-stop.</p>
+</section>
+
+<section id="f101">
+  <p class="k">F-101 / F-102 · Fabrication</p>
+  <h2>Stock, nest, routing</h2>
+  <p>Three ¾″ Baltic birch 5×5 sheets, one ¼″ sheet, maple for rails/ways/nuts. Do not substitute MDF. Grain-cross the wall skins. Leave a spare disc if the sheet allows.</p>
+  <div class="links">
+    <a href="../fab/06_DRAWINGS/F-101_nest.svg">F-101 Nest</a>
+    <a href="../fab/07_BOM/master_bom.csv">Master BOM</a>
+    <a href="../fab/08_CUT_LISTS/finished.csv">Cut list</a>
+    <a href="../fab/08_CUT_LISTS/operations.csv">Operations routing</a>
+    <a href="../plans/W8_bom.svg">W-8</a>
+    <a href="../plans/W14_buylist.svg">W-14</a>
+  </div>
+  <h3>Finish</h3>
+  <ul>
+    <li>Oil or wipe-on poly on the box after glue-up. Mask dados and way faces.</li>
+    <li>Never finish the UHMW. Oil the ways.</li>
+    <li>End-grain sealer on wall tops. Hood interior can stay raw.</li>
+    <li>Sample-board the finish on scrap birch; do not experiment on F-002.</li>
+  </ul>
+</section>
+
+<section id="h101">
+  <p class="k">H-101 · McMaster-Carr and buy list</p>
+  <h2>Linkable products — verify live before you order</h2>
+  <p>Highlighted rows are [S] from public ShopNotes hardware notes (6245K47, 6191K37) and still need a live-page check. Grey rows are [E] search hints. Catalogs move. Measure the part in hand against the interface, not the SKU string.</p>
+  <table>
+    <thead><tr><th>Line</th><th>ID</th><th>Ev</th><th>PN</th><th>Description</th><th>Qty</th><th>Search</th><th>Note</th></tr></thead>
+    <tbody><tr class='est'><td>MC-001</td><td>H-001</td><td>E</td><td>VERIFY</td><td>Shaft ¾&quot; × 22&quot; 1144 Stressproof, keyed 3/16&quot;</td><td>1</td><td>1144 ground 0.75 rod 24</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-002</td><td>H-002</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/6661K13/' rel='noopener' target='_blank'>6661K13</a></td><td>Flange bearing UCFL204-12 (¾&quot;)</td><td>2</td><td>UCFL204-12</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-003</td><td>H-003</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/6661K11/' rel='noopener' target='_blank'>6661K11</a></td><td>Flange bearing UCFL201-10 (⅝&quot;)</td><td>4</td><td>UCFL201-10</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-004</td><td>H-004</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/9056K44/' rel='noopener' target='_blank'>9056K44</a></td><td>Aluminum tube 2.00&quot; OD × 16.25&quot;</td><td>2</td><td>aluminum round tube 2.000 OD</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-005</td><td>H-005</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/1346K13/' rel='noopener' target='_blank'>1346K13</a></td><td>Roller shaft ⅝&quot; × 22&quot;</td><td>2</td><td>0.625 precision shaft</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-006</td><td>H-006</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/99030A460/' rel='noopener' target='_blank'>99030A460</a></td><td>Acme screw ¾-6 × 12&quot;</td><td>2</td><td>acme 3/4-6 12</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-007</td><td>H-007</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/6350K15/' rel='noopener' target='_blank'>6350K15</a></td><td>Acme nut ¾-6 bronze</td><td>2</td><td>acme nut 3/4-6</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-008</td><td>H-008</td><td>E</td><td>VERIFY</td><td>HTD 5 mm 15 mm belt + 16T pulleys</td><td>1 set</td><td>HTD 5mm 15mm</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-009</td><td>H-009</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/6086K52/' rel='noopener' target='_blank'>6086K52</a></td><td>Handwheel 4&quot; ¾&quot; bore</td><td>1</td><td>handwheel 4 inch 3/4 bore</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-010</td><td>H-010</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/6245K27/' rel='noopener' target='_blank'>6245K27</a></td><td>4L pulley 3.00&quot; ¾&quot; bore</td><td>1</td><td>4L pulley 3.0 3/4</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='src'><td>MC-011</td><td>H-011</td><td>S</td><td><a class='sku' href='https://www.mcmaster.com/6245K47/' rel='noopener' target='_blank'>6245K47</a></td><td>4L pulley 4.75&quot; ¾&quot; bore</td><td>1</td><td>4L pulley 4.75 3/4</td><td>Published in public ShopNotes #86 hardware notes — still verify live catalog</td></tr><tr class='src'><td>MC-012</td><td>H-012</td><td>S</td><td><a class='sku' href='https://www.mcmaster.com/6191K37/' rel='noopener' target='_blank'>6191K37</a></td><td>4L440 link belt</td><td>1</td><td>4L440 link</td><td>Published in public ShopNotes #86 hardware notes — still verify live catalog</td></tr><tr class='est'><td>MC-013</td><td>H-013</td><td>E</td><td>VERIFY</td><td>Conveyor belt 16&quot; × 60&quot; 2-ply PVC endless</td><td>1</td><td>PVC conveyor 16 inch</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-014</td><td>H-014</td><td>E</td><td>VERIFY</td><td>Motor 1 HP TEFC 1725 RPM 115 V 56C</td><td>1</td><td>1 HP TEFC 1725 56C</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-015</td><td>H-015</td><td>E</td><td>VERIFY</td><td>24 V DC worm gearmotor ~30 RPM</td><td>1</td><td>24V worm 30 rpm</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-016</td><td>H-016</td><td>E</td><td>VERIFY</td><td>24 V 5 A PSU + PWM controller</td><td>1</td><td>24V 5A PWM</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-017</td><td>H-017</td><td>E</td><td>VERIFY</td><td>Magnetic starter / DP contactor + OL</td><td>1</td><td>NEMA 0 starter 115V</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-018</td><td>H-018</td><td>E</td><td>VERIFY</td><td>E-stop 40 mm mushroom NC</td><td>1</td><td>estop 40mm</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-019</td><td>H-019</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/8910K713/' rel='noopener' target='_blank'>8910K713</a></td><td>Steel plate ¼&quot; × 6 × 6</td><td>2</td><td>A36 1/4 plate</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-020</td><td>H-020</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/8910K713/' rel='noopener' target='_blank'>8910K713</a></td><td>Steel plate ¼&quot; × 8 × 10 (hinge)</td><td>1</td><td>A36 1/4 plate</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-021</td><td>H-021</td><td>E</td><td><a class='sku' href='https://www.mcmaster.com/8752K111/' rel='noopener' target='_blank'>8752K111</a></td><td>UHMW 1/8 × 24 × 48</td><td>1</td><td>UHMW 1/8 sheet</td><td>Search-hint PN. Open the live catalog; measure the part in hand.</td></tr><tr class='est'><td>MC-022</td><td>H-022</td><td>E</td><td>VERIFY</td><td>PSA hook tape 4&quot; × 5 yd</td><td>1</td><td>hook tape 4 inch PSA</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-023</td><td>H-023</td><td>E</td><td>VERIFY</td><td>Abrasive rolls 3&quot; × 25' 80/120/150</td><td>3</td><td>Klingspor 3 inch roll</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-024</td><td>H-024</td><td>E</td><td>VERIFY</td><td>4&quot; dust flange + hose</td><td>1</td><td>4 inch dust port</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-025</td><td>H-025</td><td>E</td><td>VERIFY</td><td>Nylon brush strip 16&quot;</td><td>1</td><td>brush strip 16</td><td>No PN. Buy by search term / rating.</td></tr><tr class='est'><td>MC-026</td><td>H-026</td><td>E</td><td>VERIFY</td><td>#8 / 5/16 / ¼-20 fasteners + T-nuts</td><td>1 kit</td><td>t-nut 1/4-20</td><td>No PN. Buy by search term / rating.</td></tr></tbody>
+  </table>
+  <p>Download: <a href="MCMASTER_SCHEDULE.csv">MCMASTER_SCHEDULE.csv</a> · shop sheet <a href="../plans/W14_buylist.svg">W-14</a></p>
+</section>
+
+<section id="q101">
+  <p class="k">Q-101 · Inspection, commissioning, zero-gap</p>
+  <h2>Hold points</h2>
+  <ul>
+    <li>Q02 — drum OD 5.000 ±0.010 after turning.</li>
+    <li>Q04 — conveyor tracks empty 60 s, then loaded.</li>
+    <li>Q05 — Acme witness marks aligned (D4).</li>
+    <li>Q06 — E-stop; restore power; drum must not auto-restart.</li>
+    <li>Q09 — first 0.010″ poplar, then oak. If the motor note changes, you took too much.</li>
+  </ul>
+  <div class="links">
+    <a href="../fab/06_DRAWINGS/Q-101_inspect.svg">Q-101</a>
+    <a href="../fab/12_QA/inspection.csv">Inspection CSV</a>
+    <a href="ZERO_GAP.md">Zero-gap checklist (filled)</a>
+    <a href="FMEA.csv">FMEA CSV</a>
+  </div>
+  <h3>Zero-gap result</h3>
+  <p>Parts, joints, datums, LEGO sequence, and movement gaps <b>PASS</b>. Electrical, live catalog numbers, first-run, and machinery-guard review are <b>PASS WITH CONDITION</b>. Unconditional FABRICATION-READY is withheld.</p>
+  <h3>Builder’s next action</h3>
+  <ol>
+    <li>Print T-DISC and T-PLATE at 100%. Measure both calibration bars. If either axis is wrong, stop and reprint — do not scale a photograph of a disc.</li>
+    <li>Order plywood and the [S] belt/pulley pair after opening the live McMaster pages. Treat every other PN as a search term.</li>
+    <li>Walk the LEGO manual bag by bag. True the drum before you trust a board. Call the electrician before you land 115 V.</li>
+    <li>Commission with the collector on, hood on, no workpiece, then poplar 0.010″.</li>
+  </ol>
+</section>
+</main>
+<footer>
+  WALTER · WOODWRIGHT PLANFORGE v1.0 · WPF-WALTER-16-C · kernel 1.2.0 · Rev C ·
+  generated from walter_kernel.py + walter_project.py · not a ShopNotes reprint
+</footer>
+</body>
+</html>

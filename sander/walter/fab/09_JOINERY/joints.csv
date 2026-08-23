@@ -1,0 +1,9 @@
+JOINT_ID,TYPE,PART_A,PART_B,FUNCTION,GEOMETRY,FIT,ADHESIVE,DRAWING,INSPECTION
+J-DRUM,Keyed disc stack,D-001 ×21,ST-004 + ST-005,Transmit torque; stay round,"bore 0.748, key 3/16, gap 0.5 mm / 4 discs",0.002 under shaft; freeze/warm or ream,PVA on faces; no glue in keyway,J-201 / W-3,Q02 OD 5.000±0.010
+J-WALL,Crossed-grain laminate,F-002 skins,F-003 skins,Stiff closed frame,"¾+¾, grain crossed",glue-flat on a door,"PVA, cauls",P-202 / W-2,Q01 square + winding sticks
+J-PLATE,Bolted steel to birch,ST-001/002,F-002/003,Bearing seats; idle jack travel,6×6×¼; idle slots 0.90 vertical,plate is the drill jig,none — mechanical,P-203 / W-2,story stick D2
+J-WAY,UHMW dado slide,T-003/004,F-002/003 dados,Parallel elevation,"0.50 × 2.00 ways, 0.02–0.04 slide",sliding,UHMW mechanical / epoxy spots,J-202 / W-4,4.50 travel parallel
+J-ACME,Bronze nut in maple block,ST-007,T-005,Timed lift,"¾-6, HTD 5 mm 16T",clock nuts D4 before belt,"nut captured, not Loctite on Acme",J-202 / W-4,Q05 witness
+J-CROWN,Belt on crowned rollers,C-004,C-001/C-002,Track feed,"0.030 barrel, idle skew ¼-20",1/32 above platen,endless splice from supplier,J-203 / W-5,Q04
+J-WRAP,Spiral abrasive on hook tape,3″ roll,D-001 stack + ST-006 slots,"Cutting face, replaceable","θ≈17°, start idle slot",no lumps,PSA hook only,J-204 / W-13,carrier board full-face cut
+J-HINGE,Hinged motor plate + turnbuckle,ST-003 + M-001,F-003,Belt tension without gravity slack,"¼ plate, 4L440",turnbuckle lock,none,M-101 / W-6,Q08 guard + belt tracking

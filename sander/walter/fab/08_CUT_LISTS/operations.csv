@@ -1,0 +1,15 @@
+STEP,PART,DATUM,OP,TOOL,JIG,TARGET,HAZARD,INSPECT,HOLD
+OP-01,D-001,template T-DISC,Bandsaw 21 blanks,bandsaw,T-DISC,Ø 5.125,kickback — keep disc on the table,template line,
+OP-02,D-001,drill-press fence,Bore 0.748 and keyway,drill press + file,fence + pin,0.748 +0/−0.002,breakout — backer,pin gauge,
+OP-03,ST-004,shaft ends,Dry-stack + glue column,clamps,keyed shaft,16.00 face,no glue in keyway,gaps every 4,HOLD: wipe keyway
+OP-04,D-001,centers,True OD,lathe or in-machine,carrier,5.000 ±0.010,unbalanced blank,Q02,HOLD: do not run unbalanced
+OP-05,F-002,flat door,Glue doubled walls grain-crossed,cauls,door,1.50 thick,wind,winding sticks,
+OP-06,ST-001,plate as jig,Drill walls from plates,drill press,ST-001/002,D2 story stick,slot idle only,story stick,HOLD: do not slot drive plate
+OP-07,F-001,D1,Square the box,square,stretchers,diagonals agree,glue grab,Q01,HOLD: winding sticks on plates
+OP-08,T-001,straightedge,Torsion platen + UHMW,glue + screws,grid cauls,flat 0.010,hump prints stripe,straightedge,
+OP-09,ST-007,D4,"Clock Acme nuts, fit HTD",paint pen,nut blocks,witness aligned,rack if independent,Q05,HOLD: clock before belt
+OP-10,C-001,roller CL,Turn 0.030 crown both rollers,lathe,centers,0.030 ±0.005,flying tube,caliper mid vs end,
+OP-11,C-004,platen,"Fit PVC belt, skew, PWM",¼-20 skew,idle slots,track empty 60 s,nip at rollers,Q04,HOLD: not a sanding belt
+OP-12,M-001,hinge plate,"Motor, pulleys, 4L440, guard",turnbuckle,ST-003,guard closed,belt pinch,Q08,HOLD: electrician before 115 V
+OP-13,HD-001,walls,"Hood, 4″ port, brush",foam,collector,tissue pull,dust / fire load,Q07,HOLD: collector on before spin
+OP-14,ALL,D3,"Wrap, jack parallel, Q01–Q10, first poplar",carrier,16″ board,0.010 even cut,kickback / restart,Q06 Q09,HOLD: blink test; no board under drum at start

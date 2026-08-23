@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="WALTER — a modern 16-inch closed-frame drum thickness sander. Original engineering from Ron Walters' published failure modes. Kernel CAD, fourteen A3 sheets, build app." />
+<meta name="description" content="WALTER — a modern 16-inch closed-frame drum thickness sander. WOODWRIGHT PLANFORGE v1.0 guidebook, LEGO assembly, kernel CAD. Original engineering from Ron Walters' published failure modes." />
 <title>WALTER — 16″ Drum Thickness Sander</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -155,9 +155,10 @@ body::before{
       <a href="#lineage">Lineage</a>
       <a href="#model">CAD</a>
       <a href="#plans">Plans</a>
+      <a href="planforge/">Planforge</a>
+      <a href="manual/">Manual</a>
       <a href="app/">App</a>
       <a href="report/">Report</a>
-      <a href="manual/">Manual</a>
       <a href="../">Shop ↗</a>
     </nav>
   </div>
@@ -171,10 +172,10 @@ body::before{
       <h1 class="reveal">Wal<span>ter</span></h1>
       <p class="lead hero-copy reveal">A shop-built drum thickness sander that keeps Ron Walters' dedicated motor and flange bearings, and throws out the three things that actually failed: PVC conveyor rollers, a sanding belt used as a belt, and an oak-thread table.</p>
       <div class="cta-row reveal">
-        <a class="btn" href="#plans">Blueprints <span aria-hidden="true">→</span></a>
-        <a class="btn" href="app/">Build app</a>
+        <a class="btn" href="planforge/">Planforge <span aria-hidden="true">→</span></a>
+        <a class="btn" href="manual/">LEGO manual</a>
+        <a class="btn ghost" href="app/">Build app</a>
         <a class="btn ghost" href="cad/exports/walter_assembly.stl">STL</a>
-        <a class="btn ghost" href="report/">Report</a>
       </div>
     </div>
   </section>
@@ -306,16 +307,20 @@ body::before{
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="num">05 — Construction documents</p>
-        <h2 class="display">Fourteen blueprint sheets</h2>
-        <p class="lead">Print at 100% on A3 (or ~71% on Letter). Dimensions in inches. Generated from the same kernel as the 3D model. W-10 templates must print at true 1:1 — check the scale bar.</p>
+        <h2 class="display">Planforge drawings, fourteen shop sheets, twenty-two LEGO steps</h2>
+        <p class="lead">Print at 100% on A3 (or ~71% on Letter). Dimensions in inches. Generated from the same kernel as the 3D model. T-DISC / T-PLATE must print at true 1:1 — check both scale bars. Do not scale a perspective.</p>
       </div>
       <div class="trinity reveal" style="margin-bottom:36px">
-        <article class="civ"><span class="rule-name">Build app</span><h3><a href="app/">Checklist + explode</a></h3><p>PWA. Twelve steps, materials, subsystem locks, on-device drafts.</p></article>
-        <article class="civ"><span class="rule-name">Report · manual</span><h3><a href="report/">Engineering</a> · <a href="manual/">12 steps</a></h3><p>Datums D1–D4, FMEA, the sequence you actually glue in.</p></article>
-        <article class="civ"><span class="rule-name">Guidebook</span><h3><a href="guide/">How to use the package</a></h3><p>Print, CAD pipeline, what not to buy, what not to copy.</p></article>
+        <article class="civ"><span class="rule-name">Planforge v1.0</span><h3><a href="planforge/">Master guidebook</a></h3><p>G/A/E/P/J/M/F/Q. Release: FABRICATION-READY WITH CONDITIONS. Risk R3. Not PE, not UL, not a ShopNotes reprint.</p></article>
+        <article class="civ"><span class="rule-name">LEGO manual</span><h3><a href="manual/">22 steps · 6 bags</a></h3><p>A3 assembly pages generated from the part register. Orange arrows are this step.</p></article>
+        <article class="civ"><span class="rule-name">Build app</span><h3><a href="app/">Checklist + explode</a></h3><p>PWA. Materials, subsystem locks, on-device drafts. Shop blueprints W-1…W-14 hang on the wall.</p></article>
       </div>
       <div class="sheets">
-        <div class="sheet reveal"><img src="plans/W1_general.svg" alt="W-1" /><div class="bar"><b>W-1</b><span>General arrangement · elevations · spec</span><a href="plans/W1_general.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/G-001_cover.svg" alt="G-001" /><div class="bar"><b>G-001</b><span>Cover · release · R3 conditions · sheet index</span><a href="fab/06_DRAWINGS/G-001_cover.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/A-102_ortho.svg" alt="A-102" /><div class="bar"><b>A-102</b><span>Orthographic GA · do not scale the isometric</span><a href="fab/06_DRAWINGS/A-102_ortho.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/E-101_exploded.svg" alt="E-101" /><div class="bar"><b>E-101</b><span>Exploded · balloons match the part register</span><a href="fab/06_DRAWINGS/E-101_exploded.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="fab/06_DRAWINGS/J-201_drum.svg" alt="J-201" /><div class="bar"><b>J-201</b><span>Keyed disc stack · no glue in the keyway</span><a href="fab/06_DRAWINGS/J-201_drum.svg" download>SVG</a></div></div>
+        <div class="sheet reveal"><img src="plans/W1_general.svg" alt="W-1" /><div class="bar"><b>W-1</b><span>Shop blueprint · general arrangement</span><a href="plans/W1_general.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W2_frame.svg" alt="W-2" /><div class="bar"><b>W-2</b><span>Frame, doubled walls, bearing plate, jack screws</span><a href="plans/W2_frame.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W3_drum.svg" alt="W-3" /><div class="bar"><b>W-3</b><span>Drum, shaft, keyway, wrap, truing</span><a href="plans/W3_drum.svg" download>SVG</a></div></div>
         <div class="sheet reveal"><img src="plans/W4_elevation.svg" alt="W-4" /><div class="bar"><b>W-4</b><span>Dual Acme table · UHMW ways · readout</span><a href="plans/W4_elevation.svg" download>SVG</a></div></div>
@@ -359,7 +364,9 @@ body::before{
         </tbody>
       </table>
       <div class="dl-row reveal">
+        <a class="btn ghost" href="planforge/">Planforge book</a>
         <a class="btn ghost" href="fab/07_BOM/hardware.csv">hardware.csv</a>
+        <a class="btn ghost" href="fab/07_BOM/master_bom.csv">master_bom.csv</a>
         <a class="btn ghost" href="fab/07_BOM/plywood.csv">plywood.csv</a>
         <a class="btn ghost" href="fab/12_QA/fmea.csv">fmea.csv</a>
         <a class="btn ghost" href="fab/10_TEMPLATES/T-DISC.svg">T-DISC 1:1</a>
@@ -392,10 +399,13 @@ body::before{
       <div class="fc-box reveal">
         <p class="kicker">Regenerate CAD + plans</p>
         <pre>./scripts/build_walter.sh
-# kernel → STL/OBJ/SVG, W-1…W-14, fab CSVs
+# kernel → STL/OBJ/SVG, W-1…W-14, fab, LEGO manual, Planforge drawings + guidebook
 python3 scripts/gen_walter_cad.py
 python3 scripts/gen_walter_plans.py
-python3 scripts/gen_walter_fab.py</pre>
+python3 scripts/gen_walter_fab.py
+python3 scripts/gen_walter_manual.py
+python3 scripts/gen_walter_drawings.py
+python3 scripts/gen_walter_planforge.py</pre>
       </div>
       <p class="note">Shop-build design for experienced DIY construction — not a stamped PE document, not a wiring diagram for permit, not a substitute for a licensed electrician. Shafting, guarding, and 115 V are your responsibility. If a number on a sheet fights the CAD, trust the CAD parameters.</p>
     </div>
@@ -404,8 +414,8 @@ python3 scripts/gen_walter_fab.py</pre>
 
 <footer class="foot">
   <div class="wrap">
-    <span>WALTER · 16″ drum thickness sander · Rev B</span>
-    <span>Kernel CAD · 14 A3 sheets · build app</span>
+    <span>WALTER · 16″ drum thickness sander · Rev C · PLANFORGE v1.0</span>
+    <span>Kernel CAD · 18 Planforge sheets · 14 W-sheets · 22-step manual</span>
   </div>
 </footer>
 <script>

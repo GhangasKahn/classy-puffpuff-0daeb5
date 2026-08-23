@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# WALTER — kernel CAD → meshes/renders → plan sheets → fab package.
+# WALTER — kernel CAD → meshes → W-sheets → fab → LEGO manual → Planforge drawings + guidebook.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -21,6 +21,15 @@ python3 "$ROOT/scripts/gen_walter_plans.py"
 
 echo "==> Fab package (BOM, cut lists, FMEA, templates)"
 python3 "$ROOT/scripts/gen_walter_fab.py"
+
+echo "==> LEGO 22-step build manual"
+python3 "$ROOT/scripts/gen_walter_manual.py"
+
+echo "==> PLANFORGE G/A/E/P/J/M/F/Q drawings"
+python3 "$ROOT/scripts/gen_walter_drawings.py"
+
+echo "==> WOODWRIGHT PLANFORGE guidebook"
+python3 "$ROOT/scripts/gen_walter_planforge.py"
 
 if command -v "$FREECADCMD" >/dev/null 2>&1; then
   echo "==> FreeCAD (FCStd / STEP from kernel)"

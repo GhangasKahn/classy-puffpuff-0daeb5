@@ -1,8 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns='http://www.w3.org/2000/svg' width='150mm' height='150mm' viewBox='-75 -75 150 150'>
+<svg xmlns='http://www.w3.org/2000/svg' width='160mm' height='170mm' viewBox='-80 -75 160 170'>
   <title>WALTER T-DISC  Ø5.125  1:1</title>
   <circle r='65.087' fill='none' stroke='#1c1914' stroke-width='0.35'/>
   <circle r='9.500' fill='none' stroke='#1c1914' stroke-width='0.35'/>
   <rect x='-2.381' y='-12.500' width='4.762' height='6' fill='none' stroke='#b4532a' stroke-width='0.35'/>
-  <text x='0' y='62' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='3.2'>T-DISC  Ø5.125  BORE 0.748  1:1 mm</text>
+  <text x='0' y='62' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='3.2'>T-DISC  D-001  Ø5.125  BORE 0.748  KEY 3/16  1:1 mm</text>
+  
+  <g id='cal' fill='none' stroke='#b4532a' stroke-width='0.35'>
+    <rect x='-60' y='68' width='25.4' height='3'/>
+    <rect x='-20' y='68' width='100' height='3'/>
+  </g>
+  <text x='-47.3' y='66' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='2.4' fill='#b4532a'>1.000 in</text>
+  <text x='30' y='66' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='2.4' fill='#b4532a'>100 mm</text>
+  <text x='0' y='78' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='2.2' fill='#6b5340'>PRINT 100%  ·  actual size  ·  measure BOTH bars  ·  discard if either axis is wrong</text>
+
 </svg>

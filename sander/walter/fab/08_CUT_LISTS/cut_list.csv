@@ -1,0 +1,36 @@
+PART_ID,QTY,DESC,MAT,FINISHED,GRAIN,BAG
+F-001,1,Base panel,¾″ Baltic birch,22.00 × 36.00 × 0.75,length = Y,2
+F-002,1,"Idle wall, doubled skins grain-crossed",¾″ BB ×2,20.00 × 36.00 × 1.50,skins crossed,2
+F-003,1,"Drive wall, doubled skins grain-crossed",¾″ BB ×2,20.00 × 36.00 × 1.50,skins crossed,2
+F-004,1,Infeed stretcher,¾″ BB,16.50 × 3.50 × 0.75,X,2
+F-005,1,Outfeed stretcher,¾″ BB,16.50 × 3.50 × 0.75,X,2
+F-006,1,Base rail idle,hard maple,33.00 × 1.50 × 1.50,Y,2
+F-007,1,Base rail drive,hard maple,33.00 × 1.50 × 1.50,Y,2
+ST-001,1,"Idle bearing plate, slotted",A36 ¼″,6.00 × 6.00 × 0.25,n/a,2
+ST-002,1,"Drive bearing plate, round holes",A36 ¼″,6.00 × 6.00 × 0.25,n/a,2
+ST-003,1,Motor hinge plate,A36 ¼″,8.00 × 10.00 × 0.25,n/a,5
+ST-004,1,Drum shaft keyed,1144 Stressproof,Ø0.75 × 22.00,n/a,1
+ST-005,2,Square key,1045 / 1144,0.1875 × 0.1875 × 4.00,n/a,1
+ST-006,2,End bell with retainer slot,Al ⅛″,Ø5.04 × 0.125,n/a,1
+ST-007,2,Acme screw ¾-6,Acme steel,Ø0.75 × 12.00,n/a,3
+ST-008,1,Drum 4L pulley,cast iron,"Ø4.75 × 0.75, ¾″ bore",n/a,5
+ST-009,1,Motor 4L pulley,cast iron,"Ø3.00 × 0.75, ¾″ bore",n/a,5
+D-001,21,Drum disc blank,¾″ Baltic birch,"Ø5.125 × 0.75, bore 0.748",face ply random ok,1
+T-001,1,Platen torsion box,¼″ skins + ¾″ grid,16.25 × 25.00 × 0.75,skins X,3
+T-002,1,UHMW / HDPE platen face,UHMW ⅛″,16.25 × 25.00 × 0.125,n/a,3
+T-003,1,Table way idle,maple + UHMW,25.00 × 0.50 × 2.00,Y,3
+T-004,1,Table way drive,maple + UHMW,25.00 × 0.50 × 2.00,Y,3
+T-005,2,Acme nut block,hard maple + bronze nut,2.00 × 2.00 × 3.00,long grain to screw,3
+T-006,1,Elevation handwheel,cast 4″ ¾″ bore,Ø4.00 × 0.45,n/a,3
+C-001,1,"Infeed roller, 0.030″ crown",Al tube 2.00 OD,Ø2.00 × 16.25,n/a,4
+C-002,1,"Outfeed roller, 0.030″ crown",Al tube 2.00 OD,Ø2.00 × 16.25,n/a,4
+C-003,2,Roller shaft,precision ⅝″,Ø0.625 × 22,n/a,4
+C-004,1,Conveyor belt 2-ply PVC endless,PVC conveyor,16.00 × 60.00,n/a,4
+M-001,1,Drum motor TEFC 56C,1 HP 1725 115 V,~Ø6.5 × 8.0,n/a,5
+M-002,1,Feed worm gearmotor 24 V,~30 RPM,~3 × 3 × 3,n/a,4
+M-003,1,"Drive belt guard, fully enclosed",¼″ BB,~17 × 17 × 2.2,face,5
+M-004,1,Turnbuckle tensioner,zinc ¼-20 class,~2.1 body,n/a,5
+HD-001,1,Dust hood inverted-U,¼″ BB,~16.3 × 8.4 × 1.6,face,6
+HD-002,1,4″ dust flange,ABS / steel,Ø4.00 port,n/a,6
+HD-003,1,Nylon brush strip,nylon,16.00,n/a,6
+N-001,1,Optional 32″ cabinet stand,¾″ BB,22 × 32 × 32,vert. sides,6

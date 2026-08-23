@@ -1,9 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns='http://www.w3.org/2000/svg' width='180mm' height='180mm' viewBox='-10 -10 170 170'>
+<svg xmlns='http://www.w3.org/2000/svg' width='180mm' height='200mm' viewBox='-10 -10 170 210'>
   <title>WALTER T-PLATE  6x6  1:1</title>
   <rect x='0' y='0' width='152.400' height='152.400' fill='none' stroke='#1c1914' stroke-width='0.35'/>
   <circle cx='76.200' cy='76.200' r='13.970' fill='none' stroke='#1c1914' stroke-width='0.35'/>
   <circle cx='29.210' cy='76.200' r='4.318' fill='none' stroke='#b4532a' stroke-width='0.35'/>
   <circle cx='123.190' cy='76.200' r='4.318' fill='none' stroke='#b4532a' stroke-width='0.35'/>
-  <text x='76.200' y='160.400' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='3.2'>T-PLATE  6.00 x 6.00 x 0.25  1:1 mm</text>
+  <text x='76.200' y='160.400' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='3.2'>T-PLATE  ST-001/002  6.00 x 6.00 x 0.25  1:1 mm</text>
+  <g fill='none' stroke='#b4532a' stroke-width='0.35'>
+    <rect x='10' y='170.400' width='25.4' height='3'/>
+    <rect x='50' y='170.400' width='100' height='3'/>
+  </g>
+  <text x='22.7' y='168.400' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='2.4' fill='#b4532a'>1.000 in</text>
+  <text x='100' y='168.400' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='2.4' fill='#b4532a'>100 mm</text>
+  <text x='76.200' y='180.400' text-anchor='middle' font-family='IBM Plex Mono, monospace' font-size='2.2' fill='#6b5340'>PRINT 100%  ·  measure BOTH bars  ·  ST-001 slot the two copper holes 0.90 vertically</text>
 </svg>

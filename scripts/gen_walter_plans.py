@@ -144,7 +144,7 @@ class Sheet:
         self.text(175, Hpx - 62, f"{self.code}  ·  {self.title}", 18, INK, bold=True)
         self.text(40, Hpx - 34, self.scale_note, 13, DIM)
         self.text(W - 40, Hpx - 58, "16″ closed-frame drum thickness sander", 14, DIM, "end")
-        self.text(W - 40, Hpx - 34, "Original engineering  ·  Rev B  ·  Shop build", 13, DIM, "end")
+        self.text(W - 40, Hpx - 34, "Original engineering  ·  Rev C  ·  Shop build", 13, DIM, "end")
 
     def save(self, filename):
         path = os.path.join(OUT, filename)

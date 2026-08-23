@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>J-202  ·  Joints J-WAY / J-ACME / idle jack</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Scale ~1:4  ·  inches</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>UHMW WAY IN DADO  ·  ACME NUT BLOCK  ·  IDLE JACK D3</text>
+<rect x='80.0' y='140.0' width='40.0' height='220.0' fill='#c4a574' stroke='#1c1914' stroke-width='2'/>
+<rect x='120.0' y='180.0' width='28.0' height='140.0' fill='#e8eef0' stroke='#1c1914' stroke-width='2'/>
+<rect x='148.0' y='200.0' width='220.0' height='24.0' fill='#c4a574' stroke='#1c1914' stroke-width='1.6'/>
+<text x='160.0' y='176.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>PLATEN</text>
+<text x='88.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>WALL DADO</text>
+<text x='124.0' y='340.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>WAY</text>
+<circle cx='520.0' cy='250.0' r='18.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<rect x='500.0' y='268.0' width='40.0' height='80.0' fill='#8a6a42' stroke='#1c1914' stroke-width='1.6'/>
+<text x='520.0' y='380.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle' font-weight='600'>¾-6 ACME IN BRONZE NUT / MAPLE BLOCK</text>
+<rect x='760.0' y='160.0' width='16.0' height='160.0' fill='#5c656c' stroke='#1c1914' stroke-width='2'/>
+<rect x='748.0' y='300.0' width='40.0' height='12.0' fill='#8a9298' stroke='#1c1914' stroke-width='1.4'/>
+<text x='820.0' y='250.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>¼-20 JACK  ±0.040</text>
+<rect x='80.0' y='440.0' width='900.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='462.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>J-WAY: 0.50 × 2.00 ways in wall dados. Sliding 0.02–0.04. Oil. Never paint sliding faces.</text>
+<text x='92.0' y='480.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>J-ACME: clock both bronze nuts (datum D4) before the HTD 5 mm belt. Witness paint.</text>
+<text x='92.0' y='498.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Four independent screws will rack — Walters' oak dowel was one; four corners are worse.</text>
+<text x='92.0' y='516.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Idle jack: mid-slot = D3 zero = plates coplanar. True the drum, then jack for parallelism.</text>
+<text x='92.0' y='534.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Lock knobs on the ways before any cut. DRO is a readout, not a clamp.</text>
+</svg>

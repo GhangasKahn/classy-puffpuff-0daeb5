@@ -1,0 +1,17 @@
+ID,PRI,STATEMENT,VERIFY,STATUS,EVIDENCE
+FUN-001,MUST,Sand stock 16.00″ wide × 0.06–4.00″ thick in light passes,Q09 first poplar 0.010″ even cut,PROPOSED,G
+FUN-002,MUST,Powered feed 0–16 FPM that tracks a 16″ PVC conveyor,Q04 empty 60 s then loaded,PROPOSED,G
+FUN-003,MUST,Dedicated 1 HP TEFC drive — not a table-saw parasite,M-001 nameplate + 3.00/4.75 pulleys,PROPOSED,G
+FUN-004,SHOULD,"Optional 32″ cabinet stand, platen ~36–40″ AFF",N-001 or omit,PROPOSED,A
+DIM-001,MUST,Envelope 22 × 36 × 20″ benchtop; drum Ø 5.00 × 16.00 face,F-001 + D-001 after turning,PROPOSED,G/D
+DIM-002,MUST,Datums D1–D4 controlling; inches primary,story stick + winding sticks,PROPOSED,G
+LOAD-001,MUST,Drum ~1089 RPM / ~1427 SFM from 1725 × 3.00/4.75,tach or pulley ratio [D],PROPOSED,D
+MAT-001,MUST,Baltic birch drum and walls. No MDF. No Formica platen. No sanding-belt conveyor.,BOM contains none of the excluded items,PROPOSED,G
+JNT-001,MUST,"Keyed ¾″ shaft, 0.5 mm expansion gaps every 4 discs",dry-stack before glue,PROPOSED,G
+JNT-002,MUST,Dual ¾-6 Acme HTD-timed; no independent corner screws,D4 witness marks,PROPOSED,G
+SAFE-001,MUST,Magnetic starter / no-volt release + mushroom E-stop; no auto-restart,Q06 blink test,OPEN,P
+SAFE-002,MUST,Fully enclosed drive guard; 4″ hood @ ≥400 CFM; 12″ min stock or carrier,Q07 Q08 + startup card,PROPOSED,G
+SAFE-003,MUST,Risk R3 powered machine. Release FABRICATION-READY WITH CONDITIONS. Not PE-stamped.,G-001 banner on every affected sheet,PROPOSED,P
+DOC-001,MUST,WOODWRIGHT PLANFORGE guidebook + LEGO manual + kernel CAD + W-1…W-14 + fab CSVs,/sander/walter/planforge/ + /manual/ + /cad/,PROPOSED,G
+MAINT-001,MUST,"Replaceable wrap (hook tape + end-bell slots), replaceable UHMW face, accessible bearings",W-13 wrap; T-002 screws,PROPOSED,G
+EXCL-001,EXCLUDED,MDF drum/walls; sanding belt as conveyor; PVC-pipe rollers; gravity motor on a dowel; Formica platen; light-switch-only disconnect; ShopNotes #86 reprint,BOM + lineage note,VERIFIED,G

@@ -1,0 +1,11 @@
+ID,MODE,CAUSE,EFFECT,SEV,DET,MIT
+F01,Conveyor walk,No crown / PVC oval / sanding belt,"Belt shreds, can't feed",8,6,"0.030"" crown, PVC belt, skew screws"
+F02,Drum crack,"MDF, no expansion gaps","Out of round, vibration",7,5,"Birch discs, 0.5 mm gaps every 4"
+F03,Table rack,Independent corner screws,Wedge-sanded panels,7,4,Dual Acme HTD-timed
+F04,Belt slack on start,Gravity motor mount,"Glazed belt, stall",6,7,Hinge plate + turnbuckle
+F05,Restart after blink,Plain switch,Drum starts in hands,9,3,Magnetic starter / NOVR
+F06,Kickback short stock,Part shorter than platen,Projectile,8,4,"12"" min or carrier board"
+F07,Dust cloud,Hood off / shop-vac,"Health, fire load",8,8,"4"" @ 400 CFM, hood interlock"
+F08,Drum taper,No idle jack,Stripe / wedge,5,5,"¼-20 jack ±0.040"""
+F09,Formica score,Abrasive harder than laminate,Platen not flat,4,9,HDPE / phenolic face
+F10,Paper glued forever,Permanent Velcro,New drum to change wrap,3,8,Hook tape + end-bell slots

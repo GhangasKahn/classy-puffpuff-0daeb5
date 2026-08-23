@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>P-204  ·  Part T-001 — torsion-box platen</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>Scale 1:8  ·  16 px/in  ·  inches</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<rect x='80.0' y='140.0' width='400.0' height='260.0' fill='#c4a574' stroke='#1c1914' stroke-width='2'/>
+<line x1='160.0' y1='140.0' x2='160.0' y2='400.0' stroke='#6b5340' stroke-width='1' stroke-dasharray='4 4'/>
+<line x1='240.0' y1='140.0' x2='240.0' y2='400.0' stroke='#6b5340' stroke-width='1' stroke-dasharray='4 4'/>
+<line x1='320.0' y1='140.0' x2='320.0' y2='400.0' stroke='#6b5340' stroke-width='1' stroke-dasharray='4 4'/>
+<line x1='400.0' y1='140.0' x2='400.0' y2='400.0' stroke='#6b5340' stroke-width='1' stroke-dasharray='4 4'/>
+<line x1='80.0' y1='226.7' x2='480.0' y2='226.7' stroke='#6b5340' stroke-width='1' stroke-dasharray='4 4'/>
+<line x1='80.0' y1='313.3' x2='480.0' y2='313.3' stroke='#6b5340' stroke-width='1' stroke-dasharray='4 4'/>
+<line x1='80.0' y1='400.0' x2='80.0' y2='436.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='480.0' y1='400.0' x2='480.0' y2='436.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='80.0' y1='428.0' x2='480.0' y2='428.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='80.0,428.0 90.0,424.0 90.0,432.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='480.0,428.0 470.0,424.0 470.0,432.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='248.6' y='408.0' width='62.9' height='20.0' fill='#f4efe6'/>
+<text x='280.0' y='422.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>25.00 Y</text>
+<line x1='80.0' y1='140.0' x2='36.0' y2='140.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='80.0' y1='400.0' x2='36.0' y2='400.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='44.0' y1='140.0' x2='44.0' y2='400.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='44.0,140.0 40.0,150.0 48.0,150.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='44.0,400.0 40.0,390.0 48.0,390.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<text x='32.0' y='275.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='end' transform='rotate(-90 32.0 275.0)'>16.25 X</text>
+<rect x='80.0' y='480.0' width='820.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='502.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>T-001  ¼″ BB skins + ¾″ grid  ·  finished 16.25 × 25.00 × 0.75</text>
+<text x='92.0' y='520.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>T-002 UHMW ⅛″ face, same footprint, mechanical screws — replaceable wear part.</text>
+<text x='92.0' y='538.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Grid: ¾″ strips on ~5″ centers. Skin grain along X (across the machine).</text>
+<text x='92.0' y='556.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Flat to a known straightedge before UHMW. A 0.010″ hump prints as a stripe.</text>
+<text x='92.0' y='574.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Ways T-003/004 glue/screw to the long edges; sliding faces get oil, not paint.</text>
+</svg>

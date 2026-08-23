@@ -3,6 +3,7 @@ WALTER kernel — single source of truth for the 16" drum sander.
 
 All dimensions are inches. Downstream writers convert to mm.
 Used by: gen_walter_cad.py, gen_walter_plans.py, gen_walter_fab.py,
+         gen_walter_manual.py, gen_walter_drawings.py, gen_walter_planforge.py,
          walter_sander.py (FreeCAD), and the build app JSON dump.
 """
 
@@ -14,7 +15,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Iterable, Literal
 
 IN = 25.4
-REV = "B"
+REV = "C"
 
 P = dict(
     # envelope

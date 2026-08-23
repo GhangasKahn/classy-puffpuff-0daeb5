@@ -123,6 +123,16 @@
   to = "/sander/walter/guide/"
   status = 301
 
+[[redirects]]
+  from = "/walter/planforge"
+  to = "/sander/walter/planforge/"
+  status = 301
+
+[[redirects]]
+  from = "/walter/fab"
+  to = "/sander/walter/fab/"
+  status = 301
+
 [[headers]]
   for = "/sander/walter/app/service-worker.js"
   [headers.values]
@@ -175,6 +185,21 @@
 
 [[headers]]
   for = "/sander/*/plans/*"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/sander/walter/manual/*.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/sander/walter/fab/06_DRAWINGS/*.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/sander/walter/fab/10_TEMPLATES/*.svg"
   [headers.values]
     Content-Type = "image/svg+xml"
 
