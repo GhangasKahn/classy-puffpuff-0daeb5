@@ -21,6 +21,7 @@
     "wall_t": 1.5,
     "inner_w": 16.5,
     "wall_h": 20.0,
+    "envelope_z": 22.0,
     "drum_od": 5.0,
     "drum_blank": 5.125,
     "drum_face": 16.0,

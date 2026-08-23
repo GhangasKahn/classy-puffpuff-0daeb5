@@ -2,7 +2,7 @@
 
 **Release state:** FABRICATION-READY WITH CONDITIONS
 **Risk class:** R3
-**Project:** WPF-WALTER-16-C · kernel 1.2.1 · Rev C
+**Project:** WPF-WALTER-16-C · kernel 1.2.2 · Rev C
 **Units:** inch controlling; millimetre at CAD export only
 **Layout:** D1 base top Z0; D2 drum axis Z 13.50 Y 18.00; D3 idle jack zero; D4 Acme nuts clocked
 
@@ -29,7 +29,7 @@ This is a shop-built 16-inch closed-frame drum thickness sander. A competent cra
 - Homemade machine — not UL listed, not OSHA-certified, not PE-stamped
 
 ## Controlling geometry [G]/[D]
-- envelope 22.00 × 36.00 × 20.00 in benchtop [G]
+- envelope 22.00 × 36.00 × 22.00 in benchtop [G] (walls 20.00)
 - capacity 16.00 in wide × 0.06–4.00 in thick [G]
 - drum Ø 5.00 × 16.00 face after true [G/T]
 - drum axis D2: Z 13.50, Y 18.00 [G]

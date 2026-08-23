@@ -15,7 +15,7 @@ Protocol: WOODWRIGHT PLANFORGE v1.0. Fail any item → do not claim an unconditi
 | Assumptions and limitations on cover | PASS | G-001 banner; not PE; not UL |
 | Hardware exact make/model or search term | PASS WITH CONDITION | 6245K47 / 6191K37 [S]; other PNs [E] verify live |
 | Electrical one-line | PASS WITH CONDITION | W-12 design intent; electrician [P] |
-| Guards, nips, dust, E-stop, no auto-restart | PASS WITH CONDITION | M-101 / Q06 / Q08; first-run [T] |
+| Guards, nips, dust, E-stop, no auto-restart | PASS WITH CONDITION | M-101 / M-104 / Q06 / Q08; first-run [T] |
 | Numerical tolerances for critical fits | PASS | bore 0.748 +0/−0.002; OD 5.000±0.010; crown 0.030±0.005 |
 | Inspection methods and acceptance | PASS | Q-101 + `fab/12_QA/inspection.csv` |
 | Irreversible hold points identified | PASS | no glue in keyway; no paint on ways; no sanding-belt conveyor |

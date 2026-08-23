@@ -1,6 +1,8 @@
 DIM_ID,NOMINAL,TOL,UNIT,DATUM,FEATURE,CLASS,EQ,SHEET,INSPECT
 DIM-ENV-X,22.00,±0.03,in,D1,Base width X,G,P.base_x,A-102 / W-1,tape
 DIM-ENV-Y,36.00,±0.03,in,D1,Base depth Y,G,P.base_y,A-102 / W-1,tape
+DIM-ENV-Z,22.00,±0.10,in,benchtop floor,Overall envelope height incl. hood,G,P.envelope_z,A-101 / A-104,tape
+DIM-WALL-H,20.00,±0.03,in,D1,Wall height,G,P.wall_h,P-202 / A-102,tape
 DIM-WALL-T,1.50,±0.02,in,D1,Doubled wall,D,2×0.75,P-202,caliper
 DIM-INNER,16.50,±0.03,in,idle inner,Clear between walls,G,P.inner_w,A-102,inside stick
 DIM-FACE,16.00,±0.02,in,D2,Drum face,G,P.drum_face,P-201,caliper

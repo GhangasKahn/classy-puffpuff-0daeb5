@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>M-104  ·  Dust collection — hood, port, collector as safeguard</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS  ·  4 in port  ·  ≥400 CFM</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>THE HOOD IS A SAFEGUARD  ·  NOT AN ACCESSORY  ·  COLLECTOR ON BEFORE ANY SPIN</text>
+<rect x='120.0' y='180.0' width='420.0' height='160.0' fill='#3d4a46' stroke='#1c1914' stroke-width='2'/>
+<circle cx='330.0' cy='220.0' r='40.0' fill='#f4efe6' stroke='#1c1914' stroke-width='2'/>
+<text x='330.0' y='228.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='middle' font-weight='600'>4″</text>
+<text x='330.0' y='370.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='middle'>HD-001 inverted-U  ·  HD-002 flange  ·  HD-003 brush at infeed lip</text>
+<rect x='120.0' y='348.0' width='420.0' height='14.0' fill='#8a9298' stroke='#1c1914' stroke-width='1'/>
+<text x='330.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='middle'>BRUSH STRIP</text>
+<rect x='620.0' y='160.0' width='820.0' height='148.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='632.0' y='182.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>AIR / DUST</text>
+<text x='632.0' y='200.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Port Ø 4.00 [G]. Target ≥400 CFM at the hood, not at the impeller nameplate.</text>
+<text x='632.0' y='218.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Fine birch dust is combustible. Collector + hood are part of the machine (SAFE-002).</text>
+<text x='632.0' y='236.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Foam HD-001 to the walls. Tissue test Q07: paper should suck at the infeed gap.</text>
+<text x='632.0' y='254.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not run without the collector. Do not dump fines into a shop-vac bag as the only capture.</text>
+<text x='632.0' y='272.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Brush strip on the infeed lip reduces leak. Outfeed leak is acceptable if infeed is pulling.</text>
+<text x='632.0' y='290.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>See P-209 for parts, W-7 for shop notes, Q07 for acceptance.</text>
+<rect x='80.0' y='500.0' width='1400.0' height='94.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='522.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>HOLD POINT</text>
+<text x='92.0' y='540.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Bag 6 before any test cut: hood latched, 4″ hose on, collector started, then drum.</text>
+<text x='92.0' y='558.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>If the motor note changes or dust blows at the operator, stop. Re-seal, then 0.010″ poplar.</text>
+<text x='92.0' y='576.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>This sheet is not an NFPA 664 dust-system design. Shop collector selection is [A]/[P].</text>
+</svg>

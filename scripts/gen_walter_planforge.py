@@ -94,7 +94,7 @@ This is a shop-built 16-inch closed-frame drum thickness sander. A competent cra
         design_basis += f"- {t}\n"
     design_basis += f"""
 ## Controlling geometry [G]/[D]
-- envelope 22.00 × 36.00 × 20.00 in benchtop [G]
+- envelope 22.00 × 36.00 × 22.00 in benchtop [G] (walls 20.00)
 - capacity 16.00 in wide × 0.06–4.00 in thick [G]
 - drum Ø 5.00 × 16.00 face after true [G/T]
 - drum axis D2: Z 13.50, Y 18.00 [G]
@@ -168,7 +168,7 @@ Protocol: WOODWRIGHT PLANFORGE v1.0. Fail any item → do not claim an unconditi
 | Assumptions and limitations on cover | PASS | G-001 banner; not PE; not UL |
 | Hardware exact make/model or search term | PASS WITH CONDITION | 6245K47 / 6191K37 [S]; other PNs [E] verify live |
 | Electrical one-line | PASS WITH CONDITION | W-12 design intent; electrician [P] |
-| Guards, nips, dust, E-stop, no auto-restart | PASS WITH CONDITION | M-101 / Q06 / Q08; first-run [T] |
+| Guards, nips, dust, E-stop, no auto-restart | PASS WITH CONDITION | M-101 / M-104 / Q06 / Q08; first-run [T] |
 | Numerical tolerances for critical fits | PASS | bore 0.748 +0/−0.002; OD 5.000±0.010; crown 0.030±0.005 |
 | Inspection methods and acceptance | PASS | Q-101 + `fab/12_QA/inspection.csv` |
 | Irreversible hold points identified | PASS | no glue in keyway; no paint on ways; no sanding-belt conveyor |
@@ -403,7 +403,7 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
 <section id="a101">
   <p class="k">A-101 / A-102 / A-103 · Architecture</p>
   <h2>General arrangement</h2>
-  <p>22 × 36 × 20″ benchtop · 16″ face · Ø 5.00 drum · D2 at Z 13.50 / Y 18.00. Print A-102 at 100% on A3; do not scale the isometric.</p>
+  <p>22 × 36 × 22″ benchtop · walls 20.00″ · 16″ face · Ø 5.00 drum · D2 at Z 13.50 / Y 18.00. Print A-102 at 100% on A3; do not scale the isometric.</p>
   <img class="elev" src="../fab/06_DRAWINGS/A-102_ortho.svg" alt="A-102 orthographic general arrangement"/>
   <div class="links">
     <a href="../fab/06_DRAWINGS/G-001_cover.svg">G-001</a>
@@ -471,12 +471,14 @@ footer{{padding:24px 28px;color:var(--dim);font-size:13px;border-top:1px solid v
 </section>
 
 <section id="m101">
-  <p class="k">M-101 / M-102 · Mechanism</p>
-  <h2>Drive, feed, guards</h2>
-  <p>Drum {der['drum_rpm']:.0f} RPM / {der['sfm']:.0f} SFM from 3.00/4.75 on 1725. Feed {der['feed_fpm']:.1f} FPM at 30 rpm roller, PWM 0–16 FPM. Hinge + turnbuckle, not motor weight on a dowel. Full belt guard. 24 V feed isolated from 115 V drum.</p>
+  <p class="k">M-101 … M-105 · Mechanism</p>
+  <h2>Drive, feed, elevation, dust, electrics</h2>
+  <p>Drum {der['drum_rpm']:.0f} RPM / {der['sfm']:.0f} SFM from 3.00/4.75 on 1725. Feed {der['feed_fpm']:.1f} FPM at 30 rpm roller, PWM 0–16 FPM. Dual ¾-6 Acme HTD-timed (M-103). Hood and 4″ collector are a safeguard (M-104). Hinge + turnbuckle, not motor weight on a dowel. Full belt guard. 24 V feed isolated from 115 V drum.</p>
   <div class="links">
     <a href="../fab/06_DRAWINGS/M-101_drive.svg">M-101 Drive</a>
     <a href="../fab/06_DRAWINGS/M-102_conveyor.svg">M-102 Conveyor</a>
+    <a href="../fab/06_DRAWINGS/M-103_elevation.svg">M-103 Elevation</a>
+    <a href="../fab/06_DRAWINGS/M-104_dust.svg">M-104 Dust</a>
     <a href="../fab/06_DRAWINGS/M-105_electrics.svg">M-105 Electrics [P]</a>
     <a href="../plans/W12_wiring.svg">W-12 Wiring intent</a>
   </div>
@@ -577,6 +579,12 @@ Print the guidebook from the browser at 100%. Controlling geometry is in `walter
 
     changelog = f"""# CHANGELOG — WALTER Planforge
 
+## 1.2.2 / Rev {REV} — 2026-08-23
+
+- M-103 elevation and M-104 dust complete the mechanism family (M-101…M-105).
+- Envelope corrected to 22 × 36 × 22″ benchtop [G]; wall height remains 20.00″.
+- DIM-ENV-Z / DIM-WALL-H added to the dimension register.
+
 ## 1.2.1 / Rev {REV} — 2026-08-23
 
 - G-003/G-004, A-104, E-102, M-105, P-205…P-211, F-102 added; N/A sheets recorded on G-001.
@@ -633,13 +641,13 @@ def sync_app_assembly(proj):
         '    { src: "../fab/06_DRAWINGS/M-105_electrics.svg", title: "M-105 Electrics [P]", kind: "plan" },',
         '    { src: "../fab/06_DRAWINGS/P-205_frame.svg", title: "P-205 Frame parts", kind: "plan" },',
         '    { src: "../fab/06_DRAWINGS/E-102_sequence.svg", title: "E-102 Bags", kind: "plan" },',
+        '    { src: "../fab/06_DRAWINGS/M-103_elevation.svg", title: "M-103 Elevation", kind: "plan" },',
+        '    { src: "../fab/06_DRAWINGS/M-104_dust.svg", title: "M-104 Dust", kind: "plan" },',
     ]
-    if "G-004_safety.svg" not in new:
-        new = new.replace(
-            '    { src: "../fab/06_DRAWINGS/G-001_cover.svg", title: "G-001 Cover", kind: "plan" },',
-            '    { src: "../fab/06_DRAWINGS/G-001_cover.svg", title: "G-001 Cover", kind: "plan" },\n'
-            + "\n".join(extra),
-        )
+    insert_after = '    { src: "../fab/06_DRAWINGS/G-001_cover.svg", title: "G-001 Cover", kind: "plan" },'
+    missing = [ln for ln in extra if ln.split("src: ")[1].split(",")[0].strip('"') not in new]
+    if missing and insert_after in new:
+        new = new.replace(insert_after, insert_after + "\n" + "\n".join(missing), 1)
     with open(path, "w", encoding="utf-8") as f:
         f.write(new)
     print("synced", os.path.relpath(path, ROOT))

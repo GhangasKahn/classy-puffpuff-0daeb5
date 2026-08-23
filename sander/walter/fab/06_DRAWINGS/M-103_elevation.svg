@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1680' height='1188' viewBox='0 0 1680 1188'>
+<rect x='0.0' y='0.0' width='1680.0' height='1188.0' fill='#f4efe6' stroke='#1c1914' stroke-width='3'/>
+<rect x='24.0' y='24.0' width='1632.0' height='32.0' fill='#3a1814' stroke='none' stroke-width='2'/>
+<text x='40.0' y='46.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f3e6dc' text-anchor='start'>NOT FOR UNCONDITIONAL FABRICATION  ·  R3 POWERED MACHINE  ·  ELECTRICIAN [P]  ·  FIRST-RUN [T]  ·  DO NOT SCALE PERSPECTIVE</text>
+<rect x='24.0' y='56.0' width='1632.0' height='1108.0' fill='none' stroke='#1c1914' stroke-width='1.2'/>
+<line x1='24.0' y1='1096.0' x2='1656.0' y2='1096.0' stroke='#1c1914' stroke-width='1.5'/>
+<text x='40.0' y='1128.0' font-family='Georgia, serif' font-size='26' fill='#b4532a' text-anchor='start' font-weight='600'>WALTER</text>
+<text x='175.0' y='1124.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='17' fill='#1c1914' text-anchor='start' font-weight='600'>M-103  ·  Elevation — dual Acme, HTD, datum D4</text>
+<text x='40.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='start'>NTS mechanism  ·  inches  ·  ¾-6</text>
+<text x='1640.0' y='1128.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>WPF-WALTER-16-C  ·  Rev C  ·  FABRICATION-READY WITH CONDITIONS</text>
+<text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
+<text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#b4532a' text-anchor='start' font-weight='600'>TWO SCREWS · ONE CRANK · CLOCK NUTS BEFORE THE BELT</text>
+<rect x='80.0' y='160.0' width='40.0' height='320.0' fill='#c4a574' stroke='#1c1914' stroke-width='2'/>
+<rect x='600.0' y='160.0' width='40.0' height='320.0' fill='#c4a574' stroke='#1c1914' stroke-width='2'/>
+<text x='100.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle' font-weight='600'>IDLE ACME</text>
+<text x='620.0' y='500.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='middle' font-weight='600'>DRIVE ACME</text>
+<rect x='92.0' y='200.0' width='16.0' height='280.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='612.0' y='200.0' width='16.0' height='280.0' fill='#5c656c' stroke='#1c1914' stroke-width='1.4'/>
+<rect x='60.0' y='380.0' width='80.0' height='48.0' fill='#8a6a42' stroke='#1c1914' stroke-width='1.6'/>
+<rect x='580.0' y='380.0' width='80.0' height='48.0' fill='#8a6a42' stroke='#1c1914' stroke-width='1.6'/>
+<text x='100.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f4efe6' text-anchor='middle' font-weight='600'>T-005</text>
+<text x='620.0' y='410.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#f4efe6' text-anchor='middle' font-weight='600'>T-005</text>
+<line x1='100.0' y1='216.0' x2='620.0' y2='216.0' stroke='#2a2a2c' stroke-width='6'/>
+<text x='360.0' y='206.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle' font-weight='600'>HTD 5 mm 16T  (or #25 chain)</text>
+<circle cx='720.0' cy='216.0' r='36.0' fill='#161616' stroke='#1c1914' stroke-width='2'/>
+<text x='720.0' y='270.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='middle' font-weight='600'>T-006 4″</text>
+<line x1='100.0' y1='460.0' x2='100.0' y2='504.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='620.0' y1='460.0' x2='620.0' y2='504.0' stroke='#6b5340' stroke-width='1'/>
+<line x1='100.0' y1='496.0' x2='620.0' y2='496.0' stroke='#6b5340' stroke-width='1.4'/>
+<polygon points='100.0,496.0 110.0,492.0 110.0,500.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<polygon points='620.0,496.0 610.0,492.0 610.0,500.0' fill='#6b5340' stroke='#6b5340' stroke-width='0.5' stroke-linejoin='round'/>
+<rect x='238.4' y='476.0' width='243.2' height='20.0' fill='#f4efe6'/>
+<text x='360.0' y='490.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='14' fill='#6b5340' text-anchor='middle'>ACME AT Y 10.00 AND 26.00  [G]</text>
+<rect x='80.0' y='560.0' width='1200.0' height='112.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
+<text x='92.0' y='582.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>Pitch [D] = 1/6 = 0.1667 in/rev on ¾-6. Travel 4.50 in [G].</text>
+<text x='92.0' y='600.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Datum D4: clock both bronze nuts together, paint a witness, THEN fit the HTD belt.</text>
+<text x='92.0' y='618.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Four independent corner screws will rack the platen (Walters-adjacent failure). Two screws, one crank.</text>
+<text x='92.0' y='636.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Ways T-003/004 slide 0.02–0.04 in wall dados. Oil. Never paint. See J-202 / P-211.</text>
+<text x='92.0' y='654.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Q05: witness marks still aligned after a full up/down. Q10: jack at D3 zero before trusting taper.</text>
+</svg>

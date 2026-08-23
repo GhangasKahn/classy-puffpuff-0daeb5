@@ -28,6 +28,8 @@ J-203,J-203_crown.svg,ACTIVE,J-CROWN belt tracking
 J-204,J-204_wrap.svg,ACTIVE,J-WRAP abrasive
 M-101,M-101_drive.svg,ACTIVE,"Hinge, 4L, guard"
 M-102,M-102_conveyor.svg,ACTIVE,Feed kinematics
+M-103,M-103_elevation.svg,ACTIVE,"Dual Acme, HTD, D4 clock"
+M-104,M-104_dust.svg,ACTIVE,"Hood, 4 in port, collector as safeguard"
 M-105,M-105_electrics.svg,ACTIVE,Electrical intent — PROFESSIONAL REVIEW REQUIRED
 S-101,,N/A,Not a building / timber structure
 F-101,F-101_nest.svg,ACTIVE,Plywood nest

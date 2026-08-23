@@ -34,7 +34,7 @@
 <text x='130.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>SHOULD     Optional 32″ cabinet stand, platen ~36–40″ AFF</text>
 <text x='1300.0' y='428.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>A</text>
 <text x='48.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>DIM-001</text>
-<text x='130.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Envelope 22 × 36 × 20″ benchtop; drum Ø 5.00 × 16.00 face</text>
+<text x='130.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Envelope 22 × 36 × 22″ benchtop; walls 20.00″; drum Ø 5.00 × 16.00 face</text>
 <text x='1300.0' y='448.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>G/D</text>
 <text x='48.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#b4532a' text-anchor='start' font-weight='600'>DIM-002</text>
 <text x='130.0' y='468.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>MUST       Datums D1–D4 controlling; inches primary</text>

@@ -84,6 +84,8 @@ window.WALTER_DATA = {
     { src: "../renders/walter_top.svg", title: "Plan", kind: "render" },
     { src: "../renders/walter_stand.svg", title: "With stand", kind: "render" },
     { src: "../fab/06_DRAWINGS/G-001_cover.svg", title: "G-001 Cover", kind: "plan" },
+    { src: "../fab/06_DRAWINGS/M-103_elevation.svg", title: "M-103 Elevation", kind: "plan" },
+    { src: "../fab/06_DRAWINGS/M-104_dust.svg", title: "M-104 Dust", kind: "plan" },
     { src: "../fab/06_DRAWINGS/G-004_safety.svg", title: "G-004 Safety", kind: "plan" },
     { src: "../fab/06_DRAWINGS/A-104_envelope.svg", title: "A-104 Envelope", kind: "plan" },
     { src: "../fab/06_DRAWINGS/M-105_electrics.svg", title: "M-105 Electrics [P]", kind: "plan" },

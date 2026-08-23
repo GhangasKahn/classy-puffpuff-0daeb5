@@ -3,7 +3,7 @@ FUN-001,MUST,Sand stock 16.00″ wide × 0.06–4.00″ thick in light passes,Q0
 FUN-002,MUST,Powered feed 0–16 FPM that tracks a 16″ PVC conveyor,Q04 empty 60 s then loaded,PROPOSED,G
 FUN-003,MUST,Dedicated 1 HP TEFC drive — not a table-saw parasite,M-001 nameplate + 3.00/4.75 pulleys,PROPOSED,G
 FUN-004,SHOULD,"Optional 32″ cabinet stand, platen ~36–40″ AFF",N-001 or omit,PROPOSED,A
-DIM-001,MUST,Envelope 22 × 36 × 20″ benchtop; drum Ø 5.00 × 16.00 face,F-001 + D-001 after turning,PROPOSED,G/D
+DIM-001,MUST,Envelope 22 × 36 × 22″ benchtop; walls 20.00″; drum Ø 5.00 × 16.00 face,F-001 + D-001 after turning,PROPOSED,G/D
 DIM-002,MUST,Datums D1–D4 controlling; inches primary,story stick + winding sticks,PROPOSED,G
 LOAD-001,MUST,Drum ~1089 RPM / ~1427 SFM from 1725 × 3.00/4.75,tach or pulley ratio [D],PROPOSED,D
 MAT-001,MUST,Baltic birch drum and walls. No MDF. No Formica platen. No sanding-belt conveyor.,BOM contains none of the excluded items,PROPOSED,G

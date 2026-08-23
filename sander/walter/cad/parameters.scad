@@ -7,6 +7,7 @@ base_t = inch(0.75);
 wall_t = inch(1.5);
 inner_w = inch(16.5);
 wall_h = inch(20.0);
+envelope_z = inch(22.0);
 drum_od = inch(5.0);
 drum_blank = inch(5.125);
 drum_face = inch(16.0);

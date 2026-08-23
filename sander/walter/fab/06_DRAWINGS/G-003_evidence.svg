@@ -12,7 +12,7 @@
 <text x='1640.0' y='1152.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#6b5340' text-anchor='end'>Inches controlling  ·  3rd-angle  ·  PLANFORGE v1.0  ·  not a ShopNotes reprint</text>
 <text x='48.0' y='96.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='16' fill='#b4532a' text-anchor='start' font-weight='600'>EVIDENCE CLASSES  G M S D A E T P</text>
 <text x='48.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-001  [G]</text>
-<text x='200.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Capacity 16″ × 0.06–4.00″, envelope 22×36×20″</text>
+<text x='200.0' y='120.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Capacity 16″ × 0.06–4.00″, envelope 22×36×22″ (walls 20.00″)</text>
 <text x='48.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-002  [G]</text>
 <text x='200.0' y='140.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>Ron Walters woodgears write-up + YouTube W-5Sj6kBVic (same machine)</text>
 <text x='48.0' y='160.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>EV-003  [D]</text>
@@ -33,7 +33,7 @@
 <text x='200.0' y='300.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='12' fill='#1c1914' text-anchor='start'>OSHA 1910.212 / 1910.213 machine guarding (U.S.)</text>
 <rect x='48.0' y='360.0' width='900.0' height='130.0' fill='#efe8dc' stroke='#6b5340' stroke-width='1'/>
 <text x='60.0' y='382.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#b4532a' text-anchor='start' font-weight='600'>REVISION</text>
-<text x='60.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Kernel 1.2.1  ·  Rev C  ·  WPF-WALTER-16-C</text>
+<text x='60.0' y='400.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Kernel 1.2.2  ·  Rev C  ·  WPF-WALTER-16-C</text>
 <text x='60.0' y='418.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Change a master parameter in walter_kernel.py only, then regenerate.</text>
 <text x='60.0' y='436.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>Do not edit parameters.json, SVG dimensions, or BOM cells by hand.</text>
 <text x='60.0' y='454.0' font-family='IBM Plex Mono, Menlo, monospace' font-size='13' fill='#1c1914' text-anchor='start'>ShopNotes #86 remains copyrighted. Hardware notes 6245K47 / 6191K37 are [S] public;</text>

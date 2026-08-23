@@ -257,7 +257,7 @@ def page_cover():
     s = Sheet("BUILD MANUAL · COVER", f"Rev {REV}")
     s.text(40, 96, "WALTER", 64, INK, bold=True, mono=False)
     s.text(44, 132, "BUILD MANUAL — 16″ CLOSED-FRAME DRUM THICKNESS SANDER", 20, ACC, bold=True)
-    s.text(44, 160, f"22 × 36 × 20″ · {TOTAL} steps · 6 bags · PLANFORGE v1.0 · original engineering", 14, DIM)
+    s.text(44, 160, f"22 × 36 × 22″ · {TOTAL} steps · 6 bags · PLANFORGE v1.0 · original engineering", 14, DIM)
     paint_machine(s, 980, 560, 520, highlight=(), explode=0, discs=False)
     for i, b in enumerate(BAGS):
         x = 48 + (i % 3) * 420

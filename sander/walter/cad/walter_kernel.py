@@ -25,6 +25,7 @@ P = dict(
     wall_t=1.50,
     inner_w=16.50,
     wall_h=20.00,
+    envelope_z=22.00,  # overall benchtop height including hood; walls remain 20.00
     # drum
     drum_od=5.00,
     drum_blank=5.125,

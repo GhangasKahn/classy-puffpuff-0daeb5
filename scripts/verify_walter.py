@@ -134,14 +134,31 @@ def main():
     for st in proj["steps"]:
         if st["title"] not in app:
             fail(f"app data.js missing step title: {st['title']}")
-    if app.count('id: "s') < 22 and app.count("id: 's") < 22:
-        # allow either quote style
-        if sum(1 for st in proj["steps"] if f's{st["n"]:02d}' in app) < 22:
-            fail("app data.js does not list 22 step ids s01–s22")
+    if sum(1 for st in proj["steps"] if f's{st["n"]:02d}' in app) < 22:
+        fail("app data.js does not list 22 step ids s01–s22")
+    for need in ("M-103_elevation.svg", "M-104_dust.svg"):
+        if need not in app:
+            fail(f"app data.js missing gallery {need}")
 
     params = json.load(open(os.path.join(ROOT, "sander/walter/cad/parameters.json")))
     if params.get("rev") != "C":
         fail(f"parameters.json rev {params.get('rev')}")
+
+    if abs(P.get("envelope_z", 0) - 22.00) > 1e-9:
+        fail(f"envelope_z {P.get('envelope_z')} != 22.00")
+    if abs(P["wall_h"] - 20.00) > 1e-9:
+        fail(f"wall_h {P['wall_h']} != 20.00")
+    dim001 = next(r for r in proj["requirements"] if r["ID"] == "DIM-001")
+    if "22 × 36 × 22" not in dim001["STATEMENT"]:
+        fail("DIM-001 envelope is not 22 × 36 × 22″")
+
+    codes = {r["ID"] for r in sheet_index() if r["STATUS"] == "ACTIVE"}
+    for need in ("M-103", "M-104", "G-003", "G-004", "A-104", "E-102", "F-102", "Q-101"):
+        if need not in codes:
+            fail(f"sheet index missing ACTIVE {need}")
+    active_n = sum(1 for r in sheet_index() if r["STATUS"] == "ACTIVE")
+    if active_n < 33:
+        fail(f"expected ≥33 ACTIVE Planforge sheets, got {active_n}")
 
     print("WALTER verify:")
     for w in WARNS:

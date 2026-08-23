@@ -213,7 +213,7 @@ def sheet_a101():
     s.text(1480, 400, "20.00 WALL", 14, DIM, rot=-90)
     s.note(48, 112, [
         "NAVIGATION ISOMETRIC — NOT A FABRICATION VIEW",
-        "Overall envelope 22.00 × 36.00 × 20.00 benchtop [G]. Optional stand +32.00.",
+        "Overall envelope 22.00 × 36.00 × 22.00 benchtop [G] (walls 20.00). Optional stand +32.00.",
         "Orange in CAD renders is copper semantics, not a part ID. Use balloons on E-101.",
         "Cut from P-sheets, T-DISC, T-PLATE. Never scale this perspective.",
     ], width=620)
@@ -621,6 +621,62 @@ def sheet_m102():
         "Rotation: drum bottom toward infeed (against feed); dust into the back hood.",
     ], width=920)
     s.save("M-102_conveyor.svg", "Conveyor kinematics")
+
+
+def sheet_m103():
+    s = Sheet("M-103", "Elevation — dual Acme, HTD, datum D4", "NTS mechanism  ·  inches  ·  ¾-6")
+    s.text(48, 96, "TWO SCREWS · ONE CRANK · CLOCK NUTS BEFORE THE BELT", 14, ACC, bold=True)
+    ox, oy = 80, 160
+    s.rect(ox, oy, 40, 320, fill="#c4a574", stroke=INK, sw=2)
+    s.rect(ox + 520, oy, 40, 320, fill="#c4a574", stroke=INK, sw=2)
+    s.text(ox + 20, oy + 340, "IDLE ACME", 12, ACC, "middle", bold=True)
+    s.text(ox + 540, oy + 340, "DRIVE ACME", 12, ACC, "middle", bold=True)
+    s.rect(ox + 12, oy + 40, 16, 280, fill=STEEL, stroke=INK, sw=1.4)
+    s.rect(ox + 532, oy + 40, 16, 280, fill=STEEL, stroke=INK, sw=1.4)
+    s.rect(ox - 20, oy + 220, 80, 48, fill="#8a6a42", stroke=INK, sw=1.6)
+    s.rect(ox + 500, oy + 220, 80, 48, fill="#8a6a42", stroke=INK, sw=1.6)
+    s.text(ox + 20, oy + 250, "T-005", 12, PAPER, "middle", bold=True)
+    s.text(ox + 540, oy + 250, "T-005", 12, PAPER, "middle", bold=True)
+    s.line(ox + 20, oy + 56, ox + 540, oy + 56, 6, BELT)
+    s.text(ox + 280, oy + 46, "HTD 5 mm 16T  (or #25 chain)", 13, ACC, "middle", bold=True)
+    s.circle(ox + 640, oy + 56, 36, fill="#161616", stroke=INK, sw=2)
+    s.text(ox + 640, oy + 110, "T-006 4″", 13, ACC, "middle", bold=True)
+    s.dim_h(ox + 20, ox + 540, oy + 300, "ACME AT Y 10.00 AND 26.00  [G]", offset=36)
+    s.note(80, 560, [
+        f"Pitch [D] = 1/{P['acme_tpi']} = {1.0/P['acme_tpi']:.4f} in/rev on ¾-6. Travel {P['travel']:.2f} in [G].",
+        "Datum D4: clock both bronze nuts together, paint a witness, THEN fit the HTD belt.",
+        "Four independent corner screws will rack the platen (Walters-adjacent failure). Two screws, one crank.",
+        "Ways T-003/004 slide 0.02–0.04 in wall dados. Oil. Never paint. See J-202 / P-211.",
+        "Q05: witness marks still aligned after a full up/down. Q10: jack at D3 zero before trusting taper.",
+    ], width=1200)
+    s.save("M-103_elevation.svg", "Dual Acme elevation and HTD")
+
+
+def sheet_m104():
+    s = Sheet("M-104", "Dust collection — hood, port, collector as safeguard", "NTS  ·  4 in port  ·  ≥400 CFM")
+    s.text(48, 96, "THE HOOD IS A SAFEGUARD  ·  NOT AN ACCESSORY  ·  COLLECTOR ON BEFORE ANY SPIN", 14, ACC, bold=True)
+    s.rect(120, 180, 420, 160, fill="#3d4a46", stroke=INK, sw=2)
+    s.circle(330, 220, 40, fill=PAPER, stroke=INK, sw=2)
+    s.text(330, 228, "4″", 16, ACC, "middle", bold=True)
+    s.text(330, 370, "HD-001 inverted-U  ·  HD-002 flange  ·  HD-003 brush at infeed lip", 13, INK, "middle")
+    s.rect(120, 348, 420, 14, fill="#8a9298", stroke=INK, sw=1)
+    s.text(330, 400, "BRUSH STRIP", 12, DIM, "middle")
+    s.note(620, 160, [
+        "AIR / DUST",
+        "Port Ø 4.00 [G]. Target ≥400 CFM at the hood, not at the impeller nameplate.",
+        "Fine birch dust is combustible. Collector + hood are part of the machine (SAFE-002).",
+        "Foam HD-001 to the walls. Tissue test Q07: paper should suck at the infeed gap.",
+        "Do not run without the collector. Do not dump fines into a shop-vac bag as the only capture.",
+        "Brush strip on the infeed lip reduces leak. Outfeed leak is acceptable if infeed is pulling.",
+        "See P-209 for parts, W-7 for shop notes, Q07 for acceptance.",
+    ], width=820)
+    s.note(80, 500, [
+        "HOLD POINT",
+        "Bag 6 before any test cut: hood latched, 4″ hose on, collector started, then drum.",
+        "If the motor note changes or dust blows at the operator, stop. Re-seal, then 0.010″ poplar.",
+        "This sheet is not an NFPA 664 dust-system design. Shop collector selection is [A]/[P].",
+    ], width=1400)
+    s.save("M-104_dust.svg", "Dust hood and collector as safeguard")
 
 
 def sheet_f101():
@@ -1047,6 +1103,8 @@ def main():
     sheet_j204()
     sheet_m101()
     sheet_m102()
+    sheet_m103()
+    sheet_m104()
     sheet_m105()
     sheet_f101()
     sheet_f102()

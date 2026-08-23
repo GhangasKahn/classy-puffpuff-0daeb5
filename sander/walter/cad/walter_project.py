@@ -25,7 +25,7 @@ PROJECT = dict(
     NAME="WALTER",
     TITLE="16-inch closed-frame drum thickness sander",
     REVISION=REV,
-    MODEL_VERSION="1.2.1",
+    MODEL_VERSION="1.2.2",
     PROTOCOL="WOODWRIGHT PLANFORGE v1.0",
     PROTOCOL_DATE="2026-08-03",
     UNITS="inch controlling; millimetre at CAD export only",
@@ -152,7 +152,7 @@ def requirements():
         dict(ID="FUN-002", PRI="MUST", STATEMENT="Powered feed 0–16 FPM that tracks a 16″ PVC conveyor", VERIFY="Q04 empty 60 s then loaded", STATUS="PROPOSED", EVIDENCE="G"),
         dict(ID="FUN-003", PRI="MUST", STATEMENT="Dedicated 1 HP TEFC drive — not a table-saw parasite", VERIFY="M-001 nameplate + 3.00/4.75 pulleys", STATUS="PROPOSED", EVIDENCE="G"),
         dict(ID="FUN-004", PRI="SHOULD", STATEMENT="Optional 32″ cabinet stand, platen ~36–40″ AFF", VERIFY="N-001 or omit", STATUS="PROPOSED", EVIDENCE="A"),
-        dict(ID="DIM-001", PRI="MUST", STATEMENT="Envelope 22 × 36 × 20″ benchtop; drum Ø 5.00 × 16.00 face", VERIFY="F-001 + D-001 after turning", STATUS="PROPOSED", EVIDENCE="G/D"),
+        dict(ID="DIM-001", PRI="MUST", STATEMENT="Envelope 22 × 36 × 22″ benchtop; walls 20.00″; drum Ø 5.00 × 16.00 face", VERIFY="F-001 + D-001 after turning", STATUS="PROPOSED", EVIDENCE="G/D"),
         dict(ID="DIM-002", PRI="MUST", STATEMENT="Datums D1–D4 controlling; inches primary", VERIFY="story stick + winding sticks", STATUS="PROPOSED", EVIDENCE="G"),
         dict(ID="LOAD-001", PRI="MUST", STATEMENT="Drum ~1089 RPM / ~1427 SFM from 1725 × 3.00/4.75", VERIFY="tach or pulley ratio [D]", STATUS="PROPOSED", EVIDENCE="D"),
         dict(ID="MAT-001", PRI="MUST", STATEMENT="Baltic birch drum and walls. No MDF. No Formica platen. No sanding-belt conveyor.", VERIFY="BOM contains none of the excluded items", STATUS="PROPOSED", EVIDENCE="G"),
@@ -184,6 +184,8 @@ def dimensions():
     return [
         dict(DIM_ID="DIM-ENV-X", NOMINAL="22.00", TOL="±0.03", UNIT="in", DATUM="D1", FEATURE="Base width X", CLASS="G", EQ="P.base_x", SHEET="A-102 / W-1", INSPECT="tape"),
         dict(DIM_ID="DIM-ENV-Y", NOMINAL="36.00", TOL="±0.03", UNIT="in", DATUM="D1", FEATURE="Base depth Y", CLASS="G", EQ="P.base_y", SHEET="A-102 / W-1", INSPECT="tape"),
+        dict(DIM_ID="DIM-ENV-Z", NOMINAL="22.00", TOL="±0.10", UNIT="in", DATUM="benchtop floor", FEATURE="Overall envelope height incl. hood", CLASS="G", EQ="P.envelope_z", SHEET="A-101 / A-104", INSPECT="tape"),
+        dict(DIM_ID="DIM-WALL-H", NOMINAL="20.00", TOL="±0.03", UNIT="in", DATUM="D1", FEATURE="Wall height", CLASS="G", EQ="P.wall_h", SHEET="P-202 / A-102", INSPECT="tape"),
         dict(DIM_ID="DIM-WALL-T", NOMINAL="1.50", TOL="±0.02", UNIT="in", DATUM="D1", FEATURE="Doubled wall", CLASS="D", EQ="2×0.75", SHEET="P-202", INSPECT="caliper"),
         dict(DIM_ID="DIM-INNER", NOMINAL="16.50", TOL="±0.03", UNIT="in", DATUM="idle inner", FEATURE="Clear between walls", CLASS="G", EQ="P.inner_w", SHEET="A-102", INSPECT="inside stick"),
         dict(DIM_ID="DIM-FACE", NOMINAL="16.00", TOL="±0.02", UNIT="in", DATUM="D2", FEATURE="Drum face", CLASS="G", EQ="P.drum_face", SHEET="P-201", INSPECT="caliper"),
@@ -232,7 +234,7 @@ def steps():
 
 def evidence():
     return [
-        dict(ID="EV-001", DESC="Capacity 16″ × 0.06–4.00″, envelope 22×36×20″", CLASS="G", RELIABILITY="high", VERIFY="kernel P dict"),
+        dict(ID="EV-001", DESC="Capacity 16″ × 0.06–4.00″, envelope 22×36×22″ (walls 20.00″)", CLASS="G", RELIABILITY="high", VERIFY="kernel P dict"),
         dict(ID="EV-002", DESC="Ron Walters woodgears write-up + YouTube W-5Sj6kBVic (same machine)", CLASS="G", RELIABILITY="high as failure modes", VERIFY="open sources; do not scan ShopNotes #86"),
         dict(ID="EV-003", DESC="Drum RPM = 1725 × 3.00 / 4.75", CLASS="D", RELIABILITY="arithmetic", VERIFY="nameplates + pulley stamps"),
         dict(ID="EV-004", DESC="SFM = π × 5.00 × rpm / 12", CLASS="D", RELIABILITY="arithmetic", VERIFY="recalc"),
@@ -277,6 +279,8 @@ def sheet_index():
         dict(ID="J-204", FILE="J-204_wrap.svg", STATUS="ACTIVE", PURPOSE="J-WRAP abrasive"),
         dict(ID="M-101", FILE="M-101_drive.svg", STATUS="ACTIVE", PURPOSE="Hinge, 4L, guard"),
         dict(ID="M-102", FILE="M-102_conveyor.svg", STATUS="ACTIVE", PURPOSE="Feed kinematics"),
+        dict(ID="M-103", FILE="M-103_elevation.svg", STATUS="ACTIVE", PURPOSE="Dual Acme, HTD, D4 clock"),
+        dict(ID="M-104", FILE="M-104_dust.svg", STATUS="ACTIVE", PURPOSE="Hood, 4 in port, collector as safeguard"),
         dict(ID="M-105", FILE="M-105_electrics.svg", STATUS="ACTIVE", PURPOSE="Electrical intent — PROFESSIONAL REVIEW REQUIRED"),
         dict(ID="S-101", FILE="", STATUS="N/A", PURPOSE="Not a building / timber structure"),
         dict(ID="F-101", FILE="F-101_nest.svg", STATUS="ACTIVE", PURPOSE="Plywood nest"),
