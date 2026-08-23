@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#14110e" />
+<meta name="description" content="WALTER immersive 3D shop theater — orbit, explode, and walk 22 LEGO assembly steps." />
+<title>WALTER — Immersive 3D build</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+html,body{height:100%;overflow:hidden}
+.imm{position:fixed;inset:0;display:flex;flex-direction:column;background:#14110e}
+.imm-stage{flex:1;min-height:0}
+.imm-top,.imm-bot{
+  position:absolute;left:0;right:0;z-index:5;display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  padding:12px 16px;pointer-events:none;
+}
+.imm-top{top:0;background:linear-gradient(180deg,rgba(20,17,14,.88),transparent)}
+.imm-bot{bottom:0;background:linear-gradient(0deg,rgba(20,17,14,.92),transparent);padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+.imm-top > *,.imm-bot > *,.imm-bot label{pointer-events:auto}
+.imm h1{font:600 22px/1 Newsreader,Georgia,serif;margin:0;letter-spacing:.12em;text-transform:uppercase}
+.imm .k{font:500 10px/1 "IBM Plex Mono",monospace;letter-spacing:.22em;color:#d47248;text-transform:uppercase}
+.imm-card{
+  position:absolute;right:16px;top:64px;z-index:5;width:min(340px,calc(100% - 32px));
+  background:rgba(42,35,28,.86);border:1px solid rgba(244,239,230,.14);border-radius:10px;padding:14px;
+  backdrop-filter:blur(10px);
+}
+@media(max-width:700px){.imm-card{position:static;width:auto;margin:0 12px}}
+</style>
+</head>
+<body>
+<div class="imm">
+  <div class="imm-top">
+    <div>
+      <p class="k">WALTER · Rev C · kernel solids</p>
+      <h1>Shop theater</h1>
+    </div>
+    <a class="btn" href="./">App</a>
+    <a class="btn" href="../planforge/">Planforge</a>
+    <a class="btn" href="../manual/">Manual</a>
+    <a class="btn" href="../">Design</a>
+  </div>
+  <div class="viz-stage theater-stage imm-stage" id="vizStage" data-walter-stage></div>
+  <aside class="imm-card" id="partDetail">
+    <strong>Drag to orbit</strong>
+    <p style="margin:8px 0 0;color:#c4b49a;font-size:14px">Scroll dolly · right-drag pan · Play walks bags 1–6 as copper glow. Not a fabrication drawing — inches live in the kernel.</p>
+  </aside>
+  <div class="imm-bot theater-hud">
+    <label>Explode <input id="explodeRange" type="range" min="0" max="1" step="0.01" value="0" /> <span id="explodeVal" class="mono">0%</span></label>
+    <label>Step <input id="stepRange" type="range" min="1" max="22" step="1" value="22" /> <span id="stepVal" class="mono">22 / 22</span></label>
+    <button type="button" class="btn primary" id="btnPlayBuild">Play 22 steps</button>
+    <button type="button" class="btn" id="btnStopBuild">Stop</button>
+    <button type="button" class="btn" id="btnAssembled">Assembled</button>
+    <button type="button" class="btn" id="btnBreakdown">Explode</button>
+    <button type="button" class="btn" data-cam="iso">Iso</button>
+    <button type="button" class="btn" data-cam="infeed">Infeed</button>
+    <button type="button" class="btn" data-cam="drive">Drive</button>
+    <button type="button" class="btn" data-cam="first">Operator</button>
+    <label class="chk"><input type="checkbox" id="chkCutaway"/> Cutaway</label>
+    <label class="chk"><input type="checkbox" id="chkStand"/> Cabinet</label>
+    <label class="chk"><input type="checkbox" id="chkSpin"/> Spin</label>
+  </div>
+</div>
+<script src="data.js"></script>
+<script src="solids.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="scene.js"></script>
+</body>
+</html>

@@ -104,8 +104,8 @@
   status = 301
 
 [[redirects]]
-  from = "/walter/app"
-  to = "/sander/walter/app/"
+  from = "/walter/immersive"
+  to = "/sander/walter/app/immersive.html"
   status = 301
 
 [[redirects]]

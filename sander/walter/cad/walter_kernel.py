@@ -120,6 +120,7 @@ class Box:
     dy: float
     dz: float
     color: str = "#c4a574"
+    explode: tuple[float, float, float] = (0.0, 0.0, 0.0)
 
     @property
     def kind(self) -> str:
@@ -137,6 +138,7 @@ class Cyl:
     h: float
     axis: Literal["x", "y", "z"] = "x"
     color: str = "#7a8288"
+    explode: tuple[float, float, float] = (0.0, 0.0, 0.0)
 
     @property
     def kind(self) -> str:
@@ -167,6 +169,7 @@ def assembly(
     parts: list[Prim] = []
 
     def add(p: Prim, ex=0.0, ey=0.0, ez=0.0):
+        p.explode = (ex, ey, ez)
         parts.append(_off(p, ex * e, ey * e, ez * e))
 
     # --- frame ---

@@ -83,6 +83,10 @@ def main():
         "sander/walter/fab/10_TEMPLATES/T-DISC.svg",
         "sander/walter/cad/walter_kernel.py",
         "sander/walter/cad/exports/walter_assembly.stl",
+        "sander/walter/cad/solids.json",
+        "sander/walter/app/solids.js",
+        "sander/walter/app/scene.js",
+        "sander/walter/app/immersive.html",
     ):
         if not exists(rel):
             fail(f"missing file {rel}")
@@ -159,6 +163,26 @@ def main():
     active_n = sum(1 for r in sheet_index() if r["STATUS"] == "ACTIVE")
     if active_n < 33:
         fail(f"expected ≥33 ACTIVE Planforge sheets, got {active_n}")
+
+    solids_path = os.path.join(ROOT, "sander/walter/cad/solids.json")
+    if exists("sander/walter/cad/solids.json"):
+        solids = json.load(open(solids_path))
+        names = {s["name"] for s in solids.get("solids", [])}
+        if solids.get("count", 0) < 50:
+            fail(f"solids.json too small ({solids.get('count')})")
+        if "disc_21" not in names:
+            fail("solids.json missing disc_21")
+        if "shaft" not in names or "abrasive" not in names:
+            fail("solids.json missing shaft/abrasive")
+        abr = next((s for s in solids["solids"] if s["name"] == "abrasive"), None)
+        if not abr or abr.get("appear") != 18:
+            fail("abrasive appear step is not 18 (wrap)")
+        scene = open(os.path.join(ROOT, "sander/walter/app/scene.js")).read()
+        if "import * as THREE" not in scene:
+            fail("scene.js is not a Three.js module")
+        app_html = open(os.path.join(ROOT, "sander/walter/app/index.html")).read()
+        if "scene.js" not in app_html or "data-walter-stage" not in app_html:
+            fail("app index.html missing WebGL theater hooks")
 
     print("WALTER verify:")
     for w in WARNS:

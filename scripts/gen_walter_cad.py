@@ -234,6 +234,93 @@ def save_svg(path, svg):
     print("wrote", path)
 
 
+# Prefix order matters (pulley_ before motor, disc_ before drum, …).
+_APPEAR = (
+    ("disc_", 1),
+    ("shaft", 3),
+    ("key", 3),
+    ("bell_", 4),
+    ("abrasive", 18),
+    ("wall_", 6),
+    ("plate_", 7),
+    ("base", 8),
+    ("rail_", 8),
+    ("stretcher_", 8),
+    ("jack_", 9),
+    ("brg_", 9),
+    ("platen", 10),
+    ("uhmw", 11),
+    ("way_", 11),
+    ("acme_", 12),
+    ("lock_", 12),
+    ("handwheel", 12),
+    ("dro", 12),
+    ("roller", 13),
+    ("belt_", 14),
+    ("gearmotor", 14),
+    ("guard", 16),
+    ("hood_", 17),
+    ("port", 17),
+    ("brush", 17),
+    ("pulley_", 15),
+    ("hinge_", 15),
+    ("turnbuckle", 15),
+    ("motor", 15),
+    ("stand_", 0),
+)
+
+
+def appear_step(name: str) -> int:
+    for prefix, step in _APPEAR:
+        if name == prefix.rstrip("_") or name.startswith(prefix):
+            return step
+    return 22
+
+
+def prim_to_solid(p):
+    row = {
+        "name": p.name,
+        "group": p.group,
+        "kind": p.kind,
+        "color": p.color,
+        "explode": list(getattr(p, "explode", (0.0, 0.0, 0.0))),
+        "appear": appear_step(p.name),
+        "x": round(p.x, 4),
+        "y": round(p.y, 4),
+        "z": round(p.z, 4),
+    }
+    if p.kind == "box":
+        row.update(dx=round(p.dx, 4), dy=round(p.dy, 4), dz=round(p.dz, 4))
+    else:
+        row.update(d=round(p.d, 4), h=round(p.h, 4), axis=p.axis)
+    return row
+
+
+def dump_solids():
+    """Kernel rest pose (explode=0) + explode vectors + LEGO appear steps for the WebGL theater."""
+    parts = assembly(opening=1.5, explode=0, cutaway=False, discs=True, stand=True)
+    payload = {
+        "rev": REV,
+        "units": "inch",
+        "opening": 1.5,
+        "count": len(parts),
+        "groups": sorted({p.group for p in parts}),
+        "solids": [prim_to_solid(p) for p in parts],
+    }
+    json_path = os.path.join(CAD, "solids.json")
+    with open(json_path, "w") as f:
+        json.dump(payload, f, indent=2)
+        f.write("\n")
+    print("wrote", json_path, len(parts), "solids")
+    js_path = os.path.join(CAD, "..", "app", "solids.js")
+    with open(js_path, "w") as f:
+        f.write("/* auto-generated from walter_kernel.py — do not edit by hand */\n")
+        f.write("window.WALTER_SOLIDS = ")
+        json.dump(payload, f, separators=(",", ":"))
+        f.write(";\n")
+    print("wrote", js_path)
+
+
 def scad_parameters(path):
     lines = ["// auto-generated from walter_kernel.py — do not edit by hand", "IN = 25.4;", "function inch(n) = n * IN;"]
     skip = {"acme_y"}
@@ -264,6 +351,7 @@ def main():
         )
         f.write("\n")
     print("wrote", os.path.join(CAD, "parts.json"), len(parts_preview), "solids")
+    dump_solids()
     scad_parameters(os.path.join(CAD, "scad", "parameters.scad") if False else os.path.join(CAD, "parameters.scad"))
 
     scenes = {

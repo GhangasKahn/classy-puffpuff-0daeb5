@@ -1,5 +1,9 @@
 # CHANGELOG — WALTER Planforge
 
+## 1.3.0 / Rev C — 2026-08-23
+
+- Immersive WebGL shop theater (`/app/immersive.html`) from kernel solids — orbit, explode, 22-step play.
+
 ## 1.2.2 / Rev C — 2026-08-23
 
 - M-103 elevation and M-104 dust complete the mechanism family (M-101…M-105).

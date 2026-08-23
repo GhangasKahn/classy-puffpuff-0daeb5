@@ -50,7 +50,14 @@
     $$(".tab, .mobile-nav button").forEach((b) =>
       b.classList.toggle("on", b.dataset.tab === id)
     );
-    if (id === "viz") drawViz();
+    if (id === "viz") {
+      if (window.WALTER_SCENE && window.WALTER_SCENE.ready) {
+        window.WALTER_SCENE.resize();
+        window.WALTER_SCENE.start();
+      } else {
+        drawViz();
+      }
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -86,6 +93,11 @@
   }
 
   function drawViz() {
+    if (window.WALTER_SCENE && window.WALTER_SCENE.ready) {
+      window.WALTER_SCENE.setExplode(state.explode);
+      return;
+    }
+    if (window.WALTER_SOLIDS && document.querySelector("[data-walter-stage]")) return;
     const stage = $("#vizStage");
     if (!stage) return;
     const e = state.explode;
@@ -216,7 +228,12 @@
           </button>`
       )
       .join("");
-    $$("#partList .part").forEach((b) => b.addEventListener("click", () => selectPart(b.dataset.part)));
+    $$("#partList .part").forEach((b) =>
+      b.addEventListener("click", () => {
+        selectPart(b.dataset.part);
+        if (window.WALTER_SCENE && window.WALTER_SCENE.ready) window.WALTER_SCENE.select(b.dataset.part);
+      })
+    );
   }
 
   function renderAssembly() {
@@ -240,6 +257,11 @@
         renderAssembly();
         refreshProgress();
         toast(state.done[b.dataset.id] ? "Step complete" : "Step reopened");
+        if (window.WALTER_SCENE && window.WALTER_SCENE.ready) {
+          const n = D.assembly.findIndex((x) => x.id === b.dataset.id) + 1;
+          window.WALTER_SCENE.setMode("build");
+          window.WALTER_SCENE.setStep(n);
+        }
       })
     );
     $$(".phase-rail .chip").forEach((c) => c.classList.toggle("on", c.dataset.phase === phase));
@@ -394,6 +416,8 @@
     refreshProgress();
     drawViz();
     setTab(state.tab);
+    const hash = (location.hash || "").replace("#", "");
+    if (hash === "viz") setTab("viz");
 
     $$(".tab, .mobile-nav button").forEach((b) =>
       b.addEventListener("click", () => setTab(b.dataset.tab))
@@ -409,12 +433,13 @@
       state.explode = parseFloat(e.target.value);
       store.set("explode", state.explode);
       $("#explodeVal").textContent = Math.round(state.explode * 100) + "%";
-      drawViz();
+      if (window.WALTER_SCENE && window.WALTER_SCENE.ready) window.WALTER_SCENE.setExplode(state.explode);
+      else drawViz();
     });
     $("#explodeRange").value = state.explode;
     $("#explodeVal").textContent = Math.round(state.explode * 100) + "%";
     $("#btnBreakdown").addEventListener("click", () => {
-      $("#explodeRange").value = 0.55;
+      $("#explodeRange").value = 0.72;
       $("#explodeRange").dispatchEvent(new Event("input"));
     });
     $("#btnAssembled").addEventListener("click", () => {

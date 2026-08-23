@@ -1,5 +1,5 @@
-const CACHE = "walter-v1";
-const ASSETS = ["./","index.html","styles.css","app.js","data.js","manifest.json","icon.svg"];
+const CACHE = "walter-v3";
+const ASSETS = ["./","index.html","styles.css","app.js","data.js","solids.js","scene.js","immersive.html","manifest.json","icon.svg"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
 });

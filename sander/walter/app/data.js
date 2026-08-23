@@ -119,6 +119,7 @@ window.WALTER_DATA = {
     { href: "../cad/exports/walter_assembly.obj", label: "assembly.obj", note: "Wavefront" },
     { href: "../cad/parameters.json", label: "parameters.json", note: "Inches + derived" },
     { href: "../cad/parts.json", label: "parts.json", note: "Solid names" },
+    { href: "../app/immersive.html", label: "Immersive 3D theater", note: "Orbit · explode · 22 steps" },
     { href: "../planforge/", label: "Planforge guidebook", note: "WOODWRIGHT v1.0" },
     { href: "../planforge/MCMASTER_SCHEDULE.csv", label: "McMaster CSV", note: "Verify live" },
     { href: "../fab/06_DRAWINGS/", label: "G/A/E/P/J drawings", note: "Rev C family" },
