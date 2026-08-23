@@ -66,56 +66,81 @@
   from = "/fence"
   to = "/fence/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/martin"
   to = "/fence/martin/"
   status = 301
+  force = true
 
+# Exact shortcuts (same pattern as live /martin/app and /martin/fab).
 [[redirects]]
   from = "/martin/app"
   to = "/fence/martin/app/"
   status = 301
-
-[[redirects]]
-  from = "/build"
-  to = "/fence/martin/app/"
-  status = 301
+  force = true
 
 [[redirects]]
   from = "/martin/fab"
   to = "/fence/martin/fab/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/martin/planforge"
   to = "/fence/martin/planforge/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/martin/manual"
   to = "/fence/martin/manual/"
   status = 301
+  force = true
+
+# Nested files under those shortcuts (CSV, images, extra pages).
+[[redirects]]
+  from = "/martin/*"
+  to = "/fence/martin/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/build"
+  to = "/fence/martin/app/"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/planforge"
   to = "/fence/martin/planforge/"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/planforge/*"
+  to = "/fence/martin/planforge/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/stele"
   to = "/fence/stele/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/report"
   to = "/fence/report/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/fab"
   to = "/fence/fab/"
   status = 301
+  force = true
 
 # CAD downloads: force download with correct types
 [[headers]]

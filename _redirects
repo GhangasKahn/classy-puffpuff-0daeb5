@@ -1,0 +1,16 @@
+# Netlify _redirects (force with !). Keep in sync with netlify.toml.
+# Exact MARTIN shortcuts first — same pattern as live /martin/app.
+/martin/planforge  /fence/martin/planforge/        301!
+/martin/planforge/* /fence/martin/planforge/:splat 301!
+/martin/app        /fence/martin/app/              301!
+/martin/fab        /fence/martin/fab/              301!
+/martin/manual     /fence/martin/manual/           301!
+/martin            /fence/martin/                  301!
+/martin/*          /fence/martin/:splat            301!
+/planforge         /fence/martin/planforge/        301!
+/planforge/*       /fence/martin/planforge/:splat  301!
+/build             /fence/martin/app/              301!
+/stele             /fence/stele/                   301!
+/report            /fence/report/                  301!
+/fab               /fence/fab/                     301!
+/fence             /fence/                         301!
