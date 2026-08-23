@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Money — Hearth{% endblock %}
+{% block body %}
+<section class="hero">
+  <h1>Money</h1>
+  <p class="muted">Seed prices are the floor. Type the real GFS ticket and the farm share you paid. No live Gordon's or Elkusa feed.</p>
+</section>
+
+<section>
+  <h2>Freezer share and GFS haul</h2>
+  <form method="post" action="/money/share" class="stack">
+    <label for="freezer_share">Animal share</label>
+    <select id="freezer_share" name="freezer_share">
+      <option value="none" {% if household.freezer_share == 'none' %}selected{% endif %}>None — buy grocery lamb</option>
+      <option value="lamb_half" {% if household.freezer_share == 'lamb_half' %}selected{% endif %}>Half lamb (farm)</option>
+      <option value="beef_half" {% if household.freezer_share == 'beef_half' %}selected{% endif %}>Half beef (farm)</option>
+      <option value="elk" {% if household.freezer_share == 'elk' %}selected{% endif %}>Elk / farm share (you type the farm)</option>
+    </select>
+    <label for="freezer_lb">Pounds still in the freezer</label>
+    <input id="freezer_lb" name="freezer_lb" type="number" step="0.1" min="0" value="{{ household.freezer_lb or 0 }}">
+    <label for="share_cost">What you paid for the share (optional)</label>
+    <input id="share_cost" name="share_cost" type="number" step="0.01" min="0" value="{{ household.share_cost or 0 }}">
+    <label for="share_weeks">Weeks that share should last</label>
+    <input id="share_weeks" name="share_weeks" type="number" min="1" value="{{ household.share_weeks or 12 }}">
+    <label for="bulk_weeks">GFS haul every N weeks</label>
+    <input id="bulk_weeks" name="bulk_weeks" type="number" min="1" value="{{ household.bulk_weeks or 4 }}">
+    <button type="submit">Save share and haul</button>
+  </form>
+  <p class="muted">A share pulls grocery lamb off this week's list. The farm cost is split across those weeks as an estimate. It is not a price quote from a website.</p>
+</section>
+
+<section>
+  <h2>Correct a price</h2>
+  <form method="post" action="/money/ad" class="stack">
+    <label for="catalog_key">Item</label>
+    <select id="catalog_key" name="catalog_key" required>
+      {% for item in catalog %}
+      <option value="{{ item.key }}">{{ item.name }} ({{ item.key }})</option>
+      {% endfor %}
+    </select>
+    <label for="store">Store</label>
+    <select id="store" name="store">
+      <option value="gfs">GFS (Gordon Food Service)</option>
+      <option value="tops">Tops</option>
+      <option value="aldi">Aldi</option>
+      <option value="walmart">Walmart</option>
+      <option value="wegmans">Wegmans</option>
+    </select>
+    <label for="price">Price</label>
+    <input id="price" name="price" type="number" step="0.01" min="0" required>
+    <label for="sale_ends">Sale ends (optional)</label>
+    <input id="sale_ends" name="sale_ends" type="date">
+    <button type="submit">Save price</button>
+  </form>
+</section>
+
+<section>
+  <h2>Log a receipt</h2>
+  <form method="post" action="/money/receipt" class="stack">
+    <label for="rstore">Store</label>
+    <input id="rstore" name="store" required>
+    <label for="amount">Amount</label>
+    <input id="amount" name="amount" type="number" step="0.01" min="0" required>
+    <label for="purchased_at">Date</label>
+    <input id="purchased_at" name="purchased_at" type="date" required>
+    <label for="notes">Note</label>
+    <input id="notes" name="notes" maxlength="200">
+    <button type="submit">Save receipt</button>
+  </form>
+</section>
+
+<section>
+  <h2>Scout</h2>
+  <form method="post" action="/money/scout">
+    <button type="submit">Fetch Tops circular (best effort)</button>
+  </form>
+</section>
+
+<section>
+  <h2>Recent receipts</h2>
+  <ul>
+    {% for r in receipts %}
+    <li>{{ r.purchased_at.isoformat() }} · {{ r.store }} · ${{ '%.2f'|format(r.amount) }}</li>
+    {% else %}
+    <li class="muted">None yet.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

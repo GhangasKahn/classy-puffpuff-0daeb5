@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Recipes — Hearth{% endblock %}
+{% block body %}
+<section class="hero">
+  <h1>Recipes</h1>
+  <p class="muted">House recipes are food. A private paste stays in the private room. Kitchen refuses banned ingredients.</p>
+  {% if notice %}
+  <p class="error" role="alert">{{ notice }}</p>
+  {% endif %}
+</section>
+
+<form method="post" action="/recipes" enctype="multipart/form-data" class="stack">
+  <label for="title">Title</label>
+  <input id="title" name="title">
+  <label for="body">Recipe text</label>
+  <textarea id="body" name="body" rows="6"></textarea>
+  <label for="upload">Or a .txt file</label>
+  <input id="upload" name="upload" type="file" accept=".txt,text/plain">
+  <label for="room">Where</label>
+  <select id="room" name="room">
+    <option value="house">House recipe</option>
+    <option value="private">Private note only</option>
+  </select>
+  <button type="submit">Save</button>
+</form>
+
+<ul class="recipes">
+  {% for recipe in recipes %}
+  <li>
+    <h2>{{ recipe.title }}</h2>
+    <pre>{{ recipe.body }}</pre>
+  </li>
+  {% else %}
+  <li class="muted">No house recipes yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

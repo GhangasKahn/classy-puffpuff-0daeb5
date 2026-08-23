@@ -1,0 +1,266 @@
+:root {
+  --bg: #161310;
+  --ink: #f3e6d4;
+  --muted: #b9a48a;
+  --brass: #e0a35a;
+  --line: #3a322b;
+  --card: #1e1a16;
+  --error: #d7a07a;
+  --focus: #e0a35a;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Palatino, "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+a {
+  color: var(--brass);
+  text-decoration: none;
+}
+
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 2;
+}
+
+.top .mark {
+  font-size: 1.25rem;
+  color: var(--brass);
+  margin-right: auto;
+}
+
+.top nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.top nav a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+
+main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 4rem;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.5rem;
+}
+
+.eyebrow {
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.muted { color: var(--muted); }
+
+.figure {
+  font-size: 2rem;
+  margin: 0.25rem 0;
+}
+
+.hero { margin-bottom: 1.75rem; }
+
+.grid.two {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .grid.two { grid-template-columns: 1fr 1fr; }
+}
+
+article, .day, .store-block, .login-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+button, .pill, .check-btn {
+  min-height: 48px;
+  min-width: 48px;
+  font: inherit;
+  color: var(--bg);
+  background: var(--brass);
+  border: 0;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+button[aria-current="true"], .pill.on {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.logout button, .switcher button:not([aria-current="true"]) {
+  background: transparent;
+  color: var(--brass);
+  border: 1px solid var(--brass);
+}
+
+.pills {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  color: var(--bg);
+}
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  min-height: 48px;
+  padding: 0.5rem 0.75rem;
+  margin: 0.35rem 0 0.85rem;
+}
+
+label { display: block; color: var(--muted); }
+
+.stack { margin-bottom: 2rem; }
+
+.flags .check, .check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  color: var(--ink);
+}
+
+.flags input[type="checkbox"] {
+  width: 28px;
+  min-height: 28px;
+  display: inline-block;
+  margin: 0;
+}
+
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.thread {
+  list-style: none;
+  padding: 0;
+}
+
+.bubble {
+  border: 1px solid var(--line);
+  padding: 0.85rem;
+  margin: 0 0 0.75rem;
+}
+
+.bubble .who {
+  color: var(--brass);
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.composer { margin-top: 1.5rem; }
+
+.shop-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.check-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.check-btn .box {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--brass);
+  flex: 0 0 auto;
+}
+
+.check-btn.done .box {
+  background: var(--brass);
+}
+
+.check-btn.done strong { text-decoration: line-through; }
+
+.slot {
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.error {
+  color: var(--error);
+  border: 1px solid var(--error);
+  padding: 0.75rem;
+}
+
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.login-card {
+  width: min(28rem, 100% - 2rem);
+  margin: 1rem auto;
+}
+
+.recipes { list-style: none; padding: 0; }
+
+pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

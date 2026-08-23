@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#161310">
+  <title>Hearth — household PIN</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+</head>
+<body class="login-body">
+  <main class="login-card">
+    <p class="eyebrow">Erie County kitchen</p>
+    <h1>Hearth</h1>
+    <p class="lede">Household PIN. Pick who is holding the phone. Aliases only.</p>
+    {% if error %}
+    <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+    <form method="post" action="/login">
+      <label for="person_id">Who is this</label>
+      <select id="person_id" name="person_id" required>
+        {% for p in people %}
+        <option value="{{ p.id }}">{{ p.alias }}</option>
+        {% endfor %}
+      </select>
+      <label for="pin">PIN</label>
+      <input id="pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" required>
+      <button type="submit">Open</button>
+    </form>
+  </main>
+</body>
+</html>

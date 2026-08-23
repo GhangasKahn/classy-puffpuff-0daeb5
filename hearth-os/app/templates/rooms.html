@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Rooms — Hearth{% endblock %}
+{% block body %}
+<section class="hero">
+  <p class="eyebrow">Two rooms</p>
+  <h1>{{ "Private" if room == "private" else "House" }}</h1>
+  <p class="muted">{% if room == "private" %}You and the named agents. Encrypted at rest. The house cannot open this.{% else %}Aliases only. Agents are named Kitchen, Scout, Budget, Care.{% endif %}</p>
+  <div class="pills" role="tablist" aria-label="Rooms">
+    <a class="pill {% if room == 'house' %}on{% endif %}" href="/rooms?room=house" aria-current="{{ 'page' if room == 'house' else 'false' }}">House</a>
+    <a class="pill {% if room == 'private' %}on{% endif %}" href="/rooms?room=private" aria-current="{{ 'page' if room == 'private' else 'false' }}">Private</a>
+  </div>
+</section>
+
+<ol class="thread">
+  {% for msg in messages %}
+  <li class="bubble {% if msg.is_agent %}agent{% else %}member{% endif %}">
+    <p class="who">
+      {% if msg.is_agent %}Agent · {{ msg.agent_name }}{% else %}{{ msg.alias }}{% endif %}
+    </p>
+    <p>{{ msg.body }}</p>
+  </li>
+  {% else %}
+  <li class="muted">No messages yet.</li>
+  {% endfor %}
+</ol>
+
+<form method="post" action="/rooms" class="composer">
+  <input type="hidden" name="room" value="{{ room }}">
+  <label for="body">Message</label>
+  <textarea id="body" name="body" rows="3" required placeholder="{% if room == 'private' %}Private note to Care{% else %}Build this week. Use Tops chicken if it is still $0.99.{% endif %}"></textarea>
+  <button type="submit">Send</button>
+</form>
+{% endblock %}
